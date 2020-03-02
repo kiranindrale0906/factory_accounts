@@ -10,7 +10,7 @@ class Migration_add_field_updated_at extends CI_Model {
 
     foreach ($fields as $table_name) {
       $sql="alter table ".$table_name." add updated_at DATETIME";
-      $this->db->query($sql);
+      //$this->db->query($sql);
     }
   }
 
