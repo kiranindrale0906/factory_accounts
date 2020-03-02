@@ -44,11 +44,24 @@
   <?php if(!empty(@get_field_attribute($this->router->class,'debit_amount'))) :
           load_field('text', array('field' => 'debit_amount')); 
         endif; ?> 
-    
+
+  <?php if(!empty(@get_field_attribute($this->router->class,'credit_weight'))) :
+          load_field('text', array('field' => 'credit_weight')); 
+        endif; ?> 
+  
+  <?php if(!empty(@get_field_attribute($this->router->class,'debit_weight'))) :
+          load_field('text', array('field' => 'debit_weight')); 
+        endif; ?> 
+
   <?php if(!empty(@get_field_attribute($this->router->class,'narration'))) :
           load_field('text', array('field' => 'narration')); 
         endif; ?>
  
+  <?php if(!empty(@get_field_attribute($this->router->class,'purity'))) :
+          load_field('dropdown', array('field' => 'purity', 'option'=>@$purities)); 
+                                    
+        endif; ?>
+
   <div class="row"> 
     <div class="col-sm-6"> 
       <?php
