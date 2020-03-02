@@ -19,7 +19,7 @@ class Vouchers extends BaseController {
   public function store() {
     $this->data['open_modal'] = false;
     $this->data['ajax_success_function']= "location.reload()";
-    parent::store();
+    parent::store(); 
   }
 
   public function _get_form_data() {
