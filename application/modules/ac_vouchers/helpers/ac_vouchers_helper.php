@@ -47,6 +47,12 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
   $list_setting['debit_amount'] = array("Credit", "debit_amount", TRUE, "debit_amount", FALSE, TRUE);
   $list_setting['credit_amount'] = array("Debit Amt.", "credit_amount", TRUE, "credit_amount", FALSE, TRUE);
   $list_setting['narration'] = array("Narration", "narration", FALSE, "narration", TRUE, TRUE);
+
+  $list_setting['credit_weight'] = array("Debit Wt.", "credit_weight", FALSE, "credit_weight", TRUE, TRUE);
+  $list_setting['debit_weight'] = array("Credit Wt.", "debit_weight", FALSE, "debit_weight", TRUE, TRUE);
+  $list_setting['purity'] = array("Purity", "purity", FALSE, "purity", TRUE, TRUE);
+  $list_setting['Pure Gold'] = array("Narration", "pure_gold_credit", FALSE, "pure_gold_credit", TRUE, TRUE);
+
   $list_setting['action'] = array("Action", "action", FALSE, "action", FALSE, FALSE);
 
   if(!empty($list_setting_arg)) {
@@ -80,6 +86,10 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['account_id'] = array('', '', TRUE, '', TRUE);
   $attributes['document'] = array('', '', TRUE, '', TRUE);
 
+  $attributes['purity'] = array('Purity', 'Enter Purity', TRUE, '', TRUE);
+  $attributes['credit_weight'] = array('Credit Weight', 'Enter Credit Weight', TRUE, '', TRUE);
+  $attributes['debit_weight'] = array('Debit Weight', 'Enter Debit Weight', TRUE, '', TRUE);
+  
   if(!empty($required_field)) {
     $attributes[$ci->router->class] = array_intersect_key($attributes, array_flip($required_field));
   }
