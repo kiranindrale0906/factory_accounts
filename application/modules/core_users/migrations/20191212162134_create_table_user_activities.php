@@ -6,7 +6,7 @@ class Migration_create_table_user_activities extends CI_Model {
 
   public function up()
   {
-    $sql = "CREATE TABLE `user_activities` (
+    $sql = "CREATE TABLE IF NOT EXISTS `user_activities` (
             `id` INT(11) NOT NULL AUTO_INCREMENT,
             `category` VARCHAR(255) NOT NULL,
             `action` VARCHAR(255) NOT NULL,
