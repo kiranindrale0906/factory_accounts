@@ -1,0 +1,1 @@
+<?php $this->load->view('layouts/theme/index'); ?>

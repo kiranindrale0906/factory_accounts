@@ -1,0 +1,20 @@
+.timetracker{
+	overflow:visible;
+	.timeout{
+		position:relative;
+		&:before, &:after{
+			font-size: 10px;
+	    position: absolute;	    
+	    top: 15px;
+	    color: $black;
+		}
+		&:before{
+			content: " " attr(start) "";		   
+	    left: 0;
+		}
+		&:after{
+			content: " " attr(end) " ";
+			right:0;
+		}
+	}	
+}

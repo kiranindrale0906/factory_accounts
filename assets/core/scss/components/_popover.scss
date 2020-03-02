@@ -1,0 +1,19 @@
+.popover{
+  background-color:$blue;
+  .popover-body{
+    background-color:$blue;
+    padding:2px 15px;
+    color:$white; 
+    border-radius:50px;
+    border-color:$blue;
+    font-size:15px;
+    font-weight:bold;
+  }
+  .arrow::after, .arrow::before{
+    border-top-color: $blue !important;
+  }
+}
+
+.tooltip{
+  pointer-events: none;
+}

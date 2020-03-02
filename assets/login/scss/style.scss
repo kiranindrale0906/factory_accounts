@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800&display=swap');
+
+@import "core/_variables.scss";
+@import "core/_mixin.scss";
+@import "core/_animation.scss";
+
+@import "theme/_theme_color.scss";
+
+@import "components/_cards.scss";
+@import "components/_modals.scss";
+@import "components/_inputs.scss";
+@import "components/_buttons.scss";  
+@import "components/_form.scss";
+
+
+
+
+html, body{
+	margin:0;	
+	font-family: 'Montserrat', sans-serif;
+	font-size: 14px;
+	color: $black;
+	background-color: #f1f1f1;
+}
+main{
+	padding-top:65px;
+	&.login{
+		padding:0;
+		background:url('../images/common/login_bg.jpg');
+		height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+	}
+	.login_wrapper{
+		max-width: 570px; 
+		width:100%;
+		padding:15px;
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    @include transform(translate(-50%, -50%));
+    .logo_div{
+      img{
+        background-color: $white;
+        border:1px solid $light_gray;
+        border-radius: 10px;
+        padding: 15px;
+        position: relative;
+        z-index: 1;
+        width: 170px;
+        height: 100px;
+        object-fit: contain;
+        display:block;
+        margin:0 auto;
+        text-align:center;
+      }
+    }
+    > .card{
+      margin-top: -50px;
+      .card-body{
+        padding:80px 100px 30px 100px;
+        @include maxsize(sm) {
+          padding:50px 30px 30px 30px; 
+        }
+      }
+    }
+	}
+}
+
+

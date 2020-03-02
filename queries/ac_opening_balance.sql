@@ -1,0 +1,1 @@
+ALTER TABLE  `ac_opening_balance` ADD  `group_code` INT( 11 ) NOT NULL AFTER  `account_name_id` ;

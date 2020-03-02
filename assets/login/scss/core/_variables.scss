@@ -1,0 +1,72 @@
+/*============= Color Variables  ================*/
+$white:#fff;
+
+$dark_black:#000;
+$black:#1b1b1b;
+
+$dark_green:#35581d;
+$green:#105d39;
+$light_green:#62dc90;
+
+$dark_blue:#131b36;
+$blue:#216be9;
+$light_blue:#5ea6d9;
+
+$dark_orange:#d45622;
+$orange:#ff6a2f;
+
+$dark_red:#ca3a33;
+$red:#ec4343;
+$ind_red:#e18380;
+
+$dark_gray:#959595;
+$gray:#ced4da;
+$light_gray:#ced4da;
+
+$maroon: #800000;
+
+$cyan: #4db0ca;
+
+/*============= Font Weight Variables  ================*/
+$extra_bold:900;
+$bolder:800;
+$bold:700;
+$medium:600;
+$light:300;
+
+$colorname: (
+	white: $white,
+  gray: $gray,
+  red: $red,
+  green: $green,
+  blue: $blue,
+  orange: $orange,
+  maroon: $maroon,
+  cyan: $cyan,
+  ind_red: $ind_red,
+  black:$black
+);
+
+// custome color combination
+$thm_color_com_name: (
+	white: $black,
+  red: $white,
+  green: $white,
+  blue: $white,
+  orange: $white
+);
+
+$active_colorname: (
+	white: $gray,
+  red: $dark_red,
+  green: $dark_green,
+  orange: $dark_orange,
+  blue: $dark_blue,
+  maroon: $maroon  
+);
+
+
+
+
+%fontsm{font-size:.82rem;}
+%fontmd{font-size:1.1rem;}

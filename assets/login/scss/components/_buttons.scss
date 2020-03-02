@@ -1,0 +1,45 @@
+.btn{
+  font-weight:500;
+  &.btn-default{
+    @extend  %component_thm_color;
+    &.btn-link{
+      @extend %thm_color;   
+      padding:0;
+      background:none;    
+    }
+  }
+  &.link-default{
+    @extend  %thm_color;
+  }  
+  &.active:focus, &:active.focus, &:active:focus, &:focus, &:active{
+    outline:none;
+    outline-offset: none;
+    box-shadow:none;
+  }
+  &.btn_icon{
+    background:none;
+    padding:0;
+    border:none;
+    line-height: 0;
+    &.gray{
+      color:$gray;
+      &:hover{
+        color:$blue;
+      }
+    }
+  }
+  &.link{
+    padding-top:0;
+    padding-bottom:0;
+  }
+}
+
+
+@each $name, $color in $colorname {  
+  .link-#{$name} {
+    color:$color;
+    &:hover, &:focus{
+      color:$color;
+    }
+  }  
+}

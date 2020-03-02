@@ -1,0 +1,18 @@
+ %form_group_xs{
+  height: calc(1.50rem + 2px);
+  @extend %fontxs;  
+}
+
+.bootstrap-select{
+  .dropdown-menu{
+    ul{
+      li{
+      a{
+        &.dropdown-item{
+          padding: 0.20rem .50rem;
+        }
+      }
+    }
+    }
+  }
+}

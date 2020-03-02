@@ -1,0 +1,417 @@
+%form_group_lg{
+  height: calc(2.875rem + 2px);
+  font-size: 1.25rem;
+}
+%form_group_md{
+  height: calc(2.25rem + 2px);
+  font-size: .875rem;
+}
+%form_group_sm{
+  height: calc(1.9rem + 2px);
+  @extend %fontsm;
+}
+%form_group_xs{
+  height: calc(1.50rem + 2px);
+  @extend %fontxs;  
+}
+
+%inputbtn-md{
+  width: 1.1rem;
+  height: 1.1rem; 
+}
+%fieldsize{
+ @extend %form_group_sm;
+}
+%fieldstyle{
+  color:$dark_gray;
+  border-radius:0;
+  border-color: $gray;  
+  &:focus{
+    box-shadow:none;
+    -webkit-box-shadow:none;
+  }
+}
+.form_section{
+  + .form_section{
+    margin-top:15px;
+  }
+}
+.custom-file{
+  @extend %fieldstyle;
+  @extend %fieldsize;
+  .custom-file-input{
+    @extend %fieldstyle;
+    @extend %fieldsize;
+  }
+  .custom-file-label{
+    @include flexbox();
+    @include align-items(center);
+    @extend %fieldstyle;
+    @extend %fieldsize;
+    &:after{
+      @extend %fieldsize;
+      @include flexbox();
+      @include align-items(center); 
+      @extend %component_thm_color;
+      color:$white; 
+      border-radius:0;
+    }
+  }
+}
+form{
+  .form-check-label{
+    line-height:2;
+  }
+  .bootstrap-select{
+    .dropdown-toggle{
+      &.btn-default {
+        @extend %fieldstyle;
+        @extend %fieldsize;
+      }
+    }
+  } 
+  &.fields-group-lg{
+    .form-control{
+      @extend %form_group_lg;
+    }
+    .bootstrap-select{
+      .dropdown-toggle{
+        @extend %form_group_lg;
+        @extend %fieldstyle;
+      }
+    }
+  }
+  &.fields-group-md{
+    .form-control:not(textarea){
+      @extend %form_group_md;     
+    }
+    .custom-file{
+      @extend %form_group_md; 
+      @extend %fieldstyle;
+      .custom-file-label, .custom-file-input{
+        @extend %form_group_md;
+        &:after{
+          @extend %form_group_md;
+        }
+      }
+    }
+    .bootstrap-select{
+      .dropdown-toggle{
+        @extend %form_group_md;       
+        @extend %fieldstyle;
+      }
+    }
+  }
+  &.fields-group-sm{
+    label{
+      margin-bottom:-3px;       
+    }
+    .form-control:not(textarea){
+      @extend %form_group_sm;     
+    }
+    .custom-file{
+      @extend %form_group_sm; 
+      .custom-file-label, .custom-file-input{
+        @extend %form_group_sm;
+        &:after{
+          @extend %form_group_sm;
+        }
+      }
+    }
+    .bootstrap-select{
+      .dropdown-toggle{
+        @extend %form_group_sm;       
+      }
+    }
+    .form-group{
+      //margin-bottom:10px;
+      label{
+        margin-bottom:2px;
+        font-weight:500;
+      }
+      .bootstrap-select{
+        .dropdown-toggle{
+          &.btn-theme{
+            &:focus{
+              outline:none !important;
+              box-shadow:none;
+            }
+            .filter-option{             
+              color:$dark_gray;
+              font-weight:400;
+              @extend %fontsm;
+            }
+          }
+          .filter-option-inner-inner{
+            color:$dark_gray;
+            font-weight:400;
+            @extend %fontsm;
+            line-height: 1;
+          }
+        }
+      }
+      .custom-select-sm{
+        .dropdown-menu{
+          ul{
+            li{
+              a{
+                padding: .25rem .5rem;
+                span{
+                  font-size:14px;
+                  color:$dark_gray;
+                }
+              }
+              &.active{
+                a{
+                  span{
+                    color:$white;
+                  }
+                }
+              }
+              &.disabled{
+                a{
+                  span{
+                    color:$dark_gray;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  &.fields-group-xs{
+    label{
+      @extend %fontxs;
+      font-weight:500;
+    }    
+    .form-control:not(textarea){
+      @extend %form_group_xs;     
+    }
+    .form-group{
+      margin-bottom:10px;
+    }
+    .bootstrap-select{
+      .dropdown-toggle{
+        padding: 0.20rem .50rem;
+        @extend %form_group_xs;
+        &.btn-default{
+          @extend %form_group_xs;
+        }
+      }     
+    }
+  } 
+  .custom-control{
+    vertical-align: -webkit-baseline-middle;
+  } 
+}
+.form-control:not(.form-control-sm){
+  @extend %fieldstyle;  
+  @extend %fieldsize; 
+  &:disabled, &[readonly]{
+    &:focus{
+      border-color:$gray;
+    }
+    background-color:rgba($gray, .2);
+    ~ .icon{
+      color:$gray;
+    }
+  }
+}
+.form-control-sm{
+  @extend %fieldstyle;
+}
+
+
+
+.bootstrap-select{
+  .dropdown-menu{
+    border-color:#ced4da;
+    border-radius: .2rem;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    -webkit-box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+    li{
+      font-size: .875rem;
+    }
+  }
+  .dropdown-toggle{
+    &.btn-default{
+      font-size: inherit;
+      border: 1px solid $light_gray;
+      background: none; 
+      height: calc(1.5em + .5rem + 2px);
+      &:focus{
+        outline: none;
+        outline: none;
+        outline-offset:none;
+      }
+    }
+  }
+  .dropdown-item{
+    padding:.375rem .75rem;
+    &.active, &:hover{
+      //background-color:rgba($gray, .3);
+      //color:$dark_gray;      
+      @extend %component_thm_color;
+      color:$white;
+    }
+  }
+  &.custom-select-sm{
+    >.dropdown-toggle{
+      padding: 1px;
+      padding: .25rem .5rem;
+    }
+    .dropdown-menu{
+      .bs-searchbox{
+        .form-control{
+          height: calc(1.5em + .5rem + 2px);
+          padding: .25rem .5rem;
+          font-size: .875rem;
+          line-height: 1.5;
+          border-radius: .2rem;
+        }
+      }
+      .text{
+        font-size: .85rem;
+        font-weight:600;
+      }       
+    }
+  }
+}
+
+.custom-control:not(.custom-switch){
+  .custom-control-label{
+    span{
+      vertical-align: super;        
+    }
+  }
+  &.custom-radio, &.custom-checkbox{
+    
+  }
+  .custom-control-label{
+    &::before{          
+      @extend %inputbtn-md;
+      border:0.12rem solid rgba($blue, .2);
+    }
+    &::after{     
+      @extend %inputbtn-md;
+    }
+  } 
+  &.radio-btn{
+    &:first-child{padding:0;}
+    .custom-control-label{
+      span{
+        display:block;
+        position: relative;
+        transform: translateY(-50%);
+        top: 50%;
+      }
+      width:100%;
+      height: calc(1.5em + .75rem + 2px);
+      border-radius: .25rem;
+      padding: .375rem 3rem;
+      border:1px solid $gray;
+      left: 0;
+      &::before, &::after{
+        @include transform(translateY(-50%));
+        top:50%;
+        left:0.9rem;
+      }
+    }
+    input[type="radio"]{
+      &:checked{
+        &~{
+          .custom-control-label{
+            &:after{
+              background:$blue;
+              border-radius: 100px;
+              border:0.2rem solid rgba($white, .8);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.custom-control{
+  &.btn_blue{
+    &.custom-control
+    {
+      .custom-control-input{
+        &:checked~{
+          .custom-control-label{
+            &::before{
+              border-color: $blue;
+              background-color: $blue;
+            }
+            @include variant('.custom-switch') {
+              &::after{
+                border-color: $blue;
+                background-color: $white;
+              }
+            }           
+          }
+        }
+      }
+    }  
+    &.custom-switch{
+      .custom-control-label{
+        &::after{
+          background-color:$black;
+        }   
+      }
+    }
+  } 
+}
+
+.custom_switch{
+  padding-left:3rem;
+  .custom-control-label{
+    cursor:pointer;
+    &::before{
+      width:2.6rem;
+    }   
+  }
+  .custom-control-input{
+    &:checked~.custom-control-label{
+      &::after{
+        @include transform(translateX(1.5rem));
+      }
+    }
+  } 
+}
+
+
+.custom-checkbox, .custom-switch, .custom-radio{
+  .custom-control-input:focus~.custom-control-label::before{
+    box-shadow:none;
+  }
+  &.disabled{
+    .custom-control-input{
+      &:checked~{
+        .custom-control-label{
+          &::before{
+            border-color: $gray !important;
+            background-color: $gray !important;
+          } 
+        }
+      }
+    }
+  }
+}
+
+.footer_btn{
+  display:none;
+  width:max-content;
+  &.sticky_footer_btn{
+    display:block;
+    position:fixed;
+    bottom:10px;
+    left:0; 
+    right:0;
+    z-index:1;
+    margin: 0 auto;
+  }
+}

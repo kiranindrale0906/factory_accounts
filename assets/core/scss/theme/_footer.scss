@@ -1,0 +1,14 @@
+footer.footer{
+  padding: 10px 15px;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0; 
+  background-color: $white;
+  font-size: 12px;
+  font-weight: $bold;
+  @media (max-width:768px){
+    margin-left:0px;
+  }
+}
+

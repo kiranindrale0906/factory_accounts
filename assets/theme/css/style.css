@@ -1,0 +1,71 @@
+/*============= Color Variables  ================*/
+/*============= Font Weight Variables  ================*/
+/*@include respond-above(sm) {
+  .element {
+    font-weight: bold;
+  }
+}*/
+.bootstrap-select .dropdown-menu ul li a.dropdown-item {
+  padding: 0.20rem .50rem; }
+
+html, body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  color: #1b1b1b;
+  background-color: #f1f1f1; }
+
+.montserrat {
+  font-family: 'Montserrat', sans-serif; }
+
+.helptext {
+  display: none; }
+  .helptext ul li {
+    cursor: pointer; }
+    .helptext ul li.active {
+      font-weight: 600; }
+
+.cke_button__superbutton .cke_button_icon {
+  width: 50px;
+  height: 24px;
+  background-size: cover !important;
+  margin-top: -3px; }
+
+.fixedfilter {
+  position: sticky;
+  position: -webkit-sticky;
+  position: -moz-sticky;
+  top: 10px;
+  right: 41px;
+  z-index: 2; }
+
+.card_row {
+  display: flex;
+  flex-wrap: wrap; }
+
+.card_row > div[class*='col-'] {
+  display: flex; }
+
+.color-view {
+  display: block;
+  border: 1px solid #000;
+  border-top-width: 0;
+  overflow: hidden; }
+
+.color-view span {
+  display: block;
+  float: left;
+  width: 50%;
+  height: 50px;
+  cursor: pointer; }
+
+.dollerinput .smbl {
+  margin-right: 5px; }
+
+.stickybtnGroup {
+  position: fixed;
+  bottom: 15px;
+  width: 100%;
+  left: 0; }
+
+/*# sourceMappingURL=style.css.map */

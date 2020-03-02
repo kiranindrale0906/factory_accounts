@@ -1,0 +1,31 @@
+.card{
+	.heading{
+		margin-bottom:0.71rem;
+	}
+	&.card-default{
+		border-radius:0;
+		border:none;
+		border-top: 1px solid $black;
+		//@extend  %thm_bdr_color;
+		.card-header{
+			border-radius:0;		
+			background: $white;
+		}
+		hr{
+		  margin:5px 0;
+		}
+		h5{
+			&.heading{
+				font-size:1.12rem;
+			}
+		}
+		hr{
+		  margin:5px 0;
+		}
+		h5{
+			&.heading{
+				font-size:1.12rem;
+			}
+		}
+	}
+}

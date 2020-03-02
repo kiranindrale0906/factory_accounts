@@ -1,0 +1,104 @@
+@each $name, $color in $colorname {
+  %component_thm_color {
+    .thm_#{$name} &{
+      background-color:$color;
+      //color:$white;
+    }
+  }
+  %bg_thm_color {
+    .thm_#{$name} &{
+      background-color:$color;
+    }
+  }
+
+  %thm_color {
+    .thm_#{$name} &{
+      color:$color;
+    }
+  }
+  %thm_bdr_color {
+    .thm_#{$name} &{
+      border-color:$color;
+    }
+  }
+
+  %thm_tab_nav {
+    .thm_#{$name} &{
+      a{
+        padding: 1em;
+        color:$black;
+        border-radius:0;
+        &.active{
+          border:0;
+          border-bottom:3px solid $color;
+          color:$color;
+          background:transparent
+        }
+      }      
+      //border:1px solid $color;
+      border:none;
+      border-bottom: 0;
+      background-color:rgba($color, .1);
+    }
+  }
+}
+
+// Active Background Color 
+@each $name, $color in $active_colorname {
+  %active_thm_color {
+    .thm_#{$name} &{
+      background-color:$color;
+    }
+  }
+}
+
+// Active Background and Color Combination 
+@each $name, $color in $thm_color_com_name {
+  %thm_color_com {
+    .thm_#{$name} &{
+      color:$color;
+    }
+  }
+}
+
+// Border Theme Color 
+@each $name, $color in $active_colorname {
+  %border_thm_color {
+    .thm_#{$name} &{
+      border-color:$color;
+    }
+  }
+}
+
+@each $name, $color in $colorname {
+  .#{$name} {
+    color: $color;
+  }
+  .bg_#{$name} {
+    background-color:$color;
+  }
+  .bdr_#{$name} {
+    border-color:$color;
+  }
+  .btn{
+    &.btn_outline_#{$name}{
+      color: $color;
+      background-color:transparent;
+      border-color:$color;
+      &:hover{
+        background-color:$color;
+        color:$white;
+      }
+    }
+    &.btn_#{$name} {
+      &.btn-link{
+        color:$color;
+        background-color:transparent;
+      }
+      &:not(.btn-link){
+        background-color:$color;
+        color:$white;
+      }
+    }  
+  }
+}

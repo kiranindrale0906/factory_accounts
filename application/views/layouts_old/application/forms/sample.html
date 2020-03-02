@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+<!-- For Radio / Checkbox buttons -->
+<?php load_field('checkbox', array('field' => 'column',
+                  'option'=> array(
+                      array(
+                        'value' => '1', 
+                        'checked'=>'checked',
+                        'label' => 'Yes'),                                  
+  ))); ?>
+
+<?php
+  load_field('checkbox', array('field' => 'column',
+                  'option'=> array(
+                      array(
+                        'value' => '1', 
+                        'checked'=>'checked',
+                        'label' => 'Yes'),
+                      array(
+                        'value' => '0',   
+                        'disabled'=>'disabled',                                 
+                        'label' => 'No'),
+  )));
+?>
+
+
+
+
+
+
+<!--
+
+Type *************
+radio
+radio_btn
+inline_radio
+plain/radio
+inline_radio
+vertival_radio
+
+Attributes
+autofocus: true/false
+readonly: true/false
+disabled: true/false
+
+
+For Radio buttons -->
+
+
+
+<!-- For Text field -->
+<?php load_field('text', array('field' => 'tanofemployer',
+                                   'controller' => 'employers',
+                                   'value' => @$employer_details['tanofemployer'])) ?>
+
+<!--Input Text *************
+text
+plain/text
+inline_text
+
+
+For Text field -->
+
+
+<!-- For dropdown field -->
+<?php load_field('dropdown', array('field' => 'empstate_id',
+        'controller' => 'employers',
+        'option' => $state_list,
+        'value' => @$employer_details['empstate_id'])) ?>
+
+<!-- dropdown *************
+dropdown
+plain/dropdown
+inline_dropdown
+
+
+Attributes
+autofocus: true/false
+readonly: true/false
+disabled: true/false
+
+For dropdown field -->
+
+
+
+
+
+
+
+<!-- For Button/anchor/Submit field -->
+<?php load_buttons('anchor', array(
+  'name'=>'SELECT COLUMN(S)',
+  'class'=>'btn btn-sm link blue medium', 
+  'toggle'=>'modal',
+  'target'=>'#select_columns_model'
+)); ?>
+
+anchor
+button
+submit
+
+Attributes
+All attributes accepted
+
+
+</body>
+</html>
+

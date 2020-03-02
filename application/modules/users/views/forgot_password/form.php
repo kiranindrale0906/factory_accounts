@@ -1,0 +1,1 @@
+<?php $this->load->view('core_users/forgot_password/form.php'); ?>

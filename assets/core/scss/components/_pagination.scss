@@ -1,0 +1,37 @@
+.pagination-default{
+	li{
+		a.page-link{
+			@extend %thm_bdr_color;
+			@extend %thm_color;			
+		}
+		&.active{
+			>a.page-link{		
+				@extend  %component_thm_color;
+			}		
+		}		
+	}
+}
+.pagination_blue{
+	margin-bottom:0;
+	li{
+		a.page-link{
+			border: 1px solid $gray;
+			padding:.25rem .8rem;	
+		}	
+		.prev, .next{
+			border-radius:100px;
+			border:1px solid $gray;
+			padding:5px 10px;
+		}
+		a, .current, .clickable{	
+			line-height: 1.25;			
+			display: inline-block;
+			border:none;
+			color:$gray;
+			font-weight:600;				
+		}
+		&.active .current{				
+			border-radius:5px;
+		}
+	}
+}

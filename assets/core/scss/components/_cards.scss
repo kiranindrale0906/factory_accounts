@@ -1,0 +1,29 @@
+.card{
+	.card-header{		
+		>div{
+    	max-width: 90%;
+		}			
+	}
+	.heading{
+		max-width: 100%;
+		margin-bottom:1.2rem;
+		white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+  	display: inline-block;
+		@include maxsize(sm){			
+			font-size: .8em;	    
+		}
+	}
+	&.card-default{
+		border-radius:0;
+		border:none;
+		//@extend  %thm_bdr_color;
+		>.card-header{
+			border-radius:0;
+			@extend  %component_thm_color;
+			@extend  %thm_color_com;
+		}
+	}
+}

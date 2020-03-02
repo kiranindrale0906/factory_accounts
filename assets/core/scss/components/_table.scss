@@ -1,0 +1,142 @@
+.table{
+	thead{
+		tr{
+			th{
+				// white-space:nowrap;
+			}
+		}
+		&.nowrap{
+			white-space: nowrap;
+		}
+	}
+	&.table-default{
+		thead{
+			tr{
+				background-color:$blue;
+        color:$white;
+				th{					
+					a{
+						@extend %thm_color_com;
+						font-size: smaller;
+					}
+				}
+			}
+		}
+		tr{
+			&:nth-of-type(odd){
+				//@extend  %bg_thm_color;
+			}
+		}		
+	}
+	&.table-sm{
+    tr {
+      td{
+        vertical-align:middle;
+        padding: .3rem .5rem;
+        font-size: 0.923rem;
+      }
+      th{
+        padding:.5rem;
+        font-size: 0.923rem;
+        border-bottom-color:$blue;
+      }
+    }
+    &.form_table{
+      tr{
+        td{
+          vertical-align:top;
+        }
+      }
+    }
+  }  
+}
+
+.tableinput{
+	tr td{
+		border:none;
+		vertical-align: middle;
+		padding:5px;
+		input{
+			&:focus{
+				box-shadow:none;
+				outline:none;
+			}
+			//border:none;
+		}		
+		.form-group{
+			margin:0;
+		}
+	}
+}
+.btn_action{
+	white-space: nowrap;
+}
+
+
+
+
+
+
+.responsive_table{
+  tbody, tfoot{
+    tr{
+      td{
+        .column_heading{
+          display:none;  
+        }
+      }
+    }
+  } 
+  @include maxsize(xs) {
+    border-collapse:separate; 
+    border-spacing:0 15px;
+    thead{
+      display:none;      
+    }
+    tfoot{
+      tr{
+        background-color:$gray;
+        &.mob_hidden{
+          display:none;
+        }
+        td{
+          &.mob_hidden{
+            display:none;
+          }
+        }
+      }
+    }
+    tbody, tfoot{
+      tr{      
+        box-shadow:inset 0px -5px 9px rgba(197, 196, 196, 0.5);
+        -webkit-box-shadow:inset 0px -5px 9px rgba(197, 196, 196, 0.5);
+        &:nth-of-type(odd){
+          background-color: rgb(232, 248, 255);
+        }     
+        td{        
+          display: block;
+          padding: 0px 5px !important;
+          white-space:nowrap;              
+          .column_heading{                    
+            display: inline-block;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 10px 5px;
+            width: 150px;
+            margin: 0;
+            margin-right: 10px;
+            position: relative;
+            font-size: 0.90rem;
+            color:$black;
+            white-space:normal;
+            &:after{
+              content: ':';
+              position: absolute;
+              right: 0px;
+            }          
+          }
+        }
+      }
+    }    
+  }  
+}

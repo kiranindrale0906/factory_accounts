@@ -1,0 +1,1 @@
+ALTER TABLE `ac_ledger` ADD `from_account_name` VARCHAR(255) NOT NULL AFTER `account_id`, ADD `from_account_id` INT(11) UNSIGNED NOT NULL AFTER `from_account_name`;

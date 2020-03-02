@@ -1,0 +1,145 @@
+.sidenav_scroll{
+	position: absolute;
+	left: 0;
+	right: 0;
+  width: 250px;
+  height: 100% !important;
+}
+.sidenavbar{
+	top:50px;
+	width:0px;
+	height:calc(100vh - 50px);
+	position:fixed;
+	overflow:auto;
+	z-index:1;
+	display:none;
+	@media (max-width:768px){
+		width:0px;
+	}
+	@extend  %component_thm_color;
+	@extend  %thm_color_com;
+	@include transition (all, 0.2s, ease);
+
+	body:not(.expand_sidemenu) &:hover {
+		ul li a {						
+			span{display:inline-block !important;}	
+		}						
+	}
+	
+	&.expand{
+		overflow:auto;
+	}
+	.expand_sidemenu &{
+		display:block;
+		width:250px;
+		//@include calc(max-height, '100vh - 0px');
+		box-shadow: 0 0 4px rgba(0,0,0,.14), 2px 4px 8px rgba(0,0,0,.28);
+		z-index:2;
+	}
+	ul{
+		list-style:none;
+		margin:0;
+		padding:0;
+		li{
+			&.submenu{
+				position:relative;
+				&.active{
+					>ul{
+						display:block;						
+					}
+				}
+				>ul{
+					display:none;					
+					@extend  %active_thm_color;
+					body.expand_sidemenu &{
+						background-color:rgba($gray, .3);
+					}
+					body:not(.expand_sidemenu) &, .sidenavbar:hover &{											
+						@extend  %component_thm_color;
+						li>a {
+							text-align:left;										
+							.icon{
+								display:inline-block;	
+								width:30px;
+								vertical-align: sub;							
+							}
+						}						
+					}
+					li{
+						a{
+							padding-left:45px;
+							white-space:normal;
+						}
+					}
+				}
+				&.open{
+					.dropicon{
+						&:before{
+							@include transform(rotate(90deg));
+						}						
+					}				
+					
+				}
+			}
+			&.active{
+				@extend  %active_thm_color;
+			}
+			a{								
+				display:block;
+				padding:0.8em 1em;
+				position:relative;
+				white-space: nowrap;
+				@extend  %thm_color_com;
+				@extend %fontsm;
+				font-weight:500;	
+				.expand_sidemenu &{
+					text-align:left;
+				}				
+				&:hover{
+					text-decoration:none;
+				}
+				&.dropicon{
+					&:before{
+						@include transition (all, 0.2s, ease);
+						font-family: "Font Awesome 5 Pro";
+						position:absolute;
+						right:15px;
+						top:auto;
+					}					
+				}
+				span:not(.icon){
+					body:not(.expand_sidemenu) &{
+						display:none;						
+					}	
+				}								
+				.icon{					
+					//font-size:20px;
+    			display: inline-block;
+    			width: 30px;
+					.expand_sidemenu &{
+						display: inline-block;						
+						//width:30px;
+						i{
+							vertical-align: middle;
+							@extend %fontmd;
+						}
+					}
+									
+				}
+			}
+		}
+	}
+	&::-webkit-scrollbar-track{
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  	background-color: #F5F5F5;
+	}
+	&::-webkit-scrollbar{
+		width: 2px;
+  	background-color: #F5F5F5;
+	}
+	&::-webkit-scrollbar-thumb{
+		background-color: $black;
+  	border: 1px solid #555555;
+	}
+}
+

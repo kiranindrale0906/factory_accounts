@@ -1,0 +1,500 @@
+/*============= Color Variables  ================*/
+/*============= Font Weight Variables  ================*/
+/*@include respond-above(sm) {
+  .element {
+    font-weight: bold;
+  }
+}*/
+/* @include transition(all,2s,ease-out); */
+.tran_all {
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease; }
+
+.row.pd5 {
+  margin-left: -5px;
+  margin-right: -5px; }
+  .row.pd5 > [class*="col"] {
+    padding-left: 5px;
+    padding-right: 5px; }
+
+.clear {
+  clear: both; }
+
+.hidden {
+  display: none; }
+
+.boxrow:before {
+  content: '';
+  display: table; }
+.boxrow:after {
+  content: '';
+  display: table;
+  clear: both; }
+
+.break-all {
+  word-break: break-all; }
+
+.blinking {
+  animation: blinkingTextt 1s infinite; }
+
+@keyframes blinkingTextt {
+  from {
+    color: #82c00b; }
+  to {
+    color: #025700; } }
+@-webkit-keyframes blinkingTextt {
+  from {
+    color: #82c00b; }
+  to {
+    color: #025700; } }
+.file_name {
+  display: block;
+  word-break: break-all;
+  overflow: hidden;
+  text-overflow: ellipsis; }
+
+.sticky-bottom {
+  position: sticky;
+  bottom: 0;
+  clear: both; }
+
+.slide_show {
+  padding: 15px;
+  width: 100%;
+  max-width: 50%;
+  position: fixed;
+  top: 70px;
+  z-index: 2;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease; }
+  .slide_show.right {
+    right: -100%; }
+    .slideshow .slide_show.right {
+      right: 0; }
+  .slide_show.left {
+    left: -100%; }
+    .slideshow .slide_show.left {
+      left: 0; }
+
+.pagetitle {
+  padding: 15px 20px;
+  background: #fff;
+  -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(0, 0, 0, 0.05);
+  clear: both;
+  display: inline-block;
+  width: 100%; }
+  .pagetitle .heading {
+    margin: 0; }
+
+.underline {
+  text-decoration: underline; }
+
+/* ------- Font Size ------ */
+.font1 {
+  font-size: 0.0714285714em; }
+
+.font2 {
+  font-size: 0.1428571428em; }
+
+.font3 {
+  font-size: 0.2142857143em; }
+
+.font4 {
+  font-size: 0.2857142857em; }
+
+.font5 {
+  font-size: 0.3571428571em; }
+
+.font6 {
+  font-size: 0.4285714285em; }
+
+.font7 {
+  font-size: 0.4999999999em; }
+
+.font8 {
+  font-size: 0.5714285714em; }
+
+.font9 {
+  font-size: 0.6428571428em; }
+
+.font10 {
+  font-size: 0.7142857142em; }
+
+.font11 {
+  font-size: 0.7857142856em; }
+
+.font12 {
+  font-size: 0.857142857em; }
+
+.font13 {
+  font-size: 0.9285714285em; }
+
+.font14 {
+  font-size: 0.9999999999em; }
+
+.font15 {
+  font-size: 1.0714285713em; }
+
+.font16 {
+  font-size: 1.1428571427em; }
+
+.font17 {
+  font-size: 1.2142857141em; }
+
+.font18 {
+  font-size: 1.2857142856em; }
+
+.font19 {
+  font-size: 1.357142857em; }
+
+.font20 {
+  font-size: 1.4285714284em; }
+
+.font21 {
+  font-size: 1.4999999998em; }
+
+.font22 {
+  font-size: 1.5714285712em; }
+
+.font23 {
+  font-size: 1.6428571427em; }
+
+.font24 {
+  font-size: 1.7142857141em; }
+
+.font25 {
+  font-size: 1.7857142855em; }
+
+.font26 {
+  font-size: 1.8571428569em; }
+
+.font27 {
+  font-size: 1.9285714283em; }
+
+.font28 {
+  font-size: 1.9999999998em; }
+
+.font29 {
+  font-size: 2.0714285712em; }
+
+.font30 {
+  font-size: 2.1428571426em; }
+
+.medium {
+  font-weight: 500; }
+
+.bold {
+  font-weight: 700; }
+
+/* ------- Font Size Close ------*/
+/* ------ Margin Padding ------- */
+.left0 {
+  left: 0px !important; }
+
+.right0 {
+  right: 0px !important; }
+
+.top0 {
+  top: 0px !important; }
+
+.bottom0 {
+  bottom: 0px !important; }
+
+.leftt0 {
+  left-top: 0px !important; }
+
+.rightt0 {
+  right-top: 0px !important; }
+
+.topt0 {
+  top-top: 0px !important; }
+
+.bottomt0 {
+  bottom-top: 0px !important; }
+
+.leftb0 {
+  left-bottom: 0px !important; }
+
+.rightb0 {
+  right-bottom: 0px !important; }
+
+.topb0 {
+  top-bottom: 0px !important; }
+
+.bottomb0 {
+  bottom-bottom: 0px !important; }
+
+.leftl0 {
+  left-left: 0px !important; }
+
+.rightl0 {
+  right-left: 0px !important; }
+
+.topl0 {
+  top-left: 0px !important; }
+
+.bottoml0 {
+  bottom-left: 0px !important; }
+
+.leftr0 {
+  left-right: 0px !important; }
+
+.rightr0 {
+  right-right: 0px !important; }
+
+.topr0 {
+  top-right: 0px !important; }
+
+.bottomr0 {
+  bottom-right: 0px !important; }
+
+.left5 {
+  left: 5px !important; }
+
+.right5 {
+  right: 5px !important; }
+
+.top5 {
+  top: 5px !important; }
+
+.bottom5 {
+  bottom: 5px !important; }
+
+.leftt5 {
+  left-top: 5px !important; }
+
+.rightt5 {
+  right-top: 5px !important; }
+
+.topt5 {
+  top-top: 5px !important; }
+
+.bottomt5 {
+  bottom-top: 5px !important; }
+
+.leftb5 {
+  left-bottom: 5px !important; }
+
+.rightb5 {
+  right-bottom: 5px !important; }
+
+.topb5 {
+  top-bottom: 5px !important; }
+
+.bottomb5 {
+  bottom-bottom: 5px !important; }
+
+.leftl5 {
+  left-left: 5px !important; }
+
+.rightl5 {
+  right-left: 5px !important; }
+
+.topl5 {
+  top-left: 5px !important; }
+
+.bottoml5 {
+  bottom-left: 5px !important; }
+
+.leftr5 {
+  left-right: 5px !important; }
+
+.rightr5 {
+  right-right: 5px !important; }
+
+.topr5 {
+  top-right: 5px !important; }
+
+.bottomr5 {
+  bottom-right: 5px !important; }
+
+.left10 {
+  left: 10px !important; }
+
+.right10 {
+  right: 10px !important; }
+
+.top10 {
+  top: 10px !important; }
+
+.bottom10 {
+  bottom: 10px !important; }
+
+.leftt10 {
+  left-top: 10px !important; }
+
+.rightt10 {
+  right-top: 10px !important; }
+
+.topt10 {
+  top-top: 10px !important; }
+
+.bottomt10 {
+  bottom-top: 10px !important; }
+
+.leftb10 {
+  left-bottom: 10px !important; }
+
+.rightb10 {
+  right-bottom: 10px !important; }
+
+.topb10 {
+  top-bottom: 10px !important; }
+
+.bottomb10 {
+  bottom-bottom: 10px !important; }
+
+.leftl10 {
+  left-left: 10px !important; }
+
+.rightl10 {
+  right-left: 10px !important; }
+
+.topl10 {
+  top-left: 10px !important; }
+
+.bottoml10 {
+  bottom-left: 10px !important; }
+
+.leftr10 {
+  left-right: 10px !important; }
+
+.rightr10 {
+  right-right: 10px !important; }
+
+.topr10 {
+  top-right: 10px !important; }
+
+.bottomr10 {
+  bottom-right: 10px !important; }
+
+.left15 {
+  left: 15px !important; }
+
+.right15 {
+  right: 15px !important; }
+
+.top15 {
+  top: 15px !important; }
+
+.bottom15 {
+  bottom: 15px !important; }
+
+.leftt15 {
+  left-top: 15px !important; }
+
+.rightt15 {
+  right-top: 15px !important; }
+
+.topt15 {
+  top-top: 15px !important; }
+
+.bottomt15 {
+  bottom-top: 15px !important; }
+
+.leftb15 {
+  left-bottom: 15px !important; }
+
+.rightb15 {
+  right-bottom: 15px !important; }
+
+.topb15 {
+  top-bottom: 15px !important; }
+
+.bottomb15 {
+  bottom-bottom: 15px !important; }
+
+.leftl15 {
+  left-left: 15px !important; }
+
+.rightl15 {
+  right-left: 15px !important; }
+
+.topl15 {
+  top-left: 15px !important; }
+
+.bottoml15 {
+  bottom-left: 15px !important; }
+
+.leftr15 {
+  left-right: 15px !important; }
+
+.rightr15 {
+  right-right: 15px !important; }
+
+.topr15 {
+  top-right: 15px !important; }
+
+.bottomr15 {
+  bottom-right: 15px !important; }
+
+.left20 {
+  left: 20px !important; }
+
+.right20 {
+  right: 20px !important; }
+
+.top20 {
+  top: 20px !important; }
+
+.bottom20 {
+  bottom: 20px !important; }
+
+.leftt20 {
+  left-top: 20px !important; }
+
+.rightt20 {
+  right-top: 20px !important; }
+
+.topt20 {
+  top-top: 20px !important; }
+
+.bottomt20 {
+  bottom-top: 20px !important; }
+
+.leftb20 {
+  left-bottom: 20px !important; }
+
+.rightb20 {
+  right-bottom: 20px !important; }
+
+.topb20 {
+  top-bottom: 20px !important; }
+
+.bottomb20 {
+  bottom-bottom: 20px !important; }
+
+.leftl20 {
+  left-left: 20px !important; }
+
+.rightl20 {
+  right-left: 20px !important; }
+
+.topl20 {
+  top-left: 20px !important; }
+
+.bottoml20 {
+  bottom-left: 20px !important; }
+
+.leftr20 {
+  left-right: 20px !important; }
+
+.rightr20 {
+  right-right: 20px !important; }
+
+.topr20 {
+  top-right: 20px !important; }
+
+.bottomr20 {
+  bottom-right: 20px !important; }
+
+/* ------ Margin Padding Close ------- */
+
+/*# sourceMappingURL=base.css.map */

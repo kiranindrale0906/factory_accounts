@@ -1,0 +1,112 @@
+/*============= Color Variables  ================*/
+$white:#fff;
+
+$dark_black:#000;
+$black:#1b1b1b;
+
+$dark_green:#35581d;
+$green:#81c36b;
+$light_green:#91dc5a;
+
+$dark_blue:#131b36;
+$blue:#216cea;
+$light_blue:#346cea91;
+
+$dark_orange:#d45622;
+$orange:#ff6a2f;
+
+$yellow:#fab63f;
+
+$red:#ff0000;
+$dark_red:#ca3a33;
+
+$dark_gray:#555;
+$gray:#ced4da;
+$light_gray:#f2f2f2;
+
+$maroon: #800000;
+
+$pink: #e388a6;
+
+$cyan: #4db0ca;
+$light_cyan: #a2d3ee;
+
+$blueviolet: #ad88e3;
+
+
+
+$facebook: #3B5998;
+$flickr: #FE0883;
+$outlook: #0072C6;
+$foursquare: #8FD400;
+$google: #C63D2D;
+$instagram: #4E433C;
+$linkedin: #4875B4;
+$tumblr: #2B4964;
+$twitter: #33CCFF;
+$vimeo: #86B32D;
+$youtube: #FF3333;
+
+/*============= Font Weight Variables  ================*/
+$extra_bold:900;
+$bolder:800;
+$bold:700;
+$medium:600;
+$light:300;
+
+$colorname: (
+	white: $white,
+  black: $black,
+  dark_gray: $dark_gray,
+  gray: $gray,
+  light_gray: $light_gray,
+  red: $red,
+  green: $green,
+  light_green: $light_green,
+  blue: $blue,
+  light_blue: $light_blue,
+  orange: $orange,
+  yellow: $yellow,
+  maroon: $maroon,
+  pink: $pink,
+  cyan: $cyan,
+  blueviolet: $blueviolet,
+  light_cyan: $light_cyan,
+  
+  facebook:$facebook,
+  flickr: $flickr,
+  outlook: $outlook,
+  foursquare: $foursquare,
+  google: $google,
+  instagram: $instagram,
+  linkedin: $linkedin,
+  tumblr: $tumblr,
+  twitter: $twitter,
+  vimeo: $vimeo,
+  youtube: $youtube
+);
+
+// custome color combination theme
+$thm_color_com_name: (
+	white: $black,
+  // red: $white,
+  // green: $white,
+  blue: $white,
+  // orange: $white
+);
+
+$active_colorname: (
+	white: $gray,
+  red: $dark_red,
+  green: $dark_green,
+  orange: $dark_orange,
+  blue: $light_blue,
+  maroon: $maroon  
+);
+
+
+
+
+%fontxs{font-size:.85rem;}
+%fontsm{font-size:.95rem;}
+%fontmd{font-size:1.1rem;}

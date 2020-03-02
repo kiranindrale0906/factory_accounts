@@ -1,0 +1,43 @@
+.col-form-label{
+	.red{
+		position: absolute;
+	}
+}
+.form-group.mb-2{
+	label{
+		margin-bottom: .25rem;
+	}	
+}
+input{
+	&.radius{
+	 	@include border-radius(100px)
+	}
+}
+.input_icon{
+	position:relative;
+	.icon{
+		position:absolute;
+		top: 50%;
+		@include transform(translateY(-50%));
+    right: 15px;
+    cursor:pointer;
+	}
+}
+
+
+// Checkbox and radio button custome
+.custom-checkbox, .custom-radio{
+	input{
+	&.custom-control-input{
+			&:checked{
+				& ~ .custom-control-label{
+					&:before{
+						@extend  %component_thm_color;
+						@extend  %thm_color_com;
+						@extend  %border_thm_color;
+					}				
+				}
+			}
+		}		
+	}
+}

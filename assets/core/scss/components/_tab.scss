@@ -1,0 +1,5 @@
+.nav-tabs{
+	&.default_nav{
+    @extend %thm_tab_nav;
+  }
+}

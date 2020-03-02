@@ -1,0 +1,162 @@
+@import "core/_variables.scss";
+@import "core/_mixin.scss";
+@import "core/_animation.scss";
+
+
+.row{
+  &.pd5{
+    margin-left:-5px;
+    margin-right:-5px;
+    >[class*="col"]{
+      padding-left:5px;
+      padding-right:5px;
+    }
+  }
+}
+
+.clear{
+  clear:both;
+}
+.hidden{
+  display:none;
+}
+.boxrow{
+  &:before{
+    content:'';
+    display:table;    
+  }
+  &:after{
+    content:'';
+    display:table;
+    clear:both;
+  }
+}
+.break-all {
+  word-break: break-all;
+}
+.blinking {
+  animation: blinkingTextt 1s infinite;
+}
+@keyframes blinkingTextt {
+  from {
+    color: #82c00b;
+  }
+
+  to {
+    color: #025700;
+  }
+}
+
+
+@-webkit-keyframes blinkingTextt {
+  from {
+    color: #82c00b;
+  }
+
+  to {
+    color: #025700;
+  }
+}
+.file_name{
+  display: block;  
+  word-break: break-all;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sticky-bottom{
+  position:sticky;
+  bottom:0;
+  clear:both;  
+}
+
+.slide_show{
+  padding:15px;
+  width:100%;
+  max-width:50%;
+  position:fixed;
+  top:70px;
+  z-index:2;
+  @include transition (all, 0.5s, ease);
+  &.right{
+    right:-100%;
+    .slideshow &{
+      right:0;
+    }
+  }
+  &.left{
+    left:-100%;
+    .slideshow &{
+      left:0;
+    }
+  }
+}
+
+.pagetitle {
+  padding: 15px 20px;
+  background: $white;
+  -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(0, 0, 0, 0.05);
+  clear: both;
+  display: inline-block;
+  width: 100%;  
+  .heading{
+    margin:0;
+  }
+}
+
+.underline{
+  text-decoration:underline;
+}
+/* ------- Font Size ------ */
+$max: 30;
+$step: 1;
+
+@for $i from 1 through ($max/$step) {
+  $value: $step * $i;
+  $font: $i * 0.07142857142;
+  .font#{$value} {
+      font-size: $font + em
+  }
+}
+.medium{
+  font-weight:500;
+}
+.bold{
+  font-weight:700;
+}
+/* ------- Font Size Close ------*/
+
+/* ------ Margin Padding ------- */
+$max: 20;
+$step: 5;
+
+@for $i from 0 through ($max/$step) {
+    $stemNum: $step * $i;    
+    $sides: (
+    "": "all",
+    "t": "top",
+    "b": "bottom",
+    "l": "left",
+    "r": "right",
+  );
+
+  @each $space in $stemNum {
+    @each $prefix, $value in $sides {
+      $property: if($prefix == '', '', -#{$value});
+      .left#{$prefix}#{$space} {
+        left#{$property}: #{$space}px !important;
+      }
+      .right#{$prefix}#{$space} {
+        right#{$property}: #{$space}px !important;
+      }
+      .top#{$prefix}#{$space} {
+        top#{$property}: #{$space}px !important;
+      }
+      .bottom#{$prefix}#{$space} {
+        bottom#{$property}: #{$space}px !important;
+      }
+      
+    }
+  }  
+}
+/* ------ Margin Padding Close ------- */

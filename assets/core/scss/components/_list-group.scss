@@ -1,0 +1,36 @@
+.list-group{	
+	&.black{
+		li{
+			a{
+				color: $black;
+			}
+		}	
+	}
+	&.list_separator{
+		li{			
+				padding:0px 15px;
+			
+			+ li{
+				border-left:1px solid $gray;
+			}
+			&:first-child{
+				padding-left:0;
+			}
+			&:last-child{
+				padding-right:0;
+			}
+		}
+	}
+	&.list_center{
+		text-align:center;
+	}
+}
+
+
+ul.divider{
+  li{
+    + li{
+      border-top:1px solid $gray;
+    }
+  }
+}

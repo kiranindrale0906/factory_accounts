@@ -1,0 +1,94 @@
+ERROR - 2020-02-17 11:05:56 --> 404 Page Not Found: /index
+ERROR - 2020-02-17 11:05:58 --> 404 Page Not Found: /index
+ERROR - 2020-02-17 11:06:01 --> 404 Page Not Found: /index
+ERROR - 2020-02-17 11:06:01 --> 404 Page Not Found: /index
+ERROR - 2020-02-17 11:06:16 --> 404 Page Not Found: /index
+ERROR - 2020-02-17 11:06:22 --> Query error: Unknown column 'users_user_roles.is_delete' in 'where clause' - Invalid query: SELECT `user_role_id`
+FROM `users_user_roles`
+WHERE `user_id` = '1'
+AND `users_user_roles`.`is_delete` != 1
+ERROR - 2020-02-17 11:08:31 --> Query error: Unknown column 'users_user_roles.is_delete' in 'where clause' - Invalid query: SELECT `user_role_id`
+FROM `users_user_roles`
+WHERE `user_id` = '1'
+AND `users_user_roles`.`is_delete` != 1
+ERROR - 2020-02-17 11:11:29 --> Severity: Notice --> Undefined index: authToken /var/www/html/faber_launge_accounting_new_dev/application/modules/users/models/User_model.php 87
+ERROR - 2020-02-17 11:11:29 --> Severity: Notice --> Undefined index: password_updated_at /var/www/html/faber_launge_accounting_new_dev/application/modules/users/models/User_model.php 91
+ERROR - 2020-02-17 11:11:29 --> Query error: Unknown column 'user_role_permissions.is_delete' in 'where clause' - Invalid query: SELECT `controller_name` as `controller_name`
+FROM `user_role_permissions`
+WHERE user_role_id IN(0)
+AND `user_role_permissions`.`is_delete` != 1
+ERROR - 2020-02-17 11:12:45 --> Severity: Notice --> Undefined index: authToken /var/www/html/faber_launge_accounting_new_dev/application/modules/users/models/User_model.php 87
+ERROR - 2020-02-17 11:12:45 --> Severity: Notice --> Undefined index: password_updated_at /var/www/html/faber_launge_accounting_new_dev/application/modules/users/models/User_model.php 91
+ERROR - 2020-02-17 11:12:45 --> Query error: Unknown column 'user_role_permissions.is_delete' in 'where clause' - Invalid query: SELECT `controller_name` as `controller_name`
+FROM `user_role_permissions`
+WHERE user_role_id IN(0)
+AND `user_role_permissions`.`is_delete` != 1
+ERROR - 2020-02-17 11:12:47 --> Severity: Notice --> Undefined index: authToken /var/www/html/faber_launge_accounting_new_dev/application/modules/users/models/User_model.php 87
+ERROR - 2020-02-17 11:12:47 --> Severity: Notice --> Undefined index: password_updated_at /var/www/html/faber_launge_accounting_new_dev/application/modules/users/models/User_model.php 91
+ERROR - 2020-02-17 11:12:47 --> Query error: Unknown column 'user_role_permissions.is_delete' in 'where clause' - Invalid query: SELECT `controller_name` as `controller_name`
+FROM `user_role_permissions`
+WHERE user_role_id IN(0)
+AND `user_role_permissions`.`is_delete` != 1
+ERROR - 2020-02-17 11:14:06 --> Severity: Notice --> Undefined index: authToken /var/www/html/faber_launge_accounting_new_dev/application/modules/users/models/User_model.php 87
+ERROR - 2020-02-17 11:14:06 --> Severity: Notice --> Undefined index: password_updated_at /var/www/html/faber_launge_accounting_new_dev/application/modules/users/models/User_model.php 91
+ERROR - 2020-02-17 11:14:07 --> 404 Page Not Found: /index
+ERROR - 2020-02-17 11:14:07 --> 404 Page Not Found: /index
+ERROR - 2020-02-17 11:14:14 --> 404 Page Not Found: /index
+ERROR - 2020-02-17 11:14:14 --> 404 Page Not Found: /index
+ERROR - 2020-02-17 11:14:16 --> Query error: Unknown column 'user_roles.is_delete' in 'where clause' - Invalid query: SELECT `name` as "name", DATE_FORMAT(user_roles.created_at, '%d-%m-%Y') as created, `id`, (SELECT COUNT(id) FROM users_user_roles where user_role_id = user_roles.id) as role_count
+FROM `user_roles`
+WHERE `user_roles`.`is_delete` != 1
+GROUP BY `id`
+ LIMIT 20
+ERROR - 2020-02-17 11:14:17 --> Query error: Unknown column 'user_roles.is_delete' in 'where clause' - Invalid query: SELECT `name` as "name", DATE_FORMAT(user_roles.created_at, '%d-%m-%Y') as created, `id`, (SELECT COUNT(id) FROM users_user_roles where user_role_id = user_roles.id) as role_count
+FROM `user_roles`
+WHERE `user_roles`.`is_delete` != 1
+GROUP BY `id`
+ LIMIT 20
+ERROR - 2020-02-17 11:15:58 --> 404 Page Not Found: ../modules/users/controllers/Users/manifest.json
+ERROR - 2020-02-17 11:15:58 --> 404 Page Not Found: /index
+ERROR - 2020-02-17 11:15:59 --> 404 Page Not Found: /index
+ERROR - 2020-02-17 11:15:59 --> 404 Page Not Found: ../modules/users/controllers/Users/manifest.json
+ERROR - 2020-02-17 11:16:00 --> 404 Page Not Found: /index
+ERROR - 2020-02-17 11:16:41 --> Severity: Notice --> Undefined index: check /var/www/html/faber_launge_accounting_new_dev/application/modules/core_users/controllers/Core_user_roles.php 40
+ERROR - 2020-02-17 11:16:42 --> 404 Page Not Found: ../modules/users/controllers/Users/manifest.json
+ERROR - 2020-02-17 11:16:42 --> 404 Page Not Found: /index
+ERROR - 2020-02-17 11:16:50 --> 404 Page Not Found: ../modules/users/controllers/Users/manifest.json
+ERROR - 2020-02-17 11:16:50 --> 404 Page Not Found: /index
+ERROR - 2020-02-17 11:16:51 --> 404 Page Not Found: /index
+ERROR - 2020-02-17 11:16:53 --> Severity: Notice --> Undefined variable: sanitize_data /var/www/html/faber_launge_accounting_new_dev/application/core/logic_traits/Security_trait.php 77
+ERROR - 2020-02-17 11:16:53 --> Severity: Warning --> Invalid argument supplied for foreach() /var/www/html/faber_launge_accounting_new_dev/application/core/logic_traits/Security_trait.php 38
+ERROR - 2020-02-17 11:16:53 --> Severity: Warning --> Invalid argument supplied for foreach() /var/www/html/faber_launge_accounting_new_dev/application/core/logic_traits/Security_trait.php 38
+ERROR - 2020-02-17 11:16:53 --> Severity: Warning --> Invalid argument supplied for foreach() /var/www/html/faber_launge_accounting_new_dev/application/core/logic_traits/Security_trait.php 38
+ERROR - 2020-02-17 11:16:53 --> Severity: Warning --> Invalid argument supplied for foreach() /var/www/html/faber_launge_accounting_new_dev/application/core/logic_traits/Security_trait.php 38
+ERROR - 2020-02-17 11:16:53 --> Severity: Warning --> Invalid argument supplied for foreach() /var/www/html/faber_launge_accounting_new_dev/application/core/logic_traits/Security_trait.php 38
+ERROR - 2020-02-17 11:16:53 --> 404 Page Not Found: /index
+ERROR - 2020-02-17 11:17:07 --> 404 Page Not Found: /index
+ERROR - 2020-02-17 11:17:07 --> 404 Page Not Found: ../modules/users/controllers/Users/manifest.json
+ERROR - 2020-02-17 11:17:13 --> 404 Page Not Found: ../modules/users/controllers/Users/manifest.json
+ERROR - 2020-02-17 11:17:13 --> 404 Page Not Found: /index
+ERROR - 2020-02-17 11:17:22 --> Severity: Notice --> Undefined index: authToken /var/www/html/faber_launge_accounting_new_dev/application/modules/users/models/User_model.php 87
+ERROR - 2020-02-17 11:17:22 --> Severity: Notice --> Undefined index: password_updated_at /var/www/html/faber_launge_accounting_new_dev/application/modules/users/models/User_model.php 91
+ERROR - 2020-02-17 11:17:22 --> Severity: Notice --> Undefined index: Transactions /var/www/html/faber_launge_accounting_new_dev/application/views/navigation/application/sidebar.php 12
+ERROR - 2020-02-17 11:17:22 --> Severity: Notice --> Undefined index: Reports /var/www/html/faber_launge_accounting_new_dev/application/views/navigation/application/sidebar.php 12
+ERROR - 2020-02-17 11:17:22 --> Severity: Notice --> Undefined index: Others /var/www/html/faber_launge_accounting_new_dev/application/views/navigation/application/sidebar.php 12
+ERROR - 2020-02-17 11:17:23 --> 404 Page Not Found: /index
+ERROR - 2020-02-17 11:17:23 --> 404 Page Not Found: /index
+ERROR - 2020-02-17 11:22:29 --> Severity: Notice --> Undefined index: Transactions /var/www/html/faber_launge_accounting_new_dev/application/views/navigation/application/sidebar.php 12
+ERROR - 2020-02-17 11:22:29 --> Severity: Notice --> Undefined index: Reports /var/www/html/faber_launge_accounting_new_dev/application/views/navigation/application/sidebar.php 12
+ERROR - 2020-02-17 11:22:29 --> Severity: Notice --> Undefined index: Others /var/www/html/faber_launge_accounting_new_dev/application/views/navigation/application/sidebar.php 12
+ERROR - 2020-02-17 11:22:29 --> 404 Page Not Found: /index
+ERROR - 2020-02-17 11:22:32 --> Severity: Notice --> Undefined index: Transactions /var/www/html/faber_launge_accounting_new_dev/application/views/navigation/application/sidebar.php 12
+ERROR - 2020-02-17 11:22:32 --> Severity: Notice --> Undefined index: Reports /var/www/html/faber_launge_accounting_new_dev/application/views/navigation/application/sidebar.php 12
+ERROR - 2020-02-17 11:22:32 --> Severity: Notice --> Undefined index: Others /var/www/html/faber_launge_accounting_new_dev/application/views/navigation/application/sidebar.php 12
+ERROR - 2020-02-17 11:22:32 --> Severity: Notice --> Undefined variable: sanitize_data /var/www/html/faber_launge_accounting_new_dev/application/core/logic_traits/Security_trait.php 77
+ERROR - 2020-02-17 11:22:32 --> Severity: Warning --> Invalid argument supplied for foreach() /var/www/html/faber_launge_accounting_new_dev/application/core/logic_traits/Security_trait.php 38
+ERROR - 2020-02-17 11:22:32 --> Severity: Warning --> Invalid argument supplied for foreach() /var/www/html/faber_launge_accounting_new_dev/application/core/logic_traits/Security_trait.php 38
+ERROR - 2020-02-17 11:22:32 --> Severity: Warning --> Invalid argument supplied for foreach() /var/www/html/faber_launge_accounting_new_dev/application/core/logic_traits/Security_trait.php 38
+ERROR - 2020-02-17 11:22:32 --> Severity: Warning --> Invalid argument supplied for foreach() /var/www/html/faber_launge_accounting_new_dev/application/core/logic_traits/Security_trait.php 38
+ERROR - 2020-02-17 11:22:32 --> Severity: Warning --> Invalid argument supplied for foreach() /var/www/html/faber_launge_accounting_new_dev/application/core/logic_traits/Security_trait.php 38
+ERROR - 2020-02-17 11:22:33 --> 404 Page Not Found: /index
+ERROR - 2020-02-17 11:22:36 --> Severity: Notice --> Undefined index: Transactions /var/www/html/faber_launge_accounting_new_dev/application/views/navigation/application/sidebar.php 12
+ERROR - 2020-02-17 11:22:36 --> Severity: Notice --> Undefined index: Reports /var/www/html/faber_launge_accounting_new_dev/application/views/navigation/application/sidebar.php 12
+ERROR - 2020-02-17 11:22:36 --> Severity: Notice --> Undefined index: Others /var/www/html/faber_launge_accounting_new_dev/application/views/navigation/application/sidebar.php 12
+ERROR - 2020-02-17 11:22:36 --> 404 Page Not Found: /index

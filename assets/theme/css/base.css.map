@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,mDAAmD;AA+CnD,yDAAyD;ACgMzD;;;;GAIG",
+"sources": ["../scss/core/_variables.scss","../scss/core/_mixin.scss"],
+"names": [],
+"file": "base.css"
+}

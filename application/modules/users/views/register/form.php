@@ -1,0 +1,1 @@
+<?php $this->load->view('core_users/register/form.php'); ?>

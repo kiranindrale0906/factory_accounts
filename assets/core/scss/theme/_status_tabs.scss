@@ -1,0 +1,123 @@
+.process_nav .nav-tabs {
+  position: relative;
+  margin: 0 auto;
+  margin-bottom: 0;
+  z-index: 0;
+  box-sizing:box-sizing;
+}
+
+
+ ul.tabtext{  
+  list-style-type: none;
+  padding: 0;
+  margin:0;  
+  @include flexbox();
+  @include flex-wrap(wrap);
+  text-align: center;
+  @include maxsize(sm){
+    text-align: right;
+    &.status{
+      text-align: left;
+    }
+  }
+  li{
+    @include maxsize(sm){
+      width: 100%;
+      height: 150px;
+      &:last-child{
+        height: auto;
+      }
+    }
+    @include minsize(sm){
+      width: 20%;
+      @include align-self(flex-end)
+      
+    }
+  }
+}
+
+.process_text ul {
+  margin: 0;
+  padding: 0;
+}
+
+.process_tabs {
+  height: 100%;
+  border: none;
+  li {
+    @include maxsize(sm){
+      width: 100%;
+      height: 150px;
+      &:last-child{
+        height: auto;
+      }
+    }
+    span.round-tabs{
+      &:after {
+        content: "";
+        position: absolute;
+        background: #ccc;
+        height: 2px;
+        width: 215px;
+        top: 50%;
+        left: 50px;
+        content: "";
+        border-bottom: 1px solid $gray;
+        @include maxsize(sm){
+          height: 138px;
+          width: 2px;
+          top: 28px;
+          left: auto;
+        }
+      }
+      
+    }
+    span.round-tabs {
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      display: inline-block;
+      border-radius: 100px;
+      background: #cccccc;
+      z-index: 0;
+      position: relative;
+      left: 0;
+      text-align: center;
+      font-size: 25px;
+      
+      @include maxsize(sm){
+        width: 30px;
+        height: 30px;
+      }
+      &.one {
+        color: rgb(34, 194, 34);
+        border: 2px solid rgb(34, 194, 34);
+      }
+    }
+  }
+  
+  li {
+    &:last-child span.round-tabs:after {
+      content: none;
+    }
+    &.active span.round-tabs {
+      background: #cccccc;
+      border: 2px solid #25ae88;
+      color: $white;
+    }
+  }
+  > li {
+    &.active > a span.round-tabs {
+      -webkit-box-shadow: 0 0px 10px 0px rgba(78, 104, 201, 0.3);
+      -moz-box-shadow: 0 0px 10px 0px rgba(78, 104, 201, 0.3);
+      -ms-box-shadow: 0 0px 10px 0px rgba(78, 104, 201, 0.3);
+      -o-box-shadow: 0 0px 10px 0px rgba(78, 104, 201, 0.3);
+      box-shadow: 0 0px 10px 0px rgba(78, 104, 201, 0.3);
+      background: #25ae88;
+      background-image: url("../images/icons/checkmark.png");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 60%;
+    }
+  }
+}
