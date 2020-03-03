@@ -3,7 +3,8 @@ $ci=&get_instance();
 $ci->load->helper(array('ac_vouchers/ac_vouchers'));
 
 function getTableSettings() {
-  $table_setting=array('page_title'=>'Cash Receipt Voucher','where'=>'voucher_type="cash receipt voucher"');
+  $table_setting=array('page_title'=>'Cash Receipt Voucher','where'=>'voucher_type="cash receipt voucher" 
+                                                                      company_id='.@$_SESSION['company_id']);
   return ac_vouchers_getTableSettings($table_setting);
 }
 //Add Cash Issue Voucher

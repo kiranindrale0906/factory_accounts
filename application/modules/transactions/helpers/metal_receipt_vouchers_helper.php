@@ -4,7 +4,8 @@ $ci=&get_instance();
 $ci->load->helper(array('ac_vouchers/ac_vouchers'));
 
 function getTableSettings() {
-  $table_setting=array('page_title'=>'Metal Receipt Voucher','where'=>'voucher_type="metal receipt voucher"');
+  $table_setting=array('page_title'=>'Metal Receipt Voucher','where'=>'voucher_type="metal receipt voucher" 
+                                                                       company_id='.@$_SESSION['company_id']);
   return ac_vouchers_getTableSettings($table_setting);
 }
 //Add Cash Issue Voucher

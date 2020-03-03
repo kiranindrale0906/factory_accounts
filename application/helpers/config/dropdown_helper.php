@@ -107,3 +107,10 @@ function get_call_type() {
   return array(
           array('name' => 'Call Done', 'id'  => '1'));   
 }
+
+function get_company_list(){
+  $ci=&get_instance();
+  $ci->load->model('masters/company_model');
+  $result = $ci->company_model->get('id,name');
+  return $result;
+}
