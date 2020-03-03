@@ -3,7 +3,8 @@ $("body").on("focus", ".datepicker_js", function(){
     switchOnClick: true,
     clearButton:true,
     time: false,
-    format : 'YYYY-MM-DD',
+    // format : 'YYYY-MM-DD',
+    format : 'DD-MM-YYYY',
     placeholder : 'DD-MM-YYYY',
     weekStart : 0
   });
@@ -35,7 +36,7 @@ $("body").on("focus", ".datepicker_prevnone_js", function(){
     switchOnClick: true,
     clearButton:true,
     time: false,
-    format : 'YYYY-MM-DD',
+    //format : 'YYYY-MM-DD',
     minDate : new Date() 
   });
 });
