@@ -13,7 +13,7 @@ class Voucher_model extends BaseModel {
     $rules[] =array('field' => $this->router_class.'[voucher_date]', 'label' => 'Date',
                     'rules' => array('trim', 'required', 
                                array('validate_voucher_date', array($this, 'check_period_exists'))),
-                    'errors'=>array('validate_voucher_date' => "Please set the period from master."));
+                    'errors'=>array('validate_voucher_date' => "Please set the Financial year from master."));
     $rules[] = array('field' => $this->router_class.'[account_name]', 'label' => 'Account Name',
                      'rules' => 'trim|required');
 
