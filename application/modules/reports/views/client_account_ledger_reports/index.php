@@ -3,7 +3,7 @@
    if(!empty($client_account_ledger)) {
     foreach ($client_account_ledger as $client_name => $company_data) { ?>
       <div class="row m-1">
-       <b> Client Name :  <?=$client_name?> </b>
+       <b> <?=$client_name?> </b>
       </div>
       <br>
       <div class="row m-1">

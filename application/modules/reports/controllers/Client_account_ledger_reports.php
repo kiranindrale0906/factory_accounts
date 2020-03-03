@@ -22,7 +22,8 @@ class Client_account_ledger_reports extends BaseController {
     foreach ($get_account as $key => $company_detail) {
       $account_ledger_data=$this->model->get('date_format(voucher_date,"%d-%m-%Y") as voucher_date,
                                               voucher_type,voucher_number,credit_amount,debit_amount,credit_weight,debit_weight',
-                                             array('company_id'=>$company_detail['id']));
+                                             array('company_id'=>$company_detail['id']), array() ,
+                                             array('order_by'=>'voucher_date asc'));
       $client_account_ledger[$company_detail['name']]=$account_ledger_data;
     }
     $this->data['client_account_ledger'] = $client_account_ledger;
