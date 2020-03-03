@@ -58,7 +58,7 @@
         endif; ?>
  
   <?php if(!empty(@get_field_attribute($this->router->class,'purity'))) :
-          load_field('dropdown', array('field' => 'purity', 'option'=>@$purities)); 
+          load_field('text', array('field' => 'purity')); 
                                     
         endif; ?>
 

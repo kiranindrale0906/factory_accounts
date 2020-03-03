@@ -53,7 +53,8 @@
                                             // 'transactions/platinum_sales_voucher' => 'Platinum Sales Voucher',
                                             // 'transactions/machine_bangles_sales_voucher' => 'Machine Bangles Sales Voucher',
                                             // 'transactions/antique_sales_return_voucher' => 'Antique Sales Return Voucher',
-                                            'transactions/mangalsutra_sales_return_voucher' => 'Mangalsutra Sales Return Voucher'),
+                                            // 'transactions/mangalsutra_sales_return_voucher' => 'Mangalsutra Sales Return Voucher'
+                                          ),
                     // 'Reports'   => array('reports/mis_reports'=>'MIS Reports',
                     //                     'reports/stock_report' =>'Stock Report',
                     //                     'reports/order_report'=>'Order Report'),
