@@ -40,9 +40,9 @@ class Vouchers extends BaseController {
                                                                       'ac_account.group_code=ac_groups.name','')),
                                                           array('order_by'=>'ac_account.name asc'));
 
-    $this->data['purities'] = $this->purity_model->get('purity as name,id',
-                                                       array('where'=>array('company_id='=>$company_id)),
-                                                       array(), array('order_by'=>'purity asc'));
+    // $this->data['purities'] = $this->purity_model->get('purity as name,id',
+    //                                                    array('where'=>array('company_id='=>$company_id)),
+    //                                                    array(), array('order_by'=>'purity asc'));
 
     $this->data['group_list'] = $this->group_model->get('name,id',
                                                         array('where'=>array('company_id='=>$company_id)),

@@ -5,12 +5,14 @@
   //$data = get_field_data($data, $this->router, @$$data_variable_name); 
 ?>
 <?php 
-  $data['error'] = ((isset($data['error']) && $data['error'] == false )) ? false : true;
+  //$data['error'] = ((isset($data['error']) && $data['error'] == false )) ? false : true;
+  $data['error']=true;
   if($data['error'] == true):
-    if(!empty(form_error($data['name']))): ?>
+    //if(!empty(form_error($data['name']))): 
+    ?>
       <div class="clear red font12 col-12 pl-0" id="<?= $data['name'] ?>_error">
         <?php echo form_error($data['name']); ?>
       </div>
-    <?php endif;
+    <?php //endif;
   endif; 
 ?>

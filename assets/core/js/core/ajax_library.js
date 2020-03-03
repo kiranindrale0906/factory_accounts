@@ -62,6 +62,10 @@ function ajax_post_request(url,formData, reqOff) {
         eval(response.js_function); 
       }
       
+      if(response.errors!=null && response.errors!='' && response.open_modal != 0) {
+        display_errors(response.errors);
+      } 
+
       $('.onclick_ajaxloader_js').hide();
     }
 
@@ -99,5 +103,12 @@ function ajax_post_onclick_submit(){
     var url = $(this).closest('form').attr('action');
     var formData = new FormData($(this).closest('form')[0]);
     ajax_post_request(url, formData);
+  });
+}
+
+function display_errors(errors) {
+  $.each(errors,function(error_id,error_message) {
+    var errorid=error_id.replace( /(:|\.|\[|\]|,|=|@)/g, "\\$1" );
+    $("#"+errorid+"_error").text(error_message);
   });
 }
