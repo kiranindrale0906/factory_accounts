@@ -9,7 +9,34 @@
       <i class="fal fa-align-justify"></i>
     </button>    
   </div>  
+  <div class="m-3">
+    <select class="form-control" name="set_company_id" id="set_company_id" onchange="set_company_session()">
+      <?php 
+        $company_list=get_company_list();
+        if(!empty($company_list)) { ?>
+          <option value="">Select Company</option>
+          <?php foreach ($company_list as $key => $value) { 
+             $sel="";
+             if(!empty($_SESSION['company_id']) && $_SESSION['company_id']==$value['id'])
+              $sel="selected"; 
+          ?>
+            <option value="<?=$value['id']?>" <?=$sel?>>
+              <?=$value['name']?>
+            </option>  
+          <?php 
+          }
+        }
+        else { ?>
+          <option value="">No Company Found</option>
+        <?php 
+        }
+      ?>  
+    </select>
+  </div>
   <div class="d-flex align-items-center justify-content-end float-right">
+
+        
+    
     <?php if(isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])):
         //$this->load->view('communications/inapp_notifications/inapp_view');
     ?>
