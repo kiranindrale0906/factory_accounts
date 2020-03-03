@@ -49,7 +49,7 @@ class Vouchers extends BaseController {
                                                         array(), array('order_by'=>'name asc'));
   }
 
-  public function view($id){
+  public function view($id) {
     $this->print_voucher($id);
   }
 
@@ -61,7 +61,7 @@ class Vouchers extends BaseController {
     $model=(!empty($this->model_name))?$this->model_name:singular($this->router->class);
     $modelname=$model."_model";
     $this->data['data'] = $this->$modelname->get('*',array('where'=>array('id'=>$id)));
-    $this->load->view($this->router->class.'/view', $this->data);
+    $this->load->view($this->router->module."/".$this->router->class.'/view', $this->data);
   }
 
   // public function uplaod_print_document($id) {

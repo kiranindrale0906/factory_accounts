@@ -22,7 +22,7 @@ function getTableSettings() {
 
 
 function list_settings() {
-  $list_option=array('voucher_date','voucher_number','account_name','purity','credit_weight','pure_gold_debit','narration','account_id','company_id');
+  $list_option=array('voucher_date','voucher_number','account_name','purity','credit_weight','pure_gold_debit','narration','account_id','company_id','action');
   return ac_vouchers_list_settings($list_option);
 }
 

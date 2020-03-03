@@ -9,7 +9,7 @@ function ac_vouchers_getTableSettings($table_setting_arg=array()) {
                         'join_type'           => '',
                         'where'               => '',
                         'where_ids'           => '',
-                        'order_by'            => '',
+                        'order_by'            => 'id desc',
                         'limit'               => "20",
                         'extra_select_column' => 'id',
                         'actionFunction'      => '',
@@ -128,7 +128,7 @@ function ac_voucher_get_row_actions($row, $url, $select_url, $filter) {
                              'js_function' => "",
                              'class' => 'text-danger text-uppercase');
   $actions["Print Voucher"] = array('request' => "http", 
-                                    'url' => ADMIN_PATH.$controller.'/print_voucher/'.$row['id'],
+                                    'url' => ADMIN_PATH.$controller.'/view/'.$row['id'],
                                     'confirm_message' => "",
                                     'class' => 'btn_green');
   return $actions;
