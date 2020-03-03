@@ -15,7 +15,7 @@
           $add_attr=array('controller' => $this->router->class, 'name' => 'Submit' , 'class' => 'btn_blue');
           load_buttons('submit', $add_attr); 
           
-          load_buttons('anchor', array('href'=>ADMIN_PATH."reports/account_ledger_reports/index",'name' => 'CLEAR FILTER' , 'class' => 'btn_blue')); 
+          load_buttons('anchor', array('href'=>ADMIN_PATH."reports/account_ledger_reports/index",'name' => 'Clear Filter' , 'class' => 'btn_blue')); 
       ?> 
     </div>
   </div>  
