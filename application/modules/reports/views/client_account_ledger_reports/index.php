@@ -2,11 +2,11 @@
 <?php 
    if(!empty($client_account_ledger)) {
     foreach ($client_account_ledger as $client_name => $company_data) { ?>
-      <div class="row">
+      <div class="row m-1">
        <b> Client Name :  <?=$client_name?> </b>
       </div>
       <br>
-      <div class="row">
+      <div class="row m-1">
         <table class="table table-bordered table-sm table-default">
           <thead>
             <tr>
