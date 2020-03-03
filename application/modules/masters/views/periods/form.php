@@ -21,5 +21,6 @@
     <?php load_field('date',array('field' => 'date_to',
                                       'class' => 'datepicker_js')) ?>
   </div>
-  <?php load_field('submit', array('controller' => $controller)) ?>
+  <?php $add_attr=array('controller' => $controller, 'name' => 'SAVE' , 'class' => 'btn_blue');
+          load_buttons('submit', $add_attr);  ?>
 </form>
