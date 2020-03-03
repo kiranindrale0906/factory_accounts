@@ -12,7 +12,6 @@ class Vouchers extends BaseController {
 
   public function index() {
     $this->_get_form_data();
-    $this->where=array('voucher_type'=>strtolower($this->router->class));
     parent::index();
   }
 
@@ -23,7 +22,7 @@ class Vouchers extends BaseController {
   }
 
   public function _get_form_data() {
-    $company_id=(!empty($this->session->userdata('company_id'))?$this->session->userdata('company_id'):1);
+    $company_id=(!empty($this->session->userdata('company_id'))?$this->session->userdata('company_id'):0);
     $this->data['account_names'] = $this->account_model->get('ac_account.name as name,
                                                               ac_account.name as id',
                                                               array('where'=>array('ac_account.name!=""'=>'')),
@@ -55,7 +54,7 @@ class Vouchers extends BaseController {
 
   private function print_voucher($id) {
     $this->data['layout']='application';
-    $company_id=(!empty($this->session->userdata('company_id'))?$this->session->userdata('company_id'):1);
+    $company_id=(!empty($this->session->userdata('company_id'))?$this->session->userdata('company_id'):0);
     $this->data['company_data'] = $this->company_model->get('*',
                                                       array('where'=>array('id'=>$company_id)));
     $model=(!empty($this->model_name))?$this->model_name:singular($this->router->class);

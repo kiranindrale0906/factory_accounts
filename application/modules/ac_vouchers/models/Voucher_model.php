@@ -90,7 +90,7 @@ class Voucher_model extends BaseModel {
 
   public function create_voucher_serial_number($voucher_type,$period_id) {
     $voucher_serial_number = $this->get_serial_number($voucher_type,$period_id);
-    $company_id = (!empty($this->session->userdata('company_id'))?$this->session->userdata('company_id'):1);
+    $company_id = (!empty($this->session->userdata('company_id'))?$this->session->userdata('company_id'):0);
     if(!empty($voucher_serial_number))
       $voucher_serial_number=$voucher_serial_number+1;
     else
@@ -106,7 +106,7 @@ class Voucher_model extends BaseModel {
   }
 
   private function get_serial_number($voucher_type,$period_id='') {
-    $company_id=(!empty($this->session->userdata('company_id'))?$this->session->userdata('company_id'):1);
+    $company_id=(!empty($this->session->userdata('company_id'))?$this->session->userdata('company_id'):0);
     $result=$this->find('max(voucher_serial_number) as v_serial_number',array('period_id'=>$period_id,
                                                                                 'company_id'=>$company_id,
                                                                                 'voucher_type'=>$voucher_type));
@@ -117,7 +117,7 @@ class Voucher_model extends BaseModel {
   }
 
   public function after_save($action) {
-    $company_id=(!empty($this->session->userdata('company_id'))?$this->session->userdata('company_id'):1);
+    $company_id=(!empty($this->session->userdata('company_id'))?$this->session->userdata('company_id'):0);
     $voucher_number=true;
     if($action=="update")
       $voucher_number = $this->delete_ledger_voucher_record($this->attributes['id'],$company_id);
