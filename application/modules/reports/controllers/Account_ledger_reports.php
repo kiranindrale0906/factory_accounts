@@ -30,9 +30,9 @@ class Account_ledger_reports extends BaseController {
     
     $account_id=(!empty($_GET['account_ledger_reports']['account_id']))?$_GET['account_ledger_reports']['account_id']:'0';
 
-    $date_from=(!empty($_GET['account_ledger_reports']['date_from']))?strtotime('Y-m-d',$_GET['account_ledger_reports']['date_from']):date('Y-m-d');
+    $date_from=(!empty($_GET['account_ledger_reports']['date_from']))?date('Y-m-d',strtotime($_GET['account_ledger_reports']['date_from'])):date('Y-m-d');
 
-    $date_to=(!empty($_GET['account_ledger_reports']['date_to']))?strtotime('Y-m-d',$_GET['account_ledger_reports']['date_to']):date('Y-m-d');
+    $date_to=(!empty($_GET['account_ledger_reports']['date_to']))?date('Y-m-d',strtotime($_GET['account_ledger_reports']['date_to'])):date('Y-m-d');
 
     $this->data['account_ledger']=array();
     $this->data['record']['account_id'] = $account_id;
