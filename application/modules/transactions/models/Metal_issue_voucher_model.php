@@ -13,28 +13,30 @@ class Metal_issue_voucher_model extends Voucher_model {
       parent::__construct($data);
   }
 
-  public function validation_rules($klass='') {
-    return array(
-      array(
-        'field' => 'metal_issue_vouchers[voucher_date]', 
-        'label' => 'Date',
-        'rules' => array('trim', 'required', 
-                    array('validate_voucher_date', array($this, 'check_period_exists'))),
-        'errors'=>array('validate_voucher_date' => "Please set the period from master.")),
-      array(
-        'field' => 'metal_issue_vouchers[purity]', 
-        'label' => 'Purity',
-        'rules' => 'trim|required|numeric|less_than_equal_to[100]'),
-      array(
-        'field' => 'metal_issue_vouchers[account_name]', 
-        'label' => 'Account Name',
-        'rules' => 'trim|required'),
-      array(
-        'field' => 'metal_issue_vouchers[credit_weight]', 
-        'label' => 'Credit Weight',
-        'rules' => 'trim|required|numeric|greater_than[0]'),
-    );
-  }
+  // public function validation_rules($klass='') {
+  //   $rules  = parent :: validation_rules($klass);
+  //   $rules [] array_merge($rules);
+  //   // return array(
+  //   //   array(
+  //   //     'field' => 'metal_issue_vouchers[voucher_date]', 
+  //   //     'label' => 'Date',
+  //   //     'rules' => array('trim', 'required', 
+  //   //                 array('validate_voucher_date', array($this, 'check_period_exists'))),
+  //   //     'errors'=>array('validate_voucher_date' => "Please set the period from master.")),
+  //   //   array(
+  //   //     'field' => 'metal_issue_vouchers[purity]', 
+  //   //     'label' => 'Purity',
+  //   //     'rules' => 'trim|required|numeric|less_than_equal_to[100]'),
+  //   //   array(
+  //   //     'field' => 'metal_issue_vouchers[account_name]', 
+  //   //     'label' => 'Account Name',
+  //   //     'rules' => 'trim|required'),
+  //   //   array(
+  //   //     'field' => 'metal_issue_vouchers[credit_weight]', 
+  //   //     'label' => 'Credit Weight',
+  //   //     'rules' => 'trim|required|numeric|greater_than[0]'),
+  //   // );
+  // }
 
   
 

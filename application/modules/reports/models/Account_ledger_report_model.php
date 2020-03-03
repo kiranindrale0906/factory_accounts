@@ -1,12 +1,12 @@
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Ledger_model extends BaseModel {
-  protected $table_name = "ac_ledger";
-  protected $id = "id";
-
+class Account_ledger_report_model extends BaseModel {
+  protected $table_name = "ac_vouchers";
   function __construct($data=array()) {
     parent::__construct($data);
   }
+
 }
+
+//class

@@ -17,21 +17,41 @@ class Voucher_model extends BaseModel {
     $rules[] = array('field' => $this->router_class.'[account_name]', 'label' => 'Account Name',
                      'rules' => 'trim|required');
 
-    $check_credit_debit_type=stripos($this->router_class,'issue');
 
-    if($check_credit_debit_type==true) {
-      $credit_rules[] = array('field' => $this->router_class.'[credit_amount]', 
-                      'label' => 'Credit Amount',
-                      'rules' => 'trim|required|numeric|greater_than[0]');
-      $rules=array_merge($rules,$credit_rules);
+    $check_credit_debit_type=stripos($this->router_class,'issue');
+    if($this->router->class=="cash_issue_vouchers" || $this->router->class=="cash_receipt_vouchers") {
+      if($check_credit_debit_type==true) {
+        $credit_rules[] = array('field' => $this->router_class.'[credit_amount]', 
+                        'label' => 'Credit Amount',
+                        'rules' => 'trim|required|numeric|greater_than[0]');
+        $rules=array_merge($rules,$credit_rules);
+      }
+      else {
+        $debit_rules[] = array('field' => $this->router_class.'[debit_amount]', 
+                        'label' => 'Debit Amount',
+                        'rules' => 'trim|required|numeric|greater_than[0]');
+        $rules=array_merge($rules,$debit_rules);
+      }
     }
-    else {
-      $debit_rules[] = array('field' => $this->router_class.'[debit_amount]', 
-                      'label' => 'Debit Amount',
-                      'rules' => 'trim|required|numeric|greater_than[0]');
-      $rules=array_merge($rules,$debit_rules);
+
+    if($this->router->class=="metal_issue_vouchers" || $this->router->class=="metal_receipt_vouchers") {
+      $rules[]=array('field' => $this->router_class.'[purity]', 
+                    'label' => 'Purity',
+                    'rules' => 'trim|required|numeric|less_than_equal_to[100]');
+      if($check_credit_debit_type==true) {
+        $credit_rules[] = array('field' => $this->router_class.'[credit_weight]', 
+                        'label' => 'Credit Weight',
+                        'rules' => 'trim|required|numeric|greater_than[0]');
+        $rules=array_merge($rules,$credit_rules);
+      }
+      else {
+        $debit_rules[] = array('field' => $this->router_class.'[debit_weight]', 
+                        'label' => 'Debit Weight',
+                        'rules' => 'trim|required|numeric|greater_than[0]');
+        $rules=array_merge($rules,$debit_rules);
+      }
     }
-  
+
     return $rules;
   }
 
@@ -96,11 +116,23 @@ class Voucher_model extends BaseModel {
       return false;
   }
 
-  /*public function after_save($action) {
+  public function after_save($action) {
     $company_id=(!empty($this->session->userdata('company_id'))?$this->session->userdata('company_id'):1);
-    //$voucher_number = $this->delete_ledger_voucher_record($data['id'],$company_id);
-    $table_name = $this->get_table_name();
+    $voucher_number=true;
+    if($action=="update")
+      $voucher_number = $this->delete_ledger_voucher_record($this->attributes['id'],$company_id);
 
+    if ($voucher_number) {
+      $ledger_data=$this->set_ledger_data($this->attributes);
+      $obj_ledeger = new ledger_model($ledger_data);
+      $obj_ledeger->store(false);
+    } else {
+        return;
+    }
+  }
+
+  private function set_ledger_data($result) {
+    $ledger_data = array();
     if (in_array($this->router->class, array('cash_issue_voucher', 'cash_receipt_voucher'))) {
       $ledger_data['cash_bill_type'] = 'cash';
     }
@@ -110,24 +142,32 @@ class Voucher_model extends BaseModel {
     if (in_array($this->router->class, array('metal_issue_voucher', 'metal_receipt_voucher'))) {
       $ledger_data['cash_bill_type'] = 'metal';
     }
-  
-    // if ($voucher_number) {
-    //   $ledger_data['account_id'] = $data['account_id'];
-    //   $ledger_data['account_name'] = $data['account_name'];
-    //   $ledger_data['voucher_type'] = 'cash issue voucher';
-    //   $ledger_data['suffix'] = 'CI';
-    //   $ledger_data['voucher_date'] = $data['voucher_date'];
-    //   $ledger_data['credit_amount'] = $data['credit_amount'];
-    //   $ledger_data['table_name'] = $table_name;
-    //   $ledger_data['table_id'] = $data['id'];
-    //   $ledger_data['voucher_number'] = $voucher_number;
-    //   $ledger_data['company_id'] = $company_id;
-    //   $ledger_data['created_at'] = date('Y-m-d H:i:s');
-    //   $this->Ledger_model->store($ledger_data);
-    // } else {
-    //     return;
-    // }
-  }*/
+      
+    $ledger_data['account_id'] =   $result['account_id'];
+    $ledger_data['account_name'] = $result['account_name'];
+    $ledger_data['voucher_type'] = $result['voucher_type'];
+    $ledger_data['suffix'] = $this->prefix;
+    $ledger_data['voucher_date'] = $result['voucher_date'];
+    $ledger_data['credit_amount'] = !empty($result['credit_amount'])?$result['credit_amount']:0;
+    $ledger_data['debit_amount'] = !empty($result['debit_amount']) ? $result['debit_amount'] :0;
+    $ledger_data['credit_weight'] = !empty($result['credit_weight'])?$result['credit_weight']:0;
+    $ledger_data['debit_weight'] = !empty($result['debit_weight'])?$result['debit_weight']:0; 
+    $ledger_data['narration'] = !empty($result['narration'])?$result['narration']:''; 
+    $ledger_data['table_name'] = $this->table_name;
+    $ledger_data['table_id'] = $result['id'];
+    $ledger_data['voucher_number'] = $result['voucher_number'];
+    $ledger_data['company_id'] = $result['company_id'];
+
+    return $ledger_data;
+  }
+
+  private function delete_ledger_voucher_record($id,$company_id) {
+    $obj_leger=new ledger_model();
+    $obj_leger->delete('',array('table_id'=>$id),true);
+    return true;
+  }
+
+
 
   //public function after_delete($id,$conditions) {
     // $ledger_id=$this->Ledger_model->get('id',

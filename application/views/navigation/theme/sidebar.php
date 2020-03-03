@@ -57,6 +57,7 @@
                     // 'Reports'   => array('reports/mis_reports'=>'MIS Reports',
                     //                     'reports/stock_report' =>'Stock Report',
                     //                     'reports/order_report'=>'Order Report'),
+                    'Reports'   => array('reports/account_ledger_reports'=>'Account Ledger'),
                     // 'Interests' => array('interests/interest_issue_voucher'=>'Interest Issue Voucher'),
                     // 'Others'    => array('others/account_wise_details'=>'Account Wise Details',
                     //                     'others/category'=>'Category',
