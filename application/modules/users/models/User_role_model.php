@@ -9,7 +9,7 @@ class User_role_model extends Core_user_role_model {
     $modules = array('Masters' => array('masters/account','masters/groups', 'masters/purity', 
                                         'masters/company','masters/payment_terms', 'masters/opening_balance',
                                         'masters/department','masters/customer_category', 
-                                        'masters/department_category'),
+                                        'masters/department_category','masters/periods'),
                      'Transactions' => array('transactions/cash_issue_vouchers', 
                                             'transactions/cash_receipt_vouchers',
                                             'transactions/bank_issue_voucher', 'transactions/bank_receipt_voucher',
