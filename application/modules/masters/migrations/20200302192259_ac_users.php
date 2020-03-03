@@ -27,7 +27,7 @@ class Migration_ac_users extends CI_Model {
 					  `last_sign_in_ip` varchar(255) DEFAULT NULL,
 					  `mobile_no` varchar(255) DEFAULT NULL
 					) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
-    $this->db->query($sql);
+    //$this->db->query($sql);
   }
 
 
