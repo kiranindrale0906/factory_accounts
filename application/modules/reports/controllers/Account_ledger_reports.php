@@ -47,8 +47,7 @@ class Account_ledger_reports extends BaseController {
                                                          amount_balance,sum(credit_weight)-sum(debit_weight) as weight_balance,sum(purity_margin) as purity_balance',
                                                           array('account_id'=>$account_id,
                                                                 'voucher_date<'=>$date_from));
-      //lq();
-      //pd($opening_balance);
+  
       $this->data['account_ledger'] = $this->model->get('date_format(voucher_date,"%d-%m-%Y") as 
                                                         voucher_date,voucher_type,voucher_number,credit_amount,debit_amount,credit_weight,debit_weight,purity_margin',
                                                         $where ,array(),

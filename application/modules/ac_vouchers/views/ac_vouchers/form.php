@@ -33,7 +33,9 @@
 
         
   <?php if(!empty(@get_field_attribute($this->router->class,'account_name'))) :
-          load_field('dropdown', array('field' => 'account_name', 'option'=>@$account_names)); 
+          load_field('text', array('field' => 'account_name', 'class' => 'autocomplete',
+                                   'data-table'=>'ac_account','data-column'=>'name')); 
+          //'option'=>@$account_names
           load_field('hidden', array('field' => 'account_id'));                               
         endif; ?> 
     
