@@ -86,6 +86,19 @@
             <td class="text-right font-weight-bold"><?=sprintf('%0.2f', $total_debit_weight); ?></td>
             <td class="text-right font-weight-bold"><?=sprintf('%0.2f', $total_purity_margin); ?></td>
           </tr>
+          <tr>
+            <td class="text-right font-weight-bold">Balance</td>
+            <td></td>
+            <td></td>
+
+            <td class="text-center font-weight-bold" colspan="2">
+              <?=sprintf('%0.2f', ($total_credit_amt-$total_debit_amt)); ?>    
+            </td>
+            <td class="text-center font-weight-bold" colspan="2">
+              <?=sprintf('%0.2f', $total_credit_weight-$total_debit_weight); ?>    
+            </td>
+            <td class="text-center font-weight-bold"><?=sprintf('%0.2f', $total_purity_margin); ?></td>
+          </tr>
           <?php  } else { ?>
             <tr>
               <td colspan="8">No data found.</td>

@@ -8,4 +8,6 @@ placeholder="<?= $data['placeholder'] ?>"
 <?= $data['autofocus'] ?>
 <?= $data['readonly'] ?>
 <?= $data['disabled'] ?>
+<?php if(!empty($data['data-table'])){echo 'data-table="'.$data['data-table'].'"';}?>
+<?php if(!empty($data['data-column'])){echo 'data-column="'.$data['data-column'].'"';}?>
 <?php if($data['readonlyinput'] == 1){echo 'readonly';}?>
