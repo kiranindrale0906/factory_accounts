@@ -51,6 +51,7 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
   $list_setting['credit_weight'] = array("Debit Wt.", "credit_weight", FALSE, "credit_weight", TRUE, TRUE);
   $list_setting['debit_weight'] = array("Credit Wt.", "debit_weight", FALSE, "debit_weight", TRUE, TRUE);
   $list_setting['purity'] = array("Purity", "purity", FALSE, "purity", TRUE, TRUE);
+  $list_setting['factory_purity'] = array("Factory Purity", "factory_purity", FALSE, "factory_purity", TRUE, TRUE);
   $list_setting['Pure Gold'] = array("Narration", "pure_gold_credit", FALSE, "pure_gold_credit", TRUE, TRUE);
 
   $list_setting['action'] = array("Action", "action", FALSE, "action", FALSE, FALSE);
@@ -80,6 +81,7 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['account_name'] = array('Account Name', 'Enter Account Name', TRUE, '', TRUE);
   $attributes['credit_amount'] = array('Credit Amount', 'Enter Credit Amount', TRUE, '', TRUE);
   $attributes['debit_amount'] = array('Debit Amount', 'Enter Debit Amount', TRUE, '', TRUE);
+  $attributes['factory_purity'] = array('Factory Purity', 'Enter factory purity', TRUE, '', TRUE);
   $attributes['narration'] = array('Narration', 'Enter Narration', FALSE, '', TRUE);
   $attributes['vouchersamount'] = array('vouchersamount', 'Enter vouchersamount', FALSE, '', TRUE);
   $attributes['company_id'] = array('', '', TRUE, '', TRUE);
@@ -95,23 +97,6 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   }
   
   return $attributes[$table][$field];
-
-  // $attributes = array();
-
-
-  // $attributes['cash_issue_vouchers'] = array(
-  //   'id'              => array('', '', TRUE, '', TRUE),
-  //   'voucher_date'    => array('Date', 'Enter Date.', TRUE, '', TRUE),
-  //   'account_name'    => array('Account Name', 'Enter Account Name', TRUE, '', TRUE),
-  //   'credit_amount'   => array('Credit Amount', 'Enter Credit Amount', TRUE, '', TRUE),
-  //   'narration'       => array('Narration', 'Enter Narration', FALSE, '', TRUE),
-  //   'vouchersamount'  => array('vouchersamount', 'Enter vouchersamount', FALSE, '', TRUE),
-  //   'company_id'      => array('', '', TRUE, '', TRUE),
-  //   'account_id'      => array('', '', TRUE, '', TRUE),
-  //   'document'      => array('', '', TRUE, '', TRUE),
-  // );
- 
-  // return $attributes[$table][$field];
 }
 
 function ac_voucher_get_row_actions($row, $url, $select_url, $filter) {

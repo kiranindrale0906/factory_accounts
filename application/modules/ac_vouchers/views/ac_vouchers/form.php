@@ -61,7 +61,10 @@
           load_field('text', array('field' => 'purity')); 
                                     
         endif; ?>
-
+  <?php if(!empty(@get_field_attribute($this->router->class,'factory_purity'))) :
+          load_field('text', array('field' => 'factory_purity')); 
+                                    
+        endif; ?>      
   <div class="row"> 
     <div class="col-sm-6"> 
       <?php

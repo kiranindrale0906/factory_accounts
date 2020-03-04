@@ -18,7 +18,9 @@
           <?php foreach ($company_list as $key => $value) { 
              $sel="";
              if(!empty($_SESSION['company_id']) && $_SESSION['company_id']==$value['id'])
-              $sel="selected"; 
+              $sel="selected";
+             if(empty($_SESSION['company_id']) && $key==1) 
+               $sel="selected";  
           ?>
             <option value="<?=$value['id']?>" <?=$sel?>>
               <?=$value['name']?>

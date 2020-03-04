@@ -38,6 +38,9 @@ class Voucher_model extends BaseModel {
       $rules[]=array('field' => $this->router_class.'[purity]', 
                     'label' => 'Purity',
                     'rules' => 'trim|required|numeric|less_than_equal_to[100]');
+      $rules[]=array('field' => $this->router_class.'[factory_purity]', 
+                    'label' => 'Factory Purity',
+                    'rules' => 'trim|required|numeric|less_than_equal_to[100]');
       if($check_credit_debit_type==true) {
         $credit_rules[] = array('field' => $this->router_class.'[credit_weight]', 
                         'label' => 'Credit Weight',
@@ -157,6 +160,8 @@ class Voucher_model extends BaseModel {
     $ledger_data['table_id'] = $result['id'];
     $ledger_data['voucher_number'] = $result['voucher_number'];
     $ledger_data['company_id'] = $result['company_id'];
+    $ledger_data['factory_purity'] = !empty($result['factory_purity'])?$result['factory_purity']:0;
+    $ledger_data['purity_margin'] = !empty($result['purity_margin'])?$result['purity_margin']:0;
 
     return $ledger_data;
   }
@@ -181,27 +186,6 @@ class Voucher_model extends BaseModel {
     //   endforeach;
     // }
   //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   // public function get_max_voucher($date, $suffix) {
   //     $this->db->select('count(id) as count');
