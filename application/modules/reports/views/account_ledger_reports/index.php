@@ -1,5 +1,4 @@
 
-
 <form method="get" class="form-horizontal fields-group-sm" enctype="multipart/form-data"
       action="<?=ADMIN_PATH."reports/account_ledger_reports/index"?>">
         
@@ -21,6 +20,16 @@
   </div>  
 </form>  
 <br>
+<div class="row m-1">
+   <b>Opening Amount : <?=sprintf('%0.2f', $opening_balance['amount_balance']);?> </b> 
+</div>   
+<div class="row m-1">
+  <b>Opening Weight  : <?=sprintf('%0.2f', $opening_balance['weight_balance']);?> </b>
+</div>
+<div class="row m-1">
+  <b>Opening Purity Margin  : <?=sprintf('%0.2f', $opening_balance['purity_balance']);?></b> 
+</div> 
+
 <table class="table table-bordered table-sm table-default">
         <thead>
           <tr>
