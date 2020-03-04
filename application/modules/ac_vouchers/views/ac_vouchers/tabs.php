@@ -19,7 +19,7 @@
     <div class="btn-group" role="group" aria-label="Basic example">
       <a href="<?= base_url('transactions/'.str_replace('receipt','issue', $this->router->class)) ?>" class="btn btn-sm btn-secondary text-uppercase <?= $class_receipt; ?> skewright">
       	<span class="skewleft">
-      		<?= str_replace("_", " ", $label_issue); ?> <!-- Cash Receipt -->
+      		<?= str_replace("_", " ", $label_issue); ?>
       	</span>
       </a>
       <a href="<?= base_url('transactions/'.str_replace('issue','receipt', $this->router->class)); ?>" class="btn btn-sm btn-secondary text-uppercase <?= $class_issue; ?> skewright">

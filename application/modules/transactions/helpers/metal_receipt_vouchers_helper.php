@@ -22,7 +22,7 @@ function getTableSettings() {
 
 
 function list_settings() {
-  $list_option=array('voucher_date','voucher_number','account_name','purity','factory_purity','debit_weight','pure_gold_debit','narration','account_id','company_id','action');
+  $list_option=array('voucher_date','voucher_number','account_name','purity','factory_purity','debit_weight','pure_gold_debit','narration','account_id','company_id','receipt_type');
   return ac_vouchers_list_settings($list_option);
 }
 
@@ -39,7 +39,7 @@ function list_settings() {
 
 function get_field_attribute($table, $field) {
   $required_fields=array('id','voucher_date','account_name','debit_weight','narration','vouchersamount',
-                         'company_id','account_id','document','purity','factory_purity');
+                         'company_id','account_id','document','purity','factory_purity','receipt_type');
 
   return ac_voucher_get_field_attribute($table,$field,$required_fields);
 }
