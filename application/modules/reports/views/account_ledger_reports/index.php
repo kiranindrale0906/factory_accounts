@@ -20,6 +20,7 @@
   </div>  
 </form>  
 <br>
+<?php if(!empty($account_ledger)) { ?>
 <div class="row m-1">
    <b>Opening Amount : <?=sprintf('%0.2f', @$opening_balance['amount_balance']);?> </b> 
 </div>   
@@ -29,6 +30,7 @@
 <div class="row m-1">
   <b>Opening Purity Margin  : <?=sprintf('%0.2f', @$opening_balance['purity_balance']);?></b> 
 </div> 
+<?php } ?>
 
 <table class="table table-bordered table-sm table-default">
         <thead>

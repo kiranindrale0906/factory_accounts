@@ -46,6 +46,7 @@ class Vouchers extends BaseController {
     $this->data['group_list'] = $this->group_model->get('name,id',
                                                         array('where'=>array('company_id='=>$company_id)),
                                                         array(), array('order_by'=>'name asc'));
+    $this->data['receipt_type'] = get_receipt_type();
   }
 
   public function view($id) {

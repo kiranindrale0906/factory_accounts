@@ -1,11 +1,12 @@
 <?php //pd($client_account_ledger); ?>
 <?php 
    if(!empty($client_account_ledger)) {
-    foreach ($client_account_ledger as $client_name => $company_data) { ?>
+    foreach ($client_account_ledger as $client_name => $company_data) { 
+      if(!empty($company_data)){ ?>
       <div class="row m-1">
        <b> <?=$client_name?> </b>
       </div>
-      <br>
+    
       <div class="row m-1">
         <table class="table table-bordered table-sm table-default">
           <thead>
@@ -21,7 +22,7 @@
             </tr>
           </thead>
           <tbody>
-            <?php if(!empty($company_data)){ 
+            <?php
               $total_credit_amt=0;
               $total_debit_amt=0;
               $total_credit_weight=0;
@@ -76,17 +77,13 @@
                 <?=sprintf('%0.2f', ($total_credit_weight-$total_debit_weight)); ?>
               </td>
               <td class="text-right font-weight-bold"><?=sprintf('%0.2f', $total_purity_marign); ?></td>
-            </tr>
-            <?php  } else { ?>
-              <tr>
-                <td colspan="8">No data found.</td>
-              </tr>
-            <?php } ?>
+            </tr>  
           </tbody>
         </table>
       </div>
-      <br>
-    <?php  
+       <br>
+      <?php  
+      }
     }
   }
 ?>

@@ -129,6 +129,7 @@ class Voucher_model extends BaseModel {
       $ledger_data=$this->set_ledger_data($this->attributes);
       $obj_ledeger = new ledger_model($ledger_data);
       $obj_ledeger->store(false);
+      // call_api('BASE_PATH'.$id, $data)
     } else {
         return;
     }
@@ -162,7 +163,7 @@ class Voucher_model extends BaseModel {
     $ledger_data['company_id'] = $result['company_id'];
     $ledger_data['factory_purity'] = !empty($result['factory_purity'])?$result['factory_purity']:0;
     $ledger_data['purity_margin'] = !empty($result['purity_margin'])?$result['purity_margin']:0;
-
+    $ledger_data['receipt_type'] = !empty($result['receipt_type'])?$result['receipt_type']:'';
     return $ledger_data;
   }
 

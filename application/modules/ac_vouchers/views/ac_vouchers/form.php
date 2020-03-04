@@ -38,6 +38,12 @@
           //'option'=>@$account_names
           load_field('hidden', array('field' => 'account_id'));                               
         endif; ?> 
+
+  <?php if(!empty(@get_field_attribute($this->router->class,'receipt_type'))) :
+          load_field('dropdown', array('field' => 'receipt_type', 'option' => @$receipt_type)); 
+          //'option'=>@$account_names
+          load_field('hidden', array('field' => 'account_id'));                               
+        endif; ?>  
     
   <?php if(!empty(@get_field_attribute($this->router->class,'credit_amount'))) :
           load_field('text', array('field' => 'credit_amount')); 
