@@ -13,11 +13,6 @@ class Account_ledger_reports extends BaseController {
     $this->data['layout']='application';
     $this->get_form_data();
     $this->get_account_ledger_records();
-    $this->db->query("UPDATE ac_vouchers SET `credit_amount`=0 WHERE credit_amount IS NULL;");
-    $this->db->query("UPDATE ac_vouchers SET `debit_amount`=0 WHERE debit_amount IS NULL;");
-    $this->db->query("UPDATE ac_vouchers SET `credit_weight`=0 WHERE credit_weight IS NULL;");
-    $this->db->query("UPDATE ac_vouchers SET `debit_weight`=0 WHERE debit_weight IS NULL;");
-    $this->db->query("UPDATE ac_vouchers SET `factory_purity`=0 WHERE factory_purity IS NULL;");
     $this->load->render($this->router->class."/index",$this->data);
   }
 
