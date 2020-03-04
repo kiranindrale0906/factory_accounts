@@ -13,7 +13,11 @@ class Account_ledger_reports extends BaseController {
     $this->data['layout']='application';
     $this->get_form_data();
     $this->get_account_ledger_records();
-    
+    $this->db->query("UPDATE ac_vouchers SET `credit_amount`=0 WHERE credit_amount IS NULL;");
+    $this->db->query("UPDATE ac_vouchers SET `debit_amount`=0 WHERE debit_amount IS NULL;");
+    $this->db->query("UPDATE ac_vouchers SET `credit_weight`=0 WHERE credit_weight IS NULL;");
+    $this->db->query("UPDATE ac_vouchers SET `debit_weight`=0 WHERE debit_weight IS NULL;");
+    $this->db->query("UPDATE ac_vouchers SET `factory_purity`=0 WHERE factory_purity IS NULL;");
     $this->load->render($this->router->class."/index",$this->data);
   }
 
@@ -44,6 +48,12 @@ class Account_ledger_reports extends BaseController {
       $where['voucher_date >='] = $date_from;
       $where['voucher_date <='] = $date_to;
 
+      $this->data['opening_balance'] = $this->model->find('sum(credit_amount)-sum(debit_amount) as 
+                                                         amount_balance,sum(credit_weight)-sum(debit_weight) as weight_balance,sum(purity_margin) as purity_balance',
+                                                          array('account_id'=>$account_id,
+                                                                'voucher_date<'=>$date_from));
+      //lq();
+      //pd($opening_balance);
       $this->data['account_ledger'] = $this->model->get('date_format(voucher_date,"%d-%m-%Y") as 
                                                         voucher_date,voucher_type,voucher_number,credit_amount,debit_amount,credit_weight,debit_weight,purity_margin',
                                                         $where ,array(),
