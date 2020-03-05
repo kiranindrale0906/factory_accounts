@@ -18,7 +18,7 @@ class Account_model extends BaseModel {
       array(
         'field' => 'accounts[group_code]',
         'label' => 'Group Name',
-        'rules' => 'trim|required',),
+        'rules' => 'trim',),
       array(
         'field' => 'accounts[cont_person]',
         'label' => 'Contact Person',

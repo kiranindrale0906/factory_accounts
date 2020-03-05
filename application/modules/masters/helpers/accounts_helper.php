@@ -61,7 +61,7 @@ function get_field_attribute($table, $field) {
   $attributes['accounts'] = array(
     'id'            => array('', '', TRUE, '', TRUE),
     'name'          => array('Name', 'Enter Name.', TRUE, '', TRUE),
-    'group_code'    => array('Group Name', 'Enter Group Name.', TRUE, '', TRUE),
+    'group_code'    => array('Group Name', 'Enter Group Name.', FALSE, '', TRUE),
     'payment_terms' => array('Payment Terms', 'Enter Payment Terms.', FALSE, '', TRUE),
     'cont_person'   => array('Contact Person', 'Enter Contact Person.', FALSE, '', TRUE),
     'off_tel'       => array('Office Tel.No', 'Enter Office Tel.No.', FALSE, '', TRUE),
