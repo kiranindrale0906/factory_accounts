@@ -10,6 +10,15 @@ class Accounts extends BaseController {
                              'masters/payment_term_model'));
   }
 
+  public function index() {
+    if(!empty($_POST['account_name'])) {
+      $data=$this->model->get('name');
+      echo json_encode($data);
+    }
+
+    parent::index();
+  }
+
   public function _get_form_data() {
     $company_id=!empty($_SESSION['company_id'])?$_SESSION['company_id']:1;
     $this->data['cities'] = $this->city_model->get('name,
