@@ -167,3 +167,15 @@ function get_daily_drawer_receipt_type(){
                array('id'=>'GPC Powder','name'=>'GPC Powder'),
               );
 }
+
+function get_melting_purity(){
+  return array(
+               array('id'=>'70.00','name'=>'70.00'),
+               array('id'=>'75.15','name'=>'75.15'),
+               array('id'=>'83.50','name'=>'83.50'),
+               array('id'=>'83.65','name'=>'83.65'),
+               array('id'=>'87.65','name'=>'87.65'),
+               array('id'=>'92.00','name'=>'92.00')
+             );
+
+}
