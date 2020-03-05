@@ -46,6 +46,15 @@ class Voucher_model extends BaseModel {
                       'label' => 'Type',
                       'rules' => 'trim|required');
       }
+
+      if(!empty($this->attributes['receipt_type']) && $this->attributes['receipt_type']=="Refresh") {
+        $rules[]=array('field' => $this->router_class.'[hook_kdm_purity]', 
+                      'label' => 'Hook KDM Purity',
+                      'rules' => 'trim|required');
+        $rules[]=array('field' => $this->router_class.'[quantity]', 
+                      'label' => 'Quantity',
+                      'rules' => 'trim|required|numeric');
+      }
       
       if($check_credit_debit_type==true) {
         $credit_rules[] = array('field' => $this->router_class.'[credit_weight]', 
@@ -198,13 +207,13 @@ class Voucher_model extends BaseModel {
       $api_url=API_BASE_PATH."api/api_receipt_departments/store";   
     }
     else if($data['receipt_type']=="Refresh") {
-      // refresh_departments[hook_kdm_purity]:90
-      // refresh_departments[quantity]:2
       $send_data['refresh_departments']=array('type'=>'Pure',
                                             'account'=> $data['account_name'],
                                             'in_weight' => $data['debit_weight'],
                                             'in_lot_purity' => $data['factory_purity'],
                                             'description' =>$data['narration'],
+                                            'hook_kdm_purity' => $data['hook_kdm_purity'],
+                                            'quantity' => $data['quantity'],
                                             'process_name'=>'Refresh');
       $api_url=API_BASE_PATH."api/api_refresh_departments/store";   
     }

@@ -46,6 +46,11 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
   $list_setting['account_name'] = array("Account", "account_name", TRUE, "account_name", TRUE, TRUE);
   $list_setting['debit_amount'] = array("Credit", "debit_amount", TRUE, "debit_amount", FALSE, TRUE);
   $list_setting['credit_amount'] = array("Debit Amt.", "credit_amount", TRUE, "credit_amount", FALSE, TRUE);
+  
+  $list_setting['hook_kdm_purity'] = array("Hook KDM Purity", "hook_kdm_purity", TRUE, 
+                                           "hook_kdm_purity", FALSE, TRUE);
+  $list_setting['quantity'] = array("Quantity", "quantity", TRUE, "quantity", FALSE, TRUE);
+
   $list_setting['narration'] = array("Narration", "narration", FALSE, "narration", TRUE, TRUE);
   $list_setting['receipt_type'] = array("Receipt Type", "receipt_type", FALSE, "receipt_type", TRUE, TRUE);
   $list_setting['credit_weight'] = array("Debit Wt.", "credit_weight", FALSE, "credit_weight", TRUE, TRUE);
@@ -83,6 +88,9 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['debit_amount'] = array('Debit Amount', 'Enter Debit Amount', TRUE, '', TRUE);
   $attributes['receipt_type'] = array('Receipt Type', 'Enter Receipt Type', TRUE, '', TRUE);
   $attributes['factory_purity'] = array('Factory Purity', 'Enter factory purity', TRUE, '', TRUE);
+  $attributes['hook_kdm_purity'] = array('Hook KDM Purity', 'Enter hook kdm purity', TRUE, '', TRUE);
+  $attributes['quantity'] = array('Quantity', 'Enter quantity', TRUE, '', TRUE);
+  
   $attributes['type'] = array('Daily Drawer Type', 'Select Daily Drawer Type', TRUE, '', TRUE);
   $attributes['narration'] = array('Narration', 'Enter Narration', FALSE, '', TRUE);
   $attributes['vouchersamount'] = array('vouchersamount', 'Enter vouchersamount', FALSE, '', TRUE);

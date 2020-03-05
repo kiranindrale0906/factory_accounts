@@ -14,6 +14,8 @@ function set_company_session() {
 
 $(document).ready(function(){
 	$('.hide_daily_drawer_type').hide();
+	$('.hide_hook_kdm_purity').hide();
+	$('.hide_quantity').hide();
 });
 
 
@@ -25,4 +27,13 @@ $(".receipt_type").on('change', function() {
 	}
 	else
 		$('.hide_daily_drawer_type').hide();	 
+
+	if(receipt_type=="Refresh") {
+		$('.hide_hook_kdm_purity').show();	
+		$('.hide_quantity').show();	
+	}
+	else {
+		$('.hide_hook_kdm_purity').hide();	
+		$('.hide_quantity').hide();	
+	}
 });

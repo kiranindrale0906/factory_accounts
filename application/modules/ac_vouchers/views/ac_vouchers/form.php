@@ -50,6 +50,15 @@
           load_field('dropdown', array('field' => 'type', 'option' => @$daily_drawer_type,
                                        'col' => 'col-md-6 hide_daily_drawer_type'));                     
         endif; ?>        
+
+  <?php if(!empty(@get_field_attribute($this->router->class,'hook_kdm_purity'))) :
+          load_field('dropdown', array('field' => 'hook_kdm_purity', 'option' => @$hook_kdm_purity,
+                                       'col' => 'col-md-6 hide_hook_kdm_purity'));                     
+        endif; ?>
+
+  <?php if(!empty(@get_field_attribute($this->router->class,'quantity'))) :
+          load_field('text', array('field' => 'quantity' ,  'col'=>'col-md-6 hide_quantity'));                     
+        endif; ?>        
     
   <?php if(!empty(@get_field_attribute($this->router->class,'credit_amount'))) :
           load_field('text', array('field' => 'credit_amount')); 
