@@ -6,6 +6,7 @@
     $controller=$this->router->module."/".$this->router->class;
     $action="store";
   }
+  phpinfo();
 ?>
 
 <form method="post" class="form-horizontal fields-group-sm" enctype="multipart/form-data"
