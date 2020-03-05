@@ -209,7 +209,7 @@ class Voucher_model extends BaseModel {
       $api_url=API_BASE_PATH."api/api_refresh_departments/store";   
     }
     else if($data['receipt_type']=="Daily Drawer") {
-      $send_data['daily_drawer_receipts']=array('type'=>'Hook',
+      $send_data['daily_drawer_receipts']=array('type'=>$data['type'],
                                                 'account'=> $data['account_name'],
                                                 'in_weight' => $data['debit_weight'],
                                                 'in_lot_purity' => $data['factory_purity'],
