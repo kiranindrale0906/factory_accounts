@@ -11,7 +11,7 @@ class Accounts extends BaseController {
   }
 
   public function _get_form_data() {
-    $company_id=1;
+    $company_id=!empty($_SESSION['company_id'])?$_SESSION['company_id']:1;
     $this->data['cities'] = $this->city_model->get('name,
                                                     name as id',
                                                     array(array('company_id'=>$company_id)));

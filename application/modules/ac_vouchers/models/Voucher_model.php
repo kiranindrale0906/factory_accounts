@@ -93,6 +93,13 @@ class Voucher_model extends BaseModel {
     $this->formdata[$this->router_class]['transaction_type'] = $this->account_type;
 
     $account = $this->account_model->find('id',array('name'=>$this->attributes['account_name']));
+    if(empty($account['id'])) {
+      $account_detail['name']=$this->attributes['account_name'];
+      $obj_account = new account_model($account_detail);
+      $account_details=$obj_account->store(false);
+      $account['id']=$account_details['id'];      
+    }
+
     $this->formdata[$this->router_class]['account_id'] = $account['id'];
 
     $period_id = $this->check_period_exists($this->attributes['voucher_date']);
@@ -147,8 +154,6 @@ class Voucher_model extends BaseModel {
       if(!empty($this->attributes['receipt_type'])) {
         $this->send_request_to_argold($this->attributes);  
       }
-      
-      // call_api('BASE_PATH'.$id, $data)
     } else {
         return;
     }
