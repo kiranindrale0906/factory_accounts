@@ -13,7 +13,7 @@ class Accounts extends BaseController {
   public function index() {
     if(!empty($_POST['account_name'])) {
       $data=$this->model->get('name');
-      echo json_encode('data'=>$data,'status'=>'success');
+      echo json_encode('data'=>$data,'status'=>'success'); die;
     }
 
     parent::index();
