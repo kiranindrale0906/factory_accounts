@@ -6,6 +6,9 @@
     $controller=$this->router->module."/".$this->router->class;
     $action="store";
   }
+  if(empty($_SESSION['company_id'])){
+    echo "Please Select Company,provided on top";
+  }
 ?>
 
 <form method="post" class="form-horizontal fields-group-sm" enctype="multipart/form-data"
