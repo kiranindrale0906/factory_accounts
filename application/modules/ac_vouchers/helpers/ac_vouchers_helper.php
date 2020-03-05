@@ -83,6 +83,7 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['debit_amount'] = array('Debit Amount', 'Enter Debit Amount', TRUE, '', TRUE);
   $attributes['receipt_type'] = array('Receipt Type', 'Enter Receipt Type', TRUE, '', TRUE);
   $attributes['factory_purity'] = array('Factory Purity', 'Enter factory purity', TRUE, '', TRUE);
+  $attributes['type'] = array('Daily Drawer Type', 'Select Daily Drawer Type', TRUE, '', TRUE);
   $attributes['narration'] = array('Narration', 'Enter Narration', FALSE, '', TRUE);
   $attributes['vouchersamount'] = array('vouchersamount', 'Enter vouchersamount', FALSE, '', TRUE);
   $attributes['company_id'] = array('', '', TRUE, '', TRUE);

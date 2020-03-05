@@ -40,10 +40,16 @@
         endif; ?> 
 
   <?php if(!empty(@get_field_attribute($this->router->class,'receipt_type'))) :
-          load_field('dropdown', array('field' => 'receipt_type', 'option' => @$receipt_type)); 
+          load_field('dropdown', array('field' => 'receipt_type', 'option' => @$receipt_type ,
+                                       'class' =>'receipt_type')); 
           //'option'=>@$account_names
           load_field('hidden', array('field' => 'account_id'));                               
         endif; ?>  
+
+  <?php if(!empty(@get_field_attribute($this->router->class,'type'))) :
+          load_field('dropdown', array('field' => 'type', 'option' => @$daily_drawer_type,
+                                       'col' => 'col-md-6 hide_daily_drawer_type'));                     
+        endif; ?>        
     
   <?php if(!empty(@get_field_attribute($this->router->class,'credit_amount'))) :
           load_field('text', array('field' => 'credit_amount')); 

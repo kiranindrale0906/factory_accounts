@@ -41,6 +41,12 @@ class Voucher_model extends BaseModel {
       $rules[]=array('field' => $this->router_class.'[factory_purity]', 
                     'label' => 'Factory Purity',
                     'rules' => 'trim|required|numeric|less_than_equal_to[100]');
+      if(!empty($this->attributes['receipt_type']) && $this->attributes['receipt_type']=="Daily Drawer") {
+        $rules[]=array('field' => $this->router_class.'[type]', 
+                      'label' => 'Type',
+                      'rules' => 'trim|required');
+      }
+      
       if($check_credit_debit_type==true) {
         $credit_rules[] = array('field' => $this->router_class.'[credit_weight]', 
                         'label' => 'Credit Weight',
@@ -212,18 +218,8 @@ class Voucher_model extends BaseModel {
       $api_url=API_BASE_PATH."api/api_daily_drawer_receipts/store";   
     }
     
-    // if(is_callable('curl_init')) {
-    //       pd("Enabled");
-    //     }
-    //     else
-    //     {
-    //        echo "Not enabled";
-    //     }
-        //die;
     if(!empty($api_url)) {
-      //echo $api_url;die;
       $result=curl_post_request($api_url, $send_data);
-      pd($result);die;
     }
   }
 
