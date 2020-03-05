@@ -114,3 +114,13 @@ function get_company_list(){
   $result = $ci->company_model->get('id,name');
   return $result;
 }
+
+function get_receipt_type(){
+  return array(
+              array('id' => 'Metal',
+                     'name' => 'Metal'),
+              array('id' => 'Refresh',
+                     'name' => 'Refresh'),
+              array('id' => 'Daily Drawer',
+                     'name' => 'Daily Drawer'));
+}

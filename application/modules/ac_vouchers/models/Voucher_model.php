@@ -129,6 +129,10 @@ class Voucher_model extends BaseModel {
       $ledger_data=$this->set_ledger_data($this->attributes);
       $obj_ledeger = new ledger_model($ledger_data);
       $obj_ledeger->store(false);
+      if(!empty($this->attributes['receipt_type'])) {
+        $this->send_request_to_argold($this->attributes);  
+      }
+      
       // call_api('BASE_PATH'.$id, $data)
     } else {
         return;
@@ -174,6 +178,44 @@ class Voucher_model extends BaseModel {
   }
 
 
+  private function send_request_to_argold($data) {
+    $send_data=array();
+    $api_url="";
+
+    if($data['receipt_type']=="Metal") {
+      $send_data['receipt_departments']=array('type'=>'Pure',
+                                            'account'=> $data['account_name'],
+                                            'in_weight' => $data['debit_weight'],
+                                            'in_lot_purity' => $data['factory_purity'],
+                                            'description' =>$data['narration'],
+                                            'process_name'=>'Receipt');
+      $api_url=API_BASE_PATH."api/api_receipt_departments/store";   
+    }
+    else if($data['receipt_type']=="Refresh") {
+      // refresh_departments[hook_kdm_purity]:90
+      // refresh_departments[quantity]:2
+      $send_data['refresh_departments']=array('type'=>'Pure',
+                                            'account'=> $data['account_name'],
+                                            'in_weight' => $data['debit_weight'],
+                                            'in_lot_purity' => $data['factory_purity'],
+                                            'description' =>$data['narration'],
+                                            'process_name'=>'Refresh');
+      $api_url=API_BASE_PATH."api/api_refresh_departments/store";   
+    }
+    else if($data['receipt_type']=="Daily Drawer") {
+      $send_data['daily_drawer_receipts']=array('type'=>'Hook',
+                                                'account'=> $data['account_name'],
+                                                'in_weight' => $data['debit_weight'],
+                                                'in_lot_purity' => $data['factory_purity'],
+                                                'karigar'=> 'Factory',
+                                                'description' =>$data['narration']);
+      $api_url=API_BASE_PATH."api/api_daily_drawer_receipts/store";   
+    }
+  
+    if(!empty($api_url)) {
+      $result=curl_post_request($api_url, $send_data);
+    }
+  }
 
   //public function after_delete($id,$conditions) {
     // $ledger_id=$this->Ledger_model->get('id',
