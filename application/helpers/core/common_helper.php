@@ -350,3 +350,26 @@ if (!function_exists('is_api_request')) {
     return FALSE; 
   }
 }
+
+if (!function_exists('curl_post_request')) {
+  function curl_post_request($uri, $data = array()) {
+    if(!empty($uri)) {
+      $api_url=API_BASE_PATH.$uri;
+      $curl = curl_init($api_url);
+      curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+      curl_setopt($curl, CURLOPT_POST, true);
+      curl_setopt($curl, CURLOPT_POSTFIELDS,  http_build_query($data));
+      curl_setopt($curl, CURLOPT_HTTPHEADER, [
+        'access_token:'.ACCESS_TOKEN
+      ]);
+
+      $response = curl_exec($curl);
+      curl_close($curl);
+      return $response;
+    }
+    else
+    {
+      return 'API URL and/or access token not defined';
+    }
+  }
+}

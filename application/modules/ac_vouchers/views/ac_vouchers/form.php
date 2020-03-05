@@ -94,3 +94,4 @@
   var controller_name='<?php echo $this->router->class; ?>';
   //console.log(bank_name_list);
 </script>
+<br>
