@@ -26,7 +26,10 @@ class Account_ledger_reports extends BaseController {
   }
 
   private function get_account_ledger_records(){
-    
+    $company_id='';
+    if(!empty($_SESSION['company_id']))
+      $company_id=$_SESSION['company_id'];
+
     $account_id=(!empty($_GET['account_ledger_reports']['account_id']))?$_GET['account_ledger_reports']['account_id']:'0';
 
     $date_from=(!empty($_GET['account_ledger_reports']['date_from']))?date('Y-m-d',strtotime($_GET['account_ledger_reports']['date_from'])):date('Y-m-d');
@@ -42,11 +45,13 @@ class Account_ledger_reports extends BaseController {
       $where['account_id']=$account_id;
       $where['voucher_date >='] = $date_from;
       $where['voucher_date <='] = $date_to;
+      $where['company_id']=$company_id;
 
       $this->data['opening_balance'] = $this->model->find('sum(credit_amount)-sum(debit_amount) as 
                                                          amount_balance,sum(credit_weight)-sum(debit_weight) as weight_balance,sum(purity_margin) as purity_balance',
                                                           array('account_id'=>$account_id,
-                                                                'voucher_date<'=>$date_from));
+                                                                'voucher_date<'=>$date_from,
+                                                                'company_id'=>$company_id));
   
       $this->data['account_ledger'] = $this->model->get('date_format(voucher_date,"%d-%m-%Y") as 
                                                         voucher_date,voucher_type,voucher_number,credit_amount,debit_amount,credit_weight,debit_weight,purity_margin',

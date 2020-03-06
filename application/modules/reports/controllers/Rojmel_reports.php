@@ -18,10 +18,14 @@ class Rojmel_reports extends BaseController {
 
   private function get_rojmel_reports(){
     $rojmel_reports=array();
+    $company_id='';
+    if(!empty($_SESSION['company_id']))
+      $company_id=$_SESSION['company_id'];
   
     $this->data['rojmel_reports'] = $this->model->get('date_format(voucher_date,"%d-%m-%Y") as
                                                       voucher_date,ac.name as account_name,voucher_type,voucher_number,credit_amount,debit_amount,credit_weight,debit_weight,purity_margin', 
-                                                      array('voucher_type!=""'=>NULL), 
+                                                      array('voucher_type!=""'=>NULL,
+                                                            'ac_vouchers.company_id'=>$company_id), 
                                                       array(
                                                         array('ac_account ac',
                                                               'ac.id=ac_vouchers.account_id')) ,
