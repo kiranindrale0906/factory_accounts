@@ -1,4 +1,4 @@
-<?php //pd($client_account_ledger); ?>
+<?php $this->load->view('ac_vouchers/ac_vouchers/company_error_message'); ?>
 <?php 
    if(!empty($client_account_ledger)) {
     foreach ($client_account_ledger as $client_name => $company_data) { 

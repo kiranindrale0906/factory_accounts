@@ -6,9 +6,7 @@
     $controller=$this->router->module."/".$this->router->class;
     $action="store";
   }
-  if(empty($_SESSION['company_id'])){
-    echo "<p class='red'>Please Select Company,provided on top</p>";
-  }
+  $this->load->view('ac_vouchers/ac_vouchers/company_error_message');
 ?>
 
 <form method="post" class="form-horizontal fields-group-sm" enctype="multipart/form-data"

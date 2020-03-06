@@ -1,3 +1,4 @@
+<?php $this->load->view('ac_vouchers/ac_vouchers/company_error_message'); ?>
 <?php 
       if(!empty($rojmel_reports)) { ?>
       <div class="row m-1">

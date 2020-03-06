@@ -17,12 +17,17 @@ class Client_account_ledger_reports extends BaseController {
   }
 
   private function get_account_ledger_records(){
+    $company_id='';
+    if(!empty($_SESSION['company_id']))
+      $company_id=$_SESSION['company_id'];
+
     $get_account=$this->account_model->get('id,name');
     $client_account_ledger=array();
     foreach ($get_account as $key => $account) {
       $account_ledger_data=$this->model->get('date_format(voucher_date,"%d-%m-%Y") as voucher_date,
                                               voucher_type,voucher_number,credit_amount,debit_amount,credit_weight,debit_weight,purity_margin',
-                                             array('account_id'=>$account['id']), array() ,
+                                             array('account_id'=>$account['id'],
+                                                  'company_id' =>$company_id), array() ,
                                              array('order_by'=>'voucher_date asc'));
       $client_account_ledger[$account['name']]=$account_ledger_data;
     }
