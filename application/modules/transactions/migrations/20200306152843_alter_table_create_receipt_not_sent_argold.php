@@ -18,7 +18,6 @@ class Migration_alter_table_create_receipt_not_sent_argold extends CI_Model {
 				  `process_name` varchar(255),
 				  `karigar` varchar(255),
 				  `argold_account_id` int(11) DEFAULT 0,
-				  `api_url` varchar(255),
 				  `created_at` datetime NOT NULL,
 				  `updated_at` datetime NOT NULL,
 				  `is_delete` tinyint(1) DEFAULT '0',
