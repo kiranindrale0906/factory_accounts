@@ -31,6 +31,9 @@
   <b>Opening Purity Margin  : <?=sprintf('%0.2f', @$opening_balance['purity_balance']);?></b> 
 </div> 
 <?php } ?>
+<div class="row">
+
+</div>
 
 <table class="table table-bordered table-sm table-default">
         <thead>
@@ -121,4 +124,4 @@
             </tr>
           <?php } ?>
         </tbody>
-      </table>
+</table>

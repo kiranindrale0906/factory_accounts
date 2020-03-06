@@ -88,6 +88,13 @@ class Voucher_model extends BaseModel {
   }
 
   private function set_user_define_data() {
+    if($this->router_class=="metal_issue_vouchers") {
+      if(!is_numeric($this->attributes['company_id'])) {
+        $company_detail=$this->company_model->find('id',array('name'=>$this->attributes['company_id']));
+        $this->attributes['company_id']=$company_detail['id'];
+      }
+    }
+
     $this->formdata[$this->router_class]['suffix'] = $this->prefix;
     $this->formdata[$this->router_class]['voucher_type'] = $this->voucher_type;
     $this->formdata[$this->router_class]['transaction_type'] = $this->account_type;

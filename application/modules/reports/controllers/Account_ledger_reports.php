@@ -47,8 +47,9 @@ class Account_ledger_reports extends BaseController {
       $where['voucher_date <='] = $date_to;
       $where['company_id']=$company_id;
 
-      $this->data['opening_balance'] = $this->model->find('sum(credit_amount)-sum(debit_amount) as 
-                                                         amount_balance,sum(credit_weight)-sum(debit_weight) as weight_balance,sum(purity_margin) as purity_balance',
+      $this->data['opening_balance'] = $this->model->find('sum(credit_weight)-sum(debit_weight) as
+                                                          weight_balance,sum(purity_margin) as 
+                                                          purity_balance',
                                                           array('account_id'=>$account_id,
                                                                 'voucher_date<'=>$date_from,
                                                                 'company_id'=>$company_id));
