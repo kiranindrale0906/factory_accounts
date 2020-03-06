@@ -249,7 +249,6 @@ class Voucher_model extends BaseModel {
       
       if(!empty($api_url)) {
         $result=curl_post_request($api_url, $send_data);
-        pd($result);die;
         if(empty($result) || (!empty($result['status']) && $result['status']=="error")) {
           $dump_data_on_error=array_merge($dump_data_on_error,array('api_url'=>$api_url));
           $obj_receipt_not_sent=new Receipt_not_sent_argold_model($dump_data_on_error);
