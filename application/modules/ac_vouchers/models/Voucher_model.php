@@ -6,7 +6,7 @@ class Voucher_model extends BaseModel {
   //protected $insert_to_ledger = true;
   function __construct($data=array()) {
     parent::__construct($data);
-    $this->load->model(array('masters/period_model'));
+    $this->load->model(array('masters/period_model','transactions/Receipt_not_sent_argold_model'));
   }
 
   public function validation_rules($klass='') {
@@ -200,7 +200,8 @@ class Voucher_model extends BaseModel {
 
   private function send_request_to_argold($data) {
     $send_data=array();
-    $api_url="";
+    $dump_data_on_error=array();
+    $result['status']='';
     if($this->router->class=="metal_receipt_vouchers") {
       if($data['receipt_type']=="Metal") {
         $send_data['receipt_departments']=array('type'=>'Pure',
@@ -208,7 +209,10 @@ class Voucher_model extends BaseModel {
                                               'in_weight' => $data['debit_weight'],
                                               'in_lot_purity' => $data['factory_purity'],
                                               'description' =>$data['narration'],
-                                              'process_name'=>'Receipt');
+                                              'process_name'=>'Receipt',
+                                              'argold_account_id'=>$data['id']);
+        
+        $dump_data_on_error=$send_data['receipt_departments'];
         $api_url=API_BASE_PATH."api/api_receipt_departments/store";   
       }
       else if($data['receipt_type']=="Refresh") {
@@ -219,7 +223,9 @@ class Voucher_model extends BaseModel {
                                               'description' =>$data['narration'],
                                               'hook_kdm_purity' => $data['hook_kdm_purity'],
                                               'quantity' => $data['quantity'],
-                                              'process_name'=>'Refresh');
+                                              'process_name'=>'Refresh',
+                                              'argold_account_id'=>$data['id']);
+        $dump_data_on_error=$send_data['refresh_departments'];
         $api_url=API_BASE_PATH."api/api_refresh_departments/store";   
       }
       else if($data['receipt_type']=="Daily Drawer") {
@@ -228,13 +234,19 @@ class Voucher_model extends BaseModel {
                                                   'in_weight' => $data['debit_weight'],
                                                   'in_lot_purity' => $data['factory_purity'],
                                                   'karigar'=> 'Factory',
-                                                  'description' =>$data['narration']);
+                                                  'description' =>$data['narration'],
+                                                  'argold_account_id'=>$data['id']);
+        $dump_data_on_error=$send_data['daily_drawer_receipts'];
         $api_url=API_BASE_PATH."api/api_daily_drawer_receipts/store";   
       }
       
       if(!empty($api_url)) {
         $result=curl_post_request($api_url, $send_data);
-        //pd($result); die;
+        //pd($result);
+        if(empty($result) || (!empty($result['status']) && $result['status']=="error")) {
+          $obj_receipt_not_sent=new Receipt_not_sent_argold_model($dump_data_on_error);
+          $obj_receipt_not_sent->store(false);
+        }
       }
     }
   }

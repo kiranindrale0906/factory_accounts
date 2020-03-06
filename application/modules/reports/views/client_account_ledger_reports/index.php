@@ -14,6 +14,8 @@
               <th class="text-center">Date</th>
               <th class="text-center">Voucher Type</th>
               <th class="text-center">Voucher Number </th>
+              <th class="text-center">Purity</th>
+              <th class="text-center">Factory Purity</th>
               <th class="text-center">Credit Amount</th>
               <th class="text-center">Debit Amount</th>
               <th class="text-center">Credit Weight</th>
@@ -46,6 +48,9 @@
               <td class="text-right"><?php echo $ledger['voucher_date']; ?></td>
               <td class="text-right"><?php echo $ledger['voucher_type']; ?></td>
               <td class="text-right"><?php echo $ledger['voucher_number']; ?></td>
+              <td class="text-right"><?php echo $ledger['purity']; ?></td>
+              <td class="text-right"><?php echo $ledger['factory_purity']; ?></td>
+
               <td class="text-right">
                 <?php echo !empty($ledger['credit_amount'])?$ledger['credit_amount']:''; ?>      
               </td>
@@ -63,6 +68,8 @@
               <td class="text-right font-weight-bold">Total</td>
               <td></td>
               <td></td>
+              <td></td>
+              <td></td>
 
               <td class="text-right font-weight-bold"><?=sprintf('%0.2f',$total_credit_amt); ?></td>
               <td class="text-right font-weight-bold"><?=sprintf('%0.2f', $total_debit_amt); ?></td>
@@ -74,7 +81,9 @@
               <td class="text-right font-weight-bold">Balance</td>
               <td></td>
               <td></td>
-
+              <td></td>
+              <td></td>
+              
               <td class="text-right font-weight-bold" colspan="2">
                 <?=sprintf('%0.2f',($total_credit_amt-$total_debit_amt)); ?>
               </td>

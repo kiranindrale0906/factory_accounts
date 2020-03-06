@@ -10,7 +10,7 @@
   <?php endif; ?>     
   <div class="row">    
     <?php load_field('text', array('field' => 'name')) ?>
-    <?php load_field('text', array('field' => 'address_line1')) ?>
+    <?php load_field('text', array('field' => 'address_line1')) ?>  
   </div>
   <div class="row">    
     <?php load_field('text', array('field' => 'address_line2')) ?>
