@@ -41,10 +41,7 @@
                 else if($ledger['voucher_type']=='metal receipt voucher'){
                   $purity_margin=($ledger['factory_purity']-$ledger['purity'])*$ledger['debit_weight']/100;  
                 }
-                $total_purity_marign=$total_purity_marign+$purity_margin;
-
-                //$total_purity_marign=$total_purity_marign+$ledger['purity_margin'];
-              ?>
+                $total_purity_marign=$total_purity_marign+$purity_margin; ?>
             <tr>
               <td class="text-right"><?php echo $ledger['voucher_date']; ?></td>
               <td class="text-right"><?php echo $ledger['voucher_type']; ?></td>
