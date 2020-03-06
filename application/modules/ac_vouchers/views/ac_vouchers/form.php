@@ -7,7 +7,7 @@
     $action="store";
   }
   if(empty($_SESSION['company_id'])){
-    echo "Please Select Company,provided on top";
+    echo "<p class='red'>Please Select Company,provided on top</p>";
   }
 ?>
 
