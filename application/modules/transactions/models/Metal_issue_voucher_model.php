@@ -17,7 +17,7 @@ class Metal_issue_voucher_model extends Voucher_model {
     $purity = $this->attributes['purity'];
     $factory_purity = $this->attributes['factory_purity'];
     $credit_weight = $this->attributes['credit_weight'];
-    $purity_margin=(($factory_purity-$purity)*$credit_weight)/100;
+    $purity_margin=($factory_purity-$purity)*$credit_weight/100;
     $this->formdata[$this->router_class]['purity_margin'] = $purity_margin;
     parent::before_save($action);
   }
