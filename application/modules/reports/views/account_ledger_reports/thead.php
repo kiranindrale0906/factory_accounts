@@ -1,13 +1,12 @@
 <thead>
   <tr>
-    <th class="text-center">Name</th>
-    <th class="text-center">Date</th>
-    <th class="text-center">Desc</th>
-    <th class="text-center">Gross Wt</th>  
-    <th class="text-center">Melting</th>  
-    <th class="text-center">Purity</th>  
-    <th class="text-center">Factory Melting</th>  
-    <th class="text-center">Factory Purity</th>  
-    <th class="text-center">Difference</th>  
+    <th>URL</th>
+    <th>Product Name</th>
+    <th>Issue Type</th>
+    <th>Description</th>
+    <th>Weight</th>
+    <th>Purity</th>
+    <th>Fine</th>
+    <th>Created At</th>
   </tr>
 </thead>
