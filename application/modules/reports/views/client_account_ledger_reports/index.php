@@ -29,12 +29,21 @@
               $total_debit_weight=0;
               $total_purity_marign=0;
               foreach ($company_data as $ledger) {
-
+                $purity_margin=0;
                 $total_credit_amt=$total_credit_amt+$ledger['credit_amount'];
                 $total_debit_amt=$total_debit_amt+$ledger['debit_amount'];
                 $total_credit_weight=$total_credit_weight+$ledger['credit_weight'];
                 $total_debit_weight=$total_debit_weight+$ledger['debit_weight'];
-                $total_purity_marign=$total_purity_marign+$ledger['purity_margin'];
+                
+                if($ledger['voucher_type']=='metal issue voucher') {
+                  $purity_margin=($ledger['factory_purity']-$ledger['purity'])*$ledger['credit_weight']/100;
+                }
+                else if($ledger['voucher_type']=='metal receipt voucher'){
+                  $purity_margin=$ledger['debit_weight']*($ledger['purity']-$ledger['factory_purity'])/100;  
+                }
+                $total_purity_marign=$total_purity_marign+$purity_margin;
+
+                //$total_purity_marign=$total_purity_marign+$ledger['purity_margin'];
               ?>
             <tr>
               <td class="text-right"><?php echo $ledger['voucher_date']; ?></td>
@@ -50,7 +59,7 @@
                 <?php echo !($ledger['credit_weight']=="0.00")?$ledger['credit_weight']:''; ?>    
               </td>
               <td class="text-right"><?php echo !($ledger['debit_weight']=="0.00")?$ledger['debit_weight']:''; ?></td>
-              <td class="text-right"><?php echo !($ledger['purity_margin']=="0.00")?$ledger['purity_margin']:''; ?></td>
+              <td class="text-right"><?php echo !($purity_margin=="0.00")?$purity_margin:''; ?></td>
             </tr>
             <?php } ?>
              <tr>

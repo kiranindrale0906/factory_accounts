@@ -54,7 +54,7 @@ class Account_ledger_reports extends BaseController {
                                                                 'company_id'=>$company_id));
   
       $this->data['account_ledger'] = $this->model->get('date_format(voucher_date,"%d-%m-%Y") as 
-                                                        voucher_date,voucher_type,voucher_number,credit_amount,debit_amount,credit_weight,debit_weight,purity_margin',
+                                                        voucher_date,voucher_type,voucher_number,credit_amount,debit_amount,credit_weight,debit_weight,purity_margin,purity,factory_purity',
                                                         $where ,array(),
                                                         array('order_by'=>'voucher_date asc'));
       

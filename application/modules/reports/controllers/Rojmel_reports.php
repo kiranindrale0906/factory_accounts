@@ -23,7 +23,7 @@ class Rojmel_reports extends BaseController {
       $company_id=$_SESSION['company_id'];
   
     $this->data['rojmel_reports'] = $this->model->get('date_format(voucher_date,"%d-%m-%Y") as
-                                                      voucher_date,ac.name as account_name,voucher_type,voucher_number,credit_amount,debit_amount,credit_weight,debit_weight,purity_margin', 
+                                                      voucher_date,ac.name as account_name,voucher_type,voucher_number,credit_amount,debit_amount,credit_weight,debit_weight,purity_margin,purity,factory_purity', 
                                                       array('voucher_type!=""'=>NULL,
                                                             'ac_vouchers.company_id'=>$company_id), 
                                                       array(
