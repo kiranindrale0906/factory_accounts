@@ -208,8 +208,7 @@ class Voucher_model extends BaseModel {
                                               'in_weight' => $data['debit_weight'],
                                               'in_lot_purity' => $data['factory_purity'],
                                               'description' =>$data['narration'],
-                                              'process_name'=>'Receipt',
-                                              'argold_account_id'=>$data['id']);
+                                              'process_name'=>'Receipt');
         $api_url=API_BASE_PATH."api/api_receipt_departments/store";   
       }
       else if($data['receipt_type']=="Refresh") {
@@ -220,8 +219,7 @@ class Voucher_model extends BaseModel {
                                               'description' =>$data['narration'],
                                               'hook_kdm_purity' => $data['hook_kdm_purity'],
                                               'quantity' => $data['quantity'],
-                                              'process_name'=>'Refresh',
-                                              'argold_account_id'=>$data['id']);
+                                              'process_name'=>'Refresh');
         $api_url=API_BASE_PATH."api/api_refresh_departments/store";   
       }
       else if($data['receipt_type']=="Daily Drawer") {
@@ -230,8 +228,7 @@ class Voucher_model extends BaseModel {
                                                   'in_weight' => $data['debit_weight'],
                                                   'in_lot_purity' => $data['factory_purity'],
                                                   'karigar'=> 'Factory',
-                                                  'description' =>$data['narration'],
-                                                  'argold_account_id'=>$data['id']);
+                                                  'description' =>$data['narration']);
         $api_url=API_BASE_PATH."api/api_daily_drawer_receipts/store";   
       }
       
