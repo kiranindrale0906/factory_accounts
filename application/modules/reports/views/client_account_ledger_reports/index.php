@@ -36,10 +36,10 @@
                 $total_debit_weight=$total_debit_weight+$ledger['debit_weight'];
                 
                 if($ledger['voucher_type']=='metal issue voucher') {
-                  $purity_margin=($ledger['factory_purity']-$ledger['purity'])*$ledger['credit_weight']/100;
+                  $purity_margin=($ledger['purity']-$ledger['factory_purity'])*$ledger['credit_weight']/100;
                 }
                 else if($ledger['voucher_type']=='metal receipt voucher'){
-                  $purity_margin=$ledger['debit_weight']*($ledger['purity']-$ledger['factory_purity'])/100;  
+                  $purity_margin=($ledger['factory_purity']-$ledger['purity'])*$ledger['debit_weight']/100;  
                 }
                 $total_purity_marign=$total_purity_marign+$purity_margin;
 
