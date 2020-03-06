@@ -18,7 +18,7 @@
               <th class="text-center">Debit Amount</th>
               <th class="text-center">Credit Weight</th>
               <th class="text-center">Debit Weight</th>
-              <th class="text-center">Purity Margin</th>
+              <th class="text-center">Weight Margin</th>
             </tr>
           </thead>
           <tbody>
