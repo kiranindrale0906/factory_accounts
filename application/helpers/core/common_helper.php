@@ -357,7 +357,6 @@ if (!function_exists('curl_post_request')) {
       $api_url=$uri;
       $curl = curl_init($api_url);
       curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-      curl_setopt($curl, CURLOPT_FAILONERROR, true);
       curl_setopt($curl, CURLOPT_POST, true);
       curl_setopt($curl, CURLOPT_POSTFIELDS,  http_build_query($data));
       curl_setopt($curl, CURLOPT_HTTPHEADER, [
@@ -366,10 +365,6 @@ if (!function_exists('curl_post_request')) {
 
       $response = curl_exec($curl);
       // pd(curl_errno($curl));
-      if(curl_errno($curl))
-      {
-          $response=array('status'=>'error');
-      }
       curl_close($curl);
       return $response;
     }
