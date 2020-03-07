@@ -45,7 +45,7 @@ function list_settings($list_setting_arg=array()) {
 function get_field_attribute($table, $field) {
   $ci=&get_instance();
   $attributes = array();
-  $attributes['account_ledger_reports'] = array(
+  $attributes['client_account_ledger_reports'] = array(
   'account_id'=>array('Account Name', 'Select Account Name', TRUE, '', TRUE),
   'date_from'=>array('Date From', 'Enter Date From', TRUE, '', TRUE),
   'date_to'=>array('Date To', 'Enter Date To', TRUE, '', TRUE));

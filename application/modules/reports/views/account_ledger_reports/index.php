@@ -1,18 +1,40 @@
+<?php $this->load->view('ac_vouchers/ac_vouchers/company_error_message'); ?>
+<form method="get" class="form-horizontal fields-group-sm" enctype="multipart/form-data"
+      action="<?=ADMIN_PATH."reports/account_ledger_reports/index"?>">
+        
+  <?php load_field('dropdown', array('field' => 'account_id', 'option'=>@$account_names )); ?> 
+ 
+  <?php load_field('text', array('field' => 'date_from', 'class' => 'datepicker_js'));  ?> 
+  <?php load_field('text', array('field' => 'date_to', 'class' => 'datepicker_js'));  ?> 
+
+
+  <div class="row"> 
+    <div class="col-sm-6"> 
+      <?php
+          $add_attr=array('controller' => $this->router->class, 'name' => 'Submit' , 'class' => 'btn_blue');
+          load_buttons('submit', $add_attr); 
+          
+          load_buttons('anchor', array('href'=>ADMIN_PATH."reports/account_ledger_reports/index",'name' => 'Clear Filter' , 'class' => 'btn_blue')); 
+      ?> 
+    </div>
+  </div>  
+</form>  
+<br>
 <?php 
   $previous_date = '';
-  foreach ($created_dates as $index => $created_date) { ?>
+  foreach ($voucher_dates as $index => $voucher_date) { ?>
     <div class="row">
       <div class="col-md-6">
         <div class="form-group container">
           <div class="table-responsive m-t-20">
-            <h5 class="heading blue m-0">Receipt: <?= $created_date ?></h5>
+            <h5 class="heading blue m-0">Receipt: <?= $voucher_date ?></h5>
             <table class="table table-sm fixedthead table-default">
               <?php 
-                $this->load->view('issue_and_receipts/issue_and_receipts/thead'); 
-                $this->load->view('issue_and_receipts/issue_and_receipts/tbody', 
-                                                      array('created_date_records' => isset($receipts[$created_date]) ? $receipts[$created_date] : array(),
+                $this->load->view('reports/account_ledger_reports/thead'); 
+                $this->load->view('reports/account_ledger_reports/tbody', 
+                                                      array('voucher_date_records' => isset($receipts[$voucher_date]) ? $receipts[$voucher_date] : array(),
                                                             'previous_date' => $previous_date,
-                                                            'created_date' => $created_date,
+                                                            'voucher_date' => $voucher_date,
                                                             'type' => 'receipt')); 
               ?>
             </table>
@@ -26,11 +48,11 @@
             <h5 class="heading blue m-0">Issue</h5>
             <table class="table table-sm fixedthead table-default">
               <?php 
-                $this->load->view('issue_and_receipts/issue_and_receipts/thead');
-                $this->load->view('issue_and_receipts/issue_and_receipts/tbody', 
-                                                    array('created_date_records' => isset($issues[$created_date]) ? $issues[$created_date] : array(),
+                $this->load->view('reports/account_ledger_reports/thead');
+                $this->load->view('reports/account_ledger_reports/tbody', 
+                                                    array('voucher_date_records' => isset($issues[$voucher_date]) ? $issues[$voucher_date] : array(),
                                                           'previous_date' => $previous_date,
-                                                          'created_date' => $created_date,
+                                                          'voucher_date' => $voucher_date,
                                                           'type' => 'issue')); 
               ?>
               
@@ -42,7 +64,8 @@
       
     </div>
     <?php 
-    $previous_date = $created_date;
+    $previous_date = $voucher_date;
   }
+
 ?>
   

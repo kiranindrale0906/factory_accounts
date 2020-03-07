@@ -1,8 +1,8 @@
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Client_account_ledger_reports extends BaseController {
+include_once APPPATH . "modules/reports/controllers/Client_ledgers.php";
+class Client_account_ledger_reports extends Client_ledgers {
 
   public function __construct() {
     parent::__construct();
@@ -11,26 +11,67 @@ class Client_account_ledger_reports extends BaseController {
 
   public function index() {
     $this->data['layout']='application';
+    $this->get_form_data();
     $this->get_account_ledger_records();
-    
     $this->load->render($this->router->class."/index",$this->data);
   }
 
-  private function get_account_ledger_records(){
-    $company_id='';
-    if(!empty($_SESSION['company_id']))
-      $company_id=$_SESSION['company_id'];
-
-    $get_account=$this->account_model->get('id,name');
-    $client_account_ledger=array();
-    foreach ($get_account as $key => $account) {
-      $account_ledger_data=$this->model->get('date_format(voucher_date,"%d-%m-%Y") as voucher_date,
-                                              voucher_type,voucher_number,credit_amount,debit_amount,credit_weight,debit_weight,purity_margin,purity,factory_purity',
-                                             array('account_id'=>$account['id'],
-                                                  'company_id' =>$company_id), array() ,
-                                             array('order_by'=>'voucher_date asc'));
-      $client_account_ledger[$account['name']]=$account_ledger_data;
-    }
-    $this->data['client_account_ledger'] = $client_account_ledger;
+  public function get_form_data() {
+    $this->data['account_names'] = $this->model->get('distinct(account_name) as name',
+                          array('where_in' => array('voucher_type' => array("'metal issue vouchers'", 
+                                                                            "'metal receipt voucher'"))),
+                          array(), array('order_by'=>'account_name asc', 'limit'=>array(0,2)));
   }
+
+  private function get_account_ledger_records() {
+    $issue_data=array();
+    $receipt_data=array();
+    $this->data['voucher_dates']=array();
+
+
+    if(!empty($_SESSION['company_id'])) $company_id = $_SESSION['company_id'];
+    if(empty($company_id)) pd(1);
+
+    if(empty($this->data['account_names'])) return true;
+
+    foreach ($this->data['account_names'] as $account_detail) {
+      $account_name = $account_detail['name'];  
+
+      $where['voucher_type'] = 'metal issue voucher';
+      $where['account_name'] = $account_name;
+
+      $select = 'date_format(voucher_date,"%d-%m-%Y") as voucher_date,
+                 account_name, voucher_type, voucher_number, credit_amount, debit_amount, 
+                 credit_weight, debit_weight, purity_margin, purity, factory_purity, narration';
+
+      $issues = $this->model->get($select, $where ,array(), array('order_by'=>'voucher_date asc'));
+        
+      $where['voucher_type']='metal receipt voucher';
+      $receipts = $this->model->get($select, $where ,array(), array('order_by'=>'voucher_date asc'));
+
+      $issue_created_dates = array_column($issues, 'voucher_date');
+      $receipt_created_dates = array_column($receipts, 'voucher_date');
+      $this->data['voucher_dates'] = array_values(array_unique(array_merge($issue_created_dates, $receipt_created_dates)));
+      asort($this->data['voucher_dates']);
+
+      $issue_data[$account_name] = parent::get_records_by_created_date($issues, $account_name);
+      $receipt_data[$account_name] = parent::get_records_by_created_date($receipts, $account_name);
+
+      $total[$account_name] = parent::get_total_by_created_date($issue_data[$account_name], 'issues', array());
+
+      $total[$account_name] = parent::get_total_by_created_date($receipt_data[$account_name], 'receipt', $total[$account_name]);
+
+      $total[$account_name] = parent::set_index_for_dates($total[$account_name]);
+    }
+
+    $this->data['issues'] = $issue_data;
+    $this->data['receipts'] = $receipt_data;
+    $this->data['total'] = $total;  
+
+    
+    //$issue_data_total = parent::total_get_records_by_created_date($issues);
+    //$receipt_data_total = parent::total_get_records_by_created_date($receipts);
+
+    parent::get_balance_by_created_date();
+  }      
 }

@@ -1,99 +1,52 @@
 <?php $this->load->view('ac_vouchers/ac_vouchers/company_error_message'); ?>
-<?php 
-      if(!empty($rojmel_reports)) { ?>
-      <div class="row m-1">
-        <table class="table table-bordered table-sm table-default">
-          <thead>
-            <tr>
-              <th class="text-center">Date</th>
-              <th class="text-center">Account Name</th>
-              <th class="text-center">Voucher Type</th>
-              <th class="text-center">Voucher Number </th>
-              <th class="text-center">Purity</th>
-              <th class="text-center">Factory Purity</th>
-              <th class="text-center">Credit Amount</th>
-              <th class="text-center">Debit Amount</th>
-              <th class="text-center">Credit Weight</th>
-              <th class="text-center">Debit Weight</th>
-              <th class="text-center">Weight Margin</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php
-              $total_credit_amt=0;
-              $total_debit_amt=0;
-              $total_credit_weight=0;
-              $total_debit_weight=0;
-              $total_purity_marign=0;
-              foreach ($rojmel_reports as $ledger) {
-                $purity_margin=0;
-                $total_credit_amt=$total_credit_amt+$ledger['credit_amount'];
-                $total_debit_amt=$total_debit_amt+$ledger['debit_amount'];
-                $total_credit_weight=$total_credit_weight+$ledger['credit_weight'];
-                $total_debit_weight=$total_debit_weight+$ledger['debit_weight'];
-                //$total_purity_marign=$total_purity_marign+$ledger['purity_margin'];
 
-                if($ledger['voucher_type']=='metal issue voucher') {
-                  $purity_margin=($ledger['purity']-$ledger['factory_purity'])*$ledger['credit_weight']/100;
-                }
-                else if($ledger['voucher_type']=='metal receipt voucher'){
-                  $purity_margin=($ledger['factory_purity']-$ledger['purity'])*$ledger['debit_weight']/100;  
-                }
-                $total_purity_marign=$total_purity_marign+$purity_margin;
+<br>
+<?php 
+  $previous_date = '';
+  foreach ($voucher_dates as $index => $voucher_date) { ?>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group container">
+          <div class="table-responsive m-t-20">
+            <h5 class="heading blue m-0">Receipt: <?= $voucher_date ?></h5>
+            <table class="table table-sm fixedthead table-default">
+              <?php 
+                $this->load->view('reports/account_ledger_reports/thead'); 
+                $this->load->view('reports/account_ledger_reports/tbody', 
+                                                      array('voucher_date_records' => isset($receipts[$voucher_date]) ? $receipts[$voucher_date] : array(),
+                                                            'previous_date' => $previous_date,
+                                                            'voucher_date' => $voucher_date,
+                                                            'type' => 'receipt')); 
               ?>
-            <tr>
-              <td class="text-right"><?php echo $ledger['voucher_date']; ?></td>
-              <td class="text-right"><?php echo $ledger['account_name']; ?></td>
-              <td class="text-right"><?php echo $ledger['voucher_type']; ?></td>
-              <td class="text-right"><?php echo $ledger['voucher_number']; ?></td>
-              <td class="text-right"><?php echo $ledger['purity']; ?></td>
-              <td class="text-right"><?php echo $ledger['factory_purity']; ?></td>
-              <td class="text-right">
-                <?php echo !empty($ledger['credit_amount'])?$ledger['credit_amount']:''; ?>      
-              </td>
-              <td class="text-right">
-                <?php echo !empty($ledger['debit_amount'])?$ledger['debit_amount']:''; ?>    
-              </td>
-              <td class="text-right">
-                <?php echo !($ledger['credit_weight']=="0.00")?$ledger['credit_weight']:''; ?>    
-              </td>
-              <td class="text-right"><?php echo !($ledger['debit_weight']=="0.00")?$ledger['debit_weight']:''; ?></td>
-              <td class="text-right"><?php echo !($purity_margin=="0.00")?$purity_margin:''; ?></td>
-            </tr>
-            <?php } ?>
-             <tr>
-              <td class="text-right font-weight-bold">Total</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td class="text-right font-weight-bold"><?=sprintf('%0.2f',$total_credit_amt); ?></td>
-              <td class="text-right font-weight-bold"><?=sprintf('%0.2f', $total_debit_amt); ?></td>
-              <td class="text-right font-weight-bold"><?=sprintf('%0.2f', $total_credit_weight); ?></td>
-              <td class="text-right font-weight-bold"><?=sprintf('%0.2f', $total_debit_weight); ?></td>
-              <td class="text-right font-weight-bold"><?=sprintf('%0.2f', $total_purity_marign); ?></td>
-            </tr>
-            <tr>
-              <td class="text-right font-weight-bold">Balance</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td class="text-right font-weight-bold" colspan="2">
-                <?=sprintf('%0.2f',($total_credit_amt-$total_debit_amt)); ?>
-              </td>
+            </table>
+          </div> 
+        </div>
+      </div> 
+
+      <div class="col-md-6 border-right">
+        <div class="form-group container">
+          <div class="table-responsive m-t-20">
+            <h5 class="heading blue m-0">Issue</h5>
+            <table class="table table-sm fixedthead table-default">
+              <?php 
+                $this->load->view('reports/account_ledger_reports/thead');
+                $this->load->view('reports/account_ledger_reports/tbody', 
+                                                    array('voucher_date_records' => isset($issues[$voucher_date]) ? $issues[$voucher_date] : array(),
+                                                          'previous_date' => $previous_date,
+                                                          'voucher_date' => $voucher_date,
+                                                          'type' => 'issue')); 
+              ?>
               
-              <td class="text-right font-weight-bold" colspan="2">
-                <?=sprintf('%0.2f', ($total_credit_weight-$total_debit_weight)); ?>
-              </td>
-              <td class="text-right font-weight-bold"><?=sprintf('%0.2f', $total_purity_marign); ?></td>
-            </tr>  
-          </tbody>
-        </table>
+            </table>
+          </div> 
+        </div>
       </div>
-       <br>
-      <?php  
-      }
-      ?>
+
+      
+    </div>
+    <?php 
+    $previous_date = $voucher_date;
+  }
+
+?>
+  
