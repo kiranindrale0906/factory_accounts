@@ -13,32 +13,35 @@
     } 
     
     if(!strpos($record['voucher_type'],'issue')) {
-
       $this->load->view('reports/client_account_ledger_reports/total_receipts', 
                         array('label' => 'Total',
                              'weight' => $total[$account_name][$voucher_date][$type]['weight'], 
                              'weight_difference' => $total[$account_name][$voucher_date][$type]['weight_difference'],
-                             'fine' => $total[$voucher_date][$type]['fine'],
-                             'factory_fine' => $total[$voucher_date][$type]['factory_fine']));
+                             'fine' => @$total[$account_name][$voucher_date][$type]['fine'],
+                             'factory_fine' => @$total[$account_name][$voucher_date][$type]['factory_fine']));
 
       $this->load->view('reports/client_account_ledger_reports/balance', 
                         array('label' => 'Balance',
                              'voucher_date' => $voucher_date,
                              'type' => $type,
-                             'account_name'=>$account_name));
+                             'account_name'=>$account_name,
+                             'weight' => @$total[$account_name][$voucher_date][$type]['weight'],
+                             'weight_difference' => @$total[$account_name][$voucher_date][$type]['weight_difference']));
     }
     else {
       $this->load->view('reports/client_account_ledger_reports/total_issues', 
                             array('label' => 'Total',
                                  'weight' => $total[$account_name][$voucher_date][$type]['weight'],
                                  'weight_difference' => $total[$account_name][$voucher_date][$type]['weight_difference'],
-                                 'fine' => $total[$voucher_date][$type]['fine'],
-                                 'factory_fine' => $total[$voucher_date][$type]['factory_fine']));
+                                 'fine' => @$total[$account_name][$voucher_date][$type]['fine'],
+                                 'factory_fine' => @$total[$account_name][$voucher_date][$type]['factory_fine']));
       $this->load->view('reports/client_account_ledger_reports/balance', 
                         array('label' => 'Balance',
                              'voucher_date' => $voucher_date,
                              'type' => $type,
-                             'account_name'=>$account_name));
+                             'account_name'=>$account_name,
+                             'weight' => @$total[$account_name][$voucher_date][$type]['weight'],
+                             'weight_difference' => @$total[$account_name][$voucher_date][$type]['weight_difference']));
     }
 
 

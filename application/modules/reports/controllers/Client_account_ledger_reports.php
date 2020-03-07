@@ -30,9 +30,19 @@ class Client_account_ledger_reports extends Client_ledgers {
 
     $company_id='';
     if(!empty($_SESSION['company_id'])) $company_id = $_SESSION['company_id'];
-    //if(empty($company_id)) pd(1);
-
     if(empty($this->data['account_names'])) return true;
+
+    $where = array('voucher_type' => 'metal receipt voucher');
+    $select = 'date_format(voucher_date,"%d-%m-%Y") as voucher_date';
+    $issues = $this->model->get($select, $where ,array(), array('order_by'=>'voucher_date asc'));
+      
+    $where = array('voucher_type' => 'metal receipt voucher');
+    $receipts = $this->model->get($select, $where ,array(), array('order_by'=>'voucher_date asc'));
+
+    $issue_created_dates = array_column($issues, 'voucher_date');
+    $receipt_created_dates = array_column($receipts, 'voucher_date');
+    $this->data['voucher_dates'] = array_values(array_unique(array_merge($issue_created_dates, $receipt_created_dates)));
+    asort($this->data['voucher_dates']);
 
     foreach ($this->data['account_names'] as $account_detail) {
       $account_name = $account_detail['name'];  
@@ -43,39 +53,23 @@ class Client_account_ledger_reports extends Client_ledgers {
       $select = 'date_format(voucher_date,"%d-%m-%Y") as voucher_date,
                  account_name, voucher_type, voucher_number, credit_amount, debit_amount, 
                  credit_weight, debit_weight, purity_margin, purity, factory_purity, narration';
-
       $issues = $this->model->get($select, $where ,array(), array('order_by'=>'voucher_date asc'));
-        
+      
       $where['voucher_type']='metal receipt voucher';
       $receipts = $this->model->get($select, $where ,array(), array('order_by'=>'voucher_date asc'));
-
-      $issue_created_dates = array_column($issues, 'voucher_date');
-      $receipt_created_dates = array_column($receipts, 'voucher_date');
-      $this->data['voucher_dates'] = array_values(array_unique(array_merge($issue_created_dates, $receipt_created_dates)));
-      asort($this->data['voucher_dates']);
-
+      
       $issue_data[$account_name] = parent::get_records_by_created_date($issues, $account_name);
       $receipt_data[$account_name] = parent::get_records_by_created_date($receipts, $account_name);
-
-      $total[$account_name] = parent::get_total_by_created_date($issue_data[$account_name], 'issues', array());
-
-      $total[$account_name] = parent::get_total_by_created_date($receipt_data[$account_name], 'receipt', $total[$account_name]);
-
-      $total[$account_name] = parent::set_index_for_dates($total[$account_name]);
-      //pd($this->data['voucher_dates']);
-      $this->data['total'] = $total;  
-      parent::get_balance_by_created_date_new_modified($account_name);
       
+      $total[$account_name] = parent::get_total_by_created_date($issue_data[$account_name], 'issue', array());
+      $total[$account_name] = parent::get_total_by_created_date($receipt_data[$account_name], 'receipt', $total[$account_name]);
+      
+      $total[$account_name] = parent::set_index_for_dates($total[$account_name]);
     }
 
     $this->data['issues'] = $issue_data;
     $this->data['receipts'] = $receipt_data;
-  
-    //$issue_data_total = parent::total_get_records_by_created_date($issues);
-    //$receipt_data_total = parent::total_get_records_by_created_date($receipts);
-    //$this->data['total'] = $total;   
-    //parent::get_balance_by_created_date();
-    
-    //pd($this->data['total']);
+    $this->data['total'] = $total;  
+    parent::get_balance_by_created_date();
   }      
 }
