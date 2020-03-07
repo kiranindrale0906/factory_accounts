@@ -72,14 +72,13 @@ class Account_ledger_reports extends Ledgers {
       $this->data['receipts'] = parent::get_records_by_created_date($receipts);
       
       $this->data['total'] = array();
-      //pd($this->data['receipts']);die;
-      /*parent::get_total_by_created_date($this->data['issues'], 'issue');
+      parent::get_total_by_created_date($this->data['issues'], 'issue');
 
       parent::get_total_by_created_date($this->data['receipts'], 'receipt');
-      */
-      // parent::set_index_for_dates();
+    
+      parent::set_index_for_dates();
 
-      // parent::get_balance_by_created_date();
+      parent::get_balance_by_created_date();
     }
   }
 }
