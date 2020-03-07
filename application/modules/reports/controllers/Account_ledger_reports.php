@@ -26,6 +26,7 @@ class Account_ledger_reports extends Ledgers {
 
   private function get_account_ledger_records() {
     $company_id='';
+    $this->data['voucher_dates']=array();
     if(!empty($_SESSION['company_id']))
       $company_id=$_SESSION['company_id'];
 
