@@ -120,10 +120,8 @@ class Client_ledgers extends BaseController {
       $previous_type = '';
       foreach($this->data['voucher_dates'] as $created_date) {
         if ($previous_type != '') {
-          $this->data['total'][$account_name][$created_date][$previous_type]['weight'] += $this->data['balance'][$account_name]
-  [$account_name][$previous_date][$previous_type]['weight'];
-          $this->data['total'][$account_name][$created_date][$previous_type]['weight_difference'] += $this->data['balance'][$account_name]
-  [$account_name][$previous_date][$previous_type]['weight_difference'];
+          $this->data['total'][$account_name][$created_date][$previous_type]['weight'] += $this->data['balance'][$account_name][$previous_date][$previous_type]['weight'];
+          $this->data['total'][$account_name][$created_date][$previous_type]['weight_difference'] += $this->data['balance'][$account_name][$previous_date][$previous_type]['weight_difference'];
         }
         //pd($this->data['total'][$created_date][$account_name]);
         if ($this->data['total'][$account_name][$created_date]['receipt']['weight'] >= $this->data['total'][$account_name][$created_date]['issue']['weight']) {
