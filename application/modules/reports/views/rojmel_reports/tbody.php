@@ -16,7 +16,9 @@
       $this->load->view('reports/rejmel_reports/total_receipts', 
                         array('label' => 'Total',
                              'debit_weight' => $total[$voucher_date][$type]['debit_weight'], 
-                             'weight_difference' => $total[$voucher_date][$type]['weight_difference']));
+                             'weight_difference' => $total[$voucher_date][$type]['weight_difference'],
+                             'fine' => $total[$voucher_date][$type]['fine'],
+                             'factory_fine' => $total[$voucher_date][$type]['factory_fine']));
 
       $this->load->view('reports/rejmel_reports/balance', 
                         array('label' => 'Balance',
@@ -27,7 +29,9 @@
       $this->load->view('reports/rejmel_reports/total_issues', 
                             array('label' => 'Total',
                                  'credit_weight' => $total[$voucher_date][$type]['credit_weight'],
-                                 'weight_difference' => $total[$voucher_date][$type]['weight_difference']));
+                                 'weight_difference' => $total[$voucher_date][$type]['weight_difference'],
+                                 'fine' => $total[$voucher_date][$type]['fine'],
+                                 'factory_fine' => $total[$voucher_date][$type]['factory_fine']));
       $this->load->view('reports/rejmel_reports/balance', 
                         array('label' => 'Balance',
                              'voucher_date' => $voucher_date,

@@ -40,10 +40,10 @@
                     $this->load->view('reports/client_account_ledger_reports/thead');
                     $this->load->view('reports/client_account_ledger_reports/tbody', 
                                                         array('voucher_date_records' => isset($issues[$account['name']][$voucher_date][$account['name']]) ? $issues[$account['name']][$voucher_date][$account['name']] : array(),
-                                                              'previous_date' => $previous_date,
-                                                              'voucher_date' => $voucher_date,
-                                                              'type' => 'issue',
-                                                              'account_name'=>$account['name'])); 
+                                                          'previous_date' => $previous_date,
+                                                          'voucher_date' => $voucher_date,
+                                                          'type' => 'issue',
+                                                          'account_name'=>$account['name'])); 
                   ?>
                   
                 </table>
