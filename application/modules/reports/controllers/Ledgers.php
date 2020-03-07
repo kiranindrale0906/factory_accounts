@@ -21,9 +21,13 @@ class Ledgers extends BaseController {
         $this->data['total'][$created_date]['issue'] = array();
         $this->data['total'][$created_date]['issue']['credit_weight'] = 0;
         $this->data['total'][$created_date]['issue']['purity'] = 0;
+        $this->data['total'][$created_date]['issue']['fine'] = 0;
+        $this->data['total'][$created_date]['issue']['factory_fine'] = 0;
         $this->data['total'][$created_date]['receipt'] = array();
         $this->data['total'][$created_date]['receipt']['debit_weight'] = 0;
         $this->data['total'][$created_date]['receipt']['purity'] = 0;
+        $this->data['total'][$created_date]['receipt']['fine'] = 0;
+        $this->data['total'][$created_date]['receipt']['factory_fine'] = 0;
       }
     }
   }
@@ -37,24 +41,34 @@ class Ledgers extends BaseController {
           $this->data['total'][$record['voucher_date']]['issue'] = array();
           $this->data['total'][$record['voucher_date']]['issue']['credit_weight'] = 0;
           $this->data['total'][$record['voucher_date']]['issue']['weight_difference'] = 0;
+          $this->data['total'][$record['voucher_date']]['issue']['fine'] = 0;
+          $this->data['total'][$record['voucher_date']]['issue']['factory_fine'] = 0;
         }
 
         if (!isset($this->data['total'][$record['voucher_date']]['receipt'])) {
           $this->data['total'][$record['voucher_date']]['receipt'] = array();
           $this->data['total'][$record['voucher_date']]['receipt']['debit_weight'] = 0;
           $this->data['total'][$record['voucher_date']]['receipt']['weight_difference'] = 0;
+          $this->data['total'][$record['voucher_date']]['receipt']['fine'] = 0;
+          $this->data['total'][$record['voucher_date']]['receipt']['factory_fine'] = 0;
         }
 
         if($type=='issue'){
           $this->data['total'][$record['voucher_date']][$type]['credit_weight'] += $record['credit_weight'];
           $purity_margin=($record['factory_purity']-$record['purity'])*$record['credit_weight']/100;
-          $this->data['total'][$record['voucher_date']][$type]['weight_difference'] += $purity_margin;       
+          $this->data['total'][$record['voucher_date']][$type]['weight_difference'] += $purity_margin;
+          $this->data['total'][$record['voucher_date']][$type]['fine'] += ($record['credit_weight']*$record['purity'])/100;       
+          $this->data['total'][$record['voucher_date']][$type]['factory_fine'] += ($record['credit_weight']*$record['factory_purity'])/100;       
+
         }
 
         if($type=='receipt') {
           $this->data['total'][$record['voucher_date']][$type]['debit_weight'] += $record['debit_weight'];
           $purity_margin = $record['debit_weight']*($record['purity']-$record['factory_purity'])/100; 
           $this->data['total'][$record['voucher_date']][$type]['weight_difference'] += $purity_margin;
+
+          $this->data['total'][$record['voucher_date']][$type]['fine'] += ($record['debit_weight']*$record['purity'])/100;       
+          $this->data['total'][$record['voucher_date']][$type]['factory_fine'] += ($record['debit_weight']*$record['factory_purity'])/100;       
         }
       }
     }     
