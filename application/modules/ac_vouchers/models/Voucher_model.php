@@ -245,7 +245,7 @@ class Voucher_model extends BaseModel {
       }
       
       if(!empty($api_url)) {
-        pd($send_data);die;
+        //pd($send_data);die;
         $result=curl_post_request($api_url, $send_data);
         if(empty($result) || (!empty($result['status']) && $result['status']=="error")) {
           $dump_data_on_error=array_merge($dump_data_on_error,array('api_url'=>$api_url));
