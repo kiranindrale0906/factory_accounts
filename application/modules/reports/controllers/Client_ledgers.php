@@ -120,10 +120,49 @@ class Client_ledgers extends BaseController {
       $previous_type = '';
       foreach($this->data['voucher_dates'] as $created_date) {
         if ($previous_type != '') {
-          $this->data['total'][$account_name][$created_date][$previous_type]['weight'] += $this->data['balance'][$account_name][$previous_date][$previous_type]['weight'];
-          $this->data['total'][$account_name][$created_date][$previous_type]['weight_difference'] += $this->data['balance'][$account_name][$previous_date][$previous_type]['weight_difference'];
+          $this->data['total'][$account_name][$created_date][$previous_type]['weight'] += @$this->data['balance'][$account_name][$previous_date][$previous_type]['weight'];
+          $this->data['total'][$account_name][$created_date][$previous_type]['weight_difference'] += @$this->data['balance'][$account_name][$previous_date][$previous_type]['weight_difference'];
         }
         //pd($this->data['total'][$created_date][$account_name]);
+        if ($this->data['total'][$account_name][$created_date]['receipt']['weight'] >= $this->data['total'][$account_name][$created_date]['issue']['weight']) {
+
+          $this->data['balance'][$account_name][$created_date]['receipt']['weight'] = 
+                                                          $this->data['total'][$account_name][$created_date]['receipt']['weight']
+                                                          - $this->data['total'][$account_name][$created_date]['issue']['weight'];
+
+          $this->data['balance'][$account_name][$created_date]['receipt']['weight_difference'] = 
+                                                          $this->data['total'][$account_name][$created_date]['receipt']['weight_difference']
+                                                          - $this->data['total'][$account_name][$created_date]['issue']['weight_difference'];        
+          $type = 'receipt';
+        } else {
+          $this->data['balance'][$account_name][$created_date]['issue']['weight'] = 
+                                                          $this->data['total'][$account_name][$created_date]['issue']['weight']
+                                                          - $this->data['total'][$account_name][$created_date]['receipt']['weight'];
+          $this->data['balance'][$account_name][$created_date]['issue']['weight_difference'] = 
+                                                          $this->data['total'][$account_name][$created_date]['issue']['weight_difference'] 
+                                                          - $this->data['total'][$account_name][$created_date]['receipt']['weight_difference'];
+          $type = 'issue';
+        }
+        
+        $previous_date = $created_date;
+        $previous_type = $type;
+      }
+    }     
+  }
+
+  protected function get_balance_by_created_date_new_modified($account_name) {
+    //pd($this->data['total']);
+    //pd($this->data['total'][$account_name]);
+    foreach($this->data['total'][$account_name] as $voucher_date => $total_record) {
+      $previous_date = '';
+      $previous_type = '';
+      
+      foreach($this->data['voucher_dates'] as $created_date) {
+        if ($previous_type != '') {
+          $this->data['total'][$account_name][$created_date][$previous_type]['weight'] += @$this->data['balance'][$account_name][$previous_date][$previous_type]['weight'];
+          $this->data['total'][$account_name][$created_date][$previous_type]['weight_difference'] += @$this->data['balance'][$account_name][$previous_date][$previous_type]['weight_difference'];
+        }
+
         if ($this->data['total'][$account_name][$created_date]['receipt']['weight'] >= $this->data['total'][$account_name][$created_date]['issue']['weight']) {
 
           $this->data['balance'][$account_name][$created_date]['receipt']['weight'] = 

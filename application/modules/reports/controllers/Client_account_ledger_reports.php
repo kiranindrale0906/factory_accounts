@@ -20,7 +20,7 @@ class Client_account_ledger_reports extends Client_ledgers {
     $this->data['account_names'] = $this->model->get('distinct(account_name) as name',
                           array('where_in' => array('voucher_type' => array("'metal issue vouchers'", 
                                                                             "'metal receipt voucher'"))),
-                          array(), array('order_by'=>'account_name asc', 'limit'=>array(0,2)));
+                          array(), array('order_by'=>'account_name asc','limit'=>array(0,3)));
   }
 
   private function get_account_ledger_records() {
@@ -28,9 +28,9 @@ class Client_account_ledger_reports extends Client_ledgers {
     $receipt_data=array();
     $this->data['voucher_dates']=array();
 
-
+    $company_id='';
     if(!empty($_SESSION['company_id'])) $company_id = $_SESSION['company_id'];
-    if(empty($company_id)) pd(1);
+    //if(empty($company_id)) pd(1);
 
     if(empty($this->data['account_names'])) return true;
 
@@ -62,16 +62,20 @@ class Client_account_ledger_reports extends Client_ledgers {
       $total[$account_name] = parent::get_total_by_created_date($receipt_data[$account_name], 'receipt', $total[$account_name]);
 
       $total[$account_name] = parent::set_index_for_dates($total[$account_name]);
+      //pd($this->data['voucher_dates']);
+      $this->data['total'] = $total;  
+      parent::get_balance_by_created_date_new_modified($account_name);
+      
     }
 
     $this->data['issues'] = $issue_data;
     $this->data['receipts'] = $receipt_data;
-    $this->data['total'] = $total;  
-
-    
+  
     //$issue_data_total = parent::total_get_records_by_created_date($issues);
     //$receipt_data_total = parent::total_get_records_by_created_date($receipts);
-
-    parent::get_balance_by_created_date();
+    //$this->data['total'] = $total;   
+    //parent::get_balance_by_created_date();
+    
+    //pd($this->data['total']);
   }      
 }
