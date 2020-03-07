@@ -366,10 +366,10 @@ if (!function_exists('curl_post_request')) {
 
       $response = curl_exec($curl);
       // pd(curl_errno($curl));
-      if(curl_errno($curl))
-      {
-          $response=array('status'=>'error');
-      }
+      // if(curl_errno($curl))
+      // {
+      //     $response=array('status'=>'error');
+      // }
       curl_close($curl);
       return $response;
     }
