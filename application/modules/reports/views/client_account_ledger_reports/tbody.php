@@ -13,7 +13,7 @@
     } 
     
     if(!strpos($record['voucher_type'],'issue')) {
-      $this->load->view('reports/client_account_ledger_reports/total_receipts', 
+      $this->load->view('reports/client_account_ledger_reports/total', 
                         array('label' => 'Total',
                              'weight' => $total[$account_name][$voucher_date][$type]['weight'], 
                              'weight_difference' => $total[$account_name][$voucher_date][$type]['weight_difference'],
@@ -29,7 +29,7 @@
                              'weight_difference' => @$total[$account_name][$voucher_date][$type]['weight_difference']));
     }
     else {
-      $this->load->view('reports/client_account_ledger_reports/total_issues', 
+      $this->load->view('reports/client_account_ledger_reports/total', 
                             array('label' => 'Total',
                                  'weight' => $total[$account_name][$voucher_date][$type]['weight'],
                                  'weight_difference' => $total[$account_name][$voucher_date][$type]['weight_difference'],

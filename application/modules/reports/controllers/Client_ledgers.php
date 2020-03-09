@@ -49,24 +49,36 @@ class Client_ledgers extends BaseController {
             $total[$record['voucher_date']]['issue'] = array();
             $total[$record['voucher_date']]['issue']['weight'] = 0;
             $total[$record['voucher_date']]['issue']['weight_difference'] = 0;
+            $total[$record['voucher_date']]['issue']['fine'] = 0;
+            $total[$record['voucher_date']]['issue']['factory_fine'] = 0;
           }
 
           if (!isset($total[$record['voucher_date']]['receipt'])) {
             $total[$record['voucher_date']]['receipt'] = array();
             $total[$record['voucher_date']]['receipt']['weight'] = 0;
             $total[$record['voucher_date']]['receipt']['weight_difference'] = 0;
+            $total[$record['voucher_date']]['receipt']['fine'] = 0;
+            $total[$record['voucher_date']]['receipt']['factory_fine'] = 0;
           }
           
           if($type=='issue'){
             $total[$record['voucher_date']][$type]['weight'] += $record['credit_weight'];
             $purity_margin=($record['purity']-$record['factory_purity'])*$record['credit_weight']/100;
-            $total[$record['voucher_date']][$type]['weight_difference'] += $purity_margin;       
+            $total[$record['voucher_date']][$type]['weight_difference'] += $purity_margin;     
+            $fine=($record['credit_weight']*$record['purity'])/100;
+            $total[$record['voucher_date']][$type]['fine'] += $fine;
+            $factory_fine=($record['credit_weight']*$record['factory_purity'])/100;
+            $total[$record['voucher_date']][$type]['factory_fine'] += $factory_fine;  
           }
 
           if($type=='receipt') {
             $total[$record['voucher_date']][$type]['weight'] += $record['debit_weight'];
             $purity_margin = $record['debit_weight']*($record['factory_purity']-$record['purity'])/100; 
             $total[$record['voucher_date']][$type]['weight_difference'] += $purity_margin;
+            $fine=($record['debit_weight']*$record['purity'])/100;
+            $total[$record['voucher_date']][$type]['fine'] += $fine;
+            $factory_fine=($record['debit_weight']*$record['factory_purity'])/100;
+            $total[$record['voucher_date']][$type]['factory_fine'] += $factory_fine;
           }
         }
       }
