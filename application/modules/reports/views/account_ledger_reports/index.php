@@ -22,6 +22,7 @@
 <br>
 <?php 
   $previous_date = '';
+  $account['name']=ACCOUNT_NAME_REPORT;
   foreach ($voucher_dates as $index => $voucher_date) { ?>
     <div class="row">
       <div class="col-md-6">
@@ -32,10 +33,12 @@
               <?php 
                 $this->load->view('reports/account_ledger_reports/thead'); 
                 $this->load->view('reports/account_ledger_reports/tbody', 
-                                                      array('voucher_date_records' => isset($receipts[$voucher_date]) ? $receipts[$voucher_date] : array(),
-                                                            'previous_date' => $previous_date,
-                                                            'voucher_date' => $voucher_date,
-                                                            'type' => 'receipt')); 
+                        array('voucher_date_records' => isset($receipts[$voucher_date]) ? $receipts[$voucher_date] :
+                                                          array(),
+                              'previous_date' => $previous_date,
+                              'voucher_date' => $voucher_date,
+                              'type' => 'receipt',
+                              'account_name'=>$account['name']));  
               ?>
             </table>
           </div> 
@@ -50,10 +53,11 @@
               <?php 
                 $this->load->view('reports/account_ledger_reports/thead');
                 $this->load->view('reports/account_ledger_reports/tbody', 
-                                                    array('voucher_date_records' => isset($issues[$voucher_date]) ? $issues[$voucher_date] : array(),
+                                                        array('voucher_date_records' => isset($issues[$voucher_date]) ? $issues[$voucher_date] : array(),
                                                           'previous_date' => $previous_date,
                                                           'voucher_date' => $voucher_date,
-                                                          'type' => 'issue')); 
+                                                          'type' => 'issue',
+                                                          'account_name'=>$account['name'])); 
               ?>
               
             </table>
