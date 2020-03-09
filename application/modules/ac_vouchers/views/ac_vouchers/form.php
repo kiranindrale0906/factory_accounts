@@ -86,7 +86,7 @@
         endif; ?>
 
   <?php if(!empty(get_field_attribute($this->router->class,'fine'))) :
-          load_field('text', array('field' => 'fine', 'readonlyinput'=>'1')); 
+          load_field('text', array('field' => 'fine', 'readonlyinput'=>'1', 'class'=>'fine')); 
         endif; ?>      
   
   <?php if(!empty(get_field_attribute($this->router->class,'factory_purity'))) :
@@ -94,7 +94,7 @@
         endif; ?>
 
   <?php if(!empty(get_field_attribute($this->router->class,'factory_fine'))) :
-          load_field('text', array('field' => 'factory_fine', 'readonlyinput'=>'1')); 
+          load_field('text', array('field' => 'factory_fine', 'readonlyinput'=>'1', 'class'=>'factory_fine')); 
         endif; ?>            
   <div class="row"> 
     <div class="col-sm-6"> 
