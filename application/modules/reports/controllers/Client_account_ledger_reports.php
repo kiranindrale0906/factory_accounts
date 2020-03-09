@@ -41,7 +41,7 @@ class Client_account_ledger_reports extends Client_ledgers {
 
     $issue_created_dates = array_column($issues, 'voucher_date');
     $receipt_created_dates = array_column($receipts, 'voucher_date');
-    $this->data['voucher_dates'] = array_values(array_unique(array_merge($issue_created_dates, $receipt_created_dates)));
+    $this->data['voucher_dates'] = array(''); //array_values(array_unique(array_merge($issue_created_dates, $receipt_created_dates)));
     asort($this->data['voucher_dates']);
 
     foreach ($this->data['account_names'] as $account_detail) {
@@ -58,8 +58,8 @@ class Client_account_ledger_reports extends Client_ledgers {
       $where['voucher_type']='metal receipt voucher';
       $receipts = $this->model->get($select, $where ,array(), array('order_by'=>'voucher_date asc'));
       
-      $issue_data[$account_name] = parent::get_records_by_created_date($issues, $account_name);
-      $receipt_data[$account_name] = parent::get_records_by_created_date($receipts, $account_name);
+      $issue_data[$account_name][''] = $issues; //parent::get_records_by_created_date($issues);
+      $receipt_data[$account_name][''] = $receipts; parent::get_records_by_created_date($receipts);
       
       $total[$account_name] = parent::get_total_by_created_date($issue_data[$account_name], 'issue', array());
       $total[$account_name] = parent::get_total_by_created_date($receipt_data[$account_name], 'receipt', $total[$account_name]);

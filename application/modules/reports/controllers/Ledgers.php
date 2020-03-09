@@ -138,9 +138,13 @@ class Ledgers extends BaseController {
         $total[$created_date]['issue'] = array();
         $total[$created_date]['issue']['weight'] = 0;
         $total[$created_date]['issue']['weight_difference'] = 0;
+        $total[$created_date]['issue']['fine'] = 0;
+        $total[$created_date]['issue']['factory_fine'] = 0;
         $total[$created_date]['receipt'] = array();
         $total[$created_date]['receipt']['weight'] = 0;
         $total[$created_date]['receipt']['weight_difference'] = 0;
+        $total[$created_date]['receipt']['fine'] = 0;
+        $total[$created_date]['receipt']['factory_fine'] = 0;
       }
     }
     return $total;
@@ -195,13 +199,16 @@ class Ledgers extends BaseController {
 
   protected function get_balance_by_created_date() {
     foreach($this->data['total'] as $account_name => $total_record) {
-
       $previous_date = '';
       $previous_type = '';
       foreach($this->data['voucher_dates'] as $created_date) {
         if ($previous_type != '') {
           $this->data['total'][$account_name][$created_date][$previous_type]['weight'] += $this->data['balance'][$account_name][$previous_date][$previous_type]['weight'];
           $this->data['total'][$account_name][$created_date][$previous_type]['weight_difference'] += $this->data['balance'][$account_name][$previous_date][$previous_type]['weight_difference'];
+
+          $this->data['total'][$account_name][$created_date][$previous_type]['fine'] += $this->data['balance'][$account_name][$previous_date][$previous_type]['fine'];
+
+          $this->data['total'][$account_name][$created_date][$previous_type]['factory_fine'] += $this->data['balance'][$account_name][$previous_date][$previous_type]['factory_fine'];
         }
         
         if ($this->data['total'][$account_name][$created_date]['receipt']['weight'] >= $this->data['total'][$account_name][$created_date]['issue']['weight']) {
@@ -212,7 +219,16 @@ class Ledgers extends BaseController {
 
           $this->data['balance'][$account_name][$created_date]['receipt']['weight_difference'] = 
                                                           $this->data['total'][$account_name][$created_date]['receipt']['weight_difference']
-                                                          - $this->data['total'][$account_name][$created_date]['issue']['weight_difference'];        
+                                                          - $this->data['total'][$account_name][$created_date]['issue']['weight_difference']; 
+
+
+          $this->data['balance'][$account_name][$created_date]['receipt']['fine'] = 
+                                                          $this->data['total'][$account_name][$created_date]['receipt']['fine']
+                                                          - $this->data['total'][$account_name][$created_date]['issue']['fine'];
+
+          $this->data['balance'][$account_name][$created_date]['receipt']['factory_fine'] = 
+                                                          $this->data['total'][$account_name][$created_date]['receipt']['factory_fine']
+                                                          - $this->data['total'][$account_name][$created_date]['issue']['factory_fine'];      
           $type = 'receipt';
         } else {
           $this->data['balance'][$account_name][$created_date]['issue']['weight'] = 
@@ -221,6 +237,13 @@ class Ledgers extends BaseController {
           $this->data['balance'][$account_name][$created_date]['issue']['weight_difference'] = 
                                                           $this->data['total'][$account_name][$created_date]['issue']['weight_difference'] 
                                                           - $this->data['total'][$account_name][$created_date]['receipt']['weight_difference'];
+
+          $this->data['balance'][$account_name][$created_date]['issue']['fine'] = 
+                                                          $this->data['total'][$account_name][$created_date]['issue']['fine']
+                                                          - $this->data['total'][$account_name][$created_date]['receipt']['fine'];
+          $this->data['balance'][$account_name][$created_date]['issue']['factory_fine'] = 
+                                                          $this->data['total'][$account_name][$created_date]['issue']['factory_fine']
+                                                          - $this->data['total'][$account_name][$created_date]['receipt']['factory_fine'];
           $type = 'issue';
         }
         

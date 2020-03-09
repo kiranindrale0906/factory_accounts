@@ -19,7 +19,7 @@
                   <?php 
                     $this->load->view('reports/client_account_ledger_reports/thead'); 
                     $this->load->view('reports/client_account_ledger_reports/tbody', 
-                        array('voucher_date_records' => isset($receipts[$account['name']][$voucher_date][$account['name']])                              ? $receipts[$account['name']][$voucher_date][$account['name']] :
+                        array('voucher_date_records' => isset($receipts[$account['name']][$voucher_date])                              ? $receipts[$account['name']][$voucher_date] :
                                                           array(),
                               'previous_date' => $previous_date,
                               'voucher_date' => $voucher_date,
@@ -39,7 +39,7 @@
                   <?php 
                     $this->load->view('reports/client_account_ledger_reports/thead');
                     $this->load->view('reports/client_account_ledger_reports/tbody', 
-                                                        array('voucher_date_records' => isset($issues[$account['name']][$voucher_date][$account['name']]) ? $issues[$account['name']][$voucher_date][$account['name']] : array(),
+                                                        array('voucher_date_records' => isset($issues[$account['name']][$voucher_date]) ? $issues[$account['name']][$voucher_date] : array(),
                                                           'previous_date' => $previous_date,
                                                           'voucher_date' => $voucher_date,
                                                           'type' => 'issue',

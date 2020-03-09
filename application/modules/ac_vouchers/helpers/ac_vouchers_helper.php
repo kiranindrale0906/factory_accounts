@@ -92,6 +92,9 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['hook_kdm_purity'] = array('Hook KDM Purity', 'Enter hook kdm purity', TRUE, '', TRUE);
   $attributes['quantity'] = array('Quantity', 'Enter quantity', TRUE, '', TRUE);
   
+  $attributes['fine'] = array('Fine', '', FALSE, '', TRUE,TRUE);
+  $attributes['factory_fine'] = array('Factory Fine', '', FALSE, '', TRUE,TRUE);
+
   $attributes['type'] = array('Daily Drawer Type', 'Select Daily Drawer Type', TRUE, '', TRUE);
   $attributes['narration'] = array('Narration', 'Enter Narration', FALSE, '', TRUE);
   $attributes['vouchersamount'] = array('vouchersamount', 'Enter vouchersamount', FALSE, '', TRUE);
@@ -107,7 +110,7 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
     $attributes[$ci->router->class] = array_intersect_key($attributes, array_flip($required_field));
   }
   
-  return $attributes[$table][$field];
+  return !empty($attributes[$table][$field])?$attributes[$table][$field]:false;
 }
 
 function ac_voucher_get_row_actions($row, $url, $select_url, $filter) {
