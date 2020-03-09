@@ -16,6 +16,8 @@ $(document).ready(function(){
 	$('.hide_daily_drawer_type').hide();
 	$('.hide_hook_kdm_purity').hide();
 	$('.hide_quantity').hide();
+
+	
 });
 
 

@@ -41,6 +41,8 @@ function ac_vouchers_getTableSettings($table_setting_arg=array()) {
 
 function ac_vouchers_list_settings($list_setting_arg=array()) {
   $list_setting['voucher_date'] = array("Date", "voucher_date", TRUE, "voucher_date", TRUE, TRUE);
+  $list_setting['created_time'] = array("Time", "created_at", FALSE, "created_at", FALSE, TRUE,
+                                        "date_format(created_at,'%H:%i:%s') as created_at");
   $list_setting['voucher_number'] = array("Voucher", "voucher_number", FALSE, "voucher_number", TRUE, FALSE);
   $list_setting['bank_name'] = array("Bank Name", "bank_name", TRUE, "bank_name", TRUE, TRUE);
   $list_setting['account_name'] = array("Account", "account_name", TRUE, "account_name", TRUE, TRUE);
@@ -58,7 +60,6 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
   $list_setting['purity'] = array("Purity", "purity", FALSE, "purity", TRUE, TRUE);
   $list_setting['factory_purity'] = array("Factory Purity", "factory_purity", FALSE, "factory_purity", TRUE, TRUE);
   $list_setting['Pure Gold'] = array("Narration", "pure_gold_credit", FALSE, "pure_gold_credit", TRUE, TRUE);
-
   $list_setting['action'] = array("Action", "action", FALSE, "action", FALSE, FALSE);
 
   if(!empty($list_setting_arg)) {
@@ -82,8 +83,8 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $ci=&get_instance();
   $attributes = array();
   $attributes['id'] = array('', '', TRUE, '', TRUE);
-  $attributes['voucher_date'] = array('Date', 'Enter Date.', TRUE, '', TRUE);
-  $attributes['account_name'] = array('Account Name', 'Enter Account Name', TRUE, '', TRUE);
+  $attributes['voucher_date'] = array('Date', 'Enter Date.', TRUE, '', TRUE,TRUE);
+  $attributes['account_name'] = array('Account', 'Enter Account', TRUE, '', TRUE);
   $attributes['credit_amount'] = array('Credit Amount', 'Enter Credit Amount', TRUE, '', TRUE);
   $attributes['debit_amount'] = array('Debit Amount', 'Enter Debit Amount', TRUE, '', TRUE);
   $attributes['receipt_type'] = array('Receipt Type', 'Enter Receipt Type', TRUE, '', TRUE);
@@ -100,7 +101,7 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
 
   $attributes['purity'] = array('Purity', 'Enter Purity', TRUE, '', TRUE);
   $attributes['credit_weight'] = array('Credit Weight', 'Enter Credit Weight', TRUE, '', TRUE);
-  $attributes['debit_weight'] = array('Debit Weight', 'Enter Debit Weight', TRUE, '', TRUE);
+  $attributes['debit_weight'] = array('Weight', 'Enter Weight', TRUE, '', TRUE);
   
   if(!empty($required_field)) {
     $attributes[$ci->router->class] = array_intersect_key($attributes, array_flip($required_field));

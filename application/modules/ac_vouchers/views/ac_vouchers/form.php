@@ -29,7 +29,7 @@
         if(!empty(@get_field_attribute($this->router->class,'voucher_date'))) :
            load_field('date',array('field' => 'voucher_date',
                                   'value'=>(!empty($record['voucher_date'])?date('d-m-Y',strtotime($record['voucher_date'])):date('d-m-Y')), 
-                                  'class' => 'datepicker_js')); 
+                                  'class' => '','readonlyinput'=>true)); 
         endif; ?>
 
         
