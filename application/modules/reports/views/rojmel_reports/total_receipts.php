@@ -2,7 +2,7 @@
   <td><?= $label ?></td>
   <td></td>
   <td></td>
-  <td class="text-right"><?= $debit_weight; ?></td>
+  <td class="text-right"><?= $weight; ?></td>
   <td></td>
   <td class="text-right"><?= $fine; ?></td>
   <td></td>
