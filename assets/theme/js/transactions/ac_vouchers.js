@@ -23,6 +23,7 @@ function calculate_fine_factory_fine() {
 
 
 	if(isNaN(debit_wt)) debit_wt=0;
+	if(isNaN(credit_wt)) credit_wt=0;
 	if(isNaN(purity) || purity==undefined ) purity=0;
 	if(isNaN(factory_purity) || factory_purity==undefined || factory_purity=="") factory_purity=0;
 
