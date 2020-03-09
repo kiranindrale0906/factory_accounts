@@ -33,25 +33,24 @@ class Account_ledger_reports extends Ledgers {
     if(!empty($_SESSION['company_id'])) $company_id = $_SESSION['company_id'];
     $account_id=(!empty($_GET['account_ledger_reports']['account_id']))?$_GET['account_ledger_reports']['account_id']:'0';
 
-    $date_from=(!empty($_GET['account_ledger_reports']['date_from']))?date('Y-m-d',strtotime($_GET['account_ledger_reports']['date_from'])):date('Y-m-d');
+    // $date_from=(!empty($_GET['account_ledger_reports']['date_from']))?date('Y-m-d',strtotime($_GET['account_ledger_reports']['date_from'])):date('Y-m-d');
 
-    $date_to=(!empty($_GET['account_ledger_reports']['date_to']))?date('Y-m-d',strtotime($_GET['account_ledger_reports']['date_to'])):date('Y-m-d');
+    // $date_to=(!empty($_GET['account_ledger_reports']['date_to']))?date('Y-m-d',strtotime($_GET['account_ledger_reports']['date_to'])):date('Y-m-d');
 
     $this->data['account_ledger']=array();
     $this->data['record']['account_id'] = $account_id;
-    $this->data['record']['date_from'] = (!empty($_GET['account_ledger_reports']['date_from']))?$_GET['account_ledger_reports']['date_from']:'';
-    $this->data['record']['date_to'] = (!empty($_GET['account_ledger_reports']['date_to']))?$_GET['account_ledger_reports']['date_to']:'';
+    // $this->data['record']['date_from'] = (!empty($_GET['account_ledger_reports']['date_from']))?$_GET['account_ledger_reports']['date_from']:'';
+    // $this->data['record']['date_to'] = (!empty($_GET['account_ledger_reports']['date_to']))?$_GET['account_ledger_reports']['date_to']:'';
 
     if(!empty($account_id)) {
 
-      $where_issue = array('voucher_type' => 'metal issue voucher', 'account_id'=>$account_id ,
-                          'voucher_date >='=>$date_from, 'voucher_date <='=>$date_to, 'company_id'=>$company_id);
+      $where_issue = array('voucher_type' => 'metal issue voucher', 'account_id'=>$account_id, 'company_id'=>$company_id);
 
       $select = 'date_format(voucher_date,"%d-%m-%Y") as voucher_date';
       $issues = $this->model->get($select, $where_issue ,array(), array('order_by'=>'voucher_date asc'));
       
-      $where_receipt = array('voucher_type' => 'metal receipt voucher', 'account_id'=>$account_id ,
-                            'voucher_date >='=>$date_from, 'voucher_date <='=>$date_to, 'company_id'=>$company_id);
+      $where_receipt = array('voucher_type' => 'metal receipt voucher', 'account_id'=>$account_id , 
+                             'company_id'=>$company_id);
       $receipts = $this->model->get($select, $where_receipt ,array(), array('order_by'=>'voucher_date asc'));
 
       $issue_created_dates = array_column($issues, 'voucher_date');
@@ -59,13 +58,11 @@ class Account_ledger_reports extends Ledgers {
       $this->data['voucher_dates'] = array_values(array_unique(array_merge($issue_created_dates, $receipt_created_dates)));
       asort($this->data['voucher_dates']);
 
-      // $where['voucher_type'] = 'metal issue voucher';
       $select = 'date_format(voucher_date,"%d-%m-%Y") as voucher_date,
                  account_name, voucher_type, voucher_number, credit_amount, debit_amount, 
                  credit_weight, debit_weight, purity_margin, purity, factory_purity, narration';
       $issues = $this->model->get($select, $where_issue ,array(), array('order_by'=>'voucher_date asc'));
       
-      //$where['voucher_type']='metal receipt voucher';
       $receipts = $this->model->get($select, $where_receipt ,array(), array('order_by'=>'voucher_date asc'));
       
     
@@ -77,7 +74,6 @@ class Account_ledger_reports extends Ledgers {
       $total = parent::set_index_for_dates($total);
 
       $this->data['issues'] = $issue_data;
-      //pd($this->data['issues']);
       $this->data['receipts'] = $receipt_data;
       $this->data['total'][ACCOUNT_NAME_REPORT] = $total;  
       parent::get_balance_by_created_date();

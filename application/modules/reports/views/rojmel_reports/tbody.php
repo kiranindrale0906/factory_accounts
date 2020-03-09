@@ -28,10 +28,10 @@
     else {
       $this->load->view('reports/rojmel_reports/total', 
                             array('label' => 'Total',
-                                 'fine' => $total[ACCOUNT_NAME_REPORT][$voucher_date][$type]['fine'],
-                                 'fine_factory' => $total[ACCOUNT_NAME_REPORT][$voucher_date][$type]['factory_fine'],
                                  'weight' => $total[ACCOUNT_NAME_REPORT][$voucher_date][$type]['weight'],
-                                 'weight_difference' => $total[ACCOUNT_NAME_REPORT][$voucher_date][$type]['weight_difference']
+                                 'weight_difference' => $total[ACCOUNT_NAME_REPORT][$voucher_date][$type]['weight_difference'],
+                                  'fine' => $total[ACCOUNT_NAME_REPORT][$voucher_date][$type]['fine'],
+                                  'factory_fine' => $total[ACCOUNT_NAME_REPORT][$voucher_date][$type]['factory_fine'],
                                  ));
       $this->load->view('reports/rojmel_reports/balance', 
                         array('label' => 'Balance',

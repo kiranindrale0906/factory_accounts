@@ -4,8 +4,8 @@
         
   <?php load_field('dropdown', array('field' => 'account_id', 'option'=>@$account_names )); ?> 
  
-  <?php load_field('text', array('field' => 'date_from', 'class' => 'datepicker_js'));  ?> 
-  <?php load_field('text', array('field' => 'date_to', 'class' => 'datepicker_js'));  ?> 
+  <?php //load_field('text', array('field' => 'date_from', 'class' => 'datepicker_js'));  ?> 
+  <?php //load_field('text', array('field' => 'date_to', 'class' => 'datepicker_js'));  ?> 
 
 
   <div class="row"> 

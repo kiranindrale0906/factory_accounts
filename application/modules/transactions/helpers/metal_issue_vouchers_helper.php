@@ -40,7 +40,7 @@ function list_settings() {
 
 function get_field_attribute($table, $field) {
   $required_fields=array('id','voucher_date','account_name','credit_weight','narration','vouchersamount',
-                         'company_id','account_id','document','purity','factory_purity');
+                         'company_id','account_id','document','purity','factory_purity','fine','factory_fine');
 
   return ac_voucher_get_field_attribute($table,$field,$required_fields);
 }
