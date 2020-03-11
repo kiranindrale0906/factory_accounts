@@ -12,7 +12,7 @@
         $this->load->view('reports/rojmel_reports/tr_issue', array('record' => $record));  
     } 
 
-    if(!strpos($record['voucher_type'],'issue')) {
+    if(!strpos($type,'issue')) {
       $this->load->view('reports/rojmel_reports/total', 
                         array('label' => 'Total',
                              'weight' => $total[ACCOUNT_NAME_REPORT][$voucher_date][$type]['weight'], 
