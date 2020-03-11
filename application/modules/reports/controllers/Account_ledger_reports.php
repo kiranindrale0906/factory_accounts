@@ -44,13 +44,12 @@ class Account_ledger_reports extends Ledgers {
 
     if(!empty($account_id)) {
 
-      $where_issue = array('voucher_type' => 'metal issue voucher', 'account_id'=>$account_id, 'company_id'=>$company_id);
+      $where_issue = array('voucher_type' => 'metal issue voucher', 'account_id'=>$account_id);
 
       $select = 'date_format(voucher_date,"%d-%m-%Y") as voucher_date';
       $issues = $this->model->get($select, $where_issue ,array(), array('order_by'=>'voucher_date asc'));
       
-      $where_receipt = array('voucher_type' => 'metal receipt voucher', 'account_id'=>$account_id , 
-                             'company_id'=>$company_id);
+      $where_receipt = array('voucher_type' => 'metal receipt voucher', 'account_id'=>$account_id);
       $receipts = $this->model->get($select, $where_receipt ,array(), array('order_by'=>'voucher_date asc'));
 
       $issue_created_dates = array_column($issues, 'voucher_date');
