@@ -20,7 +20,7 @@ class Client_account_ledger_reports extends Client_ledgers {
     $this->data['account_names'] = $this->model->get('distinct(account_name) as name',
                           array('where_in' => array('voucher_type' => array("'metal issue voucher'", 
                                                                             "'metal receipt voucher'"))),
-                          array(), array('order_by'=>'account_name asc','limit'=>array(0,3)));
+                          array(), array('order_by'=>'account_name asc'));
   }
 
   private function get_account_ledger_records() {

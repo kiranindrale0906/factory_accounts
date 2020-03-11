@@ -12,7 +12,7 @@
         $this->load->view('reports/client_account_ledger_reports/tr_issue', array('record' => $record));  
     } 
     
-    if(!strpos($record['voucher_type'],'issue')) {
+    if(!strpos($type,'issue')) {
       $this->load->view('reports/client_account_ledger_reports/total', 
                         array('label' => 'Total',
                              'weight' => $total[$account_name][$voucher_date][$type]['weight'], 
