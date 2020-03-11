@@ -46,27 +46,23 @@ class Rojmel_reports extends Ledgers {
     $this->data['voucher_dates'] = array_values(array_unique(array_merge($issue_created_dates, $receipt_created_dates)));
     asort($this->data['voucher_dates']);
 
+    $where['voucher_type'] = 'metal issue voucher';
+    //$where['account_name'] = $account_name;
+
+    $select = 'date_format(voucher_date,"%d-%m-%Y") as voucher_date,
+               account_name, voucher_type, voucher_number, credit_amount, debit_amount, 
+               credit_weight, debit_weight, purity_margin, purity, factory_purity, narration';
+    $issues = $this->model->get($select, $where ,array(), array('order_by'=>'voucher_date asc'));
     
-    //foreach ($this->data['account_names'] as $account_detail) {
-      //$account_name = $account_detail['name'];  
-
-      $where['voucher_type'] = 'metal issue voucher';
-      //$where['account_name'] = $account_name;
-
-      $select = 'date_format(voucher_date,"%d-%m-%Y") as voucher_date,
-                 account_name, voucher_type, voucher_number, credit_amount, debit_amount, 
-                 credit_weight, debit_weight, purity_margin, purity, factory_purity, narration';
-      $issues = $this->model->get($select, $where ,array(), array('order_by'=>'voucher_date asc'));
-      
-      $where['voucher_type']='metal receipt voucher';
-      $receipts = $this->model->get($select, $where ,array(), array('order_by'=>'voucher_date asc'));
-      
-      $issue_data = parent::get_records_by_created_date($issues);
-      $receipt_data = parent::get_records_by_created_date($receipts);
-      $total = parent::get_total_by_created_date($issue_data, 'issue', array());
-      $total = parent::get_total_by_created_date($receipt_data, 'receipt', $total);
-      
-      $total = parent::set_index_for_dates($total);
+    $where['voucher_type']='metal receipt voucher';
+    $receipts = $this->model->get($select, $where ,array(), array('order_by'=>'voucher_date asc'));
+    
+    $issue_data = parent::get_records_by_created_date($issues);
+    $receipt_data = parent::get_records_by_created_date($receipts);
+    $total = parent::get_total_by_created_date($issue_data, 'issue', array());
+    $total = parent::get_total_by_created_date($receipt_data, 'receipt', $total);
+    
+    $total = parent::set_index_for_dates($total);
     //}
 
     $this->data['issues'] = $issue_data;
