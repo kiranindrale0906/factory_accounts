@@ -18,7 +18,7 @@ class Client_account_ledger_reports extends Client_ledgers {
 
   public function get_form_data() {
     $this->data['account_names'] = $this->model->get('distinct(account_name) as name',
-                          array('where_in' => array('voucher_type' => array("'metal issue vouchers'", 
+                          array('where_in' => array('voucher_type' => array("'metal issue voucher'", 
                                                                             "'metal receipt voucher'"))),
                           array(), array('order_by'=>'account_name asc','limit'=>array(0,3)));
   }
@@ -59,7 +59,7 @@ class Client_account_ledger_reports extends Client_ledgers {
       $receipts = $this->model->get($select, $where ,array(), array('order_by'=>'voucher_date asc'));
       
       $issue_data[$account_name][''] = $issues; //parent::get_records_by_created_date($issues);
-      $receipt_data[$account_name][''] = $receipts; parent::get_records_by_created_date($receipts);
+      $receipt_data[$account_name][''] = $receipts; //parent::get_records_by_created_date($receipts);
       
       $total[$account_name] = parent::get_total_by_created_date($issue_data[$account_name], 'issue', array());
       $total[$account_name] = parent::get_total_by_created_date($receipt_data[$account_name], 'receipt', $total[$account_name]);
