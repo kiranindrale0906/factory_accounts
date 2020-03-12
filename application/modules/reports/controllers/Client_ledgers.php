@@ -80,7 +80,7 @@ class Client_ledgers extends BaseController {
           if($type=='receipt') {
             $total[$record['voucher_date']][$type]['weight'] += $record['debit_weight'];
 
-            $purity_margin = $record['debit_weight']*($record['factory_purity']-$record['purity'])/100; 
+            $purity_margin = $record['debit_weight']*($record['purity']-$record['factory_purity'])/100; 
             $total[$record['voucher_date']][$type]['weight_difference'] += $purity_margin;
 
             $fine=($record['debit_weight']*$record['purity'])/100;

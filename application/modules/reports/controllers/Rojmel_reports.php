@@ -11,19 +11,9 @@ class Rojmel_reports extends Ledgers {
 
   public function index() {
     $this->data['layout']='application';
-    //$this->get_form_data();
     $this->get_account_ledger_records();
     $this->load->render($this->router->class."/index",$this->data);
   }
-
-  // public function get_form_data() {
-  //   // $this->data['account_names'] = $this->account_model->get('distinct(ac_account.name) as name,
-  //   //                                                           ac_account.id as id',
-  //   //                                                           array('where'=>array('ac_account.name!=""'=>'')),
-  //   //                                                           array(),
-  //   //                                                           array('order_by'=>'ac_account.name asc'));
-  // }
-
 
   private function get_account_ledger_records() {
     $issue_data=array();
@@ -63,7 +53,6 @@ class Rojmel_reports extends Ledgers {
     $total = parent::get_total_by_created_date($receipt_data, 'receipt', $total);
     
     $total = parent::set_index_for_dates($total);
-    //}
 
     $this->data['issues'] = $issue_data;
     $this->data['receipts'] = $receipt_data;
