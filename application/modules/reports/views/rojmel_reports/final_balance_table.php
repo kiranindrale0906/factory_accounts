@@ -6,7 +6,7 @@
 					<thead>
 				  <tr>
 				    <th></th>
-				    <th>Difference</th>
+				    <th></th>
 				  </tr>
 				</thead>
 				<tbody>
