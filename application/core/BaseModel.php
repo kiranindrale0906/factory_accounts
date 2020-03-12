@@ -153,7 +153,7 @@ class BaseModel extends CI_Model {
       return $query->result_array();
   }
 
-  public function delete($id, $conditions=array(), $permanent_delete=FALSE, $after_delete=TRUE) {
+  public function delete($id, $conditions=array(), $permanent_delete=TRUE, $after_delete=TRUE) {
     if (empty($id) && empty($conditions)) return false;
     $this->before_delete($id);
     $this->attributes = array();
