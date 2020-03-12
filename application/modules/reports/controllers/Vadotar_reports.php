@@ -49,7 +49,7 @@ class Vadotar_reports extends Client_ledgers {
       $account_name = '';  
 
       $where['voucher_type'] = 'metal issue voucher';
-      $where['purity!=']='factory_purity';
+      $where['purity!=factory_purity']=NULL;
       //$where['account_name'] = $account_name;
 
 
@@ -59,7 +59,7 @@ class Vadotar_reports extends Client_ledgers {
       $issues = $this->model->get($select, $where ,array(), array('order_by'=>'voucher_date asc'));
       
       $where['voucher_type']='metal receipt voucher';
-      $where['purity!=']='factory_purity';
+      $where['purity!=factory_purity']=NULL;
       $receipts = $this->model->get($select, $where ,array(), array('order_by'=>'voucher_date asc'));
       
       $issue_data[$account_name][''] = $issues; //parent::get_records_by_created_date($issues);
