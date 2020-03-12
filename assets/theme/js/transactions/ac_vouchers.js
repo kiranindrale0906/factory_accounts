@@ -30,10 +30,10 @@ function calculate_fine_factory_fine() {
 
 	var fine = (parseFloat(credit_wt) + parseFloat(debit_wt)) * parseFloat(purity)/100;
 	if(isNaN(fine)) fine=0;
-	$(".fine").val(fine.toFixed(2));
+	$(".fine").val(fine.toFixed(4));
 
 	var factory_fine = (parseFloat(credit_wt) + parseFloat(debit_wt)) * parseFloat(factory_purity)/100;
 	if(isNaN(factory_fine)) factory_fine=0;
-	$(".factory_fine").val(factory_fine.toFixed(2));
+	$(".factory_fine").val(factory_fine.toFixed(4));
 	//console.log(factory_fine);
 }
