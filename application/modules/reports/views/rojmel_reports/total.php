@@ -2,10 +2,10 @@
   <td><?= $label ?></td>
   <td></td>
   <td></td>
-  <td class="text-right"><?= $weight; ?></td>
+  <td class="text-right"><?= four_decimal($weight); ?></td>
   <td></td>
-  <td class="text-right"><?= $fine ?></td>
+  <td class="text-right"><?= four_decimal($fine); ?></td>
   <td></td>
-  <td class="text-right"><?= $factory_fine ?></td>
-  <td class="text-right"><?= $weight_difference; ?></td>
+  <td class="text-right"><?= four_decimal($factory_fine); ?></td>
+  <td class="text-right"><?= four_decimal($weight_difference); ?></td>
 </tr>
