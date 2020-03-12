@@ -1,6 +1,5 @@
 <?php  
 	if (isset($balance[ACCOUNT_NAME_REPORT][$voucher_date][$type])) {
-		  //pd($balance);
 			$this->load->view('reports/rojmel_reports/total', 
 														array('label' => $label,
 																	'weight' => $balance[ACCOUNT_NAME_REPORT][$voucher_date][$type]['weight'],

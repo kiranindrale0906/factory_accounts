@@ -48,5 +48,17 @@
     $previous_date = $voucher_date;
   }
 
+  if(!empty($voucher_date)) {
+    $weight_difference=0;
+    if(!empty($balance[ACCOUNT_NAME_REPORT][$voucher_date]['issue']['weight_difference'])) {
+      $weight_difference=$balance[ACCOUNT_NAME_REPORT][$voucher_date]['issue']['weight_difference'];
+    }
+    else if(!empty($balance[ACCOUNT_NAME_REPORT][$voucher_date]['receipt']['weight_difference'])) {
+      $weight_difference=$balance[ACCOUNT_NAME_REPORT][$voucher_date]['receipt']['weight_difference'];
+    }
+
+    $this->load->view('reports/rojmel_reports/final_balance_table', 
+                                                    array('weight_difference' => $weight_difference));
+  }  
 ?>
   
