@@ -44,11 +44,12 @@ class Client_account_ledger_reports extends Client_ledgers {
     $this->data['voucher_dates'] = array(''); //array_values(array_unique(array_merge($issue_created_dates, $receipt_created_dates)));
     asort($this->data['voucher_dates']);
 
-    foreach ($this->data['account_names'] as $account_detail) {
-      $account_name = $account_detail['name'];  
+    //foreach ($this->data['account_names'] as $account_detail) {
+      //$account_name = $account_detail['name'];  
+      $account_name = '';  
 
       $where['voucher_type'] = 'metal issue voucher';
-      $where['account_name'] = $account_name;
+      //$where['account_name'] = $account_name;
 
       $select = 'date_format(voucher_date,"%d-%m-%Y") as voucher_date,
                  account_name, voucher_type, voucher_number, credit_amount, debit_amount, 
@@ -65,7 +66,7 @@ class Client_account_ledger_reports extends Client_ledgers {
       $total[$account_name] = parent::get_total_by_created_date($receipt_data[$account_name], 'receipt', $total[$account_name]);
       
       $total[$account_name] = parent::set_index_for_dates($total[$account_name]);
-    }
+    //}
 
     $this->data['issues'] = $issue_data;
     $this->data['receipts'] = $receipt_data;
