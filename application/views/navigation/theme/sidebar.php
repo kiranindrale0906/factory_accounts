@@ -62,7 +62,7 @@
                     //                     'reports/order_report'=>'Order Report'),
                     'Reports'   => array('reports/account_ledger_reports' => 'Account Ledger',
                                         'reports/client_account_ledger_reports' => 'Client Account Ledger',
-                                        'reports/vadotar_reports' => 'Vadotar Reports',
+                                        'reports/vadotar_reports' => 'Vadotar Report',
                                         'reports/rojmel_reports' => 'Rojmel Report'),
                     // 'Interests' => array('interests/interest_issue_voucher'=>'Interest Issue Voucher'),
                     // 'Others'    => array('others/account_wise_details'=>'Account Wise Details',
