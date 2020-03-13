@@ -11,7 +11,7 @@
   <?php $this->load->view('form') ?>
   <?php 
   	if($this->router->class=="metal_receipt_vouchers") {
-  		//$this->load->view('transactions/metal_issue_vouchers/subform_list');
+  		$this->load->view('transactions/metal_issue_vouchers/subform_list');
   	}
   ?> 
 </div>

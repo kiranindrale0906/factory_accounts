@@ -1,65 +1,75 @@
-<?php $this->load->view('ac_vouchers/ac_vouchers/company_error_message'); ?> 
+<?php //$this->load->view('ac_vouchers/ac_vouchers/company_error_message'); ?> 
 <br>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group container">
+        <div class="table-responsive m-t-20">
+          <table class="table table-sm fixedthead table-default">
+            <thead>
+              <tr>
+                <th>Account Name</th>
+                <th>Receipt Weight</th>
+                <th>Receipt Fine</th>
+                <th>Issue Weight</th>
+                <th>Issue Fine</th>
+              </tr>
+            </thead>
+            <?php 
+              if(!empty($trial_balance)) {
+                $total_weight_receipt=0;
+                $total_weight_issue=0;
+                $total_fine_receipt=0;  
+                $total_fine_issue=0;  
+                foreach ($trial_balance as  $record) { 
+                  if($record['receipt_weight']>0)
+                    $total_weight_receipt=$total_weight_receipt+$record['receipt_weight'];
+                  else 
+                    $total_weight_issue=$total_weight_issue+$record['receipt_weight'];
 
-<?php   
-  if(!empty($account_names)) {
-    //foreach ($account_names as $key => $account) { 
-      $account['name']='';                          ?>
-     <!--  <h5> <?php //$account['name']; ?> </h5> -->
-      <?php
-      $previous_date = '';
-      foreach ($voucher_dates as $index => $voucher_date) {  
+                  if($record['fine']>0)
+                    $total_fine_receipt=$total_fine_receipt+$record['fine'];
+                  else 
+                    $total_fine_issue=$total_fine_issue+$record['fine']; ?> 
+                    <tr>
+                      <td><?=$record['account_name'];?></td>
+                      <td>
+                        <?=($record['receipt_weight']>0)?$record['receipt_weight']:'';?>  
+                      </td>
+                      <td><?=($record['fine']>0)?$record['fine']:'';?>  </td>
+                      <td><?=($record['receipt_weight']<0)?$record['receipt_weight']:'';?></td>
+                      <td><?=($record['fine']<0)?$record['fine']:'';?>  </td>
+                    </tr>
+            <?php }
+              } ?>
+              <tr>
+                <th>Total</th>
+                <th class="text-right"><?=$total_weight_receipt;?>  </th>
+                <th class="text-right"><?=$total_fine_receipt;?>  </th>
+                <th class="text-right"><?=$total_weight_issue;?>  </th>
+                <th class="text-right"><?=$total_fine_issue;?>  </th>
+              </tr>
+              <tr>
+                <?php 
+                  $total_weight_balance=0;
+                  $total_fine_balance=0;
+                  $total_weight_balance=$total_weight_receipt-$total_weight_issue;
+                  $total_fine_balance=$total_fine_receipt-$total_fine_issue;
 
-        ?>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group container">
-              <div class="table-responsive m-t-20">
-                <h5 class="heading blue m-0">Receipt <?= $voucher_date; ?></h5>
-                <table class="table table-sm fixedthead table-default">
-                  <?php 
-                    $this->load->view('reports/client_account_ledger_reports/thead'); 
-                    $this->load->view('reports/client_account_ledger_reports/tbody', 
-                        array('voucher_date_records' => isset($receipts[$account['name']][$voucher_date])                              ? $receipts[$account['name']][$voucher_date] :
-                                                          array(),
-                              'previous_date' => $previous_date,
-                              'voucher_date' => $voucher_date,
-                              'type' => 'receipt',
-                              'account_name'=>$account['name'])); 
-                  ?>
-                </table>
-              </div> 
-            </div>
-          </div> 
-
-          <div class="col-md-6 border-right">
-            <div class="form-group container">
-              <div class="table-responsive m-t-20">
-                <h5 class="heading blue m-0">Issue</h5>
-                <table class="table table-sm fixedthead table-default">
-                  <?php 
-                    $this->load->view('reports/client_account_ledger_reports/thead');
-                    $this->load->view('reports/client_account_ledger_reports/tbody', 
-                                                        array('voucher_date_records' => isset($issues[$account['name']][$voucher_date]) ? $issues[$account['name']][$voucher_date] : array(),
-                                                          'previous_date' => $previous_date,
-                                                          'voucher_date' => $voucher_date,
-                                                          'type' => 'issue',
-                                                          'account_name'=>$account['name'])); 
-                  ?>
-                  
-                </table>
-              </div> 
-            </div>
-          </div>
-
-          
+                ?>
+                <th>Balace</th>
+                <th class="text-right">
+                  <?=($total_weight_balance>0)?$total_weight_balance:'';?>  
+                </th>
+                <th class="text-right">
+                  <?=($total_fine_balance>0)?$total_fine_balance:'';?>  
+                </th>
+                <th class="text-right">
+                  <?=($total_weight_balance<0)?$total_weight_balance:'';?>  
+                </th>
+                <th class="text-right"><?=($total_fine_balance<0)?$total_fine_balance:'';?>  </th>
+              </tr>
+          </table>
         </div>
-        <?php 
-        $previous_date = $voucher_date;
-      }
-    //}
-  }
-      
-
-?>
-  
+      </div>
+    </div>
+  </div>
