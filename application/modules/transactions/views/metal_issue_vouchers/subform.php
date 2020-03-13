@@ -9,23 +9,27 @@
   <td>
     <?php load_field('plain/text', array('field' => 'credit_weight',
                                          'controller' => 'metal_issue_vouchers',
-                                         'onchange'=>'calculate_factory_puirty('.$index.')',
+                                         'onkeyup' => 'calculate_factory_purity('.$index.')',
+                                         'class' => 'issue_credit_weight',
+                                         'id' => 'credit_weight_'.$index,
                                          'index' => $index,
-                                         'grid'=>'col-sm-12')); ?>
+                                         'grid'=> 'col-sm-12')); ?>
   </td>
   <td>
     <?php load_field('plain/text', array('field' => 'factory_purity',
                                          'controller' => 'metal_issue_vouchers',
-                                         'onchange'=>'calculate_factory_puirty('.$index.')',
+                                         'onkeyup'=> 'calculate_factory_purity('.$index.')',
+                                         'id' => 'factory_purity_'.$index,
                                          'index' => $index,
-                                         'grid'=>'col-sm-12')); ?>
+                                         'grid'=> 'col-sm-12')); ?>
   </td>
    <td>
     <?php load_field('plain/text', array('field' => 'factory_fine',
                                          'controller' => 'metal_issue_vouchers',
-                                         'readonly'=> true,
+                                         'id' => 'factory_fine_'.$index,
+                                         'readonly' => true,
                                          'index' => $index,
-                                         'grid'=>'col-sm-12')); ?>
+                                         'grid' =>'col-sm-12')); ?>
   </td>
   <td>
     <?= getJsButton('Delete', 'javascript:void(0)', 'btn_red', '', 'delete_metal_issue_voucher('.$index.')',

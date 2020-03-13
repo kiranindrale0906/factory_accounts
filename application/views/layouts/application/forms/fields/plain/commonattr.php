@@ -4,6 +4,7 @@ class="<?= $data['class'] ?>"
 value="<?= $data['value'] ?>"  
 <?= @$data['id'] ? 'id="'.$data['id'].'"' : ''; ?>   
 onchange="<?= $data['onchange'] ?>"
+onkeyup="<?= @$data['onkeyup'] ?>"
 placeholder="<?= $data['placeholder'] ?>"
 <?= $data['autofocus'] ?>
 <?= $data['readonly'] ?>
