@@ -54,8 +54,8 @@
                 <?php 
                   $total_weight_balance=0;
                   $total_fine_balance=0;
-                  $total_weight_balance=$total_weight_receipt-($total_weight_issue*-1);
-                  $total_fine_balance=$total_fine_receipt-($total_fine_issue*-1);
+                  $total_weight_balance=$total_weight_receipt-($total_weight_issue);
+                  $total_fine_balance=$total_fine_receipt-($total_fine_issue);
 
                 ?>
                 <th>Balace</th>
