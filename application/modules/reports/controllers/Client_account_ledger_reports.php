@@ -32,11 +32,12 @@ class Client_account_ledger_reports extends Client_ledgers {
     if(!empty($_SESSION['company_id'])) $company_id = $_SESSION['company_id'];
     if(empty($this->data['account_names'])) return true;
 
-    $select = "account_name,sum(debit_weight)*sum(purity)/100 - sum(credit_weight)*sum(purity)/100 as fine,sum(debit_weight) -sum(credit_weight) as receipt_weight";
+    $select = "account_name`, (sum(debit_weight*purity)/100) - (sum(credit_weight*purity)/100) as fine, sum(debit_weight) -sum(credit_weight) as receipt_weight";
     $this->data['trial_balance'] = $this->model->get($select, array(), array() , 
                                                       array('group_by'=>'account_name',
                                                             'order_by'=>'account_name asc'));
-
+    //lq();
+    //pd($this->data['trial_balance']);
     // $where = array('voucher_type' => 'metal receipt voucher');
     // $select = 'date_format(voucher_date,"%d-%m-%Y") as voucher_date';
     // $issues = $this->model->get($select, $where ,array(), array('order_by'=>'voucher_date asc'));

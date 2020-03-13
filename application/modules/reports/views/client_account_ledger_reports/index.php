@@ -33,20 +33,20 @@
                     <tr>
                       <td><?=$record['account_name'];?></td>
                       <td>
-                        <?=($record['receipt_weight']>0)?$record['receipt_weight']:'';?>  
+                        <?=($record['receipt_weight']>0)?four_decimal($record['receipt_weight']):'';?>  
                       </td>
-                      <td><?=($record['fine']>0)?$record['fine']:'';?>  </td>
-                      <td><?=($record['receipt_weight']<0)?$record['receipt_weight']:'';?></td>
-                      <td><?=($record['fine']<0)?$record['fine']:'';?>  </td>
+                      <td><?=($record['fine']>0)?four_decimal($record['fine']):'';?>  </td>
+                      <td><?=($record['receipt_weight']<0)?four_decimal($record['receipt_weight']*-1):'';?></td>
+                      <td><?=($record['fine']<0)?four_decimal($record['fine']*-1):'';?>  </td>
                     </tr>
             <?php }
               } ?>
               <tr>
                 <th>Total</th>
-                <th class="text-right"><?=$total_weight_receipt;?>  </th>
-                <th class="text-right"><?=$total_fine_receipt;?>  </th>
-                <th class="text-right"><?=$total_weight_issue;?>  </th>
-                <th class="text-right"><?=$total_fine_issue;?>  </th>
+                <th class="text-right"><?=four_decimal($total_weight_receipt);?>  </th>
+                <th class="text-right"><?=four_decimal($total_fine_receipt);?>  </th>
+                <th class="text-right"><?=four_decimal($total_weight_issue*-1);?>  </th>
+                <th class="text-right"><?=four_decimal($total_fine_issue*-1);?>  </th>
               </tr>
               <tr>
                 <?php 
@@ -58,15 +58,15 @@
                 ?>
                 <th>Balace</th>
                 <th class="text-right">
-                  <?=($total_weight_balance>0)?$total_weight_balance:'';?>  
+                  <?=($total_weight_balance>0)?four_decimal($total_weight_balance):'';?>  
                 </th>
                 <th class="text-right">
-                  <?=($total_fine_balance>0)?$total_fine_balance:'';?>  
+                  <?=($total_fine_balance>0)?four_decimal($total_fine_balance):'';?>  
                 </th>
                 <th class="text-right">
-                  <?=($total_weight_balance<0)?$total_weight_balance:'';?>  
+                  <?=($total_weight_balance<0)?four_decimal($total_weight_balance*-1):'';?>  
                 </th>
-                <th class="text-right"><?=($total_fine_balance<0)?$total_fine_balance:'';?>  </th>
+                <th class="text-right"><?=($total_fine_balance<0)?four_decimal($total_fine_balance*-1):'';?>  </th>
               </tr>
           </table>
         </div>
