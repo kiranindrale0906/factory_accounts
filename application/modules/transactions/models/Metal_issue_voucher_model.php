@@ -13,16 +13,18 @@ class Metal_issue_voucher_model extends Voucher_model {
     parent::__construct($data);
   }
 
-  public function validation_rules($klass='',$index=1) {
-    if(empty($index)) parent::validation_rules($klass);
-
-    $rules[] = array('field' => 'metal_issue_vouchers['.$index.'][credit_weight]', 
+  public function validation_rules($klass='',$index='') {
+    if(empty($index)) $rules = parent::validation_rules($klass);
+    if(!empty($index)) {
+      $rules[] = array('field' => 'metal_issue_vouchers['.$index.'][credit_weight]', 
                      'label' => 'Credit weight',
                      'rules' => 'trim|required|numeric|greater_than[0]');
-    $rules[] = array('field' => 'metal_issue_vouchers['.$index.'][factory_purity]', 
+      $rules[] = array('field' => 'metal_issue_vouchers['.$index.'][factory_purity]', 
                     'label' => 'Factory Purity',
                     'rules' => 'trim|required|numeric|less_than_equal_to[100]');
-
+  
+    }
+    
     return $rules;
 
   }
