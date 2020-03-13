@@ -180,8 +180,10 @@ function get_melting_purity(){
 
 function get_account_name_for_metal_issue(){
   return array(
-            array('id'=>'ARF','name'=>'ARF'),
-            array('id'=>'ARC','name'=>'ARC'));
+            array('id' => '', 'name' => ''),
+            array('id' => 'ARC', 'name' => 'ARC'),
+            array('id' => 'ARF', 'name' => 'ARF')
+          );
 
 }
 

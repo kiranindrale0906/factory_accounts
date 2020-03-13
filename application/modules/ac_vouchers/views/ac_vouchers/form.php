@@ -119,6 +119,12 @@
             load_field('text', array('field' => 'narration')); 
           endif; ?>
   </div> 
+  <br>
+  <?php 
+    if($this->router->class=="metal_receipt_vouchers") {
+      $this->load->view('transactions/metal_issue_vouchers/subform_list');
+    }
+  ?>
   <div class="row"> 
     <div class="col-sm-6"> 
       <?php

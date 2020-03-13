@@ -62,7 +62,8 @@ function calculate_arg_weight() {
 		  total_issue_weight += parseFloat($(this).val()); 
 		});
 		
-		total_weight=parseFloat(receipt_weight) + parseFloat(total_issue_weight);
+		if(isNaN(total_issue_weight)) total_issue_weight=0;
+		total_weight=parseFloat(receipt_weight) - parseFloat(total_issue_weight);
 		if(isNaN(total_weight)) total_weight=0;
 		$("#arg_weight").val(total_weight.toFixed(4));
 	}
