@@ -76,6 +76,16 @@ class Voucher_model extends BaseModel {
       }
     }
 
+    if(!empty($this->router->class=="metal_receipt_vouchers")) {
+      $this->load->model('transactions/metal_issue_voucher_model');
+      foreach($this->formdata['metal_issue_vouchers'] as $index => $records) {
+        if(!empty($records['account_name'])) {
+          $record_rules = $this->metal_issue_voucher_model->validation_rules('',$index);
+          $rules = array_merge($rules, $record_rules);  
+        }
+      }
+    }
+    
     return $rules;
   }
 
@@ -184,7 +194,7 @@ class Voucher_model extends BaseModel {
             $account_details=$obj_account->store(false);
             $account['id']=$account_details['id'];      
           }
-          
+
           $metal_issue_data['company_id']  = $this->attributes['company_id'];
           $metal_issue_data['metal_receipt_voucher_reference_id']  = $this->attributes['id'];
           $metal_issue_data['voucher_date'] = $this->attributes['voucher_date'];
