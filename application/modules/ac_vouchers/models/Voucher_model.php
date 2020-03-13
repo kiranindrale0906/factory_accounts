@@ -158,50 +158,6 @@ class Voucher_model extends BaseModel {
   public function after_save($action) {
     $company_id=(!empty($this->session->userdata('company_id'))?$this->session->userdata('company_id'):0);
     $voucher_number=true;
-    if($this->router->class=="metal_receipt_vouchers") {
-      $this->load->model('transactions/metal_issue_voucher_model');
-      if(!empty($this->formdata['metal_issue_vouchers'])) {
-        foreach ($this->formdata['metal_issue_vouchers'] as $voucher_record) {
-          $account = $this->account_model->find('id',array('name'=>$this->attributes['account_name']));
-          if(empty($account['id'])) {
-            $account_detail['name']=$this->attributes['account_name'];
-            $obj_account = new account_model($account_detail);
-            $account_details=$obj_account->store(false);
-            $account['id']=$account_details['id'];      
-          }
-        
-          $data = array();
-
-          $data=$voucher_record;
-          $data['company_id']  = $this->attributes['company_id'];
-          $data['metal_receipt_voucher_reference_id']  = $this->attributes['id'];
-          $data['voucher_date'] = $this->attributes['voucher_date'];
-          $data['account_id']=$account['id'];
-          $data['receipt_type'] = $this->attributes['receipt_type'];
-          $data['purity'] = $this->attributes['purity'];
-          $data['fine'] = $voucher_record['credit_weight']*$this->attributes['purity']/100;
-          $data['narration'] = $this->attributes['narration'];
-          $data['suffix'] = "MI";
-          $data['voucher_type'] = "metal issue voucher";
-          $data['transaction_type'] = 'account';
-          $period_id = $this->attributes['period_id'];
-          $voucher_serial_number = $this->create_voucher_serial_number($data['voucher_type'],$period_id);
-          $data['voucher_serial_number'] = $voucher_serial_number;
-
-          $voucher_number = $this->create_voucher_number($data['suffix'],$voucher_serial_number,
-                                                         $this->attributes['voucher_date']);
-          $data['voucher_number'] = $voucher_number;
-
-          $purity_margin=($data['purity']-$data['factory_purity'])*$data['credit_weight']/100;
-          $data['purity_margin'] = $purity_margin;
-          //pd($data);
-          $obj_metal_issue_voucher=new metal_issue_voucher_model($data);
-          $obj_metal_issue_voucher->store(false);
-
-        }
-      }
-    }  
-
     if($action=="update")
       $voucher_number = $this->delete_ledger_voucher_record($this->attributes['id'],$company_id);
     if ($voucher_number) {
@@ -211,8 +167,56 @@ class Voucher_model extends BaseModel {
       if(!empty($this->attributes['receipt_type'])) {
         $this->send_request_to_argold($this->attributes);  
       }
-    } else {
-        return;
+    } 
+
+    if($this->router->class=="metal_receipt_vouchers") {
+      $this->load->model('transactions/metal_issue_voucher_model');
+      if(!empty($this->formdata['metal_issue_vouchers'])) {
+        foreach ($this->formdata['metal_issue_vouchers'] as $voucher_record) {
+          $metal_issue_data = array();
+
+          $metal_issue_data=$voucher_record;
+
+          $account = $this->account_model->find('id',array('name'=>$metal_issue_data['account_name']));
+          if(empty($account['id'])) {
+            $account_detail['name']=$metal_issue_data['account_name'];
+            $obj_account = new account_model($account_detail);
+            $account_details=$obj_account->store(false);
+            $account['id']=$account_details['id'];      
+          }
+          
+          $metal_issue_data['company_id']  = $this->attributes['company_id'];
+          $metal_issue_data['metal_receipt_voucher_reference_id']  = $this->attributes['id'];
+          $metal_issue_data['voucher_date'] = $this->attributes['voucher_date'];
+          $metal_issue_data['account_id']=$account['id'];
+          $metal_issue_data['receipt_type'] = $this->attributes['receipt_type'];
+          $metal_issue_data['purity'] = $this->attributes['purity'];
+          $metal_issue_data['fine'] = $voucher_record['credit_weight']*$this->attributes['purity']/100;
+          $metal_issue_data['narration'] = $this->attributes['narration'];
+          $metal_issue_data['suffix'] = "MI";
+          $metal_issue_data['voucher_type'] = "metal issue voucher";
+          $metal_issue_data['transaction_type'] = 'account';
+          $period_id = $this->attributes['period_id'];
+          $voucher_serial_number = $this->create_voucher_serial_number($metal_issue_data['voucher_type'],
+                                                                       $period_id);
+          $metal_issue_data['voucher_serial_number'] = $voucher_serial_number;
+
+          $voucher_number = $this->create_voucher_number($metal_issue_data['suffix'],$voucher_serial_number,
+                                                         $this->attributes['voucher_date']);
+          $metal_issue_data['voucher_number'] = $voucher_number;
+
+          $purity_margin=($metal_issue_data['purity']-$metal_issue_data['factory_purity'])*$metal_issue_data['credit_weight']/100;
+          $metal_issue_data['purity_margin'] = $purity_margin;
+          //pd($data);
+          $obj_metal_issue_voucher=new metal_issue_voucher_model($metal_issue_data);
+          $obj_metal_issue_voucher->store(false);
+          
+          $metal_issue_data['id']=$obj_metal_issue_voucher->attributes['id'];
+          $ledger_data=$this->set_ledger_data($metal_issue_data);
+          $obj_ledeger = new ledger_model($ledger_data);
+          $obj_ledeger->store(false);
+        }
+      }
     }
   }
 
