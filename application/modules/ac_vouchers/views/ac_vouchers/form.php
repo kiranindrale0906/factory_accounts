@@ -24,78 +24,101 @@
 
     load_field('hidden',array('field' => 'company_id',
                               'value'=>($this->session->userdata('company_id')?$this->session->userdata('company_id'):1))); ?>
-
+  <div class="row">                                  
   <?php
+      $col='';
+      // if($this->router->class == "metal_receipt_vouchers")
+        $col='col-md-4';
+
         if(!empty(get_field_attribute($this->router->class,'voucher_date'))) :
            load_field('date',array('field' => 'voucher_date',
                                   'value'=>(!empty($record['voucher_date'])?date('d-m-Y',strtotime($record['voucher_date'])):date('d-m-Y')), 
                                   'class' => '','readonlyinput'=>true)); 
         endif; ?>
+  </div>      
+  <div class="row">      
+    <?php if(!empty(get_field_attribute($this->router->class,'account_name'))) :
+            load_field('text', array('field' => 'account_name', 'class' => 'autocomplete',
+                                     'data-table'=>'ac_account','data-column'=>'name','col'=>$col)); 
 
-        
-  <?php if(!empty(get_field_attribute($this->router->class,'account_name'))) :
-          load_field('text', array('field' => 'account_name', 'class' => 'autocomplete',
-                                   'data-table'=>'ac_account','data-column'=>'name')); 
+            load_field('hidden', array('field' => 'account_id'));                               
+          endif; ?> 
 
-          load_field('hidden', array('field' => 'account_id'));                               
+    <?php if(!empty(get_field_attribute($this->router->class,'receipt_type'))) :
+            load_field('dropdown', array('field' => 'receipt_type', 'option' => @$receipt_type ,
+                                         'class' =>'receipt_type', 'col'=>$col)); 
+            
+            load_field('hidden', array('field' => 'account_id'));                               
+          endif; ?>  
+  </div>   
+
+  <div class="row">         
+    <?php if(!empty(get_field_attribute($this->router->class,'type'))) :
+            load_field('dropdown', array('field' => 'type', 'option' => @$daily_drawer_type,
+                                         'col' => 'col-md-4 hide_daily_drawer_type'));                     
+          endif; ?>        
+
+    <?php if(!empty(get_field_attribute($this->router->class,'hook_kdm_purity'))) :
+            load_field('dropdown', array('field' => 'hook_kdm_purity', 'option' => @$hook_kdm_purity,
+                                         'col' => 'col-md-4 hide_hook_kdm_purity'));                     
+          endif; ?>
+
+    <?php if(!empty(get_field_attribute($this->router->class,'quantity'))) :
+            load_field('text', array('field' => 'quantity' ,  'col'=>'col-md-4 hide_quantity'));                     
+          endif; ?>
+  </div>        
+  <div class="row">  
+    <?php if(!empty(get_field_attribute($this->router->class,'credit_amount'))) :
+            load_field('text', array('field' => 'credit_amount' , 'col'=>$col)); 
+          endif; ?>   
+
+    <?php if(!empty(get_field_attribute($this->router->class,'debit_amount'))) :
+          load_field('text', array('field' => 'debit_amount', 'col'=>$col)); 
         endif; ?> 
-
-  <?php if(!empty(get_field_attribute($this->router->class,'receipt_type'))) :
-          load_field('dropdown', array('field' => 'receipt_type', 'option' => @$receipt_type ,
-                                       'class' =>'receipt_type')); 
-          
-          load_field('hidden', array('field' => 'account_id'));                               
-        endif; ?>  
-
-  <?php if(!empty(get_field_attribute($this->router->class,'type'))) :
-          load_field('dropdown', array('field' => 'type', 'option' => @$daily_drawer_type,
-                                       'col' => 'col-md-6 hide_daily_drawer_type'));                     
-        endif; ?>        
-
-  <?php if(!empty(get_field_attribute($this->router->class,'hook_kdm_purity'))) :
-          load_field('dropdown', array('field' => 'hook_kdm_purity', 'option' => @$hook_kdm_purity,
-                                       'col' => 'col-md-6 hide_hook_kdm_purity'));                     
-        endif; ?>
-
-  <?php if(!empty(get_field_attribute($this->router->class,'quantity'))) :
-          load_field('text', array('field' => 'quantity' ,  'col'=>'col-md-6 hide_quantity'));                     
-        endif; ?>        
+  </div>     
+  <div class="row">   
+    <?php if(!empty(get_field_attribute($this->router->class,'credit_weight'))) :
+            load_field('text', array('field' => 'credit_weight', 'class'=>'credit_weight',
+                                    'col'=>$col)); 
+          endif; ?> 
     
-  <?php if(!empty(get_field_attribute($this->router->class,'credit_amount'))) :
-          load_field('text', array('field' => 'credit_amount')); 
-        endif; ?>   
+    <?php if(!empty(get_field_attribute($this->router->class,'debit_weight'))) :
+            load_field('text', array('field' => 'debit_weight', 'class'=>'debit_weight',
+                                     'col'=>$col)); 
+          endif; ?> 
 
-  <?php if(!empty(get_field_attribute($this->router->class,'debit_amount'))) :
-          load_field('text', array('field' => 'debit_amount')); 
-        endif; ?> 
-
-  <?php if(!empty(get_field_attribute($this->router->class,'credit_weight'))) :
-          load_field('text', array('field' => 'credit_weight', 'class'=>'credit_weight')); 
-        endif; ?> 
-  
-  <?php if(!empty(get_field_attribute($this->router->class,'debit_weight'))) :
-          load_field('text', array('field' => 'debit_weight', 'class'=>'debit_weight')); 
-        endif; ?> 
-
-  <?php if(!empty(get_field_attribute($this->router->class,'narration'))) :
-          load_field('text', array('field' => 'narration')); 
-        endif; ?>
- 
-  <?php if(!empty(get_field_attribute($this->router->class,'purity'))) :
-          load_field('text', array('field' => 'purity', 'class'=>'purity')); 
+    <?php if(!empty(get_field_attribute($this->router->class,'purity'))) :
+          load_field('text', array('field' => 'purity', 'class'=>'purity', 'col'=>$col)); 
         endif; ?>
 
-  <?php if(!empty(get_field_attribute($this->router->class,'fine'))) :
-          load_field('text', array('field' => 'fine', 'readonlyinput'=>'1', 'class'=>'fine')); 
+    <?php if(!empty(get_field_attribute($this->router->class,'fine'))) :
+          load_field('text', array('field' => 'fine', 'readonlyinput'=>'1', 'class'=>'fine',
+                                  'col'=>$col)); 
         endif; ?>      
-  
-  <?php if(!empty(get_field_attribute($this->router->class,'factory_purity'))) :
-          load_field('text', array('field' => 'factory_purity', 'class'=>'factory_purity'));
+  </div>        
+
+  <div class="row">   
+    <?php
+      if(!empty(get_field_attribute($this->router->class,'arg_weight'))) :
+        load_field('text', array('field' => 'arg_weight', 'readonlyinput'=>'1', 
+                                 'class'=>'arg_weight', 'col'=>$col));  
+      endif;  ?>
+
+    <?php if(!empty(get_field_attribute($this->router->class,'factory_purity'))) :
+          load_field('text', array('field' => 'factory_purity', 'class'=>'factory_purity',
+                                  'col'=>$col));
         endif; ?>
 
-  <?php if(!empty(get_field_attribute($this->router->class,'factory_fine'))) :
-          load_field('text', array('field' => 'factory_fine', 'readonlyinput'=>'1', 'class'=>'factory_fine')); 
+    <?php if(!empty(get_field_attribute($this->router->class,'factory_fine'))) :
+          load_field('text', array('field' => 'factory_fine', 'readonlyinput'=>'1', 'class'=>'factory_fine',
+                                  'col'=>$col)); 
         endif; ?>            
+  </div>  
+  <div class="row">   
+    <?php if(!empty(get_field_attribute($this->router->class,'narration'))) :
+            load_field('text', array('field' => 'narration')); 
+          endif; ?>
+  </div> 
   <div class="row"> 
     <div class="col-sm-6"> 
       <?php
