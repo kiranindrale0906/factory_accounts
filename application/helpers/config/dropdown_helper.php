@@ -170,12 +170,18 @@ function get_daily_drawer_receipt_type(){
 
 function get_melting_purity(){
   return array(
-               array('id'=>'70.00','name'=>'70.00'),
-               array('id'=>'75.15','name'=>'75.15'),
-               array('id'=>'83.50','name'=>'83.50'),
-               array('id'=>'83.65','name'=>'83.65'),
-               array('id'=>'87.65','name'=>'87.65'),
-               array('id'=>'92.00','name'=>'92.00')
-             );
+           array('id'=>'70.00','name'=>'70.00'),
+           array('id'=>'75.15','name'=>'75.15'),
+           array('id'=>'83.50','name'=>'83.50'),
+           array('id'=>'83.65','name'=>'83.65'),
+           array('id'=>'87.65','name'=>'87.65'),
+           array('id'=>'92.00','name'=>'92.00'));
+}
+
+function get_account_name_for_metal_issue(){
+  return array(
+            array('id'=>'ARF','name'=>'ARF'),
+            array('id'=>'ARC','name'=>'ARC'));
 
 }
+
