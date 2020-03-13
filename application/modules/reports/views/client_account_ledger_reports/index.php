@@ -36,8 +36,8 @@
                         <?=($record['receipt_weight']>0)?$record['receipt_weight']:'';?>  
                       </td>
                       <td><?=($record['fine']>0)?$record['fine']:'';?>  </td>
-                      <td><?=($record['receipt_weight']<0)?$record['receipt_weight']:'';?></td>
-                      <td><?=($record['fine']<0)?$record['fine']:'';?>  </td>
+                      <td><?=($record['receipt_weight']<0)?$record['receipt_weight']*-1:'';?></td>
+                      <td><?=($record['fine']<0)?$record['fine']*-1:'';?>  </td>
                     </tr>
             <?php }
               } ?>
@@ -45,8 +45,8 @@
                 <th>Total</th>
                 <th class="text-right"><?=$total_weight_receipt;?>  </th>
                 <th class="text-right"><?=$total_fine_receipt;?>  </th>
-                <th class="text-right"><?=$total_weight_issue;?>  </th>
-                <th class="text-right"><?=$total_fine_issue;?>  </th>
+                <th class="text-right"><?=$total_weight_issue*-1;?>  </th>
+                <th class="text-right"><?=$total_fine_issue*-1;?>  </th>
               </tr>
               <tr>
                 <?php 
@@ -64,9 +64,9 @@
                   <?=($total_fine_balance>0)?$total_fine_balance:'';?>  
                 </th>
                 <th class="text-right">
-                  <?=($total_weight_balance<0)?$total_weight_balance:'';?>  
+                  <?=($total_weight_balance<0)?$total_weight_balance*-1:'';?>  
                 </th>
-                <th class="text-right"><?=($total_fine_balance<0)?$total_fine_balance:'';?>  </th>
+                <th class="text-right"><?=($total_fine_balance<0)?$total_fine_balance*-1:'';?>  </th>
               </tr>
           </table>
         </div>
