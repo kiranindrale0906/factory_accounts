@@ -47,6 +47,12 @@ class Voucher_model extends BaseModel {
                       'rules' => 'trim|required');
       }
 
+      if($this->router->class=="metal_receipt_vouchers") {
+        $rules[]=array('field' => $this->router_class.'[receipt_type]', 
+                      'label' => 'Receip type',
+                      'rules' => 'trim|required');
+      }      
+
       if(!empty($this->attributes['receipt_type']) && $this->attributes['receipt_type']=="Refresh") {
         $rules[]=array('field' => $this->router_class.'[hook_kdm_purity]', 
                       'label' => 'Hook KDM Purity',
