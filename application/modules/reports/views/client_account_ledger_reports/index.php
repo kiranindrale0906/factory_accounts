@@ -38,6 +38,7 @@
                       <td><?=($record['fine']>0)?four_decimal($record['fine']):'';?>  </td>
                       <td><?=($record['receipt_weight']<0)?four_decimal($record['receipt_weight']*-1):'';?></td>
                       <td><?=($record['fine']<0)?four_decimal($record['fine']*-1):'';?>  </td>
+
                     </tr>
             <?php }
               } ?>
@@ -47,6 +48,7 @@
                 <th class="text-right"><?=four_decimal($total_fine_receipt);?>  </th>
                 <th class="text-right"><?=four_decimal($total_weight_issue*-1);?>  </th>
                 <th class="text-right"><?=four_decimal($total_fine_issue*-1);?>  </th>
+
               </tr>
               <tr>
                 <?php 
