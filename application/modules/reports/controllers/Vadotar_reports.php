@@ -61,16 +61,29 @@ class Vadotar_reports extends Client_ledgers {
       $where['voucher_type']='metal receipt voucher';
       $where['purity!=factory_purity']=NULL;
       $receipts = $this->model->get($select, $where ,array(), array('order_by'=>'voucher_date asc'));
-      
+      $issues = array_merge(array(array('voucher_date' => '01-01-2020',
+                                        'account_name' => 'Opening',
+                                        'voucher_type' => 'metal issue voucher',
+                                        'voucher_number' => '',
+                                        'credit_amount' => 0,
+                                        'debit_amount' => 0,
+                                        'credit_weight' => 0,
+                                        'debit_weight' => 0,
+                                        'purity_margin' => 0,
+                                        'purity' => 0,
+                                        'factory_purity' => 0,
+                                        'narration' => '')), $issues);
       $issue_data[$account_name][''] = $issues; //parent::get_records_by_created_date($issues);
       $receipt_data[$account_name][''] = $receipts; //parent::get_records_by_created_date($receipts);
+
+      $total[''][''] = array('issue' => array('weight' => 0, 'weight_difference' => 74180.79, 'fine' => 0, 'factory_fine' => 0),
+                             'receipt' => array('weight' => 0, 'weight_difference' => 0, 'fine' => 0, 'factory_fine' => 0));
       
-      $total[$account_name] = parent::get_total_by_created_date($issue_data[$account_name], 'issue', array());
+      $total[$account_name] = parent::get_total_by_created_date($issue_data[$account_name], 'issue', $total['']);
       $total[$account_name] = parent::get_total_by_created_date($receipt_data[$account_name], 'receipt', $total[$account_name]);
       
       $total[$account_name] = parent::set_index_for_dates($total[$account_name]);
     //}
-
     $this->data['issues'] = $issue_data;
     $this->data['receipts'] = $receipt_data;
     $this->data['total'] = $total;  
