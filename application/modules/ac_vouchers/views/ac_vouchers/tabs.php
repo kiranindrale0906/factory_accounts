@@ -15,7 +15,10 @@
 ?> 
 
 <div class="col-lg-6 col-md-12">
-  <div class="form-group row">
+	<div class="form-group row">
+		<h4 class="blue"><?php echo strtoupper(str_replace("_"," ",$this->router->class)); ?></h4>
+	</div>
+  <!-- <div class="form-group row">
     <div class="btn-group" role="group" aria-label="Basic example">
       <a href="<?= base_url('transactions/'.str_replace('receipt','issue', $this->router->class)) ?>" class="btn btn-sm btn-secondary text-uppercase <?= $class_receipt; ?> skewright">
       	<span class="skewleft">
@@ -27,7 +30,7 @@
       	</span>
       </a>
     </div>
-  </div>
+  </div> -->
 </div>
 
 <?php endif; ?>
