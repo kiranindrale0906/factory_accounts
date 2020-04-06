@@ -39,9 +39,14 @@
     </select>
   </div>
   <div class="d-flex align-items-center justify-content-end float-right">
-
+    <div class="calculate_div pr-3">
+      <label class="medium">Calculate :</label>
+      <input type="text" id="calculate" class="search_input">
+      <label class="medium">Total:</label>
+      <span id="cal"></span>     
+      <div id="errors"></div>       
+    </div>  
         
-    
     <?php if(isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])):
         //$this->load->view('communications/inapp_notifications/inapp_view');
     ?>
