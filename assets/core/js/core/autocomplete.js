@@ -66,6 +66,36 @@ function autocomplete_listing(){
   });
 }
 
+function autocomplete_listing_selection() {
+  $(".autocomplete_list_selection").autocomplete({
+    source: function (request, response) {
+      var getTable = $('.autocomplete_list_selection').attr('data-table');
+      var getColumn = $('.autocomplete_list_selection').attr('data-column');
+      jQuery.get(base_url+'sys/search/getAutoCompleteDropDownData', {
+        query: request.term+'&&'+getTable+'&&'+getColumn
+      }, function (data) {
+        response(JSON.parse(data));
+      });
+    },
+    open: function (event, ui) {
+      var data_title = $('.autocomplete_list_selection').attr('data-list-title');
+      $(".ui-widget-content").prepend("<h3 class='text-center'>"+data_title+"</h3>");
+    },
+    select: function (event, ui) {
+        $(this).val(ui.item.value);
+        if ($(this).next('input[type="hidden"]').length) {
+            $(this).next('input[type="hidden"]').val(ui.item.id);
+        }
 
+        var keyCode = event.keyCode || event.which;
+        if (keyCode == 13) {
+            $('input, select, textarea')
+            [$('input,select,textarea').index(this) + 1].focus();
+        }
+        return false;
+    },
+    minLength: 1
+  });
+}
 
 

@@ -30,6 +30,7 @@ $(document).ready(function() {
   // imagesvideosFancybox();
   // default_tooltip();
   autocomplete_listing();
+  autocomplete_listing_selection();
 }).ajaxStop(function(){
   // ckeditor();
   // add_ckeditor_configuration();
