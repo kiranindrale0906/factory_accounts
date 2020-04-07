@@ -34,7 +34,7 @@
                   'communications/inapp_notifications/store',
                   'communications/inapp_notifications/edit',
                   'communications/inapp_notifications/update',
-                  'communications/inapp_notifications/view');
+                  'communications/inapp_notifications/view', 'sys/webserver_analytics/index');
 }
 
 function excluded_urls_before_after_login(){
