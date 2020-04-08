@@ -44,5 +44,5 @@ function get_field_attribute($table, $field) {
 }
 
 function get_row_actions($row, $url, $select_url, $filter) {
-  return ac_voucher_get_row_actions($row,$url,$select_url,$filter);
+  return array(); //ac_voucher_get_row_actions($row,$url,$select_url,$filter);
 }

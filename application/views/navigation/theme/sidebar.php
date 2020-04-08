@@ -23,8 +23,8 @@
                                         'masters/department_category'=>'Department Category',
                                         'masters/periods'=>'Financial Year'),
                     'Transactions' => array(
-                                            // 'transactions/cash_issue_vouchers' => 'Cash Issue Voucher',
-                                            // 'transactions/cash_receipt_vouchers' => 'Cash Receipt Voucher',
+                                            'transactions/cash_issue_vouchers' => 'Cash Issue Voucher',
+                                            'transactions/cash_receipt_vouchers' => 'Cash Receipt Voucher',
                                             // 'transactions/bank_issue_voucher'=> 'Bank Issue Voucher',
                                             // 'transactions/bank_receipt_voucher' => 'Bank Receipt Voucher',
                                             'transactions/metal_issue_vouchers' => 'Metal Issue Voucher',

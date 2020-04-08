@@ -8,6 +8,7 @@ function getTableSettings() {
                                 company_id='.@$_SESSION['company_id']);
   return ac_vouchers_getTableSettings($table_setting);
 }
+
 //Add Cash Issue Voucher
 /*
   0 => column title
@@ -45,5 +46,5 @@ function get_field_attribute($table, $field) {
 }
 
 function get_row_actions($row, $url, $select_url, $filter) {
-  return ac_voucher_get_row_actions($row,$url,$select_url,$filter);
+  return array();//ac_voucher_get_row_actions($row,$url,$select_url,$filter);
 }
