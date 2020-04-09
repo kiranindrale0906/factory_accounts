@@ -23,7 +23,7 @@ function getTableSettings() {
 
 
 function list_settings() {
-  $list_option=array('voucher_date','voucher_number','account_name','bank_name','check_no','credit_amount','narration','action');
+  $list_option=array('voucher_date','voucher_number','account_name','bank_name','cheque_number','credit_amount','narration','action');
   return ac_vouchers_list_settings($list_option);
 }
 

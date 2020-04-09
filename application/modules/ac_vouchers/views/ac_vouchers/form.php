@@ -82,8 +82,8 @@
         endif; ?> 
   </div>     
   <div class="row">   
-  <?php if(!empty(get_field_attribute($this->router->class,'check_no'))) :
-    load_field('text', array('field' => 'check_no' ,'col'=>$col));                     
+  <?php if(!empty(get_field_attribute($this->router->class,'cheque_number'))) :
+    load_field('text', array('field' => 'cheque_number' ,'col'=>$col));                     
     endif; ?>
     <?php if(!empty(get_field_attribute($this->router->class,'credit_weight'))) :
             load_field('text', array('field' => 'credit_weight', 'class'=>'credit_weight',
