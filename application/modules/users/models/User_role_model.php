@@ -12,7 +12,7 @@ class User_role_model extends Core_user_role_model {
                                         'masters/department_category','masters/periods'),
                      'Transactions' => array('transactions/cash_issue_vouchers', 
                                             'transactions/cash_receipt_vouchers',
-                                            'transactions/bank_issue_voucher', 'transactions/bank_receipt_voucher',
+                                            'transactions/bank_issue_vouchers', 'transactions/bank_receipt_vouchers',
                                             'transactions/metal_issue_vouchers', 'transactions/metal_receipt_vouchers',
                                             'transactions/sales_voucher', 'transactions/purchase_voucher', 'transactions/journal_voucher',
                                             'transactions/contra_voucher',

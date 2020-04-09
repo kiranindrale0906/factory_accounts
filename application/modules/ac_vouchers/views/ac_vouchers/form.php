@@ -67,6 +67,10 @@
     <?php if(!empty(get_field_attribute($this->router->class,'quantity'))) :
             load_field('text', array('field' => 'quantity' ,  'col'=>'col-md-4 hide_quantity'));                     
           endif; ?>
+
+   <?php if(!empty(get_field_attribute($this->router->class,'bank_name'))) :
+    load_field('text', array('field' => 'bank_name' ,'col'=>$col));                     
+    endif; ?>
   </div>        
   <div class="row">  
     <?php if(!empty(get_field_attribute($this->router->class,'credit_amount'))) :
@@ -78,6 +82,9 @@
         endif; ?> 
   </div>     
   <div class="row">   
+  <?php if(!empty(get_field_attribute($this->router->class,'check_no'))) :
+    load_field('text', array('field' => 'check_no' ,'col'=>$col));                     
+    endif; ?>
     <?php if(!empty(get_field_attribute($this->router->class,'credit_weight'))) :
             load_field('text', array('field' => 'credit_weight', 'class'=>'credit_weight',
                                     'col'=>$col)); 

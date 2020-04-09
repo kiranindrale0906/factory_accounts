@@ -45,6 +45,7 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
                                         "date_format(created_at,'%H:%i:%s') as created_at");
   $list_setting['voucher_number'] = array("Voucher", "voucher_number", FALSE, "voucher_number", TRUE, FALSE);
   $list_setting['bank_name'] = array("Bank Name", "bank_name", TRUE, "bank_name", TRUE, TRUE);
+ $list_setting['check_no'] = array("Check Number", "check_no", TRUE, "check_no", TRUE, TRUE);
   $list_setting['account_name'] = array("Account", "account_name", TRUE, "account_name", TRUE, TRUE);
   $list_setting['debit_amount'] = array("Credit", "debit_amount", TRUE, "debit_amount", FALSE, TRUE);
   $list_setting['credit_amount'] = array("Debit Amt.", "credit_amount", TRUE, "credit_amount", FALSE, TRUE);
@@ -86,6 +87,8 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['voucher_date'] = array('Date', 'Enter Date.', TRUE, '', TRUE,TRUE);
   $attributes['account_name'] = array('Account', 'Enter Account', TRUE, '', TRUE);
   $attributes['credit_amount'] = array('Credit Amount', 'Enter Credit Amount', TRUE, '', TRUE);
+  $attributes['bank_name'] = array("Bank Name", "Enter Bank Name", TRUE,'', TRUE);
+  $attributes['check_no'] = array("Check Number", "Enter Check Number", TRUE,'', TRUE);
   $attributes['debit_amount'] = array('Debit Amount', 'Enter Debit Amount', TRUE, '', TRUE);
   $attributes['receipt_type'] = array('Receipt Type', 'Enter Receipt Type', TRUE, '', TRUE);
   $attributes['factory_purity'] = array('Factory Purity', 'Enter factory purity', TRUE, '', TRUE);

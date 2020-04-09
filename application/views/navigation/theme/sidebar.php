@@ -25,8 +25,8 @@
                     'Transactions' => array(
                                             'transactions/cash_issue_vouchers' => 'Cash Issue Voucher',
                                             'transactions/cash_receipt_vouchers' => 'Cash Receipt Voucher',
-                                            // 'transactions/bank_issue_voucher'=> 'Bank Issue Voucher',
-                                            // 'transactions/bank_receipt_voucher' => 'Bank Receipt Voucher',
+                                             'transactions/bank_issue_vouchers'=> 'Bank Issue Voucher',
+                                             'transactions/bank_receipt_vouchers' => 'Bank Receipt Voucher',
                                             'transactions/metal_issue_vouchers' => 'Metal Issue Voucher',
                                             'transactions/metal_receipt_vouchers' => 'Metal Receipt Voucher',
                                             // 'transactions/sales_voucher' => 'Sales Voucher',
