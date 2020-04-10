@@ -36,6 +36,22 @@
                                   'class' => '','readonlyinput'=>true)); 
         endif; ?>
   </div>      
+   <div class="row">   
+    <?php if(!empty(get_field_attribute($this->router->class,'from_account_name'))) :
+            load_field('text', array('field' => 'from_account_name', 'class' => 'autocomplete_list_selection',
+                                     'data-table'=>'ac_from_account','data-column'=>'name','col'=>$col,
+                                     'data-list-title'=>'From Account Name')); 
+
+            load_field('hidden', array('field' => 'from_account_id'));                               
+          endif; ?> 
+     <?php if(!empty(get_field_attribute($this->router->class,'from_group_name'))) :
+            load_field('text', array('field' => 'from_group_name', 'class' => 'autocomplete_list_selection',
+                                     'data-table'=>'ac_from_group','data-column'=>'name','col'=>$col,
+                                     'data-list-title'=>'From Group Name')); 
+
+            load_field('hidden', array('field' => 'from_group_id'));                               
+          endif; ?>   
+   </div>
   <div class="row">      
     <?php if(!empty(get_field_attribute($this->router->class,'account_name'))) :
             load_field('text', array('field' => 'account_name', 'class' => 'autocomplete_list_selection',
@@ -44,6 +60,13 @@
 
             load_field('hidden', array('field' => 'account_id'));                               
           endif; ?> 
+    <?php if(!empty(get_field_attribute($this->router->class,'to_group_name'))) :
+      load_field('text', array('field' => 'to_group_name', 'class' => 'autocomplete_list_selection',
+                               'data-table'=>'ac_to_group','data-column'=>'name','col'=>$col,
+                               'data-list-title'=>'To Group Name')); 
+
+      load_field('hidden', array('field' => 'to_group_id'));                               
+    endif; ?> 
 
     <?php if(!empty(get_field_attribute($this->router->class,'receipt_type'))) :
             load_field('dropdown', array('field' => 'receipt_type', 'option' => @$receipt_type ,
@@ -80,6 +103,10 @@
     <?php if(!empty(get_field_attribute($this->router->class,'debit_amount'))) :
           load_field('text', array('field' => 'debit_amount', 'col'=>$col)); 
         endif; ?> 
+
+    <?php if(!empty(get_field_attribute($this->router->class,'amount'))) :
+      load_field('text', array('field' => 'amount', 'col'=>$col)); 
+    endif; ?> 
   </div>     
   <div class="row">   
   <?php if(!empty(get_field_attribute($this->router->class,'cheque_number'))) :

@@ -1,15 +1,14 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed.');
+
+
 $ci=&get_instance();
-$ci->load->helper(array('ac_vouchers/ac_vouchers'));
+$ci->load->helper(array('ac_vouchers/ac_vouchers',
+                        CLIENT_NAME.'/bank_issue_voucher_clients'));
 
 function getTableSettings() {
-  $table_setting=array('page_title'=>'Bank Issue Voucher',
-                      'where'=>'voucher_type="bank issue voucher" and 
-                                company_id='.@$_SESSION['company_id']);
-  return ac_vouchers_getTableSettings($table_setting);
+  return bank_issue_voucher_clients_getTableSettings();
 }
-
-//Add Cash Issue Voucher
+//Add bank Issue Voucher
 /*
   0 => column title
   1 => column name
@@ -23,8 +22,7 @@ function getTableSettings() {
 
 
 function list_settings() {
-  $list_option=array('voucher_date','voucher_number','account_name','bank_name','cheque_number','credit_amount','narration','action');
-  return ac_vouchers_list_settings($list_option);
+  return bank_issue_voucher_clients_list_settings();
 }
 
 
@@ -39,11 +37,9 @@ function list_settings() {
 */
 
 function get_field_attribute($table, $field) {
-  $required_fields=array('id','voucher_date','account_name','bank_name','check_no','credit_amount','narration','vouchersamount','company_id','account_id','document');
-
-  return ac_voucher_get_field_attribute($table,$field,$required_fields);
+  return bank_issue_voucher_clients_get_field_attribute($table, $field);
 }
 
 function get_row_actions($row, $url, $select_url, $filter) {
-  return array();//ac_voucher_get_row_actions($row,$url,$select_url,$filter);
+  return bank_issue_voucher_clients_get_row_actions($row,$url,$select_url,$filter);
 }

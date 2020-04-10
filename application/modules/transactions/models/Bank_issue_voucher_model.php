@@ -1,11 +1,8 @@
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
-require_once APPPATH . "modules/ac_vouchers/models/Voucher_model.php";
-class Bank_issue_voucher_model extends Voucher_model {
-  protected $prefix = 'BI';
-  protected $voucher_type = 'bank issue voucher';
-  protected $account_type = 'account';
+require_once APPPATH . "modules/".CLIENT_NAME."/models/Bank_issue_voucher_client_model.php";
+class Bank_issue_voucher_model extends Bank_issue_voucher_client_model {
   public $router_class = "bank_issue_vouchers";
   protected $insert_to_ledger = true;
 
@@ -13,3 +10,5 @@ class Bank_issue_voucher_model extends Voucher_model {
     parent::__construct($data);
   }
 }
+
+//class
