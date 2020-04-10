@@ -1,7 +1,6 @@
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Vouchers extends BaseController {
 
   public function __construct() {
