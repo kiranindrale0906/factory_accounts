@@ -98,7 +98,7 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['amount'] = array('Amount', 'Enter Amount', TRUE, '', TRUE);
   $attributes['credit_amount'] = array('Credit Amount', 'Enter Credit Amount', TRUE, '', TRUE);
   $attributes['bank_name'] = array("Bank Name", "Enter Bank Name", TRUE,'', TRUE);
-  $attributes['cheque_number'] = array("Check Number", "Enter Check Number", TRUE,'', TRUE);
+  $attributes['cheque_number'] = array("Check Number", "Enter Check Number", FALSE,'', FALSE);
   $attributes['debit_amount'] = array('Debit Amount', 'Enter Debit Amount', TRUE, '', TRUE);
   $attributes['receipt_type'] = array('Receipt Type', 'Enter Receipt Type', TRUE, '', TRUE);
   $attributes['factory_purity'] = array('Factory Purity', 'Enter factory purity', TRUE, '', TRUE);

@@ -44,7 +44,7 @@
                                             // 'transactions/dispatch_voucher' => 'Dispatch Voucher',
                                             // 'transactions/repair_voucher' => 'Repair Voucher',
                                             // 'transactions/approval_voucher' => 'Approval Voucher',
-                                            // 'transactions/expense_voucher' => 'Expense Voucher',
+                                            'transactions/expense_vouchers' => 'Expense Voucher',
                                             // 'transactions/transfer_voucher' => 'Transfer Voucher',
                                             // 'transactions/repair_voucher_out' => 'Repair Voucher Out',
                                             // 'transactions/approval_in_voucher' => 'Approval in Voucher',

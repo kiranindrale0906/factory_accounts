@@ -14,12 +14,20 @@ class Voucher_model extends BaseModel {
                     'rules' => array('trim', 'required', 
                                array('validate_voucher_date', array($this, 'check_period_exists'))),
                     'errors'=>array('validate_voucher_date' => "Please set the Financial year from master."));
-    $rules[] = array('field' => $this->router_class.'[account_name]', 'label' => 'Account Name',
-                     'rules' => 'trim|required');
+    $rules[] = array('field' => $this->router_class.'[account_name]', 'label' => 'Account Name','rules' => 'trim|required');
+    if($this->router->class=="bank_issue_vouchers" || $this->router->class=="bank_receipt_vouchers") {
+    $rules[] = array('field' => $this->router_class.'[bank_name]', 'label' => 'Bank Name','rules' => 'trim|required');
+    }
 
+    if($this->router->class=="journal_vouchers" || $this->router->class=="contra_vouchers") {
+    $rules[] = array('field' => $this->router_class.'[from_account_name]', 'label' => 'From Bank Name','rules' => 'trim|required');
+    $rules[] = array('field' => $this->router_class.'[from_group_name]', 'label' => 'From Group Name','rules' => 'trim|required');
+    $rules[] = array('field' => $this->router_class.'[to_group_name]', 'label' => 'To Group Name','rules' => 'trim|required');
+    $rules[] = array('field' => $this->router_class.'[amount]', 'label' => 'Amount','rules' => 'trim|required');
+    }
 
     $check_credit_debit_type=stripos($this->router_class,'issue');
-    if($this->router->class=="cash_issue_vouchers" || $this->router->class=="cash_receipt_vouchers") {
+    if($this->router->class=="cash_issue_vouchers" || $this->router->class=="cash_receipt_vouchers" || $this->router->class=="bank_issue_vouchers" || $this->router->class=="bank_receipt_vouchers") {
       if($check_credit_debit_type==true) {
         $credit_rules[] = array('field' => $this->router_class.'[credit_amount]', 
                         'label' => 'Credit Amount',
