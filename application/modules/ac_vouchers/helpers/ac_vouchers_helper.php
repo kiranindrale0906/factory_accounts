@@ -45,9 +45,16 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
                                         "date_format(created_at,'%H:%i:%s') as created_at");
   $list_setting['voucher_number'] = array("Voucher", "voucher_number", FALSE, "voucher_number", TRUE, FALSE);
   $list_setting['bank_name'] = array("Bank Name", "bank_name", TRUE, "bank_name", TRUE, TRUE);
+ $list_setting['cheque_number'] = array("Check Number", "cheque_number", TRUE, "cheque_number", TRUE, TRUE);
   $list_setting['account_name'] = array("Account", "account_name", TRUE, "account_name", TRUE, TRUE);
+  $list_setting['from_account_name'] = array("From Account Name", "from_account_name", TRUE, "from_account_name", TRUE, TRUE);
+
+  $list_setting['from_group_name'] = array("From Group Name", "from_group_name", TRUE, "from_group_name", TRUE, TRUE);
+  $list_setting['to_group_name'] = array("To Group Name", "to_group_name", TRUE, "to_group_name", TRUE, TRUE);
+  
   $list_setting['debit_amount'] = array("Credit", "debit_amount", TRUE, "debit_amount", FALSE, TRUE);
   $list_setting['credit_amount'] = array("Debit Amt.", "credit_amount", TRUE, "credit_amount", FALSE, TRUE);
+  $list_setting['amount'] = array("Amount.", "amount", TRUE, "amount", FALSE, TRUE);
   
   $list_setting['hook_kdm_purity'] = array("Hook KDM Purity", "hook_kdm_purity", TRUE, 
                                            "hook_kdm_purity", FALSE, TRUE);
@@ -85,7 +92,13 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['id'] = array('', '', TRUE, '', TRUE);
   $attributes['voucher_date'] = array('Date', 'Enter Date.', TRUE, '', TRUE,TRUE);
   $attributes['account_name'] = array('Account', 'Enter Account', TRUE, '', TRUE);
+  $attributes['from_account_name'] = array('From Account', 'Enter From Account', TRUE, '', TRUE);
+  $attributes['from_group_name'] = array('From Group Name', 'Enter From Group', TRUE, '', TRUE);
+  $attributes['to_group_name'] = array('To Group Name', 'Enter To Group', TRUE, '', TRUE);
+  $attributes['amount'] = array('Amount', 'Enter Amount', TRUE, '', TRUE);
   $attributes['credit_amount'] = array('Credit Amount', 'Enter Credit Amount', TRUE, '', TRUE);
+  $attributes['bank_name'] = array("Bank Name", "Enter Bank Name", TRUE,'', TRUE);
+  $attributes['cheque_number'] = array("Check Number", "Enter Check Number", FALSE,'', FALSE);
   $attributes['debit_amount'] = array('Debit Amount', 'Enter Debit Amount', TRUE, '', TRUE);
   $attributes['receipt_type'] = array('Receipt Type', 'Enter Receipt Type', TRUE, '', TRUE);
   $attributes['factory_purity'] = array('Factory Purity', 'Enter factory purity', TRUE, '', TRUE);
@@ -100,6 +113,9 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['vouchersamount'] = array('vouchersamount', 'Enter vouchersamount', FALSE, '', TRUE);
   $attributes['company_id'] = array('', '', TRUE, '', TRUE);
   $attributes['account_id'] = array('', '', TRUE, '', TRUE);
+  $attributes['from_account_id'] = array('', '', TRUE, '', TRUE);
+  $attributes['from_group_id'] = array('', '', TRUE, '', TRUE);
+  $attributes['to_group_id'] = array('', '', TRUE, '', TRUE);
   $attributes['document'] = array('', '', TRUE, '', TRUE);
 
   $attributes['purity'] = array('Purity', 'Enter Purity', TRUE, '', TRUE);
