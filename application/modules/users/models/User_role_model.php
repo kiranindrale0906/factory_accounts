@@ -14,7 +14,7 @@ class User_role_model extends Core_user_role_model {
                                             'transactions/cash_receipt_vouchers',
                                             'transactions/bank_issue_vouchers', 'transactions/bank_receipt_vouchers',
                                             'transactions/metal_issue_vouchers', 'transactions/metal_receipt_vouchers',
-                                            'transactions/sales_voucher', 'transactions/purchase_voucher', 'transactions/journal_vouchers',
+                                            'transactions/sales_vouchers', 'transactions/purchase_voucher', 'transactions/journal_vouchers',
                                             'transactions/contra_vouchers',
                                             'transactions/rate_cut_purchase_price_issue_voucher',
                                             'transactions/rate_cut_purchase_weight_issue_voucher',

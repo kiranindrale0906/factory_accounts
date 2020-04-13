@@ -29,7 +29,7 @@
                                              'transactions/bank_receipt_vouchers' => 'Bank Receipt Voucher',
                                             'transactions/metal_issue_vouchers' => 'Metal Issue Voucher',
                                             'transactions/metal_receipt_vouchers' => 'Metal Receipt Voucher',
-                                            // 'transactions/sales_voucher' => 'Sales Voucher',
+                                            'transactions/sales_vouchers' => 'Sales Voucher',
                                             // 'transactions/purchase_voucher' => 'Purchase Voucher',
                                             'transactions/journal_vouchers' => 'Journal Voucher',
                                             'transactions/contra_vouchers' => 'Contra Voucher',

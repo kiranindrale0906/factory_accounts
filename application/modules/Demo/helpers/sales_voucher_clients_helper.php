@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed.');
 
 function sales_voucher_clients_getTableSettings() {
-  $table_setting=array('page_title'=>'Sales Voucher','where'=>'voucher_type="sales voucher"');
+  $table_setting=array('page_title'=>'Sales Voucher','where'=>'voucher_type="sales voucher"','add_title' => 'Add Sale Voucher');
   return ac_vouchers_getTableSettings($table_setting);
 }
 //Add Cash Issue Voucher
@@ -18,9 +18,8 @@ function sales_voucher_clients_getTableSettings() {
 
 
 function sales_voucher_clients_list_settings() {
-  $list_option=array('voucher_date','created_time','voucher_number','account_name','purity','credit_weight',
-                      'narration','account_id','company_id','created_time','department_name','gross_weight','net_weight','fine_wt',
-                      'total_amt','total_weight','custom_order','status');
+  $list_option=array('voucher_date','created_time','voucher_number','account_name','account_id','company_id','created_time','department_name',
+                     'total_gross_weight','total_net_weight','total_fine_weight','total_amount','total_weight','custom_order','status');
   return ac_vouchers_list_settings($list_option);
 }
 
