@@ -47,6 +47,7 @@ class Vouchers extends BaseController {
                                                         array('where'=>array('company_id='=>$company_id)),
                                                         array(), array('order_by'=>'name asc'));
     $this->data['receipt_type'] = get_receipt_type();
+    $this->data['transaction_type'] = get_transaction_type();
     $this->data['hook_kdm_purity'] = get_melting_purity();
   }
 

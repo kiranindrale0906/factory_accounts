@@ -26,6 +26,11 @@ class Voucher_model extends BaseModel {
     $rules[] = array('field' => $this->router_class.'[amount]', 'label' => 'Amount','rules' => 'trim|required');
     }
 
+    if($this->router->class=="expense_vouchers") {
+    $rules[] = array('field' => $this->router_class.'[to_group_name]', 'label' => 'To Group Name','rules' => 'trim|required');
+    $rules[] = array('field' => $this->router_class.'[debit_amount]', 'label' => 'Amount','rules' => 'trim|required');
+    }
+
     $check_credit_debit_type=stripos($this->router_class,'issue');
     if($this->router->class=="cash_issue_vouchers" || $this->router->class=="cash_receipt_vouchers" || $this->router->class=="bank_issue_vouchers" || $this->router->class=="bank_receipt_vouchers") {
       if($check_credit_debit_type==true) {

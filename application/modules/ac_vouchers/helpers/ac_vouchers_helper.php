@@ -44,6 +44,11 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
   $list_setting['created_time'] = array("Time", "created_at", FALSE, "created_at", FALSE, TRUE,
                                         "date_format(created_at,'%H:%i:%s') as created_at");
   $list_setting['voucher_number'] = array("Voucher", "voucher_number", FALSE, "voucher_number", TRUE, FALSE);
+  $list_setting['gold_rate'] = array("Gold Rate", "gold_rate", FALSE, "gold_rate", TRUE, FALSE);
+  $list_setting['gold_weight'] = array("Gold Weight", "gold_weight", FALSE, "gold_weight", TRUE, FALSE);
+  $list_setting['gold_rate_purity'] = array("Gold Rate Purity", "gold_rate_purity", FALSE, "gold_rate_purity", TRUE, FALSE);
+  $list_setting['gold_weight_purity'] = array("Gold Weight Purity", "gold_weight_purity", FALSE, "gold_weight_purity", TRUE, FALSE);
+  $list_setting['transaction_type'] = array("Transaction Type", "transaction_type", TRUE, "transaction_type", TRUE, TRUE);
   $list_setting['bank_name'] = array("Bank Name", "bank_name", TRUE, "bank_name", TRUE, TRUE);
  $list_setting['cheque_number'] = array("Check Number", "cheque_number", TRUE, "cheque_number", TRUE, TRUE);
   $list_setting['account_name'] = array("Account", "account_name", TRUE, "account_name", TRUE, TRUE);
@@ -98,6 +103,12 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['amount'] = array('Amount', 'Enter Amount', TRUE, '', TRUE);
   $attributes['credit_amount'] = array('Credit Amount', 'Enter Credit Amount', TRUE, '', TRUE);
   $attributes['bank_name'] = array("Bank Name", "Enter Bank Name", TRUE,'', TRUE);
+  $attributes['gold_weight'] = array("Gold Weight", "Enter Gold Weight", TRUE,'', TRUE);
+  $attributes['gold_rate'] = array("Gold Rate", "Enter Gold Rate", TRUE,'', TRUE);
+  $attributes['gold_weight_purity'] = array("Gold Weight Purity", "Enter Gold Weight Purity", TRUE,'', TRUE);
+  $attributes['gold_rate_purity'] = array("Gold Rate Purity", "Enter Gold Weight Purity", TRUE,'', TRUE);
+  $attributes['transaction_type'] = array("Transaction Type", "Select Transaction Type", TRUE,'', TRUE);
+
   $attributes['cheque_number'] = array("Check Number", "Enter Check Number", FALSE,'', FALSE);
   $attributes['debit_amount'] = array('Debit Amount', 'Enter Debit Amount', TRUE, '', TRUE);
   $attributes['receipt_type'] = array('Receipt Type', 'Enter Receipt Type', TRUE, '', TRUE);
