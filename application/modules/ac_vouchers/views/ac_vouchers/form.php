@@ -42,6 +42,12 @@
         endif; ?>
   </div>      
    <div class="row">   
+   <?php if(!empty(get_field_attribute($this->router->class,'department_name'))) :
+            load_field('text', array('field' => 'department_name', 'class' => 'autocomplete_list_selection',
+                                     'data-table'=>'ac_department','data-column'=>'name','col'=>$col,
+                                     'data-list-title'=>'From Department Name')); 
+          endif; ?> 
+
     <?php if(!empty(get_field_attribute($this->router->class,'from_account_name'))) :
             load_field('text', array('field' => 'from_account_name', 'class' => 'autocomplete_list_selection',
                                      'data-table'=>'ac_from_account','data-column'=>'name','col'=>$col,
