@@ -204,8 +204,8 @@
   </div> 
   <br>
   <?php 
-    if($this->router->class=="metal_receipt_vouchers") {
-      //$this->load->view('transactions/metal_issue_vouchers/subform_list');
+    if($this->router->class=="purchase_vouchers") {
+      $this->load->view('transactions/purchase_vouchers/subform_list');
     }
   ?>
   <div class="row"> 
