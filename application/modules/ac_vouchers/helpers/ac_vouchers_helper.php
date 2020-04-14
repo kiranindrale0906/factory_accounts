@@ -45,6 +45,8 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
                                         "date_format(created_at,'%H:%i:%s') as created_at");
   $list_setting['voucher_number'] = array("Voucher", "voucher_number", FALSE, "voucher_number", TRUE, FALSE);
   $list_setting['gold_rate'] = array("Gold Rate", "gold_rate", FALSE, "gold_rate", TRUE, FALSE);
+  $list_setting['rate'] = array("Rate", "rate", FALSE, "rate", TRUE, FALSE);
+  $list_setting['cash_amount'] = array("Cash Amount", "cash_amount", FALSE, "cash_amount", TRUE, FALSE);
   $list_setting['gold_weight'] = array("Gold Weight", "gold_weight", FALSE, "gold_weight", TRUE, FALSE);
   $list_setting['gold_rate_purity'] = array("Gold Rate Purity", "gold_rate_purity", FALSE, "gold_rate_purity", TRUE, FALSE);
   $list_setting['gold_weight_purity'] = array("Gold Weight Purity", "gold_weight_purity", FALSE, "gold_weight_purity", TRUE, FALSE);
@@ -112,6 +114,8 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['bank_name'] = array("Bank Name", "Enter Bank Name", TRUE,'', TRUE);
   $attributes['gold_weight'] = array("Gold Weight", "Enter Gold Weight", TRUE,'', TRUE);
   $attributes['gold_rate'] = array("Gold Rate", "Enter Gold Rate", TRUE,'', TRUE);
+  $attributes['rate'] = array("Rate", "Enter Rate", TRUE,'', TRUE);
+  $attributes['cash_amount'] = array("Cash Amount", "Enter Cash Amount", TRUE,'', TRUE);
   $attributes['gold_weight_purity'] = array("Gold Weight Purity", "Enter Gold Weight Purity", TRUE,'', TRUE);
   $attributes['gold_rate_purity'] = array("Gold Rate Purity", "Enter Gold Weight Purity", TRUE,'', TRUE);
   $attributes['transaction_type'] = array("Transaction Type", "Select Transaction Type", TRUE,'', TRUE);

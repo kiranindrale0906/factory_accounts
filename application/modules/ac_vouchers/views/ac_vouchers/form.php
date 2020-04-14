@@ -29,8 +29,8 @@
   <div class="row">                                  
   <?php
       $col='';
-      $readonly='readonly';
-      if($this->router->class == "purchase_prices_issue_vouchers"||$this->router->class == "purchase_prices_receipt_vouchers"||$this->router->class == "purchase_weight_issue_vouchers"||$this->router->class == "purchase_weight_receipt_vouchers"){
+      $readonly='';
+      if($this->router->class == "purchase_price_issue_vouchers"||$this->router->class == "purchase_price_receipt_vouchers"||$this->router->class == "purchase_weight_issue_vouchers"||$this->router->class == "purchase_weight_receipt_vouchers"){
         $readonly='readonly';
       }
         $col='col-md-4';
@@ -43,9 +43,8 @@
   </div>      
    <div class="row">   
    <?php if(!empty(get_field_attribute($this->router->class,'department_name'))) :
-            load_field('text', array('field' => 'department_name', 'class' => 'autocomplete_list_selection',
-                                     'data-table'=>'ac_department','data-column'=>'name','col'=>$col,
-                                     'data-list-title'=>'From Department Name')); 
+            load_field('dropdown', array('field' => 'department_name', 'option' => @$department_name ,
+                                         'class' =>'department_name', 'col'=>$col)); 
           endif; ?> 
 
     <?php if(!empty(get_field_attribute($this->router->class,'from_account_name'))) :
@@ -96,6 +95,11 @@
                                      'data-table'=>'gold_rate','data-column'=>'name','col'=>$col,
                                      'data-list-title'=>'Gold Rate'));                                
           endif; ?>
+  <?php if(!empty(get_field_attribute($this->router->class,'rate'))) :
+            load_field('text', array('field' => 'rate', 'class' => 'autocomplete_list_selection',
+                                     'data-table'=>'rate','data-column'=>'name','col'=>$col,
+                                     'data-list-title'=>'Rate'));                                
+          endif; ?>
   <?php if(!empty(get_field_attribute($this->router->class,'gold_rate_purity'))) :
             load_field('text', array('field' => 'gold_rate_purity', 'class' => 'autocomplete_list_selection',
                                      'data-table'=>'gold_rate_purity','data-column'=>'name','col'=>$col,
@@ -143,6 +147,9 @@
 
     <?php if(!empty(get_field_attribute($this->router->class,'amount'))) :
       load_field('text', array('field' => 'amount', 'col'=>$col)); 
+    endif; ?> 
+    <?php if(!empty(get_field_attribute($this->router->class,'cash_amount'))) :
+      load_field('text', array('field' => 'cash_amount', 'col'=>$col)); 
     endif; ?> 
   </div>     
   <div class="row">   

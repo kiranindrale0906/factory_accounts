@@ -10,6 +10,7 @@ class Voucher_model extends BaseModel {
   }
 
   public function validation_rules($klass='') {
+    // print_r($this->router_class);die
     $rules[] =array('field' => $this->router_class.'[voucher_date]', 'label' => 'Date',
                     'rules' => array('trim', 'required', 
                                array('validate_voucher_date', array($this, 'check_period_exists'))),

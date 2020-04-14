@@ -30,7 +30,7 @@
                                             'transactions/metal_issue_vouchers' => 'Metal Issue Voucher',
                                             'transactions/metal_receipt_vouchers' => 'Metal Receipt Voucher',
                                             'transactions/sales_vouchers' => 'Sales Voucher',
-                                            // 'transactions/purchase_voucher' => 'Purchase Voucher',
+                                            'transactions/purchase_vouchers' => 'Purchase Voucher',
                                             'transactions/journal_vouchers' => 'Journal Voucher',
                                             'transactions/contra_vouchers' => 'Contra Voucher',
                                            'transactions/purchase_price_issue_vouchers' => 'Rate Cut Purchase Price Issue Voucher',
