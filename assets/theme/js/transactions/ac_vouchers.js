@@ -137,8 +137,13 @@ function calculate_purchase_weight_receipt_vouchers() {
 }
 
 function delete_purchase_voucher(index){
-      alert(index);
-  // $("input[name*='table_purchase_voucher["+index+"][delete]']").val(1);
-  // $("tr.table_purchase_voucher_"+index).hide();
+  $("input[name*='table_purchase_voucher["+index+"][delete]']").val(1);
+  $("tr.table_purchase_voucher_"+index).remove();
 }
+
+function delete_sales_voucher(index){
+  $("input[name*='table_sales_voucher["+index+"][delete]']").val(1);
+  $("tr.table_sales_voucher_"+index).remove();
+}
+
 

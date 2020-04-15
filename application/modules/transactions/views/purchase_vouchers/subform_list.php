@@ -7,12 +7,12 @@
     <thead>
       <tr>
         <th>Category</th>
-        <th>Gross Weight</th>
-        <th>Moti Weight</th>
-        <th>Net Weight</th>
+        <th>Gross Wt</th>
+        <th>Moti Wt</th>
+        <th>Net Wt</th>
         <th>Melting%</th>
         <th>Wastage%</th>
-        <th>Other crg/th>
+        <th>Other crg</th>
         <th>Narration</th>
         <th></th>
       </tr>

@@ -42,9 +42,9 @@
         endif; ?>
   </div>      
    <div class="row">   
-   <?php if(!empty(get_field_attribute($this->router->class,'department_name'))) :
-            load_field('dropdown', array('field' => 'department_name', 'option' => @$department_name ,
-                                         'class' =>'department_name', 'col'=>$col)); 
+   <?php if(!empty(get_field_attribute($this->router->class,'department_id'))) :
+            load_field('dropdown', array('field' => 'department_id', 'option' => @$department_name ,
+                                         'class' =>'department_id', 'col'=>$col)); 
           endif; ?> 
 
     <?php if(!empty(get_field_attribute($this->router->class,'from_account_name'))) :
@@ -206,6 +206,9 @@
   <?php 
     if($this->router->class=="purchase_vouchers") {
       $this->load->view('transactions/purchase_vouchers/subform_list');
+    }
+    if($this->router->class=="sales_vouchers") {
+      $this->load->view('transactions/sales_vouchers/subform_list');
     }
   ?>
   <div class="row"> 

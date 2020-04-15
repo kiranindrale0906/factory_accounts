@@ -35,7 +35,7 @@ function purchase_voucher_clients_list_settings() {
 */
 
 function purchase_voucher_clients_get_field_attribute($table, $field) {
-  $required_fields=array('id','voucher_date','account_name','department_name','rate','account_id','purity','rate','cash_amount');
+  $required_fields=array('id','voucher_date','account_name','department_id','rate','account_id','purity','rate','cash_amount');
 
   return ac_voucher_get_field_attribute($table,$field,$required_fields);
 }
