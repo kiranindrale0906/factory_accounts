@@ -1,32 +1,32 @@
 <tr class="table_prchase_voucher_<?= $index ?>">
   <td>
-    <?php load_field('plain/dropdown', array('field' => 'category',
+    <?php load_field('plain/dropdown', array('field' => 'category_id',
                                              'option' => get_account_name_for_metal_issue(),
                                              'controller' => 'purchase_vouchers',
                                              'index' => $index,
                                              'is_table'=>TRUE)); ?>
   </td>
   <td>
-    <?php load_field('plain/text', array('field' => 'gross_weight',
+    <?php load_field('plain/text', array('field' => 'gross_wt',
                                          'controller' => 'purchase_vouchers',
                                          'onkeyup' => 'calculate_factory_purity('.$index.')',
                                          'class' => 'issue_gross_weight',
-                                         'id' => 'gross_weight_'.$index,
+                                         'id' => 'gross_wt_'.$index,
                                          'index' => $index,
                                          'grid'=> 'col-sm-12')); ?>
   </td>
   <td>
-    <?php load_field('plain/text', array('field' => 'moti_weight',
+    <?php load_field('plain/text', array('field' => 'moti_wt',
                                          'controller' => 'purchase_vouchers',
                                          'onkeyup'=> 'calculate_factory_purity('.$index.')',
-                                         'id' => 'moti_weight'.$index,
+                                         'id' => 'moti_wt'.$index,
                                          'index' => $index,
                                          'grid'=> 'col-sm-12')); ?>
   </td>
    <td>
-    <?php load_field('plain/text', array('field' => 'net_weight',
+    <?php load_field('plain/text', array('field' => 'net_wt',
                                          'controller' => 'purchase_vouchers',
-                                         'id' => 'net_weight_'.$index,
+                                         'id' => 'net_wt_'.$index,
                                          'readonly' => true,
                                          'index' => $index,
                                          'grid' =>'col-sm-12')); ?>
@@ -48,22 +48,22 @@
                                          'grid' =>'col-sm-12')); ?>
   </td>
   <td>
-    <?php load_field('plain/text', array('field' => 'other',
+    <?php load_field('plain/text', array('field' => 'other_charges',
                                          'controller' => 'purchase_vouchers',
-                                         'id' => 'other_'.$index,
+                                         'id' => 'other_charges_'.$index,
                                          'readonly' => true,
                                          'index' => $index,
                                          'grid' =>'col-sm-12')); ?>
   </td><td>
-    <?php load_field('plain/text', array('field' => 'narration',
+    <?php load_field('plain/text', array('field' => 'description',
                                          'controller' => 'purchase_vouchers',
-                                         'id' => 'narration_'.$index,
+                                         'id' => 'description_'.$index,
                                          'readonly' => true,
                                          'index' => $index,
                                          'grid' =>'col-sm-12')); ?>
   </td>
   <td>
-    <?= getJsButton('Delete', 'javascript:void(0)', 'btn_red', '', 'delete_purchase__voucher('.$index.')',
+    <?= getJsButton('Delete', 'javascript:void(0)', 'btn_red', '', 'delete_purchase_voucher('.$index.')',
                     array(
                      'controller' => 'purchase_vouchers',
                      'index' => $index)); ?>

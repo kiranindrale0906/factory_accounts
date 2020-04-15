@@ -136,3 +136,9 @@ function calculate_purchase_weight_receipt_vouchers() {
     $('input[name*="purchase_weight_receipt_vouchers[debit_weight]').val(calculated_result);
 }
 
+function delete_purchase_voucher(index){
+      alert(index);
+  // $("input[name*='table_purchase_voucher["+index+"][delete]']").val(1);
+  // $("tr.table_purchase_voucher_"+index).hide();
+}
+
