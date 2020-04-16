@@ -19,7 +19,7 @@ function purchase_voucher_clients_getTableSettings() {
 
 function purchase_voucher_clients_list_settings() {
   $list_option=array('voucher_date','created_time','voucher_number','account_name','account_id','company_id','created_time','department_name',
-                     'total_gross_weight','total_net_weight','total_fine_weight','total_amount','total_weight','custom_order','status','rate','cash_amount');
+                     'total_gross_weight','total_net_weight','total_fine_weight','debit_amount','total_weight','custom_order','status','rate','cash_amount');
   return ac_vouchers_list_settings($list_option);
 }
 
