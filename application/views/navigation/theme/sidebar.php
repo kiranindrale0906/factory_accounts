@@ -50,7 +50,7 @@
                                             // 'transactions/repair_voucher_out' => 'Repair Voucher Out',
                                             // 'transactions/approval_in_voucher' => 'Approval in Voucher',
                                             // 'transactions/opening_stock_voucher' => 'Opening Stock Voucher',
-                                            // 'transactions/sales_return_voucher' => 'Sales Return Voucher',
+                                             'transactions/sales_return_vouchers' => 'Sales Return Voucher',
                                             // 'transactions/antique_sales_voucher' => 'Antique Sales Voucher',
                                             // 'transactions/mangalsutra_sales_voucher' => 'Mangalsutra Sales Voucher',
                                             // 'transactions/platinum_sales_voucher' => 'Platinum Sales Voucher',

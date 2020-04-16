@@ -146,4 +146,9 @@ function delete_sales_voucher(index){
   $("tr.table_sales_voucher_"+index).remove();
 }
 
+function delete_sales_return_voucher(index){
+  $("input[name*='table_sales_return_voucher["+index+"][delete]']").val(1);
+  $("tr.table_sales_return_voucher_"+index).remove();
+}
+
 

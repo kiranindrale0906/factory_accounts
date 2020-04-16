@@ -210,6 +210,9 @@
     if($this->router->class=="sales_vouchers") {
       $this->load->view('transactions/sales_vouchers/subform_list');
     }
+    if($this->router->class=="sales_return_vouchers") {
+      $this->load->view('transactions/sales_return_vouchers/subform_list');
+    }
   ?>
   <div class="row"> 
     <div class="col-sm-6"> 

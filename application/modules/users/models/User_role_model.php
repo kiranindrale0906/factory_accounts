@@ -29,7 +29,7 @@ class User_role_model extends Core_user_role_model {
                                             'transactions/expense_vouchers',
                                             'transactions/transfer_voucher','transactions/repair_voucher_out',
                                             'transactions/approval_in_voucher', 'transactions/opening_stock_voucher',
-                                            'transactions/sales_return_voucher', 'transactions/antique_sales_voucher',
+                                            'transactions/sales_return_vouchers', 'transactions/antique_sales_voucher',
                                             'transactions/mangalsutra_sales_voucher','transactions/platinum_sales_voucher',
                                             'transactions/machine_bangles_sales_voucher','transactions/antique_sales_return_voucher',
                                             'transactions/mangalsutra_sales_return_voucher'),
