@@ -1,10 +1,13 @@
 <tr class="table_sales_voucher_<?= $index ?>">
   <td>
-    <?php load_field('plain/dropdown', array('field' => 'category',
-                                             'option' => @$department_category,
+    <?php load_field('plain/text', array('field' => 'category',
                                              'controller' => 'sales_voucher_details',
                                              'index' => $index,
-                                             'is_table'=>TRUE)); ?>
+                                             'class' => 'autocomplete_list_selection',
+                                             'data-table'=>'ac_department_category',
+                                             'data-column'=>'name',
+                                             'data-list-title'=>'Department Category',
+                                             'is_table'=>TRUE));?>
   </td>
   <td>
     <?php load_field('plain/text', array('field' => 'gross_wt',

@@ -42,10 +42,7 @@
         endif; ?>
   </div>      
    <div class="row">   
-   <?php if(!empty(get_field_attribute($this->router->class,'department_id'))) :
-            load_field('dropdown', array('field' => 'department_id', 'option' => @$department_name ,
-                                         'class' =>'department_id', 'col'=>$col)); 
-          endif; ?> 
+
 
     <?php if(!empty(get_field_attribute($this->router->class,'from_account_name'))) :
             load_field('text', array('field' => 'from_account_name', 'class' => 'autocomplete_list_selection',
@@ -55,12 +52,16 @@
             load_field('hidden', array('field' => 'from_account_id'));                               
           endif; ?> 
      <?php if(!empty(get_field_attribute($this->router->class,'from_group_name'))) :
-            load_field('text', array('field' => 'from_group_name', 'class' => 'autocomplete_list_selection',
-                                     'data-table'=>'ac_from_group','data-column'=>'name','col'=>$col,
+            load_field('text', array('field' => 'from_group_name','col'=>$col,
                                      'data-list-title'=>'From Group Name')); 
 
             load_field('hidden', array('field' => 'from_group_id'));                               
-          endif; ?>   
+          endif; ?> 
+        <?php if(!empty(get_field_attribute($this->router->class,'department_name'))) :
+            load_field('text', array('field' => 'department_name' ,'class' => 'autocomplete_list_selection',
+                                     'data-table'=>'ac_department','data-column'=>'name','col'=>$col,
+                                     'data-list-title'=>'Department Name')); 
+          endif; ?>    
 
    </div>
   <div class="row">      
@@ -96,8 +97,7 @@
                                      'data-list-title'=>'Gold Rate'));                                
           endif; ?>
   <?php if(!empty(get_field_attribute($this->router->class,'rate'))) :
-            load_field('text', array('field' => 'rate', 'class' => 'autocomplete_list_selection',
-                                     'data-table'=>'rate','data-column'=>'name','col'=>$col,
+            load_field('text', array('field' => 'rate','col'=>$col,
                                      'data-list-title'=>'Rate'));                                
           endif; ?>
   <?php if(!empty(get_field_attribute($this->router->class,'gold_rate_purity'))) :
@@ -167,7 +167,11 @@
           endif; ?> 
 
     <?php if(!empty(get_field_attribute($this->router->class,'purity'))) :
-          load_field('text', array('field' => 'purity', 'class'=>'purity', 'col'=>$col)); 
+          load_field('text', array('field' => 'purity',
+                                   'class' => 'autocomplete_list_selection purity',
+                                   'data-table'=>'ac_purity','data-column'=>'purity', 
+                                   'col'=>$col,
+                                   'data-list-title'=>'Purity')); 
         endif; ?>
 
     <?php if(!empty(get_field_attribute($this->router->class,'fine'))) :

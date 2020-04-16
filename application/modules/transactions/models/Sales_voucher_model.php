@@ -11,8 +11,8 @@ class Sales_voucher_model extends Sales_voucher_client_model {
     $this->load->model(array('transactions/sales_purchase_detail_model','masters/department_model'));
   }
   public function before_validate() {
-    $this->attributes['department_name'] = $this->department_model->find('name')['name'];
-  }
+    $this->attributes['department_id'] = $this->department_model->find('id',array('where'=>$this->attributes['department_name']))['id'];
+ }
 
    public function validation_rules($klass='') {
     $rules[] = array('field' => $this->router_class.'[account_name]', 'label' => 'Account Name','rules' => 'trim|required');
