@@ -20,7 +20,7 @@ class Opening_stock_voucher_model extends Opening_stock_voucher_client_model {
   }
 
    public function after_save($action) {
-    $opening_stock_data=$total_net_wt=$total_fine_wt=$total_gold_amount=$total_other_charge=0;
+    $opening_stock_data=$total_net_wt=$total_fine_wt=$total_gross_wt=$total_other_charge=$total_gold_amount=$total_other_charge=0;
     
     $opening_stock_vouchers=array();
       if(!empty($this->formdata['opening_stock_voucher_details'])) {

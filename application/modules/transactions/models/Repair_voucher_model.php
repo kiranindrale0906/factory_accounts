@@ -29,7 +29,7 @@ class Repair_voucher_model extends Repair_voucher_client_model {
 
 
    public function after_save($action) {
-    $repair_data=$total_net_wt=$total_fine_wt=$total_gold_amount=$total_other_charge=0;
+    $repair_data=$total_net_wt=$total_fine_wt=$total_gross_wt=$total_other_charge=$total_gold_amount=$total_other_charge=0;
     
     $repair_vouchers=array();
       if(!empty($this->formdata['repair_voucher_details'])) {
