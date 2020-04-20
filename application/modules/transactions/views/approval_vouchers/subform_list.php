@@ -1,5 +1,5 @@
 <div>
-  <h6 class="bold float-left mb-0">Repair Voucher</h6>
+  <h6 class="bold float-left mb-0">Approval Voucher</h6>
   <?= getJsButton('Add More', 'javascript:void(0)', 'btn_blue float-right mb-1', '', 'add_form_approval_voucher()'); ?>
 </div>
 <div class="table-responsive">
