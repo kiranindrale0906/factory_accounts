@@ -1,4 +1,4 @@
-<?php if($this->router->class =="cash_receipt_vouchers" || $this->router->class=="cash_issue_vouchers" || $this->router->class =="metal_receipt_vouchers" || $this->router->class=="metal_issue_vouchers") : 
+<?php /*if($this->router->class =="cash_receipt_vouchers" || $this->router->class=="cash_issue_vouchers" || $this->router->class =="metal_receipt_vouchers" || $this->router->class=="metal_issue_vouchers") : */
 	$class_issue= "";
 	$class_receipt= "";
 	//if(!empty($this->router->class == "cash_receipt_vouchers")) {
@@ -33,7 +33,7 @@
   </div> -->
 </div>
 
-<?php endif; ?>
+<?php //endif; ?>
 
 <?php if($this->router->class =="metal_receipt_vouchers" || $this->router->class=="metal_issue_vouchers") : 
 

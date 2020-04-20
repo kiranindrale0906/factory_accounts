@@ -10,16 +10,30 @@ class Voucher_model extends BaseModel {
   }
 
   public function validation_rules($klass='') {
+    // print_r($this->router_class);die
     $rules[] =array('field' => $this->router_class.'[voucher_date]', 'label' => 'Date',
                     'rules' => array('trim', 'required', 
                                array('validate_voucher_date', array($this, 'check_period_exists'))),
                     'errors'=>array('validate_voucher_date' => "Please set the Financial year from master."));
-    $rules[] = array('field' => $this->router_class.'[account_name]', 'label' => 'Account Name',
-                     'rules' => 'trim|required');
+    $rules[] = array('field' => $this->router_class.'[account_name]', 'label' => 'Account Name','rules' => 'trim|required');
+    if($this->router->class=="bank_issue_vouchers" || $this->router->class=="bank_receipt_vouchers") {
+    $rules[] = array('field' => $this->router_class.'[bank_name]', 'label' => 'Bank Name','rules' => 'trim|required');
+    }
 
+    if($this->router->class=="journal_vouchers" || $this->router->class=="contra_vouchers") {
+    $rules[] = array('field' => $this->router_class.'[from_account_name]', 'label' => 'From Bank Name','rules' => 'trim|required');
+    $rules[] = array('field' => $this->router_class.'[from_group_name]', 'label' => 'From Group Name','rules' => 'trim|required');
+    $rules[] = array('field' => $this->router_class.'[to_group_name]', 'label' => 'To Group Name','rules' => 'trim|required');
+    $rules[] = array('field' => $this->router_class.'[amount]', 'label' => 'Amount','rules' => 'trim|required');
+    }
+
+    if($this->router->class=="expense_vouchers") {
+    $rules[] = array('field' => $this->router_class.'[to_group_name]', 'label' => 'To Group Name','rules' => 'trim|required');
+    $rules[] = array('field' => $this->router_class.'[debit_amount]', 'label' => 'Amount','rules' => 'trim|required');
+    }
 
     $check_credit_debit_type=stripos($this->router_class,'issue');
-    if($this->router->class=="cash_issue_vouchers" || $this->router->class=="cash_receipt_vouchers") {
+    if($this->router->class=="cash_issue_vouchers" || $this->router->class=="cash_receipt_vouchers" || $this->router->class=="bank_issue_vouchers" || $this->router->class=="bank_receipt_vouchers") {
       if($check_credit_debit_type==true) {
         $credit_rules[] = array('field' => $this->router_class.'[credit_amount]', 
                         'label' => 'Credit Amount',
@@ -38,29 +52,29 @@ class Voucher_model extends BaseModel {
       $rules[]=array('field' => $this->router_class.'[purity]', 
                     'label' => 'Purity',
                     'rules' => 'trim|required|numeric|less_than_equal_to[100]');
-      $rules[]=array('field' => $this->router_class.'[factory_purity]', 
-                    'label' => 'Factory Purity',
-                    'rules' => 'trim|required|numeric|less_than_equal_to[100]');
-      if(!empty($this->attributes['receipt_type']) && $this->attributes['receipt_type']=="Daily Drawer") {
-        $rules[]=array('field' => $this->router_class.'[type]', 
-                      'label' => 'Type',
-                      'rules' => 'trim|required');
-      }
+      // $rules[]=array('field' => $this->router_class.'[factory_purity]', 
+      //               'label' => 'Factory Purity',
+      //               'rules' => 'trim|required|numeric|less_than_equal_to[100]');
+      // if(!empty($this->attributes['receipt_type']) && $this->attributes['receipt_type']=="Daily Drawer") {
+      //   $rules[]=array('field' => $this->router_class.'[type]', 
+      //                 'label' => 'Type',
+      //                 'rules' => 'trim|required');
+      // }
 
-      if($this->router->class=="metal_receipt_vouchers") {
-        $rules[]=array('field' => $this->router_class.'[receipt_type]', 
-                      'label' => 'Receip type',
-                      'rules' => 'trim|required');
-      }      
+      // if($this->router->class=="metal_receipt_vouchers") {
+      //   $rules[]=array('field' => $this->router_class.'[receipt_type]', 
+      //                 'label' => 'Receip type',
+      //                 'rules' => 'trim|required');
+      // }      
 
-      if(!empty($this->attributes['receipt_type']) && $this->attributes['receipt_type']=="Refresh") {
-        $rules[]=array('field' => $this->router_class.'[hook_kdm_purity]', 
-                      'label' => 'Hook KDM Purity',
-                      'rules' => 'trim|required');
-        $rules[]=array('field' => $this->router_class.'[quantity]', 
-                      'label' => 'Quantity',
-                      'rules' => 'trim|required|numeric');
-      }
+      // if(!empty($this->attributes['receipt_type']) && $this->attributes['receipt_type']=="Refresh") {
+      //   $rules[]=array('field' => $this->router_class.'[hook_kdm_purity]', 
+      //                 'label' => 'Hook KDM Purity',
+      //                 'rules' => 'trim|required');
+      //   $rules[]=array('field' => $this->router_class.'[quantity]', 
+      //                 'label' => 'Quantity',
+      //                 'rules' => 'trim|required|numeric');
+      // }
       
       if($check_credit_debit_type==true) {
         $credit_rules[] = array('field' => $this->router_class.'[credit_weight]', 
@@ -76,15 +90,15 @@ class Voucher_model extends BaseModel {
       }
     }
 
-    if(!empty($this->router->class=="metal_receipt_vouchers")) {
-      $this->load->model('transactions/metal_issue_voucher_model');
-      foreach($this->formdata['metal_issue_vouchers'] as $index => $records) {
-        if(!empty($records['account_name'])) {
-          $record_rules = $this->metal_issue_voucher_model->validation_rules('',$index);
-          $rules = array_merge($rules, $record_rules);  
-        }
-      }
-    }
+    // if(!empty($this->router->class=="metal_receipt_vouchers")) {
+    //   $this->load->model('transactions/metal_issue_voucher_model');
+    //   foreach($this->formdata['metal_issue_vouchers'] as $index => $records) {
+    //     if(!empty($records['account_name'])) {
+    //       $record_rules = $this->metal_issue_voucher_model->validation_rules('',$index);
+    //       $rules = array_merge($rules, $record_rules);  
+    //     }
+    //   }
+    // }
     
     return $rules;
   }
@@ -174,60 +188,60 @@ class Voucher_model extends BaseModel {
       $ledger_data=$this->set_ledger_data($this->attributes);
       $obj_ledeger = new ledger_model($ledger_data);
       $obj_ledeger->store(false);
-      if(!empty($this->attributes['receipt_type'])) {
-        $this->send_request_to_argold($this->attributes);  
-      }
+        // if(!empty($this->attributes['receipt_type'])) {
+        //   $this->send_request_to_argold($this->attributes);  
+        // }
     } 
 
-    if($this->router->class=="metal_receipt_vouchers") {
-      $this->load->model('transactions/metal_issue_voucher_model');
-      if(!empty($this->formdata['metal_issue_vouchers'])) {
-        foreach ($this->formdata['metal_issue_vouchers'] as $voucher_record) {
-          $metal_issue_data = array();
+    // if($this->router->class=="metal_receipt_vouchers") {
+    //   $this->load->model('transactions/metal_issue_voucher_model');
+    //   if(!empty($this->formdata['metal_issue_vouchers'])) {
+    //     foreach ($this->formdata['metal_issue_vouchers'] as $voucher_record) {
+    //       $metal_issue_data = array();
 
-          $metal_issue_data=$voucher_record;
+    //       $metal_issue_data=$voucher_record;
 
-          $account = $this->account_model->find('id',array('name'=>$metal_issue_data['account_name']));
-          if(empty($account['id'])) {
-            $account_detail['name']=$metal_issue_data['account_name'];
-            $obj_account = new account_model($account_detail);
-            $account_details=$obj_account->store(false);
-            $account['id']=$account_details['id'];      
-          }
+    //       $account = $this->account_model->find('id',array('name'=>$metal_issue_data['account_name']));
+    //       if(empty($account['id'])) {
+    //         $account_detail['name']=$metal_issue_data['account_name'];
+    //         $obj_account = new account_model($account_detail);
+    //         $account_details=$obj_account->store(false);
+    //         $account['id']=$account_details['id'];      
+    //       }
 
-          $metal_issue_data['company_id']  = $this->attributes['company_id'];
-          $metal_issue_data['metal_receipt_voucher_reference_id']  = $this->attributes['id'];
-          $metal_issue_data['voucher_date'] = $this->attributes['voucher_date'];
-          $metal_issue_data['account_id']=$account['id'];
-          $metal_issue_data['receipt_type'] = $this->attributes['receipt_type'];
-          $metal_issue_data['purity'] = $this->attributes['purity'];
-          $metal_issue_data['fine'] = $voucher_record['credit_weight']*$this->attributes['purity']/100;
-          $metal_issue_data['narration'] = $this->attributes['narration'];
-          $metal_issue_data['suffix'] = "MI";
-          $metal_issue_data['voucher_type'] = "metal issue voucher";
-          $metal_issue_data['transaction_type'] = 'account';
-          $period_id = $this->attributes['period_id'];
-          $voucher_serial_number = $this->create_voucher_serial_number($metal_issue_data['voucher_type'],
-                                                                       $period_id);
-          $metal_issue_data['voucher_serial_number'] = $voucher_serial_number;
+    //       $metal_issue_data['company_id']  = $this->attributes['company_id'];
+    //       $metal_issue_data['metal_receipt_voucher_reference_id']  = $this->attributes['id'];
+    //       $metal_issue_data['voucher_date'] = $this->attributes['voucher_date'];
+    //       $metal_issue_data['account_id']=$account['id'];
+    //       $metal_issue_data['receipt_type'] = $this->attributes['receipt_type'];
+    //       $metal_issue_data['purity'] = $this->attributes['purity'];
+    //       $metal_issue_data['fine'] = $voucher_record['credit_weight']*$this->attributes['purity']/100;
+    //       $metal_issue_data['narration'] = $this->attributes['narration'];
+    //       $metal_issue_data['suffix'] = "MI";
+    //       $metal_issue_data['voucher_type'] = "metal issue voucher";
+    //       $metal_issue_data['transaction_type'] = 'account';
+    //       $period_id = $this->attributes['period_id'];
+    //       $voucher_serial_number = $this->create_voucher_serial_number($metal_issue_data['voucher_type'],
+    //                                                                    $period_id);
+    //       $metal_issue_data['voucher_serial_number'] = $voucher_serial_number;
 
-          $voucher_number = $this->create_voucher_number($metal_issue_data['suffix'],$voucher_serial_number,
-                                                         $this->attributes['voucher_date']);
-          $metal_issue_data['voucher_number'] = $voucher_number;
+    //       $voucher_number = $this->create_voucher_number($metal_issue_data['suffix'],$voucher_serial_number,
+    //                                                      $this->attributes['voucher_date']);
+    //       $metal_issue_data['voucher_number'] = $voucher_number;
 
-          $purity_margin=($metal_issue_data['purity']-$metal_issue_data['factory_purity'])*$metal_issue_data['credit_weight']/100;
-          $metal_issue_data['purity_margin'] = $purity_margin;
-          //pd($data);
-          $obj_metal_issue_voucher=new metal_issue_voucher_model($metal_issue_data);
-          $obj_metal_issue_voucher->store(false);
+    //       // $purity_margin=($metal_issue_data['purity']-$metal_issue_data['factory_purity'])*$metal_issue_data['credit_weight']/100;
+    //       // $metal_issue_data['purity_margin'] = $purity_margin;
+    //       //pd($data);
+    //       $obj_metal_issue_voucher=new metal_issue_voucher_model($metal_issue_data);
+    //       $obj_metal_issue_voucher->store(false);
           
-          $metal_issue_data['id']=$obj_metal_issue_voucher->attributes['id'];
-          $ledger_data=$this->set_ledger_data($metal_issue_data);
-          $obj_ledeger = new ledger_model($ledger_data);
-          $obj_ledeger->store(false);
-        }
-      }
-    }
+    //       $metal_issue_data['id']=$obj_metal_issue_voucher->attributes['id'];
+    //       $ledger_data=$this->set_ledger_data($metal_issue_data);
+    //       $obj_ledeger = new ledger_model($ledger_data);
+    //       $obj_ledeger->store(false);
+    //     }
+    //   }
+    // }
   }
 
   private function set_ledger_data($result) {

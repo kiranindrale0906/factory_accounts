@@ -123,6 +123,12 @@ function get_receipt_type(){
                      'name' => 'Refresh'),
               array('id' => 'Daily Drawer',
                      'name' => 'Daily Drawer'));
+}function get_transaction_type(){
+  return array(
+              array('id' => 'Cash',
+                     'name' => 'Cash'),
+              array('id' => 'Bill',
+                     'name' => 'Bill'));
 }
 
 function get_daily_drawer_receipt_type(){

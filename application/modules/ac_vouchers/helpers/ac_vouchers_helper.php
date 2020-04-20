@@ -44,15 +44,27 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
   $list_setting['created_time'] = array("Time", "created_at", FALSE, "created_at", FALSE, TRUE,
                                         "date_format(created_at,'%H:%i:%s') as created_at");
   $list_setting['voucher_number'] = array("Voucher", "voucher_number", FALSE, "voucher_number", TRUE, FALSE);
+  $list_setting['gold_rate'] = array("Gold Rate", "gold_rate", FALSE, "gold_rate", TRUE, FALSE);
+  $list_setting['rate'] = array("Rate", "rate", FALSE, "rate", TRUE, FALSE);
+  $list_setting['cash_amount'] = array("Cash Amount", "cash_amount", FALSE, "cash_amount", TRUE, FALSE);
+  $list_setting['gold_weight'] = array("Gold Weight", "gold_weight", FALSE, "gold_weight", TRUE, FALSE);
+  $list_setting['gold_rate_purity'] = array("Gold Rate Purity", "gold_rate_purity", FALSE, "gold_rate_purity", TRUE, FALSE);
+  $list_setting['gold_weight_purity'] = array("Gold Weight Purity", "gold_weight_purity", FALSE, "gold_weight_purity", TRUE, FALSE);
+  $list_setting['transaction_type'] = array("Transaction Type", "transaction_type", TRUE, "transaction_type", TRUE, TRUE);
   $list_setting['bank_name'] = array("Bank Name", "bank_name", TRUE, "bank_name", TRUE, TRUE);
+  $list_setting['cheque_number'] = array("Check Number", "cheque_number", TRUE, "cheque_number", TRUE, TRUE);
   $list_setting['account_name'] = array("Account", "account_name", TRUE, "account_name", TRUE, TRUE);
-  $list_setting['debit_amount'] = array("Credit", "debit_amount", TRUE, "debit_amount", FALSE, TRUE);
-  $list_setting['credit_amount'] = array("Debit Amt.", "credit_amount", TRUE, "credit_amount", FALSE, TRUE);
+  $list_setting['from_account_name'] = array("From Account Name", "from_account_name", TRUE, "from_account_name", TRUE, TRUE);
+
+  $list_setting['from_group_name'] = array("From Group Name", "from_group_name", TRUE, "from_group_name", TRUE, TRUE);
+  $list_setting['to_group_name'] = array("To Group Name", "to_group_name", TRUE, "to_group_name", TRUE, TRUE);
   
+  
+  $list_setting['amount'] = array("Amount.", "amount", TRUE, "amount", FALSE, TRUE);
+
   $list_setting['hook_kdm_purity'] = array("Hook KDM Purity", "hook_kdm_purity", TRUE, 
                                            "hook_kdm_purity", FALSE, TRUE);
   $list_setting['quantity'] = array("Quantity", "quantity", TRUE, "quantity", FALSE, TRUE);
-
   $list_setting['narration'] = array("Narration", "narration", FALSE, "narration", TRUE, TRUE);
   $list_setting['receipt_type'] = array("Receipt Type", "receipt_type", FALSE, "receipt_type", TRUE, TRUE);
   $list_setting['credit_weight'] = array("Debit Wt.", "credit_weight", FALSE, "credit_weight", TRUE, TRUE);
@@ -60,6 +72,16 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
   $list_setting['purity'] = array("Purity", "purity", FALSE, "purity", TRUE, TRUE);
   $list_setting['factory_purity'] = array("Factory Purity", "factory_purity", FALSE, "factory_purity", TRUE, TRUE);
   $list_setting['Pure Gold'] = array("Narration", "pure_gold_credit", FALSE, "pure_gold_credit", TRUE, TRUE);
+  $list_setting['department_name'] = array("Department Name", "department_name", FALSE, "department_name", TRUE, TRUE);
+  $list_setting['debit_amount'] = array("Credit", "debit_amount", TRUE, "debit_amount", FALSE, TRUE);
+  $list_setting['credit_amount'] = array("Debit Amt.", "credit_amount", TRUE, "credit_amount", FALSE, TRUE);
+  $list_setting['total_gross_weight'] = array("Total Gross Wt", "total_gross_weight", FALSE, "total_gross_weight", TRUE, TRUE);
+  $list_setting['total_net_weight'] = array("Total Net Wt", "total_net_weight", FALSE, "total_net_weight", TRUE, TRUE);
+  $list_setting['total_fine_weight'] = array("Total Fine Wt", "total_fine_weight", FALSE, "total_fine_weight", TRUE, TRUE);
+  $list_setting['total_amount'] = array("Total Amount", "total_amount", FALSE, "total_amount", TRUE, TRUE);
+
+
+
   $list_setting['action'] = array("Action", "action", FALSE, "action", FALSE, FALSE);
 
   if(!empty($list_setting_arg)) {
@@ -85,7 +107,21 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['id'] = array('', '', TRUE, '', TRUE);
   $attributes['voucher_date'] = array('Date', 'Enter Date.', TRUE, '', TRUE,TRUE);
   $attributes['account_name'] = array('Account', 'Enter Account', TRUE, '', TRUE);
+  $attributes['from_account_name'] = array('From Account', 'Enter From Account', TRUE, '', TRUE);
+  $attributes['from_group_name'] = array('From Group Name', 'Enter From Group', TRUE, '', TRUE);
+  $attributes['to_group_name'] = array('To Group Name', 'Enter To Group', TRUE, '', TRUE);
+  $attributes['amount'] = array('Amount', 'Enter Amount', TRUE, '', TRUE);
   $attributes['credit_amount'] = array('Credit Amount', 'Enter Credit Amount', TRUE, '', TRUE);
+  $attributes['bank_name'] = array("Bank Name", "Enter Bank Name", TRUE,'', TRUE);
+  $attributes['gold_weight'] = array("Gold Weight", "Enter Gold Weight", TRUE,'', TRUE);
+  $attributes['gold_rate'] = array("Gold Rate", "Enter Gold Rate", TRUE,'', TRUE);
+  $attributes['rate'] = array("Rate", "Enter Rate", TRUE,'', TRUE);
+  $attributes['cash_amount'] = array("Cash Amount", "Enter Cash Amount", TRUE,'', TRUE);
+  $attributes['gold_weight_purity'] = array("Gold Weight Purity", "Enter Gold Weight Purity", TRUE,'', TRUE);
+  $attributes['gold_rate_purity'] = array("Gold Rate Purity", "Enter Gold Weight Purity", TRUE,'', TRUE);
+  $attributes['transaction_type'] = array("Transaction Type", "Select Transaction Type", TRUE,'', TRUE);
+
+  $attributes['cheque_number'] = array("Check Number", "Enter Check Number", FALSE,'', FALSE);
   $attributes['debit_amount'] = array('Debit Amount', 'Enter Debit Amount', TRUE, '', TRUE);
   $attributes['receipt_type'] = array('Receipt Type', 'Enter Receipt Type', TRUE, '', TRUE);
   $attributes['factory_purity'] = array('Factory Purity', 'Enter factory purity', TRUE, '', TRUE);
@@ -100,12 +136,17 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['vouchersamount'] = array('vouchersamount', 'Enter vouchersamount', FALSE, '', TRUE);
   $attributes['company_id'] = array('', '', TRUE, '', TRUE);
   $attributes['account_id'] = array('', '', TRUE, '', TRUE);
+  $attributes['from_account_id'] = array('', '', TRUE, '', TRUE);
+  $attributes['from_group_id'] = array('', '', TRUE, '', TRUE);
+  $attributes['to_group_id'] = array('', '', TRUE, '', TRUE);
   $attributes['document'] = array('', '', TRUE, '', TRUE);
 
   $attributes['purity'] = array('Purity', 'Enter Purity', TRUE, '', TRUE);
   $attributes['credit_weight'] = array('Credit Weight', 'Enter Credit Weight', TRUE, '', TRUE);
   $attributes['debit_weight'] = array('Weight', 'Enter Weight', TRUE, '', TRUE);
   $attributes['arg_weight'] = array('ARG Weight', 'ARG Weight', FALSE, '', FALSE,TRUE);
+  $attributes['department_name'] = array('Department Name', 'Department', FALSE, '', TRUE);
+  $attributes['department_id'] = array('Department', ' Department', FALSE, '', FALSE,TRUE);
 
   if(!empty($required_field)) {
     $attributes[$ci->router->class] = array_intersect_key($attributes, array_flip($required_field));

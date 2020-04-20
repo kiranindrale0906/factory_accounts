@@ -14,6 +14,18 @@ $(".purity").on('keyup', function() {
 $(".factory_purity").on('keyup', function() {
 	 calculate_fine_factory_fine();
 });
+$('input[name*="purchase_price_issue_vouchers"').on('keyup', function() {
+	 calculate_purchase_price_issue_vouchers();
+});
+$('input[name*="purchase_weight_issue_vouchers"').on('keyup', function() {
+	 calculate_purchase_weight_issue_vouchers();
+});
+$('input[name*="purchase_price_receipt_vouchers"').on('keyup', function() {
+	 calculate_purchase_price_receipt_vouchers();
+});
+$('input[name*="purchase_weight_receipt_vouchers"').on('keyup', function() {
+	 calculate_purchase_weight_receipt_vouchers();
+});
 
 function calculate_fine_factory_fine() {
 	var debit_wt=$(".debit_weight").val();
@@ -68,3 +80,75 @@ function calculate_arg_weight() {
 		$("#arg_weight").val(total_weight.toFixed(4));
 	}
 }
+
+function calculate_purchase_price_issue_vouchers() {
+    var gold_rate = $('input[name*="purchase_price_issue_vouchers[gold_rate]"]').val();
+    var gold_rate_purity = $('input[name*="purchase_price_issue_vouchers[gold_rate_purity]"]').val();
+    var gold_weight = $('input[name*="purchase_price_issue_vouchers[gold_weight]"]').val();
+    var gold_weight_purity = $('input[name*="purchase_price_issue_vouchers[gold_weight_purity]"]').val();
+    var calculated_result = 0;
+        gold_rate = gold_rate / 10;
+        var rate_pure_gold = (gold_rate / gold_rate_purity) * 100;
+        var gold_weight_pure_gold = (gold_weight * gold_weight_purity) / 100;
+        calculated_result = (rate_pure_gold * gold_weight_pure_gold) / 100;
+    
+    $('input[name*="purchase_price_issue_vouchers[credit_amount]').val(calculated_result);
+}
+
+function calculate_purchase_price_receipt_vouchers() {
+    var gold_rate = $('input[name*="purchase_price_receipt_vouchers[gold_rate]"]').val();
+    var gold_rate_purity = $('input[name*="purchase_price_receipt_vouchers[gold_rate_purity]"]').val();
+    var gold_weight = $('input[name*="purchase_price_receipt_vouchers[gold_weight]"]').val();
+    var gold_weight_purity = $('input[name*="purchase_price_receipt_vouchers[gold_weight_purity]"]').val();
+    var calculated_result = 0;
+        gold_rate = gold_rate / 10;
+        var rate_pure_gold = (gold_rate / gold_rate_purity) * 100;
+        var gold_weight_pure_gold = (gold_weight * gold_weight_purity) / 100;
+        calculated_result = (rate_pure_gold * gold_weight_pure_gold) / 100;
+    
+    $('input[name*="purchase_price_receipt_vouchers[debit_amount]').val(calculated_result);
+}
+
+function calculate_purchase_weight_issue_vouchers() {
+	var gold_rate = $('input[name*="purchase_weight_issue_vouchers[gold_rate]"]').val();
+	var gold_rate_purity = $('input[name*="purchase_weight_issue_vouchers[gold_rate_purity]"]').val();
+	var amount = $('input[name*="purchase_weight_issue_vouchers[amount]"]').val();
+	var calculated_result = 0;
+	gold_weight_purity = 100.00;
+    amount = amount * 100;
+    gold_rate = gold_rate / 10;
+    var rate_pure_gold = (gold_rate / gold_rate_purity) * 100;
+    calculated_result = (amount / rate_pure_gold) / gold_weight_purity * 100;
+    $('input[name*="purchase_weight_issue_vouchers[credit_weight]').val(calculated_result);
+}
+
+function calculate_purchase_weight_receipt_vouchers() {
+	var gold_rate = $('input[name*="purchase_weight_receipt_vouchers[gold_rate]"]').val();
+	var gold_rate_purity = $('input[name*="purchase_weight_receipt_vouchers[gold_rate_purity]"]').val();
+	var amount = $('input[name*="purchase_weight_receipt_vouchers[amount]"]').val();
+	var calculated_result = 0;
+	gold_weight_purity = 100.00;
+    amount = amount * 100;
+    gold_rate = gold_rate / 10;
+    var rate_pure_gold = (gold_rate / gold_rate_purity) * 100;
+    calculated_result = (amount / rate_pure_gold) / gold_weight_purity * 100;
+    
+    $('input[name*="purchase_weight_receipt_vouchers[debit_weight]').val(calculated_result);
+}
+
+function delete_purchase_voucher(index){
+  $("input[name*='table_purchase_voucher["+index+"][delete]']").val(1);
+  $("tr.table_purchase_voucher_"+index).remove();
+}
+
+function delete_sales_voucher(index){
+  $("input[name*='table_sales_voucher["+index+"][delete]']").val(1);
+  $("tr.table_sales_voucher_"+index).remove();
+}
+
+function delete_sales_return_voucher(index){
+  $("input[name*='table_sales_return_voucher["+index+"][delete]']").val(1);
+  $("tr.table_sales_return_voucher_"+index).remove();
+}
+
+

@@ -1,13 +1,12 @@
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Vouchers extends BaseController {
 
   public function __construct() {
     parent::__construct();
     $this->load->model(array('masters/account_model', 'transactions/ledger_model', 'masters/group_model',
-                             'masters/company_model', 'masters/purity_model'));
+                             'masters/company_model', 'masters/purity_model', 'masters/department_category_model','masters/department_model'));
   }
 
   public function index() {
@@ -47,7 +46,12 @@ class Vouchers extends BaseController {
     $this->data['group_list'] = $this->group_model->get('name,id',
                                                         array('where'=>array('company_id='=>$company_id)),
                                                         array(), array('order_by'=>'name asc'));
+    $this->data['department_name'] = $this->department_model->get('name,id', array() ,array(), array('order_by'=>'name asc'));
+     $this->data['department_category']=$this->department_category_model->get('name as name',array(),array(), array('order_by'=>'name asc'));
+    $this->data['purity_list'] = $this->purity_model->get('purity as name,purity id', array() ,array(), array('order_by'=>'name asc'));
+
     $this->data['receipt_type'] = get_receipt_type();
+    $this->data['transaction_type'] = get_transaction_type();
     $this->data['hook_kdm_purity'] = get_melting_purity();
   }
 
