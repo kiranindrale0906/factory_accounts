@@ -19,7 +19,7 @@ class Sales_return_voucher_model extends Sales_return_voucher_client_model {
   }
 
    public function after_save($action) {
-    $sales_return_data=$total_net_wt=$total_fine_wt=$total_gold_amount=$total_other_charge=0;
+    $sales_return_data=$total_net_wt=$total_fine_wt=$total_gross_wt=$total_other_charge=$total_gold_amount=$total_other_charge=0;
     
     $sales_return_vouchers=array();
       if(!empty($this->formdata['sales_return_voucher_details'])) {

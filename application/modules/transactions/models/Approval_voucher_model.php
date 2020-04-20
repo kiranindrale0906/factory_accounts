@@ -30,7 +30,7 @@ class Approval_voucher_model extends Approval_voucher_client_model {
 
 
    public function after_save($action) {
-    $approval_data=$total_net_wt=$total_fine_wt=$total_gold_amount=$total_other_charge=0;
+    $approval_data=$total_net_wt=$total_fine_wt=$total_gross_wt=$total_other_charge=$total_gold_amount=$total_other_charge=0;
     
     $approval_vouchers=array();
       if(!empty($this->formdata['approval_voucher_details'])) {
