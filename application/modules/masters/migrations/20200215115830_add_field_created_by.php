@@ -11,7 +11,7 @@ class Migration_add_field_created_by extends CI_Model {
 
     foreach ($fields as $table_name) {
       $sql="alter table ".$table_name." add created_by int(11) default 0";
-      //$this->db->query($sql);
+      $this->db->query($sql);
     }
   }
 
