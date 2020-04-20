@@ -11,9 +11,7 @@ class Purchase_voucher_model extends Purchase_voucher_client_model {
     $this->load->model(array('transactions/sales_purchase_detail_model','masters/department_model'));
 
   }
-  public function before_validate() {
-    $this->attributes['department_id'] = $this->department_model->find('id',array('where'=>$this->attributes['department_name']))['id'];
-  }
+
 
    public function validation_rules($klass='') {
     $rules[] = array('field' => $this->router_class.'[account_name]', 'label' => 'Account Name','rules' => 'trim|required');
@@ -40,7 +38,7 @@ class Purchase_voucher_model extends Purchase_voucher_client_model {
           $purchase_data['voucher_type'] =$this->attributes['voucher_type'];
           $purchase_data['transaction_type'] = 'account';
           $purchase_data['department_name'] = $this->attributes['department_name'];
-          $purchase_data['department_id'] = $this->attributes['department_id'];
+          // $purchase_data['department_id'] = $this->attributes['department_id'];
 
           $purchase_data['rate'] = $this->attributes['rate']/($this->attributes['purity']*100);
           $purchase_data['gold_amount'] = ($voucher_record['net_wt']*($voucher_record['melting']+$voucher_record['wastage'])/100)*$purchase_data['rate']/10;

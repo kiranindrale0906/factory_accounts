@@ -192,4 +192,11 @@ function get_account_name_for_metal_issue(){
           );
 
 }
+function get_has_hallmark(){
+  return array(
+            array('id' => 'Yes', 'name' => 'Yes'),
+            array('id' => 'No', 'name' => 'No')
+          );
+
+}
 

@@ -150,5 +150,94 @@ function delete_sales_return_voucher(index){
   $("input[name*='table_sales_return_voucher["+index+"][delete]']").val(1);
   $("tr.table_sales_return_voucher_"+index).remove();
 }
+function delete_repair_voucher(index){
+  $("input[name*='table_repair_voucher["+index+"][delete]']").val(1);
+  $("tr.table_repair_voucher_"+index).remove();
+}
+function delete_opening_stock_voucher(index){
+  $("input[name*='table_opening_stock_voucher["+index+"][delete]']").val(1);
+  $("tr.table_opening_stock_voucher_"+index).remove();
+}
+function delete_approval_voucher(index){
+  $("input[name*='table_approval_voucher["+index+"][delete]']").val(1);
+  $("tr.table_approval_voucher_"+index).remove();
+}
+
+$(document).on("change", ".gross_weight", function() {
+    var sum = 0;
+    $(".gross_weight").each(function(){
+        sum += +$(this).val();
+    });
+    $(".get_total_gross_weight").val(sum);
+});
+$(document).on("change", ".net_weight", function() {
+    var sum = 0;
+    $(".net_weight").each(function(){
+        sum += +$(this).val();
+    });
+    $(".get_total_net_weight").val(sum);
+});
+$(document).on("change", ".melting, .gross_weight", function() {
+    var sum = 0;
+    var melting = 0;
+    var melting_percent = 0;
+    var gross_weight = 0;
+    var length = 0;
+
+    $(".melting").each(function(i){
+        melting += +$(this).val();
+        length=i+1;
+    });
+    $(".gross_weight").each(function(){
+        gross_weight += +$(this).val();
+    });
+    melting_percent=(melting/length);
+    sum=gross_weight*melting_percent/100
+
+    $(".get_total_fine_weight").val(sum);
+});
+
+
+$(document).on("change", ".melting, .gross_weight", function() {
+    var sum = 0;
+    var melting = 0;
+    var melting_percent = 0;
+    var gross_weight = 0;
+    var length = 0;
+
+    $(".melting").each(function(i){
+        melting += +$(this).val();
+        length=i+1;
+    });
+    $(".gross_weight").each(function(){
+        gross_weight += +$(this).val();
+    });
+    melting_percent=(melting/length);
+    sum=gross_weight*melting_percent/100
+
+    $(".get_total_fine_weight").val(sum);
+});
+
+$(document).on("change", ".net_weight, .labour_rate,.other_charges", function() {
+    var sum = 0;
+    var net_weight = 0;
+    var melting_percent = 0;
+    var labour_rate = 0;
+    var other_charges = 0;
+
+    $(".net_weight").each(function(){
+        net_weight += +$(this).val();
+    });
+    $(".labour_rate").each(function(){
+        labour_rate += +$(this).val();
+    }); 
+    $(".other_charges").each(function(){
+        other_charges += +$(this).val();
+    });
+
+    sum=(net_weight*labour_rate)+other_charges;
+
+    $(".get_total_amount").val(sum);
+});
 
 

@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed.');
 
-function sales_return_voucher_clients_getTableSettings() {
-  $table_setting=array('page_title'=>'Sales Return Voucher','where'=>'voucher_type="sales return voucher"','add_title' => 'Add Sales Return Voucher');
+function opening_stock_voucher_clients_getTableSettings() {
+  $table_setting=array('page_title'=>'Opening Stock Voucher','where'=>'voucher_type="opening stock voucher"','add_title' => 'Add Opening Stock Voucher');
   return ac_vouchers_getTableSettings($table_setting);
 }
 //Add Cash Issue Voucher
@@ -17,7 +17,7 @@ function sales_return_voucher_clients_getTableSettings() {
 
 
 
-function sales_return_voucher_clients_list_settings() {
+function opening_stock_voucher_clients_list_settings() {
   $list_option=array('voucher_date','created_time','voucher_number','account_name','account_id','company_id','created_time','department_name',
                      'total_gross_weight','total_net_weight','total_fine_weight','total_amount','total_weight','custom_order','status');
   return ac_vouchers_list_settings($list_option);
@@ -34,12 +34,12 @@ function sales_return_voucher_clients_list_settings() {
   | [6] => disabled
 */
 
-function sales_return_voucher_clients_get_field_attribute($table, $field) {
+function opening_stock_voucher_clients_get_field_attribute($table, $field) {
   $required_fields=array('id','voucher_date','account_name','department_name','rate','account_id','purity','total_gross_weight','total_net_weight','total_fine_weight');
 
   return ac_voucher_get_field_attribute($table,$field,$required_fields);
 }
 
-function sales_return_voucher_clients_get_row_actions($row, $url, $select_url, $filter) {
+function opening_stock_voucher_clients_get_row_actions($row, $url, $select_url, $filter) {
   return ac_voucher_get_row_actions($row,$url,$select_url,$filter);
 }
