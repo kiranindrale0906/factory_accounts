@@ -11,6 +11,16 @@
   $this->load->view('ac_vouchers/ac_vouchers/company_error_message');
 ?>
 
+<?php
+  if (!isset($record)) 
+    $record = array();    
+    $checked="";   
+    if(!empty($record['has_hallmark']))
+    {
+      $checked='checked';
+    }
+?>
+
 <form method="post" class="form-horizontal fields-group-sm" enctype="multipart/form-data"
       action="<?= get_form_action($controller, $action, $record) ?>">
   <?php if ($action == 'edit' || $action == 'update'): 
@@ -30,10 +40,10 @@
   <?php
       $col='';
       $readonly='';
+      $col='col-md-4';
       if($this->router->class == "purchase_price_issue_vouchers"||$this->router->class == "purchase_price_receipt_vouchers"||$this->router->class == "purchase_weight_issue_vouchers"||$this->router->class == "purchase_weight_receipt_vouchers"){
         $readonly='readonly';
       }
-        $col='col-md-4';
 
         if(!empty(get_field_attribute($this->router->class,'voucher_date'))) :
            load_field('date',array('field' => 'voucher_date',
@@ -58,10 +68,17 @@
             load_field('hidden', array('field' => 'from_group_id'));                               
           endif; ?> 
         <?php if(!empty(get_field_attribute($this->router->class,'department_name'))) :
-            load_field('text', array('field' => 'department_name' ,'class' => 'autocomplete_list_selection',
-                                     'data-table'=>'ac_department','data-column'=>'name','col'=>$col,
-                                     'data-list-title'=>'Department Name')); 
-          endif; ?>    
+          load_field('text', array('field' => 'department_name',
+                                   'class' => 'autocomplete_list_selection ',
+                                   'data-table'=>'ac_department','data-column'=>'name', 
+                                   'col'=>$col,
+                                   'data-list-title'=>'Department Name')); 
+        endif; ?>
+
+        <?php if(!empty(get_field_attribute($this->router->class,'type'))) :
+            load_field('text', array('field' => 'type','col'=>$col,));                               
+          endif; ?> 
+    
 
    </div>
   <div class="row">      
@@ -82,15 +99,33 @@
 
     <?php if(!empty(get_field_attribute($this->router->class,'receipt_type'))) :
             load_field('dropdown', array('field' => 'receipt_type', 'option' => @$receipt_type ,
-                                         'class' =>'receipt_type', 'col'=>$col)); 
-            
-            load_field('hidden', array('field' => 'account_id'));                               
+                                         'class' =>'receipt_type', 'col'=>$col));                               
           endif; ?> 
   
   </div>  
 
+  <div class="row"> 
+  <?php if(!empty(get_field_attribute($this->router->class,'group_name'))) :
+            load_field('text', array('field' => 'group_name','col'=>$col,
+                                     ));                                
+          endif; ?>
+  </div> 
+  <div class="row"> 
+  <?php if(!empty(get_field_attribute($this->router->class,'gst_number'))) :
+            load_field('text', array('field' => 'gst_number','col'=>$col,
+                                     ));                                
+          endif; ?>
+  </div> 
+  <div class="row"> 
+  <?php if(!empty(get_field_attribute($this->router->class,'bill_cash'))) :
+            load_field('text', array('field' => 'bill_cash','col'=>$col,
+                                     ));                                
+          endif; ?>
+  </div>  
 
   <div class="row"> 
+
+
     <?php if(!empty(get_field_attribute($this->router->class,'gold_rate'))) :
             load_field('text', array('field' => 'gold_rate', 'class' => 'autocomplete_list_selection',
                                      'data-table'=>'gold_rate','data-column'=>'name','col'=>$col,
@@ -107,8 +142,36 @@
           endif; ?>    
 
   </div>        
+  <div class="row"> 
+  <?php if(!empty(get_field_attribute($this->router->class,'payment_term'))) :
+            load_field('dropdown', array('field' => 'payment_term',
+              'option'=>@$payment_term,
+              'col'=>$col));                                
+          endif; ?>    
+
+  </div>  
+   <div class="row"> 
+  <?php if(!empty(get_field_attribute($this->router->class,'has_hallmark'))) :
+             
+      load_field('checkbox', 
+           array('field' => 'has_hallmark',
+                 'option'=> array(
+                            array('value' => '1', 
+                                  'checked'=>TRUE,
+                                  'label' => 'Has Hallmark')
+                                  ),
+                            'checked'=>$checked,
+                ));
+
+          endif; ?> 
+  <?php if(!empty(get_field_attribute($this->router->class,'hallmark_number'))) :
+            load_field('text', array('field' => 'hallmark_number',
+              'col'=>$col));                                
+          endif; ?>    
+
+  </div>        
   <div class="row">         
-    <?php if(!empty(get_field_attribute($this->router->class,'type'))) :
+    <?php if(!empty(get_field_attribute($this->router->class,'dd_type'))) :
             load_field('dropdown', array('field' => 'type', 'option' => @$daily_drawer_type,
                                          'col' => 'col-md-4 hide_daily_drawer_type'));                     
           endif; ?>        
@@ -151,6 +214,11 @@
     <?php if(!empty(get_field_attribute($this->router->class,'cash_amount'))) :
       load_field('text', array('field' => 'cash_amount', 'col'=>$col)); 
     endif; ?> 
+
+    <?php if(!empty(get_field_attribute($this->router->class,'cash_bill'))) :
+      load_field('text', array('field' => 'cash_bill', 'col'=>$col)); 
+    endif; ?> 
+
   </div>     
   <div class="row">   
   <?php if(!empty(get_field_attribute($this->router->class,'cheque_number'))) :
@@ -205,6 +273,21 @@
     <?php if(!empty(get_field_attribute($this->router->class,'narration'))) :
             load_field('text', array('field' => 'narration')); 
           endif; ?>
+  </div>
+  <div class="row">   
+    <?php if(!empty(get_field_attribute($this->router->class,'total_gross_weight'))) :
+            load_field('text', array('field' => 'total_gross_weight','readonly'=>'readonly','class'=>'get_total_gross_weight','col'=>$col)); 
+          endif; ?>
+    <?php if(!empty(get_field_attribute($this->router->class,'total_net_weight'))) :
+            load_field('text', array('field' => 'total_net_weight','readonly'=>'readonly','class'=>'get_total_net_weight','col'=>$col)); 
+          endif; ?>
+    <?php if(!empty(get_field_attribute($this->router->class,'total_fine_weight'))) :
+            load_field('text', array('field' => 'total_fine_weight','readonly'=>'readonly','class'=>'get_total_fine_weight','col'=>$col)); 
+          endif; ?> 
+
+    <?php if(!empty(get_field_attribute($this->router->class,'total_amount'))) :
+            load_field('text', array('field' => 'total_amount','readonly'=>'readonly','class'=>'get_total_amount','col'=>$col)); 
+          endif; ?>
   </div> 
   <br>
   <?php 
@@ -216,6 +299,15 @@
     }
     if($this->router->class=="sales_return_vouchers") {
       $this->load->view('transactions/sales_return_vouchers/subform_list');
+    }
+    if($this->router->class=="opening_stock_vouchers") {
+      $this->load->view('transactions/opening_stock_vouchers/subform_list');
+    } 
+    if($this->router->class=="repair_vouchers") {
+      $this->load->view('transactions/repair_vouchers/subform_list');
+    }
+    if($this->router->class=="approval_vouchers") {
+      $this->load->view('transactions/approval_vouchers/subform_list');
     }
   ?>
   <div class="row"> 

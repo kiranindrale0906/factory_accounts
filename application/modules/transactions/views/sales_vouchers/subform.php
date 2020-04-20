@@ -12,7 +12,7 @@
   <td>
     <?php load_field('plain/text', array('field' => 'gross_wt',
                                          'controller' => 'sales_voucher_details',
-                                         'class' => 'issue_gross_weight',
+                                         'class' => 'gross_weight',
                                          'id' => 'gross_wt_'.$index,
                                          'index' => $index,
                                          'grid'=> 'col-sm-12')); ?>
@@ -27,6 +27,7 @@
    <td>
     <?php load_field('plain/text', array('field' => 'net_wt',
                                          'controller' => 'sales_voucher_details',
+                                         'class' => 'net_weight',
                                          'id' => 'net_wt_'.$index,
                                          'index' => $index,
                                          'grid' =>'col-sm-12')); ?>
@@ -34,6 +35,7 @@
   <td>
     <?php load_field('plain/text', array('field' => 'melting',
                                          'controller' => 'sales_voucher_details',
+                                         'class' => 'melting',
                                          'id' => 'melting_'.$index,
                                          'index' => $index,
                                          'grid' =>'col-sm-12')); ?>

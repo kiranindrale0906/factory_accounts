@@ -131,9 +131,16 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['fine'] = array('Fine', '', FALSE, '', TRUE,TRUE);
   $attributes['factory_fine'] = array('Factory Fine', '', FALSE, '', TRUE,TRUE);
 
-  $attributes['type'] = array('Daily Drawer Type', 'Select Daily Drawer Type', TRUE, '', TRUE);
+  $attributes['dd_type'] = array('Daily Drawer Type', 'Select Daily Drawer Type', TRUE, '', TRUE);
+
+  $attributes['type'] = array('Type', 'Type', TRUE, '', TRUE);
+
   $attributes['narration'] = array('Narration', 'Enter Narration', FALSE, '', TRUE);
-  $attributes['vouchersamount'] = array('vouchersamount', 'Enter vouchersamount', FALSE, '', TRUE);
+  $attributes['vouchersamount'] = array('vouchersamount', 'Enter vouchersamount', FALSE, '', TRUE); 
+  $attributes['total_gross_weight'] = array('Gross Weight', 'Gross Weight', FALSE, '', TRUE); 
+  $attributes['total_net_weight'] = array('Net Weight', 'Net Weight', FALSE, '', TRUE); 
+  $attributes['total_fine_weight'] = array('Fine Weight', 'Fine Weight', FALSE, '', TRUE); 
+  $attributes['total_amount'] = array('Value', 'Value', FALSE, '', TRUE);
   $attributes['company_id'] = array('', '', TRUE, '', TRUE);
   $attributes['account_id'] = array('', '', TRUE, '', TRUE);
   $attributes['from_account_id'] = array('', '', TRUE, '', TRUE);
@@ -147,6 +154,14 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['arg_weight'] = array('ARG Weight', 'ARG Weight', FALSE, '', FALSE,TRUE);
   $attributes['department_name'] = array('Department Name', 'Department', FALSE, '', TRUE);
   $attributes['department_id'] = array('Department', ' Department', FALSE, '', FALSE,TRUE);
+$attributes['type'] = array('Type', ' Type', TRUE, '', TRUE);
+$attributes['group_name'] = array('Group Name', ' Group Name', TRUE, '', TRUE);
+$attributes['gst_number'] = array('GST Number', ' GST Number', TRUE, '', TRUE);
+$attributes['cash_bill'] = array('Cash/Bill', 'Cash Bill', TRUE, '',TRUE);
+$attributes['payment_term'] = array('Payment Term', 'Payment Term', TRUE, '', TRUE);
+$attributes['hallmark_number'] = array('Hallmark Number', 'Hallmark Number', false, '', TRUE);
+$attributes['has_hallmark'] = array('Has Hallmark', 'Has Hallmark', TRUE, '', TRUE);
+$attributes['total_value'] = array('Value', 'Value', FALSE, '',TRUE);
 
   if(!empty($required_field)) {
     $attributes[$ci->router->class] = array_intersect_key($attributes, array_flip($required_field));

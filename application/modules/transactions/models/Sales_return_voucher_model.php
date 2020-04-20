@@ -10,10 +10,7 @@ class Sales_return_voucher_model extends Sales_return_voucher_client_model {
     parent::__construct($data);
     $this->load->model(array('transactions/sales_purchase_detail_model','masters/department_model'));
   }
-  public function before_validate() {
-    $this->attributes['department_id'] = $this->department_model->find('id',array('where'=>$this->attributes['department_name']))['id'];
- }
-
+ 
    public function validation_rules($klass='') {
     $rules[] = array('field' => $this->router_class.'[account_name]', 'label' => 'Account Name','rules' => 'trim|required');
     $rules[] = array('field' => $this->router_class.'[rate]', 'label' => 'Rate','rules' => 'trim|required');
@@ -39,11 +36,11 @@ class Sales_return_voucher_model extends Sales_return_voucher_client_model {
           $sales_return_data['voucher_type'] =$this->attributes['voucher_type'];
           $sales_return_data['transaction_type'] = 'account';
           $sales_return_data['department_name'] = $this->attributes['department_name'];
-          $sales_return_data['department_id'] = $this->attributes['department_id'];
+          // $sales_return_data['department_id'] = $this->attributes['department_id'];
 
           $sales_return_data['rate'] = $this->attributes['rate']/($this->attributes['purity']*100);
           $sales_return_data['gold_amount'] = ($voucher_record['net_wt']*($voucher_record['melting']+$voucher_record['wastage'])/100)*$sales_return_data['rate']/10;
-          $total_gold_amount+=$sales_data['gold_amount'];
+          $total_gold_amount+=$sales_return_data['gold_amount'];
           $sales_return_data['fine_wt'] = $voucher_record['net_wt']*$voucher_record['melting']/100;
           $obj_purchase_voucher=new sales_purchase_detail_model($sales_return_data);
           $obj_purchase_voucher->store(false);

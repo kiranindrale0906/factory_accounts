@@ -35,7 +35,7 @@ function sales_voucher_clients_list_settings() {
 */
 
 function sales_voucher_clients_get_field_attribute($table, $field) {
-  $required_fields=array('id','voucher_date','account_name','department_name','rate','account_id','purity');
+  $required_fields=array('id','voucher_date','account_name','department_name','rate','account_id','purity','total_gross_weight','total_net_weight','total_fine_weight');
 
   return ac_voucher_get_field_attribute($table,$field,$required_fields);
 }
