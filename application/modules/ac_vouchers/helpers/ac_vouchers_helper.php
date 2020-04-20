@@ -129,7 +129,7 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['credit_weight'] = array('Credit Weight', 'Enter Credit Weight', TRUE, '', TRUE);
   $attributes['debit_weight'] = array('Weight', 'Enter Weight', TRUE, '', TRUE);
   $attributes['arg_weight'] = array('ARG Weight', 'ARG Weight', FALSE, '', FALSE,TRUE);
-  $attributes['department_name'] = array('Department Name', 'Select Department', FALSE, '', FALSE,TRUE);
+  $attributes['department_name'] = array('Department Name', 'Select Department', FALSE, '', TRUE);
 
   if(!empty($required_field)) {
     $attributes[$ci->router->class] = array_intersect_key($attributes, array_flip($required_field));
