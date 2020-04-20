@@ -6,6 +6,8 @@
     $controller=$this->router->module."/".$this->router->class;
     $action="store";
   }
+
+
   $this->load->view('ac_vouchers/ac_vouchers/company_error_message');
 ?>
 
@@ -27,7 +29,10 @@
   <div class="row">                                  
   <?php
       $col='';
-      // if($this->router->class == "metal_receipt_vouchers")
+      $readonly='';
+      if($this->router->class == "purchase_price_issue_vouchers"||$this->router->class == "purchase_price_receipt_vouchers"||$this->router->class == "purchase_weight_issue_vouchers"||$this->router->class == "purchase_weight_receipt_vouchers"){
+        $readonly='readonly';
+      }
         $col='col-md-4';
 
         if(!empty(get_field_attribute($this->router->class,'voucher_date'))) :
@@ -37,11 +42,7 @@
         endif; ?>
   </div>      
    <div class="row">   
-   <?php if(!empty(get_field_attribute($this->router->class,'department_name'))) :
-            load_field('text', array('field' => 'department_name', 'class' => 'autocomplete_list_selection',
-                                     'data-table'=>'ac_department','data-column'=>'name','col'=>$col,
-                                     'data-list-title'=>'From Department Name')); 
-          endif; ?> 
+
 
     <?php if(!empty(get_field_attribute($this->router->class,'from_account_name'))) :
             load_field('text', array('field' => 'from_account_name', 'class' => 'autocomplete_list_selection',
@@ -51,12 +52,17 @@
             load_field('hidden', array('field' => 'from_account_id'));                               
           endif; ?> 
      <?php if(!empty(get_field_attribute($this->router->class,'from_group_name'))) :
-            load_field('text', array('field' => 'from_group_name', 'class' => 'autocomplete_list_selection',
-                                     'data-table'=>'ac_from_group','data-column'=>'name','col'=>$col,
+            load_field('text', array('field' => 'from_group_name','col'=>$col,
                                      'data-list-title'=>'From Group Name')); 
 
             load_field('hidden', array('field' => 'from_group_id'));                               
-          endif; ?>   
+          endif; ?> 
+        <?php if(!empty(get_field_attribute($this->router->class,'department_name'))) :
+            load_field('text', array('field' => 'department_name' ,'class' => 'autocomplete_list_selection',
+                                     'data-table'=>'ac_department','data-column'=>'name','col'=>$col,
+                                     'data-list-title'=>'Department Name')); 
+          endif; ?>    
+
    </div>
   <div class="row">      
     <?php if(!empty(get_field_attribute($this->router->class,'account_name'))) :
@@ -79,9 +85,28 @@
                                          'class' =>'receipt_type', 'col'=>$col)); 
             
             load_field('hidden', array('field' => 'account_id'));                               
-          endif; ?>  
-  </div>   
+          endif; ?> 
+  
+  </div>  
 
+
+  <div class="row"> 
+    <?php if(!empty(get_field_attribute($this->router->class,'gold_rate'))) :
+            load_field('text', array('field' => 'gold_rate', 'class' => 'autocomplete_list_selection',
+                                     'data-table'=>'gold_rate','data-column'=>'name','col'=>$col,
+                                     'data-list-title'=>'Gold Rate'));                                
+          endif; ?>
+  <?php if(!empty(get_field_attribute($this->router->class,'rate'))) :
+            load_field('text', array('field' => 'rate','col'=>$col,
+                                     'data-list-title'=>'Rate'));                                
+          endif; ?>
+  <?php if(!empty(get_field_attribute($this->router->class,'gold_rate_purity'))) :
+            load_field('text', array('field' => 'gold_rate_purity', 'class' => 'autocomplete_list_selection',
+                                     'data-table'=>'gold_rate_purity','data-column'=>'name','col'=>$col,
+                                     'data-list-title'=>'Gold Rate Purity'));                                
+          endif; ?>    
+
+  </div>        
   <div class="row">         
     <?php if(!empty(get_field_attribute($this->router->class,'type'))) :
             load_field('dropdown', array('field' => 'type', 'option' => @$daily_drawer_type,
@@ -100,18 +125,31 @@
    <?php if(!empty(get_field_attribute($this->router->class,'bank_name'))) :
     load_field('text', array('field' => 'bank_name' ,'col'=>$col));                     
     endif; ?>
+    <?php if(!empty(get_field_attribute($this->router->class,'gold_weight'))) :
+            load_field('text', array('field' => 'gold_weight', 'class' => 'autocomplete_list_selection',
+                                     'data-table'=>'gold_weight','data-column'=>'name','col'=>$col,
+                                     'data-list-title'=>'Gold Weight'));                                
+          endif; ?> 
+      <?php if(!empty(get_field_attribute($this->router->class,'gold_weight_purity'))) :
+            load_field('text', array('field' => 'gold_weight_purity', 'class' => 'autocomplete_list_selection',
+                                     'data-table'=>'gold_weight_purity','data-column'=>'name','col'=>$col,
+                                     'data-list-title'=>'Gold Weight Purity'));                                
+          endif; ?> 
   </div>        
   <div class="row">  
     <?php if(!empty(get_field_attribute($this->router->class,'credit_amount'))) :
-            load_field('text', array('field' => 'credit_amount' , 'col'=>$col)); 
+            load_field('text', array('field' => 'credit_amount' , 'col'=>$col,'readonly' => $readonly)); 
           endif; ?>   
 
     <?php if(!empty(get_field_attribute($this->router->class,'debit_amount'))) :
-          load_field('text', array('field' => 'debit_amount', 'col'=>$col)); 
+          load_field('text', array('field' => 'debit_amount', 'col'=>$col,'readonly' => $readonly)); 
         endif; ?> 
 
     <?php if(!empty(get_field_attribute($this->router->class,'amount'))) :
       load_field('text', array('field' => 'amount', 'col'=>$col)); 
+    endif; ?> 
+    <?php if(!empty(get_field_attribute($this->router->class,'cash_amount'))) :
+      load_field('text', array('field' => 'cash_amount', 'col'=>$col)); 
     endif; ?> 
   </div>     
   <div class="row">   
@@ -120,16 +158,20 @@
     endif; ?>
     <?php if(!empty(get_field_attribute($this->router->class,'credit_weight'))) :
             load_field('text', array('field' => 'credit_weight', 'class'=>'credit_weight',
-                                    'col'=>$col)); 
+                                    'col'=>$col,'readonly' => $readonly)); 
           endif; ?> 
     
     <?php if(!empty(get_field_attribute($this->router->class,'debit_weight'))) :
             load_field('text', array('field' => 'debit_weight', 'class'=>'debit_weight',
-                                     'col'=>$col)); 
+                                     'col'=>$col,'readonly' => $readonly)); 
           endif; ?> 
 
     <?php if(!empty(get_field_attribute($this->router->class,'purity'))) :
-          load_field('text', array('field' => 'purity', 'class'=>'purity', 'col'=>$col)); 
+          load_field('text', array('field' => 'purity',
+                                   'class' => 'autocomplete_list_selection purity',
+                                   'data-table'=>'ac_purity','data-column'=>'purity', 
+                                   'col'=>$col,
+                                   'data-list-title'=>'Purity')); 
         endif; ?>
 
     <?php if(!empty(get_field_attribute($this->router->class,'fine'))) :
@@ -153,7 +195,11 @@
     <?php if(!empty(get_field_attribute($this->router->class,'factory_fine'))) :
           load_field('text', array('field' => 'factory_fine', 'readonlyinput'=>'1', 'class'=>'factory_fine',
                                   'col'=>$col)); 
-        endif; ?>            
+        endif; ?>       
+        <?php if(!empty(get_field_attribute($this->router->class,'transaction_type'))) :
+            load_field('dropdown', array('field' => 'transaction_type', 'option' => @$transaction_type ,
+                                         'class' =>'transaction_type', 'col'=>$col));                                
+          endif; ?>       
   </div>  
   <div class="row">   
     <?php if(!empty(get_field_attribute($this->router->class,'narration'))) :
@@ -162,8 +208,14 @@
   </div> 
   <br>
   <?php 
-    if($this->router->class=="metal_receipt_vouchers") {
-      //$this->load->view('transactions/metal_issue_vouchers/subform_list');
+    if($this->router->class=="purchase_vouchers") {
+      $this->load->view('transactions/purchase_vouchers/subform_list');
+    }
+    if($this->router->class=="sales_vouchers") {
+      $this->load->view('transactions/sales_vouchers/subform_list');
+    }
+    if($this->router->class=="sales_return_vouchers") {
+      $this->load->view('transactions/sales_return_vouchers/subform_list');
     }
   ?>
   <div class="row"> 

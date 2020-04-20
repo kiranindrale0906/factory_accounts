@@ -1,40 +1,67 @@
-<tr class="table_metal_issue_voucher_<?= $index ?>">
+<tr class="table_sales_voucher_<?= $index ?>">
   <td>
-    <?php load_field('plain/dropdown', array('field' => 'account_name',
-                                             'option' => get_account_name_for_metal_issue(),
-                                             'controller' => 'metal_issue_vouchers',
+    <?php load_field('plain/text', array('field' => 'category',
+                                             'controller' => 'sales_voucher_details',
                                              'index' => $index,
-                                             'is_table'=>TRUE)); ?>
+                                             'class' => 'autocomplete_list_selection',
+                                             'data-table'=>'ac_department_category',
+                                             'data-column'=>'name',
+                                             'data-list-title'=>'Department Category',
+                                             'is_table'=>TRUE));?>
   </td>
   <td>
-    <?php load_field('plain/text', array('field' => 'credit_weight',
-                                         'controller' => 'metal_issue_vouchers',
-                                         'onkeyup' => 'calculate_factory_purity('.$index.')',
-                                         'class' => 'issue_credit_weight',
-                                         'id' => 'credit_weight_'.$index,
+    <?php load_field('plain/text', array('field' => 'gross_wt',
+                                         'controller' => 'sales_voucher_details',
+                                         'class' => 'issue_gross_weight',
+                                         'id' => 'gross_wt_'.$index,
                                          'index' => $index,
                                          'grid'=> 'col-sm-12')); ?>
   </td>
   <td>
-    <?php load_field('plain/text', array('field' => 'factory_purity',
-                                         'controller' => 'metal_issue_vouchers',
-                                         'onkeyup'=> 'calculate_factory_purity('.$index.')',
-                                         'id' => 'factory_purity_'.$index,
+    <?php load_field('plain/text', array('field' => 'moti_wt',
+                                         'controller' => 'sales_voucher_details',
+                                         'id' => 'moti_wt'.$index,
                                          'index' => $index,
                                          'grid'=> 'col-sm-12')); ?>
   </td>
    <td>
-    <?php load_field('plain/text', array('field' => 'factory_fine',
-                                         'controller' => 'metal_issue_vouchers',
-                                         'id' => 'factory_fine_'.$index,
-                                         'readonly' => true,
+    <?php load_field('plain/text', array('field' => 'net_wt',
+                                         'controller' => 'sales_voucher_details',
+                                         'id' => 'net_wt_'.$index,
                                          'index' => $index,
                                          'grid' =>'col-sm-12')); ?>
   </td>
   <td>
-    <?= getJsButton('Delete', 'javascript:void(0)', 'btn_red', '', 'delete_metal_issue_voucher('.$index.')',
+    <?php load_field('plain/text', array('field' => 'melting',
+                                         'controller' => 'sales_voucher_details',
+                                         'id' => 'melting_'.$index,
+                                         'index' => $index,
+                                         'grid' =>'col-sm-12')); ?>
+  </td>
+  <td>
+    <?php load_field('plain/text', array('field' => 'wastage',
+                                         'controller' => 'sales_voucher_details',
+                                         'id' => 'wastage_'.$index,
+                                         'index' => $index,
+                                         'grid' =>'col-sm-12')); ?>
+  </td>
+  <td>
+    <?php load_field('plain/text', array('field' => 'other_charges',
+                                         'controller' => 'sales_voucher_details',
+                                         'id' => 'other_charges_'.$index,
+                                         'index' => $index,
+                                         'grid' =>'col-sm-12')); ?>
+  </td><td>
+    <?php load_field('plain/text', array('field' => 'description',
+                                         'controller' => 'sales_voucher_details',
+                                         'id' => 'description_'.$index,
+                                         'index' => $index,
+                                         'grid' =>'col-sm-12')); ?>
+  </td>
+  <td>
+    <?= getJsButton('Delete', 'javascript:void(0)', 'btn_red', '', 'delete_sales_voucher('.$index.')',
                     array(
-                     'controller' => 'metal_issue_vouchers',
+                     'controller' => 'sales_voucher_details',
                      'index' => $index)); ?>
   </td>
 

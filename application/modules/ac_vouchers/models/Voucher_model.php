@@ -10,6 +10,7 @@ class Voucher_model extends BaseModel {
   }
 
   public function validation_rules($klass='') {
+    // print_r($this->router_class);die
     $rules[] =array('field' => $this->router_class.'[voucher_date]', 'label' => 'Date',
                     'rules' => array('trim', 'required', 
                                array('validate_voucher_date', array($this, 'check_period_exists'))),
@@ -24,6 +25,11 @@ class Voucher_model extends BaseModel {
     $rules[] = array('field' => $this->router_class.'[from_group_name]', 'label' => 'From Group Name','rules' => 'trim|required');
     $rules[] = array('field' => $this->router_class.'[to_group_name]', 'label' => 'To Group Name','rules' => 'trim|required');
     $rules[] = array('field' => $this->router_class.'[amount]', 'label' => 'Amount','rules' => 'trim|required');
+    }
+
+    if($this->router->class=="expense_vouchers") {
+    $rules[] = array('field' => $this->router_class.'[to_group_name]', 'label' => 'To Group Name','rules' => 'trim|required');
+    $rules[] = array('field' => $this->router_class.'[debit_amount]', 'label' => 'Amount','rules' => 'trim|required');
     }
 
     $check_credit_debit_type=stripos($this->router_class,'issue');
