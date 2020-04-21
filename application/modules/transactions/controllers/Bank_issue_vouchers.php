@@ -6,6 +6,4 @@ class Bank_issue_vouchers extends Bank_issue_voucher_clients {
     parent::__construct();
     $this->date_fields = array(array('bank_issue_vouchers', 'voucher_date'));
   }
-
-  
 }

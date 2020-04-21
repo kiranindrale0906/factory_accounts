@@ -71,10 +71,11 @@ function autocomplete_listing_selection() {
       var getTable = $(this).attr('data-table');
       var getColumn = $(this).attr('data-column');
       var data_title = $(this).attr('data-list-title');
+      var where_condition = $(this).attr('data-where_condition');
   $(".autocomplete_list_selection").autocomplete({
     source: function (request, response) {
       jQuery.get(base_url+'sys/search/getAutoCompleteDropDownData', {
-        query: request.term+'&&'+getTable+'&&'+getColumn
+        query: request.term+'&&'+getTable+'&&'+getColumn+'&&'+where_condition
       }, function (data) {
         response(JSON.parse(data));
       });
