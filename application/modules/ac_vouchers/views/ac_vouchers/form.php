@@ -55,17 +55,17 @@
 
 
     <?php if(!empty(get_field_attribute($this->router->class,'from_account_name'))) :
-            load_field('text', array('field' => 'from_account_name', 'class' => 'autocomplete_list_selection',
-                                     'data-table'=>'ac_from_account','data-column'=>'name','col'=>$col,
+            load_field('text', array('field' => 'from_account_name', 'class' => 'autocomplete_list_selection','col'=>$col,
                                      'data-list-title'=>'From Account Name')); 
 
             load_field('hidden', array('field' => 'from_account_id'));                               
           endif; ?> 
      <?php if(!empty(get_field_attribute($this->router->class,'from_group_name'))) :
-            load_field('text', array('field' => 'from_group_name','col'=>$col,
-                                     'data-list-title'=>'From Group Name')); 
+            load_field('text', array('field' => 'from_group_name','class' => 'autocomplete_list_selection','data-table'=>'ac_groups','data-column'=>'name','col'=>$col,
+                                     'data-list-title'=>'From Group Name'));
 
-            load_field('hidden', array('field' => 'from_group_id'));                               
+
+            load_field('hidden', array('field' => 'from_group_id'));                                
           endif; ?> 
         <?php if(!empty(get_field_attribute($this->router->class,'department_name'))) :
           load_field('text', array('field' => 'department_name',
@@ -76,22 +76,30 @@
         endif; ?>
 
         <?php if(!empty(get_field_attribute($this->router->class,'type'))) :
-            load_field('text', array('field' => 'type','col'=>$col,));                               
+            load_field('text', array('field' => 'type',
+                                     'class' => 'autocomplete_list_selection ',
+                                     'data-table'=>'ac_type','data-column'=>'name', 
+                                     'col'=>$col,));                               
           endif; ?> 
     
 
    </div>
   <div class="row">      
     <?php if(!empty(get_field_attribute($this->router->class,'account_name'))) :
-            load_field('text', array('field' => 'account_name', 'class' => 'autocomplete_list_selection',
-                                     'data-table'=>'ac_account','data-column'=>'name','col'=>$col,
+            load_field('text', array('field' => 'account_name',
+                                     'class' => 'autocomplete_list_selection',
+                                     'data-table'=>'ac_account',
+                                     'data-column'=>'name',
+                                     'col'=>$col,
                                      'data-list-title'=>'Account Name')); 
 
             load_field('hidden', array('field' => 'account_id'));                               
           endif; ?> 
     <?php if(!empty(get_field_attribute($this->router->class,'to_group_name'))) :
-      load_field('text', array('field' => 'to_group_name', 'class' => 'autocomplete_list_selection',
-                               'data-table'=>'ac_to_group','data-column'=>'name','col'=>$col,
+      load_field('text', array('field' => 'to_group_name', 
+                               'data-table'=>'ac_groups',
+                               'class' => 'autocomplete_list_selection',
+                               'data-column'=>'name','col'=>$col,
                                'data-list-title'=>'To Group Name')); 
 
       load_field('hidden', array('field' => 'to_group_id'));                               
@@ -107,6 +115,9 @@
   <div class="row"> 
   <?php if(!empty(get_field_attribute($this->router->class,'group_name'))) :
             load_field('text', array('field' => 'group_name','col'=>$col,
+                                      'class' => 'autocomplete_list_selection ',
+                                     'data-table'=>'ac_type','data-column'=>'name', 
+                                     
                                      ));                                
           endif; ?>
   </div> 
@@ -116,13 +127,6 @@
                                      ));                                
           endif; ?>
   </div> 
-  <div class="row"> 
-  <?php if(!empty(get_field_attribute($this->router->class,'bill_cash'))) :
-            load_field('text', array('field' => 'bill_cash','col'=>$col,
-                                     ));                                
-          endif; ?>
-  </div>  
-
   <div class="row"> 
 
 
@@ -137,16 +141,18 @@
           endif; ?>
   <?php if(!empty(get_field_attribute($this->router->class,'gold_rate_purity'))) :
             load_field('text', array('field' => 'gold_rate_purity', 'class' => 'autocomplete_list_selection',
-                                     'data-table'=>'gold_rate_purity','data-column'=>'name','col'=>$col,
+                                     'data-table'=>'ac_purity','data-column'=>'purity','col'=>$col,
                                      'data-list-title'=>'Gold Rate Purity'));                                
           endif; ?>    
 
   </div>        
   <div class="row"> 
   <?php if(!empty(get_field_attribute($this->router->class,'payment_term'))) :
-            load_field('dropdown', array('field' => 'payment_term',
-              'option'=>@$payment_term,
-              'col'=>$col));                                
+            load_field('text', array('field' => 'payment_term',
+              'class' => 'autocomplete_list_selection',
+                                     'data-table'=>'ac_payment_terms',
+                                     'data-column'=>'terms','col'=>$col,
+                                     'data-list-title'=>'Payment Term'));                                
           endif; ?>    
 
   </div>  
@@ -212,11 +218,16 @@
       load_field('text', array('field' => 'amount', 'col'=>$col)); 
     endif; ?> 
     <?php if(!empty(get_field_attribute($this->router->class,'cash_amount'))) :
-      load_field('text', array('field' => 'cash_amount', 'col'=>$col)); 
+      load_field('text', array('field' => 'cash_amount', 'col'=>$col
+                               )); 
     endif; ?> 
 
     <?php if(!empty(get_field_attribute($this->router->class,'cash_bill'))) :
-      load_field('text', array('field' => 'cash_bill', 'col'=>$col)); 
+      load_field('text', array('field' => 'cash_bill', 'col'=>$col,
+                               'class' => 'autocomplete_list_selection',
+                               'data-table'=>'ac_cash_bill','data-column'=>'name',
+                               'data-list-title'=>'Cash/Bill' 
+                                    )); 
     endif; ?> 
 
   </div>     
