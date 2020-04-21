@@ -160,7 +160,7 @@ $attributes['gst_number'] = array('GST Number', ' GST Number', TRUE, '', TRUE);
 $attributes['cash_bill'] = array('Cash/Bill', 'Cash Bill', TRUE, '',TRUE);
 $attributes['payment_term'] = array('Payment Term', 'Payment Term', TRUE, '', TRUE);
 $attributes['hallmark_number'] = array('Hallmark Number', 'Hallmark Number', false, '', TRUE);
-$attributes['has_hallmark'] = array('Has Hallmark', 'Has Hallmark', TRUE, '', TRUE);
+$attributes['has_hallmark'] = array('', 'Has Hallmark', TRUE, '', TRUE);
 $attributes['total_value'] = array('Value', 'Value', FALSE, '',TRUE);
 
   if(!empty($required_field)) {

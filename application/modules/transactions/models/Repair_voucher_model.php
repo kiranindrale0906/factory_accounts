@@ -20,7 +20,6 @@ class Repair_voucher_model extends Repair_voucher_client_model {
     $rules[] = array('field' => $this->router_class.'[gst_number]', 'label' => 'GST Number','rules' => 'trim|required');
     $rules[] = array('field' => $this->router_class.'[cash_bill]', 'label' => 'Cash/bill','rules' => 'trim|required');
     $rules[] = array('field' => $this->router_class.'[payment_term]', 'label' => 'Payment Term','rules' => 'trim|required');
-    $rules[] = array('field' => $this->router_class.'[has_hallmark]', 'label' => 'Hallmark','rules' => 'trim|required');
     return $rules;
   }
   public function before_save($action) {
