@@ -72,6 +72,7 @@ function autocomplete_listing_selection() {
       var getColumn = $(this).attr('data-column');
       var data_title = $(this).attr('data-list-title');
       var where_condition = $(this).attr('data-where_condition');
+      if(where_condition==undefined) where_condition = "";
   $(".autocomplete_list_selection").autocomplete({
     source: function (request, response) {
       jQuery.get(base_url+'sys/search/getAutoCompleteDropDownData', {
