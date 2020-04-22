@@ -40,7 +40,8 @@ function ac_vouchers_getTableSettings($table_setting_arg=array()) {
 
 
 function ac_vouchers_list_settings($list_setting_arg=array()) {
-  $list_setting['voucher_date'] = array("Date", "voucher_date", TRUE, "voucher_date", TRUE, TRUE);
+  $list_setting['voucher_date'] = array("Date", "voucher_date", TRUE, "voucher_date", TRUE, TRUE,
+                                        "DATE_FORMAT(created_at, '%d-%m-%Y') as voucher_date");
   $list_setting['created_time'] = array("Time", "created_at", FALSE, "created_at", FALSE, TRUE,
                                         "date_format(created_at,'%H:%i:%s') as created_at");
   $list_setting['voucher_number'] = array("Voucher", "voucher_number", FALSE, "voucher_number", TRUE, FALSE);

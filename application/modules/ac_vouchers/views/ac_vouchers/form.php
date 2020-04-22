@@ -48,7 +48,7 @@
         if(!empty(get_field_attribute($this->router->class,'voucher_date'))) :
            load_field('date',array('field' => 'voucher_date',
                                   'col'=>$col,
-                                  'value'=>(!empty($record['voucher_date'])?date('d-m-Y',strtotime($record['voucher_date'])):date('d-m-Y')), 
+                                  'value'=>(!empty($record['voucher_date'])?date('d M Y',strtotime($record['voucher_date'])):date('d M Y')), 
                                   'class' => '','readonlyinput'=>true)); 
         endif; ?>
   </div>      
