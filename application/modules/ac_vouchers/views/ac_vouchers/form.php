@@ -47,6 +47,7 @@
 
         if(!empty(get_field_attribute($this->router->class,'voucher_date'))) :
            load_field('date',array('field' => 'voucher_date',
+                                  'col'=>$col,
                                   'value'=>(!empty($record['voucher_date'])?date('d-m-Y',strtotime($record['voucher_date'])):date('d-m-Y')), 
                                   'class' => '','readonlyinput'=>true)); 
         endif; ?>
@@ -293,7 +294,13 @@
   </div>  
   <div class="row">   
     <?php if(!empty(get_field_attribute($this->router->class,'narration'))) :
-            load_field('text', array('field' => 'narration')); 
+            load_field('text', array('field' => 'narration',
+              'col'=>$col,
+              'class' => 'autocomplete_list_selection',
+              'data-table'=>'ac_narration',
+              'data-column'=>'name',
+              'data-list-title'=>'Narration' 
+                                    )); 
           endif; ?>
   </div>
   <div class="row">   

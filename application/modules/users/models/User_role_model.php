@@ -9,7 +9,8 @@ class User_role_model extends Core_user_role_model {
     $modules = array('Masters' => array('masters/accounts','masters/groups', 'masters/purity', 
                                         'masters/company','masters/payment_terms', 'masters/opening_balance',
                                         'masters/department','masters/customer_category', 
-                                        'masters/department_category','masters/periods'),
+                                        'masters/department_category','masters/periods',
+                                        'masters/narrations','masters/periods'),
                      'Transactions' => array('transactions/cash_issue_vouchers', 
                                             'transactions/cash_receipt_vouchers',
                                             'transactions/bank_issue_vouchers', 'transactions/bank_receipt_vouchers',
@@ -44,9 +45,9 @@ class User_role_model extends Core_user_role_model {
                                         'reports/vadotar_reports',
                                         'reports/rojmel_reports'),
                      'Interest' => array('interest/interest_issue_voucher'),
-                     'Others' => array('others/account_wise_details','others/category', 'others/item', 
-                                       'others/city','others/state', 'others/salesman', 'others/narration',
-                                        'others/book', 'others/sms'),
+                     'Others' => array('others/account_wise_details','others/categories', 'others/items', 
+                                       'others/cities','others/states', 'others/salesmans', 'others/narrations',
+                                        'others/books', 'others/sms'),
                      'Users' => array('users/users','users/user_roles'));
 
     return (!empty($module_name) ? $modules[$module_name] : $modules);
