@@ -41,7 +41,7 @@
       $col='';
       $readonly='';
       $col='col-md-4';
-      if($this->router->class == "purchase_price_issue_vouchers"||$this->router->class == "purchase_price_receipt_vouchers"||$this->router->class == "purchase_weight_issue_vouchers"||$this->router->class == "purchase_weight_receipt_vouchers"){
+      if($this->router->class == "rate_cut_purchase_price_issue_vouchers"||$this->router->class == "rate_cut_purchase_price_receipt_vouchers"||$this->router->class == "rate_cut_purchase_weight_issue_vouchers"||$this->router->class == "rate_cut_purchase_weight_receipt_vouchers"){
         $readonly='readonly';
       }
 
