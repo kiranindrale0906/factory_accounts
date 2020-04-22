@@ -1,6 +1,13 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed.');
 
 function ac_vouchers_getTableSettings($table_setting_arg=array()) {
+  $ci = &get_instance();
+  if(!empty($table_setting_arg['where'])) {
+    $table_setting_arg['where'] = 'company_id='.(!empty($ci->session->userdata('company_id'))?$ci->session->userdata('company_id'):-1)." AND ".$table_setting_arg['where'];
+  }else{
+    $table_setting_arg['where'] = 'company_id='.(!empty($ci->session->userdata('company_id'))?$ci->session->userdata('company_id'):-1);
+ 
+  }
   $table_setting= array('page_title'          => '',
                         'primary_table'       => 'ac_vouchers',
                         'default_column'      => 'id',
