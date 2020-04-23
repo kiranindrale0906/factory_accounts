@@ -240,4 +240,13 @@ $(document).on("change", ".net_weight, .labour_rate,.other_charges", function() 
     $(".get_total_amount").val(sum);
 });
 
+// $(document).on('keypress',function(e) {
+//     if(e.which == 13) {
+//         var url = $('button.ajax_post').closest('form').attr('action');
+//         var formData = new FormData($('button.ajax_post').closest('form')[0]);
+//         ajax_post_request(url, formData);
+//     }
+// });
+
+
 
