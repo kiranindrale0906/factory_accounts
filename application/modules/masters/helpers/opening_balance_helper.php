@@ -37,7 +37,6 @@ function getTableSettings() {
 function list_settings() {
   return array(
     array("Date", "date", TRUE, "date", TRUE, TRUE),
-    array("Voucher", "voucher_number", true, "voucher_number", true, true),
     array("Account", "account_name", true, "account_name", true, true),
     array("Credit Amt.", "credit_amount", true, "credit_amount", true, true),
     array("debit Amt.", "debit_amount", true, "debit_amount", true, true),
@@ -64,14 +63,14 @@ function get_field_attribute($table, $field) {
   $attributes['opening_balance'] = array(
     'id'                => array('', '', TRUE, '', TRUE),
     'date'              => array('Date', 'Enter Date.', TRUE, '', TRUE),
-    'account_name_id'   => array('Account Name', 'Enter Account Name.', TRUE, '', TRUE),
+    'account_name'   => array('Account Name', 'Enter Account Name.', TRUE, '', TRUE),
     'group_code'        => array('Group code', 'Enter Group Code.', TRUE, '', TRUE),
     'credit_amount'     => array('Credit Amount', 'Enter Credit Amount.', FALSE, '', TRUE),
     'debit_amount'      => array('Debit Amount', 'Enter Debit Amount.', FALSE, '', TRUE),
     'credit_weight'     => array('Credit Weight', 'Enter Credit Weight.', FALSE, '', TRUE),
     'debit_weight'      => array('Debit Weight', 'Enter Debit Weight.', FALSE, '', TRUE),
     'narration'         => array('Narration', 'Enter Narration.', FALSE, '', TRUE),
-    'cash_bill_type'    => array('Cash Bill Type', 'Select Cash Bill Type.', FALSE, '', TRUE),
+    'cash_bill_type'    => array('Cash Bill Type', 'Enter Cash Bill Type.', FALSE, '', TRUE),
     'gst_number'        => array('GST Number', 'Enter GST Number.', FALSE, '', TRUE),
   );
  

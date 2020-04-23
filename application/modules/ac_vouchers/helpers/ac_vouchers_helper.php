@@ -1,6 +1,13 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed.');
 
 function ac_vouchers_getTableSettings($table_setting_arg=array()) {
+  $ci = &get_instance();
+  if(!empty($table_setting_arg['where'])) {
+    $table_setting_arg['where'] = 'company_id='.(!empty($ci->session->userdata('company_id'))?$ci->session->userdata('company_id'):-1)." AND ".$table_setting_arg['where'];
+  }else{
+    $table_setting_arg['where'] = 'company_id='.(!empty($ci->session->userdata('company_id'))?$ci->session->userdata('company_id'):-1);
+ 
+  }
   $table_setting= array('page_title'          => '',
                         'primary_table'       => 'ac_vouchers',
                         'default_column'      => 'id',
@@ -40,7 +47,8 @@ function ac_vouchers_getTableSettings($table_setting_arg=array()) {
 
 
 function ac_vouchers_list_settings($list_setting_arg=array()) {
-  $list_setting['voucher_date'] = array("Date", "voucher_date", TRUE, "voucher_date", TRUE, TRUE);
+  $list_setting['voucher_date'] = array("Date", "voucher_date", TRUE, "voucher_date", TRUE, TRUE,
+                                        "DATE_FORMAT(created_at, '%d-%m-%Y') as voucher_date");
   $list_setting['created_time'] = array("Time", "created_at", FALSE, "created_at", FALSE, TRUE,
                                         "date_format(created_at,'%H:%i:%s') as created_at");
   $list_setting['voucher_number'] = array("Voucher", "voucher_number", FALSE, "voucher_number", TRUE, FALSE);
@@ -65,6 +73,9 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
   $list_setting['hook_kdm_purity'] = array("Hook KDM Purity", "hook_kdm_purity", TRUE, 
                                            "hook_kdm_purity", FALSE, TRUE);
   $list_setting['quantity'] = array("Quantity", "quantity", TRUE, "quantity", FALSE, TRUE);
+  $list_setting['lumpsum_amount'] = array("Lumpsum Amount", "lumpsum_amount", FALSE, "lumpsum_amount", TRUE, TRUE);
+  $list_setting['interest_per_day'] = array("Interest per Day", "interest_per_day", FALSE, "interest_per_day", TRUE, TRUE);
+
   $list_setting['narration'] = array("Narration", "narration", FALSE, "narration", TRUE, TRUE);
   $list_setting['receipt_type'] = array("Receipt Type", "receipt_type", FALSE, "receipt_type", TRUE, TRUE);
   $list_setting['credit_weight'] = array("Debit Wt.", "credit_weight", FALSE, "credit_weight", TRUE, TRUE);
@@ -119,7 +130,9 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['cash_amount'] = array("Cash Amount", "Enter Cash Amount", TRUE,'', TRUE);
   $attributes['gold_weight_purity'] = array("Gold Weight Purity", "Enter Gold Weight Purity", TRUE,'', TRUE);
   $attributes['gold_rate_purity'] = array("Gold Rate Purity", "Enter Gold Weight Purity", TRUE,'', TRUE);
-  $attributes['transaction_type'] = array("Transaction Type", "Select Transaction Type", TRUE,'', TRUE);
+  $attributes['transaction_type'] = array("Transaction Type", "Select Transaction Type", FALSE,'', TRUE);
+  $attributes['lumpsum_amount'] = array("Lumpsum Amount", "Enter Lumpsum Amount", FALSE,'', TRUE);
+  $attributes['interest_per_day'] = array("Interest Per Day", "Enter Interest Per Day", FALSE,'', TRUE);
 
   $attributes['cheque_number'] = array("Check Number", "Enter Check Number", FALSE,'', FALSE);
   $attributes['debit_amount'] = array('Debit Amount', 'Enter Debit Amount', TRUE, '', TRUE);

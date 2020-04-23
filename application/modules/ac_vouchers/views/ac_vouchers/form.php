@@ -41,13 +41,14 @@
       $col='';
       $readonly='';
       $col='col-md-4';
-      if($this->router->class == "purchase_price_issue_vouchers"||$this->router->class == "purchase_price_receipt_vouchers"||$this->router->class == "purchase_weight_issue_vouchers"||$this->router->class == "purchase_weight_receipt_vouchers"){
+      if($this->router->class == "rate_cut_purchase_price_issue_vouchers"||$this->router->class == "rate_cut_purchase_price_receipt_vouchers"||$this->router->class == "rate_cut_purchase_weight_issue_vouchers"||$this->router->class == "rate_cut_purchase_weight_receipt_vouchers"){
         $readonly='readonly';
       }
 
         if(!empty(get_field_attribute($this->router->class,'voucher_date'))) :
            load_field('date',array('field' => 'voucher_date',
-                                  'value'=>(!empty($record['voucher_date'])?date('d-m-Y',strtotime($record['voucher_date'])):date('d-m-Y')), 
+                                  'col'=>$col,
+                                  'value'=>(!empty($record['voucher_date'])?date('d M Y',strtotime($record['voucher_date'])):date('d M Y')), 
                                   'class' => '','readonlyinput'=>true)); 
         endif; ?>
   </div>      
@@ -118,7 +119,7 @@
   <?php if(!empty(get_field_attribute($this->router->class,'group_name'))) :
             load_field('text', array('field' => 'group_name','col'=>$col,
                                       'class' => 'autocomplete_list_selection ',
-                                     'data-table'=>'ac_type','data-column'=>'name', 
+                                     'data-table'=>'ac_groups','data-column'=>'name', 
                                      
                                      ));                                
           endif; ?>
@@ -243,11 +244,16 @@
             load_field('text', array('field' => 'credit_weight', 'class'=>'credit_weight',
                                     'col'=>$col,'readonly' => $readonly)); 
           endif; ?> 
+  
     
     <?php if(!empty(get_field_attribute($this->router->class,'debit_weight'))) :
             load_field('text', array('field' => 'debit_weight', 'class'=>'debit_weight',
                                      'col'=>$col,'readonly' => $readonly)); 
           endif; ?> 
+      <?php if(!empty(get_field_attribute($this->router->class,'interest_per_day'))) :
+          load_field('text', array('field' => 'interest_per_day',
+                                   'col'=>$col));
+        endif; ?>
 
     <?php if(!empty(get_field_attribute($this->router->class,'purity'))) :
           load_field('text', array('field' => 'purity',
@@ -274,19 +280,31 @@
           load_field('text', array('field' => 'factory_purity', 'class'=>'factory_purity',
                                   'col'=>$col));
         endif; ?>
+  
+      <?php if(!empty(get_field_attribute($this->router->class,'lumpsum_amount'))) :
+    load_field('text', array('field' => 'lumpsum_amount' ,'col'=>$col));                     
+    endif; ?>
 
     <?php if(!empty(get_field_attribute($this->router->class,'factory_fine'))) :
           load_field('text', array('field' => 'factory_fine', 'readonlyinput'=>'1', 'class'=>'factory_fine',
                                   'col'=>$col)); 
         endif; ?>       
         <?php if(!empty(get_field_attribute($this->router->class,'transaction_type'))) :
-            load_field('dropdown', array('field' => 'transaction_type', 'option' => @$transaction_type ,
-                                         'class' =>'transaction_type', 'col'=>$col));                                
+            load_field('text', array('field' => 'transaction_type', 'col'=>$col,'class' => 'autocomplete_list_selection',
+                               'data-table'=>'ac_cash_bill','data-column'=>'name',
+                               'data-list-title'=>'Transaction Type' 
+                                    ));                                
           endif; ?>       
   </div>  
   <div class="row">   
     <?php if(!empty(get_field_attribute($this->router->class,'narration'))) :
-            load_field('text', array('field' => 'narration')); 
+            load_field('text', array('field' => 'narration',
+              'col'=>$col,
+              'class' => 'autocomplete_list_selection',
+              'data-table'=>'ac_narration',
+              'data-column'=>'name',
+              'data-list-title'=>'Narration' 
+                                    )); 
           endif; ?>
   </div>
   <div class="row">   
