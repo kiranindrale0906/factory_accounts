@@ -48,7 +48,7 @@ if ($filter_columns != '' && $table_data != '') : ?>
             }*/
 
             else { ?>
-              <td>              
+              <td class="<?=(!empty($colum[10]))?'text-right':''?>">              
                 <h6 class="column_heading"><?php echo $colum[0]; ?></h6>
                 <span><?= getColumnData(@$value[$key], $key, @$value['user_id']); ?></span>
               </td>
