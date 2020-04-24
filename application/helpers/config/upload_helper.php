@@ -20,7 +20,7 @@ function image_sizes($field_name,$controller){
   $folder =  isset($file_content['folder'])?$file_content['folder']:'';
   switch($folder){
    case 'uploads/logo':
-      $img_sizes['thumbnail'] = array('width'=>60, 'height'=>60, 'folder'=>'/thumb');
+      $img_sizes['thumbnail'] = array('width'=>50, 'height'=>50, 'folder'=>'/thumb');
       $img_sizes['small'] = array('width'=>200, 'height'=>200, 'folder'=>'/small');
     break;
   }

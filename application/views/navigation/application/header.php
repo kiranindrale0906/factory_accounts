@@ -1,7 +1,8 @@
 <header class="d-flex justify-content-between align-items-center fixed-top">
   <div>
     <a href="index.php">
-      <img src="<?= CORE_PATH() ?>images/common/logo.png"> 
+    <?php $company_logo=get_logo();?>
+      <img src="<?= base_url() ?>uploads/logo/original/<?=$company_logo?>"> 
       <!-- Your Logo Here -->
     </a> 
 

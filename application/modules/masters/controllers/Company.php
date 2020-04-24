@@ -16,4 +16,6 @@ class Company extends BaseController {
   	}
   	parent::index();
   }
+
+  
 }
