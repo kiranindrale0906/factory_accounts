@@ -54,10 +54,12 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
   $list_setting['voucher_number'] = array("Voucher", "voucher_number", FALSE, "voucher_number", TRUE, FALSE);
   $list_setting['gold_rate'] = array("Gold Rate", "gold_rate", FALSE, "gold_rate", TRUE, FALSE);
   $list_setting['rate'] = array("Rate", "rate", FALSE, "rate", TRUE, FALSE);
-  $list_setting['cash_amount'] = array("Cash Amount", "cash_amount", FALSE, "cash_amount", TRUE, FALSE);
+  $list_setting['cash_amount'] = array("Cash Amount", "cash_amount", FALSE, "cash_amount", TRUE, FALSE,"cash_amount",
+                                      '','','','text-right');
   $list_setting['gold_weight'] = array("Gold Weight", "gold_weight", FALSE, "gold_weight", TRUE, FALSE);
   $list_setting['gold_rate_purity'] = array("Gold Rate Purity", "gold_rate_purity", FALSE, "gold_rate_purity", TRUE, FALSE);
-  $list_setting['gold_weight_purity'] = array("Gold Weight Purity", "gold_weight_purity", FALSE, "gold_weight_purity", TRUE, FALSE);
+  $list_setting['gold_weight_purity'] = array("Gold Weight Purity", "gold_weight_purity", FALSE, "gold_weight_purity", TRUE
+                                              , FALSE);
   $list_setting['transaction_type'] = array("Transaction Type", "transaction_type", TRUE, "transaction_type", TRUE, TRUE);
   $list_setting['bank_name'] = array("Bank Name", "bank_name", TRUE, "bank_name", TRUE, TRUE);
   $list_setting['cheque_number'] = array("Check Number", "cheque_number", TRUE, "cheque_number", TRUE, TRUE);
@@ -68,12 +70,13 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
   $list_setting['to_group_name'] = array("To Group Name", "to_group_name", TRUE, "to_group_name", TRUE, TRUE);
   
   
-  $list_setting['amount'] = array("Amount.", "amount", TRUE, "amount", FALSE, TRUE);
+  $list_setting['amount'] = array("Amount.", "amount", TRUE, "amount", FALSE, TRUE,"amount",'','','','text-right');
 
   $list_setting['hook_kdm_purity'] = array("Hook KDM Purity", "hook_kdm_purity", TRUE, 
                                            "hook_kdm_purity", FALSE, TRUE);
   $list_setting['quantity'] = array("Quantity", "quantity", TRUE, "quantity", FALSE, TRUE);
-  $list_setting['lumpsum_amount'] = array("Lumpsum Amount", "lumpsum_amount", FALSE, "lumpsum_amount", TRUE, TRUE);
+  $list_setting['lumpsum_amount'] = array("Lumpsum Amount", "lumpsum_amount", FALSE, "lumpsum_amount", TRUE, TRUE,
+                                          "lumpsum_amount",'','','','text-right');
   $list_setting['interest_per_day'] = array("Interest per Day", "interest_per_day", FALSE, "interest_per_day", TRUE, TRUE);
 
   $list_setting['narration'] = array("Narration", "narration", FALSE, "narration", TRUE, TRUE);
@@ -84,12 +87,15 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
   $list_setting['factory_purity'] = array("Factory Purity", "factory_purity", FALSE, "factory_purity", TRUE, TRUE);
   $list_setting['Pure Gold'] = array("Narration", "pure_gold_credit", FALSE, "pure_gold_credit", TRUE, TRUE);
   $list_setting['department_name'] = array("Department Name", "department_name", FALSE, "department_name", TRUE, TRUE);
-  $list_setting['debit_amount'] = array("Credit", "debit_amount", TRUE, "debit_amount", FALSE, TRUE);
-  $list_setting['credit_amount'] = array("Debit Amt.", "credit_amount", TRUE, "credit_amount", FALSE, TRUE);
+  $list_setting['debit_amount'] = array("Credit Amt", "debit_amount", TRUE, "debit_amount", FALSE, TRUE,"debit_amount",
+                                        '','','','text-right');
+  $list_setting['credit_amount'] = array("Debit Amt.", "credit_amount", TRUE, "credit_amount", FALSE, TRUE,"credit_amount",     
+                                        '','','','text-right');
   $list_setting['total_gross_weight'] = array("Total Gross Wt", "total_gross_weight", FALSE, "total_gross_weight", TRUE, TRUE);
   $list_setting['total_net_weight'] = array("Total Net Wt", "total_net_weight", FALSE, "total_net_weight", TRUE, TRUE);
   $list_setting['total_fine_weight'] = array("Total Fine Wt", "total_fine_weight", FALSE, "total_fine_weight", TRUE, TRUE);
-  $list_setting['total_amount'] = array("Total Amount", "total_amount", FALSE, "total_amount", TRUE, TRUE);
+  $list_setting['total_amount'] = array("Total Amount", "total_amount", FALSE, "total_amount", TRUE, TRUE,"total_amount",    
+                                        '','','','text-right');
 
 
 
