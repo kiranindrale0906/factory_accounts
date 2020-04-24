@@ -5,7 +5,7 @@ function get_file_content($field_name,$controller){
   $file_content = array('upload_on'=>LOCAL);
     $field_name=$controller."/".$field_name;
     switch($field_name){
-      case 'company/logo'://
+      case 'company/logo':
         $folder_array = array('folder'=>'uploads/logo');
         $file_content = array_merge($file_content,$folder_array);
       break;
