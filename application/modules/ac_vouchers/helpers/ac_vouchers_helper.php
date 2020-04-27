@@ -8,6 +8,7 @@ function ac_vouchers_getTableSettings($table_setting_arg=array()) {
     $table_setting_arg['where'] = 'company_id='.(!empty($ci->session->userdata('company_id'))?$ci->session->userdata('company_id'):-1);
  
   }
+  
   $table_setting= array('page_title'          => '',
                         'primary_table'       => 'ac_vouchers',
                         'default_column'      => 'ac_vouchers.id',
@@ -28,6 +29,9 @@ function ac_vouchers_getTableSettings($table_setting_arg=array()) {
                         'custom_table_header' => true,
                         'clear_filter'        => true,
                       );
+  if(!empty($_GET['from']) && !empty($_GET['to'])){
+    $table_setting_arg['where'] .=' and ac_vouchers.created_at >"'.date('Y-m-d',strtotime($_GET['from'])).'" and ac_vouchers.created_at <"'.date('Y-m-d',strtotime($_GET['to'])).'"';
+  }
   if(!empty($table_setting_arg)){
     $table_setting=array_merge($table_setting,$table_setting_arg);
   }
