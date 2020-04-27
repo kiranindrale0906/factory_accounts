@@ -30,7 +30,7 @@ function ac_vouchers_getTableSettings($table_setting_arg=array()) {
                         'clear_filter'        => true,
                       );
   if(!empty($_GET['from']) && !empty($_GET['to'])){
-    $table_setting_arg['where'] .=' and ac_vouchers.created_at >"'.date('Y-m-d',strtotime($_GET['from'])).'" and ac_vouchers.created_at <"'.date('Y-m-d',strtotime($_GET['to'])).'"';
+    $table_setting_arg['where'] .=' and ac_vouchers.created_at >= "'.date('Y-m-d',strtotime($_GET['from'])).'" and ac_vouchers.created_at <"'.date('Y-m-d',strtotime($_GET['to'])).'"';
   }
   if(!empty($table_setting_arg)){
     $table_setting=array_merge($table_setting,$table_setting_arg);
