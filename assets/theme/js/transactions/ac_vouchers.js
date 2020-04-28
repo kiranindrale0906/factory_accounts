@@ -278,6 +278,51 @@ $('.search_date').click(function(){
     return true;
 });
 
+$('.search_data').click(function(){
+    var from_date = $('.start_date').val();
+    var to_date = $('.end_date').val();
+    var account_name = $('.account_name').val();
+    if(from_date==""){
+      alert("Please select both dates.");
+      return false;
+    }
+    if(to_date==""){
+      alert("Please select both dates.");
+      return false;
+    }
+
+    if(moment(from_date, 'DD MMM YYYY').unix() > moment(to_date, 'DD MMM YYYY').unix())
+    {
+      alert("From Date Can't be greater than To date");
+      return false;
+    }
+
+    var url = window.location.href;
+    if (url.indexOf("?") > -1) {
+          var url = url.split('?')[0];
+        if(from_date!=""&& to_date!="" && account_name!=""){
+          new_url ='?account_name='+account_name+'&start_date='+from_date+'&end_date='+to_date+'';
+        }else if(from_date!=""&& to_date!="" && account_name==""){
+          new_url ='?start_date='+from_date+'&end_date='+to_date+'';
+        }else{
+          new_url ='?account_name='+account_name;
+
+        }
+
+      window.location.href = url+new_url;
+    }else{
+        if(from_date!=""&& to_date!="" && account_name!=""){
+          new_url ='?account_name='+account_name+'&start_date='+from_date+'&end_date='+to_date+'';
+        }else if(from_date!=""&& to_date!="" && account_name==""){
+          new_url ='?start_date='+from_date+'&end_date='+to_date+'';
+        }else{
+          new_url ='?account_name='+account_name;
+        }
+      window.location.href = url+new_url;
+    }
+    return true;
+});
+
 $('.clear_btn').click(function(){
     var url = window.location.href;
     var new_url = url.split('?')[0];
