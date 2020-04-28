@@ -282,11 +282,11 @@ $('.search_data').click(function(){
     var from_date = $('.start_date').val();
     var to_date = $('.end_date').val();
     var account_name = $('.account_name').val();
-    if(from_date==""){
+    if(from_date=="" && to_date!=""){
       alert("Please select both dates.");
       return false;
     }
-    if(to_date==""){
+    if(to_date=="" && from_date!=""){
       alert("Please select both dates.");
       return false;
     }
