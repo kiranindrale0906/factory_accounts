@@ -62,6 +62,15 @@
                                         'reports/vadotar_reports' => 'Vadotar Report',
                                         'reports/rojmel_reports' => 'Rojmel Report'),
                     'Interests' => array('transactions/interest_issue_vouchers'=>'Interest Issue Voucher','transactions/interest_receipt_vouchers'=>'Interest Receipt Voucher'),
+                    'Registers'   => array(
+                      'registers/cash_registers' => 'Cash Register',
+                      'registers/bank_registers' => 'Bank Register',
+                      'registers/sales_registers' => 'Sales Register',
+                      'registers/purchase_registers' => 'Purchase Register',
+                      'registers/rate_cut_purchase_value_registers' => 'Rate Cut Purchase Value Register',
+                      'registers/rate_cut_purchase_weight_registers' => 'Rate Cut Purchase Weight Register',
+                                        ),
+                    
                     // 'Others'    => array('others/account_wise_details'=>'Account Wise Details',
                     //                     'others/categories'=>'Category',
                     //                     'others/items'=>'Item',

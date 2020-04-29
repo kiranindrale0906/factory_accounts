@@ -282,6 +282,18 @@ $('.search_data').click(function(){
     var from_date = $('.start_date').val();
     var to_date = $('.end_date').val();
     var account_name = $('.account_name').val();
+    var bank_name = $('.bank_name').val();
+    var type = $('.type').val();
+    if(account_name==undefined){
+      account_name="";
+    }
+    if(bank_name==undefined){
+      bank_name="";
+    }
+    if(type==undefined){
+      type="";
+    }
+    
     if(from_date=="" && to_date!=""){
       alert("Please select both dates.");
       return false;
@@ -300,24 +312,51 @@ $('.search_data').click(function(){
     var url = window.location.href;
     if (url.indexOf("?") > -1) {
           var url = url.split('?')[0];
-        if(from_date!=""&& to_date!="" && account_name!=""){
-          new_url ='?account_name='+account_name+'&start_date='+from_date+'&end_date='+to_date+'';
-        }else if(from_date!=""&& to_date!="" && account_name==""){
-          new_url ='?start_date='+from_date+'&end_date='+to_date+'';
+       if(from_date!=""&& to_date!="" && (account_name=="")){
+                  new_url ='?account_name='+account_name+'&start_date='+from_date+'&end_date='+to_date+'';
+        }else if(from_date==""&& to_date=="" && (bank_name!="")){
+          
+          new_url ='?bank_name='+bank_name;
+        }else if(from_date==""&& to_date=="" && (type!="")){
+          
+          new_url ='?type='+type;
+        }else if(from_date!=""&& to_date!="" && (type!="")){
+         
+          new_url ='?type='+type+'&start_date='+from_date+'&end_date='+to_date+'';
+        }else if(from_date!=""&& to_date!="" && (bank_name!="")){
+          
+          new_url ='?bank_name='+bank_name+'&start_date='+from_date+'&end_date='+to_date+'';
+        }else if(from_date!=""&& to_date!="" && ((account_name=="") || (bank_name=="") || (type==""))){
+                    new_url ='?start_date='+from_date+'&end_date='+to_date+'';
         }else{
+          
           new_url ='?account_name='+account_name;
-
         }
 
       window.location.href = url+new_url;
     }else{
-        if(from_date!=""&& to_date!="" && account_name!=""){
-          new_url ='?account_name='+account_name+'&start_date='+from_date+'&end_date='+to_date+'';
-        }else if(from_date!=""&& to_date!="" && account_name==""){
+       if(from_date!=""&& to_date!="" && (account_name=="")){
+                 new_url ='?account_name='+account_name+'&start_date='+from_date+'&end_date='+to_date+'';
+        }else if(from_date==""&& to_date=="" && (bank_name!="")){
+          
+          new_url ='?bank_name='+bank_name;
+        }else if(from_date==""&& to_date=="" && (type!="")){
+          
+          new_url ='?type='+bank_name;
+        }else if(from_date!=""&& to_date!="" && (type!="")){
+          
+          new_url ='?type='+bank_name+'&start_date='+from_date+'&end_date='+to_date+'';
+        }else if(from_date!=""&& to_date!="" && (bank_name!="")){
+          
+          new_url ='?bank_name='+bank_name+'&start_date='+from_date+'&end_date='+to_date+'';
+        }else if(from_date!=""&& to_date!="" && ((account_name=="") || (bank_name=="") || (type==""))){
+          
           new_url ='?start_date='+from_date+'&end_date='+to_date+'';
         }else{
+          
           new_url ='?account_name='+account_name;
         }
+
       window.location.href = url+new_url;
     }
     return true;
