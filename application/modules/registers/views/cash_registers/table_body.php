@@ -1,14 +1,35 @@
 <tbody>
-<?php  foreach ($cash_registers as $index => $cash_register){ ?>
-	   <tr>
-                                        <td><?= ++$index; ?></td>
-                                        <td ><?= date('d-m-y', strtotime($cash_register['created_at'])) ?></td>
-                                        <td><?= $cash_register['voucher_number'] ?></td>
-                                        <td><?= $cash_register['account_name'] ?></td>
-                                        <td class="text-right"><?= $cash_register['credit_amount'] ?></td>
-                                        <td class="text-right"><?= $cash_register['debit_amount'] ?></td>
-                                        <td class="text-right"><?= $cash_register['amount'] ?></td>
-                                        <td><?= $cash_register['narration'] ?></td>
-                                        </tr>
+<?php 
+$credit_amount=$debit_amount=$amount=0;
+  foreach ($cash_registers as $index => $cash_register){ 
+         $credit_amount+= $cash_register['credit_amount'];
+         $debit_amount+= $cash_register['debit_amount'];
+         $amount+=$cash_register['amount'];
+  ?>
+	    <tr>
+          <td><?= ++$index; ?></td>
+          <td ><?= date('d-m-y', strtotime($cash_register['created_at'])) ?></td>
+          <td><?= $cash_register['voucher_number'] ?></td>
+          <td><?= $cash_register['account_name'] ?></td>
+          <td class="text-right"><?=!empty($cash_register['credit_amount'])?$cash_register['credit_amount']:0; ?></td>
+          <td class="text-right"><?= !empty($cash_register['debit_amount'])?$cash_register['debit_amount']:0 ?></td>
+          <td class="text-right"><?= !empty($cash_register['amount'])?$cash_register['amount']:0; ?></td>
+          <td><?= $cash_register['narration'] ?></td>
+      </tr>
 	  <?php }?>
+    <tr class="bg_gray bold">
+    <td>Total</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td class="text-right"><?=$credit_amount;?></td>
+    <td class="text-right"><?=$debit_amount;?></td>
+    <td class="text-right"><?=$amount;?></td>
+    <td></td>
+  </tr>
 </tbody> 
+
+
+
+ 
+

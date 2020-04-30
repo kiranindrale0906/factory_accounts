@@ -1,18 +1,19 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Bank_registers extends BaseController {  
+class Rate_cut_booking_value_registers extends BaseController {  
   public function __construct(){
-    $this->_model='Bank_register_model';
+    $this->_model='Rate_cut_booking_value_register_model';
     parent::__construct();
     $this->redirect_after_save = 'view';
-    $this->load->model(array('reports/bank_register_model',
+    $this->load->model(array('reports/rate_cut_booking_value_register_model',
                              'ac_vouchers/voucher_model'));
   } 
 
   public function index() { 
+    
     $this->calculation_data();
-    $this->load->render('registers/bank_registers/index',$this->data); 
+    $this->load->render('registers/rate_cut_booking_value_registers/index',$this->data); 
   } 
 
   public function _get_form_data() {
@@ -28,16 +29,16 @@ class Bank_registers extends BaseController {
             $where['created_at>='] = $this->start_date;
         }
         if (!empty($_GET['end_date'])) {
-            $where['created_at<='] = $this->end_date;
+            $where['created_at<'] = $this->end_date;
         }
-        if (!empty($_GET['bank_name'])) {
-            $where['bank_name']= $_GET['bank_name'];
+        if (!empty($_GET['type'])) {
+            $where['type']= $_GET['type'];
         }
-        $where['where']='(suffix="BI" OR suffix="BR" OR suffix="RCPPIV" OR suffix = "RCPPRV" OR suffix="RCPWIV" OR suffix = "RCPWRV")';
+        $where['where']='(suffix="RCBPIV" or suffix = "RCBPRV")';
         $where['company_id']=$this->session->userdata('company_id');
 
 
-    $this->data['bank_registers'] = $this->voucher_model->get('',$where);
+    $this->data['rate_cut_booking_value_registers'] = $this->voucher_model->get('',$where);
   }
 
   public function _after_save($formdata, $action){

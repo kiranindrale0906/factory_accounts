@@ -10,7 +10,7 @@ if($show_heading){ ?>
   <form class="fields-group-sm">
     <div class="row">
       <?php load_field('text',array('field' => 'type',
-                                     'class' => 'autocomplete_list_selection type',
+                                     'class' => 'autocomplete_list_selection ',
                                      'data-table'=>'ac_type','data-list-title'=>'Type','data-column'=>'name','col'=>'col-sm-4'));?>
       <?php load_field('date',array('field' => 'start_date','class' => 'datepicker_js start_date', 'col'=>'col-sm-4','value'=>date('d-m-Y',strtotime($start_date))));?>
       <?php load_field('date',array('field' => 'end_date','class' => 'datepicker_js end_date', 'col'=>'col-sm-4','value'=>date('d-m-Y',strtotime($end_date))));?>  
@@ -24,8 +24,8 @@ if($show_heading){ ?>
 <div class="table-responsive m-t-20">
   <table class="table table-sm fixedthead table-default">
   <?php 
-    $this->load->view('registers/rate_cut_purchase_value_registers/table_header');
-    $this->load->view('registers/rate_cut_purchase_value_registers/table_body');
+    $this->load->view('registers/rate_cut_booking_value_registers/table_header');
+    $this->load->view('registers/rate_cut_booking_value_registers/table_body');
   ?>
   </table>
 </div>

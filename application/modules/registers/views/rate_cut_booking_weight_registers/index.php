@@ -9,6 +9,7 @@ if($show_heading){ ?>
 <?php } ?>
   <form class="fields-group-sm">
     <div class="row">
+      
       <?php load_field('text',array('field' => 'type',
                                      'class' => 'autocomplete_list_selection type',
                                      'data-table'=>'ac_type','data-list-title'=>'Type','data-column'=>'name','col'=>'col-sm-4'));?>
@@ -24,8 +25,8 @@ if($show_heading){ ?>
 <div class="table-responsive m-t-20">
   <table class="table table-sm fixedthead table-default">
   <?php 
-    $this->load->view('registers/rate_cut_purchase_value_registers/table_header');
-    $this->load->view('registers/rate_cut_purchase_value_registers/table_body');
+    $this->load->view('registers/rate_cut_booking_weight_registers/table_header');
+    $this->load->view('registers/rate_cut_booking_weight_registers/table_body');
   ?>
   </table>
 </div>
