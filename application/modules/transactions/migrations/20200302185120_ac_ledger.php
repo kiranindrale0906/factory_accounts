@@ -6,7 +6,7 @@ class Migration_ac_ledger extends CI_Model {
 
   public function up()
   {
-  	$sql = "CREATE TABLE `ac_ledger` (
+  	$sql = "CREATE TABLE IF NOT EXISTS `ac_ledger` (
 				  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 				  `gold_rate_purity` float(10,2) DEFAULT NULL,
 				  `company_id` int(11) DEFAULT NULL,

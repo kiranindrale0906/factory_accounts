@@ -6,7 +6,7 @@ class Migration_ac_product_category extends CI_Model {
 
   public function up()
   {
-  	$sql ="CREATE TABLE `ac_product_category` (
+  	$sql ="CREATE TABLE IF NOT EXISTS `ac_product_category` (
 				  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 				  `name` varchar(255) DEFAULT NULL,
 				  `percentage` float(10,2) DEFAULT NULL,

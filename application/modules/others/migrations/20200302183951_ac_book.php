@@ -6,7 +6,7 @@ class Migration_ac_book extends CI_Model {
 
   public function up()
   {
-  	$sql = "CREATE TABLE `ac_book` (
+  	$sql = "CREATE TABLE IF NOT EXISTS `ac_book` (
 					  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 					  `company_id` int(11) DEFAULT NULL,
 					  `name` varchar(45) NOT NULL,
