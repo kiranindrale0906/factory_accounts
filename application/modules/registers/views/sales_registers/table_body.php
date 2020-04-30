@@ -1,13 +1,30 @@
 <tbody>
-<?php  foreach ($sales_registers as $index => $sales_registers){ ?>
+<?php 
+$amount=$gross_weight=$net_weight=$fine_weight=0;
+ foreach ($sales_registers as $index => $sales_registers){
+ $amount+=$sales_registers['total_gross_weight'];
+    $gold_weight+=$sales_registers['total_net_weight'];
+    $fine_weight+=$sales_registers['total_fine_weight'];
+     ?>
 	   <tr>
                                         <td><?= ++$index; ?></td>
                                         <td ><?= date('d-m-y', strtotime($sales_registers['created_at'])) ?></td>
                                         <td><?= $sales_registers['voucher_number'] ?></td>
                                         <td><?= $sales_registers['account_name'] ?></td>
-                                        <td class="text-right"><?= $sales_registers['total_gross_weight'] ?></td>
-                                        <td class="text-right"><?= $sales_registers['total_net_weight'] ?></td>
-                                        <td class="text-right"><?= $sales_registers['total_fine_weight'] ?></td>
+                                        <td class="text-right"><?= !empty($sales_registers['total_gross_weight'])?$sales_registers['total_gross_weight']:0; ?></td>
+                                        <td class="text-right"><?= !empty($sales_registers['total_net_weight'])?$sales_registers['total_net_weight']:0; ?></td>
+                                        <td class="text-right"><?= !empty($sales_registers['total_fine_weight'])?$sales_registers['total_fine_weight']:0; ?></td>
                                         </tr>
 	  <?php }?>
+<tr class="bg_gray bold">
+    <td>Total</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td class="text-right"><?=$gross_weight;?></td>
+    <td class="text-right"><?=$net_weight;?></td>
+    <td class="text-right"><?=$fine_weight;?></td>
+  </tr>
 </tbody> 
+  
+    

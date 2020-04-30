@@ -69,6 +69,9 @@
                       'registers/purchase_registers' => 'Purchase Register',
                       'registers/rate_cut_purchase_value_registers' => 'Rate Cut Purchase Value Register',
                       'registers/rate_cut_purchase_weight_registers' => 'Rate Cut Purchase Weight Register',
+                      'registers/rate_cut_booking_value_registers' => 'Rate Cut Booking Value Register',
+                      'registers/rate_cut_booking_weight_registers' => 'Rate Cut Booking Weight Register',
+                      'registers/expense_registers' => 'Expense Registers',
                                         ),
                     
                     // 'Others'    => array('others/account_wise_details'=>'Account Wise Details',
