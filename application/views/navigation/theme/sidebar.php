@@ -65,6 +65,7 @@
                     'Registers'   => array(
                       'registers/cash_registers' => 'Cash Register',
                       'registers/bank_registers' => 'Bank Register',
+                      'registers/metal_registers' => 'Metal Registers',
                       'registers/sales_registers' => 'Sales Register',
                       'registers/purchase_registers' => 'Purchase Register',
                       'registers/rate_cut_purchase_value_registers' => 'Rate Cut Purchase Value Register',

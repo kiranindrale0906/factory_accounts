@@ -2,7 +2,7 @@
   <div>
     <a href="index.php">
     <?php $company_logo=get_logo();?>
-      <img src="<?= base_url() ?>uploads/logo/original/<?=$company_logo?>"> 
+      <img src="<?= base_url() ?>uploads/logo/original/<?=$company_logo?>" height="50" width="50"> 
       <!-- Your Logo Here -->
     </a> 
 
