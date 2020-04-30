@@ -95,7 +95,8 @@ $autoload['helper'] = array(
     'core/field', 'core/form_fields', 
     'core/listing_helper', 'core/mimes_helper', 
     'layouts/layouts_helper', 'layouts/application_helper', 
-    'layouts/login_helper', 'layouts/theme_helper','core/request_helper');
+    'layouts/login_helper', 'layouts/theme_helper','core/request_helper','core/field_helper','fdec_common_helper','config/upload_helper','string_helper');
+
 
 /*
 | -------------------------------------------------------------------
