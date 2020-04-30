@@ -24,8 +24,9 @@
   <div class="row">    
     <?php load_field('file', array('field' => 'logo')) ?>
     <?php if ($action == 'edit' || $action == 'update'): ?>
-    <img src=<?php echo base_url().'uploads/logo/original/'.$record['logo']; ?> />
+    <img src=<?php echo base_url().'uploads/logo/original/'.$record['logo']; ?>  height="200" width="200" />
     <?php endif; ?>  
+    <?php load_field('text', array('field' => 'decimal_no')) ?>
   </div>
   
   <?php load_buttons('submit', array('controller' => $controller, 'name' => 'SAVE' , 'class' => 'btn_blue')); ?>
