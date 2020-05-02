@@ -1,4 +1,5 @@
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Metal_registers extends BaseController {  
@@ -6,8 +7,7 @@ class Metal_registers extends BaseController {
     //$this->_model='Bank_register_model';
     parent::__construct();
     $this->redirect_after_save = 'view';
-    $this->load->model(array('reports/bank_register_model',
-                             'ac_vouchers/voucher_model'));
+    $this->load->model(array('ac_vouchers/voucher_model'));
   } 
 
   public function index() { 
@@ -22,6 +22,7 @@ class Metal_registers extends BaseController {
     $this->end_date = (!empty($_GET['end_date'])) ? date('Y-m-d',strtotime($_GET['end_date'])) : date('Y-m-d');
     $this->data['start_date'] = $this->start_date;
     $this->data['end_date'] = $this->end_date;
+    $param = $this->data;
     $where=array();
     if (!empty($_GET['start_date'])) {
             $where['created_at>='] = $this->start_date;
@@ -35,7 +36,9 @@ class Metal_registers extends BaseController {
 
       
 
-      $purities = $this->get_purity();
+      $this->data['purities'] = $this->get_purity();
+
+      $this->get_metal_register_data($this->data['purities'],$param);
   }
 
   private function get_purity() {
@@ -45,33 +48,50 @@ class Metal_registers extends BaseController {
     $metal_purities = $this->metal_register_model->get('distinct(purity) purity' , 
                                                          array('(suffix="MI" or suffix="MR")'=>NULL));
     $rate_cut_purities = $this->metal_register_model->get('distinct(gold_weight_purity) as purity' , $where);
-    $sales_purities = $this->metal_register_model->get('distinct(gold_purity) as purity' , array('suffix'=>'SV'));    
+    $sales_purities = $this->metal_register_model->get('distinct(purity) as purity' , array('suffix'=>'SV'));    
     $purity_list= array_merge($metal_purities,$rate_cut_purities,$sales_purities);
     $purity_list = array_unique($purity_list, SORT_REGULAR);
     return $purity_list;
   }
 
-  public function index() {
-
-        // $param = $this->getParams();
-        // $metal_purities = $this->metal_voucher_model->get_all_purity();
-        // $all_purities = array_merge($rate_cut_purities, $metal_purities);
-        // $sales_purities = $this->sales_purchase_voucher_model->get_all_purity();
-        // $all_purities = array_merge($all_purities, $sales_purities);
-        // $all_purities = array_unique($all_purities, SORT_REGULAR);
-        // $opening_param['to_date'] = date('Y-m-d', strtotime('-1 day', strtotime($param['from_date'])));
-        // $opening_param['from_date'] = date('1990-04-01');
-        foreach ($all_purities as $key => $purity) {
+  private function get_metal_register_data($all_purities,$param) {
+    if(empty($param['start_date'])) return false;
+    $opening_param['end_date'] = date('Y-m-d', strtotime('-1 day', strtotime($param['start_date'])));
+    $opening_param['start_date'] = date('1990-04-01');
+    foreach ($all_purities as $key => $purity) {
             $param['purity'] = $purity['purity'];
             $opening_param['purity'] = $purity['purity'];
-            $metal_register = $rate_cut_register = $new_array = $all_vouchers = array();
-            $pre_metal_register = $pre_rate_cut_register = $pre_array = $all_pre_vouchers = array();
-            $metal_register = $this->metal_voucher_model->get_metal_register_data($param);
-            $pre_metal_register = $this->metal_voucher_model->get_metal_register_data($opening_param);
-            $param['gold_weight_purity'] = $purity['purity'];
+            $metal_register = array();
+            $rate_cut_register = array();
+            $new_array = array();
+            $all_vouchers = array();
+            $pre_metal_register = array(); 
+            $pre_rate_cut_register = array(); 
+            $pre_array = array();
+            $all_pre_vouchers = array();
+
+            $where['where']='(suffix="MI" OR suffix="MR")';
+            $where['company_id'] = $this->session->userdata('company_id');
+            $where['purity'] = abs($param['purity']);
+            $where['voucher_date >='] = date('Y-m-d', strtotime($param['start_date']));  
+            $where['voucher_date <='] = date('Y-m-d', strtotime($param['end_date']));  
+            $metal_register = $this->metal_register_model->get('*', $where, array(),array('order_by'=>'voucher_date asc'));
+
+            $where['voucher_date >='] = $opening_param['start_date'];  
+            $where['voucher_date <='] = $opening_param['end_date'];
+            $pre_metal_register = $this->metal_register_model->get('*', $where, array(),array('order_by'=>'voucher_date asc'));
+            unset($where['purity']);
+            $where['where']='(suffix="RCPPIV" or suffix = "RCPPRV" or suffix="RCPWIV" or suffix = "RCPWRV")';  
+            $where['voucher_date >='] = date('Y-m-d', strtotime($param['start_date']));  
+            $where['voucher_date <='] = date('Y-m-d', strtotime($param['end_date']));    
+            $where['gold_weight_purity'] = $purity['purity'];
             $opening_param['gold_weight_purity'] = $purity['purity'];
-            $rate_cut_register = $this->rate_cut_voucher_model->get_rate_cut_purchase_register_data($param);
-            $pre_rate_cut_register = $this->rate_cut_voucher_model->get_rate_cut_purchase_register_data($opening_param);
+
+            $rate_cut_register = $this->metal_register_model->get('*', $where, array(),array('order_by'=>'voucher_date asc'));
+            $where['voucher_date >='] = $opening_param['start_date'];  
+            $where['voucher_date <='] = $opening_param['end_date'];
+            $pre_rate_cut_register = $this->metal_register_model->get('*', $where, array(),array('order_by'=>'voucher_date asc'));
+
             foreach ($rate_cut_register as $k => $rcr) {
                 $new_array[$k] = $rcr;
                 switch ($rcr['voucher_type']) {
@@ -109,10 +129,15 @@ class Metal_registers extends BaseController {
            
             $all_vouchers = array_merge($metal_register, $new_array);
             $all_pre_vouchers = array_merge($pre_metal_register, $pre_array);
-            unset($param['gold_weight_purity']);
+            unset($where['gold_weight_purity']);
             unset($opening_param['gold_weight_purity']);
-            $dispatch_vouchers = $this->sales_purchase_voucher_model->get_cash_dispatch_voucher($param);
-            $pre_dispatch_vouchers = $this->sales_purchase_voucher_model->get_cash_dispatch_voucher($opening_param);
+            $where['where']='(suffix="dispatch voucher")';
+            $where['voucher_date >='] = date('Y-m-d', strtotime($param['start_date']));  
+            $where['voucher_date <='] = date('Y-m-d', strtotime($param['end_date'])); 
+            $dispatch_vouchers = $this->metal_register_model->get('*', $where, array(),array('order_by'=>'voucher_date asc'));
+            $where['voucher_date >='] = $opening_param['start_date'];  
+            $where['voucher_date <='] = $opening_param['end_date'];
+            $pre_dispatch_vouchers = $this->metal_register_model->get('*', $where, array(),array('order_by'=>'voucher_date asc'));
             foreach ($dispatch_vouchers as $dk => $dv) {
                 $new_array[$key] = $dv;
 
@@ -161,130 +186,72 @@ class Metal_registers extends BaseController {
             $all_purities[$key]['total_opening_debit'] = $total_opening_debit;
             $all_purities[$key]['balance'] = ($total_debit - $total_credit);
         }
-        $data['opening_balance'] = $this->calculate_opening_balance($param);
-        $data['all_purities'] = array_values($all_purities);
-        $data['company_data'] = $this->company_model->get_company_data();
+        //$this->data['opening_balance'] = $this->calculate_opening_balance($param,$purities);
+        $this->data['all_purities'] = array_values($all_purities);
+        //$this->data['company_data'] = $this->company_model->get_company_data();
+  }
 
-        $data['from_date'] = $param['from_date'];
-        $data['to_date'] = $param['to_date'];
-        $print = $this->input->get('print');
-        if (isset($print) && $print == 'true') {
-            $this->view->print_page('reports/metal_register/print', $data);
-        } else {
-            $this->view->render('reports/metal_register/index', $data);
-        }
-    }
+  // private function calculate_opening_balance($param,$all_purities) {
 
-    private function array_sum_weight_field($array, $field) {
-      $sum = 0;
-      foreach ($array as $item) {
-        $sum += $item[$field];
-      }
-      return $sum;
-    }
+  //     $param['end_date'] = date('Y-m-d', strtotime('-1 day', strtotime($param['start_date'])));
+  //     $param['start_date'] = date('1990-04-01');
+  //     foreach ($all_purities as $key => $purity) {
+  //         $param['purity'] = $purity['purity'];
+  //         $metal_register = $rate_cut_register = $new_array = $all_vouchers = array();
+  //         $metal_register = $this->metal_voucher_model->get_metal_register_data($param);
+  //         $param['gold_weight_purity'] = $purity['purity'];
+  //         $rate_cut_register = $this->rate_cut_voucher_model->get_rate_cut_purchase_register_data($param);
 
-    // private function getParams() {
-    //     $param = array(
-    //         'from_date' => date('Y-m-01'),
-    //         'to_date' => date('Y-m-d'),
-    //     );
+  //         foreach ($rate_cut_register as $k => $rcr) {
+  //             $new_array[$k] = $rcr;
+  //             switch ($rcr['voucher_type']) {
+  //                 case 'rate cut purchase price issue voucher':
+  //                     $new_array[$k]['debit_weight'] = $rcr['gold_weight'];
+  //                     break;
+  //                 case 'rate cut purchase price receipt voucher':
+  //                     $new_array[$k]['credit_weight'] = $rcr['gold_weight'];
+  //                     break;
+  //                 case 'rate cut purchase weight issue voucher':
+  //                     $new_array[$k]['credit_weight'] = $rcr['credit_weight'];
+  //                     break;
+  //                 case 'rate cut purchase weight receipt voucher':
+  //                     $new_array[$k]['debit_weight'] = $rcr['debit_weight'];
+  //                     break;
+  //             }
+  //         }
+  //         $all_vouchers = array_merge($metal_register, $new_array);
 
-    //     if (!empty($_GET['from_date'])) {
-    //         $param['from_date'] = $_GET['from_date'];
-    //     }
-    //     if (!empty($_GET['to_date'])) {
-    //         $param['to_date'] = $_GET['to_date'];
-    //     }
+  //         unset($param['gold_weight_purity']);
+  //         $dispatch_vouchers = $this->sales_purchase_voucher_model->get_cash_dispatch_voucher($param);
+  //         foreach ($dispatch_vouchers as $dk => $dv) {
+  //             $new_array[$key] = $dv;
 
-    //     if (isset($_GET['order_column']) && $_GET['order_by'] && !empty($_GET['order_column']) && !empty($_GET['order_by'])) {
-    //         $param['order_column'] = $_GET['order_column'];
-    //         $param['order_by'] = $_GET['order_by'];
-    //     }
-    //     $role = $this->session->userdata('accounting_role');
-    //     if (isset($role) && $role != 1) {
+  //             $dispatch_vouchers[$dk]['credit_weight'] = $dispatch_vouchers[$dk]['debit_weight'] = 0;
+  //             if ($dv['cash_amount'] < 0) {
+  //                 $dispatch_vouchers[$dk]['debit_weight'] = abs($dv['fine_wt']);
+  //             } else {
+  //                 $dispatch_vouchers[$dk]['credit_weight'] = abs($dv['fine_wt']);
+  //             }
+  //         }
 
-    //         $param['from_date'] = date('Y-m-d');
-    //         $param['to_date'] = date('Y-m-d');
-    //         if (!empty($_GET['from_date'])) {
-    //             $param['from_date'] = $_GET['from_date'];
-    //         }
-    //         if (!empty($_GET['to_date'])) {
-    //             $param['to_date'] = $_GET['to_date'];
-    //         }
-    //     }
+  //         $all_vouchers = array_merge($all_vouchers, $dispatch_vouchers);
+          
+  //         if (empty($all_vouchers)) {
+  //             unset($all_purities[$key]);
+  //             continue;
+  //         }
+          
+  //         $total_opening_debit_weight = $total_opening_credit_weight = 0;
+  //         foreach ($all_vouchers as $cr) {
+  //             $total_opening_credit_weight = $total_opening_credit_weight + $cr['credit_weight'];
+  //             $total_opening_debit_weight = $total_opening_debit_weight + $cr['debit_weight'];
+  //         }
+          
 
-    //     return $param;
-    // }
-
-    
-
-    private function calculate_opening_balance($param) {
-
-        $param['to_date'] = date('Y-m-d', strtotime('-1 day', strtotime($param['from_date'])));
-        $param['from_date'] = date('1990-04-01');
-        $rate_cut_purities = $this->rate_cut_voucher_model->get_all_purity();
-        $metal_purities = $this->metal_voucher_model->get_all_purity();
-        $all_purities = array_merge($rate_cut_purities, $metal_purities);
-        $sales_purities = $this->sales_purchase_voucher_model->get_all_purity();
-        $all_purities = array_merge($all_purities, $sales_purities);
-        $all_purities = array_unique($all_purities, SORT_REGULAR);
-        foreach ($all_purities as $key => $purity) {
-            $param['purity'] = $purity['purity'];
-            $metal_register = $rate_cut_register = $new_array = $all_vouchers = array();
-            $metal_register = $this->metal_voucher_model->get_metal_register_data($param);
-            $param['gold_weight_purity'] = $purity['purity'];
-            $rate_cut_register = $this->rate_cut_voucher_model->get_rate_cut_purchase_register_data($param);
-
-            foreach ($rate_cut_register as $k => $rcr) {
-                $new_array[$k] = $rcr;
-                switch ($rcr['voucher_type']) {
-                    case 'rate cut purchase price issue voucher':
-                        $new_array[$k]['debit_weight'] = $rcr['gold_weight'];
-                        break;
-                    case 'rate cut purchase price receipt voucher':
-                        $new_array[$k]['credit_weight'] = $rcr['gold_weight'];
-                        break;
-                    case 'rate cut purchase weight issue voucher':
-                        $new_array[$k]['credit_weight'] = $rcr['credit_weight'];
-                        break;
-                    case 'rate cut purchase weight receipt voucher':
-                        $new_array[$k]['debit_weight'] = $rcr['debit_weight'];
-                        break;
-                }
-            }
-            $all_vouchers = array_merge($metal_register, $new_array);
-
-            unset($param['gold_weight_purity']);
-            $dispatch_vouchers = $this->sales_purchase_voucher_model->get_cash_dispatch_voucher($param);
-            foreach ($dispatch_vouchers as $dk => $dv) {
-                $new_array[$key] = $dv;
-
-                $dispatch_vouchers[$dk]['credit_weight'] = $dispatch_vouchers[$dk]['debit_weight'] = 0;
-                if ($dv['cash_amount'] < 0) {
-                    $dispatch_vouchers[$dk]['debit_weight'] = abs($dv['fine_wt']);
-                } else {
-                    $dispatch_vouchers[$dk]['credit_weight'] = abs($dv['fine_wt']);
-                }
-            }
-
-            $all_vouchers = array_merge($all_vouchers, $dispatch_vouchers);
-            
-            if (empty($all_vouchers)) {
-                unset($all_purities[$key]);
-                continue;
-            }
-            
-            $total_opening_debit_weight = $total_opening_credit_weight = 0;
-            foreach ($all_vouchers as $cr) {
-                $total_opening_credit_weight = $total_opening_credit_weight + $cr['credit_weight'];
-                $total_opening_debit_weight = $total_opening_debit_weight + $cr['debit_weight'];
-            }
-            
-
-            $all_purities[$key]['total_opening_debit_weight'] = $total_opening_debit_weight;
-            $all_purities[$key]['total_opening_credit_weight'] = $total_opening_credit_weight;
-            // $all_purities[$key]['balance'] = ($total_debit - $total_credit);
-        }
-        return $all_purities;
-    }
+  //         $all_purities[$key]['total_opening_debit_weight'] = $total_opening_debit_weight;
+  //         $all_purities[$key]['total_opening_credit_weight'] = $total_opening_credit_weight;
+  //         // $all_purities[$key]['balance'] = ($total_debit - $total_credit);
+  //     }
+  //     return $all_purities;
+  // }
 }

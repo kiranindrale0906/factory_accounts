@@ -384,3 +384,18 @@ if ( ! function_exists('four_decimal')) {
      return number_format((float)$value, 4, '.', '');
   }
 }
+
+if (!function_exists('overwrite_number_format')) {
+  function overwrite_number_format($number, $digits, $default = '', $abs = true) {
+    $result = $default;
+
+    if ($number == '' || $number == '0.00') {
+        return $result;
+    }
+
+    if($abs === true):
+        $number = abs($number);
+    endif;
+    return number_format($number, $digits);
+  }
+}
