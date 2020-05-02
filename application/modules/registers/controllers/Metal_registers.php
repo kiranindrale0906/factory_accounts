@@ -4,10 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Metal_registers extends BaseController {  
   public function __construct(){
-    //$this->_model='Bank_register_model';
     parent::__construct();
-    $this->redirect_after_save = 'view';
-    $this->load->model(array('ac_vouchers/voucher_model'));
   } 
 
   public function index() { 
@@ -23,22 +20,8 @@ class Metal_registers extends BaseController {
     $this->data['start_date'] = $this->start_date;
     $this->data['end_date'] = $this->end_date;
     $param = $this->data;
-    $where=array();
-    if (!empty($_GET['start_date'])) {
-            $where['created_at>='] = $this->start_date;
-        }
-        if (!empty($_GET['end_date'])) {
-            $where['created_at<='] = $this->end_date;
-        }
-        // if (!empty($_GET['bank_name'])) {
-        //     $where['bank_name']= $_GET['bank_name'];
-        // }
-
-      
-
-      $this->data['purities'] = $this->get_purity();
-
-      $this->get_metal_register_data($this->data['purities'],$param);
+    $this->data['purities'] = $this->get_purity();
+    $this->get_metal_register_data($this->data['purities'],$param);
   }
 
   private function get_purity() {

@@ -1,7 +1,4 @@
 <?php 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 $show_heading = isset($view_type) && $view_type == 'combined_report' ? FALSE : TRUE;
 if($show_heading){ ?>
   <div class="boxrow mb-2">
