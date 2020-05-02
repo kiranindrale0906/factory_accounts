@@ -41,20 +41,19 @@ if($show_heading){ ?>
               <?php $this->load->view('registers/metal_registers/table_header'); ?>
               <tbody>
                   <?php $this->load->view('registers/metal_registers/table_opening_balance',
-                            array('total_opening_credit'=>$purity['total_opening_credit'],
-                                  'total_opening_debit'=>$purity['total_opening_debit'])); ?>
+                                          array('total_opening_credit'=>$purity['total_opening_credit'],
+                                                'total_opening_debit'=>$purity['total_opening_debit'])); ?>
                   <?php
                   if (!empty($purity['metal_register'])) :
                       foreach ($purity['metal_register'] as $key => $value) :
+                        $this->load->view('registers/metal_registers/table_body', array('voucher_date'=>$value['voucher_date'],
+                                                                                        'voucher_number'=>$value['voucher_number'],
+                                                                                        'account_name'=>$value['account_name'],
+                                                                                        'credit_weight'=>$value['credit_weight'],
+                                                                                        'debit_weight'=>$value['debit_weight'],
+                                                                                        'narration'=>$value['narration']));
                           ?>
-                          <tr>
-                              <td><?= date('d-m-y', strtotime($value['voucher_date'])) ?></td>
-                              <td><?= $value['voucher_number'] ?></td>
-                              <td><?= $value['account_name'] ?></td>
-                              <td class="text-right"><?= overwrite_number_format($value['credit_weight'], 3) ?></td>
-                              <td class="text-right"><?= overwrite_number_format($value['debit_weight'], 3) ?></td>
-                              <td><?= (!empty($value['narration'])) ? $value['narration'] : '' ?></td>
-                          </tr>
+                        
                           <?php
                       endforeach;
                   else:
