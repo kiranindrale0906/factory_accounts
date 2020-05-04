@@ -2,18 +2,16 @@
 
 class State_model extends BaseModel {
 
-    protected $table_name = "ac_state";
-    protected $id = "id";
+  protected $table_name = "ac_state";
+  protected $id = "id";
+  public $router_class = "states";
+  function __construct($data=array()) {
+      parent::__construct($data);
+  }
 
-    function __construct() {
-        parent::__construct();
-    }
-
-    public function validation_rules($klass='') {
-    	return array(
-      			array('field' => 'state[name]', 'label' => 'Name', 'rules' => 'trim|required')
-      		);
-    }
+  public function validation_rules($klass='') {
+    return array(
+            array('field' => 'states[name]', 'label' => 'Name', 'rules' => 'trim|required')
+          );
+  }
 }
-
-//class

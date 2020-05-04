@@ -74,15 +74,14 @@
                       'registers/expense_registers' => 'Expense Registers',
                                         ),
                     
-                    // 'Others'    => array('others/account_wise_details'=>'Account Wise Details',
-                    //                     'others/categories'=>'Category',
-                    //                     'others/items'=>'Item',
-                    //                     'others/cities'=>'City',
-                    //                     'others/states'=>'State',
-                    //                     'others/salesmans'=>'Sales Man',
-                    //                     'others/narrations'=>'Narration',
-                    //                     'others/books'=>'Book',
-                    //                     'others/sms'=>'SMS'),
+                    'Others'    => array('others/account_wise_details'=>'Account Wise Details',
+                                        'others/categories'=>'Category',
+                                        'others/items'=>'Item',
+                                        'others/cities'=>'City',
+                                        'others/states'=>'State',
+                                        'others/salesmans'=>'Sales Man',
+                                        'others/books'=>'Book',
+                                        'others/sms'=>'SMS'),
 
                 ); 
   $this->load->view('navigation/application/sidebar', 
