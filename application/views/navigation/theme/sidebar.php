@@ -30,8 +30,8 @@
                                             'transactions/purchase_vouchers' => 'Purchase Voucher',
                                             'transactions/journal_vouchers' => 'Journal Voucher',
                                             'transactions/contra_vouchers' => 'Contra Voucher',
-                                           'transactions/rate_cut_purchase_price_receipt_vouchers' => 'Rate Cut Purchase Price Receipt Voucher',
-                                           'transactions/rate_cut_purchase_weight_receipt_vouchers' => 'Rate Cut Purchase Weight Receipt Voucher',
+                                           'transactions/rate_cut_purchase_price_receipt_vouchers' => 'Rate Cut Purchase Price Voucher',
+                                           'transactions/rate_cut_purchase_weight_receipt_vouchers' => 'Rate Cut Purchase Weight Voucher',
 
                                             // 'transactions/rate_cut_booking_price_issue_voucher' => 'Rate Cut Booking Price Issue Voucher',
                                             // 'transactions/rate_cut_booking_weight_issue_voucher' => 'Rate Cut Booking Weight Issue Voucher',
