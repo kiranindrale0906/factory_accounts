@@ -40,7 +40,6 @@ function list_settings() {
     array("Sub Group Name", "sub_group_code", true, "sub_group_code", true, true),
     array("Area", "area", true, "area", true, true),
     array("Route Group", "route_group", true, "route_group", true, true),
-    array("Area", "area", true, "area", true, true),
     array("Salary", "salary", true, "salary", true, true),
     // array("Net Wt.", "", true, "", true, true),
     array("Action", "action", false, "action", false, false));
