@@ -6,5 +6,7 @@ class Repair_vouchers extends Repair_voucher_clients {
   public function __construct() {
     parent::__construct();
     $this->date_fields = array(array('repair_vouchers', 'voucher_date'));
+     $this->load->model(array('masters/cash_bill_model','masters/purity_model','masters/group_model'));
+   
   }
 }

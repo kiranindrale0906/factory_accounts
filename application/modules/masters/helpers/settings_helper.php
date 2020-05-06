@@ -2,10 +2,10 @@
 
 function getTableSettings() {
   return array(
-    'page_title'          => 'ALL GROUPS',
-    'primary_table'       => 'ac_groups',
+    'page_title'          => 'ALL Settings',
+    'primary_table'       => 'ac_settings',
     'default_column'      => 'id',
-    'table'               => 'ac_groups',
+    'table'               => 'ac_settings',
     'join_columns'        => '',
     'join_type'           => '',
     'where'               => '',
@@ -15,8 +15,8 @@ function getTableSettings() {
     'extra_select_column' => 'id',
     'actionFunction'      => '',
     'headingFunction'     => 'list_settings',
-    'search_url'          => 'groups',
-    'add_title'           => 'Add Group',
+    'search_url'          => 'settings',
+    'add_title'           => 'Add Setting',
     'export_title'        => '',
     'edit'                => '',
   );
@@ -37,8 +37,8 @@ function getTableSettings() {
 function list_settings() {
   return array(
     array("Name", "name", TRUE, "name", TRUE, TRUE),
-    array("Route group", "route_group", TRUE, "route_group", TRUE, TRUE),
-    array("Action", "action", FALSE, "action", FALSE, FALSE),
+    array("Value", "value", TRUE, "value", TRUE, TRUE),
+   array("Action", "action", FALSE, "action", FALSE, FALSE),
   );
 }
 
@@ -56,10 +56,10 @@ function list_settings() {
 function get_field_attribute($table, $field) {
   $attributes = array();
 
-  $attributes['groups'] = array(
+  $attributes['settings'] = array(
     'id'            => array('', '', TRUE, '', TRUE),
     'name'          => array('Name', 'Enter Name.', TRUE, '', TRUE),
-    'route_group'   => array('Route Group', 'Select Route group', TRUE, '', TRUE),
+    'value'          => array('Value', 'Enter Value.', TRUE, '', TRUE)
   );
  
   return $attributes[$table][$field];
@@ -67,16 +67,16 @@ function get_field_attribute($table, $field) {
 
 function get_row_actions($row, $url, $select_url, $filter) {
   $actions = array();
-  $controller = 'masters/groups';
+  $controller = 'masters/settings';
  $actions["Edit"] = array( 'request' => "http", 
                            'url' => ADMIN_PATH.$controller.'/edit/'.$row['id'],
                            'confirm_message' => "",
                            'class' => 'text-warning text-uppercase');
 
-  $actions["Delete"] = array('request' => "http",
-                               'url' => ADMIN_PATH.$controller.'/delete/'.$row['id'],
-                               'confirm_message' => "Do you want to delete",
-                               'js_function' => "",
-                               'class' => 'text-danger text-uppercase');
+  // $actions["Delete"] = array('request' => "http",
+  //                              'url' => ADMIN_PATH.$controller.'/delete/'.$row['id'],
+  //                              'confirm_message' => "Do you want to delete",
+  //                              'js_function' => "",
+  //                              'class' => 'text-danger text-uppercase');
   return $actions;
 }

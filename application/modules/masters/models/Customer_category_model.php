@@ -29,7 +29,9 @@ class Customer_category_model extends BaseModel {
   	  array(
         'field' => 'customer_category[account_name]', 
         'label' => 'Account Name', 
-        'rules' => 'trim|required'),
+        'rules' => array('trim','required',
+                      array('error_msg_account_name',array($this,'check_account_name_exist'))),
+        'errors'=>  array('error_msg_account_name'=>'Account name not exist in account master')),
   	  // array(
      //    'field' => 'customer_category[melting]', 
      //    'label' => 'Melting', 
@@ -54,5 +56,13 @@ class Customer_category_model extends BaseModel {
     $account_name=$this->account_model->find('id as id',
                                             array('name'=>$this->attributes['account_name']));
     $this->formdata[$this->router_class]['account_name_id']=@$account_name['id'];
+  }
+
+  public function check_account_name_exist($name) {
+    if($name=="" && !isset($name))
+      return true;
+    else
+    $account=$this->account_model->find('id as id',array('name'=>$name));
+    return (empty($account)) ? false : true;
   }
 }

@@ -9,9 +9,11 @@
   <?php endif; ?>     
   <div class="row">    
     <?php load_field('text', array('field' => 'name')) ?>
-    <?php load_field('dropdown', array('field' => 'group_code',
-                                           'option'=>@$groups,
-                                           'value'=>@$record['group_code'])); ?>
+    <?php load_field('text', array('field' => 'group_code', 
+                               'data-table'=>'ac_sub_groups',
+                               'class' => 'autocomplete_list_selection',
+                               'data-column'=>'name',
+                               'data-list-title'=>'Sub Group Name')); ?>
   </div>
   <div class="row">    
     <?php load_field('dropdown', array('field' => 'payment_terms',

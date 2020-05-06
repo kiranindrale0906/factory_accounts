@@ -15,10 +15,15 @@ class Repair_voucher_model extends Repair_voucher_client_model {
     $rules[] = array('field' => $this->router_class.'[type]', 'label' => 'Type','rules' => 'trim|required');
     $rules[] = array('field' => $this->router_class.'[account_name]', 'label' => 'Account Name','rules' => 'trim|required');
     $rules[] = array('field' => $this->router_class.'[rate]', 'label' => 'Rate','rules' => 'trim|required');
-    $rules[] = array('field' => $this->router_class.'[purity]', 'label' => 'Purity','rules' => 'trim|required');
-    $rules[] = array('field' => $this->router_class.'[group_name]', 'label' => 'Group Name','rules' => 'trim|required');
+    $rules[] = array('field' => $this->router_class.'[purity]', 'label' => 'Purity','rules'  =>array('trim','required','numeric','less_than_equal_to[100]',array('purity_error_msg',array($this,'check_purity_exist'))),
+                     'errors' => array('purity_error_msg'=>'Purity not exist in Purity master.'));
+    $rules[] = array('field' => $this->router_class.'[group_name]', 'label' => 'Group Name','rules'  =>array('trim','required',array('group_error_msg',array($this,'check_group_name_exist'))),
+                     'errors' => array('group_error_msg'=>'Group Name not exist in Group master.'));
     $rules[] = array('field' => $this->router_class.'[gst_number]', 'label' => 'GST Number','rules' => 'trim|required');
-    $rules[] = array('field' => $this->router_class.'[cash_bill]', 'label' => 'Cash/bill','rules' => 'trim|required');
+    $rules[] = array('field' => $this->router_class.'[cash_bill]', 'label' => 'Cash/bill','rules'  =>array('trim','required',
+                    array('check_cash_bill_error_msg',array($this,'check_cash_bill_exist'))),
+        'errors' => array('check_cash_bill_error_msg'=>'Cash / Bill value not exist.')
+      );
     $rules[] = array('field' => $this->router_class.'[payment_term]', 'label' => 'Payment Term','rules' => 'trim|required');
     return $rules;
   }

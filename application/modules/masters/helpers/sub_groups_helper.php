@@ -2,10 +2,10 @@
 
 function getTableSettings() {
   return array(
-    'page_title'          => 'ALL GROUPS',
-    'primary_table'       => 'ac_groups',
+    'page_title'          => 'ALL SUB GROUPS',
+    'primary_table'       => 'ac_sub_groups',
     'default_column'      => 'id',
-    'table'               => 'ac_groups',
+    'table'               => 'ac_sub_groups',
     'join_columns'        => '',
     'join_type'           => '',
     'where'               => '',
@@ -15,8 +15,8 @@ function getTableSettings() {
     'extra_select_column' => 'id',
     'actionFunction'      => '',
     'headingFunction'     => 'list_settings',
-    'search_url'          => 'groups',
-    'add_title'           => 'Add Group',
+    'search_url'          => 'sub_groups',
+    'add_title'           => 'Add Sub Group',
     'export_title'        => '',
     'edit'                => '',
   );
@@ -37,7 +37,7 @@ function getTableSettings() {
 function list_settings() {
   return array(
     array("Name", "name", TRUE, "name", TRUE, TRUE),
-    array("Route group", "route_group", TRUE, "route_group", TRUE, TRUE),
+    array("Group", "group_name", TRUE, "group_name", TRUE, TRUE),
     array("Action", "action", FALSE, "action", FALSE, FALSE),
   );
 }
@@ -56,10 +56,10 @@ function list_settings() {
 function get_field_attribute($table, $field) {
   $attributes = array();
 
-  $attributes['groups'] = array(
-    'id'            => array('', '', TRUE, '', TRUE),
-    'name'          => array('Name', 'Enter Name.', TRUE, '', TRUE),
-    'route_group'   => array('Route Group', 'Select Route group', TRUE, '', TRUE),
+  $attributes['sub_groups'] = array(
+    'id'         => array('', '', TRUE, '', TRUE),
+    'name'       => array('Name', 'Enter Name.', TRUE, '', TRUE),
+    'group_name'   => array('Group', 'Select group', TRUE, '', TRUE),
   );
  
   return $attributes[$table][$field];
@@ -67,7 +67,7 @@ function get_field_attribute($table, $field) {
 
 function get_row_actions($row, $url, $select_url, $filter) {
   $actions = array();
-  $controller = 'masters/groups';
+  $controller = 'masters/sub_groups';
  $actions["Edit"] = array( 'request' => "http", 
                            'url' => ADMIN_PATH.$controller.'/edit/'.$row['id'],
                            'confirm_message' => "",

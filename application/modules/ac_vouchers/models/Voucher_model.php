@@ -16,19 +16,36 @@ class Voucher_model extends BaseModel {
                                array('validate_voucher_date', array($this, 'check_period_exists'))),
                     'errors'=>array('validate_voucher_date' => "Please set the Financial year from master."));
     $rules[] = array('field' => $this->router_class.'[account_name]', 'label' => 'Account Name','rules' => 'trim|required');
+    $rules[] = array('field' => $this->router_class.'[narration]',
+                     'label' => 'Account Name',
+                     'rules'  =>array('trim',
+                                array('narration_error_msg',array($this,'check_narration_exist'))),
+                     'errors' => array('narration_error_msg'=>'Narration not exist in Narration master.'));
     if($this->router->class=="bank_issue_vouchers" || $this->router->class=="bank_receipt_vouchers") {
     $rules[] = array('field' => $this->router_class.'[bank_name]', 'label' => 'Bank Name','rules' => 'trim|required');
     }
 
     if($this->router->class=="journal_vouchers" || $this->router->class=="contra_vouchers") {
     $rules[] = array('field' => $this->router_class.'[from_account_name]', 'label' => 'From Bank Name','rules' => 'trim|required');
-    $rules[] = array('field' => $this->router_class.'[from_group_name]', 'label' => 'From Group Name','rules' => 'trim|required');
-    $rules[] = array('field' => $this->router_class.'[to_group_name]', 'label' => 'To Group Name','rules' => 'trim|required');
+    $rules[] = array('field' => $this->router_class.'[from_group_name]',
+                     'label' => 'From Group Name',
+                     'rules'  =>array('trim','required',
+                                array('group_name_error_msg',array($this,'check_group_name_exist'))),
+                     'errors' => array('group_name_error_msg'=>'Group name not exist in group master.'));
+    $rules[] = array('field' => $this->router_class.'[to_group_name]',
+                     'label' => 'To Group Name',
+                     'rules'  =>array('trim','required',
+                                array('group_name_error_msg',array($this,'check_group_name_exist'))),
+                     'errors' => array('group_name_error_msg'=>'Group name not exist in group master.'));
     $rules[] = array('field' => $this->router_class.'[amount]', 'label' => 'Amount','rules' => 'trim|required');
     }
 
     if($this->router->class=="expense_vouchers") {
-    $rules[] = array('field' => $this->router_class.'[to_group_name]', 'label' => 'To Group Name','rules' => 'trim|required');
+    $rules[] = array('field' => $this->router_class.'[to_group_name]',
+                     'label' => 'To Group Name',
+                     'rules'  =>array('trim','required',
+                                array('group_name_error_msg',array($this,'check_group_name_exist'))),
+                     'errors' => array('group_name_error_msg'=>'Group name not exist in group master.'));
     $rules[] = array('field' => $this->router_class.'[debit_amount]', 'label' => 'Amount','rules' => 'trim|required');
     }
 
@@ -51,7 +68,9 @@ class Voucher_model extends BaseModel {
     if($this->router->class=="metal_issue_vouchers" || $this->router->class=="metal_receipt_vouchers") {
       $rules[]=array('field' => $this->router_class.'[purity]', 
                     'label' => 'Purity',
-                    'rules' => 'trim|required|numeric|less_than_equal_to[100]');
+                    'rules'  =>array('trim','required','numeric','less_than_equal_to[100]',
+                     array('purity_error_msg',array($this,'check_purity_exist'))),
+                     'errors' => array('purity_error_msg'=>'Purity not exist in Purity master.'));
       // $rules[]=array('field' => $this->router_class.'[factory_purity]', 
       //               'label' => 'Factory Purity',
       //               'rules' => 'trim|required|numeric|less_than_equal_to[100]');
@@ -101,6 +120,35 @@ class Voucher_model extends BaseModel {
     // }
     
     return $rules;
+  }
+
+  public function check_group_name_exist($name) {
+    if($name=="" && !isset($name))
+      return true;
+    else
+    $groups=$this->group_model->find('id as id',array('name'=>$name));
+    return (empty($groups)) ? false : true;
+  }
+  public function check_narration_exist($name) {
+    if($name=="" && !isset($name))
+      return true;
+    else
+    $narration=$this->narration_model->find('id as id',array('name'=>$name));
+    return (empty($narration)) ? false : true;
+  } 
+  public function check_purity_exist($name) {
+    if($name=="" && !isset($name))
+      return true;
+    else
+    $purity=$this->purity_model->find('id as id',array('purity'=>$name));
+    return (empty($purity)) ? false : true;
+  }
+  public function check_department_exist($name) {
+    if($name=="" && !isset($name))
+      return true;
+    else
+    $department=$this->department_model->find('id as id',array('name'=>$name));
+    return (empty($department)) ? false : true;
   }
 
   public function before_save($action) {
