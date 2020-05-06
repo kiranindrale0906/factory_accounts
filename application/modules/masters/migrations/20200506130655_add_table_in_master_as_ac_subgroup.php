@@ -18,8 +18,6 @@ class Migration_add_table_in_master_as_ac_subgroup extends CI_Model {
   `is_delete` int(11) NOT NULL DEFAULT '0'
 )");
 
-    $this->db->query("ALTER TABLE `ac_sub_groups` ADD PRIMARY KEY (`id`);");
-    $this->db->query("ALTER TABLE `ac_sub_groups` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;");
   }
 
 
