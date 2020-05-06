@@ -12,7 +12,7 @@
   <?php endif; ?>     
   <div class="row">    
     <?php load_field('text', array('field' => 'name')) ?>
-    <?php load_field('text', array('field' => 'group_name', 
+    <?php load_field('text', array('field' => 'group_code', 
                                'data-table'=>'ac_groups',
                                'class' => 'autocomplete_list_selection',
                                'data-column'=>'name',

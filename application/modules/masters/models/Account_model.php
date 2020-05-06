@@ -7,6 +7,10 @@ class Account_model extends BaseModel {
     parent::__construct($data);
   }
 
+  public function before_validate() {
+    $this->set_group_data();
+  }
+
   public function validation_rules($klass='') {
     return array(
       array(
@@ -16,11 +20,11 @@ class Account_model extends BaseModel {
                     array('check_repeated_account_name_error',array($this,'check_repeated_account_name'))),
         'errors' => array('check_repeated_account_name_error'=>'Account already exists.')),
       array(
-        'field' => 'accounts[group_code]',
+        'field' => 'accounts[sub_group_code]',
         'label' => 'Sub Group Name',
         'rules'  =>array('trim','required',
-                    array('check_sub_group_name_error',array($this,'check_sub_group_name_exist'))),
-        'errors' => array('check_sub_group_name_error'=>'Sub group name not exist in sub group master.')),
+                    array('check_sub_group_code_error',array($this,'check_sub_group_code_exist'))),
+        'errors' => array('check_sub_group_code_error'=>'Sub group name not exist in sub group master.')),
       array(
         'field' => 'accounts[cont_person]',
         'label' => 'Contact Person',
@@ -120,11 +124,19 @@ class Account_model extends BaseModel {
         'label' => 'Mvat/Lst No.',
         'rules' => 'trim|numeric')); 
   }
+  private function set_group_data(){
+    $sub_groups = $this->sub_group_model->find('group_id,id',array('name'=>$this->attributes['sub_group_code']));
+    $groups = $this->group_model->find('route_group,name',array('id'=>$sub_groups['group_id']));
+    $this->formdata[$this->router_class]['sub_group_id'] =$sub_groups['id'];    
+    $this->formdata[$this->router_class]['group_id'] =$sub_groups['group_id'];    
+    $this->formdata[$this->router_class]['group_code'] =$groups['name'];
+    $this->formdata[$this->router_class]['route_group'] =$groups['route_group'];
+  }
 
   public function check_repeated_account_name($account_name) {
     return parent::check_unique('name');
   }
-  public function check_sub_group_name_exist($name) {
+  public function check_sub_group_code_exist($name) {
     if($name=="" && !isset($name))
       return true;
     else

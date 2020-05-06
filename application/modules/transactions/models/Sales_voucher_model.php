@@ -16,7 +16,7 @@ class Sales_voucher_model extends Sales_voucher_client_model {
     $rules[] = array('field' => $this->router_class.'[rate]', 'label' => 'Rate','rules' => 'trim|required');
     $rules[] = array('field' => $this->router_class.'[purity]', 'label' => 'Purity','rules'  =>array('trim','required',
                     array('check_purity_error',array($this,'check_purity_exist'))),
-        'errors' => array('check_purity_error'=>'Purity value not exist in Purity Master.')),
+        'errors' => array('check_purity_error'=>'Purity value not exist in Purity Master.'));
     return $rules;
   }
 

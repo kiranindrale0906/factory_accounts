@@ -26,7 +26,7 @@ class Voucher_model extends BaseModel {
     }
 
     if($this->router->class=="journal_vouchers" || $this->router->class=="contra_vouchers") {
-    $rules[] = array('field' => $this->router_class.'[from_account_name]', 'label' => 'From Bank Name','rules' => 'trim|required');
+    $rules[] = array('field' => $this->router_class.'[from_account_name]', 'label' => 'From Account Name','rules' => 'trim|required');
     $rules[] = array('field' => $this->router_class.'[from_group_name]',
                      'label' => 'From Group Name',
                      'rules'  =>array('trim','required',
@@ -178,12 +178,16 @@ class Voucher_model extends BaseModel {
     $this->formdata[$this->router_class]['voucher_type'] = $this->voucher_type;
     $this->formdata[$this->router_class]['transaction_type'] = $this->account_type;
 
-    $account = $this->account_model->find('id',array('name'=>$this->attributes['account_name']));
+    $account = $this->account_model->find('id,group_id,route_group',array('name'=>$this->attributes['account_name']));
+    if(!empty($account['id'])) {    
+      $this->formdata[$this->router_class]['group_id'] =!empty($account['group_id'])?$account['group_id']:0;
+      $this->formdata[$this->router_class]['route_group'] =!empty($account['route_group'])?$account['route_group']:'';
+      }
     if(empty($account['id'])) {
       $sub_groups=$this->setting_model->find('id,value',array('name'=>'Sub Group'));
       $account_detail['name']=$this->attributes['account_name'];
-      $account_detail['group_code']=!empty($sub_groups['value'])?$sub_groups['value']:'';
-      $account_detail['group_code_id']=!empty($sub_groups['id'])?$sub_groups['id']:0;
+      $account_detail['sub_group_code']=!empty($sub_groups['value'])?$sub_groups['value']:'';
+      $account_detail['sub_group_id']=!empty($sub_groups['id'])?$sub_groups['id']:0;
       $obj_account = new account_model($account_detail);
       $account_details=$obj_account->store(false);
       $account['id']=$account_details['id'];      

@@ -37,7 +37,7 @@ function getTableSettings() {
 function list_settings() {
   return array(
     array("Name", "name", TRUE, "name", TRUE, TRUE),
-    array("Group", "group_name", TRUE, "group_name", TRUE, TRUE),
+    array("Group", "group_code", TRUE, "group_code", TRUE, TRUE),
     array("Action", "action", FALSE, "action", FALSE, FALSE),
   );
 }
@@ -59,7 +59,7 @@ function get_field_attribute($table, $field) {
   $attributes['sub_groups'] = array(
     'id'         => array('', '', TRUE, '', TRUE),
     'name'       => array('Name', 'Enter Name.', TRUE, '', TRUE),
-    'group_name'   => array('Group', 'Select group', TRUE, '', TRUE),
+    'group_code'   => array('Group', 'Select group', TRUE, '', TRUE),
   );
  
   return $attributes[$table][$field];

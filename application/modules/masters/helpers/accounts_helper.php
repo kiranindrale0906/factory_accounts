@@ -37,7 +37,9 @@ function getTableSettings() {
 function list_settings() {
   return array(
     array("Name", "name", true, "name", true, true),
-    array("Group Name", "group_code", true, "group_code", true, true),
+    array("Sub Group Name", "sub_group_code", true, "sub_group_code", true, true),
+    array("Area", "area", true, "area", true, true),
+    array("Route Group", "route_group", true, "route_group", true, true),
     array("Area", "area", true, "area", true, true),
     array("Salary", "salary", true, "salary", true, true),
     // array("Net Wt.", "", true, "", true, true),
@@ -61,7 +63,7 @@ function get_field_attribute($table, $field) {
   $attributes['accounts'] = array(
     'id'            => array('', '', TRUE, '', TRUE),
     'name'          => array('Name', 'Enter Name.', TRUE, '', TRUE),
-    'group_code'    => array('Sub Group Name', 'Enter Sub Group Name.', FALSE, '', TRUE),
+    'sub_group_code'    => array('Sub Group Name', 'Enter Sub Group Name.', FALSE, '', TRUE),
     'payment_terms' => array('Payment Terms', 'Enter Payment Terms.', FALSE, '', TRUE),
     'cont_person'   => array('Contact Person', 'Enter Contact Person.', FALSE, '', TRUE),
     'off_tel'       => array('Office Tel.No', 'Enter Office Tel.No.', FALSE, '', TRUE),

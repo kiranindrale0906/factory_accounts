@@ -6,7 +6,7 @@ class Accounts extends BaseController {
 
   public function __construct() {
     parent::__construct();
-    $this->load->model(array('others/city_model', 'others/state_model', 'others/salesman_model','others/account_wise_detail_model', 'masters/sub_group_model',
+    $this->load->model(array('others/city_model', 'others/state_model', 'masters/group_model', 'others/salesman_model','others/account_wise_detail_model', 'masters/sub_group_model',
                              'masters/payment_term_model'));
   }
 

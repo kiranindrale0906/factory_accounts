@@ -9,7 +9,7 @@
   <?php endif; ?>     
   <div class="row">    
     <?php load_field('text', array('field' => 'name')) ?>
-    <?php load_field('text', array('field' => 'group_code', 
+    <?php load_field('text', array('field' => 'sub_group_code', 
                                'data-table'=>'ac_sub_groups',
                                'class' => 'autocomplete_list_selection',
                                'data-column'=>'name',

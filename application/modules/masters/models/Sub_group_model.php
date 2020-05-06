@@ -23,17 +23,17 @@ class Sub_group_model extends BaseModel {
                     array('sub_group_name_error_msg',array($this,'check_duplicate_name'))),
         'errors' => array('sub_group_name_error_msg'=>'Sub Group name already exists.')),
        array(
-        'field' => 'sub_groups[group_name]', 
+        'field' => 'sub_groups[group_code]', 
         'label' => 'Name', 
         'rules'  =>array('trim','required',
-                    array('group_name_error_msg',array($this,'check_group_name_exist'))),
-        'errors' => array('group_name_error_msg'=>'Group name not exist in group master.')));
+                    array('group_code_error_msg',array($this,'check_group_name_exist'))),
+        'errors' => array('group_code_error_msg'=>'Group code not exist in group master.')));
   }
   public function check_duplicate_name($name) {
     return parent::check_unique('name');
   }
 
-  public function check_group_name_exist($name) {
+  public function check_group_code_exist($name) {
     if($name=="" && !isset($name))
       return true;
     else
