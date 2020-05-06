@@ -2,10 +2,10 @@
 
 function getTableSettings() {
   return array(
-    'page_title'          => 'ALL DEPARTMENTS',
+    'page_title'          => 'ALL SMS',
     'primary_table'       => 'ac_department',
     'default_column'      => 'id',
-    'table'               => 'ac_department',
+    'table'               => 'ac_sms',
     'join_columns'        => '',
     'join_type'           => '',
     'where'               => '',
@@ -15,8 +15,8 @@ function getTableSettings() {
     'extra_select_column' => 'id',
     'actionFunction'      => '',
     'headingFunction'     => 'list_settings',
-    'search_url'          => 'department',
-    'add_title'           => 'Add Department',
+    'search_url'          => 'sms',
+    'add_title'           => 'Add Sms',
     'export_title'        => '',
     'edit'                => '',
   );
@@ -36,11 +36,15 @@ function getTableSettings() {
 
 function list_settings() {
   return array(
-    array("Name", "name", TRUE, "name", TRUE, TRUE),
-    array("Taggable", "taggable", TRUE, "taggable", TRUE, TRUE),
+    array("Name", "short_message", TRUE, "short_message", TRUE, TRUE),
+    array("Tvariable", "tvariable", TRUE, "tvariable", TRUE, TRUE),
+    array("Type", "type", TRUE, "type", TRUE, TRUE),
+    array("Compnay Code", "company_code", TRUE, "company_code", TRUE, TRUE),
+    array("Message", "message", TRUE, "message", TRUE, TRUE),
     array("Action", "action", FALSE, "action", FALSE, FALSE),
   );
 }
+
 
 
 /*
@@ -56,14 +60,13 @@ function list_settings() {
 function get_field_attribute($table, $field) {
   $attributes = array();
 
-  $attributes['department'] = array(
+  $attributes['sms'] = array(
     'id'            => array('', '', TRUE, '', TRUE),
-    'name'          => array('Name', 'Enter Name.', TRUE, '', TRUE),
-    'short_message'      => array('Short Message', 'Select Short Message.', FALSE, '', TRUE),
-    'tvariable'      => array('T Variable', 'Enter T Variable.', FALSE, '', TRUE),
-    'type'      => array('Type', 'Enter Type.', FALSE, '', TRUE),
-    'company_code'      => array('Type', 'Enter Compnay .', FALSE, '', TRUE),
-    'message'      => array('Massage ', 'Enter Massage .', FALSE, '', TRUE),
+    'short_message'      => array('Short Message', 'Select Short Message.', TRUE, '', TRUE),
+    'tvariable'      => array('T Variable', 'Enter T Variable.', TRUE, '', TRUE),
+    'type'      => array('Type', 'Enter Type.', TRUE, '', TRUE),
+    'company_code'      => array('Type', 'Enter Compnay .', TRUE, '', TRUE),
+    'message'      => array('Massage ', 'Enter Massage .', TRUE, '', TRUE),
     'company_id'    => array('', '', TRUE, '', TRUE),
   );
   

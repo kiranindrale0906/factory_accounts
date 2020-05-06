@@ -56,9 +56,13 @@
 
 
     <?php if(!empty(get_field_attribute($this->router->class,'from_account_name'))) :
-            load_field('text', array('field' => 'from_account_name', 'class' => 'autocomplete_list_selection','col'=>$col,
-                                     'data-where_condition'=>'group_code=\'bank\'',
-                                     'data-list-title'=>'From Account Name')); 
+            load_field('text', array('field' => 'from_account_name',
+                       'class' => 'autocomplete_list_selection',
+                       'col'=>$col,
+                       'data-table'=>'ac_account',
+                       'data-column'=>'name',
+                       'data-where_condition'=>'group_code=\'bank\'',
+                       'data-list-title'=>'From Account Name')); 
 
             load_field('hidden', array('field' => 'from_account_id'));                               
           endif; ?> 
@@ -134,17 +138,18 @@
 
 
     <?php if(!empty(get_field_attribute($this->router->class,'gold_rate'))) :
-            load_field('text', array('field' => 'gold_rate', 'class' => 'autocomplete_list_selection',
-                                     'data-table'=>'gold_rate','data-column'=>'name','col'=>$col,
-                                     'data-list-title'=>'Gold Rate'));                                
+            load_field('text', array('field' => 'gold_rate','col'=>$col));                                
           endif; ?>
   <?php if(!empty(get_field_attribute($this->router->class,'rate'))) :
             load_field('text', array('field' => 'rate','col'=>$col,
                                      'data-list-title'=>'Rate'));                                
           endif; ?>
   <?php if(!empty(get_field_attribute($this->router->class,'gold_rate_purity'))) :
-            load_field('text', array('field' => 'gold_rate_purity', 'class' => 'autocomplete_list_selection',
-                                     'data-table'=>'ac_purity','data-column'=>'purity','col'=>$col,
+            load_field('text', array('field' => 'gold_rate_purity',
+                                     'class' => 'autocomplete_list_selection',
+                                     'data-table'=>'ac_purity',
+                                     'data-column'=>'purity',
+                                     'col'=>$col,
                                      'data-list-title'=>'Gold Rate Purity'));                                
           endif; ?>    
 
@@ -152,10 +157,11 @@
   <div class="row"> 
   <?php if(!empty(get_field_attribute($this->router->class,'payment_term'))) :
             load_field('text', array('field' => 'payment_term',
-              'class' => 'autocomplete_list_selection',
-                                     'data-table'=>'ac_payment_terms',
-                                     'data-column'=>'terms','col'=>$col,
-                                     'data-list-title'=>'Payment Term'));                                
+                       'class' => 'autocomplete_list_selection',
+                       'data-table'=>'ac_payment_terms',
+                       'data-column'=>'terms',
+                       'col'=>$col,
+                       'data-list-title'=>'Payment Term'));                                
           endif; ?>    
 
   </div>  
@@ -200,13 +206,17 @@
                             'data-where_condition'=>'group_code=\'bank\'','data-list-title'=>'Bank'));                     
     endif; ?>
     <?php if(!empty(get_field_attribute($this->router->class,'gold_weight'))) :
-            load_field('text', array('field' => 'gold_weight', 'class' => 'autocomplete_list_selection',
+            load_field('text', array('field' => 'gold_weight',
+                       'class' => 'autocomplete_list_selection',
                                      'data-table'=>'gold_weight','data-column'=>'name','col'=>$col,
                                      'data-list-title'=>'Gold Weight'));                                
           endif; ?> 
       <?php if(!empty(get_field_attribute($this->router->class,'gold_weight_purity'))) :
-            load_field('text', array('field' => 'gold_weight_purity', 'class' => 'autocomplete_list_selection',
-                                     'data-table'=>'gold_weight_purity','data-column'=>'name','col'=>$col,
+            load_field('text', array('field' => 'gold_weight_purity',
+                                     'class' => 'autocomplete_list_selection',
+                                     'data-table'=>'ac_purity',
+                                     'data-column'=>'purity',
+                                     'col'=>$col,
                                      'data-list-title'=>'Gold Weight Purity'));                                
           endif; ?> 
   </div>        

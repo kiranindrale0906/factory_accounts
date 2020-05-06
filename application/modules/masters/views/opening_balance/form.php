@@ -22,7 +22,7 @@
   <div class="row">    
     <?php load_field('text', array('field' => 'group_code',
                                      'class' => 'autocomplete_list_selection',
-                                     'data-table'=>'ac_group',
+                                     'data-table'=>'ac_groups',
                                      'data-column'=>'name',
                                      'data-list-title'=>'Group')) ?>
     <?php load_field('text', array('field' => 'credit_amount')) ?>

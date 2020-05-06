@@ -4,18 +4,18 @@ class Sm_model extends BaseModel {
 
   protected $table_name = "ac_sms";
   protected $id = "id";
-
-  function __construct() {
-      parent::__construct();
+  public $router_class = "sms";
+  function __construct($data=array()) {
+      parent::__construct($data);
   }
 
   public function validation_rules($klass='') {
-  	return array(
-			array(
+    return array(
+      array(
         'field' => 'sms[short_message]', 
         'label' => 'Short Message', 
         'rules' => 'trim|required'),
-			array(
+      array(
         'field' => 'sms[tvariable]', 
         'label' => 'Tvariable', 
         'rules' => 'trim|required'),
@@ -31,10 +31,11 @@ class Sm_model extends BaseModel {
         'field' => 'sms[message]', 
         'label' => 'Message', 
         'rules' => 'trim|required'),
-		);
-  }
 
+    );
+  }
 }
+
 
 //class
 

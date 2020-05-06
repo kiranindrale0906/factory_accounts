@@ -16,7 +16,7 @@ function getTableSettings() {
     'actionFunction'      => '',
     'headingFunction'     => 'list_settings',
     'search_url'          => 'categories',
-    'add_title'           => 'Add Department',
+    'add_title'           => 'Add Category',
     'export_title'        => '',
     'edit'                => '',
   );

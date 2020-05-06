@@ -59,7 +59,7 @@ function get_field_attribute($table, $field) {
   $attributes['salesmans'] = array(
     'id'            => array('', '', TRUE, '', TRUE),
     'name'          => array('Name', 'Enter Name.', TRUE, '', TRUE),
-    'salesman_code' => array('Salesman Code', 'Enter Salesman Code.', FALSE, '', TRUE),
+    'salesman_code' => array('Salesman Code', 'Enter Salesman Code.', TRUE, '', TRUE),
     'company_id'    => array('', '', TRUE, '', TRUE),
   );
  

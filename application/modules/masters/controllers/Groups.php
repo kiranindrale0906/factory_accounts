@@ -6,16 +6,12 @@ class Groups extends BaseController {
 
   public function __construct() {
       parent::__construct();
-      // if (!$this->authentication->is_user_logged_in()) {
-      //     redirect('auth');
-      // }
-
-      // if (!$this->authentication->is_user_role_map('cash_issue_voucher')) {
-      //     redirect($_SERVER['HTTP_REFERER']);
-      //     exit();
-      // }
-      //$this->load->model('master/groups_model');
-      
-
   }
+
+  public function _get_form_data() {
+    $this->data['route_group']=array(array('id'=>'Asset','name'=>'Asset'),
+                                     array('id'=>'Liabilities','name'=>'Liabilities'),
+                                     array('id'=>'Income','name'=>'Income'),
+                                     array('id'=>'Expenses','name'=>'Expenses'));
+    }
 }
