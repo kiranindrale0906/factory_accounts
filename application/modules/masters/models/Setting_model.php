@@ -13,11 +13,11 @@ class Setting_model extends BaseModel {
     return array(
       array(
       	'field' => 'settings[name]', 
-      	'label' => 'Company Name', 
+      	'label' => 'Name', 
       	'rules' => array('trim','required')),
       array(
         'field' => 'settings[value]', 
-        'label' => 'Decimal No.', 
+        'label' => 'Value', 
         'rules' => array('trim','required'))
     );
   }
