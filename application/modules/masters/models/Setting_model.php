@@ -14,7 +14,9 @@ class Setting_model extends BaseModel {
       array(
       	'field' => 'settings[name]', 
       	'label' => 'Name', 
-      	'rules' => array('trim','required')),
+      	'rules'  =>array('trim','required',
+                    array('name_error_msg',array($this,'check_duplicate_name'))),
+        'errors' => array('name_error_msg'=>'Default Name already exists.')),
       array(
         'field' => 'settings[value]', 
         'label' => 'Value', 
@@ -22,7 +24,7 @@ class Setting_model extends BaseModel {
     );
   }
 
-  public function check_duplicate_company_name($name) {
+  public function check_duplicate_name($name) {
     return parent::check_unique('name');
   }
 

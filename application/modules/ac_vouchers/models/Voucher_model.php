@@ -6,7 +6,7 @@ class Voucher_model extends BaseModel {
   //protected $insert_to_ledger = true;
   function __construct($data=array()) {
     parent::__construct($data);
-    $this->load->model(array('masters/period_model','transactions/Receipt_not_sent_argold_model'));
+    $this->load->model(array('masters/period_model','masters/setting_model','transactions/Receipt_not_sent_argold_model'));
   }
 
   public function validation_rules($klass='') {
@@ -180,7 +180,10 @@ class Voucher_model extends BaseModel {
 
     $account = $this->account_model->find('id',array('name'=>$this->attributes['account_name']));
     if(empty($account['id'])) {
+      $sub_groups=$this->setting_model->find('id,value',array('name'=>'Sub Group'));
       $account_detail['name']=$this->attributes['account_name'];
+      $account_detail['group_code']=!empty($sub_groups['value'])?$sub_groups['value']:'';
+      $account_detail['group_code_id']=!empty($sub_groups['id'])?$sub_groups['id']:0;
       $obj_account = new account_model($account_detail);
       $account_details=$obj_account->store(false);
       $account['id']=$account_details['id'];      

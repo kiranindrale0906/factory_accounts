@@ -5,7 +5,7 @@ class Rate_cut_purchase_weight_receipt_vouchers extends Rate_cut_purchase_weight
   public function __construct() {
     parent::__construct();
     $this->date_fields = array(array('rte_cut_purchase_weight_receipt_vouchers', 'voucher_date'));
-    $this->load->model(array('masters/cash_bill_model','masters/purity_model'));
+     $this->load->model(array('masters/cash_bill_model','masters/department_category_model','masters/purity_model','masters/setting_model'));
    
   }
 
