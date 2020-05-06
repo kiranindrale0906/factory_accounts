@@ -6,7 +6,6 @@
         <th>Account Name</th> 
         <th class="text-right">Credit Amt.</th>
         <th class="text-right">Debit Amt.</th>
-        <th class="text-right">Amount.</th>
         <th>Narration</th>
     </tr>
 </thead>

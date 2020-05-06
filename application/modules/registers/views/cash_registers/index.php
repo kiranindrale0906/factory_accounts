@@ -7,13 +7,13 @@ if($show_heading){ ?>
     </div>
   </div>
 <?php } ?>
-  <form class="fields-group-sm">
+  <form class="fields-group-sm" action="<?=ADMIN_PATH."registers/cash_registers/index"?>">
     <div class="row">
       <?php load_field('text',array('field' => 'account_name',
                                      'data-table'=>'ac_account',
                                      'data-column'=>'name',
                                      'data-where_condition'=>'group_code!=\'bank\'',
-                                     'data-list-title'=>'Account Name','class' => ' account_name autocomplete_list_selection', 'col'=>'col-sm-4'));?>
+                                     'data-list-title'=>'Account Name','class' => 'account_name autocomplete_list_selection', 'col'=>'col-sm-4'));?>
       <?php load_field('date',array('field' => 'start_date','class' => 'datepicker_js start_date', 'col'=>'col-sm-4','value'=>date('d-m-Y',strtotime($start_date))));?>
       <?php load_field('date',array('field' => 'end_date','class' => 'datepicker_js end_date', 'col'=>'col-sm-4','value'=>date('d-m-Y',strtotime($end_date))));?>  
       <div class="col-sm-4 align-self-center">

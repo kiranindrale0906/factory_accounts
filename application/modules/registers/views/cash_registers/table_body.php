@@ -1,10 +1,26 @@
 <tbody>
 <?php 
 $credit_amount=$debit_amount=$amount=0;
-  foreach ($cash_registers as $index => $cash_register){ 
-         $credit_amount+= $cash_register['credit_amount'];
-         $debit_amount+= $cash_register['debit_amount'];
-         $amount+=$cash_register['amount'];
+if(isset($opening_balance['opening_balance']) && $opening_balance['opening_balance']<0)
+ $debit_amount = $opening_balance['opening_balance'];
+
+if(isset($opening_balance['opening_balance']) && $opening_balance['opening_balance']>0)
+ $credit_amount = $opening_balance['opening_balance'];  
+?>
+  <tr>
+    <td></td>
+    <td>Opening Balance</td>
+    <td></td>
+    <td></td>
+    <td class="text-right"> <?php if(!empty($credit_amount)) { echo $credit_amount; } ?>
+    <td class="text-right"><?php if(!empty($debit_amount)) { echo $debit_amount; } ?> </td>
+    <td></td>
+  </tr>
+
+<?php foreach ($cash_registers as $index => $cash_register){ 
+       $credit_amount+= $cash_register['credit_amount'];
+       $debit_amount+= $cash_register['debit_amount'];
+       $amount+=$cash_register['amount'];
   ?>
 	    <tr>
           <td><?= ++$index; ?></td>
@@ -13,20 +29,30 @@ $credit_amount=$debit_amount=$amount=0;
           <td><?= $cash_register['account_name'] ?></td>
           <td class="text-right"><?=!empty($cash_register['credit_amount'])?$cash_register['credit_amount']:0; ?></td>
           <td class="text-right"><?= !empty($cash_register['debit_amount'])?$cash_register['debit_amount']:0 ?></td>
-          <td class="text-right"><?= !empty($cash_register['amount'])?$cash_register['amount']:0; ?></td>
           <td><?= $cash_register['narration'] ?></td>
       </tr>
 	  <?php }?>
     <tr class="bg_gray bold">
-    <td>Total</td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td class="text-right"><?=$credit_amount;?></td>
-    <td class="text-right"><?=$debit_amount;?></td>
-    <td class="text-right"><?=$amount;?></td>
-    <td></td>
-  </tr>
+      <td>Total</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td class="text-right"><?=$credit_amount;?></td>
+      <td class="text-right"><?=$debit_amount;?></td>
+      <td></td>
+    </tr>
+    <?php
+      $balance = $credit_amount - $debit_amount;
+    ?>
+    <tr class="bg_gray bold">
+      <td>Balance</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td class="text-right"><?=($balance>0) ? $balance :"" ?></td>
+      <td class="text-right"><?=($balance<0) ? ($balance*-1) : ""?></td>
+      <td></td>
+    </tr>
 </tbody> 
 
 
