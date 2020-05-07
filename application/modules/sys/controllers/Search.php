@@ -70,6 +70,7 @@ class Search extends CI_Controller {
 
   public function getAutoCompleteDropDownData(){ //function is used to get autocomplete data. 
     $li_autocomplete = '';
+    $where_conditions = array();
     $getData = $this->input->get();
     $getDataArray = explode('&&',$getData['query']);
     //pd($getDataArray[3]);

@@ -15,8 +15,6 @@ class Expense_registers extends BaseController {
     $this->load->render('registers/expense_registers/index',$this->data); 
   } 
 
-  public function _get_form_data() {
-  }
   private function calculation_data() {
 
     $this->start_date = (!empty($_GET['start_date'])) ? date('Y-m-d',strtotime($_GET['start_date'])) : date('Y-m-d');
@@ -28,7 +26,7 @@ class Expense_registers extends BaseController {
             $where['created_at>='] = $this->start_date;
         }
         if (!empty($_GET['end_date'])) {
-            $where['created_at<'] = $this->end_date;
+            $where['created_at<='] = $this->end_date;
         }
         $where['where']='(suffix="EV")';
         $where['company_id']=$this->session->userdata('company_id');
@@ -36,9 +34,5 @@ class Expense_registers extends BaseController {
 
     $this->data['expense_registers'] = $this->voucher_model->get('',$where);
   }
-
-  public function _after_save($formdata, $action){
-  }
-
 
 }

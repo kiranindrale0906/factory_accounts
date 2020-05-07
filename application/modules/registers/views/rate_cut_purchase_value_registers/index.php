@@ -20,7 +20,7 @@ if($show_heading){ ?>
       </div>
     </div>
   </form> 
-
+<br>
 <div class="table-responsive m-t-20">
   <table class="table table-sm fixedthead table-default">
   <?php 

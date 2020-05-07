@@ -3,9 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Rate_cut_purchase_value_registers extends BaseController {  
   public function __construct(){
-    $this->_model='Rate_cut_purchase_value_register_model';
     parent::__construct();
-    $this->redirect_after_save = 'view';
     $this->load->model(array('reports/rate_cut_purchase_value_register_model',
                              'ac_vouchers/voucher_model'));
   } 
@@ -16,8 +14,6 @@ class Rate_cut_purchase_value_registers extends BaseController {
     $this->load->render('registers/rate_cut_purchase_value_registers/index',$this->data); 
   } 
 
-  public function _get_form_data() {
-  }
   private function calculation_data() {
 
     $this->start_date = (!empty($_GET['start_date'])) ? date('Y-m-d',strtotime($_GET['start_date'])) : date('Y-m-d');
@@ -40,9 +36,4 @@ class Rate_cut_purchase_value_registers extends BaseController {
 
     $this->data['rate_cut_purchase_value_registers'] = $this->voucher_model->get('',$where);
   }
-
-  public function _after_save($formdata, $action){
-  }
-
-
 }
