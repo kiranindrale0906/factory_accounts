@@ -72,5 +72,13 @@ class Approval_voucher_model extends Approval_voucher_client_model {
       $obj_purchase = new approval_voucher_model($approval_vouchers);
       $obj_purchase->update(false);
     }
+
+    public function check_cash_bill_exist($name) {
+    if($name=="" && !isset($name))
+      return true;
+    else
+    $accounts=$this->cash_bill_model->find('id as id',array('name'=>$name));
+    return (empty($accounts)) ? false : true;
+  }
 }
 //class
