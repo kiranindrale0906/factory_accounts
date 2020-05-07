@@ -33,11 +33,19 @@ class Bank_registers extends BaseController {
         if (!empty($_GET['bank_name'])) {
             $where['bank_name']= $_GET['bank_name'];
         }
-        $where['where']='(suffix="BI" OR suffix="BR" OR suffix="RCPPIV" OR suffix = "RCPPRV" OR suffix="RCPWIV" OR suffix = "RCPWRV")';
+        //OR suffix="RCPPIV" OR suffix = "RCPPRV" OR suffix="RCPWIV" OR suffix = "RCPWRV"
+        $where['where']='(suffix="BI" OR suffix="BR")';
         $where['company_id']=$this->session->userdata('company_id');
 
 
     $this->data['bank_registers'] = $this->voucher_model->get('',$where);
+    
+    $this->data['cash_registers'] = $this->voucher_model->get('',$where);
+    //lq();
+    unset($where['created_at<=']);
+    unset($where['created_at>=']);
+    $where['created_at<'] = $this->start_date;
+    $this->data['opening_balance'] = $this->voucher_model->find('sum(credit_amount)-sum(debit_amount) as opening_balance',$where);
   }
 
   public function _after_save($formdata, $action){

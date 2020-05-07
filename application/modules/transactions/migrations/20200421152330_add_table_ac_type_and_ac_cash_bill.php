@@ -6,7 +6,7 @@ class Migration_add_table_ac_type_and_ac_cash_bill extends CI_Model {
 
   public function up()
   {
-    $this->db->query("CREATE TABLE `ac_cash_bill` (
+    $this->db->query("CREATE TABLE IF NOT EXISTS `ac_cash_bill` (
 					  `id` int(11) NOT NULL,
 					  `name` varchar(225) NOT NULL,
 					  `created_at` datetime NOT NULL,
@@ -22,7 +22,7 @@ class Migration_add_table_ac_type_and_ac_cash_bill extends CI_Model {
 	
 /*---------------------------------------------------------------------------------*/
 
-	$this->db->query("CREATE TABLE `ac_type` (
+	$this->db->query("CREATE TABLE IF NOT EXISTS `ac_type` (
 				  `id` int(11) NOT NULL,
 				  `name` varchar(225) NOT NULL,
 				  `created_at` datetime NOT NULL,
