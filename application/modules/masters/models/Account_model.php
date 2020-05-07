@@ -125,12 +125,11 @@ class Account_model extends BaseModel {
         'rules' => 'trim|numeric')); 
   }
   private function set_group_data(){
-    $sub_groups = $this->sub_group_model->find('group_id,id',array('name'=>$this->attributes['sub_group_code']));
-    $groups = $this->group_model->find('route_group,name',array('id'=>$sub_groups['group_id']));
+    $sub_groups = $this->sub_group_model->find('group_id,id,route_group,group_name',array('name'=>$this->attributes['sub_group_code']));
     $this->formdata[$this->router_class]['sub_group_id'] =$sub_groups['id'];    
     $this->formdata[$this->router_class]['group_id'] =$sub_groups['group_id'];    
-    $this->formdata[$this->router_class]['group_code'] =$groups['name'];
-    $this->formdata[$this->router_class]['route_group'] =$groups['route_group'];
+    $this->formdata[$this->router_class]['group_code'] =$sub_groups['group_name'];
+    $this->formdata[$this->router_class]['route_group'] =$sub_groups['route_group'];
   }
 
   public function check_repeated_account_name($account_name) {
