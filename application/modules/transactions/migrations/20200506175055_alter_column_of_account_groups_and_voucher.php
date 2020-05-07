@@ -6,8 +6,8 @@ class Migration_alter_column_of_account_groups_and_voucher extends CI_Model {
 
   public function up()
   {
-    $this->db->query("ALTER TABLE `ac_vouchers` ADD `group_id` INT(11) NOT NULL,
-					  ADD `route_group` VARCHAR(255) NOT NULL;");
+    // $this->db->query("ALTER TABLE `ac_vouchers` ADD `group_id` INT(11) NOT NULL,
+					  // ADD `route_group` VARCHAR(255) NOT NULL;");
 	$this->db->query("ALTER TABLE `ac_account` ADD `sub_group_id` INT(11) NOT NULL,
 					  ADD `sub_group_code` VARCHAR(255) NOT NULL,
                       ADD `route_group` VARCHAR(255) NOT NULL;");
