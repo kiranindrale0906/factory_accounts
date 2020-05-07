@@ -20,6 +20,5 @@
     <td></td>
     <td class="text-right"><?=four_decimal($debit_amount);?></td>
     <td class="text-right"></td>
-    <td></td>
   </tr>
 </tbody> 

@@ -3,7 +3,7 @@
 $amount=$gross_weight=$net_weight=$fine_weight=0;
  foreach ($sales_registers as $index => $sales_registers){
  $amount+=$sales_registers['total_gross_weight'];
-    $gold_weight+=$sales_registers['total_net_weight'];
+    $net_weight+=$sales_registers['total_net_weight'];
     $fine_weight+=$sales_registers['total_fine_weight'];
      ?>
 	   <tr>
