@@ -62,17 +62,17 @@ if($show_heading){ ?>
               <tfoot>
                   <tr>
                       <td class="text-right" colspan="3"><b>Total</b></td>
-                      <td class="text-right"><b><?= overwrite_number_format($purity['total_credit'], 3) ?></b></td>
-                      <td class="text-right"><b><?= overwrite_number_format($purity['total_debit'], 3) ?></b></td>
+                      <td class="text-right"><b><?= decimal_number_format($purity['total_credit']) ?></b></td>
+                      <td class="text-right"><b><?= decimal_number_format($purity['total_debit']) ?></b></td>
                       <td></td>
                   </tr>
                   <tr>
                       <td class="text-right" colspan="3"><b>Balance</b></td>
                       <?php if ($purity['balance'] < 0): ?>
                           <td></td>
-                          <td class="text-right"><b><?= overwrite_number_format($purity['balance'], 3) ?></b></td>
+                          <td class="text-right"><b><?= decimal_number_format($purity['balance']) ?></b></td>
                       <?php else: ?>
-                          <td class="text-right"><b><?= overwrite_number_format($purity['balance'], 3) ?></b></td>
+                          <td class="text-right"><b><?= decimal_number_format($purity['balance']) ?></b></td>
                           <td></td>
                       <?php endif; ?>
                       <td></td>
@@ -89,14 +89,14 @@ if($show_heading){ ?>
               <tbody>
                   <tr>
                       <td class="text-right" width="58.7%"><b>Grand Total</b></td>
-                      <td class="text-right" width="15.6%"><b><?=overwrite_number_format($grand_credit,3)?></b></td>
-                      <td class="text-right" width="15%"><b><?=overwrite_number_format($grand_debit,3)?></td>
+                      <td class="text-right" width="15.6%"><b><?=decimal_number_format($grand_credit)?></b></td>
+                      <td class="text-right" width="15%"><b><?=decimal_number_format($grand_debit)?></td>
                       <td></td>
                   </tr>
                    <tr>
                       <td class="text-right" width="58.7%"><b>Balance</b></td>
                       <td class="text-right" width="15.6%"><b></b></td>
-                      <td class="text-right" width="15%"><b><?=overwrite_number_format($grand_balance,3)?></td>
+                      <td class="text-right" width="15%"><b><?=decimal_number_format($grand_balance)?></td>
                       <td></td>
                   </tr>
                </tbody>   

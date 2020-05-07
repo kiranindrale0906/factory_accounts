@@ -14,9 +14,7 @@ class Bank_registers extends BaseController {
     $this->calculation_data();
     $this->load->render('registers/bank_registers/index',$this->data); 
   } 
-
-  public function _get_form_data() {
-  }
+  
   private function calculation_data() {
 
     $this->start_date = (!empty($_GET['start_date'])) ? date('Y-m-d',strtotime($_GET['start_date'])) : date('Y-m-d');
@@ -40,16 +38,9 @@ class Bank_registers extends BaseController {
 
     $this->data['bank_registers'] = $this->voucher_model->get('',$where);
     
-    $this->data['cash_registers'] = $this->voucher_model->get('',$where);
-    //lq();
     unset($where['created_at<=']);
     unset($where['created_at>=']);
     $where['created_at<'] = $this->start_date;
     $this->data['opening_balance'] = $this->voucher_model->find('sum(credit_amount)-sum(debit_amount) as opening_balance',$where);
   }
-
-  public function _after_save($formdata, $action){
-  }
-
-
 }

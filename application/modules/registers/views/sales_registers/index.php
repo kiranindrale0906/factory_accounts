@@ -9,7 +9,6 @@ if($show_heading){ ?>
 <?php } ?>
   <form class="fields-group-sm">
     <div class="row">
-      <?php load_field('text',array('field' => 'custome_order', 'col'=>'col-sm-4'));?>
       <?php load_field('date',array('field' => 'start_date','class' => 'datepicker_js start_date', 'col'=>'col-sm-4','value'=>date('d-m-Y',strtotime($start_date))));?>
       <?php load_field('date',array('field' => 'end_date','class' => 'datepicker_js end_date', 'col'=>'col-sm-4','value'=>date('d-m-Y',strtotime($end_date))));?>  
       <div class="col-sm-4 align-self-center">

@@ -3,9 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Sales_registers extends BaseController {  
   public function __construct(){
-    $this->_model='Sales_register_model';
     parent::__construct();
-    $this->redirect_after_save = 'view';
     $this->load->model(array('reports/sales_register_model',
                              'ac_vouchers/voucher_model'));
   } 
@@ -15,8 +13,6 @@ class Sales_registers extends BaseController {
     $this->load->render('registers/sales_registers/index',$this->data); 
   } 
 
-  public function _get_form_data() {
-  }
   private function calculation_data() {
 
     $this->start_date = (!empty($_GET['start_date'])) ? date('Y-m-d',strtotime($_GET['start_date'])) : date('Y-m-d');
@@ -36,12 +32,6 @@ class Sales_registers extends BaseController {
         $where['voucher_type']="sales voucher";
         $where['company_id']=$this->session->userdata('company_id');
 
-
     $this->data['sales_registers'] = $this->voucher_model->get('',$where);
   }
-
-  public function _after_save($formdata, $action){
-  }
-
-
 }

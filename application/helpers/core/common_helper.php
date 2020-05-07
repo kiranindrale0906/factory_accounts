@@ -385,8 +385,8 @@ if ( ! function_exists('four_decimal')) {
   }
 }
 
-if (!function_exists('overwrite_number_format')) {
-  function overwrite_number_format($number, $digits, $default = '', $abs = true) {
+if (!function_exists('decimal_number_format')) {
+  function decimal_number_format($number, $digits=4, $default = '', $abs = true) {
     $result = $default;
 
     if ($number == '' || $number == '0.00') {

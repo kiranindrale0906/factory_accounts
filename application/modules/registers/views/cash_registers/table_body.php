@@ -5,15 +5,15 @@ if(isset($opening_balance['opening_balance']) && $opening_balance['opening_balan
  $debit_amount = $opening_balance['opening_balance'];
 
 if(isset($opening_balance['opening_balance']) && $opening_balance['opening_balance']>0)
- $credit_amount = $opening_balance['opening_balance'];  
+ $credit_amount = $opening_balance['opening_balance']; 
 ?>
   <tr>
     <td></td>
     <td>Opening Balance</td>
     <td></td>
     <td></td>
-    <td class="text-right"> <?php if(!empty($credit_amount)) { echo $credit_amount; } ?>
-    <td class="text-right"><?php if(!empty($debit_amount)) { echo $debit_amount; } ?> </td>
+    <td class="text-right"> <?php if(!empty($credit_amount)) { echo decimal_number_format($credit_amount); } ?>
+    <td class="text-right"><?php if(!empty($debit_amount)) { echo decimal_number_format($debit_amount); } ?> </td>
     <td></td>
   </tr>
 
@@ -37,8 +37,8 @@ if(isset($opening_balance['opening_balance']) && $opening_balance['opening_balan
       <td></td>
       <td></td>
       <td></td>
-      <td class="text-right"><?=$credit_amount;?></td>
-      <td class="text-right"><?=$debit_amount;?></td>
+      <td class="text-right"><?=decimal_number_format($credit_amount);?></td>
+      <td class="text-right"><?=decimal_number_format($debit_amount);?></td>
       <td></td>
     </tr>
     <?php
@@ -49,8 +49,8 @@ if(isset($opening_balance['opening_balance']) && $opening_balance['opening_balan
       <td></td>
       <td></td>
       <td></td>
-      <td class="text-right"><?=($balance>0) ? $balance :"" ?></td>
-      <td class="text-right"><?=($balance<0) ? ($balance*-1) : ""?></td>
+      <td class="text-right"><?=($balance>0) ? decimal_number_format($balance) :"" ?></td>
+      <td class="text-right"><?=($balance<0) ? decimal_number_format(($balance*-1)) : ""?></td>
       <td></td>
     </tr>
 </tbody> 
