@@ -85,15 +85,15 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
 
   $list_setting['narration'] = array("Narration", "narration", FALSE, "narration", TRUE, TRUE);
   $list_setting['receipt_type'] = array("Receipt Type", "receipt_type", FALSE, "receipt_type", TRUE, TRUE);
-  $list_setting['credit_weight'] = array("Debit Wt.", "credit_weight", FALSE, "credit_weight", TRUE, TRUE);
-  $list_setting['debit_weight'] = array("Credit Wt.", "debit_weight", FALSE, "debit_weight", TRUE, TRUE);
+  $list_setting['credit_weight'] = array("Credit Wt.", "credit_weight", FALSE, "credit_weight", TRUE, TRUE);
+  $list_setting['debit_weight'] = array("Debit Wt.", "debit_weight", FALSE, "debit_weight", TRUE, TRUE);
   $list_setting['purity'] = array("Purity", "purity", FALSE, "purity", TRUE, TRUE);
   $list_setting['factory_purity'] = array("Factory Purity", "factory_purity", FALSE, "factory_purity", TRUE, TRUE);
   $list_setting['Pure Gold'] = array("Narration", "pure_gold_credit", FALSE, "pure_gold_credit", TRUE, TRUE);
   $list_setting['department_name'] = array("Department Name", "department_name", FALSE, "department_name", TRUE, TRUE);
-  $list_setting['debit_amount'] = array("Credit Amt", "debit_amount", TRUE, "debit_amount", FALSE, TRUE,"FORMAT(ac_vouchers.debit_amount,ac_company.decimal_no) as debit_amount",
+  $list_setting['debit_amount'] = array("Debit Amt", "debit_amount", TRUE, "debit_amount", FALSE, TRUE,"FORMAT(ac_vouchers.debit_amount,ac_company.decimal_no) as debit_amount",
                                         '','','','text-right');
-  $list_setting['credit_amount'] = array("Debit Amt.", "credit_amount", TRUE, "credit_amount", FALSE, TRUE,"FORMAT(ac_vouchers.credit_amount,ac_company.decimal_no) as credit_amount",     
+  $list_setting['credit_amount'] = array("Credit Amt.", "credit_amount", TRUE, "credit_amount", FALSE, TRUE,"FORMAT(ac_vouchers.credit_amount,ac_company.decimal_no) as credit_amount",     
                                         '','','','text-right');
   $list_setting['total_gross_weight'] = array("Total Gross Wt", "total_gross_weight", FALSE, "total_gross_weight", TRUE, TRUE);
   $list_setting['total_net_weight'] = array("Total Net Wt", "total_net_weight", FALSE, "total_net_weight", TRUE, TRUE);

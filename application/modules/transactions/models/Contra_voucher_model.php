@@ -23,13 +23,7 @@ class Contra_voucher_model extends Contra_voucher_client_model {
                  'rules'  =>array('trim','required',
                             array('group_name_error_msg',array($this,'check_group_name_exist'))),
                  'errors' => array('group_name_error_msg'=>'Group name not exist in group master.'));
-  $rules[] = array('field' => $this->router_class.'[amount]', 'label' => 'Amount','rules' => 'trim|required');
-  $rules[] = array('field' => $this->router_class.'[narration]',
-                 'label' => 'Narration',
-                 'rules'  =>array('trim',
-                            array('narration_error_msg',array($this,'check_narration_exist'))),
-                 'errors' => array('narration_error_msg'=>'Narration not exist in narration master.'));
-   
+  $rules[] = array('field' => $this->router_class.'[amount]', 'label' => 'Amount','rules' => 'trim|required');  
  return $rules;
   }
 }

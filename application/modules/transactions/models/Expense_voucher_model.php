@@ -19,12 +19,6 @@ class Expense_voucher_model extends Expense_voucher_client_model {
                                 array('group_name_error_msg',array($this,'check_group_name_exist'))),
                      'errors' => array('group_name_error_msg'=>'Group name not exist in group master.'));
     $rules[] = array('field' => $this->router_class.'[debit_amount]', 'label' => 'Amount','rules' => 'trim|required');
-    $rules[] = array('field' => $this->router_class.'[narration]',
-                 'label' => 'Narration',
-                 'rules'  =>array('trim',
-                            array('narration_error_msg',array($this,'check_narration_exist'))),
-                 'errors' => array('narration_error_msg'=>'Narration not exist in narration master.'));
-   
    return $rules;
   }
 }

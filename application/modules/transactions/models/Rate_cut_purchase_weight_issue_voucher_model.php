@@ -16,12 +16,8 @@ class Rate_cut_purchase_weight_issue_voucher_model extends Rate_cut_purchase_wei
     $rules[] = array('field' => $this->router_class.'[gold_rate_purity]', 'label' => 'Gold Rate Purity','rules'  =>array('trim','required','numeric','less_than_equal_to[100]',array('purity_error_msg',array($this,'check_purity_exist'))),
                      'errors' => array('purity_error_msg'=>'Purity not exist in Purity master.'));
     $rules[] = array('field' => $this->router_class.'[amount]', 'label' => 'Amount','rules' => 'trim|required');
-    $rules[] = array('field' => $this->router_class.'[credit_weight]', 'label' => 'Credit Weight','rules' => 'trim|required');
+    $rules[] = array('field' => $this->router_class.'[debit_weight]', 'label' => 'Credit Weight','rules' => 'trim|required');
     $rules[] = array('field' => $this->router_class.'[transaction_type]', 'label' => 'Transaction Type','rules' => 'trim|required');
-    $rules[] = array('field' => $this->router_class.'[narration]',
-                     'label' => 'Narration',
-                     'rules'  =>array('trim',array('narration_error_msg',array($this,'check_narration_exist'))),
-                     'errors' => array('narration_error_msg'=>'Narration not exist in Narration master.'));
     return $rules;
   }
 }

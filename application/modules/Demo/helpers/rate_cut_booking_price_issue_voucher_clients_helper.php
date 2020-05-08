@@ -18,7 +18,7 @@ function rate_cut_booking_price_issue_voucher_clients_getTableSettings() {
 
 
 function rate_cut_booking_price_issue_voucher_clients_list_settings() {
-  $list_option=array('voucher_date','created_time','voucher_number','account_name','credit_amount','gold_rate','gold_rate_purity','gold_weight','transaction_type','gold_weight_purity','narration','account_id','company_id','created_time');
+  $list_option=array('voucher_date','created_time','voucher_number','account_name','debit_amount','gold_rate','gold_rate_purity','gold_weight','transaction_type','gold_weight_purity','narration','account_id','company_id','created_time');
   return ac_vouchers_list_settings($list_option);
 }
 
@@ -34,7 +34,7 @@ function rate_cut_booking_price_issue_voucher_clients_list_settings() {
 */
 
 function rate_cut_booking_price_issue_voucher_clients_get_field_attribute($table, $field) {
-  $required_fields=array('id','voucher_date','account_name','gold_rate','gold_rate_purity','gold_weight','gold_weight_purity','transaction_type','credit_amount','narration','account_id');
+  $required_fields=array('id','voucher_date','account_name','gold_rate','gold_rate_purity','gold_weight','gold_weight_purity','transaction_type','debit_amount','narration','account_id');
 
   return ac_voucher_get_field_attribute($table,$field,$required_fields);
 }
