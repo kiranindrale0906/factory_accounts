@@ -27,6 +27,11 @@ class Sales_registers extends BaseController {
     if (!empty($_GET['sales_registers']['end_date'])) {
         $where['date(created_at)<'] = $this->end_date;
     }
+
+    if (!empty($_GET['sales_registers']['account_name'])) {
+      $where['account_name']= $_GET['sales_registers']['account_name'];
+      $this->data['account_name'] = $_GET['sales_registers']['account_name'];
+    }
       
     $where['voucher_type']="sales voucher";
     $where['company_id']=$this->session->userdata('company_id');

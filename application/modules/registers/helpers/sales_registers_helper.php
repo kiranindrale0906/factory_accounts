@@ -48,6 +48,7 @@ function get_field_attribute($table, $field) {
     'start_date'       => array('Start date', '', FALSE, '', TRUE),
     'end_date'          => array('End date', '', FALSE, '', TRUE),
     'custome_order'          => array('Custome Order', '', FALSE, '', TRUE),
+    'account_name'          => array('Account Name', '', FALSE, '', TRUE),
   );
 
   return $attributes[$field];
