@@ -2,10 +2,24 @@
 $grand_credit = 0;
 $grand_debit = 0;
 $grand_balance = 0; 
-	
+
+if(!empty($opening_balance['opening_balance']) && $opening_balance<0)
+ $grand_debit = $opening_balance['opening_balance'];
+
+if(!empty($opening_balance['opening_balance']) && $opening_balance>0)
+	$grand_debit = $opening_balance['opening_balance']; ?>
+
+<tr>
+  <td colspan="3">Opening Balance</td>
+  <td class="text-right"><?=(!empty($opening_balance['opening_balance']) && $opening_balance<0)?decimal_number_format($opening_balance['opening_balance']):"" ?></td>
+ 	<td class="text-right"><?=(!empty($opening_balance['opening_balance']) && $opening_balance>0)?decimal_number_format($opening_balance['opening_balance']):"" ?></td>
+  <td></td>
+</tr>
+
+<?php
 foreach ($metal_register as $key => $metal_data) {
- $grand_credit += !empty($metal_data['credit_weight'])?$metal_data['credit_weight']:0;
- $grand_debit += !empty($metal_data['debit_weight'])?$metal_data['debit_weight']:0; ?>
+ 	$grand_credit += !empty($metal_data['credit_weight'])?$metal_data['credit_weight']:0;
+ 	$grand_debit += !empty($metal_data['debit_weight'])?$metal_data['debit_weight']:0; ?>
 
 	<tr>
 	    <td><?= date('d-m-y', strtotime($metal_data['voucher_date'])) ?></td>

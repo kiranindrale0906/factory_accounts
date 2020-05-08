@@ -48,7 +48,16 @@ class Metal_registers extends BaseController {
     if(!empty($param['account_name'])) {
       $where['account_name'] = $param['account_name']; 
     }
-
-    $this->data['metal_register'] = $this->metal_register_model->get('*', $where, array(),array('order_by'=>'date(created_at) asc'));
+    $this->data['metal_register'] = $this->metal_register_model->get('*', $where, array(),
+                                                                     array('order_by'=>'date(created_at) asc'));
+    $where['date(created_at) <'] = date('Y-m-d', strtotime($param['start_date'])); 
+    unset($where['date(created_at) <=']);
+    unset($where['date(created_at) >=']);
+    $this->data['opening_balance'] = $this->metal_register_model->find('sum(credit_weight)-sum(debit_weight) as opening_balance', 
+                                                                       $where, array(),
+                                                                       array('order_by'=>'date(created_at) asc'));
+    //lq();
+    //pd($this->data['opening_balance']);
+    //lq();
   }
 }
