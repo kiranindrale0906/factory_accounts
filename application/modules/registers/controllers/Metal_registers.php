@@ -15,8 +15,8 @@ class Metal_registers extends BaseController {
   
   private function calculation_data() {
 
-    $this->start_date = (!empty($_GET['start_date'])) ? date('Y-m-d',strtotime($_GET['start_date'])) : date('Y-m-d');
-    $this->end_date = (!empty($_GET['end_date'])) ? date('Y-m-d',strtotime($_GET['end_date'])) : date('Y-m-d');
+    $this->start_date = (!empty($_GET['metal_registers']['start_date'])) ? date('Y-m-d',strtotime($_GET['metal_registers']['start_date'])) : date('Y-m-d');
+    $this->end_date = (!empty($_GET['metal_registers']['end_date'])) ? date('Y-m-d',strtotime($_GET['metal_registers']['end_date'])) : date('Y-m-d');
     $this->data['start_date'] = $this->start_date;
     $this->data['end_date'] = $this->end_date;
     $param = $this->data;

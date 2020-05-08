@@ -15,23 +15,23 @@ class Sales_registers extends BaseController {
 
   private function calculation_data() {
 
-    $this->start_date = (!empty($_GET['start_date'])) ? date('Y-m-d',strtotime($_GET['start_date'])) : date('Y-m-d');
-    $this->end_date = (!empty($_GET['end_date'])) ? date('Y-m-d',strtotime($_GET['end_date'])) : date('Y-m-d');
+    $this->start_date = (!empty($_GET['sales_registers']['start_date'])) ? date('Y-m-d',strtotime($_GET['sales_registers']['start_date'])) : date('Y-m-d');
+    $this->end_date = (!empty($_GET['sales_registers']['end_date'])) ? date('Y-m-d',strtotime($_GET['sales_registers']['end_date'])) : date('Y-m-d');
     $this->data['start_date'] = $this->start_date;
     $this->data['end_date'] = $this->end_date;
     $where=array();
-    if (!empty($_GET['start_date'])) {
-            $where['created_at>='] = $this->start_date;
-        }
-        if (!empty($_GET['end_date'])) {
-            $where['created_at<'] = $this->end_date;
-        }
-        if (!empty($_GET['account_name'])) {
-            $where['account_name']= $_GET['account_name'];
-        }
-        $where['voucher_type']="sales voucher";
-        $where['company_id']=$this->session->userdata('company_id');
+    if (!empty($_GET['sales_registers']['start_date'])) {
+      $where['created_at>='] = $this->start_date;
+    }
+    
+    if (!empty($_GET['sales_registers']['end_date'])) {
+        $where['created_at<'] = $this->end_date;
+    }
+      
+    $where['voucher_type']="sales voucher";
+    $where['company_id']=$this->session->userdata('company_id');
 
     $this->data['sales_registers'] = $this->voucher_model->get('',$where);
+    //lq();
   }
 }

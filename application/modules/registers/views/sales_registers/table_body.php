@@ -10,9 +10,9 @@
       <td ><?= date('d-m-y', strtotime($sales_registers['created_at'])) ?></td>
       <td><?= $sales_registers['voucher_number'] ?></td>
       <td><?= $sales_registers['account_name'] ?></td>
-      <td class="text-right"><?= !empty($sales_registers['total_gross_weight'])?$sales_registers['total_gross_weight']:0; ?></td>
-      <td class="text-right"><?= !empty($sales_registers['total_net_weight'])?$sales_registers['total_net_weight']:0; ?></td>
-      <td class="text-right"><?= !empty($sales_registers['total_fine_weight'])?$sales_registers['total_fine_weight']:0; ?></td>
+      <td class="text-right"><?= !empty($sales_registers['total_gross_weight'])?$sales_registers['total_gross_weight']:"0.0000"; ?></td>
+      <td class="text-right"><?= !empty($sales_registers['total_net_weight'])?$sales_registers['total_net_weight']:"0.0000"; ?></td>
+      <td class="text-right"><?= !empty($sales_registers['total_fine_weight'])?$sales_registers['total_fine_weight']:"0.0000"; ?></td>
     </tr>
 	 <?php }?>
   <tr class="bg_gray bold">

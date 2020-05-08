@@ -16,19 +16,20 @@ class Rate_cut_purchase_weight_registers extends BaseController {
 
   private function calculation_data() {
 
-    $this->start_date = (!empty($_GET['start_date'])) ? date('Y-m-d',strtotime($_GET['start_date'])) : date('Y-m-d');
-    $this->end_date = (!empty($_GET['end_date'])) ? date('Y-m-d',strtotime($_GET['end_date'])) : date('Y-m-d');
+    $this->start_date = (!empty($_GET['rate_cut_purchase_weight_registers']['start_date'])) ? date('Y-m-d',strtotime($_GET['rate_cut_purchase_weight_registers']['start_date'])) : date('Y-m-d');
+    $this->end_date = (!empty($_GET['rate_cut_purchase_weight_registers']['end_date'])) ? date('Y-m-d',strtotime($_GET['rate_cut_purchase_weight_registers']['end_date'])) : date('Y-m-d');
     $this->data['start_date'] = $this->start_date;
     $this->data['end_date'] = $this->end_date;
     $where=array();
-    if (!empty($_GET['start_date'])) {
+    if (!empty($_GET['rate_cut_purchase_weight_registers']['start_date'])) {
             $where['created_at>='] = $this->start_date;
         }
-        if (!empty($_GET['end_date'])) {
+        if (!empty($_GET['rate_cut_purchase_weight_registers']['end_date'])) {
             $where['created_at<'] = $this->end_date;
         }
-        if (!empty($_GET['type'])) {
-            $where['type']= $_GET['type'];
+        if (!empty($_GET['rate_cut_purchase_weight_registers']['account_name'])) {
+            $where['account_name']= $_GET['rate_cut_purchase_weight_registers']['account_name'];
+            $this->data['account_name'] = $_GET['rate_cut_purchase_weight_registers']['account_name'];
         }
         $where['where']='(suffix="RCPWIV" OR suffix = "RCPWRV")';
         $where['company_id']=$this->session->userdata('company_id');
