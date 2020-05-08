@@ -35,7 +35,7 @@ class Sales_voucher_model extends Sales_voucher_client_model {
           $sales_data['company_id']  = $this->attributes['company_id'];
           $sales_data['sales_purchase_voucher_id']  = $this->attributes['id'];
           $sales_data['voucher_type'] =$this->attributes['voucher_type'];
-          $sales_data['transaction_type'] = 'account';
+          $sales_data['transaction_type'] = $this->attributes['transaction_type'];
           $sales_data['department_name'] = $this->attributes['department_name'];
           // $sales_data['department_id'] = $this->attributes['department_id'];
           $sales_data['rate'] = $this->attributes['rate']/($this->attributes['purity']*100);

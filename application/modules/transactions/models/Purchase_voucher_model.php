@@ -39,7 +39,7 @@ class Purchase_voucher_model extends Purchase_voucher_client_model {
           $purchase_data['company_id']  = $this->attributes['company_id'];
           $purchase_data['sales_purchase_voucher_id']  = $this->attributes['id'];
           $purchase_data['voucher_type'] =$this->attributes['voucher_type'];
-          $purchase_data['transaction_type'] = 'account';
+          $purchase_data['transaction_type'] =$this->attributes['transaction_type'];
           $purchase_data['department_name'] = $this->attributes['department_name'];
           // $purchase_data['department_id'] = $this->attributes['department_id'];
 

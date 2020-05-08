@@ -46,7 +46,7 @@ class Repair_voucher_model extends Repair_voucher_client_model {
           $repair_data['company_id']  = $this->attributes['company_id'];
           $repair_data['sales_purchase_repair_voucher_out_id']  = $this->attributes['id'];
           $repair_data['voucher_type'] =$this->attributes['voucher_type'];
-          $repair_data['transaction_type'] = 'account';
+          $repair_data['transaction_type'] =$this->attributes['transaction_type'];
           // $repair_data['department_name'] = $this->attributes['department_name'];
           // $repair_data['department_id'] = $this->attributes['department_id'];
 

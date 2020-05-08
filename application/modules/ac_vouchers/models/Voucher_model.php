@@ -123,7 +123,7 @@ class Voucher_model extends BaseModel {
 
     $this->formdata[$this->router_class]['suffix'] = $this->prefix;
     $this->formdata[$this->router_class]['voucher_type'] = $this->voucher_type;
-    $this->formdata[$this->router_class]['transaction_type'] = $this->account_type;
+    // $this->formdata[$this->router_class]['transaction_type'] = $this->account_type;
 
     $account = $this->account_model->find('id,group_id,route_group,sub_group_id',array('name'=>$this->attributes['account_name']));
     if(!empty($account['id'])) {    
