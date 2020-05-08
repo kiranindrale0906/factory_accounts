@@ -28,9 +28,9 @@ if(isset($opening_balance['opening_balance']) && $opening_balance['opening_balan
         <td><?= $bank_register['account_name'] ?></td>
         <td><?= $bank_register['bank_name'] ?></td>
         <td class="text-right">
-          <?=!empty($bank_register['credit_amount'])? decimal_number_format($bank_register['credit_amount']):0 ?></td>
+          <?=!empty($bank_register['credit_amount'])? decimal_number_format($bank_register['credit_amount']):"0.0000" ?></td>
         <td class="text-right">
-          <?=!empty($bank_register['debit_amount'])? decimal_number_format($bank_register['debit_amount']):0; ?> </td>
+          <?=!empty($bank_register['debit_amount'])? decimal_number_format($bank_register['debit_amount']):"0.0000"; ?> </td>
         <td><?= $bank_register['narration'] ?></td>
       </tr>
 	  <?php }?>

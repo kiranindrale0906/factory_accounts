@@ -27,8 +27,8 @@ if(isset($opening_balance['opening_balance']) && $opening_balance['opening_balan
           <td ><?= date('d-m-y', strtotime($cash_register['created_at'])) ?></td>
           <td><?= $cash_register['voucher_number'] ?></td>
           <td><?= $cash_register['account_name'] ?></td>
-          <td class="text-right"><?=!empty($cash_register['credit_amount'])?$cash_register['credit_amount']:0; ?></td>
-          <td class="text-right"><?= !empty($cash_register['debit_amount'])?$cash_register['debit_amount']:0 ?></td>
+          <td class="text-right"><?=!empty($cash_register['credit_amount'])?$cash_register['credit_amount']:"0.0000"; ?></td>
+          <td class="text-right"><?= !empty($cash_register['debit_amount'])?$cash_register['debit_amount']:"0.0000" ?></td>
           <td><?= $cash_register['narration'] ?></td>
       </tr>
 	  <?php }?>

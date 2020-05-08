@@ -7,7 +7,7 @@ if($show_heading){ ?>
     </div>
   </div>
 <?php } ?>
-  <form class="fields-group-sm">
+  <form class="fields-group-sm" action="<?=ADMIN_PATH."registers/bank_registers/index"?>">
     <div class="row">
       <?php load_field('text',array('field' => 'bank_name',
                                     'value' => @$bank_name,
@@ -18,7 +18,7 @@ if($show_heading){ ?>
       <?php load_field('date',array('field' => 'start_date','class' => 'datepicker_js start_date', 'col'=>'col-sm-4','value'=>date('d-m-Y',strtotime($start_date))));?>
       <?php load_field('date',array('field' => 'end_date','class' => 'datepicker_js end_date', 'col'=>'col-sm-4','value'=>date('d-m-Y',strtotime($end_date))));?>  
       <div class="col-sm-4 align-self-center">
-        <?php load_buttons('button', array('name' =>'Search','class'=>'btn-xs btn_blue search_data mr-2')) ?> 
+        <?php load_buttons('submit', array('name' =>'Search','class'=>'btn-xs btn_blue mr-2')) ?> 
         <?php load_buttons('button', array('name' =>'Clear','class'=>'btn-xs btn_blue clear_btn')) ?>      
       </div>
     </div>
@@ -28,7 +28,10 @@ if($show_heading){ ?>
   <table class="table table-sm fixedthead table-default">
   <?php 
     $this->load->view('registers/bank_registers/table_header');
-    $this->load->view('registers/bank_registers/table_body');
+    if(!empty($bank_registers)) 
+     $this->load->view('registers/bank_registers/table_body');
+    else
+      $this->load->view('registers/bank_registers/no_records');
   ?>
   </table>
 </div>

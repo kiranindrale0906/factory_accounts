@@ -14,21 +14,22 @@ class Cash_registers extends BaseController {
   } 
 
   private function calculation_data() {
-    $this->start_date = (!empty($_GET['start_date'])) ? date('Y-m-d',strtotime($_GET['start_date'])) : date('Y-m-d');
-    $this->end_date = (!empty($_GET['end_date'])) ? date('Y-m-d',strtotime($_GET['end_date'])) : date('Y-m-d');
-    $this->data['account_name'] = (!empty($_GET['account_name'])) ? $_GET['account_name'] : "";
+    $this->start_date = (!empty($_GET['cash_registers']['start_date'])) ? date('Y-m-d',strtotime($_GET['cash_registers']['start_date'])) : date('Y-m-d');
+
+    $this->end_date = (!empty($_GET['cash_registers']['end_date'])) ? date('Y-m-d',strtotime($_GET['cash_registers']['end_date'])) : date('Y-m-d');
+    $this->data['account_name'] = (!empty($_GET['cash_registers']['account_name'])) ? $_GET['cash_registers']['account_name'] : "";
     
     $this->data['start_date'] = $this->start_date;
     $this->data['end_date'] = $this->end_date;
     $where=array();
-    if (!empty($_GET['start_date'])) {
+    if (!empty($_GET['cash_registers']['start_date'])) {
             $where['created_at>='] = $this->start_date;
         }
-        if (!empty($_GET['end_date'])) {
+        if (!empty($_GET['cash_registers']['end_date'])) {
             $where['created_at<='] = $this->end_date;
         }
-        if (!empty($_GET['account_name'])) {
-            $where['account_name']= $_GET['account_name'];
+        if (!empty($_GET['cash_registers']['account_name'])) {
+            $where['account_name']= $_GET['cash_registers']['account_name'];
         }
 
         //OR suffix="RCPPIV" OR suffix = "RCPPRV" OR suffix="RCPWIV" OR suffix = "RCPWRV
