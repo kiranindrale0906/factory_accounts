@@ -19,6 +19,9 @@ class Metal_registers extends BaseController {
     $this->end_date = (!empty($_GET['metal_registers']['end_date'])) ? date('Y-m-d',strtotime($_GET['metal_registers']['end_date'])) : date('Y-m-d');
     $this->data['start_date'] = $this->start_date;
     $this->data['end_date'] = $this->end_date;
+    if (!empty($_GET['metal_registers']['account_name'])) {
+      $this->data['account_name'] = $_GET['metal_registers']['account_name'];
+    }
     $param = $this->data;
     $this->data['purities'] = $this->get_purity();
     $this->get_metal_register_data($this->data['purities'],$param);
@@ -37,48 +40,15 @@ class Metal_registers extends BaseController {
     if(empty($param['start_date'])) return false;
     $opening_param['end_date'] = date('Y-m-d', strtotime('-1 day', strtotime($param['start_date'])));
     $opening_param['start_date'] = date('1990-04-01');
-    foreach ($all_purities as $key => $purity) {
-            $param['purity'] = $purity['purity'];
-            $opening_param['purity'] = $purity['purity'];
-            $metal_register = array();
-            $pre_metal_register = array(); 
-    
-            $where['where']='(suffix="MI" OR suffix="MR")';
-            $where['company_id'] = $this->session->userdata('company_id');
-            $where['purity'] = abs($param['purity']);
-            $where['voucher_date >='] = date('Y-m-d', strtotime($param['start_date']));  
-            $where['voucher_date <='] = date('Y-m-d', strtotime($param['end_date']));  
-            $metal_register = $this->metal_register_model->get('*', $where, array(),array('order_by'=>'voucher_date asc'));
 
-            $where['voucher_date >='] = $opening_param['start_date'];  
-            $where['voucher_date <'] = $opening_param['end_date'];
-            $pre_metal_register = $this->metal_register_model->get('*', $where, array(),array('order_by'=>'voucher_date asc'));
-            
-           
-            if (empty($metal_register)) {
-                unset($all_purities[$key]);
-                continue;
-            }
-            $total_opening_credit = $total_opening_debit = 0;
-            $total_debit = $total_credit = 0;
-            foreach ($metal_register as $cr) {
-                $total_credit = $total_credit + $cr['credit_weight'];
-                $total_debit = $total_debit + $cr['debit_weight'];
-            }
+    $where['where']='(suffix="MI" OR suffix="MR")';
+    $where['company_id'] = $this->session->userdata('company_id');
+    $where['date(created_at) >='] = date('Y-m-d', strtotime($param['start_date']));  
+    $where['date(created_at) <='] = date('Y-m-d', strtotime($param['end_date'])); 
+    if(!empty($param['account_name'])) {
+      $where['account_name'] = $param['account_name']; 
+    }
 
-            foreach ($pre_metal_register as $pcr) {
-                $total_opening_credit = $total_opening_credit + $pcr['credit_weight'];
-                $total_opening_debit = $total_opening_debit + $pcr['debit_weight'];
-            }
-            $all_purities[$key]['metal_register'] = $metal_register;
-
-            $all_purities[$key]['total_debit'] = $total_debit;
-            $all_purities[$key]['total_credit'] = $total_credit;
-            $all_purities[$key]['total_opening_credit'] = $total_opening_credit;
-            $all_purities[$key]['total_opening_debit'] = $total_opening_debit;
-            $all_purities[$key]['balance'] = ($total_debit - $total_credit);
-      }
-      
-      $this->data['all_purities'] = array_values($all_purities);
+    $this->data['metal_register'] = $this->metal_register_model->get('*', $where, array(),array('order_by'=>'date(created_at) asc'));
   }
 }

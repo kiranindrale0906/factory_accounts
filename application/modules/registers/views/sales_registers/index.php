@@ -9,6 +9,10 @@ if($show_heading){ ?>
 <?php } ?>
   <form class="fields-group-sm" action="<?=ADMIN_PATH."registers/sales_registers/index"?>">
     <div class="row">
+      <?php load_field('text',array('field' => 'account_name',
+                                     'class' => 'autocomplete_list_selection account_name',
+                                     'data-table'=>'ac_account','data-list-title'=>'Account Name','data-column'=>'name',
+                                     'col'=>'col-sm-4','value'=>@$account_name));?>
       <?php load_field('date',array('field' => 'start_date','class' => 'datepicker_js start_date', 'col'=>'col-sm-4','value'=>date('d-m-Y',strtotime($start_date))));?>
       <?php load_field('date',array('field' => 'end_date','class' => 'datepicker_js end_date', 'col'=>'col-sm-4','value'=>date('d-m-Y',strtotime($end_date))));?>  
       <div class="col-sm-4 align-self-center">

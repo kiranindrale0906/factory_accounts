@@ -38,7 +38,7 @@ class Opening_stock_voucher_model extends Opening_stock_voucher_client_model {
           $opening_stock_data['company_id']  = $this->attributes['company_id'];
           $opening_stock_data['sales_purchase_voucher_id']  = $this->attributes['id'];
           $opening_stock_data['voucher_type'] =$this->attributes['voucher_type'];
-          $opening_stock_data['transaction_type'] = 'account';
+          $opening_stock_data['transaction_type'] = $this->attributes['transaction_type'];
           $opening_stock_data['department_name'] = $this->attributes['department_name'];
           // $opening_stock_data['department_id'] = $this->attributes['department_id'];
 
