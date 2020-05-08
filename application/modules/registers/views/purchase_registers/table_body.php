@@ -22,9 +22,8 @@
     <td></td>
     <td></td>
     <td></td>
-    <td class="text-right"><?=four_decimal($gross_weight);?></td>
-    <td class="text-right"><?=four_decimal($net_weight);?></td>
-    <td class="text-right"><?=four_decimal($fine_weight);?></td>
-    <td></td>
+    <td class="text-right"><?=decimal_number_format($gross_weight);?></td>
+    <td class="text-right"><?=decimal_number_format($net_weight);?></td>
+    <td class="text-right"><?=decimal_number_format($fine_weight);?></td>
   </tr>
 </tbody> 

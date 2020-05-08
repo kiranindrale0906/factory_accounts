@@ -360,7 +360,7 @@ $('.search_data').click(function(){
     if(type==undefined){
       type="";
     }
-    
+  
     if(from_date=="" && to_date!=""){
       alert("Please select both dates.");
       return false;
@@ -379,7 +379,7 @@ $('.search_data').click(function(){
     var url = window.location.href;
     if (url.indexOf("?") > -1) {
           var url = url.split('?')[0];
-       if(from_date!=""&& to_date!="" && (account_name=="")){
+       if(from_date!=""&& to_date!="" && (account_name!="")){
                   new_url ='?account_name='+account_name+'&start_date='+from_date+'&end_date='+to_date+'';
         }else if(from_date==""&& to_date=="" && (bank_name!="")){
           

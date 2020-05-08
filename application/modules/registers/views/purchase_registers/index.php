@@ -7,17 +7,12 @@ if($show_heading){ ?>
     </div>
   </div>
 <?php } ?>
-  <form class="fields-group-sm">
+  <form class="fields-group-sm" action="<?=ADMIN_PATH."registers/purchase_registers/index"?>">
     <div class="row">
-      <?php load_field('text',array('field' => 'custome_order',
-                                     'data-table'=>'ac_account',
-                                     'data-column'=>'name',
-                                     'data-where_condition'=>'group_code!=\'bank\'',
-                                     'data-list-title'=>'Account Name','class' => ' account_name autocomplete_list_selection', 'col'=>'col-sm-4'));?>
       <?php load_field('date',array('field' => 'start_date','class' => 'datepicker_js start_date', 'col'=>'col-sm-4','value'=>date('d-m-Y',strtotime($start_date))));?>
       <?php load_field('date',array('field' => 'end_date','class' => 'datepicker_js end_date', 'col'=>'col-sm-4','value'=>date('d-m-Y',strtotime($end_date))));?>  
       <div class="col-sm-4 align-self-center">
-        <?php load_buttons('button', array('name' =>'Search','class'=>'btn-xs btn_blue search_data mr-2')) ?> 
+        <?php load_buttons('submit', array('name' =>'Search','class'=>'btn-xs btn_blue mr-2')) ?> 
         <?php load_buttons('button', array('name' =>'Clear','class'=>'btn-xs btn_blue clear_btn')) ?>      
       </div>
     </div>
@@ -27,7 +22,10 @@ if($show_heading){ ?>
   <table class="table table-sm fixedthead table-default">
   <?php 
     $this->load->view('registers/purchase_registers/table_header');
-    $this->load->view('registers/purchase_registers/table_body');
+    if(!empty($purchase_registers))
+      $this->load->view('registers/purchase_registers/table_body');
+    else
+      $this->load->view('registers/purchase_registers/no_records');
   ?>
   </table>
 </div>

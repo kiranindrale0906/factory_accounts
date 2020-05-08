@@ -7,12 +7,12 @@ if($show_heading){ ?>
     </div>
   </div>
 <?php } ?>
-  <form class="fields-group-sm">
+  <form class="fields-group-sm" action="<?=ADMIN_PATH."registers/metal_registers/index"?>">
     <div class="row">
       <?php load_field('date',array('field' => 'start_date','class' => 'datepicker_js start_date', 'col'=>'col-sm-4','value'=>date('d-m-Y',strtotime($start_date))));?>
       <?php load_field('date',array('field' => 'end_date','class' => 'datepicker_js end_date', 'col'=>'col-sm-4','value'=>date('d-m-Y',strtotime($end_date))));?>  
       <div class="col-sm-4 align-self-center">
-        <?php load_buttons('button', array('name' =>'Search','class'=>'btn-xs btn_blue search_data mr-2')) ?> 
+        <?php load_buttons('submit', array('name' =>'Search','class'=>'btn-xs btn_blue mr-2')) ?> 
         <?php load_buttons('button', array('name' =>'Clear','class'=>'btn-xs btn_blue clear_btn')) ?>      
       </div>
     </div>
@@ -34,7 +34,7 @@ if($show_heading){ ?>
               <?= $purity['purity'] ?>
           </h3>
 
-          <table class="table table-bordered toggle-circle default footable-loaded footable">
+          <table class="table table-sm fixedthead table-default">
               <?php $this->load->view('registers/metal_registers/table_header'); ?>
               <tbody>
                   <?php $this->load->view('registers/metal_registers/table_opening_balance',
@@ -48,31 +48,30 @@ if($show_heading){ ?>
                                                                                         'account_name'=>$value['account_name'],
                                                                                         'credit_weight'=>$value['credit_weight'],
                                                                                         'debit_weight'=>$value['debit_weight'],
-                                                                                        'narration'=>$value['narration']));
-                          ?>
+                                                                                        'narration'=>$value['narration'])); ?>
                         
                           <?php
                       endforeach;
                   else:
                       ?>
-                      <tr><td colspan="6"> No Record found.</td></tr>
+                      
                   <?php endif; ?>
               </tbody>
 
               <tfoot>
                   <tr>
                       <td class="text-right" colspan="3"><b>Total</b></td>
-                      <td class="text-right"><b><?= overwrite_number_format($purity['total_credit'], 3) ?></b></td>
-                      <td class="text-right"><b><?= overwrite_number_format($purity['total_debit'], 3) ?></b></td>
+                      <td class="text-right"><b><?= decimal_number_format($purity['total_credit']) ?></b></td>
+                      <td class="text-right"><b><?= decimal_number_format($purity['total_debit']) ?></b></td>
                       <td></td>
                   </tr>
                   <tr>
                       <td class="text-right" colspan="3"><b>Balance</b></td>
                       <?php if ($purity['balance'] < 0): ?>
                           <td></td>
-                          <td class="text-right"><b><?= overwrite_number_format($purity['balance'], 3) ?></b></td>
+                          <td class="text-right"><b><?= decimal_number_format($purity['balance']) ?></b></td>
                       <?php else: ?>
-                          <td class="text-right"><b><?= overwrite_number_format($purity['balance'], 3) ?></b></td>
+                          <td class="text-right"><b><?= decimal_number_format($purity['balance']) ?></b></td>
                           <td></td>
                       <?php endif; ?>
                       <td></td>
@@ -89,19 +88,23 @@ if($show_heading){ ?>
               <tbody>
                   <tr>
                       <td class="text-right" width="58.7%"><b>Grand Total</b></td>
-                      <td class="text-right" width="15.6%"><b><?=overwrite_number_format($grand_credit,3)?></b></td>
-                      <td class="text-right" width="15%"><b><?=overwrite_number_format($grand_debit,3)?></td>
+                      <td class="text-right" width="15.6%"><b><?=decimal_number_format($grand_credit)?></b></td>
+                      <td class="text-right" width="15%"><b><?=decimal_number_format($grand_debit)?></td>
                       <td></td>
                   </tr>
                    <tr>
                       <td class="text-right" width="58.7%"><b>Balance</b></td>
                       <td class="text-right" width="15.6%"><b></b></td>
-                      <td class="text-right" width="15%"><b><?=overwrite_number_format($grand_balance,3)?></td>
+                      <td class="text-right" width="15%"><b><?=decimal_number_format($grand_balance)?></td>
                       <td></td>
                   </tr>
                </tbody>   
               
       </table>
+  <?php else :  ?>
+      <table class="table table-sm fixedthead table-default">
+        <?php $this->load->view('registers/metal_registers/table_header'); ?>
+        <?php $this->load->view('registers/metal_registers/no_records'); ?>
   <?php endif; ?>
 </div>        
           

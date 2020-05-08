@@ -3,9 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Rate_cut_purchase_weight_registers extends BaseController {  
   public function __construct(){
-    $this->_model='Rate_cut_purchase_weight_register_model';
     parent::__construct();
-    $this->redirect_after_save = 'view';
     $this->load->model(array('reports/rate_cut_purchase_weight_register_model',
                              'ac_vouchers/voucher_model'));
   } 
@@ -16,23 +14,22 @@ class Rate_cut_purchase_weight_registers extends BaseController {
     $this->load->render('registers/rate_cut_purchase_weight_registers/index',$this->data); 
   } 
 
-  public function _get_form_data() {
-  }
   private function calculation_data() {
 
-    $this->start_date = (!empty($_GET['start_date'])) ? date('Y-m-d',strtotime($_GET['start_date'])) : date('Y-m-d');
-    $this->end_date = (!empty($_GET['end_date'])) ? date('Y-m-d',strtotime($_GET['end_date'])) : date('Y-m-d');
+    $this->start_date = (!empty($_GET['rate_cut_purchase_weight_registers']['start_date'])) ? date('Y-m-d',strtotime($_GET['rate_cut_purchase_weight_registers']['start_date'])) : date('Y-m-d');
+    $this->end_date = (!empty($_GET['rate_cut_purchase_weight_registers']['end_date'])) ? date('Y-m-d',strtotime($_GET['rate_cut_purchase_weight_registers']['end_date'])) : date('Y-m-d');
     $this->data['start_date'] = $this->start_date;
     $this->data['end_date'] = $this->end_date;
     $where=array();
-    if (!empty($_GET['start_date'])) {
+    if (!empty($_GET['rate_cut_purchase_weight_registers']['start_date'])) {
             $where['created_at>='] = $this->start_date;
         }
-        if (!empty($_GET['end_date'])) {
+        if (!empty($_GET['rate_cut_purchase_weight_registers']['end_date'])) {
             $where['created_at<'] = $this->end_date;
         }
-        if (!empty($_GET['type'])) {
-            $where['type']= $_GET['type'];
+        if (!empty($_GET['rate_cut_purchase_weight_registers']['account_name'])) {
+            $where['account_name']= $_GET['rate_cut_purchase_weight_registers']['account_name'];
+            $this->data['account_name'] = $_GET['rate_cut_purchase_weight_registers']['account_name'];
         }
         $where['where']='(suffix="RCPWIV" OR suffix = "RCPWRV")';
         $where['company_id']=$this->session->userdata('company_id');
@@ -40,9 +37,4 @@ class Rate_cut_purchase_weight_registers extends BaseController {
 
     $this->data['rate_cut_purchase_weight_registers'] = $this->voucher_model->get('',$where);
   }
-
-  public function _after_save($formdata, $action){
-  }
-
-
 }
