@@ -10,6 +10,7 @@ if($show_heading){ ?>
   <form class="fields-group-sm">
     <div class="row">
       <?php load_field('text',array('field' => 'bank_name',
+                                    'value' => @$bank_name,
                                     'class'=>'autocomplete_list_selection bank_name',
                                     'data-table'=>'ac_account','data-column'=>'name',
                                     'data-where_condition'=>'group_code=\'bank\'',

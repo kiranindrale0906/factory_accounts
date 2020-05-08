@@ -19,6 +19,7 @@ class Bank_registers extends BaseController {
 
     $this->start_date = (!empty($_GET['start_date'])) ? date('Y-m-d',strtotime($_GET['start_date'])) : date('Y-m-d');
     $this->end_date = (!empty($_GET['end_date'])) ? date('Y-m-d',strtotime($_GET['end_date'])) : date('Y-m-d');
+    $this->data['bank_name'] = (!empty($_GET['bank_name'])) ? $_GET['bank_name'] : "";
     $this->data['start_date'] = $this->start_date;
     $this->data['end_date'] = $this->end_date;
     $where=array();
@@ -37,7 +38,7 @@ class Bank_registers extends BaseController {
 
 
     $this->data['bank_registers'] = $this->voucher_model->get('',$where);
-    
+    //lq();
     unset($where['created_at<=']);
     unset($where['created_at>=']);
     $where['created_at<'] = $this->start_date;

@@ -5,7 +5,6 @@
     $gross_weight+=$sales_registers['total_gross_weight'];
     $net_weight+=$sales_registers['total_net_weight'];
     $fine_weight+=$sales_registers['total_fine_weight']; ?>
-
 	   <tr>
       <td><?= ++$index; ?></td>
       <td ><?= date('d-m-y', strtotime($sales_registers['created_at'])) ?></td>

@@ -10,6 +10,7 @@ if($show_heading){ ?>
   <form class="fields-group-sm" action="<?=ADMIN_PATH."registers/cash_registers/index"?>">
     <div class="row">
       <?php load_field('text',array('field' => 'account_name',
+                                    'value' => @$account_name,
                                      'data-table'=>'ac_account',
                                      'data-column'=>'name',
                                      'data-where_condition'=>'group_code!=\'bank\'',
