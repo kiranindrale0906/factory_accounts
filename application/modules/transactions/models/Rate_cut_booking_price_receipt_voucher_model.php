@@ -16,11 +16,8 @@ class Rate_cut_booking_price_receipt_voucher_model extends Rate_cut_booking_pric
     $rules[] = array('field' => $this->router_class.'[gold_weight]', 'label' => 'Gold Weight','rules' => 'trim|required');
     $rules[] = array('field' => $this->router_class.'[gold_weight_purity]', 'label' => 'Gold Weight Purity','rules'  =>array('trim','required','numeric','less_than_equal_to[100]',array('purity_error_msg',array($this,'check_purity_exist'))),
                      'errors' => array('purity_error_msg'=>'Purity not exist in Purity master.'));
-    $rules[] = array('field' => $this->router_class.'[debit_amount]', 'label' => 'Debit Amount','rules' => 'trim|required');
+    $rules[] = array('field' => $this->router_class.'[credit_amount]', 'label' => 'credit Amount','rules' => 'trim|required');
     $rules[] = array('field' => $this->router_class.'[transaction_type]', 'label' => 'Transaction Type','rules' => 'trim|required');
-    $rules[] = array('field' => $this->router_class.'[narration]',
-                     'label' => 'Narration',
-                     'rules'  =>array('trim'));
     return $rules;
   }
 }

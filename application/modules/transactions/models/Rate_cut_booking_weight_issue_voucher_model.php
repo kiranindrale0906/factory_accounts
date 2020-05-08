@@ -17,10 +17,6 @@ class Rate_cut_booking_weight_issue_voucher_model extends Rate_cut_booking_weigh
                      'errors' => array('purity_error_msg'=>'Purity not exist in Purity master.'));
     $rules[] = array('field' => $this->router_class.'[amount]', 'label' => 'Amount','rules' => 'trim|required');
     $rules[] = array('field' => $this->router_class.'[transaction_type]', 'label' => 'Transaction Type','rules' => 'trim|required');
-    $rules[] = array('field' => $this->router_class.'[narration]',
-                     'label' => 'Narration',
-                     'rules'  =>array('trim',array('narration_error_msg',array($this,'check_narration_exist'))),
-                     'errors' => array('narration_error_msg'=>'Narration not exist in Narration master.'));
     return $rules;
   }
 }

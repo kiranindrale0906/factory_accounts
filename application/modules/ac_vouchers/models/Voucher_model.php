@@ -16,11 +16,6 @@ class Voucher_model extends BaseModel {
                     'errors'=>array('validate_voucher_date' => "Please set the Financial year from master."));
     $rules[] = array('field' => $this->router_class.'[account_name]',
                      'label' => 'Account Name','rules' => 'trim|required');
-    $rules[] = array('field' => $this->router_class.'[narration]',
-                     'label' => 'Account Name',
-                     'rules'  =>array('trim',
-                                array('narration_error_msg',array($this,'check_narration_exist'))),
-                     'errors' => array('narration_error_msg'=>'Narration not exist in Narration master.'));
     if($this->router->class=="bank_issue_vouchers" || $this->router->class=="bank_receipt_vouchers") {
     $rules[] = array('field' => $this->router_class.'[bank_name]', 'label' => 'Bank Name','rules' => 'trim|required');
     }
@@ -37,14 +32,14 @@ class Voucher_model extends BaseModel {
     $check_credit_debit_type=stripos($this->router_class,'issue');
     if($this->router->class=="cash_issue_vouchers" || $this->router->class=="cash_receipt_vouchers" || $this->router->class=="bank_issue_vouchers" || $this->router->class=="bank_receipt_vouchers") {
       if($check_credit_debit_type==true) {
-        $credit_rules[] = array('field' => $this->router_class.'[credit_amount]', 
-                        'label' => 'Credit Amount',
+        $credit_rules[] = array('field' => $this->router_class.'[debit_amount]', 
+                        'label' => 'Debit Amount',
                         'rules' => 'trim|required|numeric|greater_than[0]');
         $rules=array_merge($rules,$credit_rules);
       }
       else {
-        $debit_rules[] = array('field' => $this->router_class.'[debit_amount]', 
-                        'label' => 'Debit Amount',
+        $debit_rules[] = array('field' => $this->router_class.'[credit_amount]', 
+                        'label' => 'credit Amount',
                         'rules' => 'trim|required|numeric|greater_than[0]');
         $rules=array_merge($rules,$debit_rules);
       }
