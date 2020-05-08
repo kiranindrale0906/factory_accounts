@@ -6,7 +6,7 @@ class Migration_column_prefrences extends CI_Model {
 
   public function up()
   {
-  	$sql = "CREATE TABLE `column_prefrences` (
+  	$sql = "CREATE TABLE IF NOT EXISTS `column_prefrences` (
 					  `id` int(9) NOT NULL AUTO_INCREMENT,
 					  `user_id` bigint(20) DEFAULT NULL,
 					  `list_page` varchar(100) DEFAULT NULL,

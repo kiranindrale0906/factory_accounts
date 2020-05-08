@@ -6,7 +6,7 @@ class Migration_ac_payment_terms extends CI_Model {
 
   public function up()
   {
-  	$sql= "CREATE TABLE `ac_payment_terms` (
+  	$sql= "CREATE TABLE IF NOT EXISTS `ac_payment_terms` (
 				  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 				  `terms` int(11) NOT NULL,
 				  `company_id` int(11) DEFAULT NULL,

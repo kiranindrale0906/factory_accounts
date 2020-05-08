@@ -62,7 +62,7 @@ function get_field_attribute($table, $field) {
     'id'                      => array('', '', TRUE, '', TRUE),
     'category_name_id'        => array('Category Name', 'Enter Category Name.', TRUE, '', TRUE),
     'department_name_id'      => array('Department Name', 'Select Department.', TRUE, '', TRUE),
-    'account_name_id'         => array('Account Name', 'Enter Account Name.', TRUE, '', TRUE),
+    'account_name'         => array('Account Name', 'Enter Account Name.', TRUE, '', TRUE),
     'wastage'                 => array('Wastage', 'Enter Wastage.', FALSE, '', TRUE),
     'company_id'              => array('', '', TRUE, '', TRUE),
   );

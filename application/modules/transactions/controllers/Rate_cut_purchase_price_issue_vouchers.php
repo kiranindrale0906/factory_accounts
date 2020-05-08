@@ -5,6 +5,7 @@ class Rate_cut_purchase_price_issue_vouchers extends Rate_cut_purchase_price_iss
   public function __construct() {
     parent::__construct();
     $this->date_fields = array(array('rate_cut_purchase_price_issue_vouchers', 'voucher_date'));
+    $this->load->model(array('masters/department_category_model','masters/purity_model','masters/setting_model'));
   }
 
   

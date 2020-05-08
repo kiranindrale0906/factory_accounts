@@ -1,7 +1,8 @@
 <header class="d-flex justify-content-between align-items-center fixed-top">
   <div>
     <a href="index.php">
-      <img src="<?= CORE_PATH() ?>images/common/logo.png"> 
+    <?php $company_logo=get_logo();?>
+      <img src="<?= base_url() ?>uploads/logo/original/<?=$company_logo?>" height="50" width="50"> 
       <!-- Your Logo Here -->
     </a> 
 
@@ -37,6 +38,15 @@
         }
       ?>  
     </select>
+</div>
+<div class="m-8">
+      <label class="medium">From:</label>
+      <input type="text" id="start_date" value='<?=!empty($_GET['from'])?date('d-m-Y',strtotime($_GET['from'])):'';?>' class="datepicker_js col-sm-3">
+
+      <label class="medium">To:</label>
+      <input type="text" id="end_date" value='<?=!empty($_GET['to'])?date('d-m-Y',strtotime($_GET['to'])):'';?>' class="datepicker_js col-sm-3">
+      <?php load_buttons('button', array('name' =>'Search','class'=>'btn-xs btn_blue search_date mr-2')) ?>
+      <?php load_buttons('button', array('name' =>'Clear','class'=>'btn-xs btn_blue clear_btn')) ?>  
   </div>
   <div class="d-flex align-items-center justify-content-end float-right">
     <div class="calculate_div pr-3">

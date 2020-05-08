@@ -5,6 +5,7 @@ class Interest_issue_vouchers extends Interest_issue_voucher_clients {
   public function __construct() {
     parent::__construct();
     $this->date_fields = array(array('interest_issue_vouchers', 'voucher_date'));
+    $this->load->model(array('masters/department_category_model','masters/purity_model','masters/setting_model'));
   }
 
   

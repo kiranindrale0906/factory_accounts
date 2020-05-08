@@ -6,7 +6,7 @@ class Migration_ac_sms extends CI_Model {
 
   public function up()
   {
-  	$sql = "CREATE TABLE `ac_sms` (
+  	$sql = "CREATE TABLE IF NOT EXISTS `ac_sms` (
 				  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 				  `company_id` int(11) DEFAULT NULL,
 				  `short_message` text NOT NULL,

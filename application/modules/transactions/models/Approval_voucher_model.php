@@ -15,10 +15,20 @@ class Approval_voucher_model extends Approval_voucher_client_model {
     $rules[] = array('field' => $this->router_class.'[type]', 'label' => 'Type','rules' => 'trim|required');
     $rules[] = array('field' => $this->router_class.'[account_name]', 'label' => 'Account Name','rules' => 'trim|required');
     $rules[] = array('field' => $this->router_class.'[rate]', 'label' => 'Rate','rules' => 'trim|required');
-    $rules[] = array('field' => $this->router_class.'[purity]', 'label' => 'Purity','rules' => 'trim|required');
-    $rules[] = array('field' => $this->router_class.'[group_name]', 'label' => 'Group Name','rules' => 'trim|required');
+    $rules[] = array('field' => $this->router_class.'[purity]',
+                      'label' => 'Purity',
+                      'rules'  =>array('trim','required','numeric','less_than_equal_to[100]',
+                      array('purity_error_msg',array($this,'check_purity_exist'))),
+                     'errors' => array('purity_error_msg'=>'Purity not exist in Purity master.'));
+    $rules[] = array('field' => $this->router_class.'[group_name]',
+                     'label' => 'Group Name',
+                     'rules'  =>array('trim','required','numeric','less_than_equal_to[100]',
+                      array('group_error_msg',array($this,'check_group_name_exist'))),
+                     'errors' => array('group_error_msg'=>'Group Name not exist in Group master.'));
     $rules[] = array('field' => $this->router_class.'[gst_number]', 'label' => 'GST Number','rules' => 'trim|required');
-    $rules[] = array('field' => $this->router_class.'[cash_bill]', 'label' => 'Cash/bill','rules' => 'trim|required');
+    $rules[] = array('field' => $this->router_class.'[cash_bill]', 'label' => 'Cash/bill','rules'  =>array('trim','required',
+                    array('check_cash_bill_error',array($this,'check_cash_bill_exist'))),
+        'errors' => array('check_cash_bill_error'=>'Cash / Bill value not exist.'));
     $rules[] = array('field' => $this->router_class.'[payment_term]', 'label' => 'Payment Term','rules' => 'trim|required');
    return $rules;
   }
@@ -26,8 +36,7 @@ class Approval_voucher_model extends Approval_voucher_client_model {
   public function before_save($action) {
     $this->formdata[$this->router_class]['has_hallmark']=(!empty($this->attributes['has_hallmark'])?$this->attributes['has_hallmark']:0);
   }
-
-
+  
    public function after_save($action) {
     $approval_data=$total_net_wt=$total_fine_wt=$total_gross_wt=$total_other_charge=$total_gold_amount=$total_other_charge=0;
     
@@ -63,5 +72,13 @@ class Approval_voucher_model extends Approval_voucher_client_model {
       $obj_purchase = new approval_voucher_model($approval_vouchers);
       $obj_purchase->update(false);
     }
+
+    public function check_cash_bill_exist($name) {
+    if($name=="" && !isset($name))
+      return true;
+    else
+    $accounts=$this->cash_bill_model->find('id as id',array('name'=>$name));
+    return (empty($accounts)) ? false : true;
+  }
 }
 //class

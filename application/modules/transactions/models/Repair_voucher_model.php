@@ -15,11 +15,14 @@ class Repair_voucher_model extends Repair_voucher_client_model {
     $rules[] = array('field' => $this->router_class.'[type]', 'label' => 'Type','rules' => 'trim|required');
     $rules[] = array('field' => $this->router_class.'[account_name]', 'label' => 'Account Name','rules' => 'trim|required');
     $rules[] = array('field' => $this->router_class.'[rate]', 'label' => 'Rate','rules' => 'trim|required');
-    $rules[] = array('field' => $this->router_class.'[purity]', 'label' => 'Purity','rules' => 'trim|required');
-    $rules[] = array('field' => $this->router_class.'[group_name]', 'label' => 'Group Name','rules' => 'trim|required');
+    $rules[] = array('field' => $this->router_class.'[purity]', 'label' => 'Purity','rules'  =>array('trim','required','numeric','less_than_equal_to[100]',array('purity_error_msg',array($this,'check_purity_exist'))),
+                     'errors' => array('purity_error_msg'=>'Purity not exist in Purity master.'));
+    $rules[] = array('field' => $this->router_class.'[group_name]', 'label' => 'Group Name','rules'  =>array('trim','required',array('group_error_msg',array($this,'check_group_name_exist'))),
+                     'errors' => array('group_error_msg'=>'Group Name not exist in Group master.'));
     $rules[] = array('field' => $this->router_class.'[gst_number]', 'label' => 'GST Number','rules' => 'trim|required');
-    $rules[] = array('field' => $this->router_class.'[cash_bill]', 'label' => 'Cash/bill','rules' => 'trim|required');
     $rules[] = array('field' => $this->router_class.'[payment_term]', 'label' => 'Payment Term','rules' => 'trim|required');
+    $rules[] = array('field' => $this->router_class.'[cash_bill]', 'label' => 'Cash Bill','rules'  =>array('trim',array('cash_bill_error_msg',array($this,'check_cash_bill_exist'))),
+                     'errors' => array('cash_bill_error_msg'=>'Cash/Bill value not exist.'));
     return $rules;
   }
   public function before_save($action) {
@@ -65,5 +68,12 @@ class Repair_voucher_model extends Repair_voucher_client_model {
       $obj_purchase = new repair_voucher_model($repair_vouchers);
       $obj_purchase->update(false);
     }
+  public function check_cash_bill_exist($name) {
+    if($name=="" && !isset($name))
+      return true;
+    else
+    $accounts=$this->cash_bill_model->find('id as id',array('name'=>$name));
+    return (empty($accounts)) ? false : true;
+  }
 }
 //class

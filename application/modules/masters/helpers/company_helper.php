@@ -70,6 +70,7 @@ function get_field_attribute($table, $field) {
     'state'         => array('State', 'Enter State.', FALSE, '', TRUE),
     'pincode'       => array('Pincode', 'Enter Pincode.', FALSE, '', TRUE),
     'logo'          => array('Select logo', 'Please select logo.', FALSE, '', TRUE),
+    'decimal_no'          => array('Decimal No', 'Enter decimal no.', FALSE, '', TRUE),
   );
  
   return $attributes[$table][$field];

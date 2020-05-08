@@ -2,19 +2,16 @@
 
 class City_model extends BaseModel {
 
-    protected $table_name = "ac_city";
-    protected $id = "id";
+  protected $table_name = "ac_city";
+  protected $id = "id";
+  public $router_class = "cities";
+  function __construct($data=array()) {
+      parent::__construct($data);
+  }
 
-    function __construct() {
-        parent::__construct();
-    }
-
-    public function validation_rules($klass='') {
-    	return array(
-      			array('field' => 'city[name]', 'label' => 'Name', 'rules' => 'trim|required')
-      		);
-    }
-
+  public function validation_rules($klass='') {
+    return array(
+            array('field' => 'cities[name]', 'label' => 'Name', 'rules' => 'trim|required')
+          );
+  }
 }
-
-//class

@@ -248,5 +248,125 @@ $(document).on('keypress',function(e) {
     }
 });
 
+$('.search_date').click(function(){
+    var from_date = $('#start_date').val();
+    var to_date = $('#end_date').val();
+    if(from_date==""){
+      alert("Please select both dates.");
+      return false;
+    }
+    if(to_date==""){
+      alert("Please select both dates.");
+      return false;
+    }
+
+    if(moment(from_date, 'DD MMM YYYY').unix() > moment(to_date, 'DD MMM YYYY').unix())
+    {
+      alert("From Date Can't be greater than To date");
+      return false;
+    }
+
+    var url = window.location.href;
+    if (url.indexOf("?") > -1) {
+      var url = url.split('?')[0];
+      new_url = '?from='+from_date+'&to='+to_date+'';
+      window.location.href = url+new_url;
+    }else{
+      new_url = '?from='+from_date+'&to='+to_date+'';
+      window.location.href = url+new_url;
+    }
+    return true;
+});
+
+$('.search_data').click(function(){
+    var from_date = $('.start_date').val();
+    var to_date = $('.end_date').val();
+    var account_name = $('.account_name').val();
+    var bank_name = $('.bank_name').val();
+    var type = $('.type').val();
+    if(account_name==undefined){
+      account_name="";
+    }
+    if(bank_name==undefined){
+      bank_name="";
+    }
+    if(type==undefined){
+      type="";
+    }
+  
+    if(from_date=="" && to_date!=""){
+      alert("Please select both dates.");
+      return false;
+    }
+    if(to_date=="" && from_date!=""){
+      alert("Please select both dates.");
+      return false;
+    }
+
+    if(moment(from_date, 'DD MMM YYYY').unix() > moment(to_date, 'DD MMM YYYY').unix())
+    {
+      alert("From Date Can't be greater than To date");
+      return false;
+    }
+
+    var url = window.location.href;
+    if (url.indexOf("?") > -1) {
+          var url = url.split('?')[0];
+       if(from_date!=""&& to_date!="" && (account_name!="")){
+                  new_url ='?account_name='+account_name+'&start_date='+from_date+'&end_date='+to_date+'';
+        }else if(from_date==""&& to_date=="" && (bank_name!="")){
+          
+          new_url ='?bank_name='+bank_name;
+        }else if(from_date==""&& to_date=="" && (type!="")){
+          
+          new_url ='?type='+type;
+        }else if(from_date!=""&& to_date!="" && (type!="")){
+         
+          new_url ='?type='+type+'&start_date='+from_date+'&end_date='+to_date+'';
+        }else if(from_date!=""&& to_date!="" && (bank_name!="")){
+          
+          new_url ='?bank_name='+bank_name+'&start_date='+from_date+'&end_date='+to_date+'';
+        }else if(from_date!=""&& to_date!="" && ((account_name=="") || (bank_name=="") || (type==""))){
+                    new_url ='?start_date='+from_date+'&end_date='+to_date+'';
+        }else{
+          
+          new_url ='?account_name='+account_name;
+        }
+
+      window.location.href = url+new_url;
+    }else{
+       if(from_date!=""&& to_date!="" && (account_name=="")){
+                 new_url ='?account_name='+account_name+'&start_date='+from_date+'&end_date='+to_date+'';
+        }else if(from_date==""&& to_date=="" && (bank_name!="")){
+          
+          new_url ='?bank_name='+bank_name;
+        }else if(from_date==""&& to_date=="" && (type!="")){
+          
+          new_url ='?type='+bank_name;
+        }else if(from_date!=""&& to_date!="" && (type!="")){
+          
+          new_url ='?type='+bank_name+'&start_date='+from_date+'&end_date='+to_date+'';
+        }else if(from_date!=""&& to_date!="" && (bank_name!="")){
+          
+          new_url ='?bank_name='+bank_name+'&start_date='+from_date+'&end_date='+to_date+'';
+        }else if(from_date!=""&& to_date!="" && ((account_name=="") || (bank_name=="") || (type==""))){
+          
+          new_url ='?start_date='+from_date+'&end_date='+to_date+'';
+        }else{
+          
+          new_url ='?account_name='+account_name;
+        }
+
+      window.location.href = url+new_url;
+    }
+    return true;
+});
+
+$('.clear_btn').click(function(){
+    var url = window.location.href;
+    var new_url = url.split('?')[0];
+    window.location.href=new_url;
+});
+
 
 

@@ -114,6 +114,12 @@ function get_company_list(){
   $result = $ci->company_model->get('id,name');
   return $result;
 }
+function get_logo(){
+  $ci=&get_instance();
+  $ci->load->model('masters/company_model');
+  $logo = $ci->company_model->find('logo',array('id'=>!empty($ci->session->userdata('company_id'))?$ci->session->userdata('company_id'):1))['logo'];
+  return $logo;
+}
 
 function get_receipt_type(){
   return array(

@@ -13,7 +13,7 @@ class Rate_cut_purchase_weight_receipt_voucher_model extends Rate_cut_purchase_w
     $rules[] = array('field' => $this->router_class.'[gold_rate]', 'label' => 'Gold Rate','rules' => 'trim|required');
     $rules[] = array('field' => $this->router_class.'[gold_rate_purity]', 'label' => 'Gold Rate Purity','rules' => 'trim|required');
     $rules[] = array('field' => $this->router_class.'[amount]', 'label' => 'Amount','rules' => 'trim|required');
-    $rules[] = array('field' => $this->router_class.'[debit_weight]', 'label' => 'Debit Weight','rules' => 'trim|required');
+    $rules[] = array('field' => $this->router_class.'[credit_weight]', 'label' => 'Debit Weight','rules' => 'trim|required');
     $rules[] = array('field' => $this->router_class.'[transaction_type]', 'label' => 'Transaction Type','rules' => 'trim|required');
     return $rules;
   }

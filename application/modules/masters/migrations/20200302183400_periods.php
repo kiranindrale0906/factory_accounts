@@ -6,7 +6,7 @@ class Migration_periods extends CI_Model {
 
   public function up()
   {
-  	$sql="CREATE TABLE `periods` (
+  	$sql="CREATE TABLE IF NOT EXISTS `periods` (
 				  `id` int(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 				  `name` varchar(255) DEFAULT NULL,
 				  `date_from` date DEFAULT NULL,

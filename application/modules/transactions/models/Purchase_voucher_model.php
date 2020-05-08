@@ -16,7 +16,10 @@ class Purchase_voucher_model extends Purchase_voucher_client_model {
    public function validation_rules($klass='') {
     $rules[] = array('field' => $this->router_class.'[account_name]', 'label' => 'Account Name','rules' => 'trim|required');
     $rules[] = array('field' => $this->router_class.'[rate]', 'label' => 'Rate','rules' => 'trim|required');
-    $rules[] = array('field' => $this->router_class.'[purity]', 'label' => 'Purity','rules' => 'trim|required');
+    $rules[] = array('field' => $this->router_class.'[purity]',
+                     'label' => 'Purity',
+                     'rules'  =>array('trim','required','numeric','less_than_equal_to[100]',array('purity_error_msg',array($this,'check_purity_exist'))),
+                     'errors' => array('purity_error_msg'=>'Purity not exist in Purity master.'));
     $rules[] = array('field' => $this->router_class.'[cash_amount]', 'label' => 'Cash Amount','rules' => 'trim|required');
     return $rules;
   }

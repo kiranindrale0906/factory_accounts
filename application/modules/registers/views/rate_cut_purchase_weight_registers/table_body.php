@@ -1,0 +1,41 @@
+<tbody>
+<?php  
+
+  $amount=$gold_rate=$credit_amount=$debit_amount=0;
+  foreach ($rate_cut_purchase_weight_registers as $index => $rate_cut_purchase_weight_register){ 
+    $amount+=$rate_cut_purchase_weight_register['amount'];
+    $gold_rate+=$rate_cut_purchase_weight_register['gold_rate'];
+    $credit_amount+=$rate_cut_purchase_weight_register['credit_weight'];
+    $debit_amount+=$rate_cut_purchase_weight_register['debit_weight'];
+    
+?>
+	   <tr>
+        <td><?= ++$index; ?></td>
+        <td ><?= date('d-m-y', strtotime($rate_cut_purchase_weight_register['created_at'])) ?></td>
+        <td><?= $rate_cut_purchase_weight_register['voucher_number'] ?></td>
+        <td><?= $rate_cut_purchase_weight_register['account_name'] ?></td>
+         <td class="text-right">
+          <?= !empty($rate_cut_purchase_value_register['transaction_type'])?$rate_cut_purchase_value_register['transaction_type']:""; ?></td>
+        <td class="text-right">
+         <td class="text-right"><?= !empty($rate_cut_purchase_weight_register['gold_rate_purity'])?$rate_cut_purchase_weight_register['gold_rate_purity']:"" ?></td>
+         <td class="text-right"><?= $rate_cut_purchase_weight_register['purity'] ?></td>
+        <td class="text-right"><?= !empty($rate_cut_purchase_weight_register['credit_weight'])?$rate_cut_purchase_weight_register['credit_weight']:""; ?></td>
+        <td class="text-right"><?= !empty($rate_cut_purchase_weight_register['debit_weight'])?$rate_cut_purchase_weight_register['debit_weight']:""; ?></td>
+        </tr>
+	  <?php }?>
+
+  
+
+<tr class="bg_gray bold">
+    <td>Total</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td class="text-right"></td>
+    <td class="text-right"></td>
+    <td></td>
+    <td class="text-right"><?=decimal_number_format($credit_amount);?></td>
+    <td class="text-right"><?=decimal_number_format($debit_amount);?></td>
+  </tr>
+</tbody> 

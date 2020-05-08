@@ -6,7 +6,7 @@ class Migration_ac_opening_balance extends CI_Model {
 
   public function up()
   {
-  	$sql = "CREATE TABLE `ac_opening_balance` (
+  	$sql = "CREATE TABLE IF NOT EXISTS `ac_opening_balance` (
 					  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 					  `company_id` int(11) DEFAULT NULL,
 					  `voucher_number` varchar(255) DEFAULT NULL,
