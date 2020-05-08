@@ -34,7 +34,7 @@ function rate_cut_purchase_weight_receipt_voucher_clients_list_settings() {
 */
 
 function rate_cut_purchase_weight_receipt_voucher_clients_get_field_attribute($table, $field) {
-  $required_fields=array('id','voucher_date','account_name','gold_rate','gold_rate_purity','debit_weight','amount','transaction_type','narration','account_id');
+  $required_fields=array('id','voucher_date','account_name','gold_rate','gold_rate_purity','credit_weight','amount','transaction_type','narration','account_id');
 
   return ac_voucher_get_field_attribute($table,$field,$required_fields);
 }
