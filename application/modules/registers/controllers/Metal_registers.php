@@ -46,13 +46,13 @@ class Metal_registers extends BaseController {
             $where['where']='(suffix="MI" OR suffix="MR")';
             $where['company_id'] = $this->session->userdata('company_id');
             $where['purity'] = abs($param['purity']);
-            $where['voucher_date >='] = date('Y-m-d', strtotime($param['start_date']));  
-            $where['voucher_date <='] = date('Y-m-d', strtotime($param['end_date']));  
-            $metal_register = $this->metal_register_model->get('*', $where, array(),array('order_by'=>'voucher_date asc'));
+            $where['date(created_at) >='] = date('Y-m-d', strtotime($param['start_date']));  
+            $where['date(created_at) <='] = date('Y-m-d', strtotime($param['end_date']));  
+            $metal_register = $this->metal_register_model->get('*', $where, array(),array('order_by'=>'date(created_at) asc'));
 
-            $where['voucher_date >='] = $opening_param['start_date'];  
-            $where['voucher_date <'] = $opening_param['end_date'];
-            $pre_metal_register = $this->metal_register_model->get('*', $where, array(),array('order_by'=>'voucher_date asc'));
+            $where['date(created_at) >='] = $opening_param['start_date'];  
+            $where['date(created_at) <'] = $opening_param['end_date'];
+            $pre_metal_register = $this->metal_register_model->get('*', $where, array(),array('order_by'=>'date(created_at) asc'));
             
            
             if (empty($metal_register)) {

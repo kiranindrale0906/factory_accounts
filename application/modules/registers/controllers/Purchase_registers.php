@@ -22,11 +22,11 @@ class Purchase_registers extends BaseController {
     $this->data['end_date'] = $this->end_date;
     $where=array();
     if (!empty($_GET['purchase_registers']['start_date'])) {
-      $where['created_at>='] = $this->start_date;
+      $where['date(created_at)>='] = $this->start_date;
     }
     
     if (!empty($_GET['purchase_registers']['end_date'])) {
-        $where['created_at<='] = $this->end_date;
+        $where['date(created_at)<='] = $this->end_date;
     }
   
     $where['voucher_type']="purchase voucher";
