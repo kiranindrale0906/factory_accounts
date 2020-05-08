@@ -387,8 +387,11 @@ if ( ! function_exists('four_decimal')) {
 
 if (!function_exists('decimal_number_format')) {
   function decimal_number_format($number, $digits=4, $default = '', $abs = true) {
-    $result = $default;
-
+    if(!empty($default))
+      $result = $default;
+    else 
+      $result = "0.0000";
+    
     if ($number == '' || $number == '0.00') {
         return $result;
     }
@@ -396,6 +399,7 @@ if (!function_exists('decimal_number_format')) {
     if($abs === true):
         $number = abs($number);
     endif;
+
     return number_format($number, $digits);
   }
 }
