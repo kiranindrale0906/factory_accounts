@@ -18,7 +18,7 @@ function rate_cut_purchase_weight_receipt_voucher_clients_getTableSettings() {
 
 
 function rate_cut_purchase_weight_receipt_voucher_clients_list_settings() {
-  $list_option=array('voucher_date','created_time','gold_rate','gold_rate_purity','voucher_number','account_name','amount','debit_weight','transaction_type','narration','account_id','company_id');
+  $list_option=array('voucher_date','created_time','gold_rate','gold_rate_purity','voucher_number','account_name','amount','credit_weight','transaction_type','narration','account_id','company_id');
   return ac_vouchers_list_settings($list_option);
 }
 

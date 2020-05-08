@@ -53,7 +53,7 @@ class Approval_voucher_model extends Approval_voucher_client_model {
           $approval_data['company_id']  = $this->attributes['company_id'];
           $approval_data['sales_purchase_repair_voucher_out_id']  = $this->attributes['id'];
           $approval_data['voucher_type'] =$this->attributes['voucher_type'];
-          $approval_data['transaction_type'] = 'account';
+          $approval_data['transaction_type'] = $this->attributes['transaction_type'];
            $approval_data['rate'] = $this->attributes['rate']/($this->attributes['purity']*100);
           $approval_data['gold_amount'] = ($voucher_record['net_wt']*($voucher_record['melting']+$voucher_record['wastage'])/100)*$approval_data['rate']/10;
           $total_gold_amount+=$approval_data['gold_amount'];
