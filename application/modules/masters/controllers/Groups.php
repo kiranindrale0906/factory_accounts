@@ -6,6 +6,7 @@ class Groups extends BaseController {
 
   public function __construct() {
       parent::__construct();
+      $this->load->model(array('masters/sub_group_model','masters/account_model'));
   }
 
   public function _get_form_data() {
