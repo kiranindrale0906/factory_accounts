@@ -55,7 +55,7 @@ class Rojmel_reports extends Ledgers {
 
     $this->data['issues'] = $issue_data;
     $this->data['receipts'] = $receipt_data;
-    $total['01-01-2020'] = array('issue' => array('weight' => 0, 'weight_difference' => 74180.79, 'fine' => 0, 'factory_fine' => 0),
+    $total['01-01-2020'] = array('issue' => array('weight' => 0, 'weight_difference' => 0, 'fine' => 0, 'factory_fine' => 0),
                                  'receipt' => array('weight' => 0, 'weight_difference' => 0, 'fine' => 0, 'factory_fine' => 0));
     $this->data['total'][ACCOUNT_NAME_REPORT] = $total;  
     parent::get_balance_by_created_date();

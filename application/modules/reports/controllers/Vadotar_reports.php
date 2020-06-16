@@ -76,7 +76,7 @@ class Vadotar_reports extends Client_ledgers {
       $issue_data[$account_name][''] = $issues; //parent::get_records_by_created_date($issues);
       $receipt_data[$account_name][''] = $receipts; //parent::get_records_by_created_date($receipts);
 
-      $total[''][''] = array('issue' => array('weight' => 0, 'weight_difference' => 74180.79, 'fine' => 0, 'factory_fine' => 0),
+      $total[''][''] = array('issue' => array('weight' => 0, 'weight_difference' => 0, 'fine' => 0, 'factory_fine' => 0),
                              'receipt' => array('weight' => 0, 'weight_difference' => 0, 'fine' => 0, 'factory_fine' => 0));
       
       $total[$account_name] = parent::get_total_by_created_date($issue_data[$account_name], 'issue', $total['']);
