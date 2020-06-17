@@ -9,9 +9,11 @@
   <?php endif; ?>     
   <div class="row">    
     <?php load_field('text', array('field' => 'name')) ?>
-    <?php load_field('dropdown', array('field' => 'group_code',
-                                           'option'=>@$groups,
-                                           'value'=>@$record['group_code'])); ?>
+    <?php load_field('text', array('field' => 'sub_group_code', 
+                               'data-table'=>'ac_sub_groups',
+                               'class' => 'autocomplete_list_selection',
+                               'data-column'=>'name',
+                               'data-list-title'=>'Sub Group Name')); ?>
   </div>
   <div class="row">    
     <?php load_field('dropdown', array('field' => 'payment_terms',
@@ -21,18 +23,34 @@
   </div>
   <div class="row">    
     <?php load_field('text', array('field' => 'off_tel')); ?>
-    <?php load_field('text', array('field' => 'city')); ?>
+    <?php load_field('text', array('field' => 'city',
+                                   'class' => 'autocomplete_list_selection',
+                                   'data-table'=>'ac_city',
+                                   'data-column'=>'name',
+                                   'data-list-title'=>'City')); ?>
   </div>
   <div class="row">    
-    <?php load_field('text', array('field' => 'state')); ?>
-    <?php load_field('text', array('field' => 'salesman_code')); ?>
+    <?php load_field('text', array('field' => 'state',
+                                   'class' => 'autocomplete_list_selection',
+                                   'data-table'=>'ac_state',
+                                   'data-column'=>'name',
+                                   'data-list-title'=>'States')); ?>
+    <?php load_field('text', array('field' => 'salesman_code',
+                                   'class' => 'autocomplete_list_selection',
+                                   'data-table'=>'ac_salesman',
+                                   'data-column'=>'salesman_code',
+                                   'data-list-title'=>'Salesman Code')); ?>
   </div>
   <div class="row">    
     <?php load_field('text', array('field' => 'address')); ?>
     <?php load_field('text', array('field' => 'pin')); ?>
   </div>
   <div class="row">    
-    <?php load_field('text', array('field' => 'area')); ?>
+    <?php load_field('text', array('field' => 'area',
+                                  'class' => 'autocomplete_list_selection',
+                                   'data-table'=>'ac_account_wise_details',
+                                   'data-column'=>'area',
+                                   'data-list-title'=>'Area')); ?>
     <?php load_field('text', array('field' => 'res_tel')); ?>
   </div>
   <div class="row">    

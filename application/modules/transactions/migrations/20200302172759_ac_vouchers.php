@@ -6,7 +6,7 @@ class Migration_ac_vouchers extends CI_Model {
 
   public function up()
   {
-  	$sql="CREATE TABLE `ac_vouchers` (
+  	$sql="CREATE TABLE IF NOT EXISTS `ac_vouchers` (
 				  `id` int(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 				  `company_id` int(11) UNSIGNED DEFAULT NULL,
 				  `period_id` int(11) UNSIGNED NOT NULL,

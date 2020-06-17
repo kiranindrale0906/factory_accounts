@@ -2,12 +2,11 @@
 
 
 $ci=&get_instance();
-$ci->load->helper(array('ac_vouchers/ac_vouchers'));
+$ci->load->helper(array('ac_vouchers/ac_vouchers',
+                        CLIENT_NAME.'/metal_issue_voucher_clients'));
 
 function getTableSettings() {
-  $table_setting=array('page_title'=>'Metal Issue Voucher','where'=>'voucher_type="metal issue voucher" and 
-                                                                     company_id='.@$_SESSION['company_id']);
-  return ac_vouchers_getTableSettings($table_setting);
+  return metal_issue_voucher_clients_getTableSettings();
 }
 //Add Cash Issue Voucher
 /*
@@ -23,8 +22,7 @@ function getTableSettings() {
 
 
 function list_settings() {
-  $list_option=array('voucher_date','created_time','voucher_number','account_name','purity','factory_purity','credit_weight','pure_gold_debit','narration','account_id','company_id','created_time');
-  return ac_vouchers_list_settings($list_option);
+  return metal_issue_voucher_clients_list_settings();
 }
 
 
@@ -39,12 +37,9 @@ function list_settings() {
 */
 
 function get_field_attribute($table, $field) {
-  $required_fields=array('id','voucher_date','account_name','credit_weight','narration','vouchersamount',
-                         'company_id','account_id','document','purity','factory_purity','fine','factory_fine');
-
-  return ac_voucher_get_field_attribute($table,$field,$required_fields);
+  return metal_issue_voucher_clients_get_field_attribute($table, $field);
 }
 
 function get_row_actions($row, $url, $select_url, $filter) {
-  return ac_voucher_get_row_actions($row,$url,$select_url,$filter);
+  return metal_issue_voucher_clients_get_row_actions($row,$url,$select_url,$filter);
 }

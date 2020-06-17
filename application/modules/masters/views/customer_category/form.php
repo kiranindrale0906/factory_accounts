@@ -18,9 +18,12 @@
                                               'value'=>@$record['department_name_id'])) ?>
   </div>
   <div class="row">    
-     <?php load_field('dropdown', array('field' => 'account_name_id',
-                                                'option'=>@$account_name,
-                                                'value'=>@$record['account_name_id'])) ?>
+     <?php load_field('text', array('field' => 'account_name',
+                                     'class' => 'autocomplete_list_selection',
+                                     'data-table'=>'ac_account',
+                                     'data-column'=>'name',
+                                     'data-list-title'=>'Account Name',
+                                     'value'=>@$record['account_name'])) ?>
     <?php load_field('text', array('field' => 'wastage')) ?>
   </div>
   <?php load_buttons('submit', array('controller' => $controller, 'name' => 'SAVE' , 

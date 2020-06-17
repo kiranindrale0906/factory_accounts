@@ -1,6 +1,7 @@
 <?php
   if (!isset($record)) 
     $record = array();
+
 ?>
 
 
@@ -11,6 +12,7 @@
   <?php endif; ?>     
   <div class="row">    
     <?php load_field('text', array('field' => 'name')) ?>
+    <?php load_field('dropdown', array('field' => 'route_group','option'=>$route_group)) ?>
   </div>  
   <?php load_buttons('submit', array('controller' => $controller, 'name' => 'SAVE' , 'class' => 'btn_blue')) ?>
 </form>

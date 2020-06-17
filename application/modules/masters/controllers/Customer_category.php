@@ -15,11 +15,6 @@ class Customer_category extends BaseController {
                                                                   array('where'=>
                                                                     array('company_id'=>$company_id)),
                                                                   array(),array('order_by'=>'name asc'));
-    $this->data['account_name'] = $this->account_model->get('name as name,id as id',
-                                                             array('where'=>
-                                                              array('company_id'=>$company_id,
-                                                                    'name!=""'=>NULL)),
-                                                                  array(),array('order_by'=>'name asc'));
 
     $this->data['department_name'] = $this->department_model->get('name as name,id as id',
                                                                   array('where'=>

@@ -20,7 +20,8 @@
                 $total_weight_issue=0;
                 $total_fine_receipt=0;  
                 $total_fine_issue=0;  
-                foreach ($trial_balance as  $record) { 
+                //pd($trial_balance);die;
+                foreach ($trial_balance as  $record) {
                   if($record['receipt_weight']>0)
                     $total_weight_receipt=$total_weight_receipt+$record['receipt_weight'];
                   else 
@@ -33,7 +34,7 @@
                     <tr>
                       <td><?=$record['account_name'];?></td>
                       <td>
-                        <?=($record['receipt_weight']>0)?four_decimal($record['receipt_weight']):'';?>  
+                        <?=($record['receipt_weight']>0)?$record['receipt_weight']:'';?>  
                       </td>
                       <td><?=($record['fine']>0)?four_decimal($record['fine']):'';?>  </td>
                       <td><?=($record['receipt_weight']<0)?four_decimal($record['receipt_weight']*-1):'';?></td>
@@ -54,8 +55,8 @@
                 <?php 
                   $total_weight_balance=0;
                   $total_fine_balance=0;
-                  $total_weight_balance=$total_weight_receipt-$total_weight_issue;
-                  $total_fine_balance=$total_fine_receipt-$total_fine_issue;
+                  $total_weight_balance=$total_weight_receipt-($total_weight_issue*-1);
+                  $total_fine_balance=$total_fine_receipt-($total_fine_issue*-1);
 
                 ?>
                 <th>Balace</th>

@@ -6,7 +6,7 @@ class Migration_alter_table_create_receipt_not_sent_argold extends CI_Model {
 
   public function up()
   {
-  	$sql="CREATE TABLE `receipt_not_sent_argold` (
+  	$sql="CREATE TABLE IF NOT EXISTS `receipt_not_sent_argold` (
 				  `id` int(11) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
 				  `type` varchar(255),
 				  `account` varchar(255),

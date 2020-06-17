@@ -99,6 +99,7 @@ define('DOC', 'doc');
 define('FOLDER', 'folder');
 define('IMAGE', 'img');
 define('PDF', 'pdf');
+define('CLIENT_NAME', 'Demo');
 define('PAGES_MINIFY',false);
 define('EMAIL_VERIFICATION',false);
 define('MOBILE_VERIFICATION',false);

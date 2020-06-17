@@ -3,32 +3,43 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Voucher_model extends BaseModel {
   protected $table_name = "ac_vouchers";
-  //protected $insert_to_ledger = true;
   function __construct($data=array()) {
     parent::__construct($data);
-    $this->load->model(array('masters/period_model','transactions/Receipt_not_sent_argold_model'));
+    $this->load->model(array('masters/period_model','masters/setting_model','transactions/Receipt_not_sent_argold_model'));
   }
 
   public function validation_rules($klass='') {
-    $rules[] =array('field' => $this->router_class.'[voucher_date]', 'label' => 'Date',
+    $rules[] =array('field' => $this->router_class.'[voucher_date]',
+                    'label' => 'Date',
                     'rules' => array('trim', 'required', 
                                array('validate_voucher_date', array($this, 'check_period_exists'))),
                     'errors'=>array('validate_voucher_date' => "Please set the Financial year from master."));
-    $rules[] = array('field' => $this->router_class.'[account_name]', 'label' => 'Account Name',
-                     'rules' => 'trim|required');
+    $rules[] = array('field' => $this->router_class.'[account_name]',
+                     'label' => 'Account Name','rules' => 'trim|required');
+    if($this->router->class=="bank_issue_vouchers" || $this->router->class=="bank_receipt_vouchers") {
+    $rules[] = array('field' => $this->router_class.'[bank_name]', 'label' => 'Bank Name','rules' => 'trim|required');
+    }
 
+    if($this->router->class=="expense_vouchers") {
+    $rules[] = array('field' => $this->router_class.'[to_group_name]',
+                     'label' => 'To Group Name',
+                     'rules'  =>array('trim','required',
+                                array('group_name_error_msg',array($this,'check_group_name_exist'))),
+                     'errors' => array('group_name_error_msg'=>'Group name not exist in group master.'));
+    $rules[] = array('field' => $this->router_class.'[debit_amount]', 'label' => 'Amount','rules' => 'trim|required');
+    }
 
     $check_credit_debit_type=stripos($this->router_class,'issue');
-    if($this->router->class=="cash_issue_vouchers" || $this->router->class=="cash_receipt_vouchers") {
+    if($this->router->class=="cash_issue_vouchers" || $this->router->class=="cash_receipt_vouchers" || $this->router->class=="bank_issue_vouchers" || $this->router->class=="bank_receipt_vouchers") {
       if($check_credit_debit_type==true) {
-        $credit_rules[] = array('field' => $this->router_class.'[credit_amount]', 
-                        'label' => 'Credit Amount',
+        $credit_rules[] = array('field' => $this->router_class.'[debit_amount]', 
+                        'label' => 'Debit Amount',
                         'rules' => 'trim|required|numeric|greater_than[0]');
         $rules=array_merge($rules,$credit_rules);
       }
       else {
-        $debit_rules[] = array('field' => $this->router_class.'[debit_amount]', 
-                        'label' => 'Debit Amount',
+        $debit_rules[] = array('field' => $this->router_class.'[credit_amount]', 
+                        'label' => 'credit Amount',
                         'rules' => 'trim|required|numeric|greater_than[0]');
         $rules=array_merge($rules,$debit_rules);
       }
@@ -37,30 +48,9 @@ class Voucher_model extends BaseModel {
     if($this->router->class=="metal_issue_vouchers" || $this->router->class=="metal_receipt_vouchers") {
       $rules[]=array('field' => $this->router_class.'[purity]', 
                     'label' => 'Purity',
-                    'rules' => 'trim|required|numeric|less_than_equal_to[100]');
-      $rules[]=array('field' => $this->router_class.'[factory_purity]', 
-                    'label' => 'Factory Purity',
-                    'rules' => 'trim|required|numeric|less_than_equal_to[100]');
-      if(!empty($this->attributes['receipt_type']) && $this->attributes['receipt_type']=="Daily Drawer") {
-        $rules[]=array('field' => $this->router_class.'[type]', 
-                      'label' => 'Type',
-                      'rules' => 'trim|required');
-      }
-
-      if($this->router->class=="metal_receipt_vouchers") {
-        $rules[]=array('field' => $this->router_class.'[receipt_type]', 
-                      'label' => 'Receip type',
-                      'rules' => 'trim|required');
-      }      
-
-      if(!empty($this->attributes['receipt_type']) && $this->attributes['receipt_type']=="Refresh") {
-        $rules[]=array('field' => $this->router_class.'[hook_kdm_purity]', 
-                      'label' => 'Hook KDM Purity',
-                      'rules' => 'trim|required');
-        $rules[]=array('field' => $this->router_class.'[quantity]', 
-                      'label' => 'Quantity',
-                      'rules' => 'trim|required|numeric');
-      }
+                    'rules'  =>array('trim','required','numeric','less_than_equal_to[100]',
+                     array('purity_error_msg',array($this,'check_purity_exist'))),
+                     'errors' => array('purity_error_msg'=>'Purity not exist in Purity master.'));
       
       if($check_credit_debit_type==true) {
         $credit_rules[] = array('field' => $this->router_class.'[credit_weight]', 
@@ -76,17 +66,36 @@ class Voucher_model extends BaseModel {
       }
     }
 
-    if(!empty($this->router->class=="metal_receipt_vouchers")) {
-      $this->load->model('transactions/metal_issue_voucher_model');
-      foreach($this->formdata['metal_issue_vouchers'] as $index => $records) {
-        if(!empty($records['account_name'])) {
-          $record_rules = $this->metal_issue_voucher_model->validation_rules('',$index);
-          $rules = array_merge($rules, $record_rules);  
-        }
-      }
-    }
-    
     return $rules;
+  }
+
+  public function check_group_name_exist($name) {
+    if($name=="" && !isset($name))
+      return true;
+    else
+    $groups=$this->group_model->find('id as id',array('name'=>$name));
+    return (empty($groups)) ? false : true;
+  }
+  public function check_narration_exist($name) {
+    if($name=="" && !isset($name))
+      return true;
+    else
+    $narration=$this->narration_model->find('id as id',array('name'=>$name));
+    return (empty($narration)) ? false : true;
+  } 
+  public function check_purity_exist($name) {
+    if($name=="" && !isset($name))
+      return true;
+    else
+    $purity=$this->purity_model->find('id as id',array('purity'=>$name));
+    return (empty($purity)) ? false : true;
+  }
+  public function check_department_exist($name) {
+    if($name=="" && !isset($name))
+      return true;
+    else
+    $department=$this->department_model->find('id as id',array('name'=>$name));
+    return (empty($department)) ? false : true;
   }
 
   public function before_save($action) {
@@ -114,11 +123,19 @@ class Voucher_model extends BaseModel {
 
     $this->formdata[$this->router_class]['suffix'] = $this->prefix;
     $this->formdata[$this->router_class]['voucher_type'] = $this->voucher_type;
-    $this->formdata[$this->router_class]['transaction_type'] = $this->account_type;
+    // $this->formdata[$this->router_class]['transaction_type'] = $this->account_type;
 
-    $account = $this->account_model->find('id',array('name'=>$this->attributes['account_name']));
+    $account = $this->account_model->find('id,group_id,route_group,sub_group_id',array('name'=>$this->attributes['account_name']));
+    if(!empty($account['id'])) {    
+      $this->formdata[$this->router_class]['group_id'] =!empty($account['group_id'])?$account['group_id']:0;
+      $this->formdata[$this->router_class]['sub_group_id'] =!empty($account['sub_group_id'])?$account['sub_group_id']:0;
+      $this->formdata[$this->router_class]['route_group'] =!empty($account['route_group'])?$account['route_group']:'';
+      }
     if(empty($account['id'])) {
+      $sub_groups=$this->setting_model->find('id,value',array('name'=>'Sub Group'));
       $account_detail['name']=$this->attributes['account_name'];
+      $account_detail['sub_group_code']=!empty($sub_groups['value'])?$sub_groups['value']:'';
+      $account_detail['sub_group_id']=!empty($sub_groups['id'])?$sub_groups['id']:0;
       $obj_account = new account_model($account_detail);
       $account_details=$obj_account->store(false);
       $account['id']=$account_details['id'];      
@@ -174,60 +191,9 @@ class Voucher_model extends BaseModel {
       $ledger_data=$this->set_ledger_data($this->attributes);
       $obj_ledeger = new ledger_model($ledger_data);
       $obj_ledeger->store(false);
-      if(!empty($this->attributes['receipt_type'])) {
-        $this->send_request_to_argold($this->attributes);  
-      }
     } 
 
-    if($this->router->class=="metal_receipt_vouchers") {
-      $this->load->model('transactions/metal_issue_voucher_model');
-      if(!empty($this->formdata['metal_issue_vouchers'])) {
-        foreach ($this->formdata['metal_issue_vouchers'] as $voucher_record) {
-          $metal_issue_data = array();
-
-          $metal_issue_data=$voucher_record;
-
-          $account = $this->account_model->find('id',array('name'=>$metal_issue_data['account_name']));
-          if(empty($account['id'])) {
-            $account_detail['name']=$metal_issue_data['account_name'];
-            $obj_account = new account_model($account_detail);
-            $account_details=$obj_account->store(false);
-            $account['id']=$account_details['id'];      
-          }
-
-          $metal_issue_data['company_id']  = $this->attributes['company_id'];
-          $metal_issue_data['metal_receipt_voucher_reference_id']  = $this->attributes['id'];
-          $metal_issue_data['voucher_date'] = $this->attributes['voucher_date'];
-          $metal_issue_data['account_id']=$account['id'];
-          $metal_issue_data['receipt_type'] = $this->attributes['receipt_type'];
-          $metal_issue_data['purity'] = $this->attributes['purity'];
-          $metal_issue_data['fine'] = $voucher_record['credit_weight']*$this->attributes['purity']/100;
-          $metal_issue_data['narration'] = $this->attributes['narration'];
-          $metal_issue_data['suffix'] = "MI";
-          $metal_issue_data['voucher_type'] = "metal issue voucher";
-          $metal_issue_data['transaction_type'] = 'account';
-          $period_id = $this->attributes['period_id'];
-          $voucher_serial_number = $this->create_voucher_serial_number($metal_issue_data['voucher_type'],
-                                                                       $period_id);
-          $metal_issue_data['voucher_serial_number'] = $voucher_serial_number;
-
-          $voucher_number = $this->create_voucher_number($metal_issue_data['suffix'],$voucher_serial_number,
-                                                         $this->attributes['voucher_date']);
-          $metal_issue_data['voucher_number'] = $voucher_number;
-
-          $purity_margin=($metal_issue_data['purity']-$metal_issue_data['factory_purity'])*$metal_issue_data['credit_weight']/100;
-          $metal_issue_data['purity_margin'] = $purity_margin;
-          //pd($data);
-          $obj_metal_issue_voucher=new metal_issue_voucher_model($metal_issue_data);
-          $obj_metal_issue_voucher->store(false);
-          
-          $metal_issue_data['id']=$obj_metal_issue_voucher->attributes['id'];
-          $ledger_data=$this->set_ledger_data($metal_issue_data);
-          $obj_ledeger = new ledger_model($ledger_data);
-          $obj_ledeger->store(false);
-        }
-      }
-    }
+   
   }
 
   private function set_ledger_data($result) {
@@ -314,7 +280,6 @@ class Voucher_model extends BaseModel {
       if(!empty($api_url)) {
         //pd($send_data);die;
         $result=curl_post_request($api_url, $send_data);
-        //pd($result);
         if(empty($result) || (!empty($result['status']) && $result['status']=="error")) {
           $dump_data_on_error=array_merge($dump_data_on_error,array('api_url'=>$api_url));
           $obj_receipt_not_sent=new Receipt_not_sent_argold_model($dump_data_on_error);
@@ -323,104 +288,6 @@ class Voucher_model extends BaseModel {
       }
     }
   }
-
-  //public function after_delete($id,$conditions) {
-    // $ledger_id=$this->Ledger_model->get('id',
-    //                                     array(
-    //                                       array(
-    //                                         'table_id'=>$id)));
-    // if(!empty($ledger_id)) {
-    //   foreach ($ledger_id as $k_ledger => $ledgerid) :
-    //     if(!empty($ledgerid["id"])) 
-    //       $this->Ledger_model->delete($ledgerid["id"]);
-    //   endforeach;
-    // }
-  //}
-
-  // public function get_max_voucher($date, $suffix) {
-  //     $this->db->select('count(id) as count');
-  //     $this->db->from($this->table_name);
-  //     $this->db->where('date', $date);
-  //     $this->db->where('suffix', $suffix);
-  //     $query = $this->db->get()->row_array();
-  //     return $query['count'];
-  // }
-
-  // public function get_cash_register_data($param) {
-  //     $where = '(suffix="CI" or suffix = "CR")';
-  //     $this->db->select('*');
-  //     $this->db->from($this->table_name);
-  //     $this->db->where($where);
-  //     $this->db->where('month(date)', date('m'));
-  //     $this->db->where('company_id', $this->session->userdata('company_id'));
-  //     $this->get_date_filter($param);
-  //     $this->db->order_by("date", "asc");
-  //     return $this->db->get()->result_array();
-  // }
-
-  // public function get_bank_register_data($param) {
-  //     $where = '(suffix="BI" or suffix = "BR")';
-  //     $this->db->select('*');
-  //     $this->db->from($this->table_name);
-  //     $this->db->where($where);
-  //     $this->db->where('month(date)', date('m'));
-  //     $this->db->where('company_id', $this->session->userdata('company_id'));
-  //     $this->get_date_filter($param);
-  //     $this->get_current_date_data();
-  //     $this->db->order_by("date", "asc");
-  //     return $this->db->get()->result_array();
-  // }
-
-  // private function  delete_ledger_record($id){
-  //     $this->db->select('voucher_number');
-  //     $this->db->from($this->table_name);
-  //     $this->db->where('id', $id);
-  //     $this->db->where('company_id', $this->session->userdata('company_id'));
-  //     $query = $this->db->get()->row_array();
-  //     if($query){
-  //       $this->db->where('voucher_number', $query['voucher_number']);
-  //       $this->db->delete('ac_ledger'); 
-  //       return true;
-  //     }else{
-  //         return false;
-  //     }
-  // }
-
-  // private function get_date_filter($param) {
-  //     if (!empty($param['from_date']) && !empty($param['to_date'])) {
-  //         $this->db->where(''.$this->table_name.'.date between"' . date('Y-m-d', strtotime($param['from_date'])) . '  00:00:00" AND "' . date('Y-m-d', strtotime($param['to_date'])) . ' 23:59:59"');
-  //     }
-  // }
-
-  // private function get_current_date_data() {
-  //     if (empty($_GET['from_date']) && empty($_GET['to_date'])) {
-  //         $this->db->where('date',date('Y-m-d'));
-  //     }
-  // }
-
-  // private function get_bank_filter() {
-  //     if (!empty($_GET['bank_name'])) {
-  //         $this->db->where('bank_name',$_GET['bank_name']);
-  //     }
-  // }
-
-  // public function calculate_currentdate_amount($amount_field, $suffix) {
-  //     $total_amount = 0;
-  //     $date = date('Y-m-d');
-  //     $this->db->select('*');
-  //     $this->db->from($this->table_name);
-  //     $this->db->where('date', $date);
-  //     $this->db->where('suffix', $suffix);
-  //     $this->db->where('company_id', $this->session->userdata('company_id'));
-  //     $query = $this->db->get();
-  //     if ($query->num_rows() > 0) {
-  //         foreach ($query->result_array() as $result) {
-  //             $total_amount += $result[$amount_field];
-  //         }
-  //     }
-  //     return $total_amount;
-  // }
-
 }
 
 //class

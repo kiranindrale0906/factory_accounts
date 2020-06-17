@@ -114,6 +114,12 @@ function get_company_list(){
   $result = $ci->company_model->get('id,name');
   return $result;
 }
+function get_logo(){
+  $ci=&get_instance();
+  $ci->load->model('masters/company_model');
+  $logo = $ci->company_model->find('logo',array('id'=>!empty($ci->session->userdata('company_id'))?$ci->session->userdata('company_id'):1))['logo'];
+  return $logo;
+}
 
 function get_receipt_type(){
   return array(
@@ -123,6 +129,12 @@ function get_receipt_type(){
                      'name' => 'Refresh'),
               array('id' => 'Daily Drawer',
                      'name' => 'Daily Drawer'));
+}function get_transaction_type(){
+  return array(
+              array('id' => 'Cash',
+                     'name' => 'Cash'),
+              array('id' => 'Bill',
+                     'name' => 'Bill'));
 }
 
 function get_daily_drawer_receipt_type(){
@@ -183,6 +195,13 @@ function get_account_name_for_metal_issue(){
             array('id' => '', 'name' => ''),
             array('id' => 'ARC', 'name' => 'ARC'),
             array('id' => 'ARF', 'name' => 'ARF')
+          );
+
+}
+function get_has_hallmark(){
+  return array(
+            array('id' => 'Yes', 'name' => 'Yes'),
+            array('id' => 'No', 'name' => 'No')
           );
 
 }

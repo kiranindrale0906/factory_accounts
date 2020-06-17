@@ -7,6 +7,10 @@ class Account_model extends BaseModel {
     parent::__construct($data);
   }
 
+  public function before_validate() {
+    $this->set_group_data();
+  }
+
   public function validation_rules($klass='') {
     return array(
       array(
@@ -16,9 +20,11 @@ class Account_model extends BaseModel {
                     array('check_repeated_account_name_error',array($this,'check_repeated_account_name'))),
         'errors' => array('check_repeated_account_name_error'=>'Account already exists.')),
       array(
-        'field' => 'accounts[group_code]',
-        'label' => 'Group Name',
-        'rules' => 'trim',),
+        'field' => 'accounts[sub_group_code]',
+        'label' => 'Sub Group Name',
+        'rules'  =>array('trim','required',
+                    array('check_sub_group_code_error',array($this,'check_sub_group_code_exist'))),
+        'errors' => array('check_sub_group_code_error'=>'Sub group name not exist in sub group master.')),
       array(
         'field' => 'accounts[cont_person]',
         'label' => 'Contact Person',
@@ -26,7 +32,9 @@ class Account_model extends BaseModel {
       array(
         'field' => 'accounts[salesman_code]',
         'label' => 'Salesman Code',
-        'rules' => 'trim|numeric',),
+        'rules'  =>array('trim','numeric',
+                    array('check_salesman_exits_error',array($this,'check_salesman_exist'))),
+        'errors' => array('check_salesman_exits_error'=>'Salesman not exist in saleman master.')),
       array(
         'field' => 'accounts[address]',
         'label' => 'Address',
@@ -34,11 +42,15 @@ class Account_model extends BaseModel {
       array(
         'field' => 'accounts[city]',
         'label' => 'City Name',
-        'rules' => 'trim',),
+        'rules'  =>array('trim',
+                    array('check_city_exits_error',array($this,'check_city_exist'))),
+        'errors' => array('check_city_exits_error'=>'City not exist in city master.')),
       array(
         'field' => 'accounts[state]',
         'label' => 'State Name',
-        'rules' => 'trim',),
+        'rules'  =>array('trim',
+                    array('check_state_exits_error',array($this,'check_state_exist'))),
+        'errors' => array('check_state_exits_error'=>'State not exist in state master.')),
       array(
         'field' => 'accounts[pin]',
         'label' => 'Pin',
@@ -46,7 +58,9 @@ class Account_model extends BaseModel {
       array(
         'field' => 'accounts[area]',
         'label' => 'Area',
-        'rules' => 'trim',),
+        'rules'  =>array('trim',
+                    array('check_area_exits_error',array($this,'check_area_exist'))),
+        'errors' => array('check_area_exits_error'=>'Area not exist in account wise detail master.')),
       array(
         'field' => 'accounts[interest_rate]',
         'label' => 'Interest Rate',
@@ -110,8 +124,51 @@ class Account_model extends BaseModel {
         'label' => 'Mvat/Lst No.',
         'rules' => 'trim|numeric')); 
   }
+  private function set_group_data(){
+    $sub_groups = $this->sub_group_model->find('group_id,id,route_group,group_name',array('name'=>$this->attributes['sub_group_code']));
+    $this->formdata[$this->router_class]['sub_group_id'] =$sub_groups['id'];    
+    $this->formdata[$this->router_class]['group_id'] =$sub_groups['group_id'];    
+    $this->formdata[$this->router_class]['group_code'] =$sub_groups['group_name'];
+    $this->formdata[$this->router_class]['route_group'] =$sub_groups['route_group'];
+  }
 
   public function check_repeated_account_name($account_name) {
     return parent::check_unique('name');
+  }
+  public function check_sub_group_code_exist($name) {
+    if($name=="" && !isset($name))
+      return true;
+    else
+      $groups=$this->sub_group_model->find('id as id',array('name'=>$name));
+      return (empty($groups)) ? false : true;
+    
+  }
+  public function check_city_exist($name) {
+    if($name=="" && !isset($name))
+      return true;
+    else
+    $city=$this->city_model->find('id as id',array('name'=>$name));
+    return (empty($city)) ? false : true;
+  }
+  public function check_state_exist($name) {
+    if($name=="" && !isset($name))
+      return true;
+    else
+    $state=$this->state_model->find('id as id',array('name'=>$name));
+    return (empty($state)) ? false : true;
+  }
+  public function check_salesman_exist($name) {
+    if($name=="" && !isset($name))
+      return true;
+    else
+    $salesman=$this->salesman_model->find('id as id',array('salesman_code'=>$name));
+    return (empty($salesman)) ? false : true;
+  }
+  public function check_area_exist($name) {
+    if($name=="" && !isset($name))
+      return true;
+    else
+    $area=$this->account_wise_detail_model->find('id as id',array('area'=>$name));
+    return (empty($area)) ? false : true;
   }
 }

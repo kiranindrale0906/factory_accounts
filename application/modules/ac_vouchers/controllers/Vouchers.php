@@ -1,13 +1,13 @@
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Vouchers extends BaseController {
 
   public function __construct() {
     parent::__construct();
     $this->load->model(array('masters/account_model', 'transactions/ledger_model', 'masters/group_model',
-                             'masters/company_model', 'masters/purity_model'));
+                             'masters/company_model','masters/cash_bill_model',
+                             'masters/narration_model', 'masters/purity_model','masters/payment_term_model', 'masters/department_category_model','masters/department_model'));
   }
 
   public function index() {
@@ -47,8 +47,15 @@ class Vouchers extends BaseController {
     $this->data['group_list'] = $this->group_model->get('name,id',
                                                         array('where'=>array('company_id='=>$company_id)),
                                                         array(), array('order_by'=>'name asc'));
+    $this->data['department_name'] = $this->department_model->get('name,id', array() ,array(), array('order_by'=>'name asc'));
+     $this->data['department_category']=$this->department_category_model->get('name as name',array(),array(), array('order_by'=>'name asc'));
+    $this->data['purity_list'] = $this->purity_model->get('purity as name,purity id', array() ,array(), array('order_by'=>'purity asc'));
+    $this->data['payment_term'] = $this->payment_term_model->get('terms as name,terms as  id', array() ,array(), array('order_by'=>'terms asc'));
+
     $this->data['receipt_type'] = get_receipt_type();
+    $this->data['transaction_type'] = get_transaction_type();
     $this->data['hook_kdm_purity'] = get_melting_purity();
+    $this->data['has_hallmark'] = get_has_hallmark();
   }
 
   public function view($id) {

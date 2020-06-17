@@ -12,7 +12,7 @@
       <?php load_field('password', array('field' => 'password')) ?>
       <?php load_field('password', array('field' => 'confirm_password', 'name' => 'confirm_password')) ?>
     <?php endif;?>
-  </div>
+  </div> 
 
   <h5>Roles <span class="red">*</span></h5>   
   <?php foreach($user_role_options as $user_role):?>

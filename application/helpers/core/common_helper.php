@@ -384,3 +384,22 @@ if ( ! function_exists('four_decimal')) {
      return number_format((float)$value, 4, '.', '');
   }
 }
+
+if (!function_exists('decimal_number_format')) {
+  function decimal_number_format($number, $digits=4, $default = '', $abs = true) {
+    if(!empty($default))
+      $result = $default;
+    else 
+      $result = "0.0000";
+    
+    if ($number == '' || $number == '0.00') {
+        return $result;
+    }
+
+    if($abs === true):
+        $number = abs($number);
+    endif;
+
+    return number_format($number, $digits);
+  }
+}

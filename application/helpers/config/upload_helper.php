@@ -5,7 +5,7 @@ function get_file_content($field_name,$controller){
   $file_content = array('upload_on'=>LOCAL);
     $field_name=$controller."/".$field_name;
     switch($field_name){
-      case 'company/logo'://
+      case 'company/logo':
         $folder_array = array('folder'=>'uploads/logo');
         $file_content = array_merge($file_content,$folder_array);
       break;
@@ -20,7 +20,7 @@ function image_sizes($field_name,$controller){
   $folder =  isset($file_content['folder'])?$file_content['folder']:'';
   switch($folder){
    case 'uploads/logo':
-      $img_sizes['thumbnail'] = array('width'=>60, 'height'=>60, 'folder'=>'/thumb');
+      $img_sizes['thumbnail'] = array('width'=>50, 'height'=>50, 'folder'=>'/thumb');
       $img_sizes['small'] = array('width'=>200, 'height'=>200, 'folder'=>'/small');
     break;
   }

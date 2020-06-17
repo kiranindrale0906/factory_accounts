@@ -6,7 +6,7 @@ class Migration_ac_purity extends CI_Model {
 
   public function up()
   {
-  	$sql = "CREATE TABLE `ac_purity` (
+  	$sql = "CREATE TABLE IF NOT EXISTS `ac_purity` (
 					  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 					  `purity` float(10,2) NOT NULL,
 					  `company_id` int(11) NOT NULL,
