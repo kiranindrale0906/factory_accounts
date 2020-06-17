@@ -296,12 +296,14 @@ if($this->router->class=="metal_receipt_vouchers") {
     $result['status']='';
     $credit_weight=0;
     $in_weight=0;
+    if($this->router->class=="metal_receipt_vouchers" )
     foreach ($this->formdata['metal_issue_vouchers'] as $metal_issue_voucher) {
-      pd($metal_issue_voucher);
-        // $credit_weight += $metal_issue_voucher['credit_weight'];
+      // pd($metal_issue_voucher);
+        $credit_weight += $metal_issue_voucher['credit_weight'];
     }
     $in_weight=$data['credit_weight']-$credit_weight;
-    if($this->router->class=="metal_receipt_vouchers" && $in_weight!=0) {
+  }
+    if($in_weight!=0) {
       if($data['receipt_type']=="Metal") {
         $send_data['receipt_departments']=array('type'=>'Pure',
                                               'account'=> $data['account_name'],
