@@ -334,6 +334,7 @@
             load_field('text', array('field' => 'total_amount','readonly'=>'readonly','class'=>'get_total_amount','col'=>$col)); 
           endif; ?>
   </div> 
+  
   <br>
   <?php 
     if($this->router->class=="metal_receipt_vouchers") {

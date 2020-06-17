@@ -32,17 +32,19 @@ class Voucher_model extends BaseModel {
     $check_credit_debit_type=stripos($this->router_class,'issue');
     if($this->router->class=="cash_issue_vouchers" || $this->router->class=="cash_receipt_vouchers" || $this->router->class=="bank_issue_vouchers" || $this->router->class=="bank_receipt_vouchers") {
       if($check_credit_debit_type==true) {
-        $credit_rules[] = array('field' => $this->router_class.'[debit_amount]', 
-                        'label' => 'Debit Amount',
-                        'rules' => 'trim|required|numeric|greater_than[0]');
-        $rules=array_merge($rules,$credit_rules);
-      }
-      else {
         $debit_rules[] = array('field' => $this->router_class.'[credit_amount]', 
                         'label' => 'credit Amount',
                         'rules' => 'trim|required|numeric|greater_than[0]');
         $rules=array_merge($rules,$debit_rules);
-      }
+      
+       }
+      else {
+         $credit_rules[] = array('field' => $this->router_class.'[debit_amount]', 
+                        'label' => 'Debit Amount',
+                        'rules' => 'trim|required|numeric|greater_than[0]');
+        $rules=array_merge($rules,$credit_rules);
+      
+        }
     }
 
     if($this->router->class=="metal_issue_vouchers" || $this->router->class=="metal_receipt_vouchers") {
@@ -53,17 +55,19 @@ class Voucher_model extends BaseModel {
                      'errors' => array('purity_error_msg'=>'Purity not exist in Purity master.'));
       
       if($check_credit_debit_type==true) {
-        $credit_rules[] = array('field' => $this->router_class.'[credit_weight]', 
-                        'label' => 'Credit Weight',
-                        'rules' => 'trim|required|numeric|greater_than[0]');
-        $rules=array_merge($rules,$credit_rules);
-      }
-      else {
         $debit_rules[] = array('field' => $this->router_class.'[debit_weight]', 
                         'label' => 'Debit Weight',
                         'rules' => 'trim|required|numeric|greater_than[0]');
         $rules=array_merge($rules,$debit_rules);
-      }
+      
+        }
+      else {
+        $credit_rules[] = array('field' => $this->router_class.'[credit_weight]', 
+                        'label' => 'Credit Weight',
+                        'rules' => 'trim|required|numeric|greater_than[0]');
+        $rules=array_merge($rules,$credit_rules);
+      
+        }
     }
 
     return $rules;
@@ -195,9 +199,56 @@ class Voucher_model extends BaseModel {
         $this->send_request_to_argold($this->attributes);  
       }
     } 
+if($this->router->class=="metal_receipt_vouchers") {
+      $this->load->model('transactions/metal_issue_voucher_model');
+      if(!empty($this->formdata['metal_issue_vouchers'])) {
+        foreach ($this->formdata['metal_issue_vouchers'] as $voucher_record) {
+          $metal_issue_data = array();
+          $metal_issue_data=$voucher_record;
 
-   
+          $account = $this->account_model->find('id',array('name'=>$metal_issue_data['account_name']));
+          if(empty($account['id'])) {
+            $account_detail['name']=$metal_issue_data['account_name'];
+            $obj_account = new account_model($account_detail);
+            $account_details=$obj_account->store(false);
+            $account['id']=$account_details['id'];      
+          }
+
+          $metal_issue_data['company_id']  = $this->attributes['company_id'];
+          $metal_issue_data['metal_receipt_voucher_reference_id']  = $this->attributes['id'];
+          $metal_issue_data['voucher_date'] = $this->attributes['voucher_date'];
+          $metal_issue_data['account_id']=$account['id'];
+          $metal_issue_data['receipt_type'] = $this->attributes['receipt_type'];
+          $metal_issue_data['purity'] = $this->attributes['purity'];
+          $metal_issue_data['fine'] = $voucher_record['credit_weight']*$this->attributes['purity']/100;
+          $metal_issue_data['narration'] = $this->attributes['narration'];
+          $metal_issue_data['suffix'] = "MI";
+          $metal_issue_data['voucher_type'] = "metal issue voucher";
+          $metal_issue_data['transaction_type'] = 'account';
+          $period_id = $this->attributes['period_id'];
+          $voucher_serial_number = $this->create_voucher_serial_number($metal_issue_data['voucher_type'],
+                                                                       $period_id);
+          $metal_issue_data['voucher_serial_number'] = $voucher_serial_number;
+
+          $voucher_number = $this->create_voucher_number($metal_issue_data['suffix'],$voucher_serial_number,
+                                                         $this->attributes['voucher_date']);
+          $metal_issue_data['voucher_number'] = $voucher_number;
+
+          $purity_margin=($metal_issue_data['purity']-$metal_issue_data['factory_purity'])*$metal_issue_data['credit_weight']/100;
+          $metal_issue_data['purity_margin'] = $purity_margin;
+          //pd($data);
+          $obj_metal_issue_voucher=new metal_issue_voucher_model($metal_issue_data);
+          $obj_metal_issue_voucher->store(false);
+          
+          $metal_issue_data['id']=$obj_metal_issue_voucher->attributes['id'];
+          $ledger_data=$this->set_ledger_data($metal_issue_data);
+          $obj_ledeger = new ledger_model($ledger_data);
+          $obj_ledeger->store(false);
+        }
+      }
+    }
   }
+
 
   private function set_ledger_data($result) {
     $ledger_data = array();
@@ -238,15 +289,22 @@ class Voucher_model extends BaseModel {
   }
 
 
+
   private function send_request_to_argold($data) {
     $send_data=array();
     $dump_data_on_error=array();
     $result['status']='';
-    if($this->router->class=="metal_receipt_vouchers") {
+    $credit_weight=0;
+    $in_weight=0;
+    foreach ($this->formdata['metal_issue_vouchers'] as $metal_issue_voucher) {
+        $credit_weight += $metal_issue_voucher['credit_weight'];
+    }
+    $in_weight=$data['credit_weight']-$credit_weight;
+    if($this->router->class=="metal_receipt_vouchers" && $in_weight!=0) {
       if($data['receipt_type']=="Metal") {
         $send_data['receipt_departments']=array('type'=>'Pure',
                                               'account'=> $data['account_name'],
-                                              'in_weight' => $data['debit_weight'],
+                                              'in_weight' => $in_weight,
                                               'in_lot_purity' => $data['factory_purity'],
                                               'description' =>$data['narration'],
                                               'process_name'=>'Receipt',
@@ -258,7 +316,7 @@ class Voucher_model extends BaseModel {
       else if($data['receipt_type']=="Refresh") {
         $send_data['refresh_departments']=array('type'=>'Pure',
                                               'account'=> $data['account_name'],
-                                              'in_weight' => $data['debit_weight'],
+                                              'in_weight' => $in_weight,
                                               'in_lot_purity' => $data['factory_purity'],
                                               'description' =>$data['narration'],
                                               'hook_kdm_purity' => $data['hook_kdm_purity'],
@@ -271,7 +329,7 @@ class Voucher_model extends BaseModel {
       else if($data['receipt_type']=="Daily Drawer") {
         $send_data['daily_drawer_receipts']=array('type'=>$data['type'],
                                                   'account'=> $data['account_name'],
-                                                  'in_weight' => $data['debit_weight'],
+                                                  'in_weight' => $in_weight,
                                                   'in_lot_purity' => $data['factory_purity'],
                                                   'karigar'=> 'Factory',
                                                   'description' =>$data['narration'],
@@ -279,9 +337,7 @@ class Voucher_model extends BaseModel {
         $dump_data_on_error=$send_data['daily_drawer_receipts'];
         $api_url=API_BASE_PATH."api/api_daily_drawer_receipts/store";   
       }
-      
       if(!empty($api_url)) {
-        //pd($send_data);die;
         $result=curl_post_request($api_url, $send_data);
         if(empty($result) || (!empty($result['status']) && $result['status']=="error")) {
           $dump_data_on_error=array_merge($dump_data_on_error,array('api_url'=>$api_url));
@@ -291,6 +347,6 @@ class Voucher_model extends BaseModel {
       }
     }
   }
-}
+  }
 
 //class

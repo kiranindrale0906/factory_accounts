@@ -34,7 +34,7 @@ function metal_receipt_voucher_clients_list_settings() {
 */
 
 function metal_receipt_voucher_clients_get_field_attribute($table, $field) {
-  $required_fields=array('id','voucher_date','receipt_type','account_name','credit_weight','narration','account_id','purity');
+  $required_fields=array('id','voucher_date','receipt_type','account_name','credit_weight','narration','account_id','purity','factory_purity','factory_fine','arg_weight');
 
   return ac_voucher_get_field_attribute($table,$field,$required_fields);
 }
