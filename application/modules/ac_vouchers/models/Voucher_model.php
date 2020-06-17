@@ -297,7 +297,8 @@ if($this->router->class=="metal_receipt_vouchers") {
     $credit_weight=0;
     $in_weight=0;
     foreach ($this->formdata['metal_issue_vouchers'] as $metal_issue_voucher) {
-        $credit_weight += $metal_issue_voucher['credit_weight'];
+      pd($metal_issue_voucher);
+        // $credit_weight += $metal_issue_voucher['credit_weight'];
     }
     $in_weight=$data['credit_weight']-$credit_weight;
     if($this->router->class=="metal_receipt_vouchers" && $in_weight!=0) {
