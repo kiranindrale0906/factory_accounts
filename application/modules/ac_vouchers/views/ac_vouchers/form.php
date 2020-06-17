@@ -51,6 +51,13 @@
                                   'value'=>(!empty($record['voucher_date'])?date('d M Y',strtotime($record['voucher_date'])):date('d M Y')), 
                                   'class' => '','readonlyinput'=>true)); 
         endif; ?>
+
+         <?php if(!empty(get_field_attribute($this->router->class,'receipt_type'))) :
+            load_field('dropdown', array('field' => 'receipt_type', 'option' => @$receipt_type ,
+                                         'class' =>'receipt_type', 'col'=>$col)); 
+            
+            load_field('hidden', array('field' => 'account_id'));                               
+          endif; ?>  
   </div>      
    <div class="row">   
 
@@ -110,12 +117,7 @@
                                'data-list-title'=>'To Group Name')); 
 
       load_field('hidden', array('field' => 'to_group_id'));                               
-    endif; ?> 
-
-    <?php if(!empty(get_field_attribute($this->router->class,'receipt_type'))) :
-            load_field('dropdown', array('field' => 'receipt_type', 'option' => @$receipt_type ,
-                                         'class' =>'receipt_type', 'col'=>$col));                               
-          endif; ?> 
+    endif; ?>
   
   </div>  
 
@@ -333,6 +335,11 @@
           endif; ?>
   </div> 
   <br>
+  <?php 
+    if($this->router->class=="metal_receipt_vouchers") {
+      $this->load->view('transactions/metal_issue_vouchers/subform_list');
+    }
+  ?>
   <?php 
     if($this->router->class=="purchase_vouchers") {
       $this->load->view('transactions/purchase_vouchers/subform_list');

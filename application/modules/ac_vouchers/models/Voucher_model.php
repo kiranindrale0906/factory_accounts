@@ -191,6 +191,9 @@ class Voucher_model extends BaseModel {
       $ledger_data=$this->set_ledger_data($this->attributes);
       $obj_ledeger = new ledger_model($ledger_data);
       $obj_ledeger->store(false);
+      if(!empty($this->attributes['receipt_type'])) {
+        $this->send_request_to_argold($this->attributes);  
+      }
     } 
 
    
