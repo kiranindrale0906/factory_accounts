@@ -109,7 +109,6 @@ define('IMAGE_PATH', 'img');
 define('ADMIN_PATH', $base_url);
 define('ADMIN_IMAGES_PATH', '');
 define('ADMIN_LAYOUTS_PATH', '');
-define('API_BASE_PATH', 'http://staging-argold.ascratech.com/');
 define('AUTH_TOKEN', '1234');
 define('ACCESS_TOKEN', '1234');
 define('ACCOUNT_NAME_REPORT','account_name');
