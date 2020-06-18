@@ -8,10 +8,10 @@
             <thead>
               <tr>
                 <th>Account Name</th>
-                <th>Receipt Weight</th>
-                <th>Receipt Fine</th>
-                <th>Issue Weight</th>
-                <th>Issue Fine</th>
+                <th class="text-right">Receipt Weight</th>
+                <th class="text-right">Receipt Fine</th>
+                <th class="text-right">Issue Weight</th>
+                <th class="text-right">Issue Fine</th>
               </tr>
             </thead>
             <?php 
@@ -33,12 +33,12 @@
                     $total_fine_issue=$total_fine_issue+$record['fine']; ?> 
                     <tr>
                       <td><?=$record['account_name'];?></td>
-                      <td>
+                      <td class="text-right">
                         <?=($record['receipt_weight']>0)?$record['receipt_weight']:'';?>  
                       </td>
-                      <td><?=($record['fine']>0)?four_decimal($record['fine']):'';?>  </td>
-                      <td><?=($record['receipt_weight']<0)?four_decimal($record['receipt_weight']*-1):'';?></td>
-                      <td><?=($record['fine']<0)?four_decimal($record['fine']*-1):'';?>  </td>
+                      <td class="text-right"><?=($record['fine']>0)?four_decimal($record['fine']):'';?>  </td>
+                      <td class="text-right"><?=($record['receipt_weight']<0)?four_decimal($record['receipt_weight']*-1):'';?></td>
+                      <td class="text-right"><?=($record['fine']<0)?four_decimal($record['fine']*-1):'';?>  </td>
 
                     </tr>
             <?php }
