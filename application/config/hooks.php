@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | This file lets you define "hooks" to extend CI without hacking the core
 | files.  Please see the user guide for info:
 |
-|	https://codeigniter.com/user_guide/general/hooks.html
+| https://codeigniter.com/user_guide/general/hooks.html
 |
 */
 $hook['post_controller_constructor'] = array(
@@ -19,7 +19,7 @@ $hook['post_controller_constructor'] = array(
     'filepath' => 'hooks',
     'params'   => ""
   ),
-  
+ 
   array(
     'class'    => 'Authorization',
     'function' => 'check_url_authorization',
@@ -27,7 +27,7 @@ $hook['post_controller_constructor'] = array(
     'filepath' => 'hooks',
     'params'   => ""
   ),
-  
+ 
   array(
     'class'    => 'Inapp_notification',
     'function' => 'check_notification',
@@ -42,8 +42,8 @@ $hook['post_controller_constructor'] = array(
     'filepath' => 'hooks',
     'params'   => ""
   ),
-  
-  $hook['post_controller'] = array(
+ 
+  /*$hook['post_controller'] = array(
     array(
       'class'    => 'Api_authentication',
       'function' => 'check_api_authentication',
@@ -60,8 +60,8 @@ $hook['post_controller_constructor'] = array(
       'filepath' => 'hooks',
       'params'   => ""
     ));
-  
-  
+  */
+ 
  /* array(
     'class'    => 'Slack',
     'function' => 'check_slack_access_token_exists',
@@ -70,3 +70,4 @@ $hook['post_controller_constructor'] = array(
     'params'   => ""
   )*/
 ); 
+
