@@ -103,6 +103,7 @@ class Voucher_model extends BaseModel {
   }
 
   public function before_save($action) {
+    pd($this->formdata);
     unset($this->attributes['arg_weight']);
     $this->set_user_define_data();
   }
