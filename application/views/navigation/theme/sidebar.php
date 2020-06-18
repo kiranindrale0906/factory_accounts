@@ -12,7 +12,8 @@
   $main_menu =  array('Users'  => array('users/users'=>'Users',
                                       'users/user_roles'=>'User roles'),
                      // 'Rojmel'  => array('rojmel/rojmel'=>'Rojmel'),
-                     'Masters' => array('masters/accounts'=>'Accounts',
+                     'Masters' => array(
+                                        'masters/accounts'=>'Accounts',
                                         'masters/groups' =>'Group',
                                         'masters/sub_groups' =>'Sub Group',
                                         'masters/purity'=>'Purity',
@@ -63,7 +64,7 @@
                     //                     'reports/order_report'=>'Order Report'),
                     'Reports'   => array(
                                         // 'reports/account_ledger_reports' => 'Account Ledger',
-                                        // 'reports/account_ledgers' => 'Account Ledger Report',
+                                        'reports/account_ledgers' => 'Account Ledger Report',
                                         // 'reports/outstanding_report' => 'Outstanding Report',
                                         'reports/client_account_ledger_reports' => 'Trial Balance',
                                         'reports/vadotar_reports' => 'Vadotar Report',
