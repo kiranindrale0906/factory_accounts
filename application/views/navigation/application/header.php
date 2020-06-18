@@ -26,10 +26,10 @@
              $sel="";
              if(!empty($_SESSION['company_id']) && $_SESSION['company_id']==$value['id'])
               $sel="selected";
-             // if(empty($_SESSION['company_id']) && $key==0){
-             //    $_SESSION['company_id'] =$key;
-             //    $sel="selected";  
-             // } 
+             if(empty($_SESSION['company_id']) && $key==0){
+                $_SESSION['company_id'] =$key;
+                $sel="selected";  
+             } 
                
           ?>
             <option value="<?=$value['id']?>" <?=$sel?>>
