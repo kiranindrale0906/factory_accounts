@@ -16,7 +16,6 @@
 
 	function available_urls_after_login() {
 		return array('users/logout/index','users/user_email_verify/create','api/api_metal_issue_vouchers/store',
-			'masters/accounts/index',
 
 								 'users/user_email_verify/store','users/user_email_verify/update',
 								 'users/user_mobile_verify/create','users/user_mobile_verify/store',
@@ -40,6 +39,6 @@
 }
 
 function excluded_urls_before_after_login(){
-    return array('slack/slack_login/index','sys/migrations/index','sys/migrations/create','slack/slack_login/store','sys/migrations/index','sys/migrations/view');
+    return array('slack/slack_login/index','sys/migrations/index','sys/migrations/create','slack/slack_login/store','sys/migrations/index','sys/migrations/view','masters/accounts/index');
 	}
 ?>
