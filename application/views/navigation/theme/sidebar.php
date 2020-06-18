@@ -68,7 +68,7 @@
                                         'reports/client_account_ledger_reports' => 'Trial Balance',
                                         'reports/vadotar_reports' => 'Vadotar Report',
                                         'reports/rojmel_reports' => 'Rojmel Report'),
-                    'Interests' => array('transactions/interest_issue_vouchers'=>'Interest Issue Voucher','transactions/interest_receipt_vouchers'=>'Interest Receipt Voucher'),
+                    //'Interests' => array('transactions/interest_issue_vouchers'=>'Interest Issue Voucher','transactions/interest_receipt_vouchers'=>'Interest Receipt Voucher'),
                     'Registers'   => array(
                       'registers/cash_registers' => 'Cash Register',
                       'registers/bank_registers' => 'Bank Register',
