@@ -43,7 +43,7 @@ $hook['post_controller_constructor'] = array(
     'params'   => ""
   ),
   
-  /*$hook['post_controller'] = array(
+  $hook['post_controller'] = array(
     array(
       'class'    => 'Api_authentication',
       'function' => 'check_api_authentication',
@@ -60,7 +60,7 @@ $hook['post_controller_constructor'] = array(
       'filepath' => 'hooks',
       'params'   => ""
     ));
-  */
+  
   
  /* array(
     'class'    => 'Slack',
