@@ -61,8 +61,10 @@
                     // 'Reports'   => array('reports/mis_reports'=>'MIS Reports',
                     //                     'reports/stock_report' =>'Stock Report',
                     //                     'reports/order_report'=>'Order Report'),
-                    'Reports'   => array('reports/account_ledger_reports' => 'Account Ledger',
-                                        'reports/account_ledgers' => 'Account Ledger Report','reports/outstanding_report' => 'Outstanding Report',
+                    'Reports'   => array(
+                                        // 'reports/account_ledger_reports' => 'Account Ledger',
+                                        // 'reports/account_ledgers' => 'Account Ledger Report',
+                                        // 'reports/outstanding_report' => 'Outstanding Report',
                                         'reports/client_account_ledger_reports' => 'Trial Balance',
                                         'reports/vadotar_reports' => 'Vadotar Report',
                                         'reports/rojmel_reports' => 'Rojmel Report'),

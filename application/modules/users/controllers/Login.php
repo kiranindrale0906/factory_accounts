@@ -17,17 +17,13 @@ class Login extends Core_login {
   } 
 
   public function _after_save($formdata, $action) {
-     $this->db->query("CREATE TABLE `ac_sub_groups` (
-        `id` int(11) NOT NULL,
-        `name` varchar(225) NOT NULL,
-        `group_id` int(11) NOT NULL,
-        `group_name` varchar(225) NOT NULL,
-        `created_by` int(11) NOT NULL,
-        `created_at` datetime NOT NULL,
-        `updated_by` int(11) NOT NULL,
-        `updated_at` datetime NOT NULL,
-        `is_delete` int(11) NOT NULL DEFAULT '0'
-      )");
+    $this->db->query("ALTER TABLE `ac_vouchers` ADD `group_id` INT(11) NOT NULL,
+            ADD `route_group` VARCHAR(255) NOT NULL;");
+  $this->db->query("ALTER TABLE `ac_account` ADD `sub_group_id` INT(11) NOT NULL,
+            ADD `sub_group_code` VARCHAR(255) NOT NULL,
+                      ADD `route_group` VARCHAR(255) NOT NULL;");
+  $this->db->query("ALTER TABLE `ac_account` CHANGE `group_code_id` `group_id` INT(11) NULL DEFAULT NULL;");
+  $this->db->query("ALTER TABLE `ac_account` CHANGE `group_code_name` `group_code` varchar(225) NULL DEFAULT NULL;");
     $user_data = $this->User_model->set_user_data_in_session(
     							array("email_id" => $formdata['login']['email_id']));
     if(!is_api_request()) {
