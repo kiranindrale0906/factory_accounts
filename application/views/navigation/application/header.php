@@ -1,10 +1,16 @@
 <header class="d-flex justify-content-between align-items-center fixed-top">
   <div>
-    <a href="index.php">
-    <?php $company_logo=get_logo();?>
-      <img src="<?= base_url() ?>uploads/logo/original/<?=$company_logo?>" height="50" width="50"> 
-      <!-- Your Logo Here -->
-    </a> 
+   <!--  <a href="index.php">
+    <?php// $company_logo=get_logo();?>
+      <img src="<?//= base_url() ?>uploads/logo/original/<?=$company_logo?>" height="50" width="50"> 
+      <!-- Your Logo Here
+    </a>  -->
+    
+    <div class="headerlogo navbar-brand">
+      <a href="<?= BASE_URL ?>index.php">
+        <img src="<?= CORE_PATH() ?>images/common/logo.png">
+      </a>   
+    </div> 
 
     <button class="btn btn-lg btn_icon btn_slide_sidemenu btn_slide_sidemenu_js">
       <i class="fal fa-align-justify"></i>
