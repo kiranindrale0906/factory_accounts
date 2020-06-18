@@ -17,17 +17,7 @@ class Login extends Core_login {
   } 
 
   public function _after_save($formdata, $action) {
-     $this->db->query("CREATE TABLE `ac_settings` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `value` varchar(255) NOT NULL,
-  `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL,
-  `is_delete` tinyint(1) DEFAULT '0',
-  `created_by` int(11) DEFAULT '0',
-  `updated_by` int(11) DEFAULT '0'
-);");
-     $user_data = $this->User_model->set_user_data_in_session(
+    $user_data = $this->User_model->set_user_data_in_session(
     							array("email_id" => $formdata['login']['email_id']));
     if(!is_api_request()) {
     $this->session->set_userdata($user_data);
