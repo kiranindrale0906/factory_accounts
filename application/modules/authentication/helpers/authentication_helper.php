@@ -1,6 +1,6 @@
 <?php
 	function available_urls_before_login(){ 
-		return array('users/login/index','users/login/create','users/login/store','api/api_metal_issue_vouchers/store' 
+		return array('users/login/index','users/login/create','users/login/store','api/api_metal_issue_vouchers/store',
 									'users/login/update',
 									'users/ad_login/index','users/ad_login/create','users/ad_login/store',
 									'users/ad_login/update', 
@@ -15,7 +15,7 @@
 	}
 
 	function available_urls_after_login() {
-		return array('users/logout/index','users/user_email_verify/create','api/api_metal_issue_vouchers/store'
+		return array('users/logout/index','users/user_email_verify/create','api/api_metal_issue_vouchers/store',
 
 								 'users/user_email_verify/store','users/user_email_verify/update',
 								 'users/user_mobile_verify/create','users/user_mobile_verify/store',
