@@ -26,13 +26,13 @@
               </tr>
             </thead>
             <?php 
-                $total_weight_receipt=0;
-                $total_weight_issue=0;
-                $total_fine_receipt=0;  
-                $total_fine_issue=0;  
-                $total_factory_fine_receipt=0;  
-                $total_factory_fine_issue=0;  
-                $total_different=0;  
+                $total_weight_receipt = 0;
+                $total_weight_issue = 0;
+                $total_fine_receipt = 0;  
+                $total_fine_issue = 0;  
+                $total_factory_fine_receipt = 0;  
+                $total_factory_fine_issue = 0;  
+                $total_different = 0;  
                 if(!empty($trial_balance)) {
                   foreach ($trial_balance as $record) {
                     $total_different = $total_different + $record['different'];
@@ -58,8 +58,8 @@
                       <td class="text-right"><?= ($record['receipt_weight'] < 0) ? four_decimal($record['receipt_weight']*-1) : '-'; ?></td>
                       <td class="text-right"><?= ($record['fine'] > 0) ? four_decimal($record['fine']) : '-'; ?></td>
                       <td class="text-right"><?= ($record['fine'] < 0) ? four_decimal($record['fine']*-1) : '-'; ?></td>
-                      <td class="text-right"><?= ($record['factory_fine'] > 0) ? four_decimal($record['factory_fine']) : '-';?>  </td>
-                      <td class="text-right"><?= ($record['factory_fine'] < 0) ? four_decimal($record['factory_fine']*-1) : '-';?>  </td>
+                      <td class="text-right"><?= ($record['factory_fine'] > 0) ? four_decimal($record['factory_fine']) : '-';?></td>
+                      <td class="text-right"><?= ($record['factory_fine'] < 0) ? four_decimal($record['factory_fine'] * -1) : '-';?></td>
                       <td class="text-right"><?= ($record['different'] != 0) ? four_decimal($record['different']) : '-'?>  </td>
                     </tr>
                   <?php }
@@ -69,7 +69,7 @@
               <th>Trial Balance Total</th>
               <th class="text-right"><?= four_decimal($total_weight_receipt); ?></th>
               <th class="text-right"><?= four_decimal($total_weight_issue * -1); ?></th>
-              <th class="text-right"><?= four_decimal($total_fine_receipt); ?></th>=              
+              <th class="text-right"><?= four_decimal($total_fine_receipt); ?></th>          
               <th class="text-right"><?= four_decimal($total_fine_issue * -1); ?></th>
               <th class="text-right"><?= four_decimal($total_factory_fine_receipt); ?></th>
               <th class="text-right"><?= four_decimal($total_factory_fine_issue * -1); ?></th>
@@ -120,7 +120,7 @@
               </th>
               <th class="text-right">
                 <?= four_decimal($cs_total_factory_fine_issue); ?>
-              </th> -->
+              </th>
               <th><?=four_decimal($total_different);?></th>
             </tr>
             <th>Total</th>
@@ -141,7 +141,7 @@
               </th>
               <th class="text-right">
                 <?= four_decimal($total_factory_fine_issue * -1 + $cs_total_factory_fine_issue); ?>
-              </th> -->
+              </th>
               <th><?=four_decimal($total_different);?></th>
             </tr>
 
@@ -156,15 +156,7 @@
             </tr>
           </table>
         </div>
-        <div>
-        <?php $assets=$liabilities=0;?>
-          <!-- <b>Assets: <?=$assets=($total_fine_balance>0)?four_decimal($total_fine_balance):'';?>   </b><br> -->
-          <!-- <b>Liabilities: <?=$liabilities=($total_factory_fine_balance>0)?four_decimal($total_factory_fine_balance):'';?>  
-                </b><br>
-          <b>Vadotar: <?=four_decimal($total_different);?> </b><br>
-          <b>Balance: <?=four_decimal($assets-$liabilities-$total_different);?> </b> -->
-
-        </div>
+        
       </div>
     </div>
   </div>
