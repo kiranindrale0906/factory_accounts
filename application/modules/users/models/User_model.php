@@ -84,11 +84,11 @@ class User_model extends Core_user_model {
               'name'            => $user['name'],
               'mobile_no'       => $user['mobile_no'],
               'email_id'        => $user['email_id'],
-              'authToken'       => $user['authToken'],
+//              'authToken'       => $user['authToken'],
               'last_sign_in_at' => $user['last_sign_in_at'],
               'user_role_ids'   => $user_role_ids,
               'is_email_verify' => @$user['is_email_verify'],
-              'password_updated_at' => $user['password_updated_at'],
+//              'password_updated_at' => $user['password_updated_at'],
               'controller_list' => $this->get_user_controller_list($user_role_ids)
             );
   }
