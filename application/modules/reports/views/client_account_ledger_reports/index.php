@@ -28,6 +28,7 @@
                 $total_different=0;  
                 //pd($trial_balance);die;
                 foreach ($trial_balance as  $record) {
+                  $total_different=$total_different+$record['different'];
                   if($record['receipt_weight']>0)
                     $total_weight_receipt=$total_weight_receipt+$record['receipt_weight'];
                   else 
@@ -43,7 +44,7 @@
                   else 
                     $total_factory_fine_issue=$total_factory_fine_issue+($record['factory_fine']);
 
-                  $total_different=$total_different+$record['different']; ?>
+                   ?>
 
                     <tr>
                       <td><?=$record['account_name'];?></td>
@@ -67,7 +68,7 @@
                 <th class="text-right"><?=four_decimal($total_weight_issue*-1);?>  </th>
                 <th class="text-right"><?=four_decimal($total_fine_issue*-1);?>  </th>
                 <th class="text-right"><?=four_decimal($total_factory_fine_receipt);?>  </th>
-                <th class="text-right"><?=four_decimal($total_factory_fine_issue);?>  </th>
+                <th class="text-right"><?=four_decimal($total_factory_fine_issue*-1);?>  </th>
                 <th class="text-right"></th>
 
               </tr>
