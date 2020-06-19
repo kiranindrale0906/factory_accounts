@@ -105,7 +105,7 @@
         </div>
         <div>
         <?php $assets=$liabilities=0;?>
-          <b>Assets: <?=$assets=($total_weight_balance>0)?four_decimal($total_weight_balance):'';?>   </b><br>
+          <b>Assets: <?=$assets=($total_fine_balance>0)?four_decimal($total_fine_balance):'';?>   </b><br>
           <b>Liabilities: <?=$liabilities=($total_factory_fine_balance>0)?four_decimal($total_factory_fine_balance):'';?>  
                 </b><br>
           <b>Vadotar: <?=four_decimal($total_different);?> </b><br>
