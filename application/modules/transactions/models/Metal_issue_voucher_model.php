@@ -35,6 +35,7 @@ class Metal_issue_voucher_model extends Metal_issue_voucher_client_model {
     $metal_receipt_data['account_name'] = $receipt_voucher_company_name;
     $metal_receipt_data['account_id'] = $this->account_model->find('id', array('name' => $receipt_voucher_company_name))['id'];
     
+    $metal_receipt_data['receipt_type'] = $this->attributes['receipt_type'];
     $metal_receipt_data['debit_weight'] = $this->attributes['credit_weight'];
     $metal_receipt_data['purity'] = $this->attributes['factory_purity'];
     $metal_receipt_data['factory_purity'] = $this->attributes['factory_purity'];

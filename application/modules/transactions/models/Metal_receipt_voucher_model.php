@@ -12,6 +12,7 @@ class Metal_receipt_voucher_model extends Metal_receipt_voucher_client_model {
     $this->attributes['fine'] = $this->attributes['debit_weight'] * $this->attributes['purity'] / 100;
     if (isset($this->formdata['metal_issue_vouchers'])) {
       foreach ($this->formdata['metal_issue_vouchers'] as $index => $metal_issue_voucher) {
+        $this->formdata['metal_issue_vouchers'][$index]['receipt_type'] = $this->attributes['receipt_type'];
         if ($metal_issue_voucher['credit_weight'] == 0 || empty($metal_issue_voucher['credit_weight']))
           unset($this->formdata['metal_issue_vouchers'][$index]);
       }
