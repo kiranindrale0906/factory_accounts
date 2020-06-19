@@ -109,7 +109,7 @@
           <b>Liabilities: <?=$liabilities=($total_factory_fine_balance>0)?four_decimal($total_factory_fine_balance):'';?>  
                 </b><br>
           <b>Vadotar: <?=four_decimal($total_different);?> </b><br>
-          <b>Different: <?=four_decimal($assets-$liabilities-$total_different);?> </b>
+          <b>Balance: <?=four_decimal($assets-$liabilities-$total_different);?> </b>
 
         </div>
       </div>
