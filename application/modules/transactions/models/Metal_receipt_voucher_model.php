@@ -5,12 +5,18 @@ require_once APPPATH . "modules/".CLIENT_NAME."/models/Metal_receipt_voucher_cli
 class Metal_receipt_voucher_model extends Metal_receipt_voucher_client_model {
   public $router_class = "metal_receipt_vouchers";
   function __construct($data=array()) {
-      parent::__construct($data);
-  }
-   public function before_validate() {
-    $this->attributes['fine']=$this->attributes['debit_weight']*$this->attributes['purity']/100;
+    parent::__construct($data);
   }
 
+  public function before_validate() {
+    $this->attributes['fine'] = $this->attributes['debit_weight'] * $this->attributes['purity'] / 100;
+    if (isset($this->formdata['metal_issue_vouchers'])) {
+      foreach ($this->formdata['metal_issue_vouchers'] as $index => $metal_issue_voucher) {
+        if ($metal_issue_voucher['credit_weight'] == 0 || empty($metal_issue_voucher['credit_weight']))
+          unset($this->formdata['metal_issue_vouchers'][$index]);
+      }
+    }
+  }
   
   public function after_save($action) {
     parent::after_save($action);
@@ -50,7 +56,7 @@ class Metal_receipt_voucher_model extends Metal_receipt_voucher_client_model {
     $data = $formdata['metal_receipt_vouchers'];
     if ($data['company_id'] != 1) return true;
 
-    $credit_weight=0;
+    $credit_weight = 0;
     if (isset($formdata['metal_issue_vouchers'])) {
       foreach ($formdata['metal_issue_vouchers'] as $metal_issue_voucher) {
         $credit_weight += $metal_issue_voucher['credit_weight'];
@@ -73,8 +79,8 @@ class Metal_receipt_voucher_model extends Metal_receipt_voucher_client_model {
       $api_url=API_BASE_PATH."api/api_receipt_departments/store";   
     } else if($data['receipt_type'] == "Refresh") {
       $api_data = array_merge($api_data, array('type'=>'Pure',
-                                               'hook_kdm_purity' => $data['hook_kdm_purity'],
-                                               'quantity' => $data['quantity'],
+                                               'hook_kdm_purity' => $data['factory_purity'],
+                                               //'quantity' => $data['quantity'],
                                                'process_name'=>'Refresh'));
       $send_data['refresh_departments'] = $api_data;
       $api_url=API_BASE_PATH."api/api_refresh_departments/store";   
