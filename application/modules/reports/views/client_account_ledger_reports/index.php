@@ -12,6 +12,8 @@
                 <th class="text-right">Receipt Fine</th>
                 <th class="text-right">Issue Weight</th>
                 <th class="text-right">Issue Fine</th>
+                <th class="text-right">Factory Receipt Fine</th>
+                <th class="text-right">Factory Issue Fine</th>
               </tr>
             </thead>
             <?php 
@@ -20,6 +22,8 @@
                 $total_weight_issue=0;
                 $total_fine_receipt=0;  
                 $total_fine_issue=0;  
+                $total_factory_fine_receipt=0;  
+                $total_factory_fine_issue=0;  
                 //pd($trial_balance);die;
                 foreach ($trial_balance as  $record) {
                   if($record['receipt_weight']>0)
@@ -30,7 +34,12 @@
                   if($record['fine']>0)
                     $total_fine_receipt=$total_fine_receipt+$record['fine'];
                   else 
-                    $total_fine_issue=$total_fine_issue+$record['fine']; ?> 
+                    $total_fine_issue=$total_fine_issue+$record['fine'];
+
+                  if($record['factory_fine']>0)
+                    $total_factory_fine_receipt=$total_fine_receipt+$record['factory_fine'];
+                  else 
+                    $total_factory_fine_issue=$total_fine_issue+$record['factory_fine']; ?> 
                     <tr>
                       <td><?=$record['account_name'];?></td>
                       <td class="text-right">
@@ -39,6 +48,8 @@
                       <td class="text-right"><?=($record['fine']>0)?four_decimal($record['fine']):'';?>  </td>
                       <td class="text-right"><?=($record['receipt_weight']<0)?four_decimal($record['receipt_weight']*-1):'';?></td>
                       <td class="text-right"><?=($record['fine']<0)?four_decimal($record['fine']*-1):'';?>  </td>
+                      <td class="text-right"><?=($record['factory_fine']>0)?four_decimal($record['factory_fine']):'';?>  </td>
+                      <td class="text-right"><?=($record['factory_fine']<0)?four_decimal($record['factory_fine']*-1):'';?>  </td>
 
                     </tr>
             <?php }
@@ -49,14 +60,18 @@
                 <th class="text-right"><?=four_decimal($total_fine_receipt);?>  </th>
                 <th class="text-right"><?=four_decimal($total_weight_issue*-1);?>  </th>
                 <th class="text-right"><?=four_decimal($total_fine_issue*-1);?>  </th>
+                <th class="text-right"><?=four_decimal($total_factory_fine_receipt);?>  </th>
+                <th class="text-right"><?=four_decimal($total_factory_fine_issue*-1);?>  </th>
 
               </tr>
               <tr>
                 <?php 
                   $total_weight_balance=0;
                   $total_fine_balance=0;
+                  $total_factory_fine_balance=0;
                   $total_weight_balance=$total_weight_receipt-($total_weight_issue*-1);
                   $total_fine_balance=$total_fine_receipt-($total_fine_issue*-1);
+                  $total_factory_fine_balance=$total_factory_fine_receipt-($total_factory_fine_issue*-1);
 
                 ?>
                 <th>Balace</th>
@@ -70,6 +85,10 @@
                   <?=($total_weight_balance<0)?four_decimal($total_weight_balance*-1):'';?>  
                 </th>
                 <th class="text-right"><?=($total_fine_balance<0)?four_decimal($total_fine_balance*-1):'';?>  </th>
+                <th class="text-right">
+                  <?=($total_factory_fine_balance>0)?four_decimal($total_factory_fine_balance):'';?>  
+                </th>
+                <th class="text-right"><?=($total_factory_fine_balance<0)?four_decimal($total_factory_fine_balance*-1):'';?>  </th>
               </tr>
           </table>
         </div>
