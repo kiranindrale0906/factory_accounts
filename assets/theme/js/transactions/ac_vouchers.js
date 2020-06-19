@@ -434,6 +434,22 @@ $('.clear_btn').click(function(){
     var new_url = url.split('?')[0];
     window.location.href=new_url;
 });
+$(".onchange_trial_balance_comapny_name").change(function(e){
+  var value = $(this).val();
+  if(value!="All"){
+  window.location = base_url+'reports/client_account_ledger_reports?company_id='+value;
+  }else{
+  window.location = base_url+'reports/client_account_ledger_reports';
+  }
+});
+$(".onchange_account_ledger_comapny_name").change(function(e){
+  var value = $(this).val();
+  if(value!="All"){
+  window.location = base_url+'reports/account_ledger_reports?company_id='+value;
+  }else{
+  window.location = base_url+'reports/account_ledger_reports';
+  }
+});
 
 
 

@@ -1,8 +1,18 @@
 <?php //$this->load->view('ac_vouchers/ac_vouchers/company_error_message'); ?> 
 <br>
+ <div class="boxrow mb-2">
+    <div class="float-left">
+     <h6 class="heading blue bold text-uppercase mb-0"><?= @getTableSettings()['page_title']; ?></h6>
+    </div>
+  </div>
+  <hr>
   <div class="row">
     <div class="col-md-6">
       <div class="form-group container">
+          <div>
+         <?php 
+         load_field('dropdown', array('field'=>'company_id','option' => $company_names ,'class'=>"onchange_trial_balance_comapny_name")); ?>
+          </div>
         <div class="table-responsive m-t-20">
           <table class="table table-sm fixedthead table-default">
             <thead>
@@ -18,7 +28,6 @@
               </tr>
             </thead>
             <?php 
-              if(!empty($trial_balance)) {
                 $total_weight_receipt=0;
                 $total_weight_issue=0;
                 $total_fine_receipt=0;  
@@ -26,6 +35,7 @@
                 $total_factory_fine_receipt=0;  
                 $total_factory_fine_issue=0;  
                 $total_different=0;  
+              if(!empty($trial_balance)) {
                 //pd($trial_balance);die;
                 foreach ($trial_balance as  $record) {
                   $total_different=$total_different+$record['different'];

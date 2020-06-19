@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed.');
 
 function getTableSettings($table_setting_arg=array()) {
-  $table_setting= array('page_title'          => '',
+  $table_setting= array('page_title'          => 'Trial Balance Reports',
                         'primary_table'       => 'ac_vouchers',
                         'default_column'      => 'id',
                         'table'               => 'ac_vouchers',
@@ -46,6 +46,7 @@ function get_field_attribute($table, $field) {
   $ci=&get_instance();
   $attributes = array();
   $attributes['client_account_ledger_reports'] = array(
+  'company_id'=>array('Company Name', 'Select Company Name', TRUE, '', TRUE),
   'account_id'=>array('Account Name', 'Select Account Name', TRUE, '', TRUE),
   'date_from'=>array('Date From', 'Enter Date From', TRUE, '', TRUE),
   'date_to'=>array('Date To', 'Enter Date To', TRUE, '', TRUE));
