@@ -37,9 +37,9 @@
                     $total_fine_issue=$total_fine_issue+$record['fine'];
 
                   if($record['factory_fine']>0)
-                    $total_factory_fine_receipt=$total_fine_receipt+$record['factory_fine'];
+                    $total_factory_fine_receipt=$total_factory_fine_receipt+$record['factory_fine'];
                   else 
-                    $total_factory_fine_issue=$total_fine_issue+$record['factory_fine']; ?> 
+                    $total_factory_fine_issue=$total_factory_fine_issue+$record['factory_fine']; ?> 
                     <tr>
                       <td><?=$record['account_name'];?></td>
                       <td class="text-right">
