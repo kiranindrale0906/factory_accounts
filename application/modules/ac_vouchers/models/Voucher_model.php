@@ -53,6 +53,7 @@ class Voucher_model extends BaseModel {
                     'rules'  =>array('trim','required','numeric','less_than_equal_to[100]',
                      array('purity_error_msg',array($this,'check_purity_exist'))),
                      'errors' => array('purity_error_msg'=>'Purity not exist in Purity master.'));
+      
       if($check_credit_debit_type==false) {
         $debit_rules[] = array('field' => $this->router_class.'[debit_weight]', 
                         'label' => 'Debit Weight',
@@ -66,6 +67,13 @@ class Voucher_model extends BaseModel {
                         'rules' => 'trim|required|numeric|greater_than[0]');
         $rules=array_merge($rules,$credit_rules);
       
+        }
+      else {
+        
+        $debit_rules[] = array('field' => $this->router_class.'[debit_weight]', 
+                        'label' => 'Debit Weight',
+                        'rules' => 'trim|required|numeric|greater_than[0]');
+        $rules=array_merge($rules,$debit_rules);
         }
     }
 
