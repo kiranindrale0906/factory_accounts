@@ -18,7 +18,7 @@ function metal_receipt_voucher_clients_getTableSettings() {
 
 
 function metal_receipt_voucher_clients_list_settings() {
-  $list_option=array('voucher_date','created_time','voucher_number','account_name','purity','debit_weight','narration','account_id','company_id');
+  $list_option=array('voucher_date','created_time','voucher_number','account_name','purity','debit_weight','fine','narration','account_id','company_id','factory_purity','factory_fine',);
   return ac_vouchers_list_settings($list_option);
 }
 

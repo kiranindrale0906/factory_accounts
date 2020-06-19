@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed.');
 
 function getTableSettings($table_setting_arg=array()) {
-  $table_setting= array('page_title'          => '',
+  $table_setting= array('page_title'          => 'Vadotar Reports',
                         'primary_table'       => 'ac_vouchers',
                         'default_column'      => 'id',
                         'table'               => 'ac_vouchers',
@@ -45,8 +45,9 @@ function list_settings($list_setting_arg=array()) {
 function get_field_attribute($table, $field) {
   $ci=&get_instance();
   $attributes = array();
-  $attributes['client_account_ledger_reports'] = array(
+  $attributes['vadotar_reports'] = array(
   'account_id'=>array('Account Name', 'Select Account Name', TRUE, '', TRUE),
+  'company_id'=>array('Comapny Name', 'Select Company Name', TRUE, '', TRUE),
   'date_from'=>array('Date From', 'Enter Date From', TRUE, '', TRUE),
   'date_to'=>array('Date To', 'Enter Date To', TRUE, '', TRUE));
 

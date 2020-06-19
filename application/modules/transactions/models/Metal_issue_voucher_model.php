@@ -10,6 +10,11 @@ class Metal_issue_voucher_model extends Metal_issue_voucher_client_model {
     parent::__construct($data);
   }
 
+   public function before_validate() {
+    $this->attributes['fine']=$this->attributes['credit_weight']*$this->attributes['purity']/100;
+  }
+
+
   public function after_save($action) {
     $this->create_metal_receipt_voucher();
   }

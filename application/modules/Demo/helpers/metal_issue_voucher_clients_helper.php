@@ -18,7 +18,7 @@ function metal_issue_voucher_clients_getTableSettings() {
 
 
 function metal_issue_voucher_clients_list_settings() {
-  $list_option=array('voucher_date','created_time','voucher_number','account_name','purity','credit_weight','narration','account_id','company_id','created_time');
+  $list_option=array('voucher_date','created_time','voucher_number','account_name','purity','credit_weight','fine','narration','account_id','factory_purity','factory_fine','company_id','created_time');
   return ac_vouchers_list_settings($list_option);
 }
 
@@ -34,7 +34,7 @@ function metal_issue_voucher_clients_list_settings() {
 */
 
 function metal_issue_voucher_clients_get_field_attribute($table, $field) {
-  $required_fields=array('id','voucher_date','account_name','credit_weight','narration','account_id','purity');
+  $required_fields=array('id','voucher_date','account_name','credit_weight','narration','account_id','purity','factory_purity','factory_fine');
 
   return ac_voucher_get_field_attribute($table,$field,$required_fields);
 }
@@ -42,3 +42,4 @@ function metal_issue_voucher_clients_get_field_attribute($table, $field) {
 function metal_issue_voucher_clients_get_row_actions($row, $url, $select_url, $filter) {
   return ac_voucher_get_row_actions($row,$url,$select_url,$filter);
 }
+

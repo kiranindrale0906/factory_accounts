@@ -85,10 +85,13 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
 
   $list_setting['narration'] = array("Narration", "narration", FALSE, "narration", TRUE, TRUE);
   $list_setting['receipt_type'] = array("Receipt Type", "receipt_type", FALSE, "receipt_type", TRUE, TRUE);
+  $list_setting['purity'] = array("Purity", "purity", FALSE, "purity", TRUE, TRUE);
   $list_setting['credit_weight'] = array("Credit Wt.", "credit_weight", FALSE, "credit_weight", TRUE, TRUE);
   $list_setting['debit_weight'] = array("Debit Wt.", "debit_weight", FALSE, "debit_weight", TRUE, TRUE);
-  $list_setting['purity'] = array("Purity", "purity", FALSE, "purity", TRUE, TRUE);
+  $list_setting['fine'] = array("Fine", "fine", FALSE, "fine", TRUE, TRUE);
   $list_setting['factory_purity'] = array("Factory Purity", "factory_purity", FALSE, "factory_purity", TRUE, TRUE);
+  $list_setting['factory_fine'] = array("Factory Fine", "factory_fine", FALSE, "factory_fine", TRUE, TRUE);
+
   $list_setting['Pure Gold'] = array("Narration", "pure_gold_credit", FALSE, "pure_gold_credit", TRUE, TRUE);
   $list_setting['department_name'] = array("Department Name", "department_name", FALSE, "department_name", TRUE, TRUE);
   $list_setting['debit_amount'] = array("Debit Amt", "debit_amount", TRUE, "debit_amount", FALSE, TRUE,"FORMAT(ac_vouchers.debit_amount,ac_company.decimal_no) as debit_amount",

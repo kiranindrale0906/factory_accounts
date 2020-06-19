@@ -7,6 +7,10 @@ class Metal_receipt_voucher_model extends Metal_receipt_voucher_client_model {
   function __construct($data=array()) {
       parent::__construct($data);
   }
+   public function before_validate() {
+    $this->attributes['fine']=$this->attributes['debit_weight']*$this->attributes['purity']/100;
+  }
+
   
   public function after_save($action) {
     parent::after_save($action);

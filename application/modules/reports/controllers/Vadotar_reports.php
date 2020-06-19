@@ -6,7 +6,7 @@ class Vadotar_reports extends Client_ledgers {
 
   public function __construct() {
     parent::__construct();
-    $this->load->model(array('masters/account_model'));
+    $this->load->model(array('masters/account_model','masters/company_model'));
   }
 
   public function index() {
@@ -17,10 +17,16 @@ class Vadotar_reports extends Client_ledgers {
   }
 
   public function get_form_data() {
+    $this->data['record']['company_id']=!empty($_GET['company_id'])?$_GET['company_id']:"";
+    
     $this->data['account_names'] = $this->model->get('distinct(account_name) as name',
                           array('where_in' => array('voucher_type' => array("'metal issue voucher'", 
                                                                             "'metal receipt voucher'"))),
                           array(), array('order_by'=>'account_name asc'));
+    $company_names = $this->company_model->get('name,id');
+    if(!empty($company_names)){
+    $this->data['company_names'] =array_merge(array(array('id'=>'All','name'=>'All')),$company_names);
+    }
   }
 
   private function get_account_ledger_records() {
@@ -28,15 +34,19 @@ class Vadotar_reports extends Client_ledgers {
     $receipt_data=array();
     $this->data['voucher_dates']=array();
 
-    $company_id='';
-    if(!empty($_SESSION['company_id'])) $company_id = $_SESSION['company_id'];
     if(empty($this->data['account_names'])) return true;
 
     $where = array('voucher_type' => 'metal receipt voucher');
+    if(!empty($this->data['record']['company_id'])){
+      $where['company_id']=$this->data['record']['company_id'];
+    }
     $select = 'date_format(voucher_date,"%d-%m-%Y") as voucher_date';
     $issues = $this->model->get($select, $where ,array(), array('order_by'=>'voucher_date asc'));
       
     $where = array('voucher_type' => 'metal receipt voucher');
+    if(!empty($this->data['record']['company_id'])){
+      $where['company_id']=$this->data['record']['company_id'];
+    }
     $receipts = $this->model->get($select, $where ,array(), array('order_by'=>'voucher_date asc'));
 
     $issue_created_dates = array_column($issues, 'voucher_date');

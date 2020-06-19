@@ -1,5 +1,15 @@
 <?php $this->load->view('ac_vouchers/ac_vouchers/company_error_message'); ?> 
 <br>
+<div class="boxrow mb-2">
+    <div class="float-left">
+     <h6 class="heading blue bold text-uppercase mb-0"><?= @getTableSettings()['page_title']; ?></h6>
+    </div>
+  </div>
+  <hr>
+
+ <?php 
+         load_field('dropdown', array('field'=>'company_id','option' => $company_names ,'class'=>"onchange_vadotar_comapny_name")); ?>
+          </div>
 <?php   
   if(!empty($account_names)) {
     //foreach ($account_names as $key => $account) { 

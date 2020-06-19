@@ -3,8 +3,8 @@
   <?= getJsButton('Add More', 'javascript:void(0)', 'btn_blue float-right mb-1', '', 'add_form_metal_issue_voucher()'); ?>
 </div>
 <div class="table-responsive">
-  <table class="table table-sm table-default">
-    <thead>
+  <table class="table table-sm">
+    <thead class="bg_gray">
       <tr>
         <th>Account Name</th>
         <th>Weight</th>

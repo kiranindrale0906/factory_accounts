@@ -442,12 +442,12 @@ $(".onchange_trial_balance_comapny_name").change(function(e){
   window.location = base_url+'reports/client_account_ledger_reports';
   }
 });
-$(".onchange_account_ledger_comapny_name").change(function(e){
+$(".onchange_vadotar_comapny_name").change(function(e){
   var value = $(this).val();
   if(value!="All"){
-  window.location = base_url+'reports/account_ledger_reports?company_id='+value;
+  window.location = base_url+'reports/vadotar_reports?company_id='+value;
   }else{
-  window.location = base_url+'reports/account_ledger_reports';
+  window.location = base_url+'reports/vadotar_reports';
   }
 });
 
