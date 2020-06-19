@@ -57,7 +57,7 @@ class Metal_receipt_voucher_model extends Metal_receipt_voucher_client_model {
       }
     }
     $in_weight = $data['debit_weight'] - $credit_weight;
-    if ($in_weight) return true;
+    if ($in_weight == 0) return true;
   
     $api_data = array('account'=> $data['account_name'],
                       'in_weight' => $in_weight,
