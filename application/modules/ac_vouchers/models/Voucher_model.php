@@ -54,7 +54,14 @@ class Voucher_model extends BaseModel {
                      array('purity_error_msg',array($this,'check_purity_exist'))),
                      'errors' => array('purity_error_msg'=>'Purity not exist in Purity master.'));
       
-      if($check_credit_debit_type==true) {
+      if($check_credit_debit_type==false) {
+        $debit_rules[] = array('field' => $this->router_class.'[debit_weight]', 
+                        'label' => 'Debit Weight',
+                        'rules' => 'trim|required|numeric|greater_than[0]');
+        $rules=array_merge($rules,$debit_rules);
+      
+        }
+      else {
         $credit_rules[] = array('field' => $this->router_class.'[credit_weight]', 
                         'label' => 'Credit Weight',
                         'rules' => 'trim|required|numeric|greater_than[0]');
@@ -301,7 +308,7 @@ if($this->router->class=="metal_receipt_vouchers") {
       // pd($metal_issue_voucher);
         $credit_weight += $metal_issue_voucher['credit_weight'];
     }
-    $in_weight=$data['credit_weight']-$credit_weight;
+    $in_weight=$data['debit_weight']-$credit_weight;
   }
     if($in_weight!=0) {
       if($data['receipt_type']=="Metal") {
