@@ -1,4 +1,3 @@
-
 <?php
 
 class Salesman_model extends BaseModel {
@@ -23,3 +22,4 @@ class Salesman_model extends BaseModel {
     );
   }
 }
+?>

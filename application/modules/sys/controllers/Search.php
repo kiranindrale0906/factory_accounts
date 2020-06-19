@@ -69,7 +69,7 @@ class Search extends CI_Controller {
   }//end of index function
 
   public function getAutoCompleteDropDownData(){ //function is used to get autocomplete data. 
-    $li_autocomplete = '';
+    $li_autocomplete = array();
     $where_conditions = array();
     $getData = $this->input->get();
     $getDataArray = explode('&&',$getData['query']);
@@ -83,9 +83,11 @@ class Search extends CI_Controller {
                                               =>remove_spaces_from_value($getDataArray[0])),
                                         $where_conditions);
     foreach($autocompleteData as $setAutocompleteData){
-      if(!empty($setAutocompleteData[$getDataArray[2]]))
+      if(!empty($setAutocompleteData[$getDataArray[2]])) {
         $li_autocomplete[] = $setAutocompleteData[$getDataArray[2]];
+      }
     }
+
     if(empty($setAutocompleteData[$getDataArray[2]]))
       $li_autocomplete[] = 'No suggestion found.';
     echo json_encode($li_autocomplete);
