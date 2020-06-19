@@ -83,7 +83,6 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
                                           "FORMAT(ac_vouchers.lumpsum_amount,ac_company.decimal_no) as lumpsum_amount",'','','','text-right');
   $list_setting['interest_per_day'] = array("Interest per Day", "interest_per_day", FALSE, "interest_per_day", TRUE, TRUE);
 
-  $list_setting['narration'] = array("Narration", "narration", FALSE, "narration", TRUE, TRUE);
   $list_setting['receipt_type'] = array("Receipt Type", "receipt_type", FALSE, "receipt_type", TRUE, TRUE);
   $list_setting['purity'] = array("Purity", "purity", FALSE, "purity", TRUE, TRUE);
   $list_setting['credit_weight'] = array("Credit Wt.", "credit_weight", FALSE, "credit_weight", TRUE, TRUE);
@@ -106,6 +105,7 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
 
 
 
+  $list_setting['narration'] = array("Narration", "narration", FALSE, "narration", TRUE, TRUE);
   $list_setting['action'] = array("Action", "action", FALSE, "action", FALSE, FALSE);
 
   if(!empty($list_setting_arg)) {
