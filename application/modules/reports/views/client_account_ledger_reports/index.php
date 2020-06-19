@@ -41,7 +41,7 @@
                   if($record['factory_fine']>0)
                     $total_factory_fine_receipt=$total_factory_fine_receipt+$record['factory_fine'];
                   else 
-                    $total_factory_fine_issue=$total_factory_fine_issue+$record['factory_fine'];
+                    $total_factory_fine_issue=$total_factory_fine_issue+$record['factory_fine']*-1;
 
                   $total_different=$total_different+$record['different']; ?>
 
