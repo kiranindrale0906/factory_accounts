@@ -43,7 +43,6 @@
                   else 
                     $total_factory_fine_issue=$total_factory_fine_issue+$record['factory_fine'];
 
-                  $total_factory_fine_issue=$total_factory_fine_issue+$record['factory_fine']; 
                   $total_different=$total_different+$record['different']; ?>
 
                     <tr>
@@ -107,7 +106,8 @@
         <div>
         <?php $assets=$liabilities=0;?>
           <b>Assets: <?=$assets=($total_weight_balance>0)?four_decimal($total_weight_balance):'';?>   </b><br>
-          <b>Liabilities: <?=$liabilities=($total_factory_fine_balance<0)?four_decimal($total_factory_fine_balance*-1):'';?> </b><br>
+          <b>Liabilities: <?=$liabilities=($total_factory_fine_balance>0)?four_decimal($total_factory_fine_balance):'';?>  
+                </b><br>
           <b>Vadotar: <?=four_decimal($total_different);?> </b><br>
           <b>Different: <?=four_decimal($assets-$liabilities-$total_different);?> </b>
 
