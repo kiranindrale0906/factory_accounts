@@ -99,9 +99,18 @@
                   <?=($total_factory_fine_balance>0)?four_decimal($total_factory_fine_balance):'';?>  
                 </th>
                 <th class="text-right"><?=($total_factory_fine_balance<0)?four_decimal($total_factory_fine_balance*-1):'';?>  </th>
+
                 <th><?=four_decimal($total_different);?></th>
               </tr>
           </table>
+        </div>
+        <div>
+        <?php $assets=$liabilities=0;?>
+          <b>Assets: <?=$assets=($total_weight_balance>0)?four_decimal($total_weight_balance):'';?>   </b><br>
+          <b>Liabilities: <?=$liabilities=($total_factory_fine_balance<0)?four_decimal($total_factory_fine_balance*-1):'';?> </b><br>
+          <b>Vadotar: <?=four_decimal($total_different);?> </b><br>
+          <b>Different: <?=four_decimal($assets-$liabilities-$total_different);?> </b>
+
         </div>
       </div>
     </div>
