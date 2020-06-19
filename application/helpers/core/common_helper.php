@@ -380,8 +380,11 @@ if (!function_exists('curl_post_request')) {
 }
 
 if ( ! function_exists('four_decimal')) {
-  function four_decimal($value){
-     return number_format((float)$value, 4, '.', '');
+  function four_decimal($value, $zero_value='0'){
+    if ($value == 0)
+      return $zero_value;
+    else
+      return number_format((float)$value, 2, '.', '');
   }
 }
 

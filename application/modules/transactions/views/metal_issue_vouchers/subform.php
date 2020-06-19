@@ -1,7 +1,7 @@
 <tr class="table_metal_issue_voucher_<?= $index ?>">
   <td>
     <?php load_field('plain/dropdown', array('field' => 'account_name',
-                                             'option' => get_account_name_for_metal_issue(),
+                                             'option' => $account_names_for_metal_issue,
                                              'controller' => 'metal_issue_vouchers',
                                              'index' => $index,
                                              'is_table'=>TRUE)); ?>

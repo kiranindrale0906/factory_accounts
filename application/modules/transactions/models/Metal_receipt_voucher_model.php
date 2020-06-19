@@ -51,8 +51,10 @@ class Metal_receipt_voucher_model extends Metal_receipt_voucher_client_model {
     if ($data['company_id'] != 1) return true;
 
     $credit_weight=0;
-    foreach ($formdata['metal_issue_vouchers'] as $metal_issue_voucher) {
-      $credit_weight += $metal_issue_voucher['credit_weight'];
+    if (isset($formdata['metal_issue_vouchers'])) {
+      foreach ($formdata['metal_issue_vouchers'] as $metal_issue_voucher) {
+        $credit_weight += $metal_issue_voucher['credit_weight'];
+      }
     }
     $in_weight = $data['debit_weight'] - $credit_weight;
     if ($in_weight) return true;

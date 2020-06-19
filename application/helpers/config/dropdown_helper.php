@@ -190,14 +190,6 @@ function get_melting_purity(){
            array('id'=>'92.00','name'=>'92.00'));
 }
 
-function get_account_name_for_metal_issue(){
-  return array(
-            array('id' => '', 'name' => ''),
-            array('id' => 'ARC', 'name' => 'ARC'),
-            array('id' => 'ARF', 'name' => 'ARF')
-          );
-
-}
 function get_has_hallmark(){
   return array(
             array('id' => 'Yes', 'name' => 'Yes'),
