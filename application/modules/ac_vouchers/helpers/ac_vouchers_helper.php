@@ -84,9 +84,9 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
   $list_setting['interest_per_day'] = array("Interest per Day", "interest_per_day", FALSE, "interest_per_day", TRUE, TRUE);
 
   $list_setting['receipt_type'] = array("Receipt Type", "receipt_type", FALSE, "receipt_type", TRUE, TRUE);
-  $list_setting['purity'] = array("Purity", "purity", FALSE, "purity", TRUE, TRUE);
   $list_setting['credit_weight'] = array("Credit Wt.", "credit_weight", FALSE, "credit_weight", TRUE, TRUE);
   $list_setting['debit_weight'] = array("Debit Wt.", "debit_weight", FALSE, "debit_weight", TRUE, TRUE);
+  $list_setting['purity'] = array("Purity", "purity", FALSE, "purity", TRUE, TRUE);
   $list_setting['fine'] = array("Fine", "fine", FALSE, "fine", TRUE, TRUE);
   $list_setting['factory_purity'] = array("Factory Purity", "factory_purity", FALSE, "factory_purity", TRUE, TRUE);
   $list_setting['factory_fine'] = array("Factory Fine", "factory_fine", FALSE, "factory_fine", TRUE, TRUE);
