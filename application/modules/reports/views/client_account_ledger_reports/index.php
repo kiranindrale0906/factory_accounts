@@ -69,7 +69,7 @@
                 <th class="text-right"><?=four_decimal($total_fine_issue*-1);?>  </th>
                 <th class="text-right"><?=four_decimal($total_factory_fine_receipt);?>  </th>
                 <th class="text-right"><?=four_decimal($total_factory_fine_issue);?>  </th>
-                <th class="text-right"><?=four_decimal($total_different);?>  </th>
+                <th class="text-right"></th>
 
               </tr>
               <tr>
@@ -99,6 +99,7 @@
                   <?=($total_factory_fine_balance>0)?four_decimal($total_factory_fine_balance):'';?>  
                 </th>
                 <th class="text-right"><?=($total_factory_fine_balance<0)?four_decimal($total_factory_fine_balance*-1):'';?>  </th>
+                <th><?=four_decimal($total_different);?></th>
               </tr>
           </table>
         </div>
