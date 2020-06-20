@@ -19,13 +19,13 @@ Class Upload_file {
                                   'ACL' => 'public-read'));
   }
  
-  private function makedirs($folder='', $mode=DIR_WRITE_MODE){      
-    if(!empty($folder)) {
-      if(!@is_dir(FCPATH . $folder)){
-        @mkdir(FCPATH . $folder, $mode,true);
-      }
-    }
-  }
+  // private function makedirs($folder='', $mode=DIR_WRITE_MODE){      
+  //   if(!empty($folder)) {
+  //     if(!@is_dir(FCPATH . $folder)){
+  //       @mkdir(FCPATH . $folder, $mode,true);
+  //     }
+  //   }
+  // }
 
   public function download($data='',$id='',$image=false){
       $field_name = $_GET['field_name'];
@@ -126,7 +126,7 @@ Class Upload_file {
   private function updateMedia($image,$folder,$fileType,$controller,$field_name,$index='',$is_old_resize=false,$image_data='',$hieght=600,$width=600,$path=FALSE) {
     $class  = $this->ci->router->fetch_class();
     if($is_old_resize == false){
-      $this->makedirs($folder.'/original');
+      makedirs($folder.'/original');
       if(isset($_FILES[$image]['name']) AND strpos($_FILES[$image]['name'], ".") == FALSE){
         $extension = substr($_FILES[$image]['type'], strpos($_FILES[$image]['type'], "/") +1);
         $_FILES[$image]['name'] = $_FILES[$image]['name'].'.'.$extension;
@@ -184,7 +184,7 @@ Class Upload_file {
   private function resize_images($folder, $image_data,$img_sizes_arr){
       foreach($img_sizes_arr as $k => $v){
         $sub_folder = $folder.$v['folder'];
-        $this->makedirs($sub_folder);
+        makedirs($sub_folder);
         $real_path = realpath(FCPATH .$folder);
         $resize['image_library']      = 'gd2';
         $resize['source_image']       = $image_data['full_path'];

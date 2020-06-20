@@ -62,8 +62,6 @@ function get_records_by_id($records) {
   return $result;
 }
 
-
-
 function load_field($field, $data, $button=false) {
   $ci =& get_instance();
   if (isset($data['data'])) $data = $data['data'];
@@ -85,7 +83,6 @@ function load_card($data){
   $data['col']=!empty($data['col'])?$data['col']:'col-lg-3 col-md-6';
   return load_view('layouts/application/card',$data);  
 }
-
 
 function load_view($view, $data = array(), $return_as_string = FALSE) {
   $ci =& get_instance();
@@ -112,26 +109,3 @@ function get_field_name_from_label($label) {
     return 'invalid_header';
   }
 }
-
-function get_import_file_validation_errors($field_prefix = 'import_data') {
-  $ci =& get_instance();
-  if (empty($ci->form_validation->error_array())) return array();
-  $errors = array();
-  foreach ($ci->form_validation->error_array() as $field_name => $error) {
-    if (startsWith($field_name, $field_prefix)) {
-      $index_start_pos = stripos($field_name, '[') + 1;
-      $index_end_pos = stripos($field_name, ']');
-      $index = substr($field_name, $index_start_pos, $index_end_pos-$index_start_pos);
-      if(is_numeric($index))
-        $errors[] = 'Row No '.$index.': '.$error;  
-      else
-        $errors[] = $error;  
-    }
-  } 
-  return $errors;
-}
-
-function startsWith($string, $startString) { 
-  $len = strlen($startString); 
-  return (substr($string, 0, $len) === $startString); 
-} 
