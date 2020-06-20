@@ -91,11 +91,15 @@ $autoload['drivers'] = array();
 */
 $autoload['helper'] = array(
     'url', 'file', 'cookie', 'path', 'form', 'inflector', 'string',
-    'core/action_helper', 'core/common_helper', 'core/core_helper',
-    'core/field', 'core/form_fields', 
-    'core/listing_helper', 'core/mimes_helper', 
-    'layouts/layouts_helper', 'layouts/application_helper', 
-    'layouts/login_helper', 'layouts/theme_helper','core/request_helper','core/field_helper','fdec_common_helper','config/upload_helper','string_helper');
+    
+    'config/upload_helper',
+
+    'core/action_helper', 'core/date_helper', 'core/debug_helper', 'core/decimal_helper',
+    'core/field_helper', 'core/form_fields_helper', 
+    'core/listing_helper', 'core/mimes_helper', 'core/request_helper', 
+    'core/security_helper', 'core/string_helper', 'core/upload_file_helper',
+    
+    'layouts/application_helper', 'layouts/layouts_helper', 'layouts/login_helper', 'layouts/theme_helper');
 
 
 /*
