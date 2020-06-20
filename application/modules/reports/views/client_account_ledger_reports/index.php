@@ -104,7 +104,7 @@
 
                 $cs_total_different_balance = $total_different;
               ?>
-              <th>Closing Stock</th>
+              <th>Balance</th>
               <!-- <th class="text-right">
                 <?= four_decimal($cs_total_weight_receipt, '-'); ?>  
               </th>
@@ -271,7 +271,7 @@
 
                 $cs_total_different_balance = $total_different;
               ?>
-              <th>Closing Stock</th>
+              <th>Balance</th>
               <!-- <th class="text-right">
                 <?= four_decimal($cs_total_weight_receipt, '-'); ?>  
               </th>
