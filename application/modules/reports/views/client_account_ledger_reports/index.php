@@ -16,7 +16,7 @@
           <table class="table table-sm fixedthead table-default">
             <thead>
               <tr>
-                <th>Assets</th>
+                <th>Liabilities</th>
                 <!-- <th class="text-right">Receipt Weight</th>
                 <th class="text-right">Issue Weight</th> -->
                 <th class="text-right">Receipt Fine</th>
@@ -68,7 +68,7 @@
                 } 
             ?>
             <tr>
-              <th>Total Assets</th>
+              <th>Total</th>
               <!-- <th class="text-right"><?= four_decimal($total_weight_receipt, '-'); ?></th>
               <th class="text-right"><?= four_decimal($total_weight_issue * -1, '-'); ?></th> -->
               <th class="text-right"><?= four_decimal($total_fine_receipt, '-'); ?></th>          
@@ -125,7 +125,6 @@
                   if ($cs_total_fine_receipt < $cs_total_fine_issue) {
                     $assets_fine_closing = $cs_total_fine_issue - $cs_total_fine_receipt; 
                     echo four_decimal(($assets_fine_closing), '-'); 
-                    $assets_fine_closing = $assets_fine_closing * -1;
                   }
                 ?>
               </th>
@@ -139,8 +138,7 @@
                 <?php
                   $assets_vadotar = $total_different;
                   echo four_decimal($total_different, '-');
-                  $assets_vadotar = $assets_vadotar  * -1;
-
+                  
                 ?>
               </th>
             </tr>
@@ -186,7 +184,7 @@
           <table class="table table-sm fixedthead table-default">
             <thead>
               <tr>
-                <th>Liabilities</th>
+                <th>Assets</th>
                 <!-- <th class="text-right">Receipt Weight</th>
                 <th class="text-right">Issue Weight</th> -->
                 <th class="text-right">Receipt Fine</th>
@@ -238,7 +236,7 @@
                 } 
             ?>
             <tr>
-              <th>Total Liabilities</th>
+              <th>Total</th>
               <!-- <th class="text-right"><?= four_decimal($total_weight_receipt, '-'); ?></th>
               <th class="text-right"><?= four_decimal($total_weight_issue * -1, '-'); ?></th> -->
               <th class="text-right"><?= four_decimal($total_fine_receipt, '-'); ?></th>          
@@ -352,11 +350,11 @@
       <div class="form-group container">
         <table class="table table-sm fixedthead table-default">
           <tr>
-            <td><b>Assets: </b></td>
+            <td><b>Liabilities: </b></td>
             <td class="text-right"><?= four_decimal($assets_fine_closing) ?></td>
           </tr>
           <tr>
-            <td><b>Liabilities: </b></td>
+            <td><b>Assets: </b></td>
             <td class="text-right"><?= four_decimal(($liabilities_fine_closing));  ?></td>
           </tr>
           <tr>
@@ -365,11 +363,11 @@
           </tr>
           <tr>
             <td><b>Total: </b></td>
-            <td class="text-right"><b><?= four_decimal($assets_fine_closing + $assets_vadotar + $liabilities_fine_closing - $liabilities_vadotar);  ?></b></td>
+            <td class="text-right"><b><?= four_decimal($liabilities_fine_closing - $assets_vadotar - $assets_fine_closing - $liabilities_vadotar);  ?></b></td>
           </tr>
           <tr>
             <td><b>Closing Stock: </b></td>
-            <td class="text-right"><b><?= four_decimal( -1 * ($assets_fine_closing + $assets_vadotar + $liabilities_fine_closing - $liabilities_vadotar));  ?></b></td>
+            <td class="text-right"><b><?= four_decimal( -1 * ($liabilities_fine_closing - $assets_vadotar - $assets_fine_closing - $liabilities_vadotar));  ?></b></td>
           </tr>
           <tr>
             <td><b>Balance: </b></td>
