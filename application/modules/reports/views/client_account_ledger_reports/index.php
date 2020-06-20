@@ -125,6 +125,7 @@
                   if ($cs_total_fine_receipt < $cs_total_fine_issue) {
                     $assets_fine_closing = $cs_total_fine_issue - $cs_total_fine_receipt; 
                     echo four_decimal(($assets_fine_closing), '-'); 
+                    $assets_fine_closing = $assets_fine_closing * -1;
                   }
                 ?>
               </th>
@@ -138,6 +139,8 @@
                 <?php
                   $assets_vadotar = $total_different;
                   echo four_decimal($total_different, '-');
+                  $assets_vadotar = $assets_vadotar  * -1;
+
                 ?>
               </th>
             </tr>
@@ -361,14 +364,17 @@
             <td class="text-right"><?= four_decimal($assets_vadotar - $liabilities_vadotar);  ?></td>
           </tr>
           <tr>
-            <td><b>Balance: </b></td>
-            <td class="text-right"><b><?= four_decimal($assets_fine_closing + $assets_vadotar - $liabilities_fine_closing - $liabilities_vadotar);  ?></b></td>
+            <td><b>Total: </b></td>
+            <td class="text-right"><b><?= four_decimal($assets_fine_closing + $assets_vadotar + $liabilities_fine_closing - $liabilities_vadotar);  ?></b></td>
           </tr>
           <tr>
             <td><b>Closing Stock: </b></td>
-            <td class="text-right"><b><?= four_decimal($assets_fine_closing + $assets_vadotar - $liabilities_fine_closing - $liabilities_vadotar);  ?></b></td>
+            <td class="text-right"><b><?= four_decimal( -1 * ($assets_fine_closing + $assets_vadotar + $liabilities_fine_closing - $liabilities_vadotar));  ?></b></td>
           </tr>
-
+          <tr>
+            <td><b>Balance: </b></td>
+            <td class="text-right">0</td>
+          </tr>
       </div>
     </div>
   </div>
