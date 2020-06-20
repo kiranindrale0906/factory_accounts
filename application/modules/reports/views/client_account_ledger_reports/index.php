@@ -1,13 +1,13 @@
 <br>
  <div class="boxrow mb-2">
     <div class="float-left">
-     <h6 class="heading blue bold text-uppercase mb-0"><?= @getTableSettings()['page_title']; ?></h6>
+     <h6 class="heading blue bold text-uppercase mb-0">Trial Balance</h6>
     </div>
   </div>
   <hr>
-  <div>
+  <!-- <div>
           <?php load_field('dropdown', array('field'=>'company_id','option' => $company_names ,'class'=>"onchange_trial_balance_comapny_name")); ?>
-        </div>
+        </div> -->
   <div class="row">
     <div class="col-md-6">
       <div class="form-group container">
@@ -357,11 +357,15 @@
             <td class="text-right"><?= four_decimal(($liabilities_fine_closing));  ?></td>
           </tr>
           <tr>
-            <td><b>Vadotor: </b></td>
+            <td><b>Vadotar: </b></td>
             <td class="text-right"><?= four_decimal($assets_vadotar - $liabilities_vadotar);  ?></td>
           </tr>
           <tr>
             <td><b>Balance: </b></td>
+            <td class="text-right"><b><?= four_decimal($assets_fine_closing + $assets_vadotar - $liabilities_fine_closing - $liabilities_vadotar);  ?></b></td>
+          </tr>
+          <tr>
+            <td><b>Closing Stock: </b></td>
             <td class="text-right"><b><?= four_decimal($assets_fine_closing + $assets_vadotar - $liabilities_fine_closing - $liabilities_vadotar);  ?></b></td>
           </tr>
 
