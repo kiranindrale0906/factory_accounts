@@ -185,18 +185,9 @@ class Voucher_model extends BaseModel {
   public function after_save($action) {
     if ($action=="update")
       $this->ledger_model->delete('', array('table_id'=>$id), true);
-      //$this->delete_ledger_voucher_record($this->attributes['id'], $this->attributes['company_id']);
 
     $ledger_data = $this->ledger_model->set_data($this->attributes, $this->router->class, $this->prefix, $this->table_name);
     $ledger_obj = new ledger_model($ledger_data);
     $ledger_obj->store(false);
-    
-    // if(!empty($this->attributes['receipt_type'])) {
-    //   $this->send_request_to_argold($this->attributes);  
-    // }
   }
-
-
-  }
-
-//class
+}

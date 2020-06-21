@@ -1,4 +1,4 @@
-<?php
+<?php  //AR Gold
 defined('BASEPATH') OR exit('No direct script access allowed');
 require_once APPPATH . "modules/ac_vouchers/controllers/Vouchers.php";
 class Metal_issue_voucher_clients extends Vouchers {

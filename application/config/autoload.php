@@ -92,8 +92,6 @@ $autoload['drivers'] = array();
 $autoload['helper'] = array(
     'url', 'file', 'cookie', 'path', 'form', 'inflector', 'string',
     
-    'config/upload_helper',
-
     'core/action_helper', 'core/date_helper', 'core/debug_helper', 'core/decimal_helper',
     'core/field_helper', 'core/form_fields_helper', 
     'core/listing_helper', 'core/mimes_helper', 'core/request_helper', 

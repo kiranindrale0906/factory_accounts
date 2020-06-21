@@ -10,7 +10,7 @@ function get_field_data($data, $router, $record) {
     if (!isset($data['name'])) $data['name'] = $data['controller'] . '[' . $data['index'] . ']' . '[' . $data['field'] . ']';
     if (!isset($data['value'])) $data['value'] = @$record[$data['index']][$data['field']];
   }
-  if (!isset($data['col'])) $data['col'] = 'col-md-6';
+  if (!isset($data['col'])) $data['col'] = get_bootstrap_col_class();
   if (!isset($data['option'])) $data['option'] = array();
   if (!isset($data['error_message'])) $data['error_message'] = form_error($data['name']);
   $field_details = get_field_attribute($data['controller'], $data['field']);
@@ -52,6 +52,13 @@ function get_field_data($data, $router, $record) {
     $data['input_inline_class'] = "flex-fill btn_blue radio-btn";  
   }   
   return $data; 
+}
+
+function get_bootstrap_col_class() {
+  if (FIELDS_PER_ROW == 3)
+    return 'col-md-4';
+  else
+    return 'col-md-6';
 }
 
 function get_records_by_id($records) {

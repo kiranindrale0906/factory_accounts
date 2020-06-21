@@ -99,7 +99,7 @@ define('DOC', 'doc');
 define('FOLDER', 'folder');
 define('IMAGE', 'img');
 define('PDF', 'pdf');
-define('CLIENT_NAME', 'Demo');
+
 define('PAGES_MINIFY',false);
 define('EMAIL_VERIFICATION',false);
 define('MOBILE_VERIFICATION',false);
@@ -112,3 +112,5 @@ define('ADMIN_LAYOUTS_PATH', '');
 define('AUTH_TOKEN', '1234');
 define('ACCESS_TOKEN', '1234');
 define('ACCOUNT_NAME_REPORT','account_name');
+
+define('FIELDS_PER_ROW', 3); 

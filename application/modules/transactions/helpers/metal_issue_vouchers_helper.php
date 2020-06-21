@@ -1,45 +1,36 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed.');
-
+//General
 
 $ci=&get_instance();
-$ci->load->helper(array('ac_vouchers/ac_vouchers',
-                        CLIENT_NAME.'/metal_issue_voucher_clients'));
+$ci->load->helper(array('ac_vouchers/ac_vouchers', CLIENT_NAME.'/metal_issue_voucher_clients'));
 
 function getTableSettings() {
-  return metal_issue_voucher_clients_getTableSettings();
+  if (!function_exists('metal_issue_voucher_clients_getTableSettings')) {
+    $table_setting=array('page_title'=>'Metal Issue Voucher','where'=>'voucher_type="metal issue voucher"');
+    return ac_vouchers_getTableSettings($table_setting);
+  } else
+    return metal_issue_voucher_clients_getTableSettings();
 }
-//Add Cash Issue Voucher
-/*
-  0 => column title
-  1 => column name
-  2 => order flag
-  3 => order column
-  4 => filter flag
-  5 => expand text flag
-  6 => select column
-*/
-
-
 
 function list_settings() {
-  return metal_issue_voucher_clients_list_settings();
+  if (!function_exists('metal_issue_voucher_clients_list_settings')) { 
+    $list_option=array('voucher_date', 'created_time', 'voucher_number', 'account_name', 'debit_weight', 'purity', 'fine', 'narration');
+    return ac_vouchers_list_settings($list_option);
+  } else 
+    return metal_issue_voucher_clients_list_settings();
 }
 
-
-/*
-  | [0] => Label
-  | [1] => Placeholder
-  | [2] => Mandatory/Not Mandatory
-  | [3] => Class
-  | [4] => Autofocus
-  | [5] => Readonly
-  | [6] => disabled
-*/
-
 function get_field_attribute($table, $field) {
-  return metal_issue_voucher_clients_get_field_attribute($table, $field);
+  if (!function_exists('metal_issue_voucher_clients_get_field_attribute')) {
+    $required_fields=array('id', 'voucher_date', 'account_name', 'debit_weight', 'narration', 'account_id', 'purity');
+    return ac_voucher_get_field_attribute($table,$field,$required_fields);
+  } else
+    return metal_issue_voucher_clients_get_field_attribute($table, $field);
 }
 
 function get_row_actions($row, $url, $select_url, $filter) {
-  return metal_issue_voucher_clients_get_row_actions($row,$url,$select_url,$filter);
+  if (!function_exists('metal_issue_voucher_clients_get_row_actions')) {
+    return ac_vouchers_get_row_actions($row, $url, $select_url, $filter);
+  } else
+    return metal_issue_voucher_clients_get_row_actions($row, $url, $select_url, $filter);
 }

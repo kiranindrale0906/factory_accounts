@@ -1,10 +1,13 @@
 .DS_Store
 application/vendor/*
 application/cache/*
-application/config/development/*
+application/config/development/database.php
 application/config/staging/*
+application/config/production/*
 application/composer.lock
 application/logs/*
 .htaccess
 assets/core/.sass-cache/*
+uploads/*
+application/uploads/*
 
