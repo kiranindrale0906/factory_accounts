@@ -1,17 +1,23 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-require_once APPPATH . "modules/".CLIENT_NAME."/models/Metal_receipt_voucher_client_model.php";
-class Metal_receipt_voucher_model extends Metal_receipt_voucher_client_model {
 
-  protected $voucher_type = 'metal receipt voucher';
-  protected $account_type = 'account';
-  protected $insert_to_ledger = true; 
+if (file_exists(APPPATH . "modules/".CLIENT_NAME."/models/Metal_receipt_voucher_client_model.php")) {
 
-  public $router_class = "metal_receipt_vouchers";
-  protected $insert_to_ledger = true;
-
-  function __construct($data=array()) {
-    parent::__construct($data);
+  require_once APPPATH . "modules/".CLIENT_NAME."/models/Metal_receipt_voucher_client_model.php";  
+  class Metal_receipt_voucher_model extends Metal_receipt_voucher_client_model {
+    function __construct($data=array()) {
+      parent::__construct($data);
+    } 
   }
+
+} else {
+  
+  require_once APPPATH . "modules/ac_vouchers/models/Metal_receipt_voucher_core_model.php";  
+  class Metal_receipt_voucher_model extends Metal_receipt_voucher_core_model {
+    function __construct($data=array()) {
+      parent::__construct($data);
+    }
+  } 
+
 }
 ?>

@@ -42,32 +42,37 @@ class Voucher_model extends BaseModel {
                        'rules' => 'trim|required|numeric|greater_than[0]');
     }
 
-    if ($this->router->class=="metal_issue_vouchers" || $this->router->class=="metal_receipt_vouchers") {
-      $rules[] = array('field' => $this->router_class.'[purity]', 'label' => 'Purity',
-                       'rules' => array('trim','required','numeric','less_than_equal_to[100]',
-                                        //array('purity_error_msg', array($this,'check_purity_exist'))
-                                       ),
-                       'errors' => array('purity_error_msg'=>'Purity not exist in Purity master.'));
-
-      $rules[] = array('field' => $this->router_class.'[factory_purity]', 'label' => 'Purity',
-                       'rules' => array('trim','required','numeric','less_than_equal_to[100]'));
-    }
-
-    if ($this->router->class=="metal_receipt_vouchers") {
-      $rules[] = array('field' => $this->router_class.'[receipt_type]', 'label' => 'Receipt Type',
-                       'rules' => 'trim|required');
-      $rules[] = array('field' => $this->router_class.'[debit_weight]', 
-                       'label' => 'Weight',
-                       'rules' => 'trim|required|numeric|greater_than[0]');
-    } 
-
-    if ($this->router->class=="metal_issue_vouchers") {    
-      $rules[] = array('field' => $this->router_class.'[credit_weight]', 
-                       'label' => 'Credit Weight',
-                       'rules' => 'trim|required|numeric|greater_than[0]');
-    }
-
     return $rules;
+  }
+
+  protected function get_purity_validation_rules() {
+    return array('field' => $this->router_class.'[purity]', 'label' => 'Purity',
+                 'rules' => array('trim','required','numeric','less_than_equal_to[100]',
+                                  //array('purity_error_msg', array($this,'check_purity_exist'))
+                                 ),
+                 'errors' => array('purity_error_msg'=>'Purity not exist in Purity master.'));
+  }
+
+  protected function get_factory_purity_validation_rules() {
+    return array('field' => $this->router_class.'[factory_purity]', 'label' => 'Purity',
+                 'rules' => array('trim','required','numeric','less_than_equal_to[100]'));
+  }
+
+  protected function get_receipt_type_validation_rules() {
+    return array('field' => $this->router_class.'[receipt_type]', 'label' => 'Receipt Type',
+                 'rules' => 'trim|required');
+  }
+
+  protected function get_debit_weight_validation_rules() {
+    return array('field' => $this->router_class.'[debit_weight]', 
+                 'label' => 'Weight',
+                 'rules' => 'trim|required|numeric|greater_than[0]');
+  }
+
+  protected function get_credit_weight_validation_rules() {
+    return array('field' => $this->router_class.'[credit_weight]', 
+                 'label' => 'Credit Weight',
+                 'rules' => 'trim|required|numeric|greater_than[0]');
   }
 
   public function check_group_name_exist($name) {
