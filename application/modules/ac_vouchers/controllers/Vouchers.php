@@ -39,7 +39,7 @@ class Vouchers extends BaseController {
                                                           array(array('ac_groups',
                                                                       'ac_account.group_code=ac_groups.name','')),
                                                           array('order_by'=>'ac_account.name asc'));
-    $this->data['daily_drawer_type'] = get_daily_drawer_receipt_type();
+    // $this->data['daily_drawer_type'] = get_daily_drawer_receipt_type();
     // $this->data['purities'] = $this->purity_model->get('purity as name,id',
     //                                                    array('where'=>array('company_id='=>$company_id)),
     //                                                    array(), array('order_by'=>'purity asc'));
@@ -53,7 +53,7 @@ class Vouchers extends BaseController {
     $this->data['payment_term'] = $this->payment_term_model->get('terms as name,terms as  id', array() ,array(), array('order_by'=>'terms asc'));
 
     $this->data['transaction_type'] = get_transaction_type();
-    $this->data['hook_kdm_purity'] = get_melting_purity();
+    //$this->data['hook_kdm_purity'] = get_melting_purity();
     $this->data['has_hallmark'] = get_has_hallmark();
   }
 
