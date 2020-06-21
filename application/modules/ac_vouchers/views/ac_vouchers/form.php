@@ -17,7 +17,7 @@
       || $this->router->class == "rate_cut_booking_price_receipt_vouchers"
       || $this->router->class == "rate_cut_booking_weight_issue_vouchers"
       || $this->router->class == "rate_cut_booking_weight_receipt_vouchers") {
-    $readonly='readonly';
+    $readonly=true;
   }
 
   $this->load->view('ac_vouchers/ac_vouchers/company_error_message');
