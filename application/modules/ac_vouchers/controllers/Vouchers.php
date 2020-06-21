@@ -17,7 +17,7 @@ class Vouchers extends BaseController {
 
   public function store() {
     $this->data['open_modal'] = false;
-    $this->data['redirect_url'] = ADMIN_PATH.'transactions/metal_issue_vouchers';
+    $this->data['redirect_url'] = ADMIN_PATH.'transactions/metal_receipt_vouchers';
     $this->data['ajax_success_function']= "location.reload()";
     parent::store(); 
   }

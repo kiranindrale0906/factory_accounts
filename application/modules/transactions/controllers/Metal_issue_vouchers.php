@@ -1,11 +1,24 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-require_once APPPATH . "modules/".CLIENT_NAME."/controllers/Metal_issue_voucher_clients.php";
-class Metal_issue_vouchers extends Metal_issue_voucher_clients {
 
-  public function __construct() {
-    parent::__construct();
-    $this->date_fields = array(array('metal_issue_vouchers', 'voucher_date'));
-    $this->load->model(array('masters/department_category_model', 'masters/purity_model', 'masters/setting_model'));
+if (file_exists(APPPATH . "modules/".CLIENT_NAME."/controllers/Client_metal_issue_vouchers.php")) {
+
+  require_once APPPATH . "modules/".CLIENT_NAME."/controllers/Client_metal_issue_vouchers.php";
+  class Metal_issue_vouchers extends Client_metal_issue_vouchers {
+    function __construct($data=array()) {
+      parent::__construct($data);
+    } 
   }
+
+} else {
+  
+  require_once APPPATH . "modules/ac_vouchers/controllers/Core_metal_issue_vouchers.php";
+  require_once APPPATH . "modules/ac_vouchers/models/Core_metal_issue_vouchers.php";  
+  class Metal_issue_vouchers extends Core_metal_issue_vouchers {
+    function __construct($data=array()) {
+      parent::__construct($data);
+    } 
+  }
+
 }
+?>

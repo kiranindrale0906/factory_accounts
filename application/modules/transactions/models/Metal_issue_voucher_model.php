@@ -1,10 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-if (file_exists(APPPATH . "modules/".CLIENT_NAME."/models/Metal_issue_voucher_client_model.php")) {
+if (file_exists(APPPATH . "modules/".CLIENT_NAME."/models/Client_metal_issue_voucher_model.php")) {
 
-  require_once APPPATH . "modules/".CLIENT_NAME."/models/Metal_issue_voucher_client_model.php";  
-  class Metal_issue_voucher_model extends Metal_issue_voucher_client_model {
+  require_once APPPATH . "modules/".CLIENT_NAME."/models/Client_metal_issue_voucher_model.php";  
+  class Metal_issue_voucher_model extends Client_metal_issue_voucher_model {
     function __construct($data=array()) {
       parent::__construct($data);
     } 
@@ -12,8 +12,8 @@ if (file_exists(APPPATH . "modules/".CLIENT_NAME."/models/Metal_issue_voucher_cl
 
 } else {
   
-  require_once APPPATH . "modules/ac_vouchers/models/Metal_issue_voucher_core_model.php";  
-  class Metal_issue_voucher_model extends Metal_issue_voucher_core_model {
+  require_once APPPATH . "modules/ac_vouchers/models/Core_metal_issue_voucher_model.php";  
+  class Metal_issue_voucher_model extends Core_metal_issue_voucher_model {
     function __construct($data=array()) {
       parent::__construct($data);
     }
