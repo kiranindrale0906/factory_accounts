@@ -10,8 +10,8 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
   
   public function validation_rules($klass='') {
     $rules = parent::validation_rules($klass);
-    $rules[] = $this->get_factory_purity_validation_rules();
-    $rules[] = $this->get_receipt_type_validation_rules();
+    $rules[] = $this->get_account_validation_rules();
+    
     return $rules;
   }
 

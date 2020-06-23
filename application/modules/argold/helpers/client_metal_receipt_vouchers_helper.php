@@ -9,7 +9,20 @@ function list_settings() {
 }
 
 function get_field_attribute($table, $field) {
-  $required_fields=array('id', 'voucher_date', 'receipt_type', 'account_name', 
-                         'debit_weight', 'factory_purity','factory_fine', 'purity', 'fine', 'narration');
+
+  if(!empty($_GET['receipt_type']) && $_GET['receipt_type']=='Metal')	{
+    $required_fields=array('id', 'voucher_date', 'receipt_type', 'account_name', 
+                           'debit_weight', 'purity', 'fine', 'narration');
+  }elseif (!empty($_GET['receipt_type']) && $_GET['receipt_type']=='Finished Goods') {
+    $required_fields=array('id', 'voucher_date', 'receipt_type', 
+                           'debit_weight', 'factory_purity','factory_fine', 'purity', 'fine', 'narration');
+
+  }else {
+    $required_fields=array('id', 'voucher_date', 'receipt_type', 'account_name', 
+                           'debit_weight', 'factory_purity','factory_fine', 'purity', 'fine', 'narration');
+
+  }
+
+
   return ac_voucher_get_field_attribute($table,$field,$required_fields);
 }
