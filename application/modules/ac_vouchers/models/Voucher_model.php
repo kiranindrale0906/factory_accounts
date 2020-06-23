@@ -14,9 +14,7 @@ class Voucher_model extends BaseModel {
                                array('validate_voucher_date', array($this, 'check_period_exists'))),
                     'errors'=>array('validate_voucher_date' => "Please set the Financial year from master."));
     $rules[] = array('field' => $this->router_class.'[account_name]', 'label' => 'Account Name',
-                     'rules' => array('trim', 'required', 
-                               array('validate_account', array($this, 'check_is_account'))),
-                    'errors'=>array('validate_account' => "Account Name must be ARC or ARF."));
+                     'rules' => array('trim', 'required'));
     
     if($this->router->class=="bank_issue_vouchers" || $this->router->class=="bank_receipt_vouchers") {
       $rules[] = array('field' => $this->router_class.'[bank_name]', 'label' => 'Bank Name',
@@ -121,15 +119,6 @@ class Voucher_model extends BaseModel {
 
    public function check_factory_same_as_purity($name) {
     if(!empty($this->attributes['receipt_type']) && $this->attributes['receipt_type']=='Metal' && $this->attributes['purity']!=$name)
-     { 
-      return false;
-    }else{
-      return true;
-    }
-  }
-  public function check_is_account($name) {
-
-    if(!empty($this->attributes['receipt_type']) && $this->attributes['receipt_type']=='Finished Goods' && !in_array($name,array('ARF','ARC')))
      { 
       return false;
     }else{

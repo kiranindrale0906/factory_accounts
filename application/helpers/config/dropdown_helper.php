@@ -18,7 +18,9 @@
     return array( array('id' => 'Metal', 'name' => 'Metal'),
                   array('id' => 'Refresh', 'name' => 'Refresh'),
                   array('id' => 'Daily Drawer', 'name' => 'Daily Drawer'),
-                  array('id' => 'Finished Goods', 'name' => 'Finished Goods'));
+                  array('id' => 'ARC Finished Goods', 'name' => 'ARC Finished Goods'),
+                  array('id' => 'ARF Finished Goods', 'name' => 'ARF Finished Goods'),
+                );
   }
 
   function get_transaction_type() {
