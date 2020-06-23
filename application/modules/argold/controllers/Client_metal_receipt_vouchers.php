@@ -18,9 +18,10 @@ class Client_metal_receipt_vouchers extends Core_metal_receipt_vouchers {
       $this->data['account_names_for_metal_issue'][] = array('id' => 'ARC', 'name' => 'ARC');
 
     if ($company_name != 'ARF')
-      $this->data['account_names_for_metal_issue'][] = array('id' => 'ARF', 'name' => 'ARF');   
-
-    $this->data['account_names_for_metal_issue'][] = array('id' => 'Finished Goods', 'name' => 'Finished Goods');
+      $this->data['account_names_for_metal_issue'][] = array('id' => 'ARF', 'name' => 'ARF'); 
+    
+    $this->data['account_names_for_metal_issue'][] = array('id' => 'ARC Finished Goods', 'name' => 'ARC Finished Goods');
+    $this->data['account_names_for_metal_issue'][] = array('id' => 'ARF Finished Goods', 'name' => 'ARF Finished Goods');   
 
     $this->data['record']['receipt_type']=!empty($_GET['receipt_type'])?$_GET['receipt_type']:"";
     parent::_get_form_data(); 

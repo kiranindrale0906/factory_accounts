@@ -27,18 +27,19 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
     if (isset($this->attributes['metal_receipt_voucher_reference_id']) 
         && (!empty($this->attributes['metal_receipt_voucher_reference_id']))) return true;    
 
-    if ($this->attributes['receipt_type'] == 'Finished Goods') {
+    if ($this->attributes['receipt_type'] == 'ARC Finished Goods'
+        || $this->attributes['receipt_type'] == 'ARF Finished Goods') {
       $this->load->model('transactions/metal_receipt_voucher_model');
       $metal_receipt_data = array();
       $metal_receipt_data['company_id'] = $this->attributes['company_id'];
       $metal_receipt_data['voucher_date'] = $this->attributes['voucher_date'];
-      $metal_receipt_data['account_name'] = 'Finished Goods';
-      $metal_receipt_data['receipt_type'] = 'Finished Goods';
+      $metal_receipt_data['account_name'] = $this->attributes['receipt_type'];
+      $metal_receipt_data['receipt_type'] = $this->attributes['receipt_type'];
     
       $metal_receipt_data['debit_weight'] = $this->attributes['credit_weight'];
-      $metal_receipt_data['purity'] = $this->attributes['in_purity'];
-      $metal_receipt_data['in_purity'] = $this->attributes['in_purity'];
-      $metal_receipt_data['fine'] = $this->attributes['credit_weight'] * $this->attributes['in_purity'] / 100;
+      $metal_receipt_data['purity'] = $this->attributes['purity'];
+      $metal_receipt_data['factory_purity'] = $this->attributes['purity'];
+      $metal_receipt_data['fine'] = $this->attributes['credit_weight'] * $this->attributes['purity'] / 100;
       $metal_receipt_data['factory_fine'] = $metal_receipt_data['fine'];
       $metal_receipt_data['narration'] = $this->attributes['narration'];
       $metal_receipt_data['suffix'] = "MR";
