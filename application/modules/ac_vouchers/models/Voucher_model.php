@@ -129,7 +129,7 @@ class Voucher_model extends BaseModel {
   }
   public function check_is_account($name) {
 
-    if(!empty($this->attributes['receipt_type']) && $this->attributes['receipt_type']=='Finish Goods' && !in_array($name,array('ARF','ARC')))
+    if(!empty($this->attributes['receipt_type']) && $this->attributes['receipt_type']=='Finished Goods' && !in_array($name,array('ARF','ARC')))
      { 
       return false;
     }else{
