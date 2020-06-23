@@ -51,6 +51,8 @@ function ac_vouchers_getTableSettings($table_setting_arg=array()) {
 
 
 function ac_vouchers_list_settings($list_setting_arg=array()) {
+  $ci=&get_instance();
+
   $list_setting['voucher_date'] = array("Date", "voucher_date", TRUE, "voucher_date", TRUE, TRUE,
                                         "DATE_FORMAT(ac_vouchers.created_at, '%d-%m-%Y') as voucher_date");
   $list_setting['created_time'] = array("Time", "created_at", FALSE, "created_at", FALSE, TRUE,
@@ -83,14 +85,23 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
                                           "FORMAT(ac_vouchers.lumpsum_amount,ac_company.decimal_no) as lumpsum_amount",'','','','text-right');
   $list_setting['interest_per_day'] = array("Interest per Day", "interest_per_day", FALSE, "interest_per_day", TRUE, TRUE);
 
-  $list_setting['receipt_type'] = array("Receipt Type", "receipt_type", FALSE, "receipt_type", TRUE, TRUE);
+  if ($ci->router->class=='metal_issue_vouchers') {
+    $list_setting['receipt_type'] = array("Issue Type", "receipt_type", FALSE, "receipt_type", TRUE, TRUE);
+    $list_setting['purity'] = array("Factory Purity", "purity", FALSE, "purity", TRUE, TRUE);
+    $list_setting['fine'] = array("Factory Fine", "fine", FALSE, "fine", TRUE, TRUE);
+    $list_setting['factory_purity'] = array("Issue Purity", "factory_purity", FALSE, "factory_purity", TRUE, TRUE);
+    $list_setting['factory_fine'] = array("Issue Fine", "factory_fine", FALSE, "factory_fine", TRUE, TRUE);
+  } else {
+    $list_setting['receipt_type'] = array("Type", "receipt_type", FALSE, "receipt_type", TRUE, TRUE);
+    $list_setting['purity'] = array("Purity", "purity", FALSE, "purity", TRUE, TRUE);
+    $list_setting['fine'] = array("Fine", "fine", FALSE, "fine", TRUE, TRUE);
+    $list_setting['factory_purity'] = array("Factory Purity", "factory_purity", FALSE, "factory_purity", TRUE, TRUE);
+    $list_setting['factory_fine'] = array("Factory Fine", "factory_fine", FALSE, "factory_fine", TRUE, TRUE);
+  }
+
   $list_setting['credit_weight'] = array("Credit Wt.", "credit_weight", FALSE, "credit_weight", TRUE, TRUE);
   $list_setting['debit_weight'] = array("Debit Wt.", "debit_weight", FALSE, "debit_weight", TRUE, TRUE);
-  $list_setting['purity'] = array("Purity", "purity", FALSE, "purity", TRUE, TRUE);
-  $list_setting['fine'] = array("Fine", "fine", FALSE, "fine", TRUE, TRUE);
-  $list_setting['factory_purity'] = array("Factory Purity", "factory_purity", FALSE, "factory_purity", TRUE, TRUE);
-  $list_setting['factory_fine'] = array("Factory Fine", "factory_fine", FALSE, "factory_fine", TRUE, TRUE);
-
+  
   $list_setting['Pure Gold'] = array("Narration", "pure_gold_credit", FALSE, "pure_gold_credit", TRUE, TRUE);
   $list_setting['department_name'] = array("Department Name", "department_name", FALSE, "department_name", TRUE, TRUE);
   $list_setting['debit_amount'] = array("Debit Amt", "debit_amount", TRUE, "debit_amount", FALSE, TRUE,"FORMAT(ac_vouchers.debit_amount,ac_company.decimal_no) as debit_amount",
@@ -149,14 +160,12 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
 
   $attributes['cheque_number'] = array("Check Number", "Enter Check Number", FALSE,'', FALSE);
   $attributes['debit_amount'] = array('Debit Amount', 'Enter Debit Amount', TRUE, '', TRUE);
-  $attributes['receipt_type'] = array('Receipt Type', 'Enter Receipt Type', TRUE, '', TRUE);
+  $attributes['receipt_type'] = array('Type', 'Select Type', TRUE, '', TRUE);
   $attributes['factory_purity'] = array('Factory Purity', 'Enter factory purity', TRUE, '', TRUE);
   $attributes['hook_kdm_purity'] = array('Hook KDM Purity', 'Enter hook kdm purity', TRUE, '', TRUE);
   $attributes['quantity'] = array('Quantity', 'Enter quantity', TRUE, '', TRUE);
   
-  $attributes['fine'] = array('Fine', '', FALSE, '', TRUE,TRUE);
-  $attributes['factory_fine'] = array('Factory Fine', '', FALSE, '', TRUE,TRUE);
-
+  
   $attributes['dd_type'] = array('Daily Drawer Type', 'Select Daily Drawer Type', TRUE, '', TRUE);
 
   $attributes['type'] = array('Type', 'Type', TRUE, '', TRUE);
@@ -174,20 +183,33 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['to_group_id'] = array('', '', TRUE, '', TRUE);
   $attributes['document'] = array('', '', TRUE, '', TRUE);
 
-  $attributes['purity'] = array('Purity', 'Enter Purity', TRUE, '', TRUE);
+  if ($ci->router->class=='metal_issue_vouchers') {
+    $attributes['purity'] = array('Factory Purity', 'Enter Purity', TRUE, '', TRUE);
+    $attributes['fine'] = array('Factory Fine', '', FALSE, '', TRUE,TRUE);
+    $attributes['factory_purity'] = array('Issue Purity', 'Enter factory purity', TRUE, '', TRUE);
+    $attributes['factory_fine'] = array('Issue Fine', '', FALSE, '', TRUE,TRUE);
+    $attributes['type'] = array('Type', ' Type', TRUE, '', TRUE);
+  } else {
+    $attributes['purity'] = array('Purity', 'Enter Purity', TRUE, '', TRUE);
+    $attributes['fine'] = array('Fine', '', FALSE, '', TRUE,TRUE);
+    $attributes['factory_purity'] = array('Factory Purity', 'Enter factory purity', TRUE, '', TRUE);
+    $attributes['factory_fine'] = array('Factory Fine', '', FALSE, '', TRUE,TRUE);    
+    $attributes['type'] = array('Type', ' Type', TRUE, '', TRUE);
+  }
+
   $attributes['credit_weight'] = array('Credit Weight', 'Enter Credit Weight', TRUE, '', TRUE);
   $attributes['debit_weight'] = array('Weight', 'Enter Weight', TRUE, '', TRUE);
   $attributes['arg_weight'] = array('ARG Weight', 'ARG Weight', FALSE, '', FALSE,TRUE);
   $attributes['department_name'] = array('Department Name', 'Department', FALSE, '', TRUE);
   $attributes['department_id'] = array('Department', ' Department', FALSE, '', FALSE,TRUE);
-$attributes['type'] = array('Type', ' Type', TRUE, '', TRUE);
-$attributes['group_name'] = array('Group Name', ' Group Name', TRUE, '', TRUE);
-$attributes['gst_number'] = array('GST Number', ' GST Number', TRUE, '', TRUE);
-$attributes['cash_bill'] = array('Cash/Bill', 'Cash Bill', TRUE, '',TRUE);
-$attributes['payment_term'] = array('Payment Term', 'Payment Term', TRUE, '', TRUE);
-$attributes['hallmark_number'] = array('Hallmark Number', 'Hallmark Number', false, '', TRUE);
-$attributes['has_hallmark'] = array('', 'Has Hallmark', TRUE, '', TRUE);
-$attributes['total_value'] = array('Value', 'Value', FALSE, '',TRUE);
+  
+  $attributes['group_name'] = array('Group Name', ' Group Name', TRUE, '', TRUE);
+  $attributes['gst_number'] = array('GST Number', ' GST Number', TRUE, '', TRUE);
+  $attributes['cash_bill'] = array('Cash/Bill', 'Cash Bill', TRUE, '',TRUE);
+  $attributes['payment_term'] = array('Payment Term', 'Payment Term', TRUE, '', TRUE);
+  $attributes['hallmark_number'] = array('Hallmark Number', 'Hallmark Number', false, '', TRUE);
+  $attributes['has_hallmark'] = array('', 'Has Hallmark', TRUE, '', TRUE);
+  $attributes['total_value'] = array('Value', 'Value', FALSE, '',TRUE);
 
   if(!empty($required_field)) {
     $attributes[$ci->router->class] = array_intersect_key($attributes, array_flip($required_field));

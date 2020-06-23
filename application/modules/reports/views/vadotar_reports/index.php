@@ -27,7 +27,7 @@
                 <h5 class="heading blue m-0">Receipt <?= $voucher_date; ?></h5>
                 <table class="table table-sm fixedthead table-default">
                   <?php 
-                    $this->load->view('reports/vadotar_reports/thead'); 
+                    $this->load->view('reports/vadotar_reports/receipt_thead'); 
                     $this->load->view('reports/vadotar_reports/tbody', 
                         array('voucher_date_records' => isset($receipts[$account['name']][$voucher_date])                              ? $receipts[$account['name']][$voucher_date] :
                                                           array(),
@@ -47,7 +47,7 @@
                 <h5 class="heading blue m-0">Issue</h5>
                 <table class="table table-sm fixedthead table-default">
                   <?php 
-                    $this->load->view('reports/vadotar_reports/thead'); 
+                    $this->load->view('reports/vadotar_reports/issue_thead'); 
                     $this->load->view('reports/vadotar_reports/tbody',
                                                         array('voucher_date_records' => isset($issues[$account['name']][$voucher_date]) ? $issues[$account['name']][$voucher_date] : array(),
                                                           'previous_date' => $previous_date,
