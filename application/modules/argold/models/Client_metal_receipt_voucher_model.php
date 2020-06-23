@@ -12,8 +12,16 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     $rules = parent::validation_rules($klass);
     $rules[] = $this->get_factory_purity_validation_rules();
     $rules[] = $this->get_receipt_type_validation_rules();
+    
+    if (isset($this->formdata['metal_issue_vouchers'])) {
+      foreach ($this->formdata['metal_issue_vouchers'] as $index => $metal_issue_voucher) {
+        $rules[] = $this->get_metal_issue_factory_purity_validation_rules('metal_issue_vouchers',$index);
+      }
+    }
+
     return $rules;
   }
+
 
   public function before_validate() {
     if (isset($this->formdata['metal_issue_vouchers'])) {
