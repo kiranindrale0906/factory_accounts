@@ -36,9 +36,9 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
       $metal_receipt_data['receipt_type'] = 'Finished Goods';
     
       $metal_receipt_data['debit_weight'] = $this->attributes['credit_weight'];
-      $metal_receipt_data['purity'] = $this->attributes['factory_purity'];
-      $metal_receipt_data['factory_purity'] = $this->attributes['factory_purity'];
-      $metal_receipt_data['fine'] = $this->attributes['credit_weight'] * $this->attributes['factory_purity'] / 100;
+      $metal_receipt_data['purity'] = $this->attributes['in_purity'];
+      $metal_receipt_data['in_purity'] = $this->attributes['in_purity'];
+      $metal_receipt_data['fine'] = $this->attributes['credit_weight'] * $this->attributes['in_purity'] / 100;
       $metal_receipt_data['factory_fine'] = $metal_receipt_data['fine'];
       $metal_receipt_data['narration'] = $this->attributes['narration'];
       $metal_receipt_data['suffix'] = "MR";
