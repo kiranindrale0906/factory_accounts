@@ -10,30 +10,21 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
   public function validation_rules($klass='') {
     $rules = parent::validation_rules($klass);
-   if (!empty($this->attributes['receipt_type']) && $this->attributes['receipt_type']!='Finished Goods') {
+   if (!empty($this->attributes['receipt_type']) && $this->attributes['receipt_type']=='ARC Finished Goods' || $this->attributes['receipt_type']=='ARF Finished Goods' ) {
 
       $rules[] = $this->get_account_validation_rules();
     }
     $rules[] = $this->get_factory_purity_validation_rules();
     $rules[] = $this->get_receipt_type_validation_rules();
 
-    if (isset($this->formdata['metal_issue_vouchers'])) {
-      foreach ($this->formdata['metal_issue_vouchers'] as $index => $metal_issue_voucher) {
-        $rules[] = $this->get_metal_issue_factory_purity_validation_rules('metal_issue_vouchers',$index);
-      }
-    }
+    // if (!empty($this->formdata['metal_issue_vouchers'])) {
+    //   foreach ($this->formdata['metal_issue_vouchers'] as $index => $metal_issue_voucher) {
+    //     $rules[] = $this->get_metal_issue_factory_purity_validation_rules('metal_issue_vouchers',$index);
+    //   }
+    // }
 
     return $rules;
   }
-
-  private function get_metal_issue_factory_purity_validation_rules($router_class,$index) {
-    return array('field' => $router_class.'['.$index.'][factory_purity]', 'label' => 'Purity',
-                 'rules' => array(array('factory_purity_error_msg', array($this,'check_factory_same_as_purity'))),
-                  'errors' => array('factory_purity_error_msg'=>'Factory Purity not same as Purity.'));
-
-  }
-
- 
   public function before_validate() {
     if ($this->attributes['receipt_type'] == "ARC Finished Goods") $this->attributes['account_name'] = 'ARC';
     if ($this->attributes['receipt_type'] == "ARF Finished Goods") $this->attributes['account_name'] = 'ARC';
@@ -46,6 +37,12 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                                                             'purity' => $this->attributes['purity'],
                                                             'factory_purity' => $this->attributes['factory_purity']));
     }
+    
+     if ($this->attributes['receipt_type'] == 'Metal') {
+        $this->formdata['metal_receipt_vouchers']['factory_purity'] = $this->attributes['purity'];
+        $this->formdata['metal_receipt_vouchers']['factory_fine'] = $this->attributes['debit_weight']*$this->attributes['purity']/100;
+     }
+      
 
     if (isset($this->formdata['metal_issue_vouchers'])) {
       foreach ($this->formdata['metal_issue_vouchers'] as $index => $metal_issue_voucher) {
@@ -56,6 +53,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
         if ($this->attributes['receipt_type'] == 'Metal') 
           $this->formdata['metal_issue_vouchers'][$index]['purity'] = $this->attributes['factory_purity'];
+          
       }
     }
   }
@@ -85,7 +83,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
       $metal_issue_data['purity'] = $this->attributes['factory_purity'];
       $metal_issue_data['factory_purity'] = $this->attributes['factory_purity'];
-      $metal_issue_data['fine'] = $metal_issue_voucher['credit_weight'] * $this->attributes['factory_purity'] / 100;
+      $metal_issue_data['fine'] =!empty($metal_issue_voucher['credit_weight'])? $metal_issue_voucher['credit_weight'] * $this->attributes['factory_purity'] / 100:0;
       $metal_issue_data['factory_fine'] = $metal_issue_data['fine'];
       $metal_issue_data['narration'] = $this->attributes['narration'];
       $metal_issue_data['suffix'] = "MI";
@@ -103,8 +101,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     if ($data['company_id'] != 1) return true;
 
     $credit_weight = 0;
-    if (isset($formdata['metal_issue_vouchers'])) {
+    if (!empty($formdata['metal_issue_vouchers'])) {
       foreach ($formdata['metal_issue_vouchers'] as $metal_issue_voucher) {
+        if(!empty($metal_issue_voucher['credit_weight']))
         $credit_weight += $metal_issue_voucher['credit_weight'];
       }
     }

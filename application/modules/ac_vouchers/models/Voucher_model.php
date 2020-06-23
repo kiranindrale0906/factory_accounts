@@ -111,7 +111,7 @@ class Voucher_model extends BaseModel {
     return (empty($department)) ? false : true;
   }
 
-public function before_save($action) {
+  public function before_save($action) {
     unset($this->attributes['arg_weight']);
     $this->set_user_define_data();
   }
@@ -136,18 +136,22 @@ public function before_save($action) {
     $this->formdata[$this->router_class]['suffix'] = $this->prefix;
     $this->formdata[$this->router_class]['voucher_type'] = $this->voucher_type;
     // $this->formdata[$this->router_class]['transaction_type'] = $this->account_type;
+    // pd($this->attributes);
+    $account=array();
+    if(!empty($this->attributes['account_name'])){
 
     $account = $this->account_model->find('id, group_id, route_group, sub_group_id', 
                                           array('name' => $this->attributes['account_name']));
+    }
     if (!empty($account['id'])) {    
       $this->formdata[$this->router_class]['group_id'] = !empty($account['group_id']) ? $account['group_id'] : 0;
       $this->formdata[$this->router_class]['sub_group_id'] = !empty($account['sub_group_id']) ? $account['sub_group_id'] : 0;
       $this->formdata[$this->router_class]['route_group'] = !empty($account['route_group']) ? $account['route_group'] : '';
     }
-
+    $account_name=isset($this->attributes['account_name'])?$this->attributes['account_name']:'';
     if (empty($account['id'])) {
       $sub_groups = $this->setting_model->find('id, value', array('name' => 'Sub Group'));
-      $account_detail['name'] = $this->attributes['account_name'];
+      $account_detail['name'] =$account_name;
       $account_detail['sub_group_code'] = !empty($sub_groups['value']) ? $sub_groups['value'] : '';
       $account_detail['sub_group_id'] = !empty($sub_groups['id']) ? $sub_groups['id'] : 0;
       $obj_account = new account_model($account_detail);
