@@ -20,6 +20,8 @@ class Client_metal_receipt_vouchers extends Core_metal_receipt_vouchers {
     if ($company_name != 'ARF')
       $this->data['account_names_for_metal_issue'][] = array('id' => 'ARF', 'name' => 'ARF');   
 
+    $this->data['account_names_for_metal_issue'][] = array('id' => 'Finished Goods', 'name' => 'Finished Goods');   
+
     parent::_get_form_data(); 
   }
 }

@@ -36,7 +36,7 @@
                 $total_different = 0;  
                 if(!empty($trial_balance)) {
                   foreach ($trial_balance as $record) {
-                    if (in_array($record['account_name'], array("AR Gold", 'ARC', 'ARF'))) continue;
+                    if (in_array($record['account_name'], array("AR Gold", 'ARC', 'ARF', 'Finished Goods'))) continue;
                     $total_different = $total_different + $record['different'];
                     if($record['receipt_weight'] > 0)
                       $total_weight_receipt = $total_weight_receipt + $record['receipt_weight'];
@@ -204,7 +204,7 @@
                 $total_different = 0;  
                 if(!empty($trial_balance)) {
                   foreach ($trial_balance as $record) {
-                    if (!(in_array($record['account_name'], array('ARC', 'ARF')))) continue;
+                    if (!(in_array($record['account_name'], array('ARC', 'ARF', 'Finished Goods')))) continue;
                     $total_different = $total_different + $record['different'];
                     if($record['receipt_weight'] > 0)
                       $total_weight_receipt = $total_weight_receipt + $record['receipt_weight'];
@@ -351,10 +351,12 @@
         <table class="table table-sm fixedthead table-default">
           <tr>
             <td><b>Liabilities: </b></td>
+            <?php $assets_fine_closing = isset($assets_fine_closing) ? $assets_fine_closing : 0 ?>
             <td class="text-right"><?= four_decimal($assets_fine_closing) ?></td>
           </tr>
           <tr>
             <td><b>Assets: </b></td>
+            <?php $liabilities_fine_closing = isset($liabilities_fine_closing) ? $liabilities_fine_closing : 0 ?>
             <td class="text-right"><?= four_decimal(($liabilities_fine_closing));  ?></td>
           </tr>
           <tr>
