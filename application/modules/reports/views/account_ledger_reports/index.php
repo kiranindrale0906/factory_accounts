@@ -31,7 +31,7 @@
             <h5 class="heading blue m-0">Receipt: <?= $voucher_date ?></h5>
             <table class="table table-sm fixedthead table-default">
               <?php 
-                $this->load->view('reports/account_ledger_reports/thead'); 
+                $this->load->view('reports/account_ledger_reports/receipt_thead'); 
                 $this->load->view('reports/account_ledger_reports/tbody', 
                         array('voucher_date_records' => isset($receipts[$voucher_date]) ? $receipts[$voucher_date] :
                                                           array(),
@@ -51,7 +51,7 @@
             <h5 class="heading blue m-0">Issue</h5>
             <table class="table table-sm fixedthead table-default">
               <?php 
-                $this->load->view('reports/account_ledger_reports/thead');
+                $this->load->view('reports/account_ledger_reports/issue_thead');
                 $this->load->view('reports/account_ledger_reports/tbody', 
                                                         array('voucher_date_records' => isset($issues[$voucher_date]) ? $issues[$voucher_date] : array(),
                                                           'previous_date' => $previous_date,

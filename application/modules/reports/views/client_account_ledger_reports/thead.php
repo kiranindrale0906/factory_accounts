@@ -1,7 +1,7 @@
 <thead>
   <tr>
     <th>Account Name</th>
-    <th>Gross Wt</th>
-    <th>Fine</th>
+    <th class='text-right'>Gross Wt</th>
+    <th class='text-right'>Fine</th>
   </tr>
 </thead>

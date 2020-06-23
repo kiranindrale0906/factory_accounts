@@ -49,17 +49,13 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
     foreach ($this->formdata['metal_issue_vouchers'] as $metal_issue_voucher) {
       $metal_issue_data = array();
-      $metal_issue_data=$metal_issue_voucher;
-
+      $metal_issue_data=$metal_issue_voucher;  //set account_name, credit_weight, factory_purity, factory_fine, receipt_type
+      
       $metal_issue_data['company_id']  = $this->attributes['company_id'];
       $metal_issue_data['metal_receipt_voucher_reference_id'] = $this->attributes['id'];
       $metal_issue_data['voucher_date'] = $this->attributes['voucher_date'];
-      $metal_issue_data['account_id'] = $this->attributes['account_id'];
-
       $metal_issue_data['purity'] = $this->attributes['factory_purity'];
-      $metal_issue_data['factory_purity'] = $this->attributes['factory_purity'];
       $metal_issue_data['fine'] = $metal_issue_voucher['credit_weight'] * $this->attributes['factory_purity'] / 100;
-      $metal_issue_data['factory_fine'] = $metal_issue_data['fine'];
       $metal_issue_data['narration'] = $this->attributes['narration'];
       $metal_issue_data['suffix'] = "MI";
       $metal_issue_data['voucher_type'] = "metal issue voucher";
