@@ -111,19 +111,7 @@ class Voucher_model extends BaseModel {
     return (empty($department)) ? false : true;
   }
 
-<<<<<<< HEAD
-=======
-   public function check_factory_same_as_purity($name) {
-    if(!empty($this->attributes['receipt_type']) && $this->attributes['receipt_type']=='Metal' && $this->attributes['purity']!=$name)
-     { 
-      return false;
-    }else{
-      return true;
-    }
-  }
-
->>>>>>> cd1bac19231fed9ed6ae8acf34704a6c287ffacf
-  public function before_save($action) {
+public function before_save($action) {
     unset($this->attributes['arg_weight']);
     $this->set_user_define_data();
   }
