@@ -13,10 +13,8 @@ class Voucher_model extends BaseModel {
                     'rules' => array('trim', 'required', 
                                array('validate_voucher_date', array($this, 'check_period_exists'))),
                     'errors'=>array('validate_voucher_date' => "Please set the Financial year from master."));
-    $rules[] = array('field' => $this->router_class.'[account_name]', 'label' => 'Account Name',
-                     'rules' => array('trim', 'required', 
-                               array('validate_account', array($this, 'check_is_account'))),
-                    'errors'=>array('validate_account' => "Account Name must be ARC or ARF."));
+    // $rules[] = array('field' => $this->router_class.'[account_name]', 'label' => 'Account Name',
+    //                  'rules' => 'trim|required');
     
     if($this->router->class=="bank_issue_vouchers" || $this->router->class=="bank_receipt_vouchers") {
       $rules[] = array('field' => $this->router_class.'[bank_name]', 'label' => 'Bank Name',
@@ -54,21 +52,15 @@ class Voucher_model extends BaseModel {
                                  ),
                  'errors' => array('purity_error_msg'=>'Purity not exist in Purity master.'));
   }
+  protected function get_account_validation_rules() {
+    return array('field' => $this->router_class.'[account_name]', 'label' => 'Account Name',
+                     'rules' => 'trim|required');
+    }
 
   protected function get_factory_purity_validation_rules() {
     return array('field' => $this->router_class.'[factory_purity]', 'label' => 'Purity',
-                 'rules' => array('trim','required','numeric','less_than_equal_to[100]',
-                  array('factory_purity_error_msg', array($this,'check_factory_same_as_purity'))),
-                  'errors' => array('factory_purity_error_msg'=>'Factory Purity not same as Purity.'));
-
+                 'rules' => array('trim','required','numeric','less_than_equal_to[100]'));
   }
-   protected function get_metal_issue_factory_purity_validation_rules($router_class,$index) {
-    return array('field' => $router_class.'['.$index.'][factory_purity]', 'label' => 'Purity',
-                 'rules' => array(array('factory_purity_error_msg', array($this,'check_factory_same_as_purity'))),
-                  'errors' => array('factory_purity_error_msg'=>'Factory Purity not same as Purity.'));
-
-  }
-
 
   protected function get_receipt_type_validation_rules() {
     return array('field' => $this->router_class.'[receipt_type]', 'label' => 'Receipt Type',
@@ -117,24 +109,6 @@ class Voucher_model extends BaseModel {
     else
       $department=$this->department_model->find('id as id',array('name'=>$name));
     return (empty($department)) ? false : true;
-  }
-
-   public function check_factory_same_as_purity($name) {
-    if(!empty($this->attributes['receipt_type']) && $this->attributes['receipt_type']=='Metal' && $this->attributes['purity']!=$name)
-     { 
-      return false;
-    }else{
-      return true;
-    }
-  }
-  public function check_is_account($name) {
-
-    if(!empty($this->attributes['receipt_type']) && $this->attributes['receipt_type']=='Finished Goods' && !in_array($name,array('ARF','ARC')))
-     { 
-      return false;
-    }else{
-      return true;
-    }
   }
 
   public function before_save($action) {
