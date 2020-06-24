@@ -10,11 +10,10 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
   public function validation_rules($klass='') {
     $rules = parent::validation_rules($klass);
-   if (!empty($this->attributes['receipt_type']) && $this->attributes['receipt_type']=='ARC Finished Goods' || $this->attributes['receipt_type']=='ARF Finished Goods' ) {
-
-      $rules[] = $this->get_account_validation_rules();
+   if (!empty($this->attributes['receipt_type']) && $this->attributes['receipt_type']!='ARC Finished Goods' || $this->attributes['receipt_type']!='ARF Finished Goods' ) {
+    $rules[] = $this->get_account_validation_rules();
+    // $rules[] = $this->get_factory_purity_validation_rules();
     }
-    $rules[] = $this->get_factory_purity_validation_rules();
     $rules[] = $this->get_receipt_type_validation_rules();
 
     // if (!empty($this->formdata['metal_issue_vouchers'])) {
@@ -29,16 +28,16 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     if ($this->attributes['receipt_type'] == "ARC Finished Goods") $this->attributes['account_name'] = 'ARC';
     if ($this->attributes['receipt_type'] == "ARF Finished Goods") $this->attributes['account_name'] = 'ARC';
     
-    if ($this->attributes['receipt_type'] == "ARC Finished Goods"
-        || $this->attributes['receipt_type'] == "ARF Finished Goods") {
-      unset($this->formdata['metal_issue_vouchers']);
-      $this->formdata['metal_issue_vouchers'] = array(array('account_name' => $this->attributes['receipt_type'],
-                                                            'credit_weight' => $this->attributes['debit_weight'],
-                                                            'purity' => $this->attributes['purity'],
-                                                            'factory_purity' => $this->attributes['factory_purity']));
-    }
+    // if ($this->attributes['receipt_type'] == "ARC Finished Goods"
+    //     || $this->attributes['receipt_type'] == "ARF Finished Goods") {
+    //   unset($this->formdata['metal_issue_vouchers']);
+    //   $this->formdata['metal_issue_vouchers'] = array(array('account_name' => $this->attributes['receipt_type'],
+    //                                                         'credit_weight' => $this->attributes['debit_weight'],
+    //                                                         'purity' => $this->attributes['purity'],
+    //                                                         'factory_purity' => $this->attributes['factory_purity']));
+    // }
     
-     if ($this->attributes['receipt_type'] == 'Metal') {
+     if (in_array($this->attributes['receipt_type'], array('Metal','ARC Finished Goods','ARF Finished Goods')) == 'Metal') {
         $this->formdata['metal_receipt_vouchers']['factory_purity'] = $this->attributes['purity'];
         $this->formdata['metal_receipt_vouchers']['factory_fine'] = $this->attributes['debit_weight']*$this->attributes['purity']/100;
      }
@@ -112,7 +111,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   
     $api_data = array('account'=> $data['account_name'],
                       'in_weight' => $in_weight,
-                      'in_lot_purity' => $data['factory_purity'],
+                      'in_lot_purity' => @$data['factory_purity'],
                       'description' =>$data['narration'],
                       'argold_account_id'=>$data['id']);
     $send_data=array();
