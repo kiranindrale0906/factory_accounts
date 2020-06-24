@@ -3,6 +3,9 @@
     if ($label == 'Closing Stock') {
       $fine = $balance[$voucher_date][$type]['fine'] - $balance[$voucher_date][$type]['weight_difference'];
       $vadotar = 0;
+    } elseif ($report == 'vadotar report') {
+      $fine = 0;
+      $vadotar = $balance[$voucher_date][$type]['weight_difference'];
     } else {
       $fine = $balance[$voucher_date][$type]['fine'];
       $vadotar = $balance[$voucher_date][$type]['weight_difference'];
