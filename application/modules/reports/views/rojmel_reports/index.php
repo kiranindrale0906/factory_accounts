@@ -31,12 +31,11 @@
               <?php 
                 $this->load->view('reports/rojmel_reports/issue_thead');
                 $this->load->view('reports/rojmel_reports/tbody', 
-                                                    array('voucher_date_records' => isset($issues[$voucher_date]) ? $issues[$voucher_date] : array(),
-                                                          'previous_date' => $previous_date,
-                                                          'voucher_date' => $voucher_date,
-                                                          'type' => 'issue')); 
+                                            array('voucher_date_records' => isset($issues[$voucher_date]) ? $issues[$voucher_date] : array(),
+                                                  'previous_date' => $previous_date,
+                                                  'voucher_date' => $voucher_date,
+                                                  'type' => 'issue')); 
               ?>
-              
             </table>
           </div> 
         </div>
@@ -49,16 +48,16 @@
   }
 
   if(!empty($voucher_date)) {
-    $weight_difference=0;
-    if(!empty($balance[ACCOUNT_NAME_REPORT][$voucher_date]['issue']['weight_difference'])) {
-      $weight_difference=$balance[ACCOUNT_NAME_REPORT][$voucher_date]['issue']['weight_difference'];
+    $factory_fine=0;
+    if(!empty($balance[ACCOUNT_NAME_REPORT][$voucher_date]['issue']['factory_fine'])) {
+      $factory_fine=$balance[ACCOUNT_NAME_REPORT][$voucher_date]['issue']['factory_fine'];
     }
-    else if(!empty($balance[ACCOUNT_NAME_REPORT][$voucher_date]['receipt']['weight_difference'])) {
-      $weight_difference=$balance[ACCOUNT_NAME_REPORT][$voucher_date]['receipt']['weight_difference'];
+    else if(!empty($balance[ACCOUNT_NAME_REPORT][$voucher_date]['receipt']['factory_fine'])) {
+      $factory_fine=$balance[ACCOUNT_NAME_REPORT][$voucher_date]['receipt']['factory_fine'];
     }
 
     $this->load->view('reports/rojmel_reports/final_balance_table', 
-                                                    array('weight_difference' => $weight_difference));
+                                                    array('factory_fine' => $factory_fine));
   }  
 ?>
   

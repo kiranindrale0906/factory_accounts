@@ -21,7 +21,7 @@
                              'factory_fine' => @$total[$account_name][$voucher_date][$type]['factory_fine']));
 
       $this->load->view('reports/vadotar_reports/balance', 
-                        array('label' => 'Balance',
+                        array('label' => 'Balance Vadotar',
                              'voucher_date' => $voucher_date,
                              'type' => $type,
                              'account_name'=>$account_name,
@@ -36,7 +36,7 @@
                                  'fine' => @$total[$account_name][$voucher_date][$type]['fine'],
                                  'factory_fine' => @$total[$account_name][$voucher_date][$type]['factory_fine']));
       $this->load->view('reports/vadotar_reports/balance', 
-                        array('label' => 'Balance',
+                        array('label' => 'Balance Vadotar',
                              'voucher_date' => $voucher_date,
                              'type' => $type,
                              'account_name'=>$account_name,
