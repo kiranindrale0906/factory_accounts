@@ -6,6 +6,7 @@ class User_model extends Core_user_model {
 	//protected $load_trigger = true;
   public function __construct($data=array()) {
     parent::__construct($data);
+    $this->load->model(array('masters/company_model'));
   }
 
   public function after_save($action) {
@@ -84,11 +85,12 @@ class User_model extends Core_user_model {
               'name'            => $user['name'],
               'mobile_no'       => $user['mobile_no'],
               'email_id'        => $user['email_id'],
-              'authToken'       => $user['authToken'],
+//              'authToken'       => $user['authToken'],
               'last_sign_in_at' => $user['last_sign_in_at'],
               'user_role_ids'   => $user_role_ids,
               'is_email_verify' => @$user['is_email_verify'],
-              'password_updated_at' => $user['password_updated_at'],
+              'company_id'    => $this->company_model->find('id')['id'],
+//              'password_updated_at' => $user['password_updated_at'],
               'controller_list' => $this->get_user_controller_list($user_role_ids)
             );
   }

@@ -63,12 +63,14 @@ function get_field_attribute($table, $field) {
   $attributes['company'] = array(
     'id'            => array('', '', TRUE, '', TRUE),
     'name'          => array('Company Name', 'Enter Company Name.', TRUE, '', TRUE),
+    'api_url'       => array('Domain Url', 'Enter Domain Url', TRUE, '', TRUE),
     'address_line1' => array('Address Line1', 'Enter Address Line1.', FALSE, '', TRUE),
     'address_line2' => array('Address Line2', 'Enter Address Line2.', FALSE, '', TRUE),
     'city'          => array('City', 'Enter City.', FALSE, '', TRUE),
     'state'         => array('State', 'Enter State.', FALSE, '', TRUE),
     'pincode'       => array('Pincode', 'Enter Pincode.', FALSE, '', TRUE),
     'logo'          => array('Select logo', 'Please select logo.', FALSE, '', TRUE),
+    'decimal_no'          => array('Decimal No', 'Enter decimal no.', FALSE, '', TRUE),
   );
  
   return $attributes[$table][$field];
@@ -82,10 +84,10 @@ function get_row_actions($row, $url, $select_url, $filter) {
                            'confirm_message' => "",
                            'class' => 'text-warning text-uppercase');
 
-  $actions["Delete"] = array('request' => "http",
-                               'url' => ADMIN_PATH.$controller.'/delete/'.$row['id'],
-                               'confirm_message' => "Do you want to delete",
-                               'js_function' => "",
-                               'class' => 'text-danger text-uppercase');
+  // $actions["Delete"] = array('request' => "http",
+  //                              'url' => ADMIN_PATH.$controller.'/delete/'.$row['id'],
+  //                              'confirm_message' => "Do you want to delete",
+  //                              'js_function' => "",
+  //                              'class' => 'text-danger text-uppercase');
   return $actions;
 }

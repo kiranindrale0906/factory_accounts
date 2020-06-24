@@ -11,7 +11,7 @@ class Migration_add_all_is_delete extends CI_Model {
 
     foreach ($fields as $table_name) {
       $sql="alter table ".$table_name." add is_delete tinyint(1) DEFAULT 0";
-      $this->db->query($sql);
+      //$this->db->query($sql);
     }
   }
 

@@ -1,72 +1,154 @@
 <?php
-  if (!isset($record)) 
-    $record = array();
+  if (!isset($record)) $record = array();
 
   if(empty($action)) {
-    $controller=$this->router->module."/".$this->router->class;
-    $action="store";
+    $controller = $this->router->module."/".$this->router->class;
+    $action = "store";
   }
+
+  $checked = (!empty($record['has_hallmark'])) ? 'checked' : '';
+
+  $readonly='';
+  if ($this->router->class == "rate_cut_purchase_price_issue_vouchers"
+      || $this->router->class == "rate_cut_purchase_price_receipt_vouchers"
+      || $this->router->class == "rate_cut_purchase_weight_issue_vouchers"
+      || $this->router->class == "rate_cut_purchase_weight_receipt_vouchers"
+      || $this->router->class == "rate_cut_booking_price_issue_vouchers"
+      || $this->router->class == "rate_cut_booking_price_receipt_vouchers"
+      || $this->router->class == "rate_cut_booking_weight_issue_vouchers"
+      || $this->router->class == "rate_cut_booking_weight_receipt_vouchers") {
+    $readonly=true;
+  }
+
+  $this->load->view('ac_vouchers/ac_vouchers/company_error_message');
 ?>
 
 <form method="post" class="form-horizontal fields-group-sm" enctype="multipart/form-data"
       action="<?= get_form_action($controller, $action, $record) ?>">
-  <?php if ($action == 'edit' || $action == 'update'): 
-          load_field('hidden', array('field' => 'id'));
-        endif; ?>     
-  <?php
-    if(isset($sales_voucher_id) && $sales_voucher_id != ''):
-      if(!empty(@get_field_attribute($this->router->class,'sales_voucher_number'))) : 
-        load_field('hidden', array('field' => 'sales_voucher_number',
-                                   'value'=>@$sales_voucher_id));
-      endif;
-    endif; 
+  <?php 
+    if ($action == 'edit' || $action == 'update'): 
+      load_field('hidden', array('field' => 'id'));
+    endif;
+  ?>
 
-    load_field('hidden',array('field' => 'company_id',
-                              'value'=>($this->session->userdata('company_id')?$this->session->userdata('company_id'):1))); ?>
+  <?php load_view('ac_vouchers/ac_vouchers/fields/sales_voucher_number');
+        load_view('ac_vouchers/ac_vouchers/fields/company_id'); ?>
 
-  <?php
-        if(!empty(@get_field_attribute($this->router->class,'voucher_date'))) :
-           load_field('date',array('field' => 'voucher_date',
-                                  'value'=>(!empty($record['voucher_date'])?date('d-m-Y',strtotime($record['voucher_date'])):date('d-m-Y')), 
-                                  'class' => 'datepicker_js')); 
-        endif; ?>
+  <div class="row">                                  
+    <?php load_view('ac_vouchers/ac_vouchers/fields/voucher_date');
+          load_view('ac_vouchers/ac_vouchers/fields/receipt_type'); 
+          load_view('ac_vouchers/ac_vouchers/fields/dd_type');?>  
+  </div>
 
-        
-  <?php if(!empty(@get_field_attribute($this->router->class,'account_name'))) :
-          load_field('dropdown', array('field' => 'account_name', 'option'=>@$account_names)); 
-          load_field('hidden', array('field' => 'account_id'));                               
-        endif; ?> 
-    
-  <?php if(!empty(@get_field_attribute($this->router->class,'credit_amount'))) :
-          load_field('text', array('field' => 'credit_amount')); 
-        endif; ?>   
+  <div class="row">   
+    <?php load_view('ac_vouchers/ac_vouchers/fields/from_account_name'); 
+          load_view('ac_vouchers/ac_vouchers/fields/from_group_name'); 
+          load_view('ac_vouchers/ac_vouchers/fields/department_name'); 
+          load_view('ac_vouchers/ac_vouchers/fields/type'); ?>
+  </div>
 
-  <?php if(!empty(@get_field_attribute($this->router->class,'debit_amount'))) :
-          load_field('text', array('field' => 'debit_amount')); 
-        endif; ?> 
-    
-  <?php if(!empty(@get_field_attribute($this->router->class,'narration'))) :
-          load_field('text', array('field' => 'narration')); 
-        endif; ?>
- 
+  <div class="row">      
+    <?php load_view('ac_vouchers/ac_vouchers/fields/account_name'); 
+          load_view('ac_vouchers/ac_vouchers/fields/to_group_name'); ?>
+  </div>  
+
+  <div class="row"> 
+    <?php load_view('ac_vouchers/ac_vouchers/fields/group_name'); ?>
+  </div>
+
+  <div class="row"> 
+    <?php load_view('ac_vouchers/ac_vouchers/fields/gst_number'); ?>
+  </div> 
+
+  <div class="row"> 
+    <?php load_view('ac_vouchers/ac_vouchers/fields/gold_rate'); 
+          load_view('ac_vouchers/ac_vouchers/fields/rate'); 
+          load_view('ac_vouchers/ac_vouchers/fields/gold_rate_purity'); ?>
+  </div>  
+
+  <div class="row"> 
+    <?php load_view('ac_vouchers/ac_vouchers/fields/payment_term'); ?>   
+  </div>  
+
+  <div class="row"> 
+    <?php load_view('ac_vouchers/ac_vouchers/fields/has_hallmark');  
+          load_view('ac_vouchers/ac_vouchers/fields/hallmark_number'); ?>    
+  </div>  
+
+  <div class="row">         
+    <?php 
+          load_view('ac_vouchers/ac_vouchers/fields/hook_kdm_purity'); 
+          load_view('ac_vouchers/ac_vouchers/fields/quantity');  
+          load_view('ac_vouchers/ac_vouchers/fields/bank_name');  
+          load_view('ac_vouchers/ac_vouchers/fields/gold_weight');  
+          load_view('ac_vouchers/ac_vouchers/fields/gold_weight_purity'); ?>
+  </div>        
+  
+  <div class="row">  
+    <?php load_view('ac_vouchers/ac_vouchers/fields/credit_amount', array('readonly' => $readonly));  
+          load_view('ac_vouchers/ac_vouchers/fields/debit_amount', array('readonly' => $readonly));
+          load_view('ac_vouchers/ac_vouchers/fields/amount');
+          load_view('ac_vouchers/ac_vouchers/fields/cash_amount');
+          load_view('ac_vouchers/ac_vouchers/fields/cash_bill'); ?>   
+  </div>
+
+  <div class="row">   
+    <?php load_view('ac_vouchers/ac_vouchers/fields/cheque_number');
+          load_view('ac_vouchers/ac_vouchers/fields/credit_weight', array('readonly' => $readonly));
+          load_view('ac_vouchers/ac_vouchers/fields/debit_weight', array('readonly' => $readonly));  
+          load_view('ac_vouchers/ac_vouchers/fields/interest_per_day');
+          load_view('ac_vouchers/ac_vouchers/fields/purity');
+          load_view('ac_vouchers/ac_vouchers/fields/fine'); ?>
+  </div>        
+
+  <div class="row">   
+    <?php load_view('ac_vouchers/ac_vouchers/fields/arg_weight');
+          load_view('ac_vouchers/ac_vouchers/fields/factory_purity');
+          load_view('ac_vouchers/ac_vouchers/fields/lumpsum_amount');
+          load_view('ac_vouchers/ac_vouchers/fields/factory_fine');
+          load_view('ac_vouchers/ac_vouchers/fields/transaction_type'); ?>
+  </div>  
+
+  <div class="row">   
+    <?php load_view('ac_vouchers/ac_vouchers/fields/narration'); ?>
+  </div>
+
+  <div class="row">   
+    <?php load_view('ac_vouchers/ac_vouchers/fields/total'); ?>
+  </div> 
+  
+  <br/> 
+  <?php 
+      $receipt_type=!empty($_GET['receipt_type'])?$_GET['receipt_type']:'';
+    if ($this->router->class == "metal_receipt_vouchers" && !in_array($receipt_type, array('ARC Finished Goods','ARF Finished Goods'))) $this->load->view('transactions/metal_issue_vouchers/subform_list');
+    if ($this->router->class == "purchase_vouchers") $this->load->view('transactions/purchase_vouchers/subform_list');
+    if ($this->router->class == "sales_vouchers") $this->load->view('transactions/sales_vouchers/subform_list');
+    if ($this->router->class == "sales_return_vouchers") $this->load->view('transactions/sales_return_vouchers/subform_list');
+    if ($this->router->class == "opening_stock_vouchers") $this->load->view('transactions/opening_stock_vouchers/subform_list');
+    if ($this->router->class == "repair_vouchers") $this->load->view('transactions/repair_vouchers/subform_list');
+    if ($this->router->class == "approval_vouchers") $this->load->view('transactions/approval_vouchers/subform_list');
+  ?>
+
   <div class="row"> 
     <div class="col-sm-6"> 
       <?php
         $add_attr=array();
         if(!empty($action) && ($action=="store" || $action=="create")) {
-          $add_attr=array('controller' => $controller,'class'=>'btn_blue ajax_post','show_inline_form'=>TRUE, 'name' => 'SAVE','href'=>ADMIN_PATH.$controller."/".$action);
+          $add_attr=array('controller' => $controller,
+                          'class' => 'btn_blue ajax_post',
+                          'show_inline_form' => TRUE, 
+                          'name' => 'SAVE',
+                          'href' => ADMIN_PATH.$controller."/".$action);
           load_buttons('button', $add_attr); 
-        }
-        else {  
+        } else {  
           $add_attr=array('controller' => $controller, 'name' => 'SAVE' , 'class' => 'btn_blue');
           load_buttons('submit', $add_attr); 
-        } ?> 
+        } 
+      ?> 
     </div>
   </div>  
 </form>  
 <script type="text/javascript">
-  var account_name_list='<?php echo json_encode(@$account_names,true);?>';
-  var bank_name_list='<?php echo json_encode(@$bank_names,true); ?>';
-  var controller_name='<?php echo $this->router->class; ?>';
-  //console.log(bank_name_list);
+  var controller_name = '<?php echo $this->router->class; ?>';
 </script>
+<br>

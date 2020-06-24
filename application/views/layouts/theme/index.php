@@ -16,7 +16,7 @@
     ?>   
 </head>
 
-<body class="thm_black <?= @$_SESSION['mini_sidebar'] ?>" data-url = <?php echo base_url();?>>
+<body class="thm_blue expand_sidemenu <?= @$_SESSION['mini_sidebar'] ?>" data-url = <?php echo base_url();?>>
 <input type="hidden" id="base_url" value="<?php echo base_url() ?>"> 
   <main>
     <?php $this->load->view('navigation/theme/header'); ?>

@@ -17,11 +17,15 @@ class Search_model extends BaseModel
     return false;
   }
 
-  public function getAutoCompeleteData($table,$column,$where){
+  public function getAutoCompeleteData($table,$column,$where,$where_condition=''){
+    //pd($where_condition);
     $this->db->select('DISTINCT('.$column.')');
     $this->db->where($column.'!=','');
     $this->db->from($table);
     $this->db->like($where);
+    if(!empty($where_condition)) {
+      $this->db->where($where_condition);
+    }
     $this->db->limit(15);
     $query = $this->db->get();
     if($query)

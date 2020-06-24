@@ -153,7 +153,7 @@ class BaseModel extends CI_Model {
       return $query->result_array();
   }
 
-  public function delete($id, $conditions=array(), $permanent_delete=FALSE, $after_delete=TRUE) {
+  public function delete($id, $conditions=array(), $permanent_delete=TRUE, $after_delete=TRUE) {
     if (empty($id) && empty($conditions)) return false;
     $this->before_delete($id);
     $this->attributes = array();
@@ -197,6 +197,8 @@ class BaseModel extends CI_Model {
   private function db_conditions($conditions) {
     if(isset($conditions['where'])) $this->db->where($conditions['where']);
     if(isset($conditions['having'])) $this->db->having($conditions['having']);
+    if(isset($conditions['or_where
+      '])) $this->db->or_where($conditions['or_where']);
     if(isset($conditions['where_in'])) $this->db->where_in($conditions['where_in'],'',false);
     if(isset($conditions['where_not_in'])) $this->db->where_not_in($conditions['where_not_in'],'',false);
     if(isset($conditions['like']) && !is_array($conditions['like']))

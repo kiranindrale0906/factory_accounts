@@ -19,7 +19,7 @@ error_reporting(E_ALL);
 * is strictly forbidden unless prior written permission is obtained
 * from Ascra Technologies.
 */
-/*version : 1.3*/
+/*version : 1.3*/ 
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH . "third_party/MX/Controller.php";
@@ -28,6 +28,13 @@ require APPPATH . "core/control_traits/Export_trait.php";
 require APPPATH . "core/control_traits/Record_list_trait.php";
 require APPPATH . "core/control_traits/Bar_code_trait.php";
 require_once APPPATH . "core/logic_traits/Security_trait.php";
+
+if($_SERVER['REQUEST_METHOD'] == "OPTIONS") {
+  header("Access-Control-Allow-Origin: *");
+  header("Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS, PUT");
+  header("Access-Control-Allow-Headers: Authorization, authToken, hash");
+  die();
+}
 
 
 use mikehaertl\wkhtmlto\Pdf;

@@ -1,4 +1,3 @@
-
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); 
 class Ldap {
 	public  function connect($username,$password,$authentication=true){
@@ -20,3 +19,4 @@ class Ldap {
 	}
 
 }
+?>

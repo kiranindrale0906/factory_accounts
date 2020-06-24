@@ -1,0 +1,10 @@
+<?php  
+	if (isset($balance[ACCOUNT_NAME_REPORT][$voucher_date][$type])) {
+			$this->load->view('reports/account_ledger_reports/total', 
+														array('label' => $label,
+																	'weight' => $balance[ACCOUNT_NAME_REPORT][$voucher_date][$type]['weight'],
+															    'weight_difference' => $balance[ACCOUNT_NAME_REPORT][$voucher_date][$type]['weight_difference'],
+															  	'fine' => $balance[ACCOUNT_NAME_REPORT][$voucher_date][$type]['fine'],
+														  		'factory_fine' => $balance[ACCOUNT_NAME_REPORT][$voucher_date][$type]['factory_fine']));
+	}
+?>

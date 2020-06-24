@@ -27,18 +27,21 @@ class Customer_category_model extends BaseModel {
         'label' => 'Department name', 
         'rules' => 'trim|required'),
   	  array(
-        'field' => 'customer_category[account_name_id]', 
+        'field' => 'customer_category[account_name]', 
         'label' => 'Account Name', 
-        'rules' => 'trim|required'),
-  	  array(
-        'field' => 'customer_category[melting]', 
-        'label' => 'Melting', 
-        'rules' => 'trim|integer|is_natural|less_than_equal_to[100]')
+        'rules' => array('trim','required',
+                      array('error_msg_account_name',array($this,'check_account_name_exist'))),
+        'errors'=>  array('error_msg_account_name'=>'Account name not exist in account master')),
+  	  // array(
+     //    'field' => 'customer_category[melting]', 
+     //    'label' => 'Melting', 
+     //    'rules' => 'trim|integer|is_natural|less_than_equal_to[100]')
     );
   }
 
   public function check_duplicate_customer_category($customer_category) {
-    return parent::check_unique('category_name_id','department_name_id','account_name_id','melting');
+    // pd($customer_category);
+    return parent::check_unique(array('category_name_id','department_name_id','account_name'));
   }
 
   private function set_customer_category_data(){
@@ -50,8 +53,16 @@ class Customer_category_model extends BaseModel {
                                                    array('id'=>$this->attributes['department_name_id']));
     $this->formdata[$this->router_class]['department_name']=@$department_name['name'];
 
-    $account_name=$this->account_model->find('name as name',
-                                            array('id'=>$this->attributes['account_name_id']));
-    $this->formdata[$this->router_class]['account_name']=@$account_name['name'];
+    $account_name=$this->account_model->find('id as id',
+                                            array('name'=>$this->attributes['account_name']));
+    $this->formdata[$this->router_class]['account_name_id']=@$account_name['id'];
+  }
+
+  public function check_account_name_exist($name) {
+    if($name=="" && !isset($name))
+      return true;
+    else
+    $account=$this->account_model->find('id as id',array('name'=>$name));
+    return (empty($account)) ? false : true;
   }
 }

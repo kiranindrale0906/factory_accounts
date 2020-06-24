@@ -10,7 +10,7 @@ function get_field_data($data, $router, $record) {
     if (!isset($data['name'])) $data['name'] = $data['controller'] . '[' . $data['index'] . ']' . '[' . $data['field'] . ']';
     if (!isset($data['value'])) $data['value'] = @$record[$data['index']][$data['field']];
   }
-  if (!isset($data['col'])) $data['col'] = 'col-md-6';
+  if (!isset($data['col'])) $data['col'] = get_bootstrap_col_class();
   if (!isset($data['option'])) $data['option'] = array();
   if (!isset($data['error_message'])) $data['error_message'] = form_error($data['name']);
   $field_details = get_field_attribute($data['controller'], $data['field']);
@@ -54,6 +54,13 @@ function get_field_data($data, $router, $record) {
   return $data; 
 }
 
+function get_bootstrap_col_class() {
+  if (FIELDS_PER_ROW == 3)
+    return 'col-md-4';
+  else
+    return 'col-md-6';
+}
+
 function get_records_by_id($records) {
   $result = array();
   foreach ($records as $index => $record) {
@@ -61,8 +68,6 @@ function get_records_by_id($records) {
   }
   return $result;
 }
-
-
 
 function load_field($field, $data, $button=false) {
   $ci =& get_instance();
@@ -85,7 +90,6 @@ function load_card($data){
   $data['col']=!empty($data['col'])?$data['col']:'col-lg-3 col-md-6';
   return load_view('layouts/application/card',$data);  
 }
-
 
 function load_view($view, $data = array(), $return_as_string = FALSE) {
   $ci =& get_instance();
@@ -112,26 +116,3 @@ function get_field_name_from_label($label) {
     return 'invalid_header';
   }
 }
-
-function get_import_file_validation_errors($field_prefix = 'import_data') {
-  $ci =& get_instance();
-  if (empty($ci->form_validation->error_array())) return array();
-  $errors = array();
-  foreach ($ci->form_validation->error_array() as $field_name => $error) {
-    if (startsWith($field_name, $field_prefix)) {
-      $index_start_pos = stripos($field_name, '[') + 1;
-      $index_end_pos = stripos($field_name, ']');
-      $index = substr($field_name, $index_start_pos, $index_end_pos-$index_start_pos);
-      if(is_numeric($index))
-        $errors[] = 'Row No '.$index.': '.$error;  
-      else
-        $errors[] = $error;  
-    }
-  } 
-  return $errors;
-}
-
-function startsWith($string, $startString) { 
-  $len = strlen($startString); 
-  return (substr($string, 0, $len) === $startString); 
-} 
