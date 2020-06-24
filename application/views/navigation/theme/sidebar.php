@@ -50,7 +50,7 @@
                                             // 'transactions/transfer_voucher' => 'Transfer Voucher',
                                             // 'transactions/repair_voucher_out' => 'Repair Voucher Out',
                                             // 'transactions/approval_in_voucher' => 'Approval in Voucher',
-                                             // 'transactions/opening_stock_vouchers' => 'Opening Stock Voucher',//
+                                             'transactions/opening_stock_vouchers' => 'Opening Stock Voucher',
                                              // 'transactions/sales_return_vouchers' => 'Sales Return Voucher',//
                                             // 'transactions/antique_sales_voucher' => 'Antique Sales Voucher',
                                             // 'transactions/mangalsutra_sales_voucher' => 'Mangalsutra Sales Voucher',
@@ -63,10 +63,10 @@
                     //                     'reports/stock_report' =>'Stock Report',
                     //                     'reports/order_report'=>'Order Report'),
                     'Reports'   => array(
-                                        'reports/account_ledger_reports' => 'Account Ledger',
+                                        'reports/account_ledgers' => 'Account Ledger',
                                         // 'reports/account_ledgers' => 'Account Ledger Report',
                                         // 'reports/outstanding_report' => 'Outstanding Report',
-                                        'reports/client_account_ledger_reports' => 'Trial Balance',
+                                        'reports/trial_balances' => 'Trial Balance',
                                         'reports/vadotar_reports' => 'Vadotar Report',
                                         'reports/rojmel_reports' => 'Rojmel Report'),
                     //'Interests' => array('transactions/interest_issue_vouchers'=>'Interest Issue Voucher','transactions/interest_receipt_vouchers'=>'Interest Receipt Voucher'),

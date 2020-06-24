@@ -94,8 +94,8 @@
 
   <div class="row">   
     <?php load_view('ac_vouchers/ac_vouchers/fields/cheque_number');
-          load_view('ac_vouchers/ac_vouchers/fields/credit_weight', array('readonly' => $readonly));
           load_view('ac_vouchers/ac_vouchers/fields/debit_weight', array('readonly' => $readonly));  
+          load_view('ac_vouchers/ac_vouchers/fields/credit_weight', array('readonly' => $readonly));
           load_view('ac_vouchers/ac_vouchers/fields/interest_per_day');
           load_view('ac_vouchers/ac_vouchers/fields/purity');
           load_view('ac_vouchers/ac_vouchers/fields/fine'); ?>
@@ -124,7 +124,7 @@
     if ($this->router->class == "purchase_vouchers") $this->load->view('transactions/purchase_vouchers/subform_list');
     if ($this->router->class == "sales_vouchers") $this->load->view('transactions/sales_vouchers/subform_list');
     if ($this->router->class == "sales_return_vouchers") $this->load->view('transactions/sales_return_vouchers/subform_list');
-    if ($this->router->class == "opening_stock_vouchers") $this->load->view('transactions/opening_stock_vouchers/subform_list');
+    //if ($this->router->class == "opening_stock_vouchers") $this->load->view('transactions/opening_stock_vouchers/subform_list');
     if ($this->router->class == "repair_vouchers") $this->load->view('transactions/repair_vouchers/subform_list');
     if ($this->router->class == "approval_vouchers") $this->load->view('transactions/approval_vouchers/subform_list');
   ?>

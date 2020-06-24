@@ -18,7 +18,7 @@ class Ledger_model extends BaseModel {
     if (in_array($router_class, array('bank_issue_voucher', 'bank_receipt_voucher'))) {
       $ledger_data['cash_bill_type'] = 'bill';
     }
-    if (in_array($router_class, array('metal_issue_voucher', 'metal_receipt_voucher'))) {
+    if (in_array($router_class, array('metal_issue_voucher', 'metal_receipt_voucher', 'opening_stock_voucher'))) {
       $ledger_data['cash_bill_type'] = 'metal';
     }
       
