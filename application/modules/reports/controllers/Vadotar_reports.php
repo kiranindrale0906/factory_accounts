@@ -15,6 +15,7 @@ class Vadotar_reports extends Ledgers {
   }
 
   public function _get_form_data() {
+    $this->data['voucher_dates']=array();
     $this->data['account_names'] = $this->model->get('distinct(account_name) as name', array(), array(), array('order_by'=>'account_name asc'));
     if(empty($this->data['account_names'])) return true;
     $this->get_datewise_ledger_records();

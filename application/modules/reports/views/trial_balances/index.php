@@ -5,9 +5,7 @@
     </div>
   </div>
   <hr>
-  <!-- <div>
-          <?php load_field('dropdown', array('field'=>'company_id','option' => $company_names ,'class'=>"onchange_trial_balance_comapny_name")); ?>
-        </div> -->
+
   <div class="row">
     <div class="col-md-6">
       <div class="form-group container">
@@ -204,7 +202,7 @@
                 $total_different = 0;  
                 if(!empty($trial_balance)) {
                   foreach ($trial_balance as $record) {
-                    if (!(in_array($record['account_name'], array('ARC', 'ARF', 'ARC Finished Goods', 'ARF Finished Goods')))) continue;
+                    if (!(in_array($record['account_name'], array('AR Gold', 'ARC', 'ARF', 'ARC Finished Goods', 'ARF Finished Goods')))) continue;
                     $total_different = $total_different + $record['different'];
                     if($record['receipt_weight'] > 0)
                       $total_weight_receipt = $total_weight_receipt + $record['receipt_weight'];
