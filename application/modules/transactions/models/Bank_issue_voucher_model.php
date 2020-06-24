@@ -1,14 +1,24 @@
+
 <?php
-
 defined('BASEPATH') OR exit('No direct script access allowed');
-require_once APPPATH . "modules/".CLIENT_NAME."/models/Bank_issue_voucher_client_model.php";
-class Bank_issue_voucher_model extends Bank_issue_voucher_client_model {
-  public $router_class = "bank_issue_vouchers";
-  protected $insert_to_ledger = true;
 
-  function __construct($data=array()) {
-    parent::__construct($data);
+if (file_exists(APPPATH . "modules/".CLIENT_NAME."/models/Client_bank_issue_voucher_model.php")) {
+
+  require_once APPPATH . "modules/".CLIENT_NAME."/models/Client_bank_issue_voucher_model.php";  
+  class Bank_issue_voucher_model extends Client_bank_issue_voucher_model {
+    function __construct($data=array()) {
+      parent::__construct($data);
+    } 
   }
-}
 
-//class
+} else {
+  
+  require_once APPPATH . "modules/ac_vouchers/models/Core_bank_issue_voucher_model.php";  
+  class Bank_issue_voucher_model extends Core_bank_issue_voucher_model {
+    function __construct($data=array()) {
+      parent::__construct($data);
+    }
+  } 
+
+}
+?>

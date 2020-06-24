@@ -1,12 +1,23 @@
 <?php
-
 defined('BASEPATH') OR exit('No direct script access allowed');
-require_once APPPATH . "modules/".CLIENT_NAME."/models/Bank_receipt_voucher_client_model.php";
-class Bank_receipt_voucher_model extends Bank_receipt_voucher_client_model {
-  public $router_class = "bank_receipt_vouchers";
-  function __construct($data=array()) {
-      parent::__construct($data);
-  }
-}
 
-//class
+if (file_exists(APPPATH . "modules/".CLIENT_NAME."/models/Client_bank_receipt_voucher_model.php")) {
+
+  require_once APPPATH . "modules/".CLIENT_NAME."/models/Client_bank_receipt_voucher_model.php";  
+  class Bank_receipt_voucher_model extends Client_bank_receipt_voucher_model {
+    function __construct($data=array()) {
+      parent::__construct($data);
+    } 
+  }
+
+} else {
+  
+  require_once APPPATH . "modules/ac_vouchers/models/Core_bank_receipt_voucher_model.php";  
+  class Bank_receipt_voucher_model extends Core_bank_receipt_voucher_model {
+    function __construct($data=array()) {
+      parent::__construct($data);
+    }
+  } 
+
+}
+?>

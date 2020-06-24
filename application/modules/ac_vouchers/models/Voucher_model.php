@@ -78,6 +78,11 @@ class Voucher_model extends BaseModel {
                  'label' => 'Credit Weight',
                  'rules' => 'trim|required|numeric|greater_than[0]');
   }
+  protected function get_credit_amount_validation_rules() {
+    return array('field' => $this->router_class.'[credit_amount]', 
+                 'label' => 'Credit Amount',
+                 'rules' => 'trim|required|numeric|greater_than[0]');
+  }
 
   public function check_group_name_exist($name) {
     if($name=="" && !isset($name))
