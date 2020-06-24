@@ -1,4 +1,4 @@
-<div>
+<!-- <div>
   <h6 class="bold float-left mb-0">Opening Stock Voucher</h6>
   <?= getJsButton('Add More', 'javascript:void(0)', 'btn_blue float-right mb-1', '', 'add_form_opening_stock_voucher()'); ?>
 </div>
@@ -36,4 +36,4 @@
     return false;
   }
 
-  </script>
+  </script> -->

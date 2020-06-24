@@ -1,42 +1,27 @@
 <?php
+
 defined('BASEPATH') OR exit('No direct script access allowed');
+include_once APPPATH . "modules/reports/controllers/Ledgers.php";
+class Account_ledgers extends Ledgers {
 
-class Account_ledgers extends BaseController {  
-  public function __construct(){
-    $this->_model='Account_ledger_model';
+  public function __construct() {
     parent::__construct();
-    $this->redirect_after_save = 'view';
-    $this->load->model(array('reports/account_ledger_model'));
-  } 
+    $this->load->model(array('masters/account_model'));
+  }
 
-  public function index() { 
-    $this->start_date = (!empty($_GET['start_date'])) ? date('Y-m-d',strtotime($_GET['start_date'])) : date('Y-m-d');
-    $this->end_date = (!empty($_GET['end_date'])) ? date('Y-m-d',strtotime($_GET['end_date'])) : date('Y-m-d');
-    $this->data['start_date'] = $this->start_date;
-    $this->data['end_date'] = $this->end_date;
-    $where=array();
-    if (!empty($_GET['start_date'])) {
-            $where['created_at>='] = $this->start_date;
-        }
-        if (!empty($_GET['end_date'])) {
-            $where['created_at<'] = $this->end_date;
-        }
-        if (!empty($_GET['account_name'])) {
-            $where['account_name'] = $_GET['account_name'];
-        }
-    
-    if(isset($_GET['return']) && $_GET['return'] == 'json')
-      echo json_encode($this->data);
-    else
-    $this->data['account_ledgers'] = $this->account_ledger_model->get('',$where);
-    $this->load->render('reports/account_ledgers/index',$this->data); 
-  } 
+  public function index() {
+    $this->_get_form_data();
+    $this->load->render($this->router->class."/index",$this->data);
+  }
 
   public function _get_form_data() {
+    $this->data['voucher_dates']=array();
+    $this->data['account_names'] = $this->account_model->get('distinct(ac_account.name) as name, ac_account.id as id',
+                                                              array('where' => array('ac_account.name!=""' => '')),
+                                                              array(),
+                                                              array('order_by' => 'ac_account.name asc'));
+    $account_id = (!empty($_GET['account_ledgers']['account_id'])) ? $_GET['account_ledgers']['account_id'] : 0;
+    if (!empty($account_id))
+      $this->get_datewise_ledger_records();
   }
-
-  public function _after_save($formdata, $action){
-  }
-
-
 }

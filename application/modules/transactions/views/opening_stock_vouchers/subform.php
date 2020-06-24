@@ -1,4 +1,4 @@
-<tr class="table_opening_stock_voucher_<?= $index ?>">
+<!-- <tr class="table_opening_stock_voucher_<?= $index ?>">
   <td>
     <?php load_field('plain/text', array('field' => 'category',
                                              'controller' => 'opening_stock_voucher_details',
@@ -68,4 +68,4 @@
                      'index' => $index)); ?>
   </td>
 
-</tr>
+</tr> -->

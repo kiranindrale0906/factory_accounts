@@ -60,8 +60,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     }
   }
 
-  public function after_validate() {
+  public function before_save($action) {
     $this->attributes['fine'] = $this->attributes['debit_weight'] * $this->attributes['purity'] / 100;
+    parent::before_save($action);
   }
   
   public function after_save($action) {
