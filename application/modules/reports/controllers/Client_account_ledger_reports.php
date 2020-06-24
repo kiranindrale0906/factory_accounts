@@ -41,8 +41,8 @@ class Client_account_ledger_reports extends Client_ledgers {
     if(empty($this->data['account_names'])) return true;
 
     $select = "account_name, 
-               IFNULL((sum(debit_weight*purity)/100),0) - IFNULL((sum(credit_weight*purity)/100),0) as factory_fine,
-               IFNULL((sum(debit_weight*factory_purity)/100),0) - IFNULL((sum(credit_weight*factory_purity)/100),0) as  fine, 
+               IFNULL((sum(debit_weight*purity)/100),0) - IFNULL((sum(credit_weight*purity)/100),0) as fine,
+               IFNULL((sum(debit_weight*factory_purity)/100),0) - IFNULL((sum(credit_weight*factory_purity)/100),0) as  factory_fine, 
                IFNULL(sum(debit_weight),0) - IFNULL(sum(credit_weight),0) as receipt_weight, 
                IFNULL(sum((factory_purity-purity)*debit_weight/100),0) - IFNULL(sum((factory_purity-purity)*credit_weight/100),0) as different";
     $this->data['trial_balance'] = $this->model->get($select,$where, array() , 

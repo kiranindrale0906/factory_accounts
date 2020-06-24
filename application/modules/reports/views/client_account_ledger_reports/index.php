@@ -365,11 +365,11 @@
           </tr>
           <tr>
             <td><b>Total: </b></td>
-            <td class="text-right"><b><?= four_decimal($liabilities_fine_closing + $assets_vadotar - $assets_fine_closing + $liabilities_vadotar);  ?></b></td>
+            <td class="text-right"><b><?= four_decimal($liabilities_fine_closing - $assets_vadotar - $assets_fine_closing - $liabilities_vadotar);  ?></b></td>
           </tr>
           <tr>
             <td><b>Closing Stock: </b></td>
-            <td class="text-right"><b><?= four_decimal( -1 * ($liabilities_fine_closing + $assets_vadotar - $assets_fine_closing + $liabilities_vadotar));  ?></b></td>
+            <td class="text-right"><b><?= four_decimal( -1 * ($liabilities_fine_closing - $assets_vadotar - $assets_fine_closing - $liabilities_vadotar));  ?></b></td>
           </tr>
           <tr>
             <td><b>Balance: </b></td>
