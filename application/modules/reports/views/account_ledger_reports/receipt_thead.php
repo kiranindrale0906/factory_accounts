@@ -1,6 +1,6 @@
 <thead>
   <tr>
-    <th>Account Name</th>
+    <!-- <th>Account Name</th> -->
     <th>Date</th>
     <th>Desc</th>
     <th class='text-right'>Gross Wt</th>

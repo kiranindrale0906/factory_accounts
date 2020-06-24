@@ -1,5 +1,5 @@
 <tr>
-  <td><?= $record['account_name'];?></td>
+  <!-- <td><?= $record['account_name'];?></td> -->
   <td><?= $record['voucher_date'] ?></td>
   <td><?= $record['narration'];?></td>
   <td class="text-right"><?= four_decimal($record['debit_weight']) ?></td>
