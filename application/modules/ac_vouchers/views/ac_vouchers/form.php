@@ -36,7 +36,8 @@
 
   <div class="row">                                  
     <?php load_view('ac_vouchers/ac_vouchers/fields/voucher_date');
-          load_view('ac_vouchers/ac_vouchers/fields/receipt_type'); ?>  
+          load_view('ac_vouchers/ac_vouchers/fields/receipt_type'); 
+          load_view('ac_vouchers/ac_vouchers/fields/dd_type');?>  
   </div>
 
   <div class="row">   
@@ -75,7 +76,7 @@
   </div>  
 
   <div class="row">         
-    <?php load_view('ac_vouchers/ac_vouchers/fields/dd_type');
+    <?php 
           load_view('ac_vouchers/ac_vouchers/fields/hook_kdm_purity'); 
           load_view('ac_vouchers/ac_vouchers/fields/quantity');  
           load_view('ac_vouchers/ac_vouchers/fields/bank_name');  

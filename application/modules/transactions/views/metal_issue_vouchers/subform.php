@@ -15,22 +15,7 @@
                                          'index' => $index,
                                          'grid'=> 'col-sm-12')); ?>
   </td>
-  <td>
-    <?php load_field('plain/text', array('field' => 'factory_purity',
-                                         'controller' => 'metal_issue_vouchers',
-                                         'onkeyup'=> 'calculate_factory_purity('.$index.')',
-                                         'id' => 'factory_purity_'.$index,
-                                         'index' => $index,
-                                         'grid'=> 'col-sm-12')); ?>
-  </td>
-   <td>
-    <?php load_field('plain/text', array('field' => 'factory_fine',
-                                         'controller' => 'metal_issue_vouchers',
-                                         'id' => 'factory_fine_'.$index,
-                                         'readonly' => true,
-                                         'index' => $index,
-                                         'grid' =>'col-sm-12')); ?>
-  </td>
+  
   <td>
     <?= getJsButton('Delete', 'javascript:void(0)', 'btn_red', '', 'delete_metal_issue_voucher('.$index.')',
                     array(

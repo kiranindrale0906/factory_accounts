@@ -22,6 +22,11 @@
                   array('id' => 'ARF Finished Goods', 'name' => 'ARF Finished Goods'),
                 );
   }
+  function get_issue_type() {
+    return array(array('id' => 'ARC Finished Goods', 'name' => 'ARC Finished Goods'),
+                  array('id' => 'ARF Finished Goods', 'name' => 'ARF Finished Goods'),
+                );
+  }
 
   function get_transaction_type() {
     return array( array('id' => 'Cash', 'name' => 'Cash'),

@@ -166,7 +166,6 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['quantity'] = array('Quantity', 'Enter quantity', TRUE, '', TRUE);
   
   
-  $attributes['dd_type'] = array('Daily Drawer Type', 'Select Daily Drawer Type', TRUE, '', TRUE);
 
   $attributes['type'] = array('Type', 'Type', TRUE, '', TRUE);
 
@@ -195,6 +194,7 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
     $attributes['factory_purity'] = array('Factory Purity', 'Enter factory purity', TRUE, '', TRUE);
     $attributes['factory_fine'] = array('Factory Fine', '', FALSE, '', TRUE,TRUE);    
     $attributes['type'] = array('Type', ' Type', TRUE, '', TRUE);
+    $attributes['dd_type'] = array('Daily Drawer Type', 'Select Daily Drawer Type', TRUE, '', TRUE);
   }
 
   $attributes['credit_weight'] = array('Credit Weight', 'Enter Credit Weight', TRUE, '', TRUE);

@@ -8,8 +8,6 @@
       <tr>
         <th>Account Name</th>
         <th>Weight</th>
-        <th>Factory Purity</th>
-        <th>Factory Fine</th>
         <th></th>
       </tr>
     </thead>

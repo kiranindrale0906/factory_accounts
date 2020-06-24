@@ -50,8 +50,11 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
         if ($metal_issue_voucher['credit_weight'] == 0 || empty($metal_issue_voucher['credit_weight']))
           unset($this->formdata['metal_issue_vouchers'][$index]);
 
+
         if ($this->attributes['receipt_type'] == 'Metal') 
           $this->formdata['metal_issue_vouchers'][$index]['purity'] = $this->attributes['factory_purity'];
+          $this->formdata['metal_issue_vouchers'][$index]['factory_purity'] = $this->attributes['factory_purity'];
+          $this->formdata['metal_issue_vouchers'][$index]['factory_fine'] =$metal_issue_voucher['credit_weight']* $this->attributes['factory_purity']/100;
           
       }
     }
@@ -130,7 +133,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $api_url=API_BASE_PATH."api/api_refresh_departments/store";   
     }
     else if($data['receipt_type']=="Daily Drawer") {
-      $api_data = array_merge($api_data, array('type'=>$data['type'],
+      $api_data = array_merge($api_data, array('type'=>$data['dd_type'],
                                                'karigar'=> 'Factory'));
       $send_data['daily_drawer_receipts'] = $api_data;
       $api_url=API_BASE_PATH."api/api_daily_drawer_receipts/store";   
