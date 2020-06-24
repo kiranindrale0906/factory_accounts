@@ -24,6 +24,11 @@
                         array('label' => 'Balance',
                               'voucher_date' => $voucher_date,
                               'type' => $type));
+
+      $this->load->view('reports/account_ledger_reports/closing', 
+                        array('label' => 'Closing',
+                              'voucher_date' => $voucher_date,
+                              'type' => $type));
     }
     else {
       $this->load->view('reports/account_ledger_reports/total', 

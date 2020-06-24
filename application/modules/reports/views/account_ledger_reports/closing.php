@@ -4,7 +4,7 @@
 														array('label' => $label,
 																	'weight' => 0,
 															    'weight_difference' => 0,
-															  	'fine' => 0,
-														  		'factory_fine' => 1;
+															  	'fine' => $balance[ACCOUNT_NAME_REPORT][$voucher_date][$type]['fine'],
+														  		'factory_fine' => 0;
 	}
 ?>
