@@ -11,8 +11,8 @@
 				</thead>
 				<tbody>
 					<tr>
-				    <th>Vadotar</th>
-				    <th class="text-left"><?= four_decimal($weight_difference); ?></th>
+				    <th>Closing Stock</th>
+				    <th class="text-left"><?= four_decimal($factory_fine); ?></th>
 				  </tr>
 				</tbody>
 				</table>
