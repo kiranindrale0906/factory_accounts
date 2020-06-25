@@ -55,7 +55,7 @@
               $assets_vadotar = 0;  
               if(!empty($trial_balance)) {
                 foreach ($trial_balance as $record) {
-                  if (in_array($record['account_name'], array('AR Gold', 'ARC', 'ARF', 'AR Gold Finished Goods', 'ARC Finished Goods', 'ARF Finished Goods'))) continue;
+                  if (!in_array($record['account_name'], array('AR Gold', 'ARC', 'ARF', 'AR Gold Finished Goods', 'ARC Finished Goods', 'ARF Finished Goods'))) continue;
                   $assets_vadotar = $assets_vadotar + $record['vadotar'];
                   $assets_fine = $assets_fine + $record['fine']; ?>
 
