@@ -24,16 +24,16 @@
 
                   <tr>
                     <td><?= $record['account_name']; ?></td>
-                    <td class="text-right"><?= four_decimal($record['fine'], '-'); ?></td>
-                    <td class="text-right"><?= four_decimal($record['vadotar'], '-') ?>  </td>
+                    <td class="text-right"><?= four_decimal((-1 * $record['fine']), '-'); ?></td>
+                    <td class="text-right"><?= four_decimal((-1 * $record['vadotar']), '-') ?>  </td>
                   </tr>
                 <?php }
               } 
           ?>
           <tr>
             <th>Total</th>
-            <th class="text-right"><?= four_decimal($liabilities_fine, '-'); ?></th>          
-            <th class="text-right"><?= four_decimal($liabilities_vadotar, '-'); ?></th>
+            <th class="text-right"><?= four_decimal(-1 * $liabilities_fine, '-'); ?></th>          
+            <th class="text-right"><?= four_decimal(-1 * $liabilities_vadotar, '-'); ?></th>
           </tr>
         </table>
       </div>
@@ -82,10 +82,10 @@
       <table class="table table-sm fixedthead table-default">
         <tr>
           <td><b>Liabilities: </b></td>
-          <td class="text-right"><?= four_decimal($liabilities_fine, '-') ?></td>
+          <td class="text-right"><?= four_decimal(-1 * $liabilities_fine, '-') ?></td>
         </tr>
           <td><b>Vadotar: </b></td>
-          <td class="text-right"><?= four_decimal($liabilities_vadotar - $assets_vadotar);  ?></td>
+          <td class="text-right"><?= four_decimal($assets_vadotar - $liabilities_vadotar);  ?></td>
         </tr>
         <tr>
         <tr>
