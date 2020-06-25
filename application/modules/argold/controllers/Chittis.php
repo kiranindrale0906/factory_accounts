@@ -18,8 +18,8 @@ class Chittis extends BaseController {
     }
   }
    public function _get_view_data() {
-    $this->data['metal_vouchers'] = $this->voucher_model->get('',array('voucher_type'=>'metal issue voucher','chitti_id'=>$this->data['record']['chitti_id']));
-    $this->data['metal_voucher_details'] = $this->voucher_model->find('voucher_number,narration',array('voucher_type'=>'metal issue voucher','chitti_id'=>$this->data['record']['chitti_id']));
+    $this->data['metal_vouchers'] = $this->voucher_model->get('',array('voucher_type'=>'metal issue voucher','chitti_id'=>$this->data['record']['id']));
+    $this->data['metal_voucher_details'] = $this->voucher_model->find('voucher_number,narration',array('voucher_type'=>'metal issue voucher','chitti_id'=>$this->data['record']['id']));
 
   }
 }

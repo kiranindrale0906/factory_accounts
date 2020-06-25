@@ -13,9 +13,9 @@
 	</td>
 	<td><?php echo $vouchers['voucher_number'];?></td>
     <td><?php echo $vouchers['voucher_date'];?></td>
+    <td><?php echo $vouchers['account_name'];?></td>
 	<td><?php echo $vouchers['credit_weight'];?></td>
-	<td><?php echo $vouchers['purity'];?></td>
-	<td><?php echo $vouchers['fine'];?></td>
 	<td><?php echo $vouchers['factory_purity'];?></td>
 	<td><?php echo $vouchers['factory_fine']; ?></td>
+	<td><?php echo $vouchers['narration']; ?></td>
 </tr>
