@@ -8,6 +8,7 @@ class Chitti_model extends BaseModel {
   public function __construct($data = array()){
 		parent::__construct($data);
   }
+  
 
   public function after_save($action){
   	$chitti_details=array();
