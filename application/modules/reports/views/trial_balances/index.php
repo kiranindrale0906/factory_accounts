@@ -82,7 +82,7 @@
       <table class="table table-sm fixedthead table-default">
         <tr>
           <td><b>Liabilities: </b></td>
-          <td class="text-right"><?= four_decimal(-1 * $liabilities_fine, '-') ?></td>
+          <td class="text-right"><?= four_decimal($liabilities_fine, '-') ?></td>
         </tr>
           <td><b>Vadotar: </b></td>
           <td class="text-right"><?= four_decimal($assets_vadotar - $liabilities_vadotar);  ?></td>
@@ -90,7 +90,7 @@
         <tr>
         <tr>
           <td><b>Assets: </b></td>
-          <td class="text-right"><?= four_decimal($assets_fine, '-');  ?></td>
+          <td class="text-right"><?= four_decimal(-1 * $assets_fine, '-');  ?></td>
         </tr>
         <tr>
           <td><b>Total: </b></td>
