@@ -25,7 +25,7 @@ class Trial_balances extends Ledgers {
     if(empty($this->data['account_names'])) return true;
 
     $select = "account_name, 
-               IFNULL((sum(debit_weight*purity)/100),0) - IFNULL((sum(credit_weight*purity)/100),0) as fine,
+               IFNULL((sum(debit_weight*factory_purity)/100),0) - IFNULL((sum(credit_weight*factory_purity)/100),0) as fine,
                IFNULL(sum((factory_purity-purity)*debit_weight/100),0) - IFNULL(sum((factory_purity-purity)*credit_weight/100),0) as vadotar";
     $this->data['trial_balance'] = $this->model->get($select, array(), array() , 
                                                       array('group_by'=>'account_name,',
