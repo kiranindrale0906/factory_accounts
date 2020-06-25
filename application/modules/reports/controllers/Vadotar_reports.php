@@ -19,5 +19,14 @@ class Vadotar_reports extends Ledgers {
     $this->data['account_names'] = $this->model->get('distinct(account_name) as name', array(), array(), array('order_by'=>'account_name asc'));
     if(empty($this->data['account_names'])) return true;
     $this->get_datewise_ledger_records();
+    $this->get_companywise_vadotar();
+  }
+
+  private function get_companywise_vadotar() {
+    $this->data['company_vadotars'] = $this->model->get('receipt_type, sum(factory_fine - fine) as vadotar', 
+                                               array('receipt_type' => array("ARC Finished Goods", "ARF Finished Goods"),
+                                                     'voucher_type' => 'metal issue voucher'),
+                                               array(), array('group_by' => 'receipt_type'));
+    $this->data['total_vadotar'] = $this->model->find('sum(factory_fine - fine) as vodator');
   }
 }
