@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 require_once APPPATH . "modules/ac_vouchers/models/Voucher_model.php";
 class Core_opening_stock_voucher_model extends Voucher_model {
 
-  protected $prefix = 'OSV';
+  protected $prefix = 'OS';
   protected $voucher_type = 'opening stock voucher';
   protected $account_type = 'account';
   protected $insert_to_ledger = true; 

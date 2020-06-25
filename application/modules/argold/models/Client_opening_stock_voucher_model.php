@@ -9,6 +9,9 @@ class Client_opening_stock_voucher_model extends Core_opening_stock_voucher_mode
   }
 
   function before_validate() {
+    if (!isset($this->attributes['debit_weight']) || empty($this->attributes['debit_weight'])) $this->attributes['debit_weight']=0;
+    if (!isset($this->attributes['credit_weight']) || empty($this->attributes['credit_weight'])) $this->attributes['credit_weight']=0;
+    if (!isset($this->attributes['purity']) || empty($this->attributes['purity'])) $this->attributes['purity']=0;
     if ($this->attributes['debit_weight'] > 0 && $this->attributes['credit_weight'] > 0)
       $this->attributes['credit_weight'] = 0;
     parent::before_validate();
