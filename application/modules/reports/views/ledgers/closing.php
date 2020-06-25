@@ -8,9 +8,14 @@
     } elseif ($report == 'vadotar report') {
       $fine = 0;
       $vadotar = -1 * $balance[$voucher_date][$type]['weight_difference'];
-    } elseif ($report == 'account ledger') {
-      $fine = -1 * $balance[$voucher_date][$type]['fine'];
-      $vadotar = -1 * $balance[$voucher_date][$type]['weight_difference'];
+    } elseif ($report == 'account ledger') {  
+      $fine = $balance[$voucher_date][$type]['fine'];
+      $vadotar = $balance[$voucher_date][$type]['weight_difference'];
+      if ($type == 'issue') {
+        $fine = -1 * $fine;
+        $vadotar = -1 * $vadotar;
+      }
+
     } else {
       $fine = $balance[$voucher_date][$type]['fine'];
       $vadotar = $balance[$voucher_date][$type]['weight_difference'];
