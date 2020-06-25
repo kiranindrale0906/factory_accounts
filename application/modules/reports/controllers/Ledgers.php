@@ -13,7 +13,16 @@ class Ledgers extends BaseController {
       $this->data['record']['account_id'] = $account_id;
     }
 
-    if ($this->router->class == 'vadotar_reports') $where['purity != factory_purity'] = NULL;
+    if ($this->router->class == 'vadotar_reports') {
+      $where['purity != factory_purity'] = NULL;
+      if ($this->data['company_name'] == 'AR Gold') {
+        $where['where_not_in'] = array('receipt_type' => array("'ARF Finished Goods'", "'ARC Finished Goods'"));
+      } elseif ($this->data['company_name'] == 'ARF') {
+         $where['receipt_type'] = 'ARF Finished Goods';
+      } elseif ($this->data['company_name'] == 'ARC') {
+        $where['receipt_type'] = 'ARC Finished Goods';
+      }
+     } 
 
     $select = 'date_format(voucher_date,"%d-%m-%Y") as voucher_date, voucher_number,
                account_name, voucher_type, voucher_number, credit_amount, debit_amount, 
