@@ -118,7 +118,9 @@ class Voucher_model extends BaseModel {
 
   public function before_save($action) {
     unset($this->attributes['arg_weight']);
+    if($action=='store'){
     $this->set_user_define_data();
+    }
   }
 
   public function check_period_exists($voucher_date) {
