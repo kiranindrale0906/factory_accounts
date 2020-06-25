@@ -61,16 +61,16 @@
 
                   <tr>
                     <td><?= $record['account_name']; ?></td>
-                    <td class="text-right"><?= four_decimal($record['fine'], '-') ?></td>
-                    <td class="text-right"><?= four_decimal($record['vadotar'], '-') ?>  </td>
+                    <td class="text-right"><?= four_decimal(-1 * $record['fine'], '-') ?></td>
+                    <td class="text-right"><?= four_decimal(-1 * $record['vadotar'], '-') ?>  </td>
                   </tr>
                 <?php }
               } 
           ?>
           <tr>
             <th>Total</th>
-            <th class="text-right"><?= four_decimal($assets_fine, '-'); ?></th>          
-            <th class="text-right"><?= four_decimal($assets_vadotar, '-'); ?></th>
+            <th class="text-right"><?= four_decimal(-1 * $assets_fine, '-'); ?></th>          
+            <th class="text-right"><?= four_decimal(-1 * $assets_vadotar, '-'); ?></th>
           </tr>
         </table>
       </div>
