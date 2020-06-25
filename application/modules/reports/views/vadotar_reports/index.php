@@ -11,7 +11,7 @@
         $companies = array('All', 'AR Gold', 'ARC', 'ARF');
         foreach ($companies as $index => $company) { ?>
           <a class="ml-5 <?= ($company_name== $company) ? 'bold black underline' : '' ?>" 
-             href='/accounts/reports/vadotar_reports?company_name=<?= $company?>'><?= $company ?></a>
+             href='/reports/vadotar_reports?company_name=<?= $company?>'><?= $company ?></a>
         <?php }
       ?>
     </h5>
