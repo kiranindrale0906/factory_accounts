@@ -43,6 +43,7 @@
       $factory_fine = 0;
     } elseif ($report == 'rojmel report' && $label == 'Closing Stock') {
       $weight = 0;
+      $factory_fine = $fine;
       $fine = 0;
     } elseif ($report == 'account ledger') {
       $weight = 0;
