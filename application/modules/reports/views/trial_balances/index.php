@@ -19,6 +19,7 @@
               if(!empty($trial_balance)) {
                 foreach ($trial_balance as $record) {
                   if (in_array($record['account_name'], array("AR Gold", 'ARC', 'ARF', 'AR Gold Finished Goods', 'ARC Finished Goods', 'ARF Finished Goods'))) continue;
+                  if ($record['fine'] < 0) continue;
                   $liabilities_vadotar = $liabilities_vadotar + $record['vadotar'];
                   $liabilities_fine = $liabilities_fine + $record['fine']; ?>
 
@@ -55,7 +56,7 @@
               $assets_vadotar = 0;  
               if(!empty($trial_balance)) {
                 foreach ($trial_balance as $record) {
-                  if (!(in_array($record['account_name'], array('AR Gold', 'ARC', 'ARF', 'AR Gold Finished Goods', 'ARC Finished Goods', 'ARF Finished Goods')))) continue;
+                  if (in_array($record['account_name'], array('AR Gold', 'ARC', 'ARF', 'AR Gold Finished Goods', 'ARC Finished Goods', 'ARF Finished Goods')) || $record['fine'] < 0) continue;
                   $assets_vadotar = $assets_vadotar + $record['vadotar'];
                   $assets_fine = $assets_fine + $record['fine']; ?>
 
@@ -94,11 +95,11 @@
         </tr>
         <tr>
           <td><b>Total: </b></td>
-          <td class="text-right"><b><?= four_decimal(-1 * ($assets_vadotar + $assets_fine + $liabilities_fine + $liabilities_vadotar), '-');  ?></b></td>
+          <td class="text-right"><b><?= four_decimal(-1 * ($assets_fine - $assets_vadotar + $liabilities_fine - $liabilities_vadotar), '-');  ?></b></td>
         </tr>
         <tr>
           <td><b>Closing Stock: </b></td>
-          <td class="text-right"><b><?= four_decimal($liabilities_fine + $liabilities_vadotar + $assets_vadotar + $assets_fine, '-');  ?></b></td>
+          <td class="text-right"><b><?= four_decimal($liabilities_fine - $liabilities_vadotar - $assets_vadotar + $assets_fine, '-');  ?></b></td>
         </tr>
         <tr>
           <td><b>Balance: </b></td>
