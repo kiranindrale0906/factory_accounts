@@ -26,7 +26,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   }
   public function before_validate() {
     if ($this->attributes['receipt_type'] == "ARC Finished Goods") $this->attributes['account_name'] = 'ARC';
-    if ($this->attributes['receipt_type'] == "ARF Finished Goods") $this->attributes['account_name'] = 'ARC';
+    if ($this->attributes['receipt_type'] == "ARF Finished Goods") $this->attributes['account_name'] = 'ARF';
     
     // if ($this->attributes['receipt_type'] == "ARC Finished Goods"
     //     || $this->attributes['receipt_type'] == "ARF Finished Goods") {
@@ -37,7 +37,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     //                                                         'factory_purity' => $this->attributes['factory_purity']));
     // }
     
-     if (in_array($this->attributes['receipt_type'], array('Metal','ARC Finished Goods','ARF Finished Goods')) == 'Metal') {
+     if (in_array($this->attributes['receipt_type'], array('Metal', 'ARC Finished Goods','ARF Finished Goods')) == 'Metal') {
         $this->formdata['metal_receipt_vouchers']['factory_purity'] = $this->attributes['purity'];
         $this->formdata['metal_receipt_vouchers']['factory_fine'] = $this->attributes['debit_weight']*$this->attributes['purity']/100;
      }
@@ -47,8 +47,10 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       foreach ($this->formdata['metal_issue_vouchers'] as $index => $metal_issue_voucher) {
         $this->formdata['metal_issue_vouchers'][$index]['receipt_type'] = $this->attributes['receipt_type'];
 
-        if ($metal_issue_voucher['credit_weight'] == 0 || empty($metal_issue_voucher['credit_weight']))
+        if ($metal_issue_voucher['credit_weight'] == 0 || empty($metal_issue_voucher['credit_weight'])) {
           unset($this->formdata['metal_issue_vouchers'][$index]);
+          continue;
+        }
 
 
         if ($this->attributes['receipt_type'] == 'Metal') 

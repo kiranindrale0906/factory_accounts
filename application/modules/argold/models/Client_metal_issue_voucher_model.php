@@ -28,7 +28,8 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
     if (isset($this->attributes['metal_receipt_voucher_reference_id']) 
         && (!empty($this->attributes['metal_receipt_voucher_reference_id']))) return true;    
 
-    if ($this->attributes['receipt_type'] == 'ARC Finished Goods'
+    if ($this->attributes['receipt_type'] == 'AR Gold Finished Goods'
+        || $this->attributes['receipt_type'] == 'ARC Finished Goods'
         || $this->attributes['receipt_type'] == 'ARF Finished Goods') {
       $this->load->model('transactions/metal_receipt_voucher_model');
       $metal_receipt_data = array();
