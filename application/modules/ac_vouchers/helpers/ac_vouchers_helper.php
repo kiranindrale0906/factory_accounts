@@ -93,8 +93,13 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
                                           "FORMAT(ac_vouchers.lumpsum_amount,ac_company.decimal_no) as lumpsum_amount",'','','','text-right');
   $list_setting['interest_per_day'] = array("Interest per Day", "interest_per_day", FALSE, "interest_per_day", TRUE, TRUE);
 
-  $list_setting['debit_weight'] = array("Debit Wt.", "debit_weight", FALSE, "debit_weight", TRUE, TRUE);
-  $list_setting['credit_weight'] = array("Credit Wt.", "credit_weight", FALSE, "credit_weight", TRUE, TRUE);
+  if ($ci->router->class=='opening_stock_vouchers') {
+    $list_setting['debit_weight'] = array("Credit Wt.", "debit_weight", FALSE, "debit_weight", TRUE, TRUE);
+    $list_setting['credit_weight'] = array("Debit Wt.", "credit_weight", FALSE, "credit_weight", TRUE, TRUE);
+  } else {
+    $list_setting['debit_weight'] = array("Debit Wt.", "debit_weight", FALSE, "debit_weight", TRUE, TRUE);
+    $list_setting['credit_weight'] = array("Credit Wt.", "credit_weight", FALSE, "credit_weight", TRUE, TRUE);
+  }
   
   if ($ci->router->class=='metal_issue_vouchers') {
     $list_setting['purity'] = array("Factory Purity", "purity", FALSE, "purity", TRUE, TRUE);
@@ -189,9 +194,14 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['to_group_id'] = array('', '', TRUE, '', TRUE);
   $attributes['document'] = array('', '', TRUE, '', TRUE);
 
-  $attributes['credit_weight'] = array('Credit Weight', 'Enter Credit Weight', TRUE, '', TRUE);
-  $attributes['debit_weight'] = array('Debit Weight', 'Enter Weight', TRUE, '', TRUE);
-  
+  if ($ci->router->class == 'opening_stock_vouchers') {
+    $attributes['credit_weight'] = array('Debit Weight', 'Enter Debit Weight', TRUE, '', TRUE);
+    $attributes['debit_weight'] = array('Credit Weight', 'Enter Credit Weight', TRUE, '', TRUE);
+  } else {}
+    $attributes['credit_weight'] = array('Credit Weight', 'Enter Credit Weight', TRUE, '', TRUE);
+    $attributes['debit_weight'] = array('Debit Weight', 'Enter Weight', TRUE, '', TRUE);
+  }
+
   if ($ci->router->class=='metal_issue_vouchers') {
     $attributes['purity'] = array('Factory Purity', 'Enter Purity', TRUE, '', TRUE);
     $attributes['fine'] = array('Factory Fine', '', FALSE, '', TRUE,TRUE);
