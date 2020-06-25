@@ -19,7 +19,7 @@ if (!function_exists('list_settings')) {
 
 if (!function_exists('get_field_attribute')) {
   function get_field_attribute($table, $field) {  
-    $required_fields=array('id','voucher_date','account_name', 'debit_weight', 'credit_weight', 'purity');
+    $required_fields=array('id','voucher_date','account_name', 'debit_weight', 'credit_weight');
     return ac_voucher_get_field_attribute($table,$field,$required_fields);
   }
 }
