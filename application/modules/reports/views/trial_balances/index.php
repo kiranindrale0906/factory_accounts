@@ -94,11 +94,11 @@
         </tr>
         <tr>
           <td><b>Total: </b></td>
-          <td class="text-right"><b><?= four_decimal(-1 * ($assets_fine - $liabilities_fine), '-');  ?></b></td>
+          <td class="text-right"><b><?= four_decimal(-1 * ($liabilities_fine + $assets_fine), '-');  ?></b></td>
         </tr>
         <tr>
           <td><b>Closing Stock: </b></td>
-          <td class="text-right"><b><?= four_decimal($assets_fine - $liabilities_fine, '-');  ?></b></td>
+          <td class="text-right"><b><?= four_decimal($assets_fine + $liabilities_fine, '-');  ?></b></td>
         </tr>
         <tr>
           <td><b>Balance: </b></td>
