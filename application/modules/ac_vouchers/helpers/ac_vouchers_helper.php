@@ -197,7 +197,7 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   if ($ci->router->class == 'opening_stock_vouchers') {
     $attributes['credit_weight'] = array('Debit Weight', 'Enter Debit Weight', TRUE, '', TRUE);
     $attributes['debit_weight'] = array('Credit Weight', 'Enter Credit Weight', TRUE, '', TRUE);
-  } else {}
+  } else {
     $attributes['credit_weight'] = array('Credit Weight', 'Enter Credit Weight', TRUE, '', TRUE);
     $attributes['debit_weight'] = array('Debit Weight', 'Enter Weight', TRUE, '', TRUE);
   }
