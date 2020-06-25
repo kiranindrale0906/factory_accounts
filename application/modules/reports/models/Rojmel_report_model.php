@@ -6,7 +6,4 @@ class Rojmel_report_model extends BaseModel {
   function __construct($data=array()) {
     parent::__construct($data);
   }
-
 }
-
-//class
