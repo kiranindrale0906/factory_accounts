@@ -25,7 +25,7 @@
                             'voucher_date' => $voucher_date,
                             'type' => $type));
 
-    if ($report == 'rojmel report')
+    if ($report == 'rojmel report' || $report == 'vadotar report')
       $this->load->view('reports/ledgers/closing', 
                         array('label' => 'Closing Stock',
                               'voucher_date' => $voucher_date,
