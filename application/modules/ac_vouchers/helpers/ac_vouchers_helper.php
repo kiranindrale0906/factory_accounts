@@ -69,6 +69,14 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
   $list_setting['transaction_type'] = array("Transaction Type", "transaction_type", TRUE, "transaction_type", TRUE, TRUE);
   $list_setting['bank_name'] = array("Bank Name", "bank_name", TRUE, "bank_name", TRUE, TRUE);
   $list_setting['cheque_number'] = array("Check Number", "cheque_number", TRUE, "cheque_number", TRUE, TRUE);
+  
+  if ($ci->router->class=='metal_issue_vouchers') {
+    $list_setting['receipt_type'] = array("Issue Type", "receipt_type", FALSE, "receipt_type", TRUE, TRUE);
+  } else {
+    $list_setting['receipt_type'] = array("Type", "receipt_type", FALSE, "receipt_type", TRUE, TRUE);
+  }
+
+
   $list_setting['account_name'] = array("Account", "account_name", TRUE, "account_name", TRUE, TRUE);
   $list_setting['from_account_name'] = array("From Account Name", "from_account_name", TRUE, "from_account_name", TRUE, TRUE);
 
@@ -85,22 +93,21 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
                                           "FORMAT(ac_vouchers.lumpsum_amount,ac_company.decimal_no) as lumpsum_amount",'','','','text-right');
   $list_setting['interest_per_day'] = array("Interest per Day", "interest_per_day", FALSE, "interest_per_day", TRUE, TRUE);
 
+  $list_setting['debit_weight'] = array("Debit Wt.", "debit_weight", FALSE, "debit_weight", TRUE, TRUE);
+  $list_setting['credit_weight'] = array("Credit Wt.", "credit_weight", FALSE, "credit_weight", TRUE, TRUE);
+
   if ($ci->router->class=='metal_issue_vouchers') {
-    $list_setting['receipt_type'] = array("Issue Type", "receipt_type", FALSE, "receipt_type", TRUE, TRUE);
     $list_setting['purity'] = array("Factory Purity", "purity", FALSE, "purity", TRUE, TRUE);
     $list_setting['fine'] = array("Factory Fine", "fine", FALSE, "fine", TRUE, TRUE);
     $list_setting['factory_purity'] = array("Issue Purity", "factory_purity", FALSE, "factory_purity", TRUE, TRUE);
     $list_setting['factory_fine'] = array("Issue Fine", "factory_fine", FALSE, "factory_fine", TRUE, TRUE);
   } else {
-    $list_setting['receipt_type'] = array("Type", "receipt_type", FALSE, "receipt_type", TRUE, TRUE);
     $list_setting['purity'] = array("Purity", "purity", FALSE, "purity", TRUE, TRUE);
     $list_setting['fine'] = array("Fine", "fine", FALSE, "fine", TRUE, TRUE);
     $list_setting['factory_purity'] = array("Factory Purity", "factory_purity", FALSE, "factory_purity", TRUE, TRUE);
     $list_setting['factory_fine'] = array("Factory Fine", "factory_fine", FALSE, "factory_fine", TRUE, TRUE);
   }
 
-  $list_setting['credit_weight'] = array("Credit Wt.", "credit_weight", FALSE, "credit_weight", TRUE, TRUE);
-  $list_setting['debit_weight'] = array("Debit Wt.", "debit_weight", FALSE, "debit_weight", TRUE, TRUE);
   
   $list_setting['Pure Gold'] = array("Narration", "pure_gold_credit", FALSE, "pure_gold_credit", TRUE, TRUE);
   $list_setting['department_name'] = array("Department Name", "department_name", FALSE, "department_name", TRUE, TRUE);
@@ -182,6 +189,9 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['to_group_id'] = array('', '', TRUE, '', TRUE);
   $attributes['document'] = array('', '', TRUE, '', TRUE);
 
+  $attributes['credit_weight'] = array('Credit Weight', 'Enter Credit Weight', TRUE, '', TRUE);
+  $attributes['debit_weight'] = array('Debit Weight', 'Enter Weight', TRUE, '', TRUE);
+
   if ($ci->router->class=='metal_issue_vouchers') {
     $attributes['purity'] = array('Factory Purity', 'Enter Purity', TRUE, '', TRUE);
     $attributes['fine'] = array('Factory Fine', '', FALSE, '', TRUE,TRUE);
@@ -197,8 +207,6 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
     $attributes['dd_type'] = array('Daily Drawer Type', 'Select Daily Drawer Type', TRUE, '', TRUE);
   }
 
-  $attributes['credit_weight'] = array('Credit Weight', 'Enter Credit Weight', TRUE, '', TRUE);
-  $attributes['debit_weight'] = array('Weight', 'Enter Weight', TRUE, '', TRUE);
   $attributes['arg_weight'] = array('ARG Weight', 'ARG Weight', FALSE, '', FALSE,TRUE);
   $attributes['department_name'] = array('Department Name', 'Department', FALSE, '', TRUE);
   $attributes['department_id'] = array('Department', ' Department', FALSE, '', FALSE,TRUE);

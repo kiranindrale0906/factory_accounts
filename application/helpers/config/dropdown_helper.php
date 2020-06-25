@@ -23,7 +23,8 @@
                 );
   }
   function get_issue_type() {
-    return array(array('id' => 'ARC Finished Goods', 'name' => 'ARC Finished Goods'),
+    return array( array('id' => 'AR Gold Finished Goods', 'name' => 'AR Gold Finished Goods'),
+                  array('id' => 'ARC Finished Goods', 'name' => 'ARC Finished Goods'),
                   array('id' => 'ARF Finished Goods', 'name' => 'ARF Finished Goods'),
                 );
   }

@@ -1,102 +1,32 @@
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
-include_once APPPATH . "modules/reports/controllers/Client_ledgers.php";
-class Vadotar_reports extends Client_ledgers {
+include_once APPPATH . "modules/reports/controllers/Ledgers.php";
+class Vadotar_reports extends Ledgers {
 
   public function __construct() {
     parent::__construct();
-    $this->load->model(array('masters/account_model','masters/company_model'));
+    $this->load->model(array('masters/account_model'));
   }
 
   public function index() {
-    $this->data['layout']='application';
-    $this->get_form_data();
-    $this->get_account_ledger_records();
+    $this->_get_form_data();
     $this->load->render($this->router->class."/index",$this->data);
   }
 
-  public function get_form_data() {
-    $this->data['record']['company_id']=!empty($_GET['company_id'])?$_GET['company_id']:"";
-    
-    $this->data['account_names'] = $this->model->get('distinct(account_name) as name',
-                          array('where_in' => array('voucher_type' => array("'metal issue voucher'", 
-                                                                            "'metal receipt voucher'"))),
-                          array(), array('order_by'=>'account_name asc'));
-    $company_names = $this->company_model->get('name,id');
-    if(!empty($company_names)){
-    $this->data['company_names'] =array_merge(array(array('id'=>'All','name'=>'All')),$company_names);
-    }
+  public function _get_form_data() {
+    $this->data['voucher_dates']=array();
+    $this->data['account_names'] = $this->model->get('distinct(account_name) as name', array(), array(), array('order_by'=>'account_name asc'));
+    if(empty($this->data['account_names'])) return true;
+    $this->get_datewise_ledger_records();
+    $this->get_companywise_vadotar();
   }
 
-  private function get_account_ledger_records() {
-    $issue_data=array();
-    $receipt_data=array();
-    $this->data['voucher_dates']=array();
-
-    if(empty($this->data['account_names'])) return true;
-
-    $where = array('voucher_type' => 'metal receipt voucher');
-    if(!empty($this->data['record']['company_id'])){
-      $where['company_id']=$this->data['record']['company_id'];
-    }
-    $select = 'date_format(voucher_date,"%d-%m-%Y") as voucher_date';
-    $issues = $this->model->get($select, $where ,array(), array('order_by'=>'voucher_date asc'));
-      
-    $where = array('voucher_type' => 'metal receipt voucher');
-    if(!empty($this->data['record']['company_id'])){
-      $where['company_id']=$this->data['record']['company_id'];
-    }
-    $receipts = $this->model->get($select, $where ,array(), array('order_by'=>'voucher_date asc'));
-
-    $issue_created_dates = array_column($issues, 'voucher_date');
-    $receipt_created_dates = array_column($receipts, 'voucher_date');
-    $this->data['voucher_dates'] = array(''); //array_values(array_unique(array_merge($issue_created_dates, $receipt_created_dates)));
-    asort($this->data['voucher_dates']);
-
-    //foreach ($this->data['account_names'] as $account_detail) {
-      //$account_name = $account_detail['name'];  
-      $account_name = '';  
-
-      $where['voucher_type'] = 'metal issue voucher';
-      $where['purity != factory_purity']=NULL;
-      //$where['account_name'] = $account_name;
-
-
-      $select = 'date_format(voucher_date,"%d-%m-%Y") as voucher_date,
-                 account_name, voucher_type, voucher_number, credit_amount, debit_amount, 
-                 credit_weight, debit_weight, purity_margin, purity, factory_purity, narration';
-      $issues = $this->model->get($select, $where ,array(), array('order_by'=>'voucher_date asc'));
-      
-      $where['voucher_type']='metal receipt voucher';
-      $where['purity != factory_purity']=NULL;
-      $receipts = $this->model->get($select, $where ,array(), array('order_by'=>'voucher_date asc'));
-      $issues = array_merge(array(array('voucher_date' => '01-01-2020',
-                                        'account_name' => 'Opening',
-                                        'voucher_type' => 'metal issue voucher',
-                                        'voucher_number' => '',
-                                        'credit_amount' => 0,
-                                        'debit_amount' => 0,
-                                        'credit_weight' => 0,
-                                        'debit_weight' => 0,
-                                        'purity_margin' => 0,
-                                        'purity' => 0,
-                                        'factory_purity' => 0,
-                                        'narration' => '')), $issues);
-      $issue_data[$account_name][''] = $issues; //parent::get_records_by_created_date($issues);
-      $receipt_data[$account_name][''] = $receipts; //parent::get_records_by_created_date($receipts);
-
-      $total[''][''] = array('issue' => array('weight' => 0, 'weight_difference' => 0, 'fine' => 0, 'factory_fine' => 0),
-                             'receipt' => array('weight' => 0, 'weight_difference' => 0, 'fine' => 0, 'factory_fine' => 0));
-      
-      $total[$account_name] = parent::get_total_by_created_date($issue_data[$account_name], 'issue', $total['']);
-      $total[$account_name] = parent::get_total_by_created_date($receipt_data[$account_name], 'receipt', $total[$account_name]);
-      
-      $total[$account_name] = parent::set_index_for_dates($total[$account_name]);
-    //}
-    $this->data['issues'] = $issue_data;
-    $this->data['receipts'] = $receipt_data;
-    $this->data['total'] = $total;  
-    parent::get_balance_by_created_date();
-  }      
+  private function get_companywise_vadotar() {
+    $this->data['company_vadotars'] = $this->model->get('receipt_type, sum(factory_fine - fine) as vadotar', 
+                                               array('receipt_type' => array("ARC Finished Goods", "ARF Finished Goods"),
+                                                     'voucher_type' => 'metal issue voucher'),
+                                               array(), array('group_by' => 'receipt_type'));
+    $this->data['total_vadotar'] = $this->model->find('sum(factory_fine - fine) as vodator');
+  }
 }

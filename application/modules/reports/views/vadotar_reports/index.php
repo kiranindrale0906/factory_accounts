@@ -1,74 +1,31 @@
-<?php $this->load->view('ac_vouchers/ac_vouchers/company_error_message'); ?> 
-<br>
-<div class="boxrow mb-2">
-    <div class="float-left">
-     <h6 class="heading blue bold text-uppercase mb-0"><?= @getTableSettings()['page_title']; ?></h6>
+<?php 
+  $this->load->view('reports/ledgers/report_header', array('header' => 'Vadotar Report (Ledger)'));
+  $this->load->view('ac_vouchers/ac_vouchers/company_error_message'); 
+  $this->load->view('reports/ledgers/date_wise_ledger', array('report' => 'vadotar report')); 
+?>
+
+<div class="row">
+  <div class="col-md-3">
+    <div class="form-group container">
+      <table class="table table-sm fixedthead table-default">
+        <?php 
+          $vadotar = 0;
+          foreach ($company_vadotars as $index => $company_vadotar) { 
+            $vadotar = $vadotar + $company_vadotar['vadotar'] ?>
+            <tr>
+              <td><b><?= str_replace(' Finished Goods', '', $company_vadotar['receipt_type']); ?></b></td>
+              <td class="text-right"><?= four_decimal($company_vadotar['vadotar'], '-') ?></td>
+            </tr>
+          <?php } 
+        ?>
+        <tr>
+          <td><b>AR Gold</b></td>
+          <td class="text-right"><?= four_decimal($total_vadotar['vodator'] - $vadotar, '-') ?></td>
+        </tr>
+        <tr>
+          <td><b>Total</b></td>
+          <td class="text-right"><?= four_decimal($total_vadotar['vodator'], '-') ?></td>
+        </tr>
     </div>
   </div>
-  <hr>
-
- <?php 
-         load_field('dropdown', array('field'=>'company_id','option' => $company_names ,'class'=>"onchange_vadotar_comapny_name")); ?>
-          </div>
-<?php   
-  if(!empty($account_names)) {
-    //foreach ($account_names as $key => $account) { 
-      $account['name']='';                          ?>
-     <!--  <h5> <?php //$account['name']; ?> </h5> -->
-      <?php
-      $previous_date = '';
-      foreach ($voucher_dates as $index => $voucher_date) {  
-
-        ?>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group container">
-              <div class="table-responsive m-t-20">
-                <h5 class="heading blue m-0">Receipt <?= $voucher_date; ?></h5>
-                <table class="table table-sm fixedthead table-default">
-                  <?php 
-                    $this->load->view('reports/vadotar_reports/receipt_thead'); 
-                    $this->load->view('reports/vadotar_reports/tbody', 
-                        array('voucher_date_records' => isset($receipts[$account['name']][$voucher_date])                              ? $receipts[$account['name']][$voucher_date] :
-                                                          array(),
-                              'previous_date' => $previous_date,
-                              'voucher_date' => $voucher_date,
-                              'type' => 'receipt',
-                              'account_name'=>$account['name'])); 
-                  ?>
-                </table>
-              </div> 
-            </div>
-          </div> 
-
-          <div class="col-md-6 border-right">
-            <div class="form-group container">
-              <div class="table-responsive m-t-20">
-                <h5 class="heading blue m-0">Issue</h5>
-                <table class="table table-sm fixedthead table-default">
-                  <?php 
-                    $this->load->view('reports/vadotar_reports/issue_thead'); 
-                    $this->load->view('reports/vadotar_reports/tbody',
-                                                        array('voucher_date_records' => isset($issues[$account['name']][$voucher_date]) ? $issues[$account['name']][$voucher_date] : array(),
-                                                          'previous_date' => $previous_date,
-                                                          'voucher_date' => $voucher_date,
-                                                          'type' => 'issue',
-                                                          'account_name'=>$account['name'])); 
-                  ?>
-                  
-                </table>
-              </div> 
-            </div>
-          </div>
-
-          
-        </div>
-        <?php 
-        $previous_date = $voucher_date;
-      }
-    //}
-  }
-      
-
-?>
-  
+</div>
