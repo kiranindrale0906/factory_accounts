@@ -68,7 +68,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   
   public function after_save($action) {
     parent::after_save($action);
-    $this->send_request_to_argold($this->formdata);
+    if (ENABLE_API_FOR_RECEIPT)
+      $this->send_request_to_argold($this->formdata);
     $this->create_metal_issue_vouchers();
   }
 
