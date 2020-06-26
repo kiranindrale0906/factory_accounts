@@ -40,7 +40,7 @@ function list_settings() {
     array("Date", "created_at", FALSE, "created_at", FALSE, FALSE,'DATE_FORMAT(created_at, "%d-%m-%Y") as created_at'),
     array("Account Name", "account_name", FALSE, "account_name", FALSE, FALSE),
     array("Weight", "weight", FALSE, "weight", FALSE, FALSE),
-    array("Purity", "purity", FALSE, "purity", FALSE, FALSE),
+    // array("Purity", "purity", FALSE, "purity", FALSE, FALSE),
     array("Fine", "fine", FALSE, "fine", FALSE, FALSE),
     array("Action", "action", FALSE, "action", FALSE, FALSE),
   );
