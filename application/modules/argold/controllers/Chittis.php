@@ -26,7 +26,9 @@ class Chittis extends BaseController {
   }
 
   public function _get_form_data() {
-    $this->data['record']['account_name']=!empty($_GET['account_name'])?$_GET['account_name']:"";
+    if (!empty($_GET['account_name']))
+      $this->data['record']['account_name'] = $_GET['account_name'];
+
     $where=array('voucher_type'=>'metal issue voucher','chitti_id'=>'');
     if(!empty($this->data['record']['account_name'])){
       $where['account_name']=$this->data['record']['account_name'];
