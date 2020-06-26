@@ -86,6 +86,12 @@ function autocomplete_listing_selection() {
     },
     select: function (event, ui) {
         $(this).val(ui.item.value);
+        value = url.substring(url.lastIndexOf('/')-7);
+        value.split('/')
+        if(value=='chittis/'){
+          var receipt_type = ui.item.label; 
+          window.location = base_url+ 'argold/chittis/create?account_name='+receipt_type;  
+        }
         if ($(this).next('input[type="hidden"]').length) {
             $(this).next('input[type="hidden"]').val(ui.item.id);
         }
