@@ -19,5 +19,12 @@
 <?php
   $this->load->view('chitti_details/viewlist');
 ?>
+<style type="text/css">
+  @page { 
+    margin: 0mm; 
+    size: 4in 6in ;
+    size: landscape;
+  }
+</style>
 
 
