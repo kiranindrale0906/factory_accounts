@@ -36,8 +36,8 @@ function getTableSettings() {
 
 function list_settings() {
   return array(
-    array("Id", "chitti_id", FALSE, "chitti_id", FALSE, FALSE),
-    array("Date", "date", FALSE, "date", FALSE, FALSE),
+    array("Id", "id", FALSE, "id", FALSE, FALSE),
+    array("Date", "created_at", FALSE, "created_at", FALSE, FALSE,'DATE_FORMAT(created_at, "%d-%m-%Y") as created_at'),
     array("Action", "action", FALSE, "action", FALSE, FALSE),
   );
 }

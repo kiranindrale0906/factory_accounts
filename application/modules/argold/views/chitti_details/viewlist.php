@@ -21,10 +21,10 @@
       ?>
       <tr>
         <td><?=$index+1?></td>
-        <td><?= $metal_voucher['receipt_type'] ?></td>
+        <td><?= $metal_voucher['narration'] ?></td>
         <td class="text-right"><?= $metal_voucher['credit_weight']; ?></td>
         <td class="text-right"><?= $metal_voucher['factory_purity'] ?></td>
-        <td class="text-right"></td>
+        <td class="text-right"><?= four_decimal($metal_voucher['factory_purity']-$metal_voucher['purity']) ?></td>
         <td class="text-right"><?=$metal_voucher['factory_fine'] ?></td>
       </tr>
 
@@ -41,9 +41,3 @@
     </tbody>
   </table>
 </div>
-<div class="col-md-6 border-right">
-    <div class="form-group container">
-      <p><h6>Narrations :<?=$metal_voucher_details['narration']?> </h6></p>
-    </div>
-  </div>
-

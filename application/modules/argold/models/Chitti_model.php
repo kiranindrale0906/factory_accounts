@@ -8,6 +8,7 @@ class Chitti_model extends BaseModel {
   public function __construct($data = array()){
 		parent::__construct($data);
   }
+  
 
   public function after_save($action){
   	$chitti_details=array();
@@ -15,7 +16,7 @@ class Chitti_model extends BaseModel {
 	foreach ($this->formdata['chitti_details'] as $index => $chitti_detail) {
 		if (isset($chitti_detail['chitti_id'])) {
 		$voucher_data=$this->voucher_model->find('',array('id'=>$this->attributes['chitti_id']));
-	  	$chitti_details['chitti_id'] = $this->attributes['chitti_id'];
+	  	$chitti_details['chitti_id'] = $this->attributes['id'];
 		$chitti_details_model = new voucher_model($chitti_details);
    		$chitti_details_model->update(false,array('id'=>$chitti_detail['chitti_id']));
 		}
@@ -24,7 +25,7 @@ class Chitti_model extends BaseModel {
 	}  
 
 	public function validation_rules($klass='') {
-    $rules= array(array('field' => 'chittis[chitti_id]', 'label' => 'Chitti',
+    $rules= array(array('field' => 'chittis[date]', 'label' => 'Date',
 									      'rules' => 'trim|required')
                   );
     return $rules;
