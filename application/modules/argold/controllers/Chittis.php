@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Chittis extends BaseController {
   public function __construct() {
     parent::__construct();
-     $this->redirect_after_save = 'view';
+    //$this->redirect_after_save = 'view';
     $this->load->model(array('ac_vouchers/voucher_model','masters/account_model'));
   }
   
