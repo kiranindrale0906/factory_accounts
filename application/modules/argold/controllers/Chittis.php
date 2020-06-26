@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Chittis extends BaseController {
   public function __construct() {
     parent::__construct();
-    //$this->redirect_after_save = 'view';
+    $this->redirect_after_save = 'view';
     $this->load->model(array('ac_vouchers/voucher_model','masters/account_model'));
   }
   
@@ -41,5 +41,10 @@ class Chittis extends BaseController {
       $this->data['record']['chittis'] = $_POST['chittis'];
       $this->data['chittis_details'] = @$_POST['chittis_details'];
     }
+  }
+
+  public function store() {
+    $this->data['redirect_url'] = '/argold/chittis';
+    parent::store();
   }
 }
