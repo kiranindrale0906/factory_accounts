@@ -43,6 +43,7 @@ class Ledgers extends BaseController {
 
     $total_issue = $this->get_total_by_created_date($this->data['issues'], 'issue', array());
     $total_receipt_issue = $this->get_total_by_created_date($this->data['receipts'], 'receipt', $total_issue);      
+    //pd($total_receipt_issue);
     $this->data['total'] = $this->set_index_for_dates($total_receipt_issue);
 
     $this->get_balance_by_created_date();
@@ -110,14 +111,13 @@ class Ledgers extends BaseController {
 
           if($type=='receipt') {
             $total[$record['voucher_date']][$type]['weight'] += $record['debit_weight'];
-            $purity_margin = $record['debit_weight']*($record['purity']-$record['factory_purity'])/100; 
+            $purity_margin = ($record['factory_purity']-$record['purity']) * $record['debit_weight'] /100; 
             $total[$record['voucher_date']][$type]['weight_difference'] += $purity_margin;
             $fine=($record['debit_weight']*$record['purity'])/100;
             $total[$record['voucher_date']][$type]['fine'] += $fine;
             $factory_fine=($record['debit_weight']*$record['factory_purity'])/100;
             $total[$record['voucher_date']][$type]['factory_fine'] += $factory_fine;
           }
-        
       }
     }
     return $total;     
