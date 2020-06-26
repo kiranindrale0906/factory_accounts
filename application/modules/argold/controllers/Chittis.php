@@ -24,12 +24,4 @@ class Chittis extends BaseController {
     if(!empty($this->data['metal_voucher_details']['account_name']))
       $this->data['account_id'] = $this->account_model->find('id',array('name'=>$this->data['metal_voucher_details']['account_name']))['id'];
   }
-
-  public function _get_view_data() {
-    $this->data['metal_vouchers'] = $this->voucher_model->get('',array('voucher_type' => 'metal issue voucher',
-                                                                       'chitti_id' => $this->data['record']['id']));
-    $this->data['metal_voucher_details'] = $this->voucher_model->find('voucher_number, narration',
-                                                                 array('voucher_type' => 'metal issue voucher',
-                                                                       'chitti_id' => $this->data['record']['id']));
-  }
 }
