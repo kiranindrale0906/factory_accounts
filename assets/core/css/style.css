@@ -2941,6 +2941,8 @@ footer.footer {
   display: none; }
 
 @media print {
+  .noprint {   visibility: hidden; 
+          }
   .onlyprint {
     display: block; }
 
