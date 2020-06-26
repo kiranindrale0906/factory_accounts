@@ -10,8 +10,8 @@
     <th class='text-right'>Factory Fine</th>
     <th class='text-right'>Melting</th>
     <th class='text-right'>Fine</th>
-    <?php //if ($report != 'account ledger'): ?>
+    <?php if ($report != 'account ledger'): ?>
       <th class='text-right'>Vadotar</th>
-    <?php //endif; ?>
+    <?php endif; ?>
   </tr>
 </thead>
