@@ -16,14 +16,17 @@
 
   function get_receipt_type() {
     return array( array('id' => 'Metal', 'name' => 'Metal'),
-                  array('id' => 'Refresh', 'name' => 'Refresh'),
+                  array('id' => 'AR Gold Refresh', 'name' => 'AR Gold Refresh'),
+                  array('id' => 'ARC Refresh', 'name' => 'ARC Refresh'),
+                  array('id' => 'ARF Refresh', 'name' => 'ARF Refresh'),
                   array('id' => 'Daily Drawer', 'name' => 'Daily Drawer'),
                   array('id' => 'ARC Finished Goods', 'name' => 'ARC Finished Goods'),
                   array('id' => 'ARF Finished Goods', 'name' => 'ARF Finished Goods'),
                 );
   }
   function get_issue_type() {
-    return array( array('id' => 'AR Gold Finished Goods', 'name' => 'AR Gold Finished Goods'),
+    return array( array('id' => 'Metal', 'name' => 'Metal'),
+                  array('id' => 'AR Gold Finished Goods', 'name' => 'AR Gold Finished Goods'),
                   array('id' => 'ARC Finished Goods', 'name' => 'ARC Finished Goods'),
                   array('id' => 'ARF Finished Goods', 'name' => 'ARF Finished Goods'),
                 );
