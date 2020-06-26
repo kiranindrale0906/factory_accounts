@@ -96,17 +96,30 @@
     <?php load_view('ac_vouchers/ac_vouchers/fields/cheque_number');
           load_view('ac_vouchers/ac_vouchers/fields/debit_weight', array('readonly' => $readonly));  
           load_view('ac_vouchers/ac_vouchers/fields/credit_weight', array('readonly' => $readonly));
-          load_view('ac_vouchers/ac_vouchers/fields/interest_per_day');
-          load_view('ac_vouchers/ac_vouchers/fields/purity');
-          load_view('ac_vouchers/ac_vouchers/fields/fine'); ?>
+          load_view('ac_vouchers/ac_vouchers/fields/interest_per_day'); ?>
+    <?php
+      if ($this->router->class == 'metal_receipt_vouchers') { 
+        load_view('ac_vouchers/ac_vouchers/fields/factory_purity');
+        load_view('ac_vouchers/ac_vouchers/fields/factory_fine');
+      } else {
+        load_view('ac_vouchers/ac_vouchers/fields/purity');
+        load_view('ac_vouchers/ac_vouchers/fields/fine'); 
+      }?>
   </div>        
 
   <div class="row">   
-    <?php load_view('ac_vouchers/ac_vouchers/fields/arg_weight');
-          load_view('ac_vouchers/ac_vouchers/fields/factory_purity');
-          load_view('ac_vouchers/ac_vouchers/fields/lumpsum_amount');
-          load_view('ac_vouchers/ac_vouchers/fields/factory_fine');
-          load_view('ac_vouchers/ac_vouchers/fields/transaction_type'); ?>
+    <?php load_view('ac_vouchers/ac_vouchers/fields/arg_weight'); ?>
+    <?php 
+      if ($this->router->class == 'metal_receipt_vouchers') { 
+        load_view('ac_vouchers/ac_vouchers/fields/purity');
+        load_view('ac_vouchers/ac_vouchers/fields/fine');
+      } else {
+        load_view('ac_vouchers/ac_vouchers/fields/factory_purity');
+        load_view('ac_vouchers/ac_vouchers/fields/factory_fine');
+      }
+      load_view('ac_vouchers/ac_vouchers/fields/lumpsum_amount');
+      load_view('ac_vouchers/ac_vouchers/fields/transaction_type'); 
+    ?>
   </div>  
 
   <div class="row">   
