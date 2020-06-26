@@ -7,7 +7,7 @@
     </div>
   </div>
   <div class="col-md-6 border-right">
-    <?php load_field('hidden', array('field' => 'id','value'=>$record['id'],'id'=>'chitti_id')) ?>
+    
     <div class="form-group container">
       <p><h6>Date : <?=date('d-m-Y',strtotime($record['created_at']))?></h6></p>
       <p><h6>Page no :</h6></p>
@@ -17,7 +17,7 @@
 </div>
 <hr>
 <?php
-     $this->load->view('chitti_details/viewlist');
+  $this->load->view('chitti_details/viewlist');
 ?>
 
 
