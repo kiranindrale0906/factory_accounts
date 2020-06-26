@@ -14,6 +14,7 @@
 
     $this->load->view('reports/ledgers/total', 
                           array('report' => $report,
+                                'type' => $type,
                                 'label' => 'Total',
                                 'weight' => $total[$voucher_date][$type]['weight'],
                                 'weight_difference' => $total[$voucher_date][$type]['weight_difference'],
