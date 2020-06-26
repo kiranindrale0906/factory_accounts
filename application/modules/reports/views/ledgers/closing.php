@@ -16,6 +16,7 @@
     } elseif ($report == 'account ledger') {
       $weight = 0;
       $fine = 0;
+      $factory_fine = -1 * $factory_fine;
     }
 
     $this->load->view('reports/ledgers/total', 
