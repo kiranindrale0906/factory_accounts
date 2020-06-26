@@ -22,6 +22,7 @@ class Chitti_model extends BaseModel {
         $this->attributes['weight']=$credit_weight;
         $this->attributes['fine']=$fine;
         $this->attributes['purity']=$voucher_data['factory_purity'];
+        $this->attributes['account_name']=$voucher_data['account_name'];
     
     }
   }

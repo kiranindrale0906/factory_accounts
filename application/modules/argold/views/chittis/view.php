@@ -2,7 +2,7 @@
 <div class="row">
 <div class="col-md-6 border-right">
     <div class="form-group container">
-      <p><h6>AC Code :<?=$record['id']?> </h6></p>
+      <p><h6>AC Code :<?=$record['account_name']?> </h6></p>
       <p><h6>Voucher No :<?=$metal_voucher_details['voucher_number']?> </h6></p>
     </div>
   </div>
