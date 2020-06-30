@@ -76,6 +76,41 @@
       </div>
       
     </div>
+  </div>  <div class="col-md-6">
+    <div class="form-group container">
+      <div class="table-responsive m-t-20">
+        <table class="table table-sm fixedthead table-default">
+          <thead>
+            <tr>
+              <th></th>
+              <th class="text-right"></th>
+              <th class="text-right"></th>
+              <th class="text-right">Total</th>
+            </tr>
+          </thead>
+                  <tr>
+                    <td>AR GOLD</td>
+                    <td class="text-right"><?= four_decimal($argold_balance->argold) ?></td>
+                    <td class="text-right"><?= four_decimal($live_balance->argold) ?>  </td>
+                    <td class="text-right"><?= four_decimal($argold_balance->argold+$live_balance->argold) ?>  </td>
+                  </tr>'
+                  <tr>
+                    <td>ARC</td>
+                    <td class="text-right"><?= four_decimal($argold_balance->arc) ?></td>
+                    <td class="text-right"><?= four_decimal($live_balance->arc) ?>  </td>
+                    <td class="text-right"><?= four_decimal($argold_balance->arc+$live_balance->arc) ?>  </td>
+                  </tr>
+                  <tr>
+                    <td>ARF</td>
+                    <td class="text-right"><?= four_decimal($argold_balance->arf) ?></td>
+                    <td class="text-right"><?= four_decimal($live_balance->arf) ?>  </td>
+                    <td class="text-right"><?= four_decimal($argold_balance->arf+$live_balance->arf) ?>  </td>
+                  </tr>
+               
+        </table>
+      </div>
+      
+    </div>
   </div>
   <div class="col-md-6">
     <div class="form-group container">
