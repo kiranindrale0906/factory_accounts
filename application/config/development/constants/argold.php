@@ -4,4 +4,5 @@
   define('API_LIVE_BASE_PATH', 'http://june2020-argold.ascratech.com/');
   define('API_BASE_PATH', 'http://localhost/argold/');
   define('ENABLE_API_FOR_RECEIPT', TRUE);
+  
 ?>
