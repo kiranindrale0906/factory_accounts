@@ -11,6 +11,10 @@ class Trial_balances extends Ledgers {
 
   public function index() {
     $this->data['layout']='application';
+      // $url=API_BASE_PATH."issue_and_receipts/ladger_balance/index";
+      // $records=json_decode(curl_post_request($url,$data));
+      
+    pd($records); 
     $this->get_form_data();
     $this->get_account_ledger_records();
     $this->load->render($this->router->class."/index",$this->data);
