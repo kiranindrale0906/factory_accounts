@@ -151,11 +151,11 @@ class Ledgers extends BaseController {
 
           $this->data['balance'][$created_date]['receipt']['fine'] = 
                                                           $this->data['total'][$created_date]['receipt']['fine']
-                                                          - $this->data['total'][$created_date]['issue']['fine'];
+                                                          - $this->data['total'][$created_date]['issue']['factory_fine'];
 
           $this->data['balance'][$created_date]['receipt']['factory_fine'] = 
                                                           $this->data['total'][$created_date]['receipt']['factory_fine']
-                                                          - $this->data['total'][$created_date]['issue']['factory_fine'];      
+                                                          - $this->data['total'][$created_date]['issue']['fine'];      
           $type = 'receipt';
         } else {
           $this->data['balance'][$created_date]['issue']['weight'] = 
@@ -167,10 +167,10 @@ class Ledgers extends BaseController {
 
           $this->data['balance'][$created_date]['issue']['fine'] = 
                                                           $this->data['total'][$created_date]['issue']['fine']
-                                                          - $this->data['total'][$created_date]['receipt']['fine'];
+                                                          - $this->data['total'][$created_date]['receipt']['factory_fine'];
           $this->data['balance'][$created_date]['issue']['factory_fine'] = 
                                                           $this->data['total'][$created_date]['issue']['factory_fine']
-                                                          - $this->data['total'][$created_date]['receipt']['factory_fine'];
+                                                          - $this->data['total'][$created_date]['receipt']['fine'];
           $type = 'issue';
         }
         

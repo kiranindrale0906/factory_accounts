@@ -11,16 +11,22 @@
       $factory_fine = 0;
     } elseif ($report == 'rojmel report' && $label == 'Closing Stock') {
       $weight = 0;
-      $factory_fine = $fine;
-      $fine = 0;
+      if ($type == 'receipt') {
+        $factory_fine = 0;
+        $fine = $fine + $weight_difference;
+      } else {
+        $fine = 0;
+        $factory_fine = $factory_fine - $weight_difference;
+      }
+      $weight_difference = 0;
     } elseif ($report == 'account ledger') {
       $weight = 0;
-      $fine = 0;
-      $factory_fine = -1 * $factory_fine;
+      $factory_fine = 0;
     }
 
     $this->load->view('reports/ledgers/total', 
                           array('report' => $report,
+                                'type' => $type,
                                 'label' => $label,
                                 'weight' => $weight,
                                 'fine' => $fine,
