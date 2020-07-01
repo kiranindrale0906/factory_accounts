@@ -1,4 +1,7 @@
 <tr>
+  <?php if ($report == 'vadotar report'): ?>
+    <td><?= $record['receipt_type'];?></td>
+  <?php endif; ?>
   <?php if ($report != 'account ledger'): ?>
     <td><?= $record['account_name'];?></td>
   <?php endif; ?>
