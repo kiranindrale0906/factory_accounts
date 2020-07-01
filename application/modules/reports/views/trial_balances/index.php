@@ -142,9 +142,9 @@
             <td>Total</td>
             <td class="text-right"><?= four_decimal(-1 * ($argold_balance->argold + $argold_balance->arc + $argold_balance->arf)) ?></td>
             <td class="text-right"><?= four_decimal(-1 * ($live_balance->argold + $live_balance->arc + $live_balance->arf)) ?>  </td>
-            <td class="text-right"><?= four_decimal(-1 * ($argold_balance->argold+$live_balance->argold
+            <td class="text-right"><b><?= four_decimal(-1 * ($argold_balance->argold+$live_balance->argold
                                                           + $argold_balance->arc+$live_balance->arc
-                                                          + $argold_balance->arf+$live_balance->arf)) ?></td>
+                                                          + $argold_balance->arf+$live_balance->arf)) ?></b></td>
           </tr>   
         </table>
       </div>
