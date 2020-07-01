@@ -1,5 +1,8 @@
 <tr class="bold">
   <td><?= $label ?></td>
+  <?php if ($report == 'vadotar report'): ?>
+    <th></th>
+  <?php endif; ?>
   <?php if ($report != 'account ledger'): ?>
     <th></th>
   <?php endif; ?>

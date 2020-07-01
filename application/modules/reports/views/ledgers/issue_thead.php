@@ -1,5 +1,8 @@
 <thead class="bg_gray">
   <tr>
+    <?php if ($report == 'vadotar report'): ?>
+      <th>Type</th>
+    <?php endif; ?>
     <?php if ($report != 'account ledger'): ?>
       <th>Account Name</th>
     <?php endif; ?>

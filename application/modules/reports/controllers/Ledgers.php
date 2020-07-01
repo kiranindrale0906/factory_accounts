@@ -24,7 +24,7 @@ class Ledgers extends BaseController {
       }
      } 
 
-    $select = 'date_format(voucher_date,"%d-%m-%Y") as voucher_date, voucher_number,
+    $select = 'receipt_type, date_format(voucher_date,"%d-%m-%Y") as voucher_date, voucher_number,
                account_name, voucher_type, voucher_number, credit_amount, debit_amount, 
                credit_weight, debit_weight, purity_margin, purity, factory_purity, narration';
     $where_issue = array_merge($where, array('(credit_weight > 0 or credit_amount > 0)' => NULL));
