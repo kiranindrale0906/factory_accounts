@@ -153,14 +153,18 @@ class BaseController extends MX_Controller {
     //pr($_POST);
     $this->set_date_format();
     $model_obj = new $this->model($_POST);
-    if (method_exists($this, '_before_validate')) $model_obj->formdata = $this->_before_validate($model_obj->formdata, $this->router->method);
+    if (method_exists($this, '_before_validate')) 
+      $model_obj->set_formdata_and_attributes($this->_before_validate($model_obj->formdata, $this->router->method));
+    
     if ($model_obj->validate($this->data['validation_klass'])) {
       if(isset($this->data['file_data'])) {
         $model_obj->formdata = $this->upload_file->upload_files($model_obj->formdata, $this->data['file_data']);
       }
-      if (method_exists($this, '_before_save')) $model_obj->formdata = $this->_before_save($model_obj->formdata, $this->router->method);
+      if (method_exists($this, '_before_save')) 
+        $model_obj->set_formdata_and_attributes($this->_before_save($model_obj->formdata, $this->router->method));
       $model_obj->save();
-      if (method_exists($this, '_after_save')) $model_obj->formdata = $this->_after_save($model_obj->formdata, $this->router->method);
+      if (method_exists($this, '_after_save')) 
+        $model_obj->set_formdata_and_attributes($this->_after_save($model_obj->formdata, $this->router->method));
 
       $this->_respond_to_success_on_save($model_obj);
     } else {

@@ -16,15 +16,15 @@ class Ledgers extends BaseController {
     if ($this->router->class == 'vadotar_reports') {
       $where['purity != factory_purity'] = NULL;
       if ($this->data['company_name'] == 'AR Gold') {
-        $where['where_not_in'] = array('receipt_type' => array("'ARF Finished Goods'", "'ARC Finished Goods'"));
+        $where['where_not_in'] = array('receipt_type' => array("'ARF Finished Goods'", "'ARF Refresh'", "'ARC Finished Goods'", "'ARC Refresh'"));
       } elseif ($this->data['company_name'] == 'ARF') {
-         $where['receipt_type'] = 'ARF Finished Goods';
+         $where['where_in'] = array('receipt_type' => array("'ARF Finished Goods'", "'ARF Refresh'"));
       } elseif ($this->data['company_name'] == 'ARC') {
-        $where['receipt_type'] = 'ARC Finished Goods';
+        $where['where_in'] = array('receipt_type' => array("'ARC Finished Goods'", "'ARC Refresh'"));
       }
      } 
 
-    $select = 'date_format(voucher_date,"%d-%m-%Y") as voucher_date, voucher_number,
+    $select = 'receipt_type, date_format(voucher_date,"%d-%m-%Y") as voucher_date, voucher_number,
                account_name, voucher_type, voucher_number, credit_amount, debit_amount, 
                credit_weight, debit_weight, purity_margin, purity, factory_purity, narration';
     $where_issue = array_merge($where, array('(credit_weight > 0 or credit_amount > 0)' => NULL));
