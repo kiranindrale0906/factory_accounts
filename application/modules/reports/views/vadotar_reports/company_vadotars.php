@@ -3,18 +3,18 @@
     <div class="form-group container">
       <table class="table table-sm fixedthead table-default">
         <?php 
-          $vadotar = 0;
-          foreach ($company_vadotars as $index => $company_vadotar) { 
-            $vadotar = $vadotar + $company_vadotar['vadotar'] ?>
+          $arf_arc_vadotar = 0;
+          foreach ($company_vadotars as $company_name => $vadotar) { 
+            $arf_arc_vadotar = $arf_arc_vadotar + $vadotar ?>
             <tr>
-              <td><b><?= str_replace(' Finished Goods', '', $company_vadotar['receipt_type']); ?></b></td>
-              <td class="text-right"><?= four_decimal($company_vadotar['vadotar'], '-') ?></td>
+              <td><b><?= $company_name; ?></b></td>
+              <td class="text-right"><?= four_decimal($vadotar, '-') ?></td>
             </tr>
           <?php } 
         ?>
         <tr>
           <td><b>AR Gold</b></td>
-          <td class="text-right"><?= four_decimal($total_vadotar['vodator'] - $vadotar, '-') ?></td>
+          <td class="text-right"><?= four_decimal($total_vadotar['vodator'] - $arf_arc_vadotar, '-') ?></td>
         </tr>
         <tr>
           <td><b>Total</b></td>
