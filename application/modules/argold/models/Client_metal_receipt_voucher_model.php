@@ -132,6 +132,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   
     $api_data = array('account'=> $data['account_name'],
                       'in_weight' => $in_weight,
+                      'balance' => $in_weight,
                       'in_lot_purity' => @$data['factory_purity'],
                       'description' =>$data['narration'],
                       'argold_account_id'=>$data['id']);
