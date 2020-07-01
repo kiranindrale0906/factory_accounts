@@ -18,9 +18,9 @@ class Ledgers extends BaseController {
       if ($this->data['company_name'] == 'AR Gold') {
         $where['where_not_in'] = array('receipt_type' => array("'ARF Finished Goods'", "'ARF Refresh'", "'ARC Finished Goods'", "'ARC Refresh'"));
       } elseif ($this->data['company_name'] == 'ARF') {
-         $where['receipt_type'] = array('receipt_type' => array("'ARF Finished Goods'", "'ARF Refresh'"));
+         $where['where_in'] = array('receipt_type' => array("'ARF Finished Goods'", "'ARF Refresh'"));
       } elseif ($this->data['company_name'] == 'ARC') {
-        $where['receipt_type'] = array('receipt_type' => array("'ARC Finished Goods'", "'ARC Refresh'"));
+        $where['where_in'] = array('receipt_type' => array("'ARC Finished Goods'", "'ARC Refresh'"));
       }
      } 
 
