@@ -145,6 +145,15 @@
             <td class="text-right"><b><?= four_decimal(-1 * ($argold_balance->argold+$live_balance->argold)
                                                           + $argold_balance->arc+$live_balance->arc
                                                           + $argold_balance->arf+$live_balance->arf) ?></b></td>
+          </tr>
+          <tr>
+            <td>Balance</td>
+            <td class="text-right">-</td>
+            <td class="text-right">-</td>
+            <td class="text-right"><b><?= four_decimal($assets_fine + $liabilities_fine + $assets_vadotar - $liabilities_vadotar 
+                                                       + ($argold_balance->argold+$live_balance->argold)
+                                                       - $argold_balance->arc - $live_balance->arc
+                                                       - $argold_balance->arf - $live_balance->arf) ?></b></td>
           </tr>   
         </table>
       </div>
