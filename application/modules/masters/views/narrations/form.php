@@ -12,6 +12,11 @@
   <?php endif; ?>     
   <div class="row">    
     <?php load_field('text', array('field' => 'name')) ?>
+    <?php load_field('text', array('field' => 'chitti_purity')) ?>
+  </div> 
+  <div class="row">    
+    <?php load_field('text', array('field' => 'chain_purity')) ?>
+    <?php load_field('text', array('field' => 'chain_margin')) ?>
   </div>
   <?php load_buttons('submit', array('controller' => $controller, 'name' => 'SAVE' , 
                                      'class' => 'btn_blue')) ?>
