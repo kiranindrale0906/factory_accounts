@@ -219,6 +219,7 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['has_hallmark'] = array('', 'Has Hallmark', TRUE, '', TRUE);
   $attributes['total_value'] = array('Value', 'Value', FALSE, '',TRUE);
 
+  $attributes['add_more'] = array('', 'add_more', FALSE, '',TRUE);
   if(!empty($required_field)) {
     $attributes[$ci->router->class] = array_intersect_key($attributes, array_flip($required_field));
   }
