@@ -128,23 +128,23 @@
           </tr>
           <tr>
             <td>ARC</td>
-            <td class="text-right"><?= four_decimal(-1 * $argold_balance->arc) ?></td>
-            <td class="text-right"><?= four_decimal(-1 * $live_balance->arc) ?>  </td>
-            <td class="text-right"><?= four_decimal(-1 * ($argold_balance->arc+$live_balance->arc)) ?></td>
+            <td class="text-right"><?= four_decimal($argold_balance->arc) ?></td>
+            <td class="text-right"><?= four_decimal($live_balance->arc) ?>  </td>
+            <td class="text-right"><?= four_decimal(($argold_balance->arc+$live_balance->arc)) ?></td>
           </tr>
           <tr>
             <td>ARF</td>
-            <td class="text-right"><?= four_decimal(-1 * $argold_balance->arf) ?></td>
-            <td class="text-right"><?= four_decimal(-1 * $live_balance->arf) ?></td>
-            <td class="text-right"><?= four_decimal(-1 * ($argold_balance->arf+$live_balance->arf)) ?></td>
+            <td class="text-right"><?= four_decimal($argold_balance->arf) ?></td>
+            <td class="text-right"><?= four_decimal($live_balance->arf) ?></td>
+            <td class="text-right"><?= four_decimal(($argold_balance->arf+$live_balance->arf)) ?></td>
           </tr>
           <tr>
             <td>Total</td>
-            <td class="text-right"><?= four_decimal(-1 * ($argold_balance->argold + $argold_balance->arc + $argold_balance->arf)) ?></td>
-            <td class="text-right"><?= four_decimal(-1 * ($live_balance->argold + $live_balance->arc + $live_balance->arf)) ?>  </td>
-            <td class="text-right"><b><?= four_decimal(-1 * ($argold_balance->argold+$live_balance->argold
+            <td class="text-right"><?= four_decimal(-1 * ($argold_balance->argold) + $argold_balance->arc + $argold_balance->arf) ?></td>
+            <td class="text-right"><?= four_decimal(-1 * ($live_balance->argold) + $live_balance->arc + $live_balance->arf) ?>  </td>
+            <td class="text-right"><b><?= four_decimal(-1 * ($argold_balance->argold+$live_balance->argold)
                                                           + $argold_balance->arc+$live_balance->arc
-                                                          + $argold_balance->arf+$live_balance->arf)) ?></b></td>
+                                                          + $argold_balance->arf+$live_balance->arf) ?></b></td>
           </tr>   
         </table>
       </div>
