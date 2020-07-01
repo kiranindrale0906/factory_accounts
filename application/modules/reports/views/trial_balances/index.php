@@ -88,24 +88,33 @@
               <th class="text-right">Total</th>
             </tr>
           </thead>
+          <?php $total=abs($argold_balance->argold)+abs($live_balance->argold)+
+                        abs($argold_balance->arc)+abs($live_balance->arc)+
+                        abs($argold_balance->arf)+abs($live_balance->arf) ?>
                   <tr>
                     <td>AR GOLD</td>
-                    <td class="text-right"><?= four_decimal($argold_balance->argold) ?></td>
-                    <td class="text-right"><?= four_decimal($live_balance->argold) ?>  </td>
-                    <td class="text-right"><?= four_decimal($argold_balance->argold+$live_balance->argold) ?>  </td>
+                    <td class="text-right"><?= four_decimal(abs($argold_balance->argold)) ?></td>
+                    <td class="text-right"><?= four_decimal(abs($live_balance->argold)) ?>  </td>
+                    <td class="text-right"><?= four_decimal(abs($argold_balance->argold+$live_balance->argold)) ?>  </td>
                   </tr>'
                   <tr>
                     <td>ARC</td>
-                    <td class="text-right"><?= four_decimal($argold_balance->arc) ?></td>
-                    <td class="text-right"><?= four_decimal($live_balance->arc) ?>  </td>
-                    <td class="text-right"><?= four_decimal($argold_balance->arc+$live_balance->arc) ?>  </td>
+                    <td class="text-right"><?= four_decimal(abs($argold_balance->arc)) ?></td>
+                    <td class="text-right"><?= four_decimal(abs($live_balance->arc)) ?>  </td>
+                    <td class="text-right"><?= four_decimal(abs($argold_balance->arc+$live_balance->arc)) ?>  </td>
                   </tr>
                   <tr>
                     <td>ARF</td>
-                    <td class="text-right"><?= four_decimal($argold_balance->arf) ?></td>
-                    <td class="text-right"><?= four_decimal($live_balance->arf) ?>  </td>
-                    <td class="text-right"><?= four_decimal($argold_balance->arf+$live_balance->arf) ?>  </td>
+                    <td class="text-right"><?= four_decimal(abs($argold_balance->arf)) ?></td>
+                    <td class="text-right"><?= four_decimal(abs($live_balance->arf)) ?>  </td>
+                    <td class="text-right"><?= four_decimal(abs($argold_balance->arf+$live_balance->arf)) ?>  </td>
                   </tr>
+                  <tr>
+                  <th>Total</th>
+                  <th class="text-right"><?= four_decimal(abs($argold_balance->argold)+abs($argold_balance->arc)+abs($argold_balance->arf)); ?></th>          
+                  <th class="text-right"><?= four_decimal(abs($live_balance->argold)+abs($live_balance->arc)+abs($live_balance->arf)); ?></th>
+                  <th class="text-right"><?= four_decimal(abs($total)); ?></th>
+                </tr>
                
         </table>
       </div>
