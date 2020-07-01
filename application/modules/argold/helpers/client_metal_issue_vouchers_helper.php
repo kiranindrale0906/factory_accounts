@@ -10,6 +10,6 @@ function list_settings() {
 
 function get_field_attribute($table, $field) {
   $required_fields=array('id', 'voucher_date', 'receipt_type', 'account_name', 
-                         'credit_weight', 'factory_purity','factory_fine', 'purity', 'fine', 'narration');
+                         'credit_weight', 'factory_purity','factory_fine', 'purity', 'fine', 'narration', 'add_more');
   return ac_voucher_get_field_attribute($table, $field, $required_fields);
 }

@@ -7,8 +7,30 @@ class Client_metal_issue_vouchers extends Core_metal_issue_vouchers {
   public function __construct() {
     parent::__construct();
   }
+
   public function _get_form_data() {
-    $this->data['record']['receipt_type']=!empty($_GET['receipt_type'])?$_GET['receipt_type']:"";
+    $this->data['record']['receipt_type'] = !empty($_GET['receipt_type'])?$_GET['receipt_type']:"";
+
+    if (isset($_GET['add_more_id'])) {
+      $metal_issue_voucher = $this->model->find('', array('id' => $_GET['add_more_id']));
+      if (!empty($metal_issue_voucher)) {
+        $this->data['record']['account_name'] = $metal_issue_voucher['account_name'];
+        $this->data['record']['receipt_type'] = $metal_issue_voucher['receipt_type'];
+        $this->data['record']['purity'] = $metal_issue_voucher['purity'];
+        $this->data['add_more'] = 'checked';
+      }
+    }
+
     parent::_get_form_data(); 
+  }
+
+  public function _after_save($formdata, $action) {
+    if ($action == 'store') {
+      if (isset($formdata['add_more']) && $formdata['add_more'] == 1)
+        $this->data['ajax_success_function'] = 'window.location.replace("'.ADMIN_PATH.'transactions/metal_issue_vouchers?add_more_id='.$formdata['metal_issue_vouchers']['id'].'")';
+      else
+        $this->data['ajax_success_function'] = 'window.location.replace("'.ADMIN_PATH.'transactions/metal_issue_vouchers'.'")';
+    }
+    return $formdata;
   }
 }

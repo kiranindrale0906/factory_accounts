@@ -131,6 +131,11 @@
   </div> 
   
   <br/> 
+  
+  <div class="row">   
+    <?php load_view('ac_vouchers/ac_vouchers/fields/add_more'); ?>
+  </div>
+  
   <?php 
       $receipt_type=!empty($_GET['receipt_type'])?$_GET['receipt_type']:'';
     if ($this->router->class == "metal_receipt_vouchers" 
