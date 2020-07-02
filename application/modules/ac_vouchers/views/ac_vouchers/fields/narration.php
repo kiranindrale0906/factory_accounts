@@ -14,5 +14,9 @@ if($this->router->class=='metal_issue_vouchers'
                'data-list-title'=>'Narration')); 
   endif; 
 }
-
 ?>
+
+<script>
+  var narrations = <?= json_encode(get_records_by_id($narrations)); ?>
+</script>
+
