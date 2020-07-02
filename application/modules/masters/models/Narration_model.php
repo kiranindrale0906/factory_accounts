@@ -17,7 +17,7 @@ class Narration_model extends BaseModel {
             'errors'=> array('unique_department' => "The selected combination of name and purity already exist.")),
       array('field' => 'narrations[chain_purity]', 'label' => 'Purity', 
             'rules' => array('trim','required')),
-      array('field' => 'narrations[chain_margin]', 'label' => 'Margin', 
+      array('field' => 'narrations[chain_margin]', 'label' => 'Wastage', 
             'rules' => array('trim','required')));
   }
   public function check_department_unique(){
