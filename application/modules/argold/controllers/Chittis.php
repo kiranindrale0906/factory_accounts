@@ -6,7 +6,7 @@ class Chittis extends BaseController {
   public function __construct() {
     parent::__construct();
     $this->redirect_after_save = 'view';
-    $this->load->model(array('ac_vouchers/voucher_model','masters/account_model'));
+    $this->load->model(array('ac_vouchers/voucher_model','masters/account_model','masters/narration_model'));
   }
   
   public function view($id) {
@@ -15,9 +15,25 @@ class Chittis extends BaseController {
   }
 
   public function _get_view_data() {
+    // pd($this->data['record']['id']);
     $this->data['account_id']='';
     $this->data['metal_vouchers'] = $this->voucher_model->get('', array('voucher_type'=>'metal issue voucher',
                                                                         'chitti_id'=>$this->data['record']['id']));
+
+  
+  foreach ($this->data['metal_vouchers'] as $index => $value) {
+  
+  $chitti_purity=$this->narration_model->find('chitti_purity',array('chain_purity'=>$value['purity'],'name'=>$value['narration']))['chitti_purity'];
+    if(!empty($chitti_purity)){
+      $this->data['metal_vouchers'][$index]['chitti_purity']=$chitti_purity;
+      $this->data['metal_vouchers'][$index]['factory_fine']=$value['credit_weight']*$chitti_purity/100;
+    }else {
+      $this->data['metal_vouchers'][$index]['chitti_purity']=$value['factory_purity'];
+    
+    }
+
+  }
+
     $this->data['metal_voucher_details'] = $this->voucher_model->find('voucher_number,narration,account_name', 
                                                                             array('voucher_type'=>'metal issue voucher',
                                                                                   'chitti_id'=>$this->data['record']['id']));
