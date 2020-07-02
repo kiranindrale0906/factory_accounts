@@ -23,7 +23,7 @@
                                         'masters/department'=>'Department',
                                         'masters/customer_category'=>'Customer Category',
                                         'masters/department_category'=>'Department Category',
-                                        'masters/narrations'=>'Narrations',
+                                        'masters/narrations'=>'Item Name',
                                         'masters/periods'=>'Financial Year',
                                         'masters/settings'=>'Settings'),
                     'Transactions' => array(

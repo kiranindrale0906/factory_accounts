@@ -8,8 +8,12 @@
   $create_title = get_form_title($controller, $action);
 ?>
   <?php  
+
     $create_title = !empty($form_title)?$form_title:get_form_title($this->router->class, $this->router->method);
     $page_heading = ucwords(str_replace("_", " ", $create_title));
+     if($page_heading=='Narrations Create'){
+      $page_heading='Item Name Create';
+    }
   ?>
   <h6 class="heading blue bold text-uppercase mb-0"><?= @$page_heading; ?></h6>
   <hr>

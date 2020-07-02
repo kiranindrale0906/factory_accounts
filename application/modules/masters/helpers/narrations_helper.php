@@ -2,7 +2,7 @@
 
 function getTableSettings() {
   return array(
-    'page_title'          => 'ALL Narrations',
+    'page_title'          => 'ALL Item Name',
     'primary_table'       => 'ac_narration',
     'default_column'      => 'id',
     'table'               => 'ac_narration',
@@ -16,7 +16,7 @@ function getTableSettings() {
     'actionFunction'      => '',
     'headingFunction'     => 'list_settings',
     'search_url'          => 'narrations',
-    'add_title'           => 'Add Narration',
+    'add_title'           => 'Add Item Name',
     'export_title'        => '',
     'edit'                => '',
   );

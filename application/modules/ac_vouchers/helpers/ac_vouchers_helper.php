@@ -109,7 +109,7 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
   }
 
   
-  $list_setting['Pure Gold'] = array("Narration", "pure_gold_credit", FALSE, "pure_gold_credit", TRUE, TRUE);
+  $list_setting['Pure Gold'] = array("Item Name", "pure_gold_credit", FALSE, "pure_gold_credit", TRUE, TRUE);
   $list_setting['department_name'] = array("Department Name", "department_name", FALSE, "department_name", TRUE, TRUE);
   $list_setting['debit_amount'] = array("Debit Amt", "debit_amount", TRUE, "debit_amount", FALSE, TRUE,"FORMAT(ac_vouchers.debit_amount,ac_company.decimal_no) as debit_amount",
                                         '','','','text-right');
@@ -123,7 +123,7 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
 
 
 
-  $list_setting['narration'] = array("Narration", "narration", FALSE, "narration", TRUE, TRUE);
+  $list_setting['narration'] = array("Item Name", "narration", FALSE, "narration", TRUE, TRUE);
   $list_setting['action'] = array("Action", "action", FALSE, "action", FALSE, FALSE);
 
   if(!empty($list_setting_arg)) {
@@ -176,7 +176,7 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
 
   $attributes['type'] = array('Type', 'Type', TRUE, '', TRUE);
 
-  $attributes['narration'] = array('Narration', 'Enter Narration', FALSE, '', TRUE);
+  $attributes['narration'] = array('Item Name', 'Enter Narration', FALSE, '', TRUE);
   $attributes['vouchersamount'] = array('vouchersamount', 'Enter vouchersamount', FALSE, '', TRUE); 
   $attributes['total_gross_weight'] = array('Gross Weight', 'Gross Weight', FALSE, '', TRUE); 
   $attributes['total_net_weight'] = array('Net Weight', 'Net Weight', FALSE, '', TRUE); 
