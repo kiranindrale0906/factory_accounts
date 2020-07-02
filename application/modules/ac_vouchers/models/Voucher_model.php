@@ -83,6 +83,11 @@ class Voucher_model extends BaseModel {
                  'label' => 'Credit Amount',
                  'rules' => 'trim|required|numeric|greater_than[0]');
   }
+  protected function get_narration_validation_rules() {
+    return array('field' => $this->router_class.'[narration]', 
+                 'label' => 'Narration',
+                 'rules' => 'trim|required');
+  }
 
   public function check_group_name_exist($name) {
     if($name=="" && !isset($name))

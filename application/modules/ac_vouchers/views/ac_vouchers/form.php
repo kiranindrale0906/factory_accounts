@@ -49,6 +49,7 @@
 
   <div class="row">      
     <?php load_view('ac_vouchers/ac_vouchers/fields/account_name'); 
+          load_view('ac_vouchers/ac_vouchers/fields/narration');
           load_view('ac_vouchers/ac_vouchers/fields/to_group_name'); ?>
   </div>  
 
@@ -121,10 +122,6 @@
       load_view('ac_vouchers/ac_vouchers/fields/transaction_type'); 
     ?>
   </div>  
-
-  <div class="row">   
-    <?php load_view('ac_vouchers/ac_vouchers/fields/narration'); ?>
-  </div>
 
   <div class="row">   
     <?php load_view('ac_vouchers/ac_vouchers/fields/total'); ?>

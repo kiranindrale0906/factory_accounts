@@ -142,17 +142,17 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                                                'process_name' => 'Receipt'));
       $send_data['receipt_departments'] = $api_data;
       $api_url=API_BASE_PATH."api/api_receipt_departments/store";   
-    } else if($data['receipt_type'] == "Refresh") {
+    } else if($data['receipt_type'] == "AR Gold Refresh") {
       $api_data = array_merge($api_data, array('type'=>'Pure',
                                                'hook_kdm_purity' => $data['factory_purity'],
-                                               //'quantity' => $data['quantity'],
                                                'process_name'=>'Refresh'));
       $send_data['refresh_departments'] = $api_data;
       $api_url=API_BASE_PATH."api/api_refresh_departments/store";   
     }
     else if($data['receipt_type']=="Daily Drawer") {
       $api_data = array_merge($api_data, array('type'=>$data['dd_type'],
-                                               'karigar'=> 'Factory'));
+                                                'balance' => $in_weight,
+                                                'karigar'=> 'Factory'));
       $send_data['daily_drawer_receipts'] = $api_data;
       $api_url=API_BASE_PATH."api/api_daily_drawer_receipts/store";   
     }

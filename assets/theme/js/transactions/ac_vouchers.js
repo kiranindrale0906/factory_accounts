@@ -8,9 +8,13 @@ $(".debit_weight").on('keyup', function() {
 });
 
 $(".purity").on('keyup', function() {
-	 calculate_fine_factory_fine();
+   calculate_fine_factory_fine();
 });
 
+$('select[name*="metal_issue_vouchers[purity]"]').on('change', function() {
+       var purity = $(this).val(); 
+       calculate_fine_factory_fine(purity); 
+    })
 $(".factory_purity").on('keyup', function() {
 	 calculate_fine_factory_fine();
 });
@@ -38,10 +42,14 @@ $('input[name*="rate_cut_booking_weight_receipt_vouchers"').on('keyup', function
 	 calculate_rate_cut_booking_weight_receipt_vouchers();
 });
 
-function calculate_fine_factory_fine() {
+function calculate_fine_factory_fine(purity=0) {
 	var debit_wt=$(".debit_weight").val();
 	var credit_wt=$(".credit_weight").val();
+  if(purity==0){
 	var purity = $(".purity").val();
+  }else{
+    purity=purity;
+  }
 	var factory_purity = $(".factory_purity").val();
 
 
@@ -315,6 +323,8 @@ $(document).on('keypress',function(e) {
     }
 });
 
+
+
 $('.search_date').click(function(){
     var from_date = $('#start_date').val();
     var to_date = $('#end_date').val();
@@ -450,6 +460,3 @@ $(".onchange_vadotar_comapny_name").change(function(e){
   window.location = base_url+'reports/vadotar_reports';
   }
 });
-
-
-

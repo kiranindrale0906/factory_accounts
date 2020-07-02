@@ -11,10 +11,20 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
   public function validation_rules($klass='') {
     $rules = parent::validation_rules($klass);
     $rules[] = $this->get_account_validation_rules();
+    $rules[] = $this->get_factory_purity_validation_rules();
+    $rules[] = $this->get_narration_validation_rules();
     
     return $rules;
   }
 
+  public function before_validate() {
+    $narration_data=$this->narration_model->find('', array('name' => $this->attributes['narration'],'chain_purity'=>$this->attributes['purity']));
+    if(!empty($narration_data)){
+    $this->attributes['factory_purity']=$narration_data['chain_purity']+$narration_data['chain_margin'];
+    $this->attributes['factory_fine']=$this->attributes['credit_weight']*$this->attributes['factory_purity']/100;
+    }
+  
+   }
   public function after_validate() {
     $this->attributes['fine']=$this->attributes['credit_weight']*$this->attributes['purity']/100;
   }
