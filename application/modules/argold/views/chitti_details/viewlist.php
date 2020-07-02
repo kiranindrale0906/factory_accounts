@@ -24,7 +24,7 @@
         <td><?= $metal_voucher['narration'] ?></td>
         <td class="text-right"><?= $metal_voucher['credit_weight']; ?></td>
         <td class="text-right"><?= $metal_voucher['chitti_purity'] ?></td>
-        <td class="text-right"><?= four_decimal($metal_voucher['chitti_purity']-$metal_voucher['purity']) ?></td>
+        <td class="text-right"><?= four_decimal($metal_voucher['factory_purity'] - $metal_voucher['chitti_purity']) ?></td>
         <td class="text-right"><?=$metal_voucher['factory_fine'] ?></td>
       </tr>
 

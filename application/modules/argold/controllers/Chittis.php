@@ -19,26 +19,19 @@ class Chittis extends BaseController {
     $this->data['account_id']='';
     $this->data['metal_vouchers'] = $this->voucher_model->get('', array('voucher_type'=>'metal issue voucher',
                                                                         'chitti_id'=>$this->data['record']['id']));
-
-  
-  foreach ($this->data['metal_vouchers'] as $index => $value) {
-  
-  $chitti_purity=$this->narration_model->find('chitti_purity',array('chain_purity'=>$value['purity'],'name'=>$value['narration']))['chitti_purity'];
-    if(!empty($chitti_purity)){
-      $this->data['metal_vouchers'][$index]['chitti_purity']=$chitti_purity;
-      $this->data['metal_vouchers'][$index]['factory_fine']=$value['credit_weight']*$chitti_purity/100;
-    }else {
-      $this->data['metal_vouchers'][$index]['chitti_purity']=$value['factory_purity'];
-    
-    }
-
-  }
-
-    $this->data['metal_voucher_details'] = $this->voucher_model->find('voucher_number,narration,account_name', 
-                                                                            array('voucher_type'=>'metal issue voucher',
-                                                                                  'chitti_id'=>$this->data['record']['id']));
+    $this->data['metal_voucher_details'] = $this->voucher_model->get('', array('voucher_type'=>'metal issue voucher',
+                                                                               'chitti_id'=>$this->data['record']['id']));
     if(!empty($this->data['metal_voucher_details']['account_name']))
       $this->data['account_id'] = $this->account_model->find('id',array('name'=>$this->data['metal_voucher_details']['account_name']))['id'];
+
+    foreach ($this->data['metal_voucher_details'] as $index => $metal_voucher_detail) {
+      $narration = $this->narration_model->find('chitti_purity', array('name' => $metal_voucher_detail['narration'],
+                                                                       'chain_purity' => $metal_voucher_detail['purity']));
+      if (!empty($narration))
+        $this->data['metal_voucher_details'][$index]['chitti_purity'] = $narration['chitti_purity'];
+      else
+        $this->data['metal_voucher_details'][$index]['chitti_purity'] = 0;
+    }
   }
 
   public function _get_form_data() {
