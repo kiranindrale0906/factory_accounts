@@ -12,7 +12,6 @@
                              'class' => 'autocomplete_list_selection',
                              'data-table'=>'ac_account',
                              'data-column'=>'name',
-                             'data-where_condition'=>'group_code!=\'bank\'',
                              'data-list-title'=>'Account Name'));?>
     <?php load_field('date',array('field' => 'date',
                             'value' => (!empty($record['voucher_date']) ? date('d M Y', strtotime($record['date'])) : date('d M Y')), 
