@@ -15,8 +15,8 @@
     if(!empty($metal_vouchers)){
       $sum_weight=$sum_fine=0;
      foreach ($metal_voucher_details as $index => $metal_voucher_detail) {
-      $sum_weight+=$metal_voucher['credit_weight'];
-      $sum_fine+=$metal_voucher['factory_fine'];
+      $sum_weight+=$metal_voucher_detail['credit_weight'];
+      $sum_fine+=$metal_voucher_detail['factory_fine'];
 
       ?>
       <tr>
