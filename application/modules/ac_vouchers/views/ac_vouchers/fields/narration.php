@@ -1,5 +1,6 @@
 <?php 
-if($this->router->class=='metal_issue_vouchers'){
+if($this->router->class=='metal_issue_vouchers'
+   || $this->router->class=='metal_receipt_vouchers'){
   if(!empty(get_field_attribute($this->router->class,'narration'))) :
     load_field('dropdown', array('field' => 'narration', 
                             'option'=>$narrations)); 
