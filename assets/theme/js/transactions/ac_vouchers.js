@@ -10,6 +10,7 @@ $(".debit_weight").on('keyup', function() {
 $(".purity").on('keyup', function() {
    calculate_fine_factory_fine();
 });
+
 $('select[name*="metal_issue_vouchers[purity]"]').on('change', function() {
        var purity = $(this).val(); 
        calculate_fine_factory_fine(purity); 

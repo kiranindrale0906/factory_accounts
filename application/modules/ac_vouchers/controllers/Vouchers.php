@@ -51,9 +51,8 @@ class Vouchers extends BaseController {
     $this->data['department_category']=$this->department_category_model->get('name as name',array(),array(), array('order_by'=>'name asc'));
     $this->data['purity_list'] = $this->purity_model->get('purity as name,purity id', array() ,array(), array('order_by'=>'purity asc'));
     $this->data['payment_term'] = $this->payment_term_model->get('terms as name,terms as  id', array() ,array(), array('order_by'=>'terms asc'));
-    $this->data['narrations'] = $this->narration_model->get('distinct(name) as name,name as  id', array() ,array(), array('order_by'=>'id asc'));
+    $this->data['narrations'] = $this->narration_model->get('name as name, name as  id, chain_purity, chain_margin', array() ,array(), array('order_by'=>'name asc'));
     $this->data['chain_purity'] = $this->narration_model->get('distinct(chain_purity) as name,chain_purity as  id', array() ,array(), array('order_by'=>'id asc'));
-
 
     $this->data['transaction_type'] = get_transaction_type();
     //$this->data['hook_kdm_purity'] = get_melting_purity();
