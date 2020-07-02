@@ -37,6 +37,9 @@ function getTableSettings() {
 function list_settings() {
   return array(
     array("Name", "name", TRUE, "name", TRUE, TRUE),
+    array("Chain Purity", "chain_purity", TRUE, "chain_purity", TRUE, TRUE),
+    array("Chitti Purity", "chitti_purity", TRUE, "chitti_purity", TRUE, TRUE),
+    array("Wastage", "chain_margin", TRUE, "chain_margin", TRUE, TRUE),
     array("Action", "action", FALSE, "action", FALSE, FALSE),
   );
 }
@@ -58,9 +61,9 @@ function get_field_attribute($table, $field) {
   $attributes['narrations'] = array(
     'id'            => array('', '', TRUE, '', TRUE),
     'name'        => array('Narration', 'Enter Narration.', TRUE, '', TRUE),
-    'chitti_purity'        => array('Chitti Purity', 'Enter Chitti Purity.', TRUE, '', TRUE),
     'chain_purity'        => array('Chain Purity', 'Enter Chain Purity.', TRUE, '', TRUE),
-    'chain_margin'        => array('Chain Margin', 'Enter Chain Margin.', TRUE, '', TRUE),
+    'chitti_purity'        => array('Chitti Purity', 'Enter Chitti Purity.', TRUE, '', TRUE),
+    'chain_margin'        => array('Wastage', 'Enter Wastage', TRUE, '', TRUE),
   );
  
   return $attributes[$table][$field];
