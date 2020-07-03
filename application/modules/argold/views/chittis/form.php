@@ -13,6 +13,8 @@
                              'data-table'=>'ac_account',
                              'data-column'=>'name',
                              'data-list-title'=>'Account Name'));?>
+    <?php load_field('dropdown', array('field' => 'purity',
+                             'option'=>$purity));?>
     <?php load_field('date',array('field' => 'date',
                             'value' => (!empty($record['voucher_date']) ? date('d M Y', strtotime($record['date'])) : date('d M Y')), 
                             'readonlyinput' => true));  ?>

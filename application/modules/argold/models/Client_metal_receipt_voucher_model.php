@@ -49,7 +49,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     
     if ($this->attributes['receipt_type'] != 'AR Gold Refresh') {
       $account_name = 'ARC';
-      if ($this->attributes['receipt_type'] == 'ARF') $account_name = 'ARF';
+      if ($this->attributes['receipt_type'] == 'ARF Refresh') $account_name = 'ARF';
         $this->formdata['metal_issue_vouchers'] = array(array('account_name' => $account_name,
                                                               'credit_weight' => $this->attributes['debit_weight'],
                                                               'purity' => $this->attributes['purity'],
