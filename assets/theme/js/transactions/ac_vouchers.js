@@ -460,3 +460,10 @@ $(".onchange_vadotar_comapny_name").change(function(e){
   window.location = base_url+'reports/vadotar_reports';
   }
 });
+
+$('select[name*="chittis[purity]"]').on('change', function() {
+    var purity = $(this).val(); 
+    var account = $('input[name*="chittis[account_name]"]').val(); 
+    alert(account);
+    window.location = base_url+ 'argold/chittis/create?account_name='+account+'&purity='+purity;  
+  })

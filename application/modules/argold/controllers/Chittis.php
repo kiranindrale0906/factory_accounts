@@ -44,14 +44,22 @@ class Chittis extends BaseController {
   public function _get_form_data() {
     if (!empty($_GET['account_name']))
       $this->data['record']['account_name'] = $_GET['account_name'];
+    if (!empty($_GET['purity']))
+      $this->data['record']['purity'] = $_GET['purity'];
 
     $where=array('voucher_type'=>'metal issue voucher','chitti_id'=>'');
+
+    if (!empty($_GET['purity']))
+    $where['purity']=$_GET['purity'];
+
     if(!empty($this->data['record']['account_name'])){
       $where['account_name']=$this->data['record']['account_name'];
       $this->data['metal_vouchers'] = $this->voucher_model->get('',$where);
     } else {
       $this->data['metal_vouchers'] = array();
     }
+
+     $this->data['purity'] = $this->narration_model->get('distinct(chain_purity) as name,chain_purity as  id', array() ,array(), array('order_by'=>'id asc'));
     
     if ($this->router->method == 'store' || $this->router->method == 'update') {
       $this->data['record']['chittis'] = $_POST['chittis'];

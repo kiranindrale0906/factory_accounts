@@ -7,6 +7,7 @@
       <th>Voucher Date</th>
       <th>Account Name</th>
       <th>Weight</th>
+      <th>Purity</th>
       <th>Factory Purity</th>
       <th>Factory Fine</th>
       <th>Narration</th>

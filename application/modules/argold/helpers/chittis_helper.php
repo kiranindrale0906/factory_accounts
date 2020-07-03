@@ -64,6 +64,7 @@ function get_field_attribute($table, $field) {
     'id'            => array('', '', TRUE, '', TRUE),
     'account_name'            => array('Account Name', '', TRUE, '', TRUE),
     'chitti_id'          => array('Chitti', 'Enter Chitti.', TRUE, '', TRUE),
+    'purity'          => array('Purity', 'Select Purity.', TRUE, '', TRUE),
     'date'          => array('Date', 'Enter Date.', TRUE, '', TRUE),
    );
   $attributes['chitti_details'] = array(
