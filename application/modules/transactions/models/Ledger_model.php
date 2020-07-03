@@ -21,7 +21,7 @@ class Ledger_model extends BaseModel {
     if (in_array($router_class, array('metal_issue_voucher', 'metal_receipt_voucher', 'opening_stock_voucher'))) {
       $ledger_data['cash_bill_type'] = 'metal';
     }
-    $ledger_data['account_id'] =   $voucher['account_id'];
+    $ledger_data['account_id'] =   @$voucher['account_id'];
     $ledger_data['account_name'] = $voucher['account_name'];
     $ledger_data['voucher_type'] = $voucher['voucher_type'];
     $ledger_data['suffix'] = $prefix;

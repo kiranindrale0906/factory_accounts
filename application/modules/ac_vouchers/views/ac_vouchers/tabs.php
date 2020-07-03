@@ -30,9 +30,29 @@
 	      	<span class="skewleft"><?= str_replace("_", " ", $label_receipt); ?>
 	      	</span>
 	      </a>
+
 	    </div>
+
+	     <?php 
+	     if(!empty(strrpos($this->router->class, "issue") == TRUE)) {
+	     load_buttons('anchor',array('name'=>'create alloy record',
+                                  'layout' => 'application',
+                                  'class'=>'btn-xs bold blue float-left',
+                                  'href'=>base_url().'transactions/metal_issue_vouchers?alloy_gpc_records=1'));
+        }
+        ?> <?php 
+	     if(!empty(strrpos($this->router->class, "issue") == TRUE)) {
+	     load_buttons('anchor',array('name'=>'create gpc record',
+                                  'layout' => 'application',
+                                  'class'=>'btn-xs bold blue float-left',
+                                  'href'=>base_url().'transactions/metal_issue_vouchers?alloy_gpc_records=2'));
+        }
+        ?><br>
 	  </div>
+	
 	</div>
+
+
 <?php endif; ?>
 
 <?php 
