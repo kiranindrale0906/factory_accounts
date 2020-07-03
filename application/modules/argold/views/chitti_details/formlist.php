@@ -4,12 +4,11 @@
     <tr>
       <th><?php load_buttons('anchor', array('name'=>'Select All', 'class'=>'blue select_all')); ?></th>
       <th>Voucher No</th>
-      <th>Voucher Date</th>
-      <th>Account Name</th>
-      <th>Weight</th>
-      <th>Factory Purity</th>
-      <th>Factory Fine</th>
       <th>Narration</th>
+      <th class="text-right">Weight</th>
+      <th class="text-right">Factory Purity</th>
+      <th class="text-right">Wastage</th>
+      <th class="text-right">Issue Fine</th>
     </tr>
   </thead>
   <tbody>
