@@ -22,21 +22,23 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
     if(!empty($alloy_vodator_details)){
       $this->metal_issue_voucher_model->delete('',array('receipt_type'=>'Alloy Vodator','account_name'=> 'Alloy Vodator'),true);
     }
-    $alloy_vodator_records=$records->data->record->alloy_vodator;
-    foreach ($alloy_vodator_records as $index => $alloy_vodator) {
-     $data=array('company_id'=>1,
-                 'voucher_date'=> $alloy_vodator->created_date,
-                 'receipt_type'=>'Alloy Vodator',
-                 'account_name'=> 'Alloy Vodator',
-                 'credit_weight' => $alloy_vodator->weight,
-                 'purity' => $alloy_vodator->purity,
-                 'factory_purity' =>$alloy_vodator->purity,
-                 'fine' => $alloy_vodator->fine,
-                 'factory_fine' => $alloy_vodator->fine,
-                 'narration' =>'Alloy Vodator');
-      $process_obj = new metal_issue_voucher_model ($data);
-      $process_obj->before_validate();
-      $process_obj->store();
+    $alloy_vodator_records=$records->data->alloy_vodator;
+    if(!empty($alloy_vodator_records)){
+      foreach ($alloy_vodator_records as $index => $alloy_vodator) {
+       $data=array('company_id'=>1,
+                   'voucher_date'=> $alloy_vodator->created_date,
+                   'receipt_type'=>'Alloy Vodator',
+                   'account_name'=> 'Alloy Vodator',
+                   'credit_weight' => $alloy_vodator->weight,
+                   'purity' => $alloy_vodator->purity,
+                   'factory_purity' =>$alloy_vodator->purity,
+                   'fine' => $alloy_vodator->fine,
+                   'factory_fine' => $alloy_vodator->fine,
+                   'narration' =>'Alloy Vodator');
+        $process_obj = new metal_issue_voucher_model ($data);
+        $process_obj->before_validate();
+        $process_obj->store();
+      }
     }
   }
 public function create_gpc_vodator_records($records) {
@@ -44,21 +46,23 @@ public function create_gpc_vodator_records($records) {
     if(!empty($gpc_vodator_details)){
       $this->metal_issue_voucher_model->delete('',array('receipt_type'=>'GPC Vodator','account_name'=> 'GPC Vodator'),true);
     }
-    $gpc_vodator_records=$records->data->record->gpc_vodator;
-    foreach ($gpc_vodator_records as $index => $gpc_vodator) {
-     $data=array('company_id'=>1,
-                 'voucher_date'=> $gpc_vodator->created_date,
-                 'receipt_type'=>'GPC Vodator',
-                 'account_name'=> 'GPC Vodator',
-                 'credit_weight' => $gpc_vodator->weight,
-                 'purity' => $gpc_vodator->purity,
-                 'factory_purity' =>$gpc_vodator->purity,
-                 'fine' => $gpc_vodator->fine,
-                 'factory_fine' => $gpc_vodator->fine,
-                 'narration' =>'GPC Vodator');
-      $process_obj = new metal_issue_voucher_model ($data);
-      $process_obj->before_validate();
-      $process_obj->store();
+    $gpc_vodator_records=$records->data->gpc_vodator;
+    if(!empty($gpc_vodator_records)){
+      foreach ($gpc_vodator_records as $index => $gpc_vodator) {
+       $data=array('company_id'=>1,
+                   'voucher_date'=> $gpc_vodator->created_date,
+                   'receipt_type'=>'GPC Vodator',
+                   'account_name'=> 'GPC Vodator',
+                   'credit_weight' => $gpc_vodator->weight,
+                   'purity' => $gpc_vodator->purity,
+                   'factory_purity' =>$gpc_vodator->purity,
+                   'fine' => $gpc_vodator->fine,
+                   'factory_fine' => $gpc_vodator->fine,
+                   'narration' =>'GPC Vodator');
+        $process_obj = new metal_issue_voucher_model ($data);
+        $process_obj->before_validate();
+        $process_obj->store();
+      }
     }
   }
 
