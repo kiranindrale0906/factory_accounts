@@ -18,6 +18,55 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
     return $rules;
   }
 
+  public function create_alloy_vodator_records($records) {
+    $alloy_vodator_details=$this->metal_issue_voucher_model->get('',array('receipt_type'=>'Alloy Vodator','account_name'=> 'Alloy Vodator'));
+    if(!empty($alloy_vodator_details)){
+      $this->metal_issue_voucher_model->delete('',array('receipt_type'=>'Alloy Vodator','account_name'=> 'Alloy Vodator'),true);
+    }
+    $alloy_vodator_records=$records->data->alloy_vodator;
+    if(!empty($alloy_vodator_records)){
+      foreach ($alloy_vodator_records as $index => $alloy_vodator) {
+       $data=array('company_id'=>1,
+                   'voucher_date'=> $alloy_vodator->created_date,
+                   'receipt_type'=>'Alloy Vodator',
+                   'account_name'=> 'Alloy Vodator',
+                   'credit_weight' => $alloy_vodator->weight,
+                   'purity' => $alloy_vodator->purity,
+                   'factory_purity' =>$alloy_vodator->purity,
+                   'fine' => $alloy_vodator->fine,
+                   'factory_fine' => $alloy_vodator->fine,
+                   'narration' =>'Alloy Vodator');
+        $process_obj = new metal_issue_voucher_model ($data);
+        $process_obj->before_validate();
+        $process_obj->store();
+      }
+    }
+  }
+public function create_gpc_vodator_records($records) {
+    $gpc_vodator_details=$this->metal_issue_voucher_model->get('',array('receipt_type'=>'GPC Vodator','account_name'=> 'GPC Vodator'));
+    if(!empty($gpc_vodator_details)){
+      $this->metal_issue_voucher_model->delete('',array('receipt_type'=>'GPC Vodator','account_name'=> 'GPC Vodator'),true);
+    }
+    $gpc_vodator_records=$records->data->gpc_vodator;
+    if(!empty($gpc_vodator_records)){
+      foreach ($gpc_vodator_records as $index => $gpc_vodator) {
+       $data=array('company_id'=>1,
+                   'voucher_date'=> $gpc_vodator->created_date,
+                   'receipt_type'=>'GPC Vodator',
+                   'account_name'=> 'GPC Vodator',
+                   'credit_weight' => $gpc_vodator->weight,
+                   'purity' => $gpc_vodator->purity,
+                   'factory_purity' =>$gpc_vodator->purity,
+                   'fine' => $gpc_vodator->fine,
+                   'factory_fine' => $gpc_vodator->fine,
+                   'narration' =>'GPC Vodator');
+        $process_obj = new metal_issue_voucher_model ($data);
+        $process_obj->before_validate();
+        $process_obj->store();
+      }
+    }
+  }
+
   public function before_validate() {
     $narration_data=$this->narration_model->find('', array('name' => $this->attributes['narration'],'chain_purity'=>$this->attributes['purity']));
     if(!empty($narration_data)){

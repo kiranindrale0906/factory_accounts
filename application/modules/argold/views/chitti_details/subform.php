@@ -12,11 +12,9 @@
 																		   'controller' => 'chitti_details'));?>
 	</td>
 	<td><?php echo $vouchers['voucher_number'];?></td>
-    <td><?php echo $vouchers['voucher_date'];?></td>
-    <td><?php echo $vouchers['account_name'];?></td>
-	<td><?php echo $vouchers['credit_weight'];?></td>
-	<td><?php echo $vouchers['purity'];?></td>
-	<td><?php echo $vouchers['factory_purity'];?></td>
-	<td><?php echo $vouchers['factory_fine']; ?></td>
-	<td><?php echo $vouchers['narration']; ?></td>
+        <td><?php echo $vouchers['narration'];?></td>
+   	<td class="text-right"><?= four_decimal($vouchers['credit_weight']) ;?></td>
+	<td class="text-right"><?= four_decimal($vouchers['purity']); ?></td>
+        <td class="text-right"><?= four_decimal($vouchers['factory_purity'] - $vouchers['purity']) ?></td>
+	<td class="text-right"><?= four_decimal($vouchers['factory_fine']); ?></td>
 </tr>
