@@ -6,6 +6,7 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
   
   function __construct($data=array()) {
     parent::__construct($data);
+    $this->load->model(array('argold/Client_metal_receipt_voucher_model'));
   }
   
   public function validation_rules($klass='') {
@@ -32,6 +33,8 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
   public function after_save($action) {
     parent::after_save($action);
     $this->create_metal_receipt_voucher();
+    if ($this->attributes['account_name'] = 'ARF Software')
+      $this->Client_metal_receipt_voucher_model->send_request_to_arf($this->attributes);
   }
 
   private function create_metal_receipt_voucher() {

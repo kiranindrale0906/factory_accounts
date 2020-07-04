@@ -112,8 +112,6 @@ define('ADMIN_LAYOUTS_PATH', '');
 define('AUTH_TOKEN', '1234');
 define('ACCESS_TOKEN', '1234');
 define('ACCOUNT_NAME_REPORT','account_name');
-define('API_ARG_BASE_PATH', 'https://argold.ascratech.com/');
-define('API_LIVE_BASE_PATH', 'http://june2020-argold.ascratech.com/');
-  
 
-define('FIELDS_PER_ROW', 3); 
+
+define('FIELDS_PER_ROW', 3);

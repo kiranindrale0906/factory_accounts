@@ -113,7 +113,6 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $obj_metal_issue_voucher=new metal_issue_voucher_model($metal_issue_data);
       $obj_metal_issue_voucher->store();
     }
-    
   }
 
   private function send_request_to_argold($formdata) {
@@ -166,4 +165,32 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $obj_receipt_not_sent->store(false);
     }
   }
+
+  public function send_request_to_arf($attributes) {
+    if ($attributes['credit_weight'] == 0) return true;
+  
+    $api_data = array('account'=> $attributes['account_name'],
+                      'in_weight' => $attributes['credit_weight'],
+                      'in_lot_purity' => $attributes['factory_purity'],
+                      'description' => $attributes['narration'],
+                      'argold_account_id' => $attributes['id']);
+    $send_data=array();
+
+    if ($attributes['receipt_type'] == "Metal") {
+      $api_data = array_merge($api_data, array('type' => 'Pure',
+                                               'process_name' => 'Receipt'));
+      $send_data['receipt_departments'] = $api_data;
+      $api_url=ARF_API_BASE_PATH."api/api_receipt_departments/store";   
+    }
+
+    if (empty($api_url)) return true;
+
+    $result = curl_post_request($api_url, $send_data);
+    if(empty($result) || (!empty($result['status']) && $result['status']=="error")) {
+      $api_data = array_merge($api_data, array('api_url'=>$api_url));
+      $obj_receipt_not_sent = new Receipt_not_sent_argold_model($api_data);
+      $obj_receipt_not_sent->store(false);
+    }
+  }
+
 }
