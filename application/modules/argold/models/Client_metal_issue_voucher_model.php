@@ -6,6 +6,7 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
   
   function __construct($data=array()) {
     parent::__construct($data);
+    $this->load->model(array('argold/Client_metal_receipt_voucher_model'));
   }
   
   public function validation_rules($klass='') {
@@ -15,6 +16,55 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
     $rules[] = $this->get_narration_validation_rules();
     
     return $rules;
+  }
+
+  public function create_alloy_vodator_records($records) {
+    $alloy_vodator_details=$this->metal_issue_voucher_model->get('',array('receipt_type'=>'Alloy Vodator','account_name'=> 'Alloy Vodator'));
+    if(!empty($alloy_vodator_details)){
+      $this->metal_issue_voucher_model->delete('',array('receipt_type'=>'Alloy Vodator','account_name'=> 'Alloy Vodator'),true);
+    }
+    $alloy_vodator_records=$records->data->alloy_vodator;
+    if(!empty($alloy_vodator_records)){
+      foreach ($alloy_vodator_records as $index => $alloy_vodator) {
+       $data=array('company_id'=>1,
+                   'voucher_date'=> $alloy_vodator->created_date,
+                   'receipt_type'=>'Alloy Vodator',
+                   'account_name'=> 'Alloy Vodator',
+                   'credit_weight' => $alloy_vodator->weight,
+                   'purity' => $alloy_vodator->purity,
+                   'factory_purity' =>$alloy_vodator->purity,
+                   'fine' => $alloy_vodator->fine,
+                   'factory_fine' => $alloy_vodator->fine,
+                   'narration' =>'Alloy Vodator');
+        $process_obj = new metal_issue_voucher_model ($data);
+        $process_obj->before_validate();
+        $process_obj->store();
+      }
+    }
+  }
+public function create_gpc_vodator_records($records) {
+    $gpc_vodator_details=$this->metal_issue_voucher_model->get('',array('receipt_type'=>'GPC Vodator','account_name'=> 'GPC Vodator'));
+    if(!empty($gpc_vodator_details)){
+      $this->metal_issue_voucher_model->delete('',array('receipt_type'=>'GPC Vodator','account_name'=> 'GPC Vodator'),true);
+    }
+    $gpc_vodator_records=$records->data->gpc_vodator;
+    if(!empty($gpc_vodator_records)){
+      foreach ($gpc_vodator_records as $index => $gpc_vodator) {
+       $data=array('company_id'=>1,
+                   'voucher_date'=> $gpc_vodator->created_date,
+                   'receipt_type'=>'GPC Vodator',
+                   'account_name'=> 'GPC Vodator',
+                   'credit_weight' => $gpc_vodator->weight,
+                   'purity' => $gpc_vodator->purity,
+                   'factory_purity' =>$gpc_vodator->purity,
+                   'fine' => $gpc_vodator->fine,
+                   'factory_fine' => $gpc_vodator->fine,
+                   'narration' =>'GPC Vodator');
+        $process_obj = new metal_issue_voucher_model ($data);
+        $process_obj->before_validate();
+        $process_obj->store();
+      }
+    }
   }
 
   public function before_validate() {
@@ -32,6 +82,8 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
   public function after_save($action) {
     parent::after_save($action);
     $this->create_metal_receipt_voucher();
+    if ($this->attributes['account_name'] = 'ARF Software')
+      $this->Client_metal_receipt_voucher_model->send_request_to_arf($this->attributes);
   }
 
   private function create_metal_receipt_voucher() {
