@@ -19,6 +19,9 @@ class Client_metal_issue_vouchers extends Core_metal_issue_vouchers {
       }else{
         $this->metal_issue_voucher_model->create_gpc_vodator_records($records);
       }
+      $this->data['redirect_url'] = base_url().'reports/trial_balances';
+      redirect( $this->data['redirect_url']);
+      die;
     }
     parent::index(); 
    }

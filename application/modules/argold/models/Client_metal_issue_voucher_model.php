@@ -64,7 +64,7 @@ public function create_gpc_vodator_records($records,$date='2020-03-01') {
          $metal_issue_details=$this->metal_issue_voucher_model->find('',array('receipt_type'=>'GPC Vodator',
                                                         'account_name'=> 'GPC Vodator','voucher_date'=> $gpc_vodator->created_date));
         $assign_date=strtotime($date);
-        $voucher_date=strtotime($alloy_vodator->created_date);
+        $voucher_date=strtotime($gpc_vodator->created_date);
          
         if(empty($metal_issue_details)){
         if ($voucher_date > $assign_date) {
