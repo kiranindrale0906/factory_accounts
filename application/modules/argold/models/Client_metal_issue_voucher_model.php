@@ -6,6 +6,7 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
   
   function __construct($data=array()) {
     parent::__construct($data);
+    $this->load->model(array('argold/Client_metal_receipt_voucher_model'));
   }
   
   public function validation_rules($klass='') {
@@ -17,7 +18,7 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
     return $rules;
   }
 
-  public function create_alloy_vodator_records($records,$date='2020-03-19') {
+  public function create_alloy_vodator_records($records,$date='2020-03-1') {
     $alloy_vodator_records=$records->data->alloy_vodator;
     if(!empty($alloy_vodator_records)){
       foreach ($alloy_vodator_records as $index => $alloy_vodator) {
@@ -110,6 +111,8 @@ public function create_gpc_vodator_records($records,$date='2020-03-01') {
   public function after_save($action) {
     parent::after_save($action);
     $this->create_metal_receipt_voucher();
+    if ($this->attributes['account_name'] = 'ARF Software')
+      $this->Client_metal_receipt_voucher_model->send_request_to_arf($this->attributes);
   }
 
   private function create_metal_receipt_voucher() {
