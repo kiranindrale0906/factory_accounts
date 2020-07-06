@@ -123,6 +123,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   private function send_request_to_argold($formdata) {
     $data = $formdata['metal_receipt_vouchers'];
     if ($data['company_id'] != 1) return true;
+    if ($data['account_name'] == 'Alloy Vodator' || $data['account_name'] == 'GPC Vodator') return true;
 
     $credit_weight = 0;
     if (!empty($formdata['metal_issue_vouchers'])) {
