@@ -134,7 +134,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     $in_weight = $data['debit_weight'] - $credit_weight;
     if ($in_weight == 0) return true;
   
-    $api_data = array('account'=> $data['account_name'],
+    $api_data = array('account'=> $data['account_name'].' (accounts)',
                       'in_weight' => $in_weight,
                       'in_lot_purity' => @$data['factory_purity'],
                       'description' =>$data['narration'],
@@ -174,7 +174,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   public function send_request_to_arf($attributes) {
     if ($attributes['credit_weight'] == 0) return true;
   
-    $api_data = array('account'=> $attributes['account_name'],
+    $api_data = array('account'=> $attributes['account_name'].' (accounts)',
                       'in_weight' => $attributes['credit_weight'],
                       'in_lot_purity' => $attributes['factory_purity'],
                       'description' => $attributes['narration'],

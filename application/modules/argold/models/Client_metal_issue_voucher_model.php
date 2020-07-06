@@ -99,11 +99,12 @@ public function create_gpc_vodator_records($records,$date='2020-03-01') {
   public function before_validate() {
     $narration_data=$this->narration_model->find('', array('name' => $this->attributes['narration'],'chain_purity'=>$this->attributes['purity']));
     if(!empty($narration_data)){
-    $this->attributes['factory_purity']=$narration_data['chain_purity']+$narration_data['chain_margin'];
-    $this->attributes['factory_fine']=$this->attributes['credit_weight']*$this->attributes['factory_purity']/100;
+      $this->attributes['factory_purity']=$narration_data['chain_purity']+$narration_data['chain_margin'];
+      $this->attributes['factory_fine']=$this->attributes['credit_weight']*$this->attributes['factory_purity']/100;
     }
-  
-   }
+    $this->attributes['fine']=$this->attributes['credit_weight']*$this->attributes['purity']/100;
+  }
+
   public function after_validate() {
     $this->attributes['fine']=$this->attributes['credit_weight']*$this->attributes['purity']/100;
   }
