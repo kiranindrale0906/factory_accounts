@@ -111,7 +111,7 @@ public function create_gpc_vodator_records($records,$date='2020-03-01') {
   public function after_save($action) {
     parent::after_save($action);
     $this->create_metal_receipt_voucher();
-    if ($this->attributes['account_name'] = 'ARF Software')
+    if (ENABLE_API_FOR_RECEIPT && $this->attributes['account_name'] == 'ARF Software')
       $this->Client_metal_receipt_voucher_model->send_request_to_arf($this->attributes);
   }
 
@@ -120,7 +120,8 @@ public function create_gpc_vodator_records($records,$date='2020-03-01') {
         && (!empty($this->attributes['metal_receipt_voucher_reference_id']))) return true;    
 
     if ($this->attributes['receipt_type'] == 'ARC Finished Goods'
-        || $this->attributes['receipt_type'] == 'ARF Finished Goods') {
+        || $this->attributes['receipt_type'] == 'ARF Finished Goods'
+        || $this->attributes['receipt_type'] == 'AR Gold Finished Goods') {
       $this->load->model('transactions/metal_receipt_voucher_model');
       $metal_receipt_data = array();
       $metal_receipt_data['company_id'] = $this->attributes['company_id'];
