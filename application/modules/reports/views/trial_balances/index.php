@@ -1,21 +1,5 @@
 <?php $this->load->view('reports/ledgers/report_header', array('header' => 'Trial Balance')); ?>
-  <div>
-  <div class="col-md-12">
-    <div class="float-right">
-      <?php load_buttons('anchor',array('name'=>'Get alloy record',
-                                    'layout' => 'application',
-                                    'class'=>'btn-xs bold blue ',
-                                    'href'=>base_url().'transactions/metal_issue_vouchers?alloy_gpc_records=1'));
-
-              ?>
-      <?php load_buttons('anchor',array('name'=>'Get gpc record',
-                                        'layout' => 'application',
-                                        'class'=>'btn-xs bold blue ',
-                                        'href'=>base_url().'transactions/metal_issue_vouchers?alloy_gpc_records=2'));
-    ?>
-    </div>
-  </div>
- </div> 
+  
 <div class="row">
   <div class="col-md-6">
     <div class="form-group container">
