@@ -18,40 +18,6 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
     return $rules;
   }
 
-  public function create_vodator_records($records, $type, $from, $start_date='2020-07-04') {
-    if (empty($records)) return true;
-    $records = json_decode(json_encode($records), true);
-    foreach ($records as $index => $record) {
-      $start_date_timestamp = strtotime($start_date);
-      $voucher_date_timestamp = strtotime($record['created_date']);
-      
-      if ($start_date_timestamp > $voucher_date_timestamp) continue;
-      $metal_issue_voucher = $this->find('',array('receipt_type' => $type.' Vodator',
-                                                  'account_name' => $type.' Vodator',
-                                                  'narration' => $from.' '.$type.' Vodator',
-                                                  'voucher_date' => $record['created_date']));
-      $data=array('company_id' => 1,
-                  'voucher_date' => $record['created_date'],
-                  'receipt_type' => $type.' Vodator',
-                  'account_name' => $type.' Vodator',
-                  'credit_weight' => $record['weight'],
-                  'purity' => $record['purity'],
-                  'factory_purity' => $record['purity'],
-                  'fine' => $record['fine'],
-                  'factory_fine' => $record['fine'],
-                  'narration' => $from.' '.$type.' Vodator');
-
-      if (!empty($metal_issue_voucher)) $data['id'] = $metal_issue_voucher['id'];
-        
-      if(empty($metal_issue_voucher['credit_weight'])
-         || ($metal_issue_voucher['credit_weight'] != $record['weight'])) {
-        $metal_issue_obj = new metal_issue_voucher_model($data);
-        $metal_issue_obj->before_validate();
-        $metal_issue_obj->save();
-      } 
-    }
-  }
-
   public function before_validate() {
     $narration_data=$this->narration_model->find('', array('name' => $this->attributes['narration'],'chain_purity'=>$this->attributes['purity']));
     if(!empty($narration_data)){
