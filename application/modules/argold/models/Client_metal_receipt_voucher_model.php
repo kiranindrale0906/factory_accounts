@@ -198,4 +198,38 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     }
   }
 
+  public function create_vodator_records($records, $type, $from, $start_date='2020-07-04') {
+    if (empty($records)) return true;
+    $records = json_decode(json_encode($records), true);
+    foreach ($records as $index => $record) {
+      $start_date_timestamp = strtotime($start_date);
+      $voucher_date_timestamp = strtotime($record['created_date']);
+      
+      if ($start_date_timestamp > $voucher_date_timestamp) continue;
+      $metal_receipt_voucher = $this->find('',array('receipt_type' => $type.' Vodator',
+                                                    'account_name' => $type.' Vodator',
+                                                    'narration' => $from.' '.$type.' Vodator',
+                                                    'voucher_date' => $record['created_date']));
+      $data=array('company_id' => 1,
+                  'voucher_date' => $record['created_date'],
+                  'receipt_type' => $type.' Vodator',
+                  'account_name' => $type.' Vodator',
+                  'debit_weight' => $record['weight'],
+                  'purity' => $record['purity'],
+                  'factory_purity' => $record['purity'],
+                  'fine' => $record['fine'],
+                  'factory_fine' => $record['fine'],
+                  'narration' => $from.' '.$type.' Vodator');
+      $data['id'] = '';
+      if (!empty($metal_receipt_voucher)) $data['id'] = $metal_receipt_voucher['id'];
+        
+      if(empty($metal_receipt_voucher['debit_weight'])
+         || ($metal_receipt_voucher['debit_weight'] != $record['weight'])) {
+        $metal_issue_obj = new metal_receipt_voucher_model($data);
+        $metal_issue_obj->before_validate();
+        $metal_issue_obj->save();
+      } 
+    }
+  }
+
 }
