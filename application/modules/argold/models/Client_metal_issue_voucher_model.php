@@ -18,51 +18,80 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
     return $rules;
   }
 
-  public function create_alloy_vodator_records($records) {
-    $alloy_vodator_details=$this->metal_issue_voucher_model->get('',array('receipt_type'=>'Alloy Vodator','account_name'=> 'Alloy Vodator'));
-    if(!empty($alloy_vodator_details)){
-      $this->metal_issue_voucher_model->delete('',array('receipt_type'=>'Alloy Vodator','account_name'=> 'Alloy Vodator'),true);
-    }
+  public function create_alloy_vodator_records($records,$date='2020-03-1') {
     $alloy_vodator_records=$records->data->alloy_vodator;
     if(!empty($alloy_vodator_records)){
       foreach ($alloy_vodator_records as $index => $alloy_vodator) {
-       $data=array('company_id'=>1,
-                   'voucher_date'=> $alloy_vodator->created_date,
-                   'receipt_type'=>'Alloy Vodator',
-                   'account_name'=> 'Alloy Vodator',
-                   'credit_weight' => $alloy_vodator->weight,
-                   'purity' => $alloy_vodator->purity,
-                   'factory_purity' =>$alloy_vodator->purity,
-                   'fine' => $alloy_vodator->fine,
-                   'factory_fine' => $alloy_vodator->fine,
-                   'narration' =>'Alloy Vodator');
-        $process_obj = new metal_issue_voucher_model ($data);
-        $process_obj->before_validate();
-        $process_obj->store();
+
+        $metal_issue_details=$this->metal_issue_voucher_model->find('',array('receipt_type'=>'Alloy Vodator',
+                                                        'account_name'=> 'Alloy Vodator','voucher_date'=> $alloy_vodator->created_date));
+        $assign_date=strtotime($date);
+        $voucher_date=strtotime($alloy_vodator->created_date);
+        if(empty($metal_issue_details)){
+          if ($voucher_date > $assign_date) {
+                 $data=array('company_id'=>1,
+                     'voucher_date'=> $alloy_vodator->created_date,
+                     'receipt_type'=>'Alloy Vodator',
+                     'account_name'=> 'Alloy Vodator',
+                     'credit_weight' => $alloy_vodator->weight,
+                     'purity' => $alloy_vodator->purity,
+                     'factory_purity' =>$alloy_vodator->purity,
+                     'fine' => $alloy_vodator->fine,
+                     'factory_fine' => $alloy_vodator->fine,
+                     'narration' =>'Alloy Vodator');
+          $metal_issue_obj = new metal_issue_voucher_model ($data);
+          $metal_issue_obj->before_validate();
+          $metal_issue_obj->store();
+         }
+        }else{
+          if ($voucher_date > $assign_date) {
+            if($metal_issue_details['credit_weight']!=$alloy_vodator->weight){
+               $data['credit_weight']=$alloy_vodator->weight;
+               $data['id']=$metal_issue_details['id'];
+               $metal_issue_obj = new metal_issue_voucher_model ($data);
+               $metal_issue_obj->update();
+            }
+         
+        }
       }
     }
   }
-public function create_gpc_vodator_records($records) {
-    $gpc_vodator_details=$this->metal_issue_voucher_model->get('',array('receipt_type'=>'GPC Vodator','account_name'=> 'GPC Vodator'));
-    if(!empty($gpc_vodator_details)){
-      $this->metal_issue_voucher_model->delete('',array('receipt_type'=>'GPC Vodator','account_name'=> 'GPC Vodator'),true);
-    }
+}
+public function create_gpc_vodator_records($records,$date='2020-03-01') {
     $gpc_vodator_records=$records->data->gpc_vodator;
     if(!empty($gpc_vodator_records)){
       foreach ($gpc_vodator_records as $index => $gpc_vodator) {
-       $data=array('company_id'=>1,
-                   'voucher_date'=> $gpc_vodator->created_date,
-                   'receipt_type'=>'GPC Vodator',
-                   'account_name'=> 'GPC Vodator',
-                   'credit_weight' => $gpc_vodator->weight,
-                   'purity' => $gpc_vodator->purity,
-                   'factory_purity' =>$gpc_vodator->purity,
-                   'fine' => $gpc_vodator->fine,
-                   'factory_fine' => $gpc_vodator->fine,
-                   'narration' =>'GPC Vodator');
-        $process_obj = new metal_issue_voucher_model ($data);
-        $process_obj->before_validate();
-        $process_obj->store();
+         $metal_issue_details=$this->metal_issue_voucher_model->find('',array('receipt_type'=>'GPC Vodator',
+                                                        'account_name'=> 'GPC Vodator','voucher_date'=> $gpc_vodator->created_date));
+        $assign_date=strtotime($date);
+        $voucher_date=strtotime($gpc_vodator->created_date);
+         
+        if(empty($metal_issue_details)){
+        if ($voucher_date > $assign_date) {
+         $data=array('company_id'=>1,
+                     'voucher_date'=> $gpc_vodator->created_date,
+                     'receipt_type'=>'GPC Vodator',
+                     'account_name'=> 'GPC Vodator',
+                     'credit_weight' => $gpc_vodator->weight,
+                     'purity' => $gpc_vodator->purity,
+                     'factory_purity' =>$gpc_vodator->purity,
+                     'fine' => $gpc_vodator->fine,
+                     'factory_fine' => $gpc_vodator->fine,
+                     'narration' =>'GPC Vodator');
+          $metal_issue_obj = new metal_issue_voucher_model ($data);
+          $metal_issue_obj->before_validate();
+          $metal_issue_obj->store();
+         }
+        }else{
+          if ($voucher_date > $assign_date) {
+          if($metal_issue_details['credit_weight']!=$gpc_vodator->weight+1){
+             $data['credit_weight']=$gpc_vodator->weight+1;
+             $data['id']=$metal_issue_details['id'];
+             $metal_issue_obj = new metal_issue_voucher_model ($data);
+             $metal_issue_obj->update();
+          }
+        }
+        }
       }
     }
   }
@@ -82,7 +111,7 @@ public function create_gpc_vodator_records($records) {
   public function after_save($action) {
     parent::after_save($action);
     $this->create_metal_receipt_voucher();
-    if ($this->attributes['account_name'] = 'ARF Software')
+    if (ENABLE_API_FOR_RECEIPT && $this->attributes['account_name'] == 'ARF Software')
       $this->Client_metal_receipt_voucher_model->send_request_to_arf($this->attributes);
   }
 
@@ -91,7 +120,8 @@ public function create_gpc_vodator_records($records) {
         && (!empty($this->attributes['metal_receipt_voucher_reference_id']))) return true;    
 
     if ($this->attributes['receipt_type'] == 'ARC Finished Goods'
-        || $this->attributes['receipt_type'] == 'ARF Finished Goods') {
+        || $this->attributes['receipt_type'] == 'ARF Finished Goods'
+        || $this->attributes['receipt_type'] == 'AR Gold Finished Goods') {
       $this->load->model('transactions/metal_receipt_voucher_model');
       $metal_receipt_data = array();
       $metal_receipt_data['company_id'] = $this->attributes['company_id'];
