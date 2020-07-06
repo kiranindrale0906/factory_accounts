@@ -138,6 +138,7 @@
     if ($this->router->class == "metal_receipt_vouchers" 
         && !in_array($receipt_type, array('ARC Finished Goods',
                                           'ARF Finished Goods',
+                                          'AR Gold Finished Goods',
                                           'AR Gold Refresh',
                                           'ARC Refresh',
                                           'ARF Refresh'))) 
