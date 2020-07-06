@@ -13,7 +13,9 @@ function get_field_attribute($table, $field) {
   if(!empty($_GET['receipt_type']) && $_GET['receipt_type']=='Metal')	{
     $required_fields=array('id', 'voucher_date', 'receipt_type', 'account_name', 
                            'debit_weight', 'purity', 'fine', 'narration');
-  }elseif (!empty($_GET['receipt_type']) && ($_GET['receipt_type']=='ARC Finished Goods' || $_GET['receipt_type']=='ARF Finished Goods')) {
+  }elseif (!empty($_GET['receipt_type']) && ($_GET['receipt_type']=='ARC Finished Goods' 
+                                             || $_GET['receipt_type']=='ARF Finished Goods'
+                                             || $_GET['receipt_type']=='AR Gold Finished Goods')) {
     $required_fields=array('id', 'voucher_date', 'receipt_type', 
                            'debit_weight', 'purity', 'fine', 'narration');
 
