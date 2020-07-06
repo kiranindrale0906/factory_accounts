@@ -5,7 +5,7 @@ class Voucher_model extends BaseModel {
   protected $table_name = "ac_vouchers";
   function __construct($data=array()) {
     parent::__construct($data);
-    $this->load->model(array('masters/period_model','masters/setting_model','transactions/Receipt_not_sent_argold_model'));
+    $this->load->model(array('masters/period_model', 'masters/setting_model', 'transactions/Receipt_not_sent_argold_model', 'transactions/ledger_model'));
   }
 
   public function validation_rules($klass='') {
