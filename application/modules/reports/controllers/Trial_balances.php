@@ -24,6 +24,13 @@ class Trial_balances extends Ledgers {
       $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator, 'GPC', 'June 2020');
     }
 
+    $url = API_ARF_BASE_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
+    $records = json_decode(curl_post_request($url));
+    if (!empty($records)) {
+      $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator, 'Alloy', 'ARF');
+      $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator, 'GPC', 'ARF');
+    }
+
     $this->data['layout']='application';
     
     $this->get_form_data();
