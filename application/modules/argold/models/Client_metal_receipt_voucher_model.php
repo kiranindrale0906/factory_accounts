@@ -48,6 +48,19 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                                                             'factory_purity' => $this->attributes['factory_purity']));
     }
 
+    if (($this->attributes['account_name'] == "Alloy Vodator" && $this->attributes['narration'] == "ARF Alloy Vodator")
+         || ($this->attributes['account_name'] == "GPC Vodator" && $this->attributes['narration'] == "ARF GPC Vodator"))  {
+      unset($this->formdata['metal_issue_vouchers']);
+      $this->formdata['metal_issue_vouchers'] = array(array('account_name' => 'ARF',
+                                                            'credit_weight' => $this->attributes['debit_weight'],
+                                                            'purity' => $this->attributes['purity'],
+                                                            'factory_purity' => $this->attributes['factory_purity']));
+      $metal_issue_voucher = $this->find('',array('receipt_type' => $this->attributes['receipt_type'],
+                                                  'account_name' => 'ARF',
+                                                  'narration' => $this->attributes['narration'],
+                                                  'voucher_date' => $this->attributes['voucher_date']));
+    }
+
     if ($this->attributes['receipt_type'] == "ARC Refresh"
         || $this->attributes['receipt_type'] == "ARF Refresh"
         || $this->attributes['receipt_type'] == 'AR Gold Refresh') {
@@ -108,7 +121,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
       $metal_issue_data['purity'] = $this->attributes['factory_purity'];
       $metal_issue_data['factory_purity'] = $this->attributes['factory_purity'];
-      $metal_issue_data['fine'] =!empty($metal_issue_voucher['credit_weight'])? $metal_issue_voucher['credit_weight'] * $this->attributes['factory_purity'] / 100:0;
+      $metal_issue_data['fine'] =!empty($metal_issue_voucher['credit_weight'])? $metal_issue_voucher['credit_weight'] * $this->attributes['factory_purity'] / 100 : 0;
       $metal_issue_data['factory_fine'] = $metal_issue_data['fine'];
       $metal_issue_data['narration'] = $this->attributes['narration'];
       $metal_issue_data['suffix'] = "MI";
@@ -116,7 +129,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $metal_issue_data['transaction_type'] = 'account';
 
       $obj_metal_issue_voucher=new metal_issue_voucher_model($metal_issue_data);
-      $obj_metal_issue_voucher->store();
+      $obj_metal_issue_voucher->save();
     }
   }
 
