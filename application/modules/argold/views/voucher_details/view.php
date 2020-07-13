@@ -9,6 +9,7 @@
   <div class="col-md-6">
     
     <div class="form-group container">
+      <p><h6>Weight :<?=$record['debit_weight']?></h6></p>
       <p><h6>Melting :<?=$record['purity']?></h6></p>
       <p><h6>Receipt Type :<?=$record['receipt_type']?></h6></p>
     </div>
