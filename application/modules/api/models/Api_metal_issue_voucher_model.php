@@ -7,5 +7,3 @@ class Api_metal_issue_voucher_model extends Metal_issue_voucher_model {
     parent::__construct($data);
   }
 }
-
-//class

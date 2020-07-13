@@ -23,6 +23,7 @@
                   array('id' => 'AR Gold Finished Goods', 'name' => 'AR Gold Finished Goods'),
                   array('id' => 'ARC Finished Goods', 'name' => 'ARC Finished Goods'),
                   array('id' => 'ARF Finished Goods', 'name' => 'ARF Finished Goods'),
+                  array('id' => 'ARF Software Finished Goods', 'name' => 'ARF Software Finished Goods'),
                 );
   }
   function get_issue_type() {
@@ -30,6 +31,7 @@
                   array('id' => 'AR Gold Finished Goods', 'name' => 'AR Gold Finished Goods'),
                   array('id' => 'ARC Finished Goods', 'name' => 'ARC Finished Goods'),
                   array('id' => 'ARF Finished Goods', 'name' => 'ARF Finished Goods'),
+                  array('id' => 'ARF Software Finished Goods', 'name' => 'ARF Software Finished Goods'),
                 );
   }
 
