@@ -16,9 +16,11 @@ class Ledgers extends BaseController {
     if ($this->router->class == 'vadotar_reports') {
       $where['purity != factory_purity'] = NULL;
       if ($this->data['company_name'] == 'AR Gold') {
-        $where['where_not_in'] = array('receipt_type' => array("'ARF Finished Goods'", "'ARF Refresh'", "'ARC Finished Goods'", "'ARC Refresh'"));
+        $where['where_not_in'] = array('receipt_type' => array("'ARF Finished Goods'", "'ARC Finished Goods'", 
+                                                               "'ARF Refresh'", "'ARC Refresh'", 
+                                                               "'ARF Software Finished Goods'"));
       } elseif ($this->data['company_name'] == 'ARF') {
-         $where['where_in'] = array('receipt_type' => array("'ARF Finished Goods'", "'ARF Refresh'"));
+         $where['where_in'] = array('receipt_type' => array("'ARF Finished Goods'", "'ARF Refresh'", "'ARF Software Finished Goods'"));
       } elseif ($this->data['company_name'] == 'ARC') {
         $where['where_in'] = array('receipt_type' => array("'ARC Finished Goods'", "'ARC Refresh'"));
       }
@@ -27,8 +29,8 @@ class Ledgers extends BaseController {
     $select = 'receipt_type, date_format(voucher_date,"%Y-%m-%d") as voucher_date, voucher_number,
                account_name, voucher_type, voucher_number, credit_amount, debit_amount, 
                credit_weight, debit_weight, purity_margin, purity, factory_purity, narration';
-    $where_issue = array_merge($where, array('(credit_weight > 0 or credit_amount > 0)' => NULL));
-    $where_receipt = array_merge($where, array('(debit_weight > 0 or debit_amount > 0)' => NULL));
+    $where_issue = array_merge($where, array('(credit_weight != 0 or credit_amount != 0)' => NULL));
+    $where_receipt = array_merge($where, array('(debit_weight != 0 or debit_amount != 0)' => NULL));
 
     $issues = $this->model->get($select, $where_issue ,array(), array('order_by'=>'voucher_date asc'));
     $receipts = $this->model->get($select, $where_receipt ,array(), array('order_by'=>'voucher_date asc'));

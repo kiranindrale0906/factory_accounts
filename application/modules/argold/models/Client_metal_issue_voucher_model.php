@@ -19,6 +19,7 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
   }
 
   public function before_validate() {
+    if ($this->attributes['receipt_type'] == 'Tounch Loss Fine') return;
     $narration_data=$this->narration_model->find('', array('name' => $this->attributes['narration'],'chain_purity'=>$this->attributes['purity']));
     if(!empty($narration_data)){
       $this->attributes['factory_purity']=$narration_data['chain_purity']+$narration_data['chain_margin'];
@@ -44,7 +45,9 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
 
     if ($this->attributes['receipt_type'] == 'ARC Finished Goods'
         || $this->attributes['receipt_type'] == 'ARF Finished Goods'
-        || $this->attributes['receipt_type'] == 'AR Gold Finished Goods') {
+        || $this->attributes['receipt_type'] == 'AR Gold Finished Goods'
+        || $this->attributes['receipt_type'] == 'ARF Finished Goods'
+        || $this->attributes['receipt_type'] == 'ARF Software Finished Goods') {
       $this->load->model('transactions/metal_receipt_voucher_model');
       $metal_receipt_data = array();
       $metal_receipt_data['company_id'] = $this->attributes['company_id'];
