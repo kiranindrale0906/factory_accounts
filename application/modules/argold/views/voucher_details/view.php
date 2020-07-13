@@ -14,8 +14,8 @@
   <div class="col-md-6">
     
     <div class="form-group container">
-      <p><h6>Weight :<?=$record['debit_weight']?></h6></p>
-      <p><h6>Melting :<?=$record['purity']?></h6></p>
+      <p><h6>Debit Weight :<?=$record['debit_weight']?></h6></p>
+      <p><h6>Purity :<?=$record['purity']?></h6></p>
       <p><h6>Fine :<?=$record['fine']?></h6></p>
       <p><h6>Factory Purity :<?=$record['factory_purity']?></h6></p>
       <p><h6>Factory Fine :<?=$record['factory_fine']?></h6></p>
