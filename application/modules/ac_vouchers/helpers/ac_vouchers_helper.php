@@ -231,18 +231,23 @@ function ac_voucher_get_row_actions($row, $url, $select_url, $filter) {
   $actions = array();
   $ci=&get_instance();
   $controller = 'transactions/'.$ci->router->class; 
-  $actions["Edit"] =  array('request' => "http", 
-                            'url' => ADMIN_PATH.$controller.'/edit/'.$row['id'],
+    $actions["View"] =  array('request' => "http", 
+                            'url' => ADMIN_PATH.$controller.'/details/'.$row['id'],
                             'confirm_message' => "",
                             'class' => 'text-warning text-uppercase');
-  $actions["Delete"] = array('request' => "http",
-                             'url' => ADMIN_PATH.$controller.'/delete/'.$row['id'],
-                             'confirm_message' => "Do you want to delete",
-                             'js_function' => "",
-                             'class' => 'text-danger text-uppercase');
-  $actions["Print Voucher"] = array('request' => "http", 
-                                    'url' => ADMIN_PATH.$controller.'/view/'.$row['id'],
-                                    'confirm_message' => "",
-                                    'class' => 'btn_green');
+
+  // $actions["Edit"] =  array('request' => "http", 
+  //                           'url' => ADMIN_PATH.$controller.'/edit/'.$row['id'],
+  //                           'confirm_message' => "",
+  //                           'class' => 'text-warning text-uppercase');
+  // $actions["Delete"] = array('request' => "http",
+  //                            'url' => ADMIN_PATH.$controller.'/delete/'.$row['id'],
+  //                            'confirm_message' => "Do you want to delete",
+  //                            'js_function' => "",
+  //                            'class' => 'text-danger text-uppercase');
+  // $actions["Print Voucher"] = array('request' => "http", 
+  //                                   'url' => ADMIN_PATH.$controller.'/view/'.$row['id'],
+  //                                   'confirm_message' => "",
+  //                                   'class' => 'btn_green');
   return $actions;
 }
