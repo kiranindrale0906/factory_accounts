@@ -151,10 +151,10 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       }
     }
     $in_weight = $data['debit_weight'] - $credit_weight;
-    if ($in_weight == 0) return true;
-  
+    if ($in_weight == 0 && $data['receipt_type'] != "ARF Refresh") return true;
+    
     $api_data = array('account'=> $data['account_name'].' (accounts)',
-                      'in_weight' => $in_weight,
+                      'in_weight' => ($data['receipt_type'] != "ARF Refresh") ? $in_weight : $data['debit_weight'],
                       'in_lot_purity' => @$data['factory_purity'],
                       'description' =>$data['narration'],
                       'argold_account_id'=>$data['id']);
@@ -173,6 +173,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $api_url=API_BASE_PATH."api/api_refresh_departments/store";   
     } else if($data['receipt_type'] == "ARF Refresh") {
       $api_data = array_merge($api_data, array('type'=>'Pure',
+                                               'quantity' => 1,
                                                'hook_kdm_purity' => $data['factory_purity'],
                                                'process_name'=>'Refresh'));
       $send_data['refresh_departments'] = $api_data;
@@ -184,7 +185,6 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $send_data['daily_drawer_receipts'] = $api_data;
       $api_url=API_BASE_PATH."api/api_daily_drawer_receipts/store";   
     }
-    
     if (empty($api_url)) return true;
 
     $result = curl_post_request($api_url, $send_data);
