@@ -208,8 +208,8 @@ class Voucher_model extends BaseModel {
   }
 
   public function after_save($action) {
-    if ($action=="update")
-      $this->ledger_model->delete('', array('table_id'=>$id), true);
+    if ($action=="update" && isset($id))
+      $this->ledger_model->delete('', array('table_id' => $id), true);
 
     $ledger_data = $this->ledger_model->set_data($this->attributes, $this->router->class, $this->prefix, $this->table_name);
     $ledger_obj = new ledger_model($ledger_data);
