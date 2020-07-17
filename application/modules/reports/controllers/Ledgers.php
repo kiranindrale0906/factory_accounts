@@ -5,7 +5,28 @@ class Ledgers extends BaseController {
   	parent::__construct();
 	}
 
-  protected function get_datewise_ledger_records() {
+  protected function get_datewise_ledger_records($period = 'date') {
+    $this->data['period'] = $period;
+    if ($period == 'date') $period_select = 'date_format(voucher_date,"%Y-%m-%d")';
+    elseif ($period == 'month') $period_select = 'date_format(voucher_date,"%Y-%m")';
+    elseif ($period == 'week') {
+      $period_from_date = 'DATE_SUB(
+                                DATE_ADD(MAKEDATE(date_format(voucher_date,"%Y"), 1), INTERVAL week(voucher_date) WEEK),
+                                INTERVAL WEEKDAY(
+                                   DATE_ADD(MAKEDATE(date_format(voucher_date,"%Y"), 1), INTERVAL week(voucher_date) WEEK)
+                                ) -1 DAY)';
+      $period_to_date = 'DATE_SUB(
+                                DATE_ADD(MAKEDATE(date_format(voucher_date,"%Y"), 1), INTERVAL week(voucher_date) WEEK),
+                                INTERVAL WEEKDAY(
+                                   DATE_ADD(MAKEDATE(date_format(voucher_date,"%Y"), 1), INTERVAL week(voucher_date) WEEK)
+                                ) -7 DAY)';
+      $period_select = 'CONCAT('.$period_from_date.' , " - ", '.$period_to_date.')';
+      //$week_start_date = 'MAKEDATE(date_format(voucher_date,"%Y"), week(voucher_date))';
+      //$week_end_date = 'DATE_ADD(MAKEDATE(date_format(voucher_date,"%Y"), week(voucher_date)), INTERVAL 1 WEEK)';
+      //$period_select = 'CONCAT("Week: ", ' .$week_start_date . ')';
+      // /$period_select = 'week(voucher_date)';
+    };
+
     $account_id = (!empty($_GET[$this->router->class]['account_id'])) ? $_GET[$this->router->class]['account_id'] : 0;
     $where = array();
     if(!empty($account_id)) {
@@ -26,14 +47,15 @@ class Ledgers extends BaseController {
       }
      } 
 
-    $select = 'receipt_type, date_format(voucher_date,"%Y-%m-%d") as voucher_date, voucher_number,
+    $select = 'receipt_type, '.$period_select.' as voucher_date, 
+               date_format(voucher_date,"%Y-%m-%d") as str_voucher_date, voucher_number,
                account_name, voucher_type, voucher_number, credit_amount, debit_amount, 
                credit_weight, debit_weight, purity_margin, purity, factory_purity, narration';
     $where_issue = array_merge($where, array('(credit_weight != 0 or credit_amount != 0)' => NULL));
     $where_receipt = array_merge($where, array('(debit_weight != 0 or debit_amount != 0)' => NULL));
 
-    $issues = $this->model->get($select, $where_issue ,array(), array('order_by'=>'voucher_date asc'));
-    $receipts = $this->model->get($select, $where_receipt ,array(), array('order_by'=>'voucher_date asc'));
+    $issues = $this->model->get($select, $where_issue ,array(), array('order_by'=>'str_voucher_date asc'));
+    $receipts = $this->model->get($select, $where_receipt ,array(), array('order_by'=>'str_voucher_date asc'));
     
     $issue_voucher_dates = array_column($issues, 'voucher_date');
     $receipt_voucher_dates = array_column($receipts, 'voucher_date');
@@ -48,7 +70,11 @@ class Ledgers extends BaseController {
     //pd($total_receipt_issue);
     $this->data['total'] = $this->set_index_for_dates($total_receipt_issue);
 
-    $this->get_balance_by_created_date();
+    if (isset($this->data['report_type']) && $this->data['report_type'] == 'production') {
+      //do not compute opening / balance
+    }
+    else
+      $this->get_balance_by_created_date();
   }
 
   private function get_records_by_created_date($records) {
