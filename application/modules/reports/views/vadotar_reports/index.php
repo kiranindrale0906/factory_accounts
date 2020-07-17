@@ -16,7 +16,7 @@
         ?>
       </h5>
     </div>
-    <!-- <div class="form-group container"> 
+    <div class="form-group container"> 
       <h5> Select Period: 
         <a class="ml-5 <?= ($period=='date') ? 'bold black underline' : '' ?>" 
            href='<?= base_url() ?>reports/vadotar_reports?company_name=<?= $company_name?>&period=date&report_type=<?= $report_type ?>'>Date</a>
@@ -33,7 +33,7 @@
         <a class="ml-5 <?= ($report_type=='production') ? 'bold black underline' : '' ?>" 
            href='<?= base_url() ?>reports/vadotar_reports?company_name=<?= $company_name?>&period=<?= $period ?>&report_type=production'>Production Report</a>
       </h5>
-    </div> -->
+    </div>
   </div>
 </div>  
  

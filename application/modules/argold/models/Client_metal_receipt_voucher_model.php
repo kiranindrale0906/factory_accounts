@@ -61,7 +61,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                                                             'purity' => $this->attributes['purity'],
                                                             'factory_purity' => $this->attributes['factory_purity']));
       $metal_issue_voucher = $this->find('',array('receipt_type' => $this->attributes['receipt_type'],
-                                                  'account_name' => 'ARF',
+                                                  'account_name' => 'ARF Software',
                                                   'narration' => $this->attributes['narration'],
                                                   'voucher_date' => $this->attributes['voucher_date']));
     }
