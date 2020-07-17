@@ -56,7 +56,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     if (($this->attributes['account_name'] == "Alloy Vodator" && $this->attributes['narration'] == "ARF Alloy Vodator")
          || ($this->attributes['account_name'] == "GPC Vodator" && $this->attributes['narration'] == "ARF GPC Vodator"))  {
       unset($this->formdata['metal_issue_vouchers']);
-      $this->formdata['metal_issue_vouchers'] = array(array('account_name' => 'ARF',
+      $this->formdata['metal_issue_vouchers'] = array(array('account_name' => 'ARF Software',
                                                             'credit_weight' => $this->attributes['debit_weight'],
                                                             'purity' => $this->attributes['purity'],
                                                             'factory_purity' => $this->attributes['factory_purity']));
