@@ -55,7 +55,8 @@
               $assets_vadotar = 0;  
               if(!empty($trial_balance)) {
                 foreach ($trial_balance as $record) {
-                  if ($record['fine'] >= 0) continue;
+                  if ($record['fine'] >= 0
+                      && $record['account_name'] != 'Tounch Loss Fine') continue;
                   $assets_vadotar = $assets_vadotar + $record['vadotar'];
                   $assets_fine = $assets_fine + $record['fine']; ?>
 
