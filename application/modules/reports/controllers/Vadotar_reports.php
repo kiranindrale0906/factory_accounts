@@ -20,6 +20,7 @@ class Vadotar_reports extends Ledgers {
     //if(empty($this->data['account_names'])) return true;
     $this->data['company_name'] = (!empty($_GET['company_name'])) ? $_GET['company_name'] : 'All';
     $this->data['period'] = (!empty($_GET['period'])) ? $_GET['period'] : 'date';
+    $this->data['detail'] = (!empty($_GET['detail'])) ? $_GET['detail'] : 'yes';
     $this->data['report_type'] = (!empty($_GET['report_type'])) ? $_GET['report_type'] : 'vadotar';
     $this->get_datewise_ledger_records($this->data['period']);
     $this->get_companywise_vadotar();
