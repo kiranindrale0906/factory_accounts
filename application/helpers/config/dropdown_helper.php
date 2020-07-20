@@ -34,6 +34,7 @@
                   array('id' => 'ARC Finished Goods', 'name' => 'ARC Finished Goods'),
                   array('id' => 'ARF Finished Goods', 'name' => 'ARF Finished Goods'),
                   array('id' => 'ARF Software Finished Goods', 'name' => 'ARF Software Finished Goods'),
+                  array('id' => 'Internal', 'name' => 'Internal'),
                 );
   }
 

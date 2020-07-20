@@ -35,7 +35,9 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
   public function after_save($action) {
     parent::after_save($action);
     $this->create_metal_receipt_voucher();
-    if (ENABLE_API_FOR_RECEIPT && $this->attributes['account_name'] == 'ARF Software')
+    if (ENABLE_API_FOR_RECEIPT 
+        && $this->attributes['receipt_type'] != 'Internal' 
+        && $this->attributes['account_name'] == 'ARF Software')
       $this->client_metal_receipt_voucher_model->send_request_to_arf($this->attributes);
   }
 
