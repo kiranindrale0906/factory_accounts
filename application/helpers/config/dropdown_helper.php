@@ -25,7 +25,7 @@
                   array('id' => 'ARF Finished Goods', 'name' => 'ARF Finished Goods'),
                   array('id' => 'ARF Software Finished Goods', 'name' => 'ARF Software Finished Goods'),
                   array('id' => 'Internal', 'name' => 'Internal'),
-                  //array('id' => 'Vadotar', 'name' => 'Vadotar'),
+                  array('id' => 'Vadotar', 'name' => 'Vadotar'),
                 );
   }
   function get_issue_type() {

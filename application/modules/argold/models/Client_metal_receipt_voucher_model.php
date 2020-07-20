@@ -41,17 +41,18 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     if ($this->attributes['receipt_type'] == 'Vadotar') {
       $this->attributes['purity'] = 100;
       $this->attributes['factory_purity'] = 100;
-      $this->attributes['narration'] = 'Weekly internal transfer';
-      $last_vodotar_voucher = $this->find('voucher_date', array('receipt_type' => 'Vadotar'), array(), array('order_by' => 'id desc'));
-      if (empty($last_vodotar_voucher['voucher_date'])) $last_vodotar_voucher['voucher_date'] = '2019-04-01';
+      $this->attributes['narration'] = 'Vadotar internal transfer';
+      $last_vodotar_voucher = $this->find('created_at', array('receipt_type' => 'Vadotar'), array(), array('order_by' => 'id desc'));
+      if (empty($last_vodotar_voucher['created_at'])) $last_vodotar_voucher['created_at'] = '2019-04-01';
       $total_vadotar = $this->find('sum(debit_weight * (purity - factory_purity) / 100) + sum(credit_weight * (purity - factory_purity) / 100) as vadotar',
-                                   array('voucher_date >=' => $last_vodotar_voucher['voucher_date']));
+                                   array('created_at >= ' => $last_vodotar_voucher['created_at'],
+                                         'receipt_type != ' => 'Vadotar',
+                                         'account_name != ' => 'Tounch Loss Fine'));
       $this->attributes['debit_weight'] = empty($total_vadotar['vadotar']) ? 0 : $total_vadotar['vadotar'];    
 
-      // if ($this->attributes['debit_weight'] != 0) {
-      //   $metal_receipt_voucher = new Client_metal_receipt_voucher_model($this->attributes);
-      //   $metal_receipt_voucher->attributes['debit_weight'] = 
-      // }
+      if ($this->attributes['debit_weight'] == 0) {
+        die();   //this needs to be converted into a validation
+      }
     }
   }
 
@@ -77,7 +78,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $this->formdata['metal_issue_vouchers'] = array(array('account_name' => $this->attributes['receipt_type'],
                                                             'credit_weight' => $this->attributes['debit_weight'],
                                                             'purity' => $this->attributes['purity'],
-                                                            'factory_purity' => $this->attributes['factory_purity']));
+                                                            'factory_purity' => $this->attributes['purity']));
     }
   }
   
@@ -103,9 +104,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     if (isset($this->formdata['metal_issue_vouchers'])) {
       foreach ($this->formdata['metal_issue_vouchers'] as $index => $metal_issue_voucher) {
         if ($this->attributes['receipt_type'] == 'Metal') {
-          $this->formdata['metal_issue_vouchers'][$index]['purity'] = $this->attributes['factory_purity'];
-          $this->formdata['metal_issue_vouchers'][$index]['factory_purity'] = $this->attributes['factory_purity'];
-          $this->formdata['metal_issue_vouchers'][$index]['factory_fine'] =$metal_issue_voucher['credit_weight']* $this->attributes['factory_purity']/100;
+          $this->formdata['metal_issue_vouchers'][$index]['purity'] = $this->attributes['purity'];
+          $this->formdata['metal_issue_vouchers'][$index]['factory_purity'] = $this->attributes['purity'];
+          $this->formdata['metal_issue_vouchers'][$index]['factory_fine'] =$metal_issue_voucher['credit_weight']* $this->attributes['purity']/100;
         }
       }
     }
@@ -132,7 +133,10 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $this->formdata['metal_issue_vouchers'] = array(array('account_name' => 'Vadotar',
                                                             'credit_weight' => $this->attributes['debit_weight'],
                                                             'purity' => $this->attributes['purity'],
-                                                            'factory_purity' => $this->attributes['factory_purity']));
+                                                            'fine' => $this->attributes['debit_weight'] * $this->attributes['purity'] / 100,
+                                                            'factory_fine' => 0,
+                                                            'factory_purity' => 0),
+                                                    );
     }
   }
 
@@ -194,18 +198,21 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $metal_issue_data['voucher_date'] = $this->attributes['voucher_date'];
       $metal_issue_data['account_id'] = $this->attributes['account_id'];
 
-      $metal_issue_data['purity'] = $this->attributes['factory_purity'];
-      $metal_issue_data['factory_purity'] = $this->attributes['factory_purity'];
-      $metal_issue_data['fine'] =!empty($metal_issue_voucher['credit_weight'])? $metal_issue_voucher['credit_weight'] * $this->attributes['factory_purity'] / 100 : 0;
-      $metal_issue_data['factory_fine'] = $metal_issue_data['fine'];
+      if ($this->attributes['receipt_type'] != 'Vadotar') {
+        $metal_issue_data['purity'] = $this->attributes['factory_purity'];
+        $metal_issue_data['factory_purity'] = $this->attributes['factory_purity'];
+        $metal_issue_data['fine'] =!empty($metal_issue_voucher['credit_weight'])? $metal_issue_voucher['credit_weight'] * $this->attributes['factory_purity'] / 100 : 0;
+        $metal_issue_data['factory_fine'] = $metal_issue_data['fine'];
+      }
+      
       $metal_issue_data['narration'] = $this->attributes['narration'];
       $metal_issue_data['suffix'] = "MI";
       $metal_issue_data['voucher_type'] = "metal issue voucher";
       $metal_issue_data['transaction_type'] = 'account';
-
       $obj_metal_issue_voucher=new metal_issue_voucher_model($metal_issue_data);
       $obj_metal_issue_voucher->save();
     }
+    
   }
 
   private function send_request_to_argold($formdata) {
