@@ -19,7 +19,7 @@
               if(!empty($trial_balance)) {
                 foreach ($trial_balance as $record) {
                   if (   ($record['fine'] <= 0
-                          && $record['account_name'] != 'Vadotar')
+                          && $record['account_name'] != 'VADOTAR')
                       || ($record['account_name'] == 'Tounch Loss Fine')) continue;
                   $liabilities_vadotar = $liabilities_vadotar + $record['vadotar'];
                   $liabilities_fine = $liabilities_fine + $record['fine']; ?>
@@ -38,6 +38,8 @@
             <th class="text-right"><?= four_decimal($liabilities_vadotar, '-'); ?></th>
           </tr>
         </table>
+
+        
       </div>
     </div>
   </div>
@@ -59,7 +61,7 @@
                 foreach ($trial_balance as $record) {
                   if (  ($record['fine'] >= 0
                          && $record['account_name'] != 'Tounch Loss Fine')
-                      || ($record['account_name'] == 'Vadotar')) continue;
+                      || ($record['account_name'] == 'VADOTAR')) continue;
                   $assets_vadotar = $assets_vadotar + $record['vadotar'];
                   $assets_fine = $assets_fine + $record['fine']; ?>
 
