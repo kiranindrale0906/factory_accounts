@@ -24,6 +24,9 @@ function get_field_attribute($table, $field) {
     $required_fields=array('id', 'voucher_date', 'receipt_type', 'account_name','dd_type',
                            'debit_weight', 'factory_purity','factory_fine', 'purity', 'fine', 'narration');
 
+  }elseif (!empty($_GET['receipt_type']) && ($_GET['receipt_type']=='Vadotar')) {
+    $required_fields=array('id', 'voucher_date', 'receipt_type');
+
   }else {
     $required_fields=array('id', 'voucher_date', 'receipt_type', 'account_name',
                            'debit_weight', 'factory_purity','factory_fine', 'purity', 'fine', 'narration');

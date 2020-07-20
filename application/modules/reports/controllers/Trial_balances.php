@@ -48,7 +48,12 @@ class Trial_balances extends Ledgers {
     $records=json_decode(curl_post_request($url));
     
     $this->data['argold_balance']=$arg_records->data->record;
+    $this->data['argold_balance']->arc = 0;
+    $this->data['argold_balance']->arf = 0;
+    
     $this->data['live_balance']=$records->data->record;
+    $this->data['live_balance']->arc = 0;
+    $this->data['live_balance']->arf = 0;
   }
 
   private function get_account_ledger_records() {
