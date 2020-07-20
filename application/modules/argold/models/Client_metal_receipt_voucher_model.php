@@ -48,7 +48,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                                    array('created_at >= ' => $last_vodotar_voucher['created_at'],
                                          'receipt_type != ' => 'Vadotar',
                                          'account_name != ' => 'Tounch Loss Fine'));
-      $this->attributes['debit_weight'] = empty($total_vadotar['vadotar']) ? 0 : $total_vadotar['vadotar'];    
+      $this->attributes['debit_weight'] = empty($total_vadotar['vadotar']) ? 0 : -1 * $total_vadotar['vadotar'];    
 
       if ($this->attributes['debit_weight'] == 0) {
         die();   //this needs to be converted into a validation
@@ -130,7 +130,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   private function set_metal_issue_voucher_attributes_from_receipt_type_for_vadotar() {
     if ($this->attributes['receipt_type'] == "Vadotar") {
       unset($this->formdata['metal_issue_vouchers']);
-      $this->formdata['metal_issue_vouchers'] = array(array('account_name' => 'Vadotar',
+      $this->formdata['metal_issue_vouchers'] = array(array('account_name' => 'VADOTAR',
                                                             'credit_weight' => $this->attributes['debit_weight'],
                                                             'purity' => $this->attributes['purity'],
                                                             'fine' => $this->attributes['debit_weight'] * $this->attributes['purity'] / 100,
