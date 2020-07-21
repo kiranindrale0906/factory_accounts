@@ -47,12 +47,13 @@ class Ledgers extends BaseController {
       }
     } 
 
-    if (!isset($this->data['group']) || $this->data['group']=='')
+    if (!isset($this->data['group']) || $this->data['group']=='') {
+      $this->data['group']=='';
       $select = 'receipt_type, '.$period_select.' as voucher_date, 
                  date_format(voucher_date,"%Y-%m-%d") as str_voucher_date, voucher_number,
                  account_name, voucher_type, voucher_number, credit_amount, debit_amount, 
                  credit_weight, debit_weight, purity_margin, purity, factory_purity, narration';
-    else {
+    } else {
       $this->data['group'] = 'voucher_date';
       $select = '"" as receipt_type, '.$period_select.' as voucher_date, 
                  date_format(voucher_date,"%Y-%m-%d") as str_voucher_date, "" as voucher_number,
@@ -62,9 +63,14 @@ class Ledgers extends BaseController {
                  sum((credit_weight+debit_weight) * purity) /  sum(credit_weight+debit_weight)  as purity, 
                  sum((credit_weight+debit_weight) * factory_purity) /  sum(credit_weight+debit_weight)  as factory_purity, ""  as narration';
     }
-    
+
     $where_issue = array_merge($where, array('(credit_weight != 0 or credit_amount != 0)' => NULL));
     $where_receipt = array_merge($where, array('(debit_weight != 0 or debit_amount != 0)' => NULL));
+
+    if (isset($this->data['report_type']) && $this->data['report_type'] == 'production') {
+      $where_issue = array_merge($where_issue, array('account_name != ' => 'VADOTAR'));
+      $where_receipt = array_merge($where_receipt, array('account_name != ' => 'VADOTAR'));
+    }
 
     $issues = $this->model->get($select, $where_issue ,array(), array('order_by'=>'str_voucher_date asc', 'group_by' => $this->data['group']));
     $receipts = $this->model->get($select, $where_receipt ,array(), array('order_by'=>'str_voucher_date asc', 'group_by' => $this->data['group']));
@@ -81,10 +87,10 @@ class Ledgers extends BaseController {
     //pd($total_receipt_issue);
     $this->data['total'] = $this->set_index_for_dates($total_receipt_issue);
 
-    if (isset($this->data['report_type']) && $this->data['report_type'] == 'production') {
-      //do not compute opening / balance
-    }
-    else
+    //if (isset($this->data['report_type']) && $this->data['report_type'] == 'production') {
+    //  //do not compute opening / balance
+    //}
+    //else
       $this->get_balance_by_created_date();
   }
 
