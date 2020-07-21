@@ -48,7 +48,7 @@ class Ledgers extends BaseController {
     } 
 
     if (!isset($this->data['group']) || $this->data['group']=='') {
-      $this->data['group']=='';
+      $this->data['group']='';
       $select = 'receipt_type, '.$period_select.' as voucher_date, 
                  date_format(voucher_date,"%Y-%m-%d") as str_voucher_date, voucher_number,
                  account_name, voucher_type, voucher_number, credit_amount, debit_amount, 
