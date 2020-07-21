@@ -87,10 +87,10 @@ class Ledgers extends BaseController {
     //pd($total_receipt_issue);
     $this->data['total'] = $this->set_index_for_dates($total_receipt_issue);
 
-    //if (isset($this->data['report_type']) && $this->data['report_type'] == 'production') {
-    //  //do not compute opening / balance
-    //}
-    //else
+    if (isset($this->data['report_type']) && $this->data['report_type'] == 'production') {
+      //do not compute opening / balance
+    }
+    else
       $this->get_balance_by_created_date();
   }
 
