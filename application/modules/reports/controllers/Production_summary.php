@@ -15,13 +15,17 @@ class Production_summary extends BaseController {
   public function _get_form_data() {
     $url=ARF_API_BASE_PATH."issue_departments/api_issue_departments/create";
     $records=json_decode(curl_post_request($url));
-    $data = json_decode(json_encode($records), true);
+    $arf_data = json_decode(json_encode($records), true);
 
-    $this->data['product_names'] = get_dropdown_array($data['product_names']['names'], true);
-    $this->data['category_ones'] = get_dropdown_array($data['category_ones']['names'], true);
-    $this->data['machine_sizes'] = get_dropdown_array($data['machine_sizes']['names'], true);
-    $this->data['design_codes']  = get_dropdown_array($data['design_codes']['names'], true);
-    $this->data['in_purities']   = get_dropdown_array($data['in_purities']['names'], true);
+    $url=API_LIVE_BASE_PATH."issue_departments/api_issue_departments/create";
+    $records=json_decode(curl_post_request($url));
+    $argold_data = json_decode(json_encode($records), true);
+    
+    $this->data['product_names'] = get_dropdown_array(array_merge($arf_data['product_names']['names'], $argold_data['product_names']['names']), true);
+    $this->data['category_ones'] = get_dropdown_array(array_merge($arf_data['category_ones']['names'], $argold_data['category_ones']['names']), true);
+    $this->data['machine_sizes'] = get_dropdown_array(array_merge($arf_data['machine_sizes']['names'], $argold_data['machine_sizes']['names']), true);
+    $this->data['design_codes']  = get_dropdown_array(array_merge($arf_data['design_codes']['names'], $argold_data['design_codes']['names']), true);
+    $this->data['in_purities']   = get_dropdown_array(array_merge($arf_data['in_purities']['names'], $argold_data['in_purities']['names']), true);
   }
 
   private function get_production_summary() {
@@ -31,12 +35,12 @@ class Production_summary extends BaseController {
       return;
     }
     $this->data['production_summary'] = $_GET['production_summary'];
-    
-    $url=ARF_API_BASE_PATH."issue_departments/api_issue_departments/index";
+
+    $url=API_ARF_BASE_PATH."issue_departments/api_issue_departments/index";
     $records=json_decode(curl_post_request($url, $_GET['production_summary']));
     $arf_records = json_decode(json_encode($records), true);
 
-    $url=ARF_API_BASE_PATH."issue_departments/api_issue_departments/index";
+    $url=API_LIVE_BASE_PATH."issue_departments/api_issue_departments/index";
     $records=json_decode(curl_post_request($url, $_GET['production_summary']));
     $argold_records = json_decode(json_encode($records), true);    
 
