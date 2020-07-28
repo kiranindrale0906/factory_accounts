@@ -1,4 +1,14 @@
 <?php
+  function get_dropdown_array($simple_array, $empty_value=false) {
+    $dropdown_array = array();
+    if ($empty_value)
+      $dropdown_array[] = array('id' => '', 'name' => '');
+    if (empty($simple_array)) return $dropdown_array;
+    foreach($simple_array as $array_item) {
+      $dropdown_array[] = array('id' => $array_item, 'name' => $array_item);
+    }
+    return $dropdown_array;
+  }
 
   function get_company_list() {
     $ci=&get_instance();
