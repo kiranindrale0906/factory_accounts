@@ -25,6 +25,9 @@ $(document).ready(function() {
   initialize_select_column_arrange_column();
   initialize_pagination();
   ajax_post_onclick_submit();
+
+  onload_production_summary_report();
+
   //permission_readonly();
   //change_list_after_update();
   // imagesvideosFancybox();
