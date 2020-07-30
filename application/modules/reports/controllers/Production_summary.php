@@ -34,7 +34,7 @@ class Production_summary extends BaseController {
 
     if (!isset($this->data['record']['product_name']) || $this->data['record']['product_name'] != 'KA Chain') {
       $url=API_LIVE_BASE_PATH."issue_departments/api_issue_departments/create";
-      $records=json_decode(curl_post_request($url));
+      $records=json_decode(curl_post_request($url, $this->data['record']));
       $argold_data = json_decode(json_encode($records), true);
     } else {
       $argold_data = array('product_names' => array('names' => array()),
