@@ -92,7 +92,7 @@
           <td class="text-right"><?= four_decimal($liabilities_fine, '-') ?></td>
         </tr>
           <td><b>Vadotar: </b></td>
-          <td class="text-right"><?= four_decimal($liabilities_vadotar - $assets_vadotar);  ?></td>
+          <td class="text-right"><?= four_decimal($liabilities_vadotar + $assets_vadotar);  ?></td>
         </tr>
         <tr>
         <tr>
@@ -101,11 +101,11 @@
         </tr>
         <tr>
           <td><b>Total: </b></td>
-          <td class="text-right"><b><?= four_decimal(-1 * ($liabilities_fine + $assets_fine + $liabilities_vadotar - $assets_vadotar), '-');  ?></b></td>
+          <td class="text-right"><b><?= four_decimal(-1 * ($liabilities_fine + $assets_fine + $liabilities_vadotar + $assets_vadotar), '-');  ?></b></td>
         </tr>
         <tr>
           <td><b>Closing Stock: </b></td>
-          <td class="text-right"><b><?= four_decimal($assets_fine + $liabilities_fine + $liabilities_vadotar - $assets_vadotar, '-');  ?></b></td>
+          <td class="text-right"><b><?= four_decimal($assets_fine + $liabilities_fine + $liabilities_vadotar + $assets_vadotar, '-');  ?></b></td>
         </tr>
         <tr>
           <td><b>Balance: </b></td>
