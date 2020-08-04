@@ -120,6 +120,7 @@
       }
       load_view('ac_vouchers/ac_vouchers/fields/lumpsum_amount');
       load_view('ac_vouchers/ac_vouchers/fields/transaction_type'); 
+      load_view('ac_vouchers/ac_vouchers/fields/description'); 
     ?>
   </div>  
 

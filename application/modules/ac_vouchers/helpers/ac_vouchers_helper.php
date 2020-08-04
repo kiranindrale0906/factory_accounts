@@ -124,6 +124,7 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
 
 
   $list_setting['narration'] = array("Item Name", "narration", FALSE, "narration", TRUE, TRUE);
+  $list_setting['description'] = array("Description", "description", TRUE, "description", TRUE, TRUE);
   $list_setting['action'] = array("Action", "action", FALSE, "action", FALSE, FALSE);
 
   if(!empty($list_setting_arg)) {
@@ -218,6 +219,7 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['hallmark_number'] = array('Hallmark Number', 'Hallmark Number', false, '', TRUE);
   $attributes['has_hallmark'] = array('', 'Has Hallmark', TRUE, '', TRUE);
   $attributes['total_value'] = array('Value', 'Value', FALSE, '',TRUE);
+  $attributes['description'] = array('Description', 'Description', FALSE, '',TRUE);
 
   $attributes['add_more'] = array('', 'add_more', FALSE, '',TRUE);
   if(!empty($required_field)) {
