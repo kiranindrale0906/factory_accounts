@@ -5,11 +5,13 @@
                                                        'voucher_date' => $previous_date,
                                                        'type' => $type));
 
-    foreach ($voucher_date_records as $index => $record) {
-      if($record['debit_weight'] > 0 || $record['debit_amount'] > 0)
-        $this->load->view('reports/ledgers/tr_receipt', array('record' => $record));   
-      else 
-        $this->load->view('reports/ledgers/tr_issue', array('record' => $record));  
+    if (!isset($detail) || $detail == 'yes') {
+      foreach ($voucher_date_records as $index => $record) {
+        if($record['debit_weight'] > 0 || $record['debit_amount'] > 0)
+          $this->load->view('reports/ledgers/tr_receipt', array('record' => $record));   
+        else 
+          $this->load->view('reports/ledgers/tr_issue', array('record' => $record));  
+      }
     } 
 
     $this->load->view('reports/ledgers/total', 

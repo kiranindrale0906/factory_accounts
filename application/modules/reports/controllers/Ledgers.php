@@ -5,7 +5,28 @@ class Ledgers extends BaseController {
   	parent::__construct();
 	}
 
-  protected function get_datewise_ledger_records() {
+  protected function get_datewise_ledger_records($period = 'date') {
+    $this->data['period'] = $period;
+    if ($period == 'date') $period_select = 'date_format(voucher_date,"%Y-%m-%d")';
+    elseif ($period == 'month') $period_select = 'date_format(voucher_date,"%Y-%m")';
+    elseif ($period == 'week') {
+      $period_from_date = 'DATE_SUB(
+                                DATE_ADD(MAKEDATE(date_format(voucher_date,"%Y"), 1), INTERVAL week(voucher_date) WEEK),
+                                INTERVAL WEEKDAY(
+                                   DATE_ADD(MAKEDATE(date_format(voucher_date,"%Y"), 1), INTERVAL week(voucher_date) WEEK)
+                                ) -1 DAY)';
+      $period_to_date = 'DATE_SUB(
+                                DATE_ADD(MAKEDATE(date_format(voucher_date,"%Y"), 1), INTERVAL week(voucher_date) WEEK),
+                                INTERVAL WEEKDAY(
+                                   DATE_ADD(MAKEDATE(date_format(voucher_date,"%Y"), 1), INTERVAL week(voucher_date) WEEK)
+                                ) -7 DAY)';
+      $period_select = 'CONCAT('.$period_from_date.' , " - ", '.$period_to_date.')';
+      //$week_start_date = 'MAKEDATE(date_format(voucher_date,"%Y"), week(voucher_date))';
+      //$week_end_date = 'DATE_ADD(MAKEDATE(date_format(voucher_date,"%Y"), week(voucher_date)), INTERVAL 1 WEEK)';
+      //$period_select = 'CONCAT("Week: ", ' .$week_start_date . ')';
+      // /$period_select = 'week(voucher_date)';
+    };
+
     $account_id = (!empty($_GET[$this->router->class]['account_id'])) ? $_GET[$this->router->class]['account_id'] : 0;
     $where = array();
     if(!empty($account_id)) {
@@ -24,16 +45,35 @@ class Ledgers extends BaseController {
       } elseif ($this->data['company_name'] == 'ARC') {
         $where['where_in'] = array('receipt_type' => array("'ARC Finished Goods'", "'ARC Refresh'"));
       }
-     } 
+    } 
 
-    $select = 'receipt_type, date_format(voucher_date,"%Y-%m-%d") as voucher_date, voucher_number,
-               account_name, voucher_type, voucher_number, credit_amount, debit_amount, 
-               credit_weight, debit_weight, purity_margin, purity, factory_purity, narration';
+    if (!isset($this->data['group']) || $this->data['group']=='') {
+      $this->data['group']='';
+      $select = 'receipt_type, '.$period_select.' as voucher_date, 
+                 date_format(voucher_date,"%Y-%m-%d") as str_voucher_date, voucher_number,
+                 account_name, voucher_type, voucher_number, credit_amount, debit_amount, 
+                 credit_weight, debit_weight, purity_margin, purity, factory_purity, narration';
+    } else {
+      $this->data['group'] = 'voucher_date';
+      $select = '"" as receipt_type, '.$period_select.' as voucher_date, 
+                 date_format(voucher_date,"%Y-%m-%d") as str_voucher_date, "" as voucher_number,
+                 "" as account_name, "" as voucher_type, "" as voucher_number, 
+                 sum(credit_amount) as credit_amount, sum(debit_amount) as debit_amount, 
+                 sum(credit_weight) as credit_weight, sum(debit_weight) as debit_weight, 0 as purity_margin, 
+                 sum((credit_weight+debit_weight) * purity) /  sum(credit_weight+debit_weight)  as purity, 
+                 sum((credit_weight+debit_weight) * factory_purity) /  sum(credit_weight+debit_weight)  as factory_purity, ""  as narration';
+    }
+
     $where_issue = array_merge($where, array('(credit_weight != 0 or credit_amount != 0)' => NULL));
     $where_receipt = array_merge($where, array('(debit_weight != 0 or debit_amount != 0)' => NULL));
 
-    $issues = $this->model->get($select, $where_issue ,array(), array('order_by'=>'voucher_date asc'));
-    $receipts = $this->model->get($select, $where_receipt ,array(), array('order_by'=>'voucher_date asc'));
+    if (isset($this->data['report_type']) && $this->data['report_type'] == 'production') {
+      $where_issue = array_merge($where_issue, array('account_name != ' => 'VADOTAR'));
+      $where_receipt = array_merge($where_receipt, array('account_name != ' => 'VADOTAR'));
+    }
+
+    $issues = $this->model->get($select, $where_issue ,array(), array('order_by'=>'str_voucher_date asc', 'group_by' => $this->data['group']));
+    $receipts = $this->model->get($select, $where_receipt ,array(), array('order_by'=>'str_voucher_date asc', 'group_by' => $this->data['group']));
     
     $issue_voucher_dates = array_column($issues, 'voucher_date');
     $receipt_voucher_dates = array_column($receipts, 'voucher_date');
@@ -42,13 +82,16 @@ class Ledgers extends BaseController {
   
     $this->data['issues'] = $this->get_records_by_created_date($issues);
     $this->data['receipts'] = $this->get_records_by_created_date($receipts);
-
     $total_issue = $this->get_total_by_created_date($this->data['issues'], 'issue', array());
     $total_receipt_issue = $this->get_total_by_created_date($this->data['receipts'], 'receipt', $total_issue);      
     //pd($total_receipt_issue);
     $this->data['total'] = $this->set_index_for_dates($total_receipt_issue);
 
-    $this->get_balance_by_created_date();
+    if (isset($this->data['report_type']) && $this->data['report_type'] == 'production') {
+      //do not compute opening / balance
+    }
+    else
+      $this->get_balance_by_created_date();
   }
 
   private function get_records_by_created_date($records) {

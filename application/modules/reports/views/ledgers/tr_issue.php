@@ -5,8 +5,8 @@
   <?php if ($report != 'account ledger'): ?>
     <td><?= $record['account_name'];?></td>
   <?php endif; ?>
-  <td><?= $record['voucher_date'] ?></td>
-  <td><?= $record['voucher_number'];?></td>
+  <td><?= $record['str_voucher_date'] ?></td>
+  <td><?= $record['voucher_number'].' '.$record['narration'];?></td>
   <td class="text-right"><?= four_decimal($record['credit_weight']) ?></td>
   <td class="text-right"><?= four_decimal($record['purity']) ?></td>
   <td class="text-right"><?= four_decimal($record['credit_weight']*$record['purity']/100); ?></td>

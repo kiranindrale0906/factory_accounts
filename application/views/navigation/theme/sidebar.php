@@ -70,7 +70,8 @@
                                         // 'reports/outstanding_report' => 'Outstanding Report',
                                         'reports/trial_balances' => 'Trial Balance',
                                         'reports/vadotar_reports' => 'Vadotar Report',
-                                        'reports/rojmel_reports' => 'Rojmel Report'),
+                                        'reports/rojmel_reports' => 'Rojmel Report',
+                                        'reports/production_summary' => 'Production Summary'),
                     //'Interests' => array('transactions/interest_issue_vouchers'=>'Interest Issue Voucher','transactions/interest_receipt_vouchers'=>'Interest Receipt Voucher'),
                     'Registers'   => array(
                       'registers/cash_registers' => 'Cash Register',
