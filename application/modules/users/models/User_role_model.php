@@ -54,6 +54,7 @@ class User_role_model extends Core_user_role_model {
                                        'others/cities','others/states', 'others/salesmans', 'others/narrations',
                                         'others/books', 'others/sms'),
                      'Users' => array('users/users','users/user_roles'),
+                      'Migrations' => array('sys/migrations'),
                      'api' => array('api/api_metal_issue_vouchers'));
 
     return (!empty($module_name) ? $modules[$module_name] : $modules);
