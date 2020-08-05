@@ -1,6 +1,6 @@
 <?php
 	function available_urls_before_login(){ 
-		return array('users/login/index','users/login/create','users/login/store','api/api_metal_issue_vouchers/store','masters/accounts/index',
+		return array('users/login/index','users/login/create','users/login/store','masters/accounts/index',
 									'users/login/update',
 									'users/ad_login/index','users/ad_login/create','users/ad_login/store',
 									'users/ad_login/update', 
@@ -10,8 +10,9 @@
 									'core_users/email_verification/update/', 
 									'socials_media/google/index','socials_media/google/store',
 									'socials_media/facebook/index','socials_media/facebook/store',
-									'slack/slack_login/index','slack/slack_login/store',
-									'sys/migrations/index','sys/migrations/create','sys/migrations/store','socials_media/twitter/index','socials_media/twitter/index','socials_media/linkedin/index','socials_media/linkedin/index');
+									'slack/slack_login/index','slack/slack_login/store'
+									,'socials_media/twitter/index','socials_media/twitter/index','socials_media/linkedin/index','socials_media/linkedin/index',
+                  'api/api_metal_issue_vouchers/store','api/api_metal_receipt_vouchers/store');
 	}
 
 	function available_urls_after_login() {
@@ -39,6 +40,6 @@
 }
 
 function excluded_urls_before_after_login(){
-    return array('slack/slack_login/index','sys/migrations/index','sys/migrations/create','slack/slack_login/store','sys/migrations/index','sys/migrations/view','masters/accounts/index');
+    return array('slack/slack_login/index','slack/slack_login/store','masters/accounts/index');
 	}
 ?>

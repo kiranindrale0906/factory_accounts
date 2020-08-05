@@ -3,9 +3,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 require_once APPPATH . "modules/ac_vouchers/controllers/Core_metal_issue_vouchers.php";
 class Client_metal_issue_vouchers extends Core_metal_issue_vouchers {
-
+  
   public function __construct() {
     parent::__construct();
+    $this->load->model(array('ac_vouchers/voucher_model'));
   }
 
   public function _get_form_data() {

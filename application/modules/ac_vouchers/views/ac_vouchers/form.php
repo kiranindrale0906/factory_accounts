@@ -120,6 +120,7 @@
       }
       load_view('ac_vouchers/ac_vouchers/fields/lumpsum_amount');
       load_view('ac_vouchers/ac_vouchers/fields/transaction_type'); 
+      load_view('ac_vouchers/ac_vouchers/fields/description'); 
     ?>
   </div>  
 
@@ -138,9 +139,13 @@
     if ($this->router->class == "metal_receipt_vouchers" 
         && !in_array($receipt_type, array('ARC Finished Goods',
                                           'ARF Finished Goods',
+                                          'ARF Software Finished Goods',
+                                          'AR Gold Finished Goods',
                                           'AR Gold Refresh',
                                           'ARC Refresh',
-                                          'ARF Refresh'))) 
+                                          'ARF Refresh',
+                                          'Vadotar',
+                                          'Internal'))) 
       $this->load->view('transactions/metal_issue_vouchers/subform_list');
     if ($this->router->class == "purchase_vouchers") $this->load->view('transactions/purchase_vouchers/subform_list');
     if ($this->router->class == "sales_vouchers") $this->load->view('transactions/sales_vouchers/subform_list');

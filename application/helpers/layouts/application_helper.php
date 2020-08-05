@@ -86,6 +86,7 @@ function APPLICATION_JS($type='application'){
 		THEME_PATH().'js/transactions/metal_issue_vouchers.js',
 		THEME_PATH().'js/calculator/calculator.js',
 		THEME_PATH().'js/ar_gold/metal_vouchers.js',
+		THEME_PATH().'js/ar_gold/production_summary.js',
 		THEME_PATH().'js/base.js',
 	);
 }

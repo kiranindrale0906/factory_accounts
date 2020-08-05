@@ -30,9 +30,13 @@
 	      	<span class="skewleft"><?= str_replace("_", " ", $label_receipt); ?>
 	      	</span>
 	      </a>
+
 	    </div>
 	  </div>
+	
 	</div>
+
+
 <?php endif; ?>
 
 <?php 

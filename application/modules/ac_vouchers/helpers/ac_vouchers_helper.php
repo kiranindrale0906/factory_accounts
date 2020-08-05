@@ -54,7 +54,7 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
   $ci=&get_instance();
 
   $list_setting['voucher_date'] = array("Date", "voucher_date", TRUE, "voucher_date", TRUE, TRUE,
-                                        "DATE_FORMAT(ac_vouchers.created_at, '%d-%m-%Y') as voucher_date");
+                                        "DATE_FORMAT(ac_vouchers.voucher_date, '%d-%m-%Y') as voucher_date");
   $list_setting['created_time'] = array("Time", "created_at", FALSE, "created_at", FALSE, TRUE,
                                         "date_format(ac_vouchers.created_at,'%H:%i:%s') as created_at");
   $list_setting['voucher_number'] = array("Voucher", "voucher_number", FALSE, "voucher_number", TRUE, FALSE);
@@ -124,6 +124,7 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
 
 
   $list_setting['narration'] = array("Item Name", "narration", FALSE, "narration", TRUE, TRUE);
+  $list_setting['description'] = array("Description", "description", TRUE, "description", TRUE, TRUE);
   $list_setting['action'] = array("Action", "action", FALSE, "action", FALSE, FALSE);
 
   if(!empty($list_setting_arg)) {
@@ -218,6 +219,7 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['hallmark_number'] = array('Hallmark Number', 'Hallmark Number', false, '', TRUE);
   $attributes['has_hallmark'] = array('', 'Has Hallmark', TRUE, '', TRUE);
   $attributes['total_value'] = array('Value', 'Value', FALSE, '',TRUE);
+  $attributes['description'] = array('Description', 'Description', FALSE, '',TRUE);
 
   $attributes['add_more'] = array('', 'add_more', FALSE, '',TRUE);
   if(!empty($required_field)) {
@@ -231,18 +233,23 @@ function ac_voucher_get_row_actions($row, $url, $select_url, $filter) {
   $actions = array();
   $ci=&get_instance();
   $controller = 'transactions/'.$ci->router->class; 
-  $actions["Edit"] =  array('request' => "http", 
-                            'url' => ADMIN_PATH.$controller.'/edit/'.$row['id'],
+    $actions["View"] =  array('request' => "http", 
+                            'url' => ADMIN_PATH.$controller.'/details/'.$row['id'],
                             'confirm_message' => "",
                             'class' => 'text-warning text-uppercase');
-  $actions["Delete"] = array('request' => "http",
-                             'url' => ADMIN_PATH.$controller.'/delete/'.$row['id'],
-                             'confirm_message' => "Do you want to delete",
-                             'js_function' => "",
-                             'class' => 'text-danger text-uppercase');
-  $actions["Print Voucher"] = array('request' => "http", 
-                                    'url' => ADMIN_PATH.$controller.'/view/'.$row['id'],
-                                    'confirm_message' => "",
-                                    'class' => 'btn_green');
+
+  // $actions["Edit"] =  array('request' => "http", 
+  //                           'url' => ADMIN_PATH.$controller.'/edit/'.$row['id'],
+  //                           'confirm_message' => "",
+  //                           'class' => 'text-warning text-uppercase');
+  // $actions["Delete"] = array('request' => "http",
+  //                            'url' => ADMIN_PATH.$controller.'/delete/'.$row['id'],
+  //                            'confirm_message' => "Do you want to delete",
+  //                            'js_function' => "",
+  //                            'class' => 'text-danger text-uppercase');
+  // $actions["Print Voucher"] = array('request' => "http", 
+  //                                   'url' => ADMIN_PATH.$controller.'/view/'.$row['id'],
+  //                                   'confirm_message' => "",
+  //                                   'class' => 'btn_green');
   return $actions;
 }

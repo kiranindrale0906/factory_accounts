@@ -1,5 +1,5 @@
 <?php $this->load->view('reports/ledgers/report_header', array('header' => 'Trial Balance')); ?>
-
+  
 <div class="row">
   <div class="col-md-6">
     <div class="form-group container">
@@ -18,7 +18,9 @@
               
               if(!empty($trial_balance)) {
                 foreach ($trial_balance as $record) {
-                  if ($record['fine'] <= 0) continue;
+                  if (   ($record['fine'] <= 0
+                          && $record['account_name'] != 'VADOTAR')
+                      || ($record['account_name'] == 'Tounch Loss Fine')) continue;
                   $liabilities_vadotar = $liabilities_vadotar + $record['vadotar'];
                   $liabilities_fine = $liabilities_fine + $record['fine']; ?>
 
@@ -36,6 +38,8 @@
             <th class="text-right"><?= four_decimal($liabilities_vadotar, '-'); ?></th>
           </tr>
         </table>
+
+        
       </div>
     </div>
   </div>
@@ -55,7 +59,9 @@
               $assets_vadotar = 0;  
               if(!empty($trial_balance)) {
                 foreach ($trial_balance as $record) {
-                  if ($record['fine'] >= 0) continue;
+                  if (  ($record['fine'] >= 0
+                         && $record['account_name'] != 'Tounch Loss Fine')
+                      || ($record['account_name'] == 'VADOTAR')) continue;
                   $assets_vadotar = $assets_vadotar + $record['vadotar'];
                   $assets_fine = $assets_fine + $record['fine']; ?>
 
@@ -86,7 +92,7 @@
           <td class="text-right"><?= four_decimal($liabilities_fine, '-') ?></td>
         </tr>
           <td><b>Vadotar: </b></td>
-          <td class="text-right"><?= four_decimal($assets_vadotar - $liabilities_vadotar);  ?></td>
+          <td class="text-right"><?= four_decimal(-1 * ($liabilities_vadotar + $assets_vadotar));  ?></td>
         </tr>
         <tr>
         <tr>
@@ -95,11 +101,11 @@
         </tr>
         <tr>
           <td><b>Total: </b></td>
-          <td class="text-right"><b><?= four_decimal(-1 * ($liabilities_fine + $assets_fine + $assets_vadotar - $liabilities_vadotar), '-');  ?></b></td>
+          <td class="text-right"><b><?= four_decimal(-1 * ($liabilities_fine + $assets_fine - $liabilities_vadotar - $assets_vadotar), '-');  ?></b></td>
         </tr>
         <tr>
           <td><b>Closing Stock: </b></td>
-          <td class="text-right"><b><?= four_decimal($assets_fine + $liabilities_fine + $assets_vadotar - $liabilities_vadotar, '-');  ?></b></td>
+          <td class="text-right"><b><?= four_decimal($assets_fine + $liabilities_fine - $liabilities_vadotar - $assets_vadotar, '-');  ?></b></td>
         </tr>
         <tr>
           <td><b>Balance: </b></td>
@@ -150,7 +156,7 @@
             <td>Balance</td>
             <td class="text-right">-</td>
             <td class="text-right">-</td>
-            <td class="text-right"><b><?= four_decimal($assets_fine + $liabilities_fine + $assets_vadotar - $liabilities_vadotar 
+            <td class="text-right"><b><?= four_decimal($assets_fine + $liabilities_fine - $assets_vadotar - $liabilities_vadotar 
                                                        + ($argold_balance->argold+$live_balance->argold)
                                                        - $argold_balance->arc - $live_balance->arc
                                                        - $argold_balance->arf - $live_balance->arf) ?></b></td>

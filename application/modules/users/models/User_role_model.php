@@ -37,7 +37,7 @@ class User_role_model extends Core_user_role_model {
                                             'transactions/antique_sales_return_voucher',
                                             'transactions/interest_issue_vouchers',
                                             'transactions/interest_receipt_vouchers',
-                                            'argold/chittis',
+                                            'argold/chittis','argold/voucher_details',
                                             'transactions/mangalsutra_sales_return_voucher'),
                      // 'Reports' => array('reports/mis_reports','reports/stock_report', 
                      //                    'reports/order_report'),
@@ -46,13 +46,15 @@ class User_role_model extends Core_user_role_model {
                                         'reports/outstanding_report',
                                         'reports/trial_balances',
                                         'reports/vadotar_reports',
-                                        'reports/rojmel_reports'),
+                                        'reports/rojmel_reports',
+                                        'reports/production_summary'),
                      'Interest' => array('interest/interest_issue_voucher'),
                      'Registers' => array('registers/cash_registers','registers/bank_registers','registers/sales_registers','registers/purchase_registers','registers/rate_cut_purchase_value_registers','registers/rate_cut_purchase_weight_registers','registers/rate_cut_booking_value_registers','registers/rate_cut_booking_weight_registers','registers/expense_registers','registers/metal_registers'),
                      'Others' => array('others/account_wise_details','others/categories', 'others/items', 
                                        'others/cities','others/states', 'others/salesmans', 'others/narrations',
                                         'others/books', 'others/sms'),
                      'Users' => array('users/users','users/user_roles'),
+                      'Migrations' => array('sys/migrations'),
                      'api' => array('api/api_metal_issue_vouchers'));
 
     return (!empty($module_name) ? $modules[$module_name] : $modules);

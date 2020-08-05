@@ -1,4 +1,14 @@
 <?php
+  function get_dropdown_array($simple_array, $empty_value=false) {
+    $dropdown_array = array();
+    if ($empty_value)
+      $dropdown_array[] = array('id' => '', 'name' => '');
+    if (empty($simple_array)) return $dropdown_array;
+    foreach($simple_array as $array_item) {
+      $dropdown_array[] = array('id' => $array_item, 'name' => $array_item);
+    }
+    return $dropdown_array;
+  }
 
   function get_company_list() {
     $ci=&get_instance();
@@ -16,12 +26,16 @@
 
   function get_receipt_type() {
     return array( array('id' => 'Metal', 'name' => 'Metal'),
+                  array('id' => 'Daily Drawer', 'name' => 'Daily Drawer'),
                   array('id' => 'AR Gold Refresh', 'name' => 'AR Gold Refresh'),
                   array('id' => 'ARC Refresh', 'name' => 'ARC Refresh'),
                   array('id' => 'ARF Refresh', 'name' => 'ARF Refresh'),
-                  array('id' => 'Daily Drawer', 'name' => 'Daily Drawer'),
+                  array('id' => 'AR Gold Finished Goods', 'name' => 'AR Gold Finished Goods'),
                   array('id' => 'ARC Finished Goods', 'name' => 'ARC Finished Goods'),
                   array('id' => 'ARF Finished Goods', 'name' => 'ARF Finished Goods'),
+                  array('id' => 'ARF Software Finished Goods', 'name' => 'ARF Software Finished Goods'),
+                  array('id' => 'Internal', 'name' => 'Internal'),
+                  array('id' => 'Vadotar', 'name' => 'Vadotar'),
                 );
   }
   function get_issue_type() {
@@ -29,6 +43,8 @@
                   array('id' => 'AR Gold Finished Goods', 'name' => 'AR Gold Finished Goods'),
                   array('id' => 'ARC Finished Goods', 'name' => 'ARC Finished Goods'),
                   array('id' => 'ARF Finished Goods', 'name' => 'ARF Finished Goods'),
+                  array('id' => 'ARF Software Finished Goods', 'name' => 'ARF Software Finished Goods'),
+                  array('id' => 'Internal', 'name' => 'Internal'),
                 );
   }
 

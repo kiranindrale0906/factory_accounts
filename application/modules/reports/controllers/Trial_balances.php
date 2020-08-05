@@ -6,10 +6,31 @@ class Trial_balances extends Ledgers {
 
   public function __construct() {
     parent::__construct();
-    $this->load->model(array('masters/account_model','masters/company_model'));
+    $this->load->model(array('masters/account_model','masters/company_model', 'transactions/metal_receipt_voucher_model'));
   }
 
   public function index() {
+    $url = API_ARG_BASE_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
+    $records = json_decode(curl_post_request($url));
+    if (!empty($records)) {
+      $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator, 'Alloy', 'ARG');
+      $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator, 'GPC', 'ARG');
+    }
+
+    $url = API_LIVE_BASE_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
+    $records = json_decode(curl_post_request($url));
+    if (!empty($records)) {
+      $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator, 'Alloy', 'June 2020');
+      $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator, 'GPC', 'June 2020');
+    }
+
+    $url = API_ARF_BASE_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
+    $records = json_decode(curl_post_request($url));
+    if (!empty($records)) {
+      $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator, 'Alloy', 'ARF');
+      $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator, 'GPC', 'ARF');
+    }
+
     $this->data['layout']='application';
     
     $this->get_form_data();
@@ -27,7 +48,13 @@ class Trial_balances extends Ledgers {
     $records=json_decode(curl_post_request($url));
     
     $this->data['argold_balance']=$arg_records->data->record;
+    $this->data['argold_balance']->argold = 0;
+    $this->data['argold_balance']->arc = 0;
+    $this->data['argold_balance']->arf = 0;
+    
     $this->data['live_balance']=$records->data->record;
+    //$this->data['live_balance']->arc = 0;
+    //$this->data['live_balance']->arf = 0;
   }
 
   private function get_account_ledger_records() {
