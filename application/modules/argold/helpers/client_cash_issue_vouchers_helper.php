@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed.');
 //AR Gold
 
 function list_settings() {
-  $list_option=array('voucher_date','receipt_type','created_time', 'voucher_number', 'account_name','credit_amount','description');
+  $list_option=array('voucher_date','created_time', 'voucher_number', 'account_name','credit_amount','description');
   return ac_vouchers_list_settings($list_option);
 }
 
