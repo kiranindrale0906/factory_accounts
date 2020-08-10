@@ -82,6 +82,10 @@ class Voucher_model extends BaseModel {
     return array('field' => $this->router_class.'[credit_amount]', 
                  'label' => 'Credit Amount',
                  'rules' => 'trim|required|numeric|greater_than[0]');
+  }protected function get_debit_amount_validation_rules() {
+    return array('field' => $this->router_class.'[debit_amount]', 
+                 'label' => 'Debit Amount',
+                 'rules' => 'trim|required|numeric|greater_than[0]');
   }
   protected function get_narration_validation_rules() {
     return array('field' => $this->router_class.'[narration]', 
