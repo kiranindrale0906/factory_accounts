@@ -25,26 +25,32 @@
   }
 
   function get_receipt_type() {
-    return array( array('id' => 'Metal', 'name' => 'Metal'),
-                  array('id' => 'Daily Drawer', 'name' => 'Daily Drawer'),
-                  array('id' => 'AR Gold Refresh', 'name' => 'AR Gold Refresh'),
-                  array('id' => 'ARC Refresh', 'name' => 'ARC Refresh'),
-                  array('id' => 'ARF Refresh', 'name' => 'ARF Refresh'),
-                  array('id' => 'AR Gold Finished Goods', 'name' => 'AR Gold Finished Goods'),
-                  array('id' => 'ARC Finished Goods', 'name' => 'ARC Finished Goods'),
-                  array('id' => 'ARF Finished Goods', 'name' => 'ARF Finished Goods'),
-                  array('id' => 'ARF Software Finished Goods', 'name' => 'ARF Software Finished Goods'),
-                  array('id' => 'Internal', 'name' => 'Internal'),
-                  array('id' => 'Vadotar', 'name' => 'Vadotar'),
+    return array( array('id' => 'Metal',                          'name' => 'Metal'),
+                  array('id' => 'Daily Drawer',                   'name' => 'Daily Drawer'),
+                  array('id' => 'AR Gold Refresh',                'name' => 'AR Gold Refresh'),
+                  array('id' => 'ARC Refresh',                    'name' => 'ARC Refresh'),
+                  array('id' => 'ARF Refresh',                    'name' => 'ARF Refresh'),
+                  array('id' => 'AR Gold Finished Goods',         'name' => 'AR Gold Finished Goods'),
+                  array('id' => 'ARC Finished Goods',             'name' => 'ARC Finished Goods'),
+                  array('id' => 'ARF Finished Goods',             'name' => 'ARF Finished Goods'),
+                  array('id' => 'ARF Software Finished Goods',    'name' => 'ARF Software Finished Goods'),
+                  array('id' => 'AR Gold Chain Receipt',          'name' => 'AR Gold Chain Receipt'),
+                  array('id' => 'ARF Chain Receipt',              'name' => 'ARF Chain Receipt'),
+                  array('id' => 'ARC Chain Receipt',              'name' => 'ARC Chain Receipt'),
+                  array('id' => 'AR Gold Finished Goods Receipt', 'name' => 'AR Gold Finished Goods Receipt'),
+                  array('id' => 'ARF Finished Goods Receipt',     'name' => 'ARF Finished Goods Receipt'),
+                  array('id' => 'ARC Finished Goods Receipt',     'name' => 'ARC Finished Goods Receipt'),
+                  array('id' => 'Internal',                       'name' => 'Internal'),
+                  array('id' => 'Vadotar',                        'name' => 'Vadotar'),
                 );
   }
   function get_issue_type() {
-    return array( array('id' => 'Metal', 'name' => 'Metal'),
-                  array('id' => 'AR Gold Finished Goods', 'name' => 'AR Gold Finished Goods'),
-                  array('id' => 'ARC Finished Goods', 'name' => 'ARC Finished Goods'),
-                  array('id' => 'ARF Finished Goods', 'name' => 'ARF Finished Goods'),
+    return array( array('id' => 'Metal',                       'name' => 'Metal'),
+                  array('id' => 'AR Gold Finished Goods',      'name' => 'AR Gold Finished Goods'),
+                  array('id' => 'ARC Finished Goods',          'name' => 'ARC Finished Goods'),
+                  array('id' => 'ARF Finished Goods',          'name' => 'ARF Finished Goods'),
                   array('id' => 'ARF Software Finished Goods', 'name' => 'ARF Software Finished Goods'),
-                  array('id' => 'Internal', 'name' => 'Internal'),
+                  array('id' => 'Internal',                    'name' => 'Internal'),
                 );
   }
 
