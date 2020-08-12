@@ -137,13 +137,19 @@
   <?php 
       $receipt_type=!empty($_GET['receipt_type'])?$_GET['receipt_type']:'';
     if ($this->router->class == "metal_receipt_vouchers" 
-        && !in_array($receipt_type, array('ARC Finished Goods',
-                                          'ARF Finished Goods',
-                                          'ARF Software Finished Goods',
-                                          'AR Gold Finished Goods',
-                                          'AR Gold Refresh',
+        && !in_array($receipt_type, array('AR Gold Refresh',
                                           'ARC Refresh',
                                           'ARF Refresh',
+                                          'AR Gold Finished Goods',
+                                          'ARF Finished Goods',
+                                          'ARF Software Finished Goods',
+                                          'ARC Finished Goods',
+                                          'AR Gold Chain Receipt',
+                                          'ARF Chain Receipt',
+                                          'ARC Chain Receipt',
+                                          'AR Gold Finished Goods Receipt',
+                                          'ARF Finished Goods Receipt',
+                                          'ARC Finished Goods Receipt',
                                           'Vadotar',
                                           'Internal'))) 
       $this->load->view('transactions/metal_issue_vouchers/subform_list');
