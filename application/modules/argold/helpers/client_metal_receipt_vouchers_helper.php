@@ -10,21 +10,27 @@ function list_settings() {
 
 function get_field_attribute($table, $field) {
 
-  if(!empty($_GET['receipt_type']) && $_GET['receipt_type']=='Metal')	{
+  if(!empty($_GET['receipt_type']) && (   $_GET['receipt_type'] == 'Metal'
+                                       || $_GET['receipt_type'] == 'AR Gold Chain Receipt'
+                                       || $_GET['receipt_type'] == 'ARF Chain Receipt'
+                                       || $_GET['receipt_type'] == 'ARC Chain Receipt'
+                                       || $_GET['receipt_type'] == 'AR Gold Finished Goods Receipt'
+                                       || $_GET['receipt_type'] == 'ARF Finished Goods Receipt'
+                                       || $_GET['receipt_type'] == 'ARC Finished Goods Receipt'))	{
     $required_fields=array('id', 'voucher_date', 'receipt_type', 'account_name', 
                            'debit_weight', 'purity', 'fine', 'narration','description');
-  }elseif (!empty($_GET['receipt_type']) && ($_GET['receipt_type']=='ARC Finished Goods' 
-                                             || $_GET['receipt_type']=='ARF Finished Goods'
-                                             || $_GET['receipt_type']=='AR Gold Finished Goods'
-                                             || $_GET['receipt_type']=='ARF Software Finished Goods')) {
+  }elseif (!empty($_GET['receipt_type']) && (   $_GET['receipt_type'] == 'ARC Finished Goods' 
+                                             || $_GET['receipt_type'] == 'ARF Finished Goods'
+                                             || $_GET['receipt_type'] == 'AR Gold Finished Goods'
+                                             || $_GET['receipt_type'] == 'ARF Software Finished Goods')) {
     $required_fields=array('id', 'voucher_date', 'receipt_type', 
                            'debit_weight', 'purity', 'fine', 'narration','description');
 
-  }elseif (!empty($_GET['receipt_type']) && ($_GET['receipt_type']=='Daily Drawer')) {
+  }elseif (!empty($_GET['receipt_type']) && ($_GET['receipt_type'] == 'Daily Drawer')) {
     $required_fields=array('id', 'voucher_date', 'receipt_type', 'account_name','dd_type',
                            'debit_weight', 'factory_purity','factory_fine', 'purity', 'fine', 'narration','description');
 
-  }elseif (!empty($_GET['receipt_type']) && ($_GET['receipt_type']=='Vadotar')) {
+  }elseif (!empty($_GET['receipt_type']) && ($_GET['receipt_type'] == 'Vadotar')) {
     $required_fields=array('id', 'voucher_date', 'receipt_type');
 
   }else {

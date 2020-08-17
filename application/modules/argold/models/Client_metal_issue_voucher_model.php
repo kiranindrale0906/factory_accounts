@@ -35,9 +35,10 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
   public function after_save($action) {
     parent::after_save($action);
     $this->create_metal_receipt_voucher();
-    if (ENABLE_API_FOR_RECEIPT 
+    if (   ENABLE_API_FOR_RECEIPT 
         && $this->attributes['receipt_type'] != 'Internal' 
-        && $this->attributes['account_name'] == 'ARF Software')
+        && ($this->attributes['account_name'] == 'ARF Software'
+            || $this->attributes['receipt_type'] == 'ARF Chain Receipt'))
       $this->client_metal_receipt_voucher_model->send_request_to_arf($this->attributes);
   }
 
@@ -45,11 +46,10 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
     if (isset($this->attributes['metal_receipt_voucher_reference_id']) 
         && (!empty($this->attributes['metal_receipt_voucher_reference_id']))) return true;    
 
-    if ($this->attributes['receipt_type'] == 'ARC Finished Goods'
+    if (   $this->attributes['receipt_type'] == 'AR Gold Finished Goods'
         || $this->attributes['receipt_type'] == 'ARF Finished Goods'
-        || $this->attributes['receipt_type'] == 'AR Gold Finished Goods'
-        || $this->attributes['receipt_type'] == 'ARF Finished Goods'
-        || $this->attributes['receipt_type'] == 'ARF Software Finished Goods') {
+        || $this->attributes['receipt_type'] == 'ARF Software Finished Goods'
+        || $this->attributes['receipt_type'] == 'ARC Finished Goods') {
       $this->load->model('transactions/metal_receipt_voucher_model');
       $metal_receipt_data = array();
       $metal_receipt_data['company_id'] = $this->attributes['company_id'];

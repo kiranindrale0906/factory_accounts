@@ -61,7 +61,7 @@ class Ledgers extends BaseController {
                  sum(credit_amount) as credit_amount, sum(debit_amount) as debit_amount, 
                  sum(credit_weight) as credit_weight, sum(debit_weight) as debit_weight, 0 as purity_margin, 
                  sum((credit_weight+debit_weight) * purity) /  sum(credit_weight+debit_weight)  as purity, 
-                 sum((credit_weight+debit_weight) * factory_purity) /  sum(credit_weight+debit_weight)  as factory_purity, ""  as narration';
+                 sum((credit_weight+debit_weight) * factory_purity) /  sum(credit_weight+debit_weight)  as factory_purity, ""  as narration, "" as description';
     }
 
     $where_issue = array_merge($where, array('(credit_weight != 0 or credit_amount != 0)' => NULL));
