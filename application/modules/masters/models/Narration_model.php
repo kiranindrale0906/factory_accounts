@@ -26,7 +26,7 @@ class Narration_model extends BaseModel {
     return parent::check_unique($fields);
   }
   public function check_special_charactor($fields){
-     $charactors = preg_match('/[^a-zA-Z0-9/\d]/', $fields);
+     $charactors = preg_match('/[^a-zA-Z0-9\d]/', $fields);
      if($charactors!=0){
      return false;
      }else{
