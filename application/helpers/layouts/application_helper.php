@@ -82,6 +82,7 @@ function APPLICATION_JS($type='application'){
 		// THEME_PATH().'js/transactions/visited_clients.js',
 		// THEME_PATH().'js/transactions/called_clients.js',
 		THEME_PATH().'js/transactions/ac_vouchers.js',
+		THEME_PATH().'js/transactions/refresh.js',
 		THEME_PATH().'js/transactions/transaction_details.js',
 		THEME_PATH().'js/transactions/metal_issue_vouchers.js',
 		THEME_PATH().'js/calculator/calculator.js',
