@@ -8,8 +8,8 @@
       <tr>
         <th>Weight</th>
         <th>Purity</th>
-        <th>Factory Purity</th>
         <th>Fine</th>
+        <th>Factory Purity</th>
         <th>Factory Fine</th>
         <th></th>
       </tr>
