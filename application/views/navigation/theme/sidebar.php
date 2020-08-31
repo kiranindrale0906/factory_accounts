@@ -31,6 +31,7 @@
                                             // 'transactions/bank_receipt_vouchers' => 'Bank Voucher',
                                             'transactions/metal_receipt_vouchers' => 'Metal Voucher',
                                             'argold/chittis' => 'Chitti',
+                                            'argold/refresh' => 'Refresh',
 
                                            //  'transactions/sales_vouchers' => 'Sales Voucher',//
                                            //  'transactions/purchase_vouchers' => 'Purchase Voucher',//

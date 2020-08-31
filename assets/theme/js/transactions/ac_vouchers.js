@@ -71,32 +71,66 @@ function calculate_fine_factory_fine(purity=0) {
 
 
 function calculate_factory_purity(index) {
-	var credit_wt=$("#credit_weight_"+index).val();
-	var factory_purity = $("#factory_purity_"+index).val();
-	if(isNaN(credit_wt)) credit_wt=0;
-	if(isNaN(factory_purity) || factory_purity==undefined ) factory_purity=0;
-	var fine = parseFloat(credit_wt) * parseFloat(factory_purity)/100;
-	if(isNaN(fine)) fine=0;
-	$("#factory_fine_"+index).val(fine.toFixed(4));
-	calculate_arg_weight();
+  var credit_wt=$("#credit_weight_"+index).val();
+  var factory_purity = $("#factory_purity_"+index).val();
+  if(isNaN(credit_wt)) credit_wt=0;
+  if(isNaN(factory_purity) || factory_purity==undefined ) factory_purity=0;
+  var fine = parseFloat(credit_wt) * parseFloat(factory_purity)/100;
+  if(isNaN(fine)) fine=0;
+  $("#factory_fine_"+index).val(fine.toFixed(4));
+  calculate_arg_weight();
 }
 
-function calculate_arg_weight() {
-	var total_weight=0;
-	if($("#arg_weight").length>0) {
-		var total_issue_weight=0;
-		var receipt_weight = $(".debit_weight").val();
-		if(isNaN(receipt_weight)) receipt_weight=0;	
-		console.log(receipt_weight+'receipt_weight');
+function calculate_refresh_purity(index) {
+	var credit_wt=$("#refesh_weight_"+index).val();
+	var purity = $('select[name*="refresh[purity]"]').val();
+  if(purity==""){
+    alert('Please select purity first');
+  }else{
+  	if(isNaN(credit_wt)) credit_wt=0;
+  	if(isNaN(purity) || purity==undefined ) purity=0;
+  	var fine = parseFloat(credit_wt) * parseFloat(purity)/100;
+  	if(isNaN(fine)) fine=0;
+  	$("#refesh_fine_"+index).val(fine.toFixed(4));
+    calculate_refresh_total_weight();
+  	calculate_refresh_total_fine();
+  }
+}
 
-		$('.issue_credit_weight').each(function(){
-		  total_issue_weight += parseFloat($(this).val()); 
+function calculate_refresh_total_weight() {
+  var total_weight=0;
+  if($('input[name*="refresh[weight]"]').length>0) {
+    var total_weight=0;
+    var weight = $(".weight").val();
+    if(isNaN(weight)) weight=0; 
+    console.log(weight+'weight');
+
+    $('.refresh_weight').each(function(){
+      total_weight += parseFloat($(this).val()); 
+    });
+    
+    if(isNaN(total_weight)) total_weight=0;
+    total_weight=parseFloat(total_weight);
+    if(isNaN(total_weight)) total_weight=0;
+    $('input[name*="refresh[weight]"]').val(total_weight.toFixed(4));
+  }
+}
+function calculate_refresh_total_fine() {
+	var total_fine=0;
+	if($('input[name*="refresh[fine]"]').length>0) {
+		var total_weight=0;
+		var fine = $(".fine").val();
+		if(isNaN(fine)) fine=0;	
+		console.log(fine+'fine');
+
+		$('.refresh_fine').each(function(){
+		  total_fine += parseFloat($(this).val()); 
 		});
 		
-		if(isNaN(total_issue_weight)) total_issue_weight=0;
-		total_weight=parseFloat(receipt_weight) - parseFloat(total_issue_weight);
-		if(isNaN(total_weight)) total_weight=0;
-		$("#arg_weight").val(total_weight.toFixed(4));
+		if(isNaN(total_fine)) total_fine=0;
+		total_fine=parseFloat(total_fine);
+		if(isNaN(total_fine)) total_fine=0;
+		$('input[name*="refresh[fine]"]').val(total_fine.toFixed(4));
 	}
 }
 
@@ -236,6 +270,10 @@ function delete_opening_stock_voucher(index){
 function delete_approval_voucher(index){
   $("input[name*='table_approval_voucher["+index+"][delete]']").val(1);
   $("tr.table_approval_voucher_"+index).remove();
+}
+function delete_refresh(index){
+  $("input[name*='table_refresh["+index+"][delete]']").val(1);
+  $("tr.table_refresh_details_"+index).remove();
 }
 
 $(document).on("change", ".gross_weight", function() {
