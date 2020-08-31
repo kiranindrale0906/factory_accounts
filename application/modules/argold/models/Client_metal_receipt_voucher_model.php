@@ -210,6 +210,14 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     if (ENABLE_API_FOR_RECEIPT && $this->attributes['receipt_type'] != 'Internal')
       $this->send_request_to_argold($this->formdata);
     $this->create_metal_issue_vouchers();
+    $this->_add_metal_receipt_id_in_refresh_data();
+  }
+  private function _add_metal_receipt_id_in_refresh_data() {
+      $data = array('metal_receipt_id' => $this->attributes['id'],
+                    'id'       => $this->formdata['refresh_id']);
+        $refresh_data = new refresh_model($data);
+        $refresh_data->save();
+
   }
 
   private function create_metal_issue_vouchers() {

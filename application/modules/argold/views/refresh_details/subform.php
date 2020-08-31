@@ -4,15 +4,42 @@
                                          'controller' => 'refresh_details',
                                          'class' => 'refresh_weight',
                                          'id' => 'refesh_weight_'.$index,
+                                         'index' => $index,
+                                         'grid'=> 'col-sm-12')); ?>
+  </td>
+  <td>
+    <?php load_field('plain/text', array('field' => 'purity',
+                                         'controller' => 'refresh_details',
+                                         'class' => 'refresh_purity',
+                                         'id' => 'refresh_purity_'.$index,
                                          'onkeyup' => 'calculate_refresh_purity('.$index.')',
                                          'index' => $index,
                                          'grid'=> 'col-sm-12')); ?>
   </td>
+  
   <td>
     <?php load_field('plain/text', array('field' => 'fine',
                                          'controller' => 'refresh_details',
                                          'class' => 'refresh_fine',
                                          'id' => 'refesh_fine_'.$index,
+                                         'index' => $index,
+                                         'readonly'=>'readonly',
+                                         'grid'=> 'col-sm-12')); ?>
+  </td>
+  <td>
+    <?php load_field('plain/text', array('field' => 'factory_purity',
+                                         'controller' => 'refresh_details',
+                                         'class' => 'refresh_factory_purity',
+                                         'id' => 'refresh_factory_purity_'.$index,
+                                         'onkeyup' => 'calculate_refresh_factory_purity('.$index.')',
+                                         'index' => $index,
+                                         'grid'=> 'col-sm-12')); ?>
+  </td>
+  <td>
+    <?php load_field('plain/text', array('field' => 'factory_fine',
+                                         'controller' => 'refresh_details',
+                                         'class' => 'refresh_factory_fine',
+                                         'id' => 'refesh_factory_fine_'.$index,
                                          'index' => $index,
                                          'readonly'=>'readonly',
                                          'grid'=> 'col-sm-12')); ?>

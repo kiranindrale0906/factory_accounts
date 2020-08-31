@@ -17,8 +17,8 @@ class Migration_add_refresh_table_in_transaction extends CI_Model {
 											  `updated_by` int(11) NOT NULL,
 											  `is_delete` tinyint(4) NOT NULL
 											) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
-    $this->db->query("ALTER TABLE `refresh`
-  ADD PRIMARY KEY (`id`);");
+    $this->db->query("ALTER TABLE `refresh` ADD PRIMARY KEY (`id`);");
+    $this->db->query("ALTER TABLE `refresh` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;");
   }
 
 

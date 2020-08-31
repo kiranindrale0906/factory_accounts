@@ -29,6 +29,7 @@
     if ($action == 'edit' || $action == 'update'): 
       load_field('hidden', array('field' => 'id'));
     endif;
+      load_field('hidden', array('field' => 'refresh_id','name'=>'refresh_id','id'=>'refresh_id','value'=>$refresh_id));
   ?>
 
   <?php load_view('ac_vouchers/ac_vouchers/fields/sales_voucher_number');
