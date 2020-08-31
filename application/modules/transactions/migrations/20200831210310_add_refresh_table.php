@@ -6,7 +6,6 @@ class Migration_add_refresh_table extends CI_Model {
 
   public function up()
   {
-  	$this->db->query("drop table refresh");
   	$this->db->query("drop table refresh_details");
     $this->db->query("CREATE TABLE IF NOT EXISTS `refresh` (
 						  `id` int(11) NOT NULL AUTO_INCREMENT,
