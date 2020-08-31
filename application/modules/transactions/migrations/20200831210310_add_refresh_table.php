@@ -11,7 +11,6 @@ class Migration_add_refresh_table extends CI_Model {
     $this->db->query("CREATE TABLE IF NOT EXISTS `refresh` (
 						  `id` int(11) NOT NULL AUTO_INCREMENT,
 						  `weight` decimal(16,8) NOT NULL,
-						  `fine` decimal(16,8) NOT NULL,
 						  `factory_fine` decimal(16,8) NOT NULL,
 						  `fine` decimal(16,8) NOT NULL,
 						  `purity` decimal(16,8) NOT NULL,
@@ -29,7 +28,6 @@ class Migration_add_refresh_table extends CI_Model {
 						  `weight` decimal(16,8) NOT NULL,
 						  `fine` decimal(16,8) NOT NULL,
 						  `factory_fine` decimal(16,8) NOT NULL,
-						  `fine` decimal(16,8) NOT NULL,
 						  `purity` decimal(16,8) NOT NULL,
 						  `factory_purity` decimal(16,8) NOT NULL,
 						  `created_by` int(11) NOT NULL,
