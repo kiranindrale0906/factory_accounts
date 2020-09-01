@@ -11,6 +11,7 @@
         <th>Fine</th>
         <th>Factory Purity</th>
         <th>Factory Fine</th>
+        <th>Item Name</th>
         <th></th>
       </tr>
     </thead>
