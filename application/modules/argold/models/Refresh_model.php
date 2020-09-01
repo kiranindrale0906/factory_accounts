@@ -21,7 +21,7 @@ class Refresh_model extends BaseModel {
     $this->attributes['fine']=$total_fine;
     $this->attributes['factory_fine']=$total_factory_fine;
     $this->attributes['purity']=($total_fine/$total_weight)*100;
-    $this->attributes['factory_purity']=($total_factory_fine/$total_weight)*100;
+    $this->attributes['factory_purity']=($total_factory_fine/$total_weight)*100; 
   }
   public function after_save($action) {
     parent::after_save($action);

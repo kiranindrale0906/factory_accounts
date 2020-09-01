@@ -90,10 +90,15 @@ function get_row_actions($row, $url, $select_url, $filter) {
                            'class' => 'green');
   if($row['metal_receipt_id']==0){
 
-  $actions["Create metal receipt"] = array('request' => "http", 
+    $actions["Create metal receipt"] = array('request' => "http", 
                            'url' => ADMIN_PATH.'transactions/metal_receipt_vouchers?refresh_id='.$row['id'],
                            'confirm_message' => "",
                            'class' => 'orange');
+  }else{
+    $actions["Metal receipt view"] = array('request' => "http", 
+                           'url' => ADMIN_PATH.'argold/voucher_details/view/'.$row['metal_receipt_id'],
+                           'confirm_message' => "",
+                           'class' => 'red');
   }
 
   // $actions["Delete"] = array('request' => "http",

@@ -29,3 +29,11 @@
 <?php
   $this->load->view('voucher_details/viewlist');
 ?>
+<?php  if(!empty($refresh_details)){?>
+<hr class="">
+<h6 class="heading ">Refresh Details</h6>
+<?php
+  $this->load->view('voucher_details/refresh_viewlist');
+}
+?>
+

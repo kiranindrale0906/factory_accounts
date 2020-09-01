@@ -1,36 +1,3 @@
-<hr>
-<h6 class ='blue'>Metal Receipt Details</h6>
-<?php if($refresh['metal_receipt_id']==0){?>
-<div class="row text-right">
-  <div class="col-md-12">
-  <a href="<?=ADMIN_PATH.'transactions/metal_receipt_vouchers?refresh_id='.$refresh['id']?>" class='btn bg_blue white'>create metal receipt</a>
-  </div>
-</div>
-<?php }?>
-<div class="row">
-<div class="col-md-6 ">
-    <div class="form-group container">
-      <p><h6>AC Name :<?=$metal_receipt_details['account_name']?> </h6></p>
-      <p><h6>Voucher No :<?=$metal_receipt_details['voucher_number']?> </h6></p>
-      <p><h6>Item Name :<?=$metal_receipt_details['narration']?> </h6></p>
-      <p><h6>Receipt Type :<?=$metal_receipt_details['receipt_type']?></h6></p>
-    </div>
-  </div>
-
-  <div class="col-md-6">
-    
-    <div class="form-group container">
-      <p><h6>Debit Weight :<?=$metal_receipt_details['debit_weight']?></h6></p>
-      <p><h6>Purity :<?=$metal_receipt_details['purity']?></h6></p>
-      <p><h6>Fine :<?=$metal_receipt_details['fine']?></h6></p>
-      <p><h6>Factory Purity :<?=$metal_receipt_details['factory_purity']?></h6></p>
-      <p><h6>Factory Fine :<?=$metal_receipt_details['factory_fine']?></h6></p>
-      <p><h6>Metal Receipt Date : <?=date('d-m-Y',strtotime($metal_receipt_details['created_at']))?></h6></p>
-    </div>
-  </div>
-  
-</div>
-<h6 class ='blue'>Refresh Details</h6>
 <div class="table-responsive">
   <table class="table table-sm table-default">
     <thead>
@@ -46,7 +13,6 @@
     </thead>
     <tbody>
     <?php 
-    if(!empty($refresh_details)){
       $sum_weight=$sum_fine=$sum_factory_fine=0;
      foreach ($refresh_details as $index => $refresh_detail) {
       $sum_weight+=$refresh_detail['weight'];
@@ -74,7 +40,6 @@
     <td class="text-right"></td>
     <td class="text-right"><?=four_decimal($sum_factory_fine);?></td>
   </tr>
-   <?php } ?>
     </tbody>
   </table>
 </div>
