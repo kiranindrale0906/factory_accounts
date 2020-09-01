@@ -7,11 +7,13 @@ if($this->router->class=='metal_issue_vouchers'){
                              'option'=>$chain_purity)); 
   endif; 
 }else{
-	if(!empty(get_field_attribute($this->router->class,'purity'))) :
+  if(!empty(get_field_attribute($this->router->class,'purity'))) :
+  $data['readonly']=!empty($refresh_id)?'readonly':'';
     load_field('text', array('field' => 'purity',
                              'class' => 'autocomplete_list_selection purity',
                              'data-table'=>'ac_purity',
                              'data-column'=>'purity', 
+                             'readonlyinput'=>$data['readonly'],  
                              'data-list-title'=>'Purity')); 
   endif;
 

@@ -6,7 +6,7 @@ class Voucher_details extends BaseController {
   public function __construct() {
     parent::__construct();
     $this->redirect_after_save = 'view';
-    $this->load->model(array('ac_vouchers/voucher_model','masters/account_model','masters/narration_model'));
+    $this->load->model(array('ac_vouchers/voucher_model','masters/account_model','argold/refresh_model','argold/refresh_detail_model','masters/narration_model'));
   }
 
   public function _get_view_data() {
@@ -14,5 +14,8 @@ class Voucher_details extends BaseController {
     $this->data['account_id']='';
     $this->data['metal_vouchers'] = $this->voucher_model->get('',array('id'=>$this->data['record']['id']));
     $this->data['metal_voucher_details'] = $this->voucher_model->get('',array('metal_receipt_voucher_reference_id'=>$this->data['record']['id']));
+
+    $this->data['refresh'] = $this->refresh_model->find('',array('metal_receipt_id'=>$this->data['record']['id']));
+    $this->data['refresh_details'] = $this->refresh_detail_model->get('',array('refresh_id'=>$this->data['refresh']['id']));
   }
 }

@@ -52,10 +52,11 @@ class Voucher_model extends BaseModel {
                                  ),
                  'errors' => array('purity_error_msg'=>'Purity not exist in Purity master.'));
   }
+
   protected function get_account_validation_rules() {
     return array('field' => $this->router_class.'[account_name]', 'label' => 'Account Name',
                      'rules' => 'trim|required');
-    }
+  }
 
   protected function get_factory_purity_validation_rules() {
     return array('field' => $this->router_class.'[factory_purity]', 'label' => 'Purity',
@@ -82,10 +83,15 @@ class Voucher_model extends BaseModel {
     return array('field' => $this->router_class.'[credit_amount]', 
                  'label' => 'Credit Amount',
                  'rules' => 'trim|required|numeric|greater_than[0]');
+  }protected function get_debit_amount_validation_rules() {
+    return array('field' => $this->router_class.'[debit_amount]', 
+                 'label' => 'Debit Amount',
+                 'rules' => 'trim|required|numeric|greater_than[0]');
   }
+
   protected function get_narration_validation_rules() {
     return array('field' => $this->router_class.'[narration]', 
-                 'label' => 'Narration',
+                 'label' => 'Item Name',
                  'rules' => 'trim|required');
   }
 

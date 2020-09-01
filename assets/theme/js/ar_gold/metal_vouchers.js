@@ -1,6 +1,11 @@
 $('select[name*="metal_receipt_vouchers[receipt_type]"]').on('change', function() {
     var receipt_type = $(this).val(); 
-    window.location = base_url+ 'transactions/metal_receipt_vouchers?receipt_type='+receipt_type;  
+    refresh_id='';
+    var refresh_id = $('#refresh_id').val(); 
+    if(refresh_id!=''){
+      refresh_id='&refresh_id='+refresh_id;
+    }
+    window.location = base_url+ 'transactions/metal_receipt_vouchers?receipt_type='+receipt_type+refresh_id;  
   })
 // $('select[name*="metal_issue_vouchers[receipt_type]"]').on('change', function() {
 //     var receipt_type = $(this).val(); 
@@ -23,6 +28,18 @@ function check_metal_issue_all_checkboxes() {
     $(this).prop("checked", true);
   });
 }
+
+// function calculate_taxable_amount(index) {
+//   alert(index);
+//   // var rate=$("#rate_"+index).val();
+//   // var quantity = $("#quantity_"+index).val();
+//   // if(isNaN(rate)) rate=0;
+//   // if(isNaN(quantity) || quantity==undefined ) quantity=0;
+//   // var amount = parseFloat(rate) * parseFloat(quantity);
+//   // if(isNaN(amount)) amount=0;
+//   // $("#taxable_amount_"+index).val(fine.toFixed(4));
+//   // calculate_total_taxable_amount();
+// }
 
 
 function calculate_metal_issue_purity() {

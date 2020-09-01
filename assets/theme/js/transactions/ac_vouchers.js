@@ -71,34 +71,35 @@ function calculate_fine_factory_fine(purity=0) {
 
 
 function calculate_factory_purity(index) {
-	var credit_wt=$("#credit_weight_"+index).val();
-	var factory_purity = $("#factory_purity_"+index).val();
-	if(isNaN(credit_wt)) credit_wt=0;
-	if(isNaN(factory_purity) || factory_purity==undefined ) factory_purity=0;
-	var fine = parseFloat(credit_wt) * parseFloat(factory_purity)/100;
-	if(isNaN(fine)) fine=0;
-	$("#factory_fine_"+index).val(fine.toFixed(4));
-	calculate_arg_weight();
+  var credit_wt=$("#credit_weight_"+index).val();
+  var factory_purity = $("#factory_purity_"+index).val();
+  if(isNaN(credit_wt)) credit_wt=0;
+  if(isNaN(factory_purity) || factory_purity==undefined ) factory_purity=0;
+  var fine = parseFloat(credit_wt) * parseFloat(factory_purity)/100;
+  if(isNaN(fine)) fine=0;
+  $("#factory_fine_"+index).val(fine.toFixed(4));
+  calculate_arg_weight();
 }
 
 function calculate_arg_weight() {
-	var total_weight=0;
-	if($("#arg_weight").length>0) {
-		var total_issue_weight=0;
-		var receipt_weight = $(".debit_weight").val();
-		if(isNaN(receipt_weight)) receipt_weight=0;	
-		console.log(receipt_weight+'receipt_weight');
+  var total_weight=0;
+  if($("#arg_weight").length>0) {
+    var total_issue_weight=0;
+    var receipt_weight = $(".debit_weight").val();
+    if(isNaN(receipt_weight)) receipt_weight=0; 
+    console.log(receipt_weight+'receipt_weight');
 
-		$('.issue_credit_weight').each(function(){
-		  total_issue_weight += parseFloat($(this).val()); 
-		});
-		
-		if(isNaN(total_issue_weight)) total_issue_weight=0;
-		total_weight=parseFloat(receipt_weight) - parseFloat(total_issue_weight);
-		if(isNaN(total_weight)) total_weight=0;
-		$("#arg_weight").val(total_weight.toFixed(4));
-	}
+    $('.issue_credit_weight').each(function(){
+      total_issue_weight += parseFloat($(this).val()); 
+    });
+    
+    if(isNaN(total_issue_weight)) total_issue_weight=0;
+    total_weight=parseFloat(receipt_weight) - parseFloat(total_issue_weight);
+    if(isNaN(total_weight)) total_weight=0;
+    $("#arg_weight").val(total_weight.toFixed(4));
+  }
 }
+
 
 function calculate_rate_cut_purchase_price_issue_vouchers() {
     var gold_rate = $('input[name*="rate_cut_purchase_price_issue_vouchers[gold_rate]"]').val();
@@ -236,6 +237,10 @@ function delete_opening_stock_voucher(index){
 function delete_approval_voucher(index){
   $("input[name*='table_approval_voucher["+index+"][delete]']").val(1);
   $("tr.table_approval_voucher_"+index).remove();
+}
+function delete_refresh(index){
+  $("input[name*='table_refresh["+index+"][delete]']").val(1);
+  $("tr.table_refresh_details_"+index).remove();
 }
 
 $(document).on("change", ".gross_weight", function() {

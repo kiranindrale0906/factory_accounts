@@ -11,13 +11,20 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   public function validation_rules($klass='') {
     $rules = parent::validation_rules($klass);
     if (!empty($this->attributes['receipt_type']) 
-        && ($this->attributes['receipt_type'] !='ARC Finished Goods' 
-           || $this->attributes['receipt_type'] !='ARF Finished Goods'
-           || $this->attributes['receipt_type'] !='AR Gold Finished Goods'
-           || $this->attributes['receipt_type'] !='ARF Software Finished Goods')) {
+        && (  $this->attributes['receipt_type'] != 'ARC Finished Goods' 
+           || $this->attributes['receipt_type'] != 'ARF Finished Goods'
+           || $this->attributes['receipt_type'] != 'AR Gold Finished Goods'
+           || $this->attributes['receipt_type'] != 'ARF Software Finished Goods')) {
       $rules[] = $this->get_account_validation_rules();
     // $rules[] = $this->get_factory_purity_validation_rules();
     }
+
+    if (in_array($this->attributes['receipt_type'], array('AR Gold Finished Goods Receipt',
+                                                          'ARF Finished Goods Receipt',
+                                                          'ARC Finished Goods Receipt'))) {
+      $rules[] = $this->get_narration_validation_rules();
+    }
+
     $rules[] = $this->get_receipt_type_validation_rules();
 
     // if (!empty($this->formdata['metal_issue_vouchers'])) {
@@ -56,11 +63,11 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     }
   }
 
-  private function set_factory_purity_from_receipt_type_for_metal_and_finihed_goods() {
+  private function set_factory_purity_from_receipt_type_for_metal_and_finished_goods_and_chain_receipt() {
     if (in_array($this->attributes['receipt_type'], array('Metal', 
-                                                          'AR Gold Finished Goods', 
-                                                          'ARF Finished Goods', 'ARF Software Finished Goods',
-                                                          'ARC Finished Goods'))) {
+                                                          'AR Gold Finished Goods', 'AR Gold Chain Receipt', 'AR Gold Finished Goods Receipt', 
+                                                          'ARF Finished Goods', 'ARF Software Finished Goods', 'ARF Chain Receipt', 'ARF Finished Goods Receipt', 
+                                                          'ARC Finished Goods', 'ARC Chain Receipt', 'ARC Finished Goods Receipt'))) {
       $this->formdata['metal_receipt_vouchers']['factory_purity'] = $this->attributes['purity'];
     }
   }
@@ -70,7 +77,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   }
 
   private function set_metal_issue_voucher_attributes_from_receipt_type_for_finished_goods() {
-    if ($this->attributes['receipt_type'] == "AR Gold Finished Goods"
+    if (   $this->attributes['receipt_type'] == "AR Gold Finished Goods"
         || $this->attributes['receipt_type'] == "ARF Finished Goods"
         || $this->attributes['receipt_type'] == "ARF Software Finished Goods"
         || $this->attributes['receipt_type'] == "ARC Finished Goods") {
@@ -82,16 +89,28 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     }
   }
   
-  private function set_metal_issue_voucher_attributes_from_receipt_type_for_refresh() {
-    if ($this->attributes['receipt_type'] == 'AR Gold Refresh'
-        || $this->attributes['receipt_type'] == "ARF Refresh"
-        || $this->attributes['receipt_type'] == "ARC Refresh") {
+  private function set_metal_issue_voucher_attributes_from_receipt_type_for_refresh_and_chain_receipt() {
+    if (   $this->attributes['receipt_type'] == 'AR Gold Refresh'
+        || $this->attributes['receipt_type'] == 'AR Gold Chain Receipt'
+        || $this->attributes['receipt_type'] == 'AR Gold Finished Goods Receipt'
+        || $this->attributes['receipt_type'] == 'ARF Refresh'
+        || $this->attributes['receipt_type'] == 'ARF Chain Receipt'
+        || $this->attributes['receipt_type'] == 'ARF Finished Goods Receipt'
+        || $this->attributes['receipt_type'] == 'ARC Refresh'
+        || $this->attributes['receipt_type'] == 'ARC Chain Receipt'
+        || $this->attributes['receipt_type'] == 'ARC Finished Goods Receipt') {
       unset($this->formdata['metal_issue_vouchers']);
       
       if ($this->attributes['receipt_type'] == "AR Gold Refresh") return;
+      if ($this->attributes['receipt_type'] == "AR Gold Chain Receipt") return;
+      if ($this->attributes['receipt_type'] == "AR Gold Finished Goods Receipt") return;
 
-      if ($this->attributes['receipt_type'] == 'ARF Refresh') $account_name = 'ARF';
-      if ($this->attributes['receipt_type'] == 'ARC Refresh') $account_name = 'ARC';
+      if ($this->attributes['receipt_type'] == 'ARF Refresh')       $account_name = 'ARF';
+      if ($this->attributes['receipt_type'] == 'ARF Chain Receipt') $account_name = 'ARF Software';
+      if ($this->attributes['receipt_type'] == 'ARF Finished Goods Receipt') $account_name = 'ARF Software';
+      if ($this->attributes['receipt_type'] == 'ARC Refresh')       $account_name = 'ARC';
+      if ($this->attributes['receipt_type'] == 'ARC Chain Receipt') $account_name = 'ARC Software';
+      if ($this->attributes['receipt_type'] == 'ARC Finished Goods Receipt') $account_name = 'ARF Software';
       
       $this->formdata['metal_issue_vouchers'] = array(array('account_name' => $account_name,
                                                             'credit_weight' => $this->attributes['debit_weight'],
@@ -100,10 +119,16 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     }
   }
 
-  private function set_metal_issue_voucher_attributes_from_receipt_type_for_metal() {
+  private function set_metal_issue_voucher_attributes_from_receipt_type_for_metal_and_chain_receipt() {
     if (isset($this->formdata['metal_issue_vouchers'])) {
       foreach ($this->formdata['metal_issue_vouchers'] as $index => $metal_issue_voucher) {
-        if ($this->attributes['receipt_type'] == 'Metal') {
+        if (   $this->attributes['receipt_type'] == 'Metal'
+            || $this->attributes['receipt_type'] == 'AR Gold Chain Receipt'
+            || $this->attributes['receipt_type'] == 'ARF Chain Receipt'
+            || $this->attributes['receipt_type'] == 'ARC Chain Receipt'
+            || $this->attributes['receipt_type'] == 'AR Gold Finished Goods Receipt'
+            || $this->attributes['receipt_type'] == 'ARF Finished Goods Receipt'
+            || $this->attributes['receipt_type'] == 'ARC Finished Goods Receipt') {
           $this->formdata['metal_issue_vouchers'][$index]['purity'] = $this->attributes['purity'];
           $this->formdata['metal_issue_vouchers'][$index]['factory_purity'] = $this->attributes['purity'];
           $this->formdata['metal_issue_vouchers'][$index]['factory_fine'] =$metal_issue_voucher['credit_weight']* $this->attributes['purity']/100;
@@ -113,8 +138,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   }
 
   private function set_metal_issue_voucher_attributes_for_alloy_vadotar_and_gpc_vadotar() {
-    if (($this->attributes['account_name'] == "Alloy Vodator" && $this->attributes['narration'] == "ARF Alloy Vodator")
-         || ($this->attributes['account_name'] == "GPC Vodator" && $this->attributes['narration'] == "ARF GPC Vodator"))  {
+    if (    ($this->attributes['account_name'] == "Alloy Vodator" && $this->attributes['narration'] == "ARF Alloy Vodator")
+         || ($this->attributes['account_name'] == "GPC Vodator"   && $this->attributes['narration'] == "ARF GPC Vodator")) {
       unset($this->formdata['metal_issue_vouchers']);
       $this->formdata['metal_issue_vouchers'] = array(array('account_name' => 'ARF Software',
                                                             'credit_weight' => $this->attributes['debit_weight'],
@@ -161,13 +186,13 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
   public function before_validate() {
     $this->set_account_name_from_receipt_type();
-    $this->set_factory_purity_from_receipt_type_for_metal_and_finihed_goods();
+    $this->set_factory_purity_from_receipt_type_for_metal_and_finished_goods_and_chain_receipt();
     $this->set_metal_receipt_attributes_from_receipt_type_for_vadotar();
     $this->set_metal_receipt_attributes();
 
     $this->set_metal_issue_voucher_attributes_from_receipt_type_for_finished_goods();
-    $this->set_metal_issue_voucher_attributes_from_receipt_type_for_refresh();
-    $this->set_metal_issue_voucher_attributes_from_receipt_type_for_metal();
+    $this->set_metal_issue_voucher_attributes_from_receipt_type_for_refresh_and_chain_receipt();
+    $this->set_metal_issue_voucher_attributes_from_receipt_type_for_metal_and_chain_receipt();
     $this->set_metal_issue_voucher_attributes_for_alloy_vadotar_and_gpc_vadotar();
     $this->set_metal_issue_voucher_attributes_from_receipt_type_for_vadotar(); 
 
@@ -177,6 +202,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
   public function before_save($action) {
     $this->attributes['fine'] = $this->attributes['debit_weight'] * $this->attributes['purity'] / 100;
+    $this->attributes['factory_fine'] = $this->attributes['debit_weight'] * $this->attributes['factory_purity'] / 100;
     parent::before_save($action);
   }
   
@@ -185,6 +211,14 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     if (ENABLE_API_FOR_RECEIPT && $this->attributes['receipt_type'] != 'Internal')
       $this->send_request_to_argold($this->formdata);
     $this->create_metal_issue_vouchers();
+    $this->_add_metal_receipt_id_in_refresh_data();
+  }
+  private function _add_metal_receipt_id_in_refresh_data() {
+      $data = array('metal_receipt_id' => $this->attributes['id'],
+                    'id'       => $this->formdata['refresh_id']);
+        $refresh_data = new refresh_model($data);
+        $refresh_data->save();
+
   }
 
   private function create_metal_issue_vouchers() {
@@ -230,39 +264,39 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       }
     }
     $in_weight = $data['debit_weight'] - $credit_weight;
-    if ($in_weight == 0 && $data['receipt_type'] != "ARF Refresh") return true;
+    if ($in_weight == 0) return true;
     
     $api_data = array('account'=> $data['account_name'].' (accounts)',
-                      'in_weight' => ($data['receipt_type'] != "ARF Refresh") ? $in_weight : $data['debit_weight'],
+                      'in_weight' => $in_weight,
                       'in_lot_purity' => @$data['factory_purity'],
-                      'description' =>$data['narration'],
+                      'description' => $data['narration'],
                       'argold_account_id'=>$data['id']);
     $send_data=array();
 
-    if ($data['receipt_type'] == "Metal") {
+    if ($data['receipt_type'] == 'Metal') {
       $api_data = array_merge($api_data, array('type' => 'Pure',
                                                'process_name' => 'Receipt'));
       $send_data['receipt_departments'] = $api_data;
-      $api_url=API_BASE_PATH."api/api_receipt_departments/store";   
-    } else if($data['receipt_type'] == "AR Gold Refresh") {
-      $api_data = array_merge($api_data, array('type'=>'Pure',
-                                               'hook_kdm_purity' => $data['factory_purity'],
-                                               'process_name'=>'Refresh'));
-      $send_data['refresh_departments'] = $api_data;
-      $api_url=API_BASE_PATH."api/api_refresh_departments/store";   
-    // } else if($data['receipt_type'] == "ARF Refresh") {
-    //   $api_data = array_merge($api_data, array('type'=>'Pure',
-    //                                            'quantity' => 1,
-    //                                            'hook_kdm_purity' => $data['factory_purity'],
-    //                                            'process_name'=>'Refresh'));
-    //   $send_data['refresh_departments'] = $api_data;
-    //   $api_url=ARF_API_BASE_PATH."api/api_refresh_departments/store";   
+      $api_url=API_BASE_PATH."api/api_receipt_departments/store";
     } else if($data['receipt_type']=="Daily Drawer") {
       $api_data = array_merge($api_data, array('type'=>$data['dd_type'],
                                                'balance' => $in_weight,
                                                'karigar'=> 'Factory'));
       $send_data['daily_drawer_receipts'] = $api_data;
-      $api_url=API_BASE_PATH."api/api_daily_drawer_receipts/store";   
+      $api_url=API_BASE_PATH."api/api_daily_drawer_receipts/store";
+    } else if($data['receipt_type'] == "AR Gold Refresh") {
+      $api_data = array_merge($api_data, array('type'=>'Pure',
+                                               'hook_kdm_purity' => $data['factory_purity'],
+                                               'process_name'=>'Refresh'));
+      $send_data['refresh_departments'] = $api_data;
+      $api_url=API_BASE_PATH."api/api_refresh_departments/store";
+    } elseif ($data['receipt_type'] == "AR Gold Chain Receipt") {
+      $api_data = array_merge($api_data, array('type' => 'Solid Machine Chain'));
+      $send_data['receipt_departments'] = $api_data;
+      $api_url=API_BASE_PATH."api/api_chain_receipts/store";
+    } elseif ($data['receipt_type'] == "AR Gold Finished Goods Receipt") {
+      $send_data['finished_goods_receipts'] = $api_data;
+      $api_url=API_BASE_PATH."api/finished_goods_receipts/store";      
     }
     if (empty($api_url)) return true;
 
@@ -284,15 +318,21 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                       'argold_account_id' => $attributes['id']);
     $send_data=array();
 
-    if ($attributes['receipt_type'] == "Metal") {
+    if ($attributes['receipt_type'] == 'Metal') {
       $api_data = array_merge($api_data, array('type' => 'Pure',
                                                'process_name' => 'Receipt'));
       $send_data['receipt_departments'] = $api_data;
-      $api_url=ARF_API_BASE_PATH."api/api_receipt_departments/store";   
-    }
+      $api_url=ARF_API_BASE_PATH."api/api_receipt_departments/store";
+    } elseif ($attributes['receipt_type'] == 'ARF Chain Receipt') {
+      $api_data = array_merge($api_data, array('type' => 'Solid Machine Chain'));
+      $send_data['chain_receipts'] = $api_data;
+      $api_url=ARF_API_BASE_PATH."api/api_chain_receipts/store";
+    } elseif ($attributes['receipt_type'] == 'ARF Finished Goods Receipt') {
+      $send_data['finished_goods_receipts'] = $api_data;
+      $api_url=ARF_API_BASE_PATH."api/api_finished_goods_receipts/store";
+    } 
 
     if (empty($api_url)) return true;
-
     $result = curl_post_request($api_url, $send_data);
     if(empty($result) || (!empty($result['status']) && $result['status']=="error")) {
       $api_data = array_merge($api_data, array('api_url'=>$api_url));
