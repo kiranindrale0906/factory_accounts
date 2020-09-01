@@ -12,7 +12,7 @@ function getTableSettings() {
     'where_ids'           => '',
     'order_by'            => 'id desc',
     'limit'               => "20",
-    'extra_select_column' => 'id',
+    'extra_select_column' => 'id,metal_receipt_id',
     'actionFunction'      => '',
     'headingFunction'     => 'list_settings',
     'search_url'          => 'refresh',
@@ -41,6 +41,8 @@ function list_settings() {
     array("Weight", "weight", FALSE, "weight", FALSE, FALSE),
     array("Purity", "purity", FALSE, "purity", FALSE, FALSE),
     array("Fine", "fine", FALSE, "fine", FALSE, FALSE),
+    array("Factory Purity", "factory_purity", FALSE, "factory_purity", FALSE, FALSE),
+    array("Factory Fine", "factory_fine", FALSE, "fine", FALSE, FALSE),
     array("Action", "action", FALSE, "action", FALSE, FALSE),
   );
 }
@@ -62,14 +64,18 @@ function get_field_attribute($table, $field) {
   $attributes['refresh'] = array(
     'id'            => array('', '', TRUE, '', TRUE),
     'weight'            => array('Weight', '', TRUE, '', TRUE),
-    'fine'          => array('Fine', 'Fine', TRUE, '', TRUE),
-    'purity'          => array('Purity', 'Select Purity.', TRUE, '', TRUE),
+    'fine'          => array('Fine', '', TRUE, '', TRUE),
+    'factory_fine'          => array('Factory Fine', '', TRUE, '', TRUE),
+    'purity'          => array('Purity', '', TRUE, '', TRUE),
+    'factory_purity'          => array('Factory Purity', '', TRUE, '', TRUE),
    );
   $attributes['refresh_details'] = array(
     'refresh_id' => array('', '', TRUE, '', TRUE),
     'weight' => array('', '', TRUE, '', TRUE),
     'fine' => array('', '', TRUE, '', TRUE),
+    'factory_fine' => array('', '', TRUE, '', TRUE),
     'purity' => array('', '', TRUE, '', TRUE),
+    'factory_purity' => array('', '', TRUE, '', TRUE),
   );
  
   return $attributes[$table][$field];
@@ -81,7 +87,19 @@ function get_row_actions($row, $url, $select_url, $filter) {
   $actions["View"] = array('request' => "http", 
                            'url' => ADMIN_PATH.$controller.'/view/'.$row['id'],
                            'confirm_message' => "",
-                           'class' => 'btn-sm btn_green');
+                           'class' => 'green');
+  if($row['metal_receipt_id']==0){
+
+    $actions["Create metal receipt"] = array('request' => "http", 
+                           'url' => ADMIN_PATH.'transactions/metal_receipt_vouchers?refresh_id='.$row['id'],
+                           'confirm_message' => "",
+                           'class' => 'orange');
+  }else{
+    $actions["Metal receipt view"] = array('request' => "http", 
+                           'url' => ADMIN_PATH.'argold/voucher_details/view/'.$row['metal_receipt_id'],
+                           'confirm_message' => "",
+                           'class' => 'red');
+  }
 
   // $actions["Delete"] = array('request' => "http",
   //                              'url' => ADMIN_PATH.$controller.'/delete/'.$row['id'],

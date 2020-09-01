@@ -9,6 +9,7 @@ class Client_metal_receipt_vouchers extends Core_metal_receipt_vouchers {
 
   public function _get_form_data() {
     $company_name = $this->company_model->find('name', array('id' => $_SESSION['company_id']))['name'];
+    $re = $this->company_model->find('name', array('id' => $_SESSION['company_id']))['name'];
   	$this->data['account_names_for_metal_issue'] = array(array('id' => '', 'name' => ''));
 
     //if ($company_name != 'AR Gold')
@@ -25,6 +26,20 @@ class Client_metal_receipt_vouchers extends Core_metal_receipt_vouchers {
     //$this->data['account_names_for_metal_issue'][] = array('id' => 'ARF Finished Goods', 'name' => 'ARF Finished Goods');   
 
     $this->data['record']['receipt_type']=!empty($_GET['receipt_type'])?$_GET['receipt_type']:"";
+    $this->data['refresh_id']=!empty($_GET['refresh_id'])?$_GET['refresh_id']:"";
+    if(!empty($this->data['refresh_id'])){
+      $refresh_data=$this->refresh_model->find('', array('id' => $this->data['refresh_id']));
+      $this->data['record']['debit_weight']=!empty($refresh_data['weight'])?$refresh_data['weight']:"";
+      $this->data['record']['factory_purity']=!empty($refresh_data['factory_purity'])?$refresh_data['factory_purity']:"";
+      $this->data['record']['fine']=!empty($refresh_data['fine'])?$refresh_data['fine']:"";
+      $this->data['record']['purity']=!empty($refresh_data['purity'])?$refresh_data['purity']:"";
+      $this->data['record']['factory_fine']=!empty($refresh_data['factory_fine'])?$refresh_data['factory_fine']:"";
+    }
     parent::_get_form_data(); 
+  }
+  public function _after_save($formdata, $action) {
+
+    $this->data['ajax_success_function'] = 'window.location.replace("'.ADMIN_PATH.'transactions/metal_receipt_vouchers'.'")';
+    return $formdata;
   }
 }

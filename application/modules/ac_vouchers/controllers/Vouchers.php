@@ -6,7 +6,7 @@ class Vouchers extends BaseController {
   public function __construct() {
     parent::__construct();
     $this->load->model(array('masters/account_model', 'transactions/ledger_model', 'masters/group_model',
-                             'masters/company_model','masters/cash_bill_model','masters/narration_model',
+                             'masters/company_model','argold/refresh_model','masters/cash_bill_model','masters/narration_model',
                              'masters/narration_model', 'masters/purity_model','masters/payment_term_model', 'masters/department_category_model','masters/department_model'));
   }
 

@@ -9,9 +9,10 @@
   <?php endif; ?>     
   <div class="row">    
     <?php load_field('text', array('field' => 'weight','readonly'=>'readonly'));?>
-    <?php load_field('dropdown', array('field' => 'purity',
-                             'option'=>$purity));?>
+    <?php load_field('text', array('field' => 'purity','readonly'=>'readonly'));?>
     <?php load_field('text', array('field' => 'fine','readonly'=>'readonly'));?>
+    <?php load_field('text', array('field' => 'factory_purity','readonly'=>'readonly'));?>
+    <?php load_field('text', array('field' => 'factory_fine','readonly'=>'readonly'));?>
   </div>
     <?php $this->load->view('refresh_details/formlist');?>
   <?php load_buttons('submit', array('controller' => $controller, 'name' => 'SAVE' , 'class' => 'btn_blue')) ?>

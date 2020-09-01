@@ -10,6 +10,19 @@ class Refresh_model extends BaseModel {
 		parent::__construct($data);
   }
   
+  public function before_validate() {
+    $total_weight=$total_fine=$total_factory_fine=0;
+    foreach ($this->formdata['refresh_details'] as $refresh_detail) {
+      $total_weight+=$refresh_detail['weight'];
+      $total_fine+=$refresh_detail['fine'];
+      $total_factory_fine+=$refresh_detail['factory_fine'];
+    }
+    $this->attributes['weight']=$total_weight;
+    $this->attributes['fine']=$total_fine;
+    $this->attributes['factory_fine']=$total_factory_fine;
+    $this->attributes['purity']=($total_fine/$total_weight)*100;
+    $this->attributes['factory_purity']=($total_factory_fine/$total_weight)*100; 
+  }
   public function after_save($action) {
     parent::after_save($action);
     $this->create_refresh_details();
@@ -23,7 +36,6 @@ class Refresh_model extends BaseModel {
       $refresh_detail_data = array();
       $refresh_detail_data=$refresh_detail;
       $refresh_detail_data['refresh_id'] = $this->attributes['id'];
-      $refresh_detail_data['purity'] = $this->attributes['purity'];
       $obj_refresh_detail=new refresh_detail_model($refresh_detail_data);
       $obj_refresh_detail->save();
     }

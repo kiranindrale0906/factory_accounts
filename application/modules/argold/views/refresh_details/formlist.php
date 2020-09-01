@@ -7,7 +7,10 @@
     <thead class="bg_gray">
       <tr>
         <th>Weight</th>
+        <th>Purity</th>
         <th>Fine</th>
+        <th>Factory Purity</th>
+        <th>Factory Fine</th>
         <th></th>
       </tr>
     </thead>

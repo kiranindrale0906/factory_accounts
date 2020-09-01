@@ -81,6 +81,25 @@ function calculate_factory_purity(index) {
   calculate_arg_weight();
 }
 
+function calculate_arg_weight() {
+  var total_weight=0;
+  if($("#arg_weight").length>0) {
+    var total_issue_weight=0;
+    var receipt_weight = $(".debit_weight").val();
+    if(isNaN(receipt_weight)) receipt_weight=0; 
+    console.log(receipt_weight+'receipt_weight');
+
+    $('.issue_credit_weight').each(function(){
+      total_issue_weight += parseFloat($(this).val()); 
+    });
+    
+    if(isNaN(total_issue_weight)) total_issue_weight=0;
+    total_weight=parseFloat(receipt_weight) - parseFloat(total_issue_weight);
+    if(isNaN(total_weight)) total_weight=0;
+    $("#arg_weight").val(total_weight.toFixed(4));
+  }
+}
+
 
 function calculate_rate_cut_purchase_price_issue_vouchers() {
     var gold_rate = $('input[name*="rate_cut_purchase_price_issue_vouchers[gold_rate]"]').val();
