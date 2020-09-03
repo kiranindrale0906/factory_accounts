@@ -219,8 +219,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       //               'id'       => $this->formdata['refresh_id']);
       //   $refresh_data = new refresh_model($data);
       //   $refresh_data->save();
-      $this->attributes['metal_receipt_id']=$this->attributes['id'];
-      $refresh_data = new refresh_model($data);
+      $refresh['metal_receipt_id']=$this->attributes['id'];
+      $refresh_data = new refresh_model($refresh);
       $refresh_data->update(false,array('id'=>$this->formdata['refresh_id']));
     }
 
