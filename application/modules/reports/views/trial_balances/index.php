@@ -18,18 +18,20 @@
               
               if(!empty($trial_balance)) {
                 foreach ($trial_balance as $record) {
-                  if (   ($record['fine'] < 0
+                  if (   ($record['fine'] <= 0
                           && $record['account_name'] != 'VADOTAR')
                       || ($record['account_name'] == 'Tounch Loss Fine')) continue;
                   $liabilities_vadotar = $liabilities_vadotar + $record['vadotar'];
-                  $liabilities_fine = $liabilities_fine + $record['fine']; ?>
+                  $liabilities_fine = $liabilities_fine + $record['fine']; 
+                  if(round($record['fine'],2)!=0){
+                  ?>
 
                   <tr>
                     <td><?= $record['account_name']; ?></td>
                     <td class="text-right"><?= four_decimal(($record['fine']), '-'); ?></td>
                     <td class="text-right"><?= four_decimal(($record['vadotar']), '-') ?>  </td>
                   </tr>
-                <?php }
+                <?php }}
               } 
           ?>
           <tr>
