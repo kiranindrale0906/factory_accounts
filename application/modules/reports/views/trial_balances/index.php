@@ -18,7 +18,7 @@
               
               if(!empty($trial_balance)) {
                 foreach ($trial_balance as $record) {
-                  if (   ($record['fine'] <= 0
+                  if (   ($record['fine'] < 0
                           && $record['account_name'] != 'VADOTAR')
                       || ($record['account_name'] == 'Tounch Loss Fine')) continue;
                   $liabilities_vadotar = $liabilities_vadotar + $record['vadotar'];
