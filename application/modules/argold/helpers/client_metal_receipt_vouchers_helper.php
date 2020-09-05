@@ -16,7 +16,10 @@ function get_field_attribute($table, $field) {
                                        || $_GET['receipt_type'] == 'ARC Chain Receipt'
                                        || $_GET['receipt_type'] == 'AR Gold Finished Goods Receipt'
                                        || $_GET['receipt_type'] == 'ARF Finished Goods Receipt'
-                                       || $_GET['receipt_type'] == 'ARC Finished Goods Receipt'))	{
+                                       || $_GET['receipt_type'] == 'ARC Finished Goods Receipt'
+                                       || $_GET['receipt_type'] == 'AR Gold RND'
+                                       || $_GET['receipt_type'] == 'ARF RND'
+                                       || $_GET['receipt_type'] == 'ARC RND'))	{
     $required_fields=array('id', 'voucher_date', 'receipt_type', 'account_name', 
                            'debit_weight', 'purity', 'fine', 'narration','description');
   }elseif (!empty($_GET['receipt_type']) && (   $_GET['receipt_type'] == 'ARC Finished Goods' 

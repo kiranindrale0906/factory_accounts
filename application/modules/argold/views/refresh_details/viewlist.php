@@ -37,6 +37,7 @@
       <tr>
         <th></th>
         <th class="">Date</th>
+        <th class="text-right">Item Name</th>
         <th class="text-right">Weight</th>
         <th class="text-right">Melting</th>
         <th class="text-right">Fine</th>
@@ -57,6 +58,7 @@
       <tr>
         <td><?=$index+1?></td>
         <td><?=date('d M Y',strtotime($refresh_detail['created_at']));?></td>
+        <td class="text-right"><?=$refresh_detail['item_name'] ?></td>
         <td class="text-right"><?= $refresh_detail['weight']; ?></td>
         <td class="text-right"><?= $refresh_detail['purity'] ?></td>
         <td class="text-right"><?=$refresh_detail['fine'] ?></td>
@@ -67,6 +69,7 @@
     <?php }?>
       <tr class="bg_gray bold">
     <td>Total</td>
+    <td class="text-right"></td>
     <td class="text-right"></td>
     <td class="text-right"><?=four_decimal($sum_weight);?></td>
     <td class="text-right"></td>

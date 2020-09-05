@@ -222,12 +222,16 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     $this->create_metal_issue_vouchers();
     $this->_add_metal_receipt_id_in_refresh_data();
   }
+  
   private function _add_metal_receipt_id_in_refresh_data() {
-    if (!empty($this->formdata['refresh_id'])) {
-      $data = array('metal_receipt_id' => $this->attributes['id'],
-                    'id'       => $this->formdata['refresh_id']);
-      $refresh_data = new refresh_model($data);
-      $refresh_data->save();
+    if(!empty($this->formdata['refresh_id'])){
+      // $data = array('metal_receipt_id' => $this->attributes['id'],
+      //               'id'       => $this->formdata['refresh_id']);
+      //   $refresh_data = new refresh_model($data);
+      //   $refresh_data->save();
+      $refresh['metal_receipt_id']=$this->attributes['id'];
+      $refresh_data = new refresh_model($refresh);
+      $refresh_data->update(false,array('id'=>$this->formdata['refresh_id']));
     }
   }
 

@@ -22,14 +22,16 @@
                           && $record['account_name'] != 'VADOTAR')
                       || ($record['account_name'] == 'Tounch Loss Fine')) continue;
                   $liabilities_vadotar = $liabilities_vadotar + $record['vadotar'];
-                  $liabilities_fine = $liabilities_fine + $record['fine']; ?>
+                  $liabilities_fine = $liabilities_fine + $record['fine']; 
+                  if(round($record['fine'],2)!=0){
+                  ?>
 
                   <tr>
                     <td><?= $record['account_name']; ?></td>
                     <td class="text-right"><?= four_decimal(($record['fine']), '-'); ?></td>
                     <td class="text-right"><?= four_decimal(($record['vadotar']), '-') ?>  </td>
                   </tr>
-                <?php }
+                <?php }}
               } 
           ?>
           <tr>
@@ -63,7 +65,9 @@
                          && $record['account_name'] != 'Tounch Loss Fine')
                       || ($record['account_name'] == 'VADOTAR')) continue;
                   $assets_vadotar = $assets_vadotar + $record['vadotar'];
-                  $assets_fine = $assets_fine + $record['fine']; ?>
+                  $assets_fine = $assets_fine + $record['fine'];
+                  if(round($record['fine'],2)!=0){
+                   ?>
 
                   <tr>
                     <td><?= $record['account_name']; ?></td>
@@ -71,6 +75,7 @@
                     <td class="text-right"><?= four_decimal(-1 * $record['vadotar'], '-') ?>  </td>
                   </tr>
                 <?php }
+                }
               } 
           ?>
           <tr>

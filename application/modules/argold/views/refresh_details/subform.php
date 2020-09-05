@@ -44,6 +44,14 @@
                                          'readonly'=>'readonly',
                                          'grid'=> 'col-sm-12')); ?>
   </td>
+  <td>
+    <?php load_field('plain/text', array('field' => 'item_name',
+                                         'controller' => 'refresh_details',
+                                         'class' => 'refresh_item_name',
+                                         'id' => 'refresh_item_name_'.$index,
+                                         'index' => $index,
+                                         'grid'=> 'col-sm-12')); ?>
+  </td>
   
   <td>
     <?= getJsButton('Delete', 'javascript:void(0)', 'btn_red', '', 'delete_refresh('.$index.')',

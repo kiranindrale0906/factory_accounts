@@ -55,7 +55,9 @@ class Voucher_model extends BaseModel {
 
   protected function get_account_validation_rules() {
     return array('field' => $this->router_class.'[account_name]', 'label' => 'Account Name',
-                     'rules' => 'trim|required');
+                     'rules' => array('trim','required',array('account_error', array($this,'check_account_exist'))
+                                 ),
+                 'errors' => array('account_error'=>'Account not exist in Account master.'));
   }
 
   protected function get_factory_purity_validation_rules() {
@@ -117,6 +119,13 @@ class Voucher_model extends BaseModel {
     else
       $purity=$this->purity_model->find('id as id',array('purity'=>$name));
     return (empty($purity)) ? false : true;
+  }
+  public function check_account_exist($name) {
+    if($name=="" && !isset($name))
+      return true;
+    else
+      $account_name=$this->account_model->find('id as id',array('name'=>$name));
+    return (empty($account_name)) ? false : true;
   }
 
   public function check_department_exist($name) {

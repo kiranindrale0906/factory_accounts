@@ -38,7 +38,8 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
     if (   ENABLE_API_FOR_RECEIPT 
         && $this->attributes['receipt_type'] != 'Internal' 
         && ($this->attributes['account_name'] == 'ARF Software'
-            || $this->attributes['receipt_type'] == 'ARF Chain Receipt'))
+            || $this->attributes['receipt_type'] == 'ARF Chain Receipt'
+            || $this->attributes['receipt_type'] == 'ARF RND'))
       $this->client_metal_receipt_voucher_model->send_request_to_arf($this->attributes);
   }
 
