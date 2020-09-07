@@ -318,7 +318,6 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     if (empty($api_url)) return true;
 
     $result = curl_post_request($api_url, $send_data);
-    pd($result);
     if(empty($result) || (!empty($result['status']) && $result['status']=="error")) {
       $api_data = array_merge($api_data, array('api_url'=>$api_url));
       $obj_receipt_not_sent = new Receipt_not_sent_argold_model($api_data);
