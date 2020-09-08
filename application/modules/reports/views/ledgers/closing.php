@@ -4,6 +4,7 @@
     $fine = $balance[$voucher_date][$type]['fine'];
     $factory_fine = $balance[$voucher_date][$type]['factory_fine'];
     $vadotar = $balance[$voucher_date][$type]['weight_difference'];
+    $amount = $balance[$voucher_date][$type]['amount'];
 
     if ($report == 'vadotar report' && $label == 'Closing Stock') {
       $weight = 0;
@@ -31,6 +32,7 @@
                                 'weight' => $weight,
                                 'fine' => $fine,
                                 'factory_fine' => $factory_fine,
-                                'weight_difference' => $weight_difference));
+                                'weight_difference' => $weight_difference,
+                                'amount' => $amount));
   }
 ?>
