@@ -15,6 +15,8 @@
     <th class='text-right'>Issue Fine</th>
     <?php if ($report != 'account ledger'): ?> 
       <th class='text-right'>Vadotar</th>
+    <?php else: ?>
+      <th class='text-right'>Issue Amount</th>
     <?php endif; ?>
   </tr>
 </thead>

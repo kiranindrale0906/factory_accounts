@@ -8,6 +8,7 @@
           <thead>
             <tr>
               <th>Liabilities</th>
+              <th class="text-right">Amount</th>
               <th class="text-right">Fine</th>
               <th class="text-right">Vadotar</th>
             </tr>
@@ -15,7 +16,8 @@
           <?php
               $liabilities_fine = 0; 
               $liabilities_vadotar = 0;  
-              
+              $liabilities_amount = 0;
+
               if(!empty($trial_balance)) {
                 foreach ($trial_balance as $record) {
                   if (   ($record['fine'] <= 0
@@ -23,11 +25,13 @@
                       || ($record['account_name'] == 'Tounch Loss Fine')) continue;
                   $liabilities_vadotar = $liabilities_vadotar + $record['vadotar'];
                   $liabilities_fine = $liabilities_fine + $record['fine']; 
+                  $liabilities_amount = $liabilities_amount + $record['amount']; 
                   if(round($record['fine'],2)!=0){
                   ?>
 
                   <tr>
                     <td><?= $record['account_name']; ?></td>
+                    <td class="text-right"><?= four_decimal(($record['amount']), '-') ?>  </td>
                     <td class="text-right"><?= four_decimal(($record['fine']), '-'); ?></td>
                     <td class="text-right"><?= four_decimal(($record['vadotar']), '-') ?>  </td>
                   </tr>
@@ -36,6 +40,7 @@
           ?>
           <tr>
             <th>Total</th>
+            <th class="text-right"><?= four_decimal($liabilities_amount, '-'); ?></th>
             <th class="text-right"><?= four_decimal($liabilities_fine, '-'); ?></th>          
             <th class="text-right"><?= four_decimal($liabilities_vadotar, '-'); ?></th>
           </tr>
@@ -52,6 +57,7 @@
           <thead>
             <tr>
               <th>Assets</th>
+              <th class="text-right">Amount</th>
               <th class="text-right">Fine</th>
               <th class="text-right">Vadotar</th>
             </tr>
@@ -59,6 +65,7 @@
           <?php 
               $assets_fine = 0;  
               $assets_vadotar = 0;  
+              $assets_amount = 0;  
               if(!empty($trial_balance)) {
                 foreach ($trial_balance as $record) {
                   if (  ($record['fine'] >= 0
@@ -66,11 +73,13 @@
                       || ($record['account_name'] == 'VADOTAR')) continue;
                   $assets_vadotar = $assets_vadotar + $record['vadotar'];
                   $assets_fine = $assets_fine + $record['fine'];
+                  $assets_amount= $assets_amount + $record['amount'];
                   if(round($record['fine'],2)!=0){
                    ?>
 
                   <tr>
                     <td><?= $record['account_name']; ?></td>
+                    <td class="text-right"><?= four_decimal(-1 * $record['amount'], '-') ?>  </td>
                     <td class="text-right"><?= four_decimal(-1 * $record['fine'], '-') ?></td>
                     <td class="text-right"><?= four_decimal(-1 * $record['vadotar'], '-') ?>  </td>
                   </tr>
@@ -80,6 +89,7 @@
           ?>
           <tr>
             <th>Total</th>
+            <th class="text-right"><?= four_decimal(-1 * $assets_amount, '-'); ?></th>          
             <th class="text-right"><?= four_decimal(-1 * $assets_fine, '-'); ?></th>          
             <th class="text-right"><?= four_decimal(-1 * $assets_vadotar, '-'); ?></th>
           </tr>

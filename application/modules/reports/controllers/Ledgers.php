@@ -59,7 +59,8 @@ class Ledgers extends BaseController {
                  date_format(voucher_date,"%Y-%m-%d") as str_voucher_date, "" as voucher_number,
                  "" as account_name, "" as voucher_type, "" as voucher_number, 
                  sum(credit_amount) as credit_amount, sum(debit_amount) as debit_amount, 
-                 sum(credit_weight) as credit_weight, sum(debit_weight) as debit_weight, 0 as purity_margin, 
+                 sum(credit_weight) as credit_weight, sum(debit_weight) as debit_weight, 
+                 0 as purity_margin, 
                  sum((credit_weight+debit_weight) * purity) /  sum(credit_weight+debit_weight)  as purity, 
                  sum((credit_weight+debit_weight) * factory_purity) /  sum(credit_weight+debit_weight)  as factory_purity, ""  as narration, "" as description';
     }
@@ -112,11 +113,13 @@ class Ledgers extends BaseController {
         $total[$created_date]['issue']['weight_difference'] = 0;
         $total[$created_date]['issue']['fine'] = 0;
         $total[$created_date]['issue']['factory_fine'] = 0;
+        $total[$created_date]['issue']['amount'] = 0;
         $total[$created_date]['receipt'] = array();
         $total[$created_date]['receipt']['weight'] = 0;
         $total[$created_date]['receipt']['weight_difference'] = 0;
         $total[$created_date]['receipt']['fine'] = 0;
         $total[$created_date]['receipt']['factory_fine'] = 0;
+        $total[$created_date]['receipt']['amount'] = 0;
       }
     }
     return $total;
@@ -133,6 +136,7 @@ class Ledgers extends BaseController {
             $total[$record['voucher_date']]['issue']['weight_difference'] = 0;
             $total[$record['voucher_date']]['issue']['fine'] = 0;
             $total[$record['voucher_date']]['issue']['factory_fine'] = 0;
+            $total[$record['voucher_date']]['issue']['amount'] = 0;
           }
 
           if (!isset($total[$record['voucher_date']]['receipt'])) {
@@ -141,6 +145,7 @@ class Ledgers extends BaseController {
             $total[$record['voucher_date']]['receipt']['weight_difference'] = 0;
             $total[$record['voucher_date']]['receipt']['fine'] = 0;
             $total[$record['voucher_date']]['receipt']['factory_fine'] = 0;
+            $total[$record['voucher_date']]['receipt']['amount'] = 0;
           }
           
           if($type=='issue'){
@@ -151,7 +156,7 @@ class Ledgers extends BaseController {
             $total[$record['voucher_date']][$type]['fine'] += $fine;
             $factory_fine=($record['credit_weight']*$record['factory_purity'])/100;
             $total[$record['voucher_date']][$type]['factory_fine'] += $factory_fine;
-
+            $total[$record['voucher_date']][$type]['amount'] += $record['credit_amount'];
           }
 
           if($type=='receipt') {
@@ -162,6 +167,7 @@ class Ledgers extends BaseController {
             $total[$record['voucher_date']][$type]['fine'] += $fine;
             $factory_fine=($record['debit_weight']*$record['factory_purity'])/100;
             $total[$record['voucher_date']][$type]['factory_fine'] += $factory_fine;
+            $total[$record['voucher_date']][$type]['amount'] += $record['debit_amount'];
           }
       }
     }
@@ -181,6 +187,8 @@ class Ledgers extends BaseController {
           $this->data['total'][$created_date][$previous_type]['fine'] += $this->data['balance'][$previous_date][$previous_type]['fine'];
 
           $this->data['total'][$created_date][$previous_type]['factory_fine'] += $this->data['balance'][$previous_date][$previous_type]['factory_fine'];
+
+          $this->data['total'][$created_date][$previous_type]['amount'] += $this->data['balance'][$previous_date][$previous_type]['amount'];
         }
         
         if ($this->data['total'][$created_date]['receipt']['weight'] >= $this->data['total'][$created_date]['issue']['weight']) {
@@ -201,6 +209,10 @@ class Ledgers extends BaseController {
           $this->data['balance'][$created_date]['receipt']['factory_fine'] = 
                                                           $this->data['total'][$created_date]['receipt']['factory_fine']
                                                           - $this->data['total'][$created_date]['issue']['fine'];      
+
+          $this->data['balance'][$created_date]['receipt']['amount'] = 
+                                                          $this->data['total'][$created_date]['receipt']['amount']
+                                                          - $this->data['total'][$created_date]['issue']['amount'];                                                          
           $type = 'receipt';
         } else {
           $this->data['balance'][$created_date]['issue']['weight'] = 
@@ -216,6 +228,9 @@ class Ledgers extends BaseController {
           $this->data['balance'][$created_date]['issue']['factory_fine'] = 
                                                           $this->data['total'][$created_date]['issue']['factory_fine']
                                                           - $this->data['total'][$created_date]['receipt']['fine'];
+          $this->data['balance'][$created_date]['issue']['amount'] = 
+                                                          $this->data['total'][$created_date]['issue']['amount']
+                                                          - $this->data['total'][$created_date]['receipt']['amount'];                                                                        
           $type = 'issue';
         }
         
