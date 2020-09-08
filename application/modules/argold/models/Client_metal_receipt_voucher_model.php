@@ -267,6 +267,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
   private function send_request_to_argold($formdata) {
     $data = $formdata['metal_receipt_vouchers'];
+
     if ($data['company_id'] != 1) return true;
     if ($data['account_name'] == 'Alloy Vodator' || $data['account_name'] == 'GPC Vodator') return true;
 
@@ -286,7 +287,6 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                       'description' => $data['narration'],
                       'argold_account_id'=>$data['id']);
     $send_data=array();
-
     if ($data['receipt_type'] == 'Metal') {
       $api_data = array_merge($api_data, array('type' => 'Pure',
                                                'process_name' => 'Receipt'));
@@ -313,7 +313,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $api_url=API_BASE_PATH."api/api_rnd_receipts/store";  
     } elseif ($data['receipt_type'] == "AR Gold Finished Goods Receipt") {
       $send_data['finished_goods_receipts'] = $api_data;
-      $api_url=API_BASE_PATH."api/finished_goods_receipts/store";      
+
+      $api_url=API_BASE_PATH."api/api_finished_goods_receipts/store";      
     }
     if (empty($api_url)) return true;
 
