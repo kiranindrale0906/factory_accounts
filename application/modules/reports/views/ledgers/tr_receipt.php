@@ -14,5 +14,7 @@
   <td class="text-right"><?= four_decimal(($record['debit_weight']*$record['purity'])/100); ?></td>
   <?php if ($report != 'account ledger'): ?>
     <td class="text-right"><?= four_decimal(($record['factory_purity']-$record['purity'])*$record['debit_weight']/100); ?></td>
+  <?php else: ?>
+    <td class="text-right"><?= four_decimal($record['debit_amount'], '-') ?></td>
   <?php endif; ?>
 </tr>

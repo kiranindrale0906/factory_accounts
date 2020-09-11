@@ -21,5 +21,7 @@
   <?php } ?>
   <?php if ($report != 'account ledger'): ?>
     <td class="text-right"><?= four_decimal($weight_difference, '-'); ?></td>
+  <?php else: ?>
+    <td class="text-right"><?= four_decimal($amount, '-'); ?></td>
   <?php endif; ?>
 </tr>

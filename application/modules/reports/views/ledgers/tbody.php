@@ -21,7 +21,8 @@
                                 'weight' => $total[$voucher_date][$type]['weight'],
                                 'weight_difference' => $total[$voucher_date][$type]['weight_difference'],
                                 'fine' => @$total[$voucher_date][$type]['fine'],
-                                'factory_fine' => @$total[$voucher_date][$type]['factory_fine']));
+                                'factory_fine' => @$total[$voucher_date][$type]['factory_fine'],
+                                'amount' => $total[$voucher_date][$type]['amount']));
 
     $this->load->view('reports/ledgers/closing', 
                       array('label' => 'Closing',
