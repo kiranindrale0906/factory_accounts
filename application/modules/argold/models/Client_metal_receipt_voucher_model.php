@@ -307,7 +307,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $api_url=API_BASE_PATH."api/api_refresh_departments/store";
     } elseif ($data['receipt_type'] == "AR Gold Chain Receipt") {
       $api_data = array_merge($api_data, array('type' => 'Solid Machine Chain'));
-      $send_data['receipt_departments'] = $api_data;
+      $send_data['chain_receipts'] = $api_data;
       $api_url=API_BASE_PATH."api/api_chain_receipts/store";
     } elseif ($data['receipt_type'] == "AR Gold RND") {
       $send_data['rnd_receipts'] = $api_data;
@@ -318,7 +318,6 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $api_url=API_BASE_PATH."api/api_finished_goods_receipts/store";      
     }
     if (empty($api_url)) return true;
-
     $result = curl_post_request($api_url, $send_data);
     if(empty($result) || (!empty($result['status']) && $result['status']=="error")) {
       $api_data = array_merge($api_data, array('api_url'=>$api_url));
