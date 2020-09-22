@@ -351,7 +351,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     } else if($attributes['receipt_type'] == "ARF Refresh") {
       $api_data = array_merge($api_data, array('type'=>'Pure',
                                                'hook_kdm_purity' => $attributes['factory_purity'],
-                                               'description' => $data['description'],
+                                               'description' => $attributes['narration'],
                                                'process_name'=>'Refresh'));
       $send_data['refresh_departments'] = $api_data;
       $api_url=ARF_API_BASE_PATH."api/api_refresh_departments/store";
