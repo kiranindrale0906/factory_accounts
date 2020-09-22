@@ -358,7 +358,10 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     } elseif ($attributes['receipt_type'] == 'ARF Finished Goods Receipt') {
       $send_data['finished_goods_receipts'] = $api_data;
       $api_url=ARF_API_BASE_PATH."api/api_finished_goods_receipts/store";
-    } 
+    } elseif ($attributes['receipt_type'] == 'Pending Ghiss') {
+      $send_data['pending_ghiss_receipts'] = array_merge($api_data, array('department_name' => $attributes['narration']));
+      $api_url=ARF_API_BASE_PATH."api/api_pending_ghiss_receipts/store";
+    }
 
     if (empty($api_url)) return true;
     $result = curl_post_request($api_url, $send_data);
