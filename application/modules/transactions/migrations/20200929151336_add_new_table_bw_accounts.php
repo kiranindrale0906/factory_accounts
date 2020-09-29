@@ -23,7 +23,7 @@ class Migration_add_new_table_bw_accounts extends CI_Model {
 	$this->db->query("ALTER TABLE `bw_accounts`
 		  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;");
   }
-  }
+  
 
 
 }
