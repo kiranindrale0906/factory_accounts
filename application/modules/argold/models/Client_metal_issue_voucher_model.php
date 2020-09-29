@@ -13,28 +13,42 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
     $rules = parent::validation_rules($klass);
     $rules[] = $this->get_account_validation_rules();
     $rules[] = $this->get_factory_purity_validation_rules();
-    $rules[] = $this->get_narration_validation_rules();
-    
+    if ($this->attributes['receipt_type'] != 'Pending Ghiss')
+      $rules[] = $this->get_narration_validation_rules();
     return $rules;
   }
 
   public function before_validate() {
     if ($this->attributes['receipt_type'] == 'Tounch Loss Fine') return;
-    $narration_data=$this->narration_model->find('', array('name' => $this->attributes['narration'],'chain_purity'=>$this->attributes['purity']));
-    if(!empty($narration_data)){
-      $this->attributes['factory_purity']=$narration_data['chain_purity']+$narration_data['chain_margin'];
-      $this->attributes['factory_fine']=$this->attributes['credit_weight']*$this->attributes['factory_purity']/100;
+    if ($this->attributes['receipt_type'] == 'Pending Ghiss') $this->attributes['account_name'] = 'ARF Software';
+
+    $this->attributes['fine'] = $this->attributes['credit_weight'] * $this->attributes['purity'] / 100;
+    $this->set_factory_purity_and_factory_fine_from_narration();    
+  }
+
+  private function set_factory_purity_and_factory_fine_from_narration() {
+    if ($this->attributes['receipt_type'] == 'Pending Ghiss') return;
+    
+    if (empty($this->attributes['narration'])) {
+      $this->attributes['factory_purity'] = $this->attributes['purity'];
+      $this->attributes['factory_fine'] = $this->attributes['fine'];
+    } else {
+      $narration_data=$this->narration_model->find('', array('name' => $this->attributes['narration'], 
+                                                             'chain_purity'=>$this->attributes['purity']));
+      if(!empty($narration_data)){
+        $this->attributes['factory_purity'] = $narration_data['chain_purity'] + $narration_data['chain_margin'];
+        $this->attributes['factory_fine'] = $this->attributes['credit_weight'] * $this->attributes['factory_purity'] / 100;
+      }
     }
-    $this->attributes['fine']=$this->attributes['credit_weight']*$this->attributes['purity']/100;
   }
 
   public function after_validate() {
-    $this->attributes['fine']=$this->attributes['credit_weight']*$this->attributes['purity']/100;
+    $this->attributes['fine']=$this->attributes['credit_weight']*$this->attributes['purity'] / 100;
   }
 
   public function after_save($action) {
     parent::after_save($action);
-    $this->create_metal_receipt_voucher();
+    $this->create_metal_receipt_voucher_for_finished_goods();
     if (   ENABLE_API_FOR_RECEIPT 
         && $this->attributes['receipt_type'] != 'Internal' 
         && ($this->attributes['account_name'] == 'ARF Software'
@@ -43,7 +57,7 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
       $this->client_metal_receipt_voucher_model->send_request_to_arf($this->attributes);
   }
 
-  private function create_metal_receipt_voucher() {
+  private function create_metal_receipt_voucher_for_finished_goods() {
     if (isset($this->attributes['metal_receipt_voucher_reference_id']) 
         && (!empty($this->attributes['metal_receipt_voucher_reference_id']))) return true;    
 
