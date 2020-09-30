@@ -9,16 +9,14 @@
    if ($action == 'edit' || $action == 'update'): ?>
     <?php load_field('hidden', array('field' => 'id')) ?>
      <?php endif; ?>     
+  
   <div class="row">    
-    <?php load_field('text', array('field' => 'factory_name')) ?> 
-  </div>
-  <div class="row">    
-    <?php load_field('text', array('field' => 'balance_gross')) ?>
+    <?php load_field('text', array('field' => 'arg_balance_gross')) ?>
+    <?php load_field('text', array('field' => 'arf_balance_gross')) ?>
+    <?php load_field('text', array('field' => 'arc_balance_gross')) ?>
   </div>
   <div class="row">    
     <?php load_field('text', array('field' => 'b_gross')) ?>
-  </div>
-  <div class="row">   
     <?php load_field('text', array('field' => 'w_gross')) ?>
   </div>
   

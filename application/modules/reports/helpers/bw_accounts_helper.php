@@ -36,11 +36,14 @@ function getTableSettings() {
 
 function list_settings() {
   return array(
-    array("Date", "created_at", TRUE, "created_at", TRUE, TRUE),
-    array("Factory Name", "factory_name", TRUE, "factory_name", TRUE, TRUE),
-    array("Balance Gross", "balance_gross", TRUE, "balance_gross", TRUE, TRUE),
+    array("Date", "created_at", TRUE, "created_at", TRUE, TRUE,'DATE_FORMAT(created_at, "%d-%m-%Y") as created_at'),
+    array("AR Gold", "arg_balance_gross", TRUE, "arg_balance_gross", TRUE, TRUE),
+    array("ARF", "arf_balance_gross", TRUE, "arf_balance_gross", TRUE, TRUE),
+    array("ARC", "arc_balance_gross", TRUE, "arc_balance_gross", TRUE, TRUE),
+    array("Overall Factory", "overall_factory", TRUE, "overall_factory", TRUE, TRUE,'(arg_balance_gross+arf_balance_gross+arc_balance_gross) as overall_factory'),
     array("B Gross", "b_gross", TRUE, "b_gross", TRUE, TRUE),
     array("W Gross", "w_gross", TRUE, "w_gross", TRUE, TRUE),
+    array("Differece", "differece", TRUE, "differece", TRUE, TRUE,'(arg_balance_gross+arf_balance_gross+arc_balance_gross-w_gross) as differece'),
     array("Action", "action", FALSE, "action", FALSE, FALSE),
   );
 }
@@ -61,8 +64,9 @@ function get_field_attribute($table, $field) {
 
   $attributes['bw_accounts'] = array(
     'id'            => array('', '', TRUE, '', TRUE),
-    'factory_name'          => array('Factory Name', 'Enter Factory Name.', TRUE, '', TRUE),
-    'balance_gross'          => array('Balance Gross', 'Enter Balance Gross.', TRUE, '', TRUE),
+    'arg_balance_gross'          => array('ARG Balance Gross', 'Enter Balance Gross.', TRUE, '', TRUE),
+    'arf_balance_gross'          => array('ARF Balance Gross', 'Enter Balance Gross.', TRUE, '', TRUE),
+    'arc_balance_gross'          => array('ARC Balance Gross', 'Enter Balance Gross.', TRUE, '', TRUE),
     'b_gross'          => array('B Gross', 'Enter B Gross', TRUE, '', TRUE),
     'w_gross'          => array('W Gross', 'Enter W Gross', TRUE, '', TRUE),
     );
