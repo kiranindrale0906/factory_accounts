@@ -8,6 +8,10 @@ class Bw_account_model extends BaseModel {
   function __construct($data=array()) {
       parent::__construct($data);
   }
+  public function before_validate() {
+    $this->attributes['b_gross'] = $this->attributes['arg_balance_gross']+$this->attributes['arf_balance_gross']+$this->attributes['arc_balance_gross']-$this->attributes['w_gross'];
+    parent::before_validate();
+  }
 
   public function validation_rules($klass='') {
     return array(
@@ -33,4 +37,5 @@ class Bw_account_model extends BaseModel {
         'rules' => array('trim','numeric','required')),
     );
   }
+
 }

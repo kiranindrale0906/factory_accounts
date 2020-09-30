@@ -15,8 +15,7 @@
     <?php load_field('text', array('field' => 'arf_balance_gross')) ?>
     <?php load_field('text', array('field' => 'arc_balance_gross')) ?>
   </div>
-  <div class="row">    
-    <?php load_field('text', array('field' => 'b_gross')) ?>
+  <div class="row"> 
     <?php load_field('text', array('field' => 'w_gross')) ?>
   </div>
   

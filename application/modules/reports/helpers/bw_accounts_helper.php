@@ -41,9 +41,8 @@ function list_settings() {
     array("ARF", "arf_balance_gross", TRUE, "arf_balance_gross", TRUE, TRUE),
     array("ARC", "arc_balance_gross", TRUE, "arc_balance_gross", TRUE, TRUE),
     array("Overall Factory", "overall_factory", TRUE, "overall_factory", TRUE, TRUE,'(arg_balance_gross+arf_balance_gross+arc_balance_gross) as overall_factory'),
-    array("B Gross", "b_gross", TRUE, "b_gross", TRUE, TRUE),
     array("W Gross", "w_gross", TRUE, "w_gross", TRUE, TRUE),
-    array("Differece", "differece", TRUE, "differece", TRUE, TRUE,'(arg_balance_gross+arf_balance_gross+arc_balance_gross-w_gross) as differece'),
+    array("Differece", "b_gross", TRUE, "b_gross", TRUE, TRUE),
     array("Action", "action", FALSE, "action", FALSE, FALSE),
   );
 }
