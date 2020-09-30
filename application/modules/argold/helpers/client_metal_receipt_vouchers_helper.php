@@ -36,15 +36,20 @@ function get_field_attribute($table, $field) {
   }elseif (!empty($_GET['receipt_type']) && ($_GET['receipt_type'] == 'Vadotar')) {
     $required_fields=array('id', 'voucher_date', 'receipt_type');
 
+  }elseif (!empty($_GET['receipt_type']) && (   $_GET['receipt_type'] == 'ARC Refresh' 
+                                             || $_GET['receipt_type'] == 'ARF Refresh'
+                                             || $_GET['receipt_type'] == 'AR Gold Refresh')) {
+    $required_fields=array('id', 'voucher_date', 'receipt_type', 'account_name',
+                           'debit_weight', 'factory_purity','factory_fine', 'purity', 'fine', 'narration','description', 'hook_kdm_purity');
   }else {
     $required_fields=array('id', 'voucher_date', 'receipt_type', 'account_name',
                            'debit_weight', 'factory_purity','factory_fine', 'purity', 'fine', 'narration','description');
 
   }
 
-
-  return ac_voucher_get_field_attribute($table,$field,$required_fields);
+  return ac_voucher_get_field_attribute($table, $field, $required_fields);
 }
+
 if (!function_exists('get_row_actions')) {
   function get_row_actions($row, $url, $select_url, $filter) {
     $actions = array();

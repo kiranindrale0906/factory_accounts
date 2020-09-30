@@ -38,7 +38,9 @@
   <div class="row">                                  
     <?php load_view('ac_vouchers/ac_vouchers/fields/voucher_date');
           load_view('ac_vouchers/ac_vouchers/fields/receipt_type'); 
-          load_view('ac_vouchers/ac_vouchers/fields/dd_type');?>  
+          load_view('ac_vouchers/ac_vouchers/fields/dd_type');
+          load_view('ac_vouchers/ac_vouchers/fields/hook_kdm_purity'); ?>  
+
   </div>
 
   <div class="row">   
@@ -79,7 +81,7 @@
 
   <div class="row">         
     <?php 
-          load_view('ac_vouchers/ac_vouchers/fields/hook_kdm_purity'); 
+          //load_view('ac_vouchers/ac_vouchers/fields/hook_kdm_purity'); 
           load_view('ac_vouchers/ac_vouchers/fields/quantity');  
           load_view('ac_vouchers/ac_vouchers/fields/bank_name');  
           load_view('ac_vouchers/ac_vouchers/fields/gold_weight');  
@@ -121,7 +123,7 @@
       }
       load_view('ac_vouchers/ac_vouchers/fields/lumpsum_amount');
       load_view('ac_vouchers/ac_vouchers/fields/transaction_type'); 
-      load_view('ac_vouchers/ac_vouchers/fields/description'); 
+      load_view('ac_vouchers/ac_vouchers/fields/description');  
     ?>
   </div>  
 
@@ -136,7 +138,7 @@
   </div>
   
   <?php 
-      $receipt_type=!empty($_GET['receipt_type'])?$_GET['receipt_type']:'';
+    $receipt_type=!empty($_GET['receipt_type'])?$_GET['receipt_type']:'';
     if ($this->router->class == "metal_receipt_vouchers" 
         && !in_array($receipt_type, array('AR Gold Refresh',
                                           'ARC Refresh',
