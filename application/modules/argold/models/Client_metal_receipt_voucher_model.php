@@ -121,7 +121,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $this->formdata['metal_issue_vouchers'] = array(array('account_name' => $account_name,
                                                             'credit_weight' => $this->attributes['debit_weight'],
                                                             'purity' => $this->attributes['purity'],
-                                                            'factory_purity' => $this->attributes['factory_purity']));
+                                                            'factory_purity' => $this->attributes['factory_purity'],
+                                                            'hook_kdm_purity' => (empty($this->attributes['hook_kdm_purity'])) ? $this->attributes['factory_purity'] : $this->attributes['hook_kdm_purity']));
     }
   }
 
@@ -300,7 +301,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $api_url=API_BASE_PATH."api/api_daily_drawer_receipts/store";
     } else if($data['receipt_type'] == "AR Gold Refresh") {
       $api_data = array_merge($api_data, array('type'=>'Pure',
-                                               'hook_kdm_purity' => $data['factory_purity'],
+                                               'hook_kdm_purity' => $data['hook_kdm_purity'],
                                                'description' => $data['description'],
                                                'process_name'=>'Refresh'));
       $send_data['refresh_departments'] = $api_data;
@@ -350,7 +351,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $api_url=ARF_API_BASE_PATH."api/api_rnd_receipts/store";  
     } else if($attributes['receipt_type'] == "ARF Refresh") {
       $api_data = array_merge($api_data, array('type'=>'Pure',
-                                               'hook_kdm_purity' => $attributes['factory_purity'],
+                                               'hook_kdm_purity' => $attributes['hook_kdm_purity'],
                                                'description' => $attributes['narration'],
                                                'process_name'=>'Refresh'));
       $send_data['refresh_departments'] = $api_data;
