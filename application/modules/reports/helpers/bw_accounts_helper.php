@@ -76,9 +76,13 @@ function get_field_attribute($table, $field) {
 function get_row_actions($row, $url, $select_url, $filter) {
   $actions = array();
   $controller = 'reports/bw_accounts';
- $actions["Edit"] = array( 'request' => "http", 
+  $actions["Edit"] = array( 'request' => "http", 
                            'url' => ADMIN_PATH.$controller.'/edit/'.$row['id'],
                            'confirm_message' => "",
-                           'class' => 'text-warning text-uppercase');
+                           'class' => 'green');
+  $actions["Delete"] = array( 'request' => "http", 
+                           'url' => ADMIN_PATH.$controller.'/delete/'.$row['id'],
+                           'confirm_message' => "",
+                           'class' => 'red');
   return $actions;
 }
