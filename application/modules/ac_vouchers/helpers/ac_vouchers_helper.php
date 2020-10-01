@@ -226,7 +226,7 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
     $attributes[$ci->router->class] = array_intersect_key($attributes, array_flip($required_field));
   }
   
-  return !empty($attributes[$table][$field])?$attributes[$table][$field]:false;
+  return !empty($attributes[$table][$field]) ? $attributes[$table][$field] : false;
 }
 
 function ac_voucher_get_row_actions($row, $url, $select_url, $filter) {
