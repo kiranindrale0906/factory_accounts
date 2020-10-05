@@ -105,13 +105,16 @@
 
   function get_melting_purity(){
     return array(
-             array('id'=>70.00,'name'=>'70.00'),
-             array('id'=>75.15,'name'=>'75.15'),
+             array('id'=>92.00,'name'=>'92.00')
+             array('id'=>91.90,'name'=>'91.90'),
+             array('id'=>91.85,'name'=>'91.85'),
              array('id'=>83.50,'name'=>'83.50'),
-             array('id'=>83.65,'name'=>'83.65'),
-             array('id'=>87.65,'name'=>'87.65'),
-             array('id'=>91.80,'name'=>'91.80'),
-             array('id'=>92.00,'name'=>'92.00'));
+             array('id'=>75.25,'name'=>'75.25'),
+             array('id'=>75.15,'name'=>'75.15'),
+             array('id'=>75.00,'name'=>'75.00'),
+             array('id'=>58.50,'name'=>'58.50'),
+             array('id'=>41.70,'name'=>'41.70'),
+             );
   }
 
   function get_has_hallmark(){
