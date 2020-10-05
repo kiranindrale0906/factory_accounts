@@ -142,6 +142,7 @@ trait Listing_trait  {
                                                                 'group_by'=>$group,
                                                                 'limit'=>$limit,
                                                                 'table'=>$this->primary_table));
+
     if($count == false)return $result_array; 
     else{
       if($sum == false)
@@ -214,7 +215,6 @@ trait Listing_trait  {
       $where_data['like'][remove_spaces_from_mysql_column($key)] = 
                                                                 array(remove_spaces_from_value($like_value));
     }
-
     return $where_data;
   }//end of function..
 
