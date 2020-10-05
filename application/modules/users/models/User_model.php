@@ -78,7 +78,7 @@ class User_model extends Core_user_model {
     $user = $this->find('',$where_condition);
 
     $user_role_ids = $this->get_user_role_ids($user['id']);
-    //$this->delete_all_user_sessions($user['id']);
+    $this->delete_all_user_sessions($user['id']);
     $this->update_db_session($user['id']);
     return  array(
               'user_id'         => $user['id'],
