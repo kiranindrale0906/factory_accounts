@@ -72,7 +72,9 @@
                                         'reports/trial_balances' => 'Trial Balance',
                                         'reports/vadotar_reports' => 'Vadotar Report',
                                         'reports/rojmel_reports' => 'Rojmel Report',
-                                        'reports/production_summary' => 'Production Summary'),
+                                        'reports/production_summary' => 'Production Summary',
+                                        'reports/bw_accounts' => 'Bw Accounts'
+                                        ),
                     //'Interests' => array('transactions/interest_issue_vouchers'=>'Interest Issue Voucher','transactions/interest_receipt_vouchers'=>'Interest Receipt Voucher'),
                     'Registers'   => array(
                       'registers/cash_registers' => 'Cash Register',
