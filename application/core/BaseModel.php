@@ -203,6 +203,15 @@ class BaseModel extends CI_Model {
     if(isset($conditions['where_not_in'])) $this->db->where_not_in($conditions['where_not_in'],'',false);
     if(isset($conditions['like']) && !is_array($conditions['like']))
       $this->db->like($conditions['like']);
+    if(isset($conditions['like']) && is_array($conditions['like'])){
+      foreach ($conditions['like'] as $like_key => $like_value) {
+      $this->db->group_start();
+        foreach ($like_value as $value_key => $like) {
+          $this->db->or_like($like_key,$like);
+        }
+      $this->db->group_end();
+      }
+    }
    
     foreach($conditions as $field => $value){
       if (in_array($field, array('where', 'where_in', 'like','where_not_in','having',"or_where","or_having"))
