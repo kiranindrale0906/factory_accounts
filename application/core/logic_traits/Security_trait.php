@@ -63,6 +63,7 @@ trait security_trait {
 
 
   private function sanitize_data(){
+  	$sanitize_data = array();
   	foreach($_POST as $post_index => $post_value){
   		if(is_array($post_value)){
 				foreach($post_value as $post_key => $values){
@@ -74,6 +75,7 @@ trait security_trait {
 				}
 			}else $sanitize_data[$post_index] = $post_value;
 		}
+		
 		$_POST = $sanitize_data;
   }
 
