@@ -105,7 +105,7 @@
 
   function get_melting_purity(){
     return array(
-             array('id'=>92.00,'name'=>'92.00')
+             array('id'=>92.00,'name'=>'92.00'),
              array('id'=>91.90,'name'=>'91.90'),
              array('id'=>91.85,'name'=>'91.85'),
              array('id'=>83.50,'name'=>'83.50'),
