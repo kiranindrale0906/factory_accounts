@@ -42,7 +42,7 @@ function list_settings() {
     array("ARC", "arc_balance_gross", TRUE, "arc_balance_gross", TRUE, TRUE),
     array("Overall Factory", "overall_factory", TRUE, "overall_factory", TRUE, TRUE,'(arg_balance_gross+arf_balance_gross+arc_balance_gross) as overall_factory'),
     array("W Gross", "w_gross", TRUE, "w_gross", TRUE, TRUE),
-    array("Differece", "b_gross", TRUE, "b_gross", TRUE, TRUE),
+    array("Difference", "b_gross", TRUE, "b_gross", TRUE, TRUE),
     array("Action", "action", FALSE, "action", FALSE, FALSE),
   );
 }
@@ -76,9 +76,13 @@ function get_field_attribute($table, $field) {
 function get_row_actions($row, $url, $select_url, $filter) {
   $actions = array();
   $controller = 'reports/bw_accounts';
- $actions["Edit"] = array( 'request' => "http", 
+  $actions["Edit"] = array( 'request' => "http", 
                            'url' => ADMIN_PATH.$controller.'/edit/'.$row['id'],
                            'confirm_message' => "",
-                           'class' => 'text-warning text-uppercase');
+                           'class' => 'green');
+  $actions["Delete"] = array( 'request' => "http", 
+                           'url' => ADMIN_PATH.$controller.'/delete/'.$row['id'],
+                           'confirm_message' => "",
+                           'class' => 'red');
   return $actions;
 }
