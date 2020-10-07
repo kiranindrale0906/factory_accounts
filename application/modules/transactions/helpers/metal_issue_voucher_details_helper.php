@@ -10,7 +10,7 @@ function getTableSettings() {
     'join_type'           => '',
     'where'               => 'voucher_type="Metal Issue Voucher"',
     'where_ids'           => '',
-    'order_by'            => '',
+    'order_by'            => 'id desc',
     'limit'               => "20",
     'extra_select_column' => 'id',
     'actionFunction'      => '',
