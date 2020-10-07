@@ -26,7 +26,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     }
 
     $rules[] = $this->get_receipt_type_validation_rules();
-
+    $rules[] = $this->get_factory_purity_validation_rules();
     // if (!empty($this->formdata['metal_issue_vouchers'])) {
     //   foreach ($this->formdata['metal_issue_vouchers'] as $index => $metal_issue_voucher) {
     //     $rules[] = $this->get_metal_issue_factory_purity_validation_rules('metal_issue_vouchers',$index);
@@ -73,7 +73,10 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   }
 
   private function set_metal_receipt_attributes() {
-    $this->formdata['metal_receipt_vouchers']['factory_fine'] = $this->attributes['debit_weight']*$this->attributes['purity']/100;
+    if (empty($this->attributes['purity']))
+      $this->formdata['metal_receipt_vouchers']['factory_fine'] = 0;
+    else
+      $this->formdata['metal_receipt_vouchers']['factory_fine'] = $this->attributes['debit_weight'] * $this->attributes['purity']/100;
   }
 
   private function set_metal_issue_voucher_attributes_from_receipt_type_for_finished_goods() {

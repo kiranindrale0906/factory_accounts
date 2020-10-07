@@ -22,13 +22,19 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
     if ($this->attributes['receipt_type'] == 'Tounch Loss Fine') return;
     if ($this->attributes['receipt_type'] == 'Pending Ghiss') $this->attributes['account_name'] = 'ARF Software';
 
-    $this->attributes['fine'] = $this->attributes['credit_weight'] * $this->attributes['purity'] / 100;
+    if (empty($this->attributes['purity']))
+      $this->attributes['fine'] = 0;
+    else
+      $this->attributes['fine'] = $this->attributes['credit_weight'] * $this->attributes['purity'] / 100;
+
     $this->set_factory_purity_and_factory_fine_from_narration();    
   }
 
   private function set_factory_purity_and_factory_fine_from_narration() {
     if ($this->attributes['receipt_type'] == 'Pending Ghiss') return;
     
+    if (!empty($this->attributes['argold_id'])) return;   //do not set factory purity if set in issue department
+
     if (   empty($this->attributes['narration']) 
         || $this->attributes['account_name'] != 'SWARN SHILP CHAINS AND JEWELLERS PVT LTD') {
       $this->attributes['factory_purity'] = $this->attributes['purity'];
