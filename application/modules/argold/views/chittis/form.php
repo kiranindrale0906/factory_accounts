@@ -20,5 +20,8 @@
                             'readonlyinput' => true));  ?>
   </div>
     <?php $this->load->view('chitti_details/formlist');?>
-  <?php load_buttons('submit', array('controller' => $controller, 'name' => 'SAVE' , 'class' => 'btn_blue')) ?>
+  <?php load_buttons('submit', array('controller' => $controller, 'name' => 'SAVE' , 'class' => 'btn_blue')) ;
+    echo validation_errors();
+  ?>
+
 </form>

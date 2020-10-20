@@ -40,18 +40,20 @@ class Chittis extends BaseController {
     if (!empty($_GET['purity']))
       $this->data['record']['purity'] = $_GET['purity'];
 
-    $where=array('voucher_type'=>'metal issue voucher','chitti_id'=>'');
+    $where=array('voucher_type'=>'metal issue voucher','chitti_id'=>'','packet_no!='=>0);
 
     if (!empty($_GET['purity']))
     $where['purity']=$_GET['purity'];
 
     if(!empty($this->data['record']['account_name'])){
       $where['account_name']=$this->data['record']['account_name'];
-      $this->data['metal_vouchers'] = $this->voucher_model->get('',$where);
+      $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,
+                                           (sum(credit_weight*purity) / sum(credit_weight)) as purity,
+                                           (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,"" as voucher_number,packet_no',$where,array(),array('group_by'=>'packet_no'));
     } else {
       $this->data['metal_vouchers'] = array();
     }
-
+    
      $this->data['purity'] = $this->narration_model->get('distinct(chain_purity) as name,chain_purity as  id', array() ,array(), array('order_by'=>'id asc'));
     
     if ($this->router->method == 'store' || $this->router->method == 'update') {
