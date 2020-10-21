@@ -23,14 +23,14 @@ class Chittis extends BaseController {
                                                                                'chitti_id'=>$this->data['record']['id']));
     $this->data['chittis_details'] = $this->chitti_model->find('account_name,date',array('id'=>$this->data['record']['id']));
 
-    foreach ($this->data['metal_voucher_details'] as $index => $metal_voucher_detail) {
-      $narration = $this->narration_model->find('chitti_purity', array('name' => $metal_voucher_detail['narration'],
-                                                                       'chain_purity' => $metal_voucher_detail['purity']));
-      if (!empty($narration))
-        $this->data['metal_voucher_details'][$index]['chitti_purity'] = $narration['chitti_purity'];
-      else
-        $this->data['metal_voucher_details'][$index]['chitti_purity'] = 0;
-    }
+    // foreach ($this->data['metal_voucher_details'] as $index => $metal_voucher_detail) {
+    //   $narration = $this->narration_model->find('chitti_purity', array('name' => $metal_voucher_detail['narration'],
+    //                                                                    'chain_purity' => $metal_voucher_detail['purity']));
+    //   if (!empty($narration))
+    //     $this->data['metal_voucher_details'][$index]['chitti_purity'] = $narration['chitti_purity'];
+    //   else
+    //     $this->data['metal_voucher_details'][$index]['chitti_purity'] = 0;
+    // }
   }
 
   public function _get_form_data() {
