@@ -18,7 +18,7 @@ class Chitti_model extends BaseModel {
     foreach ($chitti_details as $index => $chitti_detail) {
       $start_process['weight']=$chitti_detail['credit_weight'];
       $start_process['fine']=$chitti_detail['credit_weight']*$chitti_detail['factory_purity']/100;
-      $start_process['purity']=$chitti_detail['factory_purity'];
+      $start_process['purity']=$chitti_detail['purity'];
       $start_process['date']=$chitti_detail['voucher_date'];
       $start_process['account_name']=$this->attributes['account_name'];
       $start_process['packet_no']=$chitti_detail['packet_no'];
