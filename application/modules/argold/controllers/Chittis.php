@@ -21,8 +21,7 @@ class Chittis extends BaseController {
                                                                         'chitti_id'=>$this->data['record']['id']));
     $this->data['metal_voucher_details'] = $this->voucher_model->get('', array('voucher_type'=>'metal issue voucher',
                                                                                'chitti_id'=>$this->data['record']['id']));
-    if(!empty($this->data['metal_voucher_details']['account_name']))
-      $this->data['account_id'] = $this->account_model->find('id',array('name'=>$this->data['metal_voucher_details']['account_name']))['id'];
+    $this->data['chittis_details'] = $this->chitti_model->find('account_name,date',array('id'=>$this->data['record']['id']));
 
     foreach ($this->data['metal_voucher_details'] as $index => $metal_voucher_detail) {
       $narration = $this->narration_model->find('chitti_purity', array('name' => $metal_voucher_detail['narration'],
@@ -49,7 +48,7 @@ class Chittis extends BaseController {
       $where['account_name']=$this->data['record']['account_name'];
       $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,
                                            (sum(credit_weight*purity) / sum(credit_weight)) as purity,
-                                           (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,"" as voucher_number,packet_no',$where,array(),array('group_by'=>'packet_no'));
+                                           (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,"" as voucher_number,packet_no,voucher_date,group_concat(narration) as narration',$where,array(),array('group_by'=>'packet_no,voucher_date'));
     } else {
       $this->data['metal_vouchers'] = array();
     }

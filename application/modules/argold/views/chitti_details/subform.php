@@ -11,7 +11,9 @@
 																		 	 						        )),
 																		   'controller' => 'chitti_details'));?>
 	</td>
-	<td><?php echo $vouchers['voucher_number'];?></td>
+	<td><?php echo $vouchers['packet_no'];?></td>
+	<td><?php echo $vouchers['voucher_date'];?></td>
+	<td><?php echo $vouchers['narration'];?></td>
   <td class="text-right"><?= four_decimal($vouchers['credit_weight']) ;?></td>
 	<td class="text-right"><?= four_decimal($vouchers['purity']); ?></td>
         <td class="text-right"><?= four_decimal($vouchers['factory_purity'] - $vouchers['purity']) ?></td>
