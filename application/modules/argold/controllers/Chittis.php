@@ -53,7 +53,7 @@ class Chittis extends BaseController {
       $this->data['metal_vouchers'] = array();
     }
     
-     $this->data['purity'] = $this->narration_model->get('distinct(chain_purity) as name,chain_purity as  id', array() ,array(), array('order_by'=>'id asc'));
+     $this->data['purity'] = $this->voucher_model->get('distinct(purity) as name,purity as  id', array() ,array(), array('order_by'=>'id asc'));
     
     if ($this->router->method == 'store' || $this->router->method == 'update') {
       $this->data['record']['chittis'] = $_POST['chittis'];
