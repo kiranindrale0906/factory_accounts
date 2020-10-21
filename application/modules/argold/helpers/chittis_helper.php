@@ -38,6 +38,8 @@ function list_settings() {
   return array(
     array("Id", "id", FALSE, "id", FALSE, FALSE),
     array("Date", "created_at", FALSE, "created_at", FALSE, FALSE,'DATE_FORMAT(created_at, "%d-%m-%Y") as created_at'),
+    array("Packet No", "packet_no", TRUE, "packet_no", TRUE, TRUE),
+    
     array("Account Name", "account_name", FALSE, "account_name", FALSE, FALSE),
     array("Weight", "weight", FALSE, "weight", FALSE, FALSE),
     // array("Purity", "purity", FALSE, "purity", FALSE, FALSE),
