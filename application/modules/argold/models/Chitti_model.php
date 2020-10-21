@@ -33,9 +33,9 @@ class Chitti_model extends BaseModel {
 
   public function after_save($action){
   	$chittis=array();
+    pd($this->formdata['chittis']);
     if (!isset($this->formdata['chittis']) || empty($this->formdata['chittis'])) return;
     $chitti_details=$this->voucher_model->get('',array('packet_no'=>$this->formdata['chittis']['packet_no'],'account_name'=>$this->attributes['account_name'],'purity'=>$this->attributes['purity']),array());
-    pd($chitti_details);
   	foreach ($chitti_details as $index => $chitti_detail) {
   	  if (isset($chitti_detail['id'])) {
   			$chittis['chitti_id'] = $this->attributes['id'];
