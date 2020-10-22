@@ -21,6 +21,10 @@ class Chittis extends BaseController {
                                                                         'chitti_id'=>$this->data['record']['id']));
     $this->data['metal_voucher_details'] = $this->voucher_model->get('', array('voucher_type'=>'metal issue voucher',
                                                                                'chitti_id'=>$this->data['record']['id']));
+    $packet_no=array_column($this->data['metal_voucher_details'],'packet_no');
+    $this->data['packet_nos']=array_unique($packet_no);
+
+
     $this->data['chittis_details'] = $this->chitti_model->find('account_name,date',array('id'=>$this->data['record']['id']));
 
     // foreach ($this->data['metal_voucher_details'] as $index => $metal_voucher_detail) {
