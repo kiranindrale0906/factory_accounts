@@ -12,7 +12,7 @@
         <th class="text-right">Gross</th>
         <th class="text-right">Melting</th>
         <th class="text-right">Wastage</th>
-        <th class="text-right">Net wt</th>
+        <th class="text-right">Fine</th>
       </tr>
     </thead>
     <tbody>

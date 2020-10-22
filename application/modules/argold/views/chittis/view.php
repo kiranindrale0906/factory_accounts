@@ -4,7 +4,7 @@
     <div class="form-group container">
       <p><h6>AC Code :<?=$chittis_details['account_name']?> </h6></p>
       <p><h6>Total Gross :<?=four_decimal($record['weight'])?> </h6>
-          <h6>Total Fine :<?=four_decimal($record['fine'])?> </h6></p>
+        <h6>Total Fine :<?=four_decimal($record['fine'])?> </h6></p>
       </div>
   </div>
   <div class="col-md-6">
