@@ -3,7 +3,6 @@
 <div class="col-md-6 ">
     <div class="form-group container">
       <p><h6>AC Code :<?=$chittis_details['account_name']?> </h6></p>
-      <p><h6>Packet No :<?=$record['packet_no']?> </h6></p>
     </div>
   </div>
   <div class="col-md-6">
