@@ -8,7 +8,7 @@
     <thead>
       <tr>
         <th></th>
-        <th>Itam Name</th>
+        <th>Design Name</th>
         <th class="text-right">Gross</th>
         <th class="text-right">Melting</th>
         <th class="text-right">Wastage</th>
