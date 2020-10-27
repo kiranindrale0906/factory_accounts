@@ -14,7 +14,7 @@ class User_role_model extends Core_user_role_model {
                      'Transactions' => array('transactions/cash_issue_vouchers', 
                                             'transactions/cash_receipt_vouchers',
                                             'transactions/bank_issue_vouchers', 'transactions/bank_receipt_vouchers',
-                                            'transactions/metal_issue_vouchers', 'transactions/metal_receipt_vouchers',
+                                            'transactions/metal_issue_vouchers', 'transactions/metal_receipt_vouchers','transactions/metal_issue_voucher_details', 'transactions/metal_receipt_voucher_details',
                                             'transactions/sales_vouchers', 'transactions/purchase_vouchers', 'transactions/journal_vouchers',
                                             'transactions/contra_vouchers',
                                             'transactions/rate_cut_purchase_price_issue_vouchers',

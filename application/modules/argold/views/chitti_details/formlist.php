@@ -3,7 +3,8 @@
   <thead>
     <tr>
       <th><?php load_buttons('anchor', array('name'=>'Select All', 'class'=>'blue select_all')); ?></th>
-      <th>Voucher No</th>
+      <th>Packet No</th>
+      <th>Date</th>
       <th>Narration</th>
       <th class="text-right">Weight</th>
       <th class="text-right">Factory Purity</th>
