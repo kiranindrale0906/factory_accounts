@@ -39,7 +39,7 @@ function list_settings() {
     array("Id", "id", FALSE, "id", FALSE, FALSE),
     array("Date", "created_at", FALSE, "created_at", FALSE, FALSE,'DATE_FORMAT(created_at, "%d-%m-%Y") as created_at'),
     // array("Packet No", "packet_no", TRUE, "packet_no", TRUE, TRUE),
-    
+    array("Factory", "site_name", FALSE, "site_name", FALSE, FALSE),
     array("Account Name", "account_name", FALSE, "account_name", FALSE, FALSE),
     array("Weight", "weight", FALSE, "weight", FALSE, FALSE),
     // array("Purity", "purity", FALSE, "purity", FALSE, FALSE),
@@ -64,6 +64,7 @@ function get_field_attribute($table, $field) {
 
   $attributes['chittis'] = array(
     'id'            => array('', '', TRUE, '', TRUE),
+    'site_name'            => array('Factory Name', '', TRUE, '', TRUE),
     'account_name'            => array('Account Name', '', TRUE, '', TRUE),
     'chitti_id'          => array('Chitti', 'Enter Chitti.', TRUE, '', TRUE),
     'purity'          => array('Purity', 'Select Purity.', TRUE, '', TRUE),
