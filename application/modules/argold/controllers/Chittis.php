@@ -42,14 +42,16 @@ class Chittis extends BaseController {
       $this->data['record']['account_name'] = $_GET['account_name'];
     if (!empty($_GET['purity']))
       $this->data['record']['purity'] = $_GET['purity'];
-
+    
+    $this->data['record']['site_name'] = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'AR Gold';
     $where=array('voucher_type'=>'metal issue voucher','chitti_id'=>'','packet_no!='=>0);
 
-    if (!empty($_GET['purity']))
-    $where['purity']=$_GET['purity'];
+    if (!empty($_GET['site_name'])) $where['site_name']=$_GET['site_name'];
+    if (!empty($_GET['purity'])) $where['purity']=$_GET['purity'];
 
-    if(!empty($this->data['record']['account_name'])){
+    if(!empty($this->data['record']['account_name'])) { 
       $where['account_name']=$this->data['record']['account_name'];
+    
       $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,
                                            (sum(credit_weight*purity) / sum(credit_weight)) as purity,
                                            (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,"" as voucher_number,packet_no,voucher_date,group_concat(narration) as narration',$where,array(),array('group_by'=>'packet_no,voucher_date'));
@@ -63,6 +65,10 @@ class Chittis extends BaseController {
       $this->data['record']['chittis'] = $_POST['chittis'];
       $this->data['chittis_details'] = @$_POST['chittis_details'];
     }
+
+    $this->data['site_names'] = array(array('id' => 'AR Gold', 'name' => 'AR Gold'),
+                                      array('id' => 'ARF', 'name' => 'ARF'),
+                                      array('id' => 'ARC', 'name' => 'ARC'));
   }
 
   public function store() {
