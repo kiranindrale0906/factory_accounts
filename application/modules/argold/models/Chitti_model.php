@@ -11,16 +11,20 @@ class Chitti_model extends BaseModel {
   
 public function before_validate(){
   $chitti_ids=array_column($this->formdata['chitti_details'], 'chitti_id');
-  $chitti_details=$this->voucher_model->find('sum(credit_weight) as credit_weight,
+  $select = 'sum(credit_weight) as credit_weight,
                                              (sum(credit_weight*purity) / sum(credit_weight)) as purity,
-                                             (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,"" as voucher_number,packet_no,voucher_date',array('where_in'=>array('packet_no'=>$chitti_ids),'where'=>array('account_name'=>$this->attributes['account_name'],'purity'=>$this->attributes['purity'])),array());
-      $this->attributes['weight']=$chitti_details['credit_weight'];
-      $this->attributes['fine']=$chitti_details['credit_weight']*$chitti_details['factory_purity']/100;
-      $this->attributes['purity']=$this->attributes['purity'];
-      $this->attributes['factory_purity']=$chitti_details['factory_purity'];
-      $this->attributes['date']=$chitti_details['voucher_date'];
-      $this->attributes['account_name']=$this->attributes['account_name'];
-      $this->attributes['packet_no']=$chitti_details['packet_no'];
+                                             (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,"" as voucher_number,packet_no,voucher_date';
+  $chitti_details=$this->voucher_model->find($select, array('site_name' => $this->attributes['site_name'],
+                                                            'packet_no' => $chitti_ids,
+                                                            'account_name' => $this->attributes['account_name'],
+                                                            'purity' => $this->attributes['purity']));
+  $this->attributes['weight']=$chitti_details['credit_weight'];
+  $this->attributes['fine']=$chitti_details['credit_weight']*$chitti_details['factory_purity']/100;
+  $this->attributes['purity']=$this->attributes['purity'];
+  $this->attributes['factory_purity']=$chitti_details['factory_purity'];
+  $this->attributes['date']=$chitti_details['voucher_date'];
+  $this->attributes['account_name']=$this->attributes['account_name'];
+  $this->attributes['packet_no']=$chitti_details['packet_no'];
 }
 //  public function save($after_save=true){
 //   $chitti_ids=array_column($this->formdata['chitti_details'], 'chitti_id');
@@ -49,12 +53,15 @@ public function before_validate(){
     $chittis=array();
     if (!isset($this->formdata['chitti_details']) || empty($this->formdata['chitti_details'])) return;
     $chitti_ids=array_column($this->formdata['chitti_details'], 'chitti_id');
-    $chitti_details=$this->voucher_model->get('',array('where_in'=>array('packet_no'=>$chitti_ids),'where'=>array('account_name'=>$this->attributes['account_name'],'purity'=>$this->attributes['purity'])),array());
+    $chitti_details = $this->voucher_model->get('', array('site_name' => $this->attributes['site_name'],
+                                                         'packet_no' => $chitti_ids,
+                                                         'account_name' => $this->attributes['account_name'],
+                                                         'purity' => $this->attributes['purity']));
   	foreach ($chitti_details as $index => $chitti_detail) {
   	  if (isset($chitti_detail['id'])) {
   			$chittis['chitti_id'] = $this->attributes['id'];
   		  $chitti_details_model = new voucher_model($chittis);
-     		$chitti_details_model->update(false,array('id'=>$chitti_detail['id']));
+     		$chitti_details_model->update(false, array('id' => $chitti_detail['id']));
   		}
     }
 	}  
