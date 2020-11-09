@@ -198,6 +198,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   }
 
   public function before_validate() {
+    $this->unset_metal_issue_voucher_records_when_credit_weight_is_0(); 
     $this->set_account_name_from_receipt_type();
     $this->set_factory_purity_from_receipt_type_for_metal_and_finished_goods_and_chain_receipt();
     $this->set_metal_receipt_attributes_from_receipt_type_for_vadotar();
