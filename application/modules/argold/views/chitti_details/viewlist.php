@@ -1,5 +1,5 @@
 <?php 
-  if(!empty($metal_vouchers)) {
+  if(!empty($metal_voucher_details)) {
     //foreach ($packet_nos as $packet_index => $packet_no) { 
     ?>
       <!-- <h6>Packet No :<?=$packet_no ?> </h6>     -->
