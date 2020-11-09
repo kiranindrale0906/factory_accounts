@@ -261,6 +261,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       }
       
       $metal_issue_data['narration'] = $this->attributes['narration'];
+      $metal_issue_data['description'] = $this->attributes['description'];
       $metal_issue_data['suffix'] = "MI";
       $metal_issue_data['voucher_type'] = "metal issue voucher";
       $metal_issue_data['transaction_type'] = 'account';
