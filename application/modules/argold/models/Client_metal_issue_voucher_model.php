@@ -94,7 +94,7 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
 
       $obj_metal_receipt_voucher=new metal_receipt_voucher_model($metal_receipt_data);
       $obj_metal_receipt_voucher->before_validate();
-      $obj_metal_receipt_voucher->store();    
+      $obj_metal_receipt_voucher->store(FALSE);    
     }
 
 
