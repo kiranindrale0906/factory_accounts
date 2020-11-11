@@ -37,15 +37,15 @@ class Trial_balances extends Ledgers {
     $url=API_ARG_BASE_PATH."issue_and_receipts/ledger_balance/index";
     $arg_records=json_decode(curl_post_request($url));
     
-    // $url=API_ARG_BASE_PATH."issue_and_receipts/ledger_balance/index";
-    // $records=json_decode(curl_post_request($url));
+    $url=API_ARG_BASE_PATH."issue_and_receipts/ledger_balance/index";
+    $records=json_decode(curl_post_request($url));
     
     $this->data['argold_balance']=$arg_records->data->record;
     $this->data['argold_balance']->argold = 0;
     $this->data['argold_balance']->arc = 0;
     $this->data['argold_balance']->arf = 0;
     
-    $this->data['live_balance']=$arg_records->data->record;
+    $this->data['live_balance']=$records->data->record;
     //$this->data['live_balance']->arc = 0;
     //$this->data['live_balance']->arf = 0;
   }
