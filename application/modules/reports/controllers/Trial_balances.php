@@ -13,13 +13,6 @@ class Trial_balances extends Ledgers {
     $url = API_ARG_BASE_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
     $records = json_decode(curl_post_request($url));
     if (!empty($records)) {
-      $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator, 'Alloy', 'ARG');
-      $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator, 'GPC', 'ARG');
-    }
-
-    $url = API_ARG_BASE_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
-    $records = json_decode(curl_post_request($url));
-    if (!empty($records)) {
       $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator, 'Alloy', 'June 2020');
       $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator, 'GPC', 'June 2020');
     }
@@ -44,15 +37,15 @@ class Trial_balances extends Ledgers {
     $url=API_ARG_BASE_PATH."issue_and_receipts/ledger_balance/index";
     $arg_records=json_decode(curl_post_request($url));
     
-    $url=API_ARG_BASE_PATH."issue_and_receipts/ledger_balance/index";
-    $records=json_decode(curl_post_request($url));
+    // $url=API_ARG_BASE_PATH."issue_and_receipts/ledger_balance/index";
+    // $records=json_decode(curl_post_request($url));
     
     $this->data['argold_balance']=$arg_records->data->record;
     $this->data['argold_balance']->argold = 0;
     $this->data['argold_balance']->arc = 0;
     $this->data['argold_balance']->arf = 0;
     
-    $this->data['live_balance']=$records->data->record;
+    $this->data['live_balance']=$arg_records->data->record;
     //$this->data['live_balance']->arc = 0;
     //$this->data['live_balance']->arf = 0;
   }
