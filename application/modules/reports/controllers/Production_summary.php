@@ -22,7 +22,7 @@ class Production_summary extends BaseController {
     //if (!empty($_GET['production_summary']['design_code']))  $this->data['record']['design_code']  = $_GET['production_summary']['design_code'];
 
     //if (!isset($this->data['product_name']) || $this->data['product_name'] == 'KA Chain') {
-    $url=ARF_API_BASE_PATH."issue_departments/api_issue_departments/create";
+    $url=API_ARF_BASE_PATH."issue_departments/api_issue_departments/create";
     $records=json_decode(curl_post_request($url, $this->data));
     $arf_data = json_decode(json_encode($records), true);
     // pd($arf_data);
@@ -30,7 +30,7 @@ class Production_summary extends BaseController {
     if (!isset($arf_data['in_purities']['names']))     $arf_data['in_purities'] = array('names' => array());
     if (!isset($arf_data['category_ones']['names']))   $arf_data['category_ones'] = array('names' => array());
 
-    $url=API_LIVE_BASE_PATH."issue_departments/api_issue_departments/create";
+    $url=API_ARG_BASE_PATH."issue_departments/api_issue_departments/create";
     $records=json_decode(curl_post_request($url, $this->data));
     $argold_data = json_decode(json_encode($records), true);
     if (!isset($argold_data['product_names']['names'])) $argold_data['product_names'] = array('names' => array());
@@ -56,7 +56,7 @@ class Production_summary extends BaseController {
     $records=json_decode(curl_post_request($url, $_GET));
     $arf_records = json_decode(json_encode($records), true);
 
-    $url=API_LIVE_BASE_PATH."issue_departments/api_issue_departments/index";
+    $url=API_ARG_BASE_PATH."issue_departments/api_issue_departments/index";
     $records=json_decode(curl_post_request($url, $_GET));
     $argold_records = json_decode(json_encode($records), true);    
     
