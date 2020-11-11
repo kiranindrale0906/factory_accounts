@@ -58,7 +58,7 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
     $this->create_metal_receipt_voucher_for_finished_goods();
     if (   ENABLE_API_FOR_RECEIPT 
         && $this->attributes['receipt_type'] != 'Internal' 
-        && ($this->attributes['account_name'] == 'ARF Software'
+        && (   $this->attributes['account_name'] == 'ARF Software'
             || $this->attributes['receipt_type'] == 'ARF Chain Receipt'
             || $this->attributes['receipt_type'] == 'ARF RND'))
       $this->client_metal_receipt_voucher_model->send_request_to_arf($this->attributes);
@@ -91,7 +91,13 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
         
       $obj_metal_receipt_voucher=new metal_receipt_voucher_model($metal_receipt_data);
       $obj_metal_receipt_voucher->store();    
+
+      $obj_metal_receipt_voucher=new metal_receipt_voucher_model($metal_receipt_data);
+      $obj_metal_receipt_voucher->before_validate();
+      $obj_metal_receipt_voucher->store();    
     }
+
+
 
 
     // if (empty($this->attributes['metal_receipt_voucher_reference_id'])) return true;
