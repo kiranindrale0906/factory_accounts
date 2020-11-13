@@ -30,7 +30,7 @@
 
 <br />
 
-<div class="row"> 
+<!-- <div class="row"> 
   <div class="col-md-12">
     <h6>
       Category One:
@@ -42,7 +42,7 @@
       <?php } ?>
     </h6>
   </div>
-</div>
+</div> -->
 
 <br />
 
