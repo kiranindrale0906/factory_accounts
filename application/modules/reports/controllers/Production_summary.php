@@ -63,7 +63,6 @@ class Production_summary extends BaseController {
     if (empty($argold_records)) $argold_records = array('data' => array());
     
     $records = array_merge($arf_records['data'], $argold_records['data']);
-    pd($records);
     $date_wise_data = array();
     if ($this->data['group_by'] == 'Date') {
       foreach ($records as $record) {      
