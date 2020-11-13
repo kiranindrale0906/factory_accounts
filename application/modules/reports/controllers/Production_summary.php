@@ -16,6 +16,7 @@ class Production_summary extends BaseController {
     if(!isset($this->data['record'])) $this->data['record'] = array();
     $this->data['product_name'] = (!empty($_GET['product_name'])) ? $_GET['product_name'] : '';
     $this->data['in_purity']    = (!empty($_GET['in_purity']))    ? $_GET['in_purity'] : '';
+    $this->data['account_name']    = (!empty($_GET['account_name']))    ? $_GET['account_name'] : '';
     $this->data['category_one'] = (!empty($_GET['category_one'])) ? $_GET['category_one'] : '';
     $this->data['group_by']     = (!empty($_GET['group_by'])) ? $_GET['group_by'] : '';
     //if (!empty($_GET['production_summary']['machine_size'])) $this->data['record']['machine_size'] = $_GET['production_summary']['machine_size'];
@@ -28,6 +29,7 @@ class Production_summary extends BaseController {
     // pd($arf_data);
     if (!isset($arf_data['product_names']['names']))   $arf_data['product_names'] = array('names' => array());
     if (!isset($arf_data['in_purities']['names']))     $arf_data['in_purities'] = array('names' => array());
+    if (!isset($arf_data['account_names']['names']))     $arf_data['account_names'] = array('names' => array());
     if (!isset($arf_data['category_ones']['names']))   $arf_data['category_ones'] = array('names' => array());
 
     $url=API_ARG_BASE_PATH."issue_departments/api_issue_departments/create";
@@ -35,10 +37,12 @@ class Production_summary extends BaseController {
     $argold_data = json_decode(json_encode($records), true);
     if (!isset($argold_data['product_names']['names'])) $argold_data['product_names'] = array('names' => array());
     if (!isset($argold_data['in_purities']['names']))   $argold_data['in_purities'] = array('names' => array());
+    if (!isset($argold_data['account_names']['names']))   $argold_data['account_names'] = array('names' => array());
     if (!isset($argold_data['category_ones']['names'])) $argold_data['category_ones'] = array('names' => array());
     
     $this->data['product_names'] = array_unique(array_merge($arf_data['product_names']['names'], $argold_data['product_names']['names']));
     $this->data['in_purities']   = array_unique(array_merge($arf_data['in_purities']['names'], $argold_data['in_purities']['names']));
+    $this->data['account_names']   = array_unique(array_merge($arf_data['account_names']['names'], $argold_data['account_names']['names']));
     $this->data['category_ones'] = array_unique(array_merge($arf_data['category_ones']['names'], $argold_data['category_ones']['names']));
     //$this->data['machine_sizes'] = get_dropdown_array(array_unique(array_merge($arf_data['machine_sizes']['names'], $argold_data['machine_sizes']['names'])), true);
     //$this->data['design_codes']  = get_dropdown_array(array_unique(array_merge($arf_data['design_codes']['names'], $argold_data['design_codes']['names'])), true);
