@@ -85,10 +85,10 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
         || $this->attributes['receipt_type'] == "ARF Software Finished Goods"
         || $this->attributes['receipt_type'] == "ARC Finished Goods") {
       unset($this->formdata['metal_issue_vouchers']);
-      $this->formdata['metal_issue_vouchers'] = array(array('account_name' => $this->attributes['receipt_type'],
-                                                            'credit_weight' => $this->attributes['debit_weight'],
-                                                            'purity' => $this->attributes['purity'],
-                                                            'factory_purity' => $this->attributes['purity']));
+      // $this->formdata['metal_issue_vouchers'] = array(array('account_name' => $this->attributes['receipt_type'],
+      //                                                       'credit_weight' => $this->attributes['debit_weight'],
+      //                                                       'purity' => $this->attributes['purity'],
+      //                                                       'factory_purity' => $this->attributes['purity']));
     }
   }
   
