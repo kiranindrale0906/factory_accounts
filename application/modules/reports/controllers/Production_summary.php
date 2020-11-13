@@ -55,12 +55,12 @@ class Production_summary extends BaseController {
     $url=API_ARF_BASE_PATH."issue_departments/api_issue_departments/index";
     $records=json_decode(curl_post_request($url, $_GET));
     $arf_records = json_decode(json_encode($records), true);
-    if (empty($arf_records)) $arf_records = array('data' => array());
+    if (empty($arf_records['data'])) $arf_records['data'] = array();
 
     $url=API_ARG_BASE_PATH."issue_departments/api_issue_departments/index";
     $records=json_decode(curl_post_request($url, $_GET));
     $argold_records = json_decode(json_encode($records), true);    
-    if (empty($argold_records)) $argold_records = array('data' => array());
+    if (empty($argold_records)) $argold_records['data'] = array();
     
     $records = array_merge($arf_records['data'], $argold_records['data']);
     $date_wise_data = array();
