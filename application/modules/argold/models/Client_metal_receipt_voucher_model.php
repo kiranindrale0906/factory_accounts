@@ -85,10 +85,10 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
         || $this->attributes['receipt_type'] == "ARF Software Finished Goods"
         || $this->attributes['receipt_type'] == "ARC Finished Goods") {
       unset($this->formdata['metal_issue_vouchers']);
-      $this->formdata['metal_issue_vouchers'] = array(array('account_name' => $this->attributes['receipt_type'],
-                                                            'credit_weight' => $this->attributes['debit_weight'],
-                                                            'purity' => $this->attributes['purity'],
-                                                            'factory_purity' => $this->attributes['purity']));
+      // $this->formdata['metal_issue_vouchers'] = array(array('account_name' => $this->attributes['receipt_type'],
+      //                                                       'credit_weight' => $this->attributes['debit_weight'],
+      //                                                       'purity' => $this->attributes['purity'],
+      //                                                       'factory_purity' => $this->attributes['purity']));
     }
   }
   
@@ -261,7 +261,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       }
       
       $metal_issue_data['narration'] = $this->attributes['narration'];
-      $metal_issue_data['description'] = $this->attributes['description'];
+      $metal_issue_data['description'] = empty($this->attributes['description']) ? '' : $this->attributes['description'];
       $metal_issue_data['suffix'] = "MI";
       $metal_issue_data['voucher_type'] = "metal issue voucher";
       $metal_issue_data['transaction_type'] = 'account';
@@ -297,31 +297,31 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $api_data = array_merge($api_data, array('type' => 'Pure',
                                                'process_name' => 'Receipt'));
       $send_data['receipt_departments'] = $api_data;
-      $api_url=API_BASE_PATH."api/api_receipt_departments/store";
+      $api_url=API_ARG_BASE_PATH."api/api_receipt_departments/store";
     } else if($data['receipt_type']=="Daily Drawer") {
       $api_data = array_merge($api_data, array('type'=>$data['dd_type'],
                                                'balance' => $in_weight,
                                                'karigar'=> 'Factory'));
       $send_data['daily_drawer_receipts'] = $api_data;
-      $api_url=API_BASE_PATH."api/api_daily_drawer_receipts/store";
+      $api_url=API_ARG_BASE_PATH."api/api_daily_drawer_receipts/store";
     } else if($data['receipt_type'] == "AR Gold Refresh") {
       $api_data = array_merge($api_data, array('type'=>'Pure',
                                                'hook_kdm_purity' => $data['hook_kdm_purity'],
                                                'description' => $data['description'],
                                                'process_name'=>'Refresh'));
       $send_data['refresh_departments'] = $api_data;
-      $api_url=API_BASE_PATH."api/api_refresh_departments/store";
+      $api_url=API_ARG_BASE_PATH."api/api_refresh_departments/store";
     } elseif ($data['receipt_type'] == "AR Gold Chain Receipt") {
       $api_data = array_merge($api_data, array('type' => 'Solid Machine Chain'));
       $send_data['chain_receipts'] = $api_data;
-      $api_url=API_BASE_PATH."api/api_chain_receipts/store";
+      $api_url=API_ARG_BASE_PATH."api/api_chain_receipts/store";
     } elseif ($data['receipt_type'] == "AR Gold RND") {
       $send_data['rnd_receipts'] = $api_data;
-      $api_url=API_BASE_PATH."api/api_rnd_receipts/store";  
+      $api_url=API_ARG_BASE_PATH."api/api_rnd_receipts/store";  
     } elseif ($data['receipt_type'] == "AR Gold Finished Goods Receipt") {
       $send_data['finished_goods_receipts'] = $api_data;
 
-      $api_url=API_BASE_PATH."api/api_finished_goods_receipts/store";      
+      $api_url=API_ARG_BASE_PATH."api/api_finished_goods_receipts/store";      
     }
     if (empty($api_url)) return true;
     $result = curl_post_request($api_url, $send_data);
@@ -346,27 +346,27 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $api_data = array_merge($api_data, array('type' => 'Pure',
                                                'process_name' => 'Receipt'));
       $send_data['receipt_departments'] = $api_data;
-      $api_url=ARF_API_BASE_PATH."api/api_receipt_departments/store";
+      $api_url=API_ARF_BASE_PATH."api/api_receipt_departments/store";
     } elseif ($attributes['receipt_type'] == 'ARF Chain Receipt') {
       $api_data = array_merge($api_data, array('type' => 'Solid Machine Chain'));
       $send_data['chain_receipts'] = $api_data;
-      $api_url=ARF_API_BASE_PATH."api/api_chain_receipts/store";
+      $api_url=API_ARF_BASE_PATH."api/api_chain_receipts/store";
     } elseif ($attributes['receipt_type'] == 'ARF RND') {
       $send_data['rnd_receipts'] = $api_data;
-      $api_url=ARF_API_BASE_PATH."api/api_rnd_receipts/store";  
+      $api_url=API_ARF_BASE_PATH."api/api_rnd_receipts/store";  
     } else if($attributes['receipt_type'] == "ARF Refresh") {
       $api_data = array_merge($api_data, array('type'=>'Pure',
                                                'hook_kdm_purity' => $attributes['hook_kdm_purity'],
                                                'description' => $attributes['description'],
                                                'process_name'=>'Refresh'));
       $send_data['refresh_departments'] = $api_data;
-      $api_url=ARF_API_BASE_PATH."api/api_refresh_departments/store";
+      $api_url=API_ARF_BASE_PATH."api/api_refresh_departments/store";
     } elseif ($attributes['receipt_type'] == 'ARF Finished Goods Receipt') {
       $send_data['finished_goods_receipts'] = $api_data;
-      $api_url=ARF_API_BASE_PATH."api/api_finished_goods_receipts/store";
+      $api_url=API_ARF_BASE_PATH."api/api_finished_goods_receipts/store";
     } elseif ($attributes['receipt_type'] == 'Pending Ghiss') {
       $send_data['pending_ghiss_receipts'] = array_merge($api_data, array('department_name' => $attributes['narration']));
-      $api_url=ARF_API_BASE_PATH."api/api_pending_ghiss_receipts/store";
+      $api_url=API_ARF_BASE_PATH."api/api_pending_ghiss_receipts/store";
     }
 
     if (empty($api_url)) return true;
