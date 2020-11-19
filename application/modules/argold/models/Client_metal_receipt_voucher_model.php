@@ -93,18 +93,21 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   // }
 
   private function set_metal_issue_voucher_attributes_from_argold_software_metal_receipt() {
-    $credit_weight = 0;
-    if (!empty($this->formdata['metal_issue_vouchers'])) {
-      foreach ($this->formdata['metal_issue_vouchers'] as $metal_issue_voucher) {
-        if(!empty($metal_issue_voucher['credit_weight']))
-        $credit_weight += $metal_issue_voucher['credit_weight'];
+    if (   $this->attributes['receipt_type'] == 'Metal'
+        || $this->attributes['receipt_type'] == 'Daily Drawer') {
+      $credit_weight = 0;
+      if (!empty($this->formdata['metal_issue_vouchers'])) {
+        foreach ($this->formdata['metal_issue_vouchers'] as $metal_issue_voucher) {
+          if(!empty($metal_issue_voucher['credit_weight']))
+          $credit_weight += $metal_issue_voucher['credit_weight'];
+        }
       }
-    }
-    $in_weight = $this->attributes['debit_weight'] - $credit_weight;
-    if ($in_weight == 0) return true;
+      $in_weight = $this->attributes['debit_weight'] - $credit_weight;
+      if ($in_weight == 0) return true;
 
-    $this->formdata['metal_issue_vouchers'][] = array('account_name' => 'AR Gold Software',
-                                                      'credit_weight' => $in_weight);
+      $this->formdata['metal_issue_vouchers'][] = array('account_name' => 'AR Gold Software',
+                                                        'credit_weight' => $in_weight);
+    } 
   }
   
   private function set_metal_issue_voucher_attributes_from_receipt_type_for_refresh_and_chain_receipt() {
@@ -159,7 +162,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                                                             'ARC Finished Goods',
                                                             'ARC RND'))
           || ((   $this->attributes['receipt_type'] == 'Alloy Vodator'
-               || $this->attributes['receipt_type'] == 'GPC Vodator') && $this->attributes['site_name'] == 'ARF')) {
+               || $this->attributes['receipt_type'] == 'GPC Vodator') && $this->attributes['site_name'] == 'ARC')) {
         $set_metal_issue_voucher = 1;
         $account_name = 'ARC Software';
         $site_name = 'ARC';
