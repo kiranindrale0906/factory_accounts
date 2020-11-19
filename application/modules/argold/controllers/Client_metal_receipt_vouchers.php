@@ -16,10 +16,11 @@ class Client_metal_receipt_vouchers extends Core_metal_receipt_vouchers {
     //  $this->data['account_names_for_metal_issue'][] = array('id' => 'AR Gold', 'name' => 'AR Gold');
 
     //if ($company_name != 'ARC')
-      $this->data['account_names_for_metal_issue'][] = array('id' => 'ARC', 'name' => 'ARC');
+    $this->data['account_names_for_metal_issue'][] = array('id' => 'AR Gold Software', 'name' => 'AR Gold Software');
+      $this->data['account_names_for_metal_issue'][] = array('id' => 'ARC Software', 'name' => 'ARC Software');
 
     //if ($company_name != 'ARF')
-      $this->data['account_names_for_metal_issue'][] = array('id' => 'ARF', 'name' => 'ARF'); 
+      //$this->data['account_names_for_metal_issue'][] = array('id' => 'ARF', 'name' => 'ARF'); 
       $this->data['account_names_for_metal_issue'][] = array('id' => 'ARF Software', 'name' => 'ARF Software'); 
     
     //$this->data['account_names_for_metal_issue'][] = array('id' => 'ARC Finished Goods', 'name' => 'ARC Finished Goods');
