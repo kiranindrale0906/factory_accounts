@@ -132,7 +132,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                                                             'AR Gold Chain Receipt',
                                                             'AR Gold Finished Goods Receipt',
                                                             'AR Gold Finished Goods',
-                                                            'AR Gold RND'))) {
+                                                            'AR Gold RND'))
+          || ((   $this->attributes['receipt_type'] == 'Alloy Vodator'
+               || $this->attributes['receipt_type'] == 'GPC Vodator') && $this->attributes['site_name'] == 'AR Gold')) {
         $set_metal_issue_voucher = 1;
         $account_name = 'AR Gold Software';
         $site_name = 'AR Gold';
@@ -143,7 +145,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                                                             'ARF Chain Receipt',
                                                             'ARF Finished Goods Receipt',
                                                             'ARF Finished Goods',
-                                                            'ARF RND'))) {
+                                                            'ARF RND'))
+          || ((   $this->attributes['receipt_type'] == 'Alloy Vodator'
+               || $this->attributes['receipt_type'] == 'GPC Vodator') && $this->attributes['site_name'] == 'ARF')) {
         $set_metal_issue_voucher = 1;
         $account_name = 'ARF Software';
         $site_name = 'ARF';
@@ -153,7 +157,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                                                             'ARC Chain Receipt',
                                                             'ARC Finished Goods Receipt',
                                                             'ARC Finished Goods',
-                                                            'ARC RND'))) {
+                                                            'ARC RND'))
+          || ((   $this->attributes['receipt_type'] == 'Alloy Vodator'
+               || $this->attributes['receipt_type'] == 'GPC Vodator') && $this->attributes['site_name'] == 'ARF')) {
         $set_metal_issue_voucher = 1;
         $account_name = 'ARC Software';
         $site_name = 'ARC';
@@ -515,13 +521,13 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       
       if ($start_date_timestamp > $voucher_date_timestamp) continue;
       $metal_receipt_voucher = $this->find('',array('receipt_type' => $type.' Vodator',
-                                                    'account_name' => $type.' Vodator',
+                                                    'account_name' => $from.' '.$type.' Vodator',
                                                     'narration' => $from.' '.$type.' Vodator',
                                                     'voucher_date' => $record['created_date']));
       $data=array('company_id' => 1,
                   'voucher_date' => $record['created_date'],
                   'receipt_type' => $type.' Vodator',
-                  'account_name' => $type.' Vodator',
+                  'account_name' => $from.' '.$type.' Vodator',
                   'debit_weight' => $record['weight'],
                   'purity' => $record['purity'],
                   'factory_purity' => $record['purity'],
