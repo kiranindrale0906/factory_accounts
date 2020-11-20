@@ -44,17 +44,22 @@ class Trial_balances extends Ledgers {
     $url=API_ARG_BASE_PATH."issue_and_receipts/ledger_balance/index";
     $arg_records=json_decode(curl_post_request($url));
     
-    $url=API_ARG_BASE_PATH."issue_and_receipts/ledger_balance/index";
-    $records=json_decode(curl_post_request($url));
+    $url=API_ARF_BASE_PATH."issue_and_receipts/ledger_balance/index";
+    $arf_records=json_decode(curl_post_request($url));
+
+    $url=API_ARC_BASE_PATH."issue_and_receipts/ledger_balance/index";
+    $arc_records=json_decode(curl_post_request($url));
     
-    $this->data['argold_balance']=$arg_records->data->record;
-    $this->data['argold_balance']->argold = 0;
-    $this->data['argold_balance']->arc = 0;
-    $this->data['argold_balance']->arf = 0;
+    $this->data['accounts_argold_balance'] = $this->voucher_model->find('sum(debit_weight - credit_weight) as balance', 
+                                                                        array('account_name' => 'AR Gold Software'));
+    $this->data['accounts_arf_balance']    = $this->voucher_model->find('sum(debit_weight - credit_weight) as balance', 
+                                                                        array('account_name' => 'ARF Software'));
+    $this->data['accounts_arc_balance']    = $this->voucher_model->find('sum(debit_weight - credit_weight) as balance', 
+                                                                        array('account_name' => 'ARC Software'));
     
-    $this->data['live_balance']=$records->data->record;
-    //$this->data['live_balance']->arc = 0;
-    //$this->data['live_balance']->arf = 0;
+    $this->data['live_argold_balance'] = $arg_records->data->record;
+    $this->data['live_arf_balance']    = $arf_records->data->record;
+    $this->data['live_arc_balance']    = $arc_records->data->record;
   }
 
   private function get_account_ledger_records() {
