@@ -32,10 +32,10 @@
                       echo implode(', ', $narration);
                     ?>
                   </td>
-                  <td class="text-right"><?= $metal_voucher_detail['credit_weight']; ?></td>
-                  <td class="text-right"><?= $metal_voucher_detail['chitti_purity'] ?></td>
+                  <td class="text-right"><?= four_decimal($metal_voucher_detail['credit_weight']); ?></td>
+                  <td class="text-right"><?= four_decimal($metal_voucher_detail['chitti_purity']); ?></td>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['factory_purity'] - $metal_voucher_detail['chitti_purity']) ?></td>
-                  <td class="text-right"><?=$metal_voucher_detail['factory_fine'] ?></td>
+                  <td class="text-right"><?= four_decimal($metal_voucher_detail['factory_fine']) ?></td>
                 </tr>
                 <?php $sr_no++; 
               //}
