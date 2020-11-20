@@ -30,10 +30,12 @@ class Chitti_model extends BaseModel {
       $this->attributes['packet_no'] = $chitti_details['packet_no'];
     }
 
-    $gst_rate = 2.5;
     if ($this->attributes['sale_type'] == 'Labour') {
       $this->attributes['credit_weight'] = $this->attributes['factory_fine'] - $this->attributes['fine']; 
       $gst_rate = 1.5;
+    } else {
+      $gst_rate = 2.5;
+      $this->attributes['credit_weight'] = $this->attributes['factory_fine']; 
     }
 
     $this->attributes['taxable_amount'] = $this->attributes['credit_weight'] * $this->attributes['rate'];
