@@ -102,7 +102,10 @@ function get_row_actions($row, $url, $select_url, $filter) {
                            'url' => ADMIN_PATH.$controller.'/edit/'.$row['id'],
                            'confirm_message' => "",
                            'class' => 'btn-sm');
-
+  $actions["detail"] = array('request' => "http", 
+                           'url' => ADMIN_PATH.$controller.'/view/'.$row['id'].'?detail=1',
+                           'confirm_message' => "",
+                           'class' => 'btn-sm');
   // $actions["Delete"] = array('request' => "http",
   //                              'url' => ADMIN_PATH.$controller.'/delete/'.$row['id'],
   //                              'confirm_message' => "Do you want to delete",
