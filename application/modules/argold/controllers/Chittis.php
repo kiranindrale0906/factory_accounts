@@ -15,6 +15,7 @@ class Chittis extends BaseController {
   }
 
   public function _get_view_data() {
+    $this->data['detail'] = isset($_GET['detail']) ? 1 : 0;
     $this->data['account_id']='';
     $this->data['metal_voucher_details'] = $this->voucher_model->get('', array('voucher_type'=>'metal issue voucher',
                                                                         'chitti_id'=>$this->data['record']['id']));
