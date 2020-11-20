@@ -80,6 +80,8 @@ function get_field_attribute($table, $field) {
     'debit_amount'  => array('Debit Amount', '', TRUE, '', TRUE),
     'sgst_amount'   => array('SGST', '', TRUE, '', TRUE),
     'cgst_amount'   => array('CGST', '', TRUE, '', TRUE),
+    'taxable_amount'   => array('Taxable Amount', '', TRUE, '', TRUE),
+
   );
   
   $attributes['chitti_details'] = array(
