@@ -26,7 +26,7 @@
                 <tr>
                   <td><?= $sr_no+1?></td>
                   <td>
-                    <?
+                    <?php
                       $narration = explode(', ', $metal_voucher_detail['narration']);
                       $narration = array_unique($narration);
                       echo implode(', ', $narration);
