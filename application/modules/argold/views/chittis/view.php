@@ -19,9 +19,9 @@
   <div class="col-md-6">
     <table class="table table-sm">
       <tr>
-        <td><h6>Account Name</td><td class="text-right"><?=$chittis_details['account_name']?></h6></td>
+        <td>Account Name</td><td class="text-right"><h6><?=$chittis_details['account_name']?></h6></td>
       </tr><tr>
-        <td><h6>Chitti Date</td><td class="text-right"><?=date('d-m-Y',strtotime($record['created_at']))?></h6></td>
+        <td>Chitti Date</td><td class="text-right"><h6><?=date('d-m-Y',strtotime($record['created_at']))?></h6></td>
     </table>
   </div>
 </div>  
@@ -29,9 +29,9 @@
   <div class="col-md-6">
     <table class="table table-sm">
       <tr>
-        <td><h6>Total Gross</td><td class="text-right"><?=four_decimal($record['weight'])?></h6></td>
+        <td>Total Gross</td><td class="text-right"><h6><?=four_decimal($record['weight'])?></h6></td>
       </tr><tr>
-        <td><h6>Total Fine</td><td class="text-right"><?=four_decimal($record['factory_fine'])?></h6></td>
+        <td>Total Fine</td><td class="text-right"><h6><?=four_decimal($record['factory_fine'])?></h6></td>
       </tr>
     </table>
   </div>
@@ -39,9 +39,9 @@
     <div class="col-md-6">
       <table class="table table-sm">
         <tr>
-          <td><h6>No of Packets</td><td class="text-right"><?=four_decimal($record['no_of_packets'])?></h6></td>
+          <td>No of Packets</td><td class="text-right"><h6><?=four_decimal($record['no_of_packets'])?></h6></td>
         </tr><tr>
-          <td><h6>Packet Gross Weight</td><td class="text-right"><?=four_decimal($record['packet_gross_weight'])?></h6></td>
+          <td>Packet Gross Weight</td><td class="text-right"><h6><?=four_decimal($record['packet_gross_weight'])?></h6></td>
         </tr>
       </table>
     </div>
@@ -62,17 +62,17 @@
     <div class="form-group container">
       <table class="table table-sm">
         <tr>
-          <td><h6>Weight</td><td class="text-right"><?=four_decimal($record['credit_weight'])?></h6></td>
+          <td>Weight</td><td class="text-right"><h6><?=four_decimal($record['credit_weight'])?></h6></td>
         </tr><tr>
-          <td><h6>Rate</td><td class="text-right"><?=four_decimal($record['rate'])?></h6></td>
+          <td>Rate</td><td class="text-right"><h6><?=four_decimal($record['rate'])?></h6></td>
         </tr><tr>
-          <td><h6>Taxable Amount</td><td class="text-right"><?=four_decimal($record['taxable_amount'])?></h6></td>
+          <td>Taxable Amount</td><td class="text-right"><h6><?=four_decimal($record['taxable_amount'])?></h6></td>
         </tr><tr>
-          <td><h6>CGST Amount</td><td class="text-right"><?=four_decimal($record['cgst_amount'])?></h6></td>
+          <td>CGST Amount</td><td class="text-right"><h6><?=four_decimal($record['cgst_amount'])?></h6></td>
         </tr><tr>
-          <td><h6>SGST Amount</td><td class="text-right"><?=four_decimal($record['sgst_amount'])?></h6></td>
+          <td>SGST Amount</td><td class="text-right"><h6><?=four_decimal($record['sgst_amount'])?></h6></td>
         </tr><tr>
-          <td><h6>Total Amount</td><td class="text-right"><?=four_decimal($record['debit_amount'])?></h6></td>
+          <td>Total Amount</td><td class="text-right"><h6><?=four_decimal($record['debit_amount'])?></h6></td>
         </tr>
       </table>
     </div>
