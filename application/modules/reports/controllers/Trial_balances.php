@@ -50,11 +50,11 @@ class Trial_balances extends Ledgers {
     $url=API_ARC_BASE_PATH."issue_and_receipts/ledger_balance/index";
     $arc_records=json_decode(curl_post_request($url));
     
-    $this->data['accounts_argold_balance'] = $this->voucher_model->find('sum(debit_weight - credit_weight) as balance', 
+    $this->data['accounts_argold_balance'] = $this->voucher_model->find('(sum(debit_weight*purity/100) - sum(credit_weight*purity/100)) as balance', 
                                                                         array('account_name' => 'AR Gold Software'))['balance'];
-    $this->data['accounts_arf_balance']    = $this->voucher_model->find('sum(debit_weight - credit_weight) as balance', 
+    $this->data['accounts_arf_balance']    = $this->voucher_model->find('(sum(debit_weight*purity/100) - sum(credit_weight*purity/100)) as balance', 
                                                                         array('account_name' => 'ARF Software'))['balance'];
-    $this->data['accounts_arc_balance']    = $this->voucher_model->find('sum(debit_weight - credit_weight) as balance', 
+    $this->data['accounts_arc_balance']    = $this->voucher_model->find('(sum(debit_weight*purity/100) - sum(credit_weight*purity/100)) as balance', 
                                                                         array('account_name' => 'ARC Software'))['balance'];
     
     $this->data['live_argold_balance'] = $arg_records->data->record->argold;
