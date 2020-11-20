@@ -144,20 +144,20 @@
           <tr>
             <td>AR GOLD</td>
             <td class="text-right"><?= four_decimal($accounts_argold_balance) ?></td>
-            <td class="text-right"><?= four_decimal($live_argold_balance->argold) ?>  </td>
-            <td class="text-right"><?= four_decimal($accounts_argold_balance - $live_argold_balance->argold) ?></td>
+            <td class="text-right"><?= four_decimal($live_argold_balance) ?></td>
+            <td class="text-right"><?= four_decimal($accounts_argold_balance - $live_argold_balance) ?></td>
           </tr>
           <tr>
             <td>ARF</td>
             <td class="text-right"><?= four_decimal($accounts_arf_balance) ?></td>
-            <td class="text-right"><?= four_decimal($live_arf_balance->arf) ?>  </td>
-            <td class="text-right"><?= four_decimal($accounts_arf_balance - $live_arf_balance->argold) ?></td>
+            <td class="text-right"><?= four_decimal($live_arf_balance) ?>  </td>
+            <td class="text-right"><?= four_decimal($accounts_arf_balance - $live_arf_balance) ?></td>
           </tr>
           <tr>
             <td>ARC</td>
             <td class="text-right"><?= four_decimal($accounts_arc_balance) ?></td>
-            <td class="text-right"><?= four_decimal($live_arc_balance->arc) ?>  </td>
-            <td class="text-right"><?= four_decimal($accounts_arc_balance - $live_arc_balance->argold) ?></td>
+            <td class="text-right"><?= four_decimal($live_arc_balance) ?>  </td>
+            <td class="text-right"><?= four_decimal($accounts_arc_balance - $live_arc_balance) ?></td>
           </tr>
           <tr>
             <td>Total</td>
