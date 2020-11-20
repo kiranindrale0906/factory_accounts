@@ -57,9 +57,9 @@ class Trial_balances extends Ledgers {
     $this->data['accounts_arc_balance']    = $this->voucher_model->find('sum(debit_weight - credit_weight) as balance', 
                                                                         array('account_name' => 'ARC Software'));
     
-    $this->data['live_argold_balance'] = $arg_records->data->record;
-    $this->data['live_arf_balance']    = $arf_records->data->record;
-    $this->data['live_arc_balance']    = $arc_records->data->record;
+    $this->data['live_argold_balance'] = $arg_records->data->record->argold;
+    $this->data['live_arf_balance']    = $arf_records->data->record->argold;
+    $this->data['live_arc_balance']    = $arc_records->data->record->argold;
   }
 
   private function get_account_ledger_records() {
