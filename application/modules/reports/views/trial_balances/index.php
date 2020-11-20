@@ -159,7 +159,7 @@
             <td>Total</td>
             <td class="text-right"><?= four_decimal(-1 * ($accounts_argold_balance + $accounts_arf_balance + $accounts_arc_balance)) ?></td>
             <td class="text-right"><?= four_decimal(-1 * ($live_argold_balance + $live_arf_balance + $live_arc_balance)) ?>  </td>
-            <td class="text-right"><b><?= four_decimal(-1 * (  $accounts_argold_balance  - $live_argold_balance)
+            <td class="text-right"><b><?= four_decimal(-1 * (  $accounts_argold_balance  - $live_argold_balance
                                                              + $accounts_arf_balance - $live_arf_balance
                                                              + $accounts_arc_balance - $live_arc_balance)) ?></b></td>
           </tr>
