@@ -122,10 +122,6 @@
           <td><b>Closing Stock: </b></td>
           <td class="text-right"><b><?= four_decimal($assets_fine + $liabilities_fine - $liabilities_vadotar - $assets_vadotar, '-');  ?></b></td>
         </tr>
-        <tr>
-          <td><b>Balance: </b></td>
-          <td class="text-right">0</td>
-        </tr>
       </table>
     </div>
   </div>
@@ -143,39 +139,30 @@
           </thead>
           <tr>
             <td>AR GOLD</td>
-            <td class="text-right"><?= four_decimal($accounts_argold_balance) ?></td>
-            <td class="text-right"><?= four_decimal($live_argold_balance) ?></td>
+            <td class="text-right"><?= four_decimal(-1 * $accounts_argold_balance) ?></td>
+            <td class="text-right"><?= four_decimal(-1 * $live_argold_balance) ?></td>
             <td class="text-right"><?= four_decimal($accounts_argold_balance - $live_argold_balance) ?></td>
           </tr>
           <tr>
             <td>ARF</td>
-            <td class="text-right"><?= four_decimal($accounts_arf_balance) ?></td>
-            <td class="text-right"><?= four_decimal($live_arf_balance) ?>  </td>
+            <td class="text-right"><?= four_decimal(-1 * $accounts_arf_balance) ?></td>
+            <td class="text-right"><?= four_decimal(-1 * $live_arf_balance) ?>  </td>
             <td class="text-right"><?= four_decimal($accounts_arf_balance - $live_arf_balance) ?></td>
           </tr>
           <tr>
             <td>ARC</td>
-            <td class="text-right"><?= four_decimal($accounts_arc_balance) ?></td>
-            <td class="text-right"><?= four_decimal($live_arc_balance) ?>  </td>
+            <td class="text-right"><?= four_decimal(-1 * $accounts_arc_balance) ?></td>
+            <td class="text-right"><?= four_decimal(-1 * $live_arc_balance) ?>  </td>
             <td class="text-right"><?= four_decimal($accounts_arc_balance - $live_arc_balance) ?></td>
           </tr>
           <tr>
             <td>Total</td>
-            <td class="text-right"><?= four_decimal(-1 * ($argold_balance->argold) + $argold_balance->arc + $argold_balance->arf) ?></td>
-            <td class="text-right"><?= four_decimal(-1 * ($live_balance->argold) + $live_balance->arc + $live_balance->arf) ?>  </td>
-            <td class="text-right"><b><?= four_decimal(-1 * ($argold_balance->argold+$live_balance->argold)
-                                                          + $argold_balance->arc+$live_balance->arc
-                                                          + $argold_balance->arf+$live_balance->arf) ?></b></td>
+            <td class="text-right"><?= four_decimal(-1 * ($accounts_argold_balance + $accounts_arf_balance + $accounts_arc_balance)) ?></td>
+            <td class="text-right"><?= four_decimal(-1 * ($live_argold_balance + $live_arf_balance + $live_arc_balance)) ?>  </td>
+            <td class="text-right"><b><?= four_decimal(-1 * (  $accounts_argold_balance  - $live_argold_balance)
+                                                             + $accounts_arf_balance - $live_arf_balance
+                                                             + $accounts_arc_balance - $live_arc_balance)) ?></b></td>
           </tr>
-          <tr>
-            <td>Balance</td>
-            <td class="text-right">-</td>
-            <td class="text-right">-</td>
-            <td class="text-right"><b><?= four_decimal($assets_fine + $liabilities_fine - $assets_vadotar - $liabilities_vadotar 
-                                                       + ($argold_balance->argold+$live_balance->argold)
-                                                       - $argold_balance->arc - $live_balance->arc
-                                                       - $argold_balance->arf - $live_balance->arf) ?></b></td>
-          </tr>   
         </table>
       </div>
     </div>
