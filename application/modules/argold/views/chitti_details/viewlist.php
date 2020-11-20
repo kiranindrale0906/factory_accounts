@@ -25,7 +25,13 @@
                 $sum_fine += $metal_voucher_detail['factory_fine']; ?>
                 <tr>
                   <td><?= $sr_no+1?></td>
-                  <td><?= $metal_voucher_detail['narration'] ?></td>
+                  <td>
+                    <?
+                      $narration = explode(', ', $metal_voucher_detail['narration']);
+                      $narration = array_unique($narration);
+                      echo implode(', ', $narration);
+                    ?>
+                  </td>
                   <td class="text-right"><?= $metal_voucher_detail['credit_weight']; ?></td>
                   <td class="text-right"><?= $metal_voucher_detail['chitti_purity'] ?></td>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['factory_purity'] - $metal_voucher_detail['chitti_purity']) ?></td>
