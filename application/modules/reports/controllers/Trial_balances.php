@@ -11,6 +11,8 @@ class Trial_balances extends Ledgers {
 
   public function index() {
     $url = API_ARG_BASE_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
+    
+    $this->metal_receipt_voucher_model->delete_vodator_records(date('Y-m-d'));
     $records = json_decode(curl_post_request($url));
     if (!empty($records)) {
       $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator, 'Alloy Vodator', 'AR Gold');
