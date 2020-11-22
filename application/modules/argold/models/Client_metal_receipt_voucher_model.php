@@ -106,7 +106,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       if ($in_weight == 0) return true;
 
       $this->formdata['metal_issue_vouchers'][] = array('account_name' => 'AR Gold Software',
-                                                        'credit_weight' => $in_weight);
+                                                        'credit_weight' => $in_weight,
+                                                        'dd_type' => $this->attributes['dd_type']);
     } 
   }
   
@@ -442,7 +443,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
   public function send_request_to_factory($attributes) {
     if ($attributes['credit_weight'] == 0) return true;
-  
+
     $api_data = array('account'=> $attributes['account_name'].' (accounts)',
                       'in_weight' => $attributes['credit_weight'],
                       'in_lot_purity' => $attributes['factory_purity'],
