@@ -11,20 +11,31 @@ class Refresh_model extends BaseModel {
   }
   
   public function before_validate() {
-    $total_weight=$total_fine=$total_factory_fine=0;
-    foreach ($this->formdata['refresh_details'] as $refresh_detail) {
-      $total_weight+=$refresh_detail['weight'];
-      $total_fine+=$refresh_detail['fine'];
-      $total_factory_fine+=$refresh_detail['factory_fine'];
+    if (!empty($this->formdata['refresh_details'])) {
+      $total_weight=$total_fine=$total_factory_fine=0;
+      foreach ($this->formdata['refresh_details'] as $refresh_detail) {
+        $total_weight+=$refresh_detail['weight'];
+        $total_fine+=$refresh_detail['fine'];
+        $total_factory_fine+=$refresh_detail['factory_fine'];
+      }
+      $this->attributes['weight']=$total_weight;
+      $this->attributes['fine']=$total_fine;
+      $this->attributes['factory_fine']=$total_factory_fine;
+      $this->attributes['purity']=($total_fine/$total_weight)*100;
+      $this->attributes['factory_purity']=($total_factory_fine/$total_weight)*100; 
     }
-    $this->attributes['weight']=$total_weight;
-    $this->attributes['fine']=$total_fine;
-    $this->attributes['factory_fine']=$total_factory_fine;
-    $this->attributes['purity']=($total_fine/$total_weight)*100;
-    $this->attributes['factory_purity']=($total_factory_fine/$total_weight)*100; 
+
+    $gst_rate = 1.5;
+    $this->attributes['debit_weight'] = $this->attributes['fine']; 
+    $this->attributes['taxable_amount'] = $this->attributes['debit_weight'] * $this->attributes['rate'];
+    $this->attributes['cgst_amount'] = $this->attributes['taxable_amount'] * $gst_rate / 100;
+    $this->attributes['sgst_amount'] = $this->attributes['taxable_amount'] * $gst_rate / 100;
+    $this->attributes['credit_amount'] = $this->attributes['taxable_amount'] + $this->attributes['cgst_amount'] + $this->attributes['sgst_amount'];
   }
+
   public function after_save($action) {
     parent::after_save($action);
+    if (empty($this->formdata['refresh_details'])) return;
     $this->create_refresh_details();
   }
 

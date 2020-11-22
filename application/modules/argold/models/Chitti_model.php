@@ -38,7 +38,7 @@ class Chitti_model extends BaseModel {
       $this->attributes['credit_weight'] = $this->attributes['factory_fine']; 
     }
 
-    //$this->attributes['taxable_amount'] = $this->attributes['credit_weight'] * $this->attributes['rate'];
+    $this->attributes['taxable_amount'] = $this->attributes['credit_weight'] * $this->attributes['rate'];
     $this->attributes['cgst_amount'] = $this->attributes['taxable_amount'] * $gst_rate / 100;
     $this->attributes['sgst_amount'] = $this->attributes['taxable_amount'] * $gst_rate / 100;
     $this->attributes['debit_amount'] = $this->attributes['taxable_amount'] + $this->attributes['cgst_amount'] + $this->attributes['sgst_amount'];
