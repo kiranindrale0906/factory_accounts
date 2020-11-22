@@ -6,8 +6,8 @@ function ac_vouchers_getTableSettings($table_setting_arg=array()) {
     $table_setting_arg['where'] = 'company_id='.(!empty($ci->session->userdata('company_id'))?$ci->session->userdata('company_id'):-1)." AND ".$table_setting_arg['where'];
   }else{
     $table_setting_arg['where'] = 'company_id='.(!empty($ci->session->userdata('company_id'))?$ci->session->userdata('company_id'):-1);
- 
   }
+  $table_setting_arg['where'] .= ' and receipt_type not in ("Alloy Vodator", "GPC Vodator", "Stone Vatav")';
   
   $table_setting= array('page_title'          => '',
                         'primary_table'       => 'ac_vouchers',
