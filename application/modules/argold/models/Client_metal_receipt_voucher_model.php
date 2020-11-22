@@ -522,13 +522,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
   public function delete_vodator_records($date) {
     $this->delete('', array('receipt_type' => 'Alloy Vodator', 'voucher_date' => $date));
-    $this->metal_issue_voucher_model->delete('', array('receipt_type' => 'Alloy Vodator', 'voucher_date' => $date));
-
     $this->delete('', array('receipt_type' => 'GPC Vodator', 'voucher_date' => $date));
-    $this->metal_issue_voucher_model->delete('', array('receipt_type' => 'GPC Vodator', 'voucher_date' => $date));
-
     $this->delete('', array('receipt_type' => 'Stone Vatav', 'voucher_date' => $date));
-    $this->metal_issue_voucher_model->delete('', array('receipt_type' => 'Stone Vatav', 'voucher_date' => $date));
   }
 
   public function create_vodator_records($records, $receipt_type, $site_name, $start_date='2020-07-04') {

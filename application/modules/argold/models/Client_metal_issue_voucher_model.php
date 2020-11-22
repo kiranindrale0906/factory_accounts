@@ -68,6 +68,12 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
       $this->client_metal_receipt_voucher_model->send_request_to_factory($this->attributes);
   }
 
+  public function delete_vodator_records($date) {
+    $this->delete('', array('receipt_type' => 'Alloy Vodator', 'voucher_date' => $date));
+    $this->delete('', array('receipt_type' => 'GPC Vodator', 'voucher_date' => $date));
+    $this->delete('', array('receipt_type' => 'Stone Vatav', 'voucher_date' => $date));
+  }
+
   // private function create_metal_receipt_voucher_for_finished_goods() {
   //   if (isset($this->attributes['metal_receipt_voucher_reference_id']) 
   //       && (!empty($this->attributes['metal_receipt_voucher_reference_id']))) return true;    

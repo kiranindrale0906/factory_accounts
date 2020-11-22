@@ -6,13 +6,16 @@ class Trial_balances extends Ledgers {
 
   public function __construct() {
     parent::__construct();
-    $this->load->model(array('masters/account_model','masters/company_model', 'transactions/metal_receipt_voucher_model', 'ac_vouchers/voucher_model'));
+    $this->load->model(array('masters/account_model','masters/company_model', 
+                             'transactions/metal_receipt_voucher_model', 'transactions/metal_issue_voucher_model', 
+                             'ac_vouchers/voucher_model'));
   }
 
   public function index() {
     $url = API_ARG_BASE_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
-    
+
     $this->metal_receipt_voucher_model->delete_vodator_records(date('Y-m-d'));
+    $this->metal_issue_voucher_model->delete_vodator_records(date('Y-m-d'));
     $records = json_decode(curl_post_request($url));
     if (!empty($records)) {
       $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator, 'Alloy Vodator', 'AR Gold');
