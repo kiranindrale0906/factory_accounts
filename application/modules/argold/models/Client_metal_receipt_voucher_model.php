@@ -106,7 +106,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       if ($in_weight == 0) return true;
 
       $this->formdata['metal_issue_vouchers'][] = array('account_name' => 'AR Gold Software',
-                                                        'credit_weight' => $in_weight);
+                                                        'credit_weight' => $in_weight,
+                                                        'dd_type' => $this->attributes['dd_type']);
     } 
   }
   
@@ -137,7 +138,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                                                             'AR Gold Finished Goods',
                                                             'AR Gold RND'))
           || ((   $this->attributes['receipt_type'] == 'Alloy Vodator'
-               || $this->attributes['receipt_type'] == 'GPC Vodator') && $this->attributes['site_name'] == 'AR Gold')) {
+               || $this->attributes['receipt_type'] == 'GPC Vodator'
+               || $this->attributes['receipt_type'] == 'Stone Vatav') && $this->attributes['site_name'] == 'AR Gold')) {
         $set_metal_issue_voucher = 1;
         $account_name = 'AR Gold Software';
         $site_name = 'AR Gold';
@@ -150,7 +152,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                                                             'ARF Finished Goods',
                                                             'ARF RND'))
           || ((   $this->attributes['receipt_type'] == 'Alloy Vodator'
-               || $this->attributes['receipt_type'] == 'GPC Vodator') && $this->attributes['site_name'] == 'ARF')) {
+               || $this->attributes['receipt_type'] == 'GPC Vodator'
+               || $this->attributes['receipt_type'] == 'Stone Vatav') && $this->attributes['site_name'] == 'ARF')) {
         $set_metal_issue_voucher = 1;
         $account_name = 'ARF Software';
         $site_name = 'ARF';
@@ -162,7 +165,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                                                             'ARC Finished Goods',
                                                             'ARC RND'))
           || ((   $this->attributes['receipt_type'] == 'Alloy Vodator'
-               || $this->attributes['receipt_type'] == 'GPC Vodator') && $this->attributes['site_name'] == 'ARC')) {
+               || $this->attributes['receipt_type'] == 'GPC Vodator'
+               || $this->attributes['receipt_type'] == 'Stone Vatav') && $this->attributes['site_name'] == 'ARC')) {
         $set_metal_issue_voucher = 1;
         $account_name = 'ARC Software';
         $site_name = 'ARC';
@@ -212,7 +216,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     // if (    ($this->attributes['account_name'] == "Alloy Vodator" && $this->attributes['narration'] == "ARF Alloy Vodator")
     //      || ($this->attributes['account_name'] == "GPC Vodator"   && $this->attributes['narration'] == "ARF GPC Vodator")) {
     if (    $this->attributes['account_name'] == "Alloy Vodator"
-         || $this->attributes['account_name'] == "GPC Vodator") {
+         || $this->attributes['account_name'] == "GPC Vodator"
+         || $this->attributes['receipt_type'] == 'Stone Vatav') {
       unset($this->formdata['metal_issue_vouchers']);
       $this->formdata['metal_issue_vouchers'] = array(array('account_name' => $this->attributes['site_name'].' Software',
                                                             'site_name' => $this->attributes['site_name'],
@@ -442,7 +447,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
   public function send_request_to_factory($attributes) {
     if ($attributes['credit_weight'] == 0) return true;
-  
+
     $api_data = array('account'=> $attributes['account_name'].' (accounts)',
                       'in_weight' => $attributes['credit_weight'],
                       'in_lot_purity' => $attributes['factory_purity'],
@@ -515,7 +520,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     // }
   }
 
-  public function create_vodator_records($records, $type, $from, $start_date='2020-07-04') {
+  public function create_vodator_records($records, $receipt_type, $site_name, $start_date='2020-07-04') {
     if (empty($records)) return true;
     $records = json_decode(json_encode($records), true);
     foreach ($records as $index => $record) {
@@ -523,21 +528,21 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $voucher_date_timestamp = strtotime($record['created_date']);
       
       if ($start_date_timestamp > $voucher_date_timestamp) continue;
-      $metal_receipt_voucher = $this->find('',array('receipt_type' => $type.' Vodator',
-                                                    'account_name' => $from.' '.$type.' Vodator',
-                                                    'narration' => $from.' '.$type.' Vodator',
+      $metal_receipt_voucher = $this->find('',array('receipt_type' => $receipt_type,
+                                                    'account_name' => $site_name.' '.$receipt_type,
+                                                    'narration' => $site_name.' '.$receipt_type,
                                                     'voucher_date' => $record['created_date']));
       $data=array('company_id' => 1,
                   'voucher_date' => $record['created_date'],
-                  'receipt_type' => $type.' Vodator',
-                  'account_name' => $from.' '.$type.' Vodator',
+                  'receipt_type' => $receipt_type,
+                  'account_name' => $site_name.' '.$receipt_type,
                   'debit_weight' => $record['weight'],
                   'purity' => $record['purity'],
                   'factory_purity' => $record['purity'],
                   'fine' => $record['fine'],
                   'factory_fine' => $record['fine'],
-                  'narration' => $from.' '.$type.' Vodator',
-                  'site_name' => $from);
+                  'narration' => $site_name.' '.$receipt_type,
+                  'site_name' => $site_name);
       $data['id'] = '';
       if (!empty($metal_receipt_voucher)) $data['id'] = $metal_receipt_voucher['id'];
         
