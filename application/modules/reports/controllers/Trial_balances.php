@@ -91,7 +91,7 @@ class Trial_balances extends Ledgers {
                     (select account_name, 
                             -1 * sum(credit_weight) as fine,
                             0 as vadotar,
-                            sum(debit_amount) as amount from chitties group by account_name)) t
+                            -1 * sum(debit_amount) as amount from chitties group by account_name)) t
                 group by account_name
                 order by account_name");
       $this->data['trial_balance'] = $query->result_array();
