@@ -276,6 +276,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     $this->set_metal_issue_voucher_attributes_from_receipt_type_for_metal_and_chain_receipt();
     $this->set_metal_issue_voucher_attributes_for_alloy_vadotar_and_gpc_vadotar();
     $this->set_metal_issue_voucher_attributes_from_receipt_type_for_vadotar(); 
+    $this->set_debit_amount_and_credit_weight(); 
 
     $this->set_receipt_type_for_all_metal_issue_vouchers();
     $this->unset_metal_issue_voucher_records_when_credit_weight_is_0(); 
@@ -286,6 +287,23 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     $this->attributes['factory_fine'] = $this->attributes['debit_weight'] * $this->attributes['factory_purity'] / 100;
     parent::before_save($action);
   }
+
+  public function set_debit_amount_and_credit_weight() {
+    if (   $this->attributes['receipt_type'] != 'Metal'
+        && $this->attributes['receipt_type'] != 'AR Gold Refresh'
+        && $this->attributes['receipt_type'] != 'ARF Refresh'
+        && $this->attributes['receipt_type'] != 'ARC Refresh')
+      return;
+
+    if ($this->attributes['gold_rate'] <= 0) return;
+
+    $this->attributes['debit_amount'] = $this->attributes['gold_rate'] * $this->attributes['debit_weight'];
+
+    $this->attributes['debit_amount'] = $this->attributes['debit_amount'] * 1.03;
+    $this->attributes['debit_amount'] = $this->attributes['debit_amount'] * 0.075 / 100;
+  
+    $this->attributes['credit_weight'] = $this->attributes['debit_weight'];
+  } 
   
   public function after_save($action) {
     parent::after_save($action);

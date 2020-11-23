@@ -72,8 +72,17 @@
         </tr><tr>
           <td>SGST Amount</td><td class="text-right"><h6><?=four_decimal($record['sgst_amount'])?></h6></td>
         </tr><tr>
-          <td>Total Amount</td><td class="text-right"><h6><?=four_decimal($record['debit_amount'])?></h6></td>
+          <td>Total Amount</td><td class="text-right"><h6><?=four_decimal(  $record['taxable_amount']
+                                                                          + $record['cgst_amount']
+                                                                          + $record['sgst_amount'])?></h6></td>
+        </tr><tr>
+          <td>TCS</td><td class="text-right"><h6><?=four_decimal(($record['taxable_amount']
+                                                                 + $record['cgst_amount']
+                                                                 + $record['sgst_amount']) * .075 / 100)?></h6></td>
+        </tr><tr>
+          <td>Grand Total</td><td class="text-right"><h6><?=four_decimal($record['debit_amount'])?></h6></td>
         </tr>
+
       </table>
     </div>
   </div>

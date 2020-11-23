@@ -65,12 +65,6 @@
   </div> 
 
   <div class="row"> 
-    <?php load_view('ac_vouchers/ac_vouchers/fields/gold_rate'); 
-          load_view('ac_vouchers/ac_vouchers/fields/rate'); 
-          load_view('ac_vouchers/ac_vouchers/fields/gold_rate_purity'); ?>
-  </div>  
-
-  <div class="row"> 
     <?php load_view('ac_vouchers/ac_vouchers/fields/payment_term'); ?>   
   </div>  
 
@@ -123,9 +117,17 @@
       }
       load_view('ac_vouchers/ac_vouchers/fields/lumpsum_amount');
       load_view('ac_vouchers/ac_vouchers/fields/transaction_type'); 
-      load_view('ac_vouchers/ac_vouchers/fields/description');  
+      
     ?>
   </div>  
+
+  <div class="row"> 
+    <?php load_view('ac_vouchers/ac_vouchers/fields/gold_rate'); 
+          load_view('ac_vouchers/ac_vouchers/fields/rate'); 
+          load_view('ac_vouchers/ac_vouchers/fields/gold_rate_purity'); 
+          load_view('ac_vouchers/ac_vouchers/fields/description');  ?>
+  </div>  
+
 
   <div class="row">   
     <?php load_view('ac_vouchers/ac_vouchers/fields/total'); ?>
