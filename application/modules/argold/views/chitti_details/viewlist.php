@@ -61,7 +61,9 @@
             <td class="text-right"><?=four_decimal($sum_weight);?></td>
             <td class="text-right"></td>
             <td class="text-right"></td>
-            <td class="text-right"></td>
+            <?php if ($detail==1): ?>
+              <td class="text-right"></td>
+            <?php endif; ?>
             <?php if ($detail==1): ?>
               <td class="text-right"><?=four_decimal($sum_fine);?></td>
             <?php endif; ?>  

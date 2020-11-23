@@ -7,7 +7,7 @@ if ( ! function_exists('four_decimal')) {
     if ($value == 0)
       return $zero_value;
     else
-      return number_format((float)$value, 2, '.', '');
+      return number_format((float)$value, 3, '.', '');
   }
 }
 
