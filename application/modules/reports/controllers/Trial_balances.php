@@ -89,7 +89,7 @@ class Trial_balances extends Ledgers {
                           IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount from ac_vouchers group by account_name)
                   UNION
                     (select account_name, 
-                            -1 * sum(credit_weight) as fine,
+                            sum(credit_weight) as fine,
                             0 as vadotar,
                             -1 * sum(debit_amount) as amount from chitties group by account_name)) t
                 group by account_name
