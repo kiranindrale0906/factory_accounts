@@ -1,6 +1,6 @@
 <?php $this->load->view('reports/ledgers/report_header', array('header' => 'Trial Balance')); ?>
 
-<div class="row"> 
+<!-- <div class="row"> 
   <div class="col-md-6">
     <div class="container">
       <h6>
@@ -13,7 +13,7 @@
     </div>
   </div>
 </div>
-
+ -->
 <div class="row">
   <div class="col-md-6">
     <div class="form-group container">
@@ -134,7 +134,7 @@
         </tr>
         <tr>
           <td><b>Total: </b></td>
-          <td class="text-right"><b><?= four_decimal(-1 * ($liabilities_fine + $assets_fine - $liabilities_vadotar - $assets_vadotar + $chitti_weight), '-');  ?></b></td>
+          <td class="text-right"><?= four_decimal(-1 * ($liabilities_fine + $assets_fine - $liabilities_vadotar - $assets_vadotar + $chitti_weight), '-');  ?></td>
         </tr>
         <tr>
           <td><b>Closing Stock: </b></td>
@@ -144,8 +144,5 @@
     </div>
   </div>
   
-  <?php 
-    if ($trial_balance_type=='Stock')
-      $this->load->view('trial_balances/factory_balance');
-  ?>
+  <?php $this->load->view('trial_balances/factory_balance'); ?>
 </div>

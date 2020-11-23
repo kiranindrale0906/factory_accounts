@@ -12,8 +12,6 @@ class Trial_balances extends Ledgers {
   }
 
   public function index() {
-    $this->data['trial_balance_type'] = isset($_GET['type']) ? $_GET['type'] : 'Stock';
-
     $url = API_ARG_BASE_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
 
     $this->metal_receipt_voucher_model->delete_vodator_records(date('Y-m-d'));
@@ -43,8 +41,7 @@ class Trial_balances extends Ledgers {
 
     $this->data['account_names'] = $this->model->get('distinct(account_name) as name', array(), array(), array('order_by'=>'account_name asc'));
 
-    if ($this->data['trial_balance_type']=='Stock')
-      $this->get_factory_balance();
+    $this->get_factory_balance();
     $this->get_account_ledger_records();
 
     $this->load->render($this->router->class."/index",$this->data);
@@ -74,16 +71,16 @@ class Trial_balances extends Ledgers {
     $this->data['voucher_dates']=array();
     if(empty($this->data['account_names'])) return true;
 
-    if ($this->data['trial_balance_type'] == 'Stock') {
-      $select = "account_name, 
-                 IFNULL((sum(debit_weight*purity)/100),0) - IFNULL((sum(credit_weight*factory_purity)/100),0) as fine,
-                 IFNULL(sum((purity-factory_purity)*debit_weight/100),0) - IFNULL(sum((factory_purity-purity)*credit_weight/100),0) as vadotar,
-                 IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount";
-      $this->data['trial_balance'] = $this->model->get($select, array(), array() , 
-                                                        array('group_by'=>'account_name,',
-                                                              'order_by'=>'account_name asc'));
-      $this->data['chitti_weight'] = 0;
-    } else {
+    // if ($this->data['trial_balance_type'] == 'Stock') {
+    //   $select = "account_name, 
+    //              IFNULL((sum(debit_weight*purity)/100),0) - IFNULL((sum(credit_weight*factory_purity)/100),0) as fine,
+    //              IFNULL(sum((purity-factory_purity)*debit_weight/100),0) - IFNULL(sum((factory_purity-purity)*credit_weight/100),0) as vadotar,
+    //              IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount";
+    //   $this->data['trial_balance'] = $this->model->get($select, array(), array() , 
+    //                                                     array('group_by'=>'account_name,',
+    //                                                           'order_by'=>'account_name asc'));
+    //   $this->data['chitti_weight'] = 0;
+    // } else {
       $query = $this->db->query("select account_name, sum(fine) as fine, sum(vadotar) as vadotar, sum(amount) as amount
                 from (
                   (select account_name, 
@@ -100,6 +97,6 @@ class Trial_balances extends Ledgers {
       $this->data['trial_balance'] = $query->result_array();
 
       $this->data['chitti_weight'] = $this->chitti_model->find('sum(credit_weight) as weight')['weight'];
-    }
+    //}
   }      
 }
