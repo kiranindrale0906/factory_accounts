@@ -129,12 +129,16 @@
           <td class="text-right"><?= four_decimal(-1 * $assets_fine, '-');  ?></td>
         </tr>
         <tr>
+          <td><b>Chitti Weight: </b></td>
+          <td class="text-right"><b><?= four_decimal($chitti_weight), '-');  ?></b></td>
+        </tr>
+        <tr>
           <td><b>Total: </b></td>
-          <td class="text-right"><b><?= four_decimal(-1 * ($liabilities_fine + $assets_fine - $liabilities_vadotar - $assets_vadotar), '-');  ?></b></td>
+          <td class="text-right"><b><?= four_decimal(-1 * ($liabilities_fine + $assets_fine - $liabilities_vadotar - $assets_vadotar - $chitti_weight), '-');  ?></b></td>
         </tr>
         <tr>
           <td><b>Closing Stock: </b></td>
-          <td class="text-right"><b><?= four_decimal($assets_fine + $liabilities_fine - $liabilities_vadotar - $assets_vadotar, '-');  ?></b></td>
+          <td class="text-right"><b><?= four_decimal($assets_fine + $liabilities_fine - $liabilities_vadotar - $assets_vadotar - $chitti_weight, '-');  ?></b></td>
         </tr>
       </table>
     </div>

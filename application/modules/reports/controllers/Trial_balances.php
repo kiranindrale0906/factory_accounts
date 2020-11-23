@@ -97,6 +97,8 @@ class Trial_balances extends Ledgers {
                 group by account_name
                 order by account_name");
       $this->data['trial_balance'] = $query->result_array();
+
+      $this->data['chitti_weight'] = $this->chitt_model->find('sum(credit_weight) as weight')['credit_weight'];
     }
   }      
 }
