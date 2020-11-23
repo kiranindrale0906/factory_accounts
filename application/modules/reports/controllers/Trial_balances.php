@@ -82,6 +82,7 @@ class Trial_balances extends Ledgers {
       $this->data['trial_balance'] = $this->model->get($select, array(), array() , 
                                                         array('group_by'=>'account_name,',
                                                               'order_by'=>'account_name asc'));
+      $this->data['chitti_weight'] = 0;
     } else {
       $query = $this->db->query("select account_name, sum(fine) as fine, sum(vadotar) as vadotar, sum(amount) as amount
                 from (
