@@ -4,24 +4,27 @@ defined('BASEPATH') OR exit('No direct script access allowed.');
 
 function list_settings() {
   $list_option=array('voucher_date','receipt_type', 'created_time', 'voucher_number', 'account_name', 
-                     'debit_weight', 'factory_purity', 'factory_fine', 'purity', 'fine', 'narration','description','action');
+                     'debit_weight', 'factory_purity', 'factory_fine', 'purity', 'fine', 'narration', 'description', 'gold_rate', 'debit_amount', 'action');
   return ac_vouchers_list_settings($list_option);
 }
 
 function get_field_attribute($table, $field) {
+  if(!empty($_GET['receipt_type']) && $_GET['receipt_type'] == 'Metal')  
+    $required_fields=array('id', 'voucher_date', 'receipt_type', 'account_name', 
+                           'debit_weight', 'purity', 'fine', 'narration', 'description', 'gold_rate');
 
-  if(!empty($_GET['receipt_type']) && (   $_GET['receipt_type'] == 'Metal'
-                                       || $_GET['receipt_type'] == 'AR Gold Chain Receipt'
-                                       || $_GET['receipt_type'] == 'ARF Chain Receipt'
-                                       || $_GET['receipt_type'] == 'ARC Chain Receipt'
-                                       || $_GET['receipt_type'] == 'AR Gold Finished Goods Receipt'
-                                       || $_GET['receipt_type'] == 'ARF Finished Goods Receipt'
-                                       || $_GET['receipt_type'] == 'ARC Finished Goods Receipt'
-                                       || $_GET['receipt_type'] == 'AR Gold RND'
-                                       || $_GET['receipt_type'] == 'ARF RND'
-                                       || $_GET['receipt_type'] == 'ARC RND'))	{
+  elseif(!empty($_GET['receipt_type']) && (  $_GET['receipt_type'] == 'AR Gold Chain Receipt'
+                                          || $_GET['receipt_type'] == 'ARF Chain Receipt'
+                                          || $_GET['receipt_type'] == 'ARC Chain Receipt'
+                                          || $_GET['receipt_type'] == 'AR Gold Finished Goods Receipt'
+                                          || $_GET['receipt_type'] == 'ARF Finished Goods Receipt'
+                                          || $_GET['receipt_type'] == 'ARC Finished Goods Receipt'
+                                          || $_GET['receipt_type'] == 'AR Gold RND'
+                                          || $_GET['receipt_type'] == 'ARF RND'
+                                          || $_GET['receipt_type'] == 'ARC RND'))	{
     $required_fields=array('id', 'voucher_date', 'receipt_type', 'account_name', 
                            'debit_weight', 'purity', 'fine', 'narration','description');
+
   }elseif (!empty($_GET['receipt_type']) && (   $_GET['receipt_type'] == 'ARC Finished Goods' 
                                              || $_GET['receipt_type'] == 'ARF Finished Goods'
                                              || $_GET['receipt_type'] == 'AR Gold Finished Goods'
@@ -40,11 +43,11 @@ function get_field_attribute($table, $field) {
                                              || $_GET['receipt_type'] == 'ARF Refresh'
                                              || $_GET['receipt_type'] == 'AR Gold Refresh')) {
     $required_fields=array('id', 'voucher_date', 'receipt_type', 'account_name',
-                           'debit_weight', 'factory_purity','factory_fine', 'purity', 'fine', 'narration','description', 'hook_kdm_purity');
-  }else {
+                           'debit_weight', 'factory_purity','factory_fine', 'purity', 'fine', 'narration','description', 'hook_kdm_purity', 'gold_rate');
+
+  } else {
     $required_fields=array('id', 'voucher_date', 'receipt_type', 'account_name',
                            'debit_weight', 'factory_purity','factory_fine', 'purity', 'fine', 'narration','description');
-
   }
 
   return ac_voucher_get_field_attribute($table, $field, $required_fields);
@@ -55,7 +58,7 @@ if (!function_exists('get_row_actions')) {
     $actions = array();
     $ci=&get_instance();
     $controller = 'argold/voucher_details'; 
-      $actions["View"] =  array('request' => "http", 
+    $actions["View"] =  array('request' => "http", 
                               'url' => ADMIN_PATH.$controller.'/view/'.$row['id'],
                               'confirm_message' => "",
                               'class' => 'text-warning text-uppercase');
