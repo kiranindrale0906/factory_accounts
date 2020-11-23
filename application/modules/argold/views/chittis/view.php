@@ -1,4 +1,4 @@
-<h5 class="heading noprint">Chitti #<?= $record['id']; ?></h5>
+<h5 class="heading noprint"><?= $record['sale_type'].' Chitti'?> #<?= $record['id']; ?></h5>
 <!-- <div class="row">
   <div class="col-md-6 ">
     <div class="form-group container">
@@ -55,6 +55,12 @@
   <?php $this->load->view('chitti_details/viewlist'); ?>
 </div>
 
+<?php 
+  if ($record['sale_type'] == 'Labour')
+    $gst_rate = 2.5;
+  else
+    $gst_rate = 1.5;
+?>
 <div class="row">
   <div class="col-md-6">
   </div>
@@ -68,9 +74,9 @@
         </tr><tr>
           <td>Taxable Amount</td><td class="text-right"><h6><?=four_decimal($record['taxable_amount'])?></h6></td>
         </tr><tr>
-          <td>CGST Amount</td><td class="text-right"><h6><?=four_decimal($record['cgst_amount'])?></h6></td>
+          <td>CGST Amount (<?= $gst_rate ?>%)</td><td class="text-right"><h6><?=four_decimal($record['cgst_amount'])?></h6></td>
         </tr><tr>
-          <td>SGST Amount</td><td class="text-right"><h6><?=four_decimal($record['sgst_amount'])?></h6></td>
+          <td>SGST Amount (<?= $gst_rate ?>%)</td><td class="text-right"><h6><?=four_decimal($record['sgst_amount'])?></h6></td>
         </tr><tr>
           <td>Total Amount</td><td class="text-right"><h6><?=four_decimal(  $record['taxable_amount']
                                                                           + $record['cgst_amount']

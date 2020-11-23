@@ -300,7 +300,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     $this->attributes['debit_amount'] = $this->attributes['gold_rate'] * $this->attributes['debit_weight'];
 
     $this->attributes['debit_amount'] = $this->attributes['debit_amount'] * 1.03;
-    $this->attributes['debit_amount'] = $this->attributes['debit_amount'] * 0.075 / 100;
+    $this->attributes['debit_amount'] = $this->attributes['debit_amount'] + $this->attributes['debit_amount'] * 0.075 / 100;
   
     $this->attributes['credit_weight'] = $this->attributes['debit_weight'];
   } 
