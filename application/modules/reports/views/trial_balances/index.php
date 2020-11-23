@@ -1,5 +1,19 @@
 <?php $this->load->view('reports/ledgers/report_header', array('header' => 'Trial Balance')); ?>
-  
+
+<div class="row"> 
+  <div class="col-md-6">
+    <div class="container">
+      <h6>
+        Bhav Cut: 
+        <a class="ml-5 <?= ($trial_balance_type == 'Stock') ? 'bold black underline' : '' ?>" 
+           href='<?= base_url() ?>reports/trial_balances?type=Stock'>No</a>
+        <a class="ml-5 <?= ($trial_balance_type != 'Stock') ? 'bold black underline' : '' ?>"
+               href='<?= base_url() ?>reports/trial_balances?type=Amount'>Yes</a>    
+      </h6>
+    </div>
+  </div>
+</div>
+
 <div class="row">
   <div class="col-md-6">
     <div class="form-group container">
@@ -125,46 +139,9 @@
       </table>
     </div>
   </div>
-  <div class="col-md-6">
-    <div class="form-group container">
-      <div class="table-responsive m-t-20">
-        <table class="table table-sm fixedthead table-default">
-          <thead>
-            <tr>
-              <th>Factory Closing Stock</th>
-              <th class="text-right">Accounts</th>
-              <th class="text-right">Factory</th>
-              <th class="text-right">Total</th>
-            </tr>
-          </thead>
-          <tr>
-            <td>AR GOLD</td>
-            <td class="text-right"><?= four_decimal(-1 * $accounts_argold_balance) ?></td>
-            <td class="text-right"><?= four_decimal(-1 * $live_argold_balance) ?></td>
-            <td class="text-right"><?= four_decimal($accounts_argold_balance - $live_argold_balance) ?></td>
-          </tr>
-          <tr>
-            <td>ARF</td>
-            <td class="text-right"><?= four_decimal(-1 * $accounts_arf_balance) ?></td>
-            <td class="text-right"><?= four_decimal(-1 * $live_arf_balance) ?>  </td>
-            <td class="text-right"><?= four_decimal($accounts_arf_balance - $live_arf_balance) ?></td>
-          </tr>
-          <tr>
-            <td>ARC</td>
-            <td class="text-right"><?= four_decimal(-1 * $accounts_arc_balance) ?></td>
-            <td class="text-right"><?= four_decimal(-1 * $live_arc_balance) ?>  </td>
-            <td class="text-right"><?= four_decimal($accounts_arc_balance - $live_arc_balance) ?></td>
-          </tr>
-          <tr>
-            <td>Total</td>
-            <td class="text-right"><?= four_decimal(-1 * ($accounts_argold_balance + $accounts_arf_balance + $accounts_arc_balance)) ?></td>
-            <td class="text-right"><?= four_decimal(-1 * ($live_argold_balance + $live_arf_balance + $live_arc_balance)) ?>  </td>
-            <td class="text-right"><b><?= four_decimal(-1 * (  $accounts_argold_balance  - $live_argold_balance
-                                                             + $accounts_arf_balance - $live_arf_balance
-                                                             + $accounts_arc_balance - $live_arc_balance)) ?></b></td>
-          </tr>
-        </table>
-      </div>
-    </div>
-  </div>
+  
+  <?php 
+    if ($trial_balance_type=='Stock')
+      $this->load->view('trial_balances/factory_balance');
+  ?>
 </div>
