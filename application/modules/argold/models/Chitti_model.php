@@ -41,7 +41,7 @@ class Chitti_model extends BaseModel {
     $this->attributes['taxable_amount'] = $this->attributes['credit_weight'] * $this->attributes['rate'];
     $this->attributes['cgst_amount'] = $this->attributes['taxable_amount'] * $gst_rate / 100;
     $this->attributes['sgst_amount'] = $this->attributes['taxable_amount'] * $gst_rate / 100;
-    $this->attributes['debit_amount'] = $this->attributes['taxable_amount'] + $this->attributes['cgst_amount'] + $this->attributes['sgst_amount'];
+    $this->attributes['debit_amount'] = round($this->attributes['taxable_amount'] + $this->attributes['cgst_amount'] + $this->attributes['sgst_amount']);
   }
   
   //  public function save($after_save=true){
