@@ -43,9 +43,9 @@ class Chitti_model extends BaseModel {
     $this->attributes['sgst_amount'] = $this->attributes['taxable_amount'] * $gst_rate / 100;
     $total_amount = $this->attributes['taxable_amount'] + $this->attributes['cgst_amount'] + $this->attributes['sgst_amount'];
     $this->attributes['debit_amount'] = $total_amount;
-    
+
     if ($this->attributes['sale_type'] != 'Labour') 
-      $this->attributes['debit_amount'] = round($total_amount * 1.075/100);
+      $this->attributes['debit_amount'] = round($total_amount + $total_amount * .075/100);
   }
   
   //  public function save($after_save=true){
