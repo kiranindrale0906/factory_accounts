@@ -130,7 +130,7 @@
         </tr>
         <tr>
           <td><b>Chitti Weight: </b></td>
-          <td class="text-right"><b><?= four_decimal($chitti_weight), '-');  ?></b></td>
+          <td class="text-right"><b><?= four_decimal($chitti_weight, '-');  ?></b></td>
         </tr>
         <tr>
           <td><b>Total: </b></td>
