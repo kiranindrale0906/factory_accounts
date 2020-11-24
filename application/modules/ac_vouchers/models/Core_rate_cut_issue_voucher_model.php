@@ -56,7 +56,7 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
                               'debit_amount' => 0,
                               'debit_weight' => $chitti['credit_weight'],
                               'credit_weight' => 0,
-                              'purity' => $chitti['purity'],
+                              'purity' => $chitti['factory_purity'],
                               'gold_rate' => $chitti['rate'],
                               'gold_rate_purity' => 100,
                               'description' => 'Chitti '.$chitti['id'],
