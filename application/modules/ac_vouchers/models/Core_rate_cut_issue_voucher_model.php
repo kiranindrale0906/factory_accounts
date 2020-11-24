@@ -85,7 +85,7 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
     
     $debit_amount = $metal_receipt_voucher['debit_weight'] * $metal_receipt_voucher['purity'] / 100 * $metal_receipt_voucher['gold_rate'];
     $rate_cut_issue = array('company_id' => 1,
-                            'account_name' => ($receipt_type=='Metal') ? 'PURCHASE ACCOUNT' : 'GOODS RETURN',
+                            'account_name' => $metal_receipt_voucher['account_name'],
                             'voucher_date' => $metal_receipt_voucher['created_at'],
                             'debit_amount' => $debit_amount,
                             'credit_amount' => 0,
@@ -103,7 +103,7 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
     $rate_cut_issue_voucher_obj->store();
 
     $rate_cut_receipt = $rate_cut_issue;
-    $rate_cut_receipt['account_name'] = $metal_receipt_voucher['account_name'];
+    $rate_cut_receipt['account_name'] = ($receipt_type=='Metal') ? 'PURCHASE ACCOUNT' : 'GOODS RETURN';
     $rate_cut_receipt['credit_amount'] = $debit_amount;
     $rate_cut_receipt['debit_amount'] = 0;
     $rate_cut_receipt['debit_weight'] = $metal_receipt_voucher['debit_weight'];
