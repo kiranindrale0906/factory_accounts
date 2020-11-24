@@ -65,6 +65,7 @@ function get_field_attribute($table, $field) {
   $attributes['metal_receipt_gold_rates'] = array(
     'id'            => array('', '', TRUE, '', TRUE),
     'gold_rate'     => array('Gold Rate', '', TRUE, '', TRUE),
+    'sale_type'     => array('Sale Type', '', TRUE, '', TRUE),
    );
   return $attributes[$table][$field];
 }

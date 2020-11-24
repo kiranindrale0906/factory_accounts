@@ -116,7 +116,8 @@
   </div>  
 
   <div class="row"> 
-    <?php load_view('ac_vouchers/ac_vouchers/fields/gold_rate'); 
+    <?php load_view('ac_vouchers/ac_vouchers/fields/sale_type'); 
+          load_view('ac_vouchers/ac_vouchers/fields/gold_rate'); 
           load_view('ac_vouchers/ac_vouchers/fields/rate'); 
           load_view('ac_vouchers/ac_vouchers/fields/gold_rate_purity'); 
           load_view('ac_vouchers/ac_vouchers/fields/description');  ?>
