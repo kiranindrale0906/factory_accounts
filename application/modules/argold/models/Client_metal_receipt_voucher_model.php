@@ -277,12 +277,25 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     $this->set_metal_issue_voucher_attributes_from_argold_software_metal_receipt();
     $this->set_metal_issue_voucher_attributes_from_receipt_type_for_refresh_and_chain_receipt();
     $this->set_metal_issue_voucher_attributes_from_receipt_type_for_metal_and_chain_receipt();
+    $this->set_id_for_alloy_vodator_gpc_vodator_and_stone_vatav();
     $this->set_metal_issue_voucher_attributes_for_alloy_vadotar_and_gpc_vadotar();
     $this->set_metal_issue_voucher_attributes_from_receipt_type_for_vadotar(); 
     //$this->set_debit_amount_and_credit_weight(); 
 
     $this->set_receipt_type_for_all_metal_issue_vouchers();
     $this->unset_metal_issue_voucher_records_when_credit_weight_is_0(); 
+  }
+
+  private function set_id_for_alloy_vodator_gpc_vodator_and_stone_vatav() {
+    if (   $this->attributes['receipt_type'] != 'Alloy Vodator'
+        && $this->attributes['receipt_type'] != 'GPC Vodator'
+        && $this->attributes['receipt_type'] != 'Stone Vatav') return;
+
+    $metal_receipt_voucher = $this->find('id', array('receipt_type' => $this->attributes['receipt_type'],
+                                                     'site_name' => $this->attributes['site_name'],
+                                                     'voucher_date' => $this->attributes['voucher_date']));
+    if (!empty($metal_receipt_voucher)) $this->attributes['id'] = $metal_receipt_voucher['id'];
+
   }
 
   public function before_save($action) {
@@ -543,11 +556,11 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     // }
   }
 
-  public function delete_vodator_records($date) {
-    $this->delete('', array('receipt_type' => 'Alloy Vodator', 'voucher_date' => $date));
-    $this->delete('', array('receipt_type' => 'GPC Vodator', 'voucher_date' => $date));
-    $this->delete('', array('receipt_type' => 'Stone Vatav', 'voucher_date' => $date));
-  }
+  // public function delete_vodator_records($date) {
+  //   $this->delete('', array('receipt_type' => 'Alloy Vodator', 'voucher_date' => $date));
+  //   $this->delete('', array('receipt_type' => 'GPC Vodator', 'voucher_date' => $date));
+  //   $this->delete('', array('receipt_type' => 'Stone Vatav', 'voucher_date' => $date));
+  // }
 
   public function create_vodator_records($records, $receipt_type, $site_name, $start_date='2020-07-04') {
     if (empty($records)) return true;
@@ -557,10 +570,10 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $voucher_date_timestamp = strtotime($record['created_date']);
       
       if ($start_date_timestamp > $voucher_date_timestamp) continue;
-      $metal_receipt_voucher = $this->find('',array('receipt_type' => $receipt_type,
-                                                    'account_name' => $site_name.' '.$receipt_type,
-                                                    'narration' => $site_name.' '.$receipt_type,
-                                                    'voucher_date' => $record['created_date']));
+      $metal_receipt_voucher = $this->find('id, debit_weight', array('receipt_type' => $receipt_type,
+                                                                     'account_name' => $site_name.' '.$receipt_type,
+                                                                     'narration' => $site_name.' '.$receipt_type,
+                                                                     'voucher_date' => $record['created_date']));
       $data=array('company_id' => 1,
                   'voucher_date' => $record['created_date'],
                   'receipt_type' => $receipt_type,
@@ -577,9 +590,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
         
       if(empty($metal_receipt_voucher['debit_weight'])
          || ($metal_receipt_voucher['debit_weight'] != $record['weight'])) {
-        $metal_issue_obj = new metal_receipt_voucher_model($data);
-        $metal_issue_obj->before_validate();
-        $metal_issue_obj->save();
+        $metal_receipt_obj = new metal_receipt_voucher_model($data);
+        $metal_receipt_obj->before_validate();
+        $metal_receipt_obj->save();
       } 
     }
   }

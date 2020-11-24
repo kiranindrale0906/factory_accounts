@@ -29,6 +29,19 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
       $this->attributes['fine'] = $this->attributes['credit_weight'] * $this->attributes['purity'] / 100;
 
     $this->set_factory_purity_and_factory_fine_from_narration();    
+    $this->set_id_for_alloy_vodator_gpc_vodator_and_stone_vatav();
+  }
+
+  private function set_id_for_alloy_vodator_gpc_vodator_and_stone_vatav() {
+    if (   $this->attributes['receipt_type'] != 'Alloy Vodator'
+        && $this->attributes['receipt_type'] != 'GPC Vodator'
+        && $this->attributes['receipt_type'] != 'Stone Vatav') return;
+
+    $metal_issue_voucher = $this->find('id', array('receipt_type' => $this->attributes['receipt_type'],
+                                                   'site_name' => $this->attributes['site_name'],
+                                                   'voucher_date' => $this->attributes['voucher_date']));
+    if (!empty($metal_issue_voucher)) $this->attributes['id'] = $metal_issue_voucher['id'];
+
   }
 
   private function set_factory_purity_and_factory_fine_from_narration() {
