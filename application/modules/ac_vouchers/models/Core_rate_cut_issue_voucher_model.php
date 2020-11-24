@@ -11,6 +11,7 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
   
   function __construct($data=array()) {
     parent::__construct($data);
+    $this->load->model(array('transactions/rate_cut_receipt_voucher_model'));
   }
 
   function validation_rules($klass='') {
@@ -25,7 +26,6 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
   }
 
   function before_validate() {
-    $this->attributes['receipt_type'] = '';
     $this->attributes['fine'] = $this->attributes['credit_weight'] * $this->attributes['purity'] / 100;
     $this->attributes['factory_purity'] = $this->attributes['purity'];
     $this->attributes['factory_fine'] = $this->attributes['fine'];
@@ -46,17 +46,31 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
     $chitti = $this->chitti_model->find('', array('id' => $chitti_id));
     $this->rate_cut_issue_voucher_model->delete('', array('description' => 'Chitti '.$chitti['id'],
                                                           'voucher_type' => 'rate cut issue voucher'));
+    $this->rate_cut_receipt_voucher_model->delete('', array('description' => 'Chitti '.$chitti['id'],
+                                                          'voucher_type' => 'rate cut receipt voucher'));
     if ($chitti['rate'] == 0) return;
-    $rate_cut_issue = array('company_id' => 1,
-                            'account_name' => 'Sales Account',
+    $rate_cut_receipt = array('company_id' => 1,
+                            'account_name' => $chitti['account_name'],
                             'voucher_date' => $chitti['created_at'],
                             'debit_amount' => $chitti['debit_amount'],
-                            'credit_weight' => $chitti['weight'],
+                            'credit_amount' => 0,
+                            'credit_weight' => $chitti['credit_weight'],
+                            'debit_weight' => 0,
                             'purity' => $chitti['purity'],
                             'gold_rate' => $chitti['rate'],
                             'gold_rate_purity' => 100,
                             'description' => 'Chitti '.$chitti['id'],
                             'receipt_type' => 'Chitti');
+    $rate_cut_receipt_voucher_obj = new rate_cut_receipt_voucher_model($rate_cut_receipt);
+    $rate_cut_receipt_voucher_obj->before_validate();
+    $rate_cut_receipt_voucher_obj->store();
+
+    $rate_cut_issue = $rate_cut_receipt;
+    $rate_cut_issue['account_name'] = 'Sales Account';
+    $rate_cut_issue['credit_amount'] = $rate_cut_issue['debit_amount'];
+    $rate_cut_issue['debit_amount'] = 0;
+    $rate_cut_issue['debit_weight'] = $rate_cut_issue['credit_weight'];
+    $rate_cut_issue['credit_weight'] = 0;
     $rate_cut_issue_voucher_obj = new rate_cut_issue_voucher_model($rate_cut_issue);
     $rate_cut_issue_voucher_obj->before_validate();
     $rate_cut_issue_voucher_obj->store();

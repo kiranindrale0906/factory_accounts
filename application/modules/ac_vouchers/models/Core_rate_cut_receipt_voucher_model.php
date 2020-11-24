@@ -25,7 +25,6 @@ class Core_rate_cut_receipt_voucher_model extends Voucher_model {
   }
 
   function before_validate() {
-    $this->attributes['receipt_type'] = '';
     $this->attributes['fine'] = $this->attributes['debit_weight'] * $this->attributes['purity'] / 100;
     $this->attributes['factory_purity'] = $this->attributes['purity'];
     $this->attributes['factory_fine'] = $this->attributes['fine'];
