@@ -42,12 +42,12 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
     }
   }
 
-  public function create_rate_cut_issue_voucher($chitti_id) {
+  public function create_rate_cut_vouchers_for_chitti($chitti_id) {
     $chitti = $this->chitti_model->find('', array('id' => $chitti_id));
     $this->rate_cut_issue_voucher_model->delete('', array('description' => 'Chitti '.$chitti['id'],
                                                           'voucher_type' => 'rate cut issue voucher'));
     $this->rate_cut_receipt_voucher_model->delete('', array('description' => 'Chitti '.$chitti['id'],
-                                                          'voucher_type' => 'rate cut receipt voucher'));
+                                                            'voucher_type' => 'rate cut receipt voucher'));
     if ($chitti['rate'] == 0) return;
     $rate_cut_receipt = array('company_id' => 1,
                               'account_name' => $chitti['account_name'],
@@ -66,7 +66,7 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
     $rate_cut_receipt_voucher_obj->store();
 
     $rate_cut_issue = $rate_cut_receipt;
-    $rate_cut_issue['account_name'] = 'Sales Account';
+    $rate_cut_issue['account_name'] = 'SALES ACCOUNT';
     $rate_cut_issue['debit_amount'] = $chitti['debit_amount'];
     $rate_cut_issue['credit_amount'] = 0;
     $rate_cut_issue['credit_weight'] = $chitti['credit_weight'];
@@ -74,5 +74,42 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
     $rate_cut_issue_voucher_obj = new rate_cut_issue_voucher_model($rate_cut_issue);
     $rate_cut_issue_voucher_obj->before_validate();
     $rate_cut_issue_voucher_obj->store();
+  }
+
+  public function create_rate_cut_vouchers_for_metal_and_refresh($metal_receipt_voucher_id, $receipt_type) {
+    $metal_receipt_voucher = $this->metal_receipt_voucher_model->find('', array('id' => $metal_receipt_voucher_id));
+    $this->rate_cut_issue_voucher_model->delete('', array('description' => $receipt_type.' '.$metal_receipt_voucher['voucher_number'],
+                                                          'voucher_type' => 'rate cut issue voucher'));
+    $this->rate_cut_receipt_voucher_model->delete('', array('description' => $receipt_type.' '.$metal_receipt_voucher['voucher_number'],
+                                                            'voucher_type' => 'rate cut receipt voucher'));
+    
+    $debit_amount = $metal_receipt_voucher['debit_weight'] * $metal_receipt_voucher['purity'] / 100 * $metal_receipt_voucher['gold_rate'];
+    $rate_cut_issue = array('company_id' => 1,
+                            'account_name' => ($receipt_type=='Metal') ? 'PURCHASE ACCOUNT' : 'GOODS RETURN',
+                            'voucher_date' => $metal_receipt_voucher['created_at'],
+                            'debit_amount' => $debit_amount,
+                            'credit_amount' => 0,
+                            'credit_weight' => $metal_receipt_voucher['debit_weight'],
+                            'debit_weight' => 0,
+                            'purity' => 100,
+                            'gold_rate' => $metal_receipt_voucher['gold_rate'],
+                            'gold_rate_purity' => 100,
+                            'description' => $receipt_type.' '.$metal_receipt_voucher['voucher_number'],
+                            'receipt_type' => $receipt_type,
+                            'metal_receipt_voucher_reference_id' => $metal_receipt_voucher['id'],
+                            'site_name' => $metal_receipt_voucher['site_name']);
+    $rate_cut_issue_voucher_obj = new rate_cut_issue_voucher_model($rate_cut_issue);
+    $rate_cut_issue_voucher_obj->before_validate();
+    $rate_cut_issue_voucher_obj->store();
+
+    $rate_cut_receipt = $rate_cut_issue;
+    $rate_cut_receipt['account_name'] = $metal_receipt_voucher['account_name'];
+    $rate_cut_receipt['credit_amount'] = $debit_amount;
+    $rate_cut_receipt['debit_amount'] = 0;
+    $rate_cut_receipt['debit_weight'] = $metal_receipt_voucher['debit_weight'];
+    $rate_cut_receipt['credit_weight'] = 0;
+    $rate_cut_receipt_voucher_obj = new rate_cut_receipt_voucher_model($rate_cut_receipt);
+    $rate_cut_receipt_voucher_obj->before_validate();
+    $rate_cut_receipt_voucher_obj->store();
   }
 }
