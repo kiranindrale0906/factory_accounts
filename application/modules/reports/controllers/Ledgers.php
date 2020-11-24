@@ -48,7 +48,7 @@ class Ledgers extends BaseController {
     } 
 
     if (!isset($this->data['group']) || $this->data['group']=='') {
-      $this->data['group']='chitti';
+      $this->data['group']='';
       $receipt_select = 'receipt_type, '.$period_select.' as voucher_date, 
                  date_format(voucher_date,"%Y-%m-%d") as str_voucher_date, voucher_number,
                  account_name, voucher_type, voucher_number, 0 as credit_amount, (debit_amount - credit_amount) as debit_amount, 
@@ -58,10 +58,9 @@ class Ledgers extends BaseController {
       $issue_select = 'receipt_type, '.$period_select.' as voucher_date, 
                  date_format(voucher_date,"%Y-%m-%d") as str_voucher_date, voucher_number,
                  account_name, voucher_type, voucher_number, (credit_amount - debit_amount) as credit_amount, 0 as debit_amount, 
-                 (credit_weight - debit_weight) as credit_weight, 0 as debit_weight, purity_margin, purity, factory_purity, narration, description,
-                 IF(chitti_id>0, chitti_id, id) as chitti';           
+                 (credit_weight - debit_weight) as credit_weight, 0 as debit_weight, purity_margin, purity, factory_purity, narration, description';           
     } else {
-      $this->data['group'] = 'voucher_date, chitti';
+      $this->data['group'] = 'voucher_date';
       $select = '"" as receipt_type, '.$period_select.' as voucher_date, 
                  date_format(voucher_date,"%Y-%m-%d") as str_voucher_date, "" as voucher_number,
                  "" as account_name, "" as voucher_type, "" as voucher_number, 
@@ -69,8 +68,7 @@ class Ledgers extends BaseController {
                  sum(credit_weight) as credit_weight, sum(debit_weight) as debit_weight, 
                  0 as purity_margin, 
                  sum((credit_weight+debit_weight) * purity) /  sum(credit_weight+debit_weight)  as purity, 
-                 sum((credit_weight+debit_weight) * factory_purity) /  sum(credit_weight+debit_weight)  as factory_purity, ""  as narration, "" as description,
-                 IF(chitti_id>0, chitti_id, id) as chitti';
+                 sum((credit_weight+debit_weight) * factory_purity) /  sum(credit_weight+debit_weight)  as factory_purity, ""  as narration, "" as description';
     }
 
     $where_issue = array_merge($where, array('(credit_weight != 0 or (credit_amount != 0 and debit_weight = 0))' => NULL));
