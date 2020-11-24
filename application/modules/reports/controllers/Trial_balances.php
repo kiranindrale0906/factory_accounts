@@ -71,32 +71,29 @@ class Trial_balances extends Ledgers {
     $this->data['voucher_dates']=array();
     if(empty($this->data['account_names'])) return true;
 
-    // if ($this->data['trial_balance_type'] == 'Stock') {
-      $select = "account_name, 
-                 IFNULL((sum(debit_weight*purity)/100),0) - IFNULL((sum(credit_weight*factory_purity)/100),0) as fine,
-                 IFNULL(sum((purity-factory_purity)*debit_weight/100),0) - IFNULL(sum((factory_purity-purity)*credit_weight/100),0) as vadotar,
-                 IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount";
-      $this->data['trial_balance'] = $this->model->get($select, array(), array() , 
-                                                        array('group_by'=>'account_name,',
-                                                              'order_by'=>'account_name asc'));
-      $this->data['chitti_weight'] = 0;
-    // } else {
-      // $query = $this->db->query("select account_name, sum(fine) as fine, sum(vadotar) as vadotar, sum(amount) as amount
-      //           from (
-      //             (select account_name, 
-      //                     IFNULL((sum(debit_weight*purity)/100),0) - IFNULL((sum(credit_weight*factory_purity)/100),0) as fine,
-      //                     IFNULL(sum((purity-factory_purity)*debit_weight/100),0) - IFNULL(sum((factory_purity-purity)*credit_weight/100),0) as vadotar,
-      //                     IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount from ac_vouchers group by account_name)
-      //             UNION
-      //               (select account_name, 
-      //                       sum(credit_weight) as fine,
-      //                       0 as vadotar,
-      //                       -1 * sum(debit_amount) as amount from chitties group by account_name)) t
-      //           group by account_name
-      //           order by account_name");
-      //$this->data['trial_balance'] = $query->result_array();
+  
+    $select = "account_name, 
+               IFNULL((sum(debit_weight*purity)/100),0) - IFNULL((sum(credit_weight*factory_purity)/100),0) as fine,
+               IFNULL(sum((purity-factory_purity)*debit_weight/100),0) - IFNULL(sum((factory_purity-purity)*credit_weight/100),0) as vadotar,
+               IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount";
+    $this->data['trial_balance'] = $this->model->get($select, array(), array() , 
+                                                      array('group_by'=>'account_name,',
+                                                            'order_by'=>'account_name asc'));
+    
+    // $query = $this->db->query("select account_name, sum(fine) as fine, sum(vadotar) as vadotar, sum(amount) as amount
+    //           from (
+    //             (select account_name, 
+    //                     IFNULL((sum(debit_weight*purity)/100),0) - IFNULL((sum(credit_weight*factory_purity)/100),0) as fine,
+    //                     IFNULL(sum((purity-factory_purity)*debit_weight/100),0) - IFNULL(sum((factory_purity-purity)*credit_weight/100),0) as vadotar,
+    //                     IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount from ac_vouchers group by account_name)
+    //             UNION
+    //               (select account_name, 
+    //                       sum(credit_weight) as fine,
+    //                       0 as vadotar,
+    //                       -1 * sum(debit_amount) as amount from chitties group by account_name)) t
+    //           group by account_name
+    //           order by account_name");
+    //$this->data['trial_balance'] = $query->result_array();
 
-      //$this->data['chitti_weight'] = $this->chitti_model->find('sum(credit_weight) as weight')['weight'];
-    //}
   }      
 }
