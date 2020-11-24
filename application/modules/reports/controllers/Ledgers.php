@@ -82,7 +82,6 @@ class Ledgers extends BaseController {
     }
 
     $issues = $this->model->get($issue_select, $where_issue ,array(), array('order_by'=>'str_voucher_date asc', 'group_by' => $this->data['group']));
-    lq();
     $receipts = $this->model->get($receipt_select, $where_receipt ,array(), array('order_by'=>'str_voucher_date asc', 'group_by' => $this->data['group']));
 
     $issue_voucher_dates = array_column($issues, 'voucher_date');
