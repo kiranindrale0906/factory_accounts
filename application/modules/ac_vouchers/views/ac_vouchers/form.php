@@ -9,14 +9,8 @@
   $checked = (!empty($record['has_hallmark'])) ? 'checked' : '';
 
   $readonly='';
-  if ($this->router->class == "rate_cut_purchase_price_issue_vouchers"
-      || $this->router->class == "rate_cut_purchase_price_receipt_vouchers"
-      || $this->router->class == "rate_cut_purchase_weight_issue_vouchers"
-      || $this->router->class == "rate_cut_purchase_weight_receipt_vouchers"
-      || $this->router->class == "rate_cut_booking_price_issue_vouchers"
-      || $this->router->class == "rate_cut_booking_price_receipt_vouchers"
-      || $this->router->class == "rate_cut_booking_weight_issue_vouchers"
-      || $this->router->class == "rate_cut_booking_weight_receipt_vouchers") {
+  if (   $this->router->class == "rate_cut_issue_vouchers"
+      || $this->router->class == "rate_cut_receipt_vouchers") {
     $readonly=true;
   }
 
@@ -83,8 +77,8 @@
   </div>        
   
   <div class="row">  
-    <?php load_view('ac_vouchers/ac_vouchers/fields/credit_amount', array('readonly' => $readonly));  
-          load_view('ac_vouchers/ac_vouchers/fields/debit_amount', array('readonly' => $readonly));
+    <?php load_view('ac_vouchers/ac_vouchers/fields/credit_amount', array('readonly' => ''));  
+          load_view('ac_vouchers/ac_vouchers/fields/debit_amount', array('readonly' => ''));
           load_view('ac_vouchers/ac_vouchers/fields/amount');
           load_view('ac_vouchers/ac_vouchers/fields/cash_amount');
           load_view('ac_vouchers/ac_vouchers/fields/cash_bill'); ?>   
@@ -92,8 +86,8 @@
 
   <div class="row">   
     <?php load_view('ac_vouchers/ac_vouchers/fields/cheque_number');
-          load_view('ac_vouchers/ac_vouchers/fields/debit_weight', array('readonly' => $readonly));  
-          load_view('ac_vouchers/ac_vouchers/fields/credit_weight', array('readonly' => $readonly));
+          load_view('ac_vouchers/ac_vouchers/fields/debit_weight', array('readonly' => ''));  
+          load_view('ac_vouchers/ac_vouchers/fields/credit_weight', array('readonly' => ''));
           load_view('ac_vouchers/ac_vouchers/fields/interest_per_day'); ?>
     <?php
       if ($this->router->class == 'metal_receipt_vouchers') { 

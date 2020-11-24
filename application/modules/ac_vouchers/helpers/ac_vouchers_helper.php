@@ -22,7 +22,7 @@ function ac_vouchers_getTableSettings($table_setting_arg=array()) {
                         'extra_select_column' => 'ac_vouchers.id',
                         'actionFunction'      => '',
                         'headingFunction'     => 'list_settings',
-                        'search_url'          => 'bank_issue_voucher',
+                        'search_url'          => $ci->router->class,
                         'add_title'           => '',
                         'export_title'        => '',
                         'edit'                => '',
@@ -34,7 +34,7 @@ function ac_vouchers_getTableSettings($table_setting_arg=array()) {
   }
   if(!empty($table_setting_arg)){
     $table_setting=array_merge($table_setting,$table_setting_arg);
-  }
+  } 
   return $table_setting;
 }
 //Add Cash Issue Voucher

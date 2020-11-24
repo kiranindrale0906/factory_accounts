@@ -55,8 +55,7 @@ class Voucher_model extends BaseModel {
 
   protected function get_account_validation_rules() {
     return array('field' => $this->router_class.'[account_name]', 'label' => 'Account Name',
-                     'rules' => array('trim','required',array('account_error', array($this,'check_account_exist'))
-                                 ),
+                 'rules' => array('trim','required',array('account_error', array($this,'check_account_exist'))),
                  'errors' => array('account_error'=>'Account not exist in Account master.'));
   }
 
@@ -81,11 +80,14 @@ class Voucher_model extends BaseModel {
                  'label' => 'Credit Weight',
                  'rules' => 'trim|required|numeric|greater_than[0]');
   }
+  
   protected function get_credit_amount_validation_rules() {
     return array('field' => $this->router_class.'[credit_amount]', 
                  'label' => 'Credit Amount',
                  'rules' => 'trim|required|numeric|greater_than[0]');
-  }protected function get_debit_amount_validation_rules() {
+  }
+
+  protected function get_debit_amount_validation_rules() {
     return array('field' => $this->router_class.'[debit_amount]', 
                  'label' => 'Debit Amount',
                  'rules' => 'trim|required|numeric|greater_than[0]');
@@ -94,6 +96,30 @@ class Voucher_model extends BaseModel {
   protected function get_narration_validation_rules() {
     return array('field' => $this->router_class.'[narration]', 
                  'label' => 'Item Name',
+                 'rules' => 'trim|required');
+  }
+
+  protected function get_gold_rate_validation_rules() {
+    return array('field' => $this->router_class.'[gold_rate]', 
+                 'label' => 'Gold Rate',
+                 'rules' => 'trim|required');
+  }
+
+  protected function get_gold_rate_purity_validation_rules() {
+    return array('field' => $this->router_class.'[gold_rate_purity]', 
+                 'label' => 'Gold Rate Purity',
+                 'rules' => 'trim|required');
+  }
+
+  protected function get_gold_weight_validation_rules() {
+    return array('field' => $this->router_class.'[gold_weight]', 
+                 'label' => 'Gold Weight',
+                 'rules' => 'trim|required');
+  }
+
+  protected function get_gold_weight_purity_validation_rules() {
+    return array('field' => $this->router_class.'[gold_weight_purity]', 
+                 'label' => 'Gold Weight Purity',
                  'rules' => 'trim|required');
   }
 
@@ -120,6 +146,7 @@ class Voucher_model extends BaseModel {
       $purity=$this->purity_model->find('id as id',array('purity'=>$name));
     return (empty($purity)) ? false : true;
   }
+
   public function check_account_exist($name) {
     if($name=="" && !isset($name))
       return true;
@@ -136,13 +163,6 @@ class Voucher_model extends BaseModel {
     return (empty($department)) ? false : true;
   }
 
-  public function before_save($action) {
-    unset($this->attributes['arg_weight']);
-    if($action=='store'){
-    $this->set_user_define_data();
-    }
-  }
-
   public function check_period_exists($voucher_date) {
     $voucher_date=date('Y-m-d',strtotime($voucher_date));  
     $period_id = $this->period_model->get('id', array('where'=> array('"'.$voucher_date.'" between date_from and date_to'=>NULL)));
@@ -150,6 +170,11 @@ class Voucher_model extends BaseModel {
       return $period_id[0]['id'];
     else
       return false;
+  }
+
+  public function before_save($action) {
+    unset($this->attributes['arg_weight']);
+    if($action=='store') $this->set_user_define_data();
   }
 
   private function set_user_define_data() {
@@ -162,19 +187,18 @@ class Voucher_model extends BaseModel {
 
     $this->formdata[$this->router_class]['suffix'] = $this->prefix;
     $this->formdata[$this->router_class]['voucher_type'] = $this->voucher_type;
-    // $this->formdata[$this->router_class]['transaction_type'] = $this->account_type;
-    // pd($this->attributes);
+    
     $account=array();
-    if(!empty($this->attributes['account_name'])){
-
-    $account = $this->account_model->find('id, group_id, route_group, sub_group_id', 
-                                          array('name' => $this->attributes['account_name']));
-    }
+    if(!empty($this->attributes['account_name']))
+      $account = $this->account_model->find('id, group_id, route_group, sub_group_id', 
+                                            array('name' => $this->attributes['account_name']));
+    
     if (!empty($account['id'])) {    
       $this->formdata[$this->router_class]['group_id'] = !empty($account['group_id']) ? $account['group_id'] : 0;
       $this->formdata[$this->router_class]['sub_group_id'] = !empty($account['sub_group_id']) ? $account['sub_group_id'] : 0;
       $this->formdata[$this->router_class]['route_group'] = !empty($account['route_group']) ? $account['route_group'] : '';
     }
+
     $account_name=isset($this->attributes['account_name'])?$this->attributes['account_name']:'';
     if (empty($account['id'])) {
       $sub_groups = $this->setting_model->find('id, value', array('name' => 'Sub Group'));
