@@ -77,18 +77,24 @@
           <td>CGST Amount (<?= $gst_rate ?>%)</td><td class="text-right"><h6><?=four_decimal($record['cgst_amount'])?></h6></td>
         </tr><tr>
           <td>SGST Amount (<?= $gst_rate ?>%)</td><td class="text-right"><h6><?=four_decimal($record['sgst_amount'])?></h6></td>
-        </tr><tr>
-          <td>Total Amount</td><td class="text-right"><h6><?=four_decimal(  $record['taxable_amount']
-                                                                          + $record['cgst_amount']
-                                                                          + $record['sgst_amount'])?></h6></td>
-        </tr><tr>
-          <td>TCS</td><td class="text-right"><h6><?=four_decimal(($record['taxable_amount']
-                                                                 + $record['cgst_amount']
-                                                                 + $record['sgst_amount']) * .075 / 100)?></h6></td>
-        </tr><tr>
+        </tr>
+        <?php if ($record['sale_type'] != 'Labour') { ?>
+          <tr>
+            <td>Total Amount</td><td class="text-right"><h6><?=four_decimal(  $record['taxable_amount']
+                                                                            + $record['cgst_amount']
+                                                                            + $record['sgst_amount'])?></h6></td>
+          </tr>
+          
+          <tr>
+            <td>TCS</td><td class="text-right"><h6><?=four_decimal(($record['taxable_amount']
+                                                                   + $record['cgst_amount']
+                                                                   + $record['sgst_amount']) * .075 / 100)?></h6></td>
+          </tr>
+        <?php endif; ?>
+        <tr>
           <td>Grand Total</td><td class="text-right"><h6><?=four_decimal($record['debit_amount'])?></h6></td>
         </tr>
-
+        
       </table>
     </div>
   </div>
