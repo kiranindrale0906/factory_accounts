@@ -31,8 +31,8 @@
                                             // 'transactions/bank_receipt_vouchers' => 'Bank Voucher',
                                             'transactions/metal_receipt_vouchers' => 'Metal Voucher',
                                             
-                                            'transactions/metal_receipt_voucher_details' => 'Metal Receipt Details',
-                                            'transactions/metal_issue_voucher_details' => 'Metal Issue Details',
+                                            //'transactions/metal_receipt_voucher_details' => 'Metal Receipt Details',
+                                            //'transactions/metal_issue_voucher_details' => 'Metal Issue Details',
                                             'argold/chittis' => 'Chitti',
                                             'argold/refresh' => 'Refresh',
 
