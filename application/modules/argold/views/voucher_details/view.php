@@ -3,12 +3,15 @@
 <div class="row">
   <div class="col-md-6 ">
     <div class="form-group container">
-      <p><h6>AC Name :<?=$record['account_name']?> </h6></p>
-      <p><h6>Voucher No :<?=$record['voucher_number']?> </h6></p>
-      <p><h6>Item Name :<?=$record['narration']?> </h6></p>
-      <p><h6>Receipt Type :<?=$record['receipt_type']?></h6></p>
+      <p><h6>AC Name: <?=$record['account_name']?> </h6></p>
+      <p><h6>Voucher No: <?=$record['voucher_number']?> </h6></p>
+      <p><h6>Item Name: <?=$record['narration']?> </h6></p>
+      <p><h6>Receipt Type: <?=$record['receipt_type']?></h6></p>
+      <?php if (!empty($record['sale_type'])) { ?>
+        <p><h6>Sale Type: <?=$record['sale_type']?></h6></p>
+      <?php }?>
       <?php if($record['receipt_type']=='Daily Drawer'){?>
-      <p><h6>Daily Drawer Type :<?=$record['dd_type']?></h6></p>
+        <p><h6>Daily Drawer Type: <?=$record['dd_type']?></h6></p>
       <?php }?>
     </div>
   </div>
@@ -36,38 +39,37 @@
   }
 ?>
 
-<?php if ($record['gold_rate'] > 0) { ?>
-  <div class="row">
-    <div class="col-md-6">
-    </div>
-    <div class="col-md-6">
-      <div class="form-group container">
-        <table class="table table-sm">
-          <tr>
-            <td>Weight</td><td class="text-right"><h6><?=four_decimal($record['debit_weight'])?></h6></td>
-          </tr><tr>
-            <td>Rate</td><td class="text-right"><h6><?=four_decimal($record['gold_rate'])?></h6></td>
-          </tr><tr>
-            <td>Taxable Amount</td><td class="text-right"><h6><?=four_decimal($record['debit_weight']
-                                                                              * $record['gold_rate'])?></h6></td>
-          </tr><tr>
-            <td>CGST Amount</td><td class="text-right"><h6><?=four_decimal($record['debit_weight']
-                                                                           * $record['gold_rate'] * 0.015)?></h6></td>
-          </tr><tr>
-            <td>SGST Amount</td><td class="text-right"><h6><?=four_decimal($record['debit_weight']
-                                                                           * $record['gold_rate'] * 0.015)?></h6></td>
-          </tr><tr>
-            <td>Total Amount</td><td class="text-right"><h6><?=four_decimal($record['debit_weight']
-                                                                            * $record['gold_rate'] * 0.03)?></h6></td>
-          </tr><tr>
-            <td>TCS</td><td class="text-right"><h6><?=four_decimal($record['debit_weight']
-                                                                  * $record['gold_rate'] * 0.03 * .075 / 100)?></h6></td>
-          </tr><tr>
-            <td>Grand Total</td><td class="text-right"><h6><?=four_decimal($record['debit_amount'])?></h6></td>
-          </tr>
+<?php 
+  if ($record['gold_rate'] > 0) { 
+    $tax_fields = get_tax_fields($record['factory_fine'], $record['fine'], $record['sale_type'], $record['gold_rate']);
+    ?>
+    <div class="row">
+      <div class="col-md-6">
+      </div>
+      <div class="col-md-6">
+        <div class="form-group container">
+          <table class="table table-sm">
+            <tr>
+              <td>Weight</td><td class="text-right"><h6><?=four_decimal($tax_fields['weight'])?></h6></td>
+            </tr><tr>
+              <td>Rate</td><td class="text-right"><h6><?=four_decimal($tax_fields['gold_rate'])?></h6></td>
+            </tr><tr>
+              <td>Taxable Amount</td><td class="text-right"><h6><?=four_decimal($tax_fields['taxable_amount'])?></h6></td>
+            </tr><tr>
+              <td>CGST Amount</td><td class="text-right"><h6><?=four_decimal($tax_fields['cgst_amount'])?></h6></td>
+            </tr><tr>
+              <td>SGST Amount</td><td class="text-right"><h6><?=four_decimal($tax_fields['sgst_amount'])?></h6></td>
+            </tr><tr>
+              <td>Total Amount</td><td class="text-right"><h6><?=four_decimal($tax_fields['total_amount'])?></h6></td>
+            </tr><tr>
+              <td>TCS</td><td class="text-right"><h6><?=four_decimal($tax_fields['tcs_amount']) ?></h6></td>
+            </tr><tr>
+              <td>Grand Total</td><td class="text-right"><h6><?=four_decimal($tax_fields['grand_total'])?></h6></td>
+            </tr>
 
-        </table>
+          </table>
+        </div>
       </div>
     </div>
-  </div>
-<?php } ?>
+  <?php } 
+?>

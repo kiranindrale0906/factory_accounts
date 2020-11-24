@@ -70,58 +70,55 @@ class Voucher_model extends BaseModel {
   }
 
   protected function get_debit_weight_validation_rules() {
-    return array('field' => $this->router_class.'[debit_weight]', 
-                 'label' => 'Weight',
+    return array('field' => $this->router_class.'[debit_weight]', 'label' => 'Weight',
                  'rules' => 'trim|required|numeric|greater_than[0]');
   }
 
   protected function get_credit_weight_validation_rules() {
-    return array('field' => $this->router_class.'[credit_weight]', 
-                 'label' => 'Credit Weight',
+    return array('field' => $this->router_class.'[credit_weight]', 'label' => 'Credit Weight',
                  'rules' => 'trim|required|numeric|greater_than[0]');
   }
   
   protected function get_credit_amount_validation_rules() {
-    return array('field' => $this->router_class.'[credit_amount]', 
-                 'label' => 'Credit Amount',
+    return array('field' => $this->router_class.'[credit_amount]', 'label' => 'Credit Amount',
                  'rules' => 'trim|required|numeric|greater_than[0]');
   }
 
   protected function get_debit_amount_validation_rules() {
-    return array('field' => $this->router_class.'[debit_amount]', 
-                 'label' => 'Debit Amount',
+    return array('field' => $this->router_class.'[debit_amount]', 'label' => 'Debit Amount',
                  'rules' => 'trim|required|numeric|greater_than[0]');
   }
 
   protected function get_narration_validation_rules() {
-    return array('field' => $this->router_class.'[narration]', 
-                 'label' => 'Item Name',
+    return array('field' => $this->router_class.'[narration]', 'label' => 'Item Name',
                  'rules' => 'trim|required');
   }
 
   protected function get_gold_rate_validation_rules() {
-    return array('field' => $this->router_class.'[gold_rate]', 
-                 'label' => 'Gold Rate',
+    return array('field' => $this->router_class.'[gold_rate]', 'label' => 'Gold Rate',
                  'rules' => 'trim|required');
   }
 
   protected function get_gold_rate_purity_validation_rules() {
-    return array('field' => $this->router_class.'[gold_rate_purity]', 
-                 'label' => 'Gold Rate Purity',
+    return array('field' => $this->router_class.'[gold_rate_purity]', 'label' => 'Gold Rate Purity',
                  'rules' => 'trim|required');
   }
 
   protected function get_gold_weight_validation_rules() {
-    return array('field' => $this->router_class.'[gold_weight]', 
-                 'label' => 'Gold Weight',
+    return array('field' => $this->router_class.'[gold_weight]', 'label' => 'Gold Weight',
                  'rules' => 'trim|required');
   }
 
   protected function get_gold_weight_purity_validation_rules() {
-    return array('field' => $this->router_class.'[gold_weight_purity]', 
-                 'label' => 'Gold Weight Purity',
+    return array('field' => $this->router_class.'[gold_weight_purity]', 'label' => 'Gold Weight Purity',
                  'rules' => 'trim|required');
   }
+
+  protected function get_sale_type_validation_rules() {
+    return array('field' => $this->router_class.'[sale_type]', 'label' => 'Sale Type',
+                 'rules' => 'trim|required');
+  }
+
 
   public function check_group_name_exist($name) {
     if($name=="" && !isset($name))

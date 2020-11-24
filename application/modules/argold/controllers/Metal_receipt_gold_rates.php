@@ -10,6 +10,6 @@ class Metal_receipt_gold_rates extends BaseController {
   }
 
   public function view($id) {
-    redirect(ADMIN_PATH.'transactions/metal_receipt_vouchers');
+    redirect(ADMIN_PATH.'argold/voucher_details/view/'.$id);
   }
 }

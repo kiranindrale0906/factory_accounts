@@ -62,6 +62,11 @@
                   array('id' => 'Bill', 'name' => 'Bill'));
   }
 
+  function get_sale_types() {
+    return array( array('id' => 'Sale', 'name' => 'Sale'),
+                  array('id' => 'Labour', 'name' => 'Labour'));
+  }
+
   function get_daily_drawer_receipt_type(){
     return array(array('id'=>'Hook','name'=>'Hook'),
                  array('id'=>'KDM','name'=>'KDM'),
