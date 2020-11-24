@@ -67,10 +67,10 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
 
     $rate_cut_issue = $rate_cut_receipt;
     $rate_cut_issue['account_name'] = 'Sales Account';
-    $rate_cut_issue['credit_amount'] = $chitti['debit_amount'];
-    $rate_cut_issue['debit_amount'] = 0;
-    $rate_cut_issue['debit_weight'] = $chitti['credit_weight'];
-    $rate_cut_issue['credit_weight'] = 0;
+    $rate_cut_issue['debit_amount'] = $chitti['debit_amount'];
+    $rate_cut_issue['credit_amount'] = 0;
+    $rate_cut_issue['credit_weight'] = $chitti['credit_weight'];
+    $rate_cut_issue['debit_weight'] = 0;
     $rate_cut_issue_voucher_obj = new rate_cut_issue_voucher_model($rate_cut_issue);
     $rate_cut_issue_voucher_obj->before_validate();
     $rate_cut_issue_voucher_obj->store();
