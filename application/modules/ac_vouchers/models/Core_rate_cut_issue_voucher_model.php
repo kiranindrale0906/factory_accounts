@@ -91,7 +91,7 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
                             'credit_amount' => 0,
                             'credit_weight' => $metal_receipt_voucher['debit_weight'],
                             'debit_weight' => 0,
-                            'purity' => 100,
+                            'purity' => $metal_receipt_voucher['purity'],
                             'gold_rate' => $metal_receipt_voucher['gold_rate'],
                             'gold_rate_purity' => 100,
                             'description' => $receipt_type.' '.$metal_receipt_voucher['voucher_number'],
