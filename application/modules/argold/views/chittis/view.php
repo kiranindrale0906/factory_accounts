@@ -90,7 +90,7 @@
                                                                    + $record['cgst_amount']
                                                                    + $record['sgst_amount']) * .075 / 100)?></h6></td>
           </tr>
-        <?php endif; ?>
+        <?php } ?>
         <tr>
           <td>Grand Total</td><td class="text-right"><h6><?=four_decimal($record['debit_amount'])?></h6></td>
         </tr>
