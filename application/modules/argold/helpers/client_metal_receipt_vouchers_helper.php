@@ -62,6 +62,14 @@ if (!function_exists('get_row_actions')) {
                               'url' => ADMIN_PATH.$controller.'/view/'.$row['id'],
                               'confirm_message' => "",
                               'class' => 'text-warning text-uppercase');
+    if (   $row['receipt_type'] == 'Metal'
+        || $row['receipt_type'] == 'AR Gold Refresh'
+        || $row['receipt_type'] == 'ARF Refresh'
+        || $row['receipt_type'] == 'ARC Refresh')
+      $actions["Edit Rate"] =  array('request' => "http", 
+                                     'url' => ADMIN_PATH.'argold/metal_receipt_gold_rates/edit/'.$row['id'],
+                                     'confirm_message' => "",
+                                     'class' => 'text-warning text-uppercase');
     return $actions;
   }
 }

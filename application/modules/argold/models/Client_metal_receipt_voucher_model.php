@@ -6,6 +6,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   
   function __construct($data=array()) {
     parent::__construct($data);
+    $this->load->model(array('transactions/rate_cut_issue_voucher_model'));
   }
 
   public function validation_rules($klass='') {
@@ -96,6 +97,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     if (   $this->attributes['receipt_type'] == 'Metal'
         || $this->attributes['receipt_type'] == 'Daily Drawer') {
       $credit_weight = 0;
+
+      $this->attributes['dd_type'] = isset($this->attributes['dd_type']) ? $this->attributes['dd_type'] : '';
       if (!empty($this->formdata['metal_issue_vouchers'])) {
         foreach ($this->formdata['metal_issue_vouchers'] as $metal_issue_voucher) {
           if(!empty($metal_issue_voucher['credit_weight']))
@@ -276,7 +279,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     $this->set_metal_issue_voucher_attributes_from_receipt_type_for_metal_and_chain_receipt();
     $this->set_metal_issue_voucher_attributes_for_alloy_vadotar_and_gpc_vadotar();
     $this->set_metal_issue_voucher_attributes_from_receipt_type_for_vadotar(); 
-    $this->set_debit_amount_and_credit_weight(); 
+    //$this->set_debit_amount_and_credit_weight(); 
 
     $this->set_receipt_type_for_all_metal_issue_vouchers();
     $this->unset_metal_issue_voucher_records_when_credit_weight_is_0(); 
@@ -288,7 +291,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     parent::before_save($action);
   }
 
-  public function set_debit_amount_and_credit_weight() {
+  private function create_rate_cut_vouchers_for_metal_and_refresh() {
     if (   $this->attributes['receipt_type'] != 'Metal'
         && $this->attributes['receipt_type'] != 'AR Gold Refresh'
         && $this->attributes['receipt_type'] != 'ARF Refresh'
@@ -297,12 +300,13 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
     if ($this->attributes['gold_rate'] <= 0) return;
 
-    $this->attributes['debit_amount'] = $this->attributes['gold_rate'] * $this->attributes['debit_weight'];
+    $this->rate_cut_issue_voucher_model->create_rate_cut_vouchers_for_metal_and_refresh($this->attributes['id'], $this->attributes['receipt_type']);
+    // $this->attributes['debit_amount'] = $this->attributes['gold_rate'] * $this->attributes['debit_weight'];
 
-    $this->attributes['debit_amount'] = $this->attributes['debit_amount'] * 1.03;
-    $this->attributes['debit_amount'] = $this->attributes['debit_amount'] + $this->attributes['debit_amount'] * 0.075 / 100;
+    // $this->attributes['debit_amount'] = $this->attributes['debit_amount'] * 1.03;
+    // $this->attributes['debit_amount'] = $this->attributes['debit_amount'] + $this->attributes['debit_amount'] * 0.075 / 100;
   
-    $this->attributes['credit_weight'] = $this->attributes['debit_weight'];
+    // $this->attributes['credit_weight'] = $this->attributes['debit_weight'];
   } 
   
   public function after_save($action) {
@@ -310,6 +314,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     //if (ENABLE_API_FOR_RECEIPT && $this->attributes['receipt_type'] != 'Internal')
     //  $this->send_request_to_argold($this->formdata);
     $this->create_metal_issue_vouchers();
+    $this->create_rate_cut_vouchers_for_metal_and_refresh();
     $this->_add_metal_receipt_id_in_refresh_data();
   }
   

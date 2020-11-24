@@ -60,7 +60,7 @@ class Chitti_model extends BaseModel {
   }
   
   public function after_save($action){
-    $this->rate_cut_issue_voucher_model->create_rate_cut_issue_voucher($this->attributes['id']);
+    $this->rate_cut_issue_voucher_model->create_rate_cut_vouchers_for_chitti($this->attributes['id']);
     if (!isset($this->formdata['chitti_details']) || empty($this->formdata['chitti_details'])) return;
     $this->set_chitti_id_in_metal_issue_vouchers();
 	}  
