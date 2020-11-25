@@ -39,7 +39,7 @@
     </tr><tr>
       <td>Rate</td><td class="text-right"><h6><?=four_decimal($record['rate'])?></h6></td>
     </tr>
-    <div class="noprint">
+    <tbody class="noprint">
       <tr class="noprint">
         <td class="noprint">Taxable Amount</td>
         <td class="text-right norprint"><h6 class="noprint"><?=four_decimal($record['taxable_amount'])?></h6></td>
@@ -66,7 +66,7 @@
                                                                  + $record['sgst_amount']) * .075 / 100)?></td>
         </tr>
       <?php } ?>
-    </div>
+    </tbody>
     <tr>
       <td>Grand Total</td><td class="text-right"><h6><?=four_decimal($record['debit_amount'])?></h6></td>
     </tr>
