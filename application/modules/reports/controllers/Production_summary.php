@@ -55,28 +55,28 @@ class Production_summary extends BaseController {
     }
     $this->data['production_summary'] = $_GET;
 
-    if ($this->data['site_name'] = '' || $this->data['site_name'] == 'AR Gold') {
+    if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold') {
       $url = API_ARG_BASE_PATH."issue_departments/api_issue_departments/index";
       $records = json_decode(curl_post_request($url, $_GET));
       $argold_records = json_decode(json_encode($records), true);    
     }
     if (empty($argold_records['data'])) $argold_records['data'] = array();
 
-    if ($this->data['site_name'] = '' || $this->data['site_name'] == 'ARF') {
+    if ($this->data['site_name'] =='' || $this->data['site_name'] == 'ARF') {
       $url = API_ARF_BASE_PATH."issue_departments/api_issue_departments/index";
       $records = json_decode(curl_post_request($url, $_GET));
       $arf_records = json_decode(json_encode($records), true);
     }
     if (empty($arf_records['data'])) $arf_records['data'] = array();
 
-    if ($this->data['site_name'] = '' || $this->data['site_name'] == 'ARC') {
+    if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARC') {
       $url = API_ARC_BASE_PATH."issue_departments/api_issue_departments/index";
       $records = json_decode(curl_post_request($url, $_GET));
       $arc_records = json_decode(json_encode($records), true);
     }
     if (empty($arc_records['data'])) $arc_records['data'] = array();
 
-    $records = array_merge($arf_records['data'], $argold_records['data'], $arc_records['data']);
+    $records = array_merge($argold_records['data'], $arf_records['data'], $arc_records['data']);
   
     $date_wise_data = array();
     if ($this->data['group_by'] == 'Date') {
