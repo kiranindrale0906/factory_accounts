@@ -38,22 +38,22 @@
       <td>Weight</td><td class="text-right"><h6><?=four_decimal($record['credit_weight'])?></h6></td>
     </tr><tr>
       <td>Rate</td><td class="text-right"><h6><?=four_decimal($record['rate'])?></h6></td>
-    </tr><tr>
+    </tr><tr class="noprint">
       <td>Taxable Amount</td><td class="text-right"><h6><?=four_decimal($record['taxable_amount'])?></h6></td>
-    </tr><tr>
+    </tr><tr class="noprint">
       <td>CGST Amount (<?= $gst_rate ?>%)</td><td class="text-right"><?=four_decimal($record['cgst_amount'])?></td>
-    </tr><tr>
+    </tr><tr class="noprint">
       <td>SGST Amount (<?= $gst_rate ?>%)</td><td class="text-right"><?=four_decimal($record['sgst_amount'])?></td>
     </tr>
     <?php if ($record['sale_type'] != 'Labour') { ?>
       <tr>
-        <td>Total Amount</td><td class="text-right"><?=four_decimal(  $record['taxable_amount']
+        <td class="noprint">Total Amount</td><td class="text-right"><?=four_decimal(  $record['taxable_amount']
                                                                         + $record['cgst_amount']
                                                                         + $record['sgst_amount'])?></td>
       </tr>
       
       <tr>
-        <td>TCS</td><td class="text-right"><?=four_decimal(($record['taxable_amount']
+        <td class="noprint">TCS</td><td class="text-right"><?=four_decimal(($record['taxable_amount']
                                                                + $record['cgst_amount']
                                                                + $record['sgst_amount']) * .075 / 100)?></td>
       </tr>
