@@ -17,6 +17,6 @@ function get_tax_fields($factory_fine, $fine, $sale_type, $gold_rate) {
   $fields['sgst_amount']    = $fields['taxable_amount'] * $fields['gst_rate'] / 100;
   $fields['total_amount']   = $fields['taxable_amount'] + $fields['cgst_amount'] + $fields['sgst_amount'];
   $fields['tcs_amount']     = $fields['total_amount'] * $fields['tcs_rate'] / 100;
-  $fields['grand_total']    = round($fields['total_amount'] + $fields['cgst_amount'] + $fields['sgst_amount'] + $fields['total_amount'] + $fields['tcs_amount']);
+  $fields['grand_total']    = round($fields['total_amount'] + $fields['cgst_amount'] + $fields['sgst_amount'] + $fields['tcs_amount']);
   return $fields;
 }
