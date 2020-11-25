@@ -74,7 +74,7 @@ class Production_summary extends BaseController {
       $records = json_decode(curl_post_request($url, $_GET));
       $arc_records = json_decode(json_encode($records), true);
     }
-    if (empty($arc_records['data'])) $arf_records['data'] = array();
+    if (empty($arc_records['data'])) $arc_records['data'] = array();
 
     if ($this->data['site_name'] == '') {
       $records = array_merge($arf_records['data'], $argold_records['data'], $arc_records['data']);
