@@ -1,3 +1,10 @@
+<style>
+@media print {    
+  .no-print, .no-print * {
+    display: none !important;
+  }
+}
+</style>
 <h4 class="heading ml-3">Chitti #<?= $record['id']; ?></h4>
 
 <div style="max-width:30%;">
@@ -20,7 +27,6 @@
   </table>
 </div>
 
-
 <div style="max-width:30%">
   <?php $this->load->view('chitti_details/viewlist'); ?>
 </div>
@@ -39,34 +45,35 @@
     </tr><tr>
       <td>Rate</td><td class="text-right"><h6><?=four_decimal($record['rate'])?></h6></td>
     </tr>
-    <tbody class="noprint">
-      <tr class="noprint">
-        <td class="noprint">Taxable Amount</td>
-        <td class="text-right norprint"><h6 class="noprint"><?=four_decimal($record['taxable_amount'])?></h6></td>
+
+    <tr class="no-print">
+      <td class="no-print">Taxable Amount</td>
+      <td class="text-right no-print"><h6><?=four_decimal($record['taxable_amount'])?></h6></td>
+    </tr>
+    <tr class="no-print">
+      <td class="no-print">CGST Amount (<?= $gst_rate ?>%)</td>
+      <td class="text-right no-print"><?=four_decimal($record['cgst_amount'])?></td>
+    </tr>
+    <tr class="no-print">
+      <td class="no-print">SGST Amount (<?= $gst_rate ?>%)</td>
+      <td class="text-right no-print"><?=four_decimal($record['sgst_amount'])?></td>
+    </tr>
+    <?php if ($record['sale_type'] != 'Labour') { ?>
+      <tr class="no-print">
+        <td class="no-print">Total Amount</td>
+        <td class="text-right no-print"><?=four_decimal(  $record['taxable_amount']
+                                                                        + $record['cgst_amount']
+                                                                        + $record['sgst_amount'])?></td>
       </tr>
-      <tr class="noprint">
-        <td class="noprint">CGST Amount (<?= $gst_rate ?>%)</td>
-        <td class="text-right noprint"><?=four_decimal($record['cgst_amount'])?></td>
+      
+      <tr class="no-print">
+        <td class="no-print">TCS</td>
+        <td class="text-right no-print"><?=four_decimal(($record['taxable_amount']
+                                                               + $record['cgst_amount']
+                                                               + $record['sgst_amount']) * .075 / 100)?></td>
       </tr>
-      <tr class="noprint">
-        <td class="noprint">SGST Amount (<?= $gst_rate ?>%)</td>
-        <td class="text-right noprint"><?=four_decimal($record['sgst_amount'])?></td>
-      </tr>
-      <?php if ($record['sale_type'] != 'Labour') { ?>
-        <tr class="noprint">
-          <td class="noprint">Total Amount</td>
-          <td class="text-right noprint"><?=four_decimal(  $record['taxable_amount']
-                                                                          + $record['cgst_amount']
-                                                                          + $record['sgst_amount'])?></td>
-        </tr>
-        
-        <tr class="noprint">
-          <td class="noprint">TCS</td><td class="text-right noprint"><?=four_decimal(($record['taxable_amount']
-                                                                 + $record['cgst_amount']
-                                                                 + $record['sgst_amount']) * .075 / 100)?></td>
-        </tr>
-      <?php } ?>
-    </tbody>
+    <?php } ?>
+ 
     <tr>
       <td>Grand Total</td><td class="text-right"><h6><?=four_decimal($record['debit_amount'])?></h6></td>
     </tr>
