@@ -76,10 +76,8 @@ class Production_summary extends BaseController {
     }
     if (empty($arc_records['data'])) $arc_records['data'] = array();
 
-    if ($this->data['site_name'] == '') {
-      $records = array_merge($arf_records['data'], $argold_records['data'], $arc_records['data']);
-    }
-
+    $records = array_merge($arf_records['data'], $argold_records['data'], $arc_records['data']);
+  
     $date_wise_data = array();
     if ($this->data['group_by'] == 'Date') {
       foreach ($records as $record) {      
