@@ -1,6 +1,6 @@
 <h4 class="heading noprint ml-3">Chitti #<?= $record['id']; ?></h4>
 
-<div class="col-md-4">
+<div style="max-width:35%;">
   <table class="table table-sm">
     <tr>
       <td><h6><?=$chittis_details['account_name']?></h6></td><td class="text-right"><h6><?=date('d-m-Y',strtotime($record['created_at']))?></h6></td>
@@ -19,11 +19,9 @@
     <?php } ?>
   </table>
 </div>
-<div class="col-md-8">
-</div>
 
 
-<div class="col-md-4">
+<div style="max-width:35%">
   <?php $this->load->view('chitti_details/viewlist'); ?>
 </div>
 
@@ -34,7 +32,7 @@
     $gst_rate = 1.5;
 ?>
 
-<div class="col-md-4">
+<div style="max-width:35%">
   <table class="table table-sm">
     <tr>
       <td>Weight</td><td class="text-right"><h6><?=four_decimal($record['credit_weight'])?></h6></td>
@@ -64,8 +62,6 @@
       <td>Grand Total</td><td class="text-right"><h6><?=four_decimal($record['debit_amount'])?></h6></td>
     </tr>
   </table>
-</div>
-<div class="col-md-8">
 </div>
 
 <style type="text/css">
