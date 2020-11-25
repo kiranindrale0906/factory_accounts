@@ -6,15 +6,21 @@
       <td><h6><?=$chittis_details['account_name']?></h6></td><td class="text-right"><h6><?=date('d-m-Y',strtotime($record['created_at']))?></h6></td>
     </tr><tr>
       <td>Sale Type</td><td class="text-right"><h6><?= $record['sale_type'] ?></h6></td>
-    </tr><tr>
-      <td>No of Packets</td><td class="text-right"><h6><?=round($record['no_of_packets'])?></h6></td>
-    </tr><tr>
-      <td>Packet Gross Weight</td><td class="text-right"><h6><?=four_decimal($record['packet_gross_weight'])?></h6></td>
     </tr>
+    <?php if (empty($record['no_of_packets'])) { ?>
+      <tr>
+        <td>No of Packets</td><td class="text-right"><h6><?=round($record['no_of_packets'])?></h6></td>
+      </tr>
+    <?php } ?>
+    <?php if (empty($record['packet_gross_weight'])) { ?>
+      <tr>
+        <td>Packet Gross Weight</td><td class="text-right"><h6><?=four_decimal($record['packet_gross_weight'])?></h6></td>
+      </tr>
+    <?php } ?>
   </table>
 </div>
 
-<div class="col-md-6">
+<div class="col-md-4">
   <?php $this->load->view('chitti_details/viewlist'); ?>
 </div>
 
@@ -25,7 +31,7 @@
     $gst_rate = 1.5;
 ?>
 
-<div class="col-md-6">
+<div class="col-md-4">
   <table class="table table-sm">
     <tr>
       <td>Weight</td><td class="text-right"><h6><?=four_decimal($record['credit_weight'])?></h6></td>
