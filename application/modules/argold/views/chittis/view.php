@@ -19,6 +19,9 @@
     <?php } ?>
   </table>
 </div>
+<div class="col-md-8">
+</div>
+
 
 <div class="col-md-4">
   <?php $this->load->view('chitti_details/viewlist'); ?>
@@ -62,7 +65,8 @@
     </tr>
   </table>
 </div>
-
+<div class="col-md-8">
+</div>
 
 <style type="text/css">
 
