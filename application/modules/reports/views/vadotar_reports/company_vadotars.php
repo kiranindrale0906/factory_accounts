@@ -5,7 +5,7 @@
         <?php 
           foreach ($company_vadotars as $index => $company_vadotar) { ?>
             <tr>
-              <td><b><?= $company_vadotar['site_name']; ?></b></td>
+              <td><b><?= ($company_vadotar['site_name']=='') ? 'Internal Transfer' : $company_vadotar['site_name']; ?></b></td>
               <td class="text-right"><?= four_decimal($company_vadotar['vadotar'], '-') ?></td>
             </tr>
           <?php } 
