@@ -16,7 +16,7 @@ class Vadotar_reports extends Ledgers {
 
   public function _get_form_data() {
     $this->data['voucher_dates'] = array();
-    $this->data['site_name']     = (!empty($_GET['site_name'])) ? $_GET['site_name'] : '';
+    $this->data['site_name']     = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'All';
     $this->data['period']        = (!empty($_GET['period'])) ? $_GET['period'] : 'date';
     $this->data['detail']        = (!empty($_GET['detail'])) ? $_GET['detail'] : 'yes';
     $this->data['group']         = (!empty($_GET['group'])) ? $_GET['group'] : '';

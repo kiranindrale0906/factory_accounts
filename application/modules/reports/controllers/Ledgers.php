@@ -36,7 +36,7 @@ class Ledgers extends BaseController {
 
     if ($this->router->class == 'vadotar_reports') {
       $where['purity != factory_purity'] = NULL;
-      if (!empty($this->data['site_name'])) 
+      if (!empty($this->data['site_name']) && $this->data['site_name'] != 'All') 
         $where['site_name'] = $this->data['site_name'];
       // if ($this->data['company_name'] == 'AR Gold') {
       //   $where['where_not_in'] = array('receipt_type' => array("'ARF Finished Goods'", "'ARC Finished Goods'", 
