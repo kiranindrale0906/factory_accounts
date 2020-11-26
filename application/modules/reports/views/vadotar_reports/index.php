@@ -8,7 +8,7 @@
     <div class="form-group container"> 
       <h5> Select Factory:
         <?php 
-          $companies = array('All', 'AR Gold', 'ARC', 'ARF');
+          $companies = array('', 'AR Gold', 'ARF', 'ARC');
           foreach ($companies as $index => $company) { ?>
             <a class="ml-5 <?= ($site_name== $company) ? 'bold black underline' : '' ?>" 
                href='<?= base_url() ?>reports/vadotar_reports?site_name=<?= $company?>&period=<?= $period ?>&report_type=<?= $report_type ?>&detail=<?= $detail ?>&group=<?= $group ?>'><?= $company ?></a>
