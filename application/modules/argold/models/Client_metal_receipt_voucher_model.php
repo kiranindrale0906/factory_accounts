@@ -38,6 +38,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
   public function before_validate() {
     $this->set_account_name_from_receipt_type();
+    $this->set_site_name_from_receipt_type();
     $this->set_sale_type_from_receipt_type_for_metal();
     $this->set_factory_purity_from_receipt_type_for_metal_and_finished_goods_and_chain_receipt();
     $this->set_metal_receipt_attributes_from_receipt_type_for_vadotar();
@@ -52,6 +53,12 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     
     $this->set_receipt_type_for_all_metal_issue_vouchers();
     $this->unset_metal_issue_voucher_records_when_credit_weight_is_0(); 
+  }
+
+  private function set_site_name_from_receipt_type() {
+    if ($this->attributes['receipt_type'] == 'AR Gold Refresh')  $this->attributes['site_name'] = 'AR Gold';
+    elseif ($this->attributes['receipt_type'] == 'ARF Refresh')  $this->attributes['site_name'] = 'ARF';
+    elseif ($this->attributes['receipt_type'] == 'ARC Refresh')  $this->attributes['site_name'] = 'ARC';
   }
 
   private function set_sale_type_from_receipt_type_for_metal() {
