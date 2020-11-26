@@ -27,7 +27,7 @@ class Vadotar_reports extends Ledgers {
 
   private function get_companywise_vadotar() {
     $this->data['company_vadotars'] = $this->model->get('site_name, sum(factory_fine - fine) as vadotar', 
-                                                        array(), array('group_by' => 'site_name'));
+                                                        array(), array(), array('group_by' => 'site_name'));
     $this->data['total_vadotar'] = $this->model->find('sum(factory_fine - fine) as vodator');
 
     // $this->data['company_vadotars'] = array('ARF' => 0, 'ARC' => 0);
