@@ -36,28 +36,33 @@ class Ledgers extends BaseController {
 
     if ($this->router->class == 'vadotar_reports') {
       $where['purity != factory_purity'] = NULL;
-      if ($this->data['company_name'] == 'AR Gold') {
-        $where['where_not_in'] = array('receipt_type' => array("'ARF Finished Goods'", "'ARC Finished Goods'", 
-                                                               "'ARF Refresh'", "'ARC Refresh'", 
-                                                               "'ARF Software Finished Goods'"));
-      } elseif ($this->data['company_name'] == 'ARF') {
-         $where['where_in'] = array('receipt_type' => array("'ARF Finished Goods'", "'ARF Refresh'", "'ARF Software Finished Goods'"));
-      } elseif ($this->data['company_name'] == 'ARC') {
-        $where['where_in'] = array('receipt_type' => array("'ARC Finished Goods'", "'ARC Refresh'"));
-      }
+      if (!empty($this->data['site_name'])) 
+        $where['site_name'] = $this->data['site_name'];
+      // if ($this->data['company_name'] == 'AR Gold') {
+      //   $where['where_not_in'] = array('receipt_type' => array("'ARF Finished Goods'", "'ARC Finished Goods'", 
+      //                                                          "'ARF Refresh'", "'ARC Refresh'", 
+      //                                                          "'ARF Software Finished Goods'"));
+      // } elseif ($this->data['company_name'] == 'ARF') {
+      //    $where['where_in'] = array('receipt_type' => array("'ARF Finished Goods'", "'ARF Refresh'", "'ARF Software Finished Goods'"));
+      // } elseif ($this->data['company_name'] == 'ARC') {
+      //   $where['where_in'] = array('receipt_type' => array("'ARC Finished Goods'", "'ARC Refresh'"));
+      // }
     } 
 
     if (!isset($this->data['group']) || $this->data['group']=='') {
       $this->data['group']='';
       $receipt_select = 'receipt_type, '.$period_select.' as voucher_date, 
-                 date_format(voucher_date,"%Y-%m-%d") as str_voucher_date, voucher_number,
-                 account_name, voucher_type, voucher_number, 0 as credit_amount, (debit_amount - credit_amount) as debit_amount, 
+                 date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
+                 account_name, voucher_type, voucher_number, 
+                 0 as credit_amount, (debit_amount - credit_amount) as debit_amount, 
                  0  as credit_weight, (debit_weight - credit_weight) as debit_weight, 
                  purity_margin, purity, factory_purity, narration, description';
       $issue_select = 'receipt_type, '.$period_select.' as voucher_date, 
-                 date_format(voucher_date,"%Y-%m-%d") as str_voucher_date, voucher_number,
-                 account_name, voucher_type, voucher_number, (credit_amount - debit_amount) as credit_amount, 0 as debit_amount, 
-                 (credit_weight - debit_weight) as credit_weight, 0 as debit_weight, purity_margin, purity, factory_purity, narration, description';           
+                 date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
+                 account_name, voucher_type, voucher_number, 
+                 (credit_amount - debit_amount) as credit_amount, 0 as debit_amount,
+                 (credit_weight - debit_weight) as credit_weight, 0 as debit_weight, 
+                 purity_margin, purity, factory_purity, narration, description';           
     } else {
       $this->data['group'] = 'voucher_date';
       $select = '"" as receipt_type, '.$period_select.' as voucher_date, 
@@ -70,8 +75,8 @@ class Ledgers extends BaseController {
                  sum((credit_weight+debit_weight) * factory_purity) /  sum(credit_weight+debit_weight)  as factory_purity, ""  as narration, "" as description';
     }
 
-    $where_issue = array_merge($where, array('(credit_weight != 0 or (credit_amount != 0 and debit_weight = 0))' => NULL));
-    $where_receipt = array_merge($where, array('(debit_weight != 0 or (debit_amount != 0 and credit_weight = 0))' => NULL));
+    $where_issue = array_merge($where, array('(credit_weight != 0 or credit_amount != 0)' => NULL));
+    $where_receipt = array_merge($where, array('(debit_weight != 0 or debit_amount != 0)' => NULL));
 
     if (isset($this->data['report_type']) && $this->data['report_type'] == 'production') {
       $where_issue = array_merge($where_issue, array('account_name != ' => 'VADOTAR'));
