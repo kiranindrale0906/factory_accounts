@@ -72,7 +72,7 @@ class Ledgers extends BaseController {
     }
 
     if (   isset($this->data['report_type']) && $this->data['report_type'] == 'Account Ledger'
-        && isset($this->data['account_id']) && $this->data['account_id'] ==  10) {
+        && isset($this->data['account_id']) ) { //&& $this->data['account_id'] ==  10
       $this->data['group'] = 'voucher_date, chitti_no';
       $issue_select = 'receipt_type, '.$period_select.' as voucher_date, 
                        date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
