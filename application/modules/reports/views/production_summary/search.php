@@ -83,7 +83,7 @@
   <br />
 <?php } ?>
 
-<?php if (!empty($machine_sizes) && $site_name = 'ARF') { ?>
+<?php if (!empty($machine_sizes) && $site_name == 'ARF') { ?>
   <div class="row"> 
     <div class="col-md-12">
       <h6>
@@ -100,7 +100,7 @@
   <br />
 <?php } ?>
 
-<?php if (!empty($design_codes) && $site_name = 'ARF') { ?>
+<?php if (!empty($design_codes) && $site_name == 'ARF') { ?>
   <div class="row"> 
     <div class="col-md-12">
       <h6>
