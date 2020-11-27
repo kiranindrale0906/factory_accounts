@@ -15,14 +15,14 @@ class Production_summary extends BaseController {
   public function _get_form_data() {
     if(!isset($this->data['record'])) $this->data['record'] = array();
     
-    $this->data['site_name']    = (!empty($_GET['site_name'])) ? $_GET['site_name'] : '';
+    $this->data['site_name']    = (!empty($_GET['site_name']))    ? $_GET['site_name'] : '';
     $this->data['product_name'] = (!empty($_GET['product_name'])) ? $_GET['product_name'] : '';
-    $this->data['in_purity']    = (!empty($_GET['in_purity'])) ? $_GET['in_purity'] : '';
+    $this->data['in_purity']    = (!empty($_GET['in_purity']))    ? $_GET['in_purity'] : '';
     $this->data['account_name'] = (!empty($_GET['account_name'])) ? $_GET['account_name'] : '';
     $this->data['category_one'] = (!empty($_GET['category_one'])) ? $_GET['category_one'] : '';
-    $this->data['group_by']     = (!empty($_GET['group_by'])) ? $_GET['group_by'] : '';
-    //if (!empty($_GET['production_summary']['machine_size'])) $this->data['record']['machine_size'] = $_GET['production_summary']['machine_size'];
-    //if (!empty($_GET['production_summary']['design_code']))  $this->data['record']['design_code']  = $_GET['production_summary']['design_code'];
+    $this->data['group_by']     = (!empty($_GET['group_by']))     ? $_GET['group_by'] : '';
+    $this->data['machine_size'] = (!empty($_GET['machine_size'])) ? $_GET['machine_size'] : '';
+    $this->data['design_code']  = (!empty($_GET['design_code']))  ? $_GET['design_code'] : '';
 
     $this->data['site_names']   = array('AR Gold', 'ARC', 'ARF');
     $url = '';
@@ -31,12 +31,14 @@ class Production_summary extends BaseController {
     elseif ($this->data['site_name'] == 'ARC') $url = API_ARC_BASE_PATH."issue_departments/api_issue_departments/create";
       
     if (!empty($url)) {
-      $records=json_decode(curl_post_request($url, $this->data));
+      $records = json_decode(curl_post_request($url, $this->data));
       $this->data = array_merge($this->data, json_decode(json_encode($records), true));
       if (!isset($this->data['product_names'])) $this->data['product_names'] = array();
       if (!isset($this->data['in_purities']))   $this->data['in_purities']   = array();
       if (!isset($this->data['account_names'])) $this->data['account_names'] = array();
       if (!isset($this->data['category_ones'])) $this->data['category_ones'] = array(); 
+      if (!isset($this->data['machine_sizes'])) $this->data['machine_sizes'] = array(); 
+      if (!isset($this->data['design_codes']))  $this->data['design_codes']  = array(); 
     }
 
     //$this->data['product_names'] = array_unique(array_merge($argold_data['product_names']['names'], $argold_data['product_names']['names']));
@@ -62,7 +64,7 @@ class Production_summary extends BaseController {
     }
     if (empty($argold_records['data'])) $argold_records['data'] = array();
 
-    if ($this->data['site_name'] =='' || $this->data['site_name'] == 'ARF') {
+    if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARF') {
       $url = API_ARF_BASE_PATH."issue_departments/api_issue_departments/index";
       $records = json_decode(curl_post_request($url, $_GET));
       $arf_records = json_decode(json_encode($records), true);
