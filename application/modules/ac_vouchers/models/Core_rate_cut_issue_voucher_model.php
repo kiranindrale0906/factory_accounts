@@ -59,7 +59,8 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
                               'gold_rate' => $chitti['rate'],
                               'gold_rate_purity' => 100,
                               'description' => 'Chitti '.$chitti['id'],
-                              'receipt_type' => 'Chitti');
+                              'receipt_type' => 'Chitti',
+                              'chitti_id' => $chitti_id);
     $rate_cut_receipt_voucher_obj = new rate_cut_receipt_voucher_model($rate_cut_receipt);
     $rate_cut_receipt_voucher_obj->before_validate();
     $rate_cut_receipt_voucher_obj->store();

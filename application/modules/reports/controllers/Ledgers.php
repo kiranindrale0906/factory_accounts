@@ -56,7 +56,7 @@ class Ledgers extends BaseController {
                  account_name, voucher_type, voucher_number, 
                  credit_amount, debit_amount, 
                  credit_weight, debit_weight, 
-                 purity_margin, purity, factory_purity, narration, description';
+                 purity_margin, purity, factory_purity, narration, description, id as chitti_no';
       $issue_select = $receipt_select;           
     } else {
       $this->data['group'] = 'voucher_date';
@@ -67,20 +67,55 @@ class Ledgers extends BaseController {
                  sum(credit_weight) as credit_weight, sum(debit_weight) as debit_weight, 
                  0 as purity_margin, 
                  sum((credit_weight+debit_weight) * purity) /  sum(credit_weight+debit_weight)  as purity, 
-                 sum((credit_weight+debit_weight) * factory_purity) /  sum(credit_weight+debit_weight)  as factory_purity, ""  as narration, "" as description';
+                 sum((credit_weight+debit_weight) * factory_purity) /  sum(credit_weight+debit_weight)  as factory_purity, ""  as narration, "" as description, "" as chitti_id';
       $issue_select = $receipt_select;          
     }
 
-    $where_issue = array_merge($where, array('(credit_weight != 0 or credit_amount != 0)' => NULL));
-    $where_receipt = array_merge($where, array('(debit_weight != 0 or debit_amount != 0)' => NULL));
+    if (   isset($this->data['report_type']) && $this->data['report_type'] == 'Account Ledger'
+        && isset($this->data['account_id']) && $this->data['account_id'] ==  10) {
+      $this->data['group'] = 'voucher_date, chitti_no';
+      $issue_select = 'receipt_type, '.$period_select.' as voucher_date, 
+                       date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
+                       account_name, voucher_type, voucher_number, 
+                       credit_amount, 
+                       if(voucher_type="rate cut receipt voucher", credit_amount, debit_amount) as debit_amount, 
+                       if(voucher_type="rate cut receipt voucher", 0, if(chitti_id not in (select chitti_id from ac_vouchers where voucher_type = "rate cut issue voucher"), sum(credit_weight) , sum(credit_weight))) as credit_weight, 
+                       if(voucher_type="rate cut receipt voucher", 0, debit_weight) as debit_weight, 
+                       purity_margin, 
+                       sum(credit_weight * purity) / sum(credit_weight) as purity, 
+                       sum(credit_weight * factory_purity) / sum(credit_weight) as factory_purity, 
+                       narration, description, 
+                       if(voucher_type != "metal issue voucher", id, chitti_id) as chitti_no';
+
+      $receipt_select = 'receipt_type, '.$period_select.' as voucher_date, 
+                         date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
+                         account_name, voucher_type, voucher_number, 
+                         debit_amount, 
+                         if(voucher_type="rate cut receipt voucher", debit_amount, credit_amount) as credit_amount, 
+                         if(voucher_type="rate cut receipt voucher", credit_weight, credit_weight) as credit_weight, 
+                         if(voucher_type="rate cut receipt voucher", debit_weight, debit_weight) as debit_weight, 
+                         purity_margin, purity, factory_purity, narration, description, id as chitti_no';
+
+
+      $str_where  = '(   (voucher_type = "metal issue voucher") ';
+      $str_where .= ' or (voucher_type = "rate cut receipt voucher" and debit_amount != 0)';
+      $str_where .= ' or (voucher_type != "metal issue voucher" and (credit_weight != 0 or credit_amount !=0)))';
+      $where_issue = array_merge($where, array($str_where => NULL));
+
+      $where_receipt = array_merge($where, array('(debit_weight != 0 or debit_amount != 0)' => NULL,
+                                                 ));
+    } else {
+      $where_issue   = array_merge($where, array('(credit_weight != 0 or credit_amount != 0)' => NULL));
+      $where_receipt = array_merge($where, array('(debit_weight != 0 or debit_amount != 0)' => NULL));
+    }
 
     if (isset($this->data['report_type']) && $this->data['report_type'] == 'production') {
       $where_issue = array_merge($where_issue, array('account_name != ' => 'VADOTAR'));
       $where_receipt = array_merge($where_receipt, array('account_name != ' => 'VADOTAR'));
     }
 
-    $issues = $this->model->get($issue_select, $where_issue ,array(), array('order_by'=>'str_voucher_date asc', 'group_by' => $this->data['group']));
-    $receipts = $this->model->get($receipt_select, $where_receipt ,array(), array('order_by'=>'str_voucher_date asc', 'group_by' => $this->data['group']));
+    $issues = $this->model->get($issue_select, $where_issue ,array(), array('order_by'=>'chitti_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
+    $receipts = $this->model->get($receipt_select, $where_receipt ,array(), array('order_by'=>'voucher_type, chitti_id, str_voucher_date asc', 'group_by' => $this->data['group']));
     $issue_voucher_dates = array_column($issues, 'voucher_date');
     $receipt_voucher_dates = array_column($receipts, 'voucher_date');
     

@@ -7,9 +7,9 @@
 
     if (!isset($detail) || $detail == 'yes') {
       foreach ($voucher_date_records as $index => $record) {
-        if($record['debit_weight'] > 0 || $record['debit_amount'] > 0)
+        if (($record['debit_weight'] > 0 || $record['debit_amount'] > 0)) {
           $this->load->view('reports/ledgers/tr_receipt', array('record' => $record));   
-        else 
+        } else 
           $this->load->view('reports/ledgers/tr_issue', array('record' => $record));  
       }
     } 
