@@ -103,7 +103,7 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
     $rate_cut_issue_voucher_obj->store();
 
     $rate_cut_receipt = $rate_cut_issue;
-    $rate_cut_receipt['account_name']  = ($receipt_type=='Metal') ? 'PURCHASE ACCOUNT' : 'GOODS RETURN';
+    $rate_cut_receipt['account_name']  = 'PURCHASE ACCOUNT';
     $rate_cut_receipt['credit_amount'] = $tax_fields['grand_total'];
     $rate_cut_receipt['debit_amount']  = 0;
     $rate_cut_receipt['debit_weight']  = $tax_fields['weight'];
