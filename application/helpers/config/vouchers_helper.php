@@ -3,7 +3,7 @@
 function get_tax_fields($factory_fine, $fine, $sale_type, $gold_rate) {
   $fields = array('sale_type' => $sale_type,
                   'gst_rate'  => ($sale_type == 'Labour') ? 2.50 : 1.50,
-                  'tcs_rate'  => ($sale_type == 'Sale') ? 1.50 : 0,
+                  'tcs_rate'  => ($sale_type == 'Sale') ? 0.075 : 0,
                   'gold_rate' => $gold_rate);
   if ($fields['sale_type'] == 'Labour') 
     $fields['weight'] = ($factory_fine > $fine) ? ($factory_fine - $fine) : ($fine - $factory_fine);
