@@ -15,7 +15,7 @@
 </div>
 <br />
 
-<?php if (!empty($product_names)) { pd($design_code); ?>
+<?php if (!empty($product_names)) { ?>
   <div class="row"> 
     <div class="col-md-12">
       <h6>
