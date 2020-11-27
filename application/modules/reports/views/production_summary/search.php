@@ -89,7 +89,7 @@
       <h6>
         Machine Size:
         <a class="ml-5 <?= ($machine_size == '') ? 'bold black underline' : '' ?>" 
-           href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=<?= $group_by ?>'>All</a>
+           href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=<?= $group_by ?>'>All</a>
         <?php foreach ($machine_sizes as $machinesize) { ?>
           <a class="ml-5 <?= ($machine_size == $machinesize) ? 'bold black underline' : '' ?>" 
              href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machinesize ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=<?= $group_by ?>'><?= $machinesize ?></a>
