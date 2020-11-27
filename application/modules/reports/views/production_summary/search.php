@@ -15,23 +15,6 @@
 </div>
 <br />
 
-<?php if (!empty($product_names)) { ?>
-  <div class="row"> 
-    <div class="col-md-12">
-      <h6>
-        Product Name: 
-        <a class="ml-5 <?= ($product_name == '') ? 'bold black underline' : '' ?>" 
-           href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=&in_purity=<?= $in_purity ?>&group_by=<?= $group_by ?>'>All</a>
-          <?php foreach ($product_names as $product) { ?>
-            <a class="ml-5 <?= ($product_name == $product) ? 'bold black underline' : '' ?>"
-               href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&account_name=<?= $account_name ?>&product_name=<?= $product ?>&in_purity=<?= $in_purity ?>&group_by=<?= $group_by ?>'><?= $product ?></a>    
-          <?php } ?>
-      </h6>
-    </div>
-  </div>
-  <br />
-<?php } ?>
-
 <?php if (!empty($account_names)) { ?>
   <div class="row"> 
     <div class="col-md-12">
@@ -47,6 +30,23 @@
     </div>
   </div>
   <br /> 
+<?php } ?>
+
+<?php if (!empty($product_names)) { ?>
+  <div class="row"> 
+    <div class="col-md-12">
+      <h6>
+        Product Name: 
+        <a class="ml-5 <?= ($product_name == '') ? 'bold black underline' : '' ?>" 
+           href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=&in_purity=<?= $in_purity ?>&group_by=<?= $group_by ?>'>All</a>
+          <?php foreach ($product_names as $product) { ?>
+            <a class="ml-5 <?= ($product_name == $product) ? 'bold black underline' : '' ?>"
+               href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&account_name=<?= $account_name ?>&product_name=<?= $product ?>&in_purity=<?= $in_purity ?>&group_by=<?= $group_by ?>'><?= $product ?></a>    
+          <?php } ?>
+      </h6>
+    </div>
+  </div>
+  <br />
 <?php } ?>
 
 <?php if (!empty($in_purities)) { ?>
@@ -83,7 +83,7 @@
   <br />
 <?php } ?>
 
-<?php if (!empty($machine_sizes) && $site_name == 'ARF') { ?>
+<?php if (!empty($machine_sizes)) { ?>
   <div class="row"> 
     <div class="col-md-12">
       <h6>
@@ -100,7 +100,7 @@
   <br />
 <?php } ?>
 
-<?php if (!empty($design_codes) && $site_name == 'ARF') { ?>
+<?php if (!empty($design_codes)) { ?>
   <div class="row"> 
     <div class="col-md-12">
       <h6>
