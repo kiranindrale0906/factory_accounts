@@ -38,7 +38,7 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
         && $this->attributes['receipt_type'] != 'Stone Vatav') return;
 
     $metal_issue_voucher = $this->find('id', array('receipt_type' => $this->attributes['receipt_type'],
-                                                   'site_name' => $this->attributes['site_name'],
+                                                   'site_name'    => $this->attributes['site_name'],
                                                    'voucher_date' => $this->attributes['voucher_date']));
     if (!empty($metal_issue_voucher)) $this->attributes['id'] = $metal_issue_voucher['id'];
 
@@ -81,11 +81,11 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
       $this->client_metal_receipt_voucher_model->send_request_to_factory($this->attributes);
   }
 
-  public function delete_vodator_records($date) {
-    $this->delete('', array('receipt_type' => 'Alloy Vodator', 'voucher_date' => $date));
-    $this->delete('', array('receipt_type' => 'GPC Vodator', 'voucher_date' => $date));
-    $this->delete('', array('receipt_type' => 'Stone Vatav', 'voucher_date' => $date));
-  }
+  // public function delete_vodator_records($date) {
+  //   $this->delete('', array('receipt_type' => 'Alloy Vodator', 'voucher_date' => $date));
+  //   $this->delete('', array('receipt_type' => 'GPC Vodator', 'voucher_date' => $date));
+  //   $this->delete('', array('receipt_type' => 'Stone Vatav', 'voucher_date' => $date));
+  // }
 
   // private function create_metal_receipt_voucher_for_finished_goods() {
   //   if (isset($this->attributes['metal_receipt_voucher_reference_id']) 
