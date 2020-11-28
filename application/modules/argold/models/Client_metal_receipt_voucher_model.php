@@ -212,8 +212,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                                                             'purity' => $this->attributes['purity'],
                                                             'factory_purity' => $this->attributes['factory_purity']));
       $metal_issue_voucher = $this->find('id',array('receipt_type' => $this->attributes['receipt_type'],
-                                                    'account_name' => $this->attributes['site_name'].' Software',
-                                                    'narration' => $this->attributes['narration'],
+                                                    // 'account_name' => $this->attributes['site_name'].' Software',
+                                                    // 'narration' => $this->attributes['narration'],
+                                                    'site_name' => $this->attributes['site_name'],
                                                     'voucher_date' => $this->attributes['voucher_date']));
       if (!empty($metal_issue_voucher))
         $this->formdata['metal_issue_vouchers'][0]['id'] = $metal_issue_voucher['id'];
