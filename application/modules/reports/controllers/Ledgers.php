@@ -16,7 +16,7 @@ class Ledgers extends BaseController {
     if (empty($this->data['account_id'])) $this->data['account_id'] = $this->data['record']['account_id'];
 
     if ($this->data['period'] == 'date' && $this->data['report_type'] == 'Account Ledger')
-      $this->data['group'] = 'voucher_date';
+      $this->data['group'] = 'date';
     elseif ($this->data['report_type'] == 'Rojmel Report')
       $this->data['group'] = 'id';
 
