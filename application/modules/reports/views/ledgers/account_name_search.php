@@ -1,7 +1,9 @@
 <form method="get" class="form-horizontal fields-group-sm" enctype="multipart/form-data"
       action="<?= $url ?>">
         
-  <?php load_field('dropdown', array('field' => 'account_id', 'option' => @$account_names)); ?> 
+  <?php load_field('dropdown', array('field' => 'account_id', 
+                                     'option' => @$account_names,
+                                     'value' => @$account_id)); ?> 
 
   <div class="row"> 
     <div class="col-md-6">

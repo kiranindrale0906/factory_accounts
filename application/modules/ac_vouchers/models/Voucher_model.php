@@ -5,7 +5,11 @@ class Voucher_model extends BaseModel {
   protected $table_name = "ac_vouchers";
   function __construct($data=array()) {
     parent::__construct($data);
-    $this->load->model(array('masters/period_model', 'masters/setting_model', 'transactions/Receipt_not_sent_argold_model', 'transactions/ledger_model'));
+    $this->load->model(array('masters/period_model', 'masters/setting_model', 
+                             'transactions/Receipt_not_sent_argold_model'));
+    if (!class_exists("Ledger_model")) {
+      $this->load->model("transactions/Ledger_model");
+    }
   }
 
   public function validation_rules($klass='') {
@@ -244,11 +248,12 @@ class Voucher_model extends BaseModel {
   }
 
   public function after_save($action) {
-    if ($action=="update" && isset($id))
-      $this->ledger_model->delete('', array('table_id' => $id), true);
+    // if ($action=="update" && isset($id))
+    //   $this->ledger_model->delete('', array('table_id' => $id), true);
 
-    $ledger_data = $this->ledger_model->set_data($this->attributes, $this->router->class, $this->prefix, $this->table_name);
-    $ledger_obj = new ledger_model($ledger_data);
-    $ledger_obj->store(false);
+    // $ledger_data = $this->ledger_model->set_data($this->attributes, $this->router->class, $this->prefix, $this->table_name);
+    $ledger_obj = new ledger_model(array('voucher_id' => $this->attributes['id']));
+    $ledger_obj->before_validate();
+    $ledger_obj->save();
   }
 }

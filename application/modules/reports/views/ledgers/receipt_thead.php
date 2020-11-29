@@ -1,9 +1,9 @@
 <thead class="bg_gray">
   <tr>
-    <?php if ($report == 'vadotar report'): ?>
+    <?php if ($report_type == 'Vadotar Report'): ?>
       <th>Type</th>
     <?php endif; ?>
-    <?php if ($report != 'account ledger'): ?>
+    <?php if ($report_type != 'Account Ledger'): ?>
       <th>Account Name</th>
     <?php endif; ?>
     <th>Date</th>
@@ -13,9 +13,9 @@
     <th class='text-right'>Factory Fine</th>
     <th class='text-right'>Melting</th>
     <th class='text-right'>Fine</th>
-    <?php if ($report != 'account ledger'): ?>
+    <?php if ($report_type == 'Vadotar Report'): ?>
       <th class='text-right'>Vadotar</th>
-    <?php else: ?>
+    <?php elseif ($report_type == 'Account Ledger'): ?>
       <th class='text-right'>Amount</th>
     <?php endif; ?>
   </tr>
