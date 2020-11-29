@@ -38,7 +38,7 @@
            href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&site_name=<?= $site_name?>&period=<?= $period ?>&report_type=<?= $report_type ?>&detail=no&group=<?= $group ?>'>Hide Details</a>
       </h5>
     </div> -->
-    <?php if ($report_type == 'Vadotar Report' || $report_type == 'Production Report') { ?>
+    <?php if ($report_type != 'Rojmel Report') { ?>
       <div class="form-group container"> 
         <h5> Group By: 
           <a class="ml-5 <?= ($group=='') ? 'bold black underline' : '' ?>" 
@@ -47,7 +47,8 @@
              href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&site_name=<?= $site_name?>&period=<?= $period ?>&report_type=<?= $report_type ?>&detail=<?= $detail ?>&group=voucher_date'>Date</a>
         </h5>
       </div>
-    
+    <?php } ?>
+    <?php if ($report_type == 'Vadotar Report' || $report_type == 'Production Report') { ?>
       <div class="form-group container"> 
         <h5> Report Type: 
           <a class="ml-5 <?= ($report_type=='Vadotar Report') ? 'bold black underline' : '' ?>" 
