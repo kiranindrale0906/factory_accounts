@@ -8,36 +8,97 @@ class Ledger_model extends BaseModel {
 
   function __construct($data=array()) {
     parent::__construct($data);
+    $this->load->model(array('ac_vouchers/voucher_model'));
   }
 
-  public function set_data($voucher, $router_class, $prefix, $table_name) {
-    $ledger_data = array();
-    if (in_array($router_class, array('cash_issue_voucher', 'cash_receipt_voucher'))) {
-      $ledger_data['cash_bill_type'] = 'cash';
+  public function regenerate_ledger_records() {
+    $this->delete('', array('id > ' => 0));
+    $voucher_ids = $this->voucher_model->get('id');
+    foreach ($voucher_ids as $voucher_id) {
+      $ledger_obj = new Ledger_model(array('voucher_id' => $voucher_id['id']));
+      $ledger_obj->before_validate();
+      $ledger_obj->save();
     }
-    if (in_array($router_class, array('bank_issue_voucher', 'bank_receipt_voucher'))) {
-      $ledger_data['cash_bill_type'] = 'bill';
+  }
+  
+  public function before_validate() {
+    if (empty($this->attributes['voucher_id'])) {
+      echo 'Voucher ID cannot be empty for Ledger';
+      exit;
     }
-    if (in_array($router_class, array('metal_issue_voucher', 'metal_receipt_voucher', 'opening_stock_voucher'))) {
-      $ledger_data['cash_bill_type'] = 'metal';
+
+    $existing_ledger_record = $this->find('id', array('voucher_id' => $this->attributes['voucher_id']));
+    if (!empty($existing_ledger_record)) 
+      $this->attributes['id'] = $existing_ledger_record['id'];
+
+    $this->initialize($this->attributes['voucher_id']);
+    $this->set_attributes_from_vouchers();
+  }
+
+  private function initialize($voucher_id) {
+    $voucher = $this->voucher_model->find('', array('id' => $this->attributes['voucher_id']));
+    $this->attributes['voucher_id'] = $voucher['id'];
+    $this->attributes['company_id'] = $voucher['company_id'];
+    $this->attributes['period_id'] = $voucher['period_id'];
+    $this->attributes['voucher_number'] = $voucher['voucher_number'];
+    $this->attributes['account_name'] = $voucher['account_name'];
+    $this->attributes['account_id'] = $voucher['account_id'];
+    $this->attributes['voucher_date'] = $voucher['voucher_date'];
+    $this->attributes['narration'] = $voucher['narration'];
+    $this->attributes['voucher_type'] = $voucher['voucher_type'];
+    $this->attributes['transaction_type'] = $voucher['transaction_type'];
+    $this->attributes['credit_amount'] = $voucher['credit_amount'];
+    $this->attributes['debit_amount'] = $voucher['debit_amount'];
+    $this->attributes['credit_weight'] = $voucher['credit_weight'];
+    $this->attributes['debit_weight'] = $voucher['debit_weight'];
+    $this->attributes['purity'] = $voucher['purity'];
+    $this->attributes['factory_purity'] = $voucher['factory_purity'];
+    $this->attributes['receipt_type'] = $voucher['receipt_type'];
+    $this->attributes['type'] = $voucher['type'];
+    $this->attributes['fine'] = $voucher['fine'];
+    $this->attributes['factory_fine'] = $voucher['factory_fine'];
+    $this->attributes['gold_rate'] = $voucher['gold_rate'];
+    $this->attributes['chitti_id'] = $voucher['chitti_id'];
+    $this->attributes['description'] = $voucher['description'];
+    $this->attributes['site_name'] = $voucher['site_name'];
+    $this->attributes['sale_type'] = $voucher['sale_type'];
+    $this->attributes['parent_id'] = $voucher['metal_receipt_voucher_reference_id'];
+  }
+  
+  private function set_attributes_from_vouchers() {
+    if (empty($this->attributes['chitti_id'])) $this->attributes['chitti_id'] = $this->attributes['voucher_id'];
+    if (empty($this->attributes['parent_id'])) $this->attributes['parent_id'] = $this->attributes['voucher_id'];
+
+    //to display debit weight and credit amount on the issue side in Swarnshilp Ledger
+    if ($this->attributes['voucher_type'] == 'rate cut receipt voucher') {
+      if ($this->attributes['chitti_id'] != $this->attributes['voucher_id']) {
+        $this->attributes['credit_weight'] = 0;
+        $this->attributes['debit_weight'] = 0;
+        $this->attributes['purity'] = 0;
+        $this->attributes['factory_purity'] = 0;
+        $this->attributes['fine'] = 0;
+        $this->attributes['factory_fine'] = -1 * $this->attributes['factory_fine'];  
+      }
+    } 
+
+    if ($this->attributes['voucher_type'] == 'rate cut issue voucher') {
+      $this->attributes['credit_weight'] = 0;
+      $this->attributes['debit_weight'] = 0;
+      $this->attributes['purity'] = 0;
+      $this->attributes['factory_purity'] = 0;
+      if ($this->attributes['chitti_id'] == $this->attributes['voucher_id']) {  
+        $this->attributes['fine'] = -1 * $this->attributes['fine'];
+        $this->attributes['factory_fine'] = 0;
+      } else {
+        $this->attributes['credit_amount'] = -1 * $this->attributes['debit_amount'];
+        $this->attributes['debit_amount'] = 0;
+      }
+    } 
+
+    //to display credit amount with weight in Purchase Account Ledger
+    if ($this->attributes['voucher_type'] == 'rate cut receipt voucher'  && $this->attributes['chitti_id'] == $this->attributes['voucher_id']) {
+      $this->attributes['debit_amount'] = -1 * $this->attributes['credit_amount'];
+      $this->attributes['credit_amount'] = 0;
     }
-    $ledger_data['account_id'] =   @$voucher['account_id'];
-    $ledger_data['account_name'] = $voucher['account_name'];
-    $ledger_data['voucher_type'] = $voucher['voucher_type'];
-    $ledger_data['suffix'] = $prefix;
-    $ledger_data['voucher_date'] = $voucher['voucher_date'];
-    $ledger_data['credit_amount'] = !empty($voucher['credit_amount']) ? $voucher['credit_amount'] : 0;
-    $ledger_data['debit_amount'] = !empty($voucher['debit_amount']) ? $voucher['debit_amount'] : 0;
-    $ledger_data['credit_weight'] = !empty($voucher['credit_weight']) ? $voucher['credit_weight'] : 0;
-    $ledger_data['debit_weight'] = !empty($voucher['debit_weight']) ? $voucher['debit_weight'] : 0; 
-    $ledger_data['narration'] = !empty($voucher['narration']) ? $voucher['narration'] : ''; 
-    $ledger_data['table_name'] = $table_name;
-    $ledger_data['table_id'] = $voucher['id'];
-    $ledger_data['voucher_number'] = $voucher['voucher_number'];
-    $ledger_data['company_id'] = $voucher['company_id'];
-    $ledger_data['factory_purity'] = !empty($voucher['factory_purity']) ? $voucher['factory_purity'] : 0;
-    $ledger_data['purity_margin'] = !empty($voucher['purity_margin']) ? $voucher['purity_margin'] : 0;
-    $ledger_data['receipt_type'] = !empty($voucher['receipt_type']) ? $voucher['receipt_type'] : '';
-    return $ledger_data;
   }
 }

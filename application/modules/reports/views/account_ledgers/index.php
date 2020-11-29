@@ -4,11 +4,9 @@
   $this->load->view('reports/ledgers/account_name_search', array('url' => ADMIN_PATH."reports/account_ledgers/index"));
 ?>
 
-<div class="col-md-3 float-right">
-  <?php echo getHttpButton('View AR Gold Ledger', base_url().'reports/account_ledgers?argold=1'); ?>
-</div>
-
 <?php 
-  
-  $this->load->view('reports/ledgers/date_wise_ledger', array('report' => 'account ledger'));
+  if (!empty($record['account_id'])) {
+    $this->load->view('reports/ledgers/search'); 
+    $this->load->view('reports/ledgers/date_wise_ledger', array('report' => 'account ledger')); 
+  }
 ?>

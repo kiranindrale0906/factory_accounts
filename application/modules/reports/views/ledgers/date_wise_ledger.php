@@ -8,10 +8,9 @@
             <h5 class="heading blue m-0">Receipt: <?= $voucher_date ?></h5>
             <table class="table table-sm fixedthead">
               <?php 
-                $this->load->view('reports/ledgers/receipt_thead', array('report' => $report)); 
+                $this->load->view('reports/ledgers/receipt_thead'); 
                 $this->load->view('reports/ledgers/tbody', 
-                        array('report' => $report,
-                              'voucher_date_records' => isset($receipts[$voucher_date]) ? $receipts[$voucher_date] : array(),
+                        array('voucher_date_records' => isset($receipts[$voucher_date]) ? $receipts[$voucher_date] : array(),
                               'previous_date' => $previous_date,
                               'voucher_date' => $voucher_date,
                               'type' => 'receipt')); 
@@ -27,10 +26,9 @@
             <h5 class="heading blue m-0">Issue</h5>
             <table class="table table-sm fixedthead">
               <?php 
-                $this->load->view('reports/ledgers/issue_thead', array('report' => $report)); 
+                $this->load->view('reports/ledgers/issue_thead'); 
                 $this->load->view('reports/ledgers/tbody', 
-                                          array('report' => $report,
-                                                'voucher_date_records' => isset($issues[$voucher_date]) ? $issues[$voucher_date] : array(),
+                                          array('voucher_date_records' => isset($issues[$voucher_date]) ? $issues[$voucher_date] : array(),
                                                 'previous_date' => $previous_date,
                                                 'voucher_date' => $voucher_date,
                                                 'type' => 'issue')); 
