@@ -7,7 +7,7 @@
 </style>
 <h4 style="margin-left:10%" class="heading">Chitti #<?= $record['id']; ?></h4>
 
-<div style="max-width:40%; margin-left:10%">
+<div style="max-width:45%; margin-left:10%">
   <table class="table table-sm">
     <tr>
       <td><h6><?=$chittis_details['account_name']?></h6></td><td class="text-right"><h6><?=date('d-m-Y',strtotime($record['created_at']))?></h6></td>
@@ -27,7 +27,7 @@
   </table>
 </div>
 
-<div style="max-width:40%; margin-left:10%">
+<div style="max-width:45%; margin-left:10%">
   <?php $this->load->view('chitti_details/viewlist'); ?>
 </div>
 
@@ -38,7 +38,7 @@
     $gst_rate = 1.5;
 ?>
 
-<div style="max-width:40%; margin-left:10%; page-break-after:avoid">
+<div style="max-width:45%; margin-left:10%; page-break-after:avoid">
   <table class="table table-sm">
     <tr>
       <td>Weight</td><td class="text-right"><h6><?=four_decimal($record['credit_weight'])?></h6></td>
