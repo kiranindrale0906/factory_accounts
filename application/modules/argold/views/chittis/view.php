@@ -19,7 +19,7 @@
         <td>No of Packets</td><td class="text-right"><h6><?=round($record['no_of_packets'])?></h6></td>
       </tr>
     <?php } ?>
-    <?php if (!empty($record['packet_gross_weight'])) { ?>
+    <?php if (!empty($record['packet_gross_weight']) && $record['packet_gross_weight'] > 0) { ?>
       <tr>
         <td>Packet Gross Weight</td><td class="text-right"><h6><?=four_decimal($record['packet_gross_weight'])?></h6></td>
       </tr>
