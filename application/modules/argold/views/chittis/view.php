@@ -5,7 +5,7 @@
   }
 }
 </style>
-<h4 style="margin-left:25%" class="heading ml-3">Chitti #<?= $record['id']; ?></h4>
+<h4 style="margin-left:25%" class="heading">Chitti #<?= $record['id']; ?></h4>
 
 <div style="max-width:40%; margin-left:25%">
   <table class="table table-sm">
