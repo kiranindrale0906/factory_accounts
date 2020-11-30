@@ -40,7 +40,8 @@ class Ledgers extends BaseController {
     if(!empty($this->data['record']['account_id']))        $where['account_id'] = $this->data['record']['account_id'];
     if (   !empty($this->data['site_name']) 
         && $this->data['site_name'] != 'All')              $where['site_name'] = $this->data['site_name'];
-    if ($this->data['report_type'] == 'Vadotar Report')    $where['purity != factory_purity'] = NULL;
+    if (   $this->data['report_type'] == 'Vadotar Report'
+        || $this->data['report_type'] == 'Production Report')    $where['purity != factory_purity'] = NULL;
     if ($this->data['report_type'] == 'Production Report') $where['account_name != '] = 'VADOTAR';
     
     if ($this->data['report_type'] == 'Account Ledger' && $this->data['group'] == 'date')
