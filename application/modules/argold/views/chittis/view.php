@@ -3,14 +3,11 @@
   .no-print, .no-print * {
     display: none !important;
   }
-  .print-font {
-    font-size:1.1rem;
-  }
 }
 </style>
-<h4 style="margin-left:25%" class="heading print-font">Chitti #<?= $record['id']; ?></h4>
+<h4 style="margin-left:25%" class="heading">Chitti #<?= $record['id']; ?></h4>
 
-<div style="max-width:40%; margin-left:25%" class="print-font">
+<div style="max-width:40%; margin-left:15%">
   <table class="table table-sm">
     <tr>
       <td><h6><?=$chittis_details['account_name']?></h6></td><td class="text-right"><h6><?=date('d-m-Y',strtotime($record['created_at']))?></h6></td>
@@ -30,7 +27,7 @@
   </table>
 </div>
 
-<div style="max-width:40%; margin-left:25%" class="print-font">
+<div style="max-width:40%; margin-left:15%">
   <?php $this->load->view('chitti_details/viewlist'); ?>
 </div>
 
@@ -41,7 +38,7 @@
     $gst_rate = 1.5;
 ?>
 
-<div style="max-width:40%; margin-left:25%" class="print-font">
+<div style="max-width:40%; margin-left:15%; page-break-inside:avoid">
   <table class="table table-sm">
     <tr>
       <td>Weight</td><td class="text-right"><h6><?=four_decimal($record['credit_weight'])?></h6></td>
