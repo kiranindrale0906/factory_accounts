@@ -14,7 +14,7 @@
     </tr><tr>
       <td>Sale Type</td><td class="text-right"><h6><?= $record['sale_type'] ?></h6></td>
     </tr>
-    <?php if (!empty($record['no_of_packets'])) { ?>
+    <?php if (!empty($record['no_of_packets']) && $record['no_of_packets'] > 0) { ?>
       <tr>
         <td>No of Packets</td><td class="text-right"><h6><?=round($record['no_of_packets'])?></h6></td>
       </tr>
