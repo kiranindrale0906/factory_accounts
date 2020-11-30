@@ -88,7 +88,7 @@
           <tr>
             <td>Closing Stock</td>
             <td class="text-right"><?= four_decimal($liabilities_amount - $assets_amount, '-'); ?></td>          
-            <td class="text-right"><?= four_decimal($liabilities_fine + $pending_vadotar - $assets_fine, '-'); ?></td>          
+            <td class="text-right"><?= four_decimal(($liabilities_fine + $pending_vadotar - $assets_fine), '-'); ?></td>          
           </tr>
           <tr>
             <th>Total</th>
