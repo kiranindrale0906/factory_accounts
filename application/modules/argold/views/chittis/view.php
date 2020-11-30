@@ -7,19 +7,19 @@
 </style>
 <h4 class="heading ml-3">Chitti #<?= $record['id']; ?></h4>
 
-<div style="max-width:40%;">
+<div style="max-width:40%; margin-left:25%">
   <table class="table table-sm">
     <tr>
       <td><h6><?=$chittis_details['account_name']?></h6></td><td class="text-right"><h6><?=date('d-m-Y',strtotime($record['created_at']))?></h6></td>
     </tr><tr>
       <td>Sale Type</td><td class="text-right"><h6><?= $record['sale_type'] ?></h6></td>
     </tr>
-    <?php if (empty($record['no_of_packets'])) { ?>
+    <?php if (!empty($record['no_of_packets'])) { ?>
       <tr>
         <td>No of Packets</td><td class="text-right"><h6><?=round($record['no_of_packets'])?></h6></td>
       </tr>
     <?php } ?>
-    <?php if (empty($record['packet_gross_weight'])) { ?>
+    <?php if (!empty($record['packet_gross_weight'])) { ?>
       <tr>
         <td>Packet Gross Weight</td><td class="text-right"><h6><?=four_decimal($record['packet_gross_weight'])?></h6></td>
       </tr>
@@ -27,7 +27,7 @@
   </table>
 </div>
 
-<div style="max-width:40%">
+<div style="max-width:40%; margin-left:25%">
   <?php $this->load->view('chitti_details/viewlist'); ?>
 </div>
 
@@ -38,7 +38,7 @@
     $gst_rate = 1.5;
 ?>
 
-<div style="max-width:40%">
+<div style="max-width:40%; margin-left:25%">
   <table class="table table-sm">
     <tr>
       <td>Weight</td><td class="text-right"><h6><?=four_decimal($record['credit_weight'])?></h6></td>
