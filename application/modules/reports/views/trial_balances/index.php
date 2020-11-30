@@ -142,3 +142,5 @@
   
   <?php $this->load->view('trial_balances/factory_balance'); ?>
 </div>
+
+<?php $this->load->view('trial_balances/profit_and_loss', array('pending_vadotar' => four_decimal($liabilities_vadotar + $assets_vadotar))); ?>
