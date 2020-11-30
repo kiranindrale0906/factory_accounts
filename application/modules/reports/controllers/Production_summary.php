@@ -3,12 +3,17 @@
 class Production_summary extends BaseController {
   public function __construct() {
     parent::__construct();
-    $this->load->model(array('masters/account_model'));
+    $this->load->model(array('masters/account_model', 'argold/refresh_detail_model'));
   }
 
   public function index() {
     $this->_get_form_data();
     $this->get_production_summary();
+    if ($this->data['site_name'] == '')
+      $this->get_refresh_details();
+    else 
+      $this->data['refresh_details'] = array();
+    $this->get_groups();
     $this->load->render($this->router->class."/index", $this->data);
   }
 
@@ -52,7 +57,7 @@ class Production_summary extends BaseController {
   private function get_production_summary() {
     if (!isset($_GET)) {
       $_GET['production_summary']= array();
-      $this->data['records'] = array('data' => array());
+      $this->data['production_details'] = array();
       return;
     }
     $this->data['production_summary'] = $_GET;
@@ -79,16 +84,29 @@ class Production_summary extends BaseController {
     if (empty($arc_records['data'])) $arc_records['data'] = array();
 
     $records = array_merge($argold_records['data'], $arf_records['data'], $arc_records['data']);
-  
+    $this->data['production_details'] = $this->get_grouped_records($records);
+    $this->get_production_group_total();
+  }
+
+  private function get_refresh_details() {
+    $select = 'date(created_at) as created_at, item_name, sum(weight) as weight, sum(weight * purity) / sum(weight) as purity, sum(weight * factory_purity) / sum(weight) as factory_purity';
+    $refresh_details = $this->refresh_detail_model->get($select, array(), array(), array('group_by' => 'date(created_at), item_name'));
+    $this->data['refresh_details'] = $this->get_grouped_records($refresh_details);
+    $this->get_refresh_group_total();
+  }
+
+  private function get_grouped_records($records) {
     $date_wise_data = array();
     if ($this->data['group_by'] == 'Date') {
       foreach ($records as $record) {      
-        if (!isset($date_wise_data[$record['created_at']])) $date_wise_data[$record['created_at']] = array('records' => array(), 'issue_gpc_out' => 0);
+        if (!isset($date_wise_data[$record['created_at']])) 
+          $date_wise_data[$record['created_at']] = array('records' => array(), 'issue_gpc_out' => 0);
         $date_wise_data[$record['created_at']]['records'][] = $record;
       }
     } elseif ($this->data['group_by'] == 'Month') {
       foreach ($records as $record) {      
-        if (!isset($date_wise_data[substr($record['created_at'], 0, 7)])) $date_wise_data[substr($record['created_at'], 0, 7)] = array('records' => array(), 'issue_gpc_out' => 0);
+        if (!isset($date_wise_data[substr($record['created_at'], 0, 7)])) 
+          $date_wise_data[substr($record['created_at'], 0, 7)] = array('records' => array(), 'issue_gpc_out' => 0);
         $date_wise_data[substr($record['created_at'], 0, 7)]['records'][] = $record;
       }
     } else {
@@ -97,6 +115,35 @@ class Production_summary extends BaseController {
       }
     }
     ksort($date_wise_data);
-    $this->data['records'] = array('data' => $date_wise_data);
+    return $date_wise_data;
+  }
+
+  private function get_production_group_total() {
+    $this->data['production_total'] = array();
+    foreach ($this->data['production_details'] as $group => $production_detail) {
+      $this->data['production_total'][$group] = array('weight' => 0, 'vadotar' => 0);
+      foreach ($production_detail['records'] as $record) {
+        $this->data['production_total'][$group]['weight'] += $record['issue_gpc_out'];
+        $this->data['production_total'][$group]['vadotar'] += $record['issue_gpc_out'] * ($record['out_purity'] - $record['in_purity']) / 100;
+      }
+    }
+  }
+
+  private function get_refresh_group_total() {
+    $this->data['refresh_total'] = array();
+    foreach ($this->data['refresh_details'] as $group => $refresh_detail) {
+      $this->data['refresh_total'][$group] = array('weight' => 0, 'vadotar' => 0);
+      foreach ($refresh_detail['records'] as $record) {
+        $this->data['refresh_total'][$group]['weight'] += $record['weight'];
+        $this->data['refresh_total'][$group]['vadotar'] += $record['weight'] * ($record['purity'] - $record['factory_purity']) / 100;
+      }
+    }
+  }
+
+  private function get_groups() {
+    $production_detail_groups = array_keys($this->data['production_details']);
+    $refresh_detail_groups = array_keys($this->data['refresh_details']);
+    $this->data['groups'] = array_unique(array_merge($production_detail_groups, $refresh_detail_groups));
+    sort($this->data['groups']);
   }
 }
