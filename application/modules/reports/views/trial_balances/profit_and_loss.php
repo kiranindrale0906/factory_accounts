@@ -77,12 +77,14 @@
               $assets_vadotar = 0;  
               $assets_amount = 0;  
               $sales_weight = 0;
+              $sales_amount = 0;
               if(!empty($trial_balance)) {
                 foreach ($trial_balance as $record) {
                   if ($record['account_name'] != 'SALES ACCOUNT') continue;
                   if ($record['account_name'] == 'SALES ACCOUNT') {
                     $sales_weight = -1 * $record['fine'];
                     $sales_rate = $record['amount'] / (-1 * $record['fine']);
+                    $sales_amount = $record['amount'];
                   }
                   $assets_vadotar = $assets_vadotar + $record['vadotar'];
                   $assets_fine = $assets_fine + $record['fine'];
@@ -114,7 +116,7 @@
           </tr>
           <tr>
             <th>Total</th>
-            <th class="text-right"><?= four_decimal(-1 * ($liabilities_amount - $assets_amount + $assets_amount), '-'); ?></th>          
+            <th class="text-right"><?= four_decimal((($liabilities_fine + $pending_vadotar + $assets_fine) * $purchase_rate) +  $sales_amount, '-'); ?></th>          
             <th class="text-right"></th>          
             <th class="text-right"><?= four_decimal($liabilities_fine + $pending_vadotar - $assets_fine + $assets_fine, '-'); ?></th>          
           </tr>
