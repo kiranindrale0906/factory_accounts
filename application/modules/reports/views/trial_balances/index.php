@@ -1,19 +1,8 @@
-<?php $this->load->view('reports/ledgers/report_header', array('header' => 'Trial Balance')); ?>
+<?php 
+  $profit_and_loss = array();
+  $this->load->view('reports/ledgers/report_header', array('header' => 'Trial Balance')); 
+?>
 
-<!-- <div class="row"> 
-  <div class="col-md-6">
-    <div class="container">
-      <h6>
-        Bhav Cut: 
-        <a class="ml-5 <?= ($trial_balance_type == 'Stock') ? 'bold black underline' : '' ?>" 
-           href='<?= base_url() ?>reports/trial_balances?type=Stock'>No</a>
-        <a class="ml-5 <?= ($trial_balance_type != 'Stock') ? 'bold black underline' : '' ?>"
-               href='<?= base_url() ?>reports/trial_balances?type=Amount'>Yes</a>    
-      </h6>
-    </div>
-  </div>
-</div>
- -->
 <div class="row">
   <div class="col-md-6">
     <div class="form-group container">
@@ -37,6 +26,10 @@
                   if (   ($record['fine'] <= 0
                           && $record['account_name'] != 'VADOTAR')
                       || ($record['account_name'] == 'Tounch Loss Fine')) continue;
+
+                  if ($record['account_name'] == 'PURCHASE ACCOUNT') $profit_and_loss['purchase_account'] = $record;
+                  if ($record['account_name'] == 'Main Vadotar')     $profit_and_loss['main_vadotar'] = $record;
+                      
                   $liabilities_vadotar = $liabilities_vadotar + $record['vadotar'];
                   $liabilities_fine = $liabilities_fine + $record['fine']; 
                   $liabilities_amount = $liabilities_amount + $record['amount']; 
@@ -60,6 +53,7 @@
           </tr>
         </table>
 
+        <?php $profit_and_loss['pending_vadotar'] = $liabilities_vadotar; ?>
         
       </div>
     </div>
@@ -85,6 +79,9 @@
                   if (  ($record['fine'] >= 0
                          && $record['account_name'] != 'Tounch Loss Fine')
                       || ($record['account_name'] == 'VADOTAR')) continue;
+
+                  if ($record['account_name'] == 'SALES ACCOUNT') $profit_and_loss['sales_account'] = $record;
+                    
                   $assets_vadotar = $assets_vadotar + $record['vadotar'];
                   $assets_fine = $assets_fine + $record['fine'];
                   $assets_amount= $assets_amount + $record['amount'];
@@ -143,4 +140,4 @@
   <?php $this->load->view('trial_balances/factory_balance'); ?>
 </div>
 
-<?php $this->load->view('trial_balances/profit_and_loss', array('pending_vadotar' => four_decimal(-1 * ($liabilities_vadotar + $assets_vadotar)))); ?>
+<?php $this->load->view('trial_balances/profit_and_loss', array('profit_and_loss' => $profit_and_loss)); ?>
