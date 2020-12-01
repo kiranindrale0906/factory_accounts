@@ -100,12 +100,12 @@
                 }
               } 
           ?>
-          <tr>
+          <!-- <tr>
             <td>Sales Diff</td>
             <td class="text-right"><?= four_decimal($sales_weight * ($sales_rate - $purchase_rate), '-'); ?></td>
             <td class="text-right"><?= four_decimal($sales_rate - $purchase_rate,'-') ?></td>
             <td class="text-right"><?= four_decimal($pending_vadotar, '-'); ?></td>
-          </tr>
+          </tr> -->
           <tr>
             <td>Closing Stock</td>
             <td class="text-right"><?= four_decimal(($liabilities_fine + $pending_vadotar + $assets_fine) * $purchase_rate, '-'); ?></td>
