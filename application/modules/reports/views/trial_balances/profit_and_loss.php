@@ -51,6 +51,7 @@
           <tr>
             <th>Total</th>
             <th class="text-right"><?= four_decimal($liabilities_amount, '-'); ?></th>
+            <th class="text-right"></th>          
             <th class="text-right"><?= four_decimal($liabilities_fine + $pending_vadotar, '-'); ?></th>          
           </tr>
         </table>
@@ -114,6 +115,7 @@
           <tr>
             <th>Total</th>
             <th class="text-right"><?= four_decimal($liabilities_amount - $assets_amount + $assets_amount, '-'); ?></th>          
+            <th class="text-right"></th>          
             <th class="text-right"><?= four_decimal($liabilities_fine + $pending_vadotar - $assets_fine + $assets_fine, '-'); ?></th>          
           </tr>
         </table>
