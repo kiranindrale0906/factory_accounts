@@ -100,9 +100,9 @@
               } 
           ?>
           <tr>
-            <td>Trade Diff</td>
-            <td class="text-right"><?= four_decimal($asles_weight * (), '-');</td>
-            <td class="text-right">-</td>
+            <td>Sales Diff</td>
+            <td class="text-right"><?= four_decimal($sales_weight * ($purchase_rate - $sales_rate), '-');</td>
+            <td class="text-right"><?= $purchase_rate - $sales_rate ?></td>
             <td class="text-right"><?= four_decimal($pending_vadotar, '-'); ?></td>
           </tr>
           <tr>
