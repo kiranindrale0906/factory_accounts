@@ -1,3 +1,17 @@
+<?php 
+  $purchase_amount = -1 * $profit_and_loss['purchase_account']['amount'];
+  $purchase_rate = -1 * $profit_and_loss['purchase_account']['amount'] / $profit_and_loss['purchase_account']['fine'];
+  $purchase_fine = $profit_and_loss['purchase_account']['fine'];
+  $sales_amount = $profit_and_loss['sales_account']['amount'];
+  $sales_rate = -1 * $profit_and_loss['sales_account']['amount'] / $profit_and_loss['sales_account']['fine'];
+  $sales_fine = -1 * $profit_and_loss['sales_account']['fine'];
+  $main_vadotar_fine = $profit_and_loss['main_vadotar']['fine'];
+  $pending_vadotar_fine = -1 * $profit_and_loss['pending_vadotar'];
+  $exchange_rate_diff = $sales_rate - $purchase_rate;
+  $closing_fine = $purchase_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_fine;
+  $income_total = $sales_amount + ($sales_fine * $exchange_rate_diff) + ($closing_fine * $purchase_rate);
+?>
+
 <hr />
 <h5 class="ml-2 pl-2">Profit and Loss Account</h5>
 
@@ -14,49 +28,38 @@
               <th class="text-right">Fine</th>
             </tr>
           </thead>
-          <?php
-              $liabilities_fine = 0; 
-              $liabilities_vadotar = 0;  
-              $liabilities_amount = 0;
-              $purchase_rate = 0;
 
-              if(!empty($trial_balance)) {
-                foreach ($trial_balance as $record) {
-                  if (   $record['account_name'] != 'PURCHASE ACCOUNT'
-                      && $record['account_name'] != 'Main Vadotar') continue;
-
-                  if ($record['account_name'] == 'PURCHASE ACCOUNT')
-                    $purchase_rate = -1 * $record['amount'] / $record['fine'];
-                  $liabilities_vadotar = $liabilities_vadotar + $record['vadotar'];
-                  $liabilities_fine = $liabilities_fine + $record['fine']; 
-                  $liabilities_amount = $liabilities_amount + $record['amount']; 
-                  if(round($record['fine'],2)!=0){
-                  ?>
-
-                  <tr>
-                    <td><?= $record['account_name']; ?></td>
-                    <td class="text-right"><?= four_decimal((-1 * $record['amount']), '-') ?>  </td>
-                    <td class="text-right"><?= four_decimal((-1 * $record['amount'] / $record['fine']), '-') ?>  </td>
-                    <td class="text-right"><?= four_decimal(($record['fine']), '-'); ?></td>
-                  </tr>
-                <?php }}
-              } 
-          ?>
+          <tr>
+            <td>PURCHASE ACCOUNT</td>
+            <td class="text-right"><?= four_decimal($purchase_amount, '-') ?></td>
+            <td class="text-right"><?= four_decimal($purchase_rate, '-'); ?></td>
+            <td class="text-right"><?= four_decimal($purchase_fine, '-'); ?></td>
+          </tr>
+          <tr>
+            <td>Main Vadotar</td>
+            <td class="text-right">-</td>
+            <td class="text-right">-</td>
+            <td class="text-right"><?= four_decimal($main_vadotar_fine, '-') ?></td>
+          </tr>
           <tr>
             <td>Pending Vadotar</td>
             <td class="text-right">-</td>
             <td class="text-right">-</td>
-            <td class="text-right"><?= four_decimal($pending_vadotar, '-'); ?></td>
+            <td class="text-right"><?= four_decimal($pending_vadotar_fine, '-'); ?></td>
+          </tr>
+          <tr>
+            <td>Gross Profit</td>
+            <td class="text-right"><?= four_decimal($income_total - $purchase_amount); ?></td>
+            <td class="text-right">-</td>
+            <td class="text-right">-</td>
           </tr>
           <tr>
             <th>Total</th>
-            <th class="text-right"><?= four_decimal(-1 * $liabilities_amount, '-'); ?></th>
-            <th class="text-right"></th>          
-            <th class="text-right"><?= four_decimal($liabilities_fine + $pending_vadotar, '-'); ?></th>          
+            <th class="text-right"><?= four_decimal($purchase_amount + ($income_total - $purchase_amount), '-'); ?></th>
+            <th class="text-right">-</th>          
+            <th class="text-right"><?= four_decimal($purchase_fine + $main_vadotar_fine + $pending_vadotar_fine, '-'); ?></th>          
           </tr>
         </table>
-
-        
       </div>
     </div>
   </div>
@@ -72,55 +75,31 @@
               <th class="text-right">Fine</th>
             </tr>
           </thead>
-          <?php 
-              $assets_fine = 0;  
-              $assets_vadotar = 0;  
-              $assets_amount = 0;  
-              $sales_weight = 0;
-              $sales_amount = 0;
-              if(!empty($trial_balance)) {
-                foreach ($trial_balance as $record) {
-                  if ($record['account_name'] != 'SALES ACCOUNT') continue;
-                  if ($record['account_name'] == 'SALES ACCOUNT') {
-                    $sales_weight = -1 * $record['fine'];
-                    $sales_rate = $record['amount'] / (-1 * $record['fine']);
-                    $sales_amount = $record['amount'];
-                  }
-                  $assets_vadotar = $assets_vadotar + $record['vadotar'];
-                  $assets_fine = $assets_fine + $record['fine'];
-                  $assets_amount= $assets_amount + $record['amount'];
-                  if(round($record['fine'],2)!=0){
-                   ?>
-
-                  <tr>
-                    <td><?= $record['account_name']; ?></td>
-                    <td class="text-right"><?= four_decimal($record['amount'], '-') ?>  </td>
-                    <td class="text-right"><?= four_decimal($record['amount'] / (-1 * $record['fine']), '-') ?>  </td>
-                    <td class="text-right"><?= four_decimal(-1 * $record['fine'], '-') ?></td>
-                  </tr>
-                <?php }
-                }
-              } 
-          ?>
+          <tr>
+            <td>SALES ACCOUNT</td>
+            <td class="text-right"><?= four_decimal($sales_amount, '-') ?>  </td>
+            <td class="text-right"><?= four_decimal($sales_rate, '-'); ?>  </td>
+            <td class="text-right"><?= four_decimal($sales_fine, '-'); ?></td>
+          </tr>
           <tr>
             <td>Exchange Gain / Loss</td>
-            <td class="text-right"><?= four_decimal($sales_weight * ($sales_rate - $purchase_rate), '-'); ?></td>
-            <td class="text-right"><?= four_decimal($sales_rate - $purchase_rate, '-'); ?></td>
+            <td class="text-right"><?= four_decimal($sales_fine * $exchange_rate_diff , '-'); ?></td>
+            <td class="text-right"><?= four_decimal($exchange_rate_diff, '-'); ?></td>
             <td class="text-right"></td>
           </tr>
           <tr>
             <td>Closing Stock</td>
-            <td class="text-right"><?= four_decimal(($liabilities_fine + $pending_vadotar + $assets_fine) * $purchase_rate, '-'); ?></td>
+            <td class="text-right"><?= four_decimal($closing_fine * $purchase_rate, '-'); ?></td>
             <td class="text-right"><?= four_decimal($purchase_rate, '-'); ?></td>          
-            <td class="text-right"><?= four_decimal(($liabilities_fine + $pending_vadotar + $assets_fine), '-'); ?></td>          
+            <td class="text-right"><?= four_decimal($closing_fine, '-'); ?></td>          
           </tr>
           <tr>
             <th>Total</th>
-            <th class="text-right"><?= four_decimal((($liabilities_fine + $pending_vadotar + $assets_fine) * $purchase_rate) 
-                                                    +  $sales_amount
-                                                    + ($sales_weight * ($sales_rate - $purchase_rate)), '-'); ?></th>          
+            <th class="text-right">
+              <?= four_decimal($income_total, '-'); ?>
+            </th>
             <th class="text-right"></th>          
-            <th class="text-right"><?= four_decimal($liabilities_fine + $pending_vadotar - $assets_fine + $assets_fine, '-'); ?></th>          
+            <th class="text-right"><?= four_decimal($sales_fine + $closing_fine, '-'); ?></th>          
           </tr>
         </table>
       </div>      
