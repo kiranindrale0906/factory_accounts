@@ -105,7 +105,7 @@
           <tr>
             <td>Exchange Gain / Loss</td>
             <td class="text-right"><?= four_decimal($sales_weight * ($sales_rate - $purchase_rate), '-'); ?></td>
-            <td class="text-right"><?= four_decimal($sales_rate - $purchase_rate), '-'); ?></td>
+            <td class="text-right"><?= four_decimal($sales_rate - $purchase_rate, '-'); ?></td>
             <td class="text-right"></td>
           </tr>
           <tr>
