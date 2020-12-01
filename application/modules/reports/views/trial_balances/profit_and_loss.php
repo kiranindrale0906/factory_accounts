@@ -81,7 +81,7 @@
                   if ($record['account_name'] != 'SALES ACCOUNT') continue;
                   if ($record['account_name'] == 'SALES ACCOUNT') {
                     $sales_weight = -1 * $record['fine'];
-                    $sales_rate = $record['amount'] / -1 * $record['fine'];
+                    $sales_rate = $record['amount'] / (-1 * $record['fine']);
                   }
                   $assets_vadotar = $assets_vadotar + $record['vadotar'];
                   $assets_fine = $assets_fine + $record['fine'];
