@@ -17,7 +17,15 @@ class Chitti_model extends BaseModel {
   }
 
   public function before_validate(){
-    if (!empty($this->formdata['chitti_details'])) {
+    if (   empty($this->formdata['chitti_details']) 
+        && isset($this->attributes['id'])
+        && !empty($this->attributes['id'])) {
+      $select = 'sum(credit_weight) as credit_weight,
+                 (sum(credit_weight*purity) / sum(credit_weight)) as purity,
+                 (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,
+                 "" as voucher_number, packet_no, voucher_date';
+      $chitti_details=$this->voucher_model->find($select, array('chitti_id' => $this->attributes['id']));
+    } elseif (!empty($this->formdata['chitti_details'])) {
       $chitti_ids=array_column($this->formdata['chitti_details'], 'chitti_id');
       $select = 'sum(credit_weight) as credit_weight,
                  (sum(credit_weight*purity) / sum(credit_weight)) as purity,
@@ -27,15 +35,15 @@ class Chitti_model extends BaseModel {
                                                                 'packet_no' => $chitti_ids,
                                                                 'account_name' => $this->attributes['account_name'],
                                                                 'purity' => $this->attributes['purity']));
-      $this->attributes['weight'] = $chitti_details['credit_weight'];
-      $this->attributes['factory_purity'] = $chitti_details['factory_purity'];
-      $this->attributes['factory_fine']   = $chitti_details['credit_weight']*$chitti_details['factory_purity']/100;
-      $this->attributes['purity'] = $this->attributes['purity'];
-      $this->attributes['fine']   = $chitti_details['credit_weight']*$chitti_details['purity']/100;
-      $this->attributes['date'] = $chitti_details['voucher_date'];
-      $this->attributes['account_name'] = $this->attributes['account_name'];
-      $this->attributes['packet_no'] = $chitti_details['packet_no'];
     }
+    $this->attributes['weight'] = $chitti_details['credit_weight'];
+    $this->attributes['factory_purity'] = $chitti_details['factory_purity'];
+    $this->attributes['factory_fine']   = $chitti_details['credit_weight']*$chitti_details['factory_purity']/100;
+    $this->attributes['purity'] = $this->attributes['purity'];
+    $this->attributes['fine']   = $chitti_details['credit_weight']*$chitti_details['purity']/100;
+    $this->attributes['date'] = $chitti_details['voucher_date'];
+    $this->attributes['account_name'] = $this->attributes['account_name'];
+    $this->attributes['packet_no'] = $chitti_details['packet_no'];
 
     $this->set_sales_amount_fields();
   }
