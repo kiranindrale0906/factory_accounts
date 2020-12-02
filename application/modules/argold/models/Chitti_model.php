@@ -26,7 +26,7 @@ class Chitti_model extends BaseModel {
                  "" as voucher_number, packet_no, voucher_date';
       $chitti_details=$this->voucher_model->find($select, array('voucher_type' => 'metal issue voucher', 
                                                                 'chitti_id' => $this->attributes['id']));
-    if (!empty($this->formdata['chitti_details'])) {
+    }elseif (!empty($this->formdata['chitti_details'])) {
       $chitti_ids=array_column($this->formdata['chitti_details'], 'chitti_id');
       $select = 'sum(credit_weight) as credit_weight,
                  (sum(credit_weight*purity) / sum(credit_weight)) as purity,
