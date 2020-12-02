@@ -25,9 +25,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $rules[] = $this->get_narration_validation_rules();
     }
 
-    if (   $attributes['receipt_type'] == 'AR Gold Refresh'
-        || $attributes['receipt_type'] == 'ARF Refresh'
-        || $attributes['receipt_type'] == 'ARC Refresh') 
+    if (   $this->attributes['receipt_type'] == 'AR Gold Refresh'
+        || $this->attributes['receipt_type'] == 'ARF Refresh'
+        || $this->attributes['receipt_type'] == 'ARC Refresh') 
       $rules[] = $this->get_sale_type_validation_rules();
 
     $rules[] = $this->get_receipt_type_validation_rules();
@@ -52,7 +52,13 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     $this->set_metal_issue_voucher_attributes_from_receipt_type_for_vadotar(); 
     
     $this->set_receipt_type_for_all_metal_issue_vouchers();
+    $this->set_gold_rate_purity();
     $this->unset_metal_issue_voucher_records_when_credit_weight_is_0(); 
+  }
+
+  private function set_gold_rate_purity() {
+    if (   !isset($this->attributes['gold_rate_purity'])
+        || $this->attributes['gold_rate_purity'] > 0)  $this->attributes['gold_rate_purity'] = 100;
   }
 
   private function set_site_name_from_receipt_type() {

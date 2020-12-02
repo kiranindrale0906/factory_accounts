@@ -67,6 +67,11 @@
                   array('id' => 'Labour', 'name' => 'Labour'));
   }
 
+  function get_gold_rate_purities() {
+    return array( array('id' => '100', 'name' => '100'),
+                  array('id' => '99.5', 'name' => '99.5'));
+  }
+
   function get_daily_drawer_receipt_type(){
     return array(array('id'=>'Hook','name'=>'Hook'),
                  array('id'=>'KDM','name'=>'KDM'),

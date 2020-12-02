@@ -32,14 +32,14 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
     parent::before_validate();
   }
 
-  private function set_debit_amount() {
-    if ($this->attributes['gold_rate_purity'] == 0) 
-      $this->attributes['debit_amount'] = 0;
-    else {
-      $gold_rate = $this->attributes['gold_rate'] / $this->attributes['gold_rate_purity'] * 100;
-      $this->attributes['debit_amount'] = $this->attributes['fine'] * $gold_rate;
-    }
-  }
+  // private function set_debit_amount() {
+  //   if ($this->attributes['gold_rate_purity'] == 0) 
+  //     $this->attributes['debit_amount'] = 0;
+  //   else {
+  //     $gold_rate = $this->attributes['gold_rate'] / $this->attributes['gold_rate_purity'] * 100;
+  //     $this->attributes['debit_amount'] = $this->attributes['fine'] * $gold_rate;
+  //   }
+  // }
 
   public function create_rate_cut_vouchers_for_chitti($chitti_id) {
     $chitti = $this->chitti_model->find('', array('id' => $chitti_id));
@@ -83,7 +83,7 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
     $this->rate_cut_receipt_voucher_model->delete('', array('description' => $receipt_type.' '.$metal_receipt_voucher['voucher_number'],
                                                             'voucher_type' => 'rate cut receipt voucher'));
 
-    $tax_fields = get_tax_fields($metal_receipt_voucher['factory_fine'], $metal_receipt_voucher['fine'], $metal_receipt_voucher['sale_type'], $metal_receipt_voucher['gold_rate']);
+    $tax_fields = get_tax_fields($metal_receipt_voucher['factory_fine'], $metal_receipt_voucher['fine'], $metal_receipt_voucher['sale_type'], $metal_receipt_voucher['gold_rate'], $metal_receipt_voucher['gold_rate_purity']);
     $rate_cut_issue = array('company_id'    => 1,
                             'account_name'  => $metal_receipt_voucher['account_name'],
                             'voucher_date'  => $metal_receipt_voucher['created_at'],
@@ -93,6 +93,7 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
                             'debit_weight'  => 0,
                             'purity'        => 100,
                             'gold_rate'     => $tax_fields['gold_rate'],
+                            'gold_rate_purity' => $tax_fields['gold_rate_purity'],
                             'gold_rate_purity' => 100,
                             'description'   => $receipt_type.' '.$metal_receipt_voucher['voucher_number'],
                             'receipt_type'  => $receipt_type,
