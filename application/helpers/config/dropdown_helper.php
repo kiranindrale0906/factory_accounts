@@ -133,3 +133,8 @@
 
   }
 
+  function get_site_url($site_name) {
+    if ($site_name=='AR Gold') return API_ARG_BASE_PATH;
+    elseif ($site_name=='ARF') return API_ARF_BASE_PATH;
+    elseif ($site_name=='ARC') return API_ARC_BASE_PATH;
+  }
