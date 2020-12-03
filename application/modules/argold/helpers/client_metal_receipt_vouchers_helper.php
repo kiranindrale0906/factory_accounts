@@ -4,14 +4,14 @@ defined('BASEPATH') OR exit('No direct script access allowed.');
 
 function list_settings() {
   $list_option=array('voucher_date','receipt_type', 'created_time', 'voucher_number', 'account_name', 
-                     'debit_weight', 'factory_purity', 'factory_fine', 'purity', 'fine', 'narration', 'description', 'gold_rate', 'debit_amount', 'action');
+                     'debit_weight', 'factory_purity', 'factory_fine', 'purity', 'fine', 'narration', 'description', 'debit_amount', 'action');
   return ac_vouchers_list_settings($list_option);
 }
 
 function get_field_attribute($table, $field) {
-  if(!empty($_GET['receipt_type']) && $_GET['receipt_type'] == 'Metal')  
+  if(!empty($_GET['receipt_type']) && $_GET['receipt_type'] == 'Metal') 
     $required_fields=array('id', 'voucher_date', 'receipt_type', 'account_name', 
-                           'debit_weight', 'purity', 'fine', 'narration', 'description', 'gold_rate');
+                           'debit_weight', 'purity', 'fine', 'narration', 'description', 'sale_type', 'gold_rate', 'gold_rate_purity');
 
   elseif(!empty($_GET['receipt_type']) && (  $_GET['receipt_type'] == 'AR Gold Chain Receipt'
                                           || $_GET['receipt_type'] == 'ARF Chain Receipt'

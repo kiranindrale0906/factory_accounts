@@ -173,8 +173,7 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['hook_kdm_purity'] = array('Hook KDM Purity', 'Enter hook kdm purity', TRUE, '', TRUE);
   $attributes['quantity'] = array('Quantity', 'Enter quantity', TRUE, '', TRUE);
   
-  
-
+  $attributes['sale_type'] = array('Sale Type', '', TRUE, '', TRUE);
   $attributes['type'] = array('Type', 'Type', TRUE, '', TRUE);
 
   $attributes['narration'] = array('Item Name', 'Enter Narration', FALSE, '', TRUE);

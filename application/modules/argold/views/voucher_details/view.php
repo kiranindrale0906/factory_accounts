@@ -41,7 +41,7 @@
 
 <?php 
   if ($record['gold_rate'] > 0) { 
-    $tax_fields = get_tax_fields($record['factory_fine'], $record['fine'], $record['sale_type'], $record['gold_rate']);
+    $tax_fields = get_tax_fields($record['factory_fine'], $record['fine'], $record['sale_type'], $record['gold_rate'], $record['gold_rate_purity']);
     ?>
     <div class="row">
       <div class="col-md-6">
@@ -52,7 +52,7 @@
             <tr>
               <td>Weight</td><td class="text-right"><h6><?=four_decimal($tax_fields['weight'])?></h6></td>
             </tr><tr>
-              <td>Rate</td><td class="text-right"><h6><?=four_decimal($tax_fields['gold_rate'])?></h6></td>
+              <td>Rate (<?= four_decimal($tax_fields['gold_rate_purity']) ?>%)</td><td class="text-right"><h6><?=four_decimal($tax_fields['gold_rate'])?></h6></td>
             </tr><tr>
               <td>Taxable Amount</td><td class="text-right"><h6><?=four_decimal($tax_fields['taxable_amount'])?></h6></td>
             </tr><tr>

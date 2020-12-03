@@ -32,12 +32,12 @@ class Core_rate_cut_receipt_voucher_model extends Voucher_model {
     parent::before_validate();
   }
 
-  private function set_credit_amount() {
-    if ($this->attributes['gold_rate_purity'] == 0) 
-      $this->attributes['credit_amount'] = 0;
-    else {
-      $gold_rate = $this->attributes['gold_rate'] / $this->attributes['gold_rate_purity'] * 100;
-      $this->attributes['credit_amount'] = $this->attributes['fine'] * $gold_rate;
-    }
-  }
+  // private function set_credit_amount() {
+  //   if ($this->attributes['gold_rate_purity'] == 0) 
+  //     $this->attributes['credit_amount'] = 0;
+  //   else {
+  //     $gold_rate = $this->attributes['gold_rate'];
+  //     $this->attributes['credit_amount'] = $this->attributes['fine'] * $gold_rate * $this->attributes['gold_rate_purity'] / 100;
+  //   }
+  // }
 }

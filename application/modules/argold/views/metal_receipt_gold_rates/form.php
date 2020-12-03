@@ -10,8 +10,8 @@
   <div class="row">    
     <?php 
       load_field('text', array('field' => 'gold_rate')); 
-      load_field('dropdown', array('field' => 'sale_type', 
-                                   'option' => get_sale_types())); 
+      load_field('dropdown', array('field' => 'gold_rate_purity', 'option' => get_gold_rate_purities())); 
+      load_field('dropdown', array('field' => 'sale_type', 'option' => get_sale_types())); 
     ?>
   </div>
   <?php load_buttons('submit', array('controller' => $controller, 'name' => 'SAVE' , 'class' => 'btn_blue')) ?>
