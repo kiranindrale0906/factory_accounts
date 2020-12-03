@@ -53,11 +53,13 @@ class Chittis extends BaseController {
       $where['account_name']=$this->data['record']['account_name'];
     
       $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,
-                                           (sum(credit_weight*purity) / sum(credit_weight)) as purity,
-                                           (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,"" as voucher_number,packet_no,voucher_date,group_concat(narration) as narration',$where,array(),array('group_by'=>'packet_no,voucher_date'));
+                         (sum(credit_weight*purity) / sum(credit_weight)) as purity,
+                         (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,
+                         "" as voucher_number,packet_no,voucher_date,group_concat(narration) as narration, argold_id as argold_id', 
+                         $where, array(), array('group_by'=>'packet_no, voucher_date, argold_id'));
     } else
       $this->data['metal_vouchers'] = array();
-    
+
      $this->data['purity'] = $this->narration_model->get('distinct(chain_purity) as name,chain_purity as  id', array() ,array(), array('order_by'=>'id asc'));
     
     if ($this->router->method == 'store' || $this->router->method == 'update') {
