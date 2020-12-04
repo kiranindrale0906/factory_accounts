@@ -12,7 +12,7 @@
   <td class="text-right"><?= four_decimal($record['factory_fine'], '-'); ?></td>
   <td class="text-right"><?= four_decimal($record['purity'], '-') ?></td>
   <td class="text-right"><?= four_decimal($record['fine'], '-'); ?></td>
-  <?php if ($report_type == 'Vadotar Report'): ?>
+  <?php if ($report_type == 'Vadotar Report' || $report_type == 'Production Report'): ?>
     <td class="text-right"><?= four_decimal($record['fine']-$record['factory_fine'], '-'); ?></td>
   <?php elseif ($report_type == 'Account Ledger'): ?>
     <td class="text-right"><?= four_decimal($record['debit_amount'], '-'); ?></td>

@@ -138,3 +138,16 @@
     elseif ($site_name=='ARF') return API_ARF_BASE_PATH;
     elseif ($site_name=='ARC') return API_ARC_BASE_PATH;
   }
+
+  
+function remove_duplicates_in_string($str) {
+  $words  = explode(",", $str);
+  $sanitized_words = array();
+  foreach ($words as $word) {
+    if (trim($word) == '') continue;
+    if (trim($word) == '0') continue;
+    $sanitized_words[] = trim($word);
+  }
+  $unique_words = array_unique($sanitized_words);
+  return implode(', ', $unique_words);
+}
