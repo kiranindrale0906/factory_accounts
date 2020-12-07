@@ -24,9 +24,14 @@
       <td></td>
       <td class="text-right"><?= four_decimal($record['fine'], '-') ?></td>
     <?php } ?>
-    <?php if ($report_type == 'Vadotar Report' || $report_type == 'Production Report'): ?>
-      <td class="text-right"><?= four_decimal($record['factory_fine'] - $record['fine'], '-'); ?></td>
-      <td class="text-right"></td>
+    <?php if ($report_type == 'Vadotar Report' || $report_type == 'Production Report'): 
+      if ($record['credit_weight'] > 0): ?>
+        <td class="text-right"><?= four_decimal($record['factory_fine'] - $record['fine'], '-'); ?></td>
+        <td class="text-right"><?= four_decimal(($record['factory_fine'] - $record['fine']) / $record['credit_weight'] * 100, '-'); ?></td>
+      <?php else: ?>
+        <td class="text-right"><?= four_decimal($record['fine'] - $record['factory_fine'], '-'); ?></td>
+        <td class="text-right"><?= four_decimal(($record['fine'] - $record['factory_fine']) / $record['debit_weight'] * 100, '-'); ?></td>
+      <?php endif; ?>
     <?php elseif ($report_type == 'Account Ledger'): ?>
       <?php if ($type=='issue') { ?>
         <td class="text-right"><?= four_decimal($record['credit_amount'], '-') ?></td>
