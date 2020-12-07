@@ -14,6 +14,7 @@
   <td class="text-right"><?= four_decimal($record['fine'], '-'); ?></td>
   <?php if ($report_type == 'Vadotar Report' || $report_type == 'Production Report'): ?>
     <td class="text-right"><?= four_decimal($record['fine']-$record['factory_fine'], '-'); ?></td>
+    <td class="text-right"><?= four_decimal($record['fine'] / $record['debit_weight'] / 100, '-'); ?></td>
   <?php elseif ($report_type == 'Account Ledger'): ?>
     <td class="text-right"><?= four_decimal($record['debit_amount'], '-'); ?></td>
   <?php endif; ?>

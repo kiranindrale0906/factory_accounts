@@ -20,6 +20,7 @@
   <td class="text-right"><?= four_decimal($record['factory_fine'], '-'); ?></td>
   <?php if ($report_type == 'Vadotar Report' || $report_type == 'Production Report'): ?>
     <td class="text-right"><?= four_decimal($record['factory_fine']-$record['fine'], '-'); ?></td>
+    <td class="text-right"><?= four_decimal($record['factory_fine'] / $record['credit_weight'] * 100, '-'); ?></td>
   <?php elseif ($report_type == 'Account Ledger'): ?>
     <td class="text-right"><?= four_decimal($record['credit_amount'], '-') ?></td>
   <?php endif; ?>
