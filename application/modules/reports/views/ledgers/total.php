@@ -26,6 +26,7 @@
     <?php } ?>
     <?php if ($report_type == 'Vadotar Report' || $report_type == 'Production Report'): ?>
       <td class="text-right"><?= four_decimal($record['factory_fine'] - $record['fine'], '-'); ?></td>
+      <td class="text-right"></td>
     <?php elseif ($report_type == 'Account Ledger'): ?>
       <?php if ($type=='issue') { ?>
         <td class="text-right"><?= four_decimal($record['credit_amount'], '-') ?></td>
