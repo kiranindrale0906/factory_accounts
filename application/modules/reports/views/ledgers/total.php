@@ -31,6 +31,9 @@
       <?php elseif (isset($record['debit_weight']) && $record['debit_weight'] > 0): ?>
         <td class="text-right"><?= four_decimal($record['fine'] - $record['factory_fine'], '-'); ?></td>
         <td class="text-right"><?= four_decimal(($record['fine'] - $record['factory_fine']) / $record['debit_weight'] * 100, '-'); ?></td>
+      <?php else: ?>
+        <td></td>
+        <td></td> 
       <?php endif; ?>
     <?php elseif ($report_type == 'Account Ledger'): ?>
       <?php if ($type=='issue') { ?>
