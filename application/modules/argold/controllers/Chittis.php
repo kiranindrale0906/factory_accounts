@@ -17,14 +17,15 @@ class Chittis extends BaseController {
   public function _get_view_data() {
     $this->data['detail'] = isset($_GET['detail']) ? 1 : 0;
     $this->data['account_id']='';
-    $this->data['metal_voucher_details'] = $this->voucher_model->get('', array('voucher_type'=>'metal issue voucher',
-                                                                        'chitti_id'=>$this->data['record']['id']));
+    $this->data['metal_voucher_details'] = $this->voucher_model->get('', array('voucher_type' => 'metal issue voucher',
+                                                                               'chitti_id' => $this->data['record']['id']));
     // $this->data['metal_voucher_details'] = $this->voucher_model->get('', array('voucher_type'=>'metal issue voucher',
     //                                                                            'chitti_id'=>$this->data['record']['id']));
     $packet_no = array_column($this->data['metal_voucher_details'], 'packet_no');
     $this->data['packet_nos']=array_unique($packet_no);
 
-    $this->data['chittis_details'] = $this->chitti_model->find('account_name,date',array('id'=>$this->data['record']['id']));
+    $this->data['chittis_details'] = $this->chitti_model->find('account_name, date',
+                                                               array('id'=>$this->data['record']['id']));
 
     // foreach ($this->data['metal_voucher_details'] as $index => $metal_voucher_detail) {
     //   $narration = $this->narration_model->find('chitti_purity', array('name' => $metal_voucher_detail['narration'],
@@ -60,7 +61,11 @@ class Chittis extends BaseController {
     } else
       $this->data['metal_vouchers'] = array();
 
-     $this->data['purity'] = $this->narration_model->get('distinct(chain_purity) as name,chain_purity as  id', array() ,array(), array('order_by'=>'id asc'));
+    $this->data['purity'] = $this->voucher_model->get('purity as name, purity as id', 
+                                                       array('receipt_type' => 'GPC Out',
+                                                             'account_name' => 'SWARN SHILP CHAINS AND JEWELLERS PVT LTD',
+                                                             'voucher_type' => 'metal issue voucher',
+                                                             'chitti_id' => 0) ,array(), array('group_by' => 'purity'));
     
     if ($this->router->method == 'store' || $this->router->method == 'update') {
       $this->data['record']['chittis'] = $_POST['chittis'];

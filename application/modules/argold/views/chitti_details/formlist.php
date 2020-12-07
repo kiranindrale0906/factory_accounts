@@ -14,9 +14,23 @@
   </thead>
   <tbody>
     <?php
+      $weight = $issue_fine = 0;
       foreach ($metal_vouchers as $index => $vouchers) {
+        $weight += $vouchers['credit_weight'];
+        $issue_fine += $vouchers['credit_weight']*$vouchers['factory_purity']/100;
         $this->load->view('chitti_details/subform',array('index'=> $index, 'vouchers' => $vouchers));
       }
     ?>
+    <tr>
+      <th>Total</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th class="text-right"><?= four_decimal($weight) ?></th>
+      <th></th>
+      <th></th>
+      <th class="text-right"><?= four_decimal($issue_fine) ?></th>
+    </tr>
   </tbody>
+
 </table>
