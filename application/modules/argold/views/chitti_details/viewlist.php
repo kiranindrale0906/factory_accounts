@@ -2,7 +2,7 @@
     if(!empty($metal_vouchers)){
      foreach ($packet_nos as $packet_index => $packet_no) {
      ?>
- <h6>Packet No :<?=$packet_no ?> </h6>    
+<h6>Packet No :<?=$packet_no ?> </h6>    
 <div class="table-responsive">
   <table class="table table-sm table-default">
     <thead>
@@ -16,14 +16,13 @@
       </tr>
     </thead>
     <tbody>
-    <?php 
+      <?php 
       $sum_weight=$sum_fine=0;
       $sr_no=0;
-     foreach ($metal_voucher_details as $index => $metal_voucher_detail) {
-      if($packet_no==$metal_voucher_detail['packet_no']){
-      $sum_weight+=$metal_voucher_detail['credit_weight'];
-      $sum_fine+=$metal_voucher_detail['factory_fine'];
-
+      foreach ($metal_voucher_details as $index => $metal_voucher_detail) {
+        if($packet_no==$metal_voucher_detail['packet_no']){
+        $sum_weight+=$metal_voucher_detail['credit_weight'];
+        $sum_fine+=$metal_voucher_detail['factory_fine'];
       ?>
       <tr>
         <td><?= $sr_no+1?></td>
@@ -34,15 +33,15 @@
         <td class="text-right"><?=$metal_voucher_detail['factory_fine'] ?></td>
       </tr>
 
-    <?php $sr_no++; }}?>
+      <?php $sr_no++; }}?>
       <tr class="bg_gray bold">
-    <td>Total</td>
-    <td></td>
-    <td class="text-right"><?=four_decimal($sum_weight);?></td>
-    <td class="text-right"></td>
-    <td class="text-right"></td>
-    <td class="text-right"><?=four_decimal($sum_fine);?></td>
-  </tr>
+        <td>Total</td>
+        <td></td>
+        <td class="text-right"><?=four_decimal($sum_weight);?></td>
+        <td class="text-right"></td>
+        <td class="text-right"></td>
+        <td class="text-right"><?=four_decimal($sum_fine);?></td>
+      </tr>
     </tbody>
   </table>
 </div>
