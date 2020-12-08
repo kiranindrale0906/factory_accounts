@@ -11,7 +11,18 @@ class Refresh extends BaseController {
 
   public function _get_form_data() {
     $this->data['purity'] = $this->narration_model->get('distinct(chain_purity) as name,chain_purity as  id', array('chain_purity >'=>0) ,array(), array('order_by'=>'id asc'));
-    $this->data['item_names'] = $this->narration_model->get('name as name, name as  id, chain_purity, chain_margin', array() ,array(), array('order_by'=>'name asc'));
+    $this->data['item_names'] = array(
+                                      array('id'=>'Rope Chain','name'=>'Rope Chain'),
+                                      array('id'=>'Machine Chain','name'=>'Machine Chain'),
+                                      array('id'=>'Choco Chain','name'=>'Choco Chain'),
+                                      array('id'=>'Round Box Chain','name'=>'Round Box Chain'),
+                                      array('id'=>'Sisma Chain','name'=>'Sisma Chain'),
+                                      array('id'=>'Imp Italy Chain','name'=>'Imp Italy Chain'),
+                                      array('id'=>'Indo Tally Chain','name'=>'Indo Tally Chain'),
+                                      array('id'=>'Hollow Choco Chain','name'=>'Hollow Choco Chain'),
+                                      array('id'=>'Refresh','name'=>'Refresh'),
+                                      array('id'=>'Fancy Chain','name'=>'Fancy Chain')
+                                    );//$this->narration_model->get('name as name, name as  id, chain_purity, chain_margin', array() ,array(), array('order_by'=>'name asc'));
     
   }
   public function _get_view_data() {
