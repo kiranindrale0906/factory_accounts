@@ -45,11 +45,12 @@
                                          'grid'=> 'col-sm-12')); ?>
   </td>
   <td>
-    <?php load_field('plain/text', array('field' => 'item_name',
+    <?php load_field('plain/dropdown', array('field' => 'item_name',
                                          'controller' => 'refresh_details',
                                          'class' => 'refresh_item_name',
                                          'id' => 'refresh_item_name_'.$index,
                                          'index' => $index,
+                                         'option'=>$item_names,
                                          'grid'=> 'col-sm-12')); ?>
   </td>
   
@@ -61,3 +62,6 @@
   </td>
 
 </tr>
+<script>
+  var narrations = <?= json_encode(get_records_by_id($narrations)); ?>
+</script>
