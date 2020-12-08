@@ -6,8 +6,8 @@ function ac_vouchers_getTableSettings($table_setting_arg=array()) {
     $table_setting_arg['where'] = 'company_id='.(!empty($ci->session->userdata('company_id'))?$ci->session->userdata('company_id'):-1)." AND ".$table_setting_arg['where'];
   }else{
     $table_setting_arg['where'] = 'company_id='.(!empty($ci->session->userdata('company_id'))?$ci->session->userdata('company_id'):-1);
- 
   }
+  $table_setting_arg['where'] .= ' and receipt_type not in ("Alloy Vodator", "GPC Vodator", "Stone Vatav")';
   
   $table_setting= array('page_title'          => '',
                         'primary_table'       => 'ac_vouchers',
@@ -22,7 +22,7 @@ function ac_vouchers_getTableSettings($table_setting_arg=array()) {
                         'extra_select_column' => 'ac_vouchers.id',
                         'actionFunction'      => '',
                         'headingFunction'     => 'list_settings',
-                        'search_url'          => 'bank_issue_voucher',
+                        'search_url'          => $ci->router->class,
                         'add_title'           => '',
                         'export_title'        => '',
                         'edit'                => '',
@@ -34,7 +34,7 @@ function ac_vouchers_getTableSettings($table_setting_arg=array()) {
   }
   if(!empty($table_setting_arg)){
     $table_setting=array_merge($table_setting,$table_setting_arg);
-  }
+  } 
   return $table_setting;
 }
 //Add Cash Issue Voucher
@@ -173,8 +173,7 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['hook_kdm_purity'] = array('Hook KDM Purity', 'Enter hook kdm purity', TRUE, '', TRUE);
   $attributes['quantity'] = array('Quantity', 'Enter quantity', TRUE, '', TRUE);
   
-  
-
+  $attributes['sale_type'] = array('Sale Type', '', TRUE, '', TRUE);
   $attributes['type'] = array('Type', 'Type', TRUE, '', TRUE);
 
   $attributes['narration'] = array('Item Name', 'Enter Narration', FALSE, '', TRUE);

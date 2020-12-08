@@ -81,3 +81,28 @@
     </tbody>
   </table>
 </div>
+
+
+<div class="row">
+  <div class="col-md-6">
+  </div>
+  <div class="col-md-6">
+    <div class="form-group container">
+      <table class="table table-sm">
+        <tr>
+          <td>Weight</td><td class="text-right"><h6><?=four_decimal($record['debit_weight'])?></h6></td>
+        </tr><tr>
+          <td>Rate</td><td class="text-right"><h6><?=four_decimal($record['rate'])?></h6></td>
+        </tr><tr>
+          <td>Taxable Amount</td><td class="text-right"><h6><?=four_decimal($record['taxable_amount'])?></h6></td>
+        </tr><tr>
+          <td>CGST Amount</td><td class="text-right"><h6><?=four_decimal($record['cgst_amount'])?></h6></td>
+        </tr><tr>
+          <td>SGST Amount</td><td class="text-right"><h6><?=four_decimal($record['sgst_amount'])?></h6></td>
+        </tr><tr>
+          <td>Total Amount</td><td class="text-right"><h6><?=four_decimal($record['credit_amount'])?></h6></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,8 @@
-<?php $this->load->view('reports/ledgers/report_header', array('header' => 'Trial Balance')); ?>
-  
+<?php 
+  $profit_and_loss = array();
+  $this->load->view('reports/ledgers/report_header', array('header' => 'Trial Balance')); 
+?>
+
 <div class="row">
   <div class="col-md-6">
     <div class="form-group container">
@@ -23,6 +26,10 @@
                   if (   ($record['fine'] <= 0
                           && $record['account_name'] != 'VADOTAR')
                       || ($record['account_name'] == 'Tounch Loss Fine')) continue;
+
+                  if ($record['account_name'] == 'PURCHASE ACCOUNT') $profit_and_loss['purchase_account'] = $record;
+                  if ($record['account_name'] == 'Main Vadotar')     $profit_and_loss['main_vadotar'] = $record;
+                      
                   $liabilities_vadotar = $liabilities_vadotar + $record['vadotar'];
                   $liabilities_fine = $liabilities_fine + $record['fine']; 
                   $liabilities_amount = $liabilities_amount + $record['amount']; 
@@ -46,6 +53,7 @@
           </tr>
         </table>
 
+        <?php $profit_and_loss['pending_vadotar'] = $liabilities_vadotar; ?>
         
       </div>
     </div>
@@ -71,6 +79,9 @@
                   if (  ($record['fine'] >= 0
                          && $record['account_name'] != 'Tounch Loss Fine')
                       || ($record['account_name'] == 'VADOTAR')) continue;
+
+                  if ($record['account_name'] == 'SALES ACCOUNT') $profit_and_loss['sales_account'] = $record;
+                    
                   $assets_vadotar = $assets_vadotar + $record['vadotar'];
                   $assets_fine = $assets_fine + $record['fine'];
                   $assets_amount= $assets_amount + $record['amount'];
@@ -116,68 +127,17 @@
         </tr>
         <tr>
           <td><b>Total: </b></td>
-          <td class="text-right"><b><?= four_decimal(-1 * ($liabilities_fine + $assets_fine - $liabilities_vadotar - $assets_vadotar), '-');  ?></b></td>
+          <td class="text-right"><?= four_decimal(-1 * ($liabilities_fine + $assets_fine - $liabilities_vadotar - $assets_vadotar), '-');  ?></td>
         </tr>
         <tr>
           <td><b>Closing Stock: </b></td>
           <td class="text-right"><b><?= four_decimal($assets_fine + $liabilities_fine - $liabilities_vadotar - $assets_vadotar, '-');  ?></b></td>
         </tr>
-        <tr>
-          <td><b>Balance: </b></td>
-          <td class="text-right">0</td>
-        </tr>
       </table>
     </div>
   </div>
-  <div class="col-md-6">
-    <div class="form-group container">
-      <div class="table-responsive m-t-20">
-        <table class="table table-sm fixedthead table-default">
-          <thead>
-            <tr>
-              <th>Factory Closing Stock</th>
-              <th class="text-right">AR Gold</th>
-              <th class="text-right">June 2020</th>
-              <th class="text-right">Total</th>
-            </tr>
-          </thead>
-          <tr>
-            <td>AR GOLD</td>
-            <td class="text-right"><?= four_decimal(-1 * $argold_balance->argold) ?></td>
-            <td class="text-right"><?= four_decimal(-1 * $live_balance->argold) ?>  </td>
-            <td class="text-right"><?= four_decimal(-1 * ($argold_balance->argold+$live_balance->argold)) ?></td>
-          </tr>
-          <tr>
-            <td>ARC</td>
-            <td class="text-right"><?= four_decimal($argold_balance->arc) ?></td>
-            <td class="text-right"><?= four_decimal($live_balance->arc) ?>  </td>
-            <td class="text-right"><?= four_decimal(($argold_balance->arc+$live_balance->arc)) ?></td>
-          </tr>
-          <tr>
-            <td>ARF</td>
-            <td class="text-right"><?= four_decimal($argold_balance->arf) ?></td>
-            <td class="text-right"><?= four_decimal($live_balance->arf) ?></td>
-            <td class="text-right"><?= four_decimal(($argold_balance->arf+$live_balance->arf)) ?></td>
-          </tr>
-          <tr>
-            <td>Total</td>
-            <td class="text-right"><?= four_decimal(-1 * ($argold_balance->argold) + $argold_balance->arc + $argold_balance->arf) ?></td>
-            <td class="text-right"><?= four_decimal(-1 * ($live_balance->argold) + $live_balance->arc + $live_balance->arf) ?>  </td>
-            <td class="text-right"><b><?= four_decimal(-1 * ($argold_balance->argold+$live_balance->argold)
-                                                          + $argold_balance->arc+$live_balance->arc
-                                                          + $argold_balance->arf+$live_balance->arf) ?></b></td>
-          </tr>
-          <tr>
-            <td>Balance</td>
-            <td class="text-right">-</td>
-            <td class="text-right">-</td>
-            <td class="text-right"><b><?= four_decimal($assets_fine + $liabilities_fine - $assets_vadotar - $liabilities_vadotar 
-                                                       + ($argold_balance->argold+$live_balance->argold)
-                                                       - $argold_balance->arc - $live_balance->arc
-                                                       - $argold_balance->arf - $live_balance->arf) ?></b></td>
-          </tr>   
-        </table>
-      </div>
-    </div>
-  </div>
+  
+  <?php $this->load->view('trial_balances/factory_balance'); ?>
 </div>
+
+<?php $this->load->view('trial_balances/profit_and_loss', array('profit_and_loss' => $profit_and_loss)); ?>
