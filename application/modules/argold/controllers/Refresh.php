@@ -21,7 +21,26 @@ class Refresh extends BaseController {
                                       array('id'=>'Indo Tally Chain','name'=>'Indo Tally Chain'),
                                       array('id'=>'Hollow Choco Chain','name'=>'Hollow Choco Chain'),
                                       array('id'=>'Refresh','name'=>'Refresh'),
-                                      array('id'=>'Fancy Chain','name'=>'Fancy Chain')
+                                      array('id'=>'Fancy Chain','name'=>'Fancy Chain'),
+                                      array('id'=>'KA Chain','name'=>'KA Chain'),
+                                      array('id'=>'Ball Chain','name'=>'Ball Chain'),
+                                      array('id'=>'Office Outside','name'=>'Office Outside'),
+                                      array('id'=>'Nano Process','name'=>'Nano Process'),
+                                      array('id'=>'I 10 Process','name'=>'I 10 Process'),
+                                      array('id'=>'Dhoom A','name'=>'Dhoom A'),
+                                      array('id'=>'Dhoom B','name'=>'Dhoom B'),
+                                      array('id'=>'Nano Process','name'=>'Nano Process'),
+                                      array('id'=>'KA Chain Refresh','name'=>'KA Chain Refresh'),
+                                      array('id'=>'Stone Ring 92','name'=>'Stone Ring 92'),
+                                      array('id'=>'Ring','name'=>'Ring'),
+                                      array('id'=>'Solder','name'=>'Solder'),
+                                      array('id'=>'Stone Ring 75','name'=>'Stone Ring 75'),
+                                      array('id'=>'Plain Ring','name'=>'Plain Ring'),
+                                      array('id'=>'Pendent Set','name'=>'Pendent Set'),
+                                      array('id'=>'Pendent Set 75','name'=>'Pendent Set 75'),
+                                      array('id'=>'Pendent Set Plain','name'=>'Pendent Set Plain'),
+                                      array('id'=>'Lock Process','name'=>'Lock Process'),
+                                      array('id'=>'Daily Drawer','name'=>'Daily Drawer'),
                                     );//$this->narration_model->get('name as name, name as  id, chain_purity, chain_margin', array() ,array(), array('order_by'=>'name asc'));
     
   }
