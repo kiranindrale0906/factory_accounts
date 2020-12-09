@@ -21,8 +21,8 @@ class Refresh_model extends BaseModel {
       $this->attributes['weight']=$total_weight;
       $this->attributes['fine']=$total_fine;
       $this->attributes['factory_fine']=$total_factory_fine;
-      $this->attributes['purity']=($total_fine/$total_weight)*100;
-      $this->attributes['factory_purity']=($total_factory_fine/$total_weight)*100; 
+      $this->attributes['purity']=!empty($total_weight)?($total_fine/$total_weight)*100:0;
+      $this->attributes['factory_purity']=!empty($total_weight)?($total_factory_fine/$total_weight)*100:0; 
     }
 
     $gst_rate = 1.5;
@@ -47,6 +47,7 @@ class Refresh_model extends BaseModel {
       $refresh_detail_data = array();
       $refresh_detail_data=$refresh_detail;
       $refresh_detail_data['refresh_id'] = $this->attributes['id'];
+      $refresh_detail_data['site_name'] = $this->attributes['site_name'];
       $obj_refresh_detail=new refresh_detail_model($refresh_detail_data);
       $obj_refresh_detail->save();
     }
@@ -58,6 +59,9 @@ class Refresh_model extends BaseModel {
     $rules[] = array('field' => 'refresh[purity]', 
                      'label' => 'Purity',
                      'rules' => 'trim|required|numeric|greater_than[0]');
+    $rules[] = array('field' => 'refresh[site_name]', 
+                     'label' => 'Site Name',
+                     'rules' => 'trim|required');
     return $rules;
   }
 }
