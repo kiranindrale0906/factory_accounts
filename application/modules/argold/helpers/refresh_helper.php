@@ -44,6 +44,7 @@ function list_settings() {
     array("Factory Purity", "factory_purity", FALSE, "factory_purity", FALSE, FALSE),
     array("Factory Fine", "factory_fine", FALSE, "fine", FALSE, FALSE),
     array("Amount", "credit_amount", FALSE, "credit_amount", FALSE, FALSE),
+    array("Site Name", "site_name", FALSE, "site_name", FALSE, FALSE),
     array("Action", "action", FALSE, "action", FALSE, FALSE),
   );
 }
@@ -69,6 +70,7 @@ function get_field_attribute($table, $field) {
     'factory_fine'          => array('Factory Fine', '', TRUE, '', TRUE),
     'purity'          => array('Purity', '', TRUE, '', TRUE),
     'factory_purity'          => array('Factory Purity', '', TRUE, '', TRUE),
+    'site_name'          => array('Site Name', 'Select Site Name', TRUE, '', TRUE),
     'rate'          => array('Rate', '', TRUE, '', TRUE),
    );
   $attributes['refresh_details'] = array(
