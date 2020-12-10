@@ -11,6 +11,9 @@
       echo $record['voucher_number'].' '.$record['narration'].' '.$record['description'].' '.$record['chitti_no'];
       if ($record['voucher_type'] == 'metal issue voucher')
         echo ' '.$record['chitti_no'];
+      if(isset($record['chitti_no']) && $record['chitti_no']!=0){ ?>
+        <a class=""  href='<?= base_url() ?>argold/chittis/view/<?=$record['chitti_no']?>'>view</a>
+     <?php  }
     ?>
   </td>
   <td class="text-right"><?= four_decimal($record['credit_weight'], '-') ?></td>
