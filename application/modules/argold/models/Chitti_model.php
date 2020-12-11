@@ -81,16 +81,17 @@ class Chitti_model extends BaseModel {
   private function set_chitti_id_in_metal_issue_vouchers() {
     $chittis=array();
 
-    if (!empty($this->formdata['chitti_details'])) 
+    if (!empty($this->formdata['chitti_details'])) {
       $chitti_ids = array_column($this->formdata['chitti_details'], 'chitti_id');
-    else 
-      $chitti_ids = $this->voucher_model->find('packet_no', array('voucher_type' => 'metal issue voucher', 
-                                                                  'chitti_id' => $this->attributes['id']));
+      $chitti_details = $this->voucher_model->get('', array('site_name' => $this->attributes['site_name'],
+                                                            'packet_no' => $chitti_ids,
+                                                            'account_name' => $this->attributes['account_name'],
+                                                            'purity' => $this->attributes['purity']));
+    } else 
+      $chitti_details = $this->voucher_model->find('', array('voucher_type' => 'metal issue voucher', 
+                                                             'chitti_id' => $this->attributes['id']));
     
-    $chitti_details = $this->voucher_model->get('', array('site_name' => $this->attributes['site_name'],
-                                                          'packet_no' => $chitti_ids,
-                                                          'account_name' => $this->attributes['account_name'],
-                                                          'purity' => $this->attributes['purity']));
+    
     foreach ($chitti_details as $index => $chitti_detail) {
       if (isset($chitti_detail['id'])) {
         $chittis['chitti_id'] = $this->attributes['id'];
