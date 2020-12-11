@@ -14,6 +14,9 @@
                              'data-table'=>'ac_account',
                              'data-column'=>'name',
                              'data-list-title'=>'Account Name')); 
+        load_field('date',array('field' => 'voucher_date',
+                                  'value'=>(!empty($record['voucher_date'])?date('d-m-Y',strtotime($record['voucher_date'])):date('d-m-Y')), 
+                                  'class' => 'datepicker_js'));
     ?>
   </div>
   <?php load_buttons('submit', array('controller' => $controller, 'name' => 'SAVE' , 'class' => 'btn_blue')) ?>
