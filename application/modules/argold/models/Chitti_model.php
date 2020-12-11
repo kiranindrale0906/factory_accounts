@@ -73,17 +73,25 @@ class Chitti_model extends BaseModel {
   
   public function after_save($action){
     $this->rate_cut_issue_voucher_model->create_rate_cut_vouchers_for_chitti($this->attributes['id']);
-    if (!isset($this->formdata['chitti_details']) || empty($this->formdata['chitti_details'])) return;
     $this->set_chitti_id_in_metal_issue_vouchers();
+    if (!isset($this->formdata['chitti_details']) || empty($this->formdata['chitti_details'])) return;
+    
 	}  
 
   private function set_chitti_id_in_metal_issue_vouchers() {
     $chittis=array();
-    $chitti_ids=array_column($this->formdata['chitti_details'], 'chitti_id');
-    $chitti_details = $this->voucher_model->get('', array('site_name' => $this->attributes['site_name'],
-                                                         'packet_no' => $chitti_ids,
-                                                         'account_name' => $this->attributes['account_name'],
-                                                         'purity' => $this->attributes['purity']));
+
+    if (!empty($this->formdata['chitti_details'])) {
+      $chitti_ids = array_column($this->formdata['chitti_details'], 'chitti_id');
+      $chitti_details = $this->voucher_model->get('', array('site_name' => $this->attributes['site_name'],
+                                                            'packet_no' => $chitti_ids,
+                                                            'account_name' => $this->attributes['account_name'],
+                                                            'purity' => $this->attributes['purity']));
+    } else 
+      $chitti_details = $this->voucher_model->find('', array('voucher_type' => 'metal issue voucher', 
+                                                             'chitti_id' => $this->attributes['id']));
+    
+    
     foreach ($chitti_details as $index => $chitti_detail) {
       if (isset($chitti_detail['id'])) {
         $chittis['chitti_id'] = $this->attributes['id'];
