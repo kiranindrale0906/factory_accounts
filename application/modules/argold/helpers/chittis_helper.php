@@ -37,7 +37,7 @@ function getTableSettings() {
 function list_settings() {
   return array(
     array("Id", "id", FALSE, "id", FALSE, FALSE),
-    array("Date", "created_at", FALSE, "created_at", FALSE, FALSE,'DATE_FORMAT(created_at, "%d-%m-%Y") as created_at'),
+    array("Date", "date", FALSE, "date", FALSE, FALSE,'DATE_FORMAT(date, "%d-%m-%Y") as date'),
     
     // array("Packet No", "packet_no", TRUE, "packet_no", TRUE, TRUE),
     array("Factory", "site_name", FALSE, "site_name", FALSE, FALSE),
