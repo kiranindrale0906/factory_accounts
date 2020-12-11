@@ -14,6 +14,11 @@
     <?php load_field('text', array('field' => 'factory_purity','readonly'=>'readonly'));?>
     <?php load_field('text', array('field' => 'factory_fine','readonly'=>'readonly'));?>
     <?php load_field('text', array('field' => 'rate'));?>
+    <?php load_field('dropdown', array('field' => 'site_name','option'=>array(
+                                                                              array('id'=>'AR Gold','name'=>'AR Gold'),
+                                                                              array('id'=>'ARF','name'=>'ARF'),
+                                                                              array('id'=>'ARC','name'=>'ARC'))));?>
+  
   </div>
     <?php $this->load->view('refresh_details/formlist');?>
   <?php load_buttons('submit', array('controller' => $controller, 'name' => 'SAVE' , 'class' => 'btn_blue')) ?>

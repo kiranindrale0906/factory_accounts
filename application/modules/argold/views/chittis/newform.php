@@ -18,9 +18,7 @@
                              'data-list-title'=>'Account Name'));?>
     <?php load_field('dropdown', array('field' => 'purity',
                                        'option'=>$purity));?>
-    <?php load_field('date',array('field' => 'date',
-                            'value' => (!empty($record['voucher_date']) ? date('d M Y', strtotime($record['date'])) : date('d M Y')), 
-                            'readonlyinput' => true)); ?>
+    <?php load_field('date',array('field' => 'date','class'=>'datepicker_js')); ?>
     <?php load_field('text',array('field' => 'no_of_packets'));  ?>
     <?php load_field('text',array('field' => 'packet_gross_weight'));  ?>
     <?php load_field('dropdown', array('field' => 'sale_type',
