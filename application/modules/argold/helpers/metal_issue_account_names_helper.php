@@ -65,8 +65,7 @@ function get_field_attribute($table, $field) {
   $attributes['metal_issue_account_names'] = array(
     'id'            => array('', '', TRUE, '', TRUE),
     'account_name'     => array('Account Name', '', TRUE, '', TRUE),
-    'gold_rate_purity'     => array('Gold Rate Purity', '', TRUE, '', TRUE),
-    'sale_type'     => array('Sale Type', '', TRUE, '', TRUE),
+    'voucher_date'     => array('Voucher Date', '', TRUE, '', TRUE),
    );
   return $attributes[$table][$field];
 }

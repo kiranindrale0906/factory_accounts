@@ -11,10 +11,9 @@ class Metal_issue_account_name_model extends BaseModel {
     $this->load->model(array('masters/account_model', 'transactions/rate_cut_issue_voucher_model'));
   }
   
-  // public function after_save($action) {
-  //   parent::after_save($action);
-  //   $this->rate_cut_issue_voucher_model->create_rate_cut_vouchers_for_metal_and_refresh($this->attributes['id'], $this->attributes['receipt_type']);
-  // }
+  public function before_validate() {
+    $this->attributes['voucher_date']=date('Y-m-d',strtotime($this->attributes['voucher_date']));
+  }
 
   public function validation_rules($klass='') {
     $rules[] = array('field' => 'metal_issue_account_names[account_name]', 
