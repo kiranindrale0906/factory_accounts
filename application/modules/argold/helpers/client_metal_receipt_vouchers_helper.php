@@ -70,7 +70,7 @@ if (!function_exists('get_row_actions')) {
                                      'url' => ADMIN_PATH.'argold/metal_receipt_gold_rates/edit/'.$row['id'],
                                      'confirm_message' => "",
                                      'class' => 'text-warning text-uppercase');
-    if ($row['account_name'] == 'SWARN SHILP CHAINS AND JEWELLERS PVT LTD')
+    // if ($row['account_name'] == 'SWARN SHILP CHAINS AND JEWELLERS PVT LTD')
       $actions["Edit"] =  array('request' => "http", 
                                      'url' => ADMIN_PATH.'argold/metal_issue_account_names/edit/'.$row['id'],
                                      'confirm_message' => "",
