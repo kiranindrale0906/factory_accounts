@@ -19,7 +19,7 @@ class Metal_receipt_gold_rate_model extends BaseModel {
   public function validation_rules($klass='') {
     $rules[] = array('field' => 'metal_receipt_gold_rates[gold_rate]', 
                      'label' => 'Weight',
-                     'rules' => 'trim|required|numeric|greater_than[0]');
+                     'rules' => 'trim|required|numeric|greater_than_equal_to[0]');
     return $rules;
   }
 }
