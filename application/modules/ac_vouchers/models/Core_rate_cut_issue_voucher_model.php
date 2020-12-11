@@ -83,6 +83,7 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
     $this->rate_cut_receipt_voucher_model->delete('', array('description' => $receipt_type.' '.$metal_receipt_voucher['voucher_number'],
                                                             'voucher_type' => 'rate cut receipt voucher'));
 
+    if ($metal_receipt_voucher['gold_rate'] == 0) return;
     $tax_fields = get_tax_fields($metal_receipt_voucher['factory_fine'], $metal_receipt_voucher['fine'], $metal_receipt_voucher['sale_type'], $metal_receipt_voucher['gold_rate'], $metal_receipt_voucher['gold_rate_purity']);
     $rate_cut_issue = array('company_id'    => 1,
                             'account_name'  => $metal_receipt_voucher['account_name'],
