@@ -37,17 +37,19 @@ class Chitti_model extends BaseModel {
                                                                 'account_name' => $this->attributes['account_name'],
                                                                 'purity' => $this->attributes['purity']));
     }
-    $this->attributes['date'] = date('Y-m-d', strtotime($this->attributes['date']));
+    
+    if (empty($this->attributes['date']))  $this->attributes['date'] = date('Y-m-d', strtotime($this->attributes['date']));
+    
     if(!empty($chitti_details)){
-    $this->attributes['weight'] = isset($chitti_details['credit_weight'])?$chitti_details['credit_weight']:0;
-    $this->attributes['factory_purity'] =isset($chitti_details['factory_purity'])?$chitti_details['factory_purity']:0;
-    $this->attributes['factory_fine']   = $chitti_details['credit_weight']*$chitti_details['factory_purity']/100;
-    $this->attributes['purity'] = $this->attributes['purity'];
-    $this->attributes['fine']   = $chitti_details['credit_weight']*$chitti_details['purity']/100;
-    // $this->attributes['date'] = date('Y-m-d', strtotime($chitti_details['voucher_date']));
-    $this->attributes['account_name'] = $this->attributes['account_name'];
-    $this->attributes['packet_no'] = isset($chitti_details['packet_no'])?$chitti_details['packet_no']:0;
-    $this->set_sales_amount_fields();
+      $this->attributes['weight'] = isset($chitti_details['credit_weight'])?$chitti_details['credit_weight']:0;
+      $this->attributes['factory_purity'] =isset($chitti_details['factory_purity'])?$chitti_details['factory_purity']:0;
+      $this->attributes['factory_fine']   = $chitti_details['credit_weight']*$chitti_details['factory_purity']/100;
+      $this->attributes['purity'] = $this->attributes['purity'];
+      $this->attributes['fine']   = $chitti_details['credit_weight']*$chitti_details['purity']/100;
+      // $this->attributes['date'] = date('Y-m-d', strtotime($chitti_details['voucher_date']));
+      $this->attributes['account_name'] = $this->attributes['account_name'];
+      $this->attributes['packet_no'] = isset($chitti_details['packet_no'])?$chitti_details['packet_no']:0;
+      $this->set_sales_amount_fields();
     }
   }
 
@@ -88,16 +90,15 @@ class Chitti_model extends BaseModel {
                                                             'account_name' => $this->attributes['account_name'],
                                                             'purity' => $this->attributes['purity']));
     } else 
-      $chitti_details = $this->voucher_model->find('', array('voucher_type' => 'metal issue voucher', 
-                                                             'chitti_id' => $this->attributes['id']));
+      $chitti_details = $this->voucher_model->get('', array('chitti_id' => $this->attributes['id']));
     
     
     foreach ($chitti_details as $index => $chitti_detail) {
       if (isset($chitti_detail['id'])) {
-        $chittis['chitti_id'] = $this->attributes['id'];
-        $chittis['voucher_date'] = $this->attributes['date'];
-        $chitti_details_model = new voucher_model($chittis);
-        $chitti_details_model->update(false, array('id' => $chitti_detail['id']));
+        $voucher_obj = new voucher_model($chitti_detail);
+        $voucher_obj->attributes['chitti_id'] = $this->attributes['id'];
+        $voucher_obj->attributes['voucher_date'] = $this->attributes['date'];
+        $voucher_obj->update(false);
       }
     }
   }
