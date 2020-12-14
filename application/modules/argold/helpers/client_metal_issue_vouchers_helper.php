@@ -19,6 +19,10 @@ if (!function_exists('get_row_actions')) {
     $ci=&get_instance();
     $controller = 'argold/voucher_details'; 
     // if ($row['account_name'] == 'SWARN SHILP CHAINS AND JEWELLERS PVT LTD')
+      $actions["View"] =  array('request' => "http", 
+                              'url' => ADMIN_PATH.$controller.'/view/'.$row['id'],
+                              'confirm_message' => "",
+                              'class' => 'text-warning text-uppercase');
       $actions["Edit"] =  array('request' => "http", 
                                      'url' => ADMIN_PATH.'argold/metal_issue_account_names/edit/'.$row['id'],
                                      'confirm_message' => "",
