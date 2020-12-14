@@ -29,7 +29,7 @@
         <td class="text-right"><?=$loss_out_detail['fine'] ?></td>
         <td class="text-right"><?=$loss_out_detail['factory_purity'] ?></td>
         <td class="text-right"><?=$loss_out_detail['factory_fine'] ?></td>
-        <td class="text-right"><a href=<?= get_site_url($record['site_name'])."transactions/metal_receipt_vouchers" ?> target='_blank'>create metal receipt voucher</a></td>
+        <td class="text-right"><a href=<?= base_url()."transactions/metal_receipt_vouchers" ?> target='_blank'>create metal receipt voucher</a></td>
       </tr>
 
     <?php }?>
