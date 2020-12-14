@@ -1,6 +1,6 @@
 <?php
 
-class Loss_account_model extends BaseModel {
+class Loss_out_model extends BaseModel {
 
   protected $table_name = "ac_vouchers";
   protected $id = "id";
@@ -9,7 +9,7 @@ class Loss_account_model extends BaseModel {
 		parent::__construct($data);
   }
   public function validation_rules($klass='') {
-    $rules[] = array('field' => 'loss_accounts[account_name]', 
+    $rules[] = array('field' => 'loss_outs[account_name]', 
                      'label' => 'Account Name',
                      'rules' => 'trim|required');
     return $rules;

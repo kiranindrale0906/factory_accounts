@@ -35,7 +35,7 @@ class User_role_model extends Core_user_role_model {
                                             'transactions/interest_receipt_vouchers',
                                             'argold/chittis','argold/voucher_details',
                                             'argold/refresh','argold/refresh_details',
-                                            'argold/loss_accounts',
+                                            'transactions/loss_outs',
                                             'transactions/mangalsutra_sales_return_voucher'),
                      // 'Reports' => array('reports/mis_reports','reports/stock_report', 
                      //                    'reports/order_report'),

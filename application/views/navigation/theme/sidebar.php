@@ -35,7 +35,7 @@
                                             //'transactions/metal_issue_voucher_details' => 'Metal Issue Details',
                                             'argold/chittis' => 'Chitti',
                                             'argold/refresh' => 'Refresh',
-                                            'argold/loss_accounts' => 'Loss Accounts',
+                                            'transactions/loss_outs' => 'Loss Out',
 
                                            //  'transactions/sales_vouchers' => 'Sales Voucher',//
                                            //  'transactions/purchase_vouchers' => 'Purchase Voucher',//
