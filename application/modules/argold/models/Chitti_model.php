@@ -102,4 +102,15 @@ class Chitti_model extends BaseModel {
       }
     }
   }
+  public function update_chitti_ids($voucher_details) {
+    if(!empty($voucher_details)){
+      foreach ($voucher_details as $index => $voucher_detail) {
+        if (isset($voucher_detail['id'])) {
+        $voucher_obj = new voucher_model($voucher_detail);
+        $voucher_obj->attributes['chitti_id'] = 0;
+        $voucher_obj->update(false);
+        }
+      }
+    }
+  }
 }
