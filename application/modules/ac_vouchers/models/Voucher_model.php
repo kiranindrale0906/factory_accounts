@@ -256,4 +256,5 @@ class Voucher_model extends BaseModel {
     $ledger_obj->before_validate();
     $ledger_obj->save();
   }
+  
 }

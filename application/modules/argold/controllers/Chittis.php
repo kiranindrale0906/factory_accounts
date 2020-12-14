@@ -82,4 +82,11 @@ class Chittis extends BaseController {
     $this->data['redirect_url'] = '/argold/chittis';
     parent::store();
   }
+  public function delete($id) {
+    $voucher_details=$this->voucher_model->get('',array('chitti_id'=>$id));
+    if(!empty($voucher_details)){
+      $this->chitti_model->update_chitti_ids($voucher_details);
+    }
+    parent::delete($id);
+  }
 }

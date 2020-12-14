@@ -21,4 +21,16 @@ class Voucher_details extends BaseController {
     $this->data['refresh'] = $this->refresh_model->find('',array('metal_receipt_id'=>$this->data['record']['id']));
     $this->data['refresh_details'] = $this->refresh_detail_model->get('',array('refresh_id'=>$this->data['refresh']['id']));
   }
+  public function delete($id) {
+    $voucher_details=$this->voucher_model->get('',array('metal_receipt_voucher_reference_id'=>$id));
+    foreach ($voucher_details as $index => $voucher) {
+      $this->voucher_model->delete($voucher['id']);
+    }
+    parent::delete($id);
+  }
+  public function _after_delete($id) {
+    redirect(base_url().'transactions/metal_receipt_vouchers');
+    return $formdata;
+  }
+
 }

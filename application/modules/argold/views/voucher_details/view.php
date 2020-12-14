@@ -1,5 +1,7 @@
 <h5 class="heading noprint">Metal Voucher View</h5>
-
+<?php if($record['chitti_id']==0){?>
+<?= getHttpButton('DELETE', base_url().'argold/voucher_details/delete/'.$record['id'], 'float-right btn-danger ml-5'); ?>
+<?php }?>
 <div class="row">
   <div class="col-md-6 ">
     <div class="form-group container">

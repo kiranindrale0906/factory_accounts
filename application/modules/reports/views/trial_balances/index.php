@@ -28,7 +28,7 @@
                       || ($record['account_name'] == 'Tounch Loss Fine')) continue;
 
                   if ($record['account_name'] == 'PURCHASE ACCOUNT') $profit_and_loss['purchase_account'] = $record;
-                  if ($record['account_name'] == 'Main Vadotar')     $profit_and_loss['main_vadotar'] = $record;
+                  if ($record['account_name'] == 'MAIN VADOTAR')     $profit_and_loss['main_vadotar'] = $record;
                       
                   $liabilities_vadotar = $liabilities_vadotar + $record['vadotar'];
                   $liabilities_fine = $liabilities_fine + $record['fine']; 
