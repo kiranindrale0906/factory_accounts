@@ -76,7 +76,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     if ($this->attributes['receipt_type'] == "ARF Finished Goods")          $this->attributes['account_name'] = 'ARF';
     if ($this->attributes['receipt_type'] == "ARF Software Finished Goods") $this->attributes['account_name'] = 'ARF Software';
     if ($this->attributes['receipt_type'] == "ARC Finished Goods")          $this->attributes['account_name'] = 'ARC';
-    if ($this->attributes['receipt_type'] == "Vadotar")                     $this->attributes['account_name'] = 'Main Vadotar';
+    if ($this->attributes['receipt_type'] == "Vadotar")                     $this->attributes['account_name'] = 'MAIN VADOTAR';
   }
 
   private function set_metal_receipt_attributes_from_receipt_type_for_vadotar() {
