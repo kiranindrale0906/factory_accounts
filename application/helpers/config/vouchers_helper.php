@@ -21,3 +21,10 @@ function get_tax_fields($factory_fine, $fine, $sale_type, $gold_rate, $gold_rate
   $fields['grand_total']    = round($fields['total_amount'] + $fields['tcs_amount']);
   return $fields;
 }
+
+function parent_id_exist($parent_id){
+    $ci=&get_instance();
+    $ci->load->model('ac_vouchers/voucher_model');
+    $parent_id = $ci->voucher_model->find('parent_id',array('parent_id'=>$parent_id))['parent_id'];
+    return $parent_id;
+}

@@ -10,6 +10,7 @@ class Client_metal_receipt_vouchers extends Core_metal_receipt_vouchers {
   public function _get_form_data() {
     $company_name = $this->company_model->find('name', array('id' => $_SESSION['company_id']))['name'];
     $re = $this->company_model->find('name', array('id' => $_SESSION['company_id']))['name'];
+    $this->data['record']['parent_id']=!empty($_GET['parent_id'])?$_GET['parent_id']:0;
   	$this->data['account_names_for_metal_issue'] = array(array('id' => '', 'name' => ''));
 
     $this->data['account_names_for_metal_issue'][] = array('id' => 'AR Gold Software', 'name' => 'AR Gold Software');

@@ -1,11 +1,15 @@
 $('select[name*="metal_receipt_vouchers[receipt_type]"]').on('change', function() {
     var receipt_type = $(this).val(); 
     refresh_id='';
+    parent_id='';
     var refresh_id = $('#refresh_id').val(); 
+    var parent_id = $('#parent_id').val(); 
     if(refresh_id!=''){
       refresh_id='&refresh_id='+refresh_id;
+    }if(parent_id!=''){
+      parent_id='&parent_id='+parent_id;
     }
-    window.location = base_url+ 'transactions/metal_receipt_vouchers?receipt_type='+receipt_type+refresh_id;  
+    window.location = base_url+ 'transactions/metal_receipt_vouchers?receipt_type='+receipt_type+refresh_id+parent_id;  
   })
 // $('select[name*="metal_issue_vouchers[receipt_type]"]').on('change', function() {
 //     var receipt_type = $(this).val(); 
@@ -13,6 +17,7 @@ $('select[name*="metal_receipt_vouchers[receipt_type]"]').on('change', function(
 //   })
 $('.select_all').click(function(){
   check_metal_issue_all_checkboxes();   
+   
 })
 
 $('select[name*="metal_issue_vouchers[narration]"').on('change', function() {

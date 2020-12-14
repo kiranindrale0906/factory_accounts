@@ -19,6 +19,7 @@
       $sum_weight+=$loss_out_detail['credit_weight'];
       $sum_fine+=$loss_out_detail['fine'];
       $sum_factory_fine+=$loss_out_detail['factory_fine'];
+      $parent_id=parent_id_exist($loss_out_detail['id']);
 
       ?>
       <tr>
@@ -29,7 +30,15 @@
         <td class="text-right"><?=$loss_out_detail['fine'] ?></td>
         <td class="text-right"><?=$loss_out_detail['factory_purity'] ?></td>
         <td class="text-right"><?=$loss_out_detail['factory_fine'] ?></td>
-        <td class="text-right"><a href=<?= base_url()."transactions/metal_receipt_vouchers" ?> target='_blank'>create metal receipt voucher</a></td>
+        <td class="text-right">
+        <?php
+        if($parent_id==0){
+        ?>
+        <a href=<?= base_url()."transactions/metal_receipt_vouchers?parent_id=".$loss_out_detail['id'] ?> target='_blank'>create metal receipt voucher</a>
+        <?php
+    		}
+        ?>
+        </td>
       </tr>
 
     <?php }?>
