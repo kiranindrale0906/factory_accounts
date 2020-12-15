@@ -68,7 +68,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   }
 
   private function set_sale_type_from_receipt_type_for_metal() {
-    if ($this->attributes['receipt_type'] == 'Metal') $this->attributes['sale_type'] == 'Sale';
+    if ($this->attributes['receipt_type'] == 'Metal' && empty($this->attributes['parent_id'])) $this->attributes['sale_type'] == 'Sale';
   }
 
   private function set_account_name_from_receipt_type() {
@@ -282,7 +282,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
         && $this->attributes['receipt_type'] != 'ARC Refresh')
       return;
 
-    if ($this->attributes['gold_rate'] <= 0) return;
+    if (!empty($this->attributes['gold_rate']) && $this->attributes['gold_rate'] <= 0 ) return;
 
     $this->rate_cut_issue_voucher_model->create_rate_cut_vouchers_for_metal_and_refresh($this->attributes['id'], $this->attributes['receipt_type']);
   } 
@@ -322,7 +322,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
         $metal_issue_data['factory_fine'] = $metal_issue_data['fine'];
       }
       
-      $metal_issue_data['narration'] = $this->attributes['narration'];
+      $metal_issue_data['narration'] = @$this->attributes['narration'];
       $metal_issue_data['description'] = empty($this->attributes['description']) ? '' : $this->attributes['description'];
       $metal_issue_data['suffix'] = "MI";
       $metal_issue_data['voucher_type'] = "metal issue voucher";
