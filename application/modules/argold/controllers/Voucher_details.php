@@ -26,10 +26,11 @@ class Voucher_details extends BaseController {
     foreach ($voucher_details as $index => $voucher) {
       $this->voucher_model->delete($voucher['id']);
     }
+    $this->data['voucher_type']=$_GET['type'];
     parent::delete($id);
   }
   public function _after_delete($id) {
-    redirect(base_url().'transactions/metal_receipt_vouchers');
+    redirect(base_url().'transactions/'.$this->data['voucher_type']);
     return $formdata;
   }
 

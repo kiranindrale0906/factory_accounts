@@ -1,6 +1,8 @@
 <h5 class="heading noprint">Voucher View</h5>
-<?php if($record['chitti_id']==0){?>
-<?= getHttpButton('DELETE', base_url().'argold/voucher_details/delete/'.$record['id'], 'float-right btn-danger ml-5'); ?>
+<?php if($record['chitti_id']==0){
+  $voucher_type=str_replace(' ', '_', $record['voucher_type']).'s';
+  ?>
+<?= getHttpButton('DELETE', base_url().'argold/voucher_details/delete/'.$record['id'].'?type='.$voucher_type, 'float-right btn-danger ml-5'); ?>
 <?php }?>
 <div class="row">
   <div class="col-md-6 ">
@@ -24,9 +26,9 @@
 
     <?php if(in_array($record['voucher_type'], array('rate cut receipt voucher','metal receipt voucher','opening stock voucher'))){?>
       <p><h6>Debit Weight :<?=$record['debit_weight']?></h6></p>
-    <?php }if(in_array($record['voucher_type'], array('rate cut receipt voucher'))){?> 
+    <?php }if(in_array($record['voucher_type'], array('rate cut receipt voucher','cash issue voucher'))){?> 
       <p><h6>Credit Amount :<?=$record['credit_amount']?></h6></p>
-    <?php }if(in_array($record['voucher_type'], array('rate cut issue voucher'))){?> 
+    <?php }if(in_array($record['voucher_type'], array('rate cut issue voucher','cash receipt voucher'))){?> 
       <p><h6>Debit Amount :<?=$record['debit_amount']?></h6></p>
     <?php } if(in_array($record['voucher_type'], array('rate cut issue voucher','opening stock voucher'))){?>  
       <p><h6>Credit Weight :<?=$record['credit_weight']?></h6></p>
@@ -36,7 +38,8 @@
       <p><h6>Credit Weight :<?=$record['credit_weight']?></h6></p>
     <?php } if(in_array($record['voucher_type'], array('rate cut receipt voucher','rate cut issue voucher'))){?>  
       <p><h6>Gold Rate Purity :<?=$record['gold_rate_purity']?></h6></p>
-    <?php }?>  
+    <?php }?> 
+
       <p><h6>Purity :<?=$record['purity']?></h6></p>
       <p><h6>Fine :<?=$record['fine']?></h6></p>
       <p><h6>Factory Purity :<?=$record['factory_purity']?></h6></p>
