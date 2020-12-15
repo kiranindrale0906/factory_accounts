@@ -1,4 +1,4 @@
-<h5 class="heading noprint">Metal Voucher View</h5>
+<h5 class="heading noprint">Voucher View</h5>
 <?php if($record['chitti_id']==0){?>
 <?= getHttpButton('DELETE', base_url().'argold/voucher_details/delete/'.$record['id'], 'float-right btn-danger ml-5'); ?>
 <?php }?>
@@ -6,9 +6,11 @@
   <div class="col-md-6 ">
     <div class="form-group container">
       <p><h6>AC Name: <?=$record['account_name']?> </h6></p>
+      <p><h6>Voucher Type: <?=$record['voucher_type']?> </h6></p>
       <p><h6>Voucher No: <?=$record['voucher_number']?> </h6></p>
       <p><h6>Item Name: <?=$record['narration']?> </h6></p>
       <p><h6>Receipt Type: <?=$record['receipt_type']?></h6></p>
+      <p><h6>Description: <?=$record['description']?></h6></p>
       <?php if (!empty($record['sale_type'])) { ?>
         <p><h6>Sale Type: <?=$record['sale_type']?></h6></p>
       <?php }?>
@@ -19,7 +21,22 @@
   </div>
   <div class="col-md-6">
     <div class="form-group container">
+
+    <?php if(in_array($record['voucher_type'], array('rate cut receipt voucher','metal receipt voucher','opening stock voucher'))){?>
       <p><h6>Debit Weight :<?=$record['debit_weight']?></h6></p>
+    <?php }if(in_array($record['voucher_type'], array('rate cut receipt voucher'))){?> 
+      <p><h6>Credit Amount :<?=$record['credit_amount']?></h6></p>
+    <?php }if(in_array($record['voucher_type'], array('rate cut issue voucher'))){?> 
+      <p><h6>Debit Amount :<?=$record['debit_amount']?></h6></p>
+    <?php } if(in_array($record['voucher_type'], array('rate cut issue voucher','opening stock voucher'))){?>  
+      <p><h6>Credit Weight :<?=$record['credit_weight']?></h6></p>
+    <?php } if(in_array($record['voucher_type'], array('rate cut receipt voucher','rate cut issue voucher'))){?>  
+      <p><h6>Gold Amount :<?=$record['gold_rate']?></h6></p>
+    <?php } if(in_array($record['voucher_type'], array('metal issue voucher'))){?>  
+      <p><h6>Credit Weight :<?=$record['credit_weight']?></h6></p>
+    <?php } if(in_array($record['voucher_type'], array('rate cut receipt voucher','rate cut issue voucher'))){?>  
+      <p><h6>Gold Rate Purity :<?=$record['gold_rate_purity']?></h6></p>
+    <?php }?>  
       <p><h6>Purity :<?=$record['purity']?></h6></p>
       <p><h6>Fine :<?=$record['fine']?></h6></p>
       <p><h6>Factory Purity :<?=$record['factory_purity']?></h6></p>
@@ -28,7 +45,7 @@
     </div>
   </div>
 </div>
-
+<?php if(in_array($record['voucher_type'], array('metal receipt voucher'))){?>
 <hr class="">
 <h6 class="heading ">Metal Issue Voucher Details</h6>
 <?php 
@@ -73,5 +90,5 @@
         </div>
       </div>
     </div>
-  <?php } 
+  <?php } }
 ?>

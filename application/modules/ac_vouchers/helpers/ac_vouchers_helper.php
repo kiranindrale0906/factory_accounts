@@ -229,12 +229,13 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   return !empty($attributes[$table][$field]) ? $attributes[$table][$field] : false;
 }
 
-function ac_voucher_get_row_actions($row, $url, $select_url, $filter) {
+function ac_vouchers_get_row_actions($row, $url, $select_url, $filter) {
   $actions = array();
   $ci=&get_instance();
-  $controller = 'transactions/'.$ci->router->class; 
+  // $controller = 'transactions/'.$ci->router->class; 
+  $controller = 'argold/voucher_details'; 
     $actions["View"] =  array('request' => "http", 
-                            'url' => ADMIN_PATH.$controller.'/details/'.$row['id'],
+                            'url' => ADMIN_PATH.$controller.'/view/'.$row['id'],
                             'confirm_message' => "",
                             'class' => 'text-warning text-uppercase');
 

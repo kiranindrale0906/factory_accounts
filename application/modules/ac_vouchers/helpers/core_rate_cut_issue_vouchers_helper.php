@@ -16,7 +16,7 @@ if (!function_exists('list_settings')) {
                        'gold_rate', 'gold_rate_purity', 
                        'credit_weight', 'purity', 
                        'voucher_number', 'account_name', 'account_id', 'company_id',
-                       'debit_amount', 'description');
+                       'debit_amount', 'description','action');
     return ac_vouchers_list_settings($list_option);
   }
 }
@@ -32,6 +32,7 @@ if (!function_exists('get_field_attribute')) {
 
 if (!function_exists('get_row_actions')) {
   function get_row_actions($row, $url, $select_url, $filter) {
+
     return ac_vouchers_get_row_actions($row, $url, $select_url, $filter);
   }
 }
