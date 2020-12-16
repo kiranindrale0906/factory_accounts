@@ -9,7 +9,7 @@
         <th class="text-right">Fine</th>
         <th class="text-right">Factory Melting</th>
         <th class="text-right">Factory Fine</th>
-        <th class="text-right">Lot No</th>
+        <th class="text-right">Description</th>
         <th class="text-right">Total Out Weight</th>
         <th class="text-right">Out Weight</th>
         <th class="text-right">Purity</th>
