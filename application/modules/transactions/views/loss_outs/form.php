@@ -32,8 +32,8 @@
         <td class="text-right"><?=$loss_out_detail['fine'] ?></td>
         <td class="text-right"><?=$loss_out_detail['factory_purity'] ?></td>
         <td class="text-right"><?=$loss_out_detail['factory_fine'] ?></td>
-        <td class="text-right"><?=$loss_out_detail['narration'] ?></td>
         <td class="text-right"><?=$loss_out_detail['description'] ?></td>
+        <td class="text-right"><?=$loss_out_detail['narration'] ?></td>
         <td class="text-right">
         <?php if($parent_id==0){ ?>
           <a href=<?= base_url()."transactions/metal_receipt_vouchers?receipt_type=Metal&parent_id=".$loss_out_detail['id'] ?> target='_blank'>create metal receipt voucher</a>
