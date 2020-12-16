@@ -9,6 +9,8 @@
         <th class="text-right">Fine</th>
         <th class="text-right">Factory Melting</th>
         <th class="text-right">Factory Fine</th>
+        <th class="text-right">Lot No</th>
+        <th class="text-right">Total Out Weight</th>
         <th class="text-right">Action</th>
       </tr>
     </thead>
@@ -30,14 +32,12 @@
         <td class="text-right"><?=$loss_out_detail['fine'] ?></td>
         <td class="text-right"><?=$loss_out_detail['factory_purity'] ?></td>
         <td class="text-right"><?=$loss_out_detail['factory_fine'] ?></td>
+        <td class="text-right"><?=$loss_out_detail['description'] ?></td>
+        <td class="text-right"><?=$loss_out_detail['narration'] ?></td>
         <td class="text-right">
-        <?php
-        if($parent_id==0){
-        ?>
-        <a href=<?= base_url()."transactions/metal_receipt_vouchers?receipt_type=Metal&parent_id=".$loss_out_detail['id'] ?> target='_blank'>create metal receipt voucher</a>
-        <?php
-    		}
-        ?>
+        <?php if($parent_id==0){ ?>
+          <a href=<?= base_url()."transactions/metal_receipt_vouchers?receipt_type=Metal&parent_id=".$loss_out_detail['id'] ?> target='_blank'>create metal receipt voucher</a>
+          <?php }?>
         </td>
       </tr>
 
@@ -50,9 +50,10 @@
     <td class="text-right"><?=four_decimal($sum_fine);?></td>
     <td class="text-right"></td>
     <td class="text-right"><?=four_decimal($sum_factory_fine);?></td>
+    <td class="text-right"></td>
+    <td class="text-right"></td>
     <td></td>
   </tr>
     </tbody>
   </table>
-</div>
 </div>
