@@ -333,6 +333,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   }
 
   public function send_request_to_factory($attributes) {
+    pd($attributes['receipt_type']);
     if ($attributes['credit_weight'] == 0) return true;
 
     $api_data = array('account'=> $attributes['account_name'].' (accounts)',
@@ -371,6 +372,13 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $api_data = array_merge($api_data, array('type' => 'Solid Machine Chain'));
       $send_data['chain_receipts'] = $api_data;
       $api_url = "api/api_chain_receipts/store";
+
+    }elseif (   $attributes['receipt_type'] == 'AR Gold Internal Receipt'
+              || $attributes['receipt_type'] == 'ARF Internal Receipt'
+              || $attributes['receipt_type'] == 'ARC Internal Receipt') {
+      $api_data = array_merge($api_data, array('type' => 'Pure'));
+      $send_data['chain_receipts'] = $api_data;
+      $api_url = "api/api_internal_receipts/store";
 
     } elseif (   $attributes['receipt_type'] == 'AR Gold RND'
               || $attributes['receipt_type'] == 'ARF RND'
