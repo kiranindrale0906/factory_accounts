@@ -398,7 +398,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     }
 
     if (empty($api_url)) return true;
-print_r(API_ARC_BASE_PATH);print_r(API_ARF_BASE_PATH);pd( API_ARG_BASE_PATH);
+pd($api_url);
     if ($attributes['account_name'] == 'AR Gold Software')
       $api_url = API_ARG_BASE_PATH.$api_url;
     elseif ($attributes['account_name'] == 'ARF Software')
