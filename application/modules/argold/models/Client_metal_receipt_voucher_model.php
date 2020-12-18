@@ -343,12 +343,14 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     $send_data=array();
 
     if ($attributes['receipt_type'] == 'Metal') {
+      pd(1);
       $api_data = array_merge($api_data, array('type' => 'Pure',
                                                'process_name' => 'Receipt'));
       $send_data['receipt_departments'] = $api_data;
       $api_url="api/api_receipt_departments/store";
 
     } else if ($attributes['receipt_type'] == "Daily Drawer") {
+      pd(2);
       $api_data = array_merge($api_data, array('type' => $attributes['dd_type'],
                                                'balance' => $attributes['credit_weight'],
                                                'karigar'=> 'Factory'));
@@ -358,6 +360,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     } else if(   $attributes['receipt_type'] == "AR Gold Refresh"
               || $attributes['receipt_type'] == "ARF Refresh"
               || $attributes['receipt_type'] == "ARC Refresh") {
+      pd(3);
       $api_data = array_merge($api_data, array('type'=>'Pure',
                                                'hook_kdm_purity' => $attributes['hook_kdm_purity'],
                                                'description' => $attributes['description'],
@@ -368,19 +371,21 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     } elseif (   $attributes['receipt_type'] == 'AR Gold Chain Receipt'
               || $attributes['receipt_type'] == 'ARF Chain Receipt'
               || $attributes['receipt_type'] == 'ARC Chain Receipt') {
+      pd(4);
       $api_data = array_merge($api_data, array('type' => 'Solid Machine Chain'));
       $send_data['chain_receipts'] = $api_data;
       $api_url = "api/api_chain_receipts/store";
 
-    }elseif (   $attributes['receipt_type'] == 'AR Gold Internal Receipt'
+    }elseif ( $attributes['receipt_type'] == 'AR Gold Internal Receipt'
               || $attributes['receipt_type'] == 'ARF Internal Receipt'
               || $attributes['receipt_type'] == 'ARC Internal Receipt') {
+      pd(8);
       $api_data = array_merge($api_data, array('type' => 'Pure'));
       $send_data['internal_receipts'] = $api_data;
       $api_url = "api/api_internal_receipts/store";
 
     }elseif (($attributes['receipt_type'] == 'Melting Wastage' || $attributes['receipt_type'] == 'Daily Drawer Wastage') && ($attributes['account_name'] == 'AR Gold Software' || $attributes['account_name'] == 'ARF Software'|| $attributes['account_name'] == 'ARC Software')) {
-
+pd(9);
       $api_data = array_merge($api_data, array('type' => 'Pure'));
       $send_data['internal_receipts'] = $api_data;
       $api_url = "api/api_internal_receipts/store";
@@ -388,24 +393,28 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     } elseif (   $attributes['receipt_type'] == 'AR Gold RND'
               || $attributes['receipt_type'] == 'ARF RND'
               || $attributes['receipt_type'] == 'ARC RND') {
+      pd(10);
       $send_data['rnd_receipts'] = $api_data;
       $api_url = "api/api_rnd_receipts/store";  
 
     } elseif (   $attributes['receipt_type'] == 'AR Gold Finished Goods Receipt'
               || $attributes['receipt_type'] == 'ARF Finished Goods Receipt'
               || $attributes['receipt_type'] == 'ARC Finished Goods Receipt') {
+      pd(19);
       $send_data['finished_goods_receipts'] = $api_data;
       $api_url = "api/api_finished_goods_receipts/store";
 
     } elseif (   $attributes['receipt_type'] == 'Cutting Ghiss' 
               || $attributes['receipt_type'] == 'Ice Cutting Ghiss') {
+      pd(11);
       $send_data['pending_ghiss_receipts'] = array_merge($api_data, array('department_name' => $attributes['narration']));
       $api_url = "api/api_pending_ghiss_receipts/store";
     }
-
-    if (empty($api_url)) return true;
+    pd(20);
     print_r($api_url);
     pd($send_data);
+
+    if (empty($api_url)) return true;
     if ($attributes['account_name'] == 'AR Gold Software')
       $api_url = API_ARG_BASE_PATH.$api_url;
     elseif ($attributes['account_name'] == 'ARF Software')
