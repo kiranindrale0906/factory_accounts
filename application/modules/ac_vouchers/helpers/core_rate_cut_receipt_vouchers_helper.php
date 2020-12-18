@@ -16,7 +16,7 @@ if (!function_exists('list_settings')) {
                        'gold_rate', 'gold_rate_purity', 
                        'debit_weight', 'purity', 
                        'voucher_number', 'account_name', 'account_id', 'company_id',
-                       'credit_amount', 'description');
+                       'credit_amount', 'description','action');
     return ac_vouchers_list_settings($list_option);
   }
 }

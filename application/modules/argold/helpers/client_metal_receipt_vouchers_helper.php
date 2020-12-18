@@ -9,11 +9,15 @@ function list_settings() {
 }
 
 function get_field_attribute($table, $field) {
-  if(!empty($_GET['receipt_type']) && $_GET['receipt_type'] == 'Metal') 
+  if(!empty($_GET['receipt_type']) && $_GET['receipt_type'] == 'Metal') {
+    if(!empty($_GET['parent_id'])){
+    $required_fields=array('id', 'voucher_date', 'receipt_type', 'account_name', 
+                           'debit_weight', 'purity', 'fine','description');
+    }else{
     $required_fields=array('id', 'voucher_date', 'receipt_type', 'account_name', 
                            'debit_weight', 'purity', 'fine', 'narration', 'description', 'sale_type', 'gold_rate', 'gold_rate_purity');
-
-  elseif(!empty($_GET['receipt_type']) && (  $_GET['receipt_type'] == 'AR Gold Chain Receipt'
+    }
+  }elseif(!empty($_GET['receipt_type']) && (  $_GET['receipt_type'] == 'AR Gold Chain Receipt'
                                           || $_GET['receipt_type'] == 'ARF Chain Receipt'
                                           || $_GET['receipt_type'] == 'ARC Chain Receipt'
                                           || $_GET['receipt_type'] == 'AR Gold Finished Goods Receipt'

@@ -35,6 +35,7 @@
                                             //'transactions/metal_issue_voucher_details' => 'Metal Issue Details',
                                             'argold/chittis' => 'Chitti',
                                             'argold/refresh' => 'Refresh',
+                                            'transactions/loss_outs' => 'Loss Out',
 
                                            //  'transactions/sales_vouchers' => 'Sales Voucher',//
                                            //  'transactions/purchase_vouchers' => 'Purchase Voucher',//
@@ -76,7 +77,8 @@
                                         'reports/vadotar_reports' => 'Vadotar Report',
                                         'reports/rojmel_reports' => 'Rojmel Report',
                                         'reports/production_summary' => 'Production Summary',
-                                        'reports/bw_accounts' => 'Bw Accounts'
+                                        'reports/bw_accounts' => 'Bw Accounts',
+                                        'reports/loss_accounts' => 'Loss Accounts'
                                         ),
                     //'Interests' => array('transactions/interest_issue_vouchers'=>'Interest Issue Voucher','transactions/interest_receipt_vouchers'=>'Interest Receipt Voucher'),
                     'Registers'   => array(

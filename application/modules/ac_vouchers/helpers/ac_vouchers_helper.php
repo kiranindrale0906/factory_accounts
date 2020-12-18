@@ -7,8 +7,10 @@ function ac_vouchers_getTableSettings($table_setting_arg=array()) {
   }else{
     $table_setting_arg['where'] = 'company_id='.(!empty($ci->session->userdata('company_id'))?$ci->session->userdata('company_id'):-1);
   }
+  if ($ci->router->class != "cash_issue_vouchers"
+      and $ci->router->class != "cash_receipt_vouchers") {
   $table_setting_arg['where'] .= ' and receipt_type not in ("Alloy Vodator", "GPC Vodator", "Stone Vatav")';
-  
+  }
   $table_setting= array('page_title'          => '',
                         'primary_table'       => 'ac_vouchers',
                         'default_column'      => 'ac_vouchers.id',
@@ -148,6 +150,7 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $ci=&get_instance();
   $attributes = array();
   $attributes['id'] = array('', '', TRUE, '', TRUE);
+  $attributes['parent_id'] = array('', '', TRUE, '', TRUE,TRUE);
   $attributes['voucher_date'] = array('Date', 'Enter Date.', TRUE, '', TRUE,TRUE);
   $attributes['account_name'] = array('Account', 'Enter Account', TRUE, '', TRUE);
   $attributes['from_account_name'] = array('From Account', 'Enter From Account', TRUE, '', TRUE);
@@ -228,12 +231,13 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   return !empty($attributes[$table][$field]) ? $attributes[$table][$field] : false;
 }
 
-function ac_voucher_get_row_actions($row, $url, $select_url, $filter) {
+function ac_vouchers_get_row_actions($row, $url, $select_url, $filter) {
   $actions = array();
   $ci=&get_instance();
-  $controller = 'transactions/'.$ci->router->class; 
+  // $controller = 'transactions/'.$ci->router->class; 
+  $controller = 'argold/voucher_details'; 
     $actions["View"] =  array('request' => "http", 
-                            'url' => ADMIN_PATH.$controller.'/details/'.$row['id'],
+                            'url' => ADMIN_PATH.$controller.'/view/'.$row['id'],
                             'confirm_message' => "",
                             'class' => 'text-warning text-uppercase');
 
