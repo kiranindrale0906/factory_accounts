@@ -70,6 +70,7 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
 
   public function after_save($action) {
     parent::after_save($action);
+    pd($this->attributes);
     //$this->create_metal_receipt_voucher_for_finished_goods();
     if (   ENABLE_API_FOR_RECEIPT 
         && $this->attributes['receipt_type'] != 'Internal' 
@@ -78,7 +79,6 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
             || $this->attributes['account_name'] == 'ARC Software'))
             // || $this->attributes['receipt_type'] == 'ARF Chain Receipt'
             // || $this->attributes['receipt_type'] == 'ARF RND'))
-      pd($this->attributes['receipt_type']);
       $this->client_metal_receipt_voucher_model->send_request_to_factory($this->attributes);
   }
 
