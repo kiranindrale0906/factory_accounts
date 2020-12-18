@@ -333,7 +333,6 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   }
 
   public function send_request_to_factory($attributes) {
-    pd($attributes);
     if ($attributes['credit_weight'] == 0) return true;
 
     $api_data = array('account'=> $attributes['account_name'].' (accounts)',
