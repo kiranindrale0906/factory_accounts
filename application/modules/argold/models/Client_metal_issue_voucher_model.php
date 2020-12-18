@@ -78,6 +78,7 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
             || $this->attributes['account_name'] == 'ARC Software'))
             // || $this->attributes['receipt_type'] == 'ARF Chain Receipt'
             // || $this->attributes['receipt_type'] == 'ARF RND'))
+      pd($this->attributes['receipt_type']);
       $this->client_metal_receipt_voucher_model->send_request_to_factory($this->attributes);
   }
 
