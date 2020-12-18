@@ -374,10 +374,13 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
     }elseif (   $attributes['receipt_type'] == 'AR Gold Internal Receipt'
               || $attributes['receipt_type'] == 'ARF Internal Receipt'
-              || $attributes['receipt_type'] == 'ARC Internal Receipt'
-              || $attributes['receipt_type'] == 'Melting Wastage'
-              || ($attributes['receipt_type'] == 'Daily Drawer Wastage' 
-              && in_array($attributes['account_name'],array('AR Gold Software','ARF Software','ARC Software')))) {
+              || $attributes['receipt_type'] == 'ARC Internal Receipt') {
+      $api_data = array_merge($api_data, array('type' => 'Pure'));
+      $send_data['internal_receipts'] = $api_data;
+      $api_url = "api/api_internal_receipts/store";
+
+    }elseif (($attributes['receipt_type'] == 'Melting Wastage' || ($attributes['receipt_type'] == 'Daily Drawer Wastage') && ($attributes['account_name'] == 'AR Gold Software' || $attributes['account_name'] == 'ARF Software'|| $attributes['account_name'] == 'ARC Software')))) {
+
       $api_data = array_merge($api_data, array('type' => 'Pure'));
       $send_data['internal_receipts'] = $api_data;
       $api_url = "api/api_internal_receipts/store";
