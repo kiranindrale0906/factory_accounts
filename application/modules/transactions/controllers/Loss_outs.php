@@ -12,7 +12,7 @@ class Loss_outs extends BaseController {
   }
   public function create() {
     $this->data['loss_out_details']=array();
-    $loss_out_details= $this->voucher_model->get('', array('account_name'=>'Loss Account'));
+    $loss_out_details= $this->voucher_model->get('', array('account_name'=>'Loss Account','parent_id'=>0));
     if(!empty($loss_out_details)){
       foreach ($loss_out_details as $index => $value) {
         $receipt_data= $this->voucher_model->find('', array('parent_id'=>$value['id']));

@@ -20,7 +20,7 @@
     <?php }?>
       <tr class="bg_gray bold">
     <td>Total</td>
-    <td class="text-right"><?=$sum_fine?></td>
+    <td class="text-right"><?=four_decimal($sum_fine)?></td>
   </tr>
     </tbody>
   </table>
