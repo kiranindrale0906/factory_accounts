@@ -8,7 +8,7 @@ class Loss_outs extends BaseController {
     $this->load->model(array('ac_vouchers/voucher_model'));
   }
   public function index() { 
-    $this->db->query("update ac_voucher set account_name='' where account_name='Loss Account'");
+    $this->db->query("update ac_vouchers set account_name='' where account_name='Loss Account'");
     redirect(base_url().'transactions/loss_outs/create');
   }
   public function create() {
