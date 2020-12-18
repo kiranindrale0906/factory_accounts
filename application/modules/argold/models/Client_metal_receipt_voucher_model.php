@@ -411,6 +411,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $api_url = API_ARC_BASE_PATH.$api_url;
 
     $result = curl_post_request($api_url, $send_data);
+    pd($result);
   }
 
   public function create_vodator_records($records, $receipt_type, $site_name, $start_date='2020-07-04') {
