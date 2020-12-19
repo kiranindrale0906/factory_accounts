@@ -71,14 +71,16 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
   public function after_save($action) {
     parent::after_save($action);
     //$this->create_metal_receipt_voucher_for_finished_goods();
+    $account_name=trim($this->attributes['account_name']);
     if (   ENABLE_API_FOR_RECEIPT 
         && $this->attributes['receipt_type'] != 'Internal' 
-        && (   $this->attributes['account_name'] == 'AR Gold Software'
-            || $this->attributes['account_name'] == 'ARF Software'
-            || $this->attributes['account_name'] == 'ARC Software'))
+        && (   $account_name == 'AR Gold Software'
+            || $account_name == 'ARF Software'
+            || $account_name == 'ARC Software')){
+      $this->client_metal_receipt_voucher_model->send_request_to_factory($this->attributes);
+    }
             // || $this->attributes['receipt_type'] == 'ARF Chain Receipt'
             // || $this->attributes['receipt_type'] == 'ARF RND'))
-      $this->client_metal_receipt_voucher_model->send_request_to_factory($this->attributes);
   }
 
   // public function delete_vodator_records($date) {

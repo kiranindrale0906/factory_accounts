@@ -333,6 +333,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   }
 
   public function send_request_to_factory($attributes) {
+    $attributes['account_name']=trim($attributes['account_name']);
     if ($attributes['credit_weight'] == 0) return true;
 
     $api_data = array('account'=> $attributes['account_name'].' (accounts)',
@@ -372,9 +373,17 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $send_data['chain_receipts'] = $api_data;
       $api_url = "api/api_chain_receipts/store";
 
-    }elseif (   $attributes['receipt_type'] == 'AR Gold Internal Receipt'
+    }elseif ( $attributes['receipt_type'] == 'AR Gold Internal Receipt'
               || $attributes['receipt_type'] == 'ARF Internal Receipt'
               || $attributes['receipt_type'] == 'ARC Internal Receipt') {
+      $api_data = array_merge($api_data, array('type' => 'Pure'));
+      $send_data['internal_receipts'] = $api_data;
+      $api_url = "api/api_internal_receipts/store";
+
+    }elseif (($attributes['receipt_type'] == 'Melting Wastage' || $attributes['receipt_type'] == 'Daily Drawer Wastage') && ( $attributes['account_name'] == 'AR Gold Software'
+              || $attributes['account_name'] == 'ARF Software'
+              || $attributes['account_name'] == 'ARC Software')) {
+
       $api_data = array_merge($api_data, array('type' => 'Pure'));
       $send_data['internal_receipts'] = $api_data;
       $api_url = "api/api_internal_receipts/store";
@@ -398,7 +407,6 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     }
 
     if (empty($api_url)) return true;
-
     if ($attributes['account_name'] == 'AR Gold Software')
       $api_url = API_ARG_BASE_PATH.$api_url;
     elseif ($attributes['account_name'] == 'ARF Software')
