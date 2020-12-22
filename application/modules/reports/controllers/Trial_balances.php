@@ -6,7 +6,7 @@ class Trial_balances extends Ledgers {
 
   public function __construct() {
     parent::__construct();
-    $this->load->model(array('masters/account_model','masters/company_model', 'transactions/ledger_model'
+    $this->load->model(array('masters/account_model','masters/company_model', 'transactions/ledger_model',
                              'transactions/metal_receipt_voucher_model', 'transactions/metal_issue_voucher_model', 
                              'ac_vouchers/voucher_model', 'argold/chitti_model'));
   }
