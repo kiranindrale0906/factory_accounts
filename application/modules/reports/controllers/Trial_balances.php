@@ -16,6 +16,18 @@ class Trial_balances extends Ledgers {
 
     //$this->metal_receipt_voucher_model->delete_vodator_records(date('Y-m-d'));
     //$this->metal_issue_voucher_model->delete_vodator_records(date('Y-m-d'));
+
+    $incorrect_vadotar_vouchers = $this->voucher_model->get('receipt_type, site_name, voucher_date, sum(credit_weight) as credit_weight, sum(debit_weight) as debit_weight',
+                                         array('receipt_type' => array('Alloy Vodator', 'GPC Vodator', 'Stone Vatav')),
+                                         array(), array('group_by' => 'receipt_type, site_name, voucher_date',
+                                                        'having' => 'credit_weight != debit_weight'));
+    foreach($incorrect_vadotar_vouchers as $incorrect_vadotar_voucher) {
+      $this->voucher_model->delete('', array('receipt_type' => $incorrect_vadotar_voucher['receipt_type'],
+                                             'site_name' => $incorrect_vadotar_voucher['site_name'],
+                                             'voucher_date' => $incorrect_vadotar_voucher['voucher_date']));
+    }
+
+
     $records = json_decode(curl_post_request($url));
     if (!empty($records)) {
       $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator, 'Alloy Vodator', 'AR Gold');
