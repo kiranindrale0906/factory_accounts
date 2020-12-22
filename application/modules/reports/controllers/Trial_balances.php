@@ -39,6 +39,7 @@ class Trial_balances extends Ledgers {
     if (!empty($records)) {
       $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator, 'Alloy Vodator', 'ARF');
       $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator, 'GPC Vodator', 'ARF');
+      $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav, 'Stone Vatav', 'ARF');
     }
 
     $url = API_ARC_BASE_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
