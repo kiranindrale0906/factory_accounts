@@ -6,5 +6,5 @@
 <?php $this->load->view('trial_balances/trial_balance', array('trial_balance_records' => $trial_balance, 'loss_account' => 0)); ?>
 
 <hr />
-<h5 class="ml-2 pl-2">Profit and Loss Account</h5>
+<h5 class="ml-2 pl-2">Loss Account Details</h5>
 <?php $this->load->view('trial_balances/trial_balance', array('trial_balance_records' => $loss_account_records, 'loss_account' => 1)); ?>
