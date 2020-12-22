@@ -6,7 +6,7 @@ class Trial_balances extends Ledgers {
 
   public function __construct() {
     parent::__construct();
-    $this->load->model(array('masters/account_model','masters/company_model', 
+    $this->load->model(array('masters/account_model','masters/company_model', 'transactions/ledger_model'
                              'transactions/metal_receipt_voucher_model', 'transactions/metal_issue_voucher_model', 
                              'ac_vouchers/voucher_model', 'argold/chitti_model'));
   }
@@ -25,6 +25,7 @@ class Trial_balances extends Ledgers {
       $this->voucher_model->delete('', array('receipt_type' => $incorrect_vadotar_voucher['receipt_type'],
                                              'site_name' => $incorrect_vadotar_voucher['site_name'],
                                              'voucher_date' => $incorrect_vadotar_voucher['voucher_date']));
+      $this->ledger_model->delete('', array('parent_id not in (select id from ac_vouchers)' => NULL));
     }
 
 
