@@ -81,6 +81,7 @@ class Trial_balances extends Ledgers {
                                                             'order_by'=>'account_name asc'));
     $loss_account = array('account_name' => 'LOSS ACCOUNT',
                           'fine' => 0, 'vadotar' => 0, 'amount' => 0);
+    $this->data['loss_account_records'] = array();
     $loss_account_names = array('AR Gold Alloy Vodator', 'ARF Alloy Vodator', 'ARC Alloy Vodator',
                           'AR Gold GPC Vodator', 'ARF GPC Vodator', 'ARC GPC Vodator',
                           'AR Gold Stone Vatav', 'ARF Stone Vatav', 'ARC Stone Vatav',
@@ -92,6 +93,7 @@ class Trial_balances extends Ledgers {
         $loss_account['fine'] += $trail_balance_record['fine'];
         // $loss_account['vadotar'] += $trail_balance_record['vadotar'];
         // $loss_account['amount'] += $trail_balance_record['amount']; 
+        $this->data['loss_account_records'][] = $trail_balance_record;
         unset($this->data['trial_balance'][$index]);
       }
     }
