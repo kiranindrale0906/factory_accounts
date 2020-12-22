@@ -79,6 +79,22 @@ class Trial_balances extends Ledgers {
     $this->data['trial_balance'] = $this->model->get($select, array(), array() , 
                                                       array('group_by'=>'account_name,',
                                                             'order_by'=>'account_name asc'));
+    $loss_account = array('account_name' => 'LOSS ACCOUNT',
+                          'fine' => 0, 'vadotar' => 0, 'amount' => 0);
+    $loss_account_names = array('AR Gold Alloy Vodator', 'ARF Alloy Vodator', 'ARC Alloy Vodator',
+                          'AR Gold GPC Vodator', 'ARF GPC Vodator', 'ARC GPC Vodator',
+                          'AR Gold Stone Vatav', 'ARF Stone Vatav', 'ARC Stone Vatav',
+                          'HCL Loss', 'STONE VATAV ARF', 'TOUNCH LOSS FINE ARF', 
+                          'Loss Account', 'Tounch & Castic Dep.Loss', 'Tounch Loss Fine');
+    foreach($this->data['trial_balance'] as $index => $trail_balance_record) {
+      if (in_array($trail_balance_record['account_name'], $loss_account_names)) {
+        $loss_account['fine'] += $trail_balance_record['fine'];
+        // $loss_account['vadotar'] += $trail_balance_record['vadotar'];
+        // $loss_account['amount'] += $trail_balance_record['amount']; 
+        unset($this->data['trial_balance'][$index]);
+      }
+    }
+    $this->data['trial_balance'][] = $loss_account;
     
     // $query = $this->db->query("select account_name, sum(fine) as fine, sum(vadotar) as vadotar, sum(amount) as amount
     //           from (
