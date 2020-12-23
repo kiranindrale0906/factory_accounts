@@ -12,13 +12,13 @@ class Telegram_production_summary extends BaseController {
     $date = date('Y-m-d');
     $this->send_message(date('d-m-Y'));
 
-    $this->send_issue_gpc_out_records();
-    $this->send_metal_receipt_record();
-    $this->send_refresh_records();
+    $this->send_issue_gpc_out_records($date);
+    $this->send_metal_receipt_record($date);
+    $this->send_refresh_records($date);
   }
 
   //get records
-  private function send_issue_gpc_out_records() {
+  private function send_issue_gpc_out_records($date) {
     $url  = API_ARG_BASE_PATH."issue_departments/api_issue_departments/index?issue_at=".$date;
     $argold_records = json_decode(curl_post_request($url));
     $this->send_issue_gpc_out_message($argold_records->data);
@@ -33,7 +33,7 @@ class Telegram_production_summary extends BaseController {
   }
 
   //get records
-  private function send_refresh_records() {
+  private function send_refresh_records($date) {
     $refresh_records = $this->voucher_model->get('receipt_type, sum(debit_weight) as weight',
                                            array('receipt_type' => array('AR Gold Refresh', 'ARF Refersh', 'ARC Refresh'),
                                                  'voucher_date' => $date), array(), array('group_by' => 'receipt_type'));
@@ -41,7 +41,7 @@ class Telegram_production_summary extends BaseController {
   }
 
   //get records
-  private function send_metal_receipt_record() {
+  private function send_metal_receipt_record($date) {
     $metal_receipts = $this->voucher_model->find('sum(debit_weight) as weight', array('receipt_type' => 'Metal',
                                                                                       'voucher_date' => $date));
     $metal_weight = (isset($metal_receipts)) ? $metal_receipts['weight'] : 0;
