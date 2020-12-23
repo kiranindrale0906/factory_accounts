@@ -29,7 +29,7 @@ class Telegram_production_summary extends BaseController {
     $this->send_message('Metal: '.$metal_weight);      
 
     $refresh_records = $this->voucher_model->get('sum(debit_weight) as weight',
-                                           array('receipt_type' => ('AR Gold Refresh', 'ARF Refersh', 'ARC Refresh'),
+                                           array('receipt_type' => array('AR Gold Refresh', 'ARF Refersh', 'ARC Refresh'),
                                                  'voucher_date' => $date), array(), array('group_by' => 'receipt_type'));
     $this->send_refresh_message($bot, $refresh_records);      
   }
