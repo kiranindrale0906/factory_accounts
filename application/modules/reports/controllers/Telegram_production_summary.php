@@ -6,18 +6,31 @@ class Telegram_production_summary extends BaseController {
   }
 
   public function index() {
-    $date = date('Y-m-d');
-    //$url  = API_ARG_BASE_PATH."issue_departments/api_issue_departments/index?issue_at=".$date;
-    $url  = "https://nov2020-argold.ascratech.com/issue_departments/api_issue_departments/index?issue_at=".$date;
-    $argold_records = json_decode(curl_post_request($url));
     $bot = new \TelegramBot\Api\BotApi('1387671982:AAGd_ke_dJoiZ_tkThtUlCrPUBTo2oNfjdc');
-    
-    foreach($argold_records->data as $argold_record) {
-      $message = $argold_record->product_name.': '.four_decimal($argold_record->issue_gpc_out);
-      $bot->sendMessage('1316386536', $message);      
-    }
-    $url  = API_ARF_BASE_PATH."issue_departments/api_issue_departments/index?issue_at=".$date;
 
+    $date = date('Y-m-d');
+    $url  = API_ARG_BASE_PATH."issue_departments/api_issue_departments/index?issue_at=".$date;
+    $argold_records = json_decode(curl_post_request($url));
+    $this->send_issue_gpc_out_message($argold_records->data);
+    
+    $url  = API_ARF_BASE_PATH."issue_departments/api_issue_departments/index?issue_at=".$date;
+    $arf_records = json_decode(curl_post_request($url));
+    $this->send_issue_gpc_out_message($arf_records->data);
+    
     $url  = API_ARC_BASE_PATH."issue_departments/api_issue_departments/index?issue_at=".$date;
+    $arc_records = json_decode(curl_post_request($url));
+    $this->send_issue_gpc_out_message($arc_records->data);
+    
   }
+
+  private function send_issue_gpc_out_message($records) {
+    foreach($records->data as $record) {
+      $message = $record->product_name.': '.four_decimal($record->issue_gpc_out);
+
+      //Atul: 712491427
+      //Bhaskar: 1316386536
+      //Nikhil Ranawat: 1056863449
+      $bot->sendMessage('712491427', $message);      
+    }
+  } 
 }
