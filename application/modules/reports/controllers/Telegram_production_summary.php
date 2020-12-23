@@ -3,6 +3,7 @@
 class Telegram_production_summary extends BaseController {
   public function __construct() {
     parent::__construct();
+    $this->load->model(array('ac_vouchers/voucher_model'));
   }
 
   public function index() {
@@ -22,17 +23,37 @@ class Telegram_production_summary extends BaseController {
     $arc_records = json_decode(curl_post_request($url));
     $this->send_issue_gpc_out_message($bot, $arc_records->data);
     
+    $metal_receipts = $this->voucher_model->find('sum(debit_weight) as weight', array('receipt_type' => 'Metal',
+                                                                                      'voucher_date' => $date));
+    $metal_weight = (isset($metal_receipts)) ? $metal_receipts['weight'] : 0;
+    $this->send_message('Metal: '.$metal_weight);      
+
+    $refresh_records = $this->voucher_model->get('sum(debit_weight) as weight',
+                                           array('receipt_type' => ('AR Gold Refresh', 'ARF Refersh', 'ARC Refresh'),
+                                                 'voucher_date' => $date), array(), array('group_by' => 'receipt_type'));
+    $this->send_refresh_message($bot, $refresh_records);      
   }
 
   private function send_issue_gpc_out_message($bot, $records) {
     foreach($records as $record) {
       $message = $record->product_name.': '.four_decimal($record->issue_gpc_out);
-
-      //Atul: 712491427
-      //Bhaskar: 1316386536
-      //Nikhil Ranawat: 1056863449
-      $bot->sendMessage('712491427', $message);      
-      $bot->sendMessage('1056863449', $message);
+      $this->send_message($message);
     }
   } 
+
+  private function send_refresh_message($bot, $records) {
+    foreach($records as $record) {
+      $message = $record['receipt_type'].': '.four_decimal($record['weight']);
+      $this->send_message($message);
+    }
+  } 
+
+  private function send_message($message) {
+    //Atul: 712491427
+    //Bhaskar: 1316386536
+    //Nikhil Ranawat: 1056863449
+
+    $bot->sendMessage('712491427', $message);      
+    //$bot->sendMessage('1056863449', $message);
+  }
 }
