@@ -17,6 +17,7 @@ class Telegram_production_summary extends BaseController {
     $this->send_refresh_records();
   }
 
+  //get records
   private function send_issue_gpc_out_records() {
     $url  = API_ARG_BASE_PATH."issue_departments/api_issue_departments/index?issue_at=".$date;
     $argold_records = json_decode(curl_post_request($url));
@@ -31,7 +32,7 @@ class Telegram_production_summary extends BaseController {
     $this->send_issue_gpc_out_message($arc_records->data);
   }
 
-
+  //get records
   private function send_refresh_records() {
     $refresh_records = $this->voucher_model->get('receipt_type, sum(debit_weight) as weight',
                                            array('receipt_type' => array('AR Gold Refresh', 'ARF Refersh', 'ARC Refresh'),
@@ -39,6 +40,7 @@ class Telegram_production_summary extends BaseController {
     $this->send_refresh_message($refresh_records);      
   }
 
+  //get records
   private function send_metal_receipt_record() {
     $metal_receipts = $this->voucher_model->find('sum(debit_weight) as weight', array('receipt_type' => 'Metal',
                                                                                       'voucher_date' => $date));
@@ -46,13 +48,7 @@ class Telegram_production_summary extends BaseController {
     $this->send_message('Metal: '.$metal_weight);      
   }
 
-  private function send_metal_receipt_record() {
-    $metal_receipts = $this->voucher_model->find('sum(debit_weight) as weight', array('receipt_type' => 'Metal',
-                                                                                      'voucher_date' => $date));
-    $metal_weight = (isset($metal_receipts)) ? $metal_receipts['weight'] : 0;
-    $this->send_message('Metal: '.$metal_weight);      
-  }
-
+  //send message
   private function send_issue_gpc_out_message($records) {
     foreach($records as $record) {
       $message = $record->product_name.': '.four_decimal($record->issue_gpc_out);
@@ -60,6 +56,7 @@ class Telegram_production_summary extends BaseController {
     }
   } 
 
+  //send message
   private function send_refresh_message($records) {
     foreach($records as $record) {
       $message = $record['receipt_type'].': '.four_decimal($record['weight']);
@@ -67,6 +64,7 @@ class Telegram_production_summary extends BaseController {
     }
   } 
 
+  //send message
   private function send_message($message) {
     //Atul: 712491427
     //Bhaskar: 1316386536
