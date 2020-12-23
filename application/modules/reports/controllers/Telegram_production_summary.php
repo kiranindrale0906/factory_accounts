@@ -32,6 +32,7 @@ class Telegram_production_summary extends BaseController {
       //Bhaskar: 1316386536
       //Nikhil Ranawat: 1056863449
       $bot->sendMessage('712491427', $message);      
+      $bot->sendMessage('1056863449', $message);
     }
   } 
 }
