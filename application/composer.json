@@ -23,7 +23,8 @@
         "mikehaertl/phpwkhtmltopdf": "2.4.1",
         "picqer/php-barcode-generator": "^0.3.0",
         "box/spout": "^2.7",
-        "facebook/graph-sdk": "^5.7"
+        "facebook/graph-sdk": "^5.7",
+        "telegram-bot/api": "*"
     },
     "suggest": {
         "paragonie/random_compat": "Provides better randomness in PHP 5.x"
