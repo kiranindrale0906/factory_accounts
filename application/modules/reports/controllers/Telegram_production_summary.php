@@ -24,7 +24,7 @@ class Telegram_production_summary extends BaseController {
   }
 
   private function send_issue_gpc_out_message($records) {
-    foreach($records->data as $record) {
+    foreach($records as $record) {
       $message = $record->product_name.': '.four_decimal($record->issue_gpc_out);
 
       //Atul: 712491427
