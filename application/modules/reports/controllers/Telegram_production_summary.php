@@ -11,19 +11,19 @@ class Telegram_production_summary extends BaseController {
     $date = date('Y-m-d');
     $url  = API_ARG_BASE_PATH."issue_departments/api_issue_departments/index?issue_at=".$date;
     $argold_records = json_decode(curl_post_request($url));
-    $this->send_issue_gpc_out_message($argold_records->data);
+    $this->send_issue_gpc_out_message($bot, $argold_records->data);
     
     $url  = API_ARF_BASE_PATH."issue_departments/api_issue_departments/index?issue_at=".$date;
     $arf_records = json_decode(curl_post_request($url));
-    $this->send_issue_gpc_out_message($arf_records->data);
+    $this->send_issue_gpc_out_message($bot, $arf_records->data);
     
     $url  = API_ARC_BASE_PATH."issue_departments/api_issue_departments/index?issue_at=".$date;
     $arc_records = json_decode(curl_post_request($url));
-    $this->send_issue_gpc_out_message($arc_records->data);
+    $this->send_issue_gpc_out_message($bot, $arc_records->data);
     
   }
 
-  private function send_issue_gpc_out_message($records) {
+  private function send_issue_gpc_out_message($bot, $records) {
     foreach($records as $record) {
       $message = $record->product_name.': '.four_decimal($record->issue_gpc_out);
 
