@@ -10,7 +10,7 @@ class Telegram_production_summary extends BaseController {
 
   public function index() {
     $date = date('Y-m-d');
-    $bot->send_message(date('d-m-Y'));
+    $this->send_message(date('d-m-Y'));
 
     $this->send_issue_gpc_out_records();
     $this->send_metal_receipt_record();
