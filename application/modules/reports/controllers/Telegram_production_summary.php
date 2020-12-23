@@ -7,8 +7,9 @@ class Telegram_production_summary extends BaseController {
 
   public function index() {
     $bot = new \TelegramBot\Api\BotApi('1387671982:AAGd_ke_dJoiZ_tkThtUlCrPUBTo2oNfjdc');
-
     $date = date('Y-m-d');
+    $bot->sendMessage('712491427', date('d-m-Y'));
+
     $url  = API_ARG_BASE_PATH."issue_departments/api_issue_departments/index?issue_at=".$date;
     $argold_records = json_decode(curl_post_request($url));
     $this->send_issue_gpc_out_message($bot, $argold_records->data);
