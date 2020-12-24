@@ -11,7 +11,7 @@ class Telegram_production_summary extends BaseController {
   public function index() {
     $date = date('Y-m-d');
     $date = '2020-12-23';
-    $this->send_message(date('d-m-Y'));
+    $this->send_message($date);
 
     $this->send_issue_gpc_out_records($date);
     $this->send_metal_receipt_record($date);
@@ -72,6 +72,6 @@ class Telegram_production_summary extends BaseController {
     //Nikhil Ranawat: 1056863449
 
     $this->bot->sendMessage('712491427', $message);      
-    //$this->bot->sendMessage('1056863449', $message);
+    $this->bot->sendMessage('1056863449', $message);
   }
 }
