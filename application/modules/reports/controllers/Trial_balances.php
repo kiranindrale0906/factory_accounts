@@ -6,7 +6,7 @@ class Trial_balances extends Ledgers {
 
   public function __construct() {
     parent::__construct();
-    $this->load->model(array('masters/account_model','masters/company_model', 
+    $this->load->model(array('masters/account_model','masters/company_model', 'transactions/ledger_model',
                              'transactions/metal_receipt_voucher_model', 'transactions/metal_issue_voucher_model', 
                              'ac_vouchers/voucher_model', 'argold/chitti_model'));
   }
@@ -16,6 +16,19 @@ class Trial_balances extends Ledgers {
 
     //$this->metal_receipt_voucher_model->delete_vodator_records(date('Y-m-d'));
     //$this->metal_issue_voucher_model->delete_vodator_records(date('Y-m-d'));
+
+    $incorrect_vadotar_vouchers = $this->voucher_model->get('receipt_type, site_name, voucher_date, sum(credit_weight) as credit_weight, sum(debit_weight) as debit_weight',
+                                         array('receipt_type' => array('Alloy Vodator', 'GPC Vodator', 'Stone Vatav')),
+                                         array(), array('group_by' => 'receipt_type, site_name, voucher_date',
+                                                        'having' => 'credit_weight != debit_weight'));
+    foreach($incorrect_vadotar_vouchers as $incorrect_vadotar_voucher) {
+      $this->voucher_model->delete('', array('receipt_type' => $incorrect_vadotar_voucher['receipt_type'],
+                                             'site_name' => $incorrect_vadotar_voucher['site_name'],
+                                             'voucher_date' => $incorrect_vadotar_voucher['voucher_date']));
+      $this->ledger_model->delete('', array('parent_id not in (select id from ac_vouchers)' => NULL));
+    }
+
+
     $records = json_decode(curl_post_request($url));
     if (!empty($records)) {
       $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator, 'Alloy Vodator', 'AR Gold');
@@ -27,6 +40,7 @@ class Trial_balances extends Ledgers {
     if (!empty($records)) {
       $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator, 'Alloy Vodator', 'ARF');
       $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator, 'GPC Vodator', 'ARF');
+      $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav, 'Stone Vatav', 'ARF');
     }
 
     $url = API_ARC_BASE_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
@@ -79,6 +93,25 @@ class Trial_balances extends Ledgers {
     $this->data['trial_balance'] = $this->model->get($select, array(), array() , 
                                                       array('group_by'=>'account_name,',
                                                             'order_by'=>'account_name asc'));
+    $loss_account = array('account_name' => 'LOSS ACCOUNT',
+                          'fine' => 0, 'vadotar' => 0, 'amount' => 0);
+    $this->data['loss_account_records'] = array();
+    $loss_account_names = array('AR Gold Alloy Vodator', 'ARF Alloy Vodator', 'ARC Alloy Vodator',
+                          'AR Gold GPC Vodator', 'ARF GPC Vodator', 'ARC GPC Vodator',
+                          'AR Gold Stone Vatav', 'ARF Stone Vatav', 'ARC Stone Vatav',
+                          'HCL Loss', 'STONE VATAV ARF', 'TOUNCH LOSS FINE ARF', 
+                          'Loss Account', 'Tounch & Castic Dep.Loss', 'Tounch Loss Fine',
+                          'MEENA LOSS ARF', 'GPC Powder', 'Gpc Powder ARF', 'SISMA GHISS LOSS');
+    foreach($this->data['trial_balance'] as $index => $trail_balance_record) {
+      if (in_array($trail_balance_record['account_name'], $loss_account_names)) {
+        $loss_account['fine'] += $trail_balance_record['fine'];
+        // $loss_account['vadotar'] += $trail_balance_record['vadotar'];
+        // $loss_account['amount'] += $trail_balance_record['amount']; 
+        $this->data['loss_account_records'][] = $trail_balance_record;
+        unset($this->data['trial_balance'][$index]);
+      }
+    }
+    $this->data['trial_balance'][] = $loss_account;
     
     // $query = $this->db->query("select account_name, sum(fine) as fine, sum(vadotar) as vadotar, sum(amount) as amount
     //           from (

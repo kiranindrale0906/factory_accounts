@@ -5,7 +5,7 @@
   $sales_amount = $profit_and_loss['sales_account']['amount'];
   $sales_rate = -1 * $profit_and_loss['sales_account']['amount'] / $profit_and_loss['sales_account']['fine'];
   $sales_fine = -1 * $profit_and_loss['sales_account']['fine'];
-  $main_vadotar_fine = $profit_and_loss['main_vadotar']['fine'];
+  $main_vadotar_fine = @$profit_and_loss['main_vadotar']['fine'];
   $pending_vadotar_fine = -1 * $profit_and_loss['pending_vadotar'];
   $exchange_rate_diff = $purchase_rate - $sales_rate;
   $closing_fine = $purchase_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_fine;
