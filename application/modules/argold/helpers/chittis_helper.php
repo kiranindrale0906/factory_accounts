@@ -82,6 +82,7 @@ function get_field_attribute($table, $field) {
     'sgst_amount'   => array('SGST', '', TRUE, '', TRUE),
     'cgst_amount'   => array('CGST', '', TRUE, '', TRUE),
     'taxable_amount'   => array('Taxable Amount', '', TRUE, '', TRUE),
+    'manual_taxable_amount'   => array('Manual Taxable Amount', '', TRUE, '', TRUE),
 
   );
   
