@@ -4,6 +4,7 @@
       <tr>
         <th></th>
         <th class="">Date</th>
+        <th class="text-right">Site Name</th>
         <th class="text-right">Total Out Weight</th>
         <th class="text-right">Receipt  Weight</th>
         <th class="text-right">Receipt Melting</th>
@@ -28,6 +29,7 @@
       <tr>
         <td><?=$index+1?></td>
         <td><?=date('d M Y',strtotime($loss_out_detail['created_at']));?></td>
+        <td><?=$loss_out_detail['site_name'];?></td>
         <td class="text-right"><?=four_decimal($loss_out_detail['narration']) ?></td>
         <td class="text-right"><?= $loss_out_detail['credit_weight']; ?></td>
         <td class="text-right"><?= $loss_out_detail['purity'] ?></td>
