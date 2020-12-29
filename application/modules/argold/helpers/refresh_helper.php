@@ -43,6 +43,8 @@ function list_settings() {
     array("Fine", "fine", FALSE, "fine", FALSE, FALSE),
     array("Factory Purity", "factory_purity", FALSE, "factory_purity", FALSE, FALSE),
     array("Factory Fine", "factory_fine", FALSE, "fine", FALSE, FALSE),
+    array("Amount", "credit_amount", FALSE, "credit_amount", FALSE, FALSE),
+    array("Site Name", "site_name", FALSE, "site_name", FALSE, FALSE),
     array("Action", "action", FALSE, "action", FALSE, FALSE),
   );
 }
@@ -68,6 +70,8 @@ function get_field_attribute($table, $field) {
     'factory_fine'          => array('Factory Fine', '', TRUE, '', TRUE),
     'purity'          => array('Purity', '', TRUE, '', TRUE),
     'factory_purity'          => array('Factory Purity', '', TRUE, '', TRUE),
+    'site_name'          => array('Site Name', 'Select Site Name', TRUE, '', TRUE),
+    'rate'          => array('Rate', '', TRUE, '', TRUE),
    );
   $attributes['refresh_details'] = array(
     'refresh_id' => array('', '', TRUE, '', TRUE),
@@ -76,7 +80,7 @@ function get_field_attribute($table, $field) {
     'factory_fine' => array('', '', TRUE, '', TRUE),
     'purity' => array('', '', TRUE, '', TRUE),
     'factory_purity' => array('', '', TRUE, '', TRUE),
-    'item_name' => array('', '', TRUE, '', TRUE),
+    'item_name' => array('', 'select', TRUE, '', TRUE),
   );
  
   return $attributes[$table][$field];
@@ -89,8 +93,11 @@ function get_row_actions($row, $url, $select_url, $filter) {
                            'url' => ADMIN_PATH.$controller.'/view/'.$row['id'],
                            'confirm_message' => "",
                            'class' => 'green');
+  $actions["Edit"] = array('request' => "http", 
+                           'url' => ADMIN_PATH.$controller.'/edit/'.$row['id'],
+                           'confirm_message' => "",
+                           'class' => '');
   if($row['metal_receipt_id']==0){
-
     $actions["Create metal receipt"] = array('request' => "http", 
                            'url' => ADMIN_PATH.'transactions/metal_receipt_vouchers?refresh_id='.$row['id'],
                            'confirm_message' => "",

@@ -37,6 +37,9 @@
                   array('id' => 'AR Gold Chain Receipt',          'name' => 'AR Gold Chain Receipt'),
                   array('id' => 'ARF Chain Receipt',              'name' => 'ARF Chain Receipt'),
                   array('id' => 'ARC Chain Receipt',              'name' => 'ARC Chain Receipt'),
+                  array('id' => 'AR Gold Internal Receipt',          'name' => 'AR Gold Internal Receipt'),
+                  array('id' => 'ARF Internal Receipt',              'name' => 'ARF Internal Receipt'),
+                  array('id' => 'ARC Internal Receipt',              'name' => 'ARC Internal Receipt'),
                   array('id' => 'AR Gold Finished Goods Receipt', 'name' => 'AR Gold Finished Goods Receipt'),
                   array('id' => 'ARF Finished Goods Receipt',     'name' => 'ARF Finished Goods Receipt'),
                   array('id' => 'ARC Finished Goods Receipt',     'name' => 'ARC Finished Goods Receipt'),
@@ -60,6 +63,16 @@
   function get_transaction_type() {
     return array( array('id' => 'Cash', 'name' => 'Cash'),
                   array('id' => 'Bill', 'name' => 'Bill'));
+  }
+
+  function get_sale_types() {
+    return array( array('id' => 'Sale', 'name' => 'Sale'),
+                  array('id' => 'Labour', 'name' => 'Labour'));
+  }
+
+  function get_gold_rate_purities() {
+    return array( array('id' => '100', 'name' => '100'),
+                  array('id' => '99.5', 'name' => '99.5'));
   }
 
   function get_daily_drawer_receipt_type(){
@@ -100,6 +113,7 @@
                  array('id'=>'Shook','name'=>'S'),
                  array('id'=>'ARF KDM','name'=>'ARF KDM'),
                  array('id'=>'Cap','name'=>'Cap'),
+                 array('id'=>'Kala Mani','name'=>'Kala Mani'),
                  array('id'=>'GPC Powder','name'=>'GPC Powder'));
   }
 
@@ -123,3 +137,21 @@
 
   }
 
+  function get_site_url($site_name) {
+    if ($site_name=='AR Gold') return API_ARG_BASE_PATH;
+    elseif ($site_name=='ARF') return API_ARF_BASE_PATH;
+    elseif ($site_name=='ARC') return API_ARC_BASE_PATH;
+  }
+
+  
+function remove_duplicates_in_string($str) {
+  $words  = explode(",", $str);
+  $sanitized_words = array();
+  foreach ($words as $word) {
+    if (trim($word) == '') continue;
+    if (trim($word) == '0') continue;
+    $sanitized_words[] = trim($word);
+  }
+  $unique_words = array_unique($sanitized_words);
+  return implode(', ', $unique_words);
+}

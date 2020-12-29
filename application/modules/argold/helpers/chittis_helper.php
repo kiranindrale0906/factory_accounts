@@ -37,11 +37,16 @@ function getTableSettings() {
 function list_settings() {
   return array(
     array("Id", "id", FALSE, "id", FALSE, FALSE),
-    array("Date", "created_at", FALSE, "created_at", FALSE, FALSE,'DATE_FORMAT(created_at, "%d-%m-%Y") as created_at'),
+    array("Date", "date", FALSE, "date", FALSE, FALSE,'DATE_FORMAT(date, "%d-%m-%Y") as date'),
+    
+    // array("Packet No", "packet_no", TRUE, "packet_no", TRUE, TRUE),
+    array("Factory", "site_name", FALSE, "site_name", FALSE, FALSE),
     array("Account Name", "account_name", FALSE, "account_name", FALSE, FALSE),
     array("Weight", "weight", FALSE, "weight", FALSE, FALSE),
     // array("Purity", "purity", FALSE, "purity", FALSE, FALSE),
     array("Fine", "fine", FALSE, "fine", FALSE, FALSE),
+    array("Issue Fine", "factory_fine", FALSE, "factory_fine", FALSE, FALSE),
+    array("Amount", "debit_amount", FALSE, "debit_amount", FALSE, FALSE),
     array("Action", "action", FALSE, "action", FALSE, FALSE),
   );
 }
@@ -62,11 +67,25 @@ function get_field_attribute($table, $field) {
 
   $attributes['chittis'] = array(
     'id'            => array('', '', TRUE, '', TRUE),
-    'account_name'            => array('Account Name', '', TRUE, '', TRUE),
-    'chitti_id'          => array('Chitti', 'Enter Chitti.', TRUE, '', TRUE),
-    'purity'          => array('Purity', 'Select Purity.', TRUE, '', TRUE),
+    'site_name'     => array('Factory Name', '', TRUE, '', TRUE),
+    'account_name'  => array('Account Name', '', TRUE, '', TRUE),
+    'chitti_id'     => array('Chitti', 'Enter Chitti.', TRUE, '', TRUE),
+    'purity'        => array('Purity', 'Select Purity.', TRUE, '', TRUE),
     'date'          => array('Date', 'Enter Date.', TRUE, '', TRUE),
-   );
+    'created_at'    => array('Created At', 'Enter Date.', TRUE, '', TRUE),
+    'no_of_packets' => array('No. of Packets', '', TRUE, '', TRUE),
+    'packet_gross_weight' => array('Packet Weight', '', TRUE, '', TRUE),
+    'sale_type'     => array('Sale Type', '', TRUE, '', TRUE),
+    'rate'          => array('Rate', '', TRUE, '', TRUE),
+    'credit_weight' => array('Credit Weight', '', TRUE, '', TRUE),
+    'debit_amount'  => array('Debit Amount', '', TRUE, '', TRUE),
+    'sgst_amount'   => array('SGST', '', TRUE, '', TRUE),
+    'cgst_amount'   => array('CGST', '', TRUE, '', TRUE),
+    'taxable_amount'   => array('Taxable Amount', '', TRUE, '', TRUE),
+    'manual_taxable_amount'   => array('Manual Taxable Amount', '', TRUE, '', TRUE),
+
+  );
+  
   $attributes['chitti_details'] = array(
     'chitti_id' => array('', '', TRUE, '', TRUE),
   );
@@ -81,11 +100,18 @@ function get_row_actions($row, $url, $select_url, $filter) {
                            'url' => ADMIN_PATH.$controller.'/view/'.$row['id'],
                            'confirm_message' => "",
                            'class' => 'btn-sm btn_green');
-
-  // $actions["Delete"] = array('request' => "http",
-  //                              'url' => ADMIN_PATH.$controller.'/delete/'.$row['id'],
-  //                              'confirm_message' => "Do you want to delete",
-  //                              'js_function' => "",
-  //                              'class' => 'text-danger text-uppercase');
+  $actions["Edit"] = array('request' => "http", 
+                           'url' => ADMIN_PATH.$controller.'/edit/'.$row['id'],
+                           'confirm_message' => "",
+                           'class' => 'btn-sm');
+  $actions["detail"] = array('request' => "http", 
+                           'url' => ADMIN_PATH.$controller.'/view/'.$row['id'].'?detail=1',
+                           'confirm_message' => "",
+                           'class' => 'btn-sm');
+  $actions["Delete"] = array('request' => "http",
+                               'url' => ADMIN_PATH.$controller.'/delete/'.$row['id'],
+                               'confirm_message' => "Do you want to delete",
+                               'js_function' => "",
+                               'class' => 'text-danger text-uppercase');
   return $actions;
 }

@@ -8,22 +8,15 @@ class Client_metal_receipt_vouchers extends Core_metal_receipt_vouchers {
   }
 
   public function _get_form_data() {
-    $company_name = $this->company_model->find('name', array('id' => $_SESSION['company_id']))['name'];
-    $re = $this->company_model->find('name', array('id' => $_SESSION['company_id']))['name'];
+    $company_id=!empty($_SESSION['company_id'])?$_SESSION['company_id']:1;
+    $company_name = $this->company_model->find('name', array('id' => $company_id))['name'];
+    $re = $this->company_model->find('name', array('id' => $company_id))['name'];
+    $this->data['record']['parent_id']=!empty($_GET['parent_id'])?$_GET['parent_id']:0;
   	$this->data['account_names_for_metal_issue'] = array(array('id' => '', 'name' => ''));
 
-    //if ($company_name != 'AR Gold')
-    //  $this->data['account_names_for_metal_issue'][] = array('id' => 'AR Gold', 'name' => 'AR Gold');
-
-    //if ($company_name != 'ARC')
-      $this->data['account_names_for_metal_issue'][] = array('id' => 'ARC', 'name' => 'ARC');
-
-    //if ($company_name != 'ARF')
-      $this->data['account_names_for_metal_issue'][] = array('id' => 'ARF', 'name' => 'ARF'); 
-      $this->data['account_names_for_metal_issue'][] = array('id' => 'ARF Software', 'name' => 'ARF Software'); 
-    
-    //$this->data['account_names_for_metal_issue'][] = array('id' => 'ARC Finished Goods', 'name' => 'ARC Finished Goods');
-    //$this->data['account_names_for_metal_issue'][] = array('id' => 'ARF Finished Goods', 'name' => 'ARF Finished Goods');   
+    $this->data['account_names_for_metal_issue'][] = array('id' => 'AR Gold Software', 'name' => 'AR Gold Software');
+    $this->data['account_names_for_metal_issue'][] = array('id' => 'ARC Software', 'name' => 'ARC Software');
+    $this->data['account_names_for_metal_issue'][] = array('id' => 'ARF Software', 'name' => 'ARF Software'); 
 
     $this->data['record']['receipt_type']=!empty($_GET['receipt_type'])?$_GET['receipt_type']:"";
     $this->data['refresh_id']=!empty($_GET['refresh_id'])?$_GET['refresh_id']:"";
@@ -37,8 +30,8 @@ class Client_metal_receipt_vouchers extends Core_metal_receipt_vouchers {
     }
     parent::_get_form_data(); 
   }
-  public function _after_save($formdata, $action) {
 
+  public function _after_save($formdata, $action) {
     $this->data['ajax_success_function'] = 'window.location.replace("'.ADMIN_PATH.'transactions/metal_receipt_vouchers'.'")';
     return $formdata;
   }

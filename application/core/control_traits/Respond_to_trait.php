@@ -112,6 +112,26 @@ trait Respond_to_trait {
     } else 
       redirect(base_url($this->router->module.'/'.$this->router->class));
   }
+  private function _respond_to_failure_on_delete($record) {
+    if ($this->is_ajax() || @$this->data['ajax']) {
+      $ajax_response = array('status'=>'error',
+                             'message' => 'Record could not be deleted',
+                             'js_function'=> @$this->data['ajax_delete_failure_function'],
+                             'data'=>$this->get_ajax_delete_data($record));
+      echo json_encode($ajax_response);
+      exit();
+    } else if ($this->is_api_request()) {
+      $ajax_response = array('status'=>'failure',
+                             'data'=> $record);
+      echo json_encode($ajax_response);
+      exit();
+    } else {
+      if (empty($this->data['redirect_url']))
+        redirect(base_url($this->router->module.'/'.$this->router->class));
+      else
+        redirect($this->data['redirect_url']);
+    }
+  }
 
   public function _respond_to_record_not_found($data) {
     if ($this->is_ajax() || @$data['ajax'] || $this->is_api_request()) {

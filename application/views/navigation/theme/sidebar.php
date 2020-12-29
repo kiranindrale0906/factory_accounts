@@ -30,17 +30,21 @@
                                            'transactions/cash_receipt_vouchers' => 'Cash Voucher',
                                             // 'transactions/bank_receipt_vouchers' => 'Bank Voucher',
                                             'transactions/metal_receipt_vouchers' => 'Metal Voucher',
+                                            
+                                            //'transactions/metal_receipt_voucher_details' => 'Metal Receipt Details',
+                                            //'transactions/metal_issue_voucher_details' => 'Metal Issue Details',
                                             'argold/chittis' => 'Chitti',
                                             'argold/refresh' => 'Refresh',
+                                            'transactions/loss_outs' => 'Loss Out',
 
                                            //  'transactions/sales_vouchers' => 'Sales Voucher',//
                                            //  'transactions/purchase_vouchers' => 'Purchase Voucher',//
                                            //  'transactions/journal_vouchers' => 'Journal Voucher',//
                                            //  'transactions/contra_vouchers' => 'Contra Voucher',//
-                                           // 'transactions/rate_cut_purchase_price_receipt_vouchers' => 'Rate Cut Purchase Price Voucher',//
-                                           // 'transactions/rate_cut_purchase_weight_receipt_vouchers' => 'Rate Cut Purchase Weight Voucher',//
-                                           // 'transactions/rate_cut_booking_price_receipt_vouchers' => 'Rate Cut Booking Price Voucher',//
-                                           // 'transactions/rate_cut_booking_weight_receipt_vouchers' => 'Rate Cut Booking Weight Voucher',//
+                                            'transactions/rate_cut_receipt_vouchers' => 'Bhav Cut Voucher',
+                                            // 'transactions/rate_cut_issue_vouchers' => 'Bhav Cut Issue Voucher',
+                                            // 'transactions/rate_cut_booking_price_receipt_vouchers' => 'Bhav Cut Booking Price Voucher',
+                                            // 'transactions/rate_cut_booking_weight_receipt_vouchers' => 'Bhav Cut Booking Weight Voucher',
 
                                             // 'transactions/rate_cut_booking_price_issue_voucher' => 'Rate Cut Booking Price Issue Voucher',
                                             // 'transactions/rate_cut_booking_weight_issue_voucher' => 'Rate Cut Booking Weight Issue Voucher',
@@ -73,7 +77,8 @@
                                         'reports/vadotar_reports' => 'Vadotar Report',
                                         'reports/rojmel_reports' => 'Rojmel Report',
                                         'reports/production_summary' => 'Production Summary',
-                                        'reports/bw_accounts' => 'Bw Accounts'
+                                        'reports/bw_accounts' => 'Bw Accounts',
+                                        'reports/loss_accounts' => 'Loss Accounts'
                                         ),
                     //'Interests' => array('transactions/interest_issue_vouchers'=>'Interest Issue Voucher','transactions/interest_receipt_vouchers'=>'Interest Receipt Voucher'),
                     'Registers'   => array(
@@ -86,8 +91,7 @@
                       'registers/rate_cut_purchase_weight_registers' => 'Rate Cut Purchase Weight Register',
                       'registers/rate_cut_booking_value_registers' => 'Rate Cut Booking Value Register',
                       'registers/rate_cut_booking_weight_registers' => 'Rate Cut Booking Weight Register',
-                      'registers/expense_registers' => 'Expense Registers',
-                                        ),
+                      'registers/expense_registers' => 'Expense Registers'),
                     
                     'Others'    => array('others/account_wise_details'=>'Account Wise Details',
                                         'others/categories'=>'Category',

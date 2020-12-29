@@ -9,14 +9,8 @@
   $checked = (!empty($record['has_hallmark'])) ? 'checked' : '';
 
   $readonly='';
-  if ($this->router->class == "rate_cut_purchase_price_issue_vouchers"
-      || $this->router->class == "rate_cut_purchase_price_receipt_vouchers"
-      || $this->router->class == "rate_cut_purchase_weight_issue_vouchers"
-      || $this->router->class == "rate_cut_purchase_weight_receipt_vouchers"
-      || $this->router->class == "rate_cut_booking_price_issue_vouchers"
-      || $this->router->class == "rate_cut_booking_price_receipt_vouchers"
-      || $this->router->class == "rate_cut_booking_weight_issue_vouchers"
-      || $this->router->class == "rate_cut_booking_weight_receipt_vouchers") {
+  if (   $this->router->class == "rate_cut_issue_vouchers"
+      || $this->router->class == "rate_cut_receipt_vouchers") {
     $readonly=true;
   }
 
@@ -30,6 +24,7 @@
       load_field('hidden', array('field' => 'id'));
     endif;
       load_field('hidden', array('field' => 'refresh_id','name'=>'refresh_id','id'=>'refresh_id','value'=>@$refresh_id));
+      load_field('hidden', array('field' => 'parent_id','id'=>'parent_id'));
   ?>
 
   <?php load_view('ac_vouchers/ac_vouchers/fields/sales_voucher_number');
@@ -65,12 +60,6 @@
   </div> 
 
   <div class="row"> 
-    <?php load_view('ac_vouchers/ac_vouchers/fields/gold_rate'); 
-          load_view('ac_vouchers/ac_vouchers/fields/rate'); 
-          load_view('ac_vouchers/ac_vouchers/fields/gold_rate_purity'); ?>
-  </div>  
-
-  <div class="row"> 
     <?php load_view('ac_vouchers/ac_vouchers/fields/payment_term'); ?>   
   </div>  
 
@@ -89,8 +78,8 @@
   </div>        
   
   <div class="row">  
-    <?php load_view('ac_vouchers/ac_vouchers/fields/credit_amount', array('readonly' => $readonly));  
-          load_view('ac_vouchers/ac_vouchers/fields/debit_amount', array('readonly' => $readonly));
+    <?php load_view('ac_vouchers/ac_vouchers/fields/credit_amount', array('readonly' => ''));  
+          load_view('ac_vouchers/ac_vouchers/fields/debit_amount', array('readonly' => ''));
           load_view('ac_vouchers/ac_vouchers/fields/amount');
           load_view('ac_vouchers/ac_vouchers/fields/cash_amount');
           load_view('ac_vouchers/ac_vouchers/fields/cash_bill'); ?>   
@@ -98,8 +87,8 @@
 
   <div class="row">   
     <?php load_view('ac_vouchers/ac_vouchers/fields/cheque_number');
-          load_view('ac_vouchers/ac_vouchers/fields/debit_weight', array('readonly' => $readonly));  
-          load_view('ac_vouchers/ac_vouchers/fields/credit_weight', array('readonly' => $readonly));
+          load_view('ac_vouchers/ac_vouchers/fields/debit_weight', array('readonly' => ''));  
+          load_view('ac_vouchers/ac_vouchers/fields/credit_weight', array('readonly' => ''));
           load_view('ac_vouchers/ac_vouchers/fields/interest_per_day'); ?>
     <?php
       if ($this->router->class == 'metal_receipt_vouchers') { 
@@ -123,9 +112,18 @@
       }
       load_view('ac_vouchers/ac_vouchers/fields/lumpsum_amount');
       load_view('ac_vouchers/ac_vouchers/fields/transaction_type'); 
-      load_view('ac_vouchers/ac_vouchers/fields/description');  
+      
     ?>
   </div>  
+
+  <div class="row"> 
+    <?php load_view('ac_vouchers/ac_vouchers/fields/sale_type'); 
+          load_view('ac_vouchers/ac_vouchers/fields/gold_rate'); 
+          load_view('ac_vouchers/ac_vouchers/fields/rate'); 
+          load_view('ac_vouchers/ac_vouchers/fields/gold_rate_purity'); 
+          load_view('ac_vouchers/ac_vouchers/fields/description');  ?>
+  </div>  
+
 
   <div class="row">   
     <?php load_view('ac_vouchers/ac_vouchers/fields/total'); ?>

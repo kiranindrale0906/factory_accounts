@@ -10,6 +10,7 @@ class Rojmel_reports extends Ledgers {
   }
 
   public function index() {
+    $this->data['report_type'] = 'Rojmel Report';
     $this->_get_form_data();
     $this->load->render($this->router->class."/index",$this->data);
   }

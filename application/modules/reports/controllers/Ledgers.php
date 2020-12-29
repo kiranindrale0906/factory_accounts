@@ -3,13 +3,26 @@
 class Ledgers extends BaseController {
 	public function __construct() {
   	parent::__construct();
+    $this->load->model(array('transactions/ledger_model'));
 	}
 
-  protected function get_datewise_ledger_records($period = 'date') {
-    $this->data['period'] = $period;
-    if ($period == 'date') $period_select = 'date_format(voucher_date,"%Y-%m-%d")';
-    elseif ($period == 'month') $period_select = 'date_format(voucher_date,"%Y-%m")';
-    elseif ($period == 'week') {
+  protected function get_datewise_ledger_records() {
+    $this->data['site_name']            = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'All';
+    $this->data['period']               = (!empty($_GET['period'])) ? $_GET['period'] : 'date';
+    $this->data['detail']               = (!empty($_GET['detail'])) ? $_GET['detail'] : 'yes';
+    $this->data['group']                = (!empty($_GET['group'])) ? $_GET['group'] : '';
+    $this->data['account_id']           = (!empty($_GET['account_id'])) ? $_GET['account_id'] : 0;
+    $this->data['record']['account_id'] = (!empty($_GET[$this->router->class]['account_id'])) ? $_GET[$this->router->class]['account_id'] : $this->data['account_id'];
+    if (empty($this->data['account_id'])) $this->data['account_id'] = $this->data['record']['account_id'];
+
+    if ($this->data['period'] == 'date' && $this->data['report_type'] == 'Account Ledger')
+      $this->data['group'] = 'date';
+    elseif ($this->data['report_type'] == 'Rojmel Report')
+      $this->data['group'] = 'id';
+
+    if     ($this->data['period'] == 'date')  $period_select = 'date_format(voucher_date,"%Y-%m-%d")';
+    elseif ($this->data['period'] == 'month') $period_select = 'date_format(voucher_date,"%Y-%m")';
+    elseif ($this->data['period'] == 'week') {
       $period_from_date = 'DATE_SUB(
                                 DATE_ADD(MAKEDATE(date_format(voucher_date,"%Y"), 1), INTERVAL week(voucher_date) WEEK),
                                 INTERVAL WEEKDAY(
@@ -21,78 +34,84 @@ class Ledgers extends BaseController {
                                    DATE_ADD(MAKEDATE(date_format(voucher_date,"%Y"), 1), INTERVAL week(voucher_date) WEEK)
                                 ) -7 DAY)';
       $period_select = 'CONCAT('.$period_from_date.' , " - ", '.$period_to_date.')';
-      //$week_start_date = 'MAKEDATE(date_format(voucher_date,"%Y"), week(voucher_date))';
-      //$week_end_date = 'DATE_ADD(MAKEDATE(date_format(voucher_date,"%Y"), week(voucher_date)), INTERVAL 1 WEEK)';
-      //$period_select = 'CONCAT("Week: ", ' .$week_start_date . ')';
-      // /$period_select = 'week(voucher_date)';
     };
 
-    $account_id = (!empty($_GET[$this->router->class]['account_id'])) ? $_GET[$this->router->class]['account_id'] : 0;
     $where = array();
-    if(!empty($account_id)) {
-      $where['account_id'] = $account_id;
-      $this->data['record']['account_id'] = $account_id;
-    }
-
-    if ($this->router->class == 'vadotar_reports') {
-      $where['purity != factory_purity'] = NULL;
-      if ($this->data['company_name'] == 'AR Gold') {
-        $where['where_not_in'] = array('receipt_type' => array("'ARF Finished Goods'", "'ARC Finished Goods'", 
-                                                               "'ARF Refresh'", "'ARC Refresh'", 
-                                                               "'ARF Software Finished Goods'"));
-      } elseif ($this->data['company_name'] == 'ARF') {
-         $where['where_in'] = array('receipt_type' => array("'ARF Finished Goods'", "'ARF Refresh'", "'ARF Software Finished Goods'"));
-      } elseif ($this->data['company_name'] == 'ARC') {
-        $where['where_in'] = array('receipt_type' => array("'ARC Finished Goods'", "'ARC Refresh'"));
-      }
-    } 
-
-    if (!isset($this->data['group']) || $this->data['group']=='') {
-      $this->data['group']='';
-      $select = 'receipt_type, '.$period_select.' as voucher_date, 
-                 date_format(voucher_date,"%Y-%m-%d") as str_voucher_date, voucher_number,
-                 account_name, voucher_type, voucher_number, credit_amount, debit_amount, 
-                 credit_weight, debit_weight, purity_margin, purity, factory_purity, narration, description';
-    } else {
-      $this->data['group'] = 'voucher_date';
-      $select = '"" as receipt_type, '.$period_select.' as voucher_date, 
-                 date_format(voucher_date,"%Y-%m-%d") as str_voucher_date, "" as voucher_number,
-                 "" as account_name, "" as voucher_type, "" as voucher_number, 
-                 sum(credit_amount) as credit_amount, sum(debit_amount) as debit_amount, 
-                 sum(credit_weight) as credit_weight, sum(debit_weight) as debit_weight, 
-                 0 as purity_margin, 
-                 sum((credit_weight+debit_weight) * purity) /  sum(credit_weight+debit_weight)  as purity, 
-                 sum((credit_weight+debit_weight) * factory_purity) /  sum(credit_weight+debit_weight)  as factory_purity, ""  as narration, "" as description';
-    }
-
-    $where_issue = array_merge($where, array('(credit_weight != 0 or credit_amount != 0)' => NULL));
-    $where_receipt = array_merge($where, array('(debit_weight != 0 or debit_amount != 0)' => NULL));
-
-    if (isset($this->data['report_type']) && $this->data['report_type'] == 'production') {
-      $where_issue = array_merge($where_issue, array('account_name != ' => 'VADOTAR'));
-      $where_receipt = array_merge($where_receipt, array('account_name != ' => 'VADOTAR'));
-    }
-
-    $issues = $this->model->get($select, $where_issue ,array(), array('order_by'=>'str_voucher_date asc', 'group_by' => $this->data['group']));
-    $receipts = $this->model->get($select, $where_receipt ,array(), array('order_by'=>'str_voucher_date asc', 'group_by' => $this->data['group']));
+    if(!empty($this->data['record']['account_id']))        $where['account_id'] = $this->data['record']['account_id'];
+    if (   !empty($this->data['site_name']) 
+        && $this->data['site_name'] != 'All')              $where['site_name'] = $this->data['site_name'];
+    if (   $this->data['report_type'] == 'Vadotar Report'
+        || $this->data['report_type'] == 'Production Report')    $where['purity != factory_purity'] = NULL;
+    if ($this->data['report_type'] == 'Production Report') $where['account_name != '] = 'VADOTAR';
     
+    if ($this->data['report_type'] == 'Account Ledger' && $this->data['group'] == 'date')
+      $this->data['group'] = 'voucher_type, voucher_date, chitti_no, receipt_type, account_name';      
+    
+    if ($this->data['report_type'] == 'Account Ledger' || $this->data['report_type'] == 'Rojmel Report') {
+      $receipt_issue_select = 'receipt_type, '.$period_select.' as voucher_date, 
+                               date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
+                               account_name, voucher_type, 
+                               concat(voucher_number, ", ") as voucher_number, 
+                               sum(credit_amount) as credit_amount, 
+                               sum(debit_amount) as debit_amount, 
+                               sum(credit_weight) as credit_weight, 
+                               sum(debit_weight) as debit_weight,
+                               sum(fine) as fine,
+                               sum(factory_fine) as factory_fine,
+                               0 as purity_margin, 
+                               sum((credit_weight+debit_weight) * purity) / sum(credit_weight+debit_weight) as purity, 
+                               sum((credit_weight+debit_weight) * factory_purity) / sum(credit_weight+debit_weight) as factory_purity, 
+                               concat(narration, " ,") as narration, concat(description, " ,") as description, 
+                               chitti_id as chitti_no';
+    } else {
+      //$this->data['group'] = 'voucher_date';
+      $receipt_issue_select = '"" as receipt_type, '.$period_select.' as voucher_date, 
+                              date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
+                              "" as account_name, "" as voucher_type, "" as voucher_number, 
+                              sum(credit_amount) as credit_amount, 
+                              sum(debit_amount) as debit_amount, 
+                              sum(credit_weight) as credit_weight, 
+                              sum(debit_weight) as debit_weight, 
+                              sum(fine) as fine,
+                              sum(factory_fine) as factory_fine,
+                              0 as purity_margin, 
+                              sum((credit_weight+debit_weight) * purity) /  sum(credit_weight+debit_weight)  as purity, 
+                              sum((credit_weight+debit_weight) * factory_purity) /  sum(credit_weight+debit_weight)  as factory_purity,
+                              ""  as narration, "" as description, 
+                              "" as chitti_no';       
+    }
+
+    $where_issue   = array_merge($where, array('(credit_weight != 0 or credit_amount != 0)' => NULL));
+    $where_receipt = array_merge($where, array('(debit_weight != 0 or debit_amount != 0)'   => NULL));
+
+    $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(), array('order_by'=>'chitti_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
+    $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(), array('order_by'=>'parent_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
+
     $issue_voucher_dates = array_column($issues, 'voucher_date');
     $receipt_voucher_dates = array_column($receipts, 'voucher_date');
     $this->data['voucher_dates'] = array_values(array_unique(array_merge($issue_voucher_dates, $receipt_voucher_dates)));
     asort($this->data['voucher_dates']);
   
-    $this->data['issues'] = $this->get_records_by_created_date($issues);
+    $this->data['issues']   = $this->get_records_by_created_date($issues);
     $this->data['receipts'] = $this->get_records_by_created_date($receipts);
-    $total_issue = $this->get_total_by_created_date($this->data['issues'], 'issue', array());
-    $total_receipt_issue = $this->get_total_by_created_date($this->data['receipts'], 'receipt', $total_issue);      
-    //pd($total_receipt_issue);
-    $this->data['total'] = $this->set_index_for_dates($total_receipt_issue);
 
-    if (isset($this->data['report_type']) && $this->data['report_type'] == 'production') {
+    $this->data['day_total'] = $this->set_index_for_dates();
+    $this->get_day_total($this->data['issues']);
+    $this->get_day_total($this->data['receipts']);      
+    
+    $this->data['day_balance'] = $this->set_index_for_dates();
+    $this->get_day_balance();   
+
+    $this->data['opening']   = $this->set_index_for_dates();
+    $this->data['balance']   = $this->set_index_for_dates();
+    
+    if (isset($this->data['report_type']) && $this->data['report_type'] == 'Production Report') {
       //do not compute opening / balance
     }
-    else
-      $this->get_balance_by_created_date();
+    else {
+      $this->get_balance();
+      $this->get_closing();
+    }
   }
 
   private function get_records_by_created_date($records) {
@@ -104,140 +123,145 @@ class Ledgers extends BaseController {
     return $records_by_created_date;
   }
 
-  private function set_index_for_dates($total) {
+  private function set_index_for_dates() {
+    $empty_record = array();
     foreach($this->data['voucher_dates'] as $created_date) {
-      if (!isset($total[$created_date])) {
-        $total[$created_date] = array();
-        $total[$created_date]['issue'] = array();
-        $total[$created_date]['issue']['weight'] = 0;
-        $total[$created_date]['issue']['weight_difference'] = 0;
-        $total[$created_date]['issue']['fine'] = 0;
-        $total[$created_date]['issue']['factory_fine'] = 0;
-        $total[$created_date]['issue']['amount'] = 0;
-        $total[$created_date]['receipt'] = array();
-        $total[$created_date]['receipt']['weight'] = 0;
-        $total[$created_date]['receipt']['weight_difference'] = 0;
-        $total[$created_date]['receipt']['fine'] = 0;
-        $total[$created_date]['receipt']['factory_fine'] = 0;
-        $total[$created_date]['receipt']['amount'] = 0;
+      if (!isset($empty_record[$created_date])) {
+        $empty_record[$created_date] = array();
+        $empty_record[$created_date]['issue'] = array();
+        $empty_record[$created_date]['issue']['credit_weight'] = 0;
+        $empty_record[$created_date]['issue']['fine'] = 0;
+        $empty_record[$created_date]['issue']['factory_fine'] = 0;
+        $empty_record[$created_date]['issue']['credit_amount'] = 0;
+        $empty_record[$created_date]['receipt'] = array();
+        $empty_record[$created_date]['receipt']['debit_weight'] = 0;
+        $empty_record[$created_date]['receipt']['fine'] = 0;
+        $empty_record[$created_date]['receipt']['factory_fine'] = 0;
+        $empty_record[$created_date]['receipt']['debit_amount'] = 0;
       }
     }
-    return $total;
+    return $empty_record;
   }
 
-  private function get_total_by_created_date($records, $type, $total) {
+  private function get_day_total($records) {
     foreach($this->data['voucher_dates'] as $created_date) {
       if (!isset($records[$created_date])) continue;
+
       foreach($records[$created_date] as $account_name => $record) {
-          if (!isset($total[$record['voucher_date']])
-              || !isset($total[$record['voucher_date']]['issue'])) {
-            $total[$record['voucher_date']]['issue'] = array();
-            $total[$record['voucher_date']]['issue']['weight'] = 0;
-            $total[$record['voucher_date']]['issue']['weight_difference'] = 0;
-            $total[$record['voucher_date']]['issue']['fine'] = 0;
-            $total[$record['voucher_date']]['issue']['factory_fine'] = 0;
-            $total[$record['voucher_date']]['issue']['amount'] = 0;
-          }
-
-          if (!isset($total[$record['voucher_date']]['receipt'])) {
-            $total[$record['voucher_date']]['receipt'] = array();
-            $total[$record['voucher_date']]['receipt']['weight'] = 0;
-            $total[$record['voucher_date']]['receipt']['weight_difference'] = 0;
-            $total[$record['voucher_date']]['receipt']['fine'] = 0;
-            $total[$record['voucher_date']]['receipt']['factory_fine'] = 0;
-            $total[$record['voucher_date']]['receipt']['amount'] = 0;
-          }
-          
-          if($type=='issue'){
-            $total[$record['voucher_date']][$type]['weight'] += $record['credit_weight'];
-            $purity_margin=($record['purity']-$record['factory_purity'])*$record['credit_weight']/100;
-            $total[$record['voucher_date']][$type]['weight_difference'] += $purity_margin;
-            $fine=($record['credit_weight']*$record['purity'])/100;
-            $total[$record['voucher_date']][$type]['fine'] += $fine;
-            $factory_fine=($record['credit_weight']*$record['factory_purity'])/100;
-            $total[$record['voucher_date']][$type]['factory_fine'] += $factory_fine;
-            $total[$record['voucher_date']][$type]['amount'] += $record['credit_amount'];
-          }
-
-          if($type=='receipt') {
-            $total[$record['voucher_date']][$type]['weight'] += $record['debit_weight'];
-            $purity_margin = ($record['factory_purity']-$record['purity']) * $record['debit_weight'] /100; 
-            $total[$record['voucher_date']][$type]['weight_difference'] += $purity_margin;
-            $fine=($record['debit_weight']*$record['purity'])/100;
-            $total[$record['voucher_date']][$type]['fine'] += $fine;
-            $factory_fine=($record['debit_weight']*$record['factory_purity'])/100;
-            $total[$record['voucher_date']][$type]['factory_fine'] += $factory_fine;
-            $total[$record['voucher_date']][$type]['amount'] += $record['debit_amount'];
-          }
+        if ($record['credit_weight'] !=0 or $record['credit_amount'] != 0){
+          $this->data['day_total'][$record['voucher_date']]['issue']['credit_weight'] += $record['credit_weight'];
+          $this->data['day_total'][$record['voucher_date']]['issue']['fine'] += $record['fine'];
+          $this->data['day_total'][$record['voucher_date']]['issue']['factory_fine'] += $record['factory_fine'];
+          $this->data['day_total'][$record['voucher_date']]['issue']['credit_amount'] += $record['credit_amount'];
+        } else {
+          $this->data['day_total'][$record['voucher_date']]['receipt']['debit_weight'] += $record['debit_weight'];
+          $this->data['day_total'][$record['voucher_date']]['receipt']['fine'] += $record['fine'];
+          $this->data['day_total'][$record['voucher_date']]['receipt']['factory_fine'] += $record['factory_fine'];
+          $this->data['day_total'][$record['voucher_date']]['receipt']['debit_amount'] += $record['debit_amount'];
+        }
       }
     }
-    return $total;     
   }
 
-  private function get_balance_by_created_date() {
-    //foreach($this->data['total'] as $account_name => $total_record)  {
-    $total_record = $this->data['total'];
-      $previous_date = '';
-      $previous_type = '';
-      foreach($this->data['voucher_dates'] as $created_date) {
-        if ($previous_type != '') {
-          $this->data['total'][$created_date][$previous_type]['weight'] += $this->data['balance'][$previous_date][$previous_type]['weight'];
-          $this->data['total'][$created_date][$previous_type]['weight_difference'] += $this->data['balance'][$previous_date][$previous_type]['weight_difference'];
+  private function get_day_balance() {
+    foreach($this->data['voucher_dates'] as $voucher_date) {    
+      $credit_weight       = $this->data['day_total'][$voucher_date]['issue']['credit_weight'];
+      $credit_factory_fine = $this->data['day_total'][$voucher_date]['issue']['factory_fine'];
+      $credit_fine         = $this->data['day_total'][$voucher_date]['issue']['fine'];
+      $credit_amount       = $this->data['day_total'][$voucher_date]['issue']['credit_amount'];
 
-          $this->data['total'][$created_date][$previous_type]['fine'] += $this->data['balance'][$previous_date][$previous_type]['fine'];
+      $debit_weight       = $this->data['day_total'][$voucher_date]['receipt']['debit_weight'];
+      $debit_factory_fine = $this->data['day_total'][$voucher_date]['receipt']['factory_fine'];
+      $debit_fine         = $this->data['day_total'][$voucher_date]['receipt']['fine'];
+      $debit_amount       = $this->data['day_total'][$voucher_date]['receipt']['debit_amount'];
 
-          $this->data['total'][$created_date][$previous_type]['factory_fine'] += $this->data['balance'][$previous_date][$previous_type]['factory_fine'];
-
-          $this->data['total'][$created_date][$previous_type]['amount'] += $this->data['balance'][$previous_date][$previous_type]['amount'];
-        }
-        
-        if ($this->data['total'][$created_date]['receipt']['weight'] >= $this->data['total'][$created_date]['issue']['weight']) {
-
-          $this->data['balance'][$created_date]['receipt']['weight'] = 
-                                                          $this->data['total'][$created_date]['receipt']['weight']
-                                                          - $this->data['total'][$created_date]['issue']['weight'];
-
-          $this->data['balance'][$created_date]['receipt']['weight_difference'] = 
-                                                          $this->data['total'][$created_date]['receipt']['weight_difference']
-                                                          - $this->data['total'][$created_date]['issue']['weight_difference']; 
-
-
-          $this->data['balance'][$created_date]['receipt']['fine'] = 
-                                                          $this->data['total'][$created_date]['receipt']['fine']
-                                                          - $this->data['total'][$created_date]['issue']['factory_fine'];
-
-          $this->data['balance'][$created_date]['receipt']['factory_fine'] = 
-                                                          $this->data['total'][$created_date]['receipt']['factory_fine']
-                                                          - $this->data['total'][$created_date]['issue']['fine'];      
-
-          $this->data['balance'][$created_date]['receipt']['amount'] = 
-                                                          $this->data['total'][$created_date]['receipt']['amount']
-                                                          - $this->data['total'][$created_date]['issue']['amount'];                                                          
-          $type = 'receipt';
-        } else {
-          $this->data['balance'][$created_date]['issue']['weight'] = 
-                                                          $this->data['total'][$created_date]['issue']['weight']
-                                                          - $this->data['total'][$created_date]['receipt']['weight'];
-          $this->data['balance'][$created_date]['issue']['weight_difference'] = 
-                                                          $this->data['total'][$created_date]['issue']['weight_difference'] 
-                                                          - $this->data['total'][$created_date]['receipt']['weight_difference'];
-
-          $this->data['balance'][$created_date]['issue']['fine'] = 
-                                                          $this->data['total'][$created_date]['issue']['fine']
-                                                          - $this->data['total'][$created_date]['receipt']['factory_fine'];
-          $this->data['balance'][$created_date]['issue']['factory_fine'] = 
-                                                          $this->data['total'][$created_date]['issue']['factory_fine']
-                                                          - $this->data['total'][$created_date]['receipt']['fine'];
-          $this->data['balance'][$created_date]['issue']['amount'] = 
-                                                          $this->data['total'][$created_date]['issue']['amount']
-                                                          - $this->data['total'][$created_date]['receipt']['amount'];                                                                        
-          $type = 'issue';
-        }
-        
-        $previous_date = $created_date;
-        $previous_type = $type;
+      if ( ($credit_weight >= $debit_weight)  && (($credit_factory_fine > $debit_factory_fine) > 0 || $credit_amount > $debit_amount)) {
+        $this->data['day_balance'][$voucher_date]['issue']['credit_weight'] = $credit_weight - $debit_weight;
+        $this->data['day_balance'][$voucher_date]['issue']['factory_fine']  = $credit_factory_fine - $debit_fine;
+        $this->data['day_balance'][$voucher_date]['issue']['fine']          = $credit_fine - $debit_factory_fine;
+        $this->data['day_balance'][$voucher_date]['issue']['credit_amount'] = $credit_amount - $debit_amount;
+      } else {
+        $this->data['day_balance'][$voucher_date]['receipt']['debit_weight'] = $debit_weight - $credit_weight;
+        $this->data['day_balance'][$voucher_date]['receipt']['factory_fine'] = $debit_factory_fine - $credit_fine;
+        $this->data['day_balance'][$voucher_date]['receipt']['fine']         = $debit_fine - $credit_factory_fine;
+        $this->data['day_balance'][$voucher_date]['receipt']['debit_amount'] = $debit_amount - $credit_amount;
       }
-   //}     
+    }
+  } 
+
+  private function get_balance() {
+    $previous_date = '';
+    
+    foreach($this->data['voucher_dates'] as $voucher_date) {
+      if ($previous_date != '') {
+        $this->data['opening'][$voucher_date]['issue']['credit_weight']  = $this->data['balance'][$previous_date]['issue']['credit_weight'];
+        $this->data['opening'][$voucher_date]['issue']['factory_fine']   = $this->data['balance'][$previous_date]['issue']['factory_fine'];
+        $this->data['opening'][$voucher_date]['issue']['fine']           = $this->data['balance'][$previous_date]['issue']['fine'];
+        $this->data['opening'][$voucher_date]['issue']['credit_amount']  = $this->data['balance'][$previous_date]['issue']['credit_amount'];
+        $this->data['opening'][$voucher_date]['receipt']['debit_weight'] = $this->data['balance'][$previous_date]['receipt']['debit_weight'];
+        $this->data['opening'][$voucher_date]['receipt']['factory_fine'] = $this->data['balance'][$previous_date]['receipt']['factory_fine'];
+        $this->data['opening'][$voucher_date]['receipt']['fine']         = $this->data['balance'][$previous_date]['receipt']['fine'];
+        $this->data['opening'][$voucher_date]['receipt']['debit_amount'] = $this->data['balance'][$previous_date]['receipt']['debit_amount'];
+
+        $current_date_credit_weight       = $this->data['day_balance'][$voucher_date]['issue']['credit_weight'];
+        $current_date_credit_factory_fine = $this->data['day_balance'][$voucher_date]['issue']['factory_fine' ];
+        $current_date_credit_fine         = $this->data['day_balance'][$voucher_date]['issue']['fine'];
+        $current_date_credit_amount       = $this->data['day_balance'][$voucher_date]['issue']['credit_amount'];
+        $current_date_debit_weight        = $this->data['day_balance'][$voucher_date]['receipt']['debit_weight'];
+        $current_date_debit_factory_fine  = $this->data['day_balance'][$voucher_date]['receipt']['factory_fine'];
+        $current_date_debit_fine          = $this->data['day_balance'][$voucher_date]['receipt']['fine'];
+        $current_date_debit_amount        = $this->data['day_balance'][$voucher_date]['receipt']['debit_amount'];
+
+        $credit_weight        = $this->data['opening'][$voucher_date]['issue']['credit_weight']  + $current_date_credit_weight;
+        $credit_factory_fine  = $this->data['opening'][$voucher_date]['issue']['factory_fine']   + $current_date_credit_factory_fine;
+        $credit_fine          = $this->data['opening'][$voucher_date]['issue']['fine']           + $current_date_credit_fine;
+        $credit_amount        = $this->data['opening'][$voucher_date]['issue']['credit_amount']  + $current_date_credit_amount;
+        $debit_weight         = $this->data['opening'][$voucher_date]['receipt']['debit_weight'] + $current_date_debit_weight;
+        $debit_factory_fine   = $this->data['opening'][$voucher_date]['receipt']['factory_fine'] + $current_date_debit_factory_fine;
+        $debit_fine           = $this->data['opening'][$voucher_date]['receipt']['fine']         + $current_date_debit_fine;
+        $debit_amount         = $this->data['opening'][$voucher_date]['receipt']['debit_amount'] + $current_date_debit_amount;
+
+        if (    ($credit_weight >= $debit_weight) 
+             && ($credit_factory_fine > $debit_fine || $credit_amount > $debit_amount)) {
+          $this->data['balance'][$voucher_date]['issue']['credit_weight'] = $credit_weight - $debit_weight;
+          $this->data['balance'][$voucher_date]['issue']['factory_fine']  = $credit_factory_fine - $debit_fine;
+          $this->data['balance'][$voucher_date]['issue']['fine']  = $credit_fine - $debit_factory_fine;
+          $this->data['balance'][$voucher_date]['issue']['credit_amount'] = $credit_amount - $debit_amount;
+        } else {
+          $this->data['balance'][$voucher_date]['receipt']['debit_weight'] = $debit_weight - $credit_weight;
+          $this->data['balance'][$voucher_date]['receipt']['fine']         = $debit_fine - $credit_factory_fine;
+          $this->data['balance'][$voucher_date]['receipt']['factory_fine'] = $debit_factory_fine - $credit_fine;
+          $this->data['balance'][$voucher_date]['receipt']['debit_amount'] = $debit_amount - $credit_amount;
+        }
+      } else
+        $this->data['balance'][$voucher_date] = $this->data['day_balance'][$voucher_date]; 
+
+      if ($this->data['report_type'] == 'Vadotar Report') {
+        $this->data['balance'][$voucher_date]['issue']['credit_weight'] = 0; 
+        $this->data['balance'][$voucher_date]['issue']['credit_amount'] = 0;
+        $this->data['balance'][$voucher_date]['receipt']['debit_weight'] = 0;
+        $this->data['balance'][$voucher_date]['receipt']['debit_amount'] = 0;
+      }
+      $previous_date = $voucher_date;
+    } 
   }
+
+  private function get_closing() {
+    $last_voucher_date = end($this->data['voucher_dates']);
+    $this->data['closing'] = array($last_voucher_date => array());
+    $this->data['closing'][$last_voucher_date]['receipt']['debit_weight'] = 0;
+    $this->data['closing'][$last_voucher_date]['receipt']['fine'] = 0;
+    $this->data['closing'][$last_voucher_date]['receipt']['factory_fine'] = $this->data['balance'][$last_voucher_date]['issue']['fine'];
+    $this->data['closing'][$last_voucher_date]['receipt']['debit_amount'] = $this->data['balance'][$last_voucher_date]['issue']['credit_amount'];
+
+    $this->data['closing'][$last_voucher_date]['issue']['credit_weight'] = 0;
+    $this->data['closing'][$last_voucher_date]['issue']['fine'] = 0;
+    $this->data['closing'][$last_voucher_date]['issue']['factory_fine'] = $this->data['balance'][$last_voucher_date]['receipt']['fine'];
+    $this->data['closing'][$last_voucher_date]['issue']['credit_amount'] = $this->data['balance'][$last_voucher_date]['receipt']['debit_amount']; 
+
+    if ($this->data['report_type'] == 'Vadotar Report') {
+      $this->data['closing'][$last_voucher_date]['receipt']['fine'] = $this->data['balance'][$last_voucher_date]['issue']['factory_fine'];
+    }
+  }  
 }
 ?>

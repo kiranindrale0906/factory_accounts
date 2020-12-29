@@ -113,7 +113,8 @@ class BaseController extends MX_Controller {
       $this->_respond_to_record_not_found($this->data);
     } else {
       $data = $this->model->delete($id);
-      $this->_respond_to_success_on_delete($record); 
+      if (method_exists($this, '_after_delete')) $this->_after_delete($id);
+      ($data) ? $this->_respond_to_success_on_delete($record) : $this->_respond_to_failure_on_delete($record); 
     }
   }
   
