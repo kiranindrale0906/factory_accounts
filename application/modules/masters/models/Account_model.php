@@ -29,12 +29,12 @@ class Account_model extends BaseModel {
         'field' => 'accounts[cont_person]',
         'label' => 'Contact Person',
         'rules' => 'trim',),
-      array(
-        'field' => 'accounts[salesman_code]',
-        'label' => 'Salesman Code',
-        'rules'  =>array('trim','numeric',
-                    array('check_salesman_exits_error',array($this,'check_salesman_exist'))),
-        'errors' => array('check_salesman_exits_error'=>'Salesman not exist in saleman master.')),
+      // array(
+      //   'field' => 'accounts[salesman_code]',
+      //   'label' => 'Salesman Code',
+      //   'rules'  =>array('trim','numeric',
+      //               array('check_salesman_exits_error',array($this,'check_salesman_exist'))),
+      //   'errors' => array('check_salesman_exits_error'=>'Salesman not exist in saleman master.')),
       array(
         'field' => 'accounts[address]',
         'label' => 'Address',
