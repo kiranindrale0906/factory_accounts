@@ -11,3 +11,7 @@ if (file_exists(APPPATH . "modules/".CLIENT_NAME."/helpers/client_metal_receipt_
 function list_settings(){
 	return metal_receipt_list_settings();
 }
+
+function getTableSettings(){
+	return ac_vouchers_getTableSettings();
+}
