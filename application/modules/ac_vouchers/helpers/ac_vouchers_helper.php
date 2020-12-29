@@ -122,6 +122,8 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
   $list_setting['total_fine_weight'] = array("Total Fine Wt", "total_fine_weight", FALSE, "total_fine_weight", TRUE, TRUE);
   $list_setting['total_amount'] = array("Total Amount", "total_amount", FALSE, "total_amount", TRUE, TRUE,"FORMAT(ac_vouchers.total_amount,ac_company.decimal_no) as total_amount",    
                                         '','','','text-right');
+  $list_setting['tcs_amount'] = array("TCS Amount", "tcs_amount", FALSE, "tcs_amount", TRUE, TRUE,"FORMAT(ac_vouchers.tcs_amount,ac_company.decimal_no) as tcs_amount",    
+                                        '','','','text-right');
 
 
 

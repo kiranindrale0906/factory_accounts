@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed.');
 //AR Gold
 
-function list_settings() {
+function cash_receipt_list_settings() {
   $list_option=array('voucher_date','created_time', 'voucher_number', 'account_name', 
                      'debit_amount', 'description','action');
   return ac_vouchers_list_settings($list_option);

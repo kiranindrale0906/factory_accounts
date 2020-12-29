@@ -14,6 +14,7 @@
     <?php load_field('date',array('field' => 'date','class'=>'datepicker_js','value'=>(!empty($record['date'])?date('d-m-Y',strtotime($record['date'])):date('d-m-Y')), )); ?>
     <?php load_field('text',array('field' => 'no_of_packets'));  ?>
     <?php load_field('text',array('field' => 'packet_gross_weight'));  ?>
+    <?php load_field('text',array('field' => 'manual_taxable_amount'));  ?>
     <?php load_field('dropdown', array('field' => 'sale_type',
                                        'option'=> array(array('id' => 'Sale', 'name' => 'Sale'),
                                                         array('id' => 'Labour', 'name' => 'Labour'))));?>

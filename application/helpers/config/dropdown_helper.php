@@ -113,6 +113,7 @@
                  array('id'=>'Shook','name'=>'S'),
                  array('id'=>'ARF KDM','name'=>'ARF KDM'),
                  array('id'=>'Cap','name'=>'Cap'),
+                 array('id'=>'Kala Mani','name'=>'Kala Mani'),
                  array('id'=>'GPC Powder','name'=>'GPC Powder'));
   }
 
