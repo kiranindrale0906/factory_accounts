@@ -5,12 +5,14 @@
   <?php if ($report_type != 'Account Ledger'): ?>
     <td><?= $record['account_name'];?></td>
   <?php endif; ?>
-  <td><?= $record['str_voucher_date'] ?></td>
-  <td><?= $record['voucher_number'].' '.$record['narration'].' '.$record['description'].' '.$record['chitti_no']; ?>
-     <?php if(isset($record['chitti_no']) && $record['chitti_no']!=0){ ?>
-        <a class=""  href='<?= base_url() ?>argold/chittis/view/<?=$record['chitti_no']?>'>view</a>
-     <?php  }
-    ?>
+  <td><?= date('d-m-y', strtotime($record['str_voucher_date'])); ?></td>
+  <td><?= '#'.$record['chitti_no'].' '.remove_duplicates_in_string($record['narration']).' '.$record['description']; ?>
+    <?php if(isset($record['chitti_no']) && $record['chitti_no']!=0) { ?>
+      <a class=""  href='<?= base_url() ?>argold/chittis/view/<?=$record['chitti_no']?>'>view</a>
+      <?php if ($record['account_name'] == 'SWARN SHILP CHAINS AND JEWELLERS PVT LTD') { ?>
+        | <a class="" href='<?= base_url() ?>argold/change_account_names/index?chitti_no=<?=$record['chitti_no']?>&account_name=SS1'>SS1</a>
+      <?php } ?>  
+    <?php } ?>
   </td>
   <td class="text-right"><?= four_decimal($record['debit_weight'], '-') ?></td>
   <td class="text-right"><?= four_decimal($record['factory_purity'], '-')?></td>
