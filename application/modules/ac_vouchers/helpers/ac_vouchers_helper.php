@@ -95,8 +95,8 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
                                           "FORMAT(ac_vouchers.lumpsum_amount,ac_company.decimal_no) as lumpsum_amount",'','','','text-right');
   $list_setting['interest_per_day'] = array("Interest per Day", "interest_per_day", FALSE, "interest_per_day", TRUE, TRUE);
 
-  $list_setting['debit_weight'] = array("Debit Wt.", "debit_weight", FALSE, "debit_weight", TRUE, TRUE,'debit_weight','','','range');
-  $list_setting['credit_weight'] = array("Credit Wt.", "credit_weight", FALSE, "credit_weight", TRUE, TRUE,'credit_weight','','','range');
+  $list_setting['debit_weight'] = array("Debit Wt.", "debit_weight", FALSE, "debit_weight", TRUE, TRUE);
+  $list_setting['credit_weight'] = array("Credit Wt.", "credit_weight", FALSE, "credit_weight", TRUE, TRUE);
 
   if ($ci->router->class=='metal_issue_vouchers') {
     $list_setting['purity'] = array("Factory Purity", "purity", FALSE, "purity", TRUE, TRUE);
@@ -113,10 +113,10 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
   
   $list_setting['Pure Gold'] = array("Item Name", "pure_gold_credit", FALSE, "pure_gold_credit", TRUE, TRUE);
   $list_setting['department_name'] = array("Department Name", "department_name", FALSE, "department_name", TRUE, TRUE);
-  $list_setting['debit_amount'] = array("Debit Amt", "debit_amount", TRUE, "debit_amount", TRUE, TRUE,"FORMAT(ac_vouchers.debit_amount,ac_company.decimal_no) as debit_amount",
-                                        'debit_amount','','range','text-right');
+  $list_setting['debit_amount'] = array("Debit Amt", "debit_amount", TRUE, "debit_amount", FALSE, TRUE,"FORMAT(ac_vouchers.debit_amount,ac_company.decimal_no) as debit_amount",
+                                        '','','','text-right');
   $list_setting['credit_amount'] = array("Credit Amt.", "credit_amount", TRUE, "credit_amount", FALSE, TRUE,"FORMAT(ac_vouchers.credit_amount,ac_company.decimal_no) as credit_amount",     
-                                        '','','range','text-right');
+                                        '','','','text-right');
   $list_setting['total_gross_weight'] = array("Total Gross Wt", "total_gross_weight", FALSE, "total_gross_weight", TRUE, TRUE);
   $list_setting['total_net_weight'] = array("Total Net Wt", "total_net_weight", FALSE, "total_net_weight", TRUE, TRUE);
   $list_setting['total_fine_weight'] = array("Total Fine Wt", "total_fine_weight", FALSE, "total_fine_weight", TRUE, TRUE);
