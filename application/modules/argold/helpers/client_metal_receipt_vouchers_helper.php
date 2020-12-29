@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed.');
 //AR Gold
 
-function list_settings() {
+function metal_receipt_list_settings() {
   $list_option=array('voucher_date','receipt_type', 'created_time', 'voucher_number', 'account_name', 
                      'debit_weight', 'factory_purity', 'factory_fine', 'purity', 'fine', 'narration', 'description', 'debit_amount', 'action');
   return ac_vouchers_list_settings($list_option);
