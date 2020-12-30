@@ -10,24 +10,32 @@ class Change_account_names extends BaseController {
 
   public function index() {
     $chitti_no = isset($_GET['chitti_no']) ? $_GET['chitti_no'] : '';
-    if (empty($chitti_no)) return false;
 
     $chitti = $this->chitti_model->find('', array('id' => $chitti_no));
-    if (!empty($chitti) && $chitti['rate'] == 0) {
+    $metal_receipt_voucher = $this->voucher_model->find('', array('voucher_type' => 'metal receipt voucher',
+                                                                  'id' => $chitti_no));
+    if (empty($chitti) && empty($metal_receipt_voucher)) return false;
+  
+    if (!empty($chitti))
       $vouchers = $this->voucher_model->get('', array('chitti_id' => $chitti_no));
-      foreach ($vouchers as $voucher) {
-        $voucher_obj = new voucher_model($voucher);
-        $voucher_obj->attributes['account_name'] = 'SWARN SHILP 1';
-        $voucher_obj->attributes['account_id'] = 130;
-        $voucher_obj->save();
-      }
+    elseif (!empty($metal_receipt_voucher))
+      $vouchers = $this->voucher_model->get('', array('id' => $chitti_no));
+    
+    foreach ($vouchers as $voucher) {
+      $voucher_obj = new voucher_model($voucher);
+      $voucher_obj->attributes['account_name'] = 'SWARN SHILP 1';
+      $voucher_obj->attributes['account_id'] = 130;
+      $voucher_obj->save();
+    }
 
+    if (!empty($chitti) && $chitti['rate'] == 0) {
       $chitti_obj = new chitti_model($chitti);
       $chitti_obj->attributes['account_name'] = 'SWARN SHILP 1';
       $chitti_obj->save();
 
       redirect(base_url().'/argold/chittis/view/'.$chitti_no);
-    }
+    } elseif (!empty($metal_receipt_voucher))
+      redirect(base_url().'argold/voucher_details/view/'.$chitti_no);
 
     echo 'Cannot change account name';
   }
