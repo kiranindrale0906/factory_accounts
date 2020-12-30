@@ -5,7 +5,14 @@
   }
 }
 </style>
-<h4 style="margin-left:10%" class="heading">Chitti #<?= $record['id']; ?></h4>
+<div class="row ">
+  <div class="col-md-3">
+   <h4 style="margin-left:45%" class="heading">Chitti #<?= $record['id']; ?></h4>
+  </div>
+  <div class="col-md-9 text-right">
+  <a href="<?=ADMIN_PATH.'argold/metal_issue_chitties/edit/'. $record['id']?>" class='btn bg_blue white'>create metal receipt</a>
+  </div>
+</div>
 
 <div style="max-width:45%; margin-left:10%">
   <table class="table table-sm">

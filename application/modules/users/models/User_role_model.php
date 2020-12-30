@@ -33,7 +33,7 @@ class User_role_model extends Core_user_role_model {
                                             'transactions/antique_sales_return_voucher',
                                             'transactions/interest_issue_vouchers',
                                             'transactions/interest_receipt_vouchers',
-                                            'argold/chittis','argold/voucher_details',
+                                            'argold/chittis','argold/metal_issue_chitties','argold/voucher_details',
                                             'argold/refresh','argold/refresh_details',
                                             'transactions/loss_outs',
                                             'transactions/mangalsutra_sales_return_voucher',
