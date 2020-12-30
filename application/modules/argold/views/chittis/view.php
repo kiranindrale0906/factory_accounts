@@ -10,7 +10,7 @@
    <h4 style="margin-left:45%" class="heading">Chitti #<?= $record['id']; ?></h4>
   </div>
   <div class="col-md-9 text-right">
-  <a href="<?=ADMIN_PATH.'argold/metal_issue_chitties/edit/'. $record['id']?>" class='btn bg_blue white'>create metal receipt</a>
+  <a  href="<?=ADMIN_PATH.'argold/metal_issue_chitties/edit/'. $record['id']?>" class='btn bg_blue white no-print'>create metal receipt</a>
   </div>
 </div>
 
