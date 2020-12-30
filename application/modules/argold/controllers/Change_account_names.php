@@ -40,7 +40,7 @@ class Change_account_names extends BaseController {
       $chitti_obj->save();
 
       redirect(base_url().'/argold/chittis/view/'.$chitti_no);
-    } elseif (!empty($metal_receipt_voucher))
+    } elseif (!empty($metal_receipt_voucher) || !empty($metal_issue_voucher))
       redirect(base_url().'argold/voucher_details/view/'.$chitti_no);
 
     echo 'Cannot change account name';
