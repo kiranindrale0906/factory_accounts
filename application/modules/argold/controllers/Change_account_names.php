@@ -14,13 +14,16 @@ class Change_account_names extends BaseController {
     $chitti = $this->chitti_model->find('', array('id' => $chitti_no));
     $metal_receipt_voucher = $this->voucher_model->find('', array('voucher_type' => 'metal receipt voucher',
                                                                   'id' => $chitti_no));
+
     if (empty($chitti) && empty($metal_receipt_voucher)) return false;
-  
+    if (!empty($chitti) && $chitti['rate'] > 0) return false;
+    if (!empty($metal_receipt_voucher) && $metal_receipt_voucher['gold_rate'] > 0) return false;
+
     if (!empty($chitti))
       $vouchers = $this->voucher_model->get('', array('chitti_id' => $chitti_no));
     elseif (!empty($metal_receipt_voucher))
       $vouchers = $this->voucher_model->get('', array('id' => $chitti_no));
-    
+
     foreach ($vouchers as $voucher) {
       $voucher_obj = new voucher_model($voucher);
       $voucher_obj->attributes['account_name'] = 'SWARN SHILP 1';
@@ -28,7 +31,7 @@ class Change_account_names extends BaseController {
       $voucher_obj->save();
     }
 
-    if (!empty($chitti) && $chitti['rate'] == 0) {
+    if (!empty($chitti)) {
       $chitti_obj = new chitti_model($chitti);
       $chitti_obj->attributes['account_name'] = 'SWARN SHILP 1';
       $chitti_obj->save();
