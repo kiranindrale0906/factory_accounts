@@ -105,7 +105,7 @@
             </tr>
           <?php endif; ?>
         </table>
-        <?php $profit_and_loss['pending_vadotar'] = -1 * ($liabilities_vadotar + $assets_vadotar); ?>
+        <?php $profit_and_loss['pending_vadotar'] = ($liabilities_vadotar + $assets_vadotar); ?>
       </div>      
     </div>
   </div>  
