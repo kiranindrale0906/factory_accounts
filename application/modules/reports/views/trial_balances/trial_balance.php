@@ -47,9 +47,6 @@
             <th class="text-right"><?= four_decimal($liabilities_vadotar, '-'); ?></th>
           </tr>
         </table>
-
-        <?php $profit_and_loss['pending_vadotar'] = $liabilities_vadotar; ?>
-        
       </div>
     </div>
   </div>
@@ -108,6 +105,7 @@
             </tr>
           <?php endif; ?>
         </table>
+        <?php $profit_and_loss['pending_vadotar'] = -1 * ($liabilities_vadotar + $assets_vadotar); ?>
       </div>      
     </div>
   </div>  
