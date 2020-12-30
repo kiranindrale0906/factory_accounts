@@ -19,6 +19,7 @@
               <th class="text-right">Factory Fine</th>
             <?php endif; ?>
             <th class="text-right">Fine</th>
+            <th class="text-right no-print">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -50,6 +51,7 @@
                     <td class="text-right"><?= four_decimal($metal_voucher_detail['fine']) ?></td>
                   <?php endif; ?>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['factory_fine']) ?></td>
+                  <td class="text-right no-print"><a href="<?=base_url().'argold/chittis/delete/'.$record['id'].'?voucher_id='.$metal_voucher_detail['id']?>">delete</a></td>
                 </tr>
                 <?php $sr_no++; 
               //}

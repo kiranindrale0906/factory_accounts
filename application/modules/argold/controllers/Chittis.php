@@ -83,10 +83,17 @@ class Chittis extends BaseController {
     parent::store();
   }
   public function delete($id) {
-    $voucher_details=$this->voucher_model->get('',array('chitti_id'=>$id));
-    if(!empty($voucher_details)){
+    $voucher_id=!empty($_GET['voucher_id'])?$_GET['voucher_id']:0;
+    if(!empty($voucher_id) && $voucher_id!=0){
+      $voucher_details=$this->voucher_model->get('',array('chitti_id'=>$id,'id'=>$voucher_id));
       $this->chitti_model->update_chitti_ids($voucher_details);
+      redirect(base_url().'argold/chittis/view/'.$id);
+    }else{
+      $voucher_details=$this->voucher_model->get('',array('chitti_id'=>$id));
+      if(!empty($voucher_details)){
+        $this->chitti_model->update_chitti_ids($voucher_details);
+      }
+      parent::delete($id);
     }
-    parent::delete($id);
   }
 }
