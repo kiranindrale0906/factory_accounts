@@ -16,8 +16,8 @@ class Change_account_names extends BaseController {
                                                                   'id' => $chitti_no));
     $metal_issue_voucher = $this->voucher_model->find('', array('voucher_type' => 'metal issue voucher',
                                                                 'id' => $chitti_no));
-
-    if (empty($chitti) && empty($metal_receipt_voucher && empty($metal_issue_voucher)) return false;
+    
+    if (empty($chitti) && empty($metal_receipt_voucher) && empty($metal_issue_voucher)) return false;
     if (!empty($chitti) && $chitti['rate'] > 0) return false;
     if (!empty($metal_receipt_voucher) && $metal_receipt_voucher['gold_rate'] > 0) return false;
     if (!empty($metal_issue_voucher) && $metal_issue_voucher['gold_rate'] > 0) return false;
