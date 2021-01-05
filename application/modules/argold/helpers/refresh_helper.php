@@ -72,6 +72,7 @@ function get_field_attribute($table, $field) {
     'factory_purity'          => array('Factory Purity', '', TRUE, '', TRUE),
     'site_name'          => array('Site Name', 'Select Site Name', TRUE, '', TRUE),
     'rate'          => array('Rate', '', TRUE, '', TRUE),
+    'manual_taxable_amount'          => array('Manual Taxable Amount', '', TRUE, '', TRUE),
    );
   $attributes['refresh_details'] = array(
     'refresh_id' => array('', '', TRUE, '', TRUE),

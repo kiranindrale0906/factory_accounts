@@ -1,5 +1,5 @@
 <hr>
-<h6 class ='blue'>Metal Receipt Details</h6>
+<!-- <h6 class ='blue'>Metal Receipt Details</h6> -->
 <?php if($refresh['metal_receipt_id']==0){?>
 <div class="row text-right">
   <div class="col-md-12">
@@ -8,24 +8,28 @@
 </div>
 <?php }?>
 <div class="row">
-<div class="col-md-6 ">
+ <div class="col-md-6 ">
+
     <div class="form-group container">
-      <p><h6>AC Name :<?=$metal_receipt_details['account_name']?> </h6></p>
-      <p><h6>Voucher No :<?=$metal_receipt_details['voucher_number']?> </h6></p>
-      <p><h6>Item Name :<?=$metal_receipt_details['narration']?> </h6></p>
-      <p><h6>Receipt Type :<?=$metal_receipt_details['receipt_type']?></h6></p>
+     <p><h6>Weight :<?=four_decimal($refresh['weight'])?></h6></p>
+      <p><h6>Purity :<?=four_decimal($refresh['purity'])?></h6></p>
+      <p><h6>Fine :<?=four_decimal($refresh['fine'])?></h6></p>
+      <p><h6>Factory Purity :<?=four_decimal($refresh['factory_purity']);?></h6></p>
+      
+     <!-- <p><h6>AC Name :<?=four_decimal($metal_receipt_details['account_name']);?> </h6></p>
+      <p><h6>Voucher No :<?=four_decimal($metal_receipt_details['voucher_number']);?> </h6></p>
+      <p><h6>Item Name :<?=four_decimal($metal_receipt_details['narration']);?> </h6></p>
+      <p><h6>Receipt Type :<?=four_decimal($metal_receipt_details['receipt_type']);?></h6></p>-->
     </div>
-  </div>
+  </div> 
 
   <div class="col-md-6">
     
     <div class="form-group container">
-      <p><h6>Debit Weight :<?=$metal_receipt_details['debit_weight']?></h6></p>
-      <p><h6>Purity :<?=$metal_receipt_details['purity']?></h6></p>
-      <p><h6>Fine :<?=$metal_receipt_details['fine']?></h6></p>
-      <p><h6>Factory Purity :<?=$metal_receipt_details['factory_purity']?></h6></p>
-      <p><h6>Factory Fine :<?=$metal_receipt_details['factory_fine']?></h6></p>
-      <p><h6>Metal Receipt Date : <?=date('d-m-Y',strtotime($metal_receipt_details['created_at']))?></h6></p>
+      <p><h6>Factory Fine :<?=four_decimal($refresh['factory_fine']);?></h6></p>
+     <p><h6>Rate :<?=four_decimal($refresh['rate']);?></h6></p>
+      <p><h6>Manual Taxable amount :<?=four_decimal($refresh['manual_taxable_amount']);?></h6></p>
+      <p><h6>Metal Receipt Date : <?=date('d-m-Y',strtotime($refresh['created_at']))?></h6></p>
     </div>
   </div>
   
