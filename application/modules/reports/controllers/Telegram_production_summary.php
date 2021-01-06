@@ -35,7 +35,7 @@ class Telegram_production_summary extends BaseController {
   //get refresh receipt records
   private function send_refresh_records($date) {
     $refresh_records = $this->voucher_model->get('receipt_type, sum(debit_weight) as weight',
-                                           array('receipt_type' => array('AR Gold Refresh', 'ARF Refersh', 'ARC Refresh'),
+                                           array('receipt_type' => array('AR Gold Refresh', 'ARF Refresh', 'ARC Refresh'),
                                                  'voucher_date' => $date), array(), array('group_by' => 'receipt_type'));
     $this->send_refresh_message($refresh_records);      
   }
