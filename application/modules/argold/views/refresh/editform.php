@@ -14,6 +14,7 @@
     <?php load_field('text', array('field' => 'factory_purity','readonly'=>'readonly'));?>
     <?php load_field('text', array('field' => 'factory_fine','readonly'=>'readonly'));?>
     <?php load_field('text', array('field' => 'rate'));?>
+    <?php load_field('text',array('field' => 'manual_taxable_amount'));  ?>
     <?php load_field('dropdown', array('field' => 'site_name','option'=>array(
                                                                               array('id'=>'AR Gold','name'=>'AR Gold'),
                                                                               array('id'=>'ARF','name'=>'ARF'),

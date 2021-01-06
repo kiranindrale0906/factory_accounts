@@ -51,7 +51,7 @@
                     <td class="text-right"><?= four_decimal($metal_voucher_detail['fine']) ?></td>
                   <?php endif; ?>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['factory_fine']) ?></td>
-                  <td class="text-right no-print"><a href="<?=base_url().'argold/chittis/delete/'.$record['id'].'?voucher_id='.$metal_voucher_detail['id']?>">delete</a></td>
+                  <td class="text-right no-print"><a class='red' href="<?=base_url().'argold/chittis/delete/'.$record['id'].'?voucher_id='.$metal_voucher_detail['id']?>">remove</a></td>
                 </tr>
                 <?php $sr_no++; 
               //}
@@ -70,6 +70,7 @@
               <td class="text-right"><?=four_decimal($sum_fine);?></td>
             <?php endif; ?>  
             <td class="text-right"><?=four_decimal($sum_factory_fine);?></td>
+            <td class="text-right"></td>
           </tr>
         </tbody>
       </table>
