@@ -28,7 +28,7 @@ class BaseModel extends CI_Model {
  
   use listing_trait;
 
-  protected $audit_log = true;
+  protected $audit_log = false;
   protected $log_columns = array();
   public $router_class = '';
   public $attributes = array();
