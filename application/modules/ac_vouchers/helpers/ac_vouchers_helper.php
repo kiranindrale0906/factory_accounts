@@ -61,6 +61,7 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
   $list_setting['created_time'] = array("Time", "created_at", FALSE, "created_at", FALSE, TRUE,
                                         "date_format(ac_vouchers.created_at,'%H:%i:%s') as created_at");
   $list_setting['voucher_number'] = array("Voucher", "voucher_number", FALSE, "voucher_number", TRUE, FALSE);
+  $list_setting['site_name'] = array("Site name", "site_name", FALSE, "site_name", TRUE, FALSE);
   $list_setting['gold_rate'] = array("Gold Rate", "gold_rate", FALSE, "gold_rate", TRUE, FALSE);
   $list_setting['rate'] = array("Rate", "rate", FALSE, "rate", TRUE, FALSE);
   $list_setting['cash_amount'] = array("Cash Amount", "cash_amount", FALSE, "cash_amount", TRUE, FALSE,"FORMAT(ac_vouchers.cash_amount,ac_company.decimal_no) as cash_amount",
