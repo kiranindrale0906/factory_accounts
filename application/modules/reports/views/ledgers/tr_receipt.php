@@ -14,7 +14,7 @@
       <?php } ?>  
     <?php } ?>
   </td>
-  <td class="text-right"><?= four_decimal($record['debit_weight'], '-') ?></td>
+  <td class="text-right"><a class=""  href='<?= base_url() ?>argold/voucher_details/view/<?=$record['parent_id']?>'><?= four_decimal($record['debit_weight'], '-') ?></a></td>
   <td class="text-right"><?= four_decimal($record['factory_purity'], '-')?></td>
   <td class="text-right"><?= four_decimal($record['factory_fine'], '-'); ?></td>
   <td class="text-right"><?= four_decimal($record['purity'], '-') ?></td>

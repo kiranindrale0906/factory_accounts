@@ -7,7 +7,7 @@ class Chitti_model extends BaseModel {
 
   public function __construct($data = array()){
 		parent::__construct($data);
-    $this->load->model(array('transactions/rate_cut_issue_voucher_model'));
+    $this->load->model(array('transactions/rate_cut_issue_voucher_model','transactions/ledger_model'));
   }
   
   public function validation_rules($klass='') {
@@ -115,6 +115,10 @@ class Chitti_model extends BaseModel {
         $voucher_obj = new voucher_model($voucher_detail);
         $voucher_obj->attributes['chitti_id'] = 0;
         $voucher_obj->update(false);
+        $ledger_details=$this->ledger_model->find('',array('voucher_id'=>$voucher_detail['id']));
+        $ledger_obj = new ledger_model($ledger_details);
+        $ledger_obj->attributes['chitti_id'] = 0;
+        $ledger_obj->update(false);
         }
       }
     }
