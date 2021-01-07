@@ -8,6 +8,7 @@ function ac_vouchers_getTableSettings($table_setting_arg=array()) {
     $table_setting_arg['where'] = 'company_id='.(!empty($ci->session->userdata('company_id'))?$ci->session->userdata('company_id'):-1);
   }
   if ($ci->router->class != "cash_issue_vouchers"
+      and $ci->router->class != "opening_stock_vouchers"
       and $ci->router->class != "cash_receipt_vouchers") {
   $table_setting_arg['where'] .= ' and receipt_type not in ("Alloy Vodator", "GPC Vodator", "Stone Vatav")';
   }
