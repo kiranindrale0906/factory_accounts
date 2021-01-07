@@ -62,7 +62,7 @@ class Ledgers extends BaseController {
                                sum((credit_weight+debit_weight) * purity) / sum(credit_weight+debit_weight) as purity, 
                                sum((credit_weight+debit_weight) * factory_purity) / sum(credit_weight+debit_weight) as factory_purity, 
                                concat(narration, " ,") as narration, concat(description, " ,") as description, 
-                               chitti_id as chitti_no';
+                               chitti_id as chitti_no,parent_id as parent_id';
     } else {
       //$this->data['group'] = 'voucher_date';
       $receipt_issue_select = '"" as receipt_type, '.$period_select.' as voucher_date, 
@@ -78,7 +78,7 @@ class Ledgers extends BaseController {
                               sum((credit_weight+debit_weight) * purity) /  sum(credit_weight+debit_weight)  as purity, 
                               sum((credit_weight+debit_weight) * factory_purity) /  sum(credit_weight+debit_weight)  as factory_purity,
                               ""  as narration, "" as description, 
-                              "" as chitti_no';       
+                              "" as chitti_no,parent_id as parent_id';       
     }
 
     $where_issue   = array_merge($where, array('(credit_weight != 0 or credit_amount != 0)' => NULL));
