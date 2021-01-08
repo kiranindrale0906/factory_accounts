@@ -45,6 +45,7 @@ class User_role_model extends Core_user_role_model {
                                         'reports/trial_balances',
                                         'reports/vadotar_reports',
                                         'reports/rojmel_reports',
+                                        'reports/metal_receipt_type_ledger_reports',
                                         'reports/bw_accounts',
                                         'reports/production_summary',
                                         'reports/loss_accounts',
