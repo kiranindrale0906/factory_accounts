@@ -7,11 +7,17 @@
 <div class="row">
   <div class="col-md-6 ">
     <div class="form-group container">
+      <p><h6>Chitti: <?=$record['chitti_id']?> </h6></p>
       <p><h6>AC Name: <?=$record['account_name']?> </h6></p>
       <p><h6>Voucher Type: <?=$record['voucher_type']?> </h6></p>
       <p><h6>Voucher No: <?=$record['voucher_number']?> </h6></p>
+      <?php if(in_array($record['voucher_type'], array('rate cut receipt voucher','rate cut issue voucher','metal receipt voucher','metal issue voucher'))){?>
       <p><h6>Item Name: <?=$record['narration']?> </h6></p>
+      <?php }?>
+      <?php if(in_array($record['voucher_type'], array('rate cut receipt voucher','rate cut issue voucher','metal receipt voucher','metal issue voucher'))){?>
+     
       <p><h6>Receipt Type: <?=$record['receipt_type']?></h6></p>
+      <?php }?>
       <p><h6>Description: <?=$record['description']?></h6></p>
       <?php if (!empty($record['sale_type'])) { ?>
         <p><h6>Sale Type: <?=$record['sale_type']?></h6></p>
@@ -39,11 +45,18 @@
     <?php } if(in_array($record['voucher_type'], array('rate cut receipt voucher','rate cut issue voucher'))){?>  
       <p><h6>Gold Rate Purity :<?=$record['gold_rate_purity']?></h6></p>
     <?php }?> 
-
+    <?php if(in_array($record['voucher_type'], array('rate cut receipt voucher','rate cut issue voucher','metal receipt voucher','metal issue voucher'))){?>  
       <p><h6>Purity :<?=$record['purity']?></h6></p>
+    <?php }?>
+    <?php if(in_array($record['voucher_type'], array('rate cut receipt voucher','rate cut issue voucher','metal receipt voucher','metal issue voucher'))){?>
       <p><h6>Fine :<?=$record['fine']?></h6></p>
+    <?php } ?>
+    <?php if(in_array($record['voucher_type'], array('rate cut receipt voucher','rate cut issue voucher','metal receipt voucher','metal issue voucher'))){?>
       <p><h6>Factory Purity :<?=$record['factory_purity']?></h6></p>
+    <?php }?>
+    <?php if(in_array($record['voucher_type'], array('rate cut receipt voucher','rate cut issue voucher','metal receipt voucher','metal issue voucher'))){?>
       <p><h6>Factory Fine :<?=$record['factory_fine']?></h6></p>
+    <?php }?>
       <p><h6>Date : <?=date('d-m-Y',strtotime($record['created_at']))?></h6></p>
     </div>
   </div>

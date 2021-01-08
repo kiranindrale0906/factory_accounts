@@ -6,8 +6,7 @@ class Voucher_details extends BaseController {
   public function __construct() {
     parent::__construct();
     $this->redirect_after_save = 'view';
-    $this->load->model(array('ac_vouchers/voucher_model', 'masters/account_model',
-                             'argold/refresh_model', 'argold/refresh_detail_model',
+    $this->load->model(array('ac_vouchers/voucher_model','transactions/ledger_model', 'masters/account_model', 'argold/refresh_model', 'argold/refresh_detail_model',
                              'masters/narration_model'));
   }
 
@@ -30,6 +29,10 @@ class Voucher_details extends BaseController {
     parent::delete($id);
   }
   public function _after_delete($id) {
+    $ledger_details=$this->ledger_model->get('',array('parent_id'=>$id));
+    foreach ($ledger_details as $index => $ledger) {
+      $this->ledger_model->delete($ledger['id']);
+    }
     redirect(base_url().'transactions/'.$this->data['voucher_type']);
     return $formdata;
   }

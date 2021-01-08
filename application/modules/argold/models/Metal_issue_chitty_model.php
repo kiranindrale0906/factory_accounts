@@ -8,7 +8,7 @@ class Metal_issue_chitty_model extends BaseModel {
 
   public function __construct($data = array()){
     parent::__construct($data);
-    $this->load->model(array('masters/account_model', 'transactions/rate_cut_issue_voucher_model'));
+    $this->load->model(array('masters/account_model', 'transactions/rate_cut_issue_voucher_model','transactions/ledger_model'));
   }
   public function validation_rules($klass='') {
     $rules[] = array('field' => 'metal_issue_chitties[id]', 
@@ -33,7 +33,7 @@ class Metal_issue_chitty_model extends BaseModel {
           $voucher_detail['id']=$voucher_detail['chitti_id'];
           $voucher_obj = new voucher_model($voucher_detail);
           $voucher_obj->attributes['chitti_id'] = $this->attributes['id'];
-          $voucher_obj->update(false);
+          $voucher_obj->update(true);
         }
       }
     }

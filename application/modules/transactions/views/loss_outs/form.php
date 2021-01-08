@@ -43,9 +43,9 @@
         <td class="text-right"><?=four_decimal($loss_out_detail['receipt_weight']) ?></td>
         <td class="text-right"><?=four_decimal($loss_out_detail['receipt_purity']) ?></td>
         <td class="text-right">
-        <?php if($parent_id==0){ ?>
+        <?php //if($parent_id==0){ ?>
           <a href=<?= base_url()."transactions/metal_receipt_vouchers?receipt_type=Metal&parent_id=".$loss_out_detail['id'] ?> target='_blank'>create metal receipt</a>
-          <?php }?>
+          <?php //}?>
         </td>
       </tr>
 

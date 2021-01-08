@@ -20,7 +20,7 @@
       <?php } ?>  
     <?php } ?>
   </td>
-  <td class="text-right"><?= four_decimal($record['credit_weight'], '-') ?></td>
+  <td class="text-right"><a class=""  href='<?= base_url() ?>argold/voucher_details/view/<?=$record['parent_id']?>'><?= four_decimal($record['credit_weight'], '-') ?></a></td>
   <td class="text-right"><?= four_decimal($record['purity'], '-') ?></td>
   <td class="text-right"><?= four_decimal($record['fine'], '-'); ?></td>
   <td class="text-right"><?= four_decimal($record['factory_purity'], '-') ?></td>
@@ -29,6 +29,6 @@
     <td class="text-right"><?= four_decimal($record['factory_fine']-$record['fine'], '-'); ?></td>
     <td class="text-right"><?= four_decimal(($record['factory_fine']-$record['fine']) / $record['credit_weight'] * 100, '-'); ?></td>
   <?php elseif ($report_type == 'Account Ledger'): ?>
-    <td class="text-right"><?= four_decimal($record['credit_amount'], '-') ?></td>
+    <td class="text-right"><a class=""  href='<?= base_url() ?>argold/voucher_details/view/<?=$record['parent_id']?>'><?= four_decimal($record['credit_amount'], '-') ?></a></td>
   <?php endif; ?>
 </tr>
