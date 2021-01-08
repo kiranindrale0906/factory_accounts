@@ -18,7 +18,7 @@ class Loss_accounts extends BaseController {
         $total_fine=0;
         foreach ($loss_details as $index => $loss_detail) {
           if($loss_detail['description']==$category['description']){
-          $receipt_data= $this->voucher_model->find('', array('parent_id'=>$loss_detail['id']));
+          $receipt_data= $this->voucher_model->find('sum(fine) as fine', array('parent_id'=>$loss_detail['id']));
           $total_fine+=$loss_detail['fine']-$receipt_data['fine'];
 
           }

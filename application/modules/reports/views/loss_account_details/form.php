@@ -45,6 +45,7 @@
     <td>Total</td>
     <td class="text-right"></td>
     <td class="text-right"></td>
+    <td class="text-right"></td>
     <td class="text-right"><?=four_decimal($sum_weight);?></td>
     <td class="text-right"></td>
     <td class="text-right"><?=four_decimal($sum_fine);?></td>

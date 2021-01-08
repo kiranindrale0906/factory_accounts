@@ -15,7 +15,7 @@ class Loss_outs extends BaseController {
     $loss_out_details= $this->voucher_model->get('', array('account_name'=>'Loss Account','parent_id'=>0));
     if(!empty($loss_out_details)){
       foreach ($loss_out_details as $index => $value) {
-        $receipt_data= $this->voucher_model->find('', array('parent_id'=>$value['id']));
+        $receipt_data= $this->voucher_model->find('sum(debit_weight) as debit_weight,purity', array('parent_id'=>$value['id']));
         $this->data['loss_out_details'][$index]=$value;
         $this->data['loss_out_details'][$index]['receipt_weight']=$receipt_data['debit_weight'];
         $this->data['loss_out_details'][$index]['receipt_purity']=$receipt_data['purity'];
