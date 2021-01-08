@@ -3,6 +3,8 @@
     $url = 'reports/vadotar_reports';
   elseif ($report_type == 'Rojmel Report')
     $url = 'reports/rojmel_reports';
+  elseif ($report_type == 'Metal Receipt Type Report')
+    $url = 'reports/metal_receipt_type_ledgers';
   else
     $url = 'reports/account_ledgers';
 ?>
@@ -38,7 +40,7 @@
            href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&site_name=<?= $site_name?>&period=<?= $period ?>&report_type=<?= $report_type ?>&detail=no&group=<?= $group ?>'>Hide Details</a>
       </h5>
     </div> -->
-    <?php if ($report_type != 'Rojmel Report') { ?>
+    <?php if ($report_type != 'Rojmel Report' && $report_type != 'Metal Receipt Type Report') { ?>
       <div class="form-group container"> 
         <h5> Group By: 
           <a class="ml-5 <?= ($group=='') ? 'bold black underline' : '' ?>" 

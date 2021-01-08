@@ -45,9 +45,11 @@ class Ledgers extends BaseController {
     if ($this->data['report_type'] == 'Production Report') $where['account_name != '] = 'VADOTAR';
     
     if ($this->data['report_type'] == 'Account Ledger' && $this->data['group'] == 'date')
-      $this->data['group'] = 'voucher_type, voucher_date, chitti_no, receipt_type, account_name';      
+      $this->data['group'] = 'voucher_type, voucher_date, chitti_no, receipt_type, account_name';
+    if ($this->data['report_type'] == 'Metal Receipt Type Report' && $this->data['group'] == 'date')
+      $this->data['group'] = 'voucher_type, voucher_date, receipt_type';      
     
-    if ($this->data['report_type'] == 'Account Ledger' || $this->data['report_type'] == 'Rojmel Report') {
+    if ($this->data['report_type'] == 'Account Ledger' || $this->data['report_type'] == 'Rojmel Report'|| $this->data['report_type'] == 'Metal Receipt Type Report') {
       $receipt_issue_select = 'receipt_type, '.$period_select.' as voucher_date, 
                                date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
                                account_name, voucher_type, 
@@ -80,10 +82,10 @@ class Ledgers extends BaseController {
                               ""  as narration, "" as description, 
                               "" as chitti_no,parent_id as parent_id';       
     }
-
+    if ($this->data['report_type'] == 'Metal Receipt Type Report')
+     $where['receipt_type']='Metal';
     $where_issue   = array_merge($where, array('(credit_weight != 0 or credit_amount != 0)' => NULL));
     $where_receipt = array_merge($where, array('(debit_weight != 0 or debit_amount != 0)'   => NULL));
-
     $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(), array('order_by'=>'chitti_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
     $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(), array('order_by'=>'parent_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
 
