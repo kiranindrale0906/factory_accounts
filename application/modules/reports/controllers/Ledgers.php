@@ -4,7 +4,7 @@ class Ledgers extends BaseController {
 	public function __construct() {
   	parent::__construct();
     $this->load->model(array('transactions/ledger_model'));
-	}
+  }
 
   protected function get_datewise_ledger_records() {
     $this->data['site_name']            = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'All';
@@ -15,11 +15,13 @@ class Ledgers extends BaseController {
     $this->data['record']['account_id'] = (!empty($_GET[$this->router->class]['account_id'])) ? $_GET[$this->router->class]['account_id'] : $this->data['account_id'];
     if (empty($this->data['account_id'])) $this->data['account_id'] = $this->data['record']['account_id'];
 
-    if ($this->data['period'] == 'date' && $this->data['report_type'] == 'Account Ledger')
+    if ($this->data['period'] == 'date' && ($this->data['report_type'] == 'Account Ledger'))
+      $this->data['group'] = 'date';
+    elseif ($this->data['period'] == 'date' && ($this->data['report_type'] == 'Metal Receipt Type Report'))
       $this->data['group'] = 'date';
     elseif ($this->data['report_type'] == 'Rojmel Report')
       $this->data['group'] = 'id';
-
+    
     if     ($this->data['period'] == 'date')  $period_select = 'date_format(voucher_date,"%Y-%m-%d")';
     elseif ($this->data['period'] == 'month') $period_select = 'date_format(voucher_date,"%Y-%m")';
     elseif ($this->data['period'] == 'week') {
@@ -48,7 +50,7 @@ class Ledgers extends BaseController {
       $this->data['group'] = 'voucher_type, voucher_date, chitti_no, receipt_type, account_name';
     if ($this->data['report_type'] == 'Metal Receipt Type Report' && $this->data['group'] == 'date')
       $this->data['group'] = 'voucher_type, voucher_date, receipt_type';      
-    
+      
     if ($this->data['report_type'] == 'Account Ledger' || $this->data['report_type'] == 'Rojmel Report'|| $this->data['report_type'] == 'Metal Receipt Type Report') {
       $receipt_issue_select = 'receipt_type, '.$period_select.' as voucher_date, 
                                date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
