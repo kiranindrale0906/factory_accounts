@@ -1,9 +1,8 @@
 <h5 class="heading noprint">Voucher View</h5>
-<?php if($record['chitti_id']==0){
+<?php
   $voucher_type=str_replace(' ', '_', $record['voucher_type']).'s';
   ?>
 <?= getHttpButton('DELETE', base_url().'argold/voucher_details/delete/'.$record['id'].'?type='.$voucher_type, 'float-right btn-danger ml-5'); ?>
-<?php }?>
 <div class="row">
   <div class="col-md-6 ">
     <div class="form-group container">
