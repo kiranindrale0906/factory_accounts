@@ -64,7 +64,7 @@ class Chittis extends BaseController {
 
     $this->data['purity'] = $this->voucher_model->get('purity as name, purity as id', 
                                                        array('receipt_type' => 'GPC Out',
-                                                             'account_name' => 'SWARN SHILP CHAINS AND JEWELLERS PVT LTD',
+                                                             'account_name' => 'OUTSIDE PARTY',
                                                              'voucher_type' => 'metal issue voucher',
                                                              'chitti_id' => 0) ,array(), array('group_by' => 'purity'));
     
