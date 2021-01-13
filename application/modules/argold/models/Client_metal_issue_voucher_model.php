@@ -51,7 +51,7 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
     if (!empty($this->attributes['argold_id'])) return;   //do not set factory purity if set in issue department
 
     if (   empty($this->attributes['narration']) 
-        || $this->attributes['account_name'] != 'SWARN SHILP CHAINS AND JEWELLERS PVT LTD') {
+        || $this->attributes['account_name'] != 'OUTSIDE PARTY') {
       $this->attributes['factory_purity'] = $this->attributes['purity'];
       $this->attributes['factory_fine'] = $this->attributes['fine'];
     } else {
