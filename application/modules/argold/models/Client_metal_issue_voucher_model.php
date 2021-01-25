@@ -75,11 +75,8 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
     if (   ENABLE_API_FOR_RECEIPT 
         && $this->attributes['receipt_type'] != 'Internal' 
         && (   $account_name == 'AR Gold Nov 2020'
-            || $account_name == 'AR Gold Jan 2021'
             || $account_name == 'ARC Nov 2020'
-            || $account_name == 'ARC Jan 2021'
             || $account_name == 'ARF Nov 2020'
-            || $account_name == 'ARF Jan 2021'
             || $account_name == 'AR Gold Software'
             || $account_name == 'ARF Software'
             || $account_name == 'ARC Software')){
