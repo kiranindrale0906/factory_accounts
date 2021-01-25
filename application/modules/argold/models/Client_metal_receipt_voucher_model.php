@@ -414,17 +414,17 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     elseif ($attributes['account_name'] == 'ARC Software')
       $api_url = API_ARC_BASE_PATH.$api_url;
     elseif ($attributes['account_name'] == 'AR Gold Nov 2020')
-          $api_url = API_ARG_NOV_2020.$api_url;
+          $api_url = API_ARG_NOV_2020_PATH.$api_url;
     elseif ($attributes['account_name'] == 'AR Gold Jan 2021')
-          $api_url = API_ARG_JAN_2021.$api_url;
+          $api_url = API_ARG_JAN_2021_PATH.$api_url;
     elseif ($attributes['account_name'] == 'ARC Nov 2020')
-          $api_url = API_ARC_NOV_2020.$api_url;
+          $api_url = API_ARC_NOV_2020_PATH.$api_url;
     elseif ($attributes['account_name'] == 'ARC Jan 2021')
-          $api_url = API_ARC_JAN_2021.$api_url;
+          $api_url = API_ARC_JAN_2021_PATH.$api_url;
     elseif ($attributes['account_name'] == 'ARF Nov 2020')
-          $api_url = API_ARF_NOV_2020.$api_url;
+          $api_url = API_ARF_NOV_2020_PATH.$api_url;
     elseif ($attributes['account_name'] == 'ARF Jan 2021')
-          $api_url = API_ARF_JAN_2021.$api_url;
+          $api_url = API_ARF_JAN_2021_PATH.$api_url;
 
     $result = curl_post_request($api_url, $send_data);
   }
