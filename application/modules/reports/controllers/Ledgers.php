@@ -255,16 +255,17 @@ class Ledgers extends BaseController {
     $this->data['closing'] = array($last_voucher_date => array());
     $this->data['closing'][$last_voucher_date]['receipt']['debit_weight'] = 0;
     $this->data['closing'][$last_voucher_date]['receipt']['fine'] = 0;
-    $this->data['closing'][$last_voucher_date]['receipt']['factory_fine'] = $this->data['balance'][$last_voucher_date]['issue']['fine'];
-    $this->data['closing'][$last_voucher_date]['receipt']['debit_amount'] = $this->data['balance'][$last_voucher_date]['issue']['credit_amount'];
+    $this->data['closing'][$last_voucher_date]['receipt']['factory_fine'] =!empty($this->data['balance'][$last_voucher_date]['issue']['fine']) ?$this->data['balance'][$last_voucher_date]['issue']['fine']:0;
+    $this->data['closing'][$last_voucher_date]['receipt']['debit_amount'] =!empty($this->data['balance'][$last_voucher_date]['issue']['credit_amount']) ? $this->data['balance'][$last_voucher_date]['issue']['credit_amount']:0;
 
     $this->data['closing'][$last_voucher_date]['issue']['credit_weight'] = 0;
     $this->data['closing'][$last_voucher_date]['issue']['fine'] = 0;
-    $this->data['closing'][$last_voucher_date]['issue']['factory_fine'] = $this->data['balance'][$last_voucher_date]['receipt']['fine'];
-    $this->data['closing'][$last_voucher_date]['issue']['credit_amount'] = $this->data['balance'][$last_voucher_date]['receipt']['debit_amount']; 
+    $this->data['closing'][$last_voucher_date]['issue']['factory_fine'] =!empty($this->data['balance'][$last_voucher_date]['receipt']['fine']) ? $this->data['balance'][$last_voucher_date]['receipt']['fine']:0;
+    $this->data['closing'][$last_voucher_date]['issue']['credit_amount'] = 
+    !empty($this->data['balance'][$last_voucher_date]['receipt']['debit_amount']) ? $this->data['balance'][$last_voucher_date]['receipt']['debit_amount']:0;
 
     if ($this->data['report_type'] == 'Vadotar Report') {
-      $this->data['closing'][$last_voucher_date]['receipt']['fine'] = $this->data['balance'][$last_voucher_date]['issue']['factory_fine'];
+      $this->data['closing'][$last_voucher_date]['receipt']['fine'] = !empty($this->data['balance'][$last_voucher_date]['issue']['factory_fine'])?$this->data['balance'][$last_voucher_date]['issue']['factory_fine']:0;
     }
   }  
 }
