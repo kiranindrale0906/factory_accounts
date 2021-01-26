@@ -417,22 +417,22 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     $result = curl_post_request($api_url, $send_data);
   }
 
-  public function create_vodator_records($records, $receipt_type, $site_name, $start_date='2020-07-04') {
+  public function create_vodator_records($records, $receipt_type, $site_name, $hostversion) {
     if (empty($records)) return true;
     $records = json_decode(json_encode($records), true);
     foreach ($records as $index => $record) {
-      $start_date_timestamp = strtotime($start_date);
-      $voucher_date_timestamp = strtotime($record['created_date']);
+      //$start_date_timestamp = strtotime($start_date);
+      //$voucher_date_timestamp = strtotime($record['created_date']);
       
-      if ($start_date_timestamp > $voucher_date_timestamp) continue;
+      //if ($start_date_timestamp > $voucher_date_timestamp) continue;
       $metal_receipt_voucher = $this->find('id, debit_weight', array('receipt_type' => $receipt_type,
-                                                                     'account_name' => $site_name.' '.$receipt_type,
+                                                                     'account_name' => $site_name.' '.$hostversion.' '.$receipt_type,
                                                                      'narration' => $site_name.' '.$receipt_type,
                                                                      'voucher_date' => $record['created_date']));
       $data=array('company_id' => 1,
                   'voucher_date' => $record['created_date'],
                   'receipt_type' => $receipt_type,
-                  'account_name' => $site_name.' '.$receipt_type,
+                  'account_name' => $site_name.' '.$hostversion.' '.$receipt_type,
                   'debit_weight' => $record['weight'],
                   'purity' => $record['purity'],
                   'factory_purity' => $record['purity'],
