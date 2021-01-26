@@ -20,7 +20,8 @@ class Client_cash_receipt_vouchers extends Core_cash_receipt_vouchers {
 
     //if ($company_name != 'ARF')
       $this->data['account_names_for_cash_issue'][] = array('id' => 'ARF', 'name' => 'ARF'); 
-      $this->data['account_names_for_cash_issue'][] = array('id' => 'ARF Software', 'name' => 'ARF Software'); 
+      $this->data['account_names_for_cash_issue'][] = array('id' => 'ARF Software Nov 2020', 'name' => 'ARF Software Nov 2020'); 
+      $this->data['account_names_for_cash_issue'][] = array('id' => 'ARF Software Jan 2021', 'name' => 'ARF Software Jan 2021'); 
     
     //$this->data['account_names_for_cash_issue'][] = array('id' => 'ARC Finished Goods', 'name' => 'ARC Finished Goods');
     //$this->data['account_names_for_cash_issue'][] = array('id' => 'ARF Finished Goods', 'name' => 'ARF Finished Goods');   

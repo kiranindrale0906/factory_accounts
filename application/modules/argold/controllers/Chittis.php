@@ -44,7 +44,7 @@ class Chittis extends BaseController {
     if (!empty($_GET['purity']))
       $this->data['record']['purity'] = $_GET['purity'];
     
-    $this->data['record']['site_name'] = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'AR Gold';
+    $this->data['record']['site_name'] = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'AR Gold Jan 2021';
     $where=array('voucher_type' => 'metal issue voucher',
                  'chitti_id' => '',
                  'packet_no!=' => 0,
@@ -73,9 +73,12 @@ class Chittis extends BaseController {
       $this->data['chittis_details'] = @$_POST['chittis_details'];
     }
 
-    $this->data['site_names'] = array(array('id' => 'AR Gold', 'name' => 'AR Gold'),
-                                      array('id' => 'ARF', 'name' => 'ARF'),
-                                      array('id' => 'ARC', 'name' => 'ARC'));
+    $this->data['site_names'] = array(array('id' => 'AR Gold Jan 2021', 'name' => 'AR Gold Jan 2021'),
+                                      array('id' => 'ARF Jan 2021', 'name' => 'ARF Jan 2021'),
+                                      array('id' => 'ARC Jan 2021', 'name' => 'ARC Jan 2021'),
+                                      array('id' => 'AR Gold Nov 2020', 'name' => 'AR Gold Nov 2020'),
+                                      array('id' => 'ARF Nov 2020', 'name' => 'ARF Nov 2020'),
+                                      array('id' => 'ARC Nov 2020', 'name' => 'ARC Nov 2020'));
   }
 
   public function store() {

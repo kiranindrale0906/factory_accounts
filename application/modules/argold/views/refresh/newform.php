@@ -16,9 +16,12 @@
     <?php load_field('text', array('field' => 'rate'));?>
     <?php load_field('text',array('field' => 'manual_taxable_amount'));  ?>
     <?php load_field('dropdown', array('field' => 'site_name','option'=>array(
-                                                                              array('id'=>'AR Gold','name'=>'AR Gold'),
-                                                                              array('id'=>'ARF','name'=>'ARF'),
-                                                                              array('id'=>'ARC','name'=>'ARC'))));?>
+                                                                              array('id'=>'AR Gold Jan 2021','name'=>'AR Gold Jan 2021'),
+                                                                              array('id'=>'AR Gold Nov 2020','name'=>'AR Gold Nov 2020'),
+                                                                              array('id'=>'ARF Jan 2021','name'=>'ARF Jan 2021'),
+                                                                              array('id'=>'ARF Nov 2020','name'=>'ARF Nov 2020'),
+                                                                              array('id'=>'ARC Jan 2021','name'=>'ARC Jan 2021'),
+                                                                              array('id'=>'ARC Nov 2020','name'=>'ARC Nov 2020'))));?>
   
   </div>
     <?php $this->load->view('refresh_details/formlist');?>
