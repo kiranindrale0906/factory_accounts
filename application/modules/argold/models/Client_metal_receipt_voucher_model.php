@@ -208,8 +208,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   }
 
   private function set_metal_issue_voucher_attributes_for_alloy_vadotar_and_gpc_vadotar() {
-    if (    $this->attributes['account_name'] == "Alloy Vodator"
-         || $this->attributes['account_name'] == "GPC Vodator"
+    if (    $this->attributes['receipt_type'] == "Alloy Vodator"
+         || $this->attributes['receipt_type'] == "GPC Vodator"
          || $this->attributes['receipt_type'] == 'Stone Vatav') {
       unset($this->formdata['metal_issue_vouchers']);
 
