@@ -19,15 +19,27 @@ class Telegram_production_summary extends BaseController {
 
   //get issue department records
   private function send_issue_gpc_out_records($date) {
-    $url  = API_ARG_BASE_PATH."issue_departments/api_issue_departments/index?issue_at=".$date;
+    $url  = API_ARG_JAN2021_PATH."issue_departments/api_issue_departments/index?issue_at=".$date;
     $argold_records = json_decode(curl_post_request($url));
     $this->send_issue_gpc_out_message($argold_records->data);
     
-    $url  = API_ARF_BASE_PATH."issue_departments/api_issue_departments/index?issue_at=".$date;
+    $url  = API_ARF_JAN2021_PATH."issue_departments/api_issue_departments/index?issue_at=".$date;
     $arf_records = json_decode(curl_post_request($url));
     $this->send_issue_gpc_out_message($arf_records->data);
     
-    $url  = API_ARC_BASE_PATH."issue_departments/api_issue_departments/index?issue_at=".$date;
+    $url  = API_ARC_JAN2021_PATH."issue_departments/api_issue_departments/index?issue_at=".$date;
+    $arc_records = json_decode(curl_post_request($url));
+    $this->send_issue_gpc_out_message($arc_records->data);
+
+    $url  = API_ARG_NOV2020_PATH."issue_departments/api_issue_departments/index?issue_at=".$date;
+    $argold_records = json_decode(curl_post_request($url));
+    $this->send_issue_gpc_out_message($argold_records->data);
+    
+    $url  = API_ARF_NOV2020_PATH."issue_departments/api_issue_departments/index?issue_at=".$date;
+    $arf_records = json_decode(curl_post_request($url));
+    $this->send_issue_gpc_out_message($arf_records->data);
+    
+    $url  = API_ARC_NOV2020_PATH."issue_departments/api_issue_departments/index?issue_at=".$date;
     $arc_records = json_decode(curl_post_request($url));
     $this->send_issue_gpc_out_message($arc_records->data);
   }
