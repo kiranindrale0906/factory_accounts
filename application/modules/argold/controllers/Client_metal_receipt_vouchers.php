@@ -13,12 +13,18 @@ class Client_metal_receipt_vouchers extends Core_metal_receipt_vouchers {
     $re = $this->company_model->find('name', array('id' => $company_id))['name'];
     $this->data['record']['parent_id']=!empty($_GET['parent_id'])?$_GET['parent_id']:0;
   	$this->data['account_names_for_metal_issue'] = array(array('id' => '', 'name' => ''));
+    $this->data['record']['receipt_type']=!empty($_GET['receipt_type'])?$_GET['receipt_type']:"";
 
     $this->data['account_names_for_metal_issue'][] = array('id' => 'AR Gold Software', 'name' => 'AR Gold Software');
     $this->data['account_names_for_metal_issue'][] = array('id' => 'ARC Software', 'name' => 'ARC Software');
     $this->data['account_names_for_metal_issue'][] = array('id' => 'ARF Software', 'name' => 'ARF Software'); 
+    if($this->data['record']['receipt_type']=='Metal'){
+    $this->data['account_names_for_metal_issue'][] = array('id' => 'AR Gold Nov 2020', 'name' => 'AR Gold Nov 2020');
+    $this->data['account_names_for_metal_issue'][] = array('id' => 'ARC Nov 2020', 'name' => 'ARC Nov 2020');
+    $this->data['account_names_for_metal_issue'][] = array('id' => 'ARF Nov 2020', 'name' => 'ARF Nov 2020'); 
+    
+    }
 
-    $this->data['record']['receipt_type']=!empty($_GET['receipt_type'])?$_GET['receipt_type']:"";
     $this->data['refresh_id']=!empty($_GET['refresh_id'])?$_GET['refresh_id']:"";
     if(!empty($this->data['refresh_id'])){
       $refresh_data=$this->refresh_model->find('', array('id' => $this->data['refresh_id']));
