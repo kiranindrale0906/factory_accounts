@@ -395,6 +395,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $api_data = array_merge($api_data, array('type' => 'Pure'));
       $send_data['internal_receipts'] = $api_data;
       $api_url = "api/api_internal_receipts/store";
+      print_r($send_data);
+      pd($api_url);
 
     } elseif (   $attributes['receipt_type'] == 'AR Gold RND'
               || $attributes['receipt_type'] == 'ARF RND'
@@ -413,9 +415,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $send_data['pending_ghiss_receipts'] = array_merge($api_data, array('department_name' => $attributes['narration']));
       $api_url = "api/api_pending_ghiss_receipts/store";
     }
-    print_r($send_data);
-    pd($api_url);
-    die;
+
     if (empty($api_url)) return true;
     if ($attributes['account_name'] == 'AR Gold Software Jan 2021')
       $api_url = API_ARG_JAN2021_PATH.$api_url;
@@ -429,6 +429,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
           $api_url = API_ARC_NOV2020_PATH.$api_url;
     elseif ($attributes['account_name'] == 'ARF Software Nov 2020')
           $api_url = API_ARF_NOV2020_PATH.$api_url;
+
     $result = curl_post_request($api_url, $send_data);
   }
 
