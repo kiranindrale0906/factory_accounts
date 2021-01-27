@@ -21,7 +21,7 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
   public function before_validate() {
     if ($this->attributes['receipt_type'] == 'Tounch Loss Fine') return;
     if ($this->attributes['receipt_type'] == 'Cutting Ghiss' || $this->attributes['receipt_type'] == 'Ice Cutting Ghiss') 
-      $this->attributes['account_name'] = 'ARF Software';
+      $this->attributes['account_name'] = 'ARF Software Nov 2020';
 
     if (empty($this->attributes['purity']))
       $this->attributes['fine'] = 0;
@@ -74,11 +74,14 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
     $account_name=trim($this->attributes['account_name']);
     if (   ENABLE_API_FOR_RECEIPT 
         && $this->attributes['receipt_type'] != 'Internal' 
-        && (   $account_name == 'AR Gold Software'
-            || $account_name == 'ARF Software'
-            || $account_name == 'ARC Software')){
-      print_r($this->attributes['receipt_type']);
-      pd($account_name);
+        && (   $account_name == 'AR Gold Software Nov 2020'
+            || $account_name == 'ARC Software Nov 2020'
+            || $account_name == 'ARF Software Nov 2020'
+            || $account_name == 'AR Gold Software Jan 2021'
+            || $account_name == 'ARF Software Jan 2021'
+            || $account_name == 'ARC Software Jan 2021')){
+      print_r($account_name);
+      pd($this->attributes['receipt_type']);
       $this->client_metal_receipt_voucher_model->send_request_to_factory($this->attributes);
     }
             // || $this->attributes['receipt_type'] == 'ARF Chain Receipt'

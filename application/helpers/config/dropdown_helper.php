@@ -138,9 +138,12 @@
   }
 
   function get_site_url($site_name) {
-    if ($site_name=='AR Gold') return API_ARG_BASE_PATH;
-    elseif ($site_name=='ARF') return API_ARF_BASE_PATH;
-    elseif ($site_name=='ARC') return API_ARC_BASE_PATH;
+    if     ($site_name=='AR Gold Nov 2020') return API_ARG_NOV2020_PATH;
+    elseif ($site_name=='ARF Nov 2020')     return API_ARF_NOV2020_PATH;
+    elseif ($site_name=='ARC Nov 2020')     return API_ARC_NOV2020_PATH;
+    elseif ($site_name=='AR Gold Jan 2021') return API_ARG_JAN2021_PATH;
+    elseif ($site_name=='ARF Jan 2021')     return API_ARF_JAN2021_PATH;
+    elseif ($site_name=='ARC Jan 2021')     return API_ARC_JAN2021_PATH;
   }
 
   
