@@ -250,6 +250,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
   private function set_receipt_type_for_all_metal_issue_vouchers() {
     if (isset($this->formdata['metal_issue_vouchers']) && is_array($this->formdata['metal_issue_vouchers'])) {
+      pd($this->attributes['receipt_type']);
       foreach ($this->formdata['metal_issue_vouchers'] as $index => $metal_issue_voucher) {
         $this->formdata['metal_issue_vouchers'][$index]['receipt_type'] = $this->attributes['receipt_type'];
       }
