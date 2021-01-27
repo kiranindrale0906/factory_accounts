@@ -45,7 +45,6 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     $this->set_metal_receipt_attributes();
 
     $this->set_metal_issue_voucher_attributes_from_argold_software_metal_receipt();
-    pd($this->formdata);
     $this->set_metal_issue_voucher_attributes_from_receipt_type_for_refresh_and_chain_receipt();
     $this->set_metal_issue_voucher_attributes_from_receipt_type_for_metal_and_chain_receipt();
     $this->set_id_for_alloy_vodator_gpc_vodator_and_stone_vatav();
