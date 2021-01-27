@@ -14,7 +14,7 @@
     <div class="form-group container"> 
       <h5> Select Factory:
         <?php 
-          $companies = array('All', 'AR Gold', 'ARF', 'ARC');
+          $companies = array('All', 'AR Gold Nov 2020', 'ARF Nov 2020', 'ARC Nov 2020', 'AR Gold Jan 2021', 'ARF Jan 2021', 'ARC Jan 2021');
           foreach ($companies as $index => $company) { ?>
             <a class="ml-5 <?= ($site_name== $company) ? 'bold black underline' : '' ?>" 
                href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&site_name=<?= $company?>&period=<?= $period ?>&report_type=<?= $report_type ?>&detail=<?= $detail ?>&group=<?= $group ?>'><?= $company ?></a>
