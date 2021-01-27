@@ -133,6 +133,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                                                         'credit_weight' => $in_weight,
                                                         'dd_type' => $this->attributes['dd_type']);
     } 
+    if ($this->attributes['receipt_type'] == 'Melting Wastage') {
+      $this->formdata['metal_issue_vouchers'][] =$this->formdata['metal_issue_vouchers'];
+    }
   }
   
   private function set_metal_issue_voucher_attributes_from_receipt_type_for_refresh_and_chain_receipt() {
@@ -395,7 +398,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $api_data = array_merge($api_data, array('type' => 'Pure'));
       $send_data['internal_receipts'] = $api_data;
       $api_url = "api/api_internal_receipts/store";
-      
+
     } elseif (   $attributes['receipt_type'] == 'AR Gold RND'
               || $attributes['receipt_type'] == 'ARF RND'
               || $attributes['receipt_type'] == 'ARC RND') {
