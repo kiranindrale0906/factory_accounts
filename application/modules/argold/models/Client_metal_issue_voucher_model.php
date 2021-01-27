@@ -80,7 +80,6 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
             || $account_name == 'AR Gold Software Jan 2021'
             || $account_name == 'ARF Software Jan 2021'
             || $account_name == 'ARC Software Jan 2021')){
-      pd($this->attributes);
       $this->client_metal_receipt_voucher_model->send_request_to_factory($this->attributes);
     }
             // || $this->attributes['receipt_type'] == 'ARF Chain Receipt'

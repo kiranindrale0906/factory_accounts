@@ -54,6 +54,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     $this->set_receipt_type_for_all_metal_issue_vouchers();
     $this->set_gold_rate_purity();
     $this->unset_metal_issue_voucher_records_when_credit_weight_is_0(); 
+    pd($this->formdata);
   }
 
   private function set_gold_rate_purity() {
@@ -249,7 +250,6 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   }
 
   private function set_receipt_type_for_all_metal_issue_vouchers() {
-    pd($this->attributes);
     if (isset($this->formdata['metal_issue_vouchers'])) {
       foreach ($this->formdata['metal_issue_vouchers'] as $index => $metal_issue_voucher) {
         $this->formdata['metal_issue_vouchers'][$index]['receipt_type'] = $this->attributes['receipt_type'];
