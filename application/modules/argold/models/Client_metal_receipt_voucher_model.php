@@ -341,7 +341,6 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   }
 
   public function send_request_to_factory($attributes) {
-    pd($attributes);
     
     $attributes['account_name']=trim($attributes['account_name']);
     if ($attributes['credit_weight'] == 0) return true;
@@ -415,6 +414,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $send_data['pending_ghiss_receipts'] = array_merge($api_data, array('department_name' => $attributes['narration']));
       $api_url = "api/api_pending_ghiss_receipts/store";
     }
+    print_r($send_data);
+    pd($api_url);
 
     if (empty($api_url)) return true;
     if ($attributes['account_name'] == 'AR Gold Software Jan 2021')
