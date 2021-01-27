@@ -415,6 +415,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     }
     print_r($send_data);
     pd($api_url);
+    die;
     if (empty($api_url)) return true;
     if ($attributes['account_name'] == 'AR Gold Software Jan 2021')
       $api_url = API_ARG_JAN2021_PATH.$api_url;
