@@ -133,11 +133,6 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                                                         'credit_weight' => $in_weight,
                                                         'dd_type' => $this->attributes['dd_type']);
     } 
-    if ($this->attributes['receipt_type'] == 'Melting Wastage') {
-      $metal_issue_voucher_details=$this->formdata['metal_issue_vouchers'];
-      $this->formdata['metal_issue_vouchers']=array();
-      $this->formdata['metal_issue_vouchers'][] =$metal_issue_voucher_details;
-    }
   }
   
   private function set_metal_issue_voucher_attributes_from_receipt_type_for_refresh_and_chain_receipt() {
@@ -346,6 +341,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   }
 
   public function send_request_to_factory($attributes) {
+    pd($attributes);
     $attributes['account_name']=trim($attributes['account_name']);
     if ($attributes['credit_weight'] == 0) return true;
 
