@@ -19,6 +19,7 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
   }
 
   public function before_validate() {
+    pd($this->attributes);
     if ($this->attributes['receipt_type'] == 'Tounch Loss Fine') return;
     if ($this->attributes['receipt_type'] == 'Cutting Ghiss' || $this->attributes['receipt_type'] == 'Ice Cutting Ghiss') 
       $this->attributes['account_name'] = 'ARF Software Nov 2020';
@@ -70,7 +71,6 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
 
   public function after_save($action) {
     parent::after_save($action);
-    pd('hihihih');
     //$this->create_metal_receipt_voucher_for_finished_goods();
     $account_name=trim($this->attributes['account_name']);
     if (   ENABLE_API_FOR_RECEIPT 
