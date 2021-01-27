@@ -37,6 +37,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
 
   public function before_validate() {
+    pd($this->formdata);
     $this->set_account_name_from_receipt_type();
     $this->set_site_name_from_receipt_type();
     $this->set_sale_type_from_receipt_type_for_metal();
@@ -54,7 +55,6 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     $this->set_receipt_type_for_all_metal_issue_vouchers();
     $this->set_gold_rate_purity();
     $this->unset_metal_issue_voucher_records_when_credit_weight_is_0(); 
-    pd($this->formdata);
   }
 
   private function set_gold_rate_purity() {
