@@ -146,8 +146,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
              || $this->attributes['receipt_type'] == 'GPC Vodator'
              || $this->attributes['receipt_type'] == 'Stone Vatav') && $this->attributes['site_name'] == 'AR Gold Jan 2021')) {
       $set_metal_issue_voucher = 1;
-      $account_name = 'AR Gold Software Jan 2021';
-      $site_name = 'AR Gold Jan 2021';
+      $account_name = 'AR Gold Software Nov 2020';
+      $site_name = 'AR Gold Nov 2020';
     }      
 
     if (in_array($this->attributes['receipt_type'], array('ARF Refresh', 
