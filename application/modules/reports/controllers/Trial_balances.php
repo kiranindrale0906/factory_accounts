@@ -15,63 +15,67 @@ class Trial_balances extends Ledgers {
     //$this->metal_receipt_voucher_model->delete_vodator_records(date('Y-m-d'));
     //$this->metal_issue_voucher_model->delete_vodator_records(date('Y-m-d'));
 
-    $incorrect_vadotar_vouchers = $this->voucher_model->get('receipt_type, site_name, voucher_date, sum(credit_weight) as credit_weight, sum(debit_weight) as debit_weight',
-                                         array('receipt_type' => array('Alloy Vodator', 'GPC Vodator', 'Stone Vatav')),
-                                         array(), array('group_by' => 'receipt_type, site_name, voucher_date',
-                                                        'having' => 'credit_weight != debit_weight'));
-    foreach($incorrect_vadotar_vouchers as $incorrect_vadotar_voucher) {
-      $this->voucher_model->delete('', array('receipt_type' => $incorrect_vadotar_voucher['receipt_type'],
-                                             'site_name' => $incorrect_vadotar_voucher['site_name'],
-                                             'voucher_date' => $incorrect_vadotar_voucher['voucher_date']));
-      $this->ledger_model->delete('', array('parent_id not in (select id from ac_vouchers)' => NULL));
-    }
+    $update_vadotar = isset($_GET['update_vadotar']) ? TRUE : FALSE;
 
-    $url = API_ARG_NOV2020_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
-    $records = json_decode(curl_post_request($url));
-    if (!empty($records)) {
-      $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator, 'Alloy Vodator', 'AR Gold', 'Nov 2020');
-      $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator, 'GPC Vodator', 'AR Gold', 'Nov 2020');
-      $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav, 'Stone Vatav', 'AR Gold', 'Nov 2020');
-    }
+    if ($update_vadotar) {
+      $incorrect_vadotar_vouchers = $this->voucher_model->get('receipt_type, site_name, voucher_date, sum(credit_weight) as credit_weight, sum(debit_weight) as debit_weight',
+                                           array('receipt_type' => array('Alloy Vodator', 'GPC Vodator', 'Stone Vatav')),
+                                           array(), array('group_by' => 'receipt_type, site_name, voucher_date',
+                                                          'having' => 'credit_weight != debit_weight'));
+      foreach($incorrect_vadotar_vouchers as $incorrect_vadotar_voucher) {
+        $this->voucher_model->delete('', array('receipt_type' => $incorrect_vadotar_voucher['receipt_type'],
+                                               'site_name' => $incorrect_vadotar_voucher['site_name'],
+                                               'voucher_date' => $incorrect_vadotar_voucher['voucher_date']));
+        $this->ledger_model->delete('', array('parent_id not in (select id from ac_vouchers)' => NULL));
+      }
 
-    $url = API_ARF_NOV2020_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
-    $records = json_decode(curl_post_request($url));
-    if (!empty($records)) {
-      $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator, 'Alloy Vodator', 'ARF', 'Nov 2020');
-      $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator, 'GPC Vodator', 'ARF', 'Nov 2020');
-      $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav, 'Stone Vatav', 'ARF', 'Nov 2020');
-    }
+      $url = API_ARG_NOV2020_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
+      $records = json_decode(curl_post_request($url));
+      if (!empty($records)) {
+        $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator, 'Alloy Vodator', 'AR Gold', 'Nov 2020');
+        $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator, 'GPC Vodator', 'AR Gold', 'Nov 2020');
+        $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav, 'Stone Vatav', 'AR Gold', 'Nov 2020');
+      }
 
-    $url = API_ARC_NOV2020_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
-    $records = json_decode(curl_post_request($url));
-    if (!empty($records)) {
-      $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator, 'Alloy Vodator', 'ARC', 'Nov 2020');
-      $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator, 'GPC Vodator', 'ARC', 'Nov 2020');
-      $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav, 'Stone Vatav', 'ARC', 'Nov 2020');
-    }
+      $url = API_ARF_NOV2020_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
+      $records = json_decode(curl_post_request($url));
+      if (!empty($records)) {
+        $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator, 'Alloy Vodator', 'ARF', 'Nov 2020');
+        $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator, 'GPC Vodator', 'ARF', 'Nov 2020');
+        $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav, 'Stone Vatav', 'ARF', 'Nov 2020');
+      }
 
-    $url = API_ARG_JAN2021_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
-    $records = json_decode(curl_post_request($url));
-    if (!empty($records)) {
-      $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator, 'Alloy Vodator', 'AR Gold', 'Jan 2021');
-      $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator, 'GPC Vodator', 'AR Gold', 'Jan 2021');
-      $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav, 'Stone Vatav', 'AR Gold', 'Jan 2021');
-    }
+      $url = API_ARC_NOV2020_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
+      $records = json_decode(curl_post_request($url));
+      if (!empty($records)) {
+        $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator, 'Alloy Vodator', 'ARC', 'Nov 2020');
+        $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator, 'GPC Vodator', 'ARC', 'Nov 2020');
+        $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav, 'Stone Vatav', 'ARC', 'Nov 2020');
+      }
 
-    $url = API_ARF_JAN2021_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
-    $records = json_decode(curl_post_request($url));
-    if (!empty($records)) {
-      $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator, 'Alloy Vodator', 'ARF', 'Jan 2021');
-      $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator, 'GPC Vodator', 'ARF', 'Jan 2021');
-      $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav, 'Stone Vatav', 'ARF', 'Jan 2021');
-    }
+      $url = API_ARG_JAN2021_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
+      $records = json_decode(curl_post_request($url));
+      if (!empty($records)) {
+        $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator, 'Alloy Vodator', 'AR Gold', 'Jan 2021');
+        $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator, 'GPC Vodator', 'AR Gold', 'Jan 2021');
+        $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav, 'Stone Vatav', 'AR Gold', 'Jan 2021');
+      }
 
-    $url = API_ARC_JAN2021_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
-    $records = json_decode(curl_post_request($url));
-    if (!empty($records)) {
-      $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator, 'Alloy Vodator', 'ARC', 'Jan 2021');
-      $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator, 'GPC Vodator', 'ARC', 'Jan 2021');
-      $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav, 'Stone Vatav', 'ARC', 'Jan 2021');
+      $url = API_ARF_JAN2021_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
+      $records = json_decode(curl_post_request($url));
+      if (!empty($records)) {
+        $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator, 'Alloy Vodator', 'ARF', 'Jan 2021');
+        $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator, 'GPC Vodator', 'ARF', 'Jan 2021');
+        $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav, 'Stone Vatav', 'ARF', 'Jan 2021');
+      }
+
+      $url = API_ARC_JAN2021_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
+      $records = json_decode(curl_post_request($url));
+      if (!empty($records)) {
+        $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator, 'Alloy Vodator', 'ARC', 'Jan 2021');
+        $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator, 'GPC Vodator', 'ARC', 'Jan 2021');
+        $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav, 'Stone Vatav', 'ARC', 'Jan 2021');
+      }
     }
 
     $this->data['layout']='application';
