@@ -62,9 +62,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   }
 
   private function set_site_name_from_receipt_type() {
-    if ($this->attributes['receipt_type'] == 'AR Gold Refresh')  $this->attributes['site_name'] = 'AR Gold Jan 2021';
-    elseif ($this->attributes['receipt_type'] == 'ARF Refresh')  $this->attributes['site_name'] = 'ARF Jan 2021';
-    elseif ($this->attributes['receipt_type'] == 'ARC Refresh')  $this->attributes['site_name'] = 'ARC Jan 2021';
+    if ($this->attributes['receipt_type'] == 'AR Gold Refresh')  $this->attributes['site_name'] = 'AR Gold Nov 2020';
+    elseif ($this->attributes['receipt_type'] == 'ARF Refresh')  $this->attributes['site_name'] = 'ARF Nov 2020';
+    elseif ($this->attributes['receipt_type'] == 'ARC Refresh')  $this->attributes['site_name'] = 'ARC Nov 2020';
   }
 
   private function set_sale_type_from_receipt_type_for_metal() {
