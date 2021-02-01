@@ -21,7 +21,7 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
   public function before_validate() {
     if ($this->attributes['receipt_type'] == 'Tounch Loss Fine') return;
     if ($this->attributes['receipt_type'] == 'Cutting Ghiss' || $this->attributes['receipt_type'] == 'Ice Cutting Ghiss') 
-      $this->attributes['account_name'] = 'ARF Software Nov 2020';
+      $this->attributes['account_name'] = 'ARF Software Jan 2021';
 
     if (empty($this->attributes['purity']))
       $this->attributes['fine'] = 0;
