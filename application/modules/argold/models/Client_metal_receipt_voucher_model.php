@@ -375,6 +375,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   }
 
   public function send_request_to_factory($attributes) {
+pd($attributes);
     $attributes['account_name']=trim($attributes['account_name']);
     if ($attributes['credit_weight'] == 0) return true;
 
@@ -461,7 +462,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
           $api_url = API_ARC_NOV2020_PATH.$api_url;
     elseif ($attributes['account_name'] == 'ARF Software Nov 2020')
           $api_url = API_ARF_NOV2020_PATH.$api_url;
-
+        pd($api_url);
     $result = curl_post_request($api_url, $send_data);
   }
 
