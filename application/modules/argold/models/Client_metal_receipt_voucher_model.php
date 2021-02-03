@@ -37,7 +37,6 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
 
   public function before_validate() {
-    pd($this->attributes);
     $this->set_account_name_from_receipt_type();
     $this->set_site_name_from_receipt_type();
     $this->set_sale_type_from_receipt_type_for_metal();
@@ -462,6 +461,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
           $api_url = API_ARC_NOV2020_PATH.$api_url;
     elseif ($attributes['account_name'] == 'ARF Software Nov 2020')
           $api_url = API_ARF_NOV2020_PATH.$api_url;
+
     $result = curl_post_request($api_url, $send_data);
   }
 
