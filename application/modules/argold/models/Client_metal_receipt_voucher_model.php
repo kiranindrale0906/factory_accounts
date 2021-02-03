@@ -461,6 +461,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
           $api_url = API_ARC_NOV2020_PATH.$api_url;
     elseif ($attributes['account_name'] == 'ARF Software Nov 2020')
           $api_url = API_ARF_NOV2020_PATH.$api_url;
+        print_r($api_url);
+        pd($send_data);
 
     $result = curl_post_request($api_url, $send_data);
   }
