@@ -49,13 +49,13 @@
 
         <tr>
           <td>Total</td>
-          <td class="text-right"><?= four_decimal(-1 * ($accounts_argold_jan2021_balance + $accounts_arf_jan2021_balance + $accounts_arc_jan2021_balance 
-                                                      //+ $accounts_argold_nov2020_balance + $accounts_arf_nov2020_balance + $accounts_arc_nov2020_balance)) ?></td>
+          <td class="text-right"><?= four_decimal(-1 * ($accounts_argold_jan2021_balance + $accounts_arf_jan2021_balance + $accounts_arc_jan2021_balance)) 
+                                                      //+ $accounts_argold_nov2020_balance + $accounts_arf_nov2020_balance + $accounts_arc_nov2020_balance ?></td>
           <td class="text-right"><?= four_decimal(-1 * ($live_argold_jan2021_balance + $live_arf_jan2021_balance + $live_arc_jan2021_balance
                                                       //+ $live_argold_nov2020_balance + $live_arf_nov2020_balance + $live_arc_nov2020_balance)) ?>  </td>
           <td class="text-right"><b><?= four_decimal(-1 * (  $accounts_argold_jan2021_balance  - $live_argold_jan2021_balance
                                                            + $accounts_arf_jan2021_balance - $live_arf_jan2021_balance
-                                                           + $accounts_arc_jan2021_balance - $live_arc_jan2021_balance
+                                                           + $accounts_arc_jan2021_balance - $live_arc_jan2021_balance))
                                                            //+ $accounts_argold_nov2020_balance  - $live_argold_nov2020_balance
                                                            //+ $accounts_arf_nov2020_balance - $live_arf_nov2020_balance
                                                            //+ $accounts_arc_nov2020_balance - $live_arc_nov2020_balance)) ?></b></td>
