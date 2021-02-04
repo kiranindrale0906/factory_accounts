@@ -89,14 +89,14 @@ class Trial_balances extends Ledgers {
   }
 
   private function get_factory_balance() {
-    $url=API_ARG_NOV2020_PATH."issue_and_receipts/ledger_balance/index";
-    $arg_nov2020_records=json_decode(curl_post_request($url));
+    // $url=API_ARG_NOV2020_PATH."issue_and_receipts/ledger_balance/index";
+    // $arg_nov2020_records=json_decode(curl_post_request($url));
     
-    $url=API_ARF_NOV2020_PATH."issue_and_receipts/ledger_balance/index";
-    $arf_nov2020_records=json_decode(curl_post_request($url));
+    // $url=API_ARF_NOV2020_PATH."issue_and_receipts/ledger_balance/index";
+    // $arf_nov2020_records=json_decode(curl_post_request($url));
     
-    $url=API_ARC_NOV2020_PATH."issue_and_receipts/ledger_balance/index";
-    $arc_nov2020_records=json_decode(curl_post_request($url));
+    // $url=API_ARC_NOV2020_PATH."issue_and_receipts/ledger_balance/index";
+    // $arc_nov2020_records=json_decode(curl_post_request($url));
 
     $url=API_ARG_JAN2021_PATH."issue_and_receipts/ledger_balance/index";
     $arg_jan2021_records=json_decode(curl_post_request($url));
@@ -108,17 +108,17 @@ class Trial_balances extends Ledgers {
     $arc_jan2021_records=json_decode(curl_post_request($url));
     
     $accounts_balance_select = '(sum(debit_weight*purity/100) - sum(credit_weight*purity/100)) as balance';
-    $this->data['accounts_argold_nov2020_balance'] = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Software Nov 2020'))['balance'];
-    $this->data['accounts_arf_nov2020_balance']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Software Nov 2020'))['balance'];
-    $this->data['accounts_arc_nov2020_balance']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARC Software Nov 2020'))['balance'];
+    // $this->data['accounts_argold_nov2020_balance'] = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Software Nov 2020'))['balance'];
+    // $this->data['accounts_arf_nov2020_balance']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Software Nov 2020'))['balance'];
+    // $this->data['accounts_arc_nov2020_balance']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARC Software Nov 2020'))['balance'];
     
     $this->data['accounts_argold_jan2021_balance'] = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Software Jan 2021'))['balance'];
     $this->data['accounts_arf_jan2021_balance']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Software Jan 2021'))['balance'];
     $this->data['accounts_arc_jan2021_balance']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARC Software Jan 2021'))['balance'];
     
-    $this->data['live_argold_nov2020_balance'] = $arg_nov2020_records->data->record->argold;
-    $this->data['live_arf_nov2020_balance']    = $arf_nov2020_records->data->record->argold;
-    $this->data['live_arc_nov2020_balance']    = $arc_nov2020_records->data->record->argold;
+    // $this->data['live_argold_nov2020_balance'] = $arg_nov2020_records->data->record->argold;
+    // $this->data['live_arf_nov2020_balance']    = $arf_nov2020_records->data->record->argold;
+    // $this->data['live_arc_nov2020_balance']    = $arc_nov2020_records->data->record->argold;
 
     $this->data['live_argold_jan2021_balance'] = $arg_jan2021_records->data->record->argold;
     $this->data['live_arf_jan2021_balance']    = $arf_jan2021_records->data->record->argold;
