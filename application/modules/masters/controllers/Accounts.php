@@ -13,7 +13,7 @@ class Accounts extends BaseController {
   public function index() {
     if(!empty($_POST['account_name'])) {
       $data=$this->model->get('name', array('name like "%'.$_POST['account_name'].'%"' => NULL,
-                                            'name not like "%Nov 2020%"'));
+                                            'name not like "%Nov 2020%"' => NULL));
       echo json_encode(array('data'=>$data,'status'=>'success')); die;
     }
 
