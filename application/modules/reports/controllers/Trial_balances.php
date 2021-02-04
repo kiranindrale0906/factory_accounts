@@ -149,7 +149,8 @@ class Trial_balances extends Ledgers {
                           'Loss Account', 'Tounch & Castic Dep.Loss', 'Tounch Loss Fine',
                           'MEENA LOSS ARF', 'GPC Powder', 'Gpc Powder ARF', 'SISMA GHISS LOSS',
                           'ARG Stone Loss', 'TOUNCH LOSS FINE ARC', 'PASSAGE SEPT', 'ARF GHISS LOSS',
-                          'BUFFING LOSS', 'GRINDING LOSS');
+                          'BUFFING LOSS', 'GRINDING LOSS',
+                          'SHAMPOO AND STEEL VIBRATOR LOSS/WALNUT SHAMPO', 'ARG GHISS LOSS', 'GPC POWDER LOSS ARC');
     foreach($this->data['trial_balance'] as $index => $trail_balance_record) {
       if (in_array($trail_balance_record['account_name'], $loss_account_names)) {
         $loss_account['fine'] += $trail_balance_record['fine'];
