@@ -141,9 +141,9 @@ class Trial_balances extends Ledgers {
      $this->data['accounts_argold_jan2021_alloy_vodator'] = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Jan 2021 Alloy Vodator'))['balance'];
      $this->data['accounts_arf_jan2021_alloy_vodator']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Jan 2021 Alloy Vodator'))['balance'];
      $this->data['accounts_arc_jan2021_alloy_vodator']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Jan 2021 Alloy Vodator'))['balance'];
-    $this->data['live_argold_jan2021_alloy_vodator'] = $arg_jan2021_records->data->alloy_vodator[0]->weight;
-    $this->data['live_arf_jan2021_alloy_vodator']    = $arf_jan2021_records->data->alloy_vodator[0]->weight;
-    $this->data['live_arc_jan2021_alloy_vodator']    = $arc_jan2021_records->data->alloy_vodator[0]->weight;
+    $this->data['live_argold_jan2021_alloy_vodator'] =!empty($arg_jan2021_records->data->alloy_vodator[0])? $arg_jan2021_records->data->alloy_vodator[0]->weight:0;
+    $this->data['live_arf_jan2021_alloy_vodator']    = !empty($arf_jan2021_records->data->alloy_vodator[0])?$arf_jan2021_records->data->alloy_vodator[0]->weight:0;
+    $this->data['live_arc_jan2021_alloy_vodator']    = !empty($arc_jan2021_records->data->alloy_vodator[0])?$arc_jan2021_records->data->alloy_vodator[0]->weight:0;
   } 
 
   private function get_gpc_vodator_balance() {
@@ -165,9 +165,9 @@ class Trial_balances extends Ledgers {
      $this->data['accounts_arc_jan2021_gpc_vodator']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Jan 2021 GPC Vodator'))['balance'];
     
     
-    $this->data['live_argold_jan2021_gpc_vodator'] = $arg_jan2021_records->data->gpc_vodator[0]->weight;
-    $this->data['live_arf_jan2021_gpc_vodator']    = $arf_jan2021_records->data->gpc_vodator[0]->weight;
-    $this->data['live_arc_jan2021_gpc_vodator']    = $arc_jan2021_records->data->alloy_vodator[0]->weight;
+    $this->data['live_argold_jan2021_gpc_vodator'] =!empty($arg_jan2021_records->data->gpc_vodator[0])? $arg_jan2021_records->data->gpc_vodator[0]->weight:0;
+    $this->data['live_arf_jan2021_gpc_vodator']    = !empty($arf_jan2021_records->data->gpc_vodator[0])? $arf_jan2021_records->data->gpc_vodator[0]->weight:0;
+    $this->data['live_arc_jan2021_gpc_vodator']    = !empty($arc_jan2021_records->data->gpc_vodator[0])? $arc_jan2021_records->data->alloy_vodator[0]->weight:0;
   }
   
   private function get_account_ledger_records() {
