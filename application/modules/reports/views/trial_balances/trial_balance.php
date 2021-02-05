@@ -143,4 +143,6 @@
     <?php $this->load->view('trial_balances/factory_balance'); ?>
   </div>
   <?php $this->load->view('trial_balances/profit_and_loss', array('profit_and_loss' => $profit_and_loss)); ?>
+
+
 <?php endif; ?>
