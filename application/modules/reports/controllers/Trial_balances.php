@@ -91,14 +91,14 @@ class Trial_balances extends Ledgers {
   }
 
   private function get_factory_balance() {
-    $url=API_ARG_NOV2020_PATH."issue_and_receipts/ledger_balance/index";
-    $arg_nov2020_records=json_decode(curl_post_request($url));
+    // $url=API_ARG_NOV2020_PATH."issue_and_receipts/ledger_balance/index";
+    // $arg_nov2020_records=json_decode(curl_post_request($url));
     
-    $url=API_ARF_NOV2020_PATH."issue_and_receipts/ledger_balance/index";
-    $arf_nov2020_records=json_decode(curl_post_request($url));
+    // $url=API_ARF_NOV2020_PATH."issue_and_receipts/ledger_balance/index";
+    // $arf_nov2020_records=json_decode(curl_post_request($url));
     
-    $url=API_ARC_NOV2020_PATH."issue_and_receipts/ledger_balance/index";
-    $arc_nov2020_records=json_decode(curl_post_request($url));
+    // $url=API_ARC_NOV2020_PATH."issue_and_receipts/ledger_balance/index";
+    // $arc_nov2020_records=json_decode(curl_post_request($url));
 
     $url=API_ARG_JAN2021_PATH."issue_and_receipts/ledger_balance/index";
     $arg_jan2021_records=json_decode(curl_post_request($url));
@@ -110,17 +110,16 @@ class Trial_balances extends Ledgers {
     $arc_jan2021_records=json_decode(curl_post_request($url));
     
     $accounts_balance_select = '(sum(debit_weight*purity/100) - sum(credit_weight*purity/100)) as balance';
-    $this->data['accounts_argold_nov2020_balance'] = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Software Nov 2020'))['balance'];
-    $this->data['accounts_arf_nov2020_balance']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Software Nov 2020'))['balance'];
-    $this->data['accounts_arc_nov2020_balance']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARC Software Nov 2020'))['balance'];
+    // $this->data['accounts_argold_nov2020_balance'] = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Software Nov 2020'))['balance'];
+    // $this->data['accounts_arf_nov2020_balance']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Software Nov 2020'))['balance'];
+    // $this->data['accounts_arc_nov2020_balance']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARC Software Nov 2020'))['balance'];
     
     $this->data['accounts_argold_jan2021_balance'] = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Software Jan 2021'))['balance'];
     $this->data['accounts_arf_jan2021_balance']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Software Jan 2021'))['balance'];
     $this->data['accounts_arc_jan2021_balance']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARC Software Jan 2021'))['balance'];
-    
-    $this->data['live_argold_nov2020_balance'] = @$arg_nov2020_records->data->record->argold;
-    $this->data['live_arf_nov2020_balance']    = @$arf_nov2020_records->data->record->argold;
-    $this->data['live_arc_nov2020_balance']    = @$arc_nov2020_records->data->record->argold;
+    // $this->data['live_argold_nov2020_balance'] = $arg_nov2020_records->data->record->argold;
+    // $this->data['live_arf_nov2020_balance']    = $arf_nov2020_records->data->record->argold;
+    // $this->data['live_arc_nov2020_balance']    = $arc_nov2020_records->data->record->argold;
 
     $this->data['live_argold_jan2021_balance'] = @$arg_jan2021_records->data->record->argold;
     $this->data['live_arf_jan2021_balance']    = @$arf_jan2021_records->data->record->argold;
@@ -229,7 +228,9 @@ class Trial_balances extends Ledgers {
                           'HCL Loss', 'STONE VATAV ARF', 'TOUNCH LOSS FINE ARF', 
                           'Loss Account', 'Tounch & Castic Dep.Loss', 'Tounch Loss Fine',
                           'MEENA LOSS ARF', 'GPC Powder', 'Gpc Powder ARF', 'SISMA GHISS LOSS',
-                          'ARG Stone Loss', 'TOUNCH LOSS FINE ARC', 'PASSAGE SEPT', 'ARF GHISS LOSS');
+                          'ARG Stone Loss', 'TOUNCH LOSS FINE ARC', 'PASSAGE SEPT', 'ARF GHISS LOSS',
+                          'BUFFING LOSS', 'GRINDING LOSS',
+                          'SHAMPOO AND STEEL VIBRATOR LOSS/WALNUT SHAMPO', 'ARG GHISS LOSS', 'GPC POWDER LOSS ARC');
     foreach($this->data['trial_balance'] as $index => $trail_balance_record) {
       if (in_array($trail_balance_record['account_name'], $loss_account_names)) {
         $loss_account['fine'] += $trail_balance_record['fine'];
