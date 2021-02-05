@@ -55,6 +55,7 @@ class Ledgers extends BaseController {
       $receipt_issue_select = 'receipt_type, '.$period_select.' as voucher_date, 
                                date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
                                account_name, voucher_type, 
+                               site_name, voucher_type, 
                                concat(voucher_number, ", ") as voucher_number, 
                                sum(credit_amount) as credit_amount, 
                                sum(debit_amount) as debit_amount, 
@@ -71,7 +72,7 @@ class Ledgers extends BaseController {
       //$this->data['group'] = 'voucher_date';
       $receipt_issue_select = '"" as receipt_type, '.$period_select.' as voucher_date, 
                               date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
-                              "" as account_name, "" as voucher_type, "" as voucher_number, 
+                              "" as account_name, "" as voucher_type,site_name , "" as voucher_number, 
                               sum(credit_amount) as credit_amount, 
                               sum(debit_amount) as debit_amount, 
                               sum(credit_weight) as credit_weight, 
