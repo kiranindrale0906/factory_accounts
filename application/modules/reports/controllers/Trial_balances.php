@@ -136,7 +136,7 @@ class Trial_balances extends Ledgers {
     $url=API_ARC_JAN2021_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
     $arc_jan2021_records=json_decode(curl_post_request($url));
     
-    $accounts_balance_select = 'sum(credit_weight) as balance';
+    $accounts_balance_select = '(sum(debit_weight*purity/100) - sum(credit_weight*purity/100)) as balance';
      
      $this->data['accounts_argold_jan2021_alloy_vodator'] = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Jan 2021 Alloy Vodator'))['balance'];
      $this->data['accounts_arf_jan2021_alloy_vodator']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Jan 2021 Alloy Vodator'))['balance'];
@@ -158,7 +158,7 @@ class Trial_balances extends Ledgers {
     $url=API_ARC_JAN2021_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
     $arc_jan2021_records=json_decode(curl_post_request($url));
     
-    $accounts_balance_select = 'sum(credit_weight) as balance';
+    $accounts_balance_select = '(sum(debit_weight*purity/100) - sum(credit_weight*purity/100)) as balance';
      
      $this->data['accounts_argold_jan2021_gpc_vodator'] = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Jan 2021 GPC Vodator'))['balance'];
      $this->data['accounts_arf_jan2021_gpc_vodator']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Jan 2021 GPC Vodator'))['balance'];
