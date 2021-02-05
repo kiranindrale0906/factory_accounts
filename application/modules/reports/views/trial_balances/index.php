@@ -12,3 +12,9 @@
 <hr />
 <h5 class="ml-2 pl-2">Loss Account Details</h5>
 <?php $this->load->view('trial_balances/trial_balance', array('trial_balance_records' => $loss_account_records, 'loss_account' => 1)); ?>
+<hr />
+<h5 class="ml-2 pl-2">Alloy Vodator Details</h5>
+<?php $this->load->view('trial_balances/alloy_vodator_balance'); ?>
+<hr />
+<h5 class="ml-2 pl-2">GPC Vodator Details</h5>
+<?php $this->load->view('trial_balances/gpc_vodator_balance'); ?>
