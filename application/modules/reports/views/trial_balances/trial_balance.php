@@ -119,11 +119,11 @@
           <tr>
             <td><b>Liabilities: </b></td>
             <td class="text-right"><?= four_decimal($liabilities_fine, '-') ?></td>
-          </tr>
+            </tr>
+          <tr>
             <td><b>Vadotar: </b></td>
             <td class="text-right"><?= four_decimal(-1 * ($liabilities_vadotar + $assets_vadotar));  ?></td>
           </tr>
-          <tr>
           <tr>
             <td><b>Assets: </b></td>
             <td class="text-right"><?= four_decimal(-1 * $assets_fine, '-');  ?></td>
@@ -139,7 +139,6 @@
         </table>
       </div>
     </div>
-    
     <?php $this->load->view('trial_balances/factory_balance'); ?>
   </div>
   <?php $this->load->view('trial_balances/profit_and_loss', array('profit_and_loss' => $profit_and_loss)); ?>

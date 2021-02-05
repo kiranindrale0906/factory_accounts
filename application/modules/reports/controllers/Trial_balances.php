@@ -84,9 +84,8 @@ class Trial_balances extends Ledgers {
 
     $this->get_factory_balance();
     $this->get_account_ledger_records();
-    $this->get_gpc_vodator_balance();
     $this->get_alloy_vodator_balance();
-
+    $this->get_gpc_vodator_balance();
     $this->load->render($this->router->class."/index",$this->data);
   }
 
@@ -127,16 +126,6 @@ class Trial_balances extends Ledgers {
   }
   private function get_alloy_vodator_balance() {
     
-    $url=API_ARG_NOV2020_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
-    $arg_nov2020_records=json_decode(curl_post_request($url));
-    // pd($arg_nov2020_records);
-    
-    $url=API_ARF_NOV2020_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
-    $arf_nov2020_records=json_decode(curl_post_request($url));
-    
-    $url=API_ARC_NOV2020_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
-    $arc_nov2020_records=json_decode(curl_post_request($url));
-
     $url=API_ARG_JAN2021_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
     $arg_jan2021_records=json_decode(curl_post_request($url));
     // pd($arg_jan2021_records);
@@ -148,18 +137,10 @@ class Trial_balances extends Ledgers {
     $arc_jan2021_records=json_decode(curl_post_request($url));
     
     $accounts_balance_select = 'sum(credit_weight) as balance';
-     $this->data['accounts_argold_nov2020_alloy_vodator'] = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Nov 2020 Alloy Vodator'))['balance'];
-     $this->data['accounts_arf_nov2020_alloy_vodator']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Nov 2020 Alloy Vodator'))['balance'];
-     $this->data['accounts_arc_nov2020_alloy_vodator']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARC Nov 2020 Alloy Vodator'))['balance'];
-    
+     
      $this->data['accounts_argold_jan2021_alloy_vodator'] = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Jan 2021 Alloy Vodator'))['balance'];
      $this->data['accounts_arf_jan2021_alloy_vodator']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Jan 2021 Alloy Vodator'))['balance'];
      $this->data['accounts_arc_jan2021_alloy_vodator']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Jan 2021 Alloy Vodator'))['balance'];
-    
-    $this->data['live_argold_nov2020_alloy_vodator'] = $arg_nov2020_records->data->alloy_vodator[0]->weight;
-    $this->data['live_arf_nov2020_alloy_vodator']    = $arf_nov2020_records->data->alloy_vodator[0]->weight;
-    $this->data['live_arc_nov2020_alloy_vodator']    = $arc_nov2020_records->data->alloy_vodator[0]->weight;
-
     $this->data['live_argold_jan2021_alloy_vodator'] = $arg_jan2021_records->data->alloy_vodator[0]->weight;
     $this->data['live_arf_jan2021_alloy_vodator']    = $arf_jan2021_records->data->alloy_vodator[0]->weight;
     $this->data['live_arc_jan2021_alloy_vodator']    = $arc_jan2021_records->data->alloy_vodator[0]->weight;
@@ -167,16 +148,6 @@ class Trial_balances extends Ledgers {
 
   private function get_gpc_vodator_balance() {
     
-    $url=API_ARG_NOV2020_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
-    $arg_nov2020_records=json_decode(curl_post_request($url));
-    // pd($arg_nov2020_records);
-    
-    $url=API_ARF_NOV2020_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
-    $arf_nov2020_records=json_decode(curl_post_request($url));
-    
-    $url=API_ARC_NOV2020_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
-    $arc_nov2020_records=json_decode(curl_post_request($url));
-
     $url=API_ARG_JAN2021_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
     $arg_jan2021_records=json_decode(curl_post_request($url));
     // pd($arg_jan2021_records);
@@ -188,23 +159,17 @@ class Trial_balances extends Ledgers {
     $arc_jan2021_records=json_decode(curl_post_request($url));
     
     $accounts_balance_select = 'sum(credit_weight) as balance';
-     $this->data['accounts_argold_nov2020_gpc_vodator'] = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Nov 2020 GPC Vodator'))['balance'];
-     $this->data['accounts_arf_nov2020_gpc_vodator']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Nov 2020 GPC Vodator'))['balance'];
-     $this->data['accounts_arc_nov2020_gpc_vodator']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARC Nov 2020 GPC Vodator'))['balance'];
-    
+     
      $this->data['accounts_argold_jan2021_gpc_vodator'] = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Jan 2021 GPC Vodator'))['balance'];
      $this->data['accounts_arf_jan2021_gpc_vodator']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Jan 2021 GPC Vodator'))['balance'];
      $this->data['accounts_arc_jan2021_gpc_vodator']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Jan 2021 GPC Vodator'))['balance'];
     
-    $this->data['live_argold_nov2020_gpc_vodator'] = $arg_nov2020_records->data->gpc_vodator[0]->weight;
-    $this->data['live_arf_nov2020_gpc_vodator']    = $arf_nov2020_records->data->gpc_vodator[0]->weight;
-    $this->data['live_arc_nov2020_gpc_vodator']    = $arc_nov2020_records->data->gpc_vodator[0]->weight;
-
+    
     $this->data['live_argold_jan2021_gpc_vodator'] = $arg_jan2021_records->data->gpc_vodator[0]->weight;
     $this->data['live_arf_jan2021_gpc_vodator']    = $arf_jan2021_records->data->gpc_vodator[0]->weight;
     $this->data['live_arc_jan2021_gpc_vodator']    = $arc_jan2021_records->data->alloy_vodator[0]->weight;
   }
-
+  
   private function get_account_ledger_records() {
     $this->data['voucher_dates']=array();
     if(empty($this->data['account_names'])) return true;
