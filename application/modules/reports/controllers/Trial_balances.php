@@ -57,6 +57,8 @@ class Trial_balances extends Ledgers {
 
     $this->get_factory_balance();
     $this->get_account_ledger_records();
+    $this->get_alloy_vodator_balance();
+    $this->get_gpc_vodator_balance();
 
     $this->load->render($this->router->class."/index",$this->data);
   }
@@ -80,6 +82,46 @@ class Trial_balances extends Ledgers {
     $this->data['live_arf_balance']    = $arf_records->data->record->argold;
     $this->data['live_arc_balance']    = $arc_records->data->record->argold;
   }
+  private function get_alloy_vodator_balance() {
+    
+    $url=API_ARG_BASE_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
+    $arg_records=json_decode(curl_post_request($url));
+    
+    $url=API_ARF_BASE_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
+    $arf_records=json_decode(curl_post_request($url));
+    
+    $url=API_ARC_BASE_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
+    $arc_records=json_decode(curl_post_request($url));
+    
+    $accounts_select = 'sum(credit_weight) as balance';
+     
+    $this->data['accounts_argold_alloy_vodator'] = $this->voucher_model->find($accounts_select, array('account_name' => 'AR Gold Jan 2021 Alloy Vodator'))['balance'];
+    $this->data['accounts_arf_alloy_vodator']    = $this->voucher_model->find($accounts_select, array('account_name' => 'ARF Jan 2021 Alloy Vodator'))['balance'];
+    $this->data['accounts_arc_alloy_vodator']    = $this->voucher_model->find($accounts_select, array('account_name' => 'ARF Jan 2021 Alloy Vodator'))['balance'];
+    
+    $this->data['live_argold_alloy_vodator'] = $arg_records->data->alloy_vodator[0]->weight;
+    $this->data['live_arf_alloy_vodator']    = $arf_records->data->alloy_vodator[0]->weight;
+    $this->data['live_arc_alloy_vodator']    = $arc_records->data->alloy_vodator[0]->weight;
+  } 
+
+  private function get_gpc_vodator_balance() {
+    $url=API_ARG_BASE_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
+    $arg_records=json_decode(curl_post_request($url));
+    $url=API_ARF_BASE_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
+    $arf_records=json_decode(curl_post_request($url));
+    $url=API_ARC_BASE_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
+    $arc_records=json_decode(curl_post_request($url));
+    
+    $accounts_balance_select = 'sum(credit_weight) as balance';
+     $this->data['accounts_argold_gpc_vodator'] = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Jan 2021 GPC Vodator'))['balance'];
+     $this->data['accounts_arf_gpc_vodator']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Jan 2021 GPC Vodator'))['balance'];
+     $this->data['accounts_arc_gpc_vodator']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Jan 2021 GPC Vodator'))['balance'];
+      $this->data['live_argold_gpc_vodator'] = $arg_records->data->gpc_vodator[0]->weight;
+      $this->data['live_arf_gpc_vodator']    = $arf_records->data->gpc_vodator[0]->weight;
+      $this->data['live_arc_gpc_vodator']    = $arc_records->data->alloy_vodator[0]->weight;
+  }
+
+
 
   private function get_account_ledger_records() {
     $this->data['voucher_dates']=array();
