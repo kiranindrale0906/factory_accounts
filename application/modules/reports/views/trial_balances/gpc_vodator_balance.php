@@ -1,10 +1,10 @@
-<div class="col-md-6">
+<div class="col-md-4">
   <div class="form-group container">
     <h5 class="ml-2 pl-2">GPC Vodator</h5>
     <div class="table-responsive m-t-20">
       <table class="table table-sm fixedthead table-default">
         <thead>
-          <tr> <th>GPC Vodatar Stock</th>
+          <tr> <th>Stock</th>
             <th class="text-right">Accounts</th>
             <th class="text-right">Factory</th>
             <th class="text-right">Total</th>
