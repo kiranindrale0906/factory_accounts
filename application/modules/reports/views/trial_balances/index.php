@@ -15,6 +15,10 @@
 </div>
 <div class="row">
 <?php $this->load->view('trial_balances/alloy_vodator_balance'); ?>
+</div>
+<div class="row">
 <?php $this->load->view('trial_balances/gpc_vodator_balance'); ?>
+</div>
+<div class="row">
 <?php $this->load->view('trial_balances/stone_vatav_balance'); ?>
 </div>

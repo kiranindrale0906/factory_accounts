@@ -102,6 +102,7 @@ class Trial_balances extends Ledgers {
 
     $url=API_ARG_JAN2021_PATH."issue_and_receipts/ledger_balance/index";
     $arg_jan2021_records=json_decode(curl_post_request($url));
+
     
     $url=API_ARF_JAN2021_PATH."issue_and_receipts/ledger_balance/index";
     $arf_jan2021_records=json_decode(curl_post_request($url));
@@ -129,7 +130,6 @@ class Trial_balances extends Ledgers {
     
     $url=API_ARG_JAN2021_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
     $arg_jan2021_records=json_decode(curl_post_request($url));
-    // pd($arg_jan2021_records);
     
     $url=API_ARF_JAN2021_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
     $arf_jan2021_records=json_decode(curl_post_request($url));
@@ -137,14 +137,23 @@ class Trial_balances extends Ledgers {
     $url=API_ARC_JAN2021_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
     $arc_jan2021_records=json_decode(curl_post_request($url));
     
-    $accounts_balance_select = '(sum(debit_weight*purity/100) - sum(credit_weight*purity/100)) as balance';
+    $accounts_balance_select = '(sum(debit_weight) - sum(credit_weight)) as balance,(sum(debit_weight*purity/100) - sum(credit_weight*purity/100)) as balance_fine';
      
      $this->data['accounts_argold_jan2021_alloy_vodator'] = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Jan 2021 Alloy Vodator'))['balance'];
      $this->data['accounts_arf_jan2021_alloy_vodator']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Jan 2021 Alloy Vodator'))['balance'];
      $this->data['accounts_arc_jan2021_alloy_vodator']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARC Jan 2021 Alloy Vodator'))['balance'];
+
+     $this->data['accounts_argold_jan2021_alloy_vodator_fine'] = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Jan 2021 Alloy Vodator'))['balance_fine'];
+     $this->data['accounts_arf_jan2021_alloy_vodator_fine']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Jan 2021 Alloy Vodator'))['balance_fine'];
+     $this->data['accounts_arc_jan2021_alloy_vodator_fine']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARC Jan 2021 Alloy Vodator'))['balance_fine'];
+
     $this->data['live_argold_jan2021_alloy_vodator'] =!empty($arg_jan2021_records->data->alloy_vodator[0])? $arg_jan2021_records->data->alloy_vodator[0]->weight:0;
     $this->data['live_arf_jan2021_alloy_vodator']    = !empty($arf_jan2021_records->data->alloy_vodator[0])?$arf_jan2021_records->data->alloy_vodator[0]->weight:0;
     $this->data['live_arc_jan2021_alloy_vodator']    = !empty($arc_jan2021_records->data->alloy_vodator[0])?$arc_jan2021_records->data->alloy_vodator[0]->weight:0;
+
+    $this->data['live_argold_jan2021_alloy_vodator_fine'] =!empty($arg_jan2021_records->data->alloy_vodator[0])? $arg_jan2021_records->data->alloy_vodator[0]->fine:0;
+    $this->data['live_arf_jan2021_alloy_vodator_fine']    = !empty($arf_jan2021_records->data->alloy_vodator[0])?$arf_jan2021_records->data->alloy_vodator[0]->fine:0;
+    $this->data['live_arc_jan2021_alloy_vodator_fine']    = !empty($arc_jan2021_records->data->alloy_vodator[0])?$arc_jan2021_records->data->alloy_vodator[0]->fine:0;
   } 
 
   private function get_gpc_vodator_balance() {
@@ -159,16 +168,23 @@ class Trial_balances extends Ledgers {
     $url=API_ARC_JAN2021_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
     $arc_jan2021_records=json_decode(curl_post_request($url));
     
-    $accounts_balance_select = '(sum(debit_weight*purity/100) - sum(credit_weight*purity/100)) as balance';
+    $accounts_balance_select = '(sum(debit_weight) - sum(credit_weight)) as balance,(sum(debit_weight*purity/100) - sum(credit_weight*purity/100)) as balance_fine';
      
      $this->data['accounts_argold_jan2021_gpc_vodator'] = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Jan 2021 GPC Vodator'))['balance'];
      $this->data['accounts_arf_jan2021_gpc_vodator']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Jan 2021 GPC Vodator'))['balance'];
      $this->data['accounts_arc_jan2021_gpc_vodator']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARC Jan 2021 GPC Vodator'))['balance'];
+    $this->data['accounts_argold_jan2021_gpc_vodator_fine'] = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Jan 2021 GPC Vodator'))['balance_fine'];
+     $this->data['accounts_arf_jan2021_gpc_vodator_fine']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Jan 2021 GPC Vodator'))['balance_fine'];
+     $this->data['accounts_arc_jan2021_gpc_vodator_fine']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARC Jan 2021 GPC Vodator'))['balance_fine'];
     
     
     $this->data['live_argold_jan2021_gpc_vodator'] =!empty($arg_jan2021_records->data->gpc_vodator[0])? $arg_jan2021_records->data->gpc_vodator[0]->weight:0;
     $this->data['live_arf_jan2021_gpc_vodator']    = !empty($arf_jan2021_records->data->gpc_vodator[0])? $arf_jan2021_records->data->gpc_vodator[0]->weight:0;
     $this->data['live_arc_jan2021_gpc_vodator']    = !empty($arc_jan2021_records->data->gpc_vodator[0])? $arc_jan2021_records->data->gpc_vodator[0]->weight:0;
+
+    $this->data['live_argold_jan2021_gpc_vodator_fine'] =!empty($arg_jan2021_records->data->gpc_vodator[0])? $arg_jan2021_records->data->gpc_vodator[0]->fine:0;
+    $this->data['live_arf_jan2021_gpc_vodator_fine']    = !empty($arf_jan2021_records->data->gpc_vodator[0])? $arf_jan2021_records->data->gpc_vodator[0]->fine:0;
+    $this->data['live_arc_jan2021_gpc_vodator_fine']    = !empty($arc_jan2021_records->data->gpc_vodator[0])? $arc_jan2021_records->data->gpc_vodator[0]->fine:0;
   }
   private function get_stone_vatav_balance() {
     
@@ -182,16 +198,24 @@ class Trial_balances extends Ledgers {
     $url=API_ARC_JAN2021_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
     $arc_jan2021_records=json_decode(curl_post_request($url));
     
-    $accounts_balance_select = '(sum(debit_weight*purity/100) - sum(credit_weight*purity/100)) as balance';
+    $accounts_balance_select = '(sum(debit_weight) - sum(credit_weight)) as balance,(sum(debit_weight*purity/100) - sum(credit_weight*purity/100)) as balance_fine';
      
      $this->data['accounts_argold_jan2021_stone_vatav'] = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Jan 2021 Stone Vatav'))['balance'];
      $this->data['accounts_arf_jan2021_stone_vatav']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Jan 2021 Stone Vatav'))['balance'];
      $this->data['accounts_arc_jan2021_stone_vatav']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARC Jan 2021 Stone Vatav'))['balance'];
+
+     $this->data['accounts_argold_jan2021_stone_vatav_fine'] = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Jan 2021 Stone Vatav'))['balance_fine'];
+     $this->data['accounts_arf_jan2021_stone_vatav_fine']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Jan 2021 Stone Vatav'))['balance_fine'];
+     $this->data['accounts_arc_jan2021_stone_vatav_fine']    = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARC Jan 2021 Stone Vatav'))['balance_fine'];
     
     
     $this->data['live_argold_jan2021_stone_vatav'] =!empty($arg_jan2021_records->data->stone_vatav[0])? $arg_jan2021_records->data->stone_vatav[0]->weight:0;
     $this->data['live_arf_jan2021_stone_vatav']    = !empty($arf_jan2021_records->data->stone_vatav[0])? $arf_jan2021_records->data->stone_vatav[0]->weight:0;
     $this->data['live_arc_jan2021_stone_vatav']    = !empty($arc_jan2021_records->data->stone_vatav[0])? $arc_jan2021_records->data->stone_vatav[0]->weight:0;
+
+    $this->data['live_argold_jan2021_stone_vatav_fine'] =!empty($arg_jan2021_records->data->stone_vatav[0])? $arg_jan2021_records->data->stone_vatav[0]->fine:0;
+    $this->data['live_arf_jan2021_stone_vatav_fine']    = !empty($arf_jan2021_records->data->stone_vatav[0])? $arf_jan2021_records->data->stone_vatav[0]->fine:0;
+    $this->data['live_arc_jan2021_stone_vatav_fine']    = !empty($arc_jan2021_records->data->stone_vatav[0])? $arc_jan2021_records->data->stone_vatav[0]->fine:0;
   }
   
   private function get_account_ledger_records() {
