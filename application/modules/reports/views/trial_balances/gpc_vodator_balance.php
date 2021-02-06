@@ -41,11 +41,11 @@
           <td class="text-right"><?= four_decimal($accounts_arc_jan2021_gpc_vodator_fine - $live_arc_jan2021_gpc_vodator_fine) ?></td>
         </tr>
         <tr>
-          <td>Total</td>
-           <td class="text-right"><?= four_decimal(($accounts_argold_jan2021_gpc_vodator + $accounts_arf_jan2021_gpc_vodator + $accounts_arc_jan2021_gpc_vodator )) ?></td>
-           <td class="text-right"><?= four_decimal(($accounts_argold_jan2021_gpc_vodator_fine + $accounts_arf_jan2021_gpc_vodator_fine + $accounts_arc_jan2021_gpc_vodator_fine )) ?></td>
-           <td class="text-right"><?= four_decimal(($live_argold_jan2021_gpc_vodator + $live_arf_jan2021_gpc_vodator + $live_arc_jan2021_gpc_vodator)) ?>  </td>
-           <td class="text-right"><?= four_decimal(($live_argold_jan2021_gpc_vodator_fine + $live_arf_jan2021_gpc_vodator_fine + $live_arc_jan2021_gpc_vodator_fine)) ?>  </td>
+          <td><b>Total</b></td>
+           <td class="text-right"><b><?= four_decimal(($accounts_argold_jan2021_gpc_vodator + $accounts_arf_jan2021_gpc_vodator + $accounts_arc_jan2021_gpc_vodator )) ?></b></td>
+           <td class="text-right"><b><?= four_decimal(($accounts_argold_jan2021_gpc_vodator_fine + $accounts_arf_jan2021_gpc_vodator_fine + $accounts_arc_jan2021_gpc_vodator_fine )) ?></b></td>
+           <td class="text-right"><b><?= four_decimal(($live_argold_jan2021_gpc_vodator + $live_arf_jan2021_gpc_vodator + $live_arc_jan2021_gpc_vodator)) ?>  </b></td>
+           <td class="text-right"><b><?= four_decimal(($live_argold_jan2021_gpc_vodator_fine + $live_arf_jan2021_gpc_vodator_fine + $live_arc_jan2021_gpc_vodator_fine)) ?> </b> </td>
           <td class="text-right"><b><?= four_decimal((($accounts_argold_jan2021_gpc_vodator-$live_argold_jan2021_gpc_vodator)
                                                            +  ($accounts_arf_jan2021_gpc_vodator-$live_arf_jan2021_gpc_vodator)
                                                            + ($accounts_arc_jan2021_gpc_vodator-$live_arc_jan2021_gpc_vodator))

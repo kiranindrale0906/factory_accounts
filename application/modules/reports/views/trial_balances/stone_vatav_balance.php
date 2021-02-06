@@ -42,11 +42,11 @@
           <td class="text-right"><?= four_decimal($accounts_arc_jan2021_stone_vatav_fine - $live_arc_jan2021_stone_vatav_fine) ?></td>
         </tr>
         <tr>
-          <td>Total</td>
-           <td class="text-right"><?= four_decimal(($accounts_argold_jan2021_stone_vatav + $accounts_arf_jan2021_stone_vatav + $accounts_arc_jan2021_stone_vatav)) ?></td>
-           <td class="text-right"><?= four_decimal(($accounts_argold_jan2021_stone_vatav_fine + $accounts_arf_jan2021_stone_vatav_fine + $accounts_arc_jan2021_stone_vatav_fine)) ?></td>
-           <td class="text-right"><?= four_decimal(($live_argold_jan2021_stone_vatav + $live_arf_jan2021_stone_vatav + $live_arc_jan2021_stone_vatav)) ?>  </td>
-           <td class="text-right"><?= four_decimal(($live_argold_jan2021_stone_vatav_fine + $live_arf_jan2021_stone_vatav_fine + $live_arc_jan2021_stone_vatav_fine)) ?>  </td>
+          <td><b>Total</b></td>
+           <td class="text-right"><b><?= four_decimal(($accounts_argold_jan2021_stone_vatav + $accounts_arf_jan2021_stone_vatav + $accounts_arc_jan2021_stone_vatav)) ?></b></td>
+           <td class="text-right"><b><?= four_decimal(($accounts_argold_jan2021_stone_vatav_fine + $accounts_arf_jan2021_stone_vatav_fine + $accounts_arc_jan2021_stone_vatav_fine)) ?></b></td>
+           <td class="text-right"><b><?= four_decimal(($live_argold_jan2021_stone_vatav + $live_arf_jan2021_stone_vatav + $live_arc_jan2021_stone_vatav)) ?></b>  </td>
+           <td class="text-right"><b><?= four_decimal(($live_argold_jan2021_stone_vatav_fine + $live_arf_jan2021_stone_vatav_fine + $live_arc_jan2021_stone_vatav_fine)) ?> </b> </td>
           <td class="text-right"><b><?= four_decimal((($accounts_argold_jan2021_stone_vatav-$live_argold_jan2021_stone_vatav)
                                                            +  ($accounts_arf_jan2021_stone_vatav-$live_arf_jan2021_stone_vatav)
                                                            + ($accounts_arc_jan2021_stone_vatav-$live_arc_jan2021_stone_vatav)
