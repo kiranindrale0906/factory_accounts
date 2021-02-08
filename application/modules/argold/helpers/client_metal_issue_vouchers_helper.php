@@ -26,6 +26,12 @@ if (!function_exists('get_row_actions')) {
                                    'url' => ADMIN_PATH.'argold/metal_issue_account_names/edit/'.$row['id'],
                                    'confirm_message' => "",
                                    'class' => 'text-warning text-uppercase');
+
+    if ($row['receipt_type'] == 'Melting Wastage  ')
+      $actions["Edit Rate"] =  array('request' => "http", 
+                                     'url' => ADMIN_PATH.'argold/metal_receipt_gold_rates/edit/'.$row['id'],
+                                     'confirm_message' => "",
+                                     'class' => 'text-warning text-uppercase');
     return $actions;
   }
 }
