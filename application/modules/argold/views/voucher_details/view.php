@@ -74,6 +74,7 @@
 ?>
 
 <?php 
+pd($record['gold_rate']);
   if ($record['gold_rate'] > 0) { 
     $tax_fields = get_tax_fields($record['factory_fine'], $record['fine'], $record['sale_type'], $record['gold_rate'], $record['gold_rate_purity']);
     ?>
