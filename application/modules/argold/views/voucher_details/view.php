@@ -70,11 +70,10 @@
     <hr class="">
     <h6 class="heading ">Refresh Details</h6>
     <?php $this->load->view('voucher_details/refresh_viewlist'); 
-  }
+  }}
 ?>
 
-<?php 
-pd($record['gold_rate']);
+<?php if(in_array($record['voucher_type'], array('metal receipt voucher','metal issue voucher'))){
   if ($record['gold_rate'] > 0) { 
     $tax_fields = get_tax_fields($record['factory_fine'], $record['fine'], $record['sale_type'], $record['gold_rate'], $record['gold_rate_purity']);
     ?>
