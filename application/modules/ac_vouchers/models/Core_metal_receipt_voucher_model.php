@@ -17,7 +17,8 @@ class Core_metal_receipt_voucher_model extends Voucher_model {
   function validation_rules($klass='') {
     $rules = parent::validation_rules($klass);
     $rules[] = $this->get_purity_validation_rules();
-    $rule[] = $this->get_debit_weight_validation_rules();
+    if (!in_array($this->attributes['receipt_type'], array('Alloy Vodator', 'GPC Vodator', 'Stone Vatav')))
+      $rule[] = $this->get_debit_weight_validation_rules();
     return $rules;
   }
 }
