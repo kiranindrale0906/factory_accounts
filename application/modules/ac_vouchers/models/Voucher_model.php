@@ -51,7 +51,7 @@ class Voucher_model extends BaseModel {
 
   protected function get_purity_validation_rules() {
     return array('field' => $this->router_class.'[purity]', 'label' => 'Purity',
-                 'rules' => array('trim','required','numeric','less_than_equal_to[100]','greater_than[0]',
+                 'rules' => array('trim','required','numeric','less_than_equal_to[150]','greater_than[0]',
                                   //array('purity_error_msg', array($this,'check_purity_exist'))
                                  ),
                  'errors' => array('purity_error_msg'=>'Purity not exist in Purity master.'));
@@ -65,7 +65,7 @@ class Voucher_model extends BaseModel {
 
   protected function get_factory_purity_validation_rules() {
     return array('field' => $this->router_class.'[factory_purity]', 'label' => 'Purity',
-                 'rules' => array('trim','required','numeric','less_than_equal_to[100]','greater_than[0]'));
+                 'rules' => array('trim','required','numeric','less_than_equal_to[150]','greater_than[0]'));
   }
 
   protected function get_receipt_type_validation_rules() {
