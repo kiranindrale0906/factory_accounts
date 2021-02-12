@@ -16,11 +16,12 @@ class Core_metal_issue_voucher_model extends Voucher_model {
 
   function validation_rules($klass='') {
     $rules = parent::validation_rules($klass);
-    if ($this->attributes['receipt_type'] != 'HCL Loss' 
-        && $this->attributes['receipt_type'] != 'Tounch Loss Fine') {
+    if (   $this->attributes['receipt_type'] != 'HCL Loss' 
+        && $this->attributes['receipt_type'] != 'Tounch Loss Fine') 
       $rules[] = $this->get_purity_validation_rules();
+    
+    if (!in_array($this->attributes['receipt_type'], array('Alloy Vodator', 'GPC Vodator', 'Stone Vatav')))
       $rules[] = $this->get_credit_weight_validation_rules();
-    }
     return $rules;
   }
 }
