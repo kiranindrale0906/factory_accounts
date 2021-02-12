@@ -423,10 +423,10 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $api_url = "api/api_internal_receipts/store";
 
     }elseif (    ($attributes['receipt_type'] == 'Melting Wastage' || $attributes['receipt_type'] == 'Daily Drawer Wastage' || $attributes['receipt_type'] == 'GPC Out') 
-              && (    $attributes['account_name'] == 'AR Gold Software Nov 2020' || $attributes['account_name'] == 'ARF Software Nov 2020' || $attributes['account_name'] == 'ARC Software Nov 2020'
+              && (    $attributes['account_name'] == 'AR Gold Software Nov 2020' || $attributes['account_name'] == 'AR Gold Software Staging' || $attributes['account_name'] == 'ARF Software Staging' || $attributes['account_name'] == 'ARC Software Staging' || $attributes['account_name'] == 'ARF Software Nov 2020' || $attributes['account_name'] == 'ARC Software Nov 2020'
                    || $attributes['account_name'] == 'AR Gold Software Jan 2021' || $attributes['account_name'] == 'ARF Software Jan 2021' || $attributes['account_name'] == 'ARC Software Jan 2021')) {
 
-      $api_data = array_merge($api_data, array('type' => 'Pure'));
+      $api_data = array_merge($api_data, array('type' => 'Pure','description' => $api_data['description'].'-'.$attributes['site_name']));
       $send_data['internal_receipts'] = $api_data;
       $api_url = "api/api_internal_receipts/store";
 
