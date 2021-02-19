@@ -1,6 +1,10 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed.');
 
 function getTableSettings() {
+  $where=array();
+  if(isset($_GET['chitti_hides'])){
+    $where=array('chitti_hide'=>$_GET['chitti_hides']);
+  }
   return array(
     'page_title'          => 'Chittis List',
     'primary_table'       => 'chitties',
@@ -8,7 +12,7 @@ function getTableSettings() {
     'table'               => 'chitties',
     'join_columns'        => '',
     'join_type'           => '',
-    'where'               => '',
+    'where'               => $where,
     'where_ids'           => '',
     'order_by'            => 'id desc',
     'limit'               => "20",
@@ -17,9 +21,11 @@ function getTableSettings() {
     'headingFunction'     => 'list_settings',
     'search_url'          => 'chittis',
     'add_title'           => 'Add Chittis',
+    'chitti_hides'        => 'Add Chittis',
     'export_title'        => '',
     'edit'                => '',
   );
+
 }
 
 /*

@@ -8,7 +8,7 @@ class User_role_model extends Core_user_role_model {
   public function get_controller_list($module_name='') {
     $modules = array('Masters' => array('masters/accounts','masters/groups','masters/sub_groups', 'masters/purity', 
                                         'masters/company','masters/payment_terms', 'masters/opening_balance',
-                                        'masters/department','masters/customer_category','masters/settings', 
+                                        'masters/department','masters/customer_category','masters/settings', 'masters/account_listing',
                                         'masters/department_category','masters/periods',
                                         'masters/narrations','masters/periods'),
                      'Transactions' => array('transactions/cash_issue_vouchers', 
@@ -34,7 +34,7 @@ class User_role_model extends Core_user_role_model {
                                             'transactions/interest_issue_vouchers',
                                             'transactions/interest_receipt_vouchers',
                                             'argold/chittis','argold/metal_issue_chitties','argold/voucher_details',
-                                            'argold/refresh','argold/refresh_details',
+                                            'argold/refresh','argold/refresh_details','argold/chitti_hides',
                                             'transactions/loss_outs',
                                             'transactions/mangalsutra_sales_return_voucher',
                                             'argold/change_account_names'),
