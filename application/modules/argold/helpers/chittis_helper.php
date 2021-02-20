@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed.');
 
 function getTableSettings() {
-  $where=array();
+  $where=array('chitti_hide'=>0);
   if(isset($_GET['chitti_hides'])){
     $where=array('chitti_hide'=>$_GET['chitti_hides']);
   }
