@@ -16,7 +16,7 @@ function getTableSettings() {
     'where_ids'           => '',
     'order_by'            => 'id desc',
     'limit'               => "20",
-    'extra_select_column' => 'id',
+    'extra_select_column' => 'id,chitti_hide',
     'actionFunction'      => '',
     'headingFunction'     => 'list_settings',
     'search_url'          => 'chittis',
@@ -106,7 +106,18 @@ function get_row_actions($row, $url, $select_url, $filter) {
   $actions["View"] = array('request' => "http", 
                            'url' => ADMIN_PATH.$controller.'/view/'.$row['id'],
                            'confirm_message' => "",
-                           'class' => 'btn-sm btn_green');
+                           'class' => 'btn-sm green');
+  if($row['chitti_hide']==0){
+  $actions["hide"] = array('request' => "http", 
+                           'url' => ADMIN_PATH.'argold/chitti_hides/update/'.$row['id'].'?from=view',
+                           'confirm_message' => "",
+                           'class' => 'btn-sm blue');
+  }else{
+  $actions["show"] = array('request' => "http", 
+                           'url' => ADMIN_PATH.'argold/chitti_hides/update/'.$row['id'].'?from=view',
+                           'confirm_message' => "",
+                           'class' => 'btn-sm blue');
+  }
   $actions["Edit"] = array('request' => "http", 
                            'url' => ADMIN_PATH.$controller.'/edit/'.$row['id'],
                            'confirm_message' => "",
