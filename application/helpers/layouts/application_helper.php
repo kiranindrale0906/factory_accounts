@@ -69,7 +69,7 @@ function APPLICATION_JS($type='application'){
 		CORE_PATH().'js/core/tablefilter.js',
 		CORE_PATH().'js/sys/barcode.js',
 		CORE_PATH().'plugins/firebase-7.4.0/firebase.js',
-		CORE_PATH().'js/config/firebase.js',
+		// CORE_PATH().'js/config/firebase.js',
 		//CORE_PATH().'js/tags_ajax.js',
 		CORE_PATH().'js/core/modal.js',
 		// THEME_PATH().'js/dashboard_js/dashboard.js',
