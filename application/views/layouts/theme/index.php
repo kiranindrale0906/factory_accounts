@@ -42,16 +42,16 @@
   <?php $this->load->view('layouts/application/modals/index'); ?>
 
   <script type="text/javascript">
-     var firebaseConfig = {
-      apiKey: "<?php echo APIKEY; ?>",
-      authDomain: "<?php echo AUTHDOMAIN; ?>",
-      databaseURL: "<?php echo DATABASEURL; ?>",
-      projectId: "<?php echo PROJECTID; ?>",
-      storageBucket: "<?php echo STORAGEBUCKET; ?>",
-      messagingSenderId: "<?php echo MESSAGINGSENDERID; ?>",
-      appId: "<?php echo APPID; ?>",
-      measurementId: "<?php echo MEASUREMENTID; ?>"
-    };
+    //  var firebaseConfig = {
+    //   apiKey: "<?php echo APIKEY; ?>",
+    //   authDomain: "<?php echo AUTHDOMAIN; ?>",
+    //   databaseURL: "<?php echo DATABASEURL; ?>",
+    //   projectId: "<?php echo PROJECTID; ?>",
+    //   storageBucket: "<?php echo STORAGEBUCKET; ?>",
+    //   messagingSenderId: "<?php echo MESSAGINGSENDERID; ?>",
+    //   appId: "<?php echo APPID; ?>",
+    //   measurementId: "<?php echo MEASUREMENTID; ?>"
+    // };
   </script>
   <?php $this->load->view('layouts/theme/js'); ?>  
   <script >
