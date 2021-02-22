@@ -15,6 +15,7 @@
                              'class' => 'autocomplete_list_selection',
                              'data-table'=>'ac_account',
                              'data-column'=>'name',
+                             'value'=>'OUTSIDE PARTY',
                              'data-list-title'=>'Account Name'));?>
     <?php load_field('dropdown', array('field' => 'purity',
                                        'option'=>$purity));?>
