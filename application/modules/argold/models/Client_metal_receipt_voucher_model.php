@@ -25,7 +25,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $rules[] = $this->get_narration_validation_rules();
     }
 
-    if (   $this->attributes['receipt_type'] == 'AR Gold Refresh'
+    if ($this->attributes['receipt_type'] == 'AR Gold Refresh'
         || $this->attributes['receipt_type'] == 'ARF Refresh'
         || $this->attributes['receipt_type'] == 'ARC Refresh') 
       $rules[] = $this->get_sale_type_validation_rules();
@@ -442,8 +442,10 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $send_data['finished_goods_receipts'] = $api_data;
       $api_url = "api/api_finished_goods_receipts/store";
 
-    } elseif (   $attributes['receipt_type'] == 'Cutting Ghiss' 
-              || $attributes['receipt_type'] == 'Ice Cutting Ghiss') {
+    } elseif ($attributes['receipt_type'] == 'Cutting Ghiss' 
+              ||$attributes['receipt_type'] == 'Hand Cutting Ghiss' 
+              ||$attributes['receipt_type'] == 'Hand Dull Ghiss' 
+              || $attributes['receipt_type'] == 'Ice Cutting Ghiss'){
       $send_data['pending_ghiss_receipts'] = array_merge($api_data, array('department_name' => $attributes['narration']));
       $api_url = "api/api_pending_ghiss_receipts/store";
     }

@@ -22,6 +22,8 @@ class Client_metal_receipt_vouchers extends Core_metal_receipt_vouchers {
       $this->data['account_names_for_metal_issue'][] = array('id' => 'AR Gold Software Nov 2020', 'name' => 'AR Gold Software Nov 2020');
       $this->data['account_names_for_metal_issue'][] = array('id' => 'ARC Software Nov 2020', 'name' => 'ARC Software Nov 2020');
       $this->data['account_names_for_metal_issue'][] = array('id' => 'ARF Software Nov 2020', 'name' => 'ARF Software Nov 2020'); 
+      $this->data['account_names_for_metal_issue'][] = array('id' => 'AR Gold Software Staging', 'name' => 'AR Gold Software Staging'); 
+      $this->data['account_names_for_metal_issue'][] = array('id' => 'ARF Software Staging', 'name' => 'AR Gold Software Staging'); 
     }
 
     $this->data['refresh_id']=!empty($_GET['refresh_id'])?$_GET['refresh_id']:"";
