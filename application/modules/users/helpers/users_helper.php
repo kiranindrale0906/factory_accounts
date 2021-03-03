@@ -60,6 +60,7 @@ function get_field_attribute($table, $field) {
 
   $attributes['users'] = array(
     'id'               => array('', '', TRUE, '', TRUE),
+    'arf_details'               => array('', '', TRUE, '', TRUE),
     'srno'             => array('Srno', '', FALSE, '', TRUE),
     'name'             => array('Name', 'Enter Name.', TRUE, '', TRUE),
     'mobile_no'        => array('Contact No', 'Enter contact number', TRUE, '', TRUE),

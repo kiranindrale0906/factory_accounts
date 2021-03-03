@@ -12,6 +12,12 @@
       <?php load_field('password', array('field' => 'password')) ?>
       <?php load_field('password', array('field' => 'confirm_password', 'name' => 'confirm_password')) ?>
     <?php endif;?>
+     <?php  load_field('checkbox',  array('field' => 'arf_details',
+                                  'name' => 'arf_details',
+                                  'option' => array( array('value' => '1', 
+                                                           'checked' => isset($add_more) ? $add_more : '',
+                                                           'label' => 'Arf Details'))));?>
+  
   </div> 
 
   <h5>Roles <span class="red">*</span></h5>   

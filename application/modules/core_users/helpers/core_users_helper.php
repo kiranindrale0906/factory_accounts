@@ -62,6 +62,7 @@ function coreusers_get_field_attribute($table, $field) {
     'id'            => array('', '', TRUE, '', TRUE),
     'srno'          => array('Srno', '', FALSE, '', TRUE),
     'id_no'         => array('ID_no', '', FALSE, '', TRUE),
+    'arf_details'         => array('', '', FALSE, '', TRUE),
     'name'          => array('Name', 'Enter Name.', TRUE, '', TRUE),
     'mobile_no'    => array('Contact No', 'Enter contact number', TRUE, '', TRUE),
     'email_id'      => array('User Email ID ', 'Enter Email ID', TRUE, '', TRUE),

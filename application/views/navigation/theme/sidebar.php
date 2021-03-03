@@ -13,6 +13,7 @@
                                       'users/user_roles'=>'User roles'),
                      // 'Rojmel'  => array('rojmel/rojmel'=>'Rojmel'),
                      'Masters' => array(
+                                        'masters/account_listing'=>'Account List',
                                         'masters/accounts'=>'Accounts',
                                         'masters/groups' =>'Group',
                                         'masters/sub_groups' =>'Sub Group',
