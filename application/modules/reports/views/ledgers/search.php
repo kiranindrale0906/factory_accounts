@@ -31,7 +31,7 @@
           $arf_companies = array('ARF Nov 2020','ARF Jan 2021');
         }
         if($_SESSION['arc_details']==1){
-          $arf_companies = array('ARC Nov 2020','ARC Jan 2021');
+          $arc_companies = array('ARC Nov 2020','ARC Jan 2021');
         }
           $companies=array_merge($all_companies,$arg_companies,$arf_companies,$arc_companies);
           foreach ($companies as $index => $company) { ?>
