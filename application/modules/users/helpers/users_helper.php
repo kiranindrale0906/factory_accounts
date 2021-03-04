@@ -60,6 +60,7 @@ function get_field_attribute($table, $field) {
 
   $attributes['users'] = array(
     'id'               => array('', '', TRUE, '', TRUE),
+    'all_details'               => array('', '', TRUE, '', TRUE),
     'arf_details'               => array('', '', TRUE, '', TRUE),
     'arg_details'               => array('', '', TRUE, '', TRUE),
     'arc_details'               => array('', '', TRUE, '', TRUE),

@@ -18,7 +18,7 @@
         $arg_companies = array();
         $arf_companies = array();
         $arc_companies = array();
-        if($_SESSION['arg_details']==1 && $_SESSION['arf_details']==1 &&$_SESSION['arc_details']== 1){
+        if($_SESSION['all_details']==1){
           $all_companies = array('All');
           $arg_companies = array('AR Gold Nov 2020','AR Gold Jan 2021');
           $arf_companies = array('ARF Nov 2020','ARF Jan 2021');

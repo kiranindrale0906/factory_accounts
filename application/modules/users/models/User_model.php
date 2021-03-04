@@ -72,6 +72,7 @@ class User_model extends Core_user_model {
       $this->attributes['password'] = md5($this->attributes['password']);
       //unset($this->attributes['password']);
     }
+    $this->attributes['all_details']=!empty($_POST['users']['all_details'])?$_POST['users']['all_details']:0;
     $this->attributes['arg_details']=!empty($_POST['users']['arg_details'])?$_POST['users']['arg_details']:0;
     $this->attributes['arf_details']=!empty($_POST['users']['arf_details'])?$_POST['users']['arf_details']:0;
     $this->attributes['arc_details']=!empty($_POST['users']['arc_details'])?$_POST['users']['arc_details']:0;
@@ -89,6 +90,7 @@ class User_model extends Core_user_model {
               'user_id'         => $user['id'],
               'name'            => $user['name'],
               'mobile_no'       => $user['mobile_no'],
+              'all_details'        => $user['all_details'],
               'arg_details'        => $user['arg_details'],
               'arf_details'        => $user['arf_details'],
               'arc_details'        => $user['arc_details'],

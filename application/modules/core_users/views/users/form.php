@@ -24,6 +24,13 @@
   </div> 
     <div>
      <?php  load_field('plain/checkbox',
+                  array('field'=>'all_details',
+                        'check_inline'=>true,
+                        'option'=> array(
+                                    array('label_for' => 'All Details',
+                                          'label'=> 'All Details',
+                                          'value' =>'1',))));?>
+    <?php  load_field('plain/checkbox',
                   array('field'=>'arg_details',
                         'check_inline'=>true,
                         'option'=> array(
