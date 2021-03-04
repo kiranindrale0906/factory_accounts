@@ -2,20 +2,29 @@
   <div class="col-md-12">
     <h6>
       Factory: 
+  
+      <?php if($_SESSION['all_details']==1){?>    
       <a class="ml-5 <?= ($site_name == '') ? 'bold black underline' : '' ?>" 
          href='<?= base_url() ?>reports/production_summary'>All</a>
+      <?php }?>
+      <?php if($_SESSION['arg_details']==1){?>    
       <a class="ml-5 <?= ($site_name == 'AR Gold') ? 'bold black underline' : '' ?>" 
          href='<?= base_url() ?>reports/production_summary?site_name=AR Gold Nov 2020'>AR Gold Nov 2020</a>
       <a class="ml-5 <?= ($site_name == 'AR Gold') ? 'bold black underline' : '' ?>" 
          href='<?= base_url() ?>reports/production_summary?site_name=AR Gold Jan 2021'>AR Gold Jan 2021</a>
+      <?php }?>
+      <?php if($_SESSION['arf_details']==1){?> 
       <a class="ml-5 <?= ($site_name == 'ARF') ? 'bold black underline' : '' ?>" 
          href='<?= base_url() ?>reports/production_summary?site_name=ARF Nov 2020'>ARF Nov 2020</a>
       <a class="ml-5 <?= ($site_name == 'ARF') ? 'bold black underline' : '' ?>" 
          href='<?= base_url() ?>reports/production_summary?site_name=ARF Jan 2021'>ARF Jan 2021</a>   
+      <?php }?>   
+      <?php if($_SESSION['arc_details']==1){?> 
       <a class="ml-5 <?= ($site_name == 'ARC') ? 'bold black underline' : '' ?>" 
          href='<?= base_url() ?>reports/production_summary?site_name=ARC Nov 2020'>ARC Nov 2020</a>
       <a class="ml-5 <?= ($site_name == 'ARC') ? 'bold black underline' : '' ?>" 
          href='<?= base_url() ?>reports/production_summary?site_name=ARC Jan 2021'>ARC Jan 2021</a>   
+      <?php }?>
     </h6>
   </div>
 </div>
