@@ -72,6 +72,11 @@ class User_model extends Core_user_model {
       $this->attributes['password'] = md5($this->attributes['password']);
       //unset($this->attributes['password']);
     }
+    $this->attributes['arg_details']=!empty($_POST['users']['arg_details'])?$_POST['users']['arg_details']:0;
+    $this->attributes['arf_details']=!empty($_POST['users']['arf_details'])?$_POST['users']['arf_details']:0;
+    $this->attributes['arc_details']=!empty($_POST['users']['arc_details'])?$_POST['users']['arc_details']:0;
+    $this->attributes['vodator_report']=!empty($_POST['users']['vodator_report'])?$_POST['users']['vodator_report']:0;
+    $this->attributes['production_report']=!empty($_POST['users']['production_report'])?$_POST['users']['production_report']:0;
   }
 
   public function set_user_data_in_session($where_condition) {
@@ -84,6 +89,11 @@ class User_model extends Core_user_model {
               'user_id'         => $user['id'],
               'name'            => $user['name'],
               'mobile_no'       => $user['mobile_no'],
+              'arg_details'        => $user['arg_details'],
+              'arf_details'        => $user['arf_details'],
+              'arc_details'        => $user['arc_details'],
+              'vodator_report'        => $user['vodator_report'],
+              'production_report'        => $user['production_report'],
               'email_id'        => $user['email_id'],
 //              'authToken'       => $user['authToken'],
               'last_sign_in_at' => $user['last_sign_in_at'],

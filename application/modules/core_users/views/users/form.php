@@ -12,13 +12,53 @@
       <?php load_field('password', array('field' => 'password')) ?>
       <?php load_field('password', array('field' => 'confirm_password', 'name' => 'confirm_password')) ?>
     <?php endif;?>
-     <?php  load_field('checkbox',  array('field' => 'arf_details',
-                                  'name' => 'arf_details',
-                                  'option' => array( array('value' => '1', 
-                                                           'checked' => isset($add_more) ? $add_more : '',
-                                                           'label' => 'Arf Details'))));?>
-  
+    <?php
+     // $arg_details = (!empty($record['arg_details'])) ? 'checked' : '';
+     // $arf_details = (!empty($record['arf_details'])) ? 'checked' : '';
+     // $arc_details = (!empty($record['arc_details'])) ? 'checked' : '';
+     // $vodator_report = (!empty($record['vodator_report'])) ? 'checked' : '';
+     // $production_report = (!empty($record['production_report'])) ? 'checked' : '';
+    ?>
+
+     
   </div> 
+    <div>
+     <?php  load_field('plain/checkbox',
+                  array('field'=>'arg_details',
+                        'check_inline'=>true,
+                        'option'=> array(
+                                    array('label_for' => 'ARG Details',
+                                          'label'=> 'ARG Details',
+                                          'value' =>'1',))));?>
+     <?php  load_field('plain/checkbox',
+                  array('field'=>'arf_details',
+                        'check_inline'=>true,
+                        'option'=> array(
+                                    array('label_for' => 'ARF Details',
+                                          'label'=> 'ARF Details',
+                                          'value' =>'1',))));?>
+     <?php  load_field('plain/checkbox',
+                  array('field'=>'arc_details',
+                        'check_inline'=>true,
+                        'option'=> array(
+                                    array('label_for' => 'ARC Details',
+                                          'label'=> 'ARC Details',
+                                          'value' =>'1',))));?>
+     <?php  load_field('plain/checkbox',
+                  array('field'=>'vodator_report',
+                        'check_inline'=>true,
+                        'option'=> array(
+                                    array('label_for' => 'Vodator Report',
+                                          'label'=> 'Vodator Report',
+                                          'value' =>'1',))));?>
+     <?php  load_field('plain/checkbox',
+                  array('field'=>'production_report',
+                        'check_inline'=>true,
+                        'option'=> array(
+                                    array('label_for' => 'Production Report',
+                                          'label'=> 'Production Report',
+                                          'value' =>'1',))));?>
+    </div>                                      
 
   <h5>Roles <span class="red">*</span></h5>   
   <?php foreach($user_role_options as $user_role):?>

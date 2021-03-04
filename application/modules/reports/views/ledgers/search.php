@@ -14,7 +14,26 @@
     <div class="form-group container"> 
       <h5> Select Factory:
         <?php 
-          $companies = array('All', 'AR Gold Nov 2020', 'ARF Nov 2020', 'ARC Nov 2020', 'AR Gold Jan 2021', 'ARF Jan 2021', 'ARC Jan 2021');
+        $all_companies = array();
+        $arg_companies = array();
+        $arf_companies = array();
+        $arc_companies = array();
+        if($_SESSION['arg_details']==1 && $_SESSION['arf_details']==1 &&$_SESSION['arc_details']== 1){
+          $all_companies = array('All');
+          $arg_companies = array('AR Gold Nov 2020','AR Gold Jan 2021');
+          $arf_companies = array('ARF Nov 2020','ARF Jan 2021');
+          $arc_companies = array('ARC Nov 2020','ARC Jan 2021');
+        }
+        if($_SESSION['arg_details']==1){
+          $arg_companies = array('AR Gold Nov 2020','AR Gold Jan 2021');
+        }
+        if($_SESSION['arf_details']==1){
+          $arf_companies = array('ARF Nov 2020','ARF Jan 2021');
+        }
+        if($_SESSION['arc_details']==1){
+          $arf_companies = array('ARC Nov 2020','ARC Jan 2021');
+        }
+          $companies=array_merge($all_companies,$arg_companies,$arf_companies,$arc_companies);
           foreach ($companies as $index => $company) { ?>
             <a class="ml-5 <?= ($site_name== $company) ? 'bold black underline' : '' ?>" 
                href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&site_name=<?= $company?>&period=<?= $period ?>&report_type=<?= $report_type ?>&detail=<?= $detail ?>&group=<?= $group ?>'><?= $company ?></a>
@@ -50,13 +69,20 @@
         </h5>
       </div>
     <?php } ?>
-    <?php if ($report_type == 'Vadotar Report' || $report_type == 'Production Report') { ?>
+    <?php if ($_SESSION['vodator_report']==1 || $_SESSION['production_report']==1 || $report_type == 'Vadotar Report' || $report_type == 'Production Report') { ?>
       <div class="form-group container"> 
-        <h5> Report Type: 
+        <h5> 
+        <?php if($_SESSION['vodator_report']==1 || $_SESSION['production_report']==1){ ?>
+        Report Type: 
+
+        <?php } if($_SESSION['vodator_report']==1){ ?>
           <a class="ml-5 <?= ($report_type=='Vadotar Report') ? 'bold black underline' : '' ?>" 
              href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&site_name=<?= $site_name?>&period=<?= $period ?>&report_type=Vadotar Report&detail=<?= $detail ?>&group=<?= $group ?>'>Vadotar Report</a>
+        <?php }?>
+        <?php if($_SESSION['production_report']==1){ ?>
           <a class="ml-5 <?= ($report_type=='Production Report') ? 'bold black underline' : '' ?>" 
              href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&site_name=<?= $site_name?>&period=<?= $period ?>&report_type=Production Report&detail=<?= $detail ?>&group=<?= $group ?>'>Production Report</a>
+        <?php }?>
         </h5>
       </div>
     <?php } ?>
