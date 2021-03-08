@@ -80,6 +80,7 @@
                                         'reports/production_summary' => 'Production Summary',
                                         'reports/bw_accounts' => 'Bw Accounts',
                                         'reports/loss_accounts' => 'Loss Accounts',
+                                        'reports/loss_reports' => 'Loss Reports',
                                         'reports/metal_receipt_type_ledgers' => 'Receipt Type Ledger'
                                         ),
                     //'Interests' => array('transactions/interest_issue_vouchers'=>'Interest Issue Voucher','transactions/interest_receipt_vouchers'=>'Interest Receipt Voucher'),

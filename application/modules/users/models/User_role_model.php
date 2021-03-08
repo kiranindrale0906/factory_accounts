@@ -49,6 +49,8 @@ class User_role_model extends Core_user_role_model {
                                         'reports/bw_accounts',
                                         'reports/production_summary',
                                         'reports/loss_accounts',
+                                        'reports/loss_reports',
+                                        'reports/loss_report_details',
                                         'reports/loss_account_details'
                                         ),
                      'Interest' => array('interest/interest_issue_voucher'),

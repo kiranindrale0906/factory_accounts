@@ -1,0 +1,65 @@
+<div class="table-responsive">
+  <table class="table table-sm table-default">
+    <thead>
+      <tr>
+        <th class="">Date</th>
+        <th class="text-right">Loss Period</th>
+        <th class="text-right">In Loss Gross</th>
+        <th class="text-right">Purity</th>
+        <th class="text-right">In Loss Fine</th>
+        <th class="text-right">Melting Production</th>
+        <th class="text-right">Loss % Before Recovery</th>
+        <th class="text-right">Product Production</th>
+        <th class="text-right">Metal Receive After Recovery</th>
+        <th class="text-right">Purity</th>
+        <th class="text-right">Fine</th>
+        <th class="text-right">Loss</th>
+        <th class="text-right">Loss % After Recovery</th>
+        <th class="text-right">Loss % On Product Production</th>
+      </tr>
+    </thead>
+    <tbody>
+    <?php 
+      $sum_weight=$sum_fine=$sum_factory_fine=$sum_receipt_weight=$sum_receipt_weight=$sum_total_fine=$sum_receipt_fine=0;
+     foreach ($loss_details as $index => $loss_out_detail) {
+      $sum_weight+=$loss_out_detail->in_weight;
+      $sum_fine+=($loss_out_detail->in_weight*$loss_out_detail->in_lot_purity/100);
+      ?>
+      <tr>
+        <td><?=date('d-m-Y',strtotime($loss_out_detail->created_at));?></td>
+        <td><?=date('d-m-Y',strtotime($loss_out_detail->first_date)).' To '.date('d-m-Y',strtotime($loss_out_detail->last_date)); ?></td>
+        <td class="text-right"><?=$loss_out_detail->in_weight?></td>
+        <td class="text-right"><?=$loss_out_detail->in_lot_purity?></td>
+        <td class="text-right"><?=$fine=($loss_out_detail->in_weight*$loss_out_detail->in_lot_purity/100);?></td>
+        <td class="text-right"><?=($loss_out_detail->out_weight);?></td>
+        <td class="text-right"><?=!empty($loss_out_detail->out_weight)?($fine/$loss_out_detail->out_weight):0;?></td>
+        <td class="text-right"><?=($loss_out_detail->production);?></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+
+    <?php }?>
+      <tr class="bg_gray bold">
+    <td class="text-right"></td>
+    <td class="text-right"></td>
+    <td class="text-right"><?=$sum_weight?></td>
+    <td class="text-right"></td>
+    <td class="text-right"><?=$sum_fine?></td>
+    <td class="text-right"></td>
+    <td class="text-right"></td>
+    <td class="text-right"></td>
+    <td class="text-right"></td>
+    <td class="text-right"></td>
+    <td class="text-right"></td>
+    <td class="text-right"></td>
+    <td class="text-right"></td>
+    <td></td>
+  </tr>
+    </tbody>
+  </table>
+</div>
