@@ -28,19 +28,47 @@ class Loss_report_details extends Ledgers {
     $url=API_ARC_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
     $arc_jan2021_records=json_decode(curl_post_request($url,$data));
 
-     foreach ($arg_jan2021_records->data->loss_details->loss_detail as $index => $loss_detail) {
+     foreach ($arg_jan2021_records->data->loss_details->loss_detail as $index => $arg_loss_detail) {
        $where['purity != factory_purity'] = NULL;
        $where['account_name != '] = 'VADOTAR';
        $arg_jan2021_records->data->loss_details->loss_detail->$index->production=0;
-       if(!empty($loss_detail->first_date)){
-          $where['date(voucher_date) >='] = date('Y-m-d',strtotime($loss_detail->first_date));
+       if(!empty($arg_loss_detail->first_date)){
+          $where['date(voucher_date) >='] = date('Y-m-d',strtotime($arg_loss_detail->first_date));
        }
-       if(!empty($loss_detail->last_date)){
-          $where['date(voucher_date) <='] = date('Y-m-d',strtotime($loss_detail->last_date));
+       if(!empty($arg_loss_detail->last_date)){
+          $where['date(voucher_date) <='] = date('Y-m-d',strtotime($arg_loss_detail->last_date));
         }
         $product_production= $this->ledger_model->find('-1*sum(credit_weight-debit_weight) as weight',$where);
         $arg_jan2021_records->data->loss_details->loss_detail->$index->production=$product_production['weight'];
      }
+     if(!empty($arf_jan2021_records)){
+     foreach ($arf_jan2021_records->data->loss_details->loss_detail as $index => $arf_loss_detail) {
+       $where['purity != factory_purity'] = NULL;
+       $where['account_name != '] = 'VADOTAR';
+       $arf_jan2021_records->data->loss_details->loss_detail->$index->production=0;
+       if(!empty($arf_loss_detail->first_date)){
+          $where['date(voucher_date) >='] = date('Y-m-d',strtotime($arf_loss_detail->first_date));
+       }
+       if(!empty($arf_loss_detail->last_date)){
+          $where['date(voucher_date) <='] = date('Y-m-d',strtotime($arf_loss_detail->last_date));
+        }
+        $product_production= $this->ledger_model->find('-1*sum(credit_weight-debit_weight) as weight',$where);
+        $arf_jan2021_records->data->loss_details->loss_detail->$index->production=$product_production['weight'];
+     }}
+     if(!empty($arc_jan2021_records)){
+     foreach ($arc_jan2021_records->data->loss_details->loss_detail as $index => $arc_loss_detail) {
+       $where['purity != factory_purity'] = NULL;
+       $where['account_name != '] = 'VADOTAR';
+       $arc_jan2021_records->data->loss_details->loss_detail->$index->production=0;
+       if(!empty($arc_loss_detail->first_date)){
+          $where['date(voucher_date) >='] = date('Y-m-d',strtotime($arc_loss_detail->first_date));
+       }
+       if(!empty($arc_loss_detail->last_date)){
+          $where['date(voucher_date) <='] = date('Y-m-d',strtotime($arc_loss_detail->last_date));
+        }
+        $product_production= $this->ledger_model->find('-1*sum(credit_weight-debit_weight) as weight',$where);
+        $arc_jan2021_records->data->loss_details->loss_detail->$index->production=$product_production['weight'];
+     }}
      $this->data['loss_details']=array();
      // if( $this->data['factory_name']=='AR Gold Nov 2020'){
      //  $this->data['loss_details']=!empty($arg_jan2021_records->data->loss_details->loss_detail)? $arg_jan2021_records->data->loss_details->loss_detail:array();

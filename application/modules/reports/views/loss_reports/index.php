@@ -37,8 +37,8 @@
       ?>
       <tr>
         <td class=""><a href="<?=base_url()?>reports/loss_report_details?category=<?=$index ?>&factory_name=<?=$factory_name ?>"><?=$index?></a></td>
-        <td></td>
-        <td></td>
+        <td class="text-right"><?=four_decimal($loss_category['overall_loss_fine'])?></td>
+        <td class="text-right"><?=four_decimal($loss_category['melting_production'])?></td>
         <td></td>
         <td></td>
       </tr>

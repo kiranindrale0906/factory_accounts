@@ -9,6 +9,7 @@ class Loss_reports extends BaseController {
   public function index() {
     $this->data['report_type'] = 'Rojmel Report';
     $this->_get_form_data();
+    // $this->get_loss_details();
     $this->load->render($this->router->class."/index",$this->data);
   }
   public function _get_form_data() {
@@ -19,6 +20,21 @@ class Loss_reports extends BaseController {
     $this->data['loss_categories']=array();
     $categories= $this->voucher_model->get('description', array('account_name'=>'Loss Account','parent_id'=>0),array(),array('group_by'=>'description'));
     $loss_details= $this->voucher_model->get('description,fine,id', array('account_name'=>'Loss Account','parent_id'=>0),array());
+    $category_names=array_column($categories,'description');
+    foreach ($category_names as $category_name_index => $category_name_value) {
+      $data['department_name']=$category_name_value;
+      $url=API_ARG_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
+      $arg_jan2021_records=json_decode(curl_post_request($url,$data));
+      $total_production=$total_loss_fine=0;
+      foreach ($arg_jan2021_records->data->loss_details->loss_detail as $index => $arg_loss_detail) {
+        $total_production+=$arg_loss_detail->out_weight;
+        $total_loss_fine+=$arg_loss_detail->in_weight*$arg_loss_detail->in_lot_purity/100;
+        $this->data['loss_categories'][$category_name_value]['melting_production']=$total_production;
+        $this->data['loss_categories'][$category_name_value]['overall_loss_fine']=$total_loss_fine;
+      }
+
+
+    }
     if(!empty($loss_details)){
       foreach ($categories as $category_index => $category) {
         $total_fine=0;
@@ -28,11 +44,84 @@ class Loss_reports extends BaseController {
           $total_fine+=$loss_detail['fine']-$receipt_data['fine'];
 
           }
-          $this->data['loss_categories'][$category['description']]['fine']=$total_fine; 
+          $this->data['loss_categories'][$category['description']]['fine']=$total_fine;
         }
       }
     }
     // parent::create();
   }
+  // private function get_loss_details() {
+  //   // $this->data['factory_name']=!empty($_GET['factory_name'])?$_GET['factory_name']:'';
+  //   // $data['department_name']=$_GET['category'];
+  //   // $url=API_ARG_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
+  //   // $arg_jan2021_records=json_decode(curl_post_request($url,$data));
+
+  //   // $url=API_ARF_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
+  //   // $arf_jan2021_records=json_decode(curl_post_request($url,$data));
+    
+  //   // $url=API_ARC_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
+  //   // $arc_jan2021_records=json_decode(curl_post_request($url,$data));
+
+  //    foreach ($arg_jan2021_records->data->loss_details->loss_detail as $index => $arg_loss_detail) {
+  //      $where['purity != factory_purity'] = NULL;
+  //      $where['account_name != '] = 'VADOTAR';
+  //      $arg_jan2021_records->data->loss_details->loss_detail->$index->production=0;
+  //      if(!empty($arg_loss_detail->first_date)){
+  //         $where['date(voucher_date) >='] = date('Y-m-d',strtotime($arg_loss_detail->first_date));
+  //      }
+  //      if(!empty($arg_loss_detail->last_date)){
+  //         $where['date(voucher_date) <='] = date('Y-m-d',strtotime($arg_loss_detail->last_date));
+  //       }
+  //       $product_production= $this->ledger_model->find('-1*sum(credit_weight-debit_weight) as weight',$where);
+  //       $arg_jan2021_records->data->loss_details->loss_detail->$index->production=$product_production['weight'];
+  //    }
+  //    // if(!empty($arf_jan2021_records)){
+  //    // foreach ($arf_jan2021_records->data->loss_details->loss_detail as $index => $arf_loss_detail) {
+  //    //   $where['purity != factory_purity'] = NULL;
+  //    //   $where['account_name != '] = 'VADOTAR';
+  //    //   $arf_jan2021_records->data->loss_details->loss_detail->$index->production=0;
+  //    //   if(!empty($arf_loss_detail->first_date)){
+  //    //      $where['date(voucher_date) >='] = date('Y-m-d',strtotime($arf_loss_detail->first_date));
+  //    //   }
+  //    //   if(!empty($arf_loss_detail->last_date)){
+  //    //      $where['date(voucher_date) <='] = date('Y-m-d',strtotime($arf_loss_detail->last_date));
+  //    //    }
+  //    //    $product_production= $this->ledger_model->find('-1*sum(credit_weight-debit_weight) as weight',$where);
+  //    //    $arf_jan2021_records->data->loss_details->loss_detail->$index->production=$product_production['weight'];
+  //    // }}
+  //    // if(!empty($arc_jan2021_records)){
+  //    // foreach ($arc_jan2021_records->data->loss_details->loss_detail as $index => $arc_loss_detail) {
+  //    //   $where['purity != factory_purity'] = NULL;
+  //    //   $where['account_name != '] = 'VADOTAR';
+  //    //   $arc_jan2021_records->data->loss_details->loss_detail->$index->production=0;
+  //    //   if(!empty($arc_loss_detail->first_date)){
+  //    //      $where['date(voucher_date) >='] = date('Y-m-d',strtotime($arc_loss_detail->first_date));
+  //    //   }
+  //    //   if(!empty($arc_loss_detail->last_date)){
+  //    //      $where['date(voucher_date) <='] = date('Y-m-d',strtotime($arc_loss_detail->last_date));
+  //    //    }
+  //    //    $product_production= $this->ledger_model->find('-1*sum(credit_weight-debit_weight) as weight',$where);
+  //    //    $arc_jan2021_records->data->loss_details->loss_detail->$index->production=$product_production['weight'];
+  //    // }}
+  //    $this->data['loss_details']=array();
+  //    // if( $this->data['factory_name']=='AR Gold Nov 2020'){
+  //    //  $this->data['loss_details']=!empty($arg_jan2021_records->data->loss_details->loss_detail)? $arg_jan2021_records->data->loss_details->loss_detail:array();
+  //    // }
+  //    if($this->data['factory_name']=='AR Gold'){
+  //     $this->data['loss_details']=!empty($arg_jan2021_records->data->loss_details->loss_detail)? $arg_jan2021_records->data->loss_details->loss_detail:array();
+  //    }
+  //    if($this->data['factory_name']=='ARF'){
+  //     $this->data['loss_details']=!empty($arf_jan2021_records->data->loss_details->loss_detail)? $arf_jan2021_records->data->loss_details->loss_detail:array();
+  //    }
+  //    // if( $this->data['factory_name']=='ARF Nov 2020'){
+  //    //  $this->data['loss_details']=!empty($arf_jan2021_records->data->loss_details->loss_detail)? $arf_jan2021_records->data->loss_details->loss_detail:array();
+  //    // }
+  //    if($this->data['factory_name']=='ARC'){
+  //     $this->data['loss_details']=!empty($arc_jan2021_records->data->loss_details->loss_detail)? $arc_jan2021_records->data->loss_details->loss_detail:array();
+  //    }
+  //   //  if( $this->data['factory_name']=='ARC Nov 2020'){
+  //   //   $this->data['loss_details']=!empty($arc_jan2021_records->data->loss_details->loss_detail)? $arc_jan2021_records->data->loss_details->loss_detail:array();
+  //   // }
+  // }      
 }
 

@@ -20,20 +20,23 @@
     </thead>
     <tbody>
     <?php 
-      $sum_weight=$sum_fine=$sum_factory_fine=$sum_receipt_weight=$sum_receipt_weight=$sum_total_fine=$sum_receipt_fine=0;
+      $sum_weight=$sum_fine=$sum_factory_fine=$sum_receipt_weight=$sum_receipt_weight=$sum_total_fine=$sum_receipt_fine=$sum_loss_befor_recovery=$sum_melting_production=$sum_production=0;
      foreach ($loss_details as $index => $loss_out_detail) {
       $sum_weight+=$loss_out_detail->in_weight;
       $sum_fine+=($loss_out_detail->in_weight*$loss_out_detail->in_lot_purity/100);
+      $sum_melting_production+=($loss_out_detail->out_weight);
+      $sum_production+=($loss_out_detail->production);
+      $sum_loss_befor_recovery+=!empty($loss_out_detail->out_weight)?(($loss_out_detail->in_weight*$loss_out_detail->in_lot_purity/100)/$loss_out_detail->out_weight):0;
       ?>
       <tr>
         <td><?=date('d-m-Y',strtotime($loss_out_detail->created_at));?></td>
         <td><?=date('d-m-Y',strtotime($loss_out_detail->first_date)).' To '.date('d-m-Y',strtotime($loss_out_detail->last_date)); ?></td>
-        <td class="text-right"><?=$loss_out_detail->in_weight?></td>
-        <td class="text-right"><?=$loss_out_detail->in_lot_purity?></td>
-        <td class="text-right"><?=$fine=($loss_out_detail->in_weight*$loss_out_detail->in_lot_purity/100);?></td>
-        <td class="text-right"><?=($loss_out_detail->out_weight);?></td>
-        <td class="text-right"><?=!empty($loss_out_detail->out_weight)?($fine/$loss_out_detail->out_weight):0;?></td>
-        <td class="text-right"><?=($loss_out_detail->production);?></td>
+        <td class="text-right"><?=four_decimal($loss_out_detail->in_weight)?></td>
+        <td class="text-right"><?=four_decimal($loss_out_detail->in_lot_purity)?></td>
+        <td class="text-right"><?=$fine=four_decimal($loss_out_detail->in_weight*$loss_out_detail->in_lot_purity/100);?></td>
+        <td class="text-right"><?=four_decimal($loss_out_detail->out_weight);?></td>
+        <td class="text-right"><?=!empty($loss_out_detail->out_weight)?four_decimal($fine/$loss_out_detail->out_weight):0;?></td>
+        <td class="text-right"><?=four_decimal($loss_out_detail->production);?></td>
         <td></td>
         <td></td>
         <td></td>
@@ -47,12 +50,12 @@
       <tr class="bg_gray bold">
     <td class="text-right"></td>
     <td class="text-right"></td>
-    <td class="text-right"><?=$sum_weight?></td>
+    <td class="text-right"><?=four_decimal($sum_weight)?></td>
     <td class="text-right"></td>
-    <td class="text-right"><?=$sum_fine?></td>
-    <td class="text-right"></td>
-    <td class="text-right"></td>
-    <td class="text-right"></td>
+    <td class="text-right"><?=four_decimal($sum_fine)?></td>
+    <td class="text-right"><?=four_decimal($sum_melting_production)?></td>
+    <td class="text-right"><?=four_decimal($sum_loss_befor_recovery)?></td>
+    <td class="text-right"><?=four_decimal($sum_production)?></td>
     <td class="text-right"></td>
     <td class="text-right"></td>
     <td class="text-right"></td>
