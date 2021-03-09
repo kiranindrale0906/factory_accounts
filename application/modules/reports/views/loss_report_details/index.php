@@ -21,12 +21,15 @@
     </thead>
     <tbody>
     <?php 
-      $sum_weight=$sum_fine=$sum_factory_fine=$sum_receipt_weight=$sum_receipt_weight=$sum_total_fine=$sum_receipt_fine=$sum_loss_befor_recovery=$sum_melting_production=$sum_production=0;
+      $sum_weight=$sum_fine=$sum_factory_fine=$sum_receipt_weight=$sum_receipt_weight=$sum_total_fine=$sum_receipt_fine=$sum_loss_befor_recovery=$sum_melting_production=$sum_production=$sum_after_recovery=$sum_after_fine=$sum_loss=0;
      foreach ($loss_details as $index => $loss_out_detail) {
       $sum_weight+=$loss_out_detail->in_weight;
       $sum_fine+=($loss_out_detail->in_weight*$loss_out_detail->in_lot_purity/100);
       $sum_melting_production+=($loss_out_detail->out_weight);
       $sum_production+=($loss_out_detail->production);
+      $sum_after_recovery+=($loss_out_detail->after_recovery);
+      $sum_after_fine+=($loss_out_detail->fine);
+      $sum_loss+=(($loss_out_detail->in_weight*$loss_out_detail->in_lot_purity/100)-($loss_out_detail->fine));
       $sum_loss_befor_recovery+=!empty($loss_out_detail->out_weight)?(($loss_out_detail->in_weight*$loss_out_detail->in_lot_purity/100)/$loss_out_detail->out_weight):0;
       ?>
       <tr>
@@ -38,10 +41,10 @@
         <td class="text-right"><?=four_decimal($loss_out_detail->out_weight);?></td>
         <td class="text-right"><?=!empty($loss_out_detail->out_weight)?four_decimal($fine/$loss_out_detail->out_weight):0;?></td>
         <td class="text-right"><?=four_decimal($loss_out_detail->production);?></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td class="text-right"><?=four_decimal($loss_out_detail->after_recovery);?></td>
+        <td class="text-right"><?=four_decimal($loss_out_detail->purity);?></td>
+        <td class="text-right"><?=four_decimal($loss_out_detail->fine);?></td>
+        <td><?=four_decimal($fine-$loss_out_detail->fine);?></td>
         <td></td>
         <td></td>
         <td class="text-right">
@@ -61,10 +64,10 @@
     <td class="text-right"><?=four_decimal($sum_melting_production)?></td>
     <td class="text-right"><?=four_decimal($sum_loss_befor_recovery)?></td>
     <td class="text-right"><?=four_decimal($sum_production)?></td>
+    <td class="text-right"><?=four_decimal($sum_after_recovery)?></td>
     <td class="text-right"></td>
-    <td class="text-right"></td>
-    <td class="text-right"></td>
-    <td class="text-right"></td>
+    <td class="text-right"><?=four_decimal($sum_after_fine)?></td>
+    <td class="text-right"><?=four_decimal($sum_loss)?></td>
     <td class="text-right"></td>
     <td class="text-right"></td>
     <td class="text-right"></td>

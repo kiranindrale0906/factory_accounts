@@ -39,7 +39,12 @@ class Loss_report_details extends Ledgers {
           $where['date(voucher_date) <='] = date('Y-m-d',strtotime($arg_loss_detail->last_date));
         }
         $product_production= $this->ledger_model->find('-1*sum(credit_weight-debit_weight) as weight',$where);
+        $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$arg_loss_detail->parent_id));
         $arg_jan2021_records->data->loss_details->loss_detail->$index->production=$product_production['weight'];
+        $arg_jan2021_records->data->loss_details->loss_detail->$index->after_recovery=!empty($loss_account_details)?$loss_account_details['weight']:0;
+        $arg_jan2021_records->data->loss_details->loss_detail->$index->purity=!empty($loss_account_details)?$loss_account_details['factory_purity']:0;
+        $arg_jan2021_records->data->loss_details->loss_detail->$index->fine=!empty($loss_account_details)?$loss_account_details['fine']:0;
+
      }
      if(!empty($arf_jan2021_records)){
      foreach ($arf_jan2021_records->data->loss_details->loss_detail as $index => $arf_loss_detail) {
