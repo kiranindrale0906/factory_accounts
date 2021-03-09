@@ -17,7 +17,7 @@ class Loss_report_details extends Ledgers {
   }
 
   private function get_loss_details() {
-    $this->data['factory_name']=!empty($_GET['site_name'])?$_GET['site_name']:'';
+    $this->data['factory_name']=!empty($_GET['factory_name'])?$_GET['factory_name']:'';
     $data['department_name']=$_GET['category'];
     $url=API_ARG_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
     $arg_jan2021_records=json_decode(curl_post_request($url,$data));
@@ -42,14 +42,23 @@ class Loss_report_details extends Ledgers {
         $arg_jan2021_records->data->loss_details->loss_detail->$index->production=$product_production['weight'];
      }
      $this->data['loss_details']=array();
-     if( $this->data['factory_name']=='AR Gold Nov 2020' ||  $this->data['factory_name']=='AR Gold Jan 2021'){
+     // if( $this->data['factory_name']=='AR Gold Nov 2020'){
+     //  $this->data['loss_details']=!empty($arg_jan2021_records->data->loss_details->loss_detail)? $arg_jan2021_records->data->loss_details->loss_detail:array();
+     // }
+     if($this->data['factory_name']=='AR Gold Jan 2021'){
       $this->data['loss_details']=!empty($arg_jan2021_records->data->loss_details->loss_detail)? $arg_jan2021_records->data->loss_details->loss_detail:array();
      }
-     if( $this->data['factory_name']=='ARF Nov 2020' ||  $this->data['factory_name']=='ARF Jan 2021'){
+     if($this->data['factory_name']=='ARF Jan 2021'){
       $this->data['loss_details']=!empty($arf_jan2021_records->data->loss_details->loss_detail)? $arf_jan2021_records->data->loss_details->loss_detail:array();
      }
-     if( $this->data['factory_name']=='ARC Nov 2020' ||  $this->data['factory_name']=='ARC Jan 2021'){
+     // if( $this->data['factory_name']=='ARF Nov 2020'){
+     //  $this->data['loss_details']=!empty($arf_jan2021_records->data->loss_details->loss_detail)? $arf_jan2021_records->data->loss_details->loss_detail:array();
+     // }
+     if($this->data['factory_name']=='ARC Jan 2021'){
       $this->data['loss_details']=!empty($arc_jan2021_records->data->loss_details->loss_detail)? $arc_jan2021_records->data->loss_details->loss_detail:array();
-    }
+     }
+    //  if( $this->data['factory_name']=='ARC Nov 2020'){
+    //   $this->data['loss_details']=!empty($arc_jan2021_records->data->loss_details->loss_detail)? $arc_jan2021_records->data->loss_details->loss_detail:array();
+    // }
   }      
 }

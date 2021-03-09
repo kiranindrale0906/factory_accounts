@@ -42,7 +42,10 @@
     <thead>
       <tr>
         <th class="">Type of Loss Out</th>
-        <th class="text-right"></th>
+        <th class="text-right">Overall Final Loss</th>
+        <th class="text-right">Overall Production</th>
+        <th class="text-right">Product Production</th>
+        <th class="text-right">Over Loss % After Recovery</th>
         </tr>
     </thead>
     <tbody>
@@ -52,11 +55,18 @@
       ?>
       <tr>
         <td class=""><a href="<?=base_url()?>reports/loss_report_details?category=<?=$index ?>&factory_name=<?=$factory_name ?>"><?=$index?></a></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
       </tr>
     <?php }?>
       <tr class="bg_gray bold">
     <td>Total</td>
-    <td class="text-right"><?//=four_decimal($sum_fine)?></td>
+    <td class="text-right"></td>
+    <td class="text-right"></td>
+    <td class="text-right"></td>
+    <td class="text-right"></td>
   </tr>
     </tbody>
   </table>
