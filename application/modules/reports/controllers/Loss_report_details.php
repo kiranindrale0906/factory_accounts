@@ -45,16 +45,16 @@ class Loss_report_details extends Ledgers {
      // if( $this->data['factory_name']=='AR Gold Nov 2020'){
      //  $this->data['loss_details']=!empty($arg_jan2021_records->data->loss_details->loss_detail)? $arg_jan2021_records->data->loss_details->loss_detail:array();
      // }
-     if($this->data['factory_name']=='AR Gold Jan 2021'){
+     if($this->data['factory_name']=='AR Gold'){
       $this->data['loss_details']=!empty($arg_jan2021_records->data->loss_details->loss_detail)? $arg_jan2021_records->data->loss_details->loss_detail:array();
      }
-     if($this->data['factory_name']=='ARF Jan 2021'){
+     if($this->data['factory_name']=='ARF'){
       $this->data['loss_details']=!empty($arf_jan2021_records->data->loss_details->loss_detail)? $arf_jan2021_records->data->loss_details->loss_detail:array();
      }
      // if( $this->data['factory_name']=='ARF Nov 2020'){
      //  $this->data['loss_details']=!empty($arf_jan2021_records->data->loss_details->loss_detail)? $arf_jan2021_records->data->loss_details->loss_detail:array();
      // }
-     if($this->data['factory_name']=='ARC Jan 2021'){
+     if($this->data['factory_name']=='ARC'){
       $this->data['loss_details']=!empty($arc_jan2021_records->data->loss_details->loss_detail)? $arc_jan2021_records->data->loss_details->loss_detail:array();
      }
     //  if( $this->data['factory_name']=='ARC Nov 2020'){

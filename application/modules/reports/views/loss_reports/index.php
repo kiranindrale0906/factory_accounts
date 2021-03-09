@@ -8,26 +8,8 @@
     <div class="form-group container"> 
       <h5> Select Factory:
         <?php 
-        $all_companies = array();
-        $arg_companies = array();
-        $arf_companies = array();
-        $arc_companies = array();
-        if($_SESSION['all_details']==1){
-          $all_companies = array('All');
-          $arg_companies = array('AR Gold Nov 2020','AR Gold Jan 2021');
-          $arf_companies = array('ARF Nov 2020','ARF Jan 2021');
-          $arc_companies = array('ARC Nov 2020','ARC Jan 2021');
-        }
-        if($_SESSION['arg_details']==1){
-          $arg_companies = array('AR Gold Nov 2020','AR Gold Jan 2021');
-        }
-        if($_SESSION['arf_details']==1){
-          $arf_companies = array('ARF Nov 2020','ARF Jan 2021');
-        }
-        if($_SESSION['arc_details']==1){
-          $arc_companies = array('ARC Nov 2020','ARC Jan 2021');
-        }
-          $companies=array_merge($all_companies,$arg_companies,$arf_companies,$arc_companies);
+        $all_companies = array('AR Gold','ARF','ARC');
+          $companies=array_merge($all_companies);
           foreach ($companies as $index => $company) { ?>
             <a class="ml-5 <?= ($site_name== $company) ? 'bold black underline' : '' ?>" 
                href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&site_name=<?= $company?>'><?= $company ?></a>
