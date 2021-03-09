@@ -16,6 +16,7 @@
         <th class="text-right">Loss</th>
         <th class="text-right">Loss % After Recovery</th>
         <th class="text-right">Loss % On Product Production</th>
+        <th class="text-right">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -43,7 +44,11 @@
         <td></td>
         <td></td>
         <td></td>
-        <td></td>
+        <td class="text-right">
+        <?php //if($parent_id==0){ ?>
+          <a href=<?= base_url()."transactions/metal_receipt_vouchers?receipt_type=Metal&parent_id=".$loss_out_detail->parent_id ?> target='_blank'>create metal receipt</a>
+          <?php //}?>
+        </td>
       </tr>
 
     <?php }?>
@@ -56,6 +61,8 @@
     <td class="text-right"><?=four_decimal($sum_melting_production)?></td>
     <td class="text-right"><?=four_decimal($sum_loss_befor_recovery)?></td>
     <td class="text-right"><?=four_decimal($sum_production)?></td>
+    <td class="text-right"></td>
+    <td class="text-right"></td>
     <td class="text-right"></td>
     <td class="text-right"></td>
     <td class="text-right"></td>
