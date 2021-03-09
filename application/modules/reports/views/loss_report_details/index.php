@@ -44,9 +44,9 @@
         <td class="text-right"><?=four_decimal($loss_out_detail->after_recovery);?></td>
         <td class="text-right"><?=four_decimal($loss_out_detail->purity);?></td>
         <td class="text-right"><?=four_decimal($loss_out_detail->fine);?></td>
-        <td><?=four_decimal($fine-$loss_out_detail->fine);?></td>
-        <td></td>
-        <td></td>
+        <td class="text-right"><?=$loss=four_decimal($fine-$loss_out_detail->fine);?></td>
+        <td class="text-right"><?=!empty($loss_out_detail->out_weight)?four_decimal($loss/$loss_out_detail->out_weight):0;?></td>
+        <td class="text-right"><?=!empty($loss_out_detail->production)?four_decimal($loss/$loss_out_detail->production):0;?></td>
         <td class="text-right">
         <?php //if($parent_id==0){ ?>
           <a href=<?= base_url()."transactions/metal_receipt_vouchers?receipt_type=Metal&parent_id=".$loss_out_detail->parent_id ?> target='_blank'>create metal receipt</a>
@@ -68,8 +68,8 @@
     <td class="text-right"></td>
     <td class="text-right"><?=four_decimal($sum_after_fine)?></td>
     <td class="text-right"><?=four_decimal($sum_loss)?></td>
-    <td class="text-right"></td>
-    <td class="text-right"></td>
+    <td class="text-right"><?=four_decimal($sum_loss/$sum_melting_production)?></td>
+    <td class="text-right"><?=four_decimal($sum_loss/$sum_production)?></td>
     <td class="text-right"></td>
     <td></td>
   </tr>
