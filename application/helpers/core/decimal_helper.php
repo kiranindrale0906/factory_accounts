@@ -10,6 +10,14 @@ if ( ! function_exists('four_decimal')) {
       return number_format((float)$value, 3, '.', '');
   }
 }
+if ( ! function_exists('eight_decimal')) {
+  function eight_decimal($value, $zero_value='0'){
+    if ($value == 0)
+      return $zero_value;
+    else
+      return number_format((float)$value, 8, '.', '');
+  }
+}
 
 if (!function_exists('decimal_number_format')) {
   function decimal_number_format($number, $digits=4, $default = '', $abs = true) {

@@ -42,6 +42,7 @@ function list_settings() {
   return array(
     array("Voucher Number", "voucher_number", true, "voucher_number", true, true),
     array("Account Name", "account_name", true, "account_name", true, true),
+    array("Description", "description", true, "description", true, true),
     array("Receipt Type", "receipt_type", true, "receipt_type", true, true),
     array("Credit Weight", "credit_weight", true, "credit_weight", true, true),
     array("Debit Weight", "debit_weight", true, "debit_weight", true, true),

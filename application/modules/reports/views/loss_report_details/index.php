@@ -39,14 +39,14 @@
         <td class="text-right"><?=four_decimal($loss_out_detail->in_lot_purity)?></td>
         <td class="text-right"><?=$fine=four_decimal($loss_out_detail->in_weight*$loss_out_detail->in_lot_purity/100);?></td>
         <td class="text-right"><?=four_decimal($loss_out_detail->out_weight);?></td>
-        <td class="text-right"><?=!empty($loss_out_detail->out_weight)?four_decimal($fine/$loss_out_detail->out_weight):0;?></td>
+        <td class="text-right"><?=!empty($loss_out_detail->out_weight)?eight_decimal($fine/$loss_out_detail->out_weight):0;?></td>
         <td class="text-right"><?=four_decimal($loss_out_detail->production);?></td>
         <td class="text-right">
           <a href=<?= base_url()."ac_vouchers/voucher_listing?parent_id=".$loss_out_detail->parent_id ?> target='_blank'><?=four_decimal($loss_out_detail->after_recovery);?></a></td>
         <td class="text-right"><?=four_decimal($loss_out_detail->purity);?></td>
         <td class="text-right"><?=four_decimal($loss_out_detail->fine);?></td>
         <td class="text-right"><?=$loss=four_decimal($fine-$loss_out_detail->fine);?></td>
-        <td class="text-right"><?=!empty($loss_out_detail->out_weight)?four_decimal($loss/$loss_out_detail->out_weight):0;?></td>
+        <td class="text-right"><?=!empty($loss_out_detail->out_weight)?eight_decimal($loss/$loss_out_detail->out_weight):0;?></td>
         <td class="text-right"><?=!empty($loss_out_detail->production)?four_decimal($loss/$loss_out_detail->production):0;?></td>
         <td class="text-right">
         <?php //if($parent_id==0){ ?>
@@ -63,13 +63,13 @@
     <td class="text-right"></td>
     <td class="text-right"><?=four_decimal($sum_fine)?></td>
     <td class="text-right"><?=four_decimal($sum_melting_production)?></td>
-    <td class="text-right"><?=four_decimal($sum_loss_befor_recovery)?></td>
+    <td class="text-right"><?=eight_decimal($sum_loss_befor_recovery)?></td>
     <td class="text-right"><?=four_decimal($sum_production)?></td>
     <td class="text-right"><?=four_decimal($sum_after_recovery)?></td>
     <td class="text-right"></td>
     <td class="text-right"><?=four_decimal($sum_after_fine)?></td>
     <td class="text-right"><?=four_decimal($sum_loss)?></td>
-    <td class="text-right"><?=four_decimal($sum_loss/$sum_melting_production)?></td>
+    <td class="text-right"><?=eight_decimal($sum_loss/$sum_melting_production)?></td>
     <td class="text-right"><?=four_decimal($sum_loss/$sum_production)?></td>
     <td class="text-right"></td>
     <td></td>
