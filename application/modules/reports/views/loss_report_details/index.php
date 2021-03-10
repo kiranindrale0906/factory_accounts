@@ -1,3 +1,6 @@
+<?php $category=$_GET['category'];
+?>
+
 <div class="table-responsive">
   <table class="table table-sm table-default">
     <thead>
@@ -52,6 +55,9 @@
         <?php //if($parent_id==0){ ?>
           <a href=<?= base_url()."transactions/metal_receipt_vouchers?receipt_type=Metal&parent_id=".$loss_out_detail->parent_id ?> target='_blank'>create metal receipt</a>
           <?php //}?>
+        </td>
+        <td class="text-right">
+          <a href=<?= base_url()."argold/unrecovarable_account_records/store?from=view&account_name=Unrecovarable&credit_weight=".$loss."&narration=".urlencode($category).""?> target='_blank'>Unrecovarable</a>
         </td>
       </tr>
 
