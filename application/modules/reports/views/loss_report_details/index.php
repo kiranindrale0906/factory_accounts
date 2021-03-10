@@ -61,7 +61,7 @@
           <?php //}?>
         </td>
         <td class="text-right">
-        <?php if(empty($loss_out_detail->unrecovery)){ ?>>
+        <?php if(empty($loss_out_detail->unrecovery)){ ?>
           <a href=<?= base_url()."argold/unrecovarable_account_records/store?from=view&account_name=Unrecovarable&credit_weight=".$loss."&narration=".urlencode($category)."&parent_id=".$loss_out_detail->parent_id ?> target='_blank'>Unrecovarable</a>
           <?php }?>
         </td>
