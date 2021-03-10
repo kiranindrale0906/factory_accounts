@@ -17,20 +17,23 @@
         <th class="text-right">Purity</th>
         <th class="text-right">Fine</th>
         <th class="text-right">Loss</th>
+        <th class="text-right">Unrecoverable</th>
         <th class="text-right">Loss % After Recovery</th>
         <th class="text-right">Loss % On Product Production</th>
         <th class="text-right">Action</th>
+        <th class="text-right"></th>
       </tr>
     </thead>
     <tbody>
     <?php 
-      $sum_weight=$sum_fine=$sum_factory_fine=$sum_receipt_weight=$sum_receipt_weight=$sum_total_fine=$sum_receipt_fine=$sum_loss_befor_recovery=$sum_melting_production=$sum_production=$sum_after_recovery=$sum_after_fine=$sum_loss=0;
+      $sum_weight=$sum_fine=$sum_factory_fine=$sum_receipt_weight=$sum_receipt_weight=$sum_total_fine=$sum_receipt_fine=$sum_loss_befor_recovery=$sum_melting_production=$sum_production=$sum_after_recovery=$sum_after_fine=$sum_loss=$sum_unrecoverable=0;
      foreach ($loss_details as $index => $loss_out_detail) {
       $sum_weight+=$loss_out_detail->in_weight;
       $sum_fine+=($loss_out_detail->in_weight*$loss_out_detail->in_lot_purity/100);
       $sum_melting_production+=($loss_out_detail->out_weight);
       $sum_production+=($loss_out_detail->production);
       $sum_after_recovery+=($loss_out_detail->after_recovery);
+      $sum_unrecoverable+=($loss_out_detail->unrecovery);
       $sum_after_fine+=($loss_out_detail->fine);
       $sum_loss+=(($loss_out_detail->in_weight*$loss_out_detail->in_lot_purity/100)-($loss_out_detail->fine));
       $sum_loss_befor_recovery+=!empty($loss_out_detail->out_weight)?(($loss_out_detail->in_weight*$loss_out_detail->in_lot_purity/100)/$loss_out_detail->out_weight):0;
@@ -48,7 +51,8 @@
           <a href=<?= base_url()."ac_vouchers/voucher_listing?parent_id=".$loss_out_detail->parent_id ?> target='_blank'><?=four_decimal($loss_out_detail->after_recovery);?></a></td>
         <td class="text-right"><?=four_decimal($loss_out_detail->purity);?></td>
         <td class="text-right"><?=four_decimal($loss_out_detail->fine);?></td>
-        <td class="text-right"><?=$loss=four_decimal($fine-$loss_out_detail->fine);?></td>
+        <td class="text-right"><?=$loss=four_decimal($fine-$loss_out_detail->fine-$loss_out_detail->unrecovery);?></td>
+        <td class="text-right"><?=!empty($loss_out_detail->unrecovery)?eight_decimal(-$loss_out_detail->unrecovery):0;?></td>
         <td class="text-right"><?=!empty($loss_out_detail->out_weight)?eight_decimal($loss/$loss_out_detail->out_weight):0;?></td>
         <td class="text-right"><?=!empty($loss_out_detail->production)?four_decimal($loss/$loss_out_detail->production):0;?></td>
         <td class="text-right">
@@ -57,7 +61,9 @@
           <?php //}?>
         </td>
         <td class="text-right">
-          <a href=<?= base_url()."argold/unrecovarable_account_records/store?from=view&account_name=Unrecovarable&credit_weight=".$loss."&narration=".urlencode($category).""?> target='_blank'>Unrecovarable</a>
+        <?php if(empty($loss_out_detail->unrecovery)){ ?>>
+          <a href=<?= base_url()."argold/unrecovarable_account_records/store?from=view&account_name=Unrecovarable&credit_weight=".$loss."&narration=".urlencode($category)."&parent_id=".$loss_out_detail->parent_id ?> target='_blank'>Unrecovarable</a>
+          <?php }?>
         </td>
       </tr>
 
@@ -75,8 +81,10 @@
     <td class="text-right"></td>
     <td class="text-right"><?=four_decimal($sum_after_fine)?></td>
     <td class="text-right"><?=four_decimal($sum_loss)?></td>
+    <td class="text-right"><?=four_decimal($sum_unrecoverable)?></td>
     <td class="text-right"><?=eight_decimal($sum_loss/$sum_melting_production)?></td>
     <td class="text-right"><?=four_decimal($sum_loss/$sum_production)?></td>
+    <td class="text-right"></td>
     <td class="text-right"></td>
     <td></td>
   </tr>

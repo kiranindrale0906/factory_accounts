@@ -16,6 +16,7 @@ class Unrecovarable_account_records extends BaseController {
         'receipt_type'=>$_GET['account_name'],
         'purity'=>100,
         'company_id'=>1,
+        'parent_id'=>$_GET['parent_id'],
         'voucher_date'=>date('Y-m-d'),
         'credit_weight'=>$_GET['credit_weight']);
       $hide_obj = new metal_issue_voucher_model($process);
