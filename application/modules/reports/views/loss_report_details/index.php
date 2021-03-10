@@ -41,7 +41,8 @@
         <td class="text-right"><?=four_decimal($loss_out_detail->out_weight);?></td>
         <td class="text-right"><?=!empty($loss_out_detail->out_weight)?four_decimal($fine/$loss_out_detail->out_weight):0;?></td>
         <td class="text-right"><?=four_decimal($loss_out_detail->production);?></td>
-        <td class="text-right"><?=four_decimal($loss_out_detail->after_recovery);?></td>
+        <td class="text-right">
+          <a href=<?= base_url()."ac_vouchers/voucher_listing?parent_id=".$loss_out_detail->parent_id ?> target='_blank'><?=four_decimal($loss_out_detail->after_recovery);?></a></td>
         <td class="text-right"><?=four_decimal($loss_out_detail->purity);?></td>
         <td class="text-right"><?=four_decimal($loss_out_detail->fine);?></td>
         <td class="text-right"><?=$loss=four_decimal($fine-$loss_out_detail->fine);?></td>

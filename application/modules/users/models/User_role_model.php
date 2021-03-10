@@ -37,6 +37,7 @@ class User_role_model extends Core_user_role_model {
                                             'argold/refresh','argold/refresh_details','argold/chitti_hides',
                                             'transactions/loss_outs',
                                             'transactions/mangalsutra_sales_return_voucher',
+                                            'ac_vouchers/voucher_listing',
                                             'argold/change_account_names'),
                      // 'Reports' => array('reports/mis_reports','reports/stock_report', 
                      //                    'reports/order_report'),
