@@ -35,7 +35,7 @@
       $sum_after_recovery+=($loss_out_detail->after_recovery);
       $sum_unrecoverable+=($loss_out_detail->unrecovery);
       $sum_after_fine+=($loss_out_detail->fine);
-      $sum_loss+=(($loss_out_detail->in_weight*$loss_out_detail->in_lot_purity/100)-($loss_out_detail->fine));
+      $sum_loss+=(($loss_out_detail->in_weight*$loss_out_detail->in_lot_purity/100)-($loss_out_detail->fine)-($loss_out_detail->unrecovery));
       $sum_loss_befor_recovery+=!empty($loss_out_detail->out_weight)?(($loss_out_detail->in_weight*$loss_out_detail->in_lot_purity/100)/$loss_out_detail->out_weight):0;
       ?>
       <tr>
