@@ -82,8 +82,8 @@
     <td class="text-right"><?=four_decimal($sum_after_fine)?></td>
     <td class="text-right"><?=four_decimal($sum_loss)?></td>
     <td class="text-right"><?=four_decimal($sum_unrecoverable)?></td>
-    <td class="text-right"><?=eight_decimal($sum_loss/$sum_melting_production)?></td>
-    <td class="text-right"><?=four_decimal($sum_loss/$sum_production)?></td>
+    <td class="text-right"><?=!empty($sum_melting_production)?eight_decimal($sum_loss/$sum_melting_production):0?></td>
+    <td class="text-right"><?=!empty($sum_production)?four_decimal($sum_loss/$sum_production):0?></td>
     <td class="text-right"></td>
     <td class="text-right"></td>
     <td></td>
