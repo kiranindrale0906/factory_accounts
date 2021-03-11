@@ -23,33 +23,41 @@ class Loss_reports extends BaseController {
     $category_names=array_column($categories,'description');
     foreach ($category_names as $category_name_index => $category_name_value) {
       $data['department_name']=$category_name_value;
-      $url=API_ARG_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
-      $arg_jan2021_records=json_decode(curl_post_request($url,$data));
-      $total_production=$total_loss_fine=0;
-      foreach ($arg_jan2021_records->data->loss_details->loss_detail as $index => $arg_loss_detail) {
-        $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$arg_loss_detail->parent_id,'account_name!='=>'Unrecovarable'));
-        $unrecovery_details= $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$arg_loss_detail->parent_id,'account_name'=>'Unrecovarable'));
-        $total_production+=$arg_loss_detail->out_weight;
-        $total_loss_fine+=($arg_loss_detail->in_weight*$arg_loss_detail->in_lot_purity/100)-$loss_account_details['weight']-$unrecovery_details['weight'];
-        $this->data['loss_categories'][$category_name_value]['melting_production']=$total_production;
-        $this->data['loss_categories'][$category_name_value]['overall_loss_fine']=$total_loss_fine;
+      if(isset($_GET['site_name'])&&$_GET['site_name']=='ARC'){
+        $url=API_ARC_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
+        $arg_jan2021_records=json_decode(curl_post_request($url,$data));
+      }elseif(isset($_GET['site_name'])&&$_GET['site_name']=='ARF'){
+        $url=API_ARF_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
+        $arg_jan2021_records=json_decode(curl_post_request($url,$data));
+      }else{
+        $url=API_ARG_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
+        $arg_jan2021_records=json_decode(curl_post_request($url,$data));
       }
-
-
-    }
-    if(!empty($loss_details)){
-      foreach ($categories as $category_index => $category) {
-        $total_fine=0;
-        foreach ($loss_details as $index => $loss_detail) {
-          if($loss_detail['description']==$category['description']){
-          $receipt_data= $this->voucher_model->find('sum(fine) as fine', array('parent_id'=>$loss_detail['id']));
-          $total_fine+=$loss_detail['fine']-$receipt_data['fine'];
-
-          }
-          $this->data['loss_categories'][$category['description']]['fine']=$total_fine;
+      $total_production=$total_loss_fine=0;
+      if(!empty($arg_jan2021_records->data->loss_details->loss_detail)){
+        foreach ($arg_jan2021_records->data->loss_details->loss_detail as $index => $arg_loss_detail) {
+          $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$arg_loss_detail->parent_id,'account_name!='=>'Unrecovarable'));
+          $unrecovery_details= $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$arg_loss_detail->parent_id,'account_name'=>'Unrecovarable'));
+          $total_production+=$arg_loss_detail->out_weight;
+          $total_loss_fine+=($arg_loss_detail->in_weight*$arg_loss_detail->in_lot_purity/100)-$loss_account_details['weight']-$unrecovery_details['weight'];
+          $this->data['loss_categories'][$category_name_value]['melting_production']=$total_production;
+          $this->data['loss_categories'][$category_name_value]['overall_loss_fine']=$total_loss_fine;
         }
       }
     }
+    // if(!empty($loss_details)){
+    //   foreach ($categories as $category_index => $category) {
+    //     $total_fine=0;
+    //     foreach ($loss_details as $index => $loss_detail) {
+    //       if($loss_detail['description']==$category['description']){
+    //       $receipt_data= $this->voucher_model->find('sum(fine) as fine', array('parent_id'=>$loss_detail['id']));
+    //       $total_fine+=$loss_detail['fine']-$receipt_data['fine'];
+
+    //       }
+    //       $this->data['loss_categories'][$category['description']]['fine']=$total_fine;
+    //     }
+    //   }
+    // }
     // parent::create();
   }
   // private function get_loss_details() {

@@ -28,72 +28,48 @@ class Loss_report_details extends Ledgers {
     $url=API_ARC_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
     $arc_jan2021_records=json_decode(curl_post_request($url,$data));
 
-     foreach ($arg_jan2021_records->data->loss_details->loss_detail as $index => $arg_loss_detail) {
-       $where['purity != factory_purity'] = NULL;
-       $where['account_name != '] = 'VADOTAR';
-       $arg_jan2021_records->data->loss_details->loss_detail->$index->production=0;
-       if(!empty($arg_loss_detail->first_date)){
-          $where['date(voucher_date) >='] = date('Y-m-d',strtotime($arg_loss_detail->first_date));
-       }
-       if(!empty($arg_loss_detail->last_date)){
-          $where['date(voucher_date) <='] = date('Y-m-d',strtotime($arg_loss_detail->last_date));
-        }
-        $product_production= $this->ledger_model->find('-1*sum(credit_weight-debit_weight) as weight',$where);
-        $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$arg_loss_detail->parent_id,'account_name!='=>'Unrecovarable'));
-        $unrecovery_details= $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$arg_loss_detail->parent_id,'account_name'=>'Unrecovarable'));
-        $arg_jan2021_records->data->loss_details->loss_detail->$index->production=$product_production['weight'];
-        $arg_jan2021_records->data->loss_details->loss_detail->$index->after_recovery=!empty($loss_account_details)?$loss_account_details['weight']:0;
-        $arg_jan2021_records->data->loss_details->loss_detail->$index->unrecovery=!empty($unrecovery_details)?$unrecovery_details['weight']:0;
-        $arg_jan2021_records->data->loss_details->loss_detail->$index->purity=!empty($loss_account_details)?$loss_account_details['factory_purity']:0;
-        $arg_jan2021_records->data->loss_details->loss_detail->$index->fine=!empty($loss_account_details)?$loss_account_details['fine']:0;
+    $arg_records=$this->factory_wise_record_array($arg_jan2021_records);
+    $arf_records=$this->factory_wise_record_array($arf_jan2021_records);
+    $arc_records=$this->factory_wise_record_array($arc_jan2021_records);
 
-     }
-     if(!empty($arf_jan2021_records)){
-     foreach ($arf_jan2021_records->data->loss_details->loss_detail as $index => $arf_loss_detail) {
-       $where['purity != factory_purity'] = NULL;
-       $where['account_name != '] = 'VADOTAR';
-       $arf_jan2021_records->data->loss_details->loss_detail->$index->production=0;
-       if(!empty($arf_loss_detail->first_date)){
-          $where['date(voucher_date) >='] = date('Y-m-d',strtotime($arf_loss_detail->first_date));
-       }
-       if(!empty($arf_loss_detail->last_date)){
-          $where['date(voucher_date) <='] = date('Y-m-d',strtotime($arf_loss_detail->last_date));
-        }
-        $product_production= $this->ledger_model->find('-1*sum(credit_weight-debit_weight) as weight',$where);
-        $arf_jan2021_records->data->loss_details->loss_detail->$index->production=$product_production['weight'];
-     }}
-     if(!empty($arc_jan2021_records)){
-     foreach ($arc_jan2021_records->data->loss_details->loss_detail as $index => $arc_loss_detail) {
-       $where['purity != factory_purity'] = NULL;
-       $where['account_name != '] = 'VADOTAR';
-       $arc_jan2021_records->data->loss_details->loss_detail->$index->production=0;
-       if(!empty($arc_loss_detail->first_date)){
-          $where['date(voucher_date) >='] = date('Y-m-d',strtotime($arc_loss_detail->first_date));
-       }
-       if(!empty($arc_loss_detail->last_date)){
-          $where['date(voucher_date) <='] = date('Y-m-d',strtotime($arc_loss_detail->last_date));
-        }
-        $product_production= $this->ledger_model->find('-1*sum(credit_weight-debit_weight) as weight',$where);
-        $arc_jan2021_records->data->loss_details->loss_detail->$index->production=$product_production['weight'];
-     }}
      $this->data['loss_details']=array();
-     // if( $this->data['factory_name']=='AR Gold Nov 2020'){
-     //  $this->data['loss_details']=!empty($arg_jan2021_records->data->loss_details->loss_detail)? $arg_jan2021_records->data->loss_details->loss_detail:array();
-     // }
      if($this->data['factory_name']=='AR Gold'){
-      $this->data['loss_details']=!empty($arg_jan2021_records->data->loss_details->loss_detail)? $arg_jan2021_records->data->loss_details->loss_detail:array();
+      $this->data['loss_details']=!empty($arg_records->data->loss_details->loss_detail)? $arg_records->data->loss_details->loss_detail:array();
      }
      if($this->data['factory_name']=='ARF'){
-      $this->data['loss_details']=!empty($arf_jan2021_records->data->loss_details->loss_detail)? $arf_jan2021_records->data->loss_details->loss_detail:array();
+      $this->data['loss_details']=!empty($arf_records->data->loss_details->loss_detail)? $arf_records->data->loss_details->loss_detail:array();
      }
-     // if( $this->data['factory_name']=='ARF Nov 2020'){
-     //  $this->data['loss_details']=!empty($arf_jan2021_records->data->loss_details->loss_detail)? $arf_jan2021_records->data->loss_details->loss_detail:array();
-     // }
      if($this->data['factory_name']=='ARC'){
-      $this->data['loss_details']=!empty($arc_jan2021_records->data->loss_details->loss_detail)? $arc_jan2021_records->data->loss_details->loss_detail:array();
+      $this->data['loss_details']=!empty($arc_records->data->loss_details->loss_detail)? $arc_records->data->loss_details->loss_detail:array();
      }
-    //  if( $this->data['factory_name']=='ARC Nov 2020'){
-    //   $this->data['loss_details']=!empty($arc_jan2021_records->data->loss_details->loss_detail)? $arc_jan2021_records->data->loss_details->loss_detail:array();
-    // }
+  }
+
+  private function factory_wise_record_array($records){
+
+    if(!empty($records)){
+       foreach ($records->data->loss_details->loss_detail as $index => $loss_detail) {
+         $where['purity != factory_purity'] = NULL;
+         $where['account_name != '] = 'VADOTAR';
+         $records->data->loss_details->loss_detail->$index->production=0;
+         if(!empty($loss_detail->first_date)){
+            $where['date(voucher_date) >='] = date('Y-m-d',strtotime($loss_detail->first_date));
+         }
+         if(!empty($loss_detail->last_date)){
+            $where['date(voucher_date) <='] = date('Y-m-d',strtotime($loss_detail->last_date));
+          }
+          $product_production= $this->ledger_model->find('-1*sum(credit_weight-debit_weight) as weight',$where);
+          $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$loss_detail->parent_id,'account_name!='=>'Unrecovarable'));
+          $unrecovery_details= $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$loss_detail->parent_id,'account_name'=>'Unrecovarable'));
+          $records->data->loss_details->loss_detail->$index->production=$product_production['weight'];
+          $records->data->loss_details->loss_detail->$index->after_recovery=!empty($loss_account_details)?$loss_account_details['weight']:0;
+          $records->data->loss_details->loss_detail->$index->unrecovery=!empty($unrecovery_details)?$unrecovery_details['weight']:0;
+          $records->data->loss_details->loss_detail->$index->purity=!empty($loss_account_details)?$loss_account_details['factory_purity']:0;
+          $records->data->loss_details->loss_detail->$index->fine=!empty($loss_account_details)?$loss_account_details['fine']:0;
+
+      }
+    }
+
+    return $records;
+
   }      
 }
