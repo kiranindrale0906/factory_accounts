@@ -20,7 +20,8 @@ class Loss_report_details extends Ledgers {
     $this->data['factory_name']=!empty($_GET['factory_name'])?$_GET['factory_name']:'';
     $data['department_name']=$_GET['category'];
     $url=API_ARG_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
-    $arg_jan2021_records=json_decode(curl_post_request($url,$data));
+    $arg_jan2021_records=json_decode(curl_post_request($url,$data),true);
+    pd($arg_jan2021_records);
 
     $url=API_ARF_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
     $arf_jan2021_records=json_decode(curl_post_request($url,$data));
@@ -48,7 +49,6 @@ class Loss_report_details extends Ledgers {
 
     if(!empty($records)){
        foreach ($records->data->loss_details->loss_detail as $index => $loss_data) {
-        pd($index);
          $where['purity != factory_purity'] = NULL;
          $where['account_name != '] = 'VADOTAR';
          $records->data->loss_details->loss_detail->$index->production=0;
