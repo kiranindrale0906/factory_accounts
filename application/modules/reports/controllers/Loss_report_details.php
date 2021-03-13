@@ -47,10 +47,10 @@ class Loss_report_details extends Ledgers {
   private function factory_wise_record_array($records){
 
     if(!empty($records)){
-       foreach ($records->data->loss_details->loss_detail as $index => $loss_detail) {
+       foreach ($records->data->loss_details->loss_detail as $loss_detail) {
          $where['purity != factory_purity'] = NULL;
          $where['account_name != '] = 'VADOTAR';
-         // $records->data->loss_details->loss_detail->$index->production=0;
+         $records->data->loss_details->loss_detail->production=0;
          if(!empty($loss_detail->first_date)){
             $where['date(voucher_date) >='] = date('Y-m-d',strtotime($loss_detail->first_date));
          }
@@ -60,11 +60,11 @@ class Loss_report_details extends Ledgers {
           $product_production= $this->ledger_model->find('-1*sum(credit_weight-debit_weight) as weight',$where);
           $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$loss_detail->parent_id,'account_name!='=>'Unrecovarable'));
           $unrecovery_details= $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$loss_detail->parent_id,'account_name'=>'Unrecovarable'));
-          $records->data->loss_details->loss_detail->$index->production=$product_production['weight'];
-          $records->data->loss_details->loss_detail->$index->after_recovery=!empty($loss_account_details)?$loss_account_details['weight']:0;
-          $records->data->loss_details->loss_detail->$index->unrecovery=!empty($unrecovery_details)?$unrecovery_details['weight']:0;
-          $records->data->loss_details->loss_detail->$index->purity=!empty($loss_account_details)?$loss_account_details['factory_purity']:0;
-          $records->data->loss_details->loss_detail->$index->fine=!empty($loss_account_details)?$loss_account_details['fine']:0;
+          $records->data->loss_details->loss_detail->production=$product_production['weight'];
+          $records->data->loss_details->loss_detail->after_recovery=!empty($loss_account_details)?$loss_account_details['weight']:0;
+          $records->data->loss_details->loss_detail->unrecovery=!empty($unrecovery_details)?$unrecovery_details['weight']:0;
+          $records->data->loss_details->loss_detail->purity=!empty($loss_account_details)?$loss_account_details['factory_purity']:0;
+          $records->data->loss_details->loss_detail->fine=!empty($loss_account_details)?$loss_account_details['fine']:0;
 
       }
     }
