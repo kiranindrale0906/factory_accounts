@@ -42,7 +42,6 @@ class Loss_report_details extends Ledgers {
      if($this->data['factory_name']=='ARC'){
       $this->data['loss_details']=!empty($arc_records)? $arc_records:array();
      }
-     pd($this->data['loss_details']);
   }
 
   private function factory_wise_record_array($records){
