@@ -21,7 +21,6 @@ class Loss_report_details extends Ledgers {
     $data['department_name']=$_GET['category'];
     $url=API_ARG_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
     $arg_jan2021_records=json_decode(curl_post_request($url,$data),true);
-    pd($arg_jan2021_records);
 
     $url=API_ARF_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
     $arf_jan2021_records=json_decode(curl_post_request($url,$data),true);
@@ -48,6 +47,7 @@ class Loss_report_details extends Ledgers {
   private function factory_wise_record_array($records){
 
     $loss_details=$records['data']['loss_details']['loss_detail'];
+    pd($loss_details);
     if(!empty($loss_details)){
        foreach ($loss_details as $index => $loss_data) {
          $where['purity != factory_purity'] = NULL;
