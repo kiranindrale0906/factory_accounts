@@ -47,31 +47,33 @@ class Loss_report_details extends Ledgers {
   private function factory_wise_record_array($records){
 
     $loss_details=$records['data']['loss_details']['loss_detail'];
-    pd($loss_details);
+    $factory_wise_record=array();
     if(!empty($loss_details)){
        foreach ($loss_details as $index => $loss_data) {
+        $factory_wise_record[$index]=$loss_data;
          $where['purity != factory_purity'] = NULL;
          $where['account_name != '] = 'VADOTAR';
-         $loss_details[$index]['production']=0;
-         if(!empty($loss_data->first_date)){
+         $factory_wise_record[$index]['production']=0;
+         if(!empty($loss_data['first_date'])){
             $where['date(voucher_date) >='] = date('Y-m-d',strtotime($loss_data['first_date']));
          }
-         if(!empty($loss_data->last_date)){
+         if(!empty($loss_data['last_date'])){
             $where['date(voucher_date) <='] = date('Y-m-d',strtotime($loss_data['last_date']));
           }
           $product_production= $this->ledger_model->find('-1*sum(credit_weight-debit_weight) as weight',$where);
           $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$loss_data['parent_id'],'account_name!='=>'Unrecovarable'));
           $unrecovery_details= $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$loss_data['parent_id'],'account_name'=>'Unrecovarable'));
-          $loss_details[$index]['production']=$product_production['weight'];
-          $loss_details[$index]['after_recovery']=!empty($loss_account_details)?$loss_account_details['weight']:0;
-          $loss_details[$index]['unrecovery']=!empty($unrecovery_details)?$unrecovery_details['weight']:0;
-          $loss_details[$index]['purity']=!empty($loss_account_details)?$loss_account_details['factory_purity']:0;
-          $loss_details[$index]['fine']=!empty($loss_account_details)?$loss_account_details['fine']:0;
+          $factory_wise_record[$index]['production']=$product_production['weight'];
+          $factory_wise_record[$index]['after_recovery']=!empty($loss_account_details)?$loss_account_details['weight']:0;
+          $factory_wise_record[$index]['unrecovery']=!empty($unrecovery_details)?$unrecovery_details['weight']:0;
+          $factory_wise_record[$index]['purity']=!empty($loss_account_details)?$loss_account_details['factory_purity']:0;
+          $factory_wise_record[$index]['fine']=!empty($loss_account_details)?$loss_account_details['fine']:0;
 
       }
     }
+    pd($factory_wise_record);
 
-    return $loss_details;
+    return $factory_wise_record;
 
   }      
 }
