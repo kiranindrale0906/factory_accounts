@@ -34,14 +34,15 @@ class Loss_report_details extends Ledgers {
 
      $this->data['loss_details']=array();
      if($this->data['factory_name']=='AR Gold'){
-      $this->data['loss_details']=!empty($arg_records->data->loss_details->loss_detail)? $arg_records->data->loss_details->loss_detail:array();
+      $this->data['loss_details']=!empty($arg_records)? $arg_records:array();
      }
      if($this->data['factory_name']=='ARF'){
-      $this->data['loss_details']=!empty($arf_records->data->loss_details->loss_detail)? $arf_records->data->loss_details->loss_detail:array();
+      $this->data['loss_details']=!empty($arf_records)? $arf_records:array();
      }
      if($this->data['factory_name']=='ARC'){
-      $this->data['loss_details']=!empty($arc_records->data->loss_details->loss_detail)? $arc_records->data->loss_details->loss_detail:array();
+      $this->data['loss_details']=!empty($arc_records)? $arc_records:array();
      }
+     pd($this->data['loss_details']);
   }
 
   private function factory_wise_record_array($records){
@@ -71,7 +72,6 @@ class Loss_report_details extends Ledgers {
 
       }
     }
-    pd($factory_wise_record);
 
     return $factory_wise_record;
 
