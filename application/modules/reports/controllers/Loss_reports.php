@@ -25,21 +25,21 @@ class Loss_reports extends BaseController {
       $data['department_name']=$category_name_value;
       if(isset($_GET['site_name'])&&$_GET['site_name']=='ARC'){
         $url=API_ARC_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
-        $arg_jan2021_records=json_decode(curl_post_request($url,$data));
+        $arg_jan2021_records=json_decode(curl_post_request($url,$data),true);
       }elseif(isset($_GET['site_name'])&&$_GET['site_name']=='ARF'){
         $url=API_ARF_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
-        $arg_jan2021_records=json_decode(curl_post_request($url,$data));
+        $arg_jan2021_records=json_decode(curl_post_request($url,$data),true);
       }else{
         $url=API_ARG_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
-        $arg_jan2021_records=json_decode(curl_post_request($url,$data));
+        $arg_jan2021_records=json_decode(curl_post_request($url,$data),true);
       }
       $total_production=$total_loss_fine=0;
-      if(!empty($arg_jan2021_records->data->loss_details->loss_detail)){
-        foreach ($arg_jan2021_records->data->loss_details->loss_detail as $index => $arg_loss_detail) {
-          $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$arg_loss_detail->parent_id,'account_name!='=>'Unrecovarable'));
-          $unrecovery_details= $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$arg_loss_detail->parent_id,'account_name'=>'Unrecovarable'));
-          $total_production+=$arg_loss_detail->out_weight;
-          $total_loss_fine+=($arg_loss_detail->in_weight*$arg_loss_detail->in_lot_purity/100)-$loss_account_details['weight']-$unrecovery_details['weight'];
+      if(!empty($arg_jan2021_records['data']['loss_details']['loss_detail'])){
+        foreach ($arg_jan2021_records['data']['loss_details']['loss_detail'] as $index => $arg_loss_detail) {
+          $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$arg_loss_detail['parent_id'],'account_name!='=>'Unrecovarable'));
+          $unrecovery_details= $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$arg_loss_detail['parent_id'],'account_name'=>'Unrecovarable'));
+          $total_production+=$arg_loss_detail['out_weight'];
+          $total_loss_fine+=($arg_loss_detail['in_weight']*$arg_loss_detail['in_lot_purity']/100)-$loss_account_details['weight']-$unrecovery_details['weight'];
           $this->data['loss_categories'][$category_name_value]['melting_production']=$total_production;
           $this->data['loss_categories'][$category_name_value]['overall_loss_fine']=$total_loss_fine;
         }
