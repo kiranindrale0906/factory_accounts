@@ -52,7 +52,7 @@ class Loss_reports extends BaseController {
           $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$arg_loss_detail['parent_id'],'account_name!='=>'Unrecovarable'));
           $unrecovery_details= $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$arg_loss_detail['parent_id'],'account_name'=>'Unrecovarable'));
           $total_production+=$arg_loss_detail['out_weight'];
-          $total_product_production+=$product_productionl['weight'];
+          $total_product_production+=$product_production['weight'];
           $total_loss_fine+=($arg_loss_detail['in_weight']*$arg_loss_detail['in_lot_purity']/100)-$loss_account_details['weight']-$unrecovery_details['weight'];
           $this->data['loss_categories'][$category_name_value]['melting_production']=$total_production;
           $this->data['loss_categories'][$category_name_value]['overall_loss_fine']=$total_loss_fine;
