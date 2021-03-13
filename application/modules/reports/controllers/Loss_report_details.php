@@ -47,6 +47,7 @@ class Loss_report_details extends Ledgers {
   private function factory_wise_record_array($records){
 
     if(!empty($records)){
+      pd($records->data->loss_details->loss_detail);
        foreach ($records->data->loss_details->loss_detail as $index => $loss_detail) {
          $where['purity != factory_purity'] = NULL;
          $where['account_name != '] = 'VADOTAR';
