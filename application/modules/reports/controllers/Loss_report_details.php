@@ -21,6 +21,7 @@ class Loss_report_details extends Ledgers {
     $data['department_name']=$_GET['category'];
     $url=API_ARG_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
     $arg_jan2021_records=json_decode(curl_post_request($url,$data),true);
+    pd($arg_jan2021_records);
 
     $url=API_ARF_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
     $arf_jan2021_records=json_decode(curl_post_request($url,$data),true);
