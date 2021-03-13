@@ -13,6 +13,7 @@ class Loss_report_details extends Ledgers {
 
   public function index() {
     $this->get_loss_details();
+     pd($this->data['loss_details']);
     $this->load->render($this->router->class."/index",$this->data);
   }
 

@@ -27,7 +27,6 @@
     <tbody>
     <?php 
       $sum_weight=$sum_fine=$sum_factory_fine=$sum_receipt_weight=$sum_receipt_weight=$sum_total_fine=$sum_receipt_fine=$sum_loss_befor_recovery=$sum_melting_production=$sum_production=$sum_after_recovery=$sum_after_fine=$sum_loss=$sum_unrecoverable=0;
-      pd($loss_details);
      foreach ($loss_details as $index => $loss_out_detail) {
       $sum_weight+=$loss_out_detail['in_weight'];
       $sum_fine+=($loss_out_detail['in_weight']*$loss_out_detail['in_lot_purity']/100);
