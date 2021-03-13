@@ -29,7 +29,6 @@ class Loss_report_details extends Ledgers {
     $arc_jan2021_records=json_decode(curl_post_request($url,$data),true);
 
     $arg_records=$this->factory_wise_record_array($arg_jan2021_records);
-    pd($arg_records);
     $arf_records=$this->factory_wise_record_array($arf_jan2021_records);
     $arc_records=$this->factory_wise_record_array($arc_jan2021_records);
 
@@ -71,7 +70,7 @@ class Loss_report_details extends Ledgers {
       }
     }
 
-    return $records;
+    return $loss_details;
 
   }      
 }
