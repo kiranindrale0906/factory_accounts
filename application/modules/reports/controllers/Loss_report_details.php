@@ -21,15 +21,15 @@ class Loss_report_details extends Ledgers {
     $data['department_name']=$_GET['category'];
     $url=API_ARG_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
     $arg_jan2021_records=json_decode(curl_post_request($url,$data),true);
-    pd($arg_jan2021_records);
 
     $url=API_ARF_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
-    $arf_jan2021_records=json_decode(curl_post_request($url,$data));
+    $arf_jan2021_records=json_decode(curl_post_request($url,$data),true);
     
     $url=API_ARC_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
-    $arc_jan2021_records=json_decode(curl_post_request($url,$data));
+    $arc_jan2021_records=json_decode(curl_post_request($url,$data),true);
 
     $arg_records=$this->factory_wise_record_array($arg_jan2021_records);
+    pd($arg_records);
     $arf_records=$this->factory_wise_record_array($arf_jan2021_records);
     $arc_records=$this->factory_wise_record_array($arc_jan2021_records);
 
@@ -47,11 +47,12 @@ class Loss_report_details extends Ledgers {
 
   private function factory_wise_record_array($records){
 
+    $loss_details=$records['data']['loss_details']['loss_detail'];
     if(!empty($records)){
-       foreach ($records->data->loss_details->loss_detail as $index => $loss_data) {
+       foreach ($loss_details as $index => $loss_data) {
          $where['purity != factory_purity'] = NULL;
          $where['account_name != '] = 'VADOTAR';
-         $records->data->loss_details->loss_detail->$index->production=0;
+         $loss_details[$index]['production']=0;
          if(!empty($loss_data->first_date)){
             $where['date(voucher_date) >='] = date('Y-m-d',strtotime($loss_data->first_date));
          }
@@ -61,11 +62,11 @@ class Loss_report_details extends Ledgers {
           $product_production= $this->ledger_model->find('-1*sum(credit_weight-debit_weight) as weight',$where);
           $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$loss_data->parent_id,'account_name!='=>'Unrecovarable'));
           $unrecovery_details= $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$loss_data->parent_id,'account_name'=>'Unrecovarable'));
-          $records->data->loss_details->loss_detail->$index->production=$product_production['weight'];
-          $records->data->loss_details->loss_detail->$index->after_recovery=!empty($loss_account_details)?$loss_account_details['weight']:0;
-          $records->data->loss_details->loss_detail->$index->unrecovery=!empty($unrecovery_details)?$unrecovery_details['weight']:0;
-          $records->data->loss_details->loss_detail->$index->purity=!empty($loss_account_details)?$loss_account_details['factory_purity']:0;
-          $records->data->loss_details->loss_detail->$index->fine=!empty($loss_account_details)?$loss_account_details['fine']:0;
+          $loss_details[$index]['production']=$product_production['weight'];
+          $loss_details[$index]['after_recovery']=!empty($loss_account_details)?$loss_account_details['weight']:0;
+          $loss_details[$index]['unrecovery']=!empty($unrecovery_details)?$unrecovery_details['weight']:0;
+          $loss_details[$index]['purity']=!empty($loss_account_details)?$loss_account_details['factory_purity']:0;
+          $loss_details[$index]['fine']=!empty($loss_account_details)?$loss_account_details['fine']:0;
 
       }
     }
