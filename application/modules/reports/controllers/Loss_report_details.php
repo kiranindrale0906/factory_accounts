@@ -54,14 +54,14 @@ class Loss_report_details extends Ledgers {
          $where['account_name != '] = 'VADOTAR';
          $loss_details[$index]['production']=0;
          if(!empty($loss_data->first_date)){
-            $where['date(voucher_date) >='] = date('Y-m-d',strtotime($loss_data->first_date));
+            $where['date(voucher_date) >='] = date('Y-m-d',strtotime($loss_data['first_date']));
          }
          if(!empty($loss_data->last_date)){
-            $where['date(voucher_date) <='] = date('Y-m-d',strtotime($loss_data->last_date));
+            $where['date(voucher_date) <='] = date('Y-m-d',strtotime($loss_data['last_date']));
           }
           $product_production= $this->ledger_model->find('-1*sum(credit_weight-debit_weight) as weight',$where);
-          $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$loss_data->parent_id,'account_name!='=>'Unrecovarable'));
-          $unrecovery_details= $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$loss_data->parent_id,'account_name'=>'Unrecovarable'));
+          $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$loss_data['parent_id'],'account_name!='=>'Unrecovarable'));
+          $unrecovery_details= $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$loss_data['parent_id'],'account_name'=>'Unrecovarable'));
           $loss_details[$index]['production']=$product_production['weight'];
           $loss_details[$index]['after_recovery']=!empty($loss_account_details)?$loss_account_details['weight']:0;
           $loss_details[$index]['unrecovery']=!empty($unrecovery_details)?$unrecovery_details['weight']:0;
