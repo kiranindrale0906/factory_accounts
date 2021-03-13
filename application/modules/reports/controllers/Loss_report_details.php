@@ -48,6 +48,7 @@ class Loss_report_details extends Ledgers {
 
     if(!empty($records)){
        foreach ($records->data->loss_details->loss_detail as $loss_details) {
+        $records->data->loss_details->loss_detail->$loss_details->production=0;
         foreach ($loss_details as $loss_detail) {
           pd($loss_details);
           
