@@ -13,7 +13,6 @@ class Loss_report_details extends Ledgers {
 
   public function index() {
     $this->get_loss_details();
-     pd($this->data['loss_details']);
     $this->load->render($this->router->class."/index",$this->data);
   }
 
@@ -32,6 +31,8 @@ class Loss_report_details extends Ledgers {
     $arg_records=$this->factory_wise_record_array($arg_jan2021_records);
     $arf_records=$this->factory_wise_record_array($arf_jan2021_records);
     $arc_records=$this->factory_wise_record_array($arc_jan2021_records);
+    
+     pd($arg_records);
 
      $this->data['loss_details']=array();
      if($this->data['factory_name']=='AR Gold'){
