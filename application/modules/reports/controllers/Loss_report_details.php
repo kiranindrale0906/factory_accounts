@@ -49,7 +49,7 @@ class Loss_report_details extends Ledgers {
     if(!empty($records)){
        foreach ($records->data->loss_details->loss_detail as $loss_details) {
         foreach ($loss_details as $loss_detail) {
-          pd($loss_detail);
+          pd($loss_details);
           
          // $where['purity != factory_purity'] = NULL;
          // $where['account_name != '] = 'VADOTAR';
