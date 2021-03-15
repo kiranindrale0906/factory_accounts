@@ -446,7 +446,16 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
               ||$attributes['receipt_type'] == 'Hand Cutting Ghiss' 
               ||$attributes['receipt_type'] == 'Hand Dull Ghiss' 
               || $attributes['receipt_type'] == 'Ice Cutting Ghiss'){
-      $send_data['pending_ghiss_receipts'] = array_merge($api_data, array('department_name' => $attributes['narration']));
+      if($attributes['receipt_type']=='Cutting Ghiss'){
+        $department_name='Cutting';
+      }elseif($attributes['receipt_type']=='Hand Cutting Ghiss'){
+        $department_name='Hand Cutting';
+      }elseif($attributes['receipt_type']=='Hand Dull Ghiss'){
+        $department_name='Hand Dull';
+      }elseif($attributes['receipt_type']=='Ice Cutting Ghiss'){
+        $department_name='Ice Cutting';
+      }
+      $send_data['pending_ghiss_receipts'] = array_merge($api_data, array('department_name' => $department_name));
       $api_url = "api/api_pending_ghiss_receipts/store";
     }
     if (empty($api_url)) return true;
