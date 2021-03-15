@@ -57,7 +57,7 @@ class Loss_reports extends BaseController {
           $this->data['loss_categories'][$category_name_value]['melting_production']=$total_production;
           $this->data['loss_categories'][$category_name_value]['overall_loss_fine']=$total_loss_fine;
           $this->data['loss_categories'][$category_name_value]['product_production']=$total_product_production;
-          $this->data['loss_categories'][$category_name_value]['all_loss_after_recovery']=!empty($total_production)?($total_loss_fine/$total_production):0;
+          $this->data['loss_categories'][$category_name_value]['all_loss_after_recovery']=!empty($total_production)?($total_loss_fine/$total_production*1000):0;
         }
       }
     }
