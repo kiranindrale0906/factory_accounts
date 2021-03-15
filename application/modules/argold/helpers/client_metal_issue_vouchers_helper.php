@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed.');
 
 function list_settings() {
   $list_option=array('voucher_date','site_name','receipt_type','created_time', 'voucher_number', 'account_name', 
-                     'credit_weight', 'factory_purity', 'factory_fine', 'purity', 'fine', 'narration','description','action');
+                     'credit_weight', 'factory_purity', 'factory_fine', 'purity', 'fine', 'narration','description','created_by','action');
   return ac_vouchers_list_settings($list_option);
 }
 

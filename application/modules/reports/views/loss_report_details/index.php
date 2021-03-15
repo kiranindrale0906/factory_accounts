@@ -36,7 +36,7 @@
       $sum_unrecoverable+=($loss_out_detail['unrecovery']);
       $sum_after_fine+=($loss_out_detail['fine']);
       $sum_loss+=(($loss_out_detail['in_weight']*$loss_out_detail['in_lot_purity']/100)-($loss_out_detail['fine'])-($loss_out_detail['unrecovery']));
-      $sum_loss_befor_recovery+=!empty($loss_out_detail['out_weight'])?(($loss_out_detail['in_weight']*$loss_out_detail['in_lot_purity']/100)/$loss_out_detail['out_weight']):0;
+      $sum_loss_befor_recovery+=!empty($loss_out_detail['out_weight'])?(($loss_out_detail['in_weight']*$loss_out_detail['in_lot_purity']/100)/$loss_out_detail['out_weight']*1000):0;
       ?>
       <tr>
         <td><?=date('d-m-Y',strtotime($loss_out_detail['created_at']));?></td>
@@ -83,7 +83,7 @@
     <td class="text-right"><?=four_decimal($sum_loss)?></td>
     <td class="text-right"><?=four_decimal($sum_unrecoverable)?></td>
     <td class="text-right"><?=!empty($sum_melting_production)?eight_decimal($sum_loss/$sum_melting_production):0?></td>
-    <td class="text-right"><?=!empty($sum_production)?four_decimal($sum_loss/$sum_production):0?></td>
+    <td class="text-right"><?=!empty($sum_production)?four_decimal($sum_loss/$sum_production*1000):0?></td>
     <td class="text-right"></td>
     <td class="text-right"></td>
     <td></td>
