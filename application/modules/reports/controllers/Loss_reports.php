@@ -41,14 +41,8 @@ class Loss_reports extends BaseController {
            $where['purity != factory_purity'] = NULL;
            $where['account_name != '] = 'VADOTAR';
            $factory_wise_record[$index]['production']=0;
-           if(!empty($loss_data['first_date'])){
-              $where['date(voucher_date) >='] = date('Y-m-d',strtotime($loss_data['first_date']));
-           }
-           if(!empty($loss_data['last_date'])){
-              $where['date(voucher_date) <='] = date('Y-m-d',strtotime($loss_data['last_date']));
-            }
+           $where['(year(voucher_date)- month(voucher_date)) <']=date("Y-m");
           $product_production= $this->ledger_model->find('-1*sum(credit_weight-debit_weight) as weight',$where);
-          
           $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$arg_loss_detail['parent_id'],'account_name!='=>'Unrecovarable'));
           $unrecovery_details= $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$arg_loss_detail['parent_id'],'account_name'=>'Unrecovarable'));
           $total_production+=$arg_loss_detail['out_weight'];
