@@ -48,6 +48,8 @@ class Loss_reports extends BaseController {
               $where['date(voucher_date) <='] = date('Y-m-d',strtotime($loss_data['last_date']));
             }
           $product_production= $this->ledger_model->find('-1*sum(credit_weight-debit_weight) as weight',$where);
+          lq();
+          // SELECT "" as `receipt_type`, date_format(voucher_date, "%Y-%m") as voucher_date, date_format(voucher_date, "%Y-%m-%d") as str_voucher_date, "" as `account_name`, "" as `voucher_type`, `site_name`, "" as `voucher_number`, sum(credit_amount) as credit_amount, sum(debit_amount) as debit_amount, sum(credit_weight) as credit_weight, sum(debit_weight) as debit_weight, sum(fine) as fine, sum(factory_fine) as factory_fine, 0 as `purity_margin`, sum((credit_weight+debit_weight) * purity) / sum(credit_weight+debit_weight) as purity, sum((credit_weight+debit_weight) * factory_purity) / sum(credit_weight+debit_weight) as factory_purity, "" as `narration`, "" as `description`, "" as `chitti_no`, `parent_id` as `parent_id` FROM `ac_ledger` WHERE `purity` != `factory_purity` AND `account_name` != 'VADOTAR' AND (`credit_weight` !=0 or `credit_amount` !=0) AND `ac_ledger`.`is_delete` != 1 GROUP BY `voucher_date` ORDER BY `chitti_id`, `voucher_type`, `str_voucher_date` asc
 
           $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$arg_loss_detail['parent_id'],'account_name!='=>'Unrecovarable'));
           $unrecovery_details= $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$arg_loss_detail['parent_id'],'account_name'=>'Unrecovarable'));
