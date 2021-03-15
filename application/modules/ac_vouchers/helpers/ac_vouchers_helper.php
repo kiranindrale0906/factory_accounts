@@ -15,8 +15,8 @@ function ac_vouchers_getTableSettings($table_setting_arg=array()) {
   $table_setting= array('page_title'          => '',
                         'primary_table'       => 'ac_vouchers',
                         'default_column'      => 'ac_vouchers.id',
-                        'table'               => array('ac_vouchers','ac_company'),
-                        'join_conditions'     => array('ac_vouchers.company_id=ac_company.id'),
+                        'table'               => array('ac_vouchers','ac_company','ac_users'),
+                        'join_conditions'     => array('ac_vouchers.company_id=ac_company.id','ac_vouchers.created_by=ac_users.id'),
                         'join_type'           => '',
                         'where'               => '',
                         'where_ids'           => '',
@@ -131,6 +131,7 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
 
   $list_setting['narration'] = array("Item Name", "narration", FALSE, "narration", TRUE, TRUE);
   $list_setting['description'] = array("Description", "description", TRUE, "description", TRUE, TRUE);
+  $list_setting['created_by'] = array("Created by", "name", TRUE, "name", TRUE, TRUE, 'ac_users.name name');
   $list_setting['action'] = array("Action", "action", FALSE, "action", FALSE, FALSE);
 
   if(!empty($list_setting_arg)) {
