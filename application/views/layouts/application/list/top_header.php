@@ -62,25 +62,6 @@
                   ));
 
       }
-      if (!empty($page_details['chitti_hides'])  && empty($_GET['chitti_hides'])) {
-        $url=base_url().$master_name.'?chitti_hides=1';
-        load_buttons('anchor', array(
-                    'name'=> 'Hidden Chittis',                    
-                    'class'=>'btn btn-sm btn_blue',
-                    'href'=>$url
-                  ));
-
-      }
-       if (!empty($page_details['chitti_hides']) && !empty($_GET['chitti_hides'])) {
-        $url=base_url().$master_name.'?chitti_hides=0';
-        load_buttons('anchor', array(
-                    'name'=> 'Show Chittis',                    
-                    'class'=>'btn btn-sm btn_blue',
-                    'href'=>$url
-                  ));
-
-      }
-
 
       if (isset($page_details['bar_code']) && $page_details['bar_code'] == true && isset($page_details['bar_code_field']) AND !empty($page_details['bar_code_field'])) {
        $url = get_url();

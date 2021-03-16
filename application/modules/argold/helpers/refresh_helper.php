@@ -1,6 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed.');
 
 function getTableSettings() {
+  $show = (isset($_GET['show_all'])) ? $_GET['show_all'] : '';
+  if($show=='yes') $where='';
+  else $where='refresh_hide=0';
   return array(
     'page_title'          => 'Refresh List',
     'primary_table'       => 'refresh',
@@ -8,17 +11,19 @@ function getTableSettings() {
     'table'               => 'refresh',
     'join_columns'        => '',
     'join_type'           => '',
-    'where'               => '',
+    'where'               => $where,
     'where_ids'           => '',
     'order_by'            => 'id desc',
     'limit'               => "20",
-    'extra_select_column' => 'id,metal_receipt_id',
+    'extra_select_column' => 'id,metal_receipt_id,refresh_hide',
     'actionFunction'      => '',
     'headingFunction'     => 'list_settings',
     'search_url'          => 'refresh',
     'add_title'           => 'Add Refresh',
+    'hide_button'        => 'Hidden Refreshs',
     'export_title'        => '',
     'edit'                => '',
+    'custom_table_header' => true,
   );
 }
 
@@ -94,6 +99,11 @@ function get_row_actions($row, $url, $select_url, $filter) {
                            'url' => ADMIN_PATH.$controller.'/view/'.$row['id'],
                            'confirm_message' => "",
                            'class' => 'green');
+  $actions["hide"] = array('request' => "http", 
+                           'url' => ADMIN_PATH.'argold/refresh_hides/update/'.$row['id'].'?from=view',
+                           'confirm_message' => "",
+                           'class' => 'btn-sm blue');
+ 
   $actions["Edit"] = array('request' => "http", 
                            'url' => ADMIN_PATH.$controller.'/edit/'.$row['id'],
                            'confirm_message' => "",

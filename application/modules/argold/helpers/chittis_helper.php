@@ -1,10 +1,10 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed.');
 
 function getTableSettings() {
-  $where=array('chitti_hide'=>0);
-  if(isset($_GET['chitti_hides'])){
-    $where=array('chitti_hide'=>$_GET['chitti_hides']);
-  }
+    $show = (isset($_GET['show_all'])) ? $_GET['show_all'] : '';
+  if($show=='yes') $where='';
+  else $where='chitti_hide=0';
+ 
   return array(
     'page_title'          => 'Chittis List',
     'primary_table'       => 'chitties',
@@ -24,6 +24,7 @@ function getTableSettings() {
     'chitti_hides'        => 'Add Chittis',
     'export_title'        => '',
     'edit'                => '',
+    'custom_table_header' => true,
   );
 
 }
@@ -107,22 +108,16 @@ function get_row_actions($row, $url, $select_url, $filter) {
                            'url' => ADMIN_PATH.$controller.'/view/'.$row['id'],
                            'confirm_message' => "",
                            'class' => 'btn-sm green');
-  if($row['chitti_hide']==0){
-  $actions["hide"] = array('request' => "http", 
+  $actions["Hide"] = array('request' => "http", 
                            'url' => ADMIN_PATH.'argold/chitti_hides/update/'.$row['id'].'?from=view',
                            'confirm_message' => "",
                            'class' => 'btn-sm blue');
-  }else{
-  $actions["show"] = array('request' => "http", 
-                           'url' => ADMIN_PATH.'argold/chitti_hides/update/'.$row['id'].'?from=view',
-                           'confirm_message' => "",
-                           'class' => 'btn-sm blue');
-  }
+ 
   $actions["Edit"] = array('request' => "http", 
                            'url' => ADMIN_PATH.$controller.'/edit/'.$row['id'],
                            'confirm_message' => "",
                            'class' => 'btn-sm');
-  $actions["detail"] = array('request' => "http", 
+  $actions["Detail"] = array('request' => "http", 
                            'url' => ADMIN_PATH.$controller.'/view/'.$row['id'].'?detail=1',
                            'confirm_message' => "",
                            'class' => 'btn-sm');
