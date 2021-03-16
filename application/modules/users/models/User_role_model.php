@@ -24,7 +24,7 @@ class User_role_model extends Core_user_role_model {
                                             'transactions/dispatch_voucher', 'transactions/repair_vouchers',
                                             'transactions/approval_vouchers', 
                                             'transactions/expense_vouchers',
-                                            'transactions/transfer_voucher','transactions/repair_voucher_out',
+                                            'transactions/transfer_vouchers','transactions/repair_voucher_out',
                                             'transactions/approval_in_voucher', 'transactions/opening_stock_vouchers',
                                             'transactions/sales_return_vouchers', 'transactions/antique_sales_voucher',
                                             'transactions/mangalsutra_sales_voucher',
