@@ -62,7 +62,7 @@
         </td>
         <td class="text-right">
         <?php if(empty($loss_out_detail->unrecovery)){ ?>
-          <a href=<?= base_url()."argold/unrecovarable_account_records/store?from=view&account_name=Unrecovarable&credit_weight=".$loss."&narration=".urlencode($category)."&parent_id=".$loss_out_detail['parent_id'] ?> target='_blank'>Unrecovarable</a>
+          <a href=<?= base_url()."argold/unrecovarable_account_records/store?from=view&account_name=Unrecovarable&credit_weight=".$loss."&narration=".urlencode($category)."&parent_id=".$loss_out_detail['parent_id'] ?> target='_blank' onclick="return confirm('Do you want to add this in Unrecovarable?')" >Unrecovarable</a>
           <?php }?>
         </td>
       </tr>
@@ -82,7 +82,7 @@
     <td class="text-right"><?=four_decimal($sum_after_fine)?></td>
     <td class="text-right"><?=four_decimal($sum_loss)?></td>
     <td class="text-right"><?=four_decimal($sum_unrecoverable)?></td>
-    <td class="text-right"><?=!empty($sum_melting_production)?eight_decimal($sum_loss/$sum_melting_production):0?></td>
+    <td class="text-right"><?=!empty($sum_melting_production)?eight_decimal($sum_loss/$sum_melting_production*1000):0?></td>
     <td class="text-right"><?=!empty($sum_production)?four_decimal($sum_loss/$sum_production*1000):0?></td>
     <td class="text-right"></td>
     <td class="text-right"></td>
