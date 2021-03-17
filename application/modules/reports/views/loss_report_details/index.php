@@ -52,7 +52,7 @@
         <td class="text-right"><?=four_decimal($loss_out_detail['purity']);?></td>
         <td class="text-right"><?=four_decimal($loss_out_detail['fine']);?></td>
         <td class="text-right"><?=$loss=four_decimal($fine-$loss_out_detail['fine']-$loss_out_detail['unrecovery']);?></td>
-        <td class="text-right"><?=!empty($loss_out_detail['unrecovery'])?eight_decimal(-$loss_out_detail['unrecovery']):0;?></td>
+        <td class="text-right"><?=!empty($loss_out_detail['unrecovery'])?eight_decimal($loss_out_detail['unrecovery']):0;?></td>
         <td class="text-right"><?=!empty($loss_out_detail['out_weight'])?eight_decimal($loss/$loss_out_detail['out_weight']*1000):0;?></td>
         <td class="text-right"><?=!empty($loss_out_detail['production'])?four_decimal($loss/$loss_out_detail['production']*1000):0;?></td>
         <td class="text-right">
@@ -81,7 +81,7 @@
     <td class="text-right"></td>
     <td class="text-right"><?=four_decimal($sum_after_fine)?></td>
     <td class="text-right"><?=four_decimal($sum_loss)?></td>
-    <td class="text-right"><?=four_decimal($sum_unrecoverable)?></td>
+    <td class="text-right"><?=eight_decimal($sum_unrecoverable)?></td>
     <td class="text-right"><?=!empty($sum_melting_production)?eight_decimal($sum_loss/$sum_melting_production*1000):0?></td>
     <td class="text-right"><?=!empty($sum_production)?four_decimal($sum_loss/$sum_production*1000):0?></td>
     <td class="text-right"></td>
