@@ -32,7 +32,6 @@ class Loss_report_details extends Ledgers {
     $arf_jan2021_records=!empty($arf_jan2021_records)?$arf_jan2021_records['data']['loss_details']['loss_detail']:$jan2021_records['data']['loss_details']['loss_detail']=array();
     $ghiss_melting_loss=$this->voucher_model->get('receipt_type,description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight', array('account_name'=>'Loss Account','site_name'=>'ARF Stagin','receipt_type'=>'Ghiss Melting Loss','description'=>$_GET['category']),array());
     $arf_jan2021_records=array_merge($arf_jan2021_records,$ghiss_melting_loss);
-    pd($arf_jan2021_records);
 
     
     $url=API_ARC_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
