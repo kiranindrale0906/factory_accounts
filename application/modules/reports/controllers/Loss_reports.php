@@ -31,15 +31,15 @@ class Loss_reports extends BaseController {
         $ghiss_melting_loss=array();
 
         $url=API_ARC_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
-        $arg_jan2021_records=json_decode(curl_post_request($url,$data),true);
-        $ghiss_melting_loss$ghiss_melting_loss=$this->voucher_model->get('description', array('account_name'=>'Loss Account','site_name'=>'ARC Jan 2021'),array());
+        $jan2021_records=json_decode(curl_post_request($url,$data),true);
+        $ghiss_melting_loss=$this->voucher_model->get('description', array('account_name'=>'Loss Account','site_name'=>'ARC Jan 2021'),array());
         $arg_jan2021_records=array_merge($jan2021_records,$ghiss_melting_loss);
 
       }elseif(isset($_GET['site_name'])&&$_GET['site_name']=='ARF'){
         $jan2021_records=array();
         $ghiss_melting_loss=array();
         $url=API_ARF_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
-        $arg_jan2021_records=json_decode(curl_post_request($url,$data),true);
+        $jan2021_records=json_decode(curl_post_request($url,$data),true);
         $ghiss_melting_loss=$this->voucher_model->get('description', array('account_name'=>'Loss Account','site_name'=>'ARC Jan 2021'),array());
         $arg_jan2021_records=array_merge($jan2021_records,$ghiss_melting_loss);
 
