@@ -40,9 +40,8 @@ class Loss_reports extends BaseController {
         $jan2021_records=json_decode(curl_post_request($url,$data),true);
         $jan2021_records=!empty($jan2021_records)?$jan2021_records:array();
         
-        $ghiss_melting_loss=$this->voucher_model->get('description,site_name', array('account_name'=>'Loss Account'),array());
+        $ghiss_melting_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity', array('account_name'=>'Loss Account','site_name'=>'ARF Stagin'),array());
         $arg_jan2021_records=array_merge($jan2021_records,$ghiss_melting_loss);
-        pd($arg_jan2021_records);
 
       }else{
         $ghiss_melting_loss=array();
