@@ -49,8 +49,8 @@ class Loss_reports extends BaseController {
         $url=API_ARG_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
         $jan2021_records=json_decode(curl_post_request($url,$data),true);
         $ghiss_melting_loss=$this->voucher_model->get('description', array('account_name'=>'Loss Account','site_name'=>'AR Gold Jan 2021'),array());
-        print_r($jan2021_records);
-        pd($ghiss_melting_loss);
+        pd($jan2021_records);
+        // pd($ghiss_melting_loss);
         $arg_jan2021_records=array_merge($jan2021_records,$ghiss_melting_loss);
       }
       $total_production=$total_loss_fine=$total_product_production=0;
