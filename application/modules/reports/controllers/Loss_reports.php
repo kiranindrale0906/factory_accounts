@@ -28,7 +28,7 @@ class Loss_reports extends BaseController {
       if(isset($_GET['site_name'])&&$_GET['site_name']=='ARC'){
         $url=API_ARC_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
         $arg_jan2021_records=json_decode(curl_post_request($url,$data),true);
-        $ghiss_melting_loss=$this->voucher_model->get('description', array('account_name'=>'Loss Account','site_name'=>'AR Gold Staging'),array());
+        $ghiss_melting_loss=$this->voucher_model->get('description', array('account_name'=>'Loss Account','site_name'=>'ARC Staging'),array());
         $arg_jan2021_records=array_merge($arg_jan2021_records,$ghiss_melting_loss);
         pd($arg_jan2021_records);
 
@@ -38,6 +38,9 @@ class Loss_reports extends BaseController {
       }else{
         $url=API_ARG_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
         $arg_jan2021_records=json_decode(curl_post_request($url,$data),true);
+        $ghiss_melting_loss=$this->voucher_model->get('description', array('account_name'=>'Loss Account','site_name'=>'AR Gold Staging'),array());
+        $arg_jan2021_records=array_merge($arg_jan2021_records,$ghiss_melting_loss);
+        pd($arg_jan2021_records);
       }
       $total_production=$total_loss_fine=$total_product_production=0;
       if(!empty($arg_jan2021_records['data']['loss_details']['loss_detail'])){
