@@ -41,6 +41,7 @@ class Loss_reports extends BaseController {
         $jan2021_records=!empty($jan2021_records)?$jan2021_records['data']['loss_details']['loss_detail']:$jan2021_records['data']['loss_details']['loss_detail']=array();
         
         $ghiss_melting_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,parent_id,0 as out_weight', array('account_name'=>'Loss Account','site_name'=>'ARF Stagin','description like "%Ghiss Melting Loss"'=>NULL),array());
+        lq();
         $arg_jan2021_records=array_merge($jan2021_records,$ghiss_melting_loss);
 
       }else{
