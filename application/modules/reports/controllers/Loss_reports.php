@@ -28,6 +28,10 @@ class Loss_reports extends BaseController {
       if(isset($_GET['site_name'])&&$_GET['site_name']=='ARC'){
         $url=API_ARC_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
         $arg_jan2021_records=json_decode(curl_post_request($url,$data),true);
+        $ghiss_melting_loss=$this->voucher_model->get('description', array('account_name'=>'Loss Account','site_name'=>'AR Gold Staging'),array()));
+        $arg_jan2021_records=array_merge($arg_jan2021_records,$ghiss_melting_loss);
+        pd($arg_jan2021_records);
+
       }elseif(isset($_GET['site_name'])&&$_GET['site_name']=='ARF'){
         $url=API_ARF_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
         $arg_jan2021_records=json_decode(curl_post_request($url,$data),true);
