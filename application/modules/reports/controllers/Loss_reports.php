@@ -31,7 +31,7 @@ class Loss_reports extends BaseController {
         $url=API_ARC_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
         $jan2021_records=json_decode(curl_post_request($url,$data),true);
         $jan2021_records=!empty($jan2021_records)?$jan2021_records['data']['loss_details']['loss_detail']:$jan2021_records['data']['loss_details']['loss_detail']=array();
-        $ghiss_melting_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,parent_id,0 as out_weight', array('account_name'=>'Loss Account','site_name'=>'ARC Jan 2021','receipt_type'=>'Ghiss Melting Loss'),array());
+        $ghiss_melting_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight', array('account_name'=>'Loss Account','site_name'=>'ARC Jan 2021','receipt_type'=>'Ghiss Melting Loss'),array());
         $arg_jan2021_records=array_merge($jan2021_records,$ghiss_melting_loss);
 
       }elseif(isset($_GET['site_name'])&&$_GET['site_name']=='ARF'){
@@ -40,7 +40,7 @@ class Loss_reports extends BaseController {
         $jan2021_records=json_decode(curl_post_request($url,$data),true);
         $jan2021_records=!empty($jan2021_records)?$jan2021_records['data']['loss_details']['loss_detail']:$jan2021_records['data']['loss_details']['loss_detail']=array();
         
-        $ghiss_melting_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,parent_id,0 as out_weight', array('account_name'=>'Loss Account','site_name'=>'ARF Stagin','receipt_type'=>'Ghiss Melting Loss'),array());
+        $ghiss_melting_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight', array('account_name'=>'Loss Account','site_name'=>'ARF Stagin','receipt_type'=>'Ghiss Melting Loss'),array());
         // pd($jan2021_records);
         $arg_jan2021_records=array_merge($jan2021_records,$ghiss_melting_loss);
 
@@ -49,7 +49,7 @@ class Loss_reports extends BaseController {
         $url=API_ARG_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
         $jan2021_records=json_decode(curl_post_request($url,$data),true);
         $jan2021_records=!empty($jan2021_records)?$jan2021_records['data']['loss_details']['loss_detail']:$jan2021_records['data']['loss_details']['loss_detail']=array();
-         $ghiss_melting_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,parent_id,0 as out_weight', array('account_name'=>'Loss Account','site_name'=>'AR Gold Jan 2021','receipt_type'=>'Ghiss Melting Loss'),array());
+         $ghiss_melting_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight', array('account_name'=>'Loss Account','site_name'=>'AR Gold Jan 2021','receipt_type'=>'Ghiss Melting Loss'),array());
         $arg_jan2021_records=array_merge($jan2021_records,$ghiss_melting_loss);
       }
       if(!empty($arg_jan2021_records)){
@@ -66,7 +66,7 @@ class Loss_reports extends BaseController {
           $unrecovery_details= $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$arg_loss_detail['parent_id'],'account_name'=>'Unrecovarable'));
           $total_production+=$arg_loss_detail['out_weight'];
           $total_product_production+=$product_production['weight'];
-          $total_loss_fine+=($arg_loss_detail['in_weight']*$arg_loss_detail['in_lot_purity']/100);//-$loss_account_details['weight']-$unrecovery_details['weight'];
+          $total_loss_fine+=($arg_loss_detail['in_weight']*$arg_loss_detail['in_lot_purity']/100)-$loss_account_details['weight']-$unrecovery_details['weight'];
           $this->data['loss_categories'][$category_name_value]['melting_production']=$total_production;
           $this->data['loss_categories'][$category_name_value]['overall_loss_fine']=$total_loss_fine;
           $this->data['loss_categories'][$category_name_value]['product_production']=$total_product_production;
