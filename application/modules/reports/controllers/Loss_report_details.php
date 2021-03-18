@@ -21,12 +21,25 @@ class Loss_report_details extends Ledgers {
     $data['department_name']=$_GET['category'];
     $url=API_ARG_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
     $arg_jan2021_records=json_decode(curl_post_request($url,$data),true);
+    $ghiss_melting_loss=array();
+    $arg_jan2021_records=!empty($arg_jan2021_records)?$arg_jan2021_records['data']['loss_details']['loss_detail']:$jan2021_records['data']['loss_details']['loss_detail']=array();
+    $ghiss_melting_loss=$this->voucher_model->get('receipt_type,description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight', array('account_name'=>'Loss Account','site_name'=>'ARC Jan 2021','receipt_type'=>'Ghiss Melting Loss','description'=>$_GET['category']),array());
+    $arg_jan2021_records=array_merge($arg_jan2021_records,$ghiss_melting_loss);
+
 
     $url=API_ARF_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
     $arf_jan2021_records=json_decode(curl_post_request($url,$data),true);
+    $arf_jan2021_records=!empty($arf_jan2021_records)?$arf_jan2021_records['data']['loss_details']['loss_detail']:$jan2021_records['data']['loss_details']['loss_detail']=array();
+    $ghiss_melting_loss=$this->voucher_model->get('receipt_type,description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight', array('account_name'=>'Loss Account','site_name'=>'ARC Jan 2021','receipt_type'=>'Ghiss Melting Loss','description'=>$_GET['category']),array());
+    $arf_jan2021_records=array_merge($arf_jan2021_records,$ghiss_melting_loss);
+
     
     $url=API_ARC_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
     $arc_jan2021_records=json_decode(curl_post_request($url,$data),true);
+    $arc_jan2021_records=!empty($arc_jan2021_records)?$arc_jan2021_records['data']['loss_details']['loss_detail']:$jan2021_records['data']['loss_details']['loss_detail']=array();
+    $ghiss_melting_loss=$this->voucher_model->get('receipt_type,description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight', array('account_name'=>'Loss Account','site_name'=>'ARC Jan 2021','receipt_type'=>'Ghiss Melting Loss','description'=>$_GET['category']),array());
+    $arc_jan2021_records=array_merge($arc_jan2021_records,$ghiss_melting_loss);
+
 
     $arg_records=$this->factory_wise_record_array($arg_jan2021_records);
     $arf_records=$this->factory_wise_record_array($arf_jan2021_records);
@@ -45,9 +58,7 @@ class Loss_report_details extends Ledgers {
      }
   }
 
-  private function factory_wise_record_array($records){
-
-    $loss_details=$records['data']['loss_details']['loss_detail'];
+  private function factory_wise_record_array($loss_details){
     $factory_wise_record=array();
     if(!empty($loss_details)){
        foreach ($loss_details as $index => $loss_data) {
@@ -63,7 +74,9 @@ class Loss_report_details extends Ledgers {
           }
           $product_production= $this->ledger_model->find('-1*sum(credit_weight-debit_weight) as weight',$where);
           $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$loss_data['parent_id'],'account_name!='=>'Unrecovarable'));
+          
           $unrecovery_details= $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$loss_data['parent_id'],'account_name'=>'Unrecovarable'));
+
           $factory_wise_record[$index]['production']=$product_production['weight'];
           $factory_wise_record[$index]['after_recovery']=!empty($loss_account_details)?$loss_account_details['weight']:0;
           $factory_wise_record[$index]['unrecovery']=!empty($unrecovery_details)?$unrecovery_details['weight']:0;
