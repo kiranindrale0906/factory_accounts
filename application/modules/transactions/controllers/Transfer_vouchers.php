@@ -5,6 +5,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Transfer_vouchers extends BaseController {
   public function __construct() {
     parent::__construct();
-    $this->load->model(array('masters/account_model'));
+    $this->load->model(array('masters/account_model','ac_vouchers/voucher_model'));
   }
 }
