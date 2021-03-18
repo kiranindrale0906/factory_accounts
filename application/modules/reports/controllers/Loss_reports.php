@@ -31,7 +31,7 @@ class Loss_reports extends BaseController {
         $url=API_ARC_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
         $jan2021_records=json_decode(curl_post_request($url,$data),true);
         $jan2021_records=!empty($jan2021_records)?$jan2021_records['data']['loss_details']['loss_detail']:$jan2021_records['data']['loss_details']['loss_detail']=array();
-        $ghiss_melting_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,parent_id,0 as out_weight', array('account_name'=>'Loss Account','site_name'=>'ARC Jan 2021','description like '=>'Ghiss Melting Loss'),array());
+        $ghiss_melting_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,parent_id,0 as out_weight', array('account_name'=>'Loss Account','site_name'=>'ARC Jan 2021','description like "%Ghiss Melting Loss"'=>NULL),array());
         $arg_jan2021_records=array_merge($jan2021_records,$ghiss_melting_loss);
 
       }elseif(isset($_GET['site_name'])&&$_GET['site_name']=='ARF'){
@@ -40,7 +40,7 @@ class Loss_reports extends BaseController {
         $jan2021_records=json_decode(curl_post_request($url,$data),true);
         $jan2021_records=!empty($jan2021_records)?$jan2021_records['data']['loss_details']['loss_detail']:$jan2021_records['data']['loss_details']['loss_detail']=array();
         
-        $ghiss_melting_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,parent_id,0 as out_weight', array('account_name'=>'Loss Account','site_name'=>'ARF Stagin','description like '=>'Ghiss Melting Loss'),array());
+        $ghiss_melting_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,parent_id,0 as out_weight', array('account_name'=>'Loss Account','site_name'=>'ARF Stagin','description like "%Ghiss Melting Loss"'=>NULL),array());
         $arg_jan2021_records=array_merge($jan2021_records,$ghiss_melting_loss);
 
       }else{
@@ -48,7 +48,7 @@ class Loss_reports extends BaseController {
         $url=API_ARG_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
         $jan2021_records=json_decode(curl_post_request($url,$data),true);
         $jan2021_records=!empty($jan2021_records)?$jan2021_records['data']['loss_details']['loss_detail']:$jan2021_records['data']['loss_details']['loss_detail']=array();
-         $ghiss_melting_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,parent_id,0 as out_weight', array('account_name'=>'Loss Account','site_name'=>'AR Gold Jan 2021','description like '=>'Ghiss Melting Loss'),array());
+         $ghiss_melting_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,parent_id,0 as out_weight', array('account_name'=>'Loss Account','site_name'=>'AR Gold Jan 2021','description like "%Ghiss Melting Loss"'=>NULL),array());
         $arg_jan2021_records=array_merge($jan2021_records,$ghiss_melting_loss);
       }
       $total_production=$total_loss_fine=$total_product_production=0;
