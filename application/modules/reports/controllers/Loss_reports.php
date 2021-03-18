@@ -43,7 +43,6 @@ class Loss_reports extends BaseController {
         $ghiss_melting_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,parent_id,0 as out_weight', array('account_name'=>'Loss Account','site_name'=>'ARF Stagin','receipt_type'=>'Ghiss Melting Loss'),array());
         // pd($jan2021_records);
         $arg_jan2021_records=array_merge($jan2021_records,$ghiss_melting_loss);
-        pd($arg_jan2021_records);
 
       }else{
         $ghiss_melting_loss=array();
@@ -54,6 +53,7 @@ class Loss_reports extends BaseController {
         $arg_jan2021_records=array_merge($jan2021_records,$ghiss_melting_loss);
       }
       $total_production=$total_loss_fine=$total_product_production=0;
+        pd($arg_jan2021_records);
       if(!empty($arg_jan2021_records)){
         foreach ($arg_jan2021_records as $index => $arg_loss_detail) {
            $where['purity != factory_purity'] = NULL;
