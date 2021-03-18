@@ -55,7 +55,7 @@ class Loss_reports extends BaseController {
       $total_production=$total_loss_fine=$total_product_production=0;
       if(!empty($arg_jan2021_records)){
         foreach ($arg_jan2021_records as $index => $arg_loss_detail) {
-          if($category_name_value==$arg_loss_detail['department_name']){
+          if($category_name_value==$arg_loss_detail['description']){
 
            $where['purity != factory_purity'] = NULL;
            $where['account_name != '] = 'VADOTAR';
