@@ -41,7 +41,8 @@ class Loss_reports extends BaseController {
         $jan2021_records=!empty($jan2021_records)?$jan2021_records:array();
         
         $ghiss_melting_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity', array('account_name'=>'Loss Account','site_name'=>'ARF Stagin'),array());
-        $arg_jan2021_records=array_merge($jan2021_records,$ghiss_melting_loss);
+        $arg_jan2021_records=array_merge($jan2021_records['data']['loss_details']['loss_detail'],$ghiss_melting_loss);
+        pd($arg_jan2021_records);
 
       }else{
         $ghiss_melting_loss=array();
@@ -52,8 +53,8 @@ class Loss_reports extends BaseController {
         $arg_jan2021_records=array_merge($jan2021_records,$ghiss_melting_loss);
       }
       $total_production=$total_loss_fine=$total_product_production=0;
-      if(!empty($arg_jan2021_records['data']['loss_details']['loss_detail'])){
-        foreach ($arg_jan2021_records['data']['loss_details']['loss_detail'] as $index => $arg_loss_detail) {
+      if(!empty($arg_jan2021_records)){
+        foreach ($arg_jan2021_records as $index => $arg_loss_detail) {
            $where['purity != factory_purity'] = NULL;
            $where['account_name != '] = 'VADOTAR';
            $factory_wise_record[$index]['production']=0;
