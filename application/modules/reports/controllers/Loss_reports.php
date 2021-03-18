@@ -11,7 +11,6 @@ class Loss_reports extends BaseController {
   public function index() {
     $this->data['report_type'] = 'Rojmel Report';
     $this->_get_form_data();
-    pd($this->data['loss_categories']);
     // $this->get_loss_details();
     $this->load->render($this->router->class."/index",$this->data);
   }
@@ -56,6 +55,8 @@ class Loss_reports extends BaseController {
       $total_production=$total_loss_fine=$total_product_production=0;
       if(!empty($arg_jan2021_records)){
         foreach ($arg_jan2021_records as $index => $arg_loss_detail) {
+          if($category_name_value==$arg_loss_detail['department_name']){
+
            $where['purity != factory_purity'] = NULL;
            $where['account_name != '] = 'VADOTAR';
            $factory_wise_record[$index]['production']=0;
@@ -70,6 +71,7 @@ class Loss_reports extends BaseController {
           $this->data['loss_categories'][$category_name_value]['overall_loss_fine']=$total_loss_fine;
           $this->data['loss_categories'][$category_name_value]['product_production']=$total_product_production;
           $this->data['loss_categories'][$category_name_value]['all_loss_after_recovery']=!empty($total_production)?($total_loss_fine/$total_production*1000):0;
+          }
         }
       }
     }
