@@ -11,6 +11,7 @@ class Loss_reports extends BaseController {
   public function index() {
     $this->data['report_type'] = 'Rojmel Report';
     $this->_get_form_data();
+    pd($this->data['loss_categories']);
     // $this->get_loss_details();
     $this->load->render($this->router->class."/index",$this->data);
   }
@@ -53,7 +54,6 @@ class Loss_reports extends BaseController {
         $arg_jan2021_records=array_merge($jan2021_records,$ghiss_melting_loss);
       }
       $total_production=$total_loss_fine=$total_product_production=0;
-        pd($arg_jan2021_records);
       if(!empty($arg_jan2021_records)){
         foreach ($arg_jan2021_records as $index => $arg_loss_detail) {
            $where['purity != factory_purity'] = NULL;
