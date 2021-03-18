@@ -32,8 +32,9 @@
     </thead>
     <tbody>
     <?php 
-      $sum_weight=$sum_fine=0;
+      $sum_overall_loss_fine=$sum_fine=0;
      foreach ($loss_categories as $index => $loss_category) {
+      $sum_overall_loss_fine+=four_decimal($loss_category['overall_loss_fine']);
       ?>
       <tr>
         <td class=""><a href="<?=base_url()?>reports/loss_report_details?category=<?=$index ?>&factory_name=<?=$factory_name ?>"><?=$index?></a></td>
@@ -46,7 +47,7 @@
     <?php }?>
       <tr class="bg_gray bold">
     <td>Total</td>
-    <td class="text-right"></td>
+    <td class="text-right"><?=$sum_overall_loss_fine?></td>
     <td class="text-right"></td>
     <td class="text-right"></td>
     <td class="text-right"></td>
