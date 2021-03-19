@@ -52,8 +52,8 @@ class Loss_reports extends BaseController {
          $ghiss_melting_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight', array('account_name'=>'Loss Account','site_name'=>'AR Gold Jan 2021','receipt_type'=>'Ghiss Melting Loss'),array());
         
         $arg_jan2021_records=array_merge($records,$ghiss_melting_loss);
-      }
         pd($arg_jan2021_records);
+      }
       if(!empty($arg_jan2021_records)){
       $total_production=$total_loss_fine=$total_product_production=0;
         foreach ($arg_jan2021_records as $index => $arg_loss_detail) {
