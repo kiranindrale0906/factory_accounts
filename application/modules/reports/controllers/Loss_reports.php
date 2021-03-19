@@ -53,7 +53,6 @@ class Loss_reports extends BaseController {
         
         $arg_jan2021_records=array_merge($records,$ghiss_melting_loss);
       }
-      pd($arg_jan2021_records);
       if(!empty($arg_jan2021_records)){
       $total_production=$total_loss_fine=$total_product_production=0;
         foreach ($arg_jan2021_records as $index => $arg_loss_detail) {
@@ -77,6 +76,7 @@ class Loss_reports extends BaseController {
         }
       }
     }
+    pd($this->data['loss_categories']);
     // if(!empty($loss_details)){
     //   foreach ($categories as $category_index => $category) {
     //     $total_fine=0;
