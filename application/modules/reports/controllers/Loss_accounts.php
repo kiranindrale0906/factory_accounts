@@ -22,7 +22,7 @@ class Loss_accounts extends BaseController {
           $total_fine+=$loss_detail['fine']-$receipt_data['fine'];
 
           }
-          $this->data['loss_categories'][$category['description']]['fine']=$total_fine; 
+          $this->data['loss_categories'][$category['description']]['fine']=four_decimal($total_fine); 
         }
       }
     }
