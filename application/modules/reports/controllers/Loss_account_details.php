@@ -11,7 +11,7 @@ class Loss_account_details extends BaseController {
   }
   public function create() {
     $this->data['loss_out_details']=array();
-   $loss_out_details= $this->voucher_model->get('', array('account_name'=>'Loss Account','description'=>$_GET['category']));
+   $loss_out_details= $this->voucher_model->get('', array('account_name'=>'Loss Account','description'=>$_GET['category'],'date(created_at)<'=>'2021-03-13'));
     if(!empty($loss_out_details)){
       foreach ($loss_out_details as $index => $value) {
         $receipt_data= $this->voucher_model->find('sum(debit_weight) as debit_weight,sum(fine) as fine,purity', array('parent_id'=>$value['id']));
