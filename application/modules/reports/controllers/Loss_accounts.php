@@ -11,8 +11,8 @@ class Loss_accounts extends BaseController {
   }
   public function create() {
     $this->data['loss_categories']=array();
-    $categories= $this->voucher_model->get('description', array('account_name'=>'Loss Account','parent_id'=>0,'date(created_at)<'=>'2021-03-13'),array(),array('group_by'=>'description'));
-    $loss_details= $this->voucher_model->get('description,fine,id', array('account_name'=>'Loss Account','parent_id'=>0,'date(created_at)<'=>'2021-03-13'),array());
+    $categories= $this->voucher_model->get('description', array('account_name'=>'Loss Account','parent_id'=>0),array(),array('group_by'=>'description'));
+    $loss_details= $this->voucher_model->get('description,fine,id', array('account_name'=>'Loss Account','parent_id'=>0),array());
     if(!empty($loss_details)){
       foreach ($categories as $category_index => $category) {
         $total_fine=0;
