@@ -20,7 +20,7 @@ class Loss_reports extends BaseController {
     $this->data['account_id']           = (!empty($_GET['account_id'])) ? $_GET['account_id'] : 0;
     
     $this->data['loss_categories']=array();
-    $categories= $this->voucher_model->get('description', array('account_name'=>'Loss Account','parent_id'=>0),array(),array('group_by'=>'description'));
+    $categories= $this->voucher_model->get('description', array('account_name'=>'Loss Account','parent_id'=>0,'date(created_at)>='=>'2021-03-13'),array(),array('group_by'=>'description'));
     $loss_details= $this->voucher_model->get('description,fine,id', array('account_name'=>'Loss Account','parent_id'=>0),array());
     $category_names=array_column($categories,'description');
 
