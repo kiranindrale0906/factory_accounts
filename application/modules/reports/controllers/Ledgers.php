@@ -87,7 +87,8 @@ class Ledgers extends BaseController {
     }
     if ($this->data['report_type'] == 'Metal Receipt Type Report')
       $where['receipt_type']='Metal';
-
+    $account_issue_where=array();
+    $account_receipt_where=array();
     if ($this->data['report_type'] == 'Account Receipt Report'){
 
     $account_receipt_where['account_name not in ("ARF Software Jan 2021","ARC Software Jan 2021","AR Gold Software Jan 2021") '] = NULL;
