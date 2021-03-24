@@ -72,7 +72,7 @@ class Ledgers extends BaseController {
       //$this->data['group'] = 'voucher_date';
       $receipt_issue_select = '"" as receipt_type, '.$period_select.' as voucher_date, 
                               date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
-                              "" as account_name, "" as voucher_type,site_name , "" as voucher_number, 
+                              account_name as account_name, "" as voucher_type,site_name , "" as voucher_number, 
                               sum(credit_amount) as credit_amount, 
                               sum(debit_amount) as debit_amount, 
                               sum(credit_weight) as credit_weight, 
@@ -87,10 +87,38 @@ class Ledgers extends BaseController {
     }
     if ($this->data['report_type'] == 'Metal Receipt Type Report')
       $where['receipt_type']='Metal';
-      $where_issue   = array_merge($where, array('(credit_weight != 0 or credit_amount != 0)' => NULL));
-      $where_receipt = array_merge($where, array('(debit_weight != 0 or debit_amount != 0)'   => NULL));
+
+    if ($this->data['report_type'] == 'Account Receipt Report'){
+
+    $account_receipt_where['account_name not in ("ARF Software Jan 2021","ARC Software Jan 2021","AR Gold Software Jan 2021") '] = NULL;
+    $account_receipt_where['purity>='] = 98;
+    $account_receipt_where['purity<='] = 100;
+    $account_issue_where['account_name in ("ARF Software Jan 2021","ARC Software Jan 2021","AR Gold Software Jan 2021") '] = NULL;
+    $account_issue_where['purity>='] = 98;
+    $account_issue_where['purity<='] = 100;
+    $receipt_issue_select = 'receipt_type, '.$period_select.' as voucher_date, 
+                               date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
+                               account_name, voucher_type, 
+                               site_name, voucher_type, 
+                               concat(voucher_number, ", ") as voucher_number, 
+                               (credit_amount) as credit_amount, 
+                               (debit_amount) as debit_amount, 
+                               (credit_weight) as credit_weight, 
+                               (debit_weight) as debit_weight,
+                               (fine) as fine,
+                               (factory_fine) as factory_fine,
+                               0 as purity_margin, 
+                               ((credit_weight+debit_weight) * purity) / (credit_weight+debit_weight) as purity, 
+                               ((credit_weight+debit_weight) * factory_purity) / (credit_weight+debit_weight) as factory_purity, 
+                               concat(narration, " ,") as narration, concat(description, " ,") as description, 
+                               chitti_id as chitti_no,parent_id as parent_id';
+    } 
+    
+      $where_issue   = array_merge($where, array('(credit_weight != 0 or credit_amount != 0)' => NULL),$account_issue_where);
+      $where_receipt = array_merge($where, array('(debit_weight != 0 or debit_amount != 0)'   => NULL),$account_receipt_where);
       $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(), array('order_by'=>'chitti_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
       $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(), array('order_by'=>'parent_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
+      
 
     $issue_voucher_dates = array_column($issues, 'voucher_date');
     $receipt_voucher_dates = array_column($receipts, 'voucher_date');

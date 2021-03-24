@@ -3,6 +3,8 @@
     $url = 'reports/vadotar_reports';
   elseif ($report_type == 'Rojmel Report')
     $url = 'reports/rojmel_reports';
+  elseif ($report_type == 'Account Receipt Report')
+    $url = 'reports/account_receipt_reports';
   elseif ($report_type == 'Metal Receipt Type Report')
     $url = 'reports/metal_receipt_type_ledgers';
   else
@@ -59,7 +61,7 @@
            href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&site_name=<?= $site_name?>&period=<?= $period ?>&report_type=<?= $report_type ?>&detail=no&group=<?= $group ?>'>Hide Details</a>
       </h5>
     </div> -->
-    <?php if ($report_type != 'Rojmel Report' && $report_type != 'Metal Receipt Type Report') { ?>
+    <?php if ($report_type != 'Rojmel Report' && $report_type != 'Account Receipt Report' && $report_type != 'Metal Receipt Type Report') { ?>
       <div class="form-group container"> 
         <h5> Group By: 
           <a class="ml-5 <?= ($group=='') ? 'bold black underline' : '' ?>" 
@@ -69,7 +71,9 @@
         </h5>
       </div>
     <?php } ?>
-    <?php if ($_SESSION['vodator_report']==1 || $_SESSION['production_report']==1 || $report_type == 'Vadotar Report' || $report_type == 'Production Report') { ?>
+    <?php 
+      if ($report_type != 'Account Receipt Report'){
+      if ($_SESSION['vodator_report']==1 || $_SESSION['production_report']==1 || $report_type == 'Vadotar Report' || $report_type == 'Production Report') { ?>
       <div class="form-group container"> 
         <h5> 
         <?php if($_SESSION['vodator_report']==1 || $_SESSION['production_report']==1){ ?>
@@ -85,6 +89,6 @@
         <?php }?>
         </h5>
       </div>
-    <?php } ?>
+    <?php } }?>
   </div>
 </div>  
