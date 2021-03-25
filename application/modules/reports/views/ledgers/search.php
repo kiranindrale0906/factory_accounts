@@ -96,9 +96,8 @@
     <?php 
     if ($report_type == 'Account Receipt Report'){
     if (!empty($account_names)) { ?>
-<div class="row"> 
-  <div class="col-md-12">
-    <div class="form-group container"> 
+    <div class="row"> 
+    <div class="col-md-12">
       <h6>
         Account Name: 
         <a class="ml-5 <?= ($account_name == '') ? 'bold black underline' : '' ?>" 
@@ -108,9 +107,7 @@
                href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&account_name=<?= $account?>&site_name=<?= $company?>&period=<?= $period ?>&report_type=<?= $report_type ?>&detail=<?= $detail ?>&group=<?= $group ?>'><?= $account ?></a>    
           <?php } ?>
       </h6>
+      </div>
     </div>
-  </div>
-</div>
-  
   <br /> 
 <?php }} ?>
