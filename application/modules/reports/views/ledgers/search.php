@@ -93,10 +93,11 @@
     <?php } }?>
   </div>
 </div>  
+
     <?php 
     if ($report_type == 'Account Receipt Report'){
     if (!empty($account_names)) { ?>
-    <div class="row"> 
+    
     <div class="col-md-12">
       <h6>
         Account Name: 
@@ -108,6 +109,4 @@
           <?php } ?>
       </h6>
       </div>
-    </div>
-  <br /> 
 <?php }} ?>
