@@ -9,10 +9,10 @@ class Production_summary extends BaseController {
   public function index() {
     $this->_get_form_data();
     $this->get_production_summary();
-    if ($this->data['site_name'] == '')
+    // if ($this->data['site_name'] == '')
       $this->get_refresh_details();
-    else 
-      $this->data['refresh_details'] = array();
+    // else 
+    //   $this->data['refresh_details'] = array();
     $this->get_groups();
     $this->load->render($this->router->class."/index", $this->data);
   }
@@ -116,7 +116,17 @@ class Production_summary extends BaseController {
 
   private function get_refresh_details() {
     $select = 'date(created_at) as created_at, item_name, sum(weight) as weight, sum(weight * purity) / sum(weight) as purity, sum(weight * factory_purity) / sum(weight) as factory_purity';
-    $refresh_details = $this->refresh_detail_model->get($select, array(), array(), array('group_by' => 'date(created_at), item_name'));
+    $where=array();
+    $group_by=array('group_by' => 'date(created_at), item_name');
+    if(!empty($this->data['site_name'])){
+       $where['site_name']    =$this->data['site_name'];
+    }
+    if(!empty($this->data['product_name'])){
+       $where['item_name']    =$this->data['product_name'];
+       $group_by=array('group_by' => 'date(created_at)');
+    }
+   
+    $refresh_details = $this->refresh_detail_model->get($select, $where, array(),$group_by);
     $this->data['refresh_details'] = $this->get_grouped_records($refresh_details);
     $this->get_refresh_group_total();
   }
