@@ -14,7 +14,7 @@
       <?php } ?>  
     <?php } ?>
   </td>
-  <td class="text-right"><a class=""  href='<?= base_url() ?>argold/voucher_details/view/<?=$record['parent_id']?>'><?= four_decimal($record['debit_weight'], '-') ?></a></td>
+  <td class="text-right"><a class=""  href='<?= base_url() ?>argold/voucher_details/view/<?=$record['chitti_no']?>'><?= four_decimal($record['debit_weight'], '-') ?></a></td>
   <td class="text-right"><?= four_decimal($record['factory_purity'], '-')?></td>
   <td class="text-right"><?= four_decimal($record['factory_fine'], '-'); ?></td>
   <td class="text-right"><?= four_decimal($record['purity'], '-') ?></td>
@@ -23,6 +23,6 @@
     <td class="text-right"><?= four_decimal($record['fine']-$record['factory_fine'], '-'); ?></td>
     <td class="text-right"><?= four_decimal(($record['fine']-$record['factory_fine']) / $record['debit_weight'] * 100, '-'); ?></td>
   <?php elseif ($report_type == 'Account Ledger'): ?>
-    <td class="text-right"><a class=""  href='<?= base_url() ?>argold/voucher_details/view/<?=$record['parent_id']?>'><?= four_decimal($record['debit_amount'], '-'); ?></a></td>
+    <td class="text-right"><a class=""  href='<?= base_url() ?>argold/voucher_details/view/<?=$record['chitti_no']?>'><?= four_decimal($record['debit_amount'], '-'); ?></a></td>
   <?php endif; ?>
 </tr>
