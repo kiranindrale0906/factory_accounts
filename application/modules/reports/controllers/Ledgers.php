@@ -25,6 +25,7 @@ class Ledgers extends BaseController {
     
     if     ($this->data['period'] == 'date')  $period_select = 'date_format(voucher_date,"%Y-%m-%d")';
     elseif ($this->data['period'] == 'month') $period_select = 'date_format(voucher_date,"%Y-%m")';
+    elseif ($this->data['period'] == 'year') $period_select = 'date_format(voucher_date,"%Y")';
     elseif ($this->data['period'] == 'week') {
       $period_from_date = 'DATE_SUB(
                                 DATE_ADD(MAKEDATE(date_format(voucher_date,"%Y"), 1), INTERVAL week(voucher_date) WEEK),

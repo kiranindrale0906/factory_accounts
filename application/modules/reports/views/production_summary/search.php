@@ -142,6 +142,8 @@
          href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=Date'>Date</a>
        <a class="ml-5 <?= ($group_by == 'Month') ? 'bold black underline' : '' ?>" 
          href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=Month'>Month</a>
+         <a class="ml-5 <?= ($group_by == 'Year') ? 'bold black underline' : '' ?>" 
+         href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=Year'>Year</a>
     </h6>
   </div>
 </div>

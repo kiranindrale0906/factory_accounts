@@ -52,6 +52,8 @@
            href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&site_name=<?= $site_name?>&period=week&report_type=<?= $report_type ?>&detail=<?= $detail ?>&group=<?= $group ?>'>Week</a>
         <a class="ml-5 <?= ($period=='month') ? 'bold black underline' : '' ?>" 
            href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&site_name=<?= $site_name?>&period=month&report_type=<?= $report_type ?>&detail=<?= $detail ?>&group=<?= $group ?>'>Month</a>
+        <a class="ml-5 <?= ($period=='year') ? 'bold black underline' : '' ?>" 
+           href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&site_name=<?= $site_name?>&period=year&report_type=<?= $report_type ?>&detail=<?= $detail ?>&group=<?= $group ?>'>Year</a>
       </h5>
     </div>
     <!-- <div class="form-group container"> 
