@@ -21,6 +21,10 @@ class Login extends Core_login {
     							array("email_id" => $formdata['login']['email_id']));
     if(!is_api_request()) {
     $this->session->set_userdata($user_data);
+    $check_ip_address = $this->ip_address_model->find('',array('ip_address'=>$_SERVER['REMOTE_ADDR']));
+      if(empty($check_ip_address) && $user_data['do_not_check_ip']==0){
+            redirect('users/logout');
+      }
     if(isset($_SESSION['http_referer']) && !(empty($_SESSION['http_referer'])))
       $redirect_url =  $_SESSION['http_referer'];
     else

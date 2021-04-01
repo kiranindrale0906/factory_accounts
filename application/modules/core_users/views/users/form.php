@@ -65,6 +65,13 @@
                                     array('label_for' => 'Production Report',
                                           'label'=> 'Production Report',
                                           'value' =>'1',))));?>
+   <?php  load_field('plain/checkbox',
+                  array('field'=>'do_not_check_ip',
+                        'check_inline'=>true,
+                        'option'=> array(
+                                    array('label_for' => 'Do Not Check IP',
+                                          'label'=> 'Do Not Check IP',
+                                          'value' =>'1',))));?>
     </div>                                      
 
   <h5>Roles <span class="red">*</span></h5>   

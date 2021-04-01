@@ -78,6 +78,7 @@ class User_model extends Core_user_model {
     $this->attributes['arc_details']=!empty($_POST['users']['arc_details'])?$_POST['users']['arc_details']:0;
     $this->attributes['vodator_report']=!empty($_POST['users']['vodator_report'])?$_POST['users']['vodator_report']:0;
     $this->attributes['production_report']=!empty($_POST['users']['production_report'])?$_POST['users']['production_report']:0;
+    $this->attributes['do_not_check_ip']=!empty($_POST['users']['do_not_check_ip'])?$_POST['users']['do_not_check_ip']:0;
   }
 
   public function set_user_data_in_session($where_condition) {
@@ -94,6 +95,7 @@ class User_model extends Core_user_model {
               'arg_details'        => $user['arg_details'],
               'arf_details'        => $user['arf_details'],
               'arc_details'        => $user['arc_details'],
+              'do_not_check_ip'        => $user['do_not_check_ip'],
               'vodator_report'        => $user['vodator_report'],
               'production_report'        => $user['production_report'],
               'email_id'        => $user['email_id'],
