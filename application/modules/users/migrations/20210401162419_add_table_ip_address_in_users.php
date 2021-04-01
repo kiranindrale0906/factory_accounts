@@ -14,8 +14,7 @@ class Migration_add_table_ip_address_in_users extends CI_Model {
 						  `updated_by` int(11) DEFAULT NULL,
 						  `created_at` datetime NOT NULL,
 						  `updated_at` datetime NOT NULL,
-						  `is_delete` int(4) NOT NULL
-						);");
+						  `is_delete` int(4) NOT NULL);");
   }
 
 
