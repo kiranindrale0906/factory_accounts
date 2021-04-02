@@ -77,7 +77,15 @@
       <td class="no-print">SGST Amount (<?= $gst_rate ?>%)</td>
       <td class="text-right no-print"><?=four_decimal($record['sgst_amount'])?></td>
     </tr>
-    <?php if ($record['sale_type'] != 'Labour') { ?>
+    <?php if ($record['sale_type'] != 'Labour') { 
+
+      $tcs_rate=0;
+      if(strtotime($record['created_at'])>strtotime('2021-03-30')){
+        $tcs_rate=0.1;
+      }elseif(strtotime($record['created_at'])<=strtotime('2021-03-30')){
+        $tcs_rate=0.075;
+      }
+      ?>
       <tr class="no-print">
         <td class="no-print">Total Amount</td>
         <td class="text-right no-print"><?=four_decimal(  $record['taxable_amount']
@@ -89,7 +97,7 @@
         <td class="no-print">TCS</td>
         <td class="text-right no-print"><?=four_decimal(($record['taxable_amount']
                                                                + $record['cgst_amount']
-                                                               + $record['sgst_amount']) * .075 / 100)?></td>
+                                                               + $record['sgst_amount']) * $tcs_rate / 100)?></td>
       </tr>
     <?php } ?>
  
