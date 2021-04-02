@@ -90,6 +90,7 @@ class Trial_balances extends Ledgers {
     $this->get_alloy_vodator_balance();
     $this->get_gpc_vodator_balance();
     $this->get_stone_vatav_balance();
+    $this->get_overall_rolling();
     $this->load->render($this->router->class."/index",$this->data);
   }
 
@@ -219,6 +220,21 @@ class Trial_balances extends Ledgers {
     $this->data['live_argold_jan2021_stone_vatav_fine'] =!empty($arg_jan2021_records->data->stone_vatav[0])? $arg_jan2021_records->data->stone_vatav[0]->fine:0;
     $this->data['live_arf_jan2021_stone_vatav_fine']    = !empty($arf_jan2021_records->data->stone_vatav[0])? $arf_jan2021_records->data->stone_vatav[0]->fine:0;
     $this->data['live_arc_jan2021_stone_vatav_fine']    = !empty($arc_jan2021_records->data->stone_vatav[0])? $arc_jan2021_records->data->stone_vatav[0]->fine:0;
+  }
+
+    private function get_overall_rolling() {
+    
+    $url=API_ARG_JAN2021_PATH."stock_summary_reports/overall_rolling_reports/index?overall_rolling=1";
+    $arg_jan2021_rolling_records=json_decode(curl_post_request($url));
+    
+    
+    $url=API_ARF_JAN2021_PATH."stock_summary_reports/overall_rolling_reports/index?overall_rolling=1";
+    $arf_jan2021_rolling_records=json_decode(curl_post_request($url));
+    
+    $url=API_ARC_JAN2021_PATH."stock_summary_reports/overall_rolling_reports/index?overall_rolling=1";
+    $arc_jan2021_rolling_records=json_decode(curl_post_request($url));
+    pd($arc_jan2021_rolling_records);
+    
   }
   
   private function get_account_ledger_records() {
