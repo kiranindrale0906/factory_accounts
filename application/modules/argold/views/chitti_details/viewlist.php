@@ -38,7 +38,7 @@
                     <?php
                       $narration = explode(', ', $metal_voucher_detail['narration']);
                       $narration = array_unique($narration);
-                      echo implode(', ', $narration);
+                      echo str_replace(['Sisma Chain','Choco Chain'],'',implode(', ', $narration));
                     ?>
                   </td>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['credit_weight']); ?></td>
