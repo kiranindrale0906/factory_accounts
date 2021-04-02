@@ -227,14 +227,19 @@ class Trial_balances extends Ledgers {
     $url=API_ARG_JAN2021_PATH."stock_summary_reports/overall_rolling_reports/index?overall_rolling=1";
     $arg_jan2021_rolling_records=json_decode(curl_post_request($url));
     
+    $this->data['live_argold_jan2021_rolling_balance'] =!empty($arg_jan2021_rolling_records->data->balance)?$arg_jan2021_rolling_records->data->balance:0;
+    $this->data['live_argold_jan2021_rolling_gpc_balance']=!empty($arg_jan2021_rolling_records->data->gpc_out_balance)? $arg_jan2021_rolling_records->data->gpc_out_balance:0;
+    
     
     $url=API_ARF_JAN2021_PATH."stock_summary_reports/overall_rolling_reports/index?overall_rolling=1";
     $arf_jan2021_rolling_records=json_decode(curl_post_request($url));
+    $this->data['live_arf_jan2021_rolling_balance'] =!empty($arf_jan2021_rolling_records->data->balance)? $arf_jan2021_rolling_records->data->balance:0;
+    $this->data['live_arf_jan2021_rolling_gpc_balance']=!empty($arf_jan2021_rolling_records->data->gpc_out_balance)? $arf_jan2021_rolling_records->data->gpc_out_balance:0;
     
     $url=API_ARC_JAN2021_PATH."stock_summary_reports/overall_rolling_reports/index?overall_rolling=1";
     $arc_jan2021_rolling_records=json_decode(curl_post_request($url));
-    pd($arc_jan2021_rolling_records);
-    
+    $this->data['live_arc_jan2021_rolling_balance'] =!empty($arc_jan2021_rolling_records->data->balance)?$arc_jan2021_rolling_records->data->balance:0;
+    $this->data['live_arc_jan2021_rolling_gpc_balance']=!empty($arc_jan2021_rolling_records->data->gpc_out_balance)? $arc_jan2021_rolling_records->data->gpc_out_balance:0;
   }
   
   private function get_account_ledger_records() {

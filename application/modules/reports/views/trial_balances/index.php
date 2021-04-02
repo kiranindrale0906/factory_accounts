@@ -22,3 +22,6 @@
 <div class="row">
 <?php $this->load->view('trial_balances/stone_vatav_balance'); ?>
 </div>
+<div class="row">
+<?php $this->load->view('trial_balances/overall_rolling_balance'); ?>
+</div>
