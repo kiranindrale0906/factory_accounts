@@ -75,7 +75,7 @@ class Loss_report_details extends Ledgers {
           $product_production= $this->ledger_model->find('-1*sum(credit_weight-debit_weight) as weight',$where);
           $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$loss_data['parent_id'],'account_name!='=>'Unrecovarable'));
 
-          $unrecovery_details= $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$loss_data['parent_id'],'account_name'=>'Unrecovarable'));
+          $unrecovery_details = $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$loss_data['parent_id'],'account_name'=>'Unrecovarable'));
 
           $factory_wise_record[$index]['production']=$product_production['weight'];
           $factory_wise_record[$index]['after_recovery']=!empty($loss_account_details)?$loss_account_details['weight']:0;

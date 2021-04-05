@@ -23,34 +23,50 @@
   <table class="table table-sm table-default">
     <thead>
       <tr>
-        <th class="">Type of Loss Out</th>
-        <th class="text-right">Overall Final Loss</th>
-        <th class="text-right">Overall Production</th>
-        <th class="text-right">Product Production</th>
-        <th class="text-right">Over Loss % After Recovery</th>
+        <th class="">Type of Loss</th>
+        <th class="text-right">Fine Loss</th>
+        <th class="text-right">Total Out Weight</th>
+        <th class="text-right">Per Kg Loss</th>
+        <th class="text-right">Recovered Loss</th>
+        <th class="text-right">% Loss Before Recovery</th>
+        <th class="text-right">% Loss After Recovery</th>
+        <th class="text-right">Unrecoverable Loss</th>
         </tr>
     </thead>
     <tbody>
     <?php 
-      $sum_overall_loss_fine=$sum_fine=0;
+      $sum_overall_loss_fine=$sum_all_loss_before_recovery=$sum_per_kg_loss=$sum_recoverd_loss_fine=$sum_out_weight=$sum_fine=$sum_unrecovery_loss=$sum_all_loss_after_recovery=$sum_out_weight=0;
      foreach ($loss_categories as $index => $loss_category) {
       $sum_overall_loss_fine+=four_decimal($loss_category['overall_loss_fine']);
+      $sum_out_weight+=four_decimal($loss_category['out_weight']);
+      $sum_recoverd_loss_fine+=four_decimal($loss_category['recoverd_loss_fine']);
+      $sum_all_loss_before_recovery+=four_decimal($loss_category['all_loss_before_recovery']);
+      $sum_all_loss_after_recovery+=four_decimal($loss_category['all_loss_after_recovery']);
+      $sum_unrecovery_loss+=four_decimal($loss_category['unrecovery_loss']);
+      $sum_per_kg_loss+=four_decimal($loss_category['overall_loss_fine']/$loss_category['out_weight']*1000);
       ?>
       <tr>
         <td class=""><a href="<?=base_url()?>reports/loss_report_details?category=<?=$index ?>&factory_name=<?=$factory_name ?>"><?=$index?></a></td>
         <td class="text-right"><?=four_decimal($loss_category['overall_loss_fine'])?></td>
-        <td class="text-right"><?=four_decimal($loss_category['melting_production'])?></td>
-        <td class="text-right"><?=four_decimal($loss_category['product_production'])?></td>
+        <td class="text-right"><?=four_decimal($loss_category['out_weight'])?></td>
+        <td class="text-right"><?=four_decimal($loss_category['overall_loss_fine']/$loss_category['out_weight']*1000)?></td>
+        
+        <td class="text-right"><?=four_decimal($loss_category['recoverd_loss_fine'])?></td>
+        <td class="text-right"><?=four_decimal($loss_category['all_loss_before_recovery'])?></td>
         <td class="text-right"><?=four_decimal($loss_category['all_loss_after_recovery'])?></td>
+        <td class="text-right"><?=four_decimal($loss_category['unrecovery_loss']) ?></td>
        
       </tr>
     <?php }?>
       <tr class="bg_gray bold">
     <td>Total</td>
     <td class="text-right"><?=$sum_overall_loss_fine?></td>
-    <td class="text-right"></td>
-    <td class="text-right"></td>
-    <td class="text-right"></td>
+    <td class="text-right"><?=$sum_out_weight?></td>
+    <td class="text-right"><?=$sum_per_kg_loss?></td>
+    <td class="text-right"><?=$sum_recoverd_loss_fine?></td>
+    <td class="text-right"><?=$sum_all_loss_before_recovery?></td>
+    <td class="text-right"><?=$sum_all_loss_after_recovery?></td>
+    <td class="text-right"><?=$sum_unrecovery_loss?></td>
   </tr>
     </tbody>
   </table>
