@@ -62,9 +62,9 @@ class User_role_model extends Core_user_role_model {
                                        'others/cities','others/states', 'others/salesmans', 'others/narrations',
                                         'others/books', 'others/sms'),
                      'Users' => array('users/users','users/user_roles','users/ip_addresses'),
-                      'Migrations' => array('sys/migrations'),
+                     'Migrations' => array('sys/migrations'),
+                     'database_restore'=>array('masters/mysqldump'),
                      'api' => array('api/api_metal_issue_vouchers'));
-
     return (!empty($module_name) ? $modules[$module_name] : $modules);
   }
 }

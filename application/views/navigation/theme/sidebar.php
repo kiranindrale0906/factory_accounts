@@ -1,5 +1,6 @@
 <?php
   $menu_icons = array('Users'=> 'mdi mdi-account-box',
+                     'Backup Database'=> 'mdi mdi-bullseye',
                      'Rojmel'=> 'mdi mdi-bullseye',
                      'Masters' => 'fa fa-black-tie',
                      'Transaction' => 'fa fa-exchange',
@@ -9,7 +10,8 @@
                      'Interest'     => 'fa fa-percent',
                      'Other'        => 'fa fa-question-circle');
 
-  $main_menu =  array('Users'  => array('users/users'=>'Users',
+  $main_menu =  array('Backup Database'=>array('masters/mysqldump'=>'Backup Database'),
+                      'Users'  => array('users/users'=>'Users',
                                       'users/user_roles'=>'User roles'),
                      // 'Rojmel'  => array('rojmel/rojmel'=>'Rojmel'),
                      'Masters' => array(
@@ -27,7 +29,8 @@
                                         'masters/narrations'=>'Item Name',
                                         'masters/periods'=>'Financial Year',
                                         'masters/settings'=>'Settings',
-                                        'users/ip_addresses'=>'Ip Addresses'),
+                                        'users/ip_addresses'=>'Ip Addresses',
+                                        ),
                     'Transactions' => array(
                                            'transactions/cash_receipt_vouchers' => 'Cash Voucher',
                                             // 'transactions/bank_receipt_vouchers' => 'Bank Voucher',
