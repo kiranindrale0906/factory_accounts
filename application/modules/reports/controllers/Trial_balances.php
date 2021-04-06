@@ -67,9 +67,9 @@ class Trial_balances extends Ledgers {
       $url = API_ARF_JAN2021_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
       $records = json_decode(curl_post_request($url));
       if (!empty($records)) {
-        $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator, 'Alloy Vodator', 'ARF', 'Jan 2021');
-        $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator, 'GPC Vodator', 'ARF', 'Jan 2021');
-        $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav, 'Stone Vatav', 'ARF', 'Jan 2021');
+        $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator_group_by_date, 'Alloy Vodator', 'ARF', 'Jan 2021');
+        $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator_group_by_date, 'GPC Vodator', 'ARF', 'Jan 2021');
+        $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav_group_by_date, 'Stone Vatav', 'ARF', 'Jan 2021');
       }
 
       $url = API_ARC_JAN2021_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
