@@ -63,14 +63,14 @@
     <?php }?>
       <tr class="bg_gray bold">
     <td>Total</td>
-    <td class="text-right"><?=$sum_loss_fine?></td>
-    <td class="text-right"><?=$sum_out_weight?></td>
+    <td class="text-right"><?=four_decimal($sum_loss_fine)?></td>
+    <td class="text-right"><?=four_decimal($sum_out_weight)?></td>
     <td class="text-right"></td>
-    <td class="text-right"><?=($sum_loss_fine/$sum_out_weight*100)?></td>
-    <td class="text-right"><?=$sum_recoverd_loss_fine?></td>
-    <td class="text-right"><?=(($sum_loss_fine-$sum_recoverd_loss_fine)/$sum_out_weight*100)?></td>
-    <td class="text-right"><?=$sum_unrecoverable_loss?></td>
-    <td class="text-right"><?=$sum_balance?></td>
+    <td class="text-right"><?=!empty($sum_out_weight)?four_decimal(($sum_loss_fine/$sum_out_weight*100)):0?></td>
+    <td class="text-right"><?=four_decimal($sum_recoverd_loss_fine)?></td>
+    <td class="text-right"><?=!empty($sum_out_weight)?four_decimal(($sum_loss_fine-$sum_recoverd_loss_fine)/$sum_out_weight*100):0?></td>
+    <td class="text-right"><?=four_decimal($sum_unrecoverable_loss)?></td>
+    <td class="text-right"><?=four_decimal($sum_balance)?></td>
   </tr>
     </tbody>
   </table>
