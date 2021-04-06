@@ -27,9 +27,8 @@
         <th class="text-right">Fine Loss</th>
         <th class="text-right">Total Out Weight</th>
         <th class="text-right">Per Kg Loss</th>
-        <th class="text-right">% Loss Before Recovery</th>
         <th class="text-right">Recovered Loss</th>
-        <th class="text-right">% Loss After Recovery</th>
+        <th class="text-right">Per Kg Loss After Recovery</th>
         <th class="text-right">Unrecoverable Loss</th>
         <th class="text-right">Balance Loss</th>
         </tr>
@@ -40,37 +39,35 @@
      foreach ($loss_categories as $index => $loss_category) {
       $sum_loss_fine+=four_decimal($loss_category['loss_fine']);
       $sum_out_weight+=four_decimal($loss_category['out_weight']);
-      $sum_per_kg_loss+=four_decimal(($loss_category['loss_fine']/$loss_category['out_weight']*1000));
-      $sum_before_recovery_loss+=four_decimal(($loss_category['loss_fine']/$loss_category['out_weight']*100));
+      $sum_per_kg_loss+=!empty($loss_category['out_weight'])?four_decimal(($loss_category['loss_fine']/$loss_category['out_weight']*1000)):0;
+
+      $sum_before_recovery_loss+=!empty($loss_category['out_weight'])?four_decimal(($loss_category['loss_fine']/$loss_category['out_weight']*100)):0;
       $sum_recoverd_loss_fine+=four_decimal($loss_category['recoverd_loss_fine']);
-      $sum_after_recovery_loss+=four_decimal((($loss_category['loss_fine']-$loss_category['recoverd_loss_fine'])/$loss_category['out_weight']*100));
+      $sum_after_recovery_loss+=!empty($loss_category['out_weight'])?four_decimal((($loss_category['loss_fine']-$loss_category['recoverd_loss_fine'])/$loss_category['out_weight']*1000)):0;
       $sum_unrecoverable_loss+=four_decimal($loss_category['unrecoverable_loss']);
       $sum_balance+=four_decimal($loss_category['balance']);
       ?>
       <tr>
         <td class=""><a href="<?=base_url()?>reports/loss_report_details?category=<?=$index ?>&factory_name=<?=$factory_name ?>"><?=$index?></a></td>
-        <td class="text-right"><?=four_decimal($loss_category['loss_fine'])?></td>
-        <td class="text-right"><?=!empty($loss_category['out_weight'])?four_decimal($loss_category['out_weight']):0;?></td>
-        <td class="text-right"><?=!empty($loss_category['out_weight'])?four_decimal(($loss_category['loss_fine']/$loss_category['out_weight']*1000)):0;?></td>
-        
-        <td class="text-right"><?=!empty($loss_category['out_weight'])?four_decimal(($loss_category['loss_fine']/$loss_category['out_weight']*100)):0;?></td>
-        <td class="text-right"><?=!empty($loss_category['recoverd_loss_fine'])?four_decimal($loss_category['recoverd_loss_fine']):0;?></td>
-        <td class="text-right"><?=!empty($loss_category['out_weight'])?four_decimal((($loss_category['loss_fine']-$loss_category['recoverd_loss_fine'])/$loss_category['out_weight']*100)):0;?></td>
-        <td class="text-right"><?=!empty($loss_category['unrecoverable_loss'])?four_decimal($loss_category['unrecoverable_loss']):0; ?></td>
-        <td class="text-right"><?=!empty($loss_category['balance'])?four_decimal($loss_category['balance']):0; ?></td>
+        <td class="text-right"><?=!empty($loss_category['loss_fine'])?four_decimal($loss_category['loss_fine']):'-'?></td>
+        <td class="text-right"><?=!empty($loss_category['out_weight'])?four_decimal($loss_category['out_weight']):'-';?></td>
+        <td class="text-right"><?=!empty($loss_category['out_weight'])?four_decimal(($loss_category['loss_fine']/$loss_category['out_weight']*1000)):'-';?></td>
+        <td class="text-right"><?=!empty($loss_category['recoverd_loss_fine'])?four_decimal($loss_category['recoverd_loss_fine']):'-';?></td>
+        <td class="text-right"><?=!empty($loss_category['out_weight'])?four_decimal((($loss_category['loss_fine']-$loss_category['recoverd_loss_fine'])/$loss_category['out_weight']*1000)):'-';?></td>
+        <td class="text-right"><?=!empty($loss_category['unrecoverable_loss'])?four_decimal($loss_category['unrecoverable_loss']):'-'; ?></td>
+        <td class="text-right"><?=!empty($loss_category['balance'])?four_decimal($loss_category['balance']):'-'; ?></td>
        
       </tr>
     <?php }?>
       <tr class="bg_gray bold">
     <td>Total</td>
-    <td class="text-right"><?=$sum_loss_fine?></td>
-    <td class="text-right"><?=$sum_out_weight?></td>
+    <td class="text-right"><?=four_decimal($sum_loss_fine)?></td>
+    <td class="text-right"><?=four_decimal($sum_out_weight)?></td>
     <td class="text-right"></td>
-    <td class="text-right"></td>
-    <td class="text-right"><?=$sum_recoverd_loss_fine?></td>
-    <td class="text-right"></td>
-    <td class="text-right"><?=$sum_unrecoverable_loss?></td>
-    <td class="text-right"><?=$sum_balance?></td>
+    <td class="text-right"><?=four_decimal($sum_recoverd_loss_fine)?></td>
+    <td class="text-right"><?=!empty($sum_out_weight)?four_decimal(($sum_loss_fine-$sum_recoverd_loss_fine)/$sum_out_weight*1000):0?></td>
+    <td class="text-right"><?=four_decimal($sum_unrecoverable_loss)?></td>
+    <td class="text-right"><?=four_decimal($sum_balance)?></td>
   </tr>
     </tbody>
   </table>

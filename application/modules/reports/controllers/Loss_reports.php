@@ -20,11 +20,13 @@ class Loss_reports extends BaseController {
     $this->data['account_id']           = (!empty($_GET['account_id'])) ? $_GET['account_id'] : 0;
     
     $this->data['loss_categories']=array();
-    $categories= $this->voucher_model->get('description', array('account_name'=>'Loss Account','parent_id'=>0,'date(created_at)>='=>'2021-03-13'),array(),array('group_by'=>'description'));
+    $categories= $this->voucher_model->get('description', array('account_name'=>'Loss Account','date(created_at)>='=>'2021-03-13'),array(),array('group_by'=>'description'));
+
     $loss_details= $this->voucher_model->get('description,fine,id', array('account_name'=>'Loss Account','parent_id'=>0),array());
     $category_names=array_column($categories,'description');
     // $category_names=array('Bengali Loss','Buffing Loss','Hammering Loss','Machine Room Loss','Melting Loss','Office Loss','Outside Ball Making Loss','Pasta Loss','Shampoo And Steel Loss','Sisma Machine Room',
-    //   'Solder','Tarpatta And Flatting Loss','Walnut Loss','Walnut Shampoo Loss');
+    //   'Solder','Tarpatta And Flatting Loss','Walnut Loss','Walnut Shampoo Loss','Ghiss Melting Loss-Sisma Machine','Castic Loss','Stamping Loss');
+
 
     
     foreach ($category_names as $category_name_index => $category_name_value) {
@@ -52,44 +54,37 @@ class Loss_reports extends BaseController {
         $url=API_ARG_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
         $jan2021_records=json_decode(curl_post_request($url,$data),true);
         $records=!empty($jan2021_records)?$jan2021_records['data']['loss_details']['loss_detail']:$jan2021_records['data']['loss_details']['loss_detail']=array();
-         $ghiss_melting_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight', array('account_name'=>'Loss Account','site_name'=>'AR Gold Jan 2021','receipt_type'=>'Ghiss Melting Loss'),array());
+        $ghiss_melting_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight', array('account_name'=>'Loss Account','site_name'=>'AR Gold Jan 2021','receipt_type'=>'Ghiss Melting Loss'),array());
+
         
         $arg_jan2021_records=array_merge($records,$ghiss_melting_loss);
       }
+      // pd($arg_jan2021_records);
       if(!empty($arg_jan2021_records)){
         $total_production=$total_loss_fine=$recoverd_loss_fine=$all_loss_before_recovery=$unrecovery_loss=$fine_loss=$total_out_weight=$per_kg_loss=$total_per_kg_loss=$before_recovery_loss=$total_before_recovery_loss=$recovered_loss=$total_recovery_loss=$after_recovery_loss=$total_after_recovery_loss=$total_unrecovery_loss=$total_balance=$balance=0;
         foreach ($arg_jan2021_records as $index => $arg_loss_detail) {
-          if($category_name_value==$arg_loss_detail['description']){
+          if(strtolower($category_name_value)==strtolower($arg_loss_detail['description'])){
             $factory_wise_record[$index]['production']=0;
             $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$arg_loss_detail['parent_id'],'account_name!='=>'Unrecovarable'));
             
             $unrecovery_details = $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$arg_loss_detail['parent_id'],'account_name'=>'Unrecovarable'));
 
             $fine_loss=($arg_loss_detail['in_weight']*$arg_loss_detail['in_lot_purity']/100);
-            // $per_kg_loss=($fine_loss/$arg_loss_detail['out_weight']*1000);
-            // $before_recovery_loss=($fine_loss/$arg_loss_detail['out_weight']*100);
             $recovered_loss=($loss_account_details['fine']);
-            // $after_recovery_loss=(($fine_loss-$recovered_loss)/$arg_loss_detail['out_weight']*100);
             $unrecovery_loss=!empty($unrecovery_details)?$unrecovery_details['weight']:0;
             $balance=$fine_loss-$recovered_loss-$unrecovery_loss;
          
             $total_out_weight+=$arg_loss_detail['out_weight'];
             $total_loss_fine+=$fine_loss;
-            $total_per_kg_loss+=$per_kg_loss;
-            // $total_before_recovery_loss+=$before_recovery_loss;
             $total_recovery_loss+=$recovered_loss;
-            // $total_after_recovery_loss+=(($fine_loss-$recovered_loss)/($arg_loss_detail['out_weight'])*100);
             $total_unrecovery_loss+=$unrecovery_loss;
             $total_balance+=$balance;
 
-          $this->data['loss_categories'][$category_name_value]['loss_fine']=$total_loss_fine;
-          $this->data['loss_categories'][$category_name_value]['out_weight']=$total_out_weight;
-          // $this->data['loss_categories'][$category_name_value]['per_kg_loss']=$total_per_kg_loss;
-          // $this->data['loss_categories'][$category_name_value]['before_recovery_loss']=$total_before_recovery_loss;
-          $this->data['loss_categories'][$category_name_value]['recoverd_loss_fine']=$total_recovery_loss;
-          // $this->data['loss_categories'][$category_name_value]['after_recovery_loss']=$total_after_recovery_loss;
-          $this->data['loss_categories'][$category_name_value]['unrecoverable_loss']=$total_unrecovery_loss;
-          $this->data['loss_categories'][$category_name_value]['balance']=$total_balance;
+            $this->data['loss_categories'][$category_name_value]['loss_fine']=$total_loss_fine;
+            $this->data['loss_categories'][$category_name_value]['out_weight']=$total_out_weight;
+            $this->data['loss_categories'][$category_name_value]['recoverd_loss_fine']=$total_recovery_loss;
+            $this->data['loss_categories'][$category_name_value]['unrecoverable_loss']=$total_unrecovery_loss;
+            $this->data['loss_categories'][$category_name_value]['balance']=$total_balance;
           }
         }
       }
