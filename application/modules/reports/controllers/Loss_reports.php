@@ -69,7 +69,7 @@ class Loss_reports extends BaseController {
             $per_kg_loss=($fine_loss/$arg_loss_detail['out_weight']*1000);
             $before_recovery_loss=($fine_loss/$arg_loss_detail['out_weight']*100);
             $recovered_loss=($loss_account_details['fine']);
-            $after_recovery_loss=($fine_loss-$recovered_loss/$arg_loss_detail['out_weight']*100);
+            // $after_recovery_loss=(($fine_loss-$recovered_loss)/$arg_loss_detail['out_weight']*100);
             $unrecovery_loss=!empty($unrecovery_details)?$unrecovery_details['weight']:0;
             $balance=$fine_loss-$recovered_loss-$unrecovery_loss;
          
@@ -78,7 +78,7 @@ class Loss_reports extends BaseController {
             $total_per_kg_loss+=$per_kg_loss;
             $total_before_recovery_loss+=$before_recovery_loss;
             $total_recovery_loss+=$recovered_loss;
-            $total_after_recovery_loss+=$after_recovery_loss;
+            // $total_after_recovery_loss+=(($fine_loss-$recovered_loss)/($arg_loss_detail['out_weight'])*100);
             $total_unrecovery_loss+=$unrecovery_loss;
             $total_balance+=$balance;
 
@@ -87,7 +87,7 @@ class Loss_reports extends BaseController {
           $this->data['loss_categories'][$category_name_value]['per_kg_loss']=$total_per_kg_loss;
           $this->data['loss_categories'][$category_name_value]['before_recovery_loss']=$total_before_recovery_loss;
           $this->data['loss_categories'][$category_name_value]['recoverd_loss_fine']=$total_recovery_loss;
-          $this->data['loss_categories'][$category_name_value]['after_recovery_loss']=$total_after_recovery_loss;
+          // $this->data['loss_categories'][$category_name_value]['after_recovery_loss']=$total_after_recovery_loss;
           $this->data['loss_categories'][$category_name_value]['unrecoverable_loss']=$total_unrecovery_loss;
           $this->data['loss_categories'][$category_name_value]['balance']=$total_balance;
           }

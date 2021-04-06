@@ -43,7 +43,7 @@
       $sum_per_kg_loss+=four_decimal($loss_category['per_kg_loss']);
       $sum_before_recovery_loss+=four_decimal($loss_category['before_recovery_loss']);
       $sum_recoverd_loss_fine+=four_decimal($loss_category['recoverd_loss_fine']);
-      $sum_after_recovery_loss+=four_decimal($loss_category['after_recovery_loss']);
+      $sum_after_recovery_loss+=four_decimal((($loss_category['loss_fine']-$loss_category['recoverd_loss_fine'])/$loss_category['out_weight']*100));
       $sum_unrecoverable_loss+=four_decimal($loss_category['unrecoverable_loss']);
       $sum_balance+=four_decimal($loss_category['balance']);
       ?>
@@ -55,7 +55,7 @@
         
         <td class="text-right"><?=!empty($loss_category['before_recovery_loss'])?four_decimal($loss_category['before_recovery_loss']):0;?></td>
         <td class="text-right"><?=!empty($loss_category['recoverd_loss_fine'])?four_decimal($loss_category['recoverd_loss_fine']):0;?></td>
-        <td class="text-right"><?=!empty($loss_category['after_recovery_loss'])?four_decimal($loss_category['after_recovery_loss']):0;?></td>
+        <td class="text-right"><?=!empty($loss_category['out_weight'])?four_decimal((($loss_category['loss_fine']-$loss_category['recoverd_loss_fine'])/$loss_category['out_weight']*100)):0;?></td>
         <td class="text-right"><?=!empty($loss_category['unrecoverable_loss'])?four_decimal($loss_category['unrecoverable_loss']):0; ?></td>
         <td class="text-right"><?=!empty($loss_category['balance'])?four_decimal($loss_category['balance']):0; ?></td>
        
