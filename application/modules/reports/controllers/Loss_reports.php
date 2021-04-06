@@ -23,7 +23,8 @@ class Loss_reports extends BaseController {
     $categories= $this->voucher_model->get('description', array('account_name'=>'Loss Account','parent_id'=>0,'date(created_at)>='=>'2021-03-13'),array(),array('group_by'=>'description'));
     $loss_details= $this->voucher_model->get('description,fine,id', array('account_name'=>'Loss Account','parent_id'=>0),array());
     $category_names=array_column($categories,'description');
-     foreach ($category_names as $category_name_index => $category_name_value) {
+    
+    foreach ($category_names as $category_name_index => $category_name_value) {
       $data['department_name']=$category_name_value;
       if(isset($_GET['site_name'])&&$_GET['site_name']=='ARC'){
         $ghiss_melting_loss=array();
