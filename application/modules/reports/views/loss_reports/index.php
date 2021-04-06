@@ -43,13 +43,13 @@
       $sum_all_loss_before_recovery+=four_decimal($loss_category['all_loss_before_recovery']);
       $sum_all_loss_after_recovery+=four_decimal($loss_category['all_loss_after_recovery']);
       $sum_unrecovery_loss+=four_decimal($loss_category['unrecovery_loss']);
-      $sum_per_kg_loss+=four_decimal($loss_category['overall_loss_fine']/$loss_category['out_weight']*1000);
+      $sum_per_kg_loss+=!empty($loss_category['out_weight'])?four_decimal($loss_category['overall_loss_fine']/$loss_category['out_weight']*1000):0;
       ?>
       <tr>
         <td class=""><a href="<?=base_url()?>reports/loss_report_details?category=<?=$index ?>&factory_name=<?=$factory_name ?>"><?=$index?></a></td>
         <td class="text-right"><?=four_decimal($loss_category['overall_loss_fine'])?></td>
         <td class="text-right"><?=four_decimal($loss_category['out_weight'])?></td>
-        <td class="text-right"><?=four_decimal($loss_category['overall_loss_fine']/$loss_category['out_weight']*1000)?></td>
+        <td class="text-right"><?=!empty($loss_category['out_weight'])?four_decimal($loss_category['overall_loss_fine']/$loss_category['out_weight']*1000):0?></td>
         
         <td class="text-right"><?=four_decimal($loss_category['recoverd_loss_fine'])?></td>
         <td class="text-right"><?=four_decimal($loss_category['all_loss_before_recovery'])?></td>
