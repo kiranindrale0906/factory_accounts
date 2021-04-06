@@ -67,7 +67,7 @@ class Loss_reports extends BaseController {
 
             $fine_loss=($arg_loss_detail['in_weight']*$arg_loss_detail['in_lot_purity']/100);
             $per_kg_loss=($fine_loss/$arg_loss_detail['out_weight']*1000);
-            $before_recovery_loss=($fine_loss/$arg_loss_detail['out_weight']*100);
+            // $before_recovery_loss=($fine_loss/$arg_loss_detail['out_weight']*100);
             $recovered_loss=($loss_account_details['fine']);
             // $after_recovery_loss=(($fine_loss-$recovered_loss)/$arg_loss_detail['out_weight']*100);
             $unrecovery_loss=!empty($unrecovery_details)?$unrecovery_details['weight']:0;
@@ -76,7 +76,7 @@ class Loss_reports extends BaseController {
             $total_out_weight+=$arg_loss_detail['out_weight'];
             $total_loss_fine+=$fine_loss;
             $total_per_kg_loss+=$per_kg_loss;
-            $total_before_recovery_loss+=$before_recovery_loss;
+            // $total_before_recovery_loss+=$before_recovery_loss;
             $total_recovery_loss+=$recovered_loss;
             // $total_after_recovery_loss+=(($fine_loss-$recovered_loss)/($arg_loss_detail['out_weight'])*100);
             $total_unrecovery_loss+=$unrecovery_loss;
@@ -85,7 +85,7 @@ class Loss_reports extends BaseController {
           $this->data['loss_categories'][$category_name_value]['loss_fine']=$total_loss_fine;
           $this->data['loss_categories'][$category_name_value]['out_weight']=$total_out_weight;
           $this->data['loss_categories'][$category_name_value]['per_kg_loss']=$total_per_kg_loss;
-          $this->data['loss_categories'][$category_name_value]['before_recovery_loss']=$total_before_recovery_loss;
+          // $this->data['loss_categories'][$category_name_value]['before_recovery_loss']=$total_before_recovery_loss;
           $this->data['loss_categories'][$category_name_value]['recoverd_loss_fine']=$total_recovery_loss;
           // $this->data['loss_categories'][$category_name_value]['after_recovery_loss']=$total_after_recovery_loss;
           $this->data['loss_categories'][$category_name_value]['unrecoverable_loss']=$total_unrecovery_loss;
