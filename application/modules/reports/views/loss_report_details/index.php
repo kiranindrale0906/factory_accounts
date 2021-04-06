@@ -40,23 +40,23 @@
       <tr>
         <td><?=date('d-m-Y',strtotime($loss_out_detail['created_at']));?></td>
         <td><?=date('d-m-Y',strtotime($loss_out_detail['first_date'])).' To '.date('d-m-Y',strtotime($loss_out_detail['last_date'])); ?></td>
-        <td class="text-right"><?=four_decimal($loss_out_detail['in_weight'])?></td>
+        <td class="text-right"><?=!empty($loss_out_detail['in_weight'])?four_decimal($loss_out_detail['in_weight']):'-'?></td>
         <td class="text-right"><?=four_decimal($loss_out_detail['in_lot_purity'])?></td>
-        <td class="text-right"><?=$fine=four_decimal($loss_out_detail['loss_fine']);?></td>
-        <td class="text-right"><?=four_decimal($loss_out_detail['out_weight']);?></td>
+        <td class="text-right"><?=$fine=!empty($loss_out_detail['loss_fine'])?four_decimal($loss_out_detail['loss_fine']):'-';?></td>
+        <td class="text-right"><?=!empty($loss_out_detail['out_weight'])?four_decimal($loss_out_detail['out_weight']):'-';?></td>
 
-        <td class="text-right"><?=!empty($loss_out_detail['out_weight'])?four_decimal(($loss_out_detail['loss_fine']/$loss_out_detail['out_weight']*100)):0;?></td>
+        <td class="text-right"><?=!empty($loss_out_detail['out_weight'])?four_decimal(($loss_out_detail['loss_fine']/$loss_out_detail['out_weight']*100)):'-';?></td>
 
 
         <!-- <td class="text-right"><?//=four_decimal($loss_out_detail['production']);?></td> -->
         <td class="text-right">
           <a href=<?= base_url()."ac_vouchers/voucher_listing?parent_id=".$loss_out_detail['parent_id'] ?> target='_blank'><?=four_decimal($loss_out_detail['after_recovery']);?></a></td>
-         <td class="text-right"><?=$loss=four_decimal($loss_out_detail['recoverd_loss_fine']);?></td>
+         <td class="text-right"><?=!empty($loss_out_detail['recoverd_loss_fine'])?four_decimal($loss_out_detail['recoverd_loss_fine']):'-';?></td>
 
-        <td class="text-right"><?=!empty($loss_out_detail['out_weight'])?four_decimal((($loss_out_detail['loss_fine']-$loss_out_detail['recoverd_loss_fine'])/$loss_out_detail['out_weight']*100)):0;?></td>
-        <td class="text-right"><?=!empty($loss_out_detail['unrecoverable_loss'])?eight_decimal($loss_out_detail['unrecoverable_loss']):0;?></td>
+        <td class="text-right"><?=!empty($loss_out_detail['out_weight'])?four_decimal((($loss_out_detail['loss_fine']-$loss_out_detail['recoverd_loss_fine'])/$loss_out_detail['out_weight']*100)):'-';?></td>
+        <td class="text-right"><?=!empty($loss_out_detail['unrecoverable_loss'])?eight_decimal($loss_out_detail['unrecoverable_loss']):'-';?></td>
         <!-- <td class="text-right"><?//=!empty($loss_out_detail['production'])?four_decimal($loss/$loss_out_detail['production']*1000):0;?></td> -->
-        <td class="text-right"><?=$loss=four_decimal($loss_out_detail['balance']);?></td>
+        <td class="text-right"><?=$loss=!empty($loss_out_detail['balance'])?four_decimal($loss_out_detail['balance']):'-';?></td>
          
         <td class="text-right">
         <?php //if($parent_id==0){ ?>
@@ -78,10 +78,10 @@
     <td class="text-right"></td>
     <td class="text-right"><?=four_decimal($sum_fine)?></td>
     <td class="text-right"><?=four_decimal($sum_melting_production)?></td>
-    <td class="text-right"><?=eight_decimal($sum_fine/$sum_melting_production*100)?></td>
+    <td class="text-right"><?=four_decimal($sum_fine/$sum_melting_production*100)?></td>
     <td class="text-right"><?=four_decimal($sum_after_recovery)?></td>
     <td class="text-right"><?=four_decimal($sum_recoverd_fine)?></td>
-    <td class="text-right"><?=eight_decimal(($sum_fine-$sum_recoverd_fine)/$sum_melting_production*100)?></td>
+    <td class="text-right"><?=four_decimal(($sum_fine-$sum_recoverd_fine)/$sum_melting_production*100)?></td>
     <td class="text-right"></td>
     <td class="text-right"><?=four_decimal($sum_loss)?></td>
     <td class="text-right"></td>
