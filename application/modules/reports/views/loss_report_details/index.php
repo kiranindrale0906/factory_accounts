@@ -11,10 +11,10 @@
         <th class="text-right">Purity</th>
         <th class="text-right">In Loss Fine</th>
         <th class="text-right">Out Weight</th>
-        <th class="text-right">Loss % Before Recovery</th>
+        <th class="text-right">Per Kg Loss</th>
         <th class="text-right">Metal Receive After Recovery</th>
         <th class="text-right">Recovered Fine</th>
-        <th class="text-right">Loss % After Recovery</th>
+        <th class="text-right">% Per Kg Loss After Recovery</th>
         <th class="text-right">Unrecoverable</th>
         <th class="text-right">Balance Loss</th>
         <!-- <th class="text-right">Loss % On Product Production</th> -->
@@ -45,7 +45,7 @@
         <td class="text-right"><?=$fine=!empty($loss_out_detail['loss_fine'])?four_decimal($loss_out_detail['loss_fine']):'-';?></td>
         <td class="text-right"><?=!empty($loss_out_detail['out_weight'])?four_decimal($loss_out_detail['out_weight']):'-';?></td>
 
-        <td class="text-right"><?=!empty($loss_out_detail['out_weight'])?four_decimal(($loss_out_detail['loss_fine']/$loss_out_detail['out_weight']*100)):'-';?></td>
+        <td class="text-right"><?=!empty($loss_out_detail['out_weight'])?four_decimal(($loss_out_detail['loss_fine']/$loss_out_detail['out_weight']*1000)):'-';?></td>
 
 
         <!-- <td class="text-right"><?//=four_decimal($loss_out_detail['production']);?></td> -->
@@ -53,7 +53,7 @@
           <a href=<?= base_url()."ac_vouchers/voucher_listing?parent_id=".$loss_out_detail['parent_id'] ?> target='_blank'><?=!empty($loss_out_detail['after_recovery'])?four_decimal($loss_out_detail['after_recovery']):0;?></a></td>
          <td class="text-right"><?=!empty($loss_out_detail['recoverd_loss_fine'])?four_decimal($loss_out_detail['recoverd_loss_fine']):'-';?></td>
 
-        <td class="text-right"><?=!empty($loss_out_detail['out_weight'])?four_decimal((($loss_out_detail['loss_fine']-$loss_out_detail['recoverd_loss_fine'])/$loss_out_detail['out_weight']*100)):'-';?></td>
+        <td class="text-right"><?=!empty($loss_out_detail['out_weight'])?four_decimal((($loss_out_detail['loss_fine']-$loss_out_detail['recoverd_loss_fine'])/$loss_out_detail['out_weight']*1000)):'-';?></td>
         <td class="text-right"><?=!empty($loss_out_detail['unrecoverable_loss'])?eight_decimal($loss_out_detail['unrecoverable_loss']):'-';?></td>
         <!-- <td class="text-right"><?//=!empty($loss_out_detail['production'])?four_decimal($loss/$loss_out_detail['production']*1000):0;?></td> -->
         <td class="text-right"><?=$loss=!empty($loss_out_detail['balance'])?four_decimal($loss_out_detail['balance']):'-';?></td>
@@ -78,10 +78,10 @@
     <td class="text-right"></td>
     <td class="text-right"><?=four_decimal($sum_fine)?></td>
     <td class="text-right"><?=four_decimal($sum_melting_production)?></td>
-    <td class="text-right"><?=!empty($sum_melting_production)?four_decimal($sum_fine/$sum_melting_production*100):0?></td>
+    <td class="text-right"><?=!empty($sum_melting_production)?four_decimal($sum_fine/$sum_melting_production*1000):0?></td>
     <td class="text-right"><?=four_decimal($sum_after_recovery)?></td>
     <td class="text-right"><?=four_decimal($sum_recoverd_fine)?></td>
-    <td class="text-right"><?=!empty($sum_melting_production)?four_decimal(($sum_fine-$sum_recoverd_fine)/$sum_melting_production*100):0?></td>
+    <td class="text-right"><?=!empty($sum_melting_production)?four_decimal(($sum_fine-$sum_recoverd_fine)/$sum_melting_production*1000):0?></td>
     <td class="text-right"></td>
     <td class="text-right"><?=four_decimal($sum_loss)?></td>
     <td class="text-right"></td>

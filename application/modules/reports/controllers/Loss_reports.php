@@ -76,7 +76,6 @@ class Loss_reports extends BaseController {
          
             $total_out_weight+=$arg_loss_detail['out_weight'];
             $total_loss_fine+=$fine_loss;
-            $total_per_kg_loss+=$per_kg_loss;
             $total_recovery_loss+=$recovered_loss;
             $total_unrecovery_loss+=$unrecovery_loss;
             $total_balance+=$balance;
