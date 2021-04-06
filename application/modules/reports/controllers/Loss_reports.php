@@ -20,11 +20,12 @@ class Loss_reports extends BaseController {
     $this->data['account_id']           = (!empty($_GET['account_id'])) ? $_GET['account_id'] : 0;
     
     $this->data['loss_categories']=array();
-    $categories= $this->voucher_model->get('description', array('account_name'=>'Loss Account','parent_id'=>0,'date(created_at)>='=>'2021-03-13'),array(),array('group_by'=>'description'));
+    $categories= $this->voucher_model->get('description', array('account_name'=>'Loss Account','date(created_at)>='=>'2021-03-13'),array(),array('group_by'=>'description'));
+    
     $loss_details= $this->voucher_model->get('description,fine,id', array('account_name'=>'Loss Account','parent_id'=>0),array());
     $category_names=array_column($categories,'description');
-    $category_names=array('Bengali Loss','Buffing Loss','Hammering Loss','Machine Room Loss','Melting Loss','Office Loss','Outside Ball Making Loss','Pasta Loss','Shampoo And Steel Loss','Sisma Machine Room',
-      'Solder','Tarpatta And Flatting Loss','Walnut Loss','Walnut Shampoo Loss','Ghiss Melting Loss-Sisma Machine');
+    // $category_names=array('Bengali Loss','Buffing Loss','Hammering Loss','Machine Room Loss','Melting Loss','Office Loss','Outside Ball Making Loss','Pasta Loss','Shampoo And Steel Loss','Sisma Machine Room',
+    //   'Solder','Tarpatta And Flatting Loss','Walnut Loss','Walnut Shampoo Loss','Ghiss Melting Loss-Sisma Machine','Castic Loss');
 
     
     foreach ($category_names as $category_name_index => $category_name_value) {
