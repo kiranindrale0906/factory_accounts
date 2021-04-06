@@ -16,7 +16,7 @@
         <th class="text-right">Recovered Fine</th>
         <th class="text-right">Loss % After Recovery</th>
         <th class="text-right">Unrecoverable</th>
-        <th class="text-right">Loss</th>
+        <th class="text-right">Balance Loss</th>
         <!-- <th class="text-right">Loss % On Product Production</th> -->
         <th class="text-right">Action</th>
         <th class="text-right"></th>
