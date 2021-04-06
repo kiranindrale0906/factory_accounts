@@ -14,7 +14,7 @@
         <th class="text-right">Per Kg Loss</th>
         <th class="text-right">Metal Receive After Recovery</th>
         <th class="text-right">Recovered Fine</th>
-        <th class="text-right">% Per Kg Loss After Recovery</th>
+        <th class="text-right">Per Kg Loss After Recovery</th>
         <th class="text-right">Unrecoverable</th>
         <th class="text-right">Balance Loss</th>
         <!-- <th class="text-right">Loss % On Product Production</th> -->

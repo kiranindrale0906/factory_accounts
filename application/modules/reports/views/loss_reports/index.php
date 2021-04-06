@@ -28,7 +28,7 @@
         <th class="text-right">Total Out Weight</th>
         <th class="text-right">Per Kg Loss</th>
         <th class="text-right">Recovered Loss</th>
-        <th class="text-right">% Per Kg Loss After Recovery</th>
+        <th class="text-right">Per Kg Loss After Recovery</th>
         <th class="text-right">Unrecoverable Loss</th>
         <th class="text-right">Balance Loss</th>
         </tr>
