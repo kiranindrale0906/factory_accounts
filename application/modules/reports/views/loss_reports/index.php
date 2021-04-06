@@ -40,7 +40,7 @@
      foreach ($loss_categories as $index => $loss_category) {
       $sum_loss_fine+=four_decimal($loss_category['loss_fine']);
       $sum_out_weight+=four_decimal($loss_category['out_weight']);
-      $sum_per_kg_loss+=four_decimal($loss_category['per_kg_loss']);
+      $sum_per_kg_loss+=four_decimal(($loss_category['loss_fine']/$loss_category['out_weight']*1000));
       $sum_before_recovery_loss+=four_decimal(($loss_category['loss_fine']/$loss_category['out_weight']*100));
       $sum_recoverd_loss_fine+=four_decimal($loss_category['recoverd_loss_fine']);
       $sum_after_recovery_loss+=four_decimal((($loss_category['loss_fine']-$loss_category['recoverd_loss_fine'])/$loss_category['out_weight']*100));
@@ -51,7 +51,7 @@
         <td class=""><a href="<?=base_url()?>reports/loss_report_details?category=<?=$index ?>&factory_name=<?=$factory_name ?>"><?=$index?></a></td>
         <td class="text-right"><?=four_decimal($loss_category['loss_fine'])?></td>
         <td class="text-right"><?=!empty($loss_category['out_weight'])?four_decimal($loss_category['out_weight']):0;?></td>
-        <td class="text-right"><?=!empty($loss_category['per_kg_loss'])?four_decimal($loss_category['per_kg_loss']):0;?></td>
+        <td class="text-right"><?=!empty($loss_category['out_weight'])?four_decimal(($loss_category['loss_fine']/$loss_category['out_weight']*1000)):0;?></td>
         
         <td class="text-right"><?=!empty($loss_category['out_weight'])?four_decimal(($loss_category['loss_fine']/$loss_category['out_weight']*100)):0;?></td>
         <td class="text-right"><?=!empty($loss_category['recoverd_loss_fine'])?four_decimal($loss_category['recoverd_loss_fine']):0;?></td>
@@ -65,10 +65,10 @@
     <td>Total</td>
     <td class="text-right"><?=$sum_loss_fine?></td>
     <td class="text-right"><?=$sum_out_weight?></td>
-    <td class="text-right"><?=$sum_per_kg_loss?></td>
-    <td class="text-right"><?=$sum_before_recovery_loss?></td>
+    <td class="text-right"></td>
+    <td class="text-right"></td>
     <td class="text-right"><?=$sum_recoverd_loss_fine?></td>
-    <td class="text-right"><?=$sum_after_recovery_loss?></td>
+    <td class="text-right"></td>
     <td class="text-right"><?=$sum_unrecoverable_loss?></td>
     <td class="text-right"><?=$sum_balance?></td>
   </tr>
