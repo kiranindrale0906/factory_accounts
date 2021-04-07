@@ -1,5 +1,4 @@
-<?php $category=$_GET['category'];
-?>
+<?php $category=$_GET['category']; ?>
 
 <div class="table-responsive">
   <table class="table table-sm table-default">
@@ -17,6 +16,7 @@
         <th class="text-right">Per Kg Loss After Recovery</th>
         <th class="text-right">Unrecoverable</th>
         <th class="text-right">Balance Loss</th>
+        <th class="text-right">%Recovered</th>
         <!-- <th class="text-right">Loss % On Product Production</th> -->
         <th class="text-right">Action</th>
         <th class="text-right"></th>
@@ -57,6 +57,7 @@
         <td class="text-right"><?=!empty($loss_out_detail['unrecoverable_loss'])?eight_decimal($loss_out_detail['unrecoverable_loss']):'-';?></td>
         <!-- <td class="text-right"><?//=!empty($loss_out_detail['production'])?four_decimal($loss/$loss_out_detail['production']*1000):0;?></td> -->
         <td class="text-right"><?=$loss=!empty($loss_out_detail['balance'])?four_decimal($loss_out_detail['balance']):'-';?></td>
+        <td class="text-right"><?=$loss=!empty($loss_out_detail['loss_fine'])?four_decimal($loss_out_detail['after_recovery']/$loss_out_detail['loss_fine']*100):'-';?></td>
          
         <td class="text-right">
         <?php //if($parent_id==0){ ?>
@@ -84,6 +85,7 @@
     <td class="text-right"><?=!empty($sum_melting_production)?four_decimal(($sum_fine-$sum_recoverd_fine)/$sum_melting_production*1000):0?></td>
     <td class="text-right"></td>
     <td class="text-right"><?=four_decimal($sum_loss)?></td>
+    <td class="text-right"><?=!empty($sum_fine)?four_decimal($sum_after_recovery/$sum_fine*100):'-'?></td>
     <td class="text-right"></td>
     <td></td>
   </tr>
