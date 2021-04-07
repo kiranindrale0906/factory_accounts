@@ -61,7 +61,7 @@
          
         <td class="text-right"><?=!empty($loss_category['unrecoverable_loss'])?four_decimal($loss_category['unrecoverable_loss']):'-'; ?></td>
         <td class="text-right"><?=!empty($loss_category['balance'])?four_decimal($loss_category['balance']):'-'; ?></td>
-        <td class="text-right"><?=!empty($loss_category['loss_fine'])?four_decimal(($loss_category['after_recovered_loss']/$loss_category['loss_fine']*100)):'-';?></td>
+        <td class="text-right"><?=(!empty($loss_category['loss_fine'])&&!empty($loss_category['after_recovered_loss']))?four_decimal(($loss_category['after_recovered_loss']/$loss_category['loss_fine']*100)):'-';?></td>
        
       </tr>
     <?php }?>
