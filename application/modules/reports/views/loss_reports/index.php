@@ -27,7 +27,7 @@
         <th class="text-right">Fine Loss</th>
         <th class="text-right">Total Out Weight</th>
         <th class="text-right">Per Kg Loss</th>
-        <!-- <th class="text-right">After Recovery</th> -->
+        <th class="text-right">Metal Receive After Recovery</th>
         <th class="text-right">Recovered Loss</th>
         <th class="text-right">Per Kg Loss After Recovery</th>
         <th class="text-right">Unrecoverable Loss</th>
@@ -55,7 +55,7 @@
         <td class="text-right"><?=!empty($loss_category['loss_fine'])?four_decimal($loss_category['loss_fine']):'-'?></td>
         <td class="text-right"><?=!empty($loss_category['out_weight'])?four_decimal($loss_category['out_weight']):'-';?></td>
         <td class="text-right"><?=!empty($loss_category['out_weight'])?four_decimal(($loss_category['loss_fine']/$loss_category['out_weight']*1000)):'-';?></td>
-        <!-- <td class="text-right"><?//=!empty($loss_category['after_recovered_loss'])?four_decimal($loss_category['after_recovered_loss']):'-';?></td> -->
+        <td class="text-right"><?=!empty($loss_category['after_recovered_loss'])?four_decimal($loss_category['after_recovered_loss']):'-';?></td>
         <td class="text-right"><?=!empty($loss_category['recoverd_loss_fine'])?four_decimal($loss_category['recoverd_loss_fine']):'-';?></td>
         <td class="text-right"><?=!empty($loss_category['out_weight'])?four_decimal((($loss_category['loss_fine']-$loss_category['recoverd_loss_fine'])/$loss_category['out_weight']*1000)):'-';?></td>
          
@@ -70,7 +70,7 @@
     <td class="text-right"><?=four_decimal($sum_loss_fine)?></td>
     <td class="text-right"><?=four_decimal($sum_out_weight)?></td>
     <td class="text-right"></td>
-    <!-- <td class="text-right"><?//=four_decimal($sum_after_recoverd_loss_fine)?></td> -->
+    <td class="text-right"><?=four_decimal($sum_after_recoverd_loss_fine)?></td>
     <td class="text-right"><?=four_decimal($sum_recoverd_loss_fine)?></td>
     <td class="text-right"><?=!empty($sum_out_weight)?four_decimal(($sum_loss_fine-$sum_recoverd_loss_fine)/$sum_out_weight*1000):'-'?></td>
     <td class="text-right"><?=four_decimal($sum_unrecoverable_loss)?></td>
