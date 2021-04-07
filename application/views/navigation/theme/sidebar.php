@@ -112,7 +112,7 @@
 
                 ); 
    $database_backup_menu = array('Backup Database' => 'settings/mysqldump');
-  if(HOST=='BACKUP ACCOUNT') 
+  if(HOST=='BACKUP ACCOUNTS') 
     $main_menu=array_merge($database_backup_menu,$main_menu);
   
   $this->load->view('navigation/application/sidebar', 

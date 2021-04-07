@@ -18,7 +18,7 @@ class Core_mysqldump extends BaseController {
 
 	public function create() {
 
-		if(HOST == 'BACKUP ACCOUNT'){
+		if(HOST == 'BACKUP ACCOUNTS'){
 			$this->import_database($_GET['file_name']);
 			$this->session->unset_userdata('user_id');
 			$this->session->sess_destroy();
@@ -40,7 +40,7 @@ class Core_mysqldump extends BaseController {
         $statement .= $line;
         if (substr(trim($line), -1) === ';')
         {
-          if(HOST == 'BACKUP ACCOUNT'){
+          if(HOST == 'BACKUP ACCOUNTS'){
             $this->db->simple_query($statement);
             $statement = '';
           }

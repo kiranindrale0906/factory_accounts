@@ -65,7 +65,7 @@ class User_role_model extends Core_user_role_model {
                      'Migrations' => array('sys/migrations'),
                      'api' => array('api/api_metal_issue_vouchers'));
     $bk_modules= array('database_restore'=>array('settings/mysqldump'));
-    if(HOST=='BACKUP ACCOUNT') {
+    if(HOST=='BACKUP ACCOUNTS') {
       $modules = array_merge($modules,$bk_modules);
     }    
     return (!empty($module_name) ? $modules[$module_name] : $modules);
