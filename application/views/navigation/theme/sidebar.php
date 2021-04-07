@@ -111,6 +111,10 @@
                                         'others/sms'=>'SMS'),
 
                 ); 
+   $database_backup_menu = array('Backup Database' => 'settings/mysqldump');
+  if(HOST=='BACKUP ACCOUNT') 
+    $main_menu=array_merge($database_backup_menu,$main_menu);
+  
   $this->load->view('navigation/application/sidebar', 
                   array('main_menu' => $main_menu, 'menu_icons' => $menu_icons)); 
 ?>

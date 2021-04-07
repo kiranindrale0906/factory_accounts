@@ -63,8 +63,11 @@ class User_role_model extends Core_user_role_model {
                                         'others/books', 'others/sms'),
                      'Users' => array('users/users','users/user_roles','users/ip_addresses'),
                      'Migrations' => array('sys/migrations'),
-                     'database_restore'=>array('masters/mysqldump'),
                      'api' => array('api/api_metal_issue_vouchers'));
+    $bk_modules= array('database_restore'=>array('settings/mysqldump'));
+    if(HOST=='BACKUP ACCOUNT') {
+      $modules = array_merge($modules,$bk_modules);
+    }    
     return (!empty($module_name) ? $modules[$module_name] : $modules);
   }
 }

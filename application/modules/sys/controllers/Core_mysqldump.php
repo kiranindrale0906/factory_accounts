@@ -17,10 +17,13 @@ class Core_mysqldump extends BaseController {
 	}
 
 	public function create() {
+
+		if(HOST == 'BACKUP ACCOUNT'){
 			$this->import_database($_GET['file_name']);
 			$this->session->unset_userdata('user_id');
 			$this->session->sess_destroy();
-			redirect('masters/mysqldump');
+			redirect('settings/mysqldump');
+		}
 		echo "You are on wrong host to perfrom this operation."; die;
 	}
 
@@ -37,8 +40,10 @@ class Core_mysqldump extends BaseController {
         $statement .= $line;
         if (substr(trim($line), -1) === ';')
         {
-          	$this->db->simple_query($statement);
+          if(HOST == 'BACKUP ACCOUNT'){
+            $this->db->simple_query($statement);
             $statement = '';
+          }
         }
       }
     }
