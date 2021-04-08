@@ -11,7 +11,7 @@ class Unrecovarable_account_records extends BaseController {
   public function store() {
     if(isset($_GET['from']) && $_GET['from']=='view') {
       $process=array(
-        'account_name'=>$_GET['account_name'],
+        'account_name'=>'Unrecovarable',
         'narration'=>$_GET['narration'],
         'receipt_type'=>$_GET['account_name'],
         'purity'=>100,
@@ -26,7 +26,7 @@ class Unrecovarable_account_records extends BaseController {
       $issue_obj->save(true);
 
         $process=array(
-        'account_name'=>'Loss Account',
+        'account_name'=>$_GET['account_name'],
         'narration'=>$_GET['narration'],
         'receipt_type'=>$_GET['account_name'],
         'debit_weight'=>$_GET['credit_weight'],

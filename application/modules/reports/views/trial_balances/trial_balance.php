@@ -81,7 +81,12 @@
                    ?>
 
                   <tr>
-                    <td><?= $record['account_name']; ?></td>
+                    <td><?= $record['account_name']; ?>
+                      <?php if ($loss_account==1 && !empty($loss_date)){
+                        ?>
+                        <a href=<?= base_url()."argold/unrecovarable_account_records/store?from=view&account_name=".urlencode($record['account_name'])."&credit_weight=".four_decimal(-1 * $record['fine'], '-')."&narration=Unrecovarable&parent_id=".$record['id'] ?> target='_blank' onclick="return confirm('Do you want to add this in Unrecovarable?')" >Unrecovarable</a>
+                      <?php }?>  
+                    </td>
                     <td class="text-right"><?= four_decimal(-1 * $record['amount'], '-') ?>  </td>
                     <td class="text-right"><?= four_decimal(-1 * $record['fine'], '-') ?></td>
                     <td class="text-right"><?= four_decimal(-1 * $record['vadotar'], '-') ?>  </td>

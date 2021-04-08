@@ -14,7 +14,7 @@ class Trial_balances extends Ledgers {
   public function index() {
     //$this->metal_receipt_voucher_model->delete_vodator_records(date('Y-m-d'));
     //$this->metal_issue_voucher_model->delete_vodator_records(date('Y-m-d'));
-
+    $this->data['loss_date']=!empty($_GET['loss_date'])?$_GET['loss_date']:'';
     $update_vadotar = isset($_GET['update_vadotar']) ? TRUE : FALSE;
 
     if ($update_vadotar) {
@@ -245,14 +245,18 @@ class Trial_balances extends Ledgers {
   private function get_account_ledger_records() {
     $this->data['voucher_dates']=array();
     if(empty($this->data['account_names'])) return true;
-  
+    $where=array();
+    if(!empty($this->data['loss_date'])){
+      $where['voucher_date <=']=$this->data['loss_date'];
+    }
     $select = "account_name, 
                IFNULL((sum(debit_weight*purity)/100),0) - IFNULL((sum(credit_weight*factory_purity)/100),0) as fine,
                IFNULL(sum((purity-factory_purity)*debit_weight/100),0) - IFNULL(sum((factory_purity-purity)*credit_weight/100),0) as vadotar,
-               IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount";
-    $this->data['trial_balance'] = $this->model->get($select, array(), array() , 
+               IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount,0 as id";
+    $this->data['trial_balance'] = $this->model->get($select,$where, array() , 
                                                       array('group_by'=>'account_name,',
                                                             'order_by'=>'account_name asc'));
+                                                            
     $loss_account = array('account_name' => 'LOSS ACCOUNT',
                           'fine' => 0, 'vadotar' => 0, 'amount' => 0);
     $this->data['loss_account_records'] = array();
