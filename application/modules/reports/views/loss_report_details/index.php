@@ -83,7 +83,7 @@
     <td class="text-right"><?=four_decimal($sum_after_recovery)?></td>
     <td class="text-right"><?=four_decimal($sum_recoverd_fine)?></td>
     <td class="text-right"><?=!empty($sum_melting_production)?four_decimal(($sum_fine-$sum_recoverd_fine)/$sum_melting_production*1000):0?></td>
-    <td class="text-right"></td>
+    <td class="text-right"><?=four_decimal($sum_unrecoverable)?></td>
     <td class="text-right"><?=four_decimal($sum_loss)?></td>
     <td class="text-right"><?=!empty($sum_fine)?four_decimal($sum_after_recovery/$sum_fine*100):'-'?></td>
     <td class="text-right"></td>
