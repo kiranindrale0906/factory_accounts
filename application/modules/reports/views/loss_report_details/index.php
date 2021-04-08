@@ -54,7 +54,7 @@
          <td class="text-right"><?=!empty($loss_out_detail['recoverd_loss_fine'])?four_decimal($loss_out_detail['recoverd_loss_fine']):'-';?></td>
 
         <td class="text-right"><?=!empty($loss_out_detail['out_weight'])?four_decimal((($loss_out_detail['loss_fine']-$loss_out_detail['recoverd_loss_fine'])/$loss_out_detail['out_weight']*1000)):'-';?></td>
-        <td class="text-right"><?=!empty($loss_out_detail['unrecoverable_loss'])?eight_decimal($loss_out_detail['unrecoverable_loss']):'-';?></td>
+        <td class="text-right"><?=!empty($loss_out_detail['unrecoverable_loss'])?four_decimal($loss_out_detail['unrecoverable_loss']):'-';?></td>
         <!-- <td class="text-right"><?//=!empty($loss_out_detail['production'])?four_decimal($loss/$loss_out_detail['production']*1000):0;?></td> -->
         <td class="text-right"><?=$loss=!empty($loss_out_detail['balance'])?four_decimal($loss_out_detail['balance']):'-';?></td>
         <td class="text-right"><?=(!empty($loss_out_detail['loss_fine'])&&!empty($loss_out_detail['after_recovery']))?four_decimal($loss_out_detail['after_recovery']/$loss_out_detail['loss_fine']*100):'-';?></td>
