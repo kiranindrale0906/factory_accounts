@@ -33,7 +33,7 @@ class Unrecovarable_account_records extends BaseController {
         'purity'=>100,
         'factory_purity'=>100,
         'factory_fine'=>$_GET['credit_weight'],
-        'description'=>$_GET['description'],
+        // 'description'=>$_GET['description'],
         'company_id'=>1,
         // 'parent_id'=>$_GET['parent_id'],
         'voucher_date'=>date('Y-m-d'));
