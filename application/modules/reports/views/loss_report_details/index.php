@@ -65,7 +65,7 @@
           <?php //}?>
         </td>
         <td class="text-right">
-        <?php if(empty($loss_out_detail->unrecovery)){ ?>
+        <?php if(empty($loss_out_detail['unrecoverable_loss'])){ ?>
           <a href=<?= base_url()."argold/unrecovarable_account_records/store?from=view&account_name=Unrecovarable&factory=".urlencode($_GET['factory_name'])."&credit_weight=".$loss."&narration=".urlencode($category)."&parent_id=".$loss_out_detail['parent_id'] ?> target='_blank' onclick="return confirm('Do you want to add this in Unrecovarable?')" >Unrecovarable</a>
           <?php }?>
         </td>
