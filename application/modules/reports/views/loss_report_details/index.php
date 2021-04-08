@@ -51,13 +51,13 @@
         <!-- <td class="text-right"><?//=four_decimal($loss_out_detail['production']);?></td> -->
         <td class="text-right">
           <a href=<?= base_url()."ac_vouchers/voucher_listing?parent_id=".$loss_out_detail['parent_id'] ?> target='_blank'><?=!empty($loss_out_detail['after_recovery'])?four_decimal($loss_out_detail['after_recovery']):0;?></a></td>
-         <td class="text-right"><?=!empty($loss_out_detail['recoverd_loss_fine'])?four_decimal($loss_out_detail['recoverd_loss_fine']):'-';?></td>
+         <td class="text-right"><?=$recoverd_loss_fine=!empty($loss_out_detail['recoverd_loss_fine'])?four_decimal($loss_out_detail['recoverd_loss_fine']):'-';?></td>
 
         <td class="text-right"><?=!empty($loss_out_detail['out_weight'])?four_decimal((($loss_out_detail['loss_fine']-$loss_out_detail['recoverd_loss_fine'])/$loss_out_detail['out_weight']*1000)):'-';?></td>
-        <td class="text-right"><?=!empty($loss_out_detail['unrecoverable_loss'])?eight_decimal($loss_out_detail['unrecoverable_loss']):'-';?></td>
+        <td class="text-right"><?=$unrecoverable_loss=!empty($loss_out_detail['unrecoverable_loss'])?eight_decimal($loss_out_detail['unrecoverable_loss']):'-';?></td>
         <!-- <td class="text-right"><?//=!empty($loss_out_detail['production'])?four_decimal($loss/$loss_out_detail['production']*1000):0;?></td> -->
-        <td class="text-right"><?=$loss=!empty($loss_out_detail['balance'])?four_decimal($loss_out_detail['balance']):'-';?></td>
-        <td class="text-right"><?=$loss=(!empty($loss_out_detail['loss_fine'])&&!empty($loss_out_detail['after_recovery']))?four_decimal($loss_out_detail['after_recovery']/$loss_out_detail['loss_fine']*100):'-';?></td>
+        <td class="text-right"><?=$loss=$fine-$recoverd_loss_fine-$unrecoverable_loss;?></td>
+        <td class="text-right"><?=(!empty($loss_out_detail['loss_fine'])&&!empty($loss_out_detail['after_recovery']))?four_decimal($loss_out_detail['after_recovery']/$loss_out_detail['loss_fine']*100):'-';?></td>
          
         <td class="text-right">
         <?php //if($parent_id==0){ ?>
@@ -84,7 +84,7 @@
     <td class="text-right"><?=four_decimal($sum_recoverd_fine)?></td>
     <td class="text-right"><?=!empty($sum_melting_production)?four_decimal(($sum_fine-$sum_recoverd_fine)/$sum_melting_production*1000):0?></td>
     <td class="text-right"></td>
-    <td class="text-right"><?=four_decimal($sum_loss)?></td>
+    <td class="text-right"><?=four_decimal($sum_fine-$sum_recoverd_fine-$sum_unrecoverable)?></td>
     <td class="text-right"><?=!empty($sum_fine)?four_decimal($sum_after_recovery/$sum_fine*100):'-'?></td>
     <td class="text-right"></td>
     <td></td>
