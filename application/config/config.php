@@ -548,4 +548,5 @@ $config['proxy_ips'] = '';
 define('API_ARG_JAN2021_PATH', 'https://staging-argold.ascratech.com/');
 define('API_ARF_JAN2021_PATH', 'https://staging-arf.ascratech.com/');
 define('API_ARC_JAN2021_PATH', 'https://staging-arc.ascratech.com/');
+define('HOST', '');
 
