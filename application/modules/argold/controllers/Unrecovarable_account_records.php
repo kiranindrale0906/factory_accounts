@@ -26,13 +26,14 @@ class Unrecovarable_account_records extends BaseController {
       $issue_obj->save(true);
 
         $process=array(
-        'account_name'=>$_GET['factory'],
+        'account_name'=>'Loss Account',
         'narration'=>$_GET['narration'],
         'receipt_type'=>$_GET['account_name'],
         'debit_weight'=>$_GET['credit_weight'],
         'purity'=>100,
         'factory_purity'=>100,
         'factory_fine'=>$_GET['credit_weight'],
+        'description'=>$_GET['description'],
         'company_id'=>1,
         // 'parent_id'=>$_GET['parent_id'],
         'voucher_date'=>date('Y-m-d'));
