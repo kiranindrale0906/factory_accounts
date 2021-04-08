@@ -19,9 +19,23 @@ class Unrecovarable_account_records extends BaseController {
         'parent_id'=>$_GET['parent_id'],
         'voucher_date'=>date('Y-m-d'),
         'credit_weight'=>$_GET['credit_weight']);
-      $hide_obj = new metal_issue_voucher_model($process);
-      $hide_obj->before_validate();
-      $hide_obj->save(true);
+      $issue_obj = new metal_issue_voucher_model($process);
+      $issue_obj->before_validate();
+      $issue_obj->save(true);
+
+        $process=array(
+        'account_name'=>$_GET['factory'],
+        'narration'=>$_GET['narration'],
+        'receipt_type'=>$_GET['account_name'],
+        'purity'=>100,
+        'company_id'=>1,
+        'parent_id'=>$_GET['parent_id'],
+        'voucher_date'=>date('Y-m-d'),
+        'debit_weight'=>$_GET['credit_weight']);
+      $receipt_obj = new metal_receipt_voucher_model($process);
+      $receipt_obj->before_validate();
+      $receipt_obj->save(true);
+
       redirect($_SERVER['HTTP_REFERER']);
     } else {
       parent::store();
