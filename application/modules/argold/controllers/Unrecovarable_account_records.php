@@ -17,7 +17,7 @@ class Unrecovarable_account_records extends BaseController {
         'purity'=>100,
         'company_id'=>1,
         'parent_id'=>$_GET['parent_id'],
-        'voucher_date'=>date('Y-m-d'),
+        'voucher_date'=>(!empty($_GET['voucher_date']))?date('Y-m-d',strtotime($_GET['voucher_date'])):date('Y-m-d'),
         'factory_purity'=>100,
         'factory_fine'=>$_GET['credit_weight'],
         'credit_weight'=>$_GET['credit_weight']);
@@ -36,7 +36,7 @@ class Unrecovarable_account_records extends BaseController {
         // 'description'=>$_GET['description'],
         'company_id'=>1,
         // 'parent_id'=>$_GET['parent_id'],
-        'voucher_date'=>date('Y-m-d'));
+        'voucher_date'=>(!empty($_GET['voucher_date']))?date('Y-m-d',strtotime($_GET['voucher_date'])):date('Y-m-d'),);
       $receipt_obj = new metal_receipt_voucher_model($process);
       $receipt_obj->before_validate();
       $receipt_obj->save(true);

@@ -1,10 +1,10 @@
 <?php 
-  $purchase_amount = -1 * $profit_and_loss['purchase_account']['amount'];
-  $purchase_rate = -1 * $profit_and_loss['purchase_account']['amount'] / $profit_and_loss['purchase_account']['fine'];
-  $purchase_fine = $profit_and_loss['purchase_account']['fine'];
-  $sales_amount = $profit_and_loss['sales_account']['amount'];
-  $sales_rate = -1 * $profit_and_loss['sales_account']['amount'] / $profit_and_loss['sales_account']['fine'];
-  $sales_fine = -1 * $profit_and_loss['sales_account']['fine'];
+  $purchase_amount = !empty($profit_and_loss['purchase_account']['amount'])?-1 * $profit_and_loss['purchase_account']['amount']:0;
+  $purchase_rate = !empty($profit_and_loss['purchase_account']['fine'])?-1 * $profit_and_loss['purchase_account']['amount'] / $profit_and_loss['purchase_account']['fine']:0;
+  $purchase_fine = !empty($profit_and_loss['purchase_account']['fine'])?$profit_and_loss['purchase_account']['fine']:0;
+  $sales_amount = !empty($profit_and_loss['sales_account']['amount'])?$profit_and_loss['sales_account']['amount']:0;
+  $sales_rate = !empty($profit_and_loss['sales_account']['fine'])?(-1 * $profit_and_loss['sales_account']['amount'] / $profit_and_loss['sales_account']['fine']):0;
+  $sales_fine = !empty($profit_and_loss['sales_account']['fine'])?-1 * $profit_and_loss['sales_account']['fine']:0;
   $main_vadotar_fine = @$profit_and_loss['main_vadotar']['fine'];
   $pending_vadotar_fine = -1 * $profit_and_loss['pending_vadotar'];
   $exchange_rate_diff = $purchase_rate - $sales_rate;
