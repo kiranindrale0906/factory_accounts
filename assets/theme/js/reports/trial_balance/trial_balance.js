@@ -1,6 +1,5 @@
 $('.loss_search_date').click(function(){
     var date = $('input[name*="trial_balances[date]').val();
-    alert(date);
       var url = window.location.href;
       if (url.indexOf("?") > -1) {
         var url = url.split('?')[0];
