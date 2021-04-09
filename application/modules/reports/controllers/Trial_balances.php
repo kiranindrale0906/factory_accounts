@@ -247,7 +247,7 @@ class Trial_balances extends Ledgers {
     if(empty($this->data['account_names'])) return true;
     $where=array();
     if(!empty($this->data['loss_date'])){
-      $where['voucher_date <=']=$this->data['loss_date'];
+      $where['date(voucher_date) <=']=date('Y-m-d',strtotime($this->data['loss_date']));
     }
     $select = "account_name, 
                IFNULL((sum(debit_weight*purity)/100),0) - IFNULL((sum(credit_weight*factory_purity)/100),0) as fine,

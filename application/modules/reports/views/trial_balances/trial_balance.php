@@ -29,10 +29,17 @@
                   $liabilities_fine = $liabilities_fine + $record['fine']; 
                   $liabilities_amount = $liabilities_amount + $record['amount']; 
                   if(round($record['fine'],2)!=0){
+
                   ?>
 
                   <tr>
-                    <td><?= $record['account_name']; ?></td>
+                    <td><?= $record['account_name']; ?>
+                      
+                      <?php if ($loss_account==1 && !empty($loss_date)){
+                        ?>
+                        <a href=<?= base_url()."argold/unrecovarable_account_records/store?from=view&account_name=Unrecovarable&credit_weight=".four_decimal($record['fine'])."&narration=Unrecovarable&factory=".urlencode($record['account_name'])."&parent_id=".$record['id'] ?> target='_blank' onclick="return confirm('Do you want to add this in Unrecovarable?')" >Unrecovarable</a>
+                      <?php }?>  
+                    </td>
                     <td class="text-right"><?= four_decimal(($record['amount']), '-') ?>  </td>
                     <td class="text-right"><?= four_decimal(($record['fine']), '-'); ?></td>
                     <td class="text-right"><?= four_decimal(($record['vadotar']), '-') ?>  </td>
@@ -84,7 +91,7 @@
                     <td><?= $record['account_name']; ?>
                       <?php if ($loss_account==1 && !empty($loss_date)){
                         ?>
-                        <a href=<?= base_url()."argold/unrecovarable_account_records/store?from=view&account_name=".urlencode($record['account_name'])."&credit_weight=".four_decimal(-1 * $record['fine'], '-')."&narration=Unrecovarable&parent_id=".$record['id'] ?> target='_blank' onclick="return confirm('Do you want to add this in Unrecovarable?')" >Unrecovarable</a>
+                        <a href=<?= base_url()."argold/unrecovarable_account_records/store?from=view&account_name=".urlencode($record['account_name'])."&credit_weight=".four_decimal(-1 * $record['fine'])."&narration=Unrecovarable&factory=Unrecovarable&parent_id=".$record['id'] ?> target='_blank' onclick="return confirm('Do you want to add this in Unrecovarable?')" >Unrecovarable</a>
                       <?php }?>  
                     </td>
                     <td class="text-right"><?= four_decimal(-1 * $record['amount'], '-') ?>  </td>
