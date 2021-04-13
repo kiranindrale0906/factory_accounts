@@ -31,6 +31,7 @@ class Loss_reports extends BaseController {
     
     foreach ($category_names as $category_name_index => $category_name_value) {
       $data['department_name']=$category_name_value;
+      if(!empty($category_name_value)){
       if(isset($_GET['site_name'])&&$_GET['site_name']=='ARC'){
         $ghiss_melting_loss=array();
         $url=API_ARC_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
@@ -112,9 +113,11 @@ class Loss_reports extends BaseController {
             $this->data['loss_categories'][$category_name_value]['unrecoverable_loss']=$total_unrecovery_loss;
             $this->data['loss_categories'][$category_name_value]['balance']=$total_balance;
           }
+        
         }
       }
     }
+  }
   }
       
 }
