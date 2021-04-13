@@ -42,7 +42,7 @@ class Loss_reports extends BaseController {
           $url=API_ARC_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
           $data['issue_department_id']=$ghiss_melting_value['parent_id'];
           $ghiss_melting_loss_out_weight=json_decode(curl_post_request($url,$data),true);
-          $ghiss_melting_loss[$ghiss_melting_index]['out_weight']=$ghiss_melting_loss_out_weight;
+          $ghiss_melting_loss[$ghiss_melting_index]['out_weight']=!empty($ghiss_melting_loss_out_weight)?$ghiss_melting_loss_out_weight['data']['ghiss_melting_loss_out_weight']:$ghiss_melting_loss_out_weight['data']['ghiss_melting_loss_out_weight']=0;
         }
         $arg_jan2021_records=array_merge($records,$ghiss_melting_loss);
 
@@ -57,7 +57,7 @@ class Loss_reports extends BaseController {
           $url=API_ARF_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
           $data['issue_department_id']=$ghiss_melting_value['parent_id'];
           $ghiss_melting_loss_out_weight=json_decode(curl_post_request($url,$data),true);
-          $ghiss_melting_loss[$ghiss_melting_index]['out_weight']=$ghiss_melting_loss_out_weight;
+          $ghiss_melting_loss[$ghiss_melting_index]['out_weight']=!empty($ghiss_melting_loss_out_weight)?$ghiss_melting_loss_out_weight['data']['ghiss_melting_loss_out_weight']:$ghiss_melting_loss_out_weight['data']['ghiss_melting_loss_out_weight']=0;
         }
         $arg_jan2021_records=array_merge($records,$ghiss_melting_loss);
 
@@ -72,11 +72,11 @@ class Loss_reports extends BaseController {
           $url=API_ARG_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
           $data['issue_department_id']=$ghiss_melting_value['parent_id'];
           $ghiss_melting_loss_out_weight=json_decode(curl_post_request($url,$data),true);
-          $ghiss_melting_loss[$ghiss_melting_index]['out_weight']=$ghiss_melting_loss_out_weight;
+          $ghiss_melting_loss[$ghiss_melting_index]['out_weight']=!empty($ghiss_melting_loss_out_weight)?$ghiss_melting_loss_out_weight['data']['ghiss_melting_loss_out_weight']:$ghiss_melting_loss_out_weight['data']['ghiss_melting_loss_out_weight']=0;
         }
         $arg_jan2021_records=array_merge($records,$ghiss_melting_loss);
       }
-      pd($arg_jan2021_records);
+      // pd($arg_jan2021_records);
       if(!empty($arg_jan2021_records)){
         $total_production=$total_loss_fine=$recoverd_loss_fine=$all_loss_before_recovery=$unrecovery_loss=$fine_loss=$total_out_weight=$per_kg_loss=$total_per_kg_loss=$before_recovery_loss=$total_before_recovery_loss=$recovered_loss=$total_recovery_loss=$after_recovery_loss=$total_after_recovery_loss=$total_unrecovery_loss=$after_recovered_loss=$total_after_recovered_loss=$total_balance=$balance=0;
         foreach ($arg_jan2021_records as $index => $arg_loss_detail) {
