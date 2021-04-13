@@ -25,7 +25,7 @@
   $exchange_gain_loss_rate = $purchase_rate - $total_sales_with_closing_rate;
   $exchange_gain_loss_amount = $exchange_gain_loss_fine * $exchange_gain_loss_rate;
 
-  $total_income_amount = $sales_amount + ($sales_fine * $exchange_rate_diff) + ($closing_fine * $closing_rate);
+  $total_income_amount = $sales_amount + $closing_amount + $exchange_gain_loss_amount;
   $total_income_fine = $total_sales_with_closing_fine;
   $total_income_rate = $total_income_amount / $total_income_fine;
 
