@@ -80,7 +80,6 @@ class Loss_report_details extends Ledgers {
   }
 
   private function factory_wise_record_array($loss_details){
-    pd($loss_details);
     $factory_wise_record=array();
       if(!empty($loss_details)){
         $total_production=$total_loss_fine=$recoverd_loss_fine=$all_loss_before_recovery=$unrecovery_loss=$fine_loss=$total_out_weight=$per_kg_loss=$total_per_kg_loss=$before_recovery_loss=$total_before_recovery_loss=$recovered_loss=$total_recovery_loss=$after_recovery_loss=$total_after_recovery_loss=$total_unrecovery_loss=$total_balance=$balance=0;
