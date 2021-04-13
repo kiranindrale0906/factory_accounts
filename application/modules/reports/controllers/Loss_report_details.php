@@ -23,7 +23,7 @@ class Loss_report_details extends Ledgers {
     $arg_jan2021_records=json_decode(curl_post_request($url,$data),true);
     $ghiss_melting_loss=array();
     $arg_jan2021_records=!empty($arg_jan2021_records)?$arg_jan2021_records['data']['loss_details']['loss_detail']:$jan2021_records['data']['loss_details']['loss_detail']=array();
-    $ghiss_melting_loss=$this->voucher_model->get('receipt_type,description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight,created_at,created_at as first_date,created_at as last_date', array('account_name'=>'Loss Account','date(created_at)>='=>'2021-03-13','site_name'=>'AR Gold st','receipt_type'=>'Ghiss Melting Loss','description'=>$_GET['category']),array());
+    $ghiss_melting_loss=$this->voucher_model->get('receipt_type,description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight,created_at,created_at as first_date,created_at as last_date', array('account_name'=>'Loss Account','date(created_at)>='=>'2021-03-13','site_name'=>'AR Gold Jan 2021','receipt_type'=>'Ghiss Melting Loss','description'=>$_GET['category']),array());
     foreach ($ghiss_melting_loss as $ghiss_melting_loss_index => $ghiss_melting_loss_value) {
           $data['issue_department_id']=$ghiss_melting_loss_value['parent_id'];
           $url=API_ARG_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
@@ -80,22 +80,8 @@ class Loss_report_details extends Ledgers {
   }
 
   private function factory_wise_record_array($loss_details){
+    pd($loss_details);
     $factory_wise_record=array();
-    // if(!empty($loss_details)){
-    //    foreach ($loss_details as $index => $loss_data) {
-    //     $factory_wise_record[$index]=$loss_data;
-    //     $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$loss_data['parent_id'],'account_name!='=>'Unrecovarable'));
-
-    //     $unrecovery_details = $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$loss_data['parent_id'],'account_name'=>'Unrecovarable'));
-
-    //     $factory_wise_record[$index]['production']=$product_production['weight'];
-    //     $factory_wise_record[$index]['after_recovery']=!empty($loss_account_details)?$loss_account_details['weight']:0;
-    //     $factory_wise_record[$index]['unrecovery']=!empty($unrecovery_details)?$unrecovery_details['weight']:0;
-    //     $factory_wise_record[$index]['purity']=!empty($loss_account_details)?$loss_account_details['factory_purity']:0;
-    //     $factory_wise_record[$index]['fine']=!empty($loss_account_details)?$loss_account_details['fine']:0;
-
-    //   }
-    // }
       if(!empty($loss_details)){
         $total_production=$total_loss_fine=$recoverd_loss_fine=$all_loss_before_recovery=$unrecovery_loss=$fine_loss=$total_out_weight=$per_kg_loss=$total_per_kg_loss=$before_recovery_loss=$total_before_recovery_loss=$recovered_loss=$total_recovery_loss=$after_recovery_loss=$total_after_recovery_loss=$total_unrecovery_loss=$total_balance=$balance=0;
         foreach ($loss_details as $index => $loss_detail) {
