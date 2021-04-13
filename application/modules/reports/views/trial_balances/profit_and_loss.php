@@ -1,17 +1,42 @@
 <?php 
-  $purchase_amount = !empty($profit_and_loss['purchase_account']['amount'])?-1 * $profit_and_loss['purchase_account']['amount']:0;
+  $purchase_fine = !empty($profit_and_loss['purchase_account']['fine']) ? $profit_and_loss['purchase_account']['fine'] : 0;
+  $purchase_rate = !empty($profit_and_loss['purchase_account']['fine']) ? -1 * $profit_and_loss['purchase_account']['amount'] / $profit_and_loss['purchase_account']['fine'] : 0;
+  $purchase_amount = !empty($profit_and_loss['purchase_account']['amount']) ? -1 * $profit_and_loss['purchase_account']['amount'] : 0;
 
-  $purchase_rate = !empty($profit_and_loss['purchase_account']['fine'])?-1 * $profit_and_loss['purchase_account']['amount'] / $profit_and_loss['purchase_account']['fine']:0;
-  $purchase_fine = !empty($profit_and_loss['purchase_account']['fine'])?$profit_and_loss['purchase_account']['fine']:0;
-  $sales_amount = !empty($profit_and_loss['sales_account']['amount'])?$profit_and_loss['sales_account']['amount']:0;
-  $sales_rate = !empty($profit_and_loss['sales_account']['fine'])?(-1 * $profit_and_loss['sales_account']['amount'] / $profit_and_loss['sales_account']['fine']):0;
-  $gold_rate=$gold_rate/10;
-  $sales_fine = !empty($profit_and_loss['sales_account']['fine'])?-1 * $profit_and_loss['sales_account']['fine']:0;
   $main_vadotar_fine = @$profit_and_loss['main_vadotar']['fine'];
+  $main_vadotar_amount = $main_vadotar_rate = 0;
+
   $pending_vadotar_fine = -1 * $profit_and_loss['pending_vadotar'];
-  $exchange_rate_diff = $purchase_rate - $sales_rate;
+  $pending_vadotar_amount = $pending_vadotar_rate = 0;
+
+  $sales_fine = !empty($profit_and_loss['sales_account']['fine']) ? -1 * $profit_and_loss['sales_account']['fine'] : 0;
+  $sales_rate = !empty($profit_and_loss['sales_account']['fine']) ? (-1 * $profit_and_loss['sales_account']['amount'] / $profit_and_loss['sales_account']['fine']) : 0;
+  $sales_amount = !empty($profit_and_loss['sales_account']['amount']) ? $profit_and_loss['sales_account']['amount'] : 0;
+
+  
   $closing_fine = $purchase_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_fine;
-  $income_total = $sales_amount + ($sales_fine * $exchange_rate_diff) + ($closing_fine * $gold_rate);
+  $closing_rate = $gold_rate / 10;
+  $closing_amount = $closing_fine * $closing_rate;
+
+  $total_sales_with_closing_amount = $sales_amount + $closing_amount;
+  $total_sales_with_closing_fine = $sales_fine + $closing_fine;
+  $total_sales_with_closing_rate = $total_sales_with_closing_amount / $total_sales_with_closing_fine;
+
+  $exchange_gain_loss_fine = $total_sales_with_closing_fine;
+  $exchange_gain_loss_rate = $purchase_rate - $total_sales_with_closing_rate;
+  $exchange_gain_loss_amount = $exchange_gain_loss_fine * $exchange_gain_loss_rate;
+
+  $total_income_amount = $sales_amount + ($sales_fine * $exchange_rate_diff) + ($closing_fine * $closing_rate);
+  $total_income_fine = $total_sales_with_closing_fine;
+  $total_income_rate = $total_income_amount / $total_income_fine;
+
+  $gross_profit_fine = 0;
+  $gross_profit_rate = 0;
+  $gross_profit_amount = $total_income_amount - $purchase_amount;
+
+  $total_expenses_amount = $purchase_amount;
+  $total_expenses_fine = $purchase_fine;
+  $total_expenses_rate = $total_expenses_amount / $total_expenses_fine;
 ?>
 
 <hr />
@@ -39,27 +64,27 @@
           </tr>
           <tr>
             <td>Main Vadotar</td>
-            <td class="text-right">-</td>
-            <td class="text-right">-</td>
+            <td class="text-right"><?= four_decimal($main_vadotar_amount, '-') ?></td>
+            <td class="text-right"><?= four_decimal($main_vadotar_rate, '-') ?></td>
             <td class="text-right"><?= four_decimal($main_vadotar_fine, '-') ?></td>
           </tr>
           <tr>
             <td>Pending Vadotar</td>
-            <td class="text-right">-</td>
-            <td class="text-right">-</td>
+            <td class="text-right"><?= four_decimal($pending_vadotar_amount, '-'); ?></td>
+            <td class="text-right"><?= four_decimal($pending_vadotar_rate, '-'); ?></td>
             <td class="text-right"><?= four_decimal($pending_vadotar_fine, '-'); ?></td>
           </tr>
           <tr>
             <td>Gross Profit</td>
-            <td class="text-right"><?= four_decimal($income_total - $purchase_amount); ?></td>
-            <td class="text-right">-</td>
-            <td class="text-right">-</td>
+            <td class="text-right"><?= four_decimal($gross_profit_amount, '-'); ?></td>
+            <td class="text-right"><?= four_decimal($gross_profit_rate, '-'); ?></td>
+            <td class="text-right"><?= four_decimal($gross_profit_fine, '-'); ?></td>
           </tr>
           <tr>
             <th>Total</th>
-            <th class="text-right"><?= four_decimal($purchase_amount + ($income_total - $purchase_amount), '-'); ?></th>
-            <th class="text-right">-</th>          
-            <th class="text-right"><?= four_decimal($purchase_fine + $main_vadotar_fine + $pending_vadotar_fine, '-'); ?></th>          
+            <td class="text-right"><?= four_decimal($total_expenses_amount, '-'); ?></td>
+            <td class="text-right"><?= four_decimal($total_expenses_rate, '-'); ?></td>
+            <td class="text-right"><?= four_decimal($total_expenses_fine, '-'); ?></td>
           </tr>
         </table>
       </div>
@@ -84,24 +109,28 @@
             <td class="text-right"><?= four_decimal($sales_fine, '-'); ?></td>
           </tr>
           <tr>
-            <td>Exchange Gain / Loss</td>
-            <td class="text-right"><?= four_decimal($sales_fine * $exchange_rate_diff , '-'); ?></td>
-            <td class="text-right"><?= four_decimal($exchange_rate_diff, '-'); ?></td>
-            <td class="text-right"></td>
-          </tr>
-          <tr>
             <td>Closing Stock</td>
-            <td class="text-right"><?= four_decimal($closing_fine * ($gold_rate), '-'); ?></td>
-            <td class="text-right"><?= four_decimal(($gold_rate), '-'); ?></td>          
-            <td class="text-right"><?= four_decimal($closing_fine, '-'); ?></td>          
+            <td class="text-right"><?= four_decimal($closing_amount, '-') ?>  </td>
+            <td class="text-right"><?= four_decimal($closing_rate, '-'); ?>  </td>
+            <td class="text-right"><?= four_decimal($closing_fine, '-'); ?></td>
+          </tr>
+           <tr>
+            <td>Sales and Closing</td>
+            <td class="text-right"><?= four_decimal($total_sales_with_closing_amount, '-') ?>  </td>
+            <td class="text-right"><?= four_decimal($total_sales_with_closing_rate, '-'); ?>  </td>
+            <td class="text-right"><?= four_decimal($total_sales_with_closing_fine, '-'); ?></td>
           </tr>
           <tr>
-            <th>Total</th>
-            <th class="text-right">
-              <?= four_decimal($income_total, '-'); ?>
-            </th>
-            <th class="text-right"></th>          
-            <th class="text-right"><?= four_decimal($sales_fine + $closing_fine, '-'); ?></th>          
+            <td>Exchange Gain / Loss</td>
+            <td class="text-right"><?= four_decimal($exchange_amount, '-') ?>  </td>
+            <td class="text-right"><?= four_decimal($exchange_rate, '-'); ?>  </td>
+            <td class="text-right"><?= four_decimal($exchange_fine, '-'); ?></td>
+          </tr>
+          <tr>
+            <td>Total</td>
+            <td class="text-right"><?= four_decimal($total_expenses_amount, '-') ?>  </td>
+            <td class="text-right"><?= four_decimal($total_expenses_rate, '-'); ?>  </td>
+            <td class="text-right"><?= four_decimal($total_expenses_fine, '-'); ?></td>
           </tr>
         </table>
       </div>      
