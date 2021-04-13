@@ -16,12 +16,9 @@ class Trial_balances extends Ledgers {
     //$this->metal_issue_voucher_model->delete_vodator_records(date('Y-m-d'));
     $this->data['loss_date']=!empty($_GET['loss_date'])?$_GET['loss_date']:'';
     $update_vadotar = isset($_GET['update_vadotar']) ? TRUE : FALSE;
-    $gold_rate_responce = get_web_page("http://spngoldlivebroadcast.noip.us:8888/VOTSBroadcast/Services/xml/a/%20mumbai?_=1617860765592");
-    $string=explode(',0',$gold_rate_responce);
-    $this->data['gold_rate']=explode(',',$string[1])[1];
-
-
-
+    $gold_rate_response = get_web_page("http://spngoldlivebroadcast.noip.us:8888/VOTSBroadcast/Services/xml/a/%20mumbai?_=1617860765592");
+    $string = explode('GOLD MUMBAI 99.50 WITH GST & TCS RTGS', $gold_rate_response);
+    $this->data['gold_rate'] = explode(',', $string[1])[3];
 
     if ($update_vadotar) {
       $incorrect_vadotar_vouchers = $this->voucher_model->get('receipt_type, site_name, voucher_date, sum(credit_weight) as credit_weight, sum(debit_weight) as debit_weight',
