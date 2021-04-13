@@ -13,7 +13,6 @@
   $sales_rate = !empty($profit_and_loss['sales_account']['fine']) ? (-1 * $profit_and_loss['sales_account']['amount'] / $profit_and_loss['sales_account']['fine']) : 0;
   $sales_amount = !empty($profit_and_loss['sales_account']['amount']) ? $profit_and_loss['sales_account']['amount'] : 0;
 
-  
   $closing_fine = $purchase_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_fine;
   $closing_rate = $gold_rate / 10;
   $closing_amount = $closing_fine * $closing_rate;
@@ -35,7 +34,7 @@
   $gross_profit_amount = $total_income_amount - $purchase_amount;
 
   $total_expenses_amount = $purchase_amount;
-  $total_expenses_fine = $purchase_fine;
+  $total_expenses_fine = $purchase_fine + $main_vadotar_fine + $pending_vadotar_fine;
   $total_expenses_rate = $total_expenses_amount / $total_expenses_fine;
 ?>
 
@@ -128,9 +127,9 @@
           </tr>
           <tr>
             <th>Total</th>
-            <th class="text-right"><?= four_decimal($total_expenses_amount, '-') ?>  </th>
-            <th class="text-right"><?= four_decimal($total_expenses_rate, '-'); ?>  </th>
-            <th class="text-right"><?= four_decimal($total_expenses_fine, '-'); ?></th>
+            <th class="text-right"><?= four_decimal($total_income_amount, '-') ?>  </th>
+            <th class="text-right"><?= four_decimal($total_income_rate, '-'); ?>  </th>
+            <th class="text-right"><?= four_decimal($total_income_fine, '-'); ?></th>
           </tr>
         </table>
       </div>      
