@@ -70,12 +70,10 @@ class Loss_reports extends BaseController {
 
         foreach ($ghiss_melting_loss as $ghiss_melting_index => $ghiss_melting_value) {
           $url=API_ARG_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
-          $data['issue_department_id']=2504;
+          $data['issue_department_id']=$ghiss_melting_value['parent_id'];
           $ghiss_melting_loss_out_weight=json_decode(curl_post_request($url,$data),true);
           $ghiss_melting_loss[$ghiss_melting_index]['out_weight']=$ghiss_melting_loss_out_weight;
-          pd($ghiss_melting_loss[$ghiss_melting_index]['out_weight']);
         }
-
         $arg_jan2021_records=array_merge($records,$ghiss_melting_loss);
       }
       // pd($arg_jan2021_records);
