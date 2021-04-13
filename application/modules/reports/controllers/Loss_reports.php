@@ -31,6 +31,7 @@ class Loss_reports extends BaseController {
     
     foreach ($category_names as $category_name_index => $category_name_value) {
       $data['department_name']=$category_name_value;
+      if(!empty($category_name_value)){
       if(isset($_GET['site_name'])&&$_GET['site_name']=='ARC'){
         $ghiss_melting_loss=array();
         $url=API_ARC_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
@@ -42,7 +43,6 @@ class Loss_reports extends BaseController {
           $data['issue_department_id']=$ghiss_melting_loss_value['parent_id'];
           $url=API_ARC_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
           $ghiss_details=json_decode(curl_post_request($url,$data),true);
-
           $out_weight=!empty($ghiss_details)?$ghiss_details['data']['ghiss_melting_out_weights']:0;
           $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight']=$out_weight;
         }
@@ -59,7 +59,6 @@ class Loss_reports extends BaseController {
           $data['issue_department_id']=$ghiss_melting_loss_value['parent_id'];
           $url=API_ARF_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
           $ghiss_details=json_decode(curl_post_request($url,$data),true);
-
           $out_weight=!empty($ghiss_details)?$ghiss_details['data']['ghiss_melting_out_weights']:0;
           $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight']=$out_weight;
         }
@@ -73,13 +72,11 @@ class Loss_reports extends BaseController {
         $ghiss_melting_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight', array('account_name'=>'Loss Account','site_name'=>'AR Gold st','receipt_type'=>'Ghiss Melting Loss'),array());
         foreach ($ghiss_melting_loss as $ghiss_melting_loss_index => $ghiss_melting_loss_value) {
           $data['issue_department_id']=$ghiss_melting_loss_value['parent_id'];
-          pd($data);
           $url=API_ARG_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
           $ghiss_details=json_decode(curl_post_request($url,$data),true);
           $out_weight=!empty($ghiss_details)?$ghiss_details['data']['ghiss_melting_out_weights']:0;
           $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight']=$out_weight;
         }
-        pd($ghiss_melting_loss);
         $arg_jan2021_records=array_merge($records,$ghiss_melting_loss);
       }
       // pd($arg_jan2021_records);
@@ -112,9 +109,11 @@ class Loss_reports extends BaseController {
             $this->data['loss_categories'][$category_name_value]['unrecoverable_loss']=$total_unrecovery_loss;
             $this->data['loss_categories'][$category_name_value]['balance']=$total_balance;
           }
+        
         }
       }
     }
+  }
   }
       
 }
