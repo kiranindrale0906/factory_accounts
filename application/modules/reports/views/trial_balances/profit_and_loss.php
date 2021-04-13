@@ -35,7 +35,7 @@
 
   $total_expenses_amount = $purchase_amount;
   $total_expenses_fine = $purchase_fine + $main_vadotar_fine + $pending_vadotar_fine;
-  $total_expenses_rate = $total_expenses_amount / $total_expenses_fine;
+  $total_expenses_rate = 0;
 ?>
 
 <hr />
