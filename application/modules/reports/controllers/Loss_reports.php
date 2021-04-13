@@ -79,7 +79,6 @@ class Loss_reports extends BaseController {
           $out_weight=!empty($ghiss_details)?$ghiss_details['data']['ghiss_melting_out_weights']:0;
           $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight']=$out_weight;
         }
-        pd($ghiss_melting_loss);
         $arg_jan2021_records=array_merge($records,$ghiss_melting_loss);
       }
       // pd($arg_jan2021_records);
