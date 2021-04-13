@@ -122,9 +122,9 @@
           </tr>
           <tr>
             <td>Exchange Gain / Loss</td>
-            <td class="text-right"><?= four_decimal($exchange_amount, '-') ?>  </td>
-            <td class="text-right"><?= four_decimal($exchange_rate, '-'); ?>  </td>
-            <td class="text-right"><?= four_decimal($exchange_fine, '-'); ?></td>
+            <td class="text-right"><?= four_decimal($exchange_gain_loss_amount, '-') ?>  </td>
+            <td class="text-right"><?= four_decimal($exchange_gain_loss_rate, '-'); ?>  </td>
+            <td class="text-right"><?= four_decimal($exchange_gain_loss_fine, '-'); ?></td>
           </tr>
           <tr>
             <td>Total</td>
