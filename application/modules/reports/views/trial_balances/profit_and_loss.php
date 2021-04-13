@@ -33,7 +33,7 @@
   $gross_profit_rate = 0;
   $gross_profit_amount = $total_income_amount - $purchase_amount;
 
-  $total_expenses_amount = $purchase_amount;
+  $total_expenses_amount = $purchase_amount + $gross_profit_amount;
   $total_expenses_fine = $purchase_fine + $main_vadotar_fine + $pending_vadotar_fine;
   $total_expenses_rate = 0;
 ?>
