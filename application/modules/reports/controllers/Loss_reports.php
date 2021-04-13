@@ -32,7 +32,7 @@ class Loss_reports extends BaseController {
     foreach ($category_names as $category_name_index => $category_name_value) {
       $data['department_name']=$category_name_value;
       if(isset($_GET['site_name'])&&$_GET['site_name']=='ARC'){
-        $ghiss_melting_loss=array();
+        $ghiss_melting_loss=$ghiss_melting_loss_details=array();
         $url=API_ARC_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
         $jan2021_records=json_decode(curl_post_request($url,$data),true);
 
@@ -42,12 +42,13 @@ class Loss_reports extends BaseController {
           $url=API_ARC_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
           $data['issue_department_id']=$ghiss_melting_value['parent_id'];
           $ghiss_melting_loss_out_weight=json_decode(curl_post_request($url,$data),true);
-          // $ghiss_melting_loss[$ghiss_melting_index]['out_weight']=!empty($ghiss_melting_loss_out_weight)?$ghiss_melting_loss_out_weight['data']['ghiss_melting_loss_out_weight']:0;
+          $ghiss_melting_loss_details=$ghiss_melting_value;
+          $ghiss_melting_loss_details[$ghiss_melting_index]['out_weight']=!empty($ghiss_melting_loss_out_weight)?$ghiss_melting_loss_out_weight['data']['ghiss_melting_loss_out_weight']:0;
         }
-        $arg_jan2021_records=array_merge($records,$ghiss_melting_loss);
+        $arg_jan2021_records=array_merge($records,$ghiss_melting_loss_details);
 
       }elseif(isset($_GET['site_name'])&&$_GET['site_name']=='ARF'){
-        $ghiss_melting_loss=array();
+        $ghiss_melting_loss=$ghiss_melting_loss_details=array();
         $url=API_ARF_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
         $jan2021_records=json_decode(curl_post_request($url,$data),true);
         $records=!empty($jan2021_records)?$jan2021_records['data']['loss_details']['loss_detail']:$jan2021_records['data']['loss_details']['loss_detail']=array();
@@ -57,12 +58,12 @@ class Loss_reports extends BaseController {
           $url=API_ARF_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
           $data['issue_department_id']=$ghiss_melting_value['parent_id'];
           $ghiss_melting_loss_out_weight=json_decode(curl_post_request($url,$data),true);
-          // $ghiss_melting_loss[$ghiss_melting_index]['out_weight']=!empty($ghiss_melting_loss_out_weight)?$ghiss_melting_loss_out_weight['data']['ghiss_melting_loss_out_weight']:0;
-        }
-        $arg_jan2021_records=array_merge($records,$ghiss_melting_loss);
+          $ghiss_melting_loss_details=$ghiss_melting_value;
+          $ghiss_melting_loss_details[$ghiss_melting_index]['out_weight']=!empty($ghiss_melting_loss_out_weight)?$ghiss_melting_loss_out_weight['data']['ghiss_melting_loss_out_weight']:0;
+        $arg_jan2021_records=array_merge($records,$ghiss_melting_loss_details);
 
       }else{
-        $ghiss_melting_loss=array();
+        $ghiss_melting_loss=$ghiss_melting_loss_details=array();
         $url=API_ARG_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
         $jan2021_records=json_decode(curl_post_request($url,$data),true);
         $records=!empty($jan2021_records)?$jan2021_records['data']['loss_details']['loss_detail']:$jan2021_records['data']['loss_details']['loss_detail']=array();
@@ -72,9 +73,10 @@ class Loss_reports extends BaseController {
           $url=API_ARG_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
           $data['issue_department_id']=$ghiss_melting_value['parent_id'];
           $ghiss_melting_loss_out_weight=json_decode(curl_post_request($url,$data),true);
-          // $ghiss_melting_loss[$ghiss_melting_index]['out_weight']=!empty($ghiss_melting_loss_out_weight)?$ghiss_melting_loss_out_weight['data']['ghiss_melting_loss_out_weight']:0;
+          $ghiss_melting_loss_details=$ghiss_melting_value;
+          $ghiss_melting_loss_details[$ghiss_melting_index]['out_weight']=!empty($ghiss_melting_loss_out_weight)?$ghiss_melting_loss_out_weight['data']['ghiss_melting_loss_out_weight']:0;
         }
-        $arg_jan2021_records=array_merge($records,$ghiss_melting_loss);
+        $arg_jan2021_records=array_merge($records,$ghiss_melting_loss_details);
       }
       // pd($arg_jan2021_records);
       if(!empty($arg_jan2021_records)){
