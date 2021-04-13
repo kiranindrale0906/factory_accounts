@@ -14,7 +14,7 @@
   $sales_amount = !empty($profit_and_loss['sales_account']['amount']) ? $profit_and_loss['sales_account']['amount'] : 0;
 
   $closing_fine = $purchase_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_fine;
-  $closing_rate = $gold_rate / 10;
+  $closing_rate = $gold_rate / .995 / 10;
   $closing_amount = $closing_fine * $closing_rate;
 
   $total_sales_with_closing_amount = $sales_amount + $closing_amount;
