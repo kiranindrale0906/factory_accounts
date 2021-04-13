@@ -13,7 +13,6 @@
   $sales_rate = !empty($profit_and_loss['sales_account']['fine']) ? (-1 * $profit_and_loss['sales_account']['amount'] / $profit_and_loss['sales_account']['fine']) : 0;
   $sales_amount = !empty($profit_and_loss['sales_account']['amount']) ? $profit_and_loss['sales_account']['amount'] : 0;
 
-  
   $closing_fine = $purchase_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_fine;
   $closing_rate = $gold_rate / 10;
   $closing_amount = $closing_fine * $closing_rate;
@@ -26,7 +25,7 @@
   $exchange_gain_loss_rate = $purchase_rate - $total_sales_with_closing_rate;
   $exchange_gain_loss_amount = $exchange_gain_loss_fine * $exchange_gain_loss_rate;
 
-  $total_income_amount = $sales_amount + ($sales_fine * $exchange_rate_diff) + ($closing_fine * $closing_rate);
+  $total_income_amount = $sales_amount + $closing_amount + $exchange_gain_loss_amount;
   $total_income_fine = $total_sales_with_closing_fine;
   $total_income_rate = $total_income_amount / $total_income_fine;
 
@@ -35,8 +34,8 @@
   $gross_profit_amount = $total_income_amount - $purchase_amount;
 
   $total_expenses_amount = $purchase_amount;
-  $total_expenses_fine = $purchase_fine;
-  $total_expenses_rate = $total_expenses_amount / $total_expenses_fine;
+  $total_expenses_fine = $purchase_fine + $main_vadotar_fine + $pending_vadotar_fine;
+  $total_expenses_rate = 0;
 ?>
 
 <hr />
@@ -128,9 +127,9 @@
           </tr>
           <tr>
             <th>Total</th>
-            <th class="text-right"><?= four_decimal($total_expenses_amount, '-') ?>  </th>
-            <th class="text-right"><?= four_decimal($total_expenses_rate, '-'); ?>  </th>
-            <th class="text-right"><?= four_decimal($total_expenses_fine, '-'); ?></th>
+            <th class="text-right"><?= four_decimal($total_income_amount, '-') ?>  </th>
+            <th class="text-right"><?= four_decimal($total_income_rate, '-'); ?>  </th>
+            <th class="text-right"><?= four_decimal($total_income_fine, '-'); ?></th>
           </tr>
         </table>
       </div>      
