@@ -15,7 +15,7 @@ class Loss_reports extends BaseController {
     $this->load->render($this->router->class."/index",$this->data);
   }
   public function _get_form_data() {
-     $this->data['factory_name']=!empty($_GET['site_name'])?$_GET['site_name']:'';
+     $this->data['factory_name']=!empty($_GET['site_name'])?$_GET['site_name']:'AR Gold';
     $this->data['site_name']            = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'All';
     $this->data['account_id']           = (!empty($_GET['account_id'])) ? $_GET['account_id'] : 0;
     
