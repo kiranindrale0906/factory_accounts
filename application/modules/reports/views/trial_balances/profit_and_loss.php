@@ -82,9 +82,9 @@
           </tr>
           <tr>
             <th>Total</th>
-            <td class="text-right"><?= four_decimal($total_expenses_amount, '-'); ?></td>
-            <td class="text-right"><?= four_decimal($total_expenses_rate, '-'); ?></td>
-            <td class="text-right"><?= four_decimal($total_expenses_fine, '-'); ?></td>
+            <th class="text-right"><?= four_decimal($total_expenses_amount, '-'); ?></th>
+            <th class="text-right"><?= four_decimal($total_expenses_rate, '-'); ?></th>
+            <th class="text-right"><?= four_decimal($total_expenses_fine, '-'); ?></th>
           </tr>
         </table>
       </div>
@@ -115,10 +115,10 @@
             <td class="text-right"><?= four_decimal($closing_fine, '-'); ?></td>
           </tr>
            <tr>
-            <td>Sales and Closing</td>
-            <td class="text-right"><?= four_decimal($total_sales_with_closing_amount, '-') ?>  </td>
-            <td class="text-right"><?= four_decimal($total_sales_with_closing_rate, '-'); ?>  </td>
-            <td class="text-right"><?= four_decimal($total_sales_with_closing_fine, '-'); ?></td>
+            <th>Sales and Closing</th>
+            <th class="text-right"><?= four_decimal($total_sales_with_closing_amount, '-') ?>  </th>
+            <th class="text-right"><?= four_decimal($total_sales_with_closing_rate, '-'); ?>  </th>
+            <th class="text-right"><?= four_decimal($total_sales_with_closing_fine, '-'); ?></th>
           </tr>
           <tr>
             <td>Exchange Gain / Loss</td>
@@ -127,10 +127,10 @@
             <td class="text-right"><?= four_decimal($exchange_gain_loss_fine, '-'); ?></td>
           </tr>
           <tr>
-            <td>Total</td>
-            <td class="text-right"><?= four_decimal($total_expenses_amount, '-') ?>  </td>
-            <td class="text-right"><?= four_decimal($total_expenses_rate, '-'); ?>  </td>
-            <td class="text-right"><?= four_decimal($total_expenses_fine, '-'); ?></td>
+            <th>Total</th>
+            <th class="text-right"><?= four_decimal($total_expenses_amount, '-') ?>  </th>
+            <th class="text-right"><?= four_decimal($total_expenses_rate, '-'); ?>  </th>
+            <th class="text-right"><?= four_decimal($total_expenses_fine, '-'); ?></th>
           </tr>
         </table>
       </div>      
