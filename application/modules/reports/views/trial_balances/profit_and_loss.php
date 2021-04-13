@@ -21,7 +21,6 @@
   <div class="col-md-6">
     <div class="form-group container">
       <div class="table-responsive m-t-20">
-        <b>Gold Rate:<?=$gold_rate?></b>
         <table class="table table-sm fixedthead table-default">
           <thead>
             <tr>
