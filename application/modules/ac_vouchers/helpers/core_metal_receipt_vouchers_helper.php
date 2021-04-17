@@ -11,7 +11,7 @@ if (!function_exists('getTableSettings')) {
 
 if (!function_exists('list_settings')) {
   function list_settings() {
-    $list_option=array('voucher_date', 'created_time', 'voucher_number', 'account_name', 'debit_weight', 'purity', 'fine', 'narration');
+    $list_option=array('voucher_date', 'created_time', 'voucher_number', 'account_name', 'debit_weight', 'purity', 'fine', 'narration','customer_name');
     return ac_vouchers_list_settings($list_option);
   }
 }
