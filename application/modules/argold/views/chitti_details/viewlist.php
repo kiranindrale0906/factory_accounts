@@ -44,7 +44,7 @@
                       echo str_replace('HCC', 'Hollow Choco Chain', $narration);
                     ?>
                   </td>
-                  <td class="text-right"><?= $metal_voucher_detail['customer_name']; ?></td>
+                  <td class="text-right"><?= (!empty($metal_voucher_detail['customer_name'])&& $metal_voucher_detail['customer_name']!='Market Issue')?($metal_voucher_detail['customer_name']):'' ; ?></td>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['credit_weight']); ?></td>
                   <?php if ($detail==1): ?>
                     <td class="text-right"><?= four_decimal($metal_voucher_detail['purity']); ?></td>
