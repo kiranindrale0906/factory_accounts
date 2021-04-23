@@ -74,7 +74,8 @@ class Core_user_model extends BaseModel {
 
   public function set_user_data_in_session($where_condition){
     $user = $this->find('',$where_condition);
-
+    if (!isset($this->attributes['do_not_check_ip'])) $user['do_not_check_ip'] = 1;
+    
     $user_role_ids = $this->get_user_role_ids($user['id']);
     $this->update_db_session($user['id']);
     return  array(
