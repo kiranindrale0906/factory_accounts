@@ -57,8 +57,8 @@ class Chittis extends BaseController {
       $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,
                          (sum(credit_weight*purity) / sum(credit_weight)) as purity,
                          (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,
-                         "" as voucher_number,packet_no,voucher_date,group_concat(narration) as narration, argold_id as argold_id', 
-                         $where, array(), array('group_by'=>'packet_no, voucher_date, argold_id'));
+                         "" as voucher_number,packet_no,voucher_date,customer_name,group_concat(narration) as narration, argold_id as argold_id', 
+                         $where, array(), array('group_by'=>'packet_no, voucher_date, argold_id,customer_name'));
     } else
       $this->data['metal_vouchers'] = array();
 
@@ -73,12 +73,11 @@ class Chittis extends BaseController {
       $this->data['chittis_details'] = @$_POST['chittis_details'];
     }
 
-    $this->data['site_names'] = array(array('id' => 'AR Gold Jan 2021', 'name' => 'AR Gold Jan 2021'),
+    $this->data['site_names'] = array(
+                                      array('id' => 'AR Gold Jan 2021', 'name' => 'AR Gold Jan 2021'),
                                       array('id' => 'ARF Jan 2021', 'name' => 'ARF Jan 2021'),
                                       array('id' => 'ARC Jan 2021', 'name' => 'ARC Jan 2021'),
-                                      array('id' => 'AR Gold Nov 2020', 'name' => 'AR Gold Nov 2020'),
-                                      array('id' => 'ARF Nov 2020', 'name' => 'ARF Nov 2020'),
-                                      array('id' => 'ARC Nov 2020', 'name' => 'ARC Nov 2020'));
+                                     );
   }
 
   public function store() {

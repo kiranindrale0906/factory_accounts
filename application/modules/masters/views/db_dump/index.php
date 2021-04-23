@@ -4,10 +4,15 @@
 	  <table class="table table-sm fixedthead table-default" >
 		<?php $this->load->view('table_header',array('headings'=>array('Database Backup Name')))?>
 		<tbody>
-			<?php foreach($scan_dir as $file_name){
-				if($file_name != "." && $file_name !='..'){ ?>
+			<?php 
+			$db_full_name=$db_display_name='';
+			foreach($scan_dir as $file_name){
+				$db_name=explode('-', $file_name);
+				$db_full_name=$db_name[0];
+				$db_display_name=!empty($db_name[1])?$db_name[1]:'';
+				if($file_name != "." && $file_name !='..' && $db_full_name=='accounts_nov2021_productions'){?>
 			<tr>
-				<td><a href="<?php echo base_url('masters/mysqldump/create/?file_name=').$file_name?>"><?php echo $file_name?></a></td>
+				<td><a href="<?php echo base_url('masters/mysqldump/create/?file_name=').$file_name?>"><?php echo $db_display_name?></a></td>
 			</tr>
             <?php }}?>
 		</tbody>

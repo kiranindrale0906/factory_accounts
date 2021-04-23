@@ -54,6 +54,15 @@
       <?php load_buttons('button', array('name' =>'Search','class'=>'btn-xs btn_blue search_date mr-2')) ?>
       <?php load_buttons('button', array('name' =>'Clear','class'=>'btn-xs btn_blue clear_btn')) ?>  
   </div>
+  <?php if(HOST == 'BACKUP ACCOUNTS'){?>
+    <div class="d-flex align-items-center ">
+      <div class="pr-3 ">
+        <?php if(isset($_SESSION['lastes_updated_at'])){
+              echo 'Last Updated at : '.date("d-m-Y H:i:m",strtotime($_SESSION['lastes_updated_at']));
+            }?>
+      </div>    
+    </div>
+  <?php }?> 
   <div class="d-flex align-items-center justify-content-end float-right">
     <div class="calculate_div pr-3">
       <label class="medium">Calculate :</label>

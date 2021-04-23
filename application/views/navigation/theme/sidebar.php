@@ -10,8 +10,7 @@
                      'Interest'     => 'fa fa-percent',
                      'Other'        => 'fa fa-question-circle');
 
-  $main_menu =  array('Backup Database'=>array('masters/mysqldump'=>'Backup Database'),
-                      'Users'  => array('users/users'=>'Users',
+  $main_menu =  array('Users'  => array('users/users'=>'Users',
                                       'users/user_roles'=>'User roles'),
                      // 'Rojmel'  => array('rojmel/rojmel'=>'Rojmel'),
                      'Masters' => array(
@@ -111,7 +110,7 @@
                                         'others/sms'=>'SMS'),
 
                 ); 
-   $database_backup_menu = array('Backup Database' => 'settings/mysqldump');
+   $database_backup_menu = array('Backup Database' => 'masters/mysqldump');
   if(HOST=='BACKUP ACCOUNTS') 
     $main_menu=array_merge($database_backup_menu,$main_menu);
   

@@ -42,6 +42,13 @@ $hook['post_controller_constructor'] = array(
     'filepath' => 'hooks',
     'params'   => ""
   ),
+  array(
+    'class'    => 'latest_updated',
+    'function' => 'get_latest_updated_date',
+    'filename' => 'latest_updated.php',
+    'filepath' => 'hooks'
+  ),
+
  
   /*$hook['post_controller'] = array(
     array(

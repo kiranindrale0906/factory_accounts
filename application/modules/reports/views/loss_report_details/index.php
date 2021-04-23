@@ -45,7 +45,7 @@
         <td class="text-right"><?=$fine=!empty($loss_out_detail['loss_fine'])?four_decimal($loss_out_detail['loss_fine']):'-';?></td>
         <td class="text-right"><?=(!empty($loss_out_detail['out_weight'])|| $loss_out_detail['out_weight']!=0)?four_decimal($loss_out_detail['out_weight']):'-';?></td>
 
-        <td class="text-right"><?=!empty($loss_out_detail['out_weight'])?four_decimal(($loss_out_detail['loss_fine']/$loss_out_detail['out_weight']*1000)):'-';?></td>
+        <td class="text-right"><?=(!empty($loss_out_detail['out_weight'])|| $loss_out_detail['out_weight']!=0)?four_decimal(($loss_out_detail['loss_fine']/$loss_out_detail['out_weight']*1000)):'-';?></td>
 
 
         <!-- <td class="text-right"><?//=four_decimal($loss_out_detail['production']);?></td> -->
@@ -66,7 +66,7 @@
         </td>
         <td class="text-right">
         <?php if(empty($loss_out_detail['unrecoverable_loss'])){ ?>
-          <a href=<?= base_url()."argold/unrecovarable_account_records/store?from=view&account_name=Loss Account&factory=Unrecovarable&credit_weight=".$loss."&narration=".urlencode($category)."&parent_id=".$loss_out_detail['parent_id'] ?> target='_blank' onclick="return confirm('Do you want to add this in Unrecovarable?')" >Unrecovarable</a>
+          <a href=<?= base_url()."argold/unrecovarable_account_records/store?from=view&account_name=".urlencode("Loss Account")."&factory=Unrecovarable&credit_weight=".$loss."&narration=".urlencode($category)."&parent_id=".$loss_out_detail['parent_id'] ?> target='_blank' onclick="return confirm('Do you want to add this in Unrecovarable?')" >Unrecovarable</a>
           <?php }?>
         </td>
       </tr>
