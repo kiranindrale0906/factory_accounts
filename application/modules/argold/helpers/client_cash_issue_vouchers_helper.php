@@ -20,6 +20,10 @@ if (!function_exists('get_row_actions')) {
                             'url' => ADMIN_PATH.$controller.'/view/'.$row['id'],
                             'confirm_message' => "",
                             'class' => 'text-warning text-uppercase');
+    $actions["Edit"] =  array('request' => "http", 
+                                   'url' => ADMIN_PATH.'argold/metal_issue_account_names/edit/'.$row['id'],
+                                   'confirm_message' => "",
+                                   'class' => 'text-warning text-uppercase');
     return $actions;
   }
 }

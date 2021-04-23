@@ -10,7 +10,9 @@
 				$db_name=explode('-', $file_name);
 				$db_full_name=$db_name[0];
 				$db_display_name=!empty($db_name[1])?$db_name[1]:'';
-				if($file_name != "." && $file_name !='..' && $db_full_name=='accounts_nov2021_productions'){?>
+				$replace_db_name=str_replace("_", " ", $db_display_name);
+				$db_display_name=explode('.gz', $replace_db_name)[0];
+				if($file_name != "." && $file_name !='..' && $db_full_name=='accounts_nov2020_production'){?>
 			<tr>
 				<td><a href="<?php echo base_url('masters/mysqldump/create/?file_name=').$file_name?>"><?php echo $db_display_name?></a></td>
 			</tr>
