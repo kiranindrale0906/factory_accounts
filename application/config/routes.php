@@ -49,11 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-if(HOST == 'BACKUP ACCOUNTS'){
-$route['default_controller'] = 'reports/account_ledgers';
-}else {
 $route['default_controller'] = 'transactions/metal_issue_vouchers';
-}
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['login'] = 'users/login/create';
