@@ -1,6 +1,6 @@
 <?php
 	function available_urls_before_login(){ 
-		return array('users/login/index','users/login/create','users/login/store','masters/accounts/index',
+		return array('users/login/index','users/login/create','users/login/store','masters/accounts/index','masters/quators/index',
 									'users/login/update',
 									'users/ad_login/index','users/ad_login/create','users/ad_login/store',
 									'users/ad_login/update', 
