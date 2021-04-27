@@ -10,6 +10,7 @@ class Quators extends BaseController {
     }
     public function index() {
 	    if(!empty($_POST['get_quators'])) {
+	    	pd($_POST);
 	      $data=$this->model->get('name,name as id', array('name!='=>''));
 	      echo json_encode(array('data'=>$data,'status'=>'success')); die;
 	    }
