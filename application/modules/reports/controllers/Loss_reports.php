@@ -15,6 +15,7 @@ class Loss_reports extends BaseController {
     $this->load->render($this->router->class."/index",$this->data);
   }
   public function _get_form_data() {
+
      $this->data['factory_name']=!empty($_GET['site_name'])?$_GET['site_name']:'AR Gold';
     $this->data['site_name']            = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'All';
     $this->data['account_id']           = (!empty($_GET['account_id'])) ? $_GET['account_id'] : 0;
@@ -24,13 +25,14 @@ class Loss_reports extends BaseController {
 
     $loss_details= $this->voucher_model->get('description,fine,id', array('account_name'=>'Loss Account','parent_id'=>0),array());
     $category_names=array_column($categories,'description');
-    // $category_names=array('Bengali Loss','Buffing Loss','Hammering Loss','Machine Room Loss','Melting Loss','Office Loss','Outside Ball Making Loss','Pasta Loss','Shampoo And Steel Loss','Sisma Machine Room',
-    //   'Solder','Tarpatta And Flatting Loss','Walnut Loss','Walnut Shampoo Loss','Ghiss Melting Loss-Sisma Machine','Castic Loss','Stamping Loss');
+    $category_names=array('Bengali Loss','Buffing Loss','Hammering Loss','Machine Room Loss','Melting Loss','Office Loss','Outside Ball Making Loss','Pasta Loss','Shampoo And Steel Loss','Sisma Machine Room',
+      'Solder','Tarpatta And Flatting Loss','Walnut Loss','Walnut Shampoo Loss','Ghiss Melting Loss-Sisma Machine','Castic Loss','Stamping Loss');
 
 
     
     foreach ($category_names as $category_name_index => $category_name_value) {
       $data['department_name']=$category_name_value;
+      $data['quator']='';
       if(!empty($category_name_value)){
       if(isset($_GET['site_name'])&&$_GET['site_name']=='ARC'){
         $ghiss_melting_loss=array();
@@ -65,6 +67,7 @@ class Loss_reports extends BaseController {
         $arg_jan2021_records=array_merge($records,$ghiss_melting_loss);
 
       }else{
+
         $ghiss_melting_loss=array();
         $url=API_ARG_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
         $jan2021_records=json_decode(curl_post_request($url,$data),true);

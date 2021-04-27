@@ -69,7 +69,7 @@ class Ledgers extends BaseController {
                                sum((credit_weight+debit_weight) * purity) / sum(credit_weight+debit_weight) as purity, 
                                sum((credit_weight+debit_weight) * factory_purity) / sum(credit_weight+debit_weight) as factory_purity, 
                                concat(narration, " ,") as narration, concat(description, " ,") as description, 
-                               chitti_id as chitti_no,parent_id as parent_id';
+                               chitti_id as chitti_no,parent_id as parent_id,id as id';
     } else {
       //$this->data['group'] = 'voucher_date';
       $receipt_issue_select = '"" as receipt_type, '.$period_select.' as voucher_date, 
@@ -85,7 +85,7 @@ class Ledgers extends BaseController {
                               sum((credit_weight+debit_weight) * purity) /  sum(credit_weight+debit_weight)  as purity, 
                               sum((credit_weight+debit_weight) * factory_purity) /  sum(credit_weight+debit_weight)  as factory_purity,
                               ""  as narration, "" as description, 
-                              "" as chitti_no,parent_id as parent_id';       
+                              "" as chitti_no,parent_id as parent_id,id as id';       
     }
     if ($this->data['report_type'] == 'Metal Receipt Type Report')
       $where['receipt_type']='Metal';
@@ -113,7 +113,7 @@ class Ledgers extends BaseController {
                                ((credit_weight+debit_weight) * purity) / (credit_weight+debit_weight) as purity, 
                                ((credit_weight+debit_weight) * factory_purity) / (credit_weight+debit_weight) as factory_purity, 
                                concat(narration, " ,") as narration, concat(description, " ,") as description, 
-                               chitti_id as chitti_no,parent_id as parent_id';
+                               chitti_id as chitti_no,parent_id as parent_id,id as id';
                                // pd($this->data['site_name'] );
        $account_receipt_where['site_name'] = '';                        
        $account_issue_where['site_name'] = '';                        

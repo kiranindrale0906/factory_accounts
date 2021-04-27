@@ -29,6 +29,7 @@
                                         'masters/periods'=>'Financial Year',
                                         'masters/settings'=>'Settings',
                                         'users/ip_addresses'=>'Ip Addresses',
+                                        'masters/quators'=>'Quators',
                                         ),
                     'Transactions' => array(
                                            'transactions/cash_receipt_vouchers' => 'Cash Voucher',

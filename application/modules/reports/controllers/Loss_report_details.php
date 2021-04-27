@@ -19,6 +19,7 @@ class Loss_report_details extends Ledgers {
   private function get_loss_details() {
     $this->data['factory_name']=!empty($_GET['factory_name'])?$_GET['factory_name']:'';
     $data['department_name']=$_GET['category'];
+    $data['quator']='';
     $url=API_ARG_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
     $arg_jan2021_records=json_decode(curl_post_request($url,$data),true);
     $ghiss_melting_loss=array();
@@ -70,12 +71,15 @@ class Loss_report_details extends Ledgers {
      $this->data['loss_details']=array();
      if($this->data['factory_name']=='AR Gold'){
       $this->data['loss_details']=!empty($arg_records)? $arg_records:array();
+      $this->data['factory_url']=API_ARG_JAN2021_PATH;
      }
      if($this->data['factory_name']=='ARF'){
       $this->data['loss_details']=!empty($arf_records)? $arf_records:array();
+      $this->data['factory_url']=API_ARF_JAN2021_PATH;
      }
      if($this->data['factory_name']=='ARC'){
       $this->data['loss_details']=!empty($arc_records)? $arc_records:array();
+      $this->data['factory_url']=API_ARC_JAN2021_PATH;
      }
   }
 
