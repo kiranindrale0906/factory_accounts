@@ -25,8 +25,8 @@ class Loss_reports extends BaseController {
 
     $loss_details= $this->voucher_model->get('description,fine,id', array('account_name'=>'Loss Account','parent_id'=>0),array());
     $category_names=array_column($categories,'description');
-    $category_names=array('Bengali Loss','Buffing Loss','Hammering Loss','Machine Room Loss','Melting Loss','Office Loss','Outside Ball Making Loss','Pasta Loss','Shampoo And Steel Loss','Sisma Machine Room',
-      'Solder','Tarpatta And Flatting Loss','Walnut Loss','Walnut Shampoo Loss','Ghiss Melting Loss-Sisma Machine','Castic Loss','Stamping Loss');
+    // $category_names=array('Bengali Loss','Buffing Loss','Hammering Loss','Machine Room Loss','Melting Loss','Office Loss','Outside Ball Making Loss','Pasta Loss','Shampoo And Steel Loss','Sisma Machine Room',
+    //   'Solder','Tarpatta And Flatting Loss','Walnut Loss','Walnut Shampoo Loss','Ghiss Melting Loss-Sisma Machine','Castic Loss','Stamping Loss');
 
 
     
