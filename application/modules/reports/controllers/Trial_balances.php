@@ -384,34 +384,36 @@ class Trial_balances extends Ledgers {
     }
 
   }
-  private function calculate_gst_of_purchase_accounts($where){
+  private function calculate_gst_of_sales_accounts($where){
                
     $where['ac_vouchers.account_name']='SALES ACCOUNT';
     $sales_accounts = $this->model->get('ac_vouchers.debit_weight as debit_weight,
                                          ac_vouchers.credit_weight as credit_weight,
                                          IFNULL((ac_vouchers.debit_amount),0) - IFNULL((ac_vouchers.credit_amount),0) as amount,
-                                         IFNULL(((ac_vouchers.debit_weight*purity)/100),0) - IFNULL(((ac_vouchers.credit_weight*factory_purity)/100),0) as amount_fine,
+                                         IFNULL(((ac_vouchers.debit_weight*ac_vouchers.purity)/100),0) - IFNULL(((ac_vouchers.credit_weight*ac_vouchers.factory_purity)/100),0) as amount_fine,
                                          ac_vouchers.factory_fine as factory_fine,
                                          ac_vouchers.fine as fine,ac_vouchers.sale_type as sale_type,
                                          ac_vouchers.gold_rate_purity as gold_rate_purity,
                                          ac_vouchers.gold_rate as gold_rate,
+                                         ac_vouchers.chitti_id as chitti_id,
                                          ac_vouchers.purity as purity,
-                                         ac_vouchers.created_at as created_at',$where,array(array('chitties',  'ac_vouchers.chitti_id=chitties.id')));
-
+                                         ac_vouchers.created_at as created_at,
+                                         chitties.taxable_amount as taxable_amount,
+                                         chitties.sgst_amount as sgst_amount,
+                                         chitties.cgst_amount as cgst_amount,
+                                         ',$where,array(array('chitties',  'ac_vouchers.chitti_id=chitties.id')));
     $total_taxable_export=$total_credit_weight_export=$total_debit_weight_export=$cgst_amount_export=$sgst_amount_export=$tcs_amount_export=$fine=$total_fine=$amount=$total_amount=0;
-    foreach ($sales_accounts as $index => $purchas_export) {
-      $tax_fields = get_tax_fields($purchas_export['factory_fine'], $purchas_export['fine'], $purchas_export['sale_type'], $purchas_export['gold_rate'], $purchas_export['gold_rate_purity'],$purchas_export['created_at']);
-      $purchas_exports[$index]=array_merge($purchas_export,$tax_fields);
-      $fine=($purchas_export['amount_fine']);
-      $amount=($purchas_export['amount']);
+    $sales=array();
+    foreach ($sales_accounts as $index => $sales_account) {
+      $fine=($sales_account['amount_fine']);
+      $amount=($sales_account['amount']);
       $total_fine+=$fine;
       $total_amount+=$amount;
-      $total_debit_weight_export+=$purchas_exports[$index]['debit_weight'];
-      $total_credit_weight_export+=$purchas_exports[$index]['credit_weight'];
-      $total_taxable_export+=$purchas_exports[$index]['taxable_amount'];
-      $cgst_amount_export+=$purchas_exports[$index]['cgst_amount'];
-      $sgst_amount_export+=$purchas_exports[$index]['sgst_amount'];
-      $tcs_amount_export+=$purchas_exports[$index]['tcs_amount'];
+      $total_debit_weight_export+=$sales_account['debit_weight'];
+      $total_credit_weight_export+=$sales_account['credit_weight'];
+      $total_taxable_export+=$sales_account['taxable_amount'];
+      $cgst_amount_export+=$sales_account['cgst_amount'];
+      $sgst_amount_export+=$sales_account['sgst_amount'];
       $this->data['sales_accounts']['debit_weight']=$total_debit_weight_export;
       $this->data['sales_accounts']['credit_weight']=$total_credit_weight_export;
       $this->data['sales_accounts']['fine']=$total_fine;
@@ -419,8 +421,9 @@ class Trial_balances extends Ledgers {
       $this->data['sales_accounts']['taxable_amount']=$total_taxable_export;
       $this->data['sales_accounts']['cgst_amount']=$cgst_amount_export;
       $this->data['sales_accounts']['sgst_amount']=$sgst_amount_export;
-      $this->data['sales_accounts']['tcs_amount']=$tcs_amount_export;
 
-    }}
+    }
+    // pd($this->data['sales_accounts']);
+  }
   
 }

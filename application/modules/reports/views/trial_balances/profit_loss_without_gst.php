@@ -32,7 +32,10 @@
   $sales_fine = !empty($profit_and_loss['sales_account']['fine']) ? -1 * $profit_and_loss['sales_account']['fine'] : 0;
   $sales_rate = !empty($profit_and_loss['sales_account']['fine']) ? (-1 * $profit_and_loss['sales_account']['amount'] / $profit_and_loss['sales_account']['fine']) : 0;
   $sales_amount = !empty($profit_and_loss['sales_account']['amount']) ? $profit_and_loss['sales_account']['amount'] : 0;
-
+  $sales_taxable_amount = !empty($profit_and_loss['sale_gst_accounts']['taxable_amount']) ? $profit_and_loss['sale_gst_accounts']['taxable_amount'] : 0;
+  $sales_cgst_amount = !empty($profit_and_loss['sale_gst_accounts']['cgst_amount']) ? $profit_and_loss['sale_gst_accounts']['cgst_amount'] : 0;
+  $sales_sgst_amount = !empty($profit_and_loss['sale_gst_accounts']['sgst_amount']) ? $profit_and_loss['sale_gst_accounts']['sgst_amount'] : 0;
+  
   $closing_fine = $purchase_export_fine +$purchase_domestic_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_fine;
   $closing_rate = $gold_rate / .995 / 10;
   $closing_amount = $closing_fine * $closing_rate;
@@ -45,7 +48,7 @@
   $exchange_gain_loss_rate = ($purchase_export_rate + $purchase_domestic_rate) - $total_sales_with_closing_rate;
   $exchange_gain_loss_amount = $exchange_gain_loss_fine * $exchange_gain_loss_rate;
 
-  $total_income_amount = $sales_amount + $closing_amount + $exchange_gain_loss_amount;
+  $total_income_amount = $sales_amount +$sales_taxable_amount +$sales_cgst_amount +$sales_sgst_amount + $closing_amount + $exchange_gain_loss_amount;
   $total_income_fine = $total_sales_with_closing_fine;
   $total_income_rate = !empty($total_income_fine)?$total_income_amount / $total_income_fine:0;
 
@@ -180,6 +183,24 @@
             <td class="text-right"><?= four_decimal($sales_amount, '-') ?>  </td>
             <td class="text-right"><?= four_decimal($sales_rate, '-'); ?>  </td>
             <td class="text-right"><?= four_decimal($sales_fine, '-'); ?></td>
+          </tr>
+          <tr>
+            <td>SALES ACCOUNT TAXABLE</td>
+            <td class="text-right"><?= four_decimal($sales_taxable_amount, '-') ?>  </td>
+            <td class="text-right">  </td>
+            <td class="text-right"></td>
+          </tr>
+          <tr>
+            <td>SALES ACCOUNT CGST</td>
+            <td class="text-right"><?= four_decimal($sales_cgst_amount, '-') ?>  </td>
+            <td class="text-right">  </td>
+            <td class="text-right"></td>
+          </tr>
+          <tr>
+            <td>SALES ACCOUNT SGST</td>
+            <td class="text-right"><?= four_decimal($sales_sgst_amount, '-') ?>  </td>
+            <td class="text-right">  </td>
+            <td class="text-right"></td>
           </tr>
           <tr>
             <td>Closing Stock</td>

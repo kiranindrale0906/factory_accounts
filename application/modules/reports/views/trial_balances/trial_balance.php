@@ -83,6 +83,7 @@
                       || ($record['account_name'] == 'VADOTAR')) continue;
 
                   if ($record['account_name'] == 'SALES ACCOUNT') $profit_and_loss['sales_account'] = $record;
+                if (!empty($sales_accounts)) $profit_and_loss['sale_gst_accounts'] = $sales_accounts;
                     
                   $assets_vadotar = $assets_vadotar + $record['vadotar'];
                   $assets_fine = $assets_fine + $record['fine'];
