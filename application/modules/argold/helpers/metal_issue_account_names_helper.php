@@ -66,6 +66,7 @@ function get_field_attribute($table, $field) {
     'id'            => array('', '', TRUE, '', TRUE),
     'account_name'     => array('Account Name', '', TRUE, '', TRUE),
     'voucher_date'     => array('Voucher Date', '', TRUE, '', TRUE),
+    'is_export'     => array('Is Export', '', TRUE, '', TRUE),
    );
   return $attributes[$table][$field];
 }

@@ -259,7 +259,85 @@ class Trial_balances extends Ledgers {
     $this->data['trial_balance'] = $this->model->get($select,$where, array() , 
                                                       array('group_by'=>'account_name,',
                                                             'order_by'=>'account_name asc'));
-                                                            
+    // pd($this->data['trial_balance']);
+    $where_export=$where;           
+    $where_export['account_name']='PURCHASE ACCOUNT';
+    $where_export['is_export']=1;
+    $purchas_account_export = $this->model->get('debit_weight,
+                                                   credit_weight,
+                                                   IFNULL((debit_amount),0) - IFNULL((credit_amount),0) as amount,
+                                                   IFNULL(((debit_weight*purity)/100),0) - IFNULL(((credit_weight*factory_purity)/100),0) as amount_fine,
+                                                   factory_fine,
+                                                   fine,sale_type,
+                                                   gold_rate_purity,
+                                                   gold_rate,
+                                                   purity,
+                                                   created_at',$where_export, array());
+
+    $total_taxable_export=$total_credit_weight_export=$total_debit_weight_export=$cgst_amount_export=$sgst_amount_export=$tcs_amount_export=$fine=$total_fine=$amount=$total_amount=0;
+    foreach ($purchas_account_export as $index => $purchas_export) {
+      $tax_fields = get_tax_fields($purchas_export['factory_fine'], $purchas_export['fine'], $purchas_export['sale_type'], $purchas_export['gold_rate'], $purchas_export['gold_rate_purity'],$purchas_export['created_at']);
+      $purchas_exports[$index]=array_merge($purchas_export,$tax_fields);
+      $fine=($purchas_export['amount_fine']);
+      $amount=($purchas_export['amount']);
+      $total_fine+=$fine;
+      $total_amount+=$amount;
+      $total_debit_weight_export+=$purchas_exports[$index]['debit_weight'];
+      $total_credit_weight_export+=$purchas_exports[$index]['credit_weight'];
+      $total_taxable_export+=$purchas_exports[$index]['taxable_amount'];
+      $cgst_amount_export+=$purchas_exports[$index]['cgst_amount'];
+      $sgst_amount_export+=$purchas_exports[$index]['sgst_amount'];
+      $tcs_amount_export+=$purchas_exports[$index]['tcs_amount'];
+      $this->data['purchas_account_export']['debit_weight']=$total_debit_weight_export;
+      $this->data['purchas_account_export']['credit_weight']=$total_credit_weight_export;
+      $this->data['purchas_account_export']['fine']=$total_fine;
+      $this->data['purchas_account_export']['amount']=$total_amount;
+      $this->data['purchas_account_export']['taxable_amount']=$total_taxable_export;
+      $this->data['purchas_account_export']['cgst_amount']=$cgst_amount_export;
+      $this->data['purchas_account_export']['sgst_amount']=$sgst_amount_export;
+      $this->data['purchas_account_export']['tcs_amount']=$tcs_amount_export;
+
+    }
+
+    $where_export=$where;           
+    $where_export['account_name']='PURCHASE ACCOUNT';
+    $where_export['is_export']=0;
+    $purchas_account_domestic = $this->model->get('debit_weight,
+                                                   credit_weight,
+                                                   IFNULL((debit_amount),0) - IFNULL((credit_amount),0) as amount,
+                                                   IFNULL(((debit_weight*purity)/100),0) - IFNULL(((credit_weight*factory_purity)/100),0) as amount_fine,
+                                                   factory_fine,
+                                                   fine,sale_type,
+                                                   gold_rate_purity,
+                                                   purity,
+                                                   gold_rate,
+                                                   created_at',$where_export, array());
+    $purchas_domestics=array();
+    $total_taxable_domestic=$total_credit_weight_domestic=$total_debit_weight_domestic=$cgst_amount_domestic=$sgst_amount_domestic=$tcs_amount_domestic=$fine=$total_fine=$amount=$total_amount=0;
+    foreach ($purchas_account_domestic as $index => $purchas_domestic) {
+      $tax_fields = get_tax_fields($purchas_domestic['factory_fine'], $purchas_domestic['fine'], $purchas_domestic['sale_type'], $purchas_domestic['gold_rate'], $purchas_domestic['gold_rate_purity'],$purchas_domestic['created_at']);
+      $fine=($purchas_domestic['amount_fine']);
+      $amount=($purchas_domestic['amount']);
+      $total_fine+=$fine;
+      $total_amount+=$amount;
+      $purchas_domestics[$index]=array_merge($purchas_domestic,$tax_fields);
+      $total_debit_weight_domestic+=$purchas_domestics[$index]['debit_weight'];
+      $total_credit_weight_domestic+=$purchas_domestics[$index]['credit_weight'];
+      $total_taxable_domestic+=$purchas_domestics[$index]['taxable_amount'];
+      $cgst_amount_domestic+=$purchas_domestics[$index]['cgst_amount'];
+      $sgst_amount_domestic+=$purchas_domestics[$index]['sgst_amount'];
+      $tcs_amount_domestic+=$purchas_domestics[$index]['tcs_amount'];
+      $this->data['purchas_account_domestic']['debit_weight']=$total_debit_weight_domestic;
+      $this->data['purchas_account_domestic']['credit_weight']=$total_credit_weight_domestic;
+      $this->data['purchas_account_domestic']['fine']=$total_fine;
+      $this->data['purchas_account_domestic']['amount']=$total_amount;
+      $this->data['purchas_account_domestic']['taxable_amount']=$total_taxable_domestic;
+      $this->data['purchas_account_domestic']['cgst_amount']=$cgst_amount_domestic;
+      $this->data['purchas_account_domestic']['sgst_amount']=$sgst_amount_domestic;
+      $this->data['purchas_account_domestic']['tcs_amount']=$tcs_amount_domestic;
+    }
+
+
     $loss_account = array('account_name' => 'LOSS ACCOUNT',
                           'fine' => 0, 'vadotar' => 0, 'amount' => 0);
     $this->data['loss_account_records'] = array();

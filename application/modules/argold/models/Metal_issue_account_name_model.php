@@ -21,4 +21,7 @@ class Metal_issue_account_name_model extends BaseModel {
                      'rules' => 'trim|required');
     return $rules;
   }
+  public function before_save($action) {
+    $this->attributes['is_export']=!empty($_POST['metal_issue_account_names']['is_export'])?$_POST['metal_issue_account_names']['is_export']:0;
+  }
 }
