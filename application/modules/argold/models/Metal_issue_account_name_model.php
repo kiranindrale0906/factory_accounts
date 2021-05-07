@@ -24,4 +24,15 @@ class Metal_issue_account_name_model extends BaseModel {
   public function before_save($action) {
     $this->attributes['is_export']=!empty($_POST['metal_issue_account_names']['is_export'])?$_POST['metal_issue_account_names']['is_export']:0;
   }
+  public function after_save($action) {
+   $reference_voucher_details = $this->get('',array('metal_receipt_voucher_reference_id'=>$this->attributes['id']));
+   $voucher_details = $this->find('is_export',array('id'=>$this->attributes['id']));
+   if(!empty($reference_voucher_details)){
+    foreach ($reference_voucher_details as $index => $reference_voucher_detail) {
+      $voucher_obj = new voucher_model($reference_voucher_detail);
+      $voucher_obj->attributes['is_export'] = $voucher_details['is_export'];
+      $voucher_obj->update('false');
+    }
+   }
+  }
 }

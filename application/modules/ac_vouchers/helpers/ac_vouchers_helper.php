@@ -157,6 +157,7 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes = array();
   $attributes['id'] = array('', '', TRUE, '', TRUE);
   $attributes['parent_id'] = array('', '', TRUE, '', TRUE,TRUE);
+  $attributes['is_export'] = array('', '', TRUE, '', TRUE,TRUE);
   $attributes['voucher_date'] = array('Date', 'Enter Date.', TRUE, '', TRUE,TRUE);
   $attributes['account_name'] = array('Account', 'Enter Account', TRUE, '', TRUE);
   $attributes['from_account_name'] = array('From Account', 'Enter From Account', TRUE, '', TRUE);
