@@ -38,7 +38,7 @@
       <p><h6>Debit Amount :<?=$record['debit_amount']?></h6></p>
     <?php } if(in_array($record['voucher_type'], array('rate cut issue voucher','opening stock voucher'))){?>  
       <p><h6>Credit Weight :<?=$record['credit_weight']?></h6></p>
-    <?php } if(in_array($record['voucher_type'], array('rate cut receipt voucher','rate cut issue voucher'))){?>  
+    <?php } if(in_array($record['voucher_type'], array('rate cut receipt voucher','rate cut issue voucher','metal receipt voucher'))){?>  
       <p><h6>Gold Amount :<?=$record['gold_rate']?></h6></p>
     <?php } if(in_array($record['voucher_type'], array('metal issue voucher'))){?>  
       <p><h6>Credit Weight :<?=$record['credit_weight']?></h6></p>
