@@ -247,11 +247,13 @@ class Trial_balances extends Ledgers {
   
   private function get_account_ledger_records() {
     $this->data['voucher_dates']=array();
-    if(empty($this->data['account_names'])) return true;
+    if (empty($this->data['account_names'])) return true;
+    
     $where=array();
     if(!empty($this->data['loss_date'])){
       $where['date(voucher_date) <=']=date('Y-m-d',strtotime($this->data['loss_date']));
     }
+
     $select = "account_name, 
                IFNULL((sum(debit_weight*purity)/100),0) - IFNULL((sum(credit_weight*factory_purity)/100),0) as fine,
                IFNULL(sum((purity-factory_purity)*debit_weight/100),0) - IFNULL(sum((factory_purity-purity)*credit_weight/100),0) as vadotar,
@@ -260,9 +262,9 @@ class Trial_balances extends Ledgers {
                                                       array('group_by'=>'account_name,',
                                                             'order_by'=>'account_name asc'));
 
-    // pd($this->data['trial_balance']);
-    $this->calculate_gst_of_purchase_accounts($where);
-    $this->calculate_gst_of_sales_accounts($where);
+    $this->calculate_gst_of_purchase_accounts(1);
+    $this->calculate_gst_of_purchase_accounts(0);
+    $this->calculate_gst_of_sales_accounts();
 
     $loss_account = array('account_name' => 'LOSS ACCOUNT',
                           'fine' => 0, 'vadotar' => 0, 'amount' => 0);
@@ -282,114 +284,56 @@ class Trial_balances extends Ledgers {
     foreach($this->data['trial_balance'] as $index => $trail_balance_record) {
       if (in_array($trail_balance_record['account_name'], $loss_account_names)) {
         $loss_account['fine'] += $trail_balance_record['fine'];
-        // $loss_account['vadotar'] += $trail_balance_record['vadotar'];
-        // $loss_account['amount'] += $trail_balance_record['amount']; 
         $this->data['loss_account_records'][] = $trail_balance_record;
         unset($this->data['trial_balance'][$index]);
       }
     }
     $this->data['trial_balance'][] = $loss_account;
-    
-    // $query = $this->db->query("select account_name, sum(fine) as fine, sum(vadotar) as vadotar, sum(amount) as amount
-    //           from (
-    //             (select account_name, 
-    //                     IFNULL((sum(debit_weight*purity)/100),0) - IFNULL((sum(credit_weight*factory_purity)/100),0) as fine,
-    //                     IFNULL(sum((purity-factory_purity)*debit_weight/100),0) - IFNULL(sum((factory_purity-purity)*credit_weight/100),0) as vadotar,
-    //                     IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount from ac_vouchers group by account_name)
-    //             UNION
-    //               (select account_name, 
-    //                       sum(credit_weight) as fine,
-    //                       0 as vadotar,
-    //                       -1 * sum(debit_amount) as amount from chitties group by account_name)) t
-    //           group by account_name
-    //           order by account_name");
-    //$this->data['trial_balance'] = $query->result_array();
-
   }      
-  private function calculate_gst_of_purchase_accounts($where){
-    $where_export=$where;           
-    $where_export['account_name']='PURCHASE ACCOUNT';
-    // $where_export['voucher_type']='rate cut receipt voucher';
-    $where_export['is_export']=1;
+
+  private function calculate_gst_of_purchase_accounts($export = 0) {
+    $where_export = array();           
+
+    $where_export['account_name'] = 'PURCHASE ACCOUNT';
+    $where_export['is_export'] = $export;
+    $data_key = ($export == 1) ? 'purchase_account_export' : 'purchase_account_domestic';
     
-    $purchas_account_export = $this->model->get('debit_weight,
-                                                 credit_weight,
-                                                 IFNULL((debit_amount),0) - IFNULL((credit_amount),0) as amount,
-                                                 IFNULL(((debit_weight*purity)/100),0) - IFNULL(((credit_weight*factory_purity)/100),0) as amount_fine,
-                                                 factory_fine,
-                                                 fine,sale_type,
-                                                 gold_rate_purity,
-                                                 gold_rate,
-                                                 purity,
-                                                 created_at',$where_export, array());
+    $purchases = $this->model->get('debit_weight, credit_weight,
+                             IFNULL((debit_amount),0) - IFNULL((credit_amount),0) as amount,
+                             IFNULL(((debit_weight*purity)/100),0) - IFNULL(((credit_weight*factory_purity)/100),0) as amount_fine,
+                             factory_fine, fine,
+                             sale_type,
+                             gold_rate_purity, gold_rate,
+                             purity,
+                             created_at', $where_export);
 
+    $this->data[$data_key] = array('debit_weight' => 0, 'credit_weight' => 0,
+                                   'fine' => 0,
+                                   'amount' => 0, 'taxable_amount' => 0,
+                                   'cgst_amount' => 0, 'sgst_amount' => 0, 'tcs_amount' => 0);
 
-    $total_taxable_export=$total_credit_weight_export=$total_debit_weight_export=$cgst_amount_export=$sgst_amount_export=$tcs_amount_export=$fine=$total_fine=$amount=$total_amount=0;
-    foreach ($purchas_account_export as $index => $purchas_export_detail) {
-      $tax_fields = get_tax_fields($purchas_export_detail['factory_fine'], $purchas_export_detail['fine'], $purchas_export_detail['sale_type'], $purchas_export_detail['gold_rate'], $purchas_export_detail['gold_rate_purity'],$purchas_export_detail['created_at']);
-      $purchas_exports[$index]=array_merge($purchas_export_detail,$tax_fields);
-      $fine=($purchas_export_detail['amount_fine']);
-      $amount=($purchas_export_detail['amount']);
-      $total_fine+=$fine;
-      $total_amount+=$amount;
-      $total_debit_weight_export+=$purchas_exports[$index]['debit_weight'];
-      $total_credit_weight_export+=$purchas_exports[$index]['credit_weight'];
-      $total_taxable_export+=$purchas_exports[$index]['taxable_amount'];
-      $cgst_amount_export+=$purchas_exports[$index]['cgst_amount'];
-      $sgst_amount_export+=$purchas_exports[$index]['sgst_amount'];
-      $tcs_amount_export+=$purchas_exports[$index]['tcs_amount'];
-      $this->data['purchas_account_export']['debit_weight']=$total_debit_weight_export;
-      $this->data['purchas_account_export']['credit_weight']=$total_credit_weight_export;
-      $this->data['purchas_account_export']['fine']=$total_fine;
-      $this->data['purchas_account_export']['amount']=$total_amount;
-      $this->data['purchas_account_export']['taxable_amount']=$total_taxable_export;
-      $this->data['purchas_account_export']['cgst_amount']=$cgst_amount_export;
-      $this->data['purchas_account_export']['sgst_amount']=$sgst_amount_export;
-      $this->data['purchas_account_export']['tcs_amount']=$tcs_amount_export;
+    foreach ($purchases as $index => $purchase) {
+      $factory_fine = $purchase['factory_fine'];
+      $fine         = $purchase['fine'];
+      $sale_type    = $purchase['sale_type'];
+      $gold_rate    = $purchase['gold_rate'];
+      $gold_rate_purity = $purchase['gold_rate_purity'];
+      $created_at   = $purchase['created_at'];
 
-    }
+      $tax_fields = get_tax_fields($factory_fine, $fine, $sale_type, $gold_rate, $gold_rate_purity, $created_at);
 
-    $where_export=$where;           
-    $where_export['account_name']='PURCHASE ACCOUNT';
-    // $where_export['voucher_type']='rate cut receipt voucher';
-    $where_export['is_export']=0;
-    $purchas_account_domestic = $this->model->get('debit_weight,
-                                                   credit_weight,
-                                                   IFNULL((debit_amount),0) - IFNULL((credit_amount),0) as amount,
-                                                   IFNULL(((debit_weight*purity)/100),0) - IFNULL(((credit_weight*factory_purity)/100),0) as amount_fine,
-                                                   factory_fine,
-                                                   fine,sale_type,
-                                                   gold_rate_purity,
-                                                   purity,
-                                                   gold_rate,
-                                                   created_at,id',$where_export, array());
-    $purchas_domestics=array();
-    $total_taxable_domestic=$total_credit_weight_domestic=$total_debit_weight_domestic=$cgst_amount_domestic=$sgst_amount_domestic=$tcs_amount_domestic=$fine=$total_fine=$amount=$total_amount=0;
-    foreach ($purchas_account_domestic as $index => $purchas_domestic_detail) {
-      $tax_fields = get_tax_fields($purchas_domestic_detail['factory_fine'], $purchas_domestic_detail['fine'], $purchas_domestic_detail['sale_type'], $purchas_domestic_detail['gold_rate'], $purchas_domestic_detail['gold_rate_purity'],$purchas_domestic_detail['created_at']);
-      $fine=($purchas_domestic_detail['amount_fine']);
-      $amount=($purchas_domestic_detail['amount']);
-      $total_fine+=$fine;
-      $total_amount+=$amount;
-      $purchas_domestics[$index]=array_merge($purchas_domestic_detail,$tax_fields);
-      $total_debit_weight_domestic+=$purchas_domestics[$index]['debit_weight'];
-      $total_credit_weight_domestic+=$purchas_domestics[$index]['credit_weight'];
-      $total_taxable_domestic+=$purchas_domestics[$index]['taxable_amount'];
-      $cgst_amount_domestic+=$purchas_domestics[$index]['cgst_amount'];
-      $sgst_amount_domestic+=$purchas_domestics[$index]['sgst_amount'];
-      $tcs_amount_domestic+=$purchas_domestics[$index]['tcs_amount'];
-      $this->data['purchas_account_domestic']['debit_weight']=$total_debit_weight_domestic;
-      $this->data['purchas_account_domestic']['credit_weight']=$total_credit_weight_domestic;
-      $this->data['purchas_account_domestic']['fine']=$total_fine;
-      $this->data['purchas_account_domestic']['amount']=$total_amount;
-      $this->data['purchas_account_domestic']['taxable_amount']=$total_taxable_domestic;
-      $this->data['purchas_account_domestic']['cgst_amount']=$cgst_amount_domestic;
-      $this->data['purchas_account_domestic']['sgst_amount']=$sgst_amount_domestic;
-      $this->data['purchas_account_domestic']['tcs_amount']=$tcs_amount_domestic;
+      $this->data[$data_key]['debit_weight'] += $purchas_exports[$index]['debit_weight'];
+      $this->data[$data_key]['credit_weight'] += $purchas_exports[$index]['credit_weight'];
+      $this->data[$data_key]['fine'] += $purchase['amount_fine'];
+      $this->data[$data_key]['amount'] += $purchase['amount'];
+      $this->data[$data_key]['taxable_amount'] += $tax_fields['taxable_amount'];
+      $this->data[$data_key]['cgst_amount'] += $tax_fields['cgst_amount'];
+      $this->data[$data_key]['sgst_amount'] += $tax_fields['sgst_amount'];
+      $this->data[$data_key]['tcs_amount'] += $tax_fields['tcs_amount'];
     }
   }
-  private function calculate_gst_of_sales_accounts($where){
-               
+
+  private function calculate_gst_of_sales_accounts($where){               
     $where['ac_vouchers.account_name']='SALES ACCOUNT';
     $sales_accounts = $this->model->get('ac_vouchers.debit_weight as debit_weight,
                                          ac_vouchers.credit_weight as credit_weight,
@@ -425,9 +369,7 @@ class Trial_balances extends Ledgers {
       $this->data['sales_accounts']['taxable_amount']=$total_taxable_export;
       $this->data['sales_accounts']['cgst_amount']=$cgst_amount_export;
       $this->data['sales_accounts']['sgst_amount']=$sgst_amount_export;
-
     }
-    // pd($this->data['sales_accounts']);
   }
   
 }

@@ -1,17 +1,18 @@
 <?php
 
-function get_tax_fields($factory_fine, $fine, $sale_type, $gold_rate, $gold_rate_purity,$created_at) {
+function get_tax_fields($factory_fine, $fine, $sale_type, $gold_rate, $gold_rate_purity, $created_at) {
   $tcs_rate=0;
-  if(strtotime($created_at)>strtotime('2021-03-30')){
+  if (strtotime($created_at) > strtotime('2021-03-30')) 
     $tcs_rate=0.1;
-  }elseif(strtotime($created_at)<=strtotime('2021-03-30')){
+  elseif (strtotime($created_at) <= strtotime('2021-03-30'))
     $tcs_rate=0.075;
-  }
+  
   $fields = array('sale_type' => $sale_type,
                   'gst_rate'  => ($sale_type == 'Labour') ? 2.50 : 1.50,
                   'tcs_rate'  => ($sale_type == 'Sale') ?  $tcs_rate : 0,
                   'gold_rate' => $gold_rate,
                   'gold_rate_purity' => $gold_rate_purity);
+
   if ($fields['sale_type'] == 'Labour') 
     $fields['weight'] = ($factory_fine > $fine) ? ($factory_fine - $fine) : ($fine - $factory_fine);
   else {
