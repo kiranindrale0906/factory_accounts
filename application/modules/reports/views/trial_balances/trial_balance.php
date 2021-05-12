@@ -25,8 +25,8 @@
                   if ($record['account_name'] == 'PURCHASE ACCOUNT') $profit_and_loss['purchase_account'] = $record;
                   if ($record['account_name'] == 'MAIN VADOTAR')     $profit_and_loss['main_vadotar'] = $record;
 
-                  if (!empty($purchas_account_export)) $profit_and_loss['purchase_account_export'] = $purchas_account_export;
-                  if (!empty($purchas_account_domestic)) $profit_and_loss['purchase_account_domestic'] = $purchas_account_domestic;
+                  if (!empty($purchase_account_export)) $profit_and_loss['purchase_account_export'] = $purchas_account_export;
+                  if (!empty($purchase_account_domestic)) $profit_and_loss['purchase_account_domestic'] = $purchas_account_domestic;
                       
                   $liabilities_vadotar = $liabilities_vadotar + $record['vadotar'];
                   $liabilities_fine = $liabilities_fine + $record['fine']; 
