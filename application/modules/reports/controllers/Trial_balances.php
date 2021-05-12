@@ -322,8 +322,8 @@ class Trial_balances extends Ledgers {
 
       $tax_fields = get_tax_fields($factory_fine, $fine, $sale_type, $gold_rate, $gold_rate_purity, $created_at);
 
-      $this->data[$data_key]['debit_weight'] += $purchas_exports[$index]['debit_weight'];
-      $this->data[$data_key]['credit_weight'] += $purchas_exports[$index]['credit_weight'];
+      $this->data[$data_key]['debit_weight'] += $purchase['debit_weight'];
+      $this->data[$data_key]['credit_weight'] += $purchase['credit_weight'];
       $this->data[$data_key]['fine'] += $purchase['amount_fine'];
       $this->data[$data_key]['amount'] += $purchase['amount'];
       $this->data[$data_key]['taxable_amount'] += $tax_fields['taxable_amount'];
