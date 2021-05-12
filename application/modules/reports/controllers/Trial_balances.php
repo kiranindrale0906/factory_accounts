@@ -333,8 +333,8 @@ class Trial_balances extends Ledgers {
     }
   }
 
-  private function calculate_gst_of_sales_accounts($where){               
-    $where['ac_vouchers.account_name']='SALES ACCOUNT';
+  private function calculate_gst_of_sales_accounts(){               
+    $where = array('ac_vouchers.account_name' => 'SALES ACCOUNT');
     $sales_accounts = $this->model->get('ac_vouchers.debit_weight as debit_weight,
                                          ac_vouchers.credit_weight as credit_weight,
                                          IFNULL((ac_vouchers.debit_amount),0) - IFNULL((ac_vouchers.credit_amount),0) as amount,
