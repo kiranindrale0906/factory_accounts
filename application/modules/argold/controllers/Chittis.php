@@ -63,10 +63,12 @@ class Chittis extends BaseController {
       $this->data['metal_vouchers'] = array();
 
     $this->data['purity'] = $this->voucher_model->get('purity as name, purity as id', 
-                                                       array('receipt_type' => 'GPC Out',
-                                                             'account_name' => 'OUTSIDE PARTY',
-                                                             'voucher_type' => 'metal issue voucher',
-                                                             'chitti_id' => 0) ,array(), array('group_by' => 'purity'));
+                                                       array('where'=>array(
+                                                               'account_name' => 'OUTSIDE PARTY',
+                                                               'voucher_type' => 'metal issue voucher',
+                                                               'chitti_id' => 0),
+                                                              'where_in'=>array('receipt_type'=>array('"Finish Good"','"GPC Out"'))) ,
+                                                       array(), array('group_by' => 'purity'));
     
     if ($this->router->method == 'store' || $this->router->method == 'update') {
       $this->data['record']['chittis'] = $_POST['chittis'];
