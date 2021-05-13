@@ -25,9 +25,6 @@
                   if ($record['account_name'] == 'PURCHASE ACCOUNT') $profit_and_loss['purchase_account'] = $record;
                   if ($record['account_name'] == 'MAIN VADOTAR')     $profit_and_loss['main_vadotar'] = $record;
 
-                  if (!empty($purchase_account_export)) $profit_and_loss['purchase_account_export'] = $purchase_account_export;
-                  if (!empty($purchase_account_domestic)) $profit_and_loss['purchase_account_domestic'] = $purchase_account_domestic;
-                      
                   $liabilities_vadotar = $liabilities_vadotar + $record['vadotar'];
                   $liabilities_fine = $liabilities_fine + $record['fine']; 
                   $liabilities_amount = $liabilities_amount + $record['amount']; 
@@ -95,7 +92,8 @@
                     <td><?= $record['account_name']; ?>
                       <?php if ($loss_account==1 && !empty($loss_date)){
                         ?>
-                        <a href=<?= base_url()."argold/unrecovarable_account_records/store?from=view&account_name=".urlencode($record['account_name'])."&credit_weight=".four_decimal(-1 * $record['fine'])."&narration=Unrecovarable&factory=Unrecovarable&parent_id=".$record['id']."&voucher_date=".$loss_date ?> target='_blank' onclick="return confirm('Do you want to add this in Unrecovarable?')" >Unrecovarable</a><?php echo'('.four_decimal(-1 * $record['fine'], '-').')'; ?>
+                        <a href=<?= base_url()."argold/unrecovarable_account_records/store?from=view&account_name=".urlencode($record['account_name'])."&credit_weight=".four_decimal(-1 * $record['fine'])."&narration=Unrecovarable&factory=Unrecovarable&parent_id=".$record['id']."&voucher_date=".$loss_date ?> 
+                          target='_blank' onclick="return confirm('Do you want to add this in Unrecovarable?')" >Unrecovarable</a><?php echo'('.four_decimal(-1 * $record['fine'], '-').')'; ?>
                       <?php }?>  
                     </td>
                     <td class="text-right"><?= four_decimal(-1 * $record['amount'], '-') ?>  </td>
@@ -157,10 +155,14 @@
     </div>
     <?php $this->load->view('trial_balances/factory_balance'); ?>
   </div>
-
-  <?php if($_SESSION['all_details']==1){$this->load->view('trial_balances/profit_and_loss', array('profit_and_loss' => $profit_and_loss));} ?>
-
-  <?php if($_SESSION['all_details']==1){$this->load->view('trial_balances/profit_and_loss_gst', array('profit_and_loss' => $profit_and_loss));} ?>
-
-
 <?php endif; ?>
+
+<?php 
+  if ($_SESSION['all_details']==1) { 
+    $this->load->view('trial_balances/profit_and_loss', array('profit_and_loss' => $profit_and_loss));
+    
+    if (!empty($purchase_account_export)) $profit_and_loss['purchase_account_export'] = $purchase_account_export;
+    if (!empty($purchase_account_domestic)) $profit_and_loss['purchase_account_domestic'] = $purchase_account_domestic;
+    $this->load->view('trial_balances/profit_and_loss_gst', array('profit_and_loss' => $profit_and_loss));
+  } 
+?>
