@@ -243,11 +243,7 @@ class Trial_balances extends Ledgers {
     
     $data_key = ($export == 1) ? 'purchase_account_export' : 'purchase_account_domestic';
     
-    $select = "account_name, 
-               IFNULL((sum(debit_weight*purity)/100),0) - IFNULL((sum(credit_weight*factory_purity)/100),0) as fine,
-               IFNULL(sum((purity-factory_purity)*debit_weight/100),0) - IFNULL(sum((factory_purity-purity)*credit_weight/100),0) as vadotar,
-               IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount,0 as id";
-
+    
 // IFNULL((debit_amount),0) - IFNULL((credit_amount),0) as amount,
 //                IFNULL(((debit_weight*purity)/100),0) - IFNULL(((credit_weight*factory_purity)/100),0) as amount_fine,
     $select = 'ac_vouchers.factory_fine, ac_vouchers.fine,
@@ -257,10 +253,12 @@ class Trial_balances extends Ledgers {
                ac_vouchers.created_at';
 
     $purchases = $this->model->get($select, $where_export, array(array('ac_vouchers material_receipt', 'material_receipt.id = ac_vouchers.metal_receipt_voucher_reference_id')));
+  
     
+
     $this->data[$data_key] = array('debit_weight' => 0, 'credit_weight' => 0,
                                    'fine' => 0,
-                                   'amount' => 0, 'taxable_amount' => 0,
+                                   'amount' => 0, 'taxable_amount' => 0, 'cash_amount' => 0,
                                    'cgst_amount' => 0, 'sgst_amount' => 0, 'tcs_amount' => 0);
 
     foreach ($purchases as $index => $purchase) {
@@ -283,10 +281,12 @@ class Trial_balances extends Ledgers {
       $this->data[$data_key]['tcs_amount'] += $tax_fields['tcs_amount'];
     }
     
-    // if ($export == 0) {
-    //   pd($this->data['purchase_account_export'], 0);
-    //   pd($this->data['purchase_account_domestic']);
-    // }
+    if ($export == 0) {
+      $cash_select = "IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount";
+      $cash = $this->model->find($cash_select, array('voucher_type like "cash%"' => NULL,
+                                                     'account_name' => "PURCHASE ACCOUNT"));
+      $this->data[$data_key]['cash_amount'] = $cash['amount'];
+    }
   }
 
   private function calculate_gst_of_sales_accounts(){               
