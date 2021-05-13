@@ -160,7 +160,7 @@
 
   <?php if($_SESSION['all_details']==1){$this->load->view('trial_balances/profit_and_loss', array('profit_and_loss' => $profit_and_loss));} ?>
 
-  <?php if($_SESSION['all_details']==1){$this->load->view('trial_balances/profit_and_loss_gst', array('profit_and_loss' => $profit_and_loss));} ?>
-
+  <!-- <?php //if($_SESSION['all_details']==1){$this->load->view('trial_balances/profit_and_loss_gst', array('profit_and_loss' => $profit_and_loss));} ?>
+ -->
 
 <?php endif; ?>
