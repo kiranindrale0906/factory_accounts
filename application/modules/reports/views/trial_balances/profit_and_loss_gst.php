@@ -1,6 +1,7 @@
 <?php 
- 
- 
+  $purchase_export = $profit_and_loss['purchase_account_export'];
+  $purchase_domestic = $profit_and_loss['purchase_account_domestic'];
+
 
   $purchase_export_amount = !empty($profit_and_loss['purchase_account_export']['amount']) ? -1 * $profit_and_loss['purchase_account_export']['amount'] : 0;
   $purchase_export_taxable_amount = !empty($profit_and_loss['purchase_account_export']['taxable_amount']) ?  $profit_and_loss['purchase_account_export']['taxable_amount'] : 0;
@@ -78,33 +79,39 @@
             </tr>
           </thead>
 
-          <tr>
+   <!--        <tr>
             <td>PURCHASE ACCOUNT DOMESTIC</td>
             <td class="text-right"><?= four_decimal($purchase_domestic_amount, '-') ?></td>
             <td class="text-right"><?= four_decimal($purchase_domestic_rate, '-'); ?></td>
             <td class="text-right"><?= four_decimal($purchase_domestic_fine, '-'); ?></td>
+          </tr> -->
+          <tr>
+            <td>PURCHASE DOMESTIC CASH</td>
+            <td class="text-right"><?= four_decimal($purchase_domestic['cash_amount'], '-') ?></td>
+            <td class="text-right"></td>
+            <td class="text-right"></td>
           </tr>
-           <tr>
+          <tr>
             <td>PURCHASE DOMESTIC TAXABLE</td>
-            <td class="text-right"><?= four_decimal($purchase_domestic_taxable_amount, '-') ?></td>
+            <td class="text-right"><?= four_decimal($purchase_domestic['taxable_amount'], '-') ?></td>
             <td class="text-right"></td>
             <td class="text-right"></td>
           </tr>
-           <tr>
+          <tr>
             <td>PURCHASE DOMESTIC CGST</td>
-            <td class="text-right"><?= four_decimal($purchase_domestic_cgst_amount, '-') ?></td>
+            <td class="text-right"><?= four_decimal($purchase_domestic['cgst_amount'], '-') ?></td>
             <td class="text-right"></td>
             <td class="text-right"></td>
           </tr>
           <tr>
             <td>PURCHASE DOMESTIC SGST</td>
-             <td class="text-right"><?= four_decimal($purchase_domestic_sgst_amount, '-') ?></td>
+             <td class="text-right"><?= four_decimal($purchase_domestic['sgst_amount'], '-') ?></td>
             <td class="text-right"></td>
             <td class="text-right"></td>
           </tr>
           <tr>
             <td>PURCHASE DOMESTIC TCS</td>
-             <td class="text-right"><?= four_decimal($purchase_domestic_tcs_amount, '-') ?></td>
+             <td class="text-right"><?= four_decimal($purchase_domestic['tcs_amount'], '-') ?></td>
             <td class="text-right"></td>
             <td class="text-right"></td>
           </tr>
@@ -116,25 +123,25 @@
           </tr>
            <tr>
             <td>PURCHASE EXPORT TAXABLE</td>
-            <td class="text-right"><?= four_decimal($purchase_export_taxable_amount, '-') ?></td>
+            <td class="text-right"><?= four_decimal($purchase_export['taxable_amount'], '-') ?></td>
             <td class="text-right"></td>
             <td class="text-right"></td>
           </tr>
            <tr>
             <td>PURCHASE EXPORT CGST</td>
-            <td class="text-right"><?= four_decimal($purchase_export_cgst_amount, '-') ?></td>
+            <td class="text-right"><?= four_decimal($purchase_export['cgst_amount'], '-') ?></td>
             <td class="text-right"></td>
             <td class="text-right"></td>
           </tr>
           <tr>
             <td>PURCHASE EXPORT SGST</td>
-            <td class="text-right"><?= four_decimal($purchase_export_sgst_amount, '-') ?></td>
+            <td class="text-right"><?= four_decimal($purchase_export['sgst_amount'], '-') ?></td>
             <td class="text-right"></td>
             <td class="text-right"></td>
           </tr>
           <tr>
             <td>PURCHASE EXPORT TCS</td>
-            <td class="text-right"><?= four_decimal($purchase_export_tcs_amount, '-') ?></td>
+            <td class="text-right"><?= four_decimal($purchase_export['tcs_amount'], '-') ?></td>
             <td class="text-right"></td>
             <td class="text-right"></td>
           </tr>
@@ -178,12 +185,12 @@
               <th class="text-right">Fine</th>
             </tr>
           </thead>
-          <tr>
+<!--           <tr>
             <td>SALES ACCOUNT</td>
             <td class="text-right"><?= four_decimal($sales_amount, '-') ?>  </td>
             <td class="text-right"><?= four_decimal($sales_rate, '-'); ?>  </td>
             <td class="text-right"><?= four_decimal($sales_fine, '-'); ?></td>
-          </tr>
+          </tr> -->
           <tr>
             <td>SALES ACCOUNT TAXABLE</td>
             <td class="text-right"><?= four_decimal($sales_taxable_amount, '-') ?>  </td>

@@ -88,6 +88,7 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
     $rate_cut_issue = array('company_id'    => 1,
                             'account_name'  => $metal_receipt_voucher['account_name'],
                             'voucher_date'  => $metal_receipt_voucher['created_at'],
+                            'sale_type'     => $metal_receipt_voucher['sale_type'],
                             'debit_amount'  => $tax_fields['grand_total'],
                             'credit_amount' => 0,
                             'credit_weight' => $tax_fields['weight'],
@@ -111,6 +112,7 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
     $rate_cut_receipt['debit_amount']  = 0;
     $rate_cut_receipt['debit_weight']  = $tax_fields['weight'];
     $rate_cut_receipt['credit_weight'] = 0;
+    $rate_cut_receipt['sale_type'] = $metal_receipt_voucher['sale_type'];
     $rate_cut_receipt_voucher_obj = new rate_cut_receipt_voucher_model($rate_cut_receipt);
     $rate_cut_receipt_voucher_obj->before_validate();
     $rate_cut_receipt_voucher_obj->store();
