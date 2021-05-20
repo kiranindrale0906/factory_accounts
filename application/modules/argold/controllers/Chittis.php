@@ -69,6 +69,8 @@ class Chittis extends BaseController {
                                                                'chitti_id' => 0),
                                                               'where_in'=>array('receipt_type'=>array('"Finish Good"','"GPC Out"'))) ,
                                                        array(), array('group_by' => 'purity'));
+    pd($this->data['purity']);
+    
     
     if ($this->router->method == 'store' || $this->router->method == 'update') {
       $this->data['record']['chittis'] = $_POST['chittis'];
