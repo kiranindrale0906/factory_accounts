@@ -66,10 +66,10 @@ class Chittis extends BaseController {
                                                        array('where'=>array(
                                                                'account_name' => 'OUTSIDE PARTY',
                                                                'voucher_type' => 'metal issue voucher',
-                                                               'chitti_id' => 0),
-                                                              'where_in'=>array('receipt_type'=>array('"Finish Good"','"GPC Out"'))) ,
+                                                               'chitti_id' => 0,
+                                                               'receipt_type in ('"Finish Good"','"GPC Out"')'=>NULL
+                                                             )) ,
                                                        array(), array('group_by' => 'purity'));
-    pd($this->data['purity']);
     
     
     if ($this->router->method == 'store' || $this->router->method == 'update') {
