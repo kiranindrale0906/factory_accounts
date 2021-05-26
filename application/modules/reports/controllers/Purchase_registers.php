@@ -11,6 +11,6 @@ class Purchase_registers extends BaseController {
   }
   public function _get_form_data() {
   	$this->data['is_export']=(!empty($_GET['is_export']) && $_GET['is_export']==1)?1:0;
-  	$this->data['purchase_register_records']=$this->voucher_model->get('', array('gold_rate !='=>0,'debit_amount  !='=>0,'is_export'=>$this->data['is_export'],'account_name'=>'SALES ACCOUNT'),array(),array('order_by'=>'id desc'));
+  	$this->data['purchase_register_records']=$this->voucher_model->get('', array('gold_rate !='=>0,'debit_amount  !='=>0,'is_export'=>$this->data['is_export'],'account_name !='=>'SALES ACCOUNT'),array(),array('order_by'=>'id desc'));
   }
 }
