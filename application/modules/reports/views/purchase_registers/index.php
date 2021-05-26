@@ -27,6 +27,7 @@
         <th class="text-right">SGST Amount</th>
         <th class="text-right">TCS Amount</th>
         <th class="text-right">Debit Amount</th>
+        <th class="text-right"></th>
         </tr>
     </thead>
     <tbody>
@@ -49,6 +50,7 @@
         <td class="text-right"><?=!empty($record['sgst_amount'])?four_decimal($record['sgst_amount']):'-'; ?></td>
         <td class="text-right"><?=!empty($record['tcs_amount'])?four_decimal($record['tcs_amount']):'-'; ?></td>
         <td class="text-right"><?=!empty($record['debit_amount'])?four_decimal($record['debit_amount']):'-'; ?></td>
+        <td class="text-right"><a href="<?=base_url().'/argold/voucher_details/view/'.$record['id']?>">View</a></td>
        
       </tr>
     <?php }?>
@@ -61,6 +63,7 @@
     <td class="text-right"><?=$total_sgst_amount?></td>
     <td class="text-right"><?=$total_tcs_amount?></td>
     <td class="text-right"><?=$total_debit?></td>
+    <td class="text-right"></td>
   </tr>
     </tbody>
   </table>
