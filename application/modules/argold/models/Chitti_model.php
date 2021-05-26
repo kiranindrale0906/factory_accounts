@@ -73,9 +73,10 @@ class Chitti_model extends BaseModel {
     $this->attributes['sgst_amount'] = $this->attributes['taxable_amount'] * $gst_rate / 100;
     $total_amount = $this->attributes['taxable_amount'] + $this->attributes['cgst_amount'] + $this->attributes['sgst_amount'];
     $tcs_rate=0;
-    if(strtotime($this->attributes['created_at'])>strtotime('2021-03-30')){
+    // pd(date('Y-m-d'));
+    if((strtotime(date('Y-m-d'))>strtotime('2021-03-30'))){
       $tcs_rate=0.1;
-    }elseif(strtotime($this->attributes['created_at'])<=strtotime('2021-03-30')){
+    }elseif((strtotime(date('Y-m-d'))<=strtotime('2021-03-30'))){
       $tcs_rate=0.075;
     }
     if ($this->attributes['sale_type'] != 'Labour') 

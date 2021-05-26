@@ -27,6 +27,7 @@
       <th></th>
       <th></th>
       <th></th>
+      <th></th>
       <th class="text-right"><?= four_decimal($weight) ?></th>
       <th></th>
       <th></th>

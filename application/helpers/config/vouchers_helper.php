@@ -19,7 +19,6 @@ function get_tax_fields($factory_fine, $fine, $sale_type, $gold_rate, $gold_rate
     $fields['weight'] = ($factory_fine > $fine) ? $factory_fine : $fine;
     if ($fields['weight']==0) $fields['weight'] = $factory_fine;
   }
-
   $fields['taxable_amount'] = $fields['weight'] * $gold_rate * $gold_rate_purity / 100;
   $fields['cgst_amount']    = $fields['taxable_amount'] * $fields['gst_rate'] / 100;
   $fields['sgst_amount']    = $fields['taxable_amount'] * $fields['gst_rate'] / 100;
