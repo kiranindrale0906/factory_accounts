@@ -43,7 +43,6 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
 
   public function create_rate_cut_vouchers_for_chitti($chitti_id) {
     $chitti = $this->chitti_model->find('', array('id' => $chitti_id));
-    pd($chitti);
     $this->rate_cut_issue_voucher_model->delete('', array('description' => 'Chitti '.$chitti['id'],
                                                           'voucher_type' => 'rate cut issue voucher'));
     $this->rate_cut_receipt_voucher_model->delete('', array('description' => 'Chitti '.$chitti['id'],
