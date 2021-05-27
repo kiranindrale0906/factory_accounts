@@ -57,13 +57,14 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
                               'debit_amount' => 0,
                               'debit_weight' => $chitti['credit_weight'],
                               'credit_weight' => 0,
-                              'taxable_amount'=>$tax_fields['taxable_amount'],
+                              'purity' => 100,
+                              'sale_type' => $chitti['sale_type'],
+                              'taxable_amount' => $tax_fields['taxable_amount'],
                               'cgst_amount'=>$tax_fields['cgst_amount'],
                               'sgst_amount'=>$tax_fields['sgst_amount'],
                               'tcs_amount'=>$tax_fields['tcs_amount'],
-                              'purity' => 100,
                               'gold_rate' => $chitti['rate'],
-                              'gold_rate_purity' => 100,
+                              'gold_rate_purity' => $chitti['purity'],
                               'description' => 'Chitti '.$chitti['id'],
                               'receipt_type' => 'Chitti',
                               'chitti_id' => $chitti_id);
@@ -77,10 +78,14 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
     $rate_cut_issue['credit_amount'] = 0;
     $rate_cut_issue['credit_weight'] = $chitti['credit_weight'];
     $rate_cut_issue['debit_weight'] = 0;
-    $rate_cut_issue['taxable_amount'] = 0;
-    $rate_cut_issue['cgst_amount'] = 0;
-    $rate_cut_issue['sgst_amount'] = 0;
-    $rate_cut_issue['tcs_amount'] = 0;
+    $rate_cut_issue['sale_type'] =  $chitti['sale_type'],
+    $rate_cut_issue['taxable_amount'] =  $tax_fields['taxable_amount'],
+    $rate_cut_issue['cgst_amount'] = $tax_fields['cgst_amount'],
+    $rate_cut_issue['sgst_amount'] = $tax_fields['sgst_amount'],
+    $rate_cut_issue['tcs_amount'] = $tax_fields['tcs_amount'],
+    $rate_cut_issue['gold_rate'] =  $chitti['rate'],
+    $rate_cut_issue['gold_rate_purity' => $chitti['purity'],
+    'description' => 'Chitti '.$chitti['id'],
     $rate_cut_issue_voucher_obj = new rate_cut_issue_voucher_model($rate_cut_issue);
     $rate_cut_issue_voucher_obj->before_validate();
     $rate_cut_issue_voucher_obj->store();
@@ -100,19 +105,18 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
     $rate_cut_issue = array('company_id'    => 1,
                             'account_name'  => $metal_receipt_voucher['account_name'],
                             'voucher_date'  => $metal_receipt_voucher['created_at'],
-                            'sale_type'     => $metal_receipt_voucher['sale_type'],
                             'debit_amount'  => $tax_fields['grand_total'],
                             'credit_amount' => 0,
                             'credit_weight' => $tax_fields['weight'],
                             'debit_weight'  => 0,
+                            'purity'        => 100,
+                            'sale_type'     => $metal_receipt_voucher['sale_type'],
                             'taxable_amount'=>$tax_fields['taxable_amount'],
                             'cgst_amount'=>$tax_fields['cgst_amount'],
                             'sgst_amount'=>$tax_fields['sgst_amount'],
                             'tcs_amount'=>$tax_fields['tcs_amount'],
-                            'purity'        => 100,
                             'gold_rate'     => $tax_fields['gold_rate'],
                             'gold_rate_purity' => $tax_fields['gold_rate_purity'],
-                            'gold_rate_purity' => 100,
                             'description'   => $receipt_type.' '.$metal_receipt_voucher['voucher_number'],
                             'receipt_type'  => $receipt_type,
                             'is_export'  => $metal_receipt_voucher['is_export'],
@@ -128,11 +132,14 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
     $rate_cut_receipt['debit_amount']  = 0;
     $rate_cut_receipt['debit_weight']  = $tax_fields['weight'];
     $rate_cut_receipt['credit_weight'] = 0;
-    $rate_cut_receipt['taxable_amount'] = 0;
-    $rate_cut_receipt['cgst_amount'] = 0;
-    $rate_cut_receipt['sgst_amount'] = 0;
-    $rate_cut_receipt['tcs_amount'] = 0;
     $rate_cut_receipt['sale_type'] = $metal_receipt_voucher['sale_type'];
+    $rate_cut_receipt['taxable_amount'] = $tax_fields['taxable_amount'];
+    $rate_cut_receipt['cgst_amount'] = $tax_fields['cgst_amount'];
+    $rate_cut_receipt['sgst_amount'] = $tax_fields['sgst_amount'];
+    $rate_cut_receipt['tcs_amount'] = $tax_fields['tcs_amount'];
+    $rate_cut_receipt['gold_rate'] = $tax_fields['gold_rate'];
+    $rate_cut_receipt['gold_rate_purity'] = $tax_fields['gold_rate_purity'];
+    
     $rate_cut_receipt_voucher_obj = new rate_cut_receipt_voucher_model($rate_cut_receipt);
     $rate_cut_receipt_voucher_obj->before_validate();
     $rate_cut_receipt_voucher_obj->store();
