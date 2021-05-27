@@ -39,7 +39,7 @@
       $total_cgst_amount+=four_decimal($record['cgst_amount']);
       $total_sgst_amount+=four_decimal($record['sgst_amount']);
       $total_tcs_amount+=four_decimal($record['tcs_amount']);
-      $total_debit+=four_decimal($record['debit_amount']);
+      $total_debit+=four_decimal($record['credit_amount']);
       ?>
       <tr>
         <td class="text-left"><?=!empty($record['voucher_date'])?date('d-m-Y',strtotime($record['voucher_date'])):'-'; ?></td>
@@ -49,7 +49,7 @@
         <td class="text-right"><?=!empty($record['cgst_amount'])?four_decimal($record['cgst_amount']):'-'; ?></td>
         <td class="text-right"><?=!empty($record['sgst_amount'])?four_decimal($record['sgst_amount']):'-'; ?></td>
         <td class="text-right"><?=!empty($record['tcs_amount'])?four_decimal($record['tcs_amount']):'-'; ?></td>
-        <td class="text-right"><?=!empty($record['debit_amount'])?four_decimal($record['debit_amount']):'-'; ?></td>
+        <td class="text-right"><?=!empty($record['credit_amount'])?four_decimal($record['credit_amount']):'-'; ?></td>
         <td class="text-right"><a href="<?=base_url().'/argold/voucher_details/view/'.$record['id']?>">View</a></td>
        
       </tr>
