@@ -243,13 +243,13 @@ class Trial_balances extends Ledgers {
     $where['credit_amount !='] = 0;
 
     $select = 'sum(taxable_amount) as taxable_amount, sum(cgst_amount) as cgst_amount, sum(sgst_amount) as sgst_amount, sum(tcs_amount) as tcs_amount';
-    $purchases = $this->model->get($select, $where);
+    $purchases = $this->model->find($select, $where);
         
     $data_key = ($export == 1) ? 'purchase_account_export' : 'purchase_account_domestic';
-    $this->data[$data_key]['taxable_amount'] = $tax_fields['taxable_amount'];
-    $this->data[$data_key]['cgst_amount'] = $tax_fields['cgst_amount'];
-    $this->data[$data_key]['sgst_amount'] = $tax_fields['sgst_amount'];
-    $this->data[$data_key]['tcs_amount'] = $tax_fields['tcs_amount'];
+    $this->data[$data_key]['taxable_amount'] = $purchases['taxable_amount'];
+    $this->data[$data_key]['cgst_amount'] = $purchases['cgst_amount'];
+    $this->data[$data_key]['sgst_amount'] = $purchases['sgst_amount'];
+    $this->data[$data_key]['tcs_amount'] = $purchases['tcs_amount'];
     
     // $select = 'ac_vouchers.factory_fine, ac_vouchers.fine,
     //            material_receipt.sale_type, 
