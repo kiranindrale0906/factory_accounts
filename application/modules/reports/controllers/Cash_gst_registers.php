@@ -10,7 +10,9 @@ class Cash_gst_registers extends BaseController {
     $this->load->render($this->router->class."/index",$this->data);
   }
   public function _get_form_data() {
-  	$this->data['cash_gst_register_records']=$this->voucher_model->get('', array('voucher_type in ("cash receipt voucher","cash issue voucher")'=>NULL),array(),array('order_by'=>'id desc'));
+  	$this->data['cash_gst_register_records']=$this->voucher_model->get('', 
+                                                                      array('voucher_type in ("cash receipt voucher","cash issue voucher")'=>NULL),
+                                                                      array(),array('order_by'=>'id desc'));
     // lq();
   }
 }
