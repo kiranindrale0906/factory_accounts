@@ -4,12 +4,12 @@ defined('BASEPATH') OR exit('No direct script access allowed.');
 
 function list_settings() {
   $list_option=array('voucher_date','created_time', 'voucher_number', 'account_name', 
-                     'debit_amount', 'description','action');
+                     'debit_amount','taxable_amount','cgst_amount','sgst_amount','tcs_amount', 'description','action');
   return ac_vouchers_list_settings($list_option);
 }
 
 function get_field_attribute($table, $field) {
-  $required_fields=array('id', 'voucher_date','account_name','debit_amount','description');
+  $required_fields=array('id', 'voucher_date','account_name','debit_amount','description','taxable_amount','cgst_amount','sgst_amount','tcs_amount');
   return ac_voucher_get_field_attribute($table,$field,$required_fields);
 }
 

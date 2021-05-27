@@ -57,6 +57,12 @@
     <?php if(in_array($record['voucher_type'], array('rate cut receipt voucher','rate cut issue voucher','metal receipt voucher','metal issue voucher'))){?>
       <p><h6>Factory Fine :<?=$record['factory_fine']?></h6></p>
     <?php }?>
+    <?php if(in_array($record['voucher_type'], array('cash receipt voucher','cash issue voucher'))){?>
+      <p><h6>Taxable Amount:<?=$record['taxable_amount']?></h6></p>
+      <p><h6>CGST Amount :<?=$record['cgst_amount']?></h6></p>
+      <p><h6>SGST Amount :<?=$record['sgst_amount']?></h6></p>
+      <p><h6>TCS Amount :<?=$record['tcs_amount']?></h6></p>
+    <?php }?>
       <p><h6>Date : <?=date('d-m-Y',strtotime($record['created_at']))?></h6></p>
     </div>
   </div>
