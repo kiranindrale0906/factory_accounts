@@ -262,17 +262,17 @@ class Trial_balances extends Ledgers {
   private function calculate_gst_of_sales_accounts(){               
     $where = array();               
     
-    $where['account_name'] = 'SALE ACCOUNT';
+    $where['account_name'] = 'SALES ACCOUNT';
     $where['gold_rate !='] = 0;
     $where['debit_amount !='] = 0;
 
     $select = 'sum(taxable_amount) as taxable_amount, sum(cgst_amount) as cgst_amount, sum(sgst_amount) as sgst_amount, sum(tcs_amount) as tcs_amount';
-    $purchases = $this->model->find($select, $where);
+    $sales = $this->model->find($select, $where);
         
-    $this->data['sales_accounts']['taxable_amount'] = $purchases['taxable_amount'];
-    $this->data['sales_accounts']['cgst_amount'] = $purchases['cgst_amount'];
-    $this->data['sales_accounts']['sgst_amount'] = $purchases['sgst_amount'];
-    $this->data['sales_accounts']['tcs_amount'] = $purchases['tcs_amount'];
+    $this->data['sales_accounts']['taxable_amount'] = $sales['taxable_amount'];
+    $this->data['sales_accounts']['cgst_amount'] = $sales['cgst_amount'];
+    $this->data['sales_accounts']['sgst_amount'] = $sales['sgst_amount'];
+    $this->data['sales_accounts']['tcs_amount'] = $sales['tcs_amount'];
 
     $cash_select = "IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount";
     $cash = $this->model->find($cash_select, array('voucher_type like "cash%"' => NULL,
