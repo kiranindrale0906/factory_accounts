@@ -3,6 +3,9 @@
   $purchase_domestic = $profit_and_loss['purchase_account_domestic'];
   $sales = $profit_and_loss['sale_gst_accounts'];
 
+  $debit_note = $sales['cash_amounts'];
+  $credit_note = $purchase_domestic['cash_amounts'];
+
   // $purchase_export_taxable_amount = !empty($profit_and_loss['purchase_account_export']['taxable_amount']) ?  $profit_and_loss['purchase_account_export']['taxable_amount'] : 0;
   // $purchase_export_cgst_amount = !empty($profit_and_loss['purchase_account_export']['cgst_amount']) ?  $profit_and_loss['purchase_account_export']['cgst_amount'] : 0;
   // $purchase_export_sgst_amount = !empty($profit_and_loss['purchase_account_export']['sgst_amount']) ?  $profit_and_loss['purchase_account_export']['sgst_amount'] : 0;
@@ -21,12 +24,16 @@
   // $sales_tcs_amount = !empty($profit_and_loss['sale_gst_accounts']['tcs_amount']) ? $profit_and_loss['sale_gst_accounts']['tcs_amount'] : 0;
 
   
-  $total_income_amount =    $sales['cash_amount']
-                         +  $sales['taxable_amount']
-                         +  $sales['cgst_amount'] + $sales['sgst_amount']
-                         +  $sales['tcs_amount'];
+  $total_income_amount =   $debit_note['taxable_amount']
+                         + $debit_note['cgst_amount'] + $debit_note['sgst_amount']
+                         + $debit_note['tcs_amount']
+                         + $sales['taxable_amount']
+                         + $sales['cgst_amount'] + $sales['sgst_amount']
+                         + $sales['tcs_amount'];
   
-  $total_expenses_amount =   $purchase_domestic['cash_amount']
+  $total_expenses_amount =   $credit_note['taxable_amount']
+                           + $credit_note['cgst_amount'] + $credit_note['sgst_amount']
+                           + $credit_note['tcs_amount']
                            + $purchase_export['taxable_amount'] + $purchase_domestic['taxable_amount']
                            + $purchase_export['cgst_amount'] + $purchase_domestic['cgst_amount']
                            + $purchase_export['sgst_amount'] + $purchase_domestic['sgst_amount']
@@ -49,8 +56,20 @@
           </thead>
 
           <tr>
-            <td>CREDIT NOTE</td>
-            <td class="text-right"><?= four_decimal($purchase_domestic['cash_amount'], '-') ?></td>
+            <td>CREDIT NOTE TAXABLE</td>
+            <td class="text-right"><?= four_decimal($credit_note['taxable_amount'], '-') ?></td>
+          </tr>
+          <tr>
+            <td>CREDIT NOTE CGST</td>
+            <td class="text-right"><?= four_decimal($credit_note['cgst_amount'], '-') ?></td>
+          </tr>
+          <tr>
+            <td>CREDIT NOTE SGST</td>
+            <td class="text-right"><?= four_decimal($credit_note['sgst_amount'], '-') ?></td>
+          </tr>
+          <tr>
+            <td>CREDIT NOTE TCS</td>
+            <td class="text-right"><?= four_decimal($credit_note['tcs_amount'], '-') ?></td>
           </tr>
           <tr>
             <td>PURCHASE DOMESTIC TAXABLE</td>
@@ -104,8 +123,20 @@
             </tr>
           </thead>
           <tr>
-            <td>DEBIT NOTE</td>
-            <td class="text-right"><?= four_decimal($sales['cash_amount'], '-') ?>  </td>
+            <td>DEBIT NOTE TAXABLE</td>
+            <td class="text-right"><?= four_decimal($debit_note['taxable_amount'], '-') ?>  </td>
+          </tr>
+          <tr>
+            <td>CREDIT NOTE CGST</td>
+            <td class="text-right"><?= four_decimal($debit_note['cgst_amount'], '-') ?></td>
+          </tr>
+          <tr>
+            <td>CREDIT NOTE SGST</td>
+            <td class="text-right"><?= four_decimal($debit_note['sgst_amount'], '-') ?></td>
+          </tr>
+          <tr>
+            <td>CREDIT NOTE TCS</td>
+            <td class="text-right"><?= four_decimal($debit_note['tcs_amount'], '-') ?></td>
           </tr>
           <tr>
             <td>SALES ACCOUNT TAXABLE</td>

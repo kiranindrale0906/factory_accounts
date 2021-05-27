@@ -252,10 +252,10 @@ class Trial_balances extends Ledgers {
     $this->data[$data_key]['tcs_amount'] = $purchases['tcs_amount'];
     
     if ($export == 0) {
-      $cash_select = "IFNULL(sum(credit_amount),0) - IFNULL(sum(debit_amount),0) as amount";
+      $cash_select = "IFNULL(sum(credit_amount),0) - IFNULL(sum(debit_amount),0) as amount".', '.$select;;
       $cash = $this->model->find($cash_select, array('voucher_type like "cash%"' => NULL,
                                                      'account_name' => "PURCHASE ACCOUNT"));
-      $this->data[$data_key]['cash_amount'] = $cash['amount'];
+      $this->data[$data_key]['cash_amounts'] = $cash;
     }
   }
 
@@ -274,10 +274,10 @@ class Trial_balances extends Ledgers {
     $this->data['sales_accounts']['sgst_amount'] = $sales['sgst_amount'];
     $this->data['sales_accounts']['tcs_amount'] = $sales['tcs_amount'];
 
-    $cash_select = "IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount";
+    $cash_select = "IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount".', '.$select;
     $cash = $this->model->find($cash_select, array('voucher_type like "cash%"' => NULL,
                                                    'account_name' => "SALES ACCOUNT"));
-    $this->data['sales_accounts']['cash_amount'] = $cash['amount'];
+    $this->data['sales_accounts']['cash_amounts'] = $cash;
     
     // $where = array('ac_vouchers.account_name' => 'SALES ACCOUNT');
     // $sales_accounts = $this->model->get('ac_vouchers.debit_weight as debit_weight,
