@@ -64,7 +64,7 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
                               'sgst_amount'=>$tax_fields['sgst_amount'],
                               'tcs_amount'=>$tax_fields['tcs_amount'],
                               'gold_rate' => $chitti['rate'],
-                              'gold_rate_purity' => $chitti['purity'],
+                              'gold_rate_purity' => 100,
                               'description' => 'Chitti '.$chitti['id'],
                               'receipt_type' => 'Chitti',
                               'chitti_id' => $chitti_id);
@@ -84,7 +84,7 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
     $rate_cut_issue['sgst_amount'] = $tax_fields['sgst_amount'];
     $rate_cut_issue['tcs_amount'] = $tax_fields['tcs_amount'];
     $rate_cut_issue['gold_rate'] =  $chitti['rate'];
-    $rate_cut_issue['gold_rate_purity'] = $chitti['purity'];
+    $rate_cut_issue['gold_rate_purity'] = 100;
     $rate_cut_issue['description'] = 'Chitti '.$chitti['id'];
     $rate_cut_issue_voucher_obj = new rate_cut_issue_voucher_model($rate_cut_issue);
     $rate_cut_issue_voucher_obj->before_validate();
