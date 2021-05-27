@@ -287,7 +287,7 @@ class Trial_balances extends Ledgers {
     // }
     
     if ($export == 0) {
-      $cash_select = "IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount";
+      $cash_select = "IFNULL(sum(credit_amount),0) - IFNULL(sum(debit_amount),0) as amount";
       $cash = $this->model->find($cash_select, array('voucher_type like "cash%"' => NULL,
                                                      'account_name' => "PURCHASE ACCOUNT"));
       $this->data[$data_key]['cash_amount'] = $cash['amount'];
