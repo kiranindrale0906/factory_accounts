@@ -84,6 +84,16 @@
           load_view('ac_vouchers/ac_vouchers/fields/cash_amount');
           load_view('ac_vouchers/ac_vouchers/fields/cash_bill'); ?>   
   </div>
+  <div class="row">  
+    <?php load_view('ac_vouchers/ac_vouchers/fields/taxable_amount', array('readonly' => ''));
+          load_view('ac_vouchers/ac_vouchers/fields/cgst_amount', array('readonly' => ''));
+          ?>   
+  </div>
+  <div class="row">  
+    <?php load_view('ac_vouchers/ac_vouchers/fields/sgst_amount', array('readonly' => ''));
+          load_view('ac_vouchers/ac_vouchers/fields/tcs_amount', array('readonly' => ''));
+          ?>   
+  </div>
 
   <div class="row">   
     <?php load_view('ac_vouchers/ac_vouchers/fields/cheque_number');

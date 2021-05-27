@@ -39,6 +39,10 @@ function list_settings() {
     array("Id", "id", FALSE, "id", FALSE, FALSE),
     array("Date", "created_at", FALSE, "created_at", FALSE, FALSE,'DATE_FORMAT(created_at, "%d-%m-%Y") as created_at'),
     array("Weight", "weight", FALSE, "weight", FALSE, FALSE),
+    array("Taxable Amount", "taxable_amount", FALSE, "taxable_amount", FALSE, FALSE),
+    array("CGST Amount", "cgst_amount", FALSE, "cgst_amount", FALSE, FALSE),
+    array("SGST Amount", "sgst_amount", FALSE, "sgst_amount", FALSE, FALSE),
+    array("TCS Amount", "tcs_amount", FALSE, "tcs_amount", FALSE, FALSE),
     array("Purity", "purity", FALSE, "purity", FALSE, FALSE),
     array("Fine", "fine", FALSE, "fine", FALSE, FALSE),
     array("Factory Purity", "factory_purity", FALSE, "factory_purity", FALSE, FALSE),
@@ -66,6 +70,10 @@ function get_field_attribute($table, $field) {
     'id'            => array('', '', TRUE, '', TRUE),
     'account_name'     => array('Account Name', '', TRUE, '', TRUE),
     'voucher_date'     => array('Voucher Date', '', TRUE, '', TRUE),
+    'taxable_amount'     => array('Taxable Amount', '', TRUE, '', TRUE),
+    'cgst_amount'     => array('CGST Amount', '', TRUE, '', TRUE),
+    'sgst_amount'     => array('CGST Amount', '', TRUE, '', TRUE),
+    'tcs_amount'     => array('TCS Amount', '', TRUE, '', TRUE),
     'is_export'     => array('Is Export', '', TRUE, '', TRUE),
    );
   return $attributes[$table][$field];

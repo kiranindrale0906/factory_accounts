@@ -124,8 +124,15 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
   $list_setting['total_fine_weight'] = array("Total Fine Wt", "total_fine_weight", FALSE, "total_fine_weight", TRUE, TRUE);
   $list_setting['total_amount'] = array("Total Amount", "total_amount", FALSE, "total_amount", TRUE, TRUE,"FORMAT(ac_vouchers.total_amount,ac_company.decimal_no) as total_amount",    
                                         '','','','text-right');
+  $list_setting['taxable_amount'] = array("Taxable Amount", "taxable_amount", FALSE, "taxable_amount", TRUE, TRUE,"FORMAT(ac_vouchers.taxable_amount,ac_company.decimal_no) as taxable_amount",    
+                                        '','','','text-right');
+  $list_setting['cgst_amount'] = array("CGST Amount", "cgst_amount", FALSE, "cgst_amount", TRUE, TRUE,"FORMAT(ac_vouchers.cgst_amount,ac_company.decimal_no) as cgst_amount",    
+                                        '','','','text-right');
+  $list_setting['sgst_amount'] = array("SGST Amount", "sgst_amount", FALSE, "sgst_amount", TRUE, TRUE,"FORMAT(ac_vouchers.sgst_amount,ac_company.decimal_no) as sgst_amount",    
+                                        '','','','text-right');
   $list_setting['tcs_amount'] = array("TCS Amount", "tcs_amount", FALSE, "tcs_amount", TRUE, TRUE,"FORMAT(ac_vouchers.tcs_amount,ac_company.decimal_no) as tcs_amount",    
                                         '','','','text-right');
+
 
 
 
@@ -165,6 +172,11 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['to_group_name'] = array('To Group Name', 'Enter To Group', TRUE, '', TRUE);
   $attributes['amount'] = array('Amount', 'Enter Amount', TRUE, '', TRUE);
   $attributes['credit_amount'] = array('Credit Amount', 'Enter Credit Amount', TRUE, '', TRUE);
+  $attributes['taxable_amount'] = array('Taxable Amount', 'Taxable Amount', FALSE, '',TRUE);
+  $attributes['cgst_amount'] = array('CGST Amount', 'CGST Amount', FALSE, '',TRUE);
+  $attributes['sgst_amount'] = array('SGST Amount', 'SGST Amount', FALSE, '',TRUE);
+  $attributes['tcs_amount'] = array('TCS Amount', 'TCS Amount', FALSE, '',TRUE);
+
   $attributes['bank_name'] = array("Bank Name", "Enter Bank Name", TRUE,'', TRUE);
   $attributes['gold_weight'] = array("Gold Weight", "Enter Gold Weight", TRUE,'', TRUE);
   $attributes['gold_rate'] = array("Gold Rate", "Enter Gold Rate", TRUE,'', TRUE);
@@ -229,7 +241,7 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['has_hallmark'] = array('', 'Has Hallmark', TRUE, '', TRUE);
   $attributes['total_value'] = array('Value', 'Value', FALSE, '',TRUE);
   $attributes['description'] = array('Description', 'Description', FALSE, '',TRUE);
-
+  
   $attributes['add_more'] = array('', 'add_more', FALSE, '',TRUE);
   if(!empty($required_field)) {
     $attributes[$ci->router->class] = array_intersect_key($attributes, array_flip($required_field));

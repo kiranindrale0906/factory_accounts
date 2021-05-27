@@ -89,7 +89,8 @@
                                         'reports/metal_receipt_type_ledgers' => 'Receipt Type Ledger',
                                         'reports/account_receipt_reports' => 'Account Receipt Reports',
                                         'reports/purchase_registers' => 'Purchase Register Reports',
-                                        'reports/sales_registers' => 'Sales Register Reports'
+                                        'reports/sales_registers' => 'Sales Register Reports',
+                                        'reports/cash_gst_registers' => 'Cash GST Register Reports'
                                         ),
                     //'Interests' => array('transactions/interest_issue_vouchers'=>'Interest Issue Voucher','transactions/interest_receipt_vouchers'=>'Interest Receipt Voucher'),
                     'Registers'   => array(
