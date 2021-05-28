@@ -12,7 +12,7 @@
                          + $sale_domestic_Labour['tcs_amount'];
 
   $purchase_amount = !empty($profit_and_loss['purchase_account']['amount']) ? -1 * $profit_and_loss['purchase_account']['amount'] : 0;
-  $income_round_off = $total_income_amount + $purchase_amount;
+  $income_round_off = $total_income_amount - $purchase_amount;
 
   $total_expenses_amount =   $credit_note['taxable_amount']
                            + $credit_note['cgst_amount'] + $credit_note['sgst_amount']
