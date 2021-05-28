@@ -70,10 +70,10 @@ function get_field_attribute($table, $field) {
     'id'            => array('', '', TRUE, '', TRUE),
     'account_name'     => array('Account Name', '', TRUE, '', TRUE),
     'voucher_date'     => array('Voucher Date', '', TRUE, '', TRUE),
-    'taxable_amount'     => array('Taxable Amount', '', TRUE, '', TRUE),
-    'cgst_amount'     => array('CGST Amount', '', TRUE, '', TRUE),
-    'sgst_amount'     => array('CGST Amount', '', TRUE, '', TRUE),
-    'tcs_amount'     => array('TCS Amount', '', TRUE, '', TRUE),
+    'taxable_amount'     => array('Taxable Amount', '', FALSE, '', TRUE),
+    'cgst_amount'     => array('CGST Amount', '', FALSE, '', TRUE),
+    'sgst_amount'     => array('SGST Amount', '', FALSE, '', TRUE),
+    'tcs_amount'     => array('TCS Amount', '', FALSE, '', TRUE),
     'is_export'     => array('Is Export', '', TRUE, '', TRUE),
    );
   return $attributes[$table][$field];

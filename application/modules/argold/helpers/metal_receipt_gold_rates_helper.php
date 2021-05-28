@@ -67,6 +67,7 @@ function get_field_attribute($table, $field) {
     'gold_rate'     => array('Gold Rate', '', TRUE, '', TRUE),
     'gold_rate_purity'     => array('Gold Rate Purity', '', TRUE, '', TRUE),
     'sale_type'     => array('Sale Type', '', TRUE, '', TRUE),
+    'is_export'     => array('Is Export', '', TRUE, '', TRUE),
    );
   return $attributes[$table][$field];
 }
