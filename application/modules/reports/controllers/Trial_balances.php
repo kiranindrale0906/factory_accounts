@@ -258,12 +258,18 @@ class Trial_balances extends Ledgers {
     $this->data[$data_key]['tcs_amount'] = $purchases['tcs_amount'];
     
     if ($export == 1) {
-      $cash_select = '-1 * sum(taxable_amount) as taxable_amount, 
-                      -1 * sum(cgst_amount) as cgst_amount, 
-                      -1 * sum(sgst_amount) as sgst_amount, 
-                      -1 * sum(tcs_amount) as tcs_amount';
-      $cash = $this->model->find($cash_select, array('voucher_type like "cash%"' => NULL,
-                                                     'account_name' => "PURCHASE ACCOUNT"));
+      $credit_cash = $this->model->find($select, array('voucher_type like "cash%"' => NULL,
+                                                       'account_name' => "PURCHASE ACCOUNT",
+                                                       'credit_amount > ' => 0));
+
+      $debit_cash = $this->model->find($select, array('voucher_type like "cash%"' => NULL,
+                                                      'account_name' => "PURCHASE ACCOUNT",
+                                                      'debit_amount > ' => 0));
+
+      $cash = array('taxable_amount' => -1 * $credit_cash['taxable_amount'] + $debit_cash['taxable_amount'],
+                    'cgst_amount' => -1 * $credit_cash['cgst_amount'] + $debit_cash['cgst_amount'],
+                    'sgst_amount' => -1 * $credit_cash['sgst_amount'] + $debit_cash['sgst_amount'],
+                    'tcs_amount' => -1 * $credit_cash['tcs_amount'] + $debit_cash['tcs_amount']);
       $this->data['credit_note'] = $cash;
     }
   }
@@ -288,9 +294,22 @@ class Trial_balances extends Ledgers {
     $this->data[$data_key]['sgst_amount'] = $sales['sgst_amount'];
     $this->data[$data_key]['tcs_amount'] = $sales['tcs_amount'];
 
-    $cash = $this->model->find($select, array('voucher_type like "cash%"' => NULL,
-                                              'account_name' => "SALES ACCOUNT"));
-    $this->data['debit_note'] = $cash;
+    if ($export == 1) {
+      $credit_cash = $this->model->find($select, array('voucher_type like "cash%"' => NULL,
+                                                       'account_name' => "SALES ACCOUNT",
+                                                       'credit_amount > ' => 0));
+
+      $debit_cash = $this->model->find($select, array('voucher_type like "cash%"' => NULL,
+                                                      'account_name' => "SALES ACCOUNT",
+                                                      'debit_amount > ' => 0));
+
+
+      $cash = array('taxable_amount' => $credit_cash['taxable_amount'] - $debit_cash['taxable_amount'],
+                    'cgst_amount' => $credit_cash['cgst_amount'] - $debit_cash['cgst_amount'],
+                    'sgst_amount' => $credit_cash['sgst_amount'] - $debit_cash['sgst_amount'],
+                    'tcs_amount' => $credit_cash['tcs_amount'] - $debit_cash['tcs_amount']);
+      $this->data['debit_note'] = $cash;
+    }
   }
 
   private function get_gold_rate_from_myspn() {
