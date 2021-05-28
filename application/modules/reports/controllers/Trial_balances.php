@@ -264,7 +264,7 @@ class Trial_balances extends Ledgers {
                       -1 * sum(tcs_amount) as tcs_amount';
       $cash = $this->model->find($cash_select, array('voucher_type like "cash%"' => NULL,
                                                      'account_name' => "PURCHASE ACCOUNT"));
-      $this->data[$data_key]['cash_amounts'] = $cash;
+      $this->data['credit_note'] = $cash;
     }
   }
 
@@ -289,7 +289,7 @@ class Trial_balances extends Ledgers {
 
     $cash = $this->model->find($select, array('voucher_type like "cash%"' => NULL,
                                               'account_name' => "SALES ACCOUNT"));
-    $this->data['sales_accounts']['cash_amounts'] = $cash;
+    $this->data['debit_note'] = $cash;
   }
 
   private function get_gold_rate_from_myspn() {

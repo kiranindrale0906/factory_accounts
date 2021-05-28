@@ -1,12 +1,4 @@
 <?php 
-  // $purchase_export_Sale = $profit_and_loss['purchase_account_export_Sale'];
-  // $purchase_domestic_Sale = $profit_and_loss['purchase_account_domestic_Sale'];
-  // $purchase_domestic_Labour = $profit_and_loss['purchase_account_domestic_Labour'];
-  // $sales = $profit_and_loss['sale_gst_accounts'];
-
-  $debit_note = $sales['cash_amounts'];
-  $credit_note = $purchase_domestic['cash_amounts'];
-
   $total_income_amount =   $debit_note['taxable_amount']
                          + $debit_note['cgst_amount'] + $debit_note['sgst_amount']
                          + $debit_note['tcs_amount']
