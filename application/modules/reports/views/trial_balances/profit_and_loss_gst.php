@@ -11,8 +11,8 @@
                          + $sale_domestic_Labour['sgst_amount']
                          + $sale_domestic_Labour['tcs_amount'];
   $sales_amount = !empty($profit_and_loss['sales_account']['amount']) ? $profit_and_loss['sales_account']['amount'] : 0;
-  $incomes_round_off = $sales_amount - $total_income_amount;  
-  $total_income_amount += $incomes_round_off;
+  $income_round_off = $sales_amount - $total_income_amount;  
+  $total_income_amount = $total_income_amount + $income_round_off;
 
   
   $total_expenses_amount =   $credit_note['taxable_amount']
@@ -29,7 +29,7 @@
 
   $purchase_amount = !empty($profit_and_loss['purchase_account']['amount']) ? -1 * $profit_and_loss['purchase_account']['amount'] : 0;
   $expenses_round_off = $purchase_amount - $total_expenses_amount;
-  $purchase_amount += $expenses_round_off;
+  $total_expenses_amount += $expenses_round_off;
 
 ?>
 
@@ -55,11 +55,11 @@
           
           <tr>
             <td>Round Off</td>
-            <td class="text-right"><?= four_decimal($income_round_off, '-') ?></td>
+            <td class="text-right"><?= four_decimal($expenses_round_off, '-') ?></td>
           </tr>
           <tr>
             <th>TOTAL</th>
-            <th class="text-right"><?= four_decimal($expenses_round_off, '-') ?></th>
+            <th class="text-right"><?= four_decimal($total_expenses_amount, '-') ?></th>
           </tr>
           
         </table>
@@ -80,6 +80,10 @@
           <?php $this->load->view('trial_balances/gst_fields', array('gst_voucher' => 'DOMESTIC SALE', 'gst' => $sale_domestic_Sale)); ?>
           <?php $this->load->view('trial_balances/gst_fields', array('gst_voucher' => 'DOMESTIC LABOUR', 'gst' => $sale_domestic_Labour)); ?>
           <?php $this->load->view('trial_balances/gst_fields', array('gst_voucher' => 'EXPORT SALE', 'gst' => $sale_export_Sale)); ?>
+          <tr>
+            <td>Round Off</td>
+            <td class="text-right"><?= four_decimal($income_round_off, '-') ?></td>
+          </tr>
           <tr>
             <th>TOTAL</th>
             <th class="text-right"><?= four_decimal($total_income_amount, '-') ?></th>
