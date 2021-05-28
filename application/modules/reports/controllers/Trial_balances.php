@@ -266,10 +266,10 @@ class Trial_balances extends Ledgers {
                                                       'account_name' => "PURCHASE ACCOUNT",
                                                       'debit_amount > ' => 0));
 
-      $cash = array('taxable_amount' => -1 * $credit_cash['taxable_amount'] + $debit_cash['taxable_amount'],
-                    'cgst_amount' => -1 * $credit_cash['cgst_amount'] + $debit_cash['cgst_amount'],
-                    'sgst_amount' => -1 * $credit_cash['sgst_amount'] + $debit_cash['sgst_amount'],
-                    'tcs_amount' => -1 * $credit_cash['tcs_amount'] + $debit_cash['tcs_amount']);
+      $cash = array('taxable_amount' => $credit_cash['taxable_amount'] - $debit_cash['taxable_amount'],
+                    'cgst_amount' => $credit_cash['cgst_amount'] - $debit_cash['cgst_amount'],
+                    'sgst_amount' => $credit_cash['sgst_amount'] - $debit_cash['sgst_amount'],
+                    'tcs_amount' => $credit_cash['tcs_amount'] - $debit_cash['tcs_amount']);
       $this->data['credit_note'] = $cash;
     }
   }
@@ -303,11 +303,10 @@ class Trial_balances extends Ledgers {
                                                       'account_name' => "SALES ACCOUNT",
                                                       'debit_amount > ' => 0));
 
-
-      $cash = array('taxable_amount' => $credit_cash['taxable_amount'] - $debit_cash['taxable_amount'],
-                    'cgst_amount' => $credit_cash['cgst_amount'] - $debit_cash['cgst_amount'],
-                    'sgst_amount' => $credit_cash['sgst_amount'] - $debit_cash['sgst_amount'],
-                    'tcs_amount' => $credit_cash['tcs_amount'] - $debit_cash['tcs_amount']);
+      $cash = array('taxable_amount' => -1 * $credit_cash['taxable_amount'] + $debit_cash['taxable_amount'],
+                    'cgst_amount' => -1 * $credit_cash['cgst_amount'] + $debit_cash['cgst_amount'],
+                    'sgst_amount' => -1 * $credit_cash['sgst_amount'] + $debit_cash['sgst_amount'],
+                    'tcs_amount' => -1 * $credit_cash['tcs_amount'] + $debit_cash['tcs_amount']);
       $this->data['debit_note'] = $cash;
     }
   }
