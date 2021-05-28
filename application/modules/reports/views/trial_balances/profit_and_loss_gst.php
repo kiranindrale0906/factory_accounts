@@ -2,9 +2,14 @@
   $total_income_amount =   $debit_note['taxable_amount']
                          + $debit_note['cgst_amount'] + $debit_note['sgst_amount']
                          + $debit_note['tcs_amount']
-                         + $sales['taxable_amount']
-                         + $sales['cgst_amount'] + $sales['sgst_amount']
-                         + $sales['tcs_amount'];
+                         + $sale_export_Sale['taxable_amount'] + $sale_domestic_Sale['taxable_amount']
+                         + $sale_export_Sale['cgst_amount'] + $sale_domestic_Sale['cgst_amount']
+                         + $sale_export_Sale['sgst_amount'] + $sale_domestic_Sale['sgst_amount']
+                         + $sale_export_Sale['tcs_amount'] + $sale_domestic_Sale['tcs_amount']
+                         + $sale_domestic_Labour['taxable_amount']
+                         + $sale_domestic_Labour['cgst_amount']
+                         + $sale_domestic_Labour['sgst_amount']
+                         + $sale_domestic_Labour['tcs_amount'];
   
   $total_expenses_amount =   $credit_note['taxable_amount']
                            + $credit_note['cgst_amount'] + $credit_note['sgst_amount']
