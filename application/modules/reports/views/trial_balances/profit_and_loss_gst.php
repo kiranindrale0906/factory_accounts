@@ -49,7 +49,7 @@
           
           <tr>
             <td>Round Off</td>
-            <td class="text-right"><?= four_decimal($purchase_amount, '-') ?></td>
+            <td class="text-right"><?= four_decimal($income_round_off, '-') ?></td>
           </tr>
           <tr>
             <th>TOTAL</th>
