@@ -10,7 +10,10 @@
                          + $sale_domestic_Labour['cgst_amount']
                          + $sale_domestic_Labour['sgst_amount']
                          + $sale_domestic_Labour['tcs_amount'];
-  
+
+  $purchase_amount = !empty($profit_and_loss['purchase_account']['amount']) ? -1 * $profit_and_loss['purchase_account']['amount'] : 0;
+  $income_round_off = $total_income_amount + $purchase_amount;
+
   $total_expenses_amount =   $credit_note['taxable_amount']
                            + $credit_note['cgst_amount'] + $credit_note['sgst_amount']
                            + $credit_note['tcs_amount']
@@ -45,9 +48,14 @@
           <?php $this->load->view('trial_balances/gst_fields', array('gst_voucher' => 'EXPORT PURCHASE', 'gst' => $purchase_export_Sale)); ?>
           
           <tr>
+            <td>Round Off</td>
+            <td class="text-right"><?= four_decimal($income_round_off, '-') ?></td>
+          </tr>
+          <tr>
             <th>TOTAL</th>
             <th class="text-right"><?= four_decimal($total_expenses_amount, '-') ?></th>
           </tr>
+          
         </table>
       </div>
     </div>
