@@ -161,8 +161,8 @@
   if ($_SESSION['all_details']==1) { 
     $this->load->view('trial_balances/profit_and_loss', array('profit_and_loss' => $profit_and_loss));
     
-    if (!empty($purchase_account_export)) $profit_and_loss['purchase_account_export'] = $purchase_account_export;
-    if (!empty($purchase_account_domestic)) $profit_and_loss['purchase_account_domestic'] = $purchase_account_domestic;
-    $this->load->view('trial_balances/profit_and_loss_gst', array('profit_and_loss' => $profit_and_loss));
+    // if (!empty($purchase_account_export)) $profit_and_loss['purchase_account_export_Sale'] = $purchase_account_export_Sale;
+    // if (!empty($purchase_account_domestic)) $profit_and_loss['purchase_account_domestic'] = $purchase_account_domestic;
+    $this->load->view('trial_balances/profit_and_loss_gst');
   } 
 ?>

@@ -65,38 +65,9 @@
               <th class="text-right">Amount</th>
             </tr>
           </thead>
-          <tr>
-            <td>DEBIT NOTE TAXABLE</td>
-            <td class="text-right"><?= four_decimal($debit_note['taxable_amount'], '-') ?>  </td>
-          </tr>
-          <tr>
-            <td>CREDIT NOTE CGST</td>
-            <td class="text-right"><?= four_decimal($debit_note['cgst_amount'], '-') ?></td>
-          </tr>
-          <tr>
-            <td>CREDIT NOTE SGST</td>
-            <td class="text-right"><?= four_decimal($debit_note['sgst_amount'], '-') ?></td>
-          </tr>
-          <tr>
-            <td>CREDIT NOTE TCS</td>
-            <td class="text-right"><?= four_decimal($debit_note['tcs_amount'], '-') ?></td>
-          </tr>
-          <tr>
-            <td>SALES ACCOUNT TAXABLE</td>
-            <td class="text-right"><?= four_decimal($sales['taxable_amount'], '-') ?>  </td>
-          </tr>
-          <tr>
-            <td>SALES ACCOUNT CGST</td>
-            <td class="text-right"><?= four_decimal($sales['cgst_amount'], '-') ?>  </td>
-          </tr>
-          <tr>
-            <td>SALES ACCOUNT SGST</td>
-            <td class="text-right"><?= four_decimal($sales['sgst_amount'], '-') ?>  </td>
-          </tr>
-          <tr>
-            <td>SALES ACCOUNT TCS</td>
-            <td class="text-right"><?= four_decimal($sales['tcs_amount'], '-') ?>  </td>
-          </tr>
+          <?php $this->load->view('trial_balances/gst_fields', array('gst_voucher' => 'DEBIT NOTE', 'gst' => $debit_note)); ?>
+          <?php $this->load->view('trial_balances/gst_fields', array('gst_voucher' => 'DOMESTIC LABOUR', 'gst' => $profit_and_loss['sale_account_domestic_Labour'])); ?>
+          <?php $this->load->view('trial_balances/gst_fields', array('gst_voucher' => 'EXPORT SALE', 'gst' => $profit_and_loss['sale_account_export_Sale'])); ?>
           <tr>
             <th>TOTAL</th>
             <th class="text-right"><?= four_decimal($total_income_amount, '-') ?></th>

@@ -249,7 +249,7 @@ class Trial_balances extends Ledgers {
     $select = 'sum(taxable_amount) as taxable_amount, sum(cgst_amount) as cgst_amount, sum(sgst_amount) as sgst_amount, sum(tcs_amount) as tcs_amount';
     $purchases = $this->model->find($select, $where);
         
-    $data_key = ($export == 1) ? 'purchase_account_export' : 'purchase_account_domestic';
+    $data_key = ($export == 1) ? 'purchase_export' : 'purchase_domestic';
     $data_key = $data_key.'_'.$sale_type;
 
     $this->data[$data_key]['taxable_amount'] = $purchases['taxable_amount'];
@@ -279,7 +279,7 @@ class Trial_balances extends Ledgers {
     $select = 'sum(taxable_amount) as taxable_amount, sum(cgst_amount) as cgst_amount, sum(sgst_amount) as sgst_amount, sum(tcs_amount) as tcs_amount';
     $sales = $this->model->find($select, $where);
         
-    $data_key = ($export == 1) ? 'sale_account_export' : 'sale_account_domestic';
+    $data_key = ($export == 1) ? 'sale_export' : 'sale_domestic';
     $data_key = $data_key.'_'.$sale_type;
 
     $this->data[$data_key]['taxable_amount'] = $sales['taxable_amount'];
