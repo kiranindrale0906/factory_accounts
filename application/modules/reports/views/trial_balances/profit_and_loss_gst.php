@@ -10,10 +10,11 @@
                          + $sale_domestic_Labour['cgst_amount']
                          + $sale_domestic_Labour['sgst_amount']
                          + $sale_domestic_Labour['tcs_amount'];
+  $sales_amount = !empty($profit_and_loss['sales_account']['amount']) ? $profit_and_loss['sales_account']['amount'] : 0;
+  $incomes_round_off = $sales_amount - $total_income_amount;  
+  $total_income_amount += $incomes_round_off;
 
-  $purchase_amount = !empty($profit_and_loss['purchase_account']['amount']) ? -1 * $profit_and_loss['purchase_account']['amount'] : 0;
-  $income_round_off = $purchase_amount - $total_income_amount;
-
+  
   $total_expenses_amount =   $credit_note['taxable_amount']
                            + $credit_note['cgst_amount'] + $credit_note['sgst_amount']
                            + $credit_note['tcs_amount']
@@ -25,6 +26,11 @@
                            + $purchase_domestic_Labour['cgst_amount']
                            + $purchase_domestic_Labour['sgst_amount']
                            + $purchase_domestic_Labour['tcs_amount'];
+
+  $purchase_amount = !empty($profit_and_loss['purchase_account']['amount']) ? -1 * $profit_and_loss['purchase_account']['amount'] : 0;
+  $expenses_round_off = $purchase_amount - $total_expenses_amount;
+  $purchase_amount += $expenses_round_off;
+
 ?>
 
 <hr />
@@ -53,7 +59,7 @@
           </tr>
           <tr>
             <th>TOTAL</th>
-            <th class="text-right"><?= four_decimal($total_expenses_amount, '-') ?></th>
+            <th class="text-right"><?= four_decimal($expenses_round_off, '-') ?></th>
           </tr>
           
         </table>
