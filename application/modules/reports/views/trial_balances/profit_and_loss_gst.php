@@ -63,6 +63,7 @@
             </tr>
           </thead>
           <?php $this->load->view('trial_balances/gst_fields', array('gst_voucher' => 'DEBIT NOTE', 'gst' => $debit_note)); ?>
+          <?php $this->load->view('trial_balances/gst_fields', array('gst_voucher' => 'DOMESTIC SALE', 'gst' => $sale_domestic_Sale)); ?>
           <?php $this->load->view('trial_balances/gst_fields', array('gst_voucher' => 'DOMESTIC LABOUR', 'gst' => $sale_domestic_Labour)); ?>
           <?php $this->load->view('trial_balances/gst_fields', array('gst_voucher' => 'EXPORT SALE', 'gst' => $sale_export_Sale)); ?>
           <tr>
