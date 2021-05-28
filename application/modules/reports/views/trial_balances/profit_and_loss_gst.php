@@ -40,9 +40,9 @@
           </thead>
 
           <?php $this->load->view('trial_balances/gst_fields', array('gst_voucher' => 'CREDIT NOTE', 'gst' => $credit_note)); ?>
-          <?php $this->load->view('trial_balances/gst_fields', array('gst_voucher' => 'DOMESTIC SALE', 'gst' => $profit_and_loss['purchase_account_domestic_Sale'])); ?>
-          <?php $this->load->view('trial_balances/gst_fields', array('gst_voucher' => 'DOMESTIC LABOUR', 'gst' => $profit_and_loss['purchase_account_domestic_Labour'])); ?>
-          <?php $this->load->view('trial_balances/gst_fields', array('gst_voucher' => 'EXPORT SALE', 'gst' => $profit_and_loss['purchase_account_export_Sale'])); ?>
+          <?php $this->load->view('trial_balances/gst_fields', array('gst_voucher' => 'DOMESTIC SALE', 'gst' => $purchase_domestic_Sale)); ?>
+          <?php $this->load->view('trial_balances/gst_fields', array('gst_voucher' => 'DOMESTIC LABOUR', 'gst' => $purchase_domestic_Labour)); ?>
+          <?php $this->load->view('trial_balances/gst_fields', array('gst_voucher' => 'EXPORT SALE', 'gst' => $purchase_export_Sale)); ?>
           
           <tr>
             <th>TOTAL</th>
@@ -63,8 +63,8 @@
             </tr>
           </thead>
           <?php $this->load->view('trial_balances/gst_fields', array('gst_voucher' => 'DEBIT NOTE', 'gst' => $debit_note)); ?>
-          <?php $this->load->view('trial_balances/gst_fields', array('gst_voucher' => 'DOMESTIC LABOUR', 'gst' => $profit_and_loss['sale_account_domestic_Labour'])); ?>
-          <?php $this->load->view('trial_balances/gst_fields', array('gst_voucher' => 'EXPORT SALE', 'gst' => $profit_and_loss['sale_account_export_Sale'])); ?>
+          <?php $this->load->view('trial_balances/gst_fields', array('gst_voucher' => 'DOMESTIC LABOUR', 'gst' => $sale_domestic_Labour)); ?>
+          <?php $this->load->view('trial_balances/gst_fields', array('gst_voucher' => 'EXPORT SALE', 'gst' => $sale_export_Sale)); ?>
           <tr>
             <th>TOTAL</th>
             <th class="text-right"><?= four_decimal($total_income_amount, '-') ?></th>
