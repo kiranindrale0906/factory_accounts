@@ -216,7 +216,7 @@ class Trial_balances extends Ledgers {
                IFNULL((sum(debit_weight*purity)/100),0) - IFNULL((sum(credit_weight*factory_purity)/100),0) as fine,
                IFNULL(sum((purity-factory_purity)*debit_weight/100),0) - IFNULL(sum((factory_purity-purity)*credit_weight/100),0) as vadotar,
                IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount,0 as id";
-    $this->data['purchase_sales_account_domestic_export_records'] = $this->model->get($select, array('account_name' => array('SALES ACCOUNT', 'PURCHASE ACCOUNT')), array(),  
+    $this->data['purchase_sales_account_domestic_export_records'] = $this->model->get($purchase_sales_account_domestic_export_select, array('account_name' => array('SALES ACCOUNT', 'PURCHASE ACCOUNT')), array(),  
                                                                                       array('group_by'=>'account_name, is_export'));
 
 
