@@ -212,7 +212,7 @@ class Trial_balances extends Ledgers {
                                                       array('group_by'=>'account_name,',
                                                             'order_by'=>'account_name asc'));
 
-    $purchase_sales_account_domestic_export_select = "account_name, 
+    $purchase_sales_account_domestic_export_select = "account_name, IFNULL(is_export, 0) as is_export,
                IFNULL((sum(debit_weight*purity)/100),0) - IFNULL((sum(credit_weight*factory_purity)/100),0) as fine,
                IFNULL(sum((purity-factory_purity)*debit_weight/100),0) - IFNULL(sum((factory_purity-purity)*credit_weight/100),0) as vadotar,
                IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount,0 as id";
