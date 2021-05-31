@@ -76,19 +76,19 @@
           </thead>
 
           <tr>
-            <td>PURCHASE DOMESTIC</td>
+            <td>DOMESTIC</td>
             <td class="text-right"><?= four_decimal($purchase_domestic_amount, '-') ?></td>
             <td class="text-right"><?= four_decimal($purchase_domestic_rate, '-'); ?></td>
             <td class="text-right"><?= four_decimal($purchase_domestic_fine, '-'); ?></td>
           </tr>
           <tr>
-            <td>PURCHASE EXPORT</td>
+            <td>IMPORT</td>
             <td class="text-right"><?= four_decimal($purchase_export_amount, '-') ?></td>
             <td class="text-right"><?= four_decimal($purchase_export_rate, '-'); ?></td>
             <td class="text-right"><?= four_decimal($purchase_export_fine, '-'); ?></td>
           </tr>
           <tr>
-            <th>PURCHASE ACCOUNT</th>
+            <th>TOTAL PURCHASE</th>
             <th class="text-right"><?= four_decimal($purchase_amount, '-') ?></th>
             <th class="text-right"><?= four_decimal($purchase_rate, '-'); ?></th>
             <th class="text-right"><?= four_decimal($purchase_fine, '-'); ?></th>
@@ -134,19 +134,19 @@
             </tr>
           </thead>
           <tr>
-            <td>SALES DOMESTIC</td>
+            <td>DOMESTIC</td>
             <td class="text-right"><?= four_decimal($sales_domestic_amount, '-') ?>  </td>
             <td class="text-right"><?= four_decimal($sales_domestic_rate, '-'); ?>  </td>
             <td class="text-right"><?= four_decimal($sales_domestic_fine, '-'); ?></td>
           </tr>
           <tr>
-            <td>SALES EXPORT</td>
+            <td>EXPORT</td>
             <td class="text-right"><?= four_decimal($sales_export_amount, '-') ?>  </td>
             <td class="text-right"><?= four_decimal($sales_export_rate, '-'); ?>  </td>
             <td class="text-right"><?= four_decimal($sales_export_fine, '-'); ?></td>
           </tr>
           <tr>
-            <th>SALES ACCOUNT</th>
+            <th>TOTAL SALE</th>
             <th class="text-right"><?= four_decimal($sales_amount, '-') ?>  </th>
             <th class="text-right"><?= four_decimal($sales_rate, '-'); ?>  </th>
             <th class="text-right"><?= four_decimal($sales_fine, '-'); ?></th>
