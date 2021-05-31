@@ -1,7 +1,23 @@
 <?php 
-  $purchase_fine = !empty($profit_and_loss['purchase_account']['fine']) ? $profit_and_loss['purchase_account']['fine'] : 0;
-  $purchase_rate = !empty($profit_and_loss['purchase_account']['fine']) ? -1 * $profit_and_loss['purchase_account']['amount'] / $profit_and_loss['purchase_account']['fine'] : 0;
-  $purchase_amount = !empty($profit_and_loss['purchase_account']['amount']) ? -1 * $profit_and_loss['purchase_account']['amount'] : 0;
+  $domestic_export_records = array();
+  foreach($purchase_sales_account_domestic_export_records as $domestic_export_record) 
+    $domestic_export_records[$domestic_export_record['account_name']][$domestic_export_records['is_export']] = $domestic_export_record;
+  
+  $purchase_domestic_fine = !empty($domestic_export_records['PURCHASE ACCOUNT'][0]['fine']) ? $domestic_export_records['PURCHASE ACCOUNT'][0]['fine'] : 0;
+  $purchase_domestic_rate = !empty($domestic_export_records['PURCHASE ACCOUNT'][0]['fine']) ? -1 * $domestic_export_records['PURCHASE ACCOUNT'][0]['amount'] / $domestic_export_records['PURCHASE ACCOUNT'][0]['fine'] : 0;
+  $purchase_domestic_amount = !empty($domestic_export_records['PURCHASE ACCOUNT'][0]['amount']) ? -1 * $domestic_export_records['PURCHASE ACCOUNT'][0]['amount'] : 0;
+
+  $purchase_export_fine = !empty($domestic_export_records['PURCHASE ACCOUNT'][1]['fine']) ? $domestic_export_records['PURCHASE ACCOUNT'][1]['fine'] : 0;
+  $purchase_export_rate = !empty($domestic_export_records['PURCHASE ACCOUNT'][1]['fine']) ? -1 * $domestic_export_records['PURCHASE ACCOUNT'][1]['amount'] / $domestic_export_records['PURCHASE ACCOUNT'][1]['fine'] : 0;
+  $purchase_export_amount = !empty($domestic_export_records['PURCHASE ACCOUNT'][1]['amount']) ? -1 * $domestic_export_records['PURCHASE ACCOUNT'][1]['amount'] : 0;
+
+  $sales_domestic_fine = !empty($domestic_export_records['SALES ACCOUNT'][0]['fine']) ? -1 * $domestic_export_records['SALES ACCOUNT'][0]['fine'] : 0;
+  $sales_domestic_rate = !empty($domestic_export_records['SALES ACCOUNT'][0]['fine']) ? -1 * $domestic_export_records['SALES ACCOUNT'][0]['amount'] / $domestic_export_records['SALES ACCOUNT'][0]['fine'] : 0;
+  $sales_domestic_amount = !empty($domestic_export_records['SALES ACCOUNT'][0]['amount']) ? $domestic_export_records['SALES ACCOUNT'][0]['amount'] : 0;
+
+  $sales_export_fine = !empty($domestic_export_records['SALES ACCOUNT'][1]['fine']) ? -1 * $domestic_export_records['SALES ACCOUNT'][1]['fine'] : 0;
+  $sales_export_rate = !empty($domestic_export_records['SALES ACCOUNT'][1]['fine']) ? -1 * $domestic_export_records['SALES ACCOUNT'][1]['amount'] / $domestic_export_records['SALES ACCOUNT'][1]['fine'] : 0;
+  $sales_export_amount = !empty($domestic_export_records['SALES ACCOUNT'][1]['amount']) ? $domestic_export_records['SALES ACCOUNT'][1]['amount'] : 0;
 
   $main_vadotar_fine = @$profit_and_loss['main_vadotar']['fine'];
   $main_vadotar_amount = $main_vadotar_rate = 0;
@@ -9,23 +25,27 @@
   $pending_vadotar_fine = -1 * $profit_and_loss['pending_vadotar'];
   $pending_vadotar_amount = $pending_vadotar_rate = 0;
 
-  $sales_fine = !empty($profit_and_loss['sales_account']['fine']) ? -1 * $profit_and_loss['sales_account']['fine'] : 0;
-  $sales_rate = !empty($profit_and_loss['sales_account']['fine']) ? (-1 * $profit_and_loss['sales_account']['amount'] / $profit_and_loss['sales_account']['fine']) : 0;
-  $sales_amount = !empty($profit_and_loss['sales_account']['amount']) ? $profit_and_loss['sales_account']['amount'] : 0;
+  //$purchase_fine = !empty($profit_and_loss['purchase_account']['fine']) ? $profit_and_loss['purchase_account']['fine'] : 0;
+  $purchase_rate = !empty($profit_and_loss['purchase_account']['fine']) ? -1 * $profit_and_loss['purchase_account']['amount'] / $profit_and_loss['purchase_account']['fine'] : 0;
+  //$purchase_amount = !empty($profit_and_loss['purchase_account']['amount']) ? -1 * $profit_and_loss['purchase_account']['amount'] : 0;
 
-  $closing_fine = $purchase_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_fine;
+  //$sales_fine = !empty($profit_and_loss['sales_account']['fine']) ? -1 * $profit_and_loss['sales_account']['fine'] : 0;
+  $sales_rate = !empty($profit_and_loss['sales_account']['fine']) ? (-1 * $profit_and_loss['sales_account']['amount'] / $profit_and_loss['sales_account']['fine']) : 0;
+  //$sales_amount = !empty($profit_and_loss['sales_account']['amount']) ? $profit_and_loss['sales_account']['amount'] : 0;
+
+  $closing_fine = $purchase_domestic_fine + $purchase_export_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_domestic_fine - $sales_export_fine;
   $closing_rate = $gold_rate / .995 / 10;
   $closing_amount = $closing_fine * $closing_rate;
 
-  $total_sales_with_closing_amount = $sales_amount + $closing_amount;
-  $total_sales_with_closing_fine = $sales_fine + $closing_fine;
+  $total_sales_with_closing_amount = $sales_domestic_amount + $sales_export_amount + $closing_amount;
+  $total_sales_with_closing_fine = $sales_domestic_fine + $sales_export_fine + $closing_fine;
   $total_sales_with_closing_rate = $total_sales_with_closing_amount / $total_sales_with_closing_fine;
 
   $exchange_gain_loss_fine = $total_sales_with_closing_fine;
   $exchange_gain_loss_rate = $purchase_rate - $total_sales_with_closing_rate;
   $exchange_gain_loss_amount = $exchange_gain_loss_fine * $exchange_gain_loss_rate;
 
-  $total_income_amount = $sales_amount + $closing_amount + $exchange_gain_loss_amount;
+  $total_income_amount = $sales_domestic_amount + $sales_export_amount + $closing_amount + $exchange_gain_loss_amount;
   $total_income_fine = $total_sales_with_closing_fine;
   $total_income_rate = $total_income_amount / $total_income_fine;
 
@@ -34,7 +54,7 @@
   $gross_profit_amount = $total_income_amount - $purchase_amount;
 
   $total_expenses_amount = $purchase_amount + $gross_profit_amount;
-  $total_expenses_fine = $purchase_fine + $main_vadotar_fine + $pending_vadotar_fine;
+  $total_expenses_fine = $purchase_domestic_fine + $purchase_export_fine + $main_vadotar_fine + $pending_vadotar_fine;
   $total_expenses_rate = 0;
 ?>
 
@@ -56,10 +76,22 @@
           </thead>
 
           <tr>
-            <td>PURCHASE ACCOUNT</td>
-            <td class="text-right"><?= four_decimal($purchase_amount, '-') ?></td>
-            <td class="text-right"><?= four_decimal($purchase_rate, '-'); ?></td>
-            <td class="text-right"><?= four_decimal($purchase_fine, '-'); ?></td>
+            <td>PURCHASE DOMESTIC</td>
+            <td class="text-right"><?= four_decimal($purchase_domestic_amount, '-') ?></td>
+            <td class="text-right"><?= four_decimal($purchase_domestic_rate, '-'); ?></td>
+            <td class="text-right"><?= four_decimal($purchase_domestic_fine, '-'); ?></td>
+          </tr>
+          <tr>
+            <td>PURCHASE EXPORT</td>
+            <td class="text-right"><?= four_decimal($purchase_export_amount, '-') ?></td>
+            <td class="text-right"><?= four_decimal($purchase_export_rate, '-'); ?></td>
+            <td class="text-right"><?= four_decimal($purchase_export_fine, '-'); ?></td>
+          </tr>
+          <tr>
+            <th>PURCHASE ACCOUNT</th>
+            <th class="text-right"><?= four_decimal($purchase_amount, '-') ?></th>
+            <th class="text-right"><?= four_decimal($purchase_rate, '-'); ?></th>
+            <th class="text-right"><?= four_decimal($purchase_fine, '-'); ?></th>
           </tr>
           <tr>
             <td>Main Vadotar</td>
@@ -102,10 +134,22 @@
             </tr>
           </thead>
           <tr>
-            <td>SALES ACCOUNT</td>
-            <td class="text-right"><?= four_decimal($sales_amount, '-') ?>  </td>
-            <td class="text-right"><?= four_decimal($sales_rate, '-'); ?>  </td>
-            <td class="text-right"><?= four_decimal($sales_fine, '-'); ?></td>
+            <td>SALES DOMESTIC</td>
+            <td class="text-right"><?= four_decimal($sales_domestic_amount, '-') ?>  </td>
+            <td class="text-right"><?= four_decimal($sales_domestic_rate, '-'); ?>  </td>
+            <td class="text-right"><?= four_decimal($sales_domestic_fine, '-'); ?></td>
+          </tr>
+          <tr>
+            <td>SALES EXPORT</td>
+            <td class="text-right"><?= four_decimal($sales_export_amount, '-') ?>  </td>
+            <td class="text-right"><?= four_decimal($sales_export_rate, '-'); ?>  </td>
+            <td class="text-right"><?= four_decimal($sales_export_fine, '-'); ?></td>
+          </tr>
+          <tr>
+            <th>SALES ACCOUNT</th>
+            <th class="text-right"><?= four_decimal($sales_amount, '-') ?>  </th>
+            <th class="text-right"><?= four_decimal($sales_rate, '-'); ?>  </th>
+            <th class="text-right"><?= four_decimal($sales_fine, '-'); ?></th>
           </tr>
           <tr>
             <td>Closing Stock</td>
