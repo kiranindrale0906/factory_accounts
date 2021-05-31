@@ -13,14 +13,22 @@
                              'class' => 'autocomplete_list_selection',
                              'data-table'=>'ac_account',
                              'data-column'=>'name',
-                             'data-list-title'=>'Account Name')); 
-        if(in_array($record['voucher_type'], array('cash receipt voucher','cash issue voucher'))){
+                             'data-list-title'=>'Account Name')); ?>
+  </div>
+  <div class="row">        
+    <?php    if(in_array($record['voucher_type'], array('cash receipt voucher','cash issue voucher'))){
           load_field('text', array('field' => 'taxable_amount')); 
-          load_field('text', array('field' => 'cgst_amount')); 
+          load_field('text', array('field' => 'cgst_amount'));  
+        }?>
+  </div>
+  <div class="row">        
+    <?php    if(in_array($record['voucher_type'], array('cash receipt voucher','cash issue voucher'))){
           load_field('text', array('field' => 'sgst_amount')); 
           load_field('text', array('field' => 'tcs_amount')); 
-        }
-        load_field('date',array('field' => 'voucher_date',
+        }?>
+  </div>
+  <div class="row">        
+    <?php    load_field('date',array('field' => 'voucher_date',
                                   'value'=>(!empty($record['voucher_date'])?date('d-m-Y',strtotime($record['voucher_date'])):date('d-m-Y')), 
                                   'class' => 'datepicker_js'));
         load_field('plain/checkbox',

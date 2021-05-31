@@ -1,6 +1,6 @@
 <?php
 
-function get_tax_fields($factory_fine, $fine, $sale_type, $gold_rate, $gold_rate_purity, $created_at) {
+function get_tax_fields($factory_fine, $fine, $sale_type, $gold_rate, $gold_rate_purity, $created_at,$export = 0) {
   $tcs_rate=0;
   if (strtotime($created_at) > strtotime('2021-03-30')) 
     $tcs_rate=0.1;
@@ -19,12 +19,22 @@ function get_tax_fields($factory_fine, $fine, $sale_type, $gold_rate, $gold_rate
     $fields['weight'] = ($factory_fine > $fine) ? $factory_fine : $fine;
     if ($fields['weight']==0) $fields['weight'] = $factory_fine;
   }
-  $fields['taxable_amount'] = $fields['weight'] * $gold_rate * $gold_rate_purity / 100;
-  $fields['cgst_amount']    = $fields['taxable_amount'] * $fields['gst_rate'] / 100;
-  $fields['sgst_amount']    = $fields['taxable_amount'] * $fields['gst_rate'] / 100;
-  $fields['total_amount']   = $fields['taxable_amount'] + $fields['cgst_amount'] + $fields['sgst_amount'];
-  $fields['tcs_amount']     = $fields['total_amount'] * $fields['tcs_rate'] / 100;
-  $fields['grand_total']    = round($fields['total_amount'] + $fields['tcs_amount']);
+  if($export==1){
+    $fields['taxable_amount'] = $fields['weight'] * $gold_rate * $gold_rate_purity / 100;
+    $fields['cgst_amount']    = 0;
+    $fields['sgst_amount']    = 0;
+    $fields['total_amount']   = $fields['taxable_amount'] + $fields['cgst_amount'] + $fields['sgst_amount'];
+    $fields['tcs_amount']     = 0;
+    $fields['grand_total']    = round($fields['total_amount'] + $fields['tcs_amount']);
+  
+  }else{
+    $fields['taxable_amount'] = $fields['weight'] * $gold_rate * $gold_rate_purity / 100;
+    $fields['cgst_amount']    = $fields['taxable_amount'] * $fields['gst_rate'] / 100;
+    $fields['sgst_amount']    = $fields['taxable_amount'] * $fields['gst_rate'] / 100;
+    $fields['total_amount']   = $fields['taxable_amount'] + $fields['cgst_amount'] + $fields['sgst_amount'];
+    $fields['tcs_amount']     = $fields['total_amount'] * $fields['tcs_rate'] / 100;
+    $fields['grand_total']    = round($fields['total_amount'] + $fields['tcs_amount']);
+  }
   return $fields;
 }
 

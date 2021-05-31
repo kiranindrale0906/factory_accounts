@@ -10,9 +10,20 @@
   <div class="row">    
     <?php 
       load_field('text', array('field' => 'gold_rate')); 
-      load_field('dropdown', array('field' => 'gold_rate_purity', 'option' => get_gold_rate_purities())); 
-      load_field('dropdown', array('field' => 'sale_type', 'option' => get_sale_types())); 
+      load_field('dropdown', array('field' => 'gold_rate_purity', 'option' => get_gold_rate_purities())); ?>
+  </div>
+  <?php    if(in_array($record['voucher_type'], array('metal receipt voucher'))){?>
+  <div class="row">        
+    <?php  load_field('dropdown', array('field' => 'sale_type', 'option' => get_sale_types())); 
+      load_field('plain/checkbox',
+                  array('field'=>'is_export',
+                        'check_inline'=>true,
+                        'option'=> array(
+                                    array('label_for' => 'Import',
+                                          'label'=> 'Import',
+                                          'value' =>'1',))));
     ?>
   </div>
+<?php }?>
   <?php load_buttons('submit', array('controller' => $controller, 'name' => 'SAVE' , 'class' => 'btn_blue')) ?>
 </form>

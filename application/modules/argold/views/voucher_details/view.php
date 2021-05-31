@@ -83,7 +83,7 @@
 <?php
 if(in_array($record['voucher_type'], array('metal receipt voucher','metal issue voucher','rate cut issue voucher','rate cut receipt voucher'))){
   if ($record['gold_rate'] > 0) { 
-    $tax_fields = get_tax_fields($record['factory_fine'], $record['fine'], $record['sale_type'], $record['gold_rate'], $record['gold_rate_purity'],$record['created_at']);
+    $tax_fields = get_tax_fields($record['factory_fine'], $record['fine'], $record['sale_type'], $record['gold_rate'], $record['gold_rate_purity'],$record['created_at'],$record['is_export']);
     ?>
     <div class="row">
       <div class="col-md-6">

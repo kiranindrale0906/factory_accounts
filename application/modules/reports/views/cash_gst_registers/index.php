@@ -1,8 +1,20 @@
 <?php 
-  $url = 'reports/purchase_registers';
+  $url = 'reports/cash_gst_registers';
 ?>
   <h6 class="heading blue bold text-uppercase mb-0">Cash GST Register Reports</h6>
   <hr>
+  <div class="row"> 
+  <div class="col-md-6">
+    <div class="form-group container"> 
+      <h5> Account Name:
+        <a class="ml-5 <?= ($account_name== "PURCHASE ACCOUNT") ? 'bold blue underline' : 'bold black' ?>" 
+               href='<?= base_url().$url ?>?account_name=PURCHASE ACCOUNT'><?= 'PURCHASE ACCOUNT' ?></a>
+        <a class="ml-5 <?= ($account_name== "SALES ACCOUNT") ? 'bold blue underline' : 'bold black' ?>" 
+               href='<?= base_url().$url ?>?account_name=SALES ACCOUNT'><?= 'SALES ACCOUNT' ?></a>
+      </h5>
+    </div>
+  </div>
+</div>  
 <div class="table-responsive">
   <table class="table table-sm table-default">
     <thead>
@@ -15,6 +27,7 @@
         <th class="text-right">CGST Amount</th>
         <th class="text-right">SGST Amount</th>
         <th class="text-right">TCS Amount</th>
+        <th class="text-right"></th>
         <th class="text-right"></th>
         </tr>
     </thead>
@@ -40,6 +53,7 @@
         <td class="text-right"><?=!empty($record['sgst_amount'])?four_decimal($record['sgst_amount']):'-'; ?></td>
         <td class="text-right"><?=!empty($record['tcs_amount'])?four_decimal($record['tcs_amount']):'-'; ?></td>
         
+        <td class="text-right"><a href="<?=base_url().'/argold/metal_issue_account_names/edit/'.$record['id']?>">Edit</a></td>
         <td class="text-right"><a href="<?=base_url().'/argold/voucher_details/view/'.$record['id']?>">View</a></td>
        
       </tr>
@@ -53,6 +67,7 @@
     <td class="text-right"><?=$total_cgst_amount?></td>
     <td class="text-right"><?=$total_sgst_amount?></td>
     <td class="text-right"><?=$total_tcs_amount?></td>
+    <td class="text-right"></td>
     <td class="text-right"></td>
   </tr>
     </tbody>
