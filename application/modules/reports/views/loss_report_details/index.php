@@ -70,7 +70,7 @@
           <?php }?>
         </td>
        <td class="text-right">
-          <a href=<?= $factory_url."processes/process_quators/edit/".$loss_out_detail['parent_id'] ?> target='_blank' >Add Quartor</a>
+          <a href=<?= $factory_url."processes/process_quators/edit/".$loss_out_detail['id'] ?> target='_blank' >Add Quartor</a>
         </td>
          
       </tr>
