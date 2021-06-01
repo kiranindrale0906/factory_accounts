@@ -92,7 +92,7 @@
     <td class="text-right"><?=!empty($sum_fine)?four_decimal($sum_after_recovery/$sum_fine*100):'-'?></td>
     <td class="text-right"></td>
     <td></td>
-    <!-- <td></td> -->
+    <td></td>
   </tr>
     </tbody>
   </table>
