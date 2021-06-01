@@ -21,6 +21,7 @@ class Loss_report_details extends Ledgers {
     $data['department_name']=$_GET['category'];
     $data['quator']='';
     $url=API_ARG_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
+    pd($data);
     $arg_jan2021_records=json_decode(curl_post_request($url,$data),true);
     $ghiss_melting_loss=array();
     $arg_jan2021_records=!empty($arg_jan2021_records)?$arg_jan2021_records['data']['loss_details']['loss_detail']:$jan2021_records['data']['loss_details']['loss_detail']=array();
