@@ -201,7 +201,7 @@ class Trial_balances extends Ledgers {
     
     $where=array();
     if(!empty($this->data['loss_date'])){
-      $where['date(voucher_date) <=']=date('Y-m-d',strtotime($this->data['loss_date']));
+      $where['date(voucher_date) <=']=date('Y-m-d', strtotime($this->data['loss_date']));
     }
 
     $select = "account_name, 
@@ -211,6 +211,14 @@ class Trial_balances extends Ledgers {
     $this->data['trial_balance'] = $this->model->get($select,$where, array() , 
                                                       array('group_by'=>'account_name,',
                                                             'order_by'=>'account_name asc'));
+
+    $purchase_sales_account_domestic_export_select = "account_name, IFNULL(is_export, 0) as is_export,
+               IFNULL((sum(debit_weight*purity)/100),0) - IFNULL((sum(credit_weight*factory_purity)/100),0) as fine,
+               IFNULL(sum((purity-factory_purity)*debit_weight/100),0) - IFNULL(sum((factory_purity-purity)*credit_weight/100),0) as vadotar,
+               IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount,0 as id";
+    $this->data['purchase_sales_account_domestic_export_records'] = $this->model->get($purchase_sales_account_domestic_export_select, array('account_name' => array('SALES ACCOUNT', 'PURCHASE ACCOUNT')), array(),  
+                                                                                      array('group_by'=>'account_name, is_export'));
+
 
     $loss_account = array('account_name' => 'LOSS ACCOUNT',
                           'fine' => 0, 'vadotar' => 0, 'amount' => 0);
