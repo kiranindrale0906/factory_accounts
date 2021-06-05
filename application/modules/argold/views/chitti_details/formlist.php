@@ -10,6 +10,8 @@
       <th class="text-right">Weight</th>
       <th class="text-right">Factory Purity</th>
       <th class="text-right">Wastage</th>
+      <th class="text-right">USD Wastage</th>
+      <th class="text-right">INR Wastage</th>
       <th class="text-right">Issue Fine</th>
     </tr>
   </thead>
@@ -29,6 +31,8 @@
       <th></th>
       <th></th>
       <th class="text-right"><?= four_decimal($weight) ?></th>
+      <th></th>
+      <th></th>
       <th></th>
       <th></th>
       <th class="text-right"><?= four_decimal($issue_fine) ?></th>

@@ -19,5 +19,7 @@
   	<td class="text-right"><?= four_decimal($vouchers['credit_weight']) ;?></td>
 	<td class="text-right"><?= four_decimal($vouchers['purity']); ?></td>
         <td class="text-right"><?= four_decimal($vouchers['factory_purity'] - $vouchers['purity']) ?></td>
+        <td class="text-right"><?= four_decimal($vouchers['usd_wastage_percentage']) ?></td>
+        <td class="text-right"><?= four_decimal($vouchers['inr_wastage_percentage']) ?></td>
 	<td class="text-right"><?= four_decimal($vouchers['credit_weight']*$vouchers['factory_purity']/100); ?></td>
 </tr>

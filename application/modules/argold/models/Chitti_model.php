@@ -79,7 +79,7 @@ class Chitti_model extends BaseModel {
     $ounce_gram_rate=$this->attributes['ounce_rate']/31.1034;
 
     $this->attributes['ounce_gram_rate']=four_decimal($ounce_gram_rate);
-    $this->attributes['taxable_usd_amount']=$this->attributes['fine'] * four_decimal($ounce_gram_rate);
+    $this->attributes['taxable_usd_amount']=$this->attributes['credit_weight'] * four_decimal($ounce_gram_rate);
 
     $inr_amount=$this->attributes['usd_rate']*($this->attributes['taxable_usd_amount']+$this->attributes['premium_usd_amount']+$this->attributes['labour_usd_amount']+$this->attributes['freight_usd_amount']);
    

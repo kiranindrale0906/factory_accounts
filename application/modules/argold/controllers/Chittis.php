@@ -63,11 +63,25 @@ class Chittis extends BaseController {
       $where['account_name']=$this->data['record']['account_name'];
     
       $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,
-                         (sum(credit_weight*purity) / sum(credit_weight)) as purity,
-                         (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,
-                         "" as voucher_number,packet_no,voucher_date,customer_name,group_concat(narration) as narration, argold_id as argold_id', 
-                         $where, array(), array('group_by'=>'packet_no, voucher_date, argold_id,customer_name'));
-     
+                                                                (sum(credit_weight*purity) / sum(credit_weight)) as purity,
+                                                                (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,
+                                                                "" as voucher_number,
+                                                                packet_no,
+                                                                voucher_date,
+                                                                customer_name,
+                                                                usd_wastage_percentage,
+                                                                inr_wastage_percentage,
+                                                                customer_name,
+                                                                group_concat(narration) as narration,
+                                                                argold_id as argold_id', 
+                                                                $where, 
+                                                                array(), 
+                                                                array('group_by'=>'packet_no,
+                                                                                   usd_wastage_percentage,
+                                                                                   inr_wastage_percentage,
+                                                                                   voucher_date, 
+                                                                                   argold_id,customer_name'));
+
 
     } else
       $this->data['metal_vouchers'] = array();

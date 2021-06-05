@@ -99,7 +99,7 @@ function get_field_attribute($table, $field) {
     'stone_amount'   => array('Stone Amount', '', TRUE, '', TRUE),
     'manual_taxable_amount'   => array('Manual Taxable Amount', '', TRUE, '', TRUE),
     'ounce_rate'   => array('Ounce Rate', '', FALSE, '', TRUE),
-    'usd_rate'   => array('Usd Rate', '', FALSE, '', TRUE),
+    'usd_rate'   => array('USD Rate', '', FALSE, '', TRUE),
     'premium_rate'   => array('Premium Rate', '', FALSE, '', TRUE),
     'premium_usd_amount'   => array('Premium USD Amount', '', FALSE, '', TRUE),
     'labour_rate'   => array('Labour Rate', '', FALSE, '', TRUE),

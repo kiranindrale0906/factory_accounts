@@ -7,6 +7,7 @@
   <div class="col-md-6 ">
     <div class="form-group container">
       <p><h6>Chitti: <?=$record['chitti_id']?> </h6></p>
+      <p><h6>Packet no: <?=$record['packet_no']?> </h6></p>
       <p><h6>IS EXPORT: <?=$record['is_export']?> </h6></p>
       <p><h6>AC Name: <?=$record['account_name']?> </h6></p>
       <p><h6>Voucher Type: <?=$record['voucher_type']?> </h6></p>
