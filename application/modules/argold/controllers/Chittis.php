@@ -54,8 +54,8 @@ class Chittis extends BaseController {
     
     $this->data['record']['site_name'] = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'AR Gold Jan 2021';
     $where=array('voucher_type' => 'metal issue voucher',
-                 /*'chitti_id' => '',
-                 'packet_no!=' => 0,
+                 'chitti_id' => '',
+                 /*'packet_no!=' => 0,
                  'site_name' => $this->data['record']['site_name']*/);
     if (!empty($_GET['purity'])) $where['purity'] = $_GET['purity'];
 
