@@ -20,6 +20,7 @@ class Chittis extends BaseController {
     $this->data['account_id']='';
     $this->data['metal_voucher_details'] = $this->voucher_model->get('', array('voucher_type' => 'metal issue voucher',
                                                                                'chitti_id' => $this->data['record']['id']));
+    pd($this->data['metal_voucher_details']);
     // $this->data['metal_voucher_details'] = $this->voucher_model->get('', array('voucher_type'=>'metal issue voucher',
     //                                                                            'chitti_id'=>$this->data['record']['id']));
     $packet_no = array_column($this->data['metal_voucher_details'], 'packet_no');
@@ -56,7 +57,7 @@ class Chittis extends BaseController {
     $where=array('voucher_type' => 'metal issue voucher',
                  'chitti_id' => '',
                  'packet_no!=' => 0,
-                 /*'site_name' => $this->data['record']['site_name']*/);
+                 'site_name' => $this->data['record']['site_name']);
     if (!empty($_GET['purity'])) $where['purity'] = $_GET['purity'];
 
     if(!empty($this->data['record']['account_name'])) { 
