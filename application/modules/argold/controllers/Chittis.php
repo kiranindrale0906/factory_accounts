@@ -20,7 +20,6 @@ class Chittis extends BaseController {
     $this->data['account_id']='';
     $this->data['metal_voucher_details'] = $this->voucher_model->get('', array('voucher_type' => 'metal issue voucher',
                                                                                'chitti_id' => $this->data['record']['id']));
-    pd($this->data['metal_voucher_details']);
     // $this->data['metal_voucher_details'] = $this->voucher_model->get('', array('voucher_type'=>'metal issue voucher',
     //                                                                            'chitti_id'=>$this->data['record']['id']));
     $packet_no = array_column($this->data['metal_voucher_details'], 'packet_no');
