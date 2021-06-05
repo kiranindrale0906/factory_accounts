@@ -61,7 +61,10 @@ class Chittis extends BaseController {
 
     if(!empty($this->data['record']['account_name'])) { 
       $where['account_name']=$this->data['record']['account_name'];
-    
+    pd($this->voucher_model->get('*',$where,));
+      
+
+
       $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,
                                                                 (sum(credit_weight*purity) / sum(credit_weight)) as purity,
                                                                 (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,
@@ -81,7 +84,7 @@ class Chittis extends BaseController {
                                                                                    inr_wastage_percentage,
                                                                                    voucher_date, 
                                                                                    argold_id,customer_name'));
-      
+
 
 
     } else

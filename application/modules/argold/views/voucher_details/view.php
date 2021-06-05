@@ -64,6 +64,8 @@
       <p><h6>SGST Amount :<?=$record['sgst_amount']?></h6></p>
       <p><h6>TCS Amount :<?=$record['tcs_amount']?></h6></p>
     <?php }?>
+      <p><h6>USD Wastage %: <?=$record['usd_wastage_percentage']?></h6></p>
+      <p><h6>INR Wastage %: <?=$record['inr_wastage_percentage']?></h6></p>
       <p><h6>Date : <?=date('d-m-Y',strtotime($record['created_at']))?></h6></p>
     </div>
   </div>
