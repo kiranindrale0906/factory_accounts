@@ -61,12 +61,8 @@ class Chittis extends BaseController {
 
     if(!empty($this->data['record']['account_name'])) { 
       $where['account_name']=$this->data['record']['account_name'];
-      $details=$this->voucher_model->get('*',$where);
-    pd($details);
-      
 
-
-      $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,
+    $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,
                                                                 (sum(credit_weight*purity) / sum(credit_weight)) as purity,
                                                                 (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,
                                                                 "" as voucher_number,
