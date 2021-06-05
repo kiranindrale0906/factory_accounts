@@ -81,6 +81,7 @@ class Chittis extends BaseController {
                                                                                    inr_wastage_percentage,
                                                                                    voucher_date, 
                                                                                    argold_id,customer_name'));
+      lq();
 
 
     } else
