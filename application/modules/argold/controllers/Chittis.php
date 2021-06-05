@@ -61,7 +61,7 @@ class Chittis extends BaseController {
 
     if(!empty($this->data['record']['account_name'])) { 
       $where['account_name']=$this->data['record']['account_name'];
-      $details=$this->voucher_model->get('*',$where)
+      $details=$this->voucher_model->get('*',$where);
     pd($details);
       
 
