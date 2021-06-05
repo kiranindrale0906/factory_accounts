@@ -16,10 +16,19 @@
     <?php load_field('text',array('field' => 'packet_gross_weight'));  ?>
     <?php load_field('text',array('field' => 'manual_taxable_amount'));  ?>
     <?php load_field('text',array('field' => 'stone_amount'));  ?>
+
     <?php load_field('dropdown', array('field' => 'sale_type',
                                        'option'=> array(array('id' => 'Sale', 'name' => 'Sale'),
                                                         array('id' => 'Labour', 'name' => 'Labour'))));?>
     <?php load_field('text',array('field' => 'rate'));  ?>
+    <?php load_field('text',array('field' => 'ounce_rate'));  ?>
+    <?php load_field('text',array('field' => 'usd_rate'));  ?>
+    <?php //load_field('text',array('field' => 'premium_rate'));  ?>
+    <?php load_field('text',array('field' => 'premium_usd_amount'));  ?>
+    <?php //load_field('text',array('field' => 'labour_rate'));  ?>
+    <?php load_field('text',array('field' => 'labour_usd_amount'));  ?>
+    <?php load_field('text',array('field' => 'freight_usd_amount'));  ?>
+    
     <?php //load_field('text',array('field' => 'taxable_amount'));  ?>
   </div>
   <?php load_buttons('submit', array('controller' => $controller, 'name' => 'SAVE' , 'class' => 'btn_blue')) ;

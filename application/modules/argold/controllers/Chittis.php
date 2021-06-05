@@ -39,6 +39,14 @@ class Chittis extends BaseController {
   }
 
   public function _get_form_data() {
+    $this->data['account_name']=array(array('id'=>'OUTSIDE PARTY','name'=>'OUTSIDE PARTY'),
+                                      array('id'=>'EXPORT ACCOUNT','name'=>'EXPORT ACCOUNT'),
+                                      array('id'=>'EXPORT DIFF.','name'=>'EXPORT DIFF.'),
+                                      array('id'=>'Pani Trading Co.','name'=>'Pani Trading Co.'),
+                                      array('id'=>'SHREE RAM JEWELLER','name'=>'SHREE RAM JEWELLER'),
+                                      array('id'=>'TANISHQ','name'=>'TANISHQ'),
+                                      array('id'=>'TITAN DIFF.','name'=>'TITAN DIFF.'),
+                                    );
     if (!empty($_GET['account_name']))
       $this->data['record']['account_name'] = $_GET['account_name'];
     if (!empty($_GET['purity']))
@@ -53,20 +61,24 @@ class Chittis extends BaseController {
 
     if(!empty($this->data['record']['account_name'])) { 
       $where['account_name']=$this->data['record']['account_name'];
-      // pd($where);
     
       $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,
                          (sum(credit_weight*purity) / sum(credit_weight)) as purity,
                          (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,
                          "" as voucher_number,packet_no,voucher_date,customer_name,group_concat(narration) as narration, argold_id as argold_id', 
                          $where, array(), array('group_by'=>'packet_no, voucher_date, argold_id,customer_name'));
+     
 
     } else
       $this->data['metal_vouchers'] = array();
-
     $this->data['purity'] = $this->voucher_model->get('purity as name, purity as id', 
                                                        array('where'=>array(
-                                                               'account_name' => 'OUTSIDE PARTY',
+                                                               'account_name in ("OUTSIDE PARTY",
+                                                                                 "EXPORT ACCOUNT",
+                                                                                 "EXPORT DIFF.",
+                                                                                 "Pani Trading Co.",
+                                                                                 "SHREE RAM JEWELLER",
+                                                                                 "TANISHQ","TITAN DIFF.")' => NULL,
                                                                'voucher_type' => 'metal issue voucher',
                                                                'chitti_id' => 0,
                                                                'receipt_type in ("Finish Good","GPC Out")'=>NULL

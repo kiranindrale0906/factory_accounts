@@ -11,12 +11,9 @@
     <?php load_field('dropdown', array('field' => 'site_name',
                                        'option' => $site_names,
                                        'value' => $record['site_name']));?>
-    <?php load_field('text', array('field' => 'account_name',
-                             'class' => 'autocomplete_list_selection',
-                             'data-table'=>'ac_account',
-                             'data-column'=>'name',
-                             'value'=>'OUTSIDE PARTY',
-                             'data-list-title'=>'Account Name'));?>
+    <?php load_field('dropdown', array('field' => 'account_name',
+                                        'option'=>$account_name,
+                             ));?>
     <?php load_field('dropdown', array('field' => 'purity',
                                        'option'=>$purity));?>
     <?php load_field('date',array('field' => 'date','class'=>'datepicker_js')); ?>
@@ -29,6 +26,14 @@
                                        'option'=> array(array('id' => 'Sale', 'name' => 'Sale'),
                                                         array('id' => 'Labour', 'name' => 'Labour'))));?>
     <?php load_field('text',array('field' => 'rate'));  ?>
+    <?php load_field('text',array('field' => 'ounce_rate'));  ?>
+    <?php load_field('text',array('field' => 'usd_rate'));  ?>
+    <?php //load_field('text',array('field' => 'premium_rate'));  ?>
+    <?php load_field('text',array('field' => 'premium_usd_amount'));  ?>
+    <?php //load_field('text',array('field' => 'labour_rate'));  ?>
+    <?php load_field('text',array('field' => 'labour_usd_amount'));  ?>
+    <?php load_field('text',array('field' => 'freight_usd_amount'));  ?>
+    
   </div>
     <?php $this->load->view('chitti_details/formlist');?>
   <?php load_buttons('submit', array('controller' => $controller, 'name' => 'SAVE' , 'class' => 'btn_blue')) ;

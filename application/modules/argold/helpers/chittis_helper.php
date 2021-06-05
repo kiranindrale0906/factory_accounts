@@ -54,6 +54,13 @@ function list_settings() {
     array("Fine", "fine", FALSE, "fine", FALSE, FALSE),
     array("Issue Fine", "factory_fine", FALSE, "factory_fine", FALSE, FALSE),
     array("Amount", "debit_amount", FALSE, "debit_amount", FALSE, FALSE),
+    array("Ounce Rate", "ounce_rate", FALSE, "ounce_rate", FALSE, FALSE),
+    array("USD Rate", "usd_rate", FALSE, "usd_rate", FALSE, FALSE),
+    array("Premium Rate", "premium_rate", FALSE, "premium_rate", FALSE, FALSE),
+    array("Premium USD Amount", "premium_usd_amount", FALSE, "premium_usd_amount", FALSE, FALSE),
+    array("Labour Rate", "labour_rate", FALSE, "labour_rate", FALSE, FALSE),
+    array("Labour USD Amount", "labour_usd_amount", FALSE, "labour_usd_amount", FALSE, FALSE),
+    array("Freight USD Amount", "freight_usd_amount", FALSE, "freight_usd_amount", FALSE, FALSE),
     array("Action", "action", FALSE, "action", FALSE, FALSE),
   );
 }
@@ -75,7 +82,7 @@ function get_field_attribute($table, $field) {
   $attributes['chittis'] = array(
     'id'            => array('', '', TRUE, '', TRUE),
     'site_name'     => array('Factory Name', '', TRUE, '', TRUE),
-    'account_name'  => array('Account Name', '', TRUE, '', TRUE),
+    'account_name'  => array('Account Name', 'Select', TRUE, '', TRUE),
     'chitti_id'     => array('Chitti', 'Enter Chitti.', TRUE, '', TRUE),
     'purity'        => array('Purity', 'Select Purity.', TRUE, '', TRUE),
     'date'          => array('Date', 'Enter Date.', TRUE, '', TRUE),
@@ -91,6 +98,13 @@ function get_field_attribute($table, $field) {
     'taxable_amount'   => array('Taxable Amount', '', TRUE, '', TRUE),
     'stone_amount'   => array('Stone Amount', '', TRUE, '', TRUE),
     'manual_taxable_amount'   => array('Manual Taxable Amount', '', TRUE, '', TRUE),
+    'ounce_rate'   => array('Ounce Rate', '', FALSE, '', TRUE),
+    'usd_rate'   => array('Usd Rate', '', FALSE, '', TRUE),
+    'premium_rate'   => array('Premium Rate', '', FALSE, '', TRUE),
+    'premium_usd_amount'   => array('Premium USD Amount', '', FALSE, '', TRUE),
+    'labour_rate'   => array('Labour Rate', '', FALSE, '', TRUE),
+    'labour_usd_amount'   => array('Labour USD Amount', '', FALSE, '', TRUE),
+    'freight_usd_amount'   => array('Freight USD Amount', '', FALSE, '', TRUE),
 
   );
   

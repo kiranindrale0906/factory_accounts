@@ -49,6 +49,7 @@ class Chitti_model extends BaseModel {
       // $this->attributes['date'] = date('Y-m-d', strtotime($chitti_details['voucher_date']));
       $this->attributes['account_name'] = $this->attributes['account_name'];
       $this->attributes['packet_no'] = isset($chitti_details['packet_no'])?$chitti_details['packet_no']:0;
+
       $this->set_sales_amount_fields();
     }
   }
@@ -61,8 +62,11 @@ class Chitti_model extends BaseModel {
       $gst_rate = 1.5;
       $this->attributes['credit_weight'] = $this->attributes['factory_fine']; 
     }
-
+    $this->attributes['rate']=!empty($this->attributes['rate'])?$this->attributes['rate']:0;
+    $this->attributes['stone_amount']=!empty($this->attributes['stone_amount'])?$this->attributes['stone_amount']:0;
+    $this->attributes['manual_taxable_amount']=!empty($this->attributes['manual_taxable_amount'])?$this->attributes['manual_taxable_amount']:0;
     $taxable_amount = $this->attributes['credit_weight'] * $this->attributes['rate'];
+
     $this->attributes['discount']=$taxable_amount-$this->attributes['manual_taxable_amount'];
     if(!empty($this->attributes['manual_taxable_amount']) && $this->attributes['manual_taxable_amount']==0){
       $this->attributes['taxable_amount']=$this->attributes['manual_taxable_amount']+$this->attributes['stone_amount'];
@@ -71,7 +75,16 @@ class Chitti_model extends BaseModel {
     }
     $this->attributes['cgst_amount'] = $this->attributes['taxable_amount'] * $gst_rate / 100;
     $this->attributes['sgst_amount'] = $this->attributes['taxable_amount'] * $gst_rate / 100;
-    $total_amount = $this->attributes['taxable_amount'] + $this->attributes['cgst_amount'] + $this->attributes['sgst_amount'];
+
+    $ounce_gram_rate=$this->attributes['ounce_rate']/31.1034;
+
+    $this->attributes['ounce_gram_rate']=four_decimal($ounce_gram_rate);
+    $this->attributes['taxable_usd_amount']=$this->attributes['fine'] * four_decimal($ounce_gram_rate);
+
+    $inr_amount=$this->attributes['usd_rate']*($this->attributes['taxable_usd_amount']+$this->attributes['premium_usd_amount']+$this->attributes['labour_usd_amount']+$this->attributes['freight_usd_amount']);
+   
+    $total_amount = $this->attributes['taxable_amount'] + $this->attributes['cgst_amount'] + $this->attributes['sgst_amount']+$inr_amount;
+
     $tcs_rate=0;
     // pd(date('Y-m-d'));
     if((strtotime(date('Y-m-d'))>strtotime('2021-03-30'))){
