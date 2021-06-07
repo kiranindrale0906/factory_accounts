@@ -21,13 +21,13 @@
                                        'option'=> array(array('id' => 'Sale', 'name' => 'Sale'),
                                                         array('id' => 'Labour', 'name' => 'Labour'))));?>
     <?php load_field('text',array('field' => 'rate'));  ?>
-    <?php load_field('text',array('field' => 'ounce_rate'));  ?>
-    <?php load_field('text',array('field' => 'usd_rate'));  ?>
+    <?php //load_field('text',array('field' => 'ounce_rate'));  ?>
+    <?php //load_field('text',array('field' => 'usd_rate'));  ?>
     <?php //load_field('text',array('field' => 'premium_rate'));  ?>
-    <?php load_field('text',array('field' => 'premium_usd_amount'));  ?>
+    <?php //load_field('text',array('field' => 'premium_usd_amount'));  ?>
     <?php //load_field('text',array('field' => 'labour_rate'));  ?>
-    <?php load_field('text',array('field' => 'labour_usd_amount'));  ?>
-    <?php load_field('text',array('field' => 'freight_usd_amount'));  ?>
+    <?php //load_field('text',array('field' => 'labour_usd_amount'));  ?>
+    <?php //load_field('text',array('field' => 'freight_usd_amount'));  ?>
     
     <?php //load_field('text',array('field' => 'taxable_amount'));  ?>
   </div>

@@ -101,30 +101,30 @@
       </tr>
     <?php } ?>
  
-    <tr>
-      <td>USD Rate </td><td class="text-right"><h6><?=four_decimal($record['usd_rate'])?></h6>
+    <!-- <tr>
+      <td>USD Rate </td><td class="text-right"><h6><?//=four_decimal($record['usd_rate'])?></h6>
       </td>
     </tr>
     <tr>
-      <td>Ounce rate </td><td class="text-right"><h6><?=four_decimal($record['ounce_rate'])?></h6>
+      <td>Ounce rate </td><td class="text-right"><h6><?//=four_decimal($record['ounce_rate'])?></h6>
       </td>
     </tr>
     <tr>
-      <td>Taxable USD Amount </td><td class="text-right"><h6><?=four_decimal($record['taxable_usd_amount'])?></h6>
+      <td>Taxable USD Amount </td><td class="text-right"><h6><?//=four_decimal($record['taxable_usd_amount'])?></h6>
       </td>
     </tr>
     <tr>
-      <td>Premium USD Amount </td><td class="text-right"><h6><?=four_decimal($record['premium_usd_amount'])?></h6>
+      <td>Premium USD Amount </td><td class="text-right"><h6><?//=four_decimal($record['premium_usd_amount'])?></h6>
       </td>
     </tr>
     <tr>
-      <td>Labour USD Amount </td><td class="text-right"><h6><?=four_decimal($record['labour_usd_amount'])?></h6>
+      <td>Labour USD Amount </td><td class="text-right"><h6><?//=four_decimal($record['labour_usd_amount'])?></h6>
       </td>
     </tr>
     <tr>
-      <td>Freight USD Amount </td><td class="text-right"><h6><?=four_decimal($record['freight_usd_amount'])?></h6>
+      <td>Freight USD Amount </td><td class="text-right"><h6><?//=four_decimal($record['freight_usd_amount'])?></h6>
       </td>
-    </tr>
+    </tr> -->
     <tr>
       <td>Grand Total</td><td class="text-right"><h6><?=four_decimal($record['debit_amount'])?></h6></td>
     </tr>
