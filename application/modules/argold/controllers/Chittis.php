@@ -69,16 +69,11 @@ class Chittis extends BaseController {
                                                                 packet_no,
                                                                 voucher_date,
                                                                 customer_name,
-                                                                usd_wastage_percentage,
-                                                                inr_wastage_percentage,
-                                                                customer_name,
                                                                 group_concat(narration) as narration,
                                                                 argold_id as argold_id', 
                                                                 $where, 
                                                                 array(), 
                                                                 array('group_by'=>'packet_no,
-                                                                                   usd_wastage_percentage,
-                                                                                   inr_wastage_percentage,
                                                                                    voucher_date, 
                                                                                    argold_id,customer_name'));
 

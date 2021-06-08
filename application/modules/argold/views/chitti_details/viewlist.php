@@ -16,8 +16,8 @@
             <?php endif; ?>
             <th class="text-right">Melting</th>
             <th class="text-right">Wastage</th>
-            <th class="text-right">USD Wastage %</th>
-            <th class="text-right">INR Wastage %</th>
+            <!-- <th class="text-right">USD Wastage %</th> -->
+            <!-- <th class="text-right">INR Wastage %</th> -->
             <?php if ($detail==1): ?>
               <th class="text-right">Factory Fine</th>
             <?php endif; ?>
@@ -53,9 +53,9 @@
                   <?php endif; ?>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['chitti_purity']); ?></td>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['factory_purity'] - $metal_voucher_detail['chitti_purity']) ?></td>
-                  <td class="text-right"><?= four_decimal($metal_voucher_detail['usd_wastage_percentage']); ?></td>
-                  <td class="text-right"><?= four_decimal($metal_voucher_detail['inr_wastage_percentage']); ?></td>
-                  <?php if ($detail==1): ?>
+                  <!-- <td class="text-right"><?//= four_decimal($metal_voucher_detail['usd_wastage_percentage']); ?></td>
+                  <td class="text-right"><?//= four_decimal($metal_voucher_detail['inr_wastage_percentage']); ?></td>
+                   --><?php if ($detail==1): ?>
                     <td class="text-right"><?= four_decimal($metal_voucher_detail['fine']) ?></td>
                   <?php endif; ?>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['factory_fine']) ?></td>
@@ -72,8 +72,8 @@
             <td class="text-right"><?=four_decimal($sum_weight);?></td>
             <td class="text-right"></td>
             <td class="text-right"></td>
-            <td class="text-right"></td>
-            <td class="text-right"></td>
+            <!-- <td class="text-right"></td>
+            <td class="text-right"></td> -->
             <?php if ($detail==1): ?>
               <td class="text-right"></td>
             <?php endif; ?>
