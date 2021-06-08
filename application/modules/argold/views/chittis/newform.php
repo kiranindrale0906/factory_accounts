@@ -11,7 +11,7 @@
     <?php load_field('dropdown', array('field' => 'site_name',
                                        'option' => $site_names,
                                        'value' => $record['site_name']));?>
-    <?php load_field('text', array('field' => 'account_name','value'=>'OUTSIDE PARTY'));?>
+    <?php load_field('dropdown', array('field' => 'account_name','option'=>$account_name));?>
     <?php load_field('dropdown', array('field' => 'purity',
                                        'option'=>$purity));?>
     <?php load_field('date',array('field' => 'date','class'=>'datepicker_js')); ?>

@@ -9,7 +9,7 @@
   <?php endif; ?>     
   <div class="row">    
     <?php load_field('text', array('field' => 'site_name', 'readonly' => true));?>
-    <?php load_field('text', array('field' => 'account_name', 'readonly' => true));?>
+    <?php load_field('dropdown', array('field' => 'account_name','option'=>$account_name));?>
     <?php load_field('text', array('field' => 'purity', 'readonly' => true));?>
     <?php load_field('date',array('field' => 'date','class'=>'datepicker_js','value'=>(!empty($record['date'])?date('d-m-Y',strtotime($record['date'])):date('d-m-Y')), )); ?>
     <?php load_field('text',array('field' => 'no_of_packets'));  ?>
