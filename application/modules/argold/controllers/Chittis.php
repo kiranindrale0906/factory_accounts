@@ -55,13 +55,32 @@ class Chittis extends BaseController {
     $this->data['record']['site_name'] = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'AR Gold Jan 2021';
     $where=array('voucher_type' => 'metal issue voucher',
                  'chitti_id' => '',
-                 'packet_no!=' => 0,
-                 'site_name' => $this->data['record']['site_name']);
+                 'packet_no!=' => 0/*,
+                 'site_name' => $this->data['record']['site_name']*/);
     if (!empty($_GET['purity'])) $where['purity'] = $_GET['purity'];
 
     if(!empty($this->data['record']['account_name'])) { 
       $where['account_name']=$this->data['record']['account_name'];
-
+    if($this->router->class == 'chitti_exports'){ 
+    $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,
+                                                                (sum(credit_weight*purity) / sum(credit_weight)) as purity,
+                                                                (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,
+                                                                "" as voucher_number,
+                                                                packet_no,
+                                                                voucher_date,
+                                                                customer_name,
+                                                                usd_wastage_percentage,
+                                                                inr_wastage_percentage,
+                                                                group_concat(narration) as narration,
+                                                                argold_id as argold_id', 
+                                                                $where, 
+                                                                array(), 
+                                                                array('group_by'=>'packet_no,
+                                                                                   voucher_date, 
+                                                                                   usd_wastage_percentage,
+                                                                                   inr_wastage_percentage,
+                                                                                   argold_id,customer_name'));
+  }else{
     $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,
                                                                 (sum(credit_weight*purity) / sum(credit_weight)) as purity,
                                                                 (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,
@@ -76,6 +95,8 @@ class Chittis extends BaseController {
                                                                 array('group_by'=>'packet_no,
                                                                                    voucher_date, 
                                                                                    argold_id,customer_name'));
+
+  }
 
 
 
@@ -95,10 +116,16 @@ class Chittis extends BaseController {
                                                              )) ,
                                                        array(), array('group_by' => 'purity'));
     
-    
-    if ($this->router->method == 'store' || $this->router->method == 'update') {
+    if($this->router->class == 'chitti_exports'){ 
+      if ($this->router->method == 'store' || $this->router->method == 'update') {
+        $this->data['record']['chitti_exports'] = $_POST['chitti_exports'];
+        $this->data['chittis_details'] = @$_POST['chittis_details'];
+      }
+    }else{
+      if ($this->router->method == 'store' || $this->router->method == 'update') {
       $this->data['record']['chittis'] = $_POST['chittis'];
       $this->data['chittis_details'] = @$_POST['chittis_details'];
+      }
     }
 
     $this->data['site_names'] = array(
@@ -125,5 +152,13 @@ class Chittis extends BaseController {
       }
       parent::delete($id);
     }
+  }
+  public function _after_save($formdata, $action){
+    if($this->router->class == 'chitti_exports'){ 
+     $this->data['redirect_url']= ADMIN_PATH.'argold/chitti_exports';
+    }else{
+     $this->data['redirect_url']= ADMIN_PATH.'argold/chittis';
+    }
+    return $formdata;
   }
 }

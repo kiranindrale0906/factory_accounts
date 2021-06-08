@@ -3,10 +3,10 @@
 function getTableSettings() {
     $show = (isset($_GET['show_all'])) ? $_GET['show_all'] : '';
   if($show=='yes') $where='';
-  else $where='chitti_hide=0';
+  else $where='chitti_hide=0 and taxable_usd_amount!=0';
  
   return array(
-    'page_title'          => 'Chittis List',
+    'page_title'          => 'Chittis Export List',
     'primary_table'       => 'chitties',
     'default_column'      => 'id',
     'table'               => 'chitties',
@@ -24,7 +24,7 @@ function getTableSettings() {
     'chitti_hides'        => 'Add Chittis',
     'export_title'        => '',
     'edit'                => '',
-    'custom_table_header' => true,
+    'custom_table_header' => false,
   );
 
 }
@@ -54,6 +54,14 @@ function list_settings() {
     array("Fine", "fine", FALSE, "fine", FALSE, FALSE),
     array("Issue Fine", "factory_fine", FALSE, "factory_fine", FALSE, FALSE),
     array("Amount", "debit_amount", FALSE, "debit_amount", FALSE, FALSE),
+    array("Taxable USD Amount", "taxable_usd_amount", FALSE, "taxable_usd_amount", FALSE, FALSE),
+    array("Ounce Rate", "ounce_rate", FALSE, "ounce_rate", FALSE, FALSE),
+    array("USD Rate", "usd_rate", FALSE, "usd_rate", FALSE, FALSE),
+    // array("Premium Rate", "premium_rate", FALSE, "premium_rate", FALSE, FALSE),
+    array("Premium USD Amount", "premium_usd_amount", FALSE, "premium_usd_amount", FALSE, FALSE),
+    // array("Labour Rate", "labour_rate", FALSE, "labour_rate", FALSE, FALSE),
+    array("Labour USD Amount", "labour_usd_amount", FALSE, "labour_usd_amount", FALSE, FALSE),
+    array("Freight USD Amount", "freight_usd_amount", FALSE, "freight_usd_amount", FALSE, FALSE),
     array("Action", "action", FALSE, "action", FALSE, FALSE),
   );
 }
@@ -72,7 +80,7 @@ function list_settings() {
 function get_field_attribute($table, $field) {
   $attributes = array();
 
-  $attributes['chittis'] = array(
+  $attributes['chitti_exports'] = array(
     'id'            => array('', '', TRUE, '', TRUE),
     'site_name'     => array('Factory Name', '', TRUE, '', TRUE),
     'account_name'  => array('Account Name', 'Select', TRUE, '', TRUE),
@@ -110,7 +118,7 @@ function get_field_attribute($table, $field) {
 
 function get_row_actions($row, $url, $select_url, $filter) {
   $actions = array();
-  $controller = 'argold/chittis';
+  $controller = 'argold/chitti_exports';
   $actions["View"] = array('request' => "http", 
                            'url' => ADMIN_PATH.$controller.'/view/'.$row['id'],
                            'confirm_message' => "",
