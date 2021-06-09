@@ -125,10 +125,10 @@
       <td>Freight USD Amount </td><td class="text-right"><h6><?=four_decimal($record['freight_usd_amount'])?></h6>
       </td>
     </tr> 
+  <?php }?>
     <tr>
       <td>Grand Total</td><td class="text-right"><h6><?=four_decimal($record['debit_amount'])?></h6></td>
     </tr>
-  <?php }?>
   </table>
 </div>
 
