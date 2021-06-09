@@ -53,10 +53,16 @@ class Chittis extends BaseController {
       $this->data['record']['purity'] = $_GET['purity'];
     
     $this->data['record']['site_name'] = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'AR Gold Jan 2021';
-    $where=array('voucher_type' => 'metal issue voucher',
-                 'chitti_id' => '',
-                 'packet_no!=' => 0/*,
-                 'site_name' => $this->data['record']['site_name']*/);
+    if($this->router->class == 'chitti_exports'){ 
+      $where=array('voucher_type' => 'metal issue voucher',
+                   'chitti_id' => '',
+                   'site_name' => $this->data['record']['site_name']);
+    }else{
+      $where=array('voucher_type' => 'metal issue voucher',
+                   'chitti_id' => '',
+                   'packet_no!=' => 0,
+                   'site_name' => $this->data['record']['site_name']);
+    }
     if (!empty($_GET['purity'])) $where['purity'] = $_GET['purity'];
 
     if(!empty($this->data['record']['account_name'])) { 
