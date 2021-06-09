@@ -20,6 +20,7 @@
     <?php load_field('dropdown', array('field' => 'sale_type',
                                        'option'=> array(array('id' => 'Sale', 'name' => 'Sale'),
                                                         array('id' => 'Labour', 'name' => 'Labour'))));?>
+    <?php load_field('text',array('field' => 'rate'));  ?>
 
     <?php
       if($this->router->class == 'chitti_exports'){ ?>
