@@ -118,10 +118,12 @@ class Chitti_model extends BaseModel {
 
     if (!empty($this->formdata['chitti_details'])) {
       $chitti_ids = array_column($this->formdata['chitti_details'], 'chitti_id');
+
       $chitti_details = $this->voucher_model->get('', array('site_name' => $this->attributes['site_name'],
                                                             'packet_no' => $chitti_ids,
                                                             'account_name' => $this->attributes['account_name'],
                                                             'purity' => $this->attributes['purity']));
+      pd($chitti_ids);
     } else 
       $chitti_details = $this->voucher_model->get('', array('chitti_id' => $this->attributes['id']));
     
