@@ -53,6 +53,7 @@ class User_role_model extends Core_user_role_model {
                                         'reports/production_summary',
                                         'reports/loss_accounts',
                                         'reports/loss_reports',
+                                        'reports/category_wise_loss_reports',
                                         'reports/loss_report_details',
                                         'reports/quator_wise_loss_reports',
                                         'reports/quator_wise_loss_report_details',
