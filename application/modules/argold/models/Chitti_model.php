@@ -42,8 +42,7 @@ class Chitti_model extends BaseModel {
                                                                 'account_name' => $this->attributes['account_name'],
                                                                 'purity' => $this->attributes['purity']));
     }
-    $this->attributes['date'] = date('Y-m-d', strtotime($this->attributes['date']));
-    
+    if (!empty($this->attributes['date']))  $this->attributes['date'] = date('Y-m-d', strtotime($this->attributes['date']));
     if(!empty($chitti_details)){
       $this->attributes['weight'] = isset($chitti_details['credit_weight'])?$chitti_details['credit_weight']:0;
       $this->attributes['factory_purity'] =isset($chitti_details['factory_purity'])?$chitti_details['factory_purity']:0;
