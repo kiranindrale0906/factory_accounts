@@ -34,7 +34,7 @@ class Chitti_model extends BaseModel {
     }elseif (!empty($this->formdata['chitti_details'])) {
       $chitti_ids=array_column($this->formdata['chitti_details'], 'chitti_id');
       $chitti_id_details=array();
-      foreach ($chitti_ids as $key => $chitti_id) {
+      foreach ($chitti_ids as $index => $chitti_id) {
         $chittis=explode('-', $chitti_id);
         $chitti_id_details[$index]['packet_no']=$chittis[0];
         $chitti_id_details[$index]['argold_id']=$chittis[1];
@@ -130,7 +130,7 @@ class Chitti_model extends BaseModel {
     if (!empty($this->formdata['chitti_details'])) {
       $chitti_ids=array_column($this->formdata['chitti_details'], 'chitti_id');
       $chitti_id_details=array();
-      foreach ($chitti_ids as $key => $chitti_id) {
+      foreach ($chitti_ids as $index => $chitti_id) {
         $chittis=explode('-', $chitti_id);
         $chitti_id_details[$index]['packet_no']=$chittis[0];
         $chitti_id_details[$index]['argold_id']=$chittis[1];
