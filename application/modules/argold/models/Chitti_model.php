@@ -39,8 +39,7 @@ class Chitti_model extends BaseModel {
         $chitti_id_details[$index]['packet_no']=$chittis[0];
         $chitti_id_details[$index]['argold_id']=$chittis[1];
       }
-      pd($chitti_id_details);
-      $packet_nos=array_column($chitti_id_details, 'argold_id');
+      $packet_nos=array_column($chitti_id_details, 'packet_no');
       $argold_ids=array_column($chitti_id_details, 'argold_id');
 
       $select = 'sum(credit_weight) as credit_weight,
@@ -135,7 +134,7 @@ class Chitti_model extends BaseModel {
         $chitti_id_details[$index]['packet_no']=$chittis[0];
         $chitti_id_details[$index]['argold_id']=$chittis[1];
       }
-      $packet_nos=array_column($chitti_id_details, 'argold_id');
+      $packet_nos=array_column($chitti_id_details, 'packet_no');
       $argold_ids=array_column($chitti_id_details, 'argold_id');
 
       $chitti_details = $this->voucher_model->get('', array('site_name' => $this->attributes['site_name'],
