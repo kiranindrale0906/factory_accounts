@@ -61,7 +61,7 @@
   // $exchange_gain_loss_rate = $purchase_rate - $total_sales_with_closing_rate;
   // $exchange_gain_loss_amount = $exchange_gain_loss_fine * $exchange_gain_loss_rate;
 
-  $total_income_amount = $total_sales_with_closing_amount + $exchange_gain_loss_amount;
+  $total_income_amount = $total_sales_with_closing_amount + $domestic_gain_loss_amount + $export_gain_loss_amount;
   $total_income_fine = $total_sales_with_closing_fine;
   $total_income_rate = $total_income_amount / $total_income_fine;
 
