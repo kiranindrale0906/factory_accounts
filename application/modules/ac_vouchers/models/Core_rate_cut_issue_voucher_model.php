@@ -50,6 +50,8 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
      $tax_fields = get_tax_fields($chitti['factory_fine'], $chitti['fine'], $chitti['sale_type'], $chitti['rate'], $chitti['purity'],$chitti['created_at']);
 
     if ($chitti['rate'] == 0 && $chitti['ounce_rate'] == 0) return;
+
+    if ($chitti['ounce_rate'] > 0) $chitti['rate'] = $chitti['debit_amount'] / $chitti['credit_weight'];
     $rate_cut_receipt = array('company_id' => 1,
                               'account_name' => $chitti['account_name'],
                               'voucher_date' => $chitti['created_at'],
