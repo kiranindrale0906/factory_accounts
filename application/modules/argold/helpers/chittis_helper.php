@@ -3,7 +3,7 @@
 function getTableSettings() {
     $show = (isset($_GET['show_all'])) ? $_GET['show_all'] : '';
   if($show=='yes') $where='';
-  else $where='chitti_hide=0';
+  else $where='chitti_hide=0 and account_name="OUTSIDE PARTY"';
  
   return array(
     'page_title'          => 'Chittis List',
