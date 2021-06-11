@@ -33,17 +33,26 @@ class Chitti_model extends BaseModel {
                                                                 'chitti_id' => $this->attributes['id']));
     }elseif (!empty($this->formdata['chitti_details'])) {
       $chitti_ids=array_column($this->formdata['chitti_details'], 'chitti_id');
+      $chitti_id_details=array();
+      foreach ($chitti_ids as $index => $chitti_id) {
+        $chittis=explode('-', $chitti_id);
+        $chitti_id_details[$index]['packet_no']=$chittis[0];
+        $chitti_id_details[$index]['argold_id']=$chittis[1];
+      }
+      $packet_nos=array_column($chitti_id_details, 'packet_no');
+      $argold_ids=array_column($chitti_id_details, 'argold_id');
+
       $select = 'sum(credit_weight) as credit_weight,
                  (sum(credit_weight*purity) / sum(credit_weight)) as purity,
                  (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,
                  "" as voucher_number, packet_no, voucher_date';
       $chitti_details=$this->voucher_model->find($select, array('site_name' => $this->attributes['site_name'],
-                                                                'packet_no' => $chitti_ids,
+                                                                'packet_no' => $packet_nos,
+                                                                'argold_id' => $argold_ids,
                                                                 'account_name' => $this->attributes['account_name'],
                                                                 'purity' => $this->attributes['purity']));
     }
-    $this->attributes['date'] = date('Y-m-d', strtotime($this->attributes['date']));
-    
+    if (!empty($this->attributes['date']))  $this->attributes['date'] = date('Y-m-d', strtotime($this->attributes['date']));
     if(!empty($chitti_details)){
       $this->attributes['weight'] = isset($chitti_details['credit_weight'])?$chitti_details['credit_weight']:0;
       $this->attributes['factory_purity'] =isset($chitti_details['factory_purity'])?$chitti_details['factory_purity']:0;
@@ -118,9 +127,19 @@ class Chitti_model extends BaseModel {
     $chittis=array();
 
     if (!empty($this->formdata['chitti_details'])) {
-      $chitti_ids = array_column($this->formdata['chitti_details'], 'chitti_id');
-      $chitti_details = $this->voucher_model->get('', array(/*'site_name' => $this->attributes['site_name'],*/
-                                                            'packet_no' => $chitti_ids,
+      $chitti_ids=array_column($this->formdata['chitti_details'], 'chitti_id');
+      $chitti_id_details=array();
+      foreach ($chitti_ids as $index => $chitti_id) {
+        $chittis=explode('-', $chitti_id);
+        $chitti_id_details[$index]['packet_no']=$chittis[0];
+        $chitti_id_details[$index]['argold_id']=$chittis[1];
+      }
+      $packet_nos=array_column($chitti_id_details, 'packet_no');
+      $argold_ids=array_column($chitti_id_details, 'argold_id');
+
+      $chitti_details = $this->voucher_model->get('', array('site_name' => $this->attributes['site_name'],
+                                                            'packet_no' => $packet_nos,
+                                                            'argold_id' => $argold_ids,
                                                             'account_name' => $this->attributes['account_name'],
                                                             'purity' => $this->attributes['purity']));
     } else 

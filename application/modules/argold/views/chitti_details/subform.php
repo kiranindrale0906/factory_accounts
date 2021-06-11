@@ -5,7 +5,7 @@
 																		 	 'class' => 'chitti_details_id',
 																		 	 'option' => array(
 																		 	 							array('chk_id' => $index,
-																		                      'value' => $vouchers['packet_no'],
+																		                      'value' => $vouchers['packet_no'].'-'.$vouchers['argold_id'],
 																		                      'label' => '',
 																		                      'checked' => (!empty($chitti_details[$index]['chitti_id']) ? 'checked' : ''),
 																		 	 						        )),
