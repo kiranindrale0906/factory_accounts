@@ -55,6 +55,7 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
     if ($chitti['ounce_rate'] > 0) {
       $chitti['rate'] = $chitti['debit_amount'] / $chitti['credit_weight'];
       $is_export = 1;
+      $tax_fields['taxable_amount'] = $chitti['debit_amount'];
     }
 
     $rate_cut_receipt = array('company_id' => 1,
