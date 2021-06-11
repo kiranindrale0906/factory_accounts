@@ -170,13 +170,13 @@
           <tr>
             <td>Domestic Closing Stock</td>
             <td class="text-right"><?= four_decimal($domestic_closing_amount, '-') ?>  </td>
-            <td class="text-right"><?= four_decimal($domestic_closing_rate, '-'); ?>  </td>
+            <td class="text-right"><?= four_decimal($closing_rate, '-'); ?>  </td>
             <td class="text-right"><?= four_decimal($domestic_closing_fine, '-'); ?></td>
           </tr>
           <tr>
             <td>Export Closing Stock</td>
             <td class="text-right"><?= four_decimal($export_closing_amount, '-') ?>  </td>
-            <td class="text-right"><?= four_decimal($export_closing_rate, '-'); ?>  </td>
+            <td class="text-right"><?= four_decimal($closing_rate, '-'); ?>  </td>
             <td class="text-right"><?= four_decimal($export_closing_fine, '-'); ?></td>
           </tr>
            <tr>
