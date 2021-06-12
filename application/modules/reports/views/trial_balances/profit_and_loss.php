@@ -33,19 +33,35 @@
   $sales_rate = !empty($profit_and_loss['sales_account']['fine']) ? (-1 * $profit_and_loss['sales_account']['amount'] / $profit_and_loss['sales_account']['fine']) : 0;
   $sales_amount = !empty($profit_and_loss['sales_account']['amount']) ? $profit_and_loss['sales_account']['amount'] : 0;
 
-  $closing_fine = $purchase_domestic_fine + $purchase_export_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_domestic_fine - $sales_export_fine;
+  $domestic_closing_fine = $purchase_domestic_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_domestic_fine;
   $closing_rate = $gold_rate / .995 / 10;
-  $closing_amount = $closing_fine * $closing_rate;
+  $domestic_closing_amount = $domestic_closing_fine * $closing_rate;
 
-  $total_sales_with_closing_amount = $sales_domestic_amount + $sales_export_amount + $closing_amount;
-  $total_sales_with_closing_fine = $sales_domestic_fine + $sales_export_fine + $closing_fine;
+  $export_closing_fine = $purchase_export_fine - $sales_export_fine;
+  //$closing_rate = $gold_rate / .995 / 10;
+  $export_closing_amount = $export_closing_fine * $closing_rate;
+
+  // $closing_fine = $purchase_domestic_fine + $purchase_export_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_domestic_fine - $sales_export_fine;
+  // $closing_rate = $gold_rate / .995 / 10;
+  // $closing_amount = $closing_fine * $closing_rate;
+
+  $total_sales_with_closing_amount = $sales_domestic_amount + $sales_export_amount + $domestic_closing_amount + $export_closing_amount;
+  $total_sales_with_closing_fine = $sales_domestic_fine + $sales_export_fine + $domestic_closing_fine + $export_closing_fine;
   $total_sales_with_closing_rate = $total_sales_with_closing_amount / $total_sales_with_closing_fine;
 
-  $exchange_gain_loss_fine = $total_sales_with_closing_fine;
-  $exchange_gain_loss_rate = $purchase_rate - $total_sales_with_closing_rate;
-  $exchange_gain_loss_amount = $exchange_gain_loss_fine * $exchange_gain_loss_rate;
+  $domestic_gain_loss_fine = $sales_domestic_fine + $domestic_closing_fine;
+  $domestic_gain_loss_rate = $purchase_domestic_rate - (($sales_domestic_amount + $domestic_closing_amount) / $domestic_gain_loss_fine);
+  $domestic_gain_loss_amount = $domestic_gain_loss_fine * $domestic_gain_loss_rate;
 
-  $total_income_amount = $sales_domestic_amount + $sales_export_amount + $closing_amount + $exchange_gain_loss_amount;
+  $export_gain_loss_fine = $sales_export_fine + $export_closing_fine;
+  $export_gain_loss_rate = $purchase_export_rate - (($sales_export_amount + $export_closing_amount) / $export_gain_loss_fine);
+  $export_gain_loss_amount = $export_gain_loss_fine * $export_gain_loss_rate;
+
+  // $exchange_gain_loss_fine = $total_sales_with_closing_fine;
+  // $exchange_gain_loss_rate = $purchase_rate - $total_sales_with_closing_rate;
+  // $exchange_gain_loss_amount = $exchange_gain_loss_fine * $exchange_gain_loss_rate;
+
+  $total_income_amount = $total_sales_with_closing_amount + $domestic_gain_loss_amount + $export_gain_loss_amount;
   $total_income_fine = $total_sales_with_closing_fine;
   $total_income_rate = $total_income_amount / $total_income_fine;
 
@@ -152,10 +168,16 @@
             <th class="text-right"><?= four_decimal($sales_fine, '-'); ?></th>
           </tr>
           <tr>
-            <td>Closing Stock</td>
-            <td class="text-right"><?= four_decimal($closing_amount, '-') ?>  </td>
+            <td>Domestic Closing Stock</td>
+            <td class="text-right"><?= four_decimal($domestic_closing_amount, '-') ?>  </td>
             <td class="text-right"><?= four_decimal($closing_rate, '-'); ?>  </td>
-            <td class="text-right"><?= four_decimal($closing_fine, '-'); ?></td>
+            <td class="text-right"><?= four_decimal($domestic_closing_fine, '-'); ?></td>
+          </tr>
+          <tr>
+            <td>Export Closing Stock</td>
+            <td class="text-right"><?= four_decimal($export_closing_amount, '-') ?>  </td>
+            <td class="text-right"><?= four_decimal($closing_rate, '-'); ?>  </td>
+            <td class="text-right"><?= four_decimal($export_closing_fine, '-'); ?></td>
           </tr>
            <tr>
             <th>Sales and Closing</th>
@@ -164,10 +186,16 @@
             <th class="text-right"><?= four_decimal($total_sales_with_closing_fine, '-'); ?></th>
           </tr>
           <tr>
-            <td>Exchange Gain / Loss</td>
-            <td class="text-right"><?= four_decimal($exchange_gain_loss_amount, '-') ?>  </td>
-            <td class="text-right"><?= four_decimal($exchange_gain_loss_rate, '-'); ?>  </td>
-            <td class="text-right"><?= four_decimal($exchange_gain_loss_fine, '-'); ?></td>
+            <td>Domestic Gain / Loss</td>
+            <td class="text-right"><?= four_decimal($domestic_gain_loss_amount, '-') ?>  </td>
+            <td class="text-right"><?= four_decimal($domestic_gain_loss_rate, '-'); ?>  </td>
+            <td class="text-right"><?= four_decimal($domestic_gain_loss_fine, '-'); ?></td>
+          </tr>
+          <tr>
+            <td>Export Gain / Loss</td>
+            <td class="text-right"><?= four_decimal($export_gain_loss_amount, '-') ?>  </td>
+            <td class="text-right"><?= four_decimal($export_gain_loss_rate, '-'); ?>  </td>
+            <td class="text-right"><?= four_decimal($export_gain_loss_fine, '-'); ?></td>
           </tr>
           <tr>
             <th>Total</th>

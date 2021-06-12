@@ -49,7 +49,15 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
                                                             'voucher_type' => 'rate cut receipt voucher'));
      $tax_fields = get_tax_fields($chitti['factory_fine'], $chitti['fine'], $chitti['sale_type'], $chitti['rate'], $chitti['purity'],$chitti['created_at']);
 
-    if ($chitti['rate'] == 0) return;
+    if ($chitti['rate'] == 0 && $chitti['ounce_rate'] == 0) return;
+
+    $is_export = 0;
+    if ($chitti['ounce_rate'] > 0) {
+      $chitti['rate'] = $chitti['debit_amount'] / $chitti['credit_weight'];
+      $is_export = 1;
+      $tax_fields['taxable_amount'] = $chitti['debit_amount'];
+    }
+
     $rate_cut_receipt = array('company_id' => 1,
                               'account_name' => $chitti['account_name'],
                               'voucher_date' => $chitti['created_at'],
@@ -67,6 +75,7 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
                               'gold_rate_purity' => 100,
                               'description' => 'Chitti '.$chitti['id'],
                               'receipt_type' => 'Chitti',
+                              'is_export'  => $is_export,
                               'chitti_id' => $chitti_id);
     $rate_cut_receipt_voucher_obj = new rate_cut_receipt_voucher_model($rate_cut_receipt);
     $rate_cut_receipt_voucher_obj->before_validate();
@@ -86,6 +95,7 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
     $rate_cut_issue['gold_rate'] =  $chitti['rate'];
     $rate_cut_issue['gold_rate_purity'] = 100;
     $rate_cut_issue['description'] = 'Chitti '.$chitti['id'];
+    $rate_cut_issue['is_export'] = $is_export;
     $rate_cut_issue_voucher_obj = new rate_cut_issue_voucher_model($rate_cut_issue);
     $rate_cut_issue_voucher_obj->before_validate();
     $rate_cut_issue_voucher_obj->store();
