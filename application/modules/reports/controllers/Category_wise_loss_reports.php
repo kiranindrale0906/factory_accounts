@@ -89,7 +89,7 @@ class Category_wise_loss_reports extends BaseController {
                 
                 $unrecovery_details = $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$arg_loss_detail['parent_id'],'account_name'=>'Unrecovarable'));
 
-                $fine_loss=($arg_loss_detail['loss_fine']);
+                $fine_loss=($arg_loss_detail['in_weight']*$arg_loss_detail['in_lot_purity']/100);
                 $recovered_loss=($loss_account_details['fine']);
                 $after_recovered_loss=($loss_account_details['weight']);
                 $unrecovery_loss=!empty($unrecovery_details)?$unrecovery_details['weight']:0;
