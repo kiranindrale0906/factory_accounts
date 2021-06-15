@@ -86,7 +86,7 @@
                                         'reports/bw_accounts' => 'Bw Accounts',
                                         'reports/loss_accounts' => 'Loss Accounts',
                                         'reports/loss_reports' => 'Loss Reports',
-                                        'reports/category_wise_loss_reports' => 'Category Wise Loss Reports',
+                                        //'reports/category_wise_loss_reports' => 'Category Wise Loss Reports',
                                         // 'reports/quator_wise_loss_reports' => 'Quator Wise Loss Reports',
                                         'reports/metal_receipt_type_ledgers' => 'Receipt Type Ledger',
                                         'reports/account_receipt_reports' => 'Account Receipt Reports',
