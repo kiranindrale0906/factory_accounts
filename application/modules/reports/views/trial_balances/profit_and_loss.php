@@ -38,8 +38,8 @@
   $domestic_closing_amount = $domestic_closing_fine * $closing_rate;
 
   $export_closing_fine = $purchase_export_fine - $sales_export_fine;
-  //$closing_rate = $gold_rate / .995 / 10;
-  $export_closing_amount = $export_closing_fine * $closing_rate;
+  $export_closing_rate = $spot_gold / 31.1034 * $usd_rate;
+  $export_closing_amount = $export_closing_fine * $export_closing_rate;
 
   // $closing_fine = $purchase_domestic_fine + $purchase_export_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_domestic_fine - $sales_export_fine;
   // $closing_rate = $gold_rate / .995 / 10;
@@ -176,7 +176,7 @@
           <tr>
             <td>Export Closing Stock</td>
             <td class="text-right"><?= four_decimal($export_closing_amount, '-') ?>  </td>
-            <td class="text-right"><?= four_decimal($closing_rate, '-'); ?>  </td>
+            <td class="text-right"><?= four_decimal($export_closing_rate, '-'); ?>  </td>
             <td class="text-right"><?= four_decimal($export_closing_fine, '-'); ?></td>
           </tr>
            <tr>

@@ -323,6 +323,12 @@ class Trial_balances extends Ledgers {
     $gold_rate_response = get_web_page("http://spngoldlivebroadcast.noip.us:8888/VOTSBroadcast/Services/xml/a/%20mumbai?_=1617860765592");
     $string = explode('GOLD MUMBAI 99.50 WITH GST & TCS RTGS', $gold_rate_response);
     $this->data['gold_rate'] = @explode(',', $string[1])[3];
+
+    $string = explode('SPOT GOLD', $gold_rate_response);
+    $this->data['spot_gold'] = @explode(',', $string[1])[3];
+  
+    $string = explode('MUSDINR', $gold_rate_response);
+    $this->data['usd_rate'] = @explode(',', $string[1])[3];
   }  
 
   private function update_alloy_gpc_stone_vadotar() {
