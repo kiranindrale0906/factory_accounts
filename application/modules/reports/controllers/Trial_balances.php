@@ -29,6 +29,7 @@ class Trial_balances extends Ledgers {
     $this->calculate_gst_of_sales_accounts(0, 'Sale');
     $this->calculate_gst_of_sales_accounts(0, 'Labour');
     $this->calculate_gst_of_export_sales_accounts('Sale');
+    $this->calculate_gst_of_export_sales_accounts('Freight');
 
     $this->get_vadotar_from_factory();
     $this->get_alloy_vodator_balance();
@@ -216,8 +217,9 @@ class Trial_balances extends Ledgers {
                IFNULL((sum(debit_weight*purity)/100),0) - IFNULL((sum(credit_weight*factory_purity)/100),0) as fine,
                IFNULL(sum((purity-factory_purity)*debit_weight/100),0) - IFNULL(sum((factory_purity-purity)*credit_weight/100),0) as vadotar,
                IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount,0 as id";
-    $this->data['purchase_sales_account_domestic_export_records'] = $this->model->get($purchase_sales_account_domestic_export_select, array('account_name' => array('SALES ACCOUNT', 'PURCHASE ACCOUNT')), array(),  
-                                                                                      array('group_by'=>'account_name, is_export'));
+    $this->data['purchase_sales_account_domestic_export_records'] = $this->model->get($purchase_sales_account_domestic_export_select, 
+                                                array('account_name' => array('SALES ACCOUNT', 'PURCHASE ACCOUNT')), 
+                                                array(), array('group_by'=>'account_name, is_export'));
 
 
     $loss_account = array('account_name' => 'LOSS ACCOUNT',
@@ -312,7 +314,10 @@ class Trial_balances extends Ledgers {
     $where['ounce_rate !='] = 0;
     //$where['debit_amount !='] = 0;
 
-    $select = 'sum(taxable_usd_amount) + sum(premium_usd_amount) as taxable_amount, 0 as cgst_amount, 0 as sgst_amount, 0 as tcs_amount'; 
+    if ($sale_type == 'Freight')
+      $select = 'sum(labour_usd_amount) + sum(freight_usd_amount) as taxable_amount, 0 as cgst_amount, 0 as sgst_amount, 0 as tcs_amount'; 
+    else
+      $select = 'sum(taxable_usd_amount) + sum(premium_usd_amount) as taxable_amount, 0 as cgst_amount, 0 as sgst_amount, 0 as tcs_amount'; 
     $sales = $this->chitti_model->find($select, $where);
         
     $data_key = 'sale_export';
@@ -323,9 +328,8 @@ class Trial_balances extends Ledgers {
     $this->data[$data_key]['sgst_amount'] = $sales['sgst_amount'];
     $this->data[$data_key]['tcs_amount'] = $sales['tcs_amount'];
 
-
-    //if ($export == 1) {
-    $select = 'sum(taxable_amount) as taxable_amount, sum(cgst_amount) as cgst_amount, sum(sgst_amount) as sgst_amount, sum(tcs_amount) as tcs_amount';
+    if ($sale_type == 'Freight') {
+      $select = 'sum(taxable_amount) as taxable_amount, sum(cgst_amount) as cgst_amount, sum(sgst_amount) as sgst_amount, sum(tcs_amount) as tcs_amount';
       $credit_cash = $this->model->find($select, array('voucher_type like "cash%"' => NULL,
                                                        'account_name' => "SALES ACCOUNT",
                                                        'credit_amount > ' => 0));
@@ -339,7 +343,7 @@ class Trial_balances extends Ledgers {
                     'sgst_amount' => -1 * $credit_cash['sgst_amount'] + $debit_cash['sgst_amount'],
                     'tcs_amount' => -1 * $credit_cash['tcs_amount'] + $debit_cash['tcs_amount']);
       $this->data['debit_note'] = $cash;
-    //}
+    }
 
     // if ($export == 1) {
     //   $credit_cash = $this->model->find($select, array('voucher_type like "cash%"' => NULL,
