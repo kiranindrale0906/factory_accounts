@@ -291,7 +291,10 @@ class Trial_balances extends Ledgers {
     $where['gold_rate !='] = 0;
     $where['debit_amount !='] = 0;
 
-    $select = 'sum(taxable_amount) as taxable_amount, sum(cgst_amount) as cgst_amount, sum(sgst_amount) as sgst_amount, sum(tcs_amount) as tcs_amount';
+    if ($export == 1)
+      $select = 'sum(taxable_usd_amount) + sum(premium_usd_amount) as taxable_amount, 0 as cgst_amount, 0 as sgst_amount, 0 as tcs_amount'; //+$this->attributes['labour_usd_amount']+$this->attributes['freight_usd_amount']
+    else
+      $select = 'sum(taxable_amount) as taxable_amount, sum(cgst_amount) as cgst_amount, sum(sgst_amount) as sgst_amount, sum(tcs_amount) as tcs_amount';
     $sales = $this->model->find($select, $where);
         
     $data_key = ($export == 1) ? 'sale_export' : 'sale_domestic';
