@@ -24,6 +24,7 @@
                                        'option'=> array(array('id' => 'Sale', 'name' => 'Sale'),
                                                         array('id' => 'Labour', 'name' => 'Labour'))));?>
     <?php load_field('text',array('field' => 'rate'));  ?>
+    <?php load_field('text',array('field' => 'product_rate'));  ?>
     <?php
       if($this->router->class == 'chitti_exports'){?>
       <?php load_field('text',array('field' => 'ounce_rate'));  ?>

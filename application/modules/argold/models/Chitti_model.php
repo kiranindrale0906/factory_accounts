@@ -68,6 +68,9 @@ class Chitti_model extends BaseModel {
   }
 
   private function set_sales_amount_fields() {
+    if(!empty($this->attributes['product_rate'])){
+      $this->attributes['sale_type'] ='Labour';
+    }
     if ($this->attributes['sale_type'] == 'Labour') {
       $this->attributes['credit_weight'] = $this->attributes['factory_fine'] - $this->attributes['fine']; 
       $gst_rate = 2.5;
@@ -76,6 +79,7 @@ class Chitti_model extends BaseModel {
       $this->attributes['credit_weight'] = $this->attributes['factory_fine']; 
     }
     $this->attributes['rate']=!empty($this->attributes['rate'])?$this->attributes['rate']:0;
+    $this->attributes['product_rate']=!empty($this->attributes['product_rate'])?$this->attributes['product_rate']:0;
     $this->attributes['stone_amount']=!empty($this->attributes['stone_amount'])?$this->attributes['stone_amount']:0;
     $this->attributes['manual_taxable_amount']=!empty($this->attributes['manual_taxable_amount'])?$this->attributes['manual_taxable_amount']:0;
     $this->attributes['ounce_rate']=!empty($this->attributes['ounce_rate'])?$this->attributes['ounce_rate']:0;
@@ -83,7 +87,14 @@ class Chitti_model extends BaseModel {
     $this->attributes['premium_usd_amount']=!empty($this->attributes['premium_usd_amount'])?$this->attributes['premium_usd_amount']:0;
     $this->attributes['labour_usd_amount']=!empty($this->attributes['labour_usd_amount'])?$this->attributes['labour_usd_amount']:0;
     $this->attributes['freight_usd_amount']=!empty($this->attributes['freight_usd_amount'])?$this->attributes['freight_usd_amount']:0;
-    $taxable_amount = $this->attributes['credit_weight'] * $this->attributes['rate'];
+
+    $taxable_amount=0;
+    if(!empty($this->attributes['rate'])){
+      $taxable_amount = $this->attributes['credit_weight'] * $this->attributes['rate'];
+    }elseif(!empty($this->attributes['product_rate'])){
+      $taxable_amount = $this->attributes['credit_weight'] * $this->attributes['product_rate'];
+    }
+
 
     $this->attributes['discount']=$taxable_amount-$this->attributes['manual_taxable_amount'];
     if(!empty($this->attributes['manual_taxable_amount']) && $this->attributes['manual_taxable_amount']==0){
@@ -93,6 +104,7 @@ class Chitti_model extends BaseModel {
     }
     $this->attributes['cgst_amount'] = $this->attributes['taxable_amount'] * $gst_rate / 100;
     $this->attributes['sgst_amount'] = $this->attributes['taxable_amount'] * $gst_rate / 100;
+    // pd($this->attributes['cgst_amount']);
     $ounce_gram_rate=$inr_amount=0;
     $ounce_gram_rate=$this->attributes['ounce_rate']/31.1034;
 

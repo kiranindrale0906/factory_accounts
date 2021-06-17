@@ -42,6 +42,7 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
   // }
 
   public function create_rate_cut_vouchers_for_chitti($chitti_id) {
+
     $chitti = $this->chitti_model->find('', array('id' => $chitti_id));
     $this->rate_cut_issue_voucher_model->delete('', array('description' => 'Chitti '.$chitti['id'],
                                                           'voucher_type' => 'rate cut issue voucher'));
@@ -53,7 +54,7 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
 
     $is_export = 0;
     if ($chitti['ounce_rate'] > 0) {
-      $chitti['rate'] = $chitti['debit_amount'] / $chitti['credit_weight'];
+      $chitti['rate'] = (!empty($chitti['credit_weight'])&&$chitti['credit_weight']!=0)?$chitti['debit_amount'] / $chitti['credit_weight']:0;
       $is_export = 1;
       $tax_fields['taxable_amount'] = $chitti['debit_amount'];
     }
