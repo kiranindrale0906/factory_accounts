@@ -37,7 +37,7 @@
   // $sales_amount = !empty($profit_and_loss['sales_account']['amount']) ? $profit_and_loss['sales_account']['amount'] : 0;
 
   $sales_fine = $sales_domestic_fine + $sales_export_fine;
-  $sales_amount = $sales_export_amount + $sales_export_amount;
+  $sales_amount = $sales_domestic_amount + $sales_export_amount;
   $sales_rate = $sales_amount / $sales_fine;
 
   $domestic_closing_fine = $purchase_domestic_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_domestic_fine;
