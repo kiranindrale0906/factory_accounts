@@ -36,7 +36,7 @@
   // $sales_rate = !empty($profit_and_loss['sales_account']['fine']) ? (-1 * $profit_and_loss['sales_account']['amount'] / $profit_and_loss['sales_account']['fine']) : 0;
   // $sales_amount = !empty($profit_and_loss['sales_account']['amount']) ? $profit_and_loss['sales_account']['amount'] : 0;
 
-  $sale_fine = $sales_domestic_fine + $sales_export_fine;
+  $sales_fine = $sales_domestic_fine + $sales_export_fine;
   $sales_amount = $sales_export_amount + $sales_export_amount;
   $sales_rate = $sales_amount / $sale_fine;
 
