@@ -309,7 +309,7 @@ class Trial_balances extends Ledgers {
     $where = array();               
     
     if ($sale_type == 'Freight')
-      $select = 'sum(labour_usd_amount) + sum(freight_usd_amount) as taxable_amount, 0 as cgst_amount, 0 as sgst_amount, 0 as tcs_amount'; 
+      $select = 'sum(labour_usd_amount) + sum(freight_usd_amount) as taxable_amount, 0 as cgst_amount, 0 as sgst_amount, 0 as tcs_amount,-0 as factory_fine'; 
     else
       $select = 'sum(taxable_usd_amount) + sum(premium_usd_amount) as taxable_amount, 0 as cgst_amount, 0 as sgst_amount, 0 as tcs_amount, sum(factory_fine) as factory_fine'; 
 
@@ -322,6 +322,7 @@ class Trial_balances extends Ledgers {
     $this->data[$data_key]['cgst_amount'] = $sales['cgst_amount'];
     $this->data[$data_key]['sgst_amount'] = $sales['sgst_amount'];
     $this->data[$data_key]['tcs_amount'] = $sales['tcs_amount'];
+    $this->data[$data_key]['factory_fine'] = $sales['factory_fine'];
   }
 
   private function get_gold_rate_from_myspn() {
