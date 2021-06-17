@@ -28,7 +28,7 @@ class Trial_balances extends Ledgers {
     $this->calculate_gst_of_purchase_accounts(1, 'Sale');
     $this->calculate_gst_of_sales_accounts(0, 'Sale');
     $this->calculate_gst_of_sales_accounts(0, 'Labour');
-    $this->calculate_gst_of_sales_accounts(1, 'Sale');
+    $this->calculate_gst_of_export_sales_accounts('Sale');
 
     $this->get_vadotar_from_factory();
     $this->get_alloy_vodator_balance();
@@ -291,10 +291,7 @@ class Trial_balances extends Ledgers {
     $where['gold_rate !='] = 0;
     $where['debit_amount !='] = 0;
 
-    // if ($export == 1)
-    //   $select = 'sum(taxable_usd_amount) + sum(premium_usd_amount) as taxable_amount, 0 as cgst_amount, 0 as sgst_amount, 0 as tcs_amount'; //+$this->attributes['labour_usd_amount']+$this->attributes['freight_usd_amount']
-    // else
-      $select = 'sum(taxable_amount) as taxable_amount, sum(cgst_amount) as cgst_amount, sum(sgst_amount) as sgst_amount, sum(tcs_amount) as tcs_amount';
+    $select = 'sum(taxable_amount) as taxable_amount, sum(cgst_amount) as cgst_amount, sum(sgst_amount) as sgst_amount, sum(tcs_amount) as tcs_amount';
     $sales = $this->model->find($select, $where);
         
     $data_key = ($export == 1) ? 'sale_export' : 'sale_domestic';
@@ -320,6 +317,43 @@ class Trial_balances extends Ledgers {
                     'tcs_amount' => -1 * $credit_cash['tcs_amount'] + $debit_cash['tcs_amount']);
       $this->data['debit_note'] = $cash;
     }
+  }
+
+  private function calculate_gst_of_export_sales_accounts($sale_type){               
+    $where = array();               
+    
+    //$where['account_name'] = 'SALES ACCOUNT';
+    //$where['is_export'] = $export;
+    //$where['sale_type'] = $sale_type;
+    $where['ounce_rate !='] = 0;
+    //$where['debit_amount !='] = 0;
+
+    $select = 'sum(taxable_usd_amount) + sum(premium_usd_amount) as taxable_amount, 0 as cgst_amount, 0 as sgst_amount, 0 as tcs_amount'; 
+    $sales = $this->chitti_model->find($select, $where);
+        
+    $data_key = 'sale_export';
+    $data_key = $data_key.'_'.$sale_type;
+
+    $this->data[$data_key]['taxable_amount'] = $sales['taxable_amount'];
+    $this->data[$data_key]['cgst_amount'] = $sales['cgst_amount'];
+    $this->data[$data_key]['sgst_amount'] = $sales['sgst_amount'];
+    $this->data[$data_key]['tcs_amount'] = $sales['tcs_amount'];
+
+    // if ($export == 1) {
+    //   $credit_cash = $this->model->find($select, array('voucher_type like "cash%"' => NULL,
+    //                                                    'account_name' => "SALES ACCOUNT",
+    //                                                    'credit_amount > ' => 0));
+
+    //   $debit_cash = $this->model->find($select, array('voucher_type like "cash%"' => NULL,
+    //                                                   'account_name' => "SALES ACCOUNT",
+    //                                                   'debit_amount > ' => 0));
+
+    //   $cash = array('taxable_amount' => -1 * $credit_cash['taxable_amount'] + $debit_cash['taxable_amount'],
+    //                 'cgst_amount' => -1 * $credit_cash['cgst_amount'] + $debit_cash['cgst_amount'],
+    //                 'sgst_amount' => -1 * $credit_cash['sgst_amount'] + $debit_cash['sgst_amount'],
+    //                 'tcs_amount' => -1 * $credit_cash['tcs_amount'] + $debit_cash['tcs_amount']);
+    //   $this->data['debit_note'] = $cash;
+    // }
   }
 
   private function get_gold_rate_from_myspn() {
