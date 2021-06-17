@@ -28,7 +28,8 @@ class Trial_balances extends Ledgers {
     $this->calculate_gst_of_purchase_accounts(1, 'Sale');
     $this->calculate_gst_of_sales_accounts(0, 'Sale');
     $this->calculate_gst_of_sales_accounts(0, 'Labour');
-    $this->calculate_gst_of_sales_accounts(1, 'Sale');
+    $this->calculate_gst_of_export_sales_accounts('Sale');
+    $this->calculate_gst_of_export_sales_accounts('Labour');
 
     $this->get_vadotar_from_factory();
     $this->get_alloy_vodator_balance();
@@ -216,9 +217,9 @@ class Trial_balances extends Ledgers {
                IFNULL((sum(debit_weight*purity)/100),0) - IFNULL((sum(credit_weight*factory_purity)/100),0) as fine,
                IFNULL(sum((purity-factory_purity)*debit_weight/100),0) - IFNULL(sum((factory_purity-purity)*credit_weight/100),0) as vadotar,
                IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount,0 as id";
-    $this->data['purchase_sales_account_domestic_export_records'] = $this->model->get($purchase_sales_account_domestic_export_select, array('account_name' => array('SALES ACCOUNT', 'PURCHASE ACCOUNT')), array(),  
-                                                                                      array('group_by'=>'account_name, is_export'));
-
+    $this->data['purchase_sales_account_domestic_export_records'] = $this->model->get($purchase_sales_account_domestic_export_select, 
+                                                array('account_name' => array('SALES ACCOUNT', 'PURCHASE ACCOUNT')), 
+                                                array(), array('group_by'=>'account_name, is_export'));
 
     $loss_account = array('account_name' => 'LOSS ACCOUNT',
                           'fine' => 0, 'vadotar' => 0, 'amount' => 0);
@@ -264,7 +265,7 @@ class Trial_balances extends Ledgers {
     $this->data[$data_key]['cgst_amount'] = $purchases['cgst_amount'];
     $this->data[$data_key]['sgst_amount'] = $purchases['sgst_amount'];
     $this->data[$data_key]['tcs_amount'] = $purchases['tcs_amount'];
-    
+
     if ($export == 1) {
       $credit_cash = $this->model->find($select, array('voucher_type like "cash%"' => NULL,
                                                        'account_name' => "PURCHASE ACCOUNT",
@@ -302,7 +303,7 @@ class Trial_balances extends Ledgers {
     $this->data[$data_key]['sgst_amount'] = $sales['sgst_amount'];
     $this->data[$data_key]['tcs_amount'] = $sales['tcs_amount'];
 
-    if ($export == 1) {
+    if ($export == 0 && $sale_type = 'Sale') {
       $credit_cash = $this->model->find($select, array('voucher_type like "cash%"' => NULL,
                                                        'account_name' => "SALES ACCOUNT",
                                                        'credit_amount > ' => 0));
@@ -319,10 +320,37 @@ class Trial_balances extends Ledgers {
     }
   }
 
+  private function calculate_gst_of_export_sales_accounts($sale_type){               
+    $where = array();               
+    
+    $where['ounce_rate !='] = 0;
+    if ($sale_type == 'Labour')
+      $select = 'sum(labour_usd_amount * usd_rate) + sum(freight_usd_amount * usd_rate) as taxable_amount, 0 as cgst_amount, 0 as sgst_amount, 0 as tcs_amount, 0 as factory_fine'; 
+    else
+      $select = 'sum(taxable_usd_amount * usd_rate) + sum(premium_usd_amount * usd_rate) as taxable_amount, 0 as cgst_amount, 0 as sgst_amount, 0 as tcs_amount, sum(factory_fine) as factory_fine'; 
+
+    $sales = $this->chitti_model->find($select, $where);
+        
+    $data_key = 'sale_export';
+    $data_key = $data_key.'_'.$sale_type;
+
+    $this->data[$data_key]['taxable_amount'] = $sales['taxable_amount'];
+    $this->data[$data_key]['cgst_amount'] = $sales['cgst_amount'];
+    $this->data[$data_key]['sgst_amount'] = $sales['sgst_amount'];
+    $this->data[$data_key]['tcs_amount'] = $sales['tcs_amount'];
+    $this->data[$data_key]['factory_fine'] = $sales['factory_fine'];
+  }
+
   private function get_gold_rate_from_myspn() {
     $gold_rate_response = get_web_page("http://spngoldlivebroadcast.noip.us:8888/VOTSBroadcast/Services/xml/a/%20mumbai?_=1617860765592");
     $string = explode('GOLD MUMBAI 99.50 WITH GST & TCS RTGS', $gold_rate_response);
     $this->data['gold_rate'] = @explode(',', $string[1])[3];
+
+    $string = explode('SPOT GOLD', $gold_rate_response);
+    $this->data['spot_gold'] = @explode(',', $string[1])[3];
+  
+    $string = explode('MUSDINR', $gold_rate_response);
+    $this->data['usd_rate'] = @explode(',', $string[1])[3];
   }  
 
   private function update_alloy_gpc_stone_vadotar() {
