@@ -68,7 +68,9 @@
   // $exchange_gain_loss_rate = $purchase_rate - $total_sales_with_closing_rate;
   // $exchange_gain_loss_amount = $exchange_gain_loss_fine * $exchange_gain_loss_rate;
 
-  $total_income_amount = $total_sales_with_closing_amount + $domestic_gain_loss_amount + $export_gain_loss_amount;
+  $export_labour_amount = $sale_export_Labour['taxable_amount'];
+
+  $total_income_amount = $total_sales_with_closing_amount + $domestic_gain_loss_amount + $export_gain_loss_amount + $export_labour_amount;
   $total_income_fine = $total_sales_with_closing_fine;
   $total_income_rate = $total_income_amount / $total_income_fine;
 
@@ -203,6 +205,12 @@
             <td class="text-right"><?= four_decimal($export_gain_loss_amount, '-') ?>  </td>
             <td class="text-right"><?= four_decimal($export_gain_loss_rate, '-'); ?>  </td>
             <td class="text-right"><?= four_decimal($export_gain_loss_fine, '-'); ?></td>
+          </tr>
+          <tr>
+            <td>Export Labour</td>
+            <td class="text-right"><?= four_decimal($export_labour_amount, '-') ?>  </td>
+            <td class="text-right">-</td>
+            <td class="text-right">-</td>
           </tr>
           <tr>
             <th>Total</th>
