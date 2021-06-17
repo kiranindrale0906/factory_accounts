@@ -84,6 +84,9 @@ class Chitti_model extends BaseModel {
     }
     $this->attributes['rate']=!empty($this->attributes['rate'])?$this->attributes['rate']:0;
     $this->attributes['product_rate']=!empty($this->attributes['product_rate'])?$this->attributes['product_rate']:0;
+    
+    if(!empty($this->attributes['product_rate'])) $this->attributes['rate'] = $this->attributes['product_rate'];
+
     $this->attributes['stone_amount']=!empty($this->attributes['stone_amount'])?$this->attributes['stone_amount']:0;
     $this->attributes['manual_taxable_amount']=!empty($this->attributes['manual_taxable_amount'])?$this->attributes['manual_taxable_amount']:0;
     $this->attributes['ounce_rate']=!empty($this->attributes['ounce_rate'])?$this->attributes['ounce_rate']:0;
