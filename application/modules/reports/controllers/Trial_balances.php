@@ -325,6 +325,7 @@ class Trial_balances extends Ledgers {
 
 
     //if ($export == 1) {
+    $select = 'sum(taxable_amount) as taxable_amount, sum(cgst_amount) as cgst_amount, sum(sgst_amount) as sgst_amount, sum(tcs_amount) as tcs_amount';
       $credit_cash = $this->model->find($select, array('voucher_type like "cash%"' => NULL,
                                                        'account_name' => "SALES ACCOUNT",
                                                        'credit_amount > ' => 0));
