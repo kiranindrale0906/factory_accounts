@@ -323,6 +323,7 @@ class Trial_balances extends Ledgers {
   private function calculate_gst_of_export_sales_accounts($sale_type){               
     $where = array();               
     
+    $where['ounce_rate !='] = 0;
     if ($sale_type == 'Freight')
       $select = 'sum(labour_usd_amount * usd_rate) + sum(freight_usd_amount * usd_rate) as taxable_amount, 0 as cgst_amount, 0 as sgst_amount, 0 as tcs_amount,-0 as factory_fine'; 
     else
