@@ -301,22 +301,6 @@ class Trial_balances extends Ledgers {
     $this->data[$data_key]['cgst_amount'] = $sales['cgst_amount'];
     $this->data[$data_key]['sgst_amount'] = $sales['sgst_amount'];
     $this->data[$data_key]['tcs_amount'] = $sales['tcs_amount'];
-
-    if ($export == 1) {
-      $credit_cash = $this->model->find($select, array('voucher_type like "cash%"' => NULL,
-                                                       'account_name' => "SALES ACCOUNT",
-                                                       'credit_amount > ' => 0));
-
-      $debit_cash = $this->model->find($select, array('voucher_type like "cash%"' => NULL,
-                                                      'account_name' => "SALES ACCOUNT",
-                                                      'debit_amount > ' => 0));
-
-      $cash = array('taxable_amount' => -1 * $credit_cash['taxable_amount'] + $debit_cash['taxable_amount'],
-                    'cgst_amount' => -1 * $credit_cash['cgst_amount'] + $debit_cash['cgst_amount'],
-                    'sgst_amount' => -1 * $credit_cash['sgst_amount'] + $debit_cash['sgst_amount'],
-                    'tcs_amount' => -1 * $credit_cash['tcs_amount'] + $debit_cash['tcs_amount']);
-      $this->data['debit_note'] = $cash;
-    }
   }
 
   private function calculate_gst_of_export_sales_accounts($sale_type){               
@@ -338,6 +322,23 @@ class Trial_balances extends Ledgers {
     $this->data[$data_key]['cgst_amount'] = $sales['cgst_amount'];
     $this->data[$data_key]['sgst_amount'] = $sales['sgst_amount'];
     $this->data[$data_key]['tcs_amount'] = $sales['tcs_amount'];
+
+
+    //if ($export == 1) {
+      $credit_cash = $this->model->find($select, array('voucher_type like "cash%"' => NULL,
+                                                       'account_name' => "SALES ACCOUNT",
+                                                       'credit_amount > ' => 0));
+
+      $debit_cash = $this->model->find($select, array('voucher_type like "cash%"' => NULL,
+                                                      'account_name' => "SALES ACCOUNT",
+                                                      'debit_amount > ' => 0));
+
+      $cash = array('taxable_amount' => -1 * $credit_cash['taxable_amount'] + $debit_cash['taxable_amount'],
+                    'cgst_amount' => -1 * $credit_cash['cgst_amount'] + $debit_cash['cgst_amount'],
+                    'sgst_amount' => -1 * $credit_cash['sgst_amount'] + $debit_cash['sgst_amount'],
+                    'tcs_amount' => -1 * $credit_cash['tcs_amount'] + $debit_cash['tcs_amount']);
+      $this->data['debit_note'] = $cash;
+    //}
 
     // if ($export == 1) {
     //   $credit_cash = $this->model->find($select, array('voucher_type like "cash%"' => NULL,
