@@ -309,9 +309,9 @@ class Trial_balances extends Ledgers {
     $where = array();               
     
     if ($sale_type == 'Freight')
-      $select = 'sum(labour_usd_amount) + sum(freight_usd_amount) as taxable_amount, 0 as cgst_amount, 0 as sgst_amount, 0 as tcs_amount, sum(factory_fine) as factory_fine'; 
+      $select = 'sum(labour_usd_amount) + sum(freight_usd_amount) as taxable_amount, 0 as cgst_amount, 0 as sgst_amount, 0 as tcs_amount'; 
     else
-      $select = 'sum(taxable_usd_amount) + sum(premium_usd_amount) as taxable_amount, 0 as cgst_amount, 0 as sgst_amount, 0 as tcs_amount'; 
+      $select = 'sum(taxable_usd_amount) + sum(premium_usd_amount) as taxable_amount, 0 as cgst_amount, 0 as sgst_amount, 0 as tcs_amount, sum(factory_fine) as factory_fine'; 
 
     $sales = $this->chitti_model->find($select);
         
