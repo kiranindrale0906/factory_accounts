@@ -133,9 +133,7 @@ class Ledgers extends BaseController {
         $account_issue_where['account_name in ("ARF Software Jan 2021","ARC Software Jan 2021","AR Gold Software Jan 2021") '] = NULL;
       }   
       !empty($this->data['account_name'])?$account_receipt_where['account_name']=$this->data['account_name']:$account_receipt_where['account_name not in ("MAIN VADOTAR","PURCHASE ACCOUNT","ARF Software Jan 2021","ARC Software Jan 2021","AR Gold Software Jan 2021") '] = NULL;                    
-    } 
-    print_r($account_issue_where);
-    pd($account_issue_where);
+    }
     
       $where_issue   = array_merge($where, array('(credit_weight != 0 or credit_amount != 0)' => NULL),$account_issue_where);
       $where_receipt = array_merge($where, array('(debit_weight != 0 or debit_amount != 0)'   => NULL),$account_receipt_where);
