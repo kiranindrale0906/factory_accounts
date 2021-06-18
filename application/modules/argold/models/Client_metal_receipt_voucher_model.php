@@ -394,7 +394,6 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
     } elseif ($attributes['receipt_type'] == 'Rodium') {
       $api_data = array_merge($api_data, array('type' => 'Pure',
-                                               'product_name' => 'Rodium',
                                                'process_name' => 'Receipt'));
       $send_data['receipt_departments'] = $api_data;
       $api_url="api/api_rodium_receipts/store";
