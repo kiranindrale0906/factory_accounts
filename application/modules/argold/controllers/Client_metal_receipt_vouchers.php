@@ -8,6 +8,7 @@ class Client_metal_receipt_vouchers extends Core_metal_receipt_vouchers {
   }
 
   public function _get_form_data() {
+    pd(ENABLE_API_FOR_RECEIPT);
     $company_id=!empty($_SESSION['company_id'])?$_SESSION['company_id']:1;
     $company_name = $this->company_model->find('name', array('id' => $company_id))['name'];
     $re = $this->company_model->find('name', array('id' => $company_id))['name'];
