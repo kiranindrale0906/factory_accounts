@@ -9,7 +9,7 @@ function list_settings() {
 }
 
 function get_field_attribute($table, $field) {
-  if(!empty($_GET['receipt_type']) && ($_GET['receipt_type'] == 'Metal' || $_GET['receipt_type'] == 'Rodium')) {
+  if(!empty($_GET['receipt_type']) && ($_GET['receipt_type'] == 'Metal' || $_GET['receipt_type'] == 'Rhodium')) {
     if(!empty($_GET['parent_id'])){
     $required_fields=array('id', 'voucher_date', 'receipt_type', 'account_name', 
                            'debit_weight', 'purity', 'fine','description');
