@@ -165,6 +165,7 @@
                                           'ARF Finished Goods Receipt',
                                           'ARC Finished Goods Receipt',
                                           'Vadotar',
+                                          'Rodium',
                                           'Internal'))) 
       $this->load->view('transactions/metal_issue_vouchers/subform_list');
     if ($this->router->class == "purchase_vouchers") $this->load->view('transactions/purchase_vouchers/subform_list');

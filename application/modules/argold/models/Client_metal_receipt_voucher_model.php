@@ -392,6 +392,13 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $send_data['receipt_departments'] = $api_data;
       $api_url="api/api_receipt_departments/store";
 
+    } elseif ($attributes['receipt_type'] == 'Rodium') {
+      $api_data = array_merge($api_data, array('type' => 'Pure',
+                                               'product_name' => 'Rodium',
+                                               'process_name' => 'Receipt'));
+      $send_data['receipt_departments'] = $api_data;
+      $api_url="api/api_rodium_receipts/store";
+
     } else if ($attributes['receipt_type'] == "Daily Drawer") {
       $api_data = array_merge($api_data, array('type' => $attributes['dd_type'],
                                                'balance' => $attributes['credit_weight'],
