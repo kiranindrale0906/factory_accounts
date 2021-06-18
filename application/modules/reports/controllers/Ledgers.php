@@ -42,7 +42,6 @@ class Ledgers extends BaseController {
 
     $where = array();
     if(!empty($this->data['record']['account_id']))        $where['account_id'] = $this->data['record']['account_id'];
-    pd($this->data['site_name']);
     if (   !empty($this->data['site_name']) 
         && $this->data['site_name'] != 'All' && $this->data['report_type'] != 'Metal Receipt Type Report')              $where['site_name'] = $this->data['site_name'];
     if (   $this->data['report_type'] == 'Vadotar Report'
@@ -115,7 +114,7 @@ class Ledgers extends BaseController {
                                ((credit_weight+debit_weight) * factory_purity) / (credit_weight+debit_weight) as factory_purity, 
                                concat(narration, " ,") as narration, concat(description, " ,") as description, 
                                chitti_id as chitti_no,parent_id as parent_id,id as id';
-                               // pd($this->data['site_name'] );
+                               pd($this->data['site_name'] );
        $account_receipt_where['site_name'] = '';                        
        $account_issue_where['site_name'] = '';                        
       if ($this->data['site_name'] == 'ARF Jan 2021'){
