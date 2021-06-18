@@ -5,6 +5,7 @@
   <?php if ($report_type != 'Account Ledger'): ?>
     <td><?= $record['account_name'];?></td>
   <?php endif; ?>
+    <td><?= $record['site_name'];?></td>
   <td><?= date('d-m-y', strtotime($record['str_voucher_date'])); ?></td>
   <td><?= '#'.$record['chitti_no'].' '.remove_duplicates_in_string($record['narration']).' '.$record['description']; ?>
     <?php if(isset($record['chitti_no']) && $record['chitti_no']!=0) { ?>
