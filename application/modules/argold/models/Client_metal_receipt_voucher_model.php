@@ -100,7 +100,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
   private function set_factory_purity_from_receipt_type_for_metal_and_finished_goods_and_chain_receipt() {
     if (in_array($this->attributes['receipt_type'], array('Metal', 
-                                                          'Rodium', 
+                                                          'Rhodium', 
                                                           'AR Gold Finished Goods', 'AR Gold Chain Receipt', 'AR Gold Finished Goods Receipt', 'AR Gold RND',
                                                           'ARF Finished Goods', 'ARF Software Finished Goods', 'ARF Chain Receipt', 'ARF Finished Goods Receipt', 'ARF RND',
                                                           'ARC Finished Goods', 'ARC Chain Receipt', 'ARC Finished Goods Receipt', 'ARC RND'))) {
@@ -392,11 +392,11 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $send_data['receipt_departments'] = $api_data;
       $api_url="api/api_receipt_departments/store";
 
-    } elseif ($attributes['receipt_type'] == 'Rodium') {
+    } elseif ($attributes['receipt_type'] == 'Rhodium') {
       $api_data = array_merge($api_data, array('type' => 'Pure',
                                                'process_name' => 'Receipt'));
-      $send_data['rodium_receipts'] = $api_data;
-      $api_url="api/api_rodium_receipts/store";
+      $send_data['rhodium_receipts'] = $api_data;
+      $api_url="api/api_rhodium_receipts/store";
 
     } else if ($attributes['receipt_type'] == "Daily Drawer") {
       $api_data = array_merge($api_data, array('type' => $attributes['dd_type'],

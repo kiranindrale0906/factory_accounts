@@ -48,7 +48,7 @@
                   array('id' => 'ARC RND',                        'name' => 'ARC RND'),
                   array('id' => 'Internal',                       'name' => 'Internal'),
                   array('id' => 'Vadotar',                        'name' => 'Vadotar'),
-                  array('id' => 'Rodium',                        'name' => 'Rodium'),
+                  array('id' => 'Rhodium',                        'name' => 'Rhodium'),
                 );
     if(!empty($_GET['refresh_id']) && $_GET['refresh_id']!=''){
       $data[]=array('id' => 'AR Gold Refresh','name' => 'AR Gold Refresh');
@@ -64,7 +64,7 @@
                   array('id' => 'ARF Finished Goods',          'name' => 'ARF Finished Goods'),
                   array('id' => 'ARF Software Finished Goods', 'name' => 'ARF Software Finished Goods'),
                   array('id' => 'Internal',                    'name' => 'Internal'),
-                  array('id' => 'Rodium',                    'name' => 'Rodium'),
+                  array('id' => 'Rhodium',                    'name' => 'Rhodium'),
                 );
   }
 
