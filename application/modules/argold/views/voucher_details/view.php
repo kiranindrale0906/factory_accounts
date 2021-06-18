@@ -10,6 +10,7 @@
       <p><h6>Packet no: <?=$record['packet_no']?> </h6></p>
       <p><h6>IS EXPORT: <?=$record['is_export']?> </h6></p>
       <p><h6>AC Name: <?=$record['account_name']?> </h6></p>
+      <p><h6>Site Name: <?=$record['site_name']?> </h6></p>
       <p><h6>Voucher Type: <?=$record['voucher_type']?> </h6></p>
       <p><h6>Voucher No: <?=$record['voucher_number']?> </h6></p>
       <?php if(in_array($record['voucher_type'], array('rate cut receipt voucher','rate cut issue voucher','metal receipt voucher','metal issue voucher'))){?>
