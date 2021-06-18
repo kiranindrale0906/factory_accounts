@@ -5,6 +5,7 @@
   <?php if ($report_type != 'Account Ledger'): ?>
     <td><?= $record['account_name'];?></td>
   <?php endif; ?>
+  <td><?= $record['site_name'];?></td>
   <td><?= date('d-m-y', strtotime($record['str_voucher_date'])); ?></td>
   <td>
     <?php

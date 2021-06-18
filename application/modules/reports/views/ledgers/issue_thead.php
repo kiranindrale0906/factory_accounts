@@ -6,6 +6,7 @@
     <?php if ($report_type != 'Account Ledger'): ?>
       <th>Account Name</th>
     <?php endif; ?>
+    <th>Site name</th>
     <th>Date</th>
     <th>Narration</th>
     <th class='text-right'>Gross Wt</th>
