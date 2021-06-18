@@ -69,6 +69,7 @@ function get_field_attribute($table, $field) {
   $attributes['metal_issue_account_names'] = array(
     'id'            => array('', '', TRUE, '', TRUE),
     'account_name'     => array('Account Name', '', TRUE, '', TRUE),
+    'site_name'     => array('Site Name', '', TRUE, '', TRUE),
     'voucher_date'     => array('Voucher Date', '', TRUE, '', TRUE),
     'taxable_amount'     => array('Taxable Amount', '', FALSE, '', TRUE),
     'cgst_amount'     => array('CGST Amount', '', FALSE, '', TRUE),

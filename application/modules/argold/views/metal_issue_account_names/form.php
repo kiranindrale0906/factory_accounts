@@ -15,6 +15,13 @@
                              'data-column'=>'name',
                              'data-list-title'=>'Account Name')); ?>
   </div>
+  <div class="row">    
+    <?php 
+        load_field('dropdown', array('field' => 'site_name','option'=>array(
+          array('id'='AR Gold Nov 2020','name'=>'AR Gold Jan 2021'),
+          array('id'='ARF Nov 2020','name'=>'ARF Jan 2021'),
+          array('id'='ARC Nov 2020','name'=>'ARC Gold Jan 2021')))); ?>
+  </div>
   <div class="row">        
     <?php    if(in_array($record['voucher_type'], array('cash receipt voucher','cash issue voucher'))){
           load_field('text', array('field' => 'taxable_amount')); 

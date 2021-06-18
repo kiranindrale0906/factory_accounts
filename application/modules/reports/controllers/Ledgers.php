@@ -43,7 +43,7 @@ class Ledgers extends BaseController {
     $where = array();
     if(!empty($this->data['record']['account_id']))        $where['account_id'] = $this->data['record']['account_id'];
     if (   !empty($this->data['site_name']) 
-        && $this->data['site_name'] != 'All' && $this->data['report_type'] != 'Metal Receipt Type Report')              $where['site_name'] = $this->data['site_name'];
+        && $this->data['site_name'] != 'All')              $where['site_name'] = $this->data['site_name'];
     if (   $this->data['report_type'] == 'Vadotar Report'
         || $this->data['report_type'] == 'Production Report')    $where['purity != factory_purity'] = NULL;
     if ($this->data['report_type'] == 'Production Report') $where['account_name != '] = 'VADOTAR';
@@ -92,6 +92,7 @@ class Ledgers extends BaseController {
     $account_issue_where=array();
     $account_receipt_where=array();
     if ($this->data['report_type'] == 'Account Receipt Report'){
+
     $account_receipt_where['purity>='] = 98;
     $account_receipt_where['purity<='] = 100;
     
@@ -113,6 +114,7 @@ class Ledgers extends BaseController {
                                ((credit_weight+debit_weight) * factory_purity) / (credit_weight+debit_weight) as factory_purity, 
                                concat(narration, " ,") as narration, concat(description, " ,") as description, 
                                chitti_id as chitti_no,parent_id as parent_id,id as id';
+                               // pd($this->data['site_name'] );
        $account_receipt_where['site_name'] = '';                        
        $account_issue_where['site_name'] = '';                        
       if ($this->data['site_name'] == 'ARF Jan 2021'){
@@ -131,30 +133,12 @@ class Ledgers extends BaseController {
         $account_issue_where['account_name in ("ARF Software Jan 2021","ARC Software Jan 2021","AR Gold Software Jan 2021") '] = NULL;
       }   
       !empty($this->data['account_name'])?$account_receipt_where['account_name']=$this->data['account_name']:$account_receipt_where['account_name not in ("MAIN VADOTAR","PURCHASE ACCOUNT","ARF Software Jan 2021","ARC Software Jan 2021","AR Gold Software Jan 2021") '] = NULL;                    
-    }
-
-      if($this->data['report_type'] == 'Metal Receipt Type Report'){
-        if ($this->data['site_name'] == 'ARF Jan 2021'){
-        $account_issue_where['account_name'] = 'ARF Software Jan 2021';
-        }elseif ($this->data['site_name'] == 'ARC Jan 2021'){
-          $account_issue_where['account_name'] = 'ARC Software Jan 2021';
-        }elseif ($this->data['site_name'] == 'AR Gold Jan 2021'){
-          $account_issue_where['account_name'] = 'AR Gold Software Jan 2021';
-        }elseif ($this->data['site_name'] == 'AR Gold Nov 2020'){
-          $account_issue_where['account_name'] = 'AR Gold Software Nov 2020';
-        }elseif ($this->data['site_name'] == 'ARF Nov 2020'){
-          $account_issue_where['account_name'] = 'ARF Software Jan 2020';
-        }elseif ($this->data['site_name'] == 'ARC Nov 2020'){
-          $account_issue_where['account_name'] = 'ARC Software Nov 2020';}
-        else{
-          $account_issue_where['account_name in ("ARF Software Jan 2021","ARC Software Jan 2021","AR Gold Software Jan 2021") '] = NULL;
-        }   
-      }
+    } 
+    
     
       $where_issue   = array_merge($where, array('(credit_weight != 0 or credit_amount != 0)' => NULL),$account_issue_where);
       $where_receipt = array_merge($where, array('(debit_weight != 0 or debit_amount != 0)'   => NULL),$account_receipt_where);
       $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(), array('order_by'=>'chitti_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
-
       $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(), array('order_by'=>'parent_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
       
 
