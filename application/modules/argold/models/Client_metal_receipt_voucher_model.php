@@ -386,7 +386,6 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                       'description' => $attributes['narration'],
                       'argold_account_id' => $attributes['id']);
     $send_data=array();
-
     if ($attributes['receipt_type'] == 'Metal') {
       $api_data = array_merge($api_data, array('type' => 'Pure',
                                                'process_name' => 'Receipt'));
@@ -396,7 +395,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     } elseif ($attributes['receipt_type'] == 'Rodium') {
       $api_data = array_merge($api_data, array('type' => 'Pure',
                                                'process_name' => 'Receipt'));
-      $send_data['receipt_departments'] = $api_data;
+      $send_data['rodium_receipts'] = $api_data;
       $api_url="api/api_rodium_receipts/store";
 
     } else if ($attributes['receipt_type'] == "Daily Drawer") {
@@ -486,8 +485,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
           $api_url = API_ARC_NOV2020_PATH.$api_url;
     elseif ($attributes['account_name'] == 'ARF Software Staging')
           $api_url = API_ARF_NOV2020_PATH.$api_url;
-
     $result = curl_post_request($api_url, $send_data);
+    pd($result);
   }
 
   public function create_vodator_records($records, $receipt_type, $site_name, $hostversion) {
