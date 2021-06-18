@@ -92,6 +92,7 @@ function get_field_attribute($table, $field) {
     'packet_gross_weight' => array('Packet Weight', '', TRUE, '', TRUE),
     'sale_type'     => array('Sale Type', '', TRUE, '', TRUE),
     'rate'          => array('Rate', '', TRUE, '', TRUE),
+    'product_rate'          => array('Product Rate', '', TRUE, '', TRUE),
     'credit_weight' => array('Credit Weight', '', TRUE, '', TRUE),
     'debit_amount'  => array('Debit Amount', '', TRUE, '', TRUE),
     'sgst_amount'   => array('SGST', '', TRUE, '', TRUE),
