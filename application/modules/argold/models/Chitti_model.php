@@ -72,11 +72,10 @@ class Chitti_model extends BaseModel {
   private function set_sales_amount_fields() {
     
     if ($this->attributes['sale_type'] == 'Labour') {
-      if(!empty($this->attributes['product_rate'])){
+      if($this->attributes['product_rate'] > 0) 
         $this->attributes['credit_weight'] = $this->attributes['weight'];
-      }else{
+      else
         $this->attributes['credit_weight'] = $this->attributes['factory_fine'] - $this->attributes['fine']; 
-      }
       $gst_rate = 2.5;
     } else {
       $gst_rate = 1.5;
@@ -93,9 +92,8 @@ class Chitti_model extends BaseModel {
     $this->attributes['labour_usd_amount']=!empty($this->attributes['labour_usd_amount'])?$this->attributes['labour_usd_amount']:0;
     $this->attributes['freight_usd_amount']=!empty($this->attributes['freight_usd_amount'])?$this->attributes['freight_usd_amount']:0;
 
-    if(!empty($this->attributes['product_rate'])){
-      $this->attributes['rate']=$this->attributes['product_rate'];
-    }
+    if ($this->attributes['product_rate'] > 0) $this->attributes['rate']=$this->attributes['product_rate'];
+    
     $taxable_amount = $this->attributes['credit_weight'] * $this->attributes['rate'];
 
     $this->attributes['discount']=$taxable_amount-$this->attributes['manual_taxable_amount'];
