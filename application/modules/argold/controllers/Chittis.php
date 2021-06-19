@@ -42,6 +42,7 @@ class Chittis extends BaseController {
     $this->data['account_name']=array(array('id'=>'OUTSIDE PARTY','name'=>'OUTSIDE PARTY'),
                                       array('id'=>'EXPORT ACCOUNT','name'=>'EXPORT ACCOUNT'),
                                       array('id'=>'EXPORT DIFF.','name'=>'EXPORT DIFF.'),
+                                      array('id'=>'G & J GOLDSHMITHS','name'=>'G & J GOLDSHMITHS'),
                                       array('id'=>'Pani Trading Co.','name'=>'Pani Trading Co.'),
                                       array('id'=>'SHREE RAM JEWELLER','name'=>'SHREE RAM JEWELLER'),
                                       array('id'=>'TANISHQ','name'=>'TANISHQ'),
