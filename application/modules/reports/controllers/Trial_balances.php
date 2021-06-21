@@ -431,9 +431,11 @@ class Trial_balances extends Ledgers {
     $this->set_rhodium_purchase('Pen R/d Issue', $this->data['rhodium']['Pen R/d']['rate']);
 
     $this->data['rhodium']['Dip R/d Closing'] = array('fine' => $this->data['rhodium']['Dip R/d']['fine'] - $this->data['rhodium']['Dip R/d Issue']['fine'],
-                                                      'amount' => $this->data['rhodium']['Dip R/d']['amount'] - $this->data['rhodium']['Dip R/d Issue']['amount']);
+                                                      'amount' => $this->data['rhodium']['Dip R/d']['amount'] - $this->data['rhodium']['Dip R/d Issue']['amount'],
+                                                      'rate' => $this->data['rhodium']['Dip R/d']['rate']);
     $this->data['rhodium']['Pen R/d Closing'] = array('fine' => $this->data['rhodium']['Pen R/d']['fine'] - $this->data['rhodium']['Pen R/d Issue']['fine'],
-                                                      'amount' => $this->data['rhodium']['Pen R/d']['amount'] - $this->data['rhodium']['Pen R/d Issue']['amount']);
+                                                      'amount' => $this->data['rhodium']['Pen R/d']['amount'] - $this->data['rhodium']['Pen R/d Issue']['amount'],
+                                                      'rate' => $this->data['rhodium']['Pen R/d']['rate']);
   } 
 
   private function set_rhodium_purchase($rhodium_type, $purchase_rate = 0) {
