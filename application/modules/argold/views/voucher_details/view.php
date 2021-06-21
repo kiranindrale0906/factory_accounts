@@ -110,7 +110,7 @@ if(in_array($record['voucher_type'], array('metal receipt voucher','metal issue 
             </tr><tr>
               <td>TCS</td><td class="text-right"><h6><?=four_decimal($record['tcs_amount']) ?></h6></td>
             </tr><tr>
-              <td>Grand Total</td><td class="text-right"><h6><?=four_decimal($record['grand_total'])?></h6></td>
+              <td>Grand Total</td><td class="text-right"><h6><?=four_decimal($record['debit_amount'] + $record['credit_amount'])?></h6></td>
             </tr>
 
           </table>
