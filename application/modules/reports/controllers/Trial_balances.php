@@ -22,7 +22,7 @@ class Trial_balances extends Ledgers {
 
     $this->get_account_ledger_records();
     $this->get_factory_balance();
-
+    $this->get_rhodium_balance();
     $this->calculate_gst_of_purchase_accounts(0,'Sale');
     $this->calculate_gst_of_purchase_accounts(0,'Labour');
     $this->calculate_gst_of_purchase_accounts(1, 'Sale');
@@ -423,7 +423,7 @@ class Trial_balances extends Ledgers {
     }
   }
 
-  private function get_rodium_balances() {
+  private function get_rhodium_balance() {
     $this->data['rhodium'] = array();
     $this->set_rhodium_purchase('Dip R/d');
     $this->set_rhodium_purchase('Pen R/d');
