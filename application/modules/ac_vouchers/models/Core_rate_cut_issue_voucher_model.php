@@ -118,7 +118,7 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
       $tax_fields['tcs_amount'] = 0;
       $tax_fields['grand_total'] = $tax_fields['taxable_amount'];
     }                       
-    
+
     $rate_cut_issue = array('company_id'    => 1,
                             'account_name'  => $metal_receipt_voucher['account_name'],
                             'voucher_date'  => $metal_receipt_voucher['created_at'],
@@ -145,7 +145,7 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
 
     $rate_cut_receipt = $rate_cut_issue;
     $purchase_acccount_name = 'PURCHASE ACCOUNT';
-    if ($metal_receipt_voucher['account_name'] == 'Dip R/d' || $me tal_receipt_voucher['account_name'] == 'Pen R/d')
+    if ($metal_receipt_voucher['account_name'] == 'Dip R/d' || $metal_receipt_voucher['account_name'] == 'Pen R/d')
       $purchase_acccount_name = 'R/D PURCHASE ACCOUNT';
     $rate_cut_receipt['account_name']  = $purchase_acccount_name;
     $rate_cut_receipt['credit_amount'] = $tax_fields['grand_total'];
