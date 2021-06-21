@@ -440,13 +440,14 @@ class Trial_balances extends Ledgers {
 
   private function set_rhodium_purchase($rhodium_type, $purchase_rate = 0) {
     $select = 'sum(factory_fine) as factory_fine';
-    $rhodium_fine = $this->metal_receipt_voucher_model->find($select, array('account_name' => $rhodium_type));
+    $rhodium_fine = $this->voucher_model->find($select, array('account_name' => $rhodium_type,
+                                                              'voucher_type' => array('metal receipt voucher', 'metal issue voucher')));
     $this->data['rhodium'][$rhodium_type] = array('fine' => $rhodium_fine['factory_fine']);
 
     if ($purchase_rate == 0) {
       $select = 'sum(debit_amount) as debit_amount';
       $rhodium_amount = $this->voucher_model->find($select, array('account_name' => $rhodium_type,
-                                                               'voucher_type' => 'rate cut issue voucher'));
+                                                                  'voucher_type' => 'rate cut issue voucher'));
       $this->data['rhodium'][$rhodium_type]['amount'] = $rhodium_amount['debit_amount'];
       $this->data['rhodium'][$rhodium_type]['rate'] = $this->data['rhodium'][$rhodium_type]['amount'] / $this->data['rhodium'][$rhodium_type]['fine'];
     } else {
