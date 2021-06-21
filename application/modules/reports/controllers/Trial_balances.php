@@ -445,7 +445,7 @@ class Trial_balances extends Ledgers {
       $select = 'sum(debit_amount) as debit_amount';
       $rhodium_amount = $this->voucher_model->find($select, array('account_name' => $rhodium_type,
                                                                'voucher_type' => 'rate cut issue voucher'));
-      $this->data['rhodium'][$rhodium_type] = array('amount' => $rhodium_amount['debit_amount']);
+      $this->data['rhodium'][$rhodium_type]['amount'] = $rhodium_amount['debit_amount'];
       $this->data['rhodium'][$rhodium_type]['purchase_rate'] = $this->data['rhodium'][$rhodium_type]['amount'] / $this->data['rhodium'][$rhodium_type]['fine'];
     } else {
       $this->data['rhodium'][$rhodium_type]['purchase_rate'] = $purchase_rate;
