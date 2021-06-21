@@ -100,17 +100,17 @@ if(in_array($record['voucher_type'], array('metal receipt voucher','metal issue 
             </tr><tr>
               <td>Rate (<?= four_decimal($tax_fields['gold_rate_purity']) ?>%)</td><td class="text-right"><h6><?=four_decimal($tax_fields['gold_rate'])?></h6></td>
             </tr><tr>
-              <td>Taxable Amount</td><td class="text-right"><h6><?=four_decimal($tax_fields['taxable_amount'])?></h6></td>
+              <td>Taxable Amount</td><td class="text-right"><h6><?=four_decimal($record['taxable_amount'])?></h6></td>
             </tr><tr>
-              <td>CGST Amount</td><td class="text-right"><h6><?=four_decimal($tax_fields['cgst_amount'])?></h6></td>
+              <td>CGST Amount</td><td class="text-right"><h6><?=four_decimal($record['cgst_amount'])?></h6></td>
             </tr><tr>
-              <td>SGST Amount</td><td class="text-right"><h6><?=four_decimal($tax_fields['sgst_amount'])?></h6></td>
+              <td>SGST Amount</td><td class="text-right"><h6><?=four_decimal($record['sgst_amount'])?></h6></td>
             </tr><tr>
-              <td>Total Amount</td><td class="text-right"><h6><?=four_decimal($tax_fields['total_amount'])?></h6></td>
+              <td>Total Amount</td><td class="text-right"><h6><?=four_decimal($record['total_amount'])?></h6></td>
             </tr><tr>
-              <td>TCS</td><td class="text-right"><h6><?=four_decimal($tax_fields['tcs_amount']) ?></h6></td>
+              <td>TCS</td><td class="text-right"><h6><?=four_decimal($record['tcs_amount']) ?></h6></td>
             </tr><tr>
-              <td>Grand Total</td><td class="text-right"><h6><?=four_decimal($tax_fields['grand_total'])?></h6></td>
+              <td>Grand Total</td><td class="text-right"><h6><?=four_decimal($record['grand_total'])?></h6></td>
             </tr>
 
           </table>
