@@ -131,6 +131,18 @@
             <td class="text-right"><?= four_decimal($pending_vadotar_fine, '-'); ?></td>
           </tr>
           <tr>
+            <td>Dip R/d Purchase</td>
+            <td class="text-right"><?= four_decimal($rhodium['Dip R/d']['amount'], '-'); ?></td>
+            <td class="text-right"><?= four_decimal($rhodium['Dip R/d']['rate'], '-'); ?></td>
+            <td class="text-right"><?= four_decimal($rhodium['Dip R/d']['fine'], '-'); ?></td>
+          </tr>
+          <tr>
+            <td>Pen R/d Purchase</td>
+            <td class="text-right"><?= four_decimal($rhodium['Pen R/d']['amount'], '-'); ?></td>
+            <td class="text-right"><?= four_decimal($rhodium['Pen R/d']['rate'], '-'); ?></td>
+            <td class="text-right"><?= four_decimal($rhodium['Pen R/d']['fine'], '-'); ?></td>
+          </tr>
+          <tr>
             <td>Gross Profit</td>
             <td class="text-right"><?= four_decimal($gross_profit_amount, '-'); ?></td>
             <td class="text-right"><?= four_decimal($gross_profit_rate, '-'); ?></td>
@@ -211,6 +223,36 @@
             <td class="text-right"><?= four_decimal($export_labour_amount, '-') ?>  </td>
             <td class="text-right">-</td>
             <td class="text-right">-</td>
+          </tr>
+          <tr>
+            <td>Pending Vadotar</td>
+            <td class="text-right"><?= four_decimal($pending_vadotar_amount, '-'); ?></td>
+            <td class="text-right"><?= four_decimal($pending_vadotar_rate, '-'); ?></td>
+            <td class="text-right"><?= four_decimal($pending_vadotar_fine, '-'); ?></td>
+          </tr>
+          <tr>
+            <td>Dip R/d Issue</td>
+            <td class="text-right"><?= four_decimal($rhodium['Dip R/d Issue']['amount'], '-'); ?></td>
+            <td class="text-right"><?= four_decimal($rhodium['Dip R/d Issue']['rate'], '-'); ?></td>
+            <td class="text-right"><?= four_decimal($rhodium['Dip R/d Issue']['fine'], '-'); ?></td>
+          </tr>
+          <tr>
+            <td>Pen R/d Issue</td>
+            <td class="text-right"><?= four_decimal($rhodium['Pen R/d Issue']['amount'], '-'); ?></td>
+            <td class="text-right"><?= four_decimal($rhodium['Pen R/d Issue']['rate'], '-'); ?></td>
+            <td class="text-right"><?= four_decimal($rhodium['Pen R/d Issue']['fine'], '-'); ?></td>
+          </tr>
+          <tr>
+            <td>Dip R/d Closing</td>
+            <td class="text-right"><?= four_decimal($rhodium['Dip R/d Closing']['amount'], '-'); ?></td>
+            <td class="text-right"><?= four_decimal($rhodium['Dip R/d Closing']['rate'], '-'); ?></td>
+            <td class="text-right"><?= four_decimal($rhodium['Dip R/d Closing']['fine'], '-'); ?></td>
+          </tr>
+          <tr>
+            <td>Pen R/d Closing</td>
+            <td class="text-right"><?= four_decimal($rhodium['Pen R/d Closing']['amount'], '-'); ?></td>
+            <td class="text-right"><?= four_decimal($rhodium['Pen R/d Closing']['rate'], '-'); ?></td>
+            <td class="text-right"><?= four_decimal($rhodium['Pen R/d Closing']['fine'], '-'); ?></td>
           </tr>
           <tr>
             <th>Total</th>
