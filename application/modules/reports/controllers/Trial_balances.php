@@ -458,7 +458,10 @@ class Trial_balances extends Ledgers {
       else 
         $this->data['rhodium'][$rhodium_type]['rate'] = 0;
     } else {
-      $this->data['rhodium'][$rhodium_type]['rate'] = $purchase_rate;
+      if ($this->data['rhodium'][$rhodium_type]['fine'] > 0)
+        $this->data['rhodium'][$rhodium_type]['rate'] = $purchase_rate;
+      else 
+        $this->data['rhodium'][$rhodium_type]['rate'] = 0;
       $this->data['rhodium'][$rhodium_type]['amount'] = $purchase_rate * $this->data['rhodium'][$rhodium_type]['fine'];
     }
 
