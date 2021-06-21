@@ -445,7 +445,7 @@ class Trial_balances extends Ledgers {
   private function set_rhodium_purchase($rhodium_type, $purchase_rate = 0) {
     $select = 'sum(factory_fine) as factory_fine';
     $rhodium_fine = $this->voucher_model->find($select, array('account_name' => $rhodium_type,
-                                                              'voucher_type' => array('metal receipt voucher', 'metal issue voucher')));
+                                                              'voucher_type' => array('metal receipt voucher')));
     $this->data['rhodium'][$rhodium_type] = array('fine' => $rhodium_fine['factory_fine']);
 
     if ($purchase_rate == 0) {
@@ -453,7 +453,10 @@ class Trial_balances extends Ledgers {
       $rhodium_amount = $this->voucher_model->find($select, array('account_name' => $rhodium_type,
                                                                   'voucher_type' => 'rate cut issue voucher'));
       $this->data['rhodium'][$rhodium_type]['amount'] = $rhodium_amount['debit_amount'];
-      $this->data['rhodium'][$rhodium_type]['rate'] = $this->data['rhodium'][$rhodium_type]['amount'] / $this->data['rhodium'][$rhodium_type]['fine'];
+      if ($this->data['rhodium'][$rhodium_type]['fine'] > 0)
+        $this->data['rhodium'][$rhodium_type]['rate'] = $this->data['rhodium'][$rhodium_type]['amount'] / $this->data['rhodium'][$rhodium_type]['fine'];
+      else 
+        $this->data['rhodium'][$rhodium_type]['rate'] = 0;
     } else {
       $this->data['rhodium'][$rhodium_type]['rate'] = $purchase_rate;
       $this->data['rhodium'][$rhodium_type]['amount'] = $purchase_rate * $this->data['rhodium'][$rhodium_type]['fine'];
