@@ -22,6 +22,7 @@ class Chitti_model extends BaseModel {
   }
 
   public function before_validate(){
+    pd($this->formdata);
     if (   empty($this->formdata['chitti_details']) 
         && isset($this->attributes['id'])
         && !empty($this->attributes['id'])) {
