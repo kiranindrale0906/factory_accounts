@@ -69,7 +69,7 @@ class Chittis extends BaseController {
     if(!empty($this->data['record']['account_name'])) { 
       $where['account_name']=$this->data['record']['account_name'];
       if (($this->router->method == 'store' || $this->router->method == 'update') && ($this->router->class == 'chitti_exports')) {
-        pd($_POST);
+        // pd($_POST);
         $this->data['record']['chitti_exports'] = $_POST['chitti_exports'];
         $this->data['chittis_details'] = @$_POST['chittis_details'];
       }
