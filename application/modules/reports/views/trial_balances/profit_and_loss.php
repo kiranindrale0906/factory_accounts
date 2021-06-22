@@ -183,10 +183,10 @@
           </tr>
 
           <tr>
-            <td>Domestic Gain / Loss</td>
-            <td class="text-right"><?= four_decimal($domestic_gain_loss_amount, '-') ?>  </td>
-            <td class="text-right"><?= four_decimal($domestic_gain_loss_rate, '-'); ?>  </td>
-            <td class="text-right"><?= four_decimal($domestic_gain_loss_fine, '-'); ?></td>
+            <th>Domestic Gain / Loss</th>
+            <th class="text-right"><?= four_decimal($domestic_gain_loss_amount, '-') ?>  </th>
+            <th class="text-right"><?= four_decimal($domestic_gain_loss_rate, '-'); ?>  </th>
+            <th class="text-right"><?= four_decimal($domestic_gain_loss_fine, '-'); ?></th>
           </tr>
           
           <tr>
