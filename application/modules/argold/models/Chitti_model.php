@@ -18,12 +18,17 @@ class Chitti_model extends BaseModel {
       $rules= array(array('field' => 'chittis[date]', 'label' => 'Date',
                         'rules' => 'trim|required'));
     }
+    if ($this->router->class == 'chitti_exports') {
+      $rules[]=array('field' => 'chitti_exports[freight_usd_amount]', 'label' => 'Purity',
+                     'rules' => array('trim',
+                                      array('chitti_detail_msg', array($this,'chitti_detail_exist')),),
+                     'errors' => array('chitti_detail_msg' => 'Select atleast one chitti details'));
+    }
     return $rules;
   }
 
   public function before_validate(){
-
-    if (empty($this->formdata['chitti_details']) 
+    if (   empty($this->formdata['chitti_details']) 
         && isset($this->attributes['id'])
         && !empty($this->attributes['id'])) {
       $select = 'sum(credit_weight) as credit_weight,
@@ -135,9 +140,6 @@ class Chitti_model extends BaseModel {
     if (!isset($this->formdata['chitti_details']) || empty($this->formdata['chitti_details'])) return;
     
 	}  
-  public function before_save($action){pd($_POST);
-    
-  }  
 
   private function set_chitti_id_in_metal_issue_vouchers() {
     $chittis=array();
@@ -185,5 +187,13 @@ class Chitti_model extends BaseModel {
         }
       }
     }
+  }
+  public function chitti_detail_exist($name) {
+    if(empty($this->formdata['chitti_details'])){
+      return false;
+    }else{
+      return true;
+    }
+    
   }
 }
