@@ -23,7 +23,7 @@ class Chitti_model extends BaseModel {
 
   public function before_validate(){
 
-    if (   empty($this->formdata['chitti_details']) 
+    if (empty($this->formdata['chitti_details']) 
         && isset($this->attributes['id'])
         && !empty($this->attributes['id'])) {
       $select = 'sum(credit_weight) as credit_weight,
@@ -134,7 +134,10 @@ class Chitti_model extends BaseModel {
     $this->set_chitti_id_in_metal_issue_vouchers();
     if (!isset($this->formdata['chitti_details']) || empty($this->formdata['chitti_details'])) return;
     
-	} 
+	}  
+  public function before_save($action){pd($_POST);
+    
+  }  
 
   private function set_chitti_id_in_metal_issue_vouchers() {
     $chittis=array();
