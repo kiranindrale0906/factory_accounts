@@ -22,7 +22,7 @@ class Chitti_model extends BaseModel {
   }
 
   public function before_validate(){
-    pd($this->formdata);
+
     if (   empty($this->formdata['chitti_details']) 
         && isset($this->attributes['id'])
         && !empty($this->attributes['id'])) {
@@ -135,6 +135,9 @@ class Chitti_model extends BaseModel {
     if (!isset($this->formdata['chitti_details']) || empty($this->formdata['chitti_details'])) return;
     
 	}  
+  public function before_save($action){pd($this->formdata);
+    
+  }  
 
   private function set_chitti_id_in_metal_issue_vouchers() {
     $chittis=array();
