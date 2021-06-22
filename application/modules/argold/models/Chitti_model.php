@@ -53,7 +53,7 @@ class Chitti_model extends BaseModel {
                                                                 'purity' => $this->attributes['purity']));
     }
     if (!empty($this->attributes['date']))  $this->attributes['date'] = date('Y-m-d', strtotime($this->attributes['date']));
-    if(!empty($this->attributes['product_rate'])){
+    if($this->attributes['product_rate']>0){
       $this->attributes['sale_type'] ='Labour';
     }
     if(!empty($chitti_details)){
@@ -82,7 +82,7 @@ class Chitti_model extends BaseModel {
       $this->attributes['credit_weight'] = $this->attributes['factory_fine']; 
     }
     $this->attributes['rate']=!empty($this->attributes['rate'])?$this->attributes['rate']:0;
-    $this->attributes['product_rate']=!empty($this->attributes['product_rate'])?$this->attributes['product_rate']:0;
+    $this->attributes['product_rate']=($this->attributes['product_rate']>0)?$this->attributes['product_rate']:0;
     
     $this->attributes['stone_amount']=!empty($this->attributes['stone_amount'])?$this->attributes['stone_amount']:0;
     $this->attributes['manual_taxable_amount']=!empty($this->attributes['manual_taxable_amount'])?$this->attributes['manual_taxable_amount']:0;
