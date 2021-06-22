@@ -70,20 +70,16 @@
 
   $export_labour_amount = $sale_export_Labour['taxable_amount'];
 
-  $total_income_amount = $total_sales_with_closing_amount + $domestic_gain_loss_amount + $export_gain_loss_amount + $export_labour_amount 
-                         + $rhodium['Dip R/d']['amount'] + $rhodium['Pen R/d']['amount'];
-  $total_income_fine = $total_sales_with_closing_fine + $rhodium['Dip R/d']['fine'] + $rhodium['Pen R/d']['fine'];;
+  $total_income_amount = $total_sales_with_closing_amount + $domestic_gain_loss_amount + $export_gain_loss_amount + $export_labour_amount;
+  $total_income_fine = $total_sales_with_closing_fine;
   $total_income_rate = $total_income_amount / $total_income_fine;
 
   $gross_profit_fine = 0;
   $gross_profit_rate = 0;
-  $gross_profit_amount = $total_income_amount - $purchase_domestic_amount - $purchase_export_amount 
-                        - $rhodium['Dip R/d']['amount'] - $rhodium['Pen R/d']['amount'];
+  $gross_profit_amount = $total_income_amount - $purchase_domestic_amount - $purchase_export_amount;
 
-  $total_expenses_amount = $purchase_domestic_amount + $purchase_export_amount + $gross_profit_amount
-                           + $rhodium['Dip R/d']['amount'] + $rhodium['Pen R/d']['amount'];
-  $total_expenses_fine = $purchase_domestic_fine + $purchase_export_fine + $main_vadotar_fine + $pending_vadotar_fine
-                         + $rhodium['Dip R/d']['fine'] + $rhodium['Pen R/d']['fine'];
+  $total_expenses_amount = $purchase_domestic_amount + $purchase_export_amount + $gross_profit_amount;
+  $total_expenses_fine = $purchase_domestic_fine + $purchase_export_fine + $main_vadotar_fine + $pending_vadotar_fine;
   $total_expenses_rate = 0;
 ?>
 
@@ -133,18 +129,6 @@
             <td class="text-right"><?= four_decimal($pending_vadotar_amount, '-'); ?></td>
             <td class="text-right"><?= four_decimal($pending_vadotar_rate, '-'); ?></td>
             <td class="text-right"><?= four_decimal($pending_vadotar_fine, '-'); ?></td>
-          </tr>
-          <tr>
-            <td>Dip R/d Purchase</td>
-            <td class="text-right"><?= four_decimal($rhodium['Dip R/d']['amount'], '-'); ?></td>
-            <td class="text-right"><?= four_decimal($rhodium['Dip R/d']['rate'], '-'); ?></td>
-            <td class="text-right"><?= four_decimal($rhodium['Dip R/d']['fine'], '-'); ?></td>
-          </tr>
-          <tr>
-            <td>Pen R/d Purchase</td>
-            <td class="text-right"><?= four_decimal($rhodium['Pen R/d']['amount'], '-'); ?></td>
-            <td class="text-right"><?= four_decimal($rhodium['Pen R/d']['rate'], '-'); ?></td>
-            <td class="text-right"><?= four_decimal($rhodium['Pen R/d']['fine'], '-'); ?></td>
           </tr>
           <tr>
             <td>Gross Profit</td>
@@ -255,32 +239,6 @@
             <th class="text-right"><?= four_decimal($total_sales_with_closing_rate, '-'); ?>  </th>
             <th class="text-right"><?= four_decimal($total_sales_with_closing_fine, '-'); ?></th>
           </tr> -->
-          
-          
-          <tr>
-            <td>Dip R/d Issue</td>
-            <td class="text-right"><?= four_decimal($rhodium['Dip R/d Issue']['amount'], '-'); ?></td>
-            <td class="text-right"><?= four_decimal($rhodium['Dip R/d Issue']['rate'], '-'); ?></td>
-            <td class="text-right"><?= four_decimal($rhodium['Dip R/d Issue']['fine'], '-'); ?></td>
-          </tr>
-          <tr>
-            <td>Pen R/d Issue</td>
-            <td class="text-right"><?= four_decimal($rhodium['Pen R/d Issue']['amount'], '-'); ?></td>
-            <td class="text-right"><?= four_decimal($rhodium['Pen R/d Issue']['rate'], '-'); ?></td>
-            <td class="text-right"><?= four_decimal($rhodium['Pen R/d Issue']['fine'], '-'); ?></td>
-          </tr>
-          <tr>
-            <td>Dip R/d Closing</td>
-            <td class="text-right"><?= four_decimal($rhodium['Dip R/d Closing']['amount'], '-'); ?></td>
-            <td class="text-right"><?= four_decimal($rhodium['Dip R/d Closing']['rate'], '-'); ?></td>
-            <td class="text-right"><?= four_decimal($rhodium['Dip R/d Closing']['fine'], '-'); ?></td>
-          </tr>
-          <tr>
-            <td>Pen R/d Closing</td>
-            <td class="text-right"><?= four_decimal($rhodium['Pen R/d Closing']['amount'], '-'); ?></td>
-            <td class="text-right"><?= four_decimal($rhodium['Pen R/d Closing']['rate'], '-'); ?></td>
-            <td class="text-right"><?= four_decimal($rhodium['Pen R/d Closing']['fine'], '-'); ?></td>
-          </tr>
           <tr>
             <th>Total</th>
             <th class="text-right"><?= four_decimal($total_income_amount, '-') ?>  </th>
