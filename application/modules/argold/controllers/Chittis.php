@@ -68,11 +68,6 @@ class Chittis extends BaseController {
 
     if(!empty($this->data['record']['account_name'])) { 
       $where['account_name']=$this->data['record']['account_name'];
-      if (($this->router->method == 'store' || $this->router->method == 'update') && ($this->router->class == 'chitti_exports')) {
-        pd($_POST);
-        $this->data['record']['chitti_exports'] = $_POST['chitti_exports'];
-        $this->data['chittis_details'] = @$_POST['chittis_details'];
-      }
     if($this->router->class == 'chitti_exports'){ 
     $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,
                                                                 (sum(credit_weight*purity) / sum(credit_weight)) as purity,
@@ -130,7 +125,6 @@ class Chittis extends BaseController {
                                                        array(), array('group_by' => 'purity'));
     
     if($this->router->class == 'chitti_exports'){ 
-
       if ($this->router->method == 'store' || $this->router->method == 'update') {
         $this->data['record']['chitti_exports'] = $_POST['chitti_exports'];
         $this->data['chittis_details'] = @$_POST['chittis_details'];
