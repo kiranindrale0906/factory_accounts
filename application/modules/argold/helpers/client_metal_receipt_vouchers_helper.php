@@ -69,7 +69,8 @@ if (!function_exists('get_row_actions')) {
     if (   $row['receipt_type'] == 'Metal'
         || $row['receipt_type'] == 'AR Gold Refresh'
         || $row['receipt_type'] == 'ARF Refresh'
-        || $row['receipt_type'] == 'ARC Refresh')
+        || $row['receipt_type'] == 'ARC Refresh'
+        || $row['receipt_type'] == 'Rhodium')
       $actions["Edit Rate"] =  array('request' => "http", 
                                      'url' => ADMIN_PATH.'argold/metal_receipt_gold_rates/edit/'.$row['id'],
                                      'confirm_message' => "",

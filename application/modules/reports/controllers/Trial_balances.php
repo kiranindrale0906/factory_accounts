@@ -22,14 +22,14 @@ class Trial_balances extends Ledgers {
 
     $this->get_account_ledger_records();
     $this->get_factory_balance();
-
+    $this->get_rhodium_balance();
     $this->calculate_gst_of_purchase_accounts(0,'Sale');
     $this->calculate_gst_of_purchase_accounts(0,'Labour');
     $this->calculate_gst_of_purchase_accounts(1, 'Sale');
     $this->calculate_gst_of_sales_accounts(0, 'Sale');
     $this->calculate_gst_of_sales_accounts(0, 'Labour');
-    $this->calculate_gst_of_export_sales_accounts('Sale');
-    $this->calculate_gst_of_export_sales_accounts('Labour');
+    $this->calculate_profit_loss_of_export_sales_accounts('Sale');
+    $this->calculate_profit_loss_of_export_sales_accounts('Labour');
 
     $this->get_vadotar_from_factory();
     $this->get_alloy_vodator_balance();
@@ -320,7 +320,7 @@ class Trial_balances extends Ledgers {
     }
   }
 
-  private function calculate_gst_of_export_sales_accounts($sale_type){               
+  private function calculate_profit_loss_of_export_sales_accounts($sale_type){               
     $where = array();               
     
     $where['ounce_rate !='] = 0;
@@ -421,5 +421,49 @@ class Trial_balances extends Ledgers {
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav_group_by_date, 'Stone Vatav', 'ARC', 'Jan 2021');
       }
     }
+  }
+
+  private function get_rhodium_balance() {
+    $this->data['rhodium'] = array();
+    $this->set_rhodium_purchase('Dip R/d');
+    $this->set_rhodium_purchase('Pen R/d');
+    $this->set_rhodium_purchase('Dip R/d Issue', $this->data['rhodium']['Dip R/d']['rate']);
+    $this->set_rhodium_purchase('Pen R/d Issue', $this->data['rhodium']['Pen R/d']['rate']);
+
+    $this->data['rhodium']['Dip R/d Closing'] = array('fine' => $this->data['rhodium']['Dip R/d']['fine'] - $this->data['rhodium']['Dip R/d Issue']['fine'],
+                                                      'amount' => $this->data['rhodium']['Dip R/d']['amount'] - $this->data['rhodium']['Dip R/d Issue']['amount'],
+                                                      'rate' => 0);
+    if ($this->data['rhodium']['Dip R/d Closing']['amount'] > 0)
+      $this->data['rhodium']['Dip R/d Closing']['rate'] = $this->data['rhodium']['Dip R/d']['rate'];
+    $this->data['rhodium']['Pen R/d Closing'] = array('fine' => $this->data['rhodium']['Pen R/d']['fine'] - $this->data['rhodium']['Pen R/d Issue']['fine'],
+                                                      'amount' => $this->data['rhodium']['Pen R/d']['amount'] - $this->data['rhodium']['Pen R/d Issue']['amount'],
+                                                      'rate' => 0);
+    if ($this->data['rhodium']['Pen R/d Closing']['amount'] > 0)
+      $this->data['rhodium']['Pen R/d Closing']['rate'] = $this->data['rhodium']['Pen R/d']['rate'];
+  } 
+
+  private function set_rhodium_purchase($rhodium_type, $purchase_rate = 0) {
+    $select = 'sum(factory_fine) as factory_fine';
+    $rhodium_fine = $this->voucher_model->find($select, array('account_name' => $rhodium_type,
+                                                              'voucher_type' => array('metal receipt voucher')));
+    $this->data['rhodium'][$rhodium_type] = array('fine' => $rhodium_fine['factory_fine']);
+
+    if ($purchase_rate == 0) {
+      $select = 'sum(debit_amount) as debit_amount';
+      $rhodium_amount = $this->voucher_model->find($select, array('account_name' => $rhodium_type,
+                                                                  'voucher_type' => 'rate cut issue voucher'));
+      $this->data['rhodium'][$rhodium_type]['amount'] = $rhodium_amount['debit_amount'];
+      if ($this->data['rhodium'][$rhodium_type]['fine'] > 0)
+        $this->data['rhodium'][$rhodium_type]['rate'] = $this->data['rhodium'][$rhodium_type]['amount'] / $this->data['rhodium'][$rhodium_type]['fine'];
+      else 
+        $this->data['rhodium'][$rhodium_type]['rate'] = 0;
+    } else {
+      if ($this->data['rhodium'][$rhodium_type]['fine'] > 0)
+        $this->data['rhodium'][$rhodium_type]['rate'] = $purchase_rate;
+      else 
+        $this->data['rhodium'][$rhodium_type]['rate'] = 0;
+      $this->data['rhodium'][$rhodium_type]['amount'] = $purchase_rate * $this->data['rhodium'][$rhodium_type]['fine'];
+    }
+
   }
 }

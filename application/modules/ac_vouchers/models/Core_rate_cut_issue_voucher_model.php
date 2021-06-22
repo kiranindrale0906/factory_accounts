@@ -110,8 +110,13 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
                                                             'voucher_type' => 'rate cut receipt voucher'));
 
     if ($metal_receipt_voucher['gold_rate'] == 0) return;
-    $tax_fields = get_tax_fields($metal_receipt_voucher['factory_fine'], $metal_receipt_voucher['fine'], $metal_receipt_voucher['sale_type'], $metal_receipt_voucher['gold_rate'], $metal_receipt_voucher['gold_rate_purity'],$metal_receipt_voucher['created_at'],$metal_receipt_voucher['is_export']);
 
+    if (   $metal_receipt_voucher['account_name'] == 'Dip R/d' 
+        || $metal_receipt_voucher['account_name'] == 'Pen R/d') {
+      $metal_receipt_voucher['is_export'] = 1;
+    }
+
+    $tax_fields = get_tax_fields($metal_receipt_voucher['factory_fine'], $metal_receipt_voucher['fine'], $metal_receipt_voucher['sale_type'], $metal_receipt_voucher['gold_rate'], $metal_receipt_voucher['gold_rate_purity'],$metal_receipt_voucher['created_at'], $metal_receipt_voucher['is_export']);
 
     $rate_cut_issue = array('company_id'    => 1,
                             'account_name'  => $metal_receipt_voucher['account_name'],
@@ -122,10 +127,10 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
                             'debit_weight'  => 0,
                             'purity'        => 100,
                             'sale_type'     => $metal_receipt_voucher['sale_type'],
-                            'taxable_amount'=>$tax_fields['taxable_amount'],
-                            'cgst_amount'=>$tax_fields['cgst_amount'],
-                            'sgst_amount'=>$tax_fields['sgst_amount'],
-                            'tcs_amount'=>$tax_fields['tcs_amount'],
+                            'taxable_amount' => $tax_fields['taxable_amount'],
+                            'cgst_amount'   => $tax_fields['cgst_amount'],
+                            'sgst_amount'   => $tax_fields['sgst_amount'],
+                            'tcs_amount'    => $tax_fields['tcs_amount'],
                             'gold_rate'     => $tax_fields['gold_rate'],
                             'gold_rate_purity' => $tax_fields['gold_rate_purity'],
                             'description'   => $receipt_type.' '.$metal_receipt_voucher['voucher_number'],
@@ -138,7 +143,10 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
     $rate_cut_issue_voucher_obj->store();
 
     $rate_cut_receipt = $rate_cut_issue;
-    $rate_cut_receipt['account_name']  = 'PURCHASE ACCOUNT';
+    $purchase_acccount_name = 'PURCHASE ACCOUNT';
+    if ($metal_receipt_voucher['account_name'] == 'Dip R/d' || $metal_receipt_voucher['account_name'] == 'Pen R/d')
+      $purchase_acccount_name = 'R/D PURCHASE ACCOUNT';
+    $rate_cut_receipt['account_name']  = $purchase_acccount_name;
     $rate_cut_receipt['credit_amount'] = $tax_fields['grand_total'];
     $rate_cut_receipt['debit_amount']  = 0;
     $rate_cut_receipt['debit_weight']  = $tax_fields['weight'];

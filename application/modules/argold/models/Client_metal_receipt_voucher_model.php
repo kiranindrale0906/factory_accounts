@@ -322,7 +322,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     if (   $this->attributes['receipt_type'] != 'Metal'
         && $this->attributes['receipt_type'] != 'AR Gold Refresh'
         && $this->attributes['receipt_type'] != 'ARF Refresh'
-        && $this->attributes['receipt_type'] != 'ARC Refresh')
+        && $this->attributes['receipt_type'] != 'ARC Refresh'
+        && $this->attributes['receipt_type'] != 'Rhodium')
       return;
 
     if (!empty($this->attributes['gold_rate']) && $this->attributes['gold_rate'] <= 0 ) return;
