@@ -18,7 +18,7 @@ class Chitti_model extends BaseModel {
       $rules= array(array('field' => 'chittis[date]', 'label' => 'Date',
                         'rules' => 'trim|required'));
     }
-    if ($this->router->class == 'chitti_exports') {
+    if ($this->router->class == 'chitti_exports' &&  $this->router->method == 'store') {
       $rules[]=array('field' => 'chitti_exports[freight_usd_amount]', 'label' => 'Purity',
                      'rules' => array('trim',
                                       array('chitti_detail_msg', array($this,'chitti_detail_exist')),),
