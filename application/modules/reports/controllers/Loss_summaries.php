@@ -64,7 +64,7 @@ class Loss_summaries extends BaseController {
     $this->data['arc_total_loss'] = 0;
     $this->data['arc_without_recovery_per_kg_loss'] = 0;
   }
-
+    pd($this->data);
     $this->load->render($this->router->class."/index",$this->data);
   }
 }
