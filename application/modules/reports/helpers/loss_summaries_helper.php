@@ -1,0 +1,48 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed.');
+
+function getTableSettings() {
+  return array(
+    'page_title'          => 'BW Accounts',
+    'primary_table'       => 'bw_accounts',
+    'default_column'      => 'id',
+    'table'               => 'bw_accounts',
+    'join_columns'        => '',
+    'join_type'           => '',
+    'where'               => '',
+    'where_ids'           => '',
+    'order_by'            => '',
+    'limit'               => "20",
+    'extra_select_column' => 'id',
+    'actionFunction'      => '',
+    'headingFunction'     => 'list_settings',
+    'search_url'          => 'bw_accounts',
+    'add_title'           => 'Add BW Accounts',
+    'export_title'        => '',
+    'edit'                => '',
+  );
+}
+
+/*
+  0 => column title
+  1 => column name
+  2 => order flag
+  3 => order column
+  4 => filter flag
+  5 => expand text flag
+  6 => select column
+*/
+
+
+
+function list_settings() {
+  return array(
+    array("Date", "created_at", TRUE, "created_at", TRUE, TRUE,'DATE_FORMAT(created_at, "%d-%m-%Y") as created_at'),
+    array("AR Gold", "arg_balance_gross", TRUE, "arg_balance_gross", TRUE, TRUE),
+    array("ARF", "arf_balance_gross", TRUE, "arf_balance_gross", TRUE, TRUE),
+    array("ARC", "arc_balance_gross", TRUE, "arc_balance_gross", TRUE, TRUE),
+    array("Overall Factory", "overall_factory", TRUE, "overall_factory", TRUE, TRUE,'(arg_balance_gross+arf_balance_gross+arc_balance_gross) as overall_factory'),
+    array("W Gross", "w_gross", TRUE, "w_gross", TRUE, TRUE),
+    array("Difference", "b_gross", TRUE, "b_gross", TRUE, TRUE),
+    array("Action", "action", FALSE, "action", FALSE, FALSE),
+  );
+}
