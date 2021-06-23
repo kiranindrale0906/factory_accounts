@@ -101,6 +101,7 @@
                                  +$arf_without_recovery_per_kg_loss
                                  +$arc_without_recovery_per_kg_loss?></td>
                                  
+
       </tr>
     </tbody>
   </table>
