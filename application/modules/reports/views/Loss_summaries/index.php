@@ -38,6 +38,7 @@
     ?>
       <tr>
         <td class="">AR Gold</td>
+        
         <td class="text-right"><?=!empty($arg_total_production)?$arg_total_production:0?></td>
         <td class="text-right"><?=!empty($arg_gpc_powder)?$arg_gpc_powder:0?></td>
         <td class="text-right"><?=!empty($arg_gpc_vodator)?$arg_gpc_vodator:0?></td>
