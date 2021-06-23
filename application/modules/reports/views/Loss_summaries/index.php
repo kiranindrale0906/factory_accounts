@@ -6,6 +6,7 @@
       <h5> Select Quator:
         <?php
           $quators=array_column($quators, 'name');
+          pd($quators);
           foreach ($quators as $index => $quator) { ?>
             <a class="ml-5 <?= ($quator_name== $quator) ? 'bold black underline' : '' ?>" 
                href='<?= base_url().'reports/loss_summaries' ?>?quator=<?= $quator?>'><?= $quator ?></a>
