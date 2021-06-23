@@ -12,6 +12,7 @@ class Loss_summaries extends BaseController {
     $this->data['quator_name'] = (!empty($_GET['quator'])) ? $_GET['quator'] : '';
     $this->data['quators'] = $this->quator_model->get('name');
     $this->data['quator'] = $this->quator_model->find('*',array('name'=>$this->data['quator_name']));
+    if(!empty($this->data['quator'])){
     $this->data['arg_gpc_powder'] =$this->voucher_model->find('
                                                 sum(debit_weight-credit_weight) as amount',
                                               array('account_name'=>"GPC Powder",
@@ -62,6 +63,7 @@ class Loss_summaries extends BaseController {
     $this->data['arc_per_kg_loss'] = 0;
     $this->data['arc_total_loss'] = 0;
     $this->data['arc_without_recovery_per_kg_loss'] = 0;
+  }
 
     $this->load->render($this->router->class."/index",$this->data);
   }
