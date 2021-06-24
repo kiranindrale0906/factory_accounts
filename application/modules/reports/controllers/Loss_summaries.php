@@ -23,7 +23,7 @@ class Loss_summaries extends BaseController {
     $arf_vodator = $this->ledger_model->find($accounts_balance_select, array("`site_name` = 'ARF Jan 2021' AND `purity` != `factory_purity` AND `account_name` != 'VADOTAR' AND (`debit_weight` !=0 or `debit_amount` !=0 or `credit_weight` !=0 or `credit_amount` !=0)"=>NULL),array(),array('group_by'=>'voucher_date'));
     
 
-    $arc_vodator = $this->ledger_model->find($accounts_balance_select, array('site_name' => 'ARC Jan 2021','purity != factory_purity'=>NULL,'account_name != '=>"VADOTAR"));
+    $arc_vodator = $this->ledger_model->find($accounts_balance_select, array('site_name' => 'ARC Jan 2021','purity != factory_purity'=>NULL,'account_name != '=>"VADOTAR"),array(),array('group_by'=>'voucher_date'));
 
     $this->data['arg_gpc_powder'] =$this->voucher_model->find('
                                                 sum(debit_weight-credit_weight) as amount',
