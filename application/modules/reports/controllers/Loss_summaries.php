@@ -20,7 +20,7 @@ class Loss_summaries extends BaseController {
 
     $argold_vodator = $this->ledger_model->find($accounts_balance_select, array('site_name = "AR Gold Jan 2021"' => NULL,'purity != factory_purity'=>NULL,'account_name != "VADOTAR"'=> NULL));
 
-    $arf_vodator = $this->ledger_model->find($accounts_balance_select, array('site_name = "ARF Jan 2021"' => NULL,'purity != factory_purity'=>NULL,'account_name != "VADOTAR"'=> NULL));
+    $arf_vodator = $this->ledger_model->find($accounts_balance_select, array('site_name` = "ARF Jan 2021"' => NULL,'purity != factory_purity'=>NULL,'account_name != "VADOTAR"'=> NULL));
 
 
     $arc_vodator = $this->ledger_model->find($accounts_balance_select, array('site_name = "ARC Jan 2021"' => NULL,'purity != factory_purity'=>NULL,'account_name != "VADOTAR"'=> NULL));
