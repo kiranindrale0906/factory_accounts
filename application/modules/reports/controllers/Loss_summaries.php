@@ -85,9 +85,10 @@ class Loss_summaries extends BaseController {
       }
       if(!empty($data['department_names'])){
           $url=$path."issue_and_receipts/loss_report_for_accounts/index";
-          $records=json_decode(curl_post_request($url,$data),true);
+          $factory_records=json_decode(curl_post_request($url,$data),true);
+          $records=!empty($factory_records)?$factory_records['data']['loss_details']['loss_detail']:$factory_records['data']['loss_details']['loss_detail']=array();
+          
       }
-      pd($records);
       foreach ($category_names as $index => $category_name) {
         $total_unrecovery_loss=0;
         foreach ($records as $key => $value) {
