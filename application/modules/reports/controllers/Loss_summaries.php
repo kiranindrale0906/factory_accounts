@@ -96,11 +96,11 @@ class Loss_summaries extends BaseController {
             $unrecovery_details = $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$value['parent_id'],'account_name'=>'Unrecovarable'));
             $unrecovery_loss=!empty($unrecovery_details)?$unrecovery_details['weight']:0;
             $total_unrecovery_loss+=$unrecovery_loss;
+          pd($total_unrecovery_loss);
 
           }  
         }
       }
-      pd($total_unrecovery_loss);
   }
 }
 
