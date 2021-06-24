@@ -114,8 +114,8 @@ class Loss_summaries extends BaseController {
           }  
         }
       }
-      $data['fine_loss']=$total_unrecovery_loss;
-      $data['unrecovery_loss']=$total_fine;
+      $data['fine_loss']=$total_fine;
+      $data['unrecovery_loss']=$total_unrecovery_loss;
       return $data;
   }
 }
