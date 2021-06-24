@@ -48,7 +48,7 @@
         </td>
         <td class="text-right"><?=$arg_per_kg_loss=!empty($arg_total_production)?($arg_final_loss/$arg_total_production):0?></td>
         <td class="text-right"><?=$arg_loss=(!empty($arg_total_loss)||!empty($arg_gpc_powder)||!empty($arg_gpc_vodator))?($arg_total_loss+$arg_gpc_powder-$arg_gpc_vodator):0?></td>
-        <td class="text-right"><?=$arg_without_recovery_per_kg_loss=!empty($arg_total_production)?($arg_total_loss/$arg_total_production):0:0?></td>
+        <td class="text-right"><?=$arg_without_recovery_per_kg_loss=!empty($arg_total_production)?($arg_total_loss/$arg_total_production):0?></td>
       </tr><tr>
         <td class="">ARF</td>
         <td class="text-right"><?=$arf_total_production=!empty($arf_total_production)?$arf_total_production:0?></td>
