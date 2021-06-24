@@ -47,7 +47,7 @@
                                                   -$arg_gpc_vodator)?>
         </td>
         <td class="text-right"><?=$arg_per_kg_loss=!empty($arg_total_production)?($arg_final_loss/$arg_total_production):0?></td>
-        <td class="text-right"><?=$arg_loss=($arg_total_loss+$arg_gpc_powder-$arg_gpc_vodator)?></td>
+        <td class="text-right"><?=$arg_loss=(!empty($arg_total_loss)||!empty($arg_gpc_powder)||!empty($arg_gpc_vodator))?($arg_total_loss+$arg_gpc_powder-$arg_gpc_vodator):0?></td>
         <td class="text-right"><?=$arg_without_recovery_per_kg_loss=!empty($arg_without_recovery_per_kg_loss)?$arg_without_recovery_per_kg_loss:0?></td>
       </tr><tr>
         <td class="">ARF</td>
@@ -59,7 +59,7 @@
                                                   +$arf_unrecoverable_loss
                                                   -$arf_gpc_vodator)?></td>
         <td class="text-right"><?=$arf_per_kg_loss=!empty($arf_total_production)?($arf_final_loss/$arf_total_production):0?></td>
-        <td class="text-right"><?=$arf_loss=($arf_total_loss+$arf_gpc_powder-$arf_gpc_vodator)?></td>
+        <td class="text-right"><?=$arf_loss=(!empty($arf_total_loss)||!empty($arf_gpc_powder)||!empty($arf_gpc_vodator))?($arf_total_loss+$arf_gpc_powder-$arf_gpc_vodator):0?></td>
         <td class="text-right"><?=$arf_without_recovery_per_kg_loss=!empty($arf_without_recovery_per_kg_loss)?$arf_without_recovery_per_kg_loss:0?></td>
       </tr><tr>
         <td class="">ARC</td>
@@ -71,7 +71,7 @@
                                                   +$arc_unrecoverable_loss
                                                   -$arc_gpc_vodator)?></td>
         <td class="text-right"><?=$arc_per_kg_loss=!empty($arc_total_production)?($arc_final_loss/$arc_total_production):0?></td>
-        <td class="text-right"><?=$arc_loss=($arc_total_loss+$arc_gpc_powder-$arc_gpc_vodator)?></td>
+        <td class="text-right"><?=$arc_loss=(!empty($arc_total_loss)||!empty($arc_gpc_powder)||!empty($arc_gpc_vodator))?($arc_total_loss+$arc_gpc_powder-$arc_gpc_vodator):0?></td>
         <td class="text-right"><?=$arc_without_recovery_per_kg_loss=!empty($arc_without_recovery_per_kg_loss)?$arc_without_recovery_per_kg_loss:0?></td>
       </tr>
       <tr class="bg_gray bold">

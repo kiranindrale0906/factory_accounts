@@ -94,14 +94,12 @@ class Loss_summaries extends BaseController {
           $ghiss_melting_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight', array('account_name'=>'Loss Account','site_name'=>$factory_name,'receipt_type'=>'Ghiss Melting Loss'),array());
           foreach ($ghiss_melting_loss as $ghiss_melting_loss_index => $ghiss_melting_loss_value) {
             $data['issue_department_id']=$ghiss_melting_loss_value['parent_id'];
-            $url=API_ARG_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
+            $url=$path."issue_and_receipts/loss_report_for_accounts/index";
             $ghiss_details=json_decode(curl_post_request($url,$data),true);
             $out_weight=!empty($ghiss_details)&&(!empty($ghiss_details['data']['ghiss_melting_out_weights']))?$ghiss_details['data']['ghiss_melting_out_weights']:0;
             $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight']=$out_weight;
           }
           $records=array_merge($records,$ghiss_melting_loss);
-          
-          
       }
       $total_unrecovery_loss=$total_fine=0;
       foreach ($category_names as $index => $category_name) {
