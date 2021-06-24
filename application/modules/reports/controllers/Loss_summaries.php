@@ -73,21 +73,34 @@ class Loss_summaries extends BaseController {
   private function loss_details($site_name,$from_date,$to_date){
     $categories= $this->voucher_model->get('description', array('account_name'=>'Loss Account','date(created_at)>='=>'2021-03-13'),array(),array('group_by'=>'description'));
       $category_names=array_column($categories,'description');
-      // $category_names=array('Pasta Loss','Tarpatta And Flatting Loss');
+      $category_names=array('Pasta Loss','Tarpatta And Flatting Loss');
       $data['department_names']=$category_names;
       $data['type']='category';
       $data['quator']='';
       if($site_name=='ARC'){
         $path=API_ARC_JAN2021_PATH;
+        $factory_name='ARC Jan 2021';
       }elseif($site_name=='ARF'){
         $path=API_ARF_JAN2021_PATH;
+        $factory_name='AR Gold Jan 2021';
       }else{
         $path=API_ARG_JAN2021_PATH;
+        $factory_name='ARF Jan 2021';
       }
       if(!empty($data['department_names'])){
           $url=$path."issue_and_receipts/loss_report_for_accounts/index";
           $factory_records=json_decode(curl_post_request($url,$data),true);
           $records=!empty($factory_records)?$factory_records['data']['loss_details']['loss_detail']:$factory_records['data']['loss_details']['loss_detail']=array();
+          $ghiss_melting_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight', array('account_name'=>'Loss Account','site_name'=>$factory_name,'receipt_type'=>'Ghiss Melting Loss'),array());
+          foreach ($ghiss_melting_loss as $ghiss_melting_loss_index => $ghiss_melting_loss_value) {
+            $data['issue_department_id']=$ghiss_melting_loss_value['parent_id'];
+            $url=API_ARG_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
+            $ghiss_details=json_decode(curl_post_request($url,$data),true);
+            $out_weight=!empty($ghiss_details)&&(!empty($ghiss_details['data']['ghiss_melting_out_weights']))?$ghiss_details['data']['ghiss_melting_out_weights']:0;
+            $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight']=$out_weight;
+          }
+          $records=array_merge($records,$ghiss_melting_loss);
+          
           
       }
       $total_unrecovery_loss=$total_fine=0;
