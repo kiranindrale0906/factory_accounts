@@ -87,7 +87,18 @@ class Loss_summaries extends BaseController {
           $url=$path."issue_and_receipts/loss_report_for_accounts/index";
           $records=json_decode(curl_post_request($url,$data),true);
       }
-      pd($records);
+      foreach ($category_names as $index => $category_name) {
+        $total_unrecovery_loss=0;
+        foreach ($records as $key => $value) {
+          if(strtolower($value['description'])==$category_name){
+            $unrecovery_details = $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$value['parent_id'],'account_name'=>'Unrecovarable'));
+            $unrecovery_loss=!empty($unrecovery_details)?$unrecovery_details['weight']:0;
+            $total_unrecovery_loss+=$unrecovery_loss;
+
+          }  
+        }
+      }
+      pd($total_unrecovery_loss);
   }
 }
 
