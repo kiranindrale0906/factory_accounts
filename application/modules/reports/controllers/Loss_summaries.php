@@ -12,6 +12,9 @@ class Loss_summaries extends BaseController {
     $this->data['quator_name'] = (!empty($_GET['quator'])) ? $_GET['quator'] : '';
     $this->data['quators'] = $this->quator_model->get('name');
     $this->data['quator'] = $this->quator_model->find('*',array('name'=>$this->data['quator_name']));
+    $arg_loss_records=$this->unrecoverable_loss('ARG');
+    $arf_loss_records=$this->unrecoverable_loss('ARF');
+    $arc_loss_records=$this->unrecoverable_loss('ARC');
     if(!empty($this->data['quator'])){
     $this->data['arg_gpc_powder'] =$this->voucher_model->find('
                                                 sum(debit_weight-credit_weight) as amount',
@@ -24,7 +27,7 @@ class Loss_summaries extends BaseController {
                                               array('account_name'=>"AR Gold Jan 2021 GPC Vodator",
                                               'date(voucher_date)>='=>$this->data['quator']['from_date'],
                                               'date(voucher_date)<='=>$this->data['quator']['to_date']))['amount'];
-    $this->data['arg_unrecoverable_loss'] = 0;
+    $this->data['arg_unrecoverable_loss'] = 0
     $this->data['arg_final_loss'] = 0;
     $this->data['arg_per_kg_loss'] = 0;
     $this->data['arg_total_loss'] = 0;
@@ -65,6 +68,26 @@ class Loss_summaries extends BaseController {
     $this->data['arc_without_recovery_per_kg_loss'] = 0;
   }
     $this->load->render($this->router->class."/index",$this->data);
+  }
+
+  private function unrecoverable_loss($site_name){
+    $categories= $this->voucher_model->get('description', array('account_name'=>'Loss Account','date(created_at)>='=>'2021-03-13'),array(),array('group_by'=>'description'));
+      $category_names=array_column($categories,'description');
+      $data['department_names']=$category_names;
+      $data['type']='category';
+      $data['quator']='';
+      if($site_name=='ARC'){
+        $path=API_ARC_JAN2021_PATH;
+      }elseif($site_name=='ARF'){
+        $path=API_ARF_JAN2021_PATH;
+      }else{
+        $path=API_ARG_JAN2021_PATH;
+      }
+      if(!empty($data['department_names'])){
+          $url=$path."issue_and_receipts/loss_report_for_accounts/index";
+          $records=json_decode(curl_post_request($url,$data),true);
+      }
+      pd($records);
   }
 }
 
