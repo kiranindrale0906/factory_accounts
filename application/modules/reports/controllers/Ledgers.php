@@ -140,12 +140,12 @@ class Ledgers extends BaseController {
       $where_receipt = array_merge($where, array('(debit_weight != 0 or debit_amount != 0)'   => NULL),$account_receipt_where);
       $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(), array('order_by'=>'chitti_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
       $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(), array('order_by'=>'parent_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
+      lq();
       
 
     $issue_voucher_dates = array_column($issues, 'voucher_date');
     $receipt_voucher_dates = array_column($receipts, 'voucher_date');
     $this->data['voucher_dates'] = array_values(array_unique(array_merge($issue_voucher_dates, $receipt_voucher_dates)));
-    asort($this->data['voucher_dates']);
   
     $this->data['issues']   = $this->get_records_by_created_date($issues);
     $this->data['receipts'] = $this->get_records_by_created_date($receipts);
