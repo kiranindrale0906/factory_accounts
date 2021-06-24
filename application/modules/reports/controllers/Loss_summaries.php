@@ -12,10 +12,10 @@ class Loss_summaries extends BaseController {
     $this->data['quator_name'] = (!empty($_GET['quator'])) ? $_GET['quator'] : '';
     $this->data['quators'] = $this->quator_model->get('name');
     $this->data['quator'] = $this->quator_model->find('*',array('name'=>$this->data['quator_name']));
+    if(!empty($this->data['quator'])){
     $arg_loss_records=$this->unrecoverable_loss('ARG');
     $arf_loss_records=$this->unrecoverable_loss('ARF');
     $arc_loss_records=$this->unrecoverable_loss('ARC');
-    if(!empty($this->data['quator'])){
     $this->data['arg_gpc_powder'] =$this->voucher_model->find('
                                                 sum(debit_weight-credit_weight) as amount',
                                               array('account_name'=>"GPC Powder",
@@ -27,7 +27,7 @@ class Loss_summaries extends BaseController {
                                               array('account_name'=>"AR Gold Jan 2021 GPC Vodator",
                                               'date(voucher_date)>='=>$this->data['quator']['from_date'],
                                               'date(voucher_date)<='=>$this->data['quator']['to_date']))['amount'];
-    $this->data['arg_unrecoverable_loss'] = 0
+    $this->data['arg_unrecoverable_loss'] = 0;
     $this->data['arg_final_loss'] = 0;
     $this->data['arg_per_kg_loss'] = 0;
     $this->data['arg_total_loss'] = 0;
