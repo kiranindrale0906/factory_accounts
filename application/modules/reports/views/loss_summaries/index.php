@@ -65,7 +65,7 @@
         <td class="">ARC</td>
         <td class="text-right"><?=$arc_total_production=!empty($arc_total_production)?four_decimal($arc_total_production):0?></td>
         <td class="text-right"><?=$arc_gpc_powder=!empty($arc_gpc_powder)?four_decimal($arc_gpc_powder):0?></td>
-        <td class="text-right"><?=$arc_gpc_vodator=!empty($arc_gpc_vodator)?four_decimal($arc_gpc_vodator)four_decimal($arc_gpc_vodator):0?></td>
+        <td class="text-right"><?=$arc_gpc_vodator=!empty($arc_gpc_vodator)?four_decimal($arc_gpc_vodator):0?></td>
         <td class="text-right"><?=$arc_unrecoverable_loss=!empty($arc_unrecoverable_loss)?four_decimal($arc_unrecoverable_loss):0?></td>
         <td class="text-right"><?=$arc_final_loss=four_decimal($arc_gpc_powder
                                                   +$arc_unrecoverable_loss
