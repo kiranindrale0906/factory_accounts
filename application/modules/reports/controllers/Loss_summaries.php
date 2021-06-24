@@ -18,7 +18,7 @@ class Loss_summaries extends BaseController {
     $arc_loss_records=$this->loss_details('ARC',$this->data['quator']['from_date'],$this->data['quator']['to_date']);
     $accounts_balance_select = '(sum(debit_weight) - sum(credit_weight)) as balance, (sum(debit_weight*purity/100) - sum(credit_weight*purity/100)) as balance_fine';
 
-    $argold_vodator = $this->voucher_model->find($accounts_balance_select, array('site_name' => 'AR Gold Jan 2021','purity != voucher_model'=>NULL,'account_name != '=>"VADOTAR"));
+    $argold_vodator = $this->voucher_model->find($accounts_balance_select, array('site_name' => 'AR Gold Jan 2021','purity != factory_purity'=>NULL,'account_name != '=>"VADOTAR"));
 
     $arf_vodator = $this->voucher_model->find($accounts_balance_select, array("site_name = 'ARF Jan 2021' AND purity != factory_purity AND account_name != 'VADOTAR'"=>NULL));
     
