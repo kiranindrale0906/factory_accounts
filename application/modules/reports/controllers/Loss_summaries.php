@@ -89,7 +89,6 @@ class Loss_summaries extends BaseController {
           $records=!empty($factory_records)?$factory_records['data']['loss_details']['loss_detail']:$factory_records['data']['loss_details']['loss_detail']=array();
           
       }
-      pd($records);
       $total_unrecovery_loss=0;
       foreach ($category_names as $index => $category_name) {
         foreach ($records as $key => $value) {
@@ -97,11 +96,11 @@ class Loss_summaries extends BaseController {
             $unrecovery_details = $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$value['parent_id'],'account_name'=>'Unrecovarable'));
             $unrecovery_loss=!empty($unrecovery_details)?$unrecovery_details['weight']:0;
             $total_unrecovery_loss+=$unrecovery_loss;
-          pd($total_unrecovery_loss);
 
           }  
         }
       }
+      return $total_unrecovery_loss;
   }
 }
 
