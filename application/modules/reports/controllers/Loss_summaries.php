@@ -89,6 +89,7 @@ class Loss_summaries extends BaseController {
           $records=!empty($factory_records)?$factory_records['data']['loss_details']['loss_detail']:$factory_records['data']['loss_details']['loss_detail']=array();
           
       }
+      pd($records);
       $total_unrecovery_loss=0;
       foreach ($category_names as $index => $category_name) {
         foreach ($records as $key => $value) {
