@@ -13,9 +13,9 @@ class Loss_summaries extends BaseController {
     $this->data['quators'] = $this->quator_model->get('name');
     $this->data['quator'] = $this->quator_model->find('*',array('name'=>$this->data['quator_name']));
     if(!empty($this->data['quator'])){
-    $arg_loss_records=$this->unrecoverable_loss('ARG');
-    $arf_loss_records=$this->unrecoverable_loss('ARF');
-    $arc_loss_records=$this->unrecoverable_loss('ARC');
+    $arg_loss_records=$this->loss_details('ARG',$this->data['quator']['from_date'],$this->data['quator']['to_date']);
+    $arf_loss_records=$this->loss_details('ARF',$this->data['quator']['from_date'],$this->data['quator']['to_date']);
+    $arc_loss_records=$this->loss_details('ARC',$this->data['quator']['from_date'],$this->data['quator']['to_date']);
     $this->data['arg_gpc_powder'] =$this->voucher_model->find('
                                                 sum(debit_weight-credit_weight) as amount',
                                               array('account_name'=>"GPC Powder",
@@ -27,10 +27,10 @@ class Loss_summaries extends BaseController {
                                               array('account_name'=>"AR Gold Jan 2021 GPC Vodator",
                                               'date(voucher_date)>='=>$this->data['quator']['from_date'],
                                               'date(voucher_date)<='=>$this->data['quator']['to_date']))['amount'];
-    $this->data['arg_unrecoverable_loss'] = 0;
+    $this->data['arg_unrecoverable_loss'] =!empty($arg_loss_records['unrecovery_loss'])?$arg_loss_records['unrecovery_loss']:0;
     $this->data['arg_final_loss'] = 0;
     $this->data['arg_per_kg_loss'] = 0;
-    $this->data['arg_total_loss'] = 0;
+    $this->data['arg_total_loss'] =!empty($arg_loss_records['fine_loss'])?$arg_loss_records['fine_loss']:0;;
     $this->data['arg_without_recovery_per_kg_loss'] = 0;
 
     $this->data['arf_gpc_powder'] =$this->voucher_model->find('
@@ -44,10 +44,10 @@ class Loss_summaries extends BaseController {
                                               array('account_name'=>"ARF Jan 2021 GPC Vodator",
                                               'date(voucher_date)>='=>$this->data['quator']['from_date'],
                                               'date(voucher_date)<='=>$this->data['quator']['to_date']))['amount'];
-    $this->data['arf_unrecoverable_loss'] = 0;
+    $this->data['arf_unrecoverable_loss'] =!empty($arf_loss_records['unrecovery_loss'])?$arf_loss_records['unrecovery_loss']:0;;
     $this->data['arf_final_loss'] = 0;
     $this->data['arf_per_kg_loss'] = 0;
-    $this->data['arf_total_loss'] = 0;
+    $this->data['arf_total_loss'] =!empty($arf_loss_records['fine_loss'])?$arf_loss_records['fine_loss']:0;
     $this->data['arf_without_recovery_per_kg_loss'] = 0;
 
     $this->data['arc_gpc_powder'] = $this->voucher_model->find('
@@ -61,18 +61,19 @@ class Loss_summaries extends BaseController {
                                               array('account_name'=>"ARC Jan 2021 GPC Vodator",
                                               'date(voucher_date)>='=>$this->data['quator']['from_date'],
                                               'date(voucher_date)<='=>$this->data['quator']['to_date']))['amount'];
-    $this->data['arc_unrecoverable_loss'] = 0;
+    $this->data['arc_unrecoverable_loss'] =!empty($arc_loss_records['unrecovery_loss'])?$arc_loss_records['unrecovery_loss']:0;;
     $this->data['arc_final_loss'] = 0;
     $this->data['arc_per_kg_loss'] = 0;
-    $this->data['arc_total_loss'] = 0;
+    $this->data['arc_total_loss']=!empty($arc_loss_records['fine_loss'])?$arc_loss_records['fine_loss']:0;
     $this->data['arc_without_recovery_per_kg_loss'] = 0;
   }
     $this->load->render($this->router->class."/index",$this->data);
   }
 
-  private function unrecoverable_loss($site_name){
+  private function loss_details($site_name,$from_date,$to_date){
     $categories= $this->voucher_model->get('description', array('account_name'=>'Loss Account','date(created_at)>='=>'2021-03-13'),array(),array('group_by'=>'description'));
       $category_names=array_column($categories,'description');
+      // $category_names=array('Pasta Loss','Tarpatta And Flatting Loss');
       $data['department_names']=$category_names;
       $data['type']='category';
       $data['quator']='';
@@ -89,18 +90,22 @@ class Loss_summaries extends BaseController {
           $records=!empty($factory_records)?$factory_records['data']['loss_details']['loss_detail']:$factory_records['data']['loss_details']['loss_detail']=array();
           
       }
-      $total_unrecovery_loss=0;
+      $total_unrecovery_loss=$total_fine=0;
       foreach ($category_names as $index => $category_name) {
+        $fine_loss=$unrecovery_loss=0;
         foreach ($records as $key => $value) {
-          if(strtolower($value['description'])==$category_name){
-            $unrecovery_details = $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$value['parent_id'],'account_name'=>'Unrecovarable'));
+          if(strtolower($value['description'])==strtolower($category_name)){
+            $fine_loss=($value['in_weight']*$value['in_lot_purity']/100);
+            $unrecovery_details = $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$value['parent_id'],'account_name'=>'Unrecovarable','date(voucher_date)>='=>$from_date,'date(voucher_date)<='=>$to_date));
             $unrecovery_loss=!empty($unrecovery_details)?$unrecovery_details['weight']:0;
             $total_unrecovery_loss+=$unrecovery_loss;
-
+            $total_fine+=four_decimal($fine_loss);
           }  
         }
       }
-      return $total_unrecovery_loss;
+      $data['fine_loss']=$total_unrecovery_loss;
+      $data['unrecovery_loss']=$total_fine;
+      return $data;
   }
 }
 
