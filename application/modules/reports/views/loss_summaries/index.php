@@ -38,68 +38,68 @@
       <tr>
         <td class="">AR Gold</td>
         
-        <td class="text-right"><?=$arg_total_production=!empty($arg_total_production)?$arg_total_production:0?></td>
-        <td class="text-right"><?=$arg_gpc_powder=!empty($arg_gpc_powder)?$arg_gpc_powder:0?></td>
-        <td class="text-right"><?=$arg_gpc_vodator=!empty($arg_gpc_vodator)?$arg_gpc_vodator:0?></td>
-        <td class="text-right"><?=$arg_unrecoverable_loss=!empty($arg_unrecoverable_loss)?$arg_unrecoverable_loss:0?></td>
-        <td class="text-right"><?=$arg_final_loss=($arg_gpc_powder
+        <td class="text-right"><?=$arg_total_production=!empty($arg_total_production)?four_decimal($arg_total_production):0?></td>
+        <td class="text-right"><?=$arg_gpc_powder=!empty($arg_gpc_powder)?four_decimal($arg_gpc_powder):0?></td>
+        <td class="text-right"><?=$arg_gpc_vodator=!empty($arg_gpc_vodator)?four_decimal($arg_gpc_vodator):0?></td>
+        <td class="text-right"><?=$arg_unrecoverable_loss=!empty($arg_unrecoverable_loss)?four_decimal($arg_unrecoverable_loss):0?></td>
+        <td class="text-right"><?=$arg_final_loss=four_decimal($arg_gpc_powder
                                                   +$arg_unrecoverable_loss
                                                   -$arg_gpc_vodator)?>
         </td>
-        <td class="text-right"><?=$arg_per_kg_loss=!empty($arg_total_production)?($arg_final_loss/$arg_total_production):0?></td>
-        <td class="text-right"><?=$arg_loss=(!empty($arg_total_loss)||!empty($arg_gpc_powder)||!empty($arg_gpc_vodator))?($arg_total_loss+$arg_gpc_powder-$arg_gpc_vodator):0?></td>
-        <td class="text-right"><?=$arg_without_recovery_per_kg_loss=!empty($arg_total_production)?($arg_total_loss/$arg_total_production):0?></td>
+        <td class="text-right"><?=$arg_per_kg_loss=!empty($arg_total_production)?four_decimal($arg_final_loss/$arg_total_production):0?></td>
+        <td class="text-right"><?=$arg_loss=(!empty($arg_total_loss)||!empty($arg_gpc_powder)||!empty($arg_gpc_vodator))?four_decimal($arg_total_loss+$arg_gpc_powder-$arg_gpc_vodator):0?></td>
+        <td class="text-right"><?=$arg_without_recovery_per_kg_loss=!empty($arg_total_production)?four_decimal($arg_total_loss/$arg_total_production):0?></td>
       </tr><tr>
         <td class="">ARF</td>
-        <td class="text-right"><?=$arf_total_production=!empty($arf_total_production)?$arf_total_production:0?></td>
-        <td class="text-right"><?=$arf_gpc_powder=!empty($arf_gpc_powder)?$arf_gpc_powder:0?></td>
-        <td class="text-right"><?=$arf_gpc_vodator=!empty($arf_gpc_vodator)?$arf_gpc_vodator:0?></td>
-        <td class="text-right"><?=$arf_unrecoverable_loss=!empty($arf_unrecoverable_loss)?$arf_unrecoverable_loss:0?></td>
-        <td class="text-right"><?=$arf_final_loss=($arf_gpc_powder
+        <td class="text-right"><?=$arf_total_production=!empty($arf_total_production)?four_decimal($arf_total_production):0?></td>
+        <td class="text-right"><?=$arf_gpc_powder=!empty($arf_gpc_powder)?four_decimal($arf_gpc_powder):0?></td>
+        <td class="text-right"><?=$arf_gpc_vodator=!empty($arf_gpc_vodator)?four_decimal($arf_gpc_vodator):0?></td>
+        <td class="text-right"><?=$arf_unrecoverable_loss=!empty($arf_unrecoverable_loss)?four_decimal($arf_unrecoverable_loss):0?></td>
+        <td class="text-right"><?=$arf_final_loss=four_decimal($arf_gpc_powder
                                                   +$arf_unrecoverable_loss
                                                   -$arf_gpc_vodator)?></td>
-        <td class="text-right"><?=$arf_per_kg_loss=!empty($arf_total_production)?($arf_final_loss/$arf_total_production):0?></td>
-        <td class="text-right"><?=$arf_loss=(!empty($arf_total_loss)||!empty($arf_gpc_powder)||!empty($arf_gpc_vodator))?($arf_total_loss+$arf_gpc_powder-$arf_gpc_vodator):0?></td>
-        <td class="text-right"><?=$arf_without_recovery_per_kg_loss=!empty($arf_total_production)?($arf_total_loss/$arf_total_production):0?></td>
+        <td class="text-right"><?=$arf_per_kg_loss=!empty($arf_total_production)?four_decimal($arf_final_loss/$arf_total_production):0?></td>
+        <td class="text-right"><?=$arf_loss=(!empty($arf_total_loss)||!empty($arf_gpc_powder)||!empty($arf_gpc_vodator))?four_decimal($arf_total_loss+$arf_gpc_powder-$arf_gpc_vodator):0?></td>
+        <td class="text-right"><?=$arf_without_recovery_per_kg_loss=!empty($arf_total_production)?four_decimal($arf_total_loss/$arf_total_production):0?></td>
       </tr><tr>
         <td class="">ARC</td>
-        <td class="text-right"><?=$arc_total_production=!empty($arc_total_production)?$arc_total_production:0?></td>
-        <td class="text-right"><?=$arc_gpc_powder=!empty($arc_gpc_powder)?$arc_gpc_powder:0?></td>
-        <td class="text-right"><?=$arc_gpc_vodator=!empty($arc_gpc_vodator)?$arc_gpc_vodator:0?></td>
-        <td class="text-right"><?=$arc_unrecoverable_loss=!empty($arc_unrecoverable_loss)?$arc_unrecoverable_loss:0?></td>
-        <td class="text-right"><?=$arc_final_loss=($arc_gpc_powder
+        <td class="text-right"><?=$arc_total_production=!empty($arc_total_production)?four_decimal($arc_total_production):0?></td>
+        <td class="text-right"><?=$arc_gpc_powder=!empty($arc_gpc_powder)?four_decimal($arc_gpc_powder):0?></td>
+        <td class="text-right"><?=$arc_gpc_vodator=!empty($arc_gpc_vodator)?four_decimal($arc_gpc_vodator)four_decimal($arc_gpc_vodator):0?></td>
+        <td class="text-right"><?=$arc_unrecoverable_loss=!empty($arc_unrecoverable_loss)?four_decimal($arc_unrecoverable_loss):0?></td>
+        <td class="text-right"><?=$arc_final_loss=four_decimal($arc_gpc_powder
                                                   +$arc_unrecoverable_loss
                                                   -$arc_gpc_vodator)?></td>
-        <td class="text-right"><?=$arc_per_kg_loss=!empty($arc_total_production)?($arc_final_loss/$arc_total_production):0?></td>
-        <td class="text-right"><?=$arc_loss=(!empty($arc_total_loss)||!empty($arc_gpc_powder)||!empty($arc_gpc_vodator))?($arc_total_loss+$arc_gpc_powder-$arc_gpc_vodator):0?></td>
-        <td class="text-right"><?=$arc_without_recovery_per_kg_loss=!empty($arc_total_production)?($arc_total_loss/$arc_total_production):0?></td>
+        <td class="text-right"><?=$arc_per_kg_loss=!empty($arc_total_production)?four_decimal($arc_final_loss/$arc_total_production):0?></td>
+        <td class="text-right"><?=$arc_loss=(!empty($arc_total_loss)||!empty($arc_gpc_powder)||!empty($arc_gpc_vodator))?four_decimal($arc_total_loss+$arc_gpc_powder-$arc_gpc_vodator):0?></td>
+        <td class="text-right"><?=$arc_without_recovery_per_kg_loss=!empty($arc_total_production)?four_decimal($arc_total_loss/$arc_total_production):0?></td>
       </tr>
       <tr class="bg_gray bold">
         <td>Total</td>
-        <td class="text-right"><?=$arg_total_production
+        <td class="text-right"><?=four_decimal($arg_total_production
                                  +$arf_total_production
-                                 +$arc_total_production?></td>
-        <td class="text-right"><?=$arg_gpc_powder
+                                 +$arc_total_production)?></td>
+        <td class="text-right"><?=four_decimal($arg_gpc_powder
                                  +$arf_gpc_powder
-                                 +$arc_gpc_powder?></td>
-        <td class="text-right"><?=$arg_gpc_vodator
+                                 +$arc_gpc_powder)?></td>
+        <td class="text-right"><?=four_decimal($arg_gpc_vodator
                                  +$arf_gpc_vodator
-                                 +$arc_gpc_vodator?></td>
-        <td class="text-right"><?=$arg_unrecoverable_loss
+                                 +$arc_gpc_vodator)?></td>
+        <td class="text-right"><?=four_decimal($arg_unrecoverable_loss
                                  +$arf_unrecoverable_loss
-                                 +$arc_unrecoverable_loss?></td>
-        <td class="text-right"><?=$arg_final_loss
+                                 +$arc_unrecoverable_loss)?></td>
+        <td class="text-right"><?=four_decimal($arg_final_loss
                                  +$arf_final_loss
-                                 +$arc_final_loss?></td>
-        <td class="text-right"><?=$arg_per_kg_loss
+                                 +$arc_final_loss)?></td>
+        <td class="text-right"><?=four_decimal($arg_per_kg_loss
                                  +$arf_per_kg_loss
-                                 +$arc_per_kg_loss?></td>
-        <td class="text-right"><?=$arg_loss
+                                 +$arc_per_kg_loss)?></td>
+        <td class="text-right"><?=four_decimal($arg_loss
                                  +$arf_loss
-                                 +$arc_loss?></td>
-        <td class="text-right"><?=$arg_without_recovery_per_kg_loss
+                                 +$arc_loss)?></td>
+        <td class="text-right"><?=four_decimal($arg_without_recovery_per_kg_loss
                                  +$arf_without_recovery_per_kg_loss
-                                 +$arc_without_recovery_per_kg_loss?></td>
+                                 +$arc_without_recovery_per_kg_loss)?></td>
                                  
 
       </tr>
