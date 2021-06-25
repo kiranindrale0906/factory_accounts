@@ -124,18 +124,14 @@
     ?>
       <tr>
         <td class="">AR Gold</td>
-        <?php foreach ($month_record as $month_key => $month) { 
-          pd($argold_production_report);
-
-          ?>
+        <?php foreach ($month_record as $month_key => $month) { ?>
                 <td class="text-right"><?=!empty($argold_production_report)&&!empty($argold_production_report[$month])?$argold_production_report[$month]:0?></td>
                  
         <?php }?>
       </tr>
       <tr>
         <td class="">ARF</td>
-        <?php foreach ($month_record as $month_key => $month) {
-          ?>
+        <?php foreach ($month_record as $month_key => $month) {?>
                 <td class="text-right"><?=!empty($arf_production_report)&&!empty($arf_production_report[$month])?$arf_production_report[$month]:0?></td>
                  
         <?php }?>
