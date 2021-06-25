@@ -23,13 +23,16 @@ class Loss_summaries extends BaseController {
     $arf_vodator = $this->ledger_model->find($accounts_balance_select, array('site_name` = "ARF Jan 2021"' => NULL,'purity != factory_purity'=>NULL,'account_name != "VADOTAR"'=> NULL,'date(voucher_date)>='=>$this->data['quator']['from_date'],'date(voucher_date)<='=>$this->data['quator']['to_date']),array(),array('group_by'=>'date_format(voucher_date,"%Y-%m")'));
 
     $arc_vodator = $this->ledger_model->find($accounts_balance_select, array('site_name = "ARC Jan 2021"' => NULL,'purity != factory_purity'=>NULL,'account_name != "VADOTAR"'=> NULL,'date(voucher_date)>='=>$this->data['quator']['from_date'],'date(voucher_date)<='=>$this->data['quator']['to_date']),array(),array('group_by'=>'date_format(voucher_date,"%Y-%m")'));
+    $argold_total_production=end($argold_vodator);
+    $arf_total_production=end($arf_vodator);
+    $arc_total_production=end($arc_vodator);
 
     $this->data['arg_gpc_powder'] =$this->voucher_model->find('
                                                 sum(debit_weight-credit_weight) as amount',
                                               array('account_name'=>"GPC Powder",
                                               'date(voucher_date)>='=>$this->data['quator']['from_date'],
                                               'date(voucher_date)<='=>$this->data['quator']['to_date']))['amount'];
-    $this->data['arg_total_production'] =!empty($argold_vodator)?end($argold_vodator['balance']):0;
+    $this->data['arg_total_production'] =!empty($argold_total_production)?$argold_total_production['balance']:0;
     $this->data['arg_gpc_vodator'] = $this->voucher_model->find('
                                                 sum(debit_weight-credit_weight) as amount',
                                               array('account_name'=>"AR Gold Jan 2021 GPC Vodator",
@@ -46,7 +49,7 @@ class Loss_summaries extends BaseController {
                                               array('account_name'=>"GPC Powder ARF",
                                               'date(voucher_date)>='=>$this->data['quator']['from_date'],
                                               'date(voucher_date)<='=>$this->data['quator']['to_date']))['amount'];
-    $this->data['arf_total_production'] =!empty($arf_vodator)?end($arf_vodator['balance']):0;
+    $this->data['arf_total_production'] =!empty($arf_total_production)?$arf_total_production['balance']:0;
     $this->data['arf_gpc_vodator'] =$this->voucher_model->find('
                                                 sum(debit_weight-credit_weight) as amount',
                                               array('account_name'=>"ARF Jan 2021 GPC Vodator",
@@ -63,7 +66,7 @@ class Loss_summaries extends BaseController {
                                               array('account_name'=>"GPC POWDER LOSS ARC",
                                               'date(voucher_date)>='=>$this->data['quator']['from_date'],
                                               'date(voucher_date)<='=>$this->data['quator']['to_date']))['amount'];
-    $this->data['arc_total_production'] =!empty($arc_vodator)?end($arc_vodator['balance']):0;
+    $this->data['arc_total_production'] =!empty($arc_total_production)?$arc_total_production['balance']:0;
     $this->data['arc_gpc_vodator'] =$this->voucher_model->find('
                                                 sum(debit_weight-credit_weight) as amount',
                                               array('account_name'=>"ARC Jan 2021 GPC Vodator",
@@ -81,7 +84,6 @@ class Loss_summaries extends BaseController {
   private function loss_details($site_name,$from_date,$to_date){
     $categories= $this->voucher_model->get('description', array('account_name'=>'Loss Account','date(created_at)>='=>'2021-03-13'),array(),array('group_by'=>'description'));
       $category_names=array_column($categories,'description');
-      // $category_names=array('Pasta Loss','Tarpatta And Flatting Loss');
       $data['department_names']=$category_names;
       $data['type']='category';
       $data['quator']='';
