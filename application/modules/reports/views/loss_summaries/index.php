@@ -106,7 +106,7 @@
     </tbody>
   </table>
 </div>
-<?php if(!empty($month_record)) ?>
+<?php if(!empty($month_record)) { ?>
   <h5>Production Report</h5>
   <hr>
   <div class="table-responsive">
