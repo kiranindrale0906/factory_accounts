@@ -125,16 +125,10 @@
       <tr>
         <td class="">AR Gold</td>
         <?php
-        print_r($month_record);
-        pd($argold_production_report);
          foreach ($month_record as $month_key => $month) { 
                 foreach ($argold_production_report as $index => $value) {
                   if($value['voucher_date']==$month){  ?>
                     <td class="text-right"><?=$value['balance']?></td>
-                  <?php 
-                  }else{ 
-                  ?>
-                    <td class="text-right">0</td>
                   <?php
                   }
                 }
@@ -147,10 +141,6 @@
                 foreach ($arf_production_report as $arf_index => $arf_value) {
                   if($arf_value['voucher_date']==$month){  ?>
                     <td class="text-right"><?=$arf_value['balance']?></td>
-                  <?php 
-                  }else{ 
-                  ?>
-                    <td class="text-right">0</td>
                   <?php
                   }
                 }
@@ -162,10 +152,6 @@
                 foreach ($arc_production_report as $arc_index => $arc_value) {
                   if($arc_value['voucher_date']==$month){  ?>
                     <td class="text-right"><?=$arc_value['balance']?></td>
-                  <?php 
-                  }else{ 
-                  ?>
-                    <td class="text-right">0</td>
                   <?php
                   }
                 }
