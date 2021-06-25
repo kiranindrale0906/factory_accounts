@@ -16,16 +16,24 @@ class Loss_summaries extends BaseController {
     $arg_loss_records=$this->loss_details('ARG',$this->data['quator']['from_date'],$this->data['quator']['to_date']);
     $arf_loss_records=$this->loss_details('ARF',$this->data['quator']['from_date'],$this->data['quator']['to_date']);
     $arc_loss_records=$this->loss_details('ARC',$this->data['quator']['from_date'],$this->data['quator']['to_date']);
-    $accounts_balance_select = 'sum(debit_weight)-sum(credit_weight) as balance,voucher_date';
+    $accounts_balance_select = 'sum(debit_weight)-sum(credit_weight) as balance,date_format(voucher_date,"%Y-%m") as voucher_date';
 
     $argold_vodator = $this->ledger_model->get($accounts_balance_select, array('site_name = "AR Gold Jan 2021"' => NULL,'purity != factory_purity'=>NULL,'account_name != "VADOTAR"'=> NULL,'date(voucher_date)>='=>$this->data['quator']['from_date'],'date(voucher_date)<='=>$this->data['quator']['to_date']),array(),array('group_by'=>'date_format(voucher_date,"%Y-%m")'));
 
     $arf_vodator = $this->ledger_model->get($accounts_balance_select, array('site_name` = "ARF Jan 2021"' => NULL,'purity != factory_purity'=>NULL,'account_name != "VADOTAR"'=> NULL,'date(voucher_date)>='=>$this->data['quator']['from_date'],'date(voucher_date)<='=>$this->data['quator']['to_date']),array(),array('group_by'=>'date_format(voucher_date,"%Y-%m")'));
 
     $arc_vodator = $this->ledger_model->get($accounts_balance_select, array('site_name = "ARC Jan 2021"' => NULL,'purity != factory_purity'=>NULL,'account_name != "VADOTAR"'=> NULL,'date(voucher_date)>='=>$this->data['quator']['from_date'],'date(voucher_date)<='=>$this->data['quator']['to_date']),array(),array('group_by'=>'date_format(voucher_date,"%Y-%m")'));
+    $argold_date=array_column($argold_vodator,'voucher_date');
+    $arf_date=array_column($arf_vodator,'voucher_date');
+    $arc_date=array_column($arc_vodator,'voucher_date');
+    pd($argold_date);
     $argold_total_production=end($argold_vodator);
     $arf_total_production=end($arf_vodator);
     $arc_total_production=end($arc_vodator);
+
+    $this->datap['argold_production_report']=$argold_vodator;
+    $this->datap['arf_production_report']=$arf_vodator;
+    $this->datap['arc_production_report']=$arc_vodator;
 
     $this->data['arg_gpc_powder'] =$this->voucher_model->find('
                                                 sum(debit_weight-credit_weight) as amount',
