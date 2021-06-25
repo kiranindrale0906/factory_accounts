@@ -18,11 +18,23 @@ class Loss_summaries extends BaseController {
     $arc_loss_records=$this->loss_details('ARC',$this->data['quator']['from_date'],$this->data['quator']['to_date']);
     $accounts_balance_select = 'sum(debit_weight)-sum(credit_weight) as balance,date_format(voucher_date,"%Y-%m") as voucher_date';
 
-    $argold_vodator = $this->ledger_model->get($accounts_balance_select, array('site_name = "AR Gold Jan 2021"' => NULL,'purity != factory_purity'=>NULL,'account_name != "VADOTAR"'=> NULL,'date(voucher_date)>='=>$this->data['quator']['from_date'],'date(voucher_date)<='=>$this->data['quator']['to_date']),array(),array('group_by'=>'date_format(voucher_date,"%Y-%m")'));
+    $argold_production = $this->ledger_model->get($accounts_balance_select, array('site_name = "AR Gold Jan 2021"' => NULL,'purity != factory_purity'=>NULL,'account_name != "VADOTAR"'=> NULL,'date(voucher_date)>='=>$this->data['quator']['from_date'],'date(voucher_date)<='=>$this->data['quator']['to_date']),array(),array('group_by'=>'date_format(voucher_date,"%Y-%m")'));
+      $argold_vodator=array();
+      foreach ($argold_production as $argold_key => $argold_value) {
+        $argold_vodator[$argold_value['voucher_date']]=$argold_value;
+      }
 
-    $arf_vodator = $this->ledger_model->get($accounts_balance_select, array('site_name` = "ARF Jan 2021"' => NULL,'purity != factory_purity'=>NULL,'account_name != "VADOTAR"'=> NULL,'date(voucher_date)>='=>$this->data['quator']['from_date'],'date(voucher_date)<='=>$this->data['quator']['to_date']),array(),array('group_by'=>'date_format(voucher_date,"%Y-%m")'));
+    $arf_production = $this->ledger_model->get($accounts_balance_select, array('site_name` = "ARF Jan 2021"' => NULL,'purity != factory_purity'=>NULL,'account_name != "VADOTAR"'=> NULL,'date(voucher_date)>='=>$this->data['quator']['from_date'],'date(voucher_date)<='=>$this->data['quator']['to_date']),array(),array('group_by'=>'date_format(voucher_date,"%Y-%m")'));
+    $arf_vodator=array();
+    foreach ($arf_production as $arf_key => $arf_value) {
+      $arf_vodator[$arf_value['voucher_date']]=$arf_value;
+    }
 
-    $arc_vodator = $this->ledger_model->get($accounts_balance_select, array('site_name = "ARC Jan 2021"' => NULL,'purity != factory_purity'=>NULL,'account_name != "VADOTAR"'=> NULL,'date(voucher_date)>='=>$this->data['quator']['from_date'],'date(voucher_date)<='=>$this->data['quator']['to_date']),array(),array('group_by'=>'date_format(voucher_date,"%Y-%m")'));
+    $arc_production = $this->ledger_model->get($accounts_balance_select, array('site_name = "ARC Jan 2021"' => NULL,'purity != factory_purity'=>NULL,'account_name != "VADOTAR"'=> NULL,'date(voucher_date)>='=>$this->data['quator']['from_date'],'date(voucher_date)<='=>$this->data['quator']['to_date']),array(),array('group_by'=>'date_format(voucher_date,"%Y-%m")'));
+    $arc_vodator=array();
+    foreach ($arc_production as $arc_key => $arc_value) {
+      $arc_vodator[$arc_value['voucher_date']]=$arc_value;
+    }
     $argold_date=array_column($argold_vodator,'voucher_date');
     $arf_date=array_column($arf_vodator,'voucher_date');
     $arc_date=array_column($arc_vodator,'voucher_date');
