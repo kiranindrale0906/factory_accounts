@@ -124,7 +124,10 @@
     ?>
       <tr>
         <td class="">AR Gold</td>
-        <?php foreach ($month_record as $month_key => $month) { 
+        <?php
+        print_r($month_record);
+        pd($argold_production_report);
+         foreach ($month_record as $month_key => $month) { 
                 foreach ($argold_production_report as $index => $value) {
                   if($value['voucher_date']==$month){  ?>
                     <td class="text-right"><?=$value['balance']?></td>
