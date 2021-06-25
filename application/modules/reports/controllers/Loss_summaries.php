@@ -13,9 +13,9 @@ class Loss_summaries extends BaseController {
     $this->data['quators'] = $this->quator_model->get('name');
     $this->data['quator'] = $this->quator_model->find('*',array('name'=>$this->data['quator_name']));
     if(!empty($this->data['quator'])){
-    $arg_loss_records=$this->loss_details('ARG',$this->data['quator']['from_date'],$this->data['quator']['to_date']);
-    $arf_loss_records=$this->loss_details('ARF',$this->data['quator']['from_date'],$this->data['quator']['to_date']);
-    $arc_loss_records=$this->loss_details('ARC',$this->data['quator']['from_date'],$this->data['quator']['to_date']);
+    // $arg_loss_records=$this->loss_details('ARG',$this->data['quator']['from_date'],$this->data['quator']['to_date']);
+    // $arf_loss_records=$this->loss_details('ARF',$this->data['quator']['from_date'],$this->data['quator']['to_date']);
+    // $arc_loss_records=$this->loss_details('ARC',$this->data['quator']['from_date'],$this->data['quator']['to_date']);
     $accounts_balance_select = 'sum(debit_weight)-sum(credit_weight) as balance,date_format(voucher_date,"%Y-%m") as voucher_date';
 
     $argold_production = $this->ledger_model->get($accounts_balance_select, array('site_name = "AR Gold Jan 2021"' => NULL,'purity != factory_purity'=>NULL,'account_name != "VADOTAR"'=> NULL,'date(voucher_date)>='=>$this->data['quator']['from_date'],'date(voucher_date)<='=>$this->data['quator']['to_date']),array(),array('group_by'=>'date_format(voucher_date,"%Y-%m")'));
@@ -25,6 +25,7 @@ class Loss_summaries extends BaseController {
         $argold_total_production+=abs($argold_value);
         $argold_vodator[$argold_value['voucher_date']]=$argold_value;
       }
+      pd($argold_total_production);
 
     $arf_production = $this->ledger_model->get($accounts_balance_select, array('site_name` = "ARF Jan 2021"' => NULL,'purity != factory_purity'=>NULL,'account_name != "VADOTAR"'=> NULL,'date(voucher_date)>='=>$this->data['quator']['from_date'],'date(voucher_date)<='=>$this->data['quator']['to_date']),array(),array('group_by'=>'date_format(voucher_date,"%Y-%m")'));
     $arf_vodator=array();
