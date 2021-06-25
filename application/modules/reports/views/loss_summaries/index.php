@@ -113,35 +113,64 @@
     <thead>
       <tr>
         <th class=""></th>
-        <th class="text-right">Month 1</th>
-        <th class="text-right">Month 2</th>
-        <th class="text-right">Month 3</th>
-        </tr>
+        <?php foreach ($month_record as $key => $value) { ?>
+        <th class="text-right"><?=date('M',strtotime($value))?></th>
+        <?php 
+        } ?>
+      </tr>
     </thead>
     <tbody>
     <?php 
     ?>
       <tr>
         <td class="">AR Gold</td>
-        <td class="text-right"></td>
-        <td class="text-right"></td>
-        <td class="text-right"></td>
-      </tr><tr>
+        <?php foreach ($month_record as $month_key => $month) { 
+                foreach ($argold_production_report as $index => $value) {
+                  if($value['voucher_date']==$month){  ?>
+                    <td class="text-right"><?=$value['balance']?></td>
+                  <?php 
+                  }else{ 
+                  ?>
+                    <td class="text-right">0</td>
+                  <?php
+                  }
+                }
+              }
+            ?>
+        <?php } ?>
+      </tr>
+      <tr>
         <td class="">ARF</td>
-        <td class="text-right"></td>
-        <td class="text-right"></td>
-        <td class="text-right"></td>
+        <?php foreach ($month_record as $month_key => $month) { 
+                foreach ($arf_production_report as $arf_index => $arf_value) {
+                  if($arf_value['voucher_date']==$month){  ?>
+                    <td class="text-right"><?=$arf_value['balance']?></td>
+                  <?php 
+                  }else{ 
+                  ?>
+                    <td class="text-right">0</td>
+                  <?php
+                  }
+                }
+              }
+            ?>
+        <?php } ?>
       </tr><tr>
         <td class="">ARC</td>
-        <td class="text-right"></td>
-        <td class="text-right"></td>
-        <td class="text-right"></td>
-      </tr>
-      <tr class="bg_gray bold">
-        <td>Total</td>
-        <td class="text-right"></td>
-        <td class="text-right"></td>
-        <td class="text-right"></td>
+        <?php foreach ($month_record as $month_key => $month) { 
+                foreach ($arc_production_report as $arc_index => $arc_value) {
+                  if($arc_value['voucher_date']==$month){  ?>
+                    <td class="text-right"><?=$arc_value['balance']?></td>
+                  <?php 
+                  }else{ 
+                  ?>
+                    <td class="text-right">0</td>
+                  <?php
+                  }
+                }
+              }
+            ?>
+        <?php } ?>
       </tr>
     </tbody>
   </table>

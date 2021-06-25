@@ -27,14 +27,15 @@ class Loss_summaries extends BaseController {
     $arf_date=array_column($arf_vodator,'voucher_date');
     $arc_date=array_column($arc_vodator,'voucher_date');
     $moth_record=array_unique(array_merge($argold_date,$arf_date,$arc_date));
-    pd($moth_record);
+
     $argold_total_production=end($argold_vodator);
     $arf_total_production=end($arf_vodator);
     $arc_total_production=end($arc_vodator);
 
-    $this->datap['argold_production_report']=$argold_vodator;
-    $this->datap['arf_production_report']=$arf_vodator;
-    $this->datap['arc_production_report']=$arc_vodator;
+    $this->data['argold_production_report']=$argold_vodator;
+    $this->data['arf_production_report']=$arf_vodator;
+    $this->data['arc_production_report']=$arc_vodator;
+    $this->data['moth_record']=$moth_record;
 
     $this->data['arg_gpc_powder'] =$this->voucher_model->find('
                                                 sum(debit_weight-credit_weight) as amount',
