@@ -137,7 +137,6 @@
                 }
               }
             ?>
-        <?php } ?>
       </tr>
       <tr>
         <td class="">ARF</td>
@@ -154,7 +153,6 @@
                 }
               }
             ?>
-        <?php } ?>
       </tr><tr>
         <td class="">ARC</td>
         <?php foreach ($month_record as $month_key => $month) { 
@@ -170,7 +168,6 @@
                 }
               }
             ?>
-        <?php } ?>
       </tr>
     </tbody>
   </table>
