@@ -44,10 +44,6 @@ class Loss_summaries extends BaseController {
     $arc_date=array_column($arc_vodator,'voucher_date');
     $month_record=array_unique(array_merge($argold_date,$arf_date,$arc_date));
 
-    $argold_total_production=end($argold_vodator);
-    $arf_total_production=end($arf_vodator);
-    $arc_total_production=end($arc_vodator);
-
     $this->data['argold_production_report']=$argold_vodator;
     $this->data['arf_production_report']=$arf_vodator;
     $this->data['arc_production_report']=$arc_vodator;
