@@ -26,7 +26,8 @@ class Loss_summaries extends BaseController {
     $argold_date=array_column($argold_vodator,'voucher_date');
     $arf_date=array_column($arf_vodator,'voucher_date');
     $arc_date=array_column($arc_vodator,'voucher_date');
-    pd($argold_date);
+    $moth_record=array_unique((array_merge($argold_date,$arf_date,$arc_date));
+    pd($moth_record);
     $argold_total_production=end($argold_vodator);
     $arf_total_production=end($arf_vodator);
     $arc_total_production=end($arc_vodator);
