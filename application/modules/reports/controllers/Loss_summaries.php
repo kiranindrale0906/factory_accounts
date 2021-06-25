@@ -23,7 +23,7 @@ class Loss_summaries extends BaseController {
       foreach ($argold_production as $argold_key => $argold_value) {
         $argold_vodator[$argold_value['voucher_date']]=$argold_value;
       }
-      pd($argold_vodator);
+      // pd($argold_vodator);
 
     $arf_production = $this->ledger_model->get($accounts_balance_select, array('site_name` = "ARF Jan 2021"' => NULL,'purity != factory_purity'=>NULL,'account_name != "VADOTAR"'=> NULL,'date(voucher_date)>='=>$this->data['quator']['from_date'],'date(voucher_date)<='=>$this->data['quator']['to_date']),array(),array('group_by'=>'date_format(voucher_date,"%Y-%m")'));
     $arf_vodator=array();
