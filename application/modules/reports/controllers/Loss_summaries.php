@@ -26,7 +26,6 @@ class Loss_summaries extends BaseController {
     $argold_total_production=end($argold_vodator);
     $arf_total_production=end($arf_vodator);
     $arc_total_production=end($arc_vodator);
-    pd($argold_total_production);
 
     $this->data['arg_gpc_powder'] =$this->voucher_model->find('
                                                 sum(debit_weight-credit_weight) as amount',
