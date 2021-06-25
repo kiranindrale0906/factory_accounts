@@ -19,6 +19,7 @@ class Loss_summaries extends BaseController {
     $accounts_balance_select = 'sum(debit_weight)-sum(credit_weight) as balance,date_format(voucher_date,"%Y-%m") as voucher_date';
 
     $argold_production = $this->ledger_model->get($accounts_balance_select, array('site_name = "AR Gold Jan 2021"' => NULL,'purity != factory_purity'=>NULL,'account_name != "VADOTAR"'=> NULL,'date(voucher_date)>='=>$this->data['quator']['from_date'],'date(voucher_date)<='=>$this->data['quator']['to_date']),array(),array('group_by'=>'date_format(voucher_date,"%Y-%m")'));
+    pd($argold_production);
       $argold_vodator=array();
       foreach ($argold_production as $argold_key => $argold_value) {
         $argold_vodator[$argold_value['voucher_date']]=$argold_value;
