@@ -19,7 +19,6 @@ class Loss_summaries extends BaseController {
     $accounts_balance_select = 'sum(debit_weight)-sum(credit_weight) as balance,voucher_date';
 
     $argold_vodator = $this->ledger_model->get($accounts_balance_select, array('site_name = "AR Gold Jan 2021"' => NULL,'purity != factory_purity'=>NULL,'account_name != "VADOTAR"'=> NULL,'date(voucher_date)>='=>$this->data['quator']['from_date'],'date(voucher_date)<='=>$this->data['quator']['to_date']),array(),array('group_by'=>'date_format(voucher_date,"%Y-%m")'));
-    pd($argold_vodator);
 
     $arf_vodator = $this->ledger_model->find($accounts_balance_select, array('site_name` = "ARF Jan 2021"' => NULL,'purity != factory_purity'=>NULL,'account_name != "VADOTAR"'=> NULL,'date(voucher_date)>='=>$this->data['quator']['from_date'],'date(voucher_date)<='=>$this->data['quator']['to_date']),array(),array('group_by'=>'date_format(voucher_date,"%Y-%m")'));
 
@@ -30,7 +29,7 @@ class Loss_summaries extends BaseController {
                                               array('account_name'=>"GPC Powder",
                                               'date(voucher_date)>='=>$this->data['quator']['from_date'],
                                               'date(voucher_date)<='=>$this->data['quator']['to_date']))['amount'];
-    $this->data['arg_total_production'] =!empty($argold_vodator)?$argold_vodator['balance']:0;
+    $this->data['arg_total_production'] =!empty($argold_vodator)?end($argold_vodator['balance']):0;
     $this->data['arg_gpc_vodator'] = $this->voucher_model->find('
                                                 sum(debit_weight-credit_weight) as amount',
                                               array('account_name'=>"AR Gold Jan 2021 GPC Vodator",
@@ -47,7 +46,7 @@ class Loss_summaries extends BaseController {
                                               array('account_name'=>"GPC Powder ARF",
                                               'date(voucher_date)>='=>$this->data['quator']['from_date'],
                                               'date(voucher_date)<='=>$this->data['quator']['to_date']))['amount'];
-    $this->data['arf_total_production'] =!empty($arf_vodator)?$arf_vodator['balance']:0;
+    $this->data['arf_total_production'] =!empty($arf_vodator)?end($arf_vodator['balance']):0;
     $this->data['arf_gpc_vodator'] =$this->voucher_model->find('
                                                 sum(debit_weight-credit_weight) as amount',
                                               array('account_name'=>"ARF Jan 2021 GPC Vodator",
@@ -64,7 +63,7 @@ class Loss_summaries extends BaseController {
                                               array('account_name'=>"GPC POWDER LOSS ARC",
                                               'date(voucher_date)>='=>$this->data['quator']['from_date'],
                                               'date(voucher_date)<='=>$this->data['quator']['to_date']))['amount'];
-    $this->data['arc_total_production'] =!empty($arc_vodator)?$arc_vodator['balance']:0;
+    $this->data['arc_total_production'] =!empty($arc_vodator)?end($arc_vodator['balance']):0;
     $this->data['arc_gpc_vodator'] =$this->voucher_model->find('
                                                 sum(debit_weight-credit_weight) as amount',
                                               array('account_name'=>"ARC Jan 2021 GPC Vodator",
