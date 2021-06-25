@@ -124,41 +124,23 @@
     ?>
       <tr>
         <td class="">AR Gold</td>
-        <?php
-              foreach ($month_record as $month_key => $month) { 
-                // foreach ($argold_production_report as $index => $value) {
-                //   if($value['voucher_date']==$month){  ?>
-                    <td class="text-right">0</td>
-                  <?php
-                //   }else{
-                //     echo'<td class="text-right">0</td>';
-                //   }
-                // }
-              }
-            ?>
+        <?php foreach ($month_record as $month_key => $month) { ?>
+                <td class="text-right"><?=!empty($argold_production_report)&&!empty($argold_production_report[$month])?$argold_production_report[$month]:0?></td>
+                 
+        <?php }?>
       </tr>
       <tr>
         <td class="">ARF</td>
-        <?php foreach ($month_record as $month_key => $month) { 
-                foreach ($arf_production_report as $arf_index => $arf_value) {
-                  if($arf_value['voucher_date']==$month){  ?>
-                    <td class="text-right"><?=$arf_value['balance']?></td>
-                  <?php
-                  }
-                }
-              }
-            ?>
+        <?php foreach ($month_record as $month_key => $month) {?>
+                <td class="text-right"><?=!empty($arf_production_report)&&!empty($arf_production_report[$month])?$arf_production_report[$month]:0?></td>
+                 
+        <?php }?>
       </tr><tr>
         <td class="">ARC</td>
-        <?php foreach ($month_record as $month_key => $month) { 
-                foreach ($arc_production_report as $arc_index => $arc_value) {
-                  if($arc_value['voucher_date']==$month){  ?>
-                    <td class="text-right"><?=$arc_value['balance']?></td>
-                  <?php
-                  }
-                }
-              }
-            ?>
+        <?php foreach ($month_record as $month_key => $month) {?>
+                <td class="text-right"><?=!empty($arc_production_report)&&!empty($arc_production_report[$month])?$arc_production_report[$month]:0?></td>
+                 
+        <?php }?>
       </tr>
     </tbody>
   </table>
