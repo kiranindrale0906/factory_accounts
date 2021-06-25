@@ -38,7 +38,7 @@
       <tr>
         <td class="">AR Gold</td>
         
-        <td class="text-right"><?=$arg_total_production=!empty($arg_total_production)?four_decimal($arg_total_production):0?></td>
+        <td class="text-right"><?=$arg_total_production=!empty($arg_total_production)?four_decimal(abs($arg_total_production)):0?></td>
         <td class="text-right"><?=$arg_gpc_powder=!empty($arg_gpc_powder)?four_decimal($arg_gpc_powder):0?></td>
         <td class="text-right"><?=$arg_gpc_vodator=!empty($arg_gpc_vodator)?four_decimal($arg_gpc_vodator):0?></td>
         <td class="text-right"><?=$arg_unrecoverable_loss=!empty($arg_unrecoverable_loss)?four_decimal($arg_unrecoverable_loss):0?></td>
@@ -51,7 +51,7 @@
         <td class="text-right"><?=$arg_without_recovery_per_kg_loss=!empty($arg_total_production)?four_decimal($arg_total_loss/$arg_total_production):0?></td>
       </tr><tr>
         <td class="">ARF</td>
-        <td class="text-right"><?=$arf_total_production=!empty($arf_total_production)?four_decimal($arf_total_production):0?></td>
+        <td class="text-right"><?=$arf_total_production=!empty($arf_total_production)?four_decimal(abs($arf_total_production)):0?></td>
         <td class="text-right"><?=$arf_gpc_powder=!empty($arf_gpc_powder)?four_decimal($arf_gpc_powder):0?></td>
         <td class="text-right"><?=$arf_gpc_vodator=!empty($arf_gpc_vodator)?four_decimal($arf_gpc_vodator):0?></td>
         <td class="text-right"><?=$arf_unrecoverable_loss=!empty($arf_unrecoverable_loss)?four_decimal($arf_unrecoverable_loss):0?></td>
@@ -63,7 +63,7 @@
         <td class="text-right"><?=$arf_without_recovery_per_kg_loss=!empty($arf_total_production)?four_decimal($arf_total_loss/$arf_total_production):0?></td>
       </tr><tr>
         <td class="">ARC</td>
-        <td class="text-right"><?=$arc_total_production=!empty($arc_total_production)?four_decimal($arc_total_production):0?></td>
+        <td class="text-right"><?=$arc_total_production=!empty($arc_total_production)?four_decimal(abs($arc_total_production)):0?></td>
         <td class="text-right"><?=$arc_gpc_powder=!empty($arc_gpc_powder)?four_decimal($arc_gpc_powder):0?></td>
         <td class="text-right"><?=$arc_gpc_vodator=!empty($arc_gpc_vodator)?four_decimal($arc_gpc_vodator):0?></td>
         <td class="text-right"><?=$arc_unrecoverable_loss=!empty($arc_unrecoverable_loss)?four_decimal($arc_unrecoverable_loss):0?></td>
