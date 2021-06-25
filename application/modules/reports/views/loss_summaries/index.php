@@ -106,42 +106,46 @@
     </tbody>
   </table>
 </div>
-<h5>Production Report</h5>
-<hr>
-<div class="table-responsive">
-  <table class="table table-sm table-default">
-    <thead>
-      <tr>
-        <th class=""></th>
-        <?php foreach ($month_record as $key => $value) { ?>
-        <th class="text-right"><?=date('M',strtotime($value))?></th>
-        <?php 
-        } ?>
-      </tr>
-    </thead>
-    <tbody>
-    <?php 
-    ?>
-      <tr>
-        <td class="">AR Gold</td>
-        <?php foreach ($month_record as $month_key => $month) { ?>
-                <td class="text-right"><?=!empty($argold_production_report)&&!empty($argold_production_report[$month])?abs($argold_production_report[$month]['balance']):0?></td>
-                 
-        <?php }?>
-      </tr>
-      <tr>
-        <td class="">ARF</td>
-        <?php foreach ($month_record as $month_key => $month) {?>
-                <td class="text-right"><?=!empty($arf_production_report)&&!empty($arf_production_report[$month])?abs($arf_production_report[$month]['balance']):0?></td>
-                 
-        <?php }?>
-      </tr><tr>
-        <td class="">ARC</td>
-        <?php foreach ($month_record as $month_key => $month) {?>
-                <td class="text-right"><?=!empty($arc_production_report)&&!empty($arc_production_report[$month])?abs($arc_production_report[$month]['balance']):0?></td>
-                 
-        <?php }?>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<?php if(!empty($month_record)) ?>
+  <h5>Production Report</h5>
+  <hr>
+  <div class="table-responsive">
+    <table class="table table-sm table-default">
+      <thead>
+        <tr>
+          <th class=""></th>
+          <?php foreach ($month_record as $key => $value) { ?>
+          <th class="text-right"><?=date('M',strtotime($value))?></th>
+          <?php 
+          } ?>
+        </tr>
+      </thead>
+      <tbody>
+      <?php 
+      ?>
+        <tr>
+          <td class="">AR Gold</td>
+          <?php foreach ($month_record as $month_key => $month) { ?>
+                  <td class="text-right"><?=!empty($argold_production_report)&&!empty($argold_production_report[$month])?abs($argold_production_report[$month]['balance']):0?></td>
+                   
+          <?php }?>
+        </tr>
+        <tr>
+          <td class="">ARF</td>
+          <?php foreach ($month_record as $month_key => $month) {?>
+                  <td class="text-right"><?=!empty($arf_production_report)&&!empty($arf_production_report[$month])?abs($arf_production_report[$month]['balance']):0?></td>
+                   
+          <?php }?>
+        </tr><tr>
+          <td class="">ARC</td>
+          <?php foreach ($month_record as $month_key => $month) {?>
+                  <td class="text-right"><?=!empty($arc_production_report)&&!empty($arc_production_report[$month])?abs($arc_production_report[$month]['balance']):0?></td>
+                   
+          <?php }?>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <?php } 
+?>
