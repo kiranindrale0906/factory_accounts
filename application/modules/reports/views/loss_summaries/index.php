@@ -125,15 +125,15 @@
       <tr>
         <td class="">AR Gold</td>
         <?php
-              foreach ($argold_production_report as $index => $value) {
-                foreach ($month_record as $month_key => $month) { 
-                  if($value['voucher_date']==$month){  ?>
-                    <td class="text-right"><?=$value['balance']?></td>
+              foreach ($month_record as $month_key => $month) { 
+                // foreach ($argold_production_report as $index => $value) {
+                //   if($value['voucher_date']==$month){  ?>
+                    <td class="text-right">0</td>
                   <?php
-                  }else{
-                    echo'<td class="text-right">0</td>';
-                  }
-                }
+                //   }else{
+                //     echo'<td class="text-right">0</td>';
+                //   }
+                // }
               }
             ?>
       </tr>
