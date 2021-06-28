@@ -20,7 +20,7 @@
         <!-- <th class="text-right">Loss % On Product Production</th> -->
         <th class="text-right">Action</th>
         <th class="text-right"></th>
-        <!-- <th class="text-right"></th> -->
+        <th class="text-right"></th>
       </tr>
     </thead>
     <tbody>
@@ -69,11 +69,11 @@
           <a href=<?= base_url()."argold/unrecovarable_account_records/store?from=view&account_name=".urlencode("Loss Account")."&factory=Unrecovarable&credit_weight=".$loss."&narration=".urlencode($category)."&parent_id=".$loss_out_detail['parent_id'] ?> target='_blank' onclick="return confirm('Do you want to add this in Unrecovarable?')" >Unrecovarable</a>
           <?php }?>
         </td>
-        <!-- <?php// if(!empty($loss_out_detail['id'])){?>
+        <?php if(!empty($loss_out_detail['id'])){?>
           <td class="text-right">
-            <a href=<?//= $factory_url."processes/process_quators/edit/".$loss_out_detail['id'] ?> target='_blank' >Add Quartor</a>
+            <a href=<?= $factory_url."processes/process_quators/edit/".$loss_out_detail['id'] ?> target='_blank' >Add Quartor</a>
           </td>
-        <?php //}?> -->
+        <?php }?>
          
       </tr>
 
