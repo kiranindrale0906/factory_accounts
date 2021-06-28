@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Loss_reports extends BaseController {
+class Quator_wise_loss_reports extends BaseController {
   public function __construct() {
     parent::__construct();
      $this->load->model(array('masters/account_model','masters/company_model', 'transactions/ledger_model',
