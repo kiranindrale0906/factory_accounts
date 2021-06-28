@@ -126,7 +126,7 @@ class Loss_summaries extends BaseController {
       if(!empty($data['department_names'])){
           $url=$path."issue_and_receipts/loss_report_for_accounts/index";
           $factory_records=json_decode(curl_post_request($url,array_merge($data, array('quator' => $quator['name'])),true));
-          $factory_records = json_decode(json_encode($factory_records));
+          $factory_records = (array)$factory_records;
           $records = !empty($factory_records) ? $factory_records['data']['loss_details']['loss_detail'] : array();
           $ghiss_melting_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight', array('account_name'=>'Loss Account',
                                               'site_name'=>$factory_name,
