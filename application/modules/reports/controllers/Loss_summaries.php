@@ -145,7 +145,7 @@ class Loss_summaries extends BaseController {
         foreach ($records as $key => $value) {
           if(strtolower($value['description'])==strtolower($category_name)){
             $fine_loss=($value['in_weight']*$value['in_lot_purity']/100);
-            $unrecovery_details = $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$value['parent_id'],'account_name'=>'Unrecovarable');
+            $unrecovery_details = $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$value['parent_id'],'account_name'=>'Unrecovarable'));
             $unrecovery_loss=!empty($unrecovery_details)?$unrecovery_details['weight']:0;
             $total_unrecovery_loss+=$unrecovery_loss;
             $total_fine+=four_decimal($fine_loss);
