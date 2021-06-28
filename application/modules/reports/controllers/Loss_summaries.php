@@ -124,8 +124,12 @@ class Loss_summaries extends BaseController {
       if(!empty($data['department_names'])){
           $url=$path."issue_and_receipts/loss_report_for_accounts/index";
           $factory_records=json_decode(curl_post_request($url,$data),true);
-          $records=!empty($factory_records)?$factory_records['data']['loss_details']['loss_detail']:$factory_records['data']['loss_details']['loss_detail']=array();
-          $ghiss_melting_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight', array('account_name'=>'Loss Account','site_name'=>$factory_name,'receipt_type'=>'Ghiss Melting Loss'),array());
+          $records = !empty($factory_records) ? $factory_records['data']['loss_details']['loss_detail'] : $factory_records['data']['loss_details']['loss_detail']=array();
+          $ghiss_melting_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight', array('account_name'=>'Loss Account',
+                                              'site_name'=>$factory_name,
+                                              'receipt_type'=>'Ghiss Melting Loss',
+                                              'date(voucher_date)>='=>$from_date,
+                                              'date(voucher_date)<='=>$to_date));
           foreach ($ghiss_melting_loss as $ghiss_melting_loss_index => $ghiss_melting_loss_value) {
             $data['issue_department_id']=$ghiss_melting_loss_value['parent_id'];
             $url=$path."issue_and_receipts/loss_report_for_accounts/index";
@@ -141,7 +145,7 @@ class Loss_summaries extends BaseController {
         foreach ($records as $key => $value) {
           if(strtolower($value['description'])==strtolower($category_name)){
             $fine_loss=($value['in_weight']*$value['in_lot_purity']/100);
-            $unrecovery_details = $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$value['parent_id'],'account_name'=>'Unrecovarable','date(voucher_date)>='=>$from_date,'date(voucher_date)<='=>$to_date));
+            $unrecovery_details = $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$value['parent_id'],'account_name'=>'Unrecovarable');
             $unrecovery_loss=!empty($unrecovery_details)?$unrecovery_details['weight']:0;
             $total_unrecovery_loss+=$unrecovery_loss;
             $total_fine+=four_decimal($fine_loss);
