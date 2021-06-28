@@ -52,13 +52,13 @@ class Loss_summaries extends BaseController {
     $this->data['month_record']=$month_record;
 
     $this->data['arg_gpc_powder'] =$this->voucher_model->find('
-                                                sum(debit_weight-credit_weight) as amount',
+                                                sum(debit_weight*factory_purity/100 - credit_weight*factory_purity/100) as amount',
                                               array('account_name'=>"GPC Powder",
                                               'date(voucher_date)>='=>$this->data['quator']['from_date'],
                                               'date(voucher_date)<='=>$this->data['quator']['to_date']))['amount'];
     $this->data['arg_total_production'] =!empty($argold_total_production)?$argold_total_production:0;
     $this->data['arg_gpc_vodator'] = $this->voucher_model->find('
-                                                sum(debit_weight-credit_weight) as amount',
+                                                sum(debit_weight*factory_purity/100 - credit_weight*factory_purity/100) as amount',
                                               array('account_name'=>"AR Gold Jan 2021 GPC Vodator",
                                               'date(voucher_date)>='=>$this->data['quator']['from_date'],
                                               'date(voucher_date)<='=>$this->data['quator']['to_date']))['amount'];
@@ -69,13 +69,13 @@ class Loss_summaries extends BaseController {
     $this->data['arg_without_recovery_per_kg_loss'] = 0;
 
     $this->data['arf_gpc_powder'] =$this->voucher_model->find('
-                                                sum(debit_weight-credit_weight) as amount',
+                                                sum(debit_weight*factory_purity/100 - credit_weight*factory_purity/100) as amount',
                                               array('account_name'=>"GPC Powder ARF",
                                               'date(voucher_date)>='=>$this->data['quator']['from_date'],
                                               'date(voucher_date)<='=>$this->data['quator']['to_date']))['amount'];
     $this->data['arf_total_production'] =!empty($arf_total_production)?$arf_total_production:0;
     $this->data['arf_gpc_vodator'] =$this->voucher_model->find('
-                                                sum(debit_weight-credit_weight) as amount',
+                                                sum(debit_weight*factory_purity/100 - credit_weight*factory_purity/100) as amount',
                                               array('account_name'=>"ARF Jan 2021 GPC Vodator",
                                               'date(voucher_date)>='=>$this->data['quator']['from_date'],
                                               'date(voucher_date)<='=>$this->data['quator']['to_date']))['amount'];
@@ -86,13 +86,13 @@ class Loss_summaries extends BaseController {
     $this->data['arf_without_recovery_per_kg_loss'] = 0;
 
     $this->data['arc_gpc_powder'] = $this->voucher_model->find('
-                                                sum(debit_weight-credit_weight) as amount',
+                                                sum(debit_weight*factory_purity/100 - credit_weight*factory_purity/100) as amount',
                                               array('account_name'=>"GPC POWDER LOSS ARC",
                                               'date(voucher_date)>='=>$this->data['quator']['from_date'],
                                               'date(voucher_date)<='=>$this->data['quator']['to_date']))['amount'];
     $this->data['arc_total_production'] =!empty($arc_total_production)?$arc_total_production:0;
     $this->data['arc_gpc_vodator'] =$this->voucher_model->find('
-                                                sum(debit_weight-credit_weight) as amount',
+                                                sum(debit_weight*factory_purity/100 - credit_weight*factory_purity/100) as amount',
                                               array('account_name'=>"ARC Jan 2021 GPC Vodator",
                                               'date(voucher_date)>='=>$this->data['quator']['from_date'],
                                               'date(voucher_date)<='=>$this->data['quator']['to_date']))['amount'];
