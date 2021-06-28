@@ -17,6 +17,7 @@ class Quator_wise_loss_report_details extends Ledgers {
   }
 
   private function get_loss_details() {
+    pd($_GET['quator']);
     $this->data['factory_name']=!empty($_GET['factory_name'])?$_GET['factory_name']:'';
     $data['department_name']=$_GET['category'];
     $data['quator']=$_GET['quator'];
