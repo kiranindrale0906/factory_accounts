@@ -30,7 +30,7 @@ class Quator_wise_loss_reports extends BaseController {
       $data['department_names']=$category_names;
       $data['type']='category';
       $data['quator']=$this->data['quator_name'];
-      if(!empty($data['department_names'])){
+      if(!empty($data['department_names']) && !empty($this->data['quator_name'])){
         if(isset($_GET['site_name'])&&$_GET['site_name']=='ARC'){
           $ghiss_melting_loss=array();
           $url=API_ARC_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
@@ -43,7 +43,7 @@ class Quator_wise_loss_reports extends BaseController {
           $ghiss_details=json_decode(curl_post_request($url,$ghiss_melting_loss_ids),true);
           $out_weight=!empty($ghiss_details)&&(!empty($ghiss_details['data']['ghiss_melting_out_weights']))?$ghiss_details['data']['ghiss_melting_out_weights']:0;
           $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight']=$out_weight;
-          $arg_jan2021_records=array_merge($records,$ghiss_melting_loss);
+          $arg_jan2021_records=array_merge($records);
 
         }elseif(isset($_GET['site_name'])&&$_GET['site_name']=='ARF'){
           $ghiss_melting_loss=array();
@@ -59,7 +59,7 @@ class Quator_wise_loss_reports extends BaseController {
           $out_weight=!empty($ghiss_details)&&(!empty($ghiss_details['data']['ghiss_melting_out_weights']))?$ghiss_details['data']['ghiss_melting_out_weights']:0;
           $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight']=$out_weight;
           }
-          $arg_jan2021_records=array_merge($records,$ghiss_melting_loss);
+          $arg_jan2021_records=array_merge($records);
 
         }else{
           $ghiss_melting_loss=array();
@@ -74,7 +74,7 @@ class Quator_wise_loss_reports extends BaseController {
           $out_weight=!empty($ghiss_details)&&(!empty($ghiss_details['data']['ghiss_melting_out_weights']))?$ghiss_details['data']['ghiss_melting_out_weights']:0;
           $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight']=$out_weight;
           }
-          $arg_jan2021_records=array_merge($records,$ghiss_melting_loss);
+          $arg_jan2021_records=array_merge($records);
           // pd($arg_jan2021_records);
        // pd($arg_jan2021_records);
         }
