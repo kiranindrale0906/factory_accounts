@@ -19,7 +19,7 @@ class Quator_wise_loss_report_details extends Ledgers {
   private function get_loss_details() {
     $this->data['factory_name']=!empty($_GET['factory_name'])?$_GET['factory_name']:'';
     $data['department_name']=$_GET['category'];
-    $data['quator']=$_GET['quator'];
+    $data['quator']=$this->data['quator_name'];
     $url=API_ARG_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
     $arg_jan2021_records=json_decode(curl_post_request($url,$data),true);
     $ghiss_melting_loss=array();
@@ -32,7 +32,7 @@ class Quator_wise_loss_report_details extends Ledgers {
           $out_weight=!empty($ghiss_details)?$ghiss_details['data']['ghiss_melting_out_weights']:0;
           $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight']=$out_weight;
     }
-    $arg_jan2021_records=array_merge($arg_jan2021_records,$ghiss_melting_loss);
+    $arg_jan2021_records=array_merge($arg_jan2021_records/*,$ghiss_melting_loss*/);
 
 
     $url=API_ARF_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
@@ -46,7 +46,7 @@ class Quator_wise_loss_report_details extends Ledgers {
           $out_weight=!empty($ghiss_details)?$ghiss_details['data']['ghiss_melting_out_weights']:0;
           $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight']=$out_weight;
     }
-    $arf_jan2021_records=array_merge($arf_jan2021_records,$ghiss_melting_loss);
+    $arf_jan2021_records=array_merge($arf_jan2021_records/*,$ghiss_melting_loss*/);
 
     
     $url=API_ARC_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
@@ -60,9 +60,9 @@ class Quator_wise_loss_report_details extends Ledgers {
           $out_weight=!empty($ghiss_details)?$ghiss_details['data']['ghiss_melting_out_weights']:0;
           $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight']=$out_weight;
     }
-    $arc_jan2021_records=array_merge($arc_jan2021_records,$ghiss_melting_loss);
+    $arc_jan2021_records=array_merge($arc_jan2021_records/*,$ghiss_melting_loss*/);
 
-
+    pd($arg_jan2021_records);
     $arg_records=$this->factory_wise_record_array($arg_jan2021_records);
     $arf_records=$this->factory_wise_record_array($arf_jan2021_records);
     $arc_records=$this->factory_wise_record_array($arc_jan2021_records);
