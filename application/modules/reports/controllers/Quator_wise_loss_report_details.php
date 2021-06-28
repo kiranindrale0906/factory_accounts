@@ -62,10 +62,10 @@ class Quator_wise_loss_report_details extends Ledgers {
     }
     $arc_jan2021_records=array_merge($arc_jan2021_records/*,$ghiss_melting_loss*/);
 
-    pd($arg_jan2021_records);
     $arg_records=$this->factory_wise_record_array($arg_jan2021_records);
     $arf_records=$this->factory_wise_record_array($arf_jan2021_records);
     $arc_records=$this->factory_wise_record_array($arc_jan2021_records);
+    
     
 
      $this->data['loss_details']=array();
