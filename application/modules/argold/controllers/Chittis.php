@@ -39,7 +39,8 @@ class Chittis extends BaseController {
   }
 
   public function _get_form_data() {
-    $this->data['account_name']=array(array('id'=>'OUTSIDE PARTY','name'=>'OUTSIDE PARTY'),
+    $this->data['account_name']=array(array('id'=>'AQUA GOLD','name'=>'AQUA GOLD'),
+                                      array('id'=>'OUTSIDE PARTY','name'=>'OUTSIDE PARTY'),
                                       array('id'=>'EXPORT ACCOUNT','name'=>'EXPORT ACCOUNT'),
                                       array('id'=>'EXPORT DIFF.','name'=>'EXPORT DIFF.'),
                                       array('id'=>'G and J GOLDSHMITHS','name'=>'G and J GOLDSHMITHS'),
@@ -112,6 +113,7 @@ class Chittis extends BaseController {
     $this->data['purity'] = $this->voucher_model->get('purity as name, purity as id', 
                                                        array('where'=>array(
                                                                'account_name in ("OUTSIDE PARTY",
+                                                                                 "AQUA GOLD",
                                                                                  "EXPORT ACCOUNT",
                                                                                  "EXPORT DIFF.",
                                                                                  "G and J GOLDSHMITHS",
