@@ -2,7 +2,7 @@
 
 function getTableSettings() {
   return array(
-    'page_title'          => '',
+    'page_title'          => 'Metal Receipt Gold Rate List',
     'primary_table'       => 'ac_vouchers',
     'default_column'      => 'id',
     'table'               => 'ac_vouchers',
@@ -12,11 +12,11 @@ function getTableSettings() {
     'where_ids'           => '',
     'order_by'            => 'id desc',
     'limit'               => "20",
-    'extra_select_column' => 'id',
+    'extra_select_column' => 'id,metal_receipt_id',
     'actionFunction'      => '',
     'headingFunction'     => 'list_settings',
     'search_url'          => 'refresh',
-    'add_title'           => '',
+    'add_title'           => 'Add Refresh',
     'export_title'        => '',
     'edit'                => '',
   );
@@ -35,7 +35,17 @@ function getTableSettings() {
 
 
 function list_settings() {
-  return array();
+  return array(
+    array("Id", "id", FALSE, "id", FALSE, FALSE),
+    array("Date", "created_at", FALSE, "created_at", FALSE, FALSE,'DATE_FORMAT(created_at, "%d-%m-%Y") as created_at'),
+    array("Weight", "weight", FALSE, "weight", FALSE, FALSE),
+    array("Purity", "purity", FALSE, "purity", FALSE, FALSE),
+    array("Fine", "fine", FALSE, "fine", FALSE, FALSE),
+    array("Factory Purity", "factory_purity", FALSE, "factory_purity", FALSE, FALSE),
+    array("Factory Fine", "factory_fine", FALSE, "fine", FALSE, FALSE),
+    array("Amount", "credit_amount", FALSE, "credit_amount", FALSE, FALSE),
+    array("Action", "action", FALSE, "action", FALSE, FALSE),
+  );
 }
 
 

@@ -20,6 +20,7 @@ class User_role_model extends Core_user_role_model {
                                             'transactions/journal_vouchers', 'transactions/contra_vouchers',
                                             'transactions/rate_cut_receipt_vouchers', 'transactions/rate_cut_issue_vouchers',
                                             'argold/metal_receipt_gold_rates',
+                                            'argold/ghiss_melting_quators',
                                             'argold/metal_issue_account_names',
                                             'transactions/dispatch_voucher', 'transactions/repair_vouchers',
                                             'transactions/approval_vouchers', 
