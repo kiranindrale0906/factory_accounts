@@ -49,7 +49,6 @@ defined('BASEPATH') OR exit('No direct script access allowed.');
           $response=array('status'=>'error','response'=>json_encode($response));
         
         curl_close($curl);
-        pd($response);
         return $response;
       } else
         return 'API URL and/or access token not defined';
