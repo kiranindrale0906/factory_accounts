@@ -34,6 +34,7 @@ class Loss_report_details extends Ledgers {
           $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight']=$out_weight;
           $ghiss_melting_loss[$ghiss_melting_loss_index]['id']=$data['issue_department_id'];
     }
+    pd();
     $arg_jan2021_records=array_merge($arg_jan2021_records,$ghiss_melting_loss);
 
 
