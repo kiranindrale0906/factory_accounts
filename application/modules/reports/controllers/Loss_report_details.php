@@ -67,7 +67,6 @@ class Loss_report_details extends Ledgers {
 
 
     $arg_records=$this->factory_wise_record_array($arg_jan2021_records);
-    pd($arg_records);
     $arf_records=$this->factory_wise_record_array($arf_jan2021_records);
     $arc_records=$this->factory_wise_record_array($arc_jan2021_records);
     
