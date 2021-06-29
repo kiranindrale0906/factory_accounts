@@ -80,11 +80,9 @@
           <td class="text-right">
             <a href=<?= $factory_url."processes/process_quators/edit/".$loss_out_detail['id'] ?> target='_blank' >Add Quartor</a>
           </td>
-        <?php }?>
+        <?php } } ?>
          
       </tr>
-
-    <?php }?>
       <tr class="bg_gray bold">
     <td class="text-right"></td>
     <td class="text-right"></td>
