@@ -70,6 +70,7 @@
           <?php }?>
         </td>
         <?php if(!empty($loss_out_detail['id'])){
+          pd($loss_out_detail);
           if($loss_out_detail['receipt_type']=='Ghiss Melting Loss'){
           ?>
           <td class="text-right">
