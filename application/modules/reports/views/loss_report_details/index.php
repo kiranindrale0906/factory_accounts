@@ -71,7 +71,7 @@
         </td>
         <?php if(!empty($loss_out_detail['id'])&&$loss_out_detail['receipt_type']=="Ghiss Melting Loss"){?>
           <td class="text-right">
-            <a href=<?= $factory_url."issue_departments/issue_department_quators/edit/".$loss_out_detail['id'] ?> target='_blank' >Add Quartor</a>
+            <a href=<?= $factory_url."argold/ghiss_melting_quators/edit/".$loss_out_detail['id'] ?> target='_blank' >Add Quartor</a>
           </td>
         <?php }?>
         <?php if(!empty($loss_out_detail['id'])&&$loss_out_detail['receipt_type']!="Ghiss Melting Loss"){?>
