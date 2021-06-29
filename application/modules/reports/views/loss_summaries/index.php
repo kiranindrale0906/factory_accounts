@@ -95,15 +95,12 @@
         <td class="text-right"><?=four_decimal($arg_final_loss
                                  +$arf_final_loss
                                  +$arc_final_loss)?></td>
-        <td class="text-right"><?=four_decimal($arg_per_kg_loss
-                                 +$arf_per_kg_loss
-                                 +$arc_per_kg_loss)?></td>
+        <td class="text-right"></td>
+        <td class="text-right"></td>                         
         <td class="text-right"><?=four_decimal($arg_loss
                                  +$arf_loss
                                  +$arc_loss)?></td>
-        <td class="text-right"><?=four_decimal($arg_without_recovery_per_kg_loss
-                                 +$arf_without_recovery_per_kg_loss
-                                 +$arc_without_recovery_per_kg_loss)?></td>
+        <td class="text-right"></td>
                                  
 
       </tr>
