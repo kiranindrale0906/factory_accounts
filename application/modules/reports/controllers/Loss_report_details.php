@@ -61,7 +61,7 @@ class Loss_report_details extends Ledgers {
           $ghiss_details=json_decode(curl_post_request($url,$data),true);
           $out_weight=!empty($ghiss_details)?$ghiss_details['data']['ghiss_melting_out_weights']:0;
           $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight']=$out_weight;
-          // $ghiss_melting_loss[$ghiss_melting_loss_index]['id']=$data['issue_department_id'];
+          $ghiss_melting_loss[$ghiss_melting_loss_index]['id']=$data['issue_department_id'];
     }
     $arc_jan2021_records=array_merge($arc_jan2021_records,$ghiss_melting_loss);
 
