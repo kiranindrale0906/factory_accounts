@@ -30,8 +30,7 @@ class Loss_report_details extends Ledgers {
           $data['quator']='';
           $url=API_ARG_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
           $ghiss_details=json_decode(curl_post_request($url,$data),true);
-          pd($ghiss_details);
-          $out_weight=!empty($ghiss_details)?$ghiss_details['data']['ghiss_melting_out_weights']:0;
+          $out_weight=!empty($ghiss_details)&&!empty($ghiss_details['data']['ghiss_melting_out_weights'])?$ghiss_details['data']['ghiss_melting_out_weights']:0;
           $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight']=$out_weight;
           $ghiss_melting_loss[$ghiss_melting_loss_index]['id']=$data['issue_department_id'];
     }
@@ -47,7 +46,7 @@ class Loss_report_details extends Ledgers {
           $data['quator']='';
           $url=API_ARF_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
           $ghiss_details=json_decode(curl_post_request($url,$data),true);
-          $out_weight=!empty($ghiss_details)?$ghiss_details['data']['ghiss_melting_out_weights']:0;
+          $out_weight=!empty($ghiss_details)&&!empty($ghiss_details['data']['ghiss_melting_out_weights'])?$ghiss_details['data']['ghiss_melting_out_weights']:0;
           $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight']=$out_weight;
           $ghiss_melting_loss[$ghiss_melting_loss_index]['id']=$data['issue_department_id'];
     }
@@ -63,7 +62,7 @@ class Loss_report_details extends Ledgers {
           $data['quator']='';
           $url=API_ARC_JAN2021_PATH."issue_and_receipts/loss_report_for_accounts/index";
           $ghiss_details=json_decode(curl_post_request($url,$data),true);
-          $out_weight=!empty($ghiss_details)?$ghiss_details['data']['ghiss_melting_out_weights']:0;
+          $out_weight=!empty($ghiss_details)&&!empty($ghiss_details['data']['ghiss_melting_out_weights'])?$ghiss_details['data']['ghiss_melting_out_weights']:0;
           $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight']=$out_weight;
           $ghiss_melting_loss[$ghiss_melting_loss_index]['id']=$data['issue_department_id'];
     }
