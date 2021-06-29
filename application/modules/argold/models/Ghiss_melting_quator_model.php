@@ -16,7 +16,7 @@ class Ghiss_melting_quator_model extends BaseModel {
   public function validation_rules($klass='') {
     $rules[] = array('field' => 'ghiss_melting_quators[quator]', 
                      'label' => 'Weight',
-                     'rules' => 'trim|required|numeric|greater_than_equal_to[0]');
+                     'rules' => 'trim|required');
     return $rules;
   }
 }
