@@ -29,7 +29,7 @@
      foreach ($loss_details as $index => $loss_out_detail) {
       $sum_weight+=$loss_out_detail['in_weight'];
       $sum_fine+=($loss_out_detail['in_weight']*$loss_out_detail['in_lot_purity']/100);
-      $sum_melting_production+=($loss_out_detail['out_weight']);
+      $sum_melting_production+=(@$loss_out_detail['out_weight']);
       $sum_recoverd_fine+=($loss_out_detail['recoverd_loss_fine']);
       $sum_after_recovery+=($loss_out_detail['after_recovery']);
       $sum_unrecoverable+=($loss_out_detail['unrecoverable_loss']);
