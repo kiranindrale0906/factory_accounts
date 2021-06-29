@@ -2,8 +2,8 @@
 
 function getTableSettings() {
     $show = (isset($_GET['show_all'])) ? $_GET['show_all'] : '';
-  if($show=='yes') $where='account_name in ("OUTSIDE PARTY", "SWARN SHILP 1", "CHAIN AND JWELLERY")';
-  else $where='chitti_hide=0 and account_name in ("OUTSIDE PARTY", "SWARN SHILP 1", "CHAIN AND JWELLERY")';
+  if($show=='yes') $where='account_name in ("OUTSIDE PARTY", "AQUA GOLD", "SWARN SHILP 1", "CHAIN AND JWELLERY")';
+  else $where='chitti_hide=0 and account_name in ("OUTSIDE PARTY", "AQUA GOLD", "SWARN SHILP 1", "CHAIN AND JWELLERY")';
  
   return array(
     'page_title'          => 'Chittis List',
