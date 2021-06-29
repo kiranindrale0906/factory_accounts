@@ -76,7 +76,7 @@
         <?php }?>
         <?php if(!empty($loss_out_detail['id'])&&$loss_out_detail['receipt_type']!="Ghiss Melting Loss"){?>
           <td class="text-right">
-            <a href=<?= $factory_url."processes/process_quators/edit/".$loss_out_detail['id'] ?> target='_blank' >Add Quartor</a>
+            <a href=<?= base_url()."processes/process_quators/edit/".$loss_out_detail['id'] ?> target='_blank' >Add Quartor</a>
           </td>
         <?php }?>
          
