@@ -63,6 +63,7 @@ class Loss_summaries extends BaseController {
                                               'date(voucher_date)>='=>$this->data['quator']['from_date'],
                                               'date(voucher_date)<='=>$this->data['quator']['to_date']))['amount'];
     $this->data['arg_unrecoverable_loss'] =!empty($arg_loss_records['unrecovery_loss'])?$arg_loss_records['unrecovery_loss']:0;
+    $this->data['arg_total_fine_loss'] =!empty($arg_loss_records['fine_loss'])?$arg_loss_records['fine_loss']:0;
     $this->data['arg_final_loss'] = 0;
     $this->data['arg_per_kg_loss'] = 0;
     $this->data['arg_total_loss'] =!empty($arg_loss_records['fine_loss'])?$arg_loss_records['fine_loss']:0;;
@@ -79,7 +80,8 @@ class Loss_summaries extends BaseController {
                                               array('account_name'=>"ARF Jan 2021 GPC Vodator",
                                               'date(voucher_date)>='=>$this->data['quator']['from_date'],
                                               'date(voucher_date)<='=>$this->data['quator']['to_date']))['amount'];
-    $this->data['arf_unrecoverable_loss'] =!empty($arf_loss_records['unrecovery_loss'])?$arf_loss_records['unrecovery_loss']:0;;
+    $this->data['arf_unrecoverable_loss'] =!empty($arf_loss_records['unrecovery_loss'])?$arf_loss_records['unrecovery_loss']:0;
+    $this->data['arf_total_fine_loss'] =!empty($arf_loss_records['fine_loss'])?$arf_loss_records['fine_loss']:0;
     $this->data['arf_final_loss'] = 0;
     $this->data['arf_per_kg_loss'] = 0;
     $this->data['arf_total_loss'] =!empty($arf_loss_records['fine_loss'])?$arf_loss_records['fine_loss']:0;
@@ -97,6 +99,7 @@ class Loss_summaries extends BaseController {
                                               'date(voucher_date)>='=>$this->data['quator']['from_date'],
                                               'date(voucher_date)<='=>$this->data['quator']['to_date']))['amount'];
     $this->data['arc_unrecoverable_loss'] =!empty($arc_loss_records['unrecovery_loss'])?$arc_loss_records['unrecovery_loss']:0;;
+    $this->data['arc_total_fine_loss'] =!empty($arc_loss_records['fine_loss'])?$arc_loss_records['fine_loss']:0;
     $this->data['arc_final_loss'] = 0;
     $this->data['arc_per_kg_loss'] = 0;
     $this->data['arc_total_loss']=!empty($arc_loss_records['fine_loss'])?$arc_loss_records['fine_loss']:0;
