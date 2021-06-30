@@ -325,7 +325,7 @@ class Trial_balances extends Ledgers {
     
     $where['usd_rate != 0'] = NULL;
     if ($sale_type == 'Labour') {
-      $where['ounce_rate != 0 || usd_rate != 0'] = NULL;
+      $where['ounce_rate != 0 or usd_rate != 0'] = NULL;
       $select = 'sum(labour_usd_amount * usd_rate) + sum(freight_usd_amount * usd_rate) as taxable_amount, 0 as cgst_amount, 0 as sgst_amount, 0 as tcs_amount, 0 as factory_fine'; 
     } else {
       $where['ounce_rate != 0'] = NULL;
