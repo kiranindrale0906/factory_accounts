@@ -29,7 +29,7 @@
      foreach ($loss_details as $index => $loss_out_detail) {
       $sum_weight+=$loss_out_detail['in_weight'];
       $sum_fine+=($loss_out_detail['in_weight']*$loss_out_detail['in_lot_purity']/100);
-      $sum_melting_production+=($loss_out_detail['out_weight']);
+      $sum_melting_production+=(@$loss_out_detail['out_weight']);
       $sum_recoverd_fine+=($loss_out_detail['recoverd_loss_fine']);
       $sum_after_recovery+=($loss_out_detail['after_recovery']);
       $sum_unrecoverable+=($loss_out_detail['unrecoverable_loss']);
@@ -43,9 +43,9 @@
         <td class="text-right"><?=!empty($loss_out_detail['in_weight'])?four_decimal($loss_out_detail['in_weight']):'-'?></td>
         <td class="text-right"><?=four_decimal($loss_out_detail['in_lot_purity'])?></td>
         <td class="text-right"><?=$fine=!empty($loss_out_detail['loss_fine'])?four_decimal($loss_out_detail['loss_fine']):'-';?></td>
-        <td class="text-right"><?=(!empty($loss_out_detail['out_weight'])|| $loss_out_detail['out_weight']!=0)?four_decimal($loss_out_detail['out_weight']):'-';?></td>
+        <td class="text-right"><?=(!empty($loss_out_detail['out_weight'])&& $loss_out_detail['out_weight']!=0)?four_decimal($loss_out_detail['out_weight']):'-';?></td>
 
-        <td class="text-right"><?=(!empty($loss_out_detail['out_weight'])|| $loss_out_detail['out_weight']!=0)?four_decimal(($loss_out_detail['loss_fine']/$loss_out_detail['out_weight']*1000)):'-';?></td>
+        <td class="text-right"><?=(!empty($loss_out_detail['out_weight'])&& $loss_out_detail['out_weight']!=0)?four_decimal(($loss_out_detail['loss_fine']/$loss_out_detail['out_weight']*1000)):'-';?></td>
 
 
         <!-- <td class="text-right"><?//=four_decimal($loss_out_detail['production']);?></td> -->
@@ -53,7 +53,7 @@
           <a href=<?= base_url()."ac_vouchers/voucher_listing?parent_id=".$loss_out_detail['parent_id'] ?> target='_blank'><?=!empty($loss_out_detail['after_recovery'])?four_decimal($loss_out_detail['after_recovery']):0;?></a></td>
          <td class="text-right"><?=!empty($loss_out_detail['recoverd_loss_fine'])?four_decimal($loss_out_detail['recoverd_loss_fine']):'-';?></td>
 
-        <td class="text-right"><?=(!empty($loss_out_detail['out_weight']) || $loss_out_detail['out_weight']!=0)?four_decimal((($loss_out_detail['loss_fine']-$loss_out_detail['recoverd_loss_fine'])/$loss_out_detail['out_weight']*1000)):'-';?></td>
+        <td class="text-right"><?=(!empty($loss_out_detail['out_weight']) && $loss_out_detail['out_weight']!=0)?four_decimal((($loss_out_detail['loss_fine']-$loss_out_detail['recoverd_loss_fine'])/$loss_out_detail['out_weight']*1000)):'-';?></td>
         <td class="text-right"><?=!empty($loss_out_detail['unrecoverable_loss'])?four_decimal($loss_out_detail['unrecoverable_loss']):'-';?></td>
         <!-- <td class="text-right"><?//=!empty($loss_out_detail['production'])?four_decimal($loss/$loss_out_detail['production']*1000):0;?></td> -->
         <td class="text-right"><?=$loss=!empty($loss_out_detail['balance'])?four_decimal($loss_out_detail['balance']):'-';?></td>
@@ -69,7 +69,12 @@
           <a href=<?= base_url()."argold/unrecovarable_account_records/store?from=view&account_name=".urlencode("Loss Account")."&factory=Unrecovarable&credit_weight=".$loss."&narration=".urlencode($category)."&parent_id=".$loss_out_detail['parent_id'] ?> target='_blank' onclick="return confirm('Do you want to add this in Unrecovarable?')" >Unrecovarable</a>
           <?php }?>
         </td>
-        <?php if(!empty($loss_out_detail['id'])){?>
+        <?php if(!empty($loss_out_detail['id'])&&$loss_out_detail['receipt_type']=="Ghiss Melting Loss"){?>
+          <td class="text-right">
+            <a href=<?= base_url()."argold/ghiss_melting_quators/edit/".$loss_out_detail['id'] ?> target='_blank' >Add Quartor</a>
+          </td>
+        <?php }?>
+        <?php if(!empty($loss_out_detail['id'])&&$loss_out_detail['receipt_type']!="Ghiss Melting Loss"){?>
           <td class="text-right">
             <a href=<?= $factory_url."processes/process_quators/edit/".$loss_out_detail['id'] ?> target='_blank' >Add Quartor</a>
           </td>
