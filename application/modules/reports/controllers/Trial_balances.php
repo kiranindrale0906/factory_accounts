@@ -323,11 +323,14 @@ class Trial_balances extends Ledgers {
   private function calculate_profit_loss_of_export_sales_accounts($sale_type){               
     $where = array();               
     
-    $where['ounce_rate != 0 or usd_rate != 0'] = NULL;
-    if ($sale_type == 'Labour')
+    $where['usd_rate != 0'] = NULL;
+    if ($sale_type == 'Labour') {
+      $where['ounce_rate != 0 || usd_rate != 0'] = NULL;
       $select = 'sum(labour_usd_amount * usd_rate) + sum(freight_usd_amount * usd_rate) as taxable_amount, 0 as cgst_amount, 0 as sgst_amount, 0 as tcs_amount, 0 as factory_fine'; 
-    else
+    } else {
+      $where['ounce_rate != 0'] = NULL;
       $select = 'sum(taxable_usd_amount * usd_rate) + sum(premium_usd_amount * usd_rate) as taxable_amount, 0 as cgst_amount, 0 as sgst_amount, 0 as tcs_amount, sum(factory_fine) as factory_fine'; 
+    }
 
     $sales = $this->chitti_model->find($select, $where);
         
