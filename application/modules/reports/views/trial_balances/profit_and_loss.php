@@ -102,15 +102,15 @@
 
           <tr>
             <td>DOMESTIC</td>
-            <td class="text-right"><?= four_decimal(($purchase_domestic_fine - 33927.49) * $purchase_domestic_rate, '-') ?></td>
+            <td class="text-right"><?= four_decimal($purchase_domestic_amount, '-') ?></td>
             <td class="text-right"><?= four_decimal($purchase_domestic_rate, '-'); ?></td>
-            <td class="text-right"><?= four_decimal(($purchase_domestic_fine - 33927.49), '-'); ?></td>
+            <td class="text-right"><?= four_decimal($purchase_domestic_fine, '-'); ?></td>
           </tr>
           <tr>
             <td>IMPORT</td>
-            <td class="text-right"><?= four_decimal($purchase_export_amount + 153828342, '-') ?></td>
-            <td class="text-right"><?= four_decimal(($purchase_export_amount + 153828342) / ($purchase_export_fine + 33927.49), '-'); ?></td>
-            <td class="text-right"><?= four_decimal($purchase_export_fine + 33927.49, '-'); ?></td>
+            <td class="text-right"><?= four_decimal($purchase_export_amount, '-') ?></td>
+            <td class="text-right"><?= four_decimal($purchase_export_rate, '-'); ?></td>
+            <td class="text-right"><?= four_decimal($purchase_export_fine, '-'); ?></td>
           </tr>
           <tr>
             <th>TOTAL PURCHASE</th>
@@ -197,16 +197,16 @@
           </tr>
           <tr>
             <td>Export Closing Stock</td>
-            <td class="text-right"><?//= four_decimal($export_closing_amount, '-') ?></td>
-            <td class="text-right"><?//= four_decimal($export_closing_rate, '-'); ?></td>
-            <td class="text-right"><?//= four_decimal($export_closing_fine, '-'); ?></td>
+            <td class="text-right"><?= four_decimal($export_closing_amount, '-') ?>  </td>
+            <td class="text-right"><?= four_decimal($export_closing_rate, '-'); ?>  </td>
+            <td class="text-right"><?= four_decimal($export_closing_fine, '-'); ?></td>
           </tr>
           <tr>
             <th>Total Export</th>
             <?php 
-              $total_export_amount = $sales_export_amount; // + $export_closing_amount;
-              $total_export_fine = $sales_export_fine; // + $export_closing_fine;
-              $total_export_rate = $total_export_amount;
+              $total_export_amount = $sales_export_amount + $export_closing_amount;
+              $total_export_fine = $sales_export_fine + $export_closing_fine;
+              $total_export_rate = $total_export_amount / $total_export_fine;
             ?>
             <th class="text-right"><?= four_decimal($total_export_amount, '-') ?>  </th>
             <th class="text-right"><?= four_decimal($total_export_rate, '-'); ?>  </th>
@@ -221,12 +221,6 @@
           <tr>
             <td>Export Labour</td>
             <td class="text-right"><?= four_decimal($export_labour_amount, '-') ?>  </td>
-            <td class="text-right">-</td>
-            <td class="text-right">-</td>
-          </tr>
-          <tr>
-            <td>Export Loss</td>
-            <td class="text-right"><?= four_decimal($export_closing_amount-153828342, '-') ?>  </td>
             <td class="text-right">-</td>
             <td class="text-right">-</td>
           </tr>
