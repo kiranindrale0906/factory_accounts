@@ -108,9 +108,9 @@
           </tr>
           <tr>
             <td>IMPORT</td>
-            <td class="text-right"><?= four_decimal($purchase_export_amount, '-') ?></td>
-            <td class="text-right"><?= four_decimal($purchase_export_rate, '-'); ?></td>
-            <td class="text-right"><?= four_decimal($purchase_export_fine, '-'); ?></td>
+            <td class="text-right"><?= four_decimal($purchase_export_amount + 153828342, '-') ?></td>
+            <td class="text-right"><?= four_decimal(($purchase_export_amount + 153828342) / ($purchase_export_fine + 33927.49), '-'); ?></td>
+            <td class="text-right"><?= four_decimal($purchase_export_fine + 33927.49, '-'); ?></td>
           </tr>
           <tr>
             <th>TOTAL PURCHASE</th>
@@ -221,6 +221,12 @@
           <tr>
             <td>Export Labour</td>
             <td class="text-right"><?= four_decimal($export_labour_amount, '-') ?>  </td>
+            <td class="text-right">-</td>
+            <td class="text-right">-</td>
+          </tr>
+          <tr>
+            <td>Export Loss</td>
+            <td class="text-right"><?= four_decimal($export_closing_amount-153828342, '-') ?>  </td>
             <td class="text-right">-</td>
             <td class="text-right">-</td>
           </tr>
