@@ -197,9 +197,9 @@
           </tr>
           <tr>
             <td>Export Closing Stock</td>
-            <td class="text-right"><?= //four_decimal($export_closing_amount, '-') ?></td>
-            <td class="text-right"><?= //four_decimal($export_closing_rate, '-'); ?></td>
-            <td class="text-right"><?= //four_decimal($export_closing_fine, '-'); ?></td>
+            <td class="text-right"><?//= four_decimal($export_closing_amount, '-') ?></td>
+            <td class="text-right"><?//= four_decimal($export_closing_rate, '-'); ?></td>
+            <td class="text-right"><?//= four_decimal($export_closing_fine, '-'); ?></td>
           </tr>
           <tr>
             <th>Total Export</th>
