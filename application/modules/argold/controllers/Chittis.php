@@ -39,8 +39,9 @@ class Chittis extends BaseController {
   }
 
   public function _get_form_data() {
-    $this->data['account_name']=array(array('id'=>'AQUA GOLD','name'=>'AQUA GOLD'),
-                                      array('id'=>'OUTSIDE PARTY','name'=>'OUTSIDE PARTY'),
+    $this->data['account_name']=array(array('id'=>'OUTSIDE PARTY','name'=>'OUTSIDE PARTY'),
+                                      array('id'=>'AQUA GOLD','name'=>'AQUA GOLD'),
+                                      array('id'=>'Bhandari Jewellers Pvt.Ltd.','name'=>'Bhandari Jewellers Pvt.Ltd.'),
                                       array('id'=>'EXPORT ACCOUNT','name'=>'EXPORT ACCOUNT'),
                                       array('id'=>'EXPORT DIFF.','name'=>'EXPORT DIFF.'),
                                       array('id'=>'G and J GOLDSHMITHS','name'=>'G and J GOLDSHMITHS'),
