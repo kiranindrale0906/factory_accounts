@@ -104,7 +104,7 @@
             <td>DOMESTIC</td>
             <td class="text-right"><?= four_decimal(($purchase_domestic_fine - 33927.49) * $purchase_domestic_rate, '-') ?></td>
             <td class="text-right"><?= four_decimal($purchase_domestic_rate, '-'); ?></td>
-            <td class="text-right"><?= four_decimal($purchase_domestic_fine - 33927.49, '-'); ?></td>
+            <td class="text-right"><?= four_decimal(($purchase_domestic_fine - 33927.49), '-'); ?></td>
           </tr>
           <tr>
             <td>IMPORT</td>
