@@ -6,7 +6,8 @@ function get_tax_fields($factory_fine, $fine, $sale_type, $gold_rate, $gold_rate
     $tcs_rate=0.1;
   elseif (strtotime($created_at) <= strtotime('2021-03-30'))
     $tcs_rate=0.075;
-  
+  $tcs_rate = 0;
+
   $fields = array('sale_type' => $sale_type,
                   'gst_rate'  => ($sale_type == 'Labour') ? 2.50 : 1.50,
                   'tcs_rate'  => ($sale_type == 'Sale') ?  $tcs_rate : 0,

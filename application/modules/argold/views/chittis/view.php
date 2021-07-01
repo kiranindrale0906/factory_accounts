@@ -85,6 +85,8 @@
       }elseif(strtotime($record['created_at'])<=strtotime('2021-03-30')){
         $tcs_rate=0.075;
       }
+      $tcs_rate = 0;
+      
       ?>
       <tr class="no-print">
         <td class="no-print">Total Amount</td>

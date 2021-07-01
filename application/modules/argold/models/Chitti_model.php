@@ -128,6 +128,8 @@ class Chitti_model extends BaseModel {
     }elseif((strtotime(date('Y-m-d'))<=strtotime('2021-03-30'))){
       $tcs_rate=0.075;
     }
+    $tcs_rate=0;
+    
     if ($this->attributes['sale_type'] != 'Labour' && $this->attributes['usd_rate'] == 0) 
       $this->attributes['debit_amount'] = (!empty($tcs_rate) || $tcs_rate!=0)?round($total_amount + $total_amount * $tcs_rate/100):0;
     else
