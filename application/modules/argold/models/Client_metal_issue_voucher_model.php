@@ -35,7 +35,10 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
   private function set_id_for_alloy_vodator_gpc_vodator_and_stone_vatav() {
     if (   $this->attributes['receipt_type'] != 'Alloy Vodator'
         && $this->attributes['receipt_type'] != 'GPC Vodator'
-        && $this->attributes['receipt_type'] != 'Stone Vatav') return;
+        && $this->attributes['receipt_type'] != 'Stone Vatav'
+        && $this->attributes['receipt_type'] != 'Copper Vatav'
+        && $this->attributes['receipt_type'] != 'Rhodium Vatav') return;
+
 
     $metal_issue_voucher = $this->find('id', array('receipt_type' => $this->attributes['receipt_type'],
                                                    'site_name'    => $this->attributes['site_name'],

@@ -151,7 +151,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
     if (     $this->attributes['receipt_type'] == 'Alloy Vodator'
           || $this->attributes['receipt_type'] == 'GPC Vodator'
-          || $this->attributes['receipt_type'] == 'Stone Vatav') {
+          || $this->attributes['receipt_type'] == 'Stone Vatav'
+          || $this->attributes['receipt_type'] == 'Copper Vatav'
+          || $this->attributes['receipt_type'] == 'Rhodium Vatav') {
       $set_metal_issue_voucher = 1;
       
       if ($this->attributes['site_name'] == 'AR Gold Jan 2021') {
@@ -175,7 +177,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
     if (     $this->attributes['receipt_type'] == 'Alloy Vodator'
           || $this->attributes['receipt_type'] == 'GPC Vodator'
-          || $this->attributes['receipt_type'] == 'Stone Vatav') {
+          || $this->attributes['receipt_type'] == 'Stone Vatav'
+          || $this->attributes['receipt_type'] == 'Copper Vatav'
+          || $this->attributes['receipt_type'] == 'Rhodium Vatav') {
       $set_metal_issue_voucher = 1;
       
       if ($this->attributes['site_name'] == 'ARF Jan 2021') {
@@ -199,7 +203,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
     if (     $this->attributes['receipt_type'] == 'Alloy Vodator'
           || $this->attributes['receipt_type'] == 'GPC Vodator'
-          || $this->attributes['receipt_type'] == 'Stone Vatav') {
+          || $this->attributes['receipt_type'] == 'Stone Vatav'
+          || $this->attributes['receipt_type'] == 'Copper Vatav'
+          || $this->attributes['receipt_type'] == 'Rhodium Vatav') {
       $set_metal_issue_voucher = 1;
       
       if ($this->attributes['site_name'] == 'ARC Jan 2021') {
@@ -245,7 +251,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   private function set_metal_issue_voucher_attributes_for_alloy_vadotar_and_gpc_vadotar() {
     if (    $this->attributes['receipt_type'] == "Alloy Vodator"
          || $this->attributes['receipt_type'] == "GPC Vodator"
-         || $this->attributes['receipt_type'] == 'Stone Vatav') {
+         || $this->attributes['receipt_type'] == 'Stone Vatav'
+         || $this->attributes['receipt_type'] == 'Copper Vatav'
+         || $this->attributes['receipt_type'] == 'Rhodium Vatav') {
       unset($this->formdata['metal_issue_vouchers']);
 
       if     ($this->attributes['site_name'] == 'AR Gold Nov 2020') $account_name = 'AR Gold Software Nov 2020';
@@ -303,7 +311,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   private function set_id_for_alloy_vodator_gpc_vodator_and_stone_vatav() {
     if (   $this->attributes['receipt_type'] != 'Alloy Vodator'
         && $this->attributes['receipt_type'] != 'GPC Vodator'
-        && $this->attributes['receipt_type'] != 'Stone Vatav') return;
+        && $this->attributes['receipt_type'] != 'Stone Vatav'
+        && $this->attributes['receipt_type'] != 'Copper Vatav'
+        && $this->attributes['receipt_type'] != 'Rhodium Vatav') return;
 
     $metal_receipt_voucher = $this->find('id', array('receipt_type' => $this->attributes['receipt_type'],
                                                      'site_name' => $this->attributes['site_name'],
