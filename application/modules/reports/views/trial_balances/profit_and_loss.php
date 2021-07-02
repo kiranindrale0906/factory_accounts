@@ -107,7 +107,7 @@
             <td class="text-right"><?= four_decimal($purchase_domestic_fine, '-'); ?></td>
           </tr>
           <tr>
-            <td>IMPORT</td>
+            <td>OPENING IMPORT</td>
             <td class="text-right">-</td>
             <td class="text-right">-</td>
             <td class="text-right">33927.49</td>
@@ -213,7 +213,7 @@
           </tr>
 
           <?php
-            $export_closing_fine = $export_closing_fine - 33927.49;
+            $export_closing_fine = $export_closing_fine + 33927.49;
             $export_closing_amount = $export_closing_fine * $export_closing_rate;
           ?>
             <tr>
