@@ -218,7 +218,7 @@ class Trial_balances extends Ledgers {
                IFNULL(sum((purity-factory_purity)*debit_weight/100),0) - IFNULL(sum((factory_purity-purity)*credit_weight/100),0) as vadotar,
                IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount,0 as id";
     $this->data['purchase_sales_account_domestic_export_records'] = $this->model->get($purchase_sales_account_domestic_export_select, 
-                                                array('account_name' => array('SALES ACCOUNT', 'PURCHASE ACCOUNT')), 
+                                                array_merge($where, array('account_name' => array('SALES ACCOUNT', 'PURCHASE ACCOUNT'))), 
                                                 array(), array('group_by'=>'account_name, is_export'));
 
     $loss_account = array('account_name' => 'LOSS ACCOUNT',
@@ -323,11 +323,14 @@ class Trial_balances extends Ledgers {
   private function calculate_profit_loss_of_export_sales_accounts($sale_type){               
     $where = array();               
     
-    $where['ounce_rate !='] = 0;
-    if ($sale_type == 'Labour')
+    $where['usd_rate != 0'] = NULL;
+    if ($sale_type == 'Labour') {
+      $where['ounce_rate != 0 or usd_rate != 0'] = NULL;
       $select = 'sum(labour_usd_amount * usd_rate) + sum(freight_usd_amount * usd_rate) as taxable_amount, 0 as cgst_amount, 0 as sgst_amount, 0 as tcs_amount, 0 as factory_fine'; 
-    else
+    } else {
+      $where['ounce_rate != 0'] = NULL;
       $select = 'sum(taxable_usd_amount * usd_rate) + sum(premium_usd_amount * usd_rate) as taxable_amount, 0 as cgst_amount, 0 as sgst_amount, 0 as tcs_amount, sum(factory_fine) as factory_fine'; 
+    }
 
     $sales = $this->chitti_model->find($select, $where);
         
@@ -343,7 +346,7 @@ class Trial_balances extends Ledgers {
 
   private function get_gold_rate_from_myspn() {
     $gold_rate_response = get_web_page("http://spngoldlivebroadcast.noip.us:8888/VOTSBroadcast/Services/xml/a/%20mumbai?_=1617860765592");
-    $string = explode('GOLD MUMBAI 99.50 WITH GST & TCS RTGS', $gold_rate_response);
+    $string = explode('GOLD MUMBAI 99.90 WITH GST & TCS RTGS', $gold_rate_response);
     $this->data['gold_rate'] = @explode(',', $string[1])[3];
 
     $string = explode('SPOT GOLD', $gold_rate_response);

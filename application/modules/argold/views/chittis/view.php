@@ -80,11 +80,13 @@
     <?php if ($record['sale_type'] != 'Labour') { 
 
       $tcs_rate=0;
-      if(strtotime($record['created_at'])>strtotime('2021-03-30')){
+      if(strtotime($record['created_at'])>strtotime('2021-03-30') && strtotime($record['created_at'])<strtotime('2021-07-301')){
         $tcs_rate=0.1;
       }elseif(strtotime($record['created_at'])<=strtotime('2021-03-30')){
         $tcs_rate=0.075;
-      }
+      } else
+        $tcs_rate = 0;
+
       ?>
       <tr class="no-print">
         <td class="no-print">Total Amount</td>
