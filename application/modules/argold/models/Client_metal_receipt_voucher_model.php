@@ -493,6 +493,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     if (empty($records)) return true;
     $records = json_decode(json_encode($records), true);
     foreach ($records as $index => $record) {
+      if ($record['weight']==0) continue;
       //$start_date_timestamp = strtotime($start_date);
       //$voucher_date_timestamp = strtotime($record['created_date']);
       
