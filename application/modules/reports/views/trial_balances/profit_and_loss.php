@@ -236,6 +236,7 @@
 
           <?php
             $export_gain_loss_fine = $sales_export_fine + $export_closing_fine;
+            $export_gain_loss_rate = $purchase_export_rate - (($sales_export_amount + $export_closing_amount) / $export_gain_loss_fine);
             $export_gain_loss_amount = $export_gain_loss_fine * $export_gain_loss_rate;
           ?>
           <tr>
