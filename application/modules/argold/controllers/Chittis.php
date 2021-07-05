@@ -41,6 +41,7 @@ class Chittis extends BaseController {
   public function _get_form_data() {
     $this->data['account_name']=array(array('id'=>'OUTSIDE PARTY','name'=>'OUTSIDE PARTY'),
                                       array('id'=>'AQUA GOLD','name'=>'AQUA GOLD'),
+                                      array('id'=>'CHAIN AND JWELLERY', 'name'=>'CHAIN AND JWELLERY'),
                                       array('id'=>'Bhandari Jewellers Pvt.Ltd.','name'=>'Bhandari Jewellers Pvt.Ltd.'),
                                       array('id'=>'EXPORT ACCOUNT','name'=>'EXPORT ACCOUNT'),
                                       array('id'=>'EXPORT DIFF.','name'=>'EXPORT DIFF.'),
@@ -115,6 +116,7 @@ class Chittis extends BaseController {
                                                        array('where'=>array(
                                                                'account_name in ("OUTSIDE PARTY",
                                                                                  "AQUA GOLD",
+                                                                                 "CHAIN AND JWELLERY",
                                                                                  "EXPORT ACCOUNT",
                                                                                  "EXPORT DIFF.",
                                                                                  "G and J GOLDSHMITHS",
