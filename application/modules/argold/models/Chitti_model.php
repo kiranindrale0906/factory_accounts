@@ -130,8 +130,9 @@ class Chitti_model extends BaseModel {
     } else
       $tcs_rate=0;
 
-    if ($this->attributes['sale_type'] != 'Labour' && $this->attributes['usd_rate'] == 0) 
-      $this->attributes['debit_amount'] = (!empty($tcs_rate) || $tcs_rate!=0) ? round($total_amount + $total_amount * $tcs_rate/100):0;
+    //$this->attributes['debit_amount'] = (!empty($tcs_rate) || $tcs_rate!=0) ? round($total_amount + $total_amount * $tcs_rate/100) : 0;
+    if ($this->attributes['sale_type'] != 'Labour' && $this->attributes['usd_rate'] == 0)   
+      $this->attributes['debit_amount'] = round($total_amount + $total_amount * $tcs_rate/100);
     else
       $this->attributes['debit_amount'] = round($total_amount);
   }
@@ -140,7 +141,6 @@ class Chitti_model extends BaseModel {
     $this->rate_cut_issue_voucher_model->create_rate_cut_vouchers_for_chitti($this->attributes['id']);
     $this->set_chitti_id_in_metal_issue_vouchers();
     if (!isset($this->formdata['chitti_details']) || empty($this->formdata['chitti_details'])) return;
-    
 	}  
 
   private function set_chitti_id_in_metal_issue_vouchers() {
