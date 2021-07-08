@@ -122,7 +122,7 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
   $list_setting['usd_rate'] = array("USD Rate", "usd_rate", TRUE, "usd_rate", FALSE, TRUE,"FORMAT(ac_vouchers.usd_rate,ac_company.decimal_no) as usd_rate",'','','','text-right');
   
   $list_setting['usd_credit_amount'] = array("Usd Credit Amt.", "usd_credit_amount", TRUE, "usd_credit_amount", FALSE, TRUE,"FORMAT(ac_vouchers.usd_credit_amount,ac_company.decimal_no) as usd_credit_amount",'','','','text-right');
-  $list_setting['usd_debit_amount'] = array("Credit Amt.", "usd_debit_amount", TRUE, "usd_debit_amount", FALSE, TRUE,"FORMAT(ac_vouchers.usd_debit_amount,ac_company.decimal_no) as usd_debit_amount",'','','','text-right');
+  $list_setting['usd_debit_amount'] = array("Usd Debit Amt.", "usd_debit_amount", TRUE, "usd_debit_amount", FALSE, TRUE,"FORMAT(ac_vouchers.usd_debit_amount,ac_company.decimal_no) as usd_debit_amount",'','','','text-right');
   
   $list_setting['total_gross_weight'] = array("Total Gross Wt", "total_gross_weight", FALSE, "total_gross_weight", TRUE, TRUE);
   $list_setting['total_net_weight'] = array("Total Net Wt", "total_net_weight", FALSE, "total_net_weight", TRUE, TRUE);
