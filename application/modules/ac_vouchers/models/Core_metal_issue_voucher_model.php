@@ -20,7 +20,7 @@ class Core_metal_issue_voucher_model extends Voucher_model {
         && $this->attributes['receipt_type'] != 'Tounch Loss Fine') 
       $rules[] = $this->get_purity_validation_rules();
     
-    if (!in_array($this->attributes['receipt_type'], array('Alloy Vodator', 'GPC Vodator', 'Stone Vatav', 'HCL Loss', 'Tounch Loss Fine')))
+    if (!in_array($this->attributes['receipt_type'], array('Alloy Vodator', 'GPC Vodator', 'Stone Vatav', 'Copper Vatav', 'Rhodium Vatav', 'HCL Loss', 'Tounch Loss Fine')))
       $rules[] = $this->get_credit_weight_validation_rules();
     return $rules;
   }

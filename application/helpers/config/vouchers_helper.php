@@ -2,7 +2,7 @@
 
 function get_tax_fields($factory_fine, $fine, $sale_type, $gold_rate, $gold_rate_purity, $created_at,$export = 0) {
   $tcs_rate=0;
-  if(strtotime($created_at)>strtotime('2021-03-30') && strtotime($created_at)<strtotime('2021-07-301'))
+  if(strtotime($created_at)>strtotime('2021-03-30') && strtotime($created_at)<strtotime('2021-07-01'))
     $tcs_rate=0.1;
   elseif (strtotime($created_at) <= strtotime('2021-03-30'))
     $tcs_rate=0.075;

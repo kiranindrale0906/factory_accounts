@@ -41,10 +41,12 @@ class Chittis extends BaseController {
   public function _get_form_data() {
     $this->data['account_name']=array(array('id'=>'OUTSIDE PARTY','name'=>'OUTSIDE PARTY'),
                                       array('id'=>'AQUA GOLD','name'=>'AQUA GOLD'),
+                                      array('id'=>'CHAIN AND JWELLERY', 'name'=>'CHAIN AND JWELLERY'),
                                       array('id'=>'Bhandari Jewellers Pvt.Ltd.','name'=>'Bhandari Jewellers Pvt.Ltd.'),
                                       array('id'=>'EXPORT ACCOUNT','name'=>'EXPORT ACCOUNT'),
                                       array('id'=>'EXPORT DIFF.','name'=>'EXPORT DIFF.'),
                                       array('id'=>'G and J GOLDSHMITHS','name'=>'G and J GOLDSHMITHS'),
+                                      array('id'=>'MKORE LLC USA','name'=>'MKORE LLC USA'),
                                       array('id'=>'Pani Trading Co.','name'=>'Pani Trading Co.'),
                                       array('id'=>'SHREE RAM JEWELLER','name'=>'SHREE RAM JEWELLER'),
                                       array('id'=>'TANISHQ','name'=>'TANISHQ'),
@@ -115,8 +117,10 @@ class Chittis extends BaseController {
                                                        array('where'=>array(
                                                                'account_name in ("OUTSIDE PARTY",
                                                                                  "AQUA GOLD",
+                                                                                 "CHAIN AND JWELLERY",
                                                                                  "EXPORT ACCOUNT",
                                                                                  "EXPORT DIFF.",
+                                                                                 "MKORE LLC USA",
                                                                                  "G and J GOLDSHMITHS",
                                                                                  "Pani Trading Co.",
                                                                                  "SHREE RAM JEWELLER",
