@@ -117,8 +117,13 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
   $list_setting['department_name'] = array("Department Name", "department_name", FALSE, "department_name", TRUE, TRUE);
   $list_setting['debit_amount'] = array("Debit Amt", "debit_amount", TRUE, "debit_amount", FALSE, TRUE,"FORMAT(ac_vouchers.debit_amount,ac_company.decimal_no) as debit_amount",
                                         '','','','text-right');
-  $list_setting['credit_amount'] = array("Credit Amt.", "credit_amount", TRUE, "credit_amount", FALSE, TRUE,"FORMAT(ac_vouchers.credit_amount,ac_company.decimal_no) as credit_amount",     
-                                        '','','','text-right');
+  $list_setting['credit_amount'] = array("Credit Amt.", "credit_amount", TRUE, "credit_amount", FALSE, TRUE,"FORMAT(ac_vouchers.credit_amount,ac_company.decimal_no) as credit_amount",'','','','text-right');
+
+  $list_setting['usd_rate'] = array("USD Rate", "usd_rate", TRUE, "usd_rate", FALSE, TRUE,"FORMAT(ac_vouchers.usd_rate,ac_company.decimal_no) as usd_rate",'','','','text-right');
+  
+  $list_setting['usd_credit_amount'] = array("Usd Credit Amt.", "usd_credit_amount", TRUE, "usd_credit_amount", FALSE, TRUE,"FORMAT(ac_vouchers.usd_credit_amount,ac_company.decimal_no) as usd_credit_amount",'','','','text-right');
+  $list_setting['usd_debit_amount'] = array("Credit Amt.", "usd_debit_amount", TRUE, "usd_debit_amount", FALSE, TRUE,"FORMAT(ac_vouchers.usd_debit_amount,ac_company.decimal_no) as usd_debit_amount",'','','','text-right');
+  
   $list_setting['total_gross_weight'] = array("Total Gross Wt", "total_gross_weight", FALSE, "total_gross_weight", TRUE, TRUE);
   $list_setting['total_net_weight'] = array("Total Net Wt", "total_net_weight", FALSE, "total_net_weight", TRUE, TRUE);
   $list_setting['total_fine_weight'] = array("Total Fine Wt", "total_fine_weight", FALSE, "total_fine_weight", TRUE, TRUE);
@@ -172,6 +177,7 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['to_group_name'] = array('To Group Name', 'Enter To Group', TRUE, '', TRUE);
   $attributes['amount'] = array('Amount', 'Enter Amount', TRUE, '', TRUE);
   $attributes['credit_amount'] = array('Credit Amount', 'Enter Credit Amount', TRUE, '', TRUE);
+  $attributes['usd_rate'] = array('USD Rate', 'Enter Usd Rate', FALSE, '', TRUE);
   $attributes['taxable_amount'] = array('Taxable Amount', 'Taxable Amount', FALSE, '',TRUE);
   $attributes['cgst_amount'] = array('CGST Amount', 'CGST Amount', FALSE, '',TRUE);
   $attributes['sgst_amount'] = array('SGST Amount', 'SGST Amount', FALSE, '',TRUE);

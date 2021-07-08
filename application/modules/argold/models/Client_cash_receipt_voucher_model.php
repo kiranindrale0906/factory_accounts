@@ -14,4 +14,9 @@ class Client_cash_receipt_voucher_model extends Core_cash_receipt_voucher_model 
     $rules[] = $this->get_debit_amount_validation_rules();
     return $rules;
   }
+  public function before_validate() {
+    if($this->attributes['usd_rate']>0){
+    $this->attributes['usd_debit_amount']=$this->attributes['debit_amount']*$this->attributes['usd_rate'];
+    }
+  }
 }
