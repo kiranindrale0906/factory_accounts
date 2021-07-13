@@ -30,7 +30,7 @@
                   $liabilities_vadotar = $liabilities_vadotar + $record['vadotar'];
                   $liabilities_fine = $liabilities_fine + $record['fine']; 
                   $liabilities_amount = $liabilities_amount + $record['amount']; 
-                  $liabilities_usd_amount = $liabilities_usd_amount + $record['usd_amount']; 
+                  $liabilities_usd_amount = $liabilities_usd_amount + @$record['usd_amount']; 
                   if(round($record['fine'],2)!=0){
 
                   ?>
@@ -44,7 +44,7 @@
                       <?php }?>  
                     </td>
                     <td class="text-right"><?= four_decimal(($record['amount']), '-') ?>  </td>
-                    <td class="text-right"><?= four_decimal(($record['usd_amount']), '-') ?>  </td>
+                    <td class="text-right"><?= four_decimal((@$record['usd_amount']), '-') ?>  </td>
                     <td class="text-right"><?= four_decimal(($record['fine']), '-'); ?></td>
                     <td class="text-right"><?= four_decimal(($record['vadotar']), '-') ?>  </td>
                   </tr>
@@ -81,7 +81,6 @@
               $assets_amount = 0;  
               $assets_usd_amount = 0;  
               if(!empty($trial_balance_records)) {
-                pd($trial_balance_records);
                 foreach ($trial_balance_records as $record) {
                   if (  ($record['fine'] >= 0
                          && $record['account_name'] != 'Tounch Loss Fine')
@@ -93,7 +92,7 @@
                   $assets_vadotar = $assets_vadotar + $record['vadotar'];
                   $assets_fine = $assets_fine + $record['fine'];
                   $assets_amount= $assets_amount + $record['amount'];
-                  $assets_usd_amount= $assets_usd_amount + $record['usd_amount'];
+                  $assets_usd_amount= $assets_usd_amount + @$record['usd_amount'];
                   if(round($record['fine'],2)!=0){
                    ?>
 
@@ -105,7 +104,7 @@
                       <?php } ?>  
                     </td>
                     <td class="text-right"><?= four_decimal(-1 * $record['amount'], '-') ?>  </td>
-                    <td class="text-right"><?= four_decimal(-1 * $record['usd_amount'], '-') ?>  </td>
+                    <td class="text-right"><?= four_decimal(-1 * @$record['usd_amount'], '-') ?>  </td>
                     <td class="text-right"><?= four_decimal(-1 * $record['fine'], '-') ?></td>
                     <td class="text-right"><?= four_decimal(-1 * $record['vadotar'], '-') ?>  </td>
                   </tr>
