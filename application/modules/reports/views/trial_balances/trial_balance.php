@@ -7,6 +7,7 @@
             <tr>
               <th>Liabilities</th>
               <th class="text-right">Amount</th>
+              <th class="text-right">Usd Amount</th>
               <th class="text-right">Fine</th>
               <th class="text-right">Vadotar</th>
             </tr>
@@ -15,6 +16,7 @@
               $liabilities_fine = 0; 
               $liabilities_vadotar = 0;  
               $liabilities_amount = 0;
+              $liabilities_usd_amount = 0;
 
               if(!empty($trial_balance_records)) {
                 foreach ($trial_balance_records as $record) {
@@ -28,6 +30,7 @@
                   $liabilities_vadotar = $liabilities_vadotar + $record['vadotar'];
                   $liabilities_fine = $liabilities_fine + $record['fine']; 
                   $liabilities_amount = $liabilities_amount + $record['amount']; 
+                  $liabilities_usd_amount = $liabilities_usd_amount + $record['usd_amount']; 
                   if(round($record['fine'],2)!=0){
 
                   ?>
@@ -41,6 +44,7 @@
                       <?php }?>  
                     </td>
                     <td class="text-right"><?= four_decimal(($record['amount']), '-') ?>  </td>
+                    <td class="text-right"><?= four_decimal(($record['usd_amount']), '-') ?>  </td>
                     <td class="text-right"><?= four_decimal(($record['fine']), '-'); ?></td>
                     <td class="text-right"><?= four_decimal(($record['vadotar']), '-') ?>  </td>
                   </tr>
@@ -50,6 +54,7 @@
           <tr>
             <th>Total</th>
             <th class="text-right"><?= four_decimal($liabilities_amount, '-'); ?></th>
+            <th class="text-right"><?= four_decimal($liabilities_usd_amount, '-'); ?></th>
             <th class="text-right"><?= four_decimal($liabilities_fine, '-'); ?></th>          
             <th class="text-right"><?= four_decimal($liabilities_vadotar, '-'); ?></th>
           </tr>
@@ -65,6 +70,7 @@
             <tr>
               <th>Assets</th>
               <th class="text-right">Amount</th>
+              <th class="text-right">Usd Amount</th>
               <th class="text-right">Fine</th>
               <th class="text-right">Vadotar</th>
             </tr>
@@ -73,6 +79,7 @@
               $assets_fine = 0;  
               $assets_vadotar = 0;  
               $assets_amount = 0;  
+              $assets_usd_amount = 0;  
               if(!empty($trial_balance_records)) {
                 foreach ($trial_balance_records as $record) {
                   if (  ($record['fine'] >= 0
@@ -85,6 +92,7 @@
                   $assets_vadotar = $assets_vadotar + $record['vadotar'];
                   $assets_fine = $assets_fine + $record['fine'];
                   $assets_amount= $assets_amount + $record['amount'];
+                  $assets_usd_amount= $assets_usd_amount + $record['usd_amount'];
                   if(round($record['fine'],2)!=0){
                    ?>
 
@@ -96,6 +104,7 @@
                       <?php } ?>  
                     </td>
                     <td class="text-right"><?= four_decimal(-1 * $record['amount'], '-') ?>  </td>
+                    <td class="text-right"><?= four_decimal(-1 * $record['usd_amount'], '-') ?>  </td>
                     <td class="text-right"><?= four_decimal(-1 * $record['fine'], '-') ?></td>
                     <td class="text-right"><?= four_decimal(-1 * $record['vadotar'], '-') ?>  </td>
                   </tr>
@@ -106,6 +115,7 @@
           <tr>
             <th>Total</th>
             <th class="text-right"><?= four_decimal(-1 * $assets_amount, '-'); ?></th>          
+            <th class="text-right"><?= four_decimal(-1 * $assets_usd_amount, '-'); ?></th>          
             <th class="text-right"><?= four_decimal(-1 * $assets_fine, '-'); ?></th>          
             <th class="text-right"><?= four_decimal(-1 * $assets_vadotar, '-'); ?></th>
           </tr>
@@ -113,6 +123,7 @@
             <tr>
               <th>Balance</th>
               <th class="text-right"><?= four_decimal(-1 * $assets_amount - $liabilities_amount, '-'); ?></th>          
+              <th class="text-right"><?= four_decimal(-1 * $assets_usd_amount - $liabilities_usd_amount, '-'); ?></th>          
               <th class="text-right"><?= four_decimal(-1 * $assets_fine - $liabilities_fine, '-'); ?></th>          
               <th class="text-right"><?= four_decimal(-1 * $assets_vadotar - $liabilities_vadotar, '-'); ?></th>
             </tr>

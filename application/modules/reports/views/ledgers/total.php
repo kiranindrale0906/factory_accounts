@@ -38,8 +38,10 @@
     <?php elseif ($report_type == 'Account Ledger'): ?>
       <?php if ($type=='issue') { ?>
         <td class="text-right"><?= four_decimal($record['credit_amount'], '-') ?></td>
+        <td class="text-right"><?= four_decimal($record['usd_credit_amount'], '-') ?></td>
       <?php } else { ?> 
         <td class="text-right"><?= four_decimal($record['debit_amount'], '-') ?></td>
+        <td class="text-right"><?= four_decimal($record['usd_debit_amount'], '-') ?></td>
       <?php } ?>
     <?php endif; ?>
   </tr>

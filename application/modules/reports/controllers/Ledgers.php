@@ -60,7 +60,9 @@ class Ledgers extends BaseController {
                                site_name, voucher_type, 
                                concat(voucher_number, ", ") as voucher_number, 
                                sum(credit_amount) as credit_amount, 
+                               sum(usd_credit_amount) as usd_credit_amount, 
                                sum(debit_amount) as debit_amount, 
+                               sum(usd_debit_amount) as usd_debit_amount, 
                                sum(credit_weight) as credit_weight, 
                                sum(debit_weight) as debit_weight,
                                sum(fine) as fine,
@@ -76,7 +78,9 @@ class Ledgers extends BaseController {
                               date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
                               account_name as account_name, "" as voucher_type,site_name , "" as voucher_number, 
                               sum(credit_amount) as credit_amount, 
+                              sum(usd_credit_amount) as usd_credit_amount, 
                               sum(debit_amount) as debit_amount, 
+                              sum(usd_debit_amount) as usd_debit_amount, 
                               sum(credit_weight) as credit_weight, 
                               sum(debit_weight) as debit_weight, 
                               sum(fine) as fine,
@@ -104,7 +108,9 @@ class Ledgers extends BaseController {
                                site_name, voucher_type, 
                                concat(voucher_number, ", ") as voucher_number, 
                                (credit_amount) as credit_amount, 
+                               (usd_credit_amount) as usd_credit_amount, 
                                (debit_amount) as debit_amount, 
+                               (usd_debit_amount) as usd_debit_amount, 
                                (credit_weight) as credit_weight, 
                                (debit_weight) as debit_weight,
                                (fine) as fine,
@@ -188,11 +194,13 @@ class Ledgers extends BaseController {
         $empty_record[$created_date]['issue']['fine'] = 0;
         $empty_record[$created_date]['issue']['factory_fine'] = 0;
         $empty_record[$created_date]['issue']['credit_amount'] = 0;
+        $empty_record[$created_date]['issue']['usd_credit_amount'] = 0;
         $empty_record[$created_date]['receipt'] = array();
         $empty_record[$created_date]['receipt']['debit_weight'] = 0;
         $empty_record[$created_date]['receipt']['fine'] = 0;
         $empty_record[$created_date]['receipt']['factory_fine'] = 0;
         $empty_record[$created_date]['receipt']['debit_amount'] = 0;
+        $empty_record[$created_date]['receipt']['usd_debit_amount'] = 0;
       }
     }
     return $empty_record;
@@ -203,16 +211,18 @@ class Ledgers extends BaseController {
       if (!isset($records[$created_date])) continue;
 
       foreach($records[$created_date] as $account_name => $record) {
-        if ($record['credit_weight'] !=0 or $record['credit_amount'] != 0){
+        if ($record['credit_weight'] !=0 or $record['credit_amount'] != 0 or $record['usd_credit_amount'] != 0){
           $this->data['day_total'][$record['voucher_date']]['issue']['credit_weight'] += $record['credit_weight'];
           $this->data['day_total'][$record['voucher_date']]['issue']['fine'] += $record['fine'];
           $this->data['day_total'][$record['voucher_date']]['issue']['factory_fine'] += $record['factory_fine'];
           $this->data['day_total'][$record['voucher_date']]['issue']['credit_amount'] += $record['credit_amount'];
+          $this->data['day_total'][$record['voucher_date']]['issue']['usd_credit_amount'] += $record['usd_credit_amount'];
         } else {
           $this->data['day_total'][$record['voucher_date']]['receipt']['debit_weight'] += $record['debit_weight'];
           $this->data['day_total'][$record['voucher_date']]['receipt']['fine'] += $record['fine'];
           $this->data['day_total'][$record['voucher_date']]['receipt']['factory_fine'] += $record['factory_fine'];
           $this->data['day_total'][$record['voucher_date']]['receipt']['debit_amount'] += $record['debit_amount'];
+          $this->data['day_total'][$record['voucher_date']]['receipt']['usd_debit_amount'] += $record['usd_debit_amount'];
         }
       }
     }
@@ -224,22 +234,26 @@ class Ledgers extends BaseController {
       $credit_factory_fine = $this->data['day_total'][$voucher_date]['issue']['factory_fine'];
       $credit_fine         = $this->data['day_total'][$voucher_date]['issue']['fine'];
       $credit_amount       = $this->data['day_total'][$voucher_date]['issue']['credit_amount'];
+      $usd_credit_amount       = $this->data['day_total'][$voucher_date]['issue']['usd_credit_amount'];
 
       $debit_weight       = $this->data['day_total'][$voucher_date]['receipt']['debit_weight'];
       $debit_factory_fine = $this->data['day_total'][$voucher_date]['receipt']['factory_fine'];
       $debit_fine         = $this->data['day_total'][$voucher_date]['receipt']['fine'];
       $debit_amount       = $this->data['day_total'][$voucher_date]['receipt']['debit_amount'];
+      $usd_debit_amount       = $this->data['day_total'][$voucher_date]['receipt']['usd_debit_amount'];
 
-      if ( ($credit_weight >= $debit_weight)  && (($credit_factory_fine > $debit_factory_fine) > 0 || $credit_amount > $debit_amount)) {
+      if ( ($credit_weight >= $debit_weight)  && (($credit_factory_fine > $debit_factory_fine) > 0 || ($credit_amount > $debit_amount) || ($usd_credit_amount > $usd_debit_amount))) {
         $this->data['day_balance'][$voucher_date]['issue']['credit_weight'] = $credit_weight - $debit_weight;
         $this->data['day_balance'][$voucher_date]['issue']['factory_fine']  = $credit_factory_fine - $debit_fine;
         $this->data['day_balance'][$voucher_date]['issue']['fine']          = $credit_fine - $debit_factory_fine;
         $this->data['day_balance'][$voucher_date]['issue']['credit_amount'] = $credit_amount - $debit_amount;
+        $this->data['day_balance'][$voucher_date]['issue']['credit_amount'] = $usd_credit_amount - $usd_debit_amount;
       } else {
         $this->data['day_balance'][$voucher_date]['receipt']['debit_weight'] = $debit_weight - $credit_weight;
         $this->data['day_balance'][$voucher_date]['receipt']['factory_fine'] = $debit_factory_fine - $credit_fine;
         $this->data['day_balance'][$voucher_date]['receipt']['fine']         = $debit_fine - $credit_factory_fine;
         $this->data['day_balance'][$voucher_date]['receipt']['debit_amount'] = $debit_amount - $credit_amount;
+        $this->data['day_balance'][$voucher_date]['receipt']['debit_amount'] = $usd_debit_amount - $usd_credit_amount;
       }
     }
   } 
@@ -253,40 +267,48 @@ class Ledgers extends BaseController {
         $this->data['opening'][$voucher_date]['issue']['factory_fine']   = $this->data['balance'][$previous_date]['issue']['factory_fine'];
         $this->data['opening'][$voucher_date]['issue']['fine']           = $this->data['balance'][$previous_date]['issue']['fine'];
         $this->data['opening'][$voucher_date]['issue']['credit_amount']  = $this->data['balance'][$previous_date]['issue']['credit_amount'];
+        $this->data['opening'][$voucher_date]['issue']['usd_credit_amount']  = $this->data['balance'][$previous_date]['issue']['usd_credit_amount'];
         $this->data['opening'][$voucher_date]['receipt']['debit_weight'] = $this->data['balance'][$previous_date]['receipt']['debit_weight'];
         $this->data['opening'][$voucher_date]['receipt']['factory_fine'] = $this->data['balance'][$previous_date]['receipt']['factory_fine'];
         $this->data['opening'][$voucher_date]['receipt']['fine']         = $this->data['balance'][$previous_date]['receipt']['fine'];
         $this->data['opening'][$voucher_date]['receipt']['debit_amount'] = $this->data['balance'][$previous_date]['receipt']['debit_amount'];
+        $this->data['opening'][$voucher_date]['receipt']['usd_debit_amount'] = $this->data['balance'][$previous_date]['receipt']['usd_debit_amount'];
 
         $current_date_credit_weight       = $this->data['day_balance'][$voucher_date]['issue']['credit_weight'];
         $current_date_credit_factory_fine = $this->data['day_balance'][$voucher_date]['issue']['factory_fine' ];
         $current_date_credit_fine         = $this->data['day_balance'][$voucher_date]['issue']['fine'];
         $current_date_credit_amount       = $this->data['day_balance'][$voucher_date]['issue']['credit_amount'];
+        $current_date_usd_credit_amount       = $this->data['day_balance'][$voucher_date]['issue']['usd_credit_amount'];
         $current_date_debit_weight        = $this->data['day_balance'][$voucher_date]['receipt']['debit_weight'];
         $current_date_debit_factory_fine  = $this->data['day_balance'][$voucher_date]['receipt']['factory_fine'];
         $current_date_debit_fine          = $this->data['day_balance'][$voucher_date]['receipt']['fine'];
         $current_date_debit_amount        = $this->data['day_balance'][$voucher_date]['receipt']['debit_amount'];
+        $current_date_usd_debit_amount        = $this->data['day_balance'][$voucher_date]['receipt']['usd_debit_amount'];
 
         $credit_weight        = $this->data['opening'][$voucher_date]['issue']['credit_weight']  + $current_date_credit_weight;
         $credit_factory_fine  = $this->data['opening'][$voucher_date]['issue']['factory_fine']   + $current_date_credit_factory_fine;
         $credit_fine          = $this->data['opening'][$voucher_date]['issue']['fine']           + $current_date_credit_fine;
         $credit_amount        = $this->data['opening'][$voucher_date]['issue']['credit_amount']  + $current_date_credit_amount;
+        $usd_credit_amount        = $this->data['opening'][$voucher_date]['issue']['usd_credit_amount']  + $current_date_usd_credit_amount;
         $debit_weight         = $this->data['opening'][$voucher_date]['receipt']['debit_weight'] + $current_date_debit_weight;
         $debit_factory_fine   = $this->data['opening'][$voucher_date]['receipt']['factory_fine'] + $current_date_debit_factory_fine;
         $debit_fine           = $this->data['opening'][$voucher_date]['receipt']['fine']         + $current_date_debit_fine;
         $debit_amount         = $this->data['opening'][$voucher_date]['receipt']['debit_amount'] + $current_date_debit_amount;
+        $usd_debit_amount         = $this->data['opening'][$voucher_date]['receipt']['usd_debit_amount'] + $current_date_usd_debit_amount;
 
         if (    ($credit_weight >= $debit_weight) 
-             && ($credit_factory_fine > $debit_fine || $credit_amount > $debit_amount)) {
+             && ($credit_factory_fine > $debit_fine || $credit_amount > $debit_amount || $usd_credit_amount > $usd_debit_amount)) {
           $this->data['balance'][$voucher_date]['issue']['credit_weight'] = $credit_weight - $debit_weight;
           $this->data['balance'][$voucher_date]['issue']['factory_fine']  = $credit_factory_fine - $debit_fine;
           $this->data['balance'][$voucher_date]['issue']['fine']  = $credit_fine - $debit_factory_fine;
           $this->data['balance'][$voucher_date]['issue']['credit_amount'] = $credit_amount - $debit_amount;
+          $this->data['balance'][$voucher_date]['issue']['usd_credit_amount'] = $usd_credit_amount - $usd_debit_amount;
         } else {
           $this->data['balance'][$voucher_date]['receipt']['debit_weight'] = $debit_weight - $credit_weight;
           $this->data['balance'][$voucher_date]['receipt']['fine']         = $debit_fine - $credit_factory_fine;
           $this->data['balance'][$voucher_date]['receipt']['factory_fine'] = $debit_factory_fine - $credit_fine;
           $this->data['balance'][$voucher_date]['receipt']['debit_amount'] = $debit_amount - $credit_amount;
+          $this->data['balance'][$voucher_date]['receipt']['usd_debit_amount'] = $usd_debit_amount - $usd_credit_amount;
         }
       } else
         $this->data['balance'][$voucher_date] = $this->data['day_balance'][$voucher_date]; 
@@ -294,8 +316,10 @@ class Ledgers extends BaseController {
       if ($this->data['report_type'] == 'Vadotar Report') {
         $this->data['balance'][$voucher_date]['issue']['credit_weight'] = 0; 
         $this->data['balance'][$voucher_date]['issue']['credit_amount'] = 0;
+        $this->data['balance'][$voucher_date]['issue']['usd_credit_amount'] = 0;
         $this->data['balance'][$voucher_date]['receipt']['debit_weight'] = 0;
         $this->data['balance'][$voucher_date]['receipt']['debit_amount'] = 0;
+        $this->data['balance'][$voucher_date]['receipt']['usd_debit_amount'] = 0;
       }
       $previous_date = $voucher_date;
     } 
@@ -308,12 +332,15 @@ class Ledgers extends BaseController {
     $this->data['closing'][$last_voucher_date]['receipt']['fine'] = 0;
     $this->data['closing'][$last_voucher_date]['receipt']['factory_fine'] =!empty($this->data['balance'][$last_voucher_date]['issue']['fine']) ?$this->data['balance'][$last_voucher_date]['issue']['fine']:0;
     $this->data['closing'][$last_voucher_date]['receipt']['debit_amount'] =!empty($this->data['balance'][$last_voucher_date]['issue']['credit_amount']) ? $this->data['balance'][$last_voucher_date]['issue']['credit_amount']:0;
+    $this->data['closing'][$last_voucher_date]['receipt']['usd_debit_amount'] =!empty($this->data['balance'][$last_voucher_date]['issue']['usd_credit_amount']) ? $this->data['balance'][$last_voucher_date]['issue']['usd_credit_amount']:0;
 
     $this->data['closing'][$last_voucher_date]['issue']['credit_weight'] = 0;
     $this->data['closing'][$last_voucher_date]['issue']['fine'] = 0;
     $this->data['closing'][$last_voucher_date]['issue']['factory_fine'] =!empty($this->data['balance'][$last_voucher_date]['receipt']['fine']) ? $this->data['balance'][$last_voucher_date]['receipt']['fine']:0;
     $this->data['closing'][$last_voucher_date]['issue']['credit_amount'] = 
     !empty($this->data['balance'][$last_voucher_date]['receipt']['debit_amount']) ? $this->data['balance'][$last_voucher_date]['receipt']['debit_amount']:0;
+    $this->data['closing'][$last_voucher_date]['issue']['usd_credit_amount'] = 
+    !empty($this->data['balance'][$last_voucher_date]['receipt']['usd_debit_amount']) ? $this->data['balance'][$last_voucher_date]['receipt']['usd_debit_amount']:0;
 
     if ($this->data['report_type'] == 'Vadotar Report') {
       $this->data['closing'][$last_voucher_date]['receipt']['fine'] = !empty($this->data['balance'][$last_voucher_date]['issue']['factory_fine'])?$this->data['balance'][$last_voucher_date]['issue']['factory_fine']:0;

@@ -6,7 +6,6 @@
     <?php if ($report_type != 'Account Ledger'): ?>
       <th>Account Name</th>
     <?php endif; ?>
-    <th>Site Name</th>
     <th>Date</th>
     <th>Narration</th>
     <th class='text-right'>Gross Wt</th>
@@ -19,6 +18,7 @@
       <th class='text-right'>%</th>
     <?php elseif ($report_type == 'Account Ledger'): ?>
       <th class='text-right'>Amount</th>
+      <th class='text-right'>Usd Amount</th>
     <?php endif; ?>
   </tr>
 </thead>

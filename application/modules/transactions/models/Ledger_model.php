@@ -49,6 +49,9 @@ class Ledger_model extends BaseModel {
     $this->attributes['transaction_type'] = $voucher['transaction_type'];
     $this->attributes['credit_amount'] = $voucher['credit_amount'];
     $this->attributes['debit_amount'] = $voucher['debit_amount'];
+    $this->attributes['usd_credit_amount'] = $voucher['usd_credit_amount'];
+    $this->attributes['usd_debit_amount'] = $voucher['usd_debit_amount'];
+    $this->attributes['usd_rate'] = $voucher['usd_rate'];
     $this->attributes['credit_weight'] = $voucher['credit_weight'];
     $this->attributes['debit_weight'] = $voucher['debit_weight'];
     $this->attributes['purity'] = $voucher['purity'];

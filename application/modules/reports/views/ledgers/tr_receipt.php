@@ -5,7 +5,6 @@
   <?php if ($report_type != 'Account Ledger'): ?>
     <td><?= $record['account_name'];?></td>
   <?php endif; ?>
-    <td><?= $record['site_name'];?></td>
   <td><?= date('d-m-y', strtotime($record['str_voucher_date'])); ?></td>
   <td><?= '#'.$record['chitti_no'].' '.remove_duplicates_in_string($record['narration']).' '.$record['description']; ?>
     <?php if(isset($record['chitti_no']) && $record['chitti_no']!=0) { ?>
@@ -25,5 +24,6 @@
     <td class="text-right"><?= four_decimal(($record['fine']-$record['factory_fine']) / $record['debit_weight'] * 100, '-'); ?></td>
   <?php elseif ($report_type == 'Account Ledger'): ?>
     <td class="text-right"><a class=""  href='<?= base_url() ?>argold/voucher_details/view/<?=$record['chitti_no']?>'><?= four_decimal($record['debit_amount'], '-'); ?></a></td>
+    <td class="text-right"><?= four_decimal($record['usd_debit_amount'], '-') ?></td>
   <?php endif; ?>
 </tr>
