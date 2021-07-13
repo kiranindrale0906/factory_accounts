@@ -5,9 +5,6 @@
 
 
 <?php 
-
-pd($trial_balance);
-
 $this->load->view('trial_balances/trial_balance', array('trial_balance_records' => $trial_balance, 'loss_account' => 0)); ?>
 
 <hr />
