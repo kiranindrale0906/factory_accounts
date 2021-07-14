@@ -39,10 +39,15 @@ class Chittis extends BaseController {
   }
 
   public function _get_form_data() {
-    $this->data['account_name']=array(array('id'=>'OUTSIDE PARTY','name'=>'OUTSIDE PARTY'),
-                                      array('id'=>'AQUA GOLD','name'=>'AQUA GOLD'),
-                                      array('id'=>'CHAIN AND JWELLERY', 'name'=>'CHAIN AND JWELLERY'),
-                                      array('id'=>'Bhandari Jewellers Pvt.Ltd.','name'=>'Bhandari Jewellers Pvt.Ltd.'),
+    if (!empty($_GET['account_name']))
+      $this->data['record']['account_name'] = $_GET['account_name'];
+    if (!empty($_GET['purity']))
+      $this->data['record']['purity'] = $_GET['purity'];
+    
+    $this->data['record']['site_name'] = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'AR Gold Jan 2021';
+    if($this->router->class == 'chitti_exports'){ 
+     $this->data['account_name']= $this->account_model->get('distinct(name) as name,name as id',array('sub_group_code'=>"Export"));
+    /*$this->data['account_name']=array(
                                       array('id'=>'EXPORT ACCOUNT','name'=>'EXPORT ACCOUNT'),
                                       array('id'=>'EXPORT DIFF.','name'=>'EXPORT DIFF.'),
                                       array('id'=>'G and J GOLDSHMITHS','name'=>'G and J GOLDSHMITHS'),
@@ -53,17 +58,17 @@ class Chittis extends BaseController {
                                       array('id'=>'TANISHQ','name'=>'TANISHQ'),
                                       array('id'=>'TITAN DIFF.','name'=>'TITAN DIFF.'),
                                     );
-    if (!empty($_GET['account_name']))
-      $this->data['record']['account_name'] = $_GET['account_name'];
-    if (!empty($_GET['purity']))
-      $this->data['record']['purity'] = $_GET['purity'];
-    
-    $this->data['record']['site_name'] = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'AR Gold Jan 2021';
-    if($this->router->class == 'chitti_exports'){ 
-      $where=array('voucher_type' => 'metal issue voucher',
+    */  $where=array('voucher_type' => 'metal issue voucher',
                    'chitti_id' => '',
                    'site_name' => $this->data['record']['site_name']);
     }else{
+      $this->data['account_name']= $this->account_model->get('distinct(name) as name,name as id',array('sub_group_code'=>"Domestic"));
+      /*$this->data['account_name']=array(array('id'=>'OUTSIDE PARTY','name'=>'OUTSIDE PARTY'),
+                                      array('id'=>'AQUA GOLD','name'=>'AQUA GOLD'),
+                                      array('id'=>'SWARN SHILP 1','name'=>'SWARN SHILP 1'),
+                                      array('id'=>'CHAIN AND JWELLERY', 'name'=>'CHAIN AND JWELLERY'),
+                                      array('id'=>'Bhandari Jewellers Pvt.Ltd.','name'=>'Bhandari Jewellers Pvt.Ltd.')
+                                    );*/
       $where=array('voucher_type' => 'metal issue voucher',
                    'chitti_id' => '',
                    'packet_no!=' => 0,
@@ -114,32 +119,33 @@ class Chittis extends BaseController {
 
     } else
       $this->data['metal_vouchers'] = array();
-    $this->data['purity'] = $this->voucher_model->get('purity as name, purity as id', 
+    $account_name= array_column($this->data['account_name'],'name');
+    if($this->router->class == 'chitti_exports'){ 
+      $this->data['purity'] = $this->voucher_model->get('purity as name, purity as id', 
                                                        array('where'=>array(
-                                                               'account_name in ("OUTSIDE PARTY",
-                                                                                 "AQUA GOLD",
-                                                                                 "CHAIN AND JWELLERY",
-                                                                                 "EXPORT ACCOUNT",
-                                                                                 "EXPORT DIFF.",
-                                                                                 "KT INTERNATIONAL",
-                                                                                 "MKORE LLC USA",
-                                                                                 "G and J GOLDSHMITHS",
-                                                                                 "Pani Trading Co.",
-                                                                                 "SHREE RAM JEWELLER",
-                                                                                 "TANISHQ","TITAN DIFF.")' => NULL,
+                                                               'account_name in ("'.implode(", ", $account_name).'")' => NULL,
                                                                'voucher_type' => 'metal issue voucher',
                                                                'chitti_id' => 0,
                                                                'receipt_type in ("Finish Good","GPC Out")'=>NULL
                                                              )) ,
                                                        array(), array('group_by' => 'purity'));
     
-    if($this->router->class == 'chitti_exports'){ 
+    
       if ($this->router->method == 'store' || $this->router->method == 'update') {
         $this->data['record']['chitti_exports'] = $_POST['chitti_exports'];
         $this->data['chittis_details'] = @$_POST['chittis_details'];
       }
     }else{
-      if ($this->router->method == 'store' || $this->router->method == 'update') {
+      $this->data['purity'] = $this->voucher_model->get('purity as name, purity as id', 
+                                                       array('where'=>array(
+                                                               'account_name in ("'.implode(", ", $account_name).'")' => NULL,
+                                                               'voucher_type' => 'metal issue voucher',
+                                                               'chitti_id' => 0,
+                                                               'receipt_type in ("Finish Good","GPC Out")'=>NULL
+                                                             )) ,
+                                                       array(), array('group_by' => 'purity'));
+    
+     if ($this->router->method == 'store' || $this->router->method == 'update') {
       $this->data['record']['chittis'] = $_POST['chittis'];
       $this->data['chittis_details'] = @$_POST['chittis_details'];
       }
