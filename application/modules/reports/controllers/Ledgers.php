@@ -247,13 +247,13 @@ class Ledgers extends BaseController {
         $this->data['day_balance'][$voucher_date]['issue']['factory_fine']  = $credit_factory_fine - $debit_fine;
         $this->data['day_balance'][$voucher_date]['issue']['fine']          = $credit_fine - $debit_factory_fine;
         $this->data['day_balance'][$voucher_date]['issue']['credit_amount'] = $credit_amount - $debit_amount;
-        $this->data['day_balance'][$voucher_date]['issue']['credit_amount'] = $usd_credit_amount - $usd_debit_amount;
+        $this->data['day_balance'][$voucher_date]['issue']['usd_credit_amount'] = $usd_credit_amount - $usd_debit_amount;
       } else {
         $this->data['day_balance'][$voucher_date]['receipt']['debit_weight'] = $debit_weight - $credit_weight;
         $this->data['day_balance'][$voucher_date]['receipt']['factory_fine'] = $debit_factory_fine - $credit_fine;
         $this->data['day_balance'][$voucher_date]['receipt']['fine']         = $debit_fine - $credit_factory_fine;
         $this->data['day_balance'][$voucher_date]['receipt']['debit_amount'] = $debit_amount - $credit_amount;
-        $this->data['day_balance'][$voucher_date]['receipt']['debit_amount'] = $usd_debit_amount - $usd_credit_amount;
+        $this->data['day_balance'][$voucher_date]['receipt']['usd_debit_amount'] = $usd_debit_amount - $usd_credit_amount;
       }
     }
   } 
