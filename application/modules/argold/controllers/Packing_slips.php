@@ -23,7 +23,7 @@ class Packing_slips extends BaseController {
     $packet_no = array_column($this->data['metal_voucher_details'], 'packet_no');
     $this->data['packet_nos']=array_unique($packet_no);
 
-    $this->data['chittis_details'] = $this->chitti_model->find('account_name, date',
+    $this->data['chittis_details'] = $this->packing_slip_model->find('account_name, date',
                                                                array('id'=>$this->data['record']['id']));
   }
 

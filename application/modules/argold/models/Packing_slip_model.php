@@ -2,7 +2,7 @@
 
 class Packing_slip_model extends BaseModel {
 
-  protected $table_name = "chitties";
+  protected $table_name = "packing_slips";
   public $router_class = "packing_slips";
 
   public function __construct($data = array()){
@@ -48,9 +48,9 @@ class Packing_slip_model extends BaseModel {
                                                                 'purity' => $this->attributes['purity']));
     }
     if (!empty($this->attributes['date']))  $this->attributes['date'] = date('Y-m-d', strtotime($this->attributes['date']));
-    if($this->attributes['product_rate']>0){
-      $this->attributes['sale_type'] ='Labour';
-    }
+    // if($this->attributes['product_rate']>0){
+    //   $this->attributes['sale_type'] ='Labour';
+    // }
     if(!empty($packing_slip_details)){
       $this->attributes['weight'] = isset($packing_slip_details['credit_weight'])?$packing_slip_details['credit_weight']:0;
       $this->attributes['factory_purity'] =isset($packing_slip_details['factory_purity'])?$packing_slip_details['factory_purity']:0;
@@ -77,7 +77,7 @@ class Packing_slip_model extends BaseModel {
       $this->attributes['credit_weight'] = $this->attributes['factory_fine']; 
     }
     $this->attributes['rate']=!empty($this->attributes['rate'])?$this->attributes['rate']:0;
-    $this->attributes['product_rate']=($this->attributes['product_rate']>0)?$this->attributes['product_rate']:0;
+    // $this->attributes['product_rate']=($this->attributes['product_rate']>0)?$this->attributes['product_rate']:0;
     
     $this->attributes['stone_amount']=!empty($this->attributes['stone_amount'])?$this->attributes['stone_amount']:0;
     $this->attributes['manual_taxable_amount']=!empty($this->attributes['manual_taxable_amount'])?$this->attributes['manual_taxable_amount']:0;
@@ -87,7 +87,7 @@ class Packing_slip_model extends BaseModel {
     $this->attributes['labour_usd_amount']=!empty($this->attributes['labour_usd_amount'])?$this->attributes['labour_usd_amount']:0;
     $this->attributes['freight_usd_amount']=!empty($this->attributes['freight_usd_amount'])?$this->attributes['freight_usd_amount']:0;
 
-    if ($this->attributes['product_rate'] > 0) $this->attributes['rate']=$this->attributes['product_rate'];
+    // if ($this->attributes['product_rate'] > 0) $this->attributes['rate']=$this->attributes['product_rate'];
     
     $taxable_amount = $this->attributes['credit_weight'] * $this->attributes['rate'];
 
@@ -127,7 +127,7 @@ class Packing_slip_model extends BaseModel {
   }
   
   public function after_save($action){
-    $this->rate_cut_issue_voucher_model->create_rate_cut_vouchers_for_chitti($this->attributes['id']);
+    // $this->rate_cut_issue_voucher_model->create_rate_cut_vouchers_for_chitti($this->attributes['id']);
     $this->set_chitti_id_in_metal_issue_vouchers();
     if (!isset($this->formdata['packing_slip_details']) || empty($this->formdata['packing_slip_details'])) return;
 	}  

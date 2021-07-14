@@ -7,9 +7,9 @@ function getTableSettings() {
  
   return array(
     'page_title'          => 'Packing Slip List',
-    'primary_table'       => 'chitties',
+    'primary_table'       => 'packing_slips',
     'default_column'      => 'id',
-    'table'               => 'chitties',
+    'table'               => 'packing_slips',
     'join_columns'        => '',
     'join_type'           => '',
     'where'               => $where,
