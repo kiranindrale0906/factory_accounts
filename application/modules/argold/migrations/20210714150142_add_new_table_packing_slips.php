@@ -46,7 +46,7 @@ class Migration_add_new_table_packing_slips extends CI_Model {
   `freight_usd_amount` decimal(16,4) NOT NULL DEFAULT 0.0000,
   `taxable_usd_amount` decimal(16,4) NOT NULL DEFAULT 0.0000,
   `ounce_gram_rate` decimal(16,4) NOT NULL DEFAULT 0.0000,
-  `product_rate` decimal(16,8) NOT NULL DEFAULT 0.00000000"
+  `product_rate` decimal(16,8) NOT NULL DEFAULT 0.00000000)"
 );
 
   
