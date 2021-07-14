@@ -40,6 +40,7 @@
                                             //'transactions/metal_issue_voucher_details' => 'Metal Issue Details',
                                             'argold/chittis' => 'Chitti',
                                             'argold/chitti_exports' => 'Chitti Export',
+                                            'argold/packing_slips' => 'Packing slips',
                                             'argold/refresh' => 'Refresh',
                                             'transactions/loss_outs' => 'Loss Out',
 
