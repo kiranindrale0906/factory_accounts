@@ -92,6 +92,7 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
     $rate_cut_issue['sale_type'] =  $chitti['sale_type'];
     $rate_cut_issue['taxable_amount'] =  $tax_fields['taxable_amount'];
     $rate_cut_issue['usd_debit_amount'] = ($chitti['premium_usd_amount']+$chitti['labour_usd_amount']+$chitti['freight_usd_amount']+$chitti['taxable_usd_amount']);
+    
     $rate_cut_issue['cgst_amount'] = $tax_fields['cgst_amount'];
     $rate_cut_issue['sgst_amount'] = $tax_fields['sgst_amount'];
     $rate_cut_issue['tcs_amount'] = $tax_fields['tcs_amount'];
