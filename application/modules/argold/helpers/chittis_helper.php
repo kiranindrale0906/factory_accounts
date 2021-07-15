@@ -1,10 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed.');
 
-function getTableSettings() {
-    $show = (isset($_GET['show_all'])) ? $_GET['show_all'] : '';
-  if($show=='yes') $where='account_name in ("OUTSIDE PARTY", "AQUA GOLD", "SWARN SHILP 1", "CHAIN AND JWELLERY")';
-  else $where='chitti_hide=0 and account_name in ("OUTSIDE PARTY", "AQUA GOLD", "SWARN SHILP 1", "CHAIN AND JWELLERY")';
- 
+function getTableSettings($data = array(), $where = array()) {
   return array(
     'page_title'          => 'Chittis List',
     'primary_table'       => 'chitties',

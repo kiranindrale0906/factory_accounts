@@ -13,6 +13,21 @@ class Chittis extends BaseController {
   public function view($id) {
     $this->data['layout'] = 'plain';
     parent::view($id);
+  } 
+  public function index() {
+      $show = (isset($_GET['show_all'])) ? $_GET['show_all'] : '';
+      $account_name= $this->account_model->get('distinct(name) as name,name as id',array('sub_group_code'=>"Domestic"));
+      $account_name= array_column($account_name,'name');
+      if($this->router->class == 'chitti_exports'){ 
+        if($show=='yes') $this->where='account_name not in ("'.implode('", "', $account_name).'")';
+        else $this->where='chitti_hide=0 and account_name not in ("'.implode('", "', $account_name).'")';
+      }else{
+
+        if($show=='yes') $this->where='account_name in ("'.implode('", "', $account_name).'")';
+        else $this->where='chitti_hide=0 and account_name in ("'.implode('", "', $account_name).'")';
+      }
+      // pd($this->where);
+        parent::index();
   }
 
   public function _get_view_data() {
@@ -123,7 +138,7 @@ class Chittis extends BaseController {
     if($this->router->class == 'chitti_exports'){ 
       $this->data['purity'] = $this->voucher_model->get('purity as name, purity as id', 
                                                        array('where'=>array(
-                                                               'account_name in ("'.implode(", ", $account_name).'")' => NULL,
+                                                               'account_name in ("'.implode('", "', $account_name).'")' => NULL,
                                                                'voucher_type' => 'metal issue voucher',
                                                                'chitti_id' => 0,
                                                                'receipt_type in ("Finish Good","GPC Out")'=>NULL
@@ -138,7 +153,7 @@ class Chittis extends BaseController {
     }else{
       $this->data['purity'] = $this->voucher_model->get('purity as name, purity as id', 
                                                        array('where'=>array(
-                                                               'account_name in ("'.implode(", ", $account_name).'")' => NULL,
+                                                               'account_name in ("'.implode('", "', $account_name).'")' => NULL,
                                                                'voucher_type' => 'metal issue voucher',
                                                                'chitti_id' => 0,
                                                                'receipt_type in ("Finish Good","GPC Out")'=>NULL
