@@ -17,9 +17,8 @@ class Accounts extends BaseController {
       echo json_encode(array('data'=>$data,'status'=>'success')); die;
     }
     if(!empty($_POST['sub_group_name'])) {
-    pd($_POST['sub_group_name']);
-
       $data=$this->model->get('name', array('sub_group_name' => $_POST['sub_group_name']));
+      lq();
       echo json_encode(array('data'=>$data,'status'=>'success')); die;
     }
 
