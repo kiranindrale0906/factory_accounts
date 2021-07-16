@@ -17,7 +17,7 @@ class Accounts extends BaseController {
       echo json_encode(array('data'=>$data,'status'=>'success')); die;
     }
     if(!empty($_POST['sub_group_name'])) {
-      $data=$this->account_model->get('name', array('sub_group_name' =>'Export'));
+      $data=$this->account_model->get('distinct(name) as name,name as id',array('sub_group_code'=>"Export"));
       pd($data);
 
       echo json_encode(array('data'=>$data,'status'=>'success')); die;
