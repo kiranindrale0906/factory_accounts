@@ -16,8 +16,8 @@ class Accounts extends BaseController {
                                             'name not like "%Nov 2020%"' => NULL));
       echo json_encode(array('data'=>$data,'status'=>'success')); die;
     }
-    pd($_POST);
     if(!empty($_POST['sub_group_name'])) {
+    pd($_POST['sub_group_name']);
 
       $data=$this->model->get('name', array('sub_group_name' => $_POST['sub_group_name']));
       echo json_encode(array('data'=>$data,'status'=>'success')); die;
