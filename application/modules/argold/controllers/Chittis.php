@@ -170,6 +170,7 @@ class Chittis extends BaseController {
                                       array('id' => 'AR Gold Jan 2021', 'name' => 'AR Gold Jan 2021'),
                                       array('id' => 'ARF Jan 2021', 'name' => 'ARF Jan 2021'),
                                       array('id' => 'ARC Jan 2021', 'name' => 'ARC Jan 2021'),
+                                      array('id' => 'AR Gold staging', 'name' => 'AR Gold staging'),
                                      );
   }
 
