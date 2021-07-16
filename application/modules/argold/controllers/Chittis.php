@@ -16,7 +16,7 @@ class Chittis extends BaseController {
   } 
   public function index() {
       $show = (isset($_GET['show_all'])) ? $_GET['show_all'] : '';
-      $account_name= $this->account_model->get('distinct(name) as name,name as id',array('sub_group_code'=>"Domestic"));
+      $account_name= $this->account_model->get('distinct(name) as name,name as id',array('group_code'=>"Domestic"));
       $account_name= array_column($account_name,'name');
       if($this->router->class == 'chitti_exports'){ 
         if($show=='yes') $this->where='account_name not in ("'.implode('", "', $account_name).'")';
@@ -61,7 +61,7 @@ class Chittis extends BaseController {
     
     $this->data['record']['site_name'] = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'AR Gold Jan 2021';
     if($this->router->class == 'chitti_exports'){ 
-     $this->data['account_name']= $this->account_model->get('distinct(name) as name,name as id',array('sub_group_code'=>"Export"));
+     $this->data['account_name']= $this->account_model->get('distinct(name) as name,name as id',array('group_code'=>"Export"));
     /*$this->data['account_name']=array(
                                       array('id'=>'EXPORT ACCOUNT','name'=>'EXPORT ACCOUNT'),
                                       array('id'=>'EXPORT DIFF.','name'=>'EXPORT DIFF.'),
@@ -77,7 +77,7 @@ class Chittis extends BaseController {
                    'chitti_id' => '',
                    'site_name' => $this->data['record']['site_name']);
     }else{
-      $this->data['account_name']= $this->account_model->get('distinct(name) as name,name as id',array('sub_group_code'=>"Domestic"));
+      $this->data['account_name']= $this->account_model->get('distinct(name) as name,name as id',array('group_code'=>"Domestic"));
       /*$this->data['account_name']=array(array('id'=>'OUTSIDE PARTY','name'=>'OUTSIDE PARTY'),
                                       array('id'=>'AQUA GOLD','name'=>'AQUA GOLD'),
                                       array('id'=>'SWARN SHILP 1','name'=>'SWARN SHILP 1'),
