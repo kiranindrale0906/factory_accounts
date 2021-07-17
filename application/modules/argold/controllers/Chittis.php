@@ -60,6 +60,8 @@ class Chittis extends BaseController {
     if (!empty($_GET['purity'])){
       $this->data['record']['purity'] = $_GET['purity'];
     }
+
+    
     
     $this->data['record']['site_name'] = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'AR Gold Jan 2021';
     if($this->router->class == 'chitti_exports'){ 
@@ -67,12 +69,32 @@ class Chittis extends BaseController {
       $where=array('voucher_type' => 'metal issue voucher',
                    'chitti_id' => '',
                    'site_name' => $this->data['record']['site_name']);
+      $account_name= array_column($this->data['account_name'],'name');
+      $this->data['purity'] = $this->voucher_model->get('purity as name, purity as id', 
+                                                       array('where'=>array(
+                                                               'account_name in ("'.implode('", "', $account_name).'")' => NULL,
+                                                               'voucher_type' => 'metal issue voucher',
+                                                               'chitti_id' => 0,
+                                                               'receipt_type in ("Finish Good","GPC Out")'=>NULL
+                                                             )) ,
+                                                       array(), array('group_by' => 'purity'));
+    
     }else{
       $this->data['account_name']= $this->account_model->get('distinct(name) as name,name as id',array('group_code'=>"Domestic"));
       $where=array('voucher_type' => 'metal issue voucher',
                    'chitti_id' => '',
                    'packet_no!=' => 0,
                    'site_name' => $this->data['record']['site_name']);
+      $account_name= array_column($this->data['account_name'],'name');
+      $this->data['purity'] = $this->voucher_model->get('purity as name, purity as id', 
+                                                       array('where'=>array(
+                                                               'account_name in ("'.implode('", "', $account_name).'")' => NULL,
+                                                               'voucher_type' => 'metal issue voucher',
+                                                               'chitti_id' => 0,
+                                                               'receipt_type in ("Finish Good","GPC Out")'=>NULL
+                                                             )) ,
+                                                       array(), array('group_by' => 'purity'));
+    
     }
     if (!empty($_GET['purity'])){
      $where['purity'] = $_GET['purity'];
@@ -121,39 +143,20 @@ class Chittis extends BaseController {
 
   } else{
       $this->data['metal_vouchers'] = array();
-    $account_name= array_column($this->data['account_name'],'name');
     if($this->router->class == 'chitti_exports'){ 
-      $this->data['purity'] = $this->voucher_model->get('purity as name, purity as id', 
-                                                       array('where'=>array(
-                                                               'account_name in ("'.implode('", "', $account_name).'")' => NULL,
-                                                               'voucher_type' => 'metal issue voucher',
-                                                               'chitti_id' => 0,
-                                                               'receipt_type in ("Finish Good","GPC Out")'=>NULL
-                                                             )) ,
-                                                       array(), array('group_by' => 'purity'));
-    
-    
       if ($this->router->method == 'store' || $this->router->method == 'update') {
         $this->data['record']['chitti_exports'] = $_POST['chitti_exports'];
         $this->data['chittis_details'] = @$_POST['chittis_details'];
       }
     }else{
-      $this->data['purity'] = $this->voucher_model->get('purity as name, purity as id', 
-                                                       array('where'=>array(
-                                                               'account_name in ("'.implode('", "', $account_name).'")' => NULL,
-                                                               'voucher_type' => 'metal issue voucher',
-                                                               'chitti_id' => 0,
-                                                               'receipt_type in ("Finish Good","GPC Out")'=>NULL
-                                                             )) ,
-                                                       array(), array('group_by' => 'purity'));
-    
-     if ($this->router->method == 'store' || $this->router->method == 'update') {
+      if ($this->router->method == 'store' || $this->router->method == 'update') {
       $this->data['record']['chittis'] = $_POST['chittis'];
       $this->data['chittis_details'] = @$_POST['chittis_details'];
       }
     }
 
   }
+        
     $this->data['site_names'] = array(
                                       array('id' => 'AR Gold Jan 2021', 'name' => 'AR Gold Jan 2021'),
                                       array('id' => 'ARF Jan 2021', 'name' => 'ARF Jan 2021'),
