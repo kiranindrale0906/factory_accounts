@@ -14,22 +14,21 @@ class Chittis extends BaseController {
     $this->data['layout'] = 'plain';
     parent::view($id);
   } 
-  public function index() {
-      $show = (isset($_GET['show_all'])) ? $_GET['show_all'] : '';
-      $account_names= $this->account_model->get('distinct(name) as name,name as id',array('group_code'=>"Domestic"));
-      $account_name= array_column($account_names,'name');
-      pd($account_name);
-      if($this->router->class == 'chitti_exports'){ 
-        if($show=='yes') $this->where='account_name not in ("'.implode('", "', $account_name).'")';
-        else $this->where='chitti_hide=0 and account_name not in ("'.implode('", "', $account_name).'")';
-      }else{
+  // public function index() {
+  //     $show = (isset($_GET['show_all'])) ? $_GET['show_all'] : '';
+  //     $account_names= $this->account_model->get('distinct(name) as name,name as id',array('group_code'=>"Domestic"));
+  //     $account_name= array_column($account_names,'name');
 
-        if($show=='yes') $this->where='account_name in ("'.implode('", "', $account_name).'")';
-        else $this->where='chitti_hide=0 and account_name in ("'.implode('", "', $account_name).'")';
-      }
-      // pd($this->where);
-        parent::index();
-  }
+  //     if($this->router->class == 'chitti_exports'){ 
+  //       if($show=='yes') $this->where='account_name not in ("'.implode('", "', $account_name).'")';
+  //       else $this->where='chitti_hide=0 and account_name not in ("'.implode('", "', $account_name).'")';
+  //     }else{
+
+  //       if($show=='yes') $this->where='account_name in ("'.implode('", "', $account_name).'")';
+  //       else $this->where='chitti_hide=0 and account_name in ("'.implode('", "', $account_name).'")';
+  //     }
+  //       parent::index();
+  // }
 
   public function _get_view_data() {
     $this->data['detail'] = isset($_GET['detail']) ? 1 : 0;
@@ -55,85 +54,72 @@ class Chittis extends BaseController {
   }
 
   public function _get_form_data() {
-    if (!empty($_GET['account_name']))
+    if (!empty($_GET['account_name'])){
       $this->data['record']['account_name'] = $_GET['account_name'];
-    if (!empty($_GET['purity']))
+    }
+    if (!empty($_GET['purity'])){
       $this->data['record']['purity'] = $_GET['purity'];
+    }
     
     $this->data['record']['site_name'] = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'AR Gold Jan 2021';
     if($this->router->class == 'chitti_exports'){ 
      $this->data['account_name']= $this->account_model->get('distinct(name) as name,name as id',array('group_code'=>"Export"));
-    /*$this->data['account_name']=array(
-                                      array('id'=>'EXPORT ACCOUNT','name'=>'EXPORT ACCOUNT'),
-                                      array('id'=>'EXPORT DIFF.','name'=>'EXPORT DIFF.'),
-                                      array('id'=>'G and J GOLDSHMITHS','name'=>'G and J GOLDSHMITHS'),
-                                      array('id'=>'KT INTERNATIONAL', 'name'=>'KT INTERNATIONAL'),
-                                      array('id'=>'MKORE LLC USA','name'=>'MKORE LLC USA'),
-                                      array('id'=>'Pani Trading Co.','name'=>'Pani Trading Co.'),
-                                      array('id'=>'SHREE RAM JEWELLER','name'=>'SHREE RAM JEWELLER'),
-                                      array('id'=>'TANISHQ','name'=>'TANISHQ'),
-                                      array('id'=>'TITAN DIFF.','name'=>'TITAN DIFF.'),
-                                    );
-    */  $where=array('voucher_type' => 'metal issue voucher',
+      $where=array('voucher_type' => 'metal issue voucher',
                    'chitti_id' => '',
                    'site_name' => $this->data['record']['site_name']);
     }else{
       $this->data['account_name']= $this->account_model->get('distinct(name) as name,name as id',array('group_code'=>"Domestic"));
-      /*$this->data['account_name']=array(array('id'=>'OUTSIDE PARTY','name'=>'OUTSIDE PARTY'),
-                                      array('id'=>'AQUA GOLD','name'=>'AQUA GOLD'),
-                                      array('id'=>'SWARN SHILP 1','name'=>'SWARN SHILP 1'),
-                                      array('id'=>'CHAIN AND JWELLERY', 'name'=>'CHAIN AND JWELLERY'),
-                                      array('id'=>'Bhandari Jewellers Pvt.Ltd.','name'=>'Bhandari Jewellers Pvt.Ltd.')
-                                    );*/
       $where=array('voucher_type' => 'metal issue voucher',
                    'chitti_id' => '',
                    'packet_no!=' => 0,
                    'site_name' => $this->data['record']['site_name']);
     }
-    if (!empty($_GET['purity'])) $where['purity'] = $_GET['purity'];
+    if (!empty($_GET['purity'])){
+     $where['purity'] = $_GET['purity'];
+    }
 
     if(!empty($this->data['record']['account_name'])) { 
       $where['account_name']=$this->data['record']['account_name'];
-    if($this->router->class == 'chitti_exports'){ 
-    $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,
-                                                                (sum(credit_weight*purity) / sum(credit_weight)) as purity,
-                                                                (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,
-                                                                "" as voucher_number,
-                                                                packet_no,
-                                                                voucher_date,
-                                                                customer_name,
-                                                                usd_wastage_percentage,
-                                                                inr_wastage_percentage,
-                                                                group_concat(narration) as narration,
-                                                                argold_id as argold_id', 
-                                                                $where, 
-                                                                array(), 
-                                                                array('group_by'=>'packet_no,
-                                                                                   voucher_date, 
-                                                                                   usd_wastage_percentage,
-                                                                                   inr_wastage_percentage,
-                                                                                   argold_id,customer_name'));
-  }else{
-    $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,
-                                                                (sum(credit_weight*purity) / sum(credit_weight)) as purity,
-                                                                (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,
-                                                                "" as voucher_number,
-                                                                packet_no,
-                                                                voucher_date,
-                                                                customer_name,
-                                                                group_concat(narration) as narration,
-                                                                argold_id as argold_id', 
-                                                                $where, 
-                                                                array(), 
-                                                                array('group_by'=>'packet_no,
-                                                                                   voucher_date, 
-                                                                                   argold_id,customer_name'));
+      if($this->router->class == 'chitti_exports'){ 
+      $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,
+                                                                  (sum(credit_weight*purity) / sum(credit_weight)) as purity,
+                                                                  (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,
+                                                                  "" as voucher_number,
+                                                                  packet_no,
+                                                                  voucher_date,
+                                                                  customer_name,
+                                                                  usd_wastage_percentage,
+                                                                  inr_wastage_percentage,
+                                                                  group_concat(narration) as narration,
+                                                                  argold_id as argold_id', 
+                                                                  $where, 
+                                                                  array(), 
+                                                                  array('group_by'=>'packet_no,
+                                                                                     voucher_date, 
+                                                                                     usd_wastage_percentage,
+                                                                                     inr_wastage_percentage,
+                                                                                     argold_id,customer_name'));
+    }else{
+      $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,
+                                                                  (sum(credit_weight*purity) / sum(credit_weight)) as purity,
+                                                                  (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,
+                                                                  "" as voucher_number,
+                                                                  packet_no,
+                                                                  voucher_date,
+                                                                  customer_name,
+                                                                  group_concat(narration) as narration,
+                                                                  argold_id as argold_id', 
+                                                                  $where, 
+                                                                  array(), 
+                                                                  array('group_by'=>'packet_no,
+                                                                                     voucher_date, 
+                                                                                     argold_id,customer_name'));
 
-  }
+    }
 
 
 
-    } else
+  } else{
       $this->data['metal_vouchers'] = array();
     $account_name= array_column($this->data['account_name'],'name');
     if($this->router->class == 'chitti_exports'){ 
@@ -173,6 +159,7 @@ class Chittis extends BaseController {
                                       array('id' => 'ARC Jan 2021', 'name' => 'ARC Jan 2021')),
                                      );
   }
+}
 
   public function store() {
     $this->data['redirect_url'] = '/argold/chittis';
