@@ -16,8 +16,9 @@ class Chittis extends BaseController {
   } 
   public function index() {
       $show = (isset($_GET['show_all'])) ? $_GET['show_all'] : '';
-      $account_name= $this->account_model->get('distinct(name) as name,name as id',array('group_code'=>"Domestic"));
-      $account_name= array_column($account_name,'name');
+      $account_names= $this->account_model->get('distinct(name) as name,name as id',array('group_code'=>"Domestic"));
+      $account_name= array_column($account_names,'name');
+      pd($account_name);
       if($this->router->class == 'chitti_exports'){ 
         if($show=='yes') $this->where='account_name not in ("'.implode('", "', $account_name).'")';
         else $this->where='chitti_hide=0 and account_name not in ("'.implode('", "', $account_name).'")';
