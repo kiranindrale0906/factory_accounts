@@ -34,7 +34,7 @@ class Migration_add_columns_in_packing_slips extends CI_Model {
     											  ADD `sr_no` int(11) NULL DEFAULT '0',
     											  ADD stone decimal(16,4) NULL DEFAULT '0',
     											  ADD net_weight decimal(16,4) NULL DEFAULT '0',
-    											  ADD making_charges decimal(16,4) NULL DEFAULT '0',
+    											  ADD making_charge decimal(16,4) NULL DEFAULT '0',
     											  ADD pure decimal(16,4) NULL DEFAULT '0',
     											  ADD total decimal(16,4) NULL DEFAULT '0',
     											  ADD description varchar(500) NULL DEFAULT NULL,

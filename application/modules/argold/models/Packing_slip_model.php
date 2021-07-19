@@ -59,7 +59,6 @@ class Packing_slip_model extends BaseModel {
       // $this->attributes['date'] = date('Y-m-d', strtotime($packing_slip_details['voucher_date']));
       $this->attributes['account_name'] = $this->attributes['account_name'];
       $this->attributes['packet_no'] = isset($packing_slip_details['packet_no'])?$packing_slip_details['packet_no']:0;
-      $this->set_sales_amount_fields();
     }
     $this->attributes['pure']=$this->attributes['net_weight']*$this->attributes['purity']/100;
     $this->attributes['total']=$this->attributes['making_charge']*$this->attributes['net_weight'];
