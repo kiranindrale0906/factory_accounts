@@ -28,7 +28,6 @@ class Packing_slips extends BaseController {
   }
 
   public function _get_form_data() {
-    $this->db->query("ALTER TABLE `packing_slips` ADD packet_no int(11) NULL DEFAULT '0'");
     
     $this->data['account_name']=$this->account_model->get('distinct(name) as name,name as id');
     $this->data['purity'] = $this->voucher_model->get('purity as name, purity as id', 
