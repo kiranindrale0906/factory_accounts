@@ -9,7 +9,7 @@ function list_settings() {
 }
 
 function get_field_attribute($table, $field) {
-  $required_fields=array('id', 'voucher_date','account_name','debit_amount','usd_rate','usd_debit_amount', 'description','taxable_amount','cgst_amount','sgst_amount','tcs_amount');
+  $required_fields=array('id', 'voucher_date','account_name','debit_amount','usd_debit_amount', 'usd_rate','usd_debit_amount', 'description','taxable_amount','cgst_amount','sgst_amount','tcs_amount');
   return ac_voucher_get_field_attribute($table,$field,$required_fields);
 }
 

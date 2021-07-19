@@ -178,6 +178,8 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['amount'] = array('Amount', 'Enter Amount', TRUE, '', TRUE);
   $attributes['credit_amount'] = array('Credit Amount', 'Enter Credit Amount', TRUE, '', TRUE);
   $attributes['usd_rate'] = array('USD Rate', 'Enter Usd Rate', FALSE, '', TRUE);
+  $attributes['usd_credit_amount'] = array('USD Credit Amount', 'Enter Credit Amount', FALSE, '', TRUE);
+  $attributes['usd_debit_amount'] = array('USD Debit Amount', 'Enter Debit Amount', FALSE, '', TRUE);
   $attributes['taxable_amount'] = array('Taxable Amount', 'Taxable Amount', FALSE, '',TRUE);
   $attributes['cgst_amount'] = array('CGST Amount', 'CGST Amount', FALSE, '',TRUE);
   $attributes['sgst_amount'] = array('SGST Amount', 'SGST Amount', FALSE, '',TRUE);
