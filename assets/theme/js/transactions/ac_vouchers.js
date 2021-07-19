@@ -472,10 +472,9 @@ $('select[name*="chittis[purity]"]').on('change', function() {
   var account =$('select[name*="chittis[account_name]"] option:selected').val();  
   window.location = base_url+ 'argold/chittis/create?account_name='+account+'&purity='+purity+'&site_name='+site_name;  
 });
-$('select[name*="packing_slips[purity]"]').on('change', function() {
-  var purity = $(this).val(); 
-  var account =$('select[name*="packing_slips[account_name]"] option:selected').val();  
-  window.location = base_url+ 'argold/packing_slips/create?account_name='+account+'&purity='+purity;  
+$('select[name*="packing_slips[account_name]"]').on('change', function() {
+  var account_name = $(this).val(); 
+  window.location = base_url+ 'argold/packing_slips/create?account_name='+account_name;  
 });
 $('select[name*="chitti_exports[purity]"]').on('change', function() {
   var purity = $(this).val(); 

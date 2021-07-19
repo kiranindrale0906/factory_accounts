@@ -28,31 +28,9 @@ class Packing_slips extends BaseController {
   }
 
   public function _get_form_data() {
-    $this->data['account_name']=array(array('id'=>'OUTSIDE PARTY','name'=>'OUTSIDE PARTY'),
-                                      array('id'=>'AQUA GOLD','name'=>'AQUA GOLD'),
-                                      array('id'=>'CHAIN AND JWELLERY', 'name'=>'CHAIN AND JWELLERY'),
-                                      array('id'=>'Bhandari Jewellers Pvt.Ltd.','name'=>'Bhandari Jewellers Pvt.Ltd.'),
-                                      array('id'=>'EXPORT ACCOUNT','name'=>'EXPORT ACCOUNT'),
-                                      array('id'=>'EXPORT DIFF.','name'=>'EXPORT DIFF.'),
-                                      array('id'=>'G and J GOLDSHMITHS','name'=>'G and J GOLDSHMITHS'),
-                                      array('id'=>'MKORE LLC USA','name'=>'MKORE LLC USA'),
-                                      array('id'=>'Pani Trading Co.','name'=>'Pani Trading Co.'),
-                                      array('id'=>'SHREE RAM JEWELLER','name'=>'SHREE RAM JEWELLER'),
-                                      array('id'=>'TANISHQ','name'=>'TANISHQ'),
-                                      array('id'=>'TITAN DIFF.','name'=>'TITAN DIFF.'),
-                                    );
+    $this->data['account_name']=$this->account_model->get('distinct(name) as name,name as id');
     $this->data['purity'] = $this->voucher_model->get('purity as name, purity as id', 
                                                        array('where'=>array(
-                                                               'account_name in ("OUTSIDE PARTY",
-                                                                                 "AQUA GOLD",
-                                                                                 "CHAIN AND JWELLERY",
-                                                                                 "EXPORT ACCOUNT",
-                                                                                 "EXPORT DIFF.",
-                                                                                 "MKORE LLC USA",
-                                                                                 "G and J GOLDSHMITHS",
-                                                                                 "Pani Trading Co.",
-                                                                                 "SHREE RAM JEWELLER",
-                                                                                 "TANISHQ","TITAN DIFF.")' => NULL,
                                                                'voucher_type' => 'metal issue voucher',
                                                                'packing_slip_id' => 0,
                                                                'receipt_type in ("Finish Good","GPC Out")'=>NULL
@@ -61,14 +39,9 @@ class Packing_slips extends BaseController {
     
     if (!empty($_GET['account_name']))
       $this->data['record']['account_name'] = $_GET['account_name'];
-    if (!empty($_GET['purity']))
-      $this->data['record']['purity'] = $_GET['purity'];
+    $where=array('voucher_type' => 'metal issue voucher',
+                   'packing_slip_id' => 0);
     
-      $where=array('voucher_type' => 'metal issue voucher',
-                   'packing_slip_id' => '');
-    
-    if (!empty($_GET['purity'])) $where['purity'] = $_GET['purity'];
-
     if(!empty($this->data['record']['account_name'])) { 
       $where['account_name']=$this->data['record']['account_name'];
     $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,
@@ -85,9 +58,7 @@ class Packing_slips extends BaseController {
                                                                 array('group_by'=>'packet_no,
                                                                                    voucher_date, 
                                                                                    argold_id,customer_name'));
-  
-
-
+    
 
     } else{
       $this->data['metal_vouchers'] = array();

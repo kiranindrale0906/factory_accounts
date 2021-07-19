@@ -44,8 +44,7 @@ class Packing_slip_model extends BaseModel {
                  "" as voucher_number, packet_no, voucher_date';
       $packing_slip_details=$this->voucher_model->find($select, array('packet_no' => $packet_nos,
                                                                 'argold_id' => $argold_ids,
-                                                                'account_name' => $this->attributes['account_name'],
-                                                                'purity' => $this->attributes['purity']));
+                                                                'account_name' => $this->attributes['account_name']));
     }
     if (!empty($this->attributes['date']))  $this->attributes['date'] = date('Y-m-d', strtotime($this->attributes['date']));
     // if($this->attributes['product_rate']>0){
@@ -55,18 +54,21 @@ class Packing_slip_model extends BaseModel {
       $this->attributes['weight'] = isset($packing_slip_details['credit_weight'])?$packing_slip_details['credit_weight']:0;
       $this->attributes['factory_purity'] =isset($packing_slip_details['factory_purity'])?$packing_slip_details['factory_purity']:0;
       $this->attributes['factory_fine']   = $packing_slip_details['credit_weight']*$packing_slip_details['factory_purity']/100;
-      $this->attributes['purity'] = $this->attributes['purity'];
+      $this->attributes['purity'] = isset($packing_slip_details['purity'])?$packing_slip_details['purity']:0;
       $this->attributes['fine']   = $packing_slip_details['credit_weight']*$packing_slip_details['purity']/100;
       // $this->attributes['date'] = date('Y-m-d', strtotime($packing_slip_details['voucher_date']));
       $this->attributes['account_name'] = $this->attributes['account_name'];
       $this->attributes['packet_no'] = isset($packing_slip_details['packet_no'])?$packing_slip_details['packet_no']:0;
       $this->set_sales_amount_fields();
     }
+    $this->attributes['pure']=$this->attributes['net_weight']*$this->attributes['purity']/100;
+    $this->attributes['total']=$this->attributes['making_charge']*$this->attributes['net_weight'];
+    
   }
 
   private function set_sales_amount_fields() {
     
-    if ($this->attributes['sale_type'] == 'Labour') {
+    if (!empty($this->attributes['sale_type'])&&$this->attributes['sale_type'] == 'Labour') {
       if($this->attributes['product_rate'] > 0) 
         $this->attributes['credit_weight'] = $this->attributes['weight'];
       else

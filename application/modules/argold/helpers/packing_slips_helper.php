@@ -1,10 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed.');
 
 function getTableSettings() {
-    $show = (isset($_GET['show_all'])) ? $_GET['show_all'] : '';
-  if($show=='yes') $where='account_name in ("OUTSIDE PARTY", "AQUA GOLD", "SWARN SHILP 1", "CHAIN AND JWELLERY")';
-  else $where='chitti_hide=0 and account_name in ("OUTSIDE PARTY", "AQUA GOLD", "SWARN SHILP 1", "CHAIN AND JWELLERY")';
- 
   return array(
     'page_title'          => 'Packing Slip List',
     'primary_table'       => 'packing_slips',
@@ -12,16 +8,16 @@ function getTableSettings() {
     'table'               => 'packing_slips',
     'join_columns'        => '',
     'join_type'           => '',
-    'where'               => $where,
+    'where'               => '',
     'where_ids'           => '',
     'order_by'            => 'id desc',
     'limit'               => "20",
-    'extra_select_column' => 'id,chitti_hide',
+    'extra_select_column' => 'id',
     'actionFunction'      => '',
     'headingFunction'     => 'list_settings',
     'search_url'          => 'packing_slips',
     'add_title'           => 'Add Packing Slip',
-    'chitti_hides'        => 'Add Packing Slip',
+    'chitti_hides'        => '',
     'export_title'        => '',
     'edit'                => '',
     'custom_table_header' => true,
@@ -43,17 +39,20 @@ function getTableSettings() {
 
 function list_settings() {
   return array(
-    array("Id", "id", FALSE, "id", FALSE, FALSE),
+    array("Sr.no", "sr_no", FALSE, "sr_no", FALSE, FALSE),
     array("Date", "date", FALSE, "date", FALSE, FALSE,'DATE_FORMAT(date, "%d-%m-%Y") as date'),
-    
-    // array("Packet No", "packet_no", TRUE, "packet_no", TRUE, TRUE),
-    array("Factory", "site_name", FALSE, "site_name", FALSE, FALSE),
     array("Account Name", "account_name", FALSE, "account_name", FALSE, FALSE),
+    array("Quantity", "quantity", FALSE, "quantity", FALSE, FALSE),
     array("Weight", "weight", FALSE, "weight", FALSE, FALSE),
-    // array("Purity", "purity", FALSE, "purity", FALSE, FALSE),
+    array("Net Weight", "net_weight", FALSE, "net_weight", FALSE, FALSE),
+    array("Stone", "stone", FALSE, "stone", FALSE, FALSE),
+    array("Purity", "purity", FALSE, "purity", FALSE, FALSE),
+    array("Pure", "pure", FALSE, "pure", FALSE, FALSE),
     array("Fine", "fine", FALSE, "fine", FALSE, FALSE),
-    array("Issue Fine", "factory_fine", FALSE, "factory_fine", FALSE, FALSE),
-    array("Amount", "debit_amount", FALSE, "debit_amount", FALSE, FALSE),
+    array("Making Charge", "making_charge", FALSE, "making_charge", FALSE, FALSE),
+    array("Total", "total", FALSE, "total", FALSE, FALSE),
+    array("Description", "description", FALSE, "description", FALSE, FALSE),
+    array("Colour", "colour", FALSE, "colour", FALSE, FALSE),
     array("Action", "action", FALSE, "action", FALSE, FALSE),
   );
 }
@@ -93,12 +92,13 @@ function get_field_attribute($table, $field) {
     'stone_amount'   => array('Stone Amount', '', TRUE, '', TRUE),
     'manual_taxable_amount'   => array('Manual Taxable Amount', '', TRUE, '', TRUE),
     'ounce_rate'   => array('Ounce Rate', '', FALSE, '', TRUE),
-    'usd_rate'   => array('USD Rate', '', FALSE, '', TRUE),
+    'stone'   => array('Stone', '', FALSE, '', TRUE),
     'premium_rate'   => array('Premium Rate', '', FALSE, '', TRUE),
-    'premium_usd_amount'   => array('Premium USD Amount', '', FALSE, '', TRUE),
-    'labour_rate'   => array('Labour Rate', '', FALSE, '', TRUE),
-    'labour_usd_amount'   => array('Labour USD Amount', '', FALSE, '', TRUE),
-    'freight_usd_amount'   => array('Freight USD Amount', '', FALSE, '', TRUE),
+    'colour'   => array('Colour', '', FALSE, '', TRUE),
+    'description'   => array('Description', '', FALSE, '', TRUE),
+    'net_weight'   => array('Net Weight', '', FALSE, '', TRUE),
+    'quantity'   => array('Quantity', '', FALSE, '', TRUE),
+    'making_charge'   => array('Making Charge', '', FALSE, '', TRUE),
 
   );
   
@@ -116,19 +116,7 @@ function get_row_actions($row, $url, $select_url, $filter) {
                            'url' => ADMIN_PATH.$controller.'/view/'.$row['id'],
                            'confirm_message' => "",
                            'class' => 'btn-sm green');
-  // $actions["Hide"] = array('request' => "http", 
-  //                          'url' => ADMIN_PATH.'argold/chitti_hides/update/'.$row['id'].'?from=view',
-  //                          'confirm_message' => "",
-  //                          'class' => 'btn-sm blue');
- 
-  $actions["Edit"] = array('request' => "http", 
-                           'url' => ADMIN_PATH.$controller.'/edit/'.$row['id'],
-                           'confirm_message' => "",
-                           'class' => 'btn-sm');
-  $actions["Detail"] = array('request' => "http", 
-                           'url' => ADMIN_PATH.$controller.'/view/'.$row['id'].'?detail=1',
-                           'confirm_message' => "",
-                           'class' => 'btn-sm');
+  
   $actions["Delete"] = array('request' => "http",
                                'url' => ADMIN_PATH.$controller.'/delete/'.$row['id'],
                                'confirm_message' => "Do you want to delete",

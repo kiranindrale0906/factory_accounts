@@ -10,10 +10,6 @@
       <th class="text-right">Weight</th>
       <th class="text-right">Factory Purity</th>
       <th class="text-right">Wastage</th>
-    <?php if($this->router->class == 'chitti_exports'){ ?>
-      <th class="text-right">USD Wastage</th>
-      <th class="text-right">INR Wastage</th>
-    <?php }?>
       <th class="text-right">Issue Fine</th>
     </tr>
   </thead>
