@@ -14,21 +14,21 @@ class Chittis extends BaseController {
     $this->data['layout'] = 'plain';
     parent::view($id);
   } 
-  // public function index() {
-  //     $show = (isset($_GET['show_all'])) ? $_GET['show_all'] : '';
-  //     $account_names= $this->account_model->get('distinct(name) as name,name as id',array('group_code'=>"Domestic"));
-  //     $account_name= array_column($account_names,'name');
+  public function index() {
+      $show = (isset($_GET['show_all'])) ? $_GET['show_all'] : '';
+      $account_names= $this->account_model->get('distinct(name) as name,name as id',array('group_code'=>"Domestic"));
+      $account_name= array_column($account_names,'name');
 
-  //     if($this->router->class == 'chitti_exports'){ 
-  //       if($show=='yes') $this->where='account_name not in ("'.implode('", "', $account_name).'")';
-  //       else $this->where='chitti_hide=0 and account_name not in ("'.implode('", "', $account_name).'")';
-  //     }else{
+      if($this->router->class == 'chitti_exports'){ 
+        if($show=='yes') $this->where='account_name not in ("'.implode('", "', $account_name).'")';
+        else $this->where='chitti_hide=0 and account_name not in ("'.implode('", "', $account_name).'")';
+      }else{
 
-  //       if($show=='yes') $this->where='account_name in ("'.implode('", "', $account_name).'")';
-  //       else $this->where='chitti_hide=0 and account_name in ("'.implode('", "', $account_name).'")';
-  //     }
-  //       parent::index();
-  // }
+        if($show=='yes') $this->where='account_name in ("'.implode('", "', $account_name).'")';
+        else $this->where='chitti_hide=0 and account_name in ("'.implode('", "', $account_name).'")';
+      }
+        parent::index();
+  }
 
   public function _get_view_data() {
     $this->data['detail'] = isset($_GET['detail']) ? 1 : 0;
