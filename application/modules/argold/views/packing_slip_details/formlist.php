@@ -7,6 +7,7 @@
       <th>Narration</th>
       <th>Customer Name</th>
       <th class="text-right">Weight</th>
+      <th class="text-right">Balance</th>
       <th class="text-right">Purity</th>
       <th class="text-right">Net weight</th>
       <th class="text-right">Qauntity</th>
@@ -22,9 +23,10 @@
   </thead>
   <tbody>
     <?php
-      $weight = $issue_fine = 0;
+      $weight = $issue_fine = $balance = 0;
       foreach ($metal_vouchers as $index => $vouchers) {
         $weight += $vouchers['credit_weight'];
+        $balance += $vouchers['packing_slip_balance'];
         $issue_fine += $vouchers['credit_weight']*$vouchers['factory_purity']/100;
         $this->load->view('packing_slip_details/subform',array('index'=> $index, 'vouchers' => $vouchers));
       }
@@ -35,6 +37,8 @@
       <th></th>
       <th></th>
       <th class="text-right"><?= four_decimal($weight) ?></th>
+      <th class="text-right"><?= four_decimal($balance) ?></th>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>

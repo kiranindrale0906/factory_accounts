@@ -39,12 +39,17 @@ class Packing_slips extends BaseController {
     
     if (!empty($_GET['account_name']))
       $this->data['record']['account_name'] = $_GET['account_name'];
-    $where=array('voucher_type' => 'metal issue voucher',
-                   'packing_slip_id' => 0);
+    $where=array('voucher_type' => 'metal issue voucher','packing_slip_balance!=' => 0,);
     
     if(!empty($this->data['record']['account_name'])) { 
       $where['account_name']=$this->data['record']['account_name'];
-    $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,
+    if (!empty($_GET['voucher_id'])){
+      unset($where['packing_slip_id']);
+      $where['id']=$_GET['voucher_id'];
+      $this->data['metal_vouchers'] = $this->voucher_model->get('',$where);
+    
+    }else{
+    $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,sum(packing_slip_balance) as packing_slip_balance,
                                                                 (sum(credit_weight*purity) / sum(credit_weight)) as purity,
                                                                 (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,
                                                                 "" as voucher_number,
@@ -57,7 +62,7 @@ class Packing_slips extends BaseController {
                                                                 array(), 
                                                                 array('group_by'=>'packet_no,
                                                                                    voucher_date, 
-                                                                                   argold_id,customer_name'));
+                                                                                   argold_id,customer_name'));}
     
 
     } else{

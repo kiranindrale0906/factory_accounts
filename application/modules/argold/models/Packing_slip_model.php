@@ -90,14 +90,21 @@ class Packing_slip_model extends BaseModel {
     foreach ($this->formdata['packing_slip_details'] as $index => $packing_slip_detail) {
       if(!empty($packing_slip_detail['packing_slip_id'])){
       $packing_slips=explode('-', $packing_slip_detail['packing_slip_id']);
-      $packing_details = $this->voucher_model->find('sum(credit_weight) as credit_weight,
-                 (sum(credit_weight*purity) / sum(credit_weight)) as purity,
-                 (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,id', array('packet_no' => $packing_slips[0],
-                                                            'argold_id' => $packing_slips[1],
-                                                            'account_name' => $this->attributes['account_name']
-                                                            ));
+      if(!empty($packing_slip_detail['voucher_id'])){
+
+      $packing_details = $this->voucher_model->find('', array('id' => $packing_slip_detail['voucher_id']));
+      }else{
+
+          $packing_details = $this->voucher_model->find('sum(credit_weight) as credit_weight,sum(packing_slip_balance) as packing_slip_balance,
+                   (sum(credit_weight*purity) / sum(credit_weight)) as purity,
+                   (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,id', array('packet_no' => $packing_slips[0],
+                                                              'argold_id' => $packing_slips[1],
+                                                              'account_name' => $this->attributes['account_name']
+                                                              ));
+      }
         $packing_details['packing_slip_id'] = $this->attributes['id'];
         $packing_details['voucher_date'] = $this->attributes['date'];
+        $packing_details['packing_slip_balance'] =$packing_details['packing_slip_balance']- $packing_slip_detail['packing_slip_net_weight'];
         $packing_details['packing_slip_pure'] = $packing_slip_detail['packing_slip_net_weight']*$packing_details['purity']/100;
         $packing_details['packing_slip_making_charge'] = $packing_slip_detail['packing_slip_making_charge'];
         $packing_details['description'] = $packing_slip_detail['packing_slip_description'];
