@@ -51,6 +51,7 @@ class Packing_slip_model extends BaseModel {
                  sum(packing_slip_total) as packing_slip_total,
                  sum(packing_slip_pure) as packing_slip_pure,
                  sum(packing_slip_stone) as packing_slip_stone,
+                 sum(packing_slip_quantity) as packing_slip_quantity,
                  (sum(credit_weight*purity) / sum(credit_weight)) as purity,
                  (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,
                  "" as voucher_number, packet_no, voucher_date';
