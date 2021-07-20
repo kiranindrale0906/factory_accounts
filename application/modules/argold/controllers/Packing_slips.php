@@ -18,8 +18,7 @@ class Packing_slips extends BaseController {
   public function _get_view_data() {
     $this->data['detail'] = isset($_GET['detail']) ? 1 : 0;
     $this->data['account_id']='';
-    $this->data['metal_voucher_details'] = $this->voucher_model->get('', array('voucher_type' => 'metal issue voucher','chitti_id' => $this->data['record']['id']));
-    
+    $this->data['metal_voucher_details'] = $this->voucher_model->get('', array('voucher_type' => 'metal issue voucher','packing_slip_id' => $this->data['record']['id']));
     $packet_no = array_column($this->data['metal_voucher_details'], 'packet_no');
     $this->data['packet_nos']=array_unique($packet_no);
 
@@ -28,7 +27,7 @@ class Packing_slips extends BaseController {
   }
 
   public function _get_form_data() {
-    
+
     $this->data['account_name']=$this->account_model->get('distinct(name) as name,name as id');
     $this->data['purity'] = $this->voucher_model->get('purity as name, purity as id', 
                                                        array('where'=>array(
@@ -72,7 +71,7 @@ class Packing_slips extends BaseController {
   }
 
   public function store() {
-    $this->data['redirect_url'] = '/argold/chittis';
+    $this->data['redirect_url'] = '/argold/packing_slips';
     parent::store();
   }
   public function delete($id) {
