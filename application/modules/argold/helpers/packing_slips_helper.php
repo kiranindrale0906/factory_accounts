@@ -39,20 +39,9 @@ function getTableSettings() {
 
 function list_settings() {
   return array(
-    array("Sr.no", "sr_no", FALSE, "sr_no", FALSE, FALSE),
+    array("Packing Slip No", "id", FALSE, "id", FALSE, FALSE),
     array("Date", "date", FALSE, "date", FALSE, FALSE,'DATE_FORMAT(date, "%d-%m-%Y") as date'),
     array("Account Name", "account_name", FALSE, "account_name", FALSE, FALSE),
-    array("Quantity", "quantity", FALSE, "quantity", FALSE, FALSE),
-    array("Weight", "weight", FALSE, "weight", FALSE, FALSE),
-    array("Net Weight", "net_weight", FALSE, "net_weight", FALSE, FALSE),
-    array("Stone", "stone", FALSE, "stone", FALSE, FALSE),
-    array("Purity", "purity", FALSE, "purity", FALSE, FALSE),
-    array("Pure", "pure", FALSE, "pure", FALSE, FALSE),
-    array("Fine", "fine", FALSE, "fine", FALSE, FALSE),
-    array("Making Charge", "making_charge", FALSE, "making_charge", FALSE, FALSE),
-    array("Total", "total", FALSE, "total", FALSE, FALSE),
-    array("Description", "description", FALSE, "description", FALSE, FALSE),
-    array("Colour", "colour", FALSE, "colour", FALSE, FALSE),
     array("Action", "action", FALSE, "action", FALSE, FALSE),
   );
 }
@@ -103,7 +92,14 @@ function get_field_attribute($table, $field) {
   );
   
   $attributes['packing_slip_details'] = array(
-    'chitti_id' => array('', '', TRUE, '', TRUE),
+    'packing_slip_id' => array('', '', TRUE, '', TRUE),
+    'packing_slip_net_weight' => array('', '', TRUE, '', TRUE),
+    'packing_slip_description' => array('', '', TRUE, '', TRUE),
+    'packing_slip_colour' => array('', '', TRUE, '', TRUE),
+    'packing_slip_quantity' => array('', '', TRUE, '', TRUE),
+    'packing_slip_making_charge' => array('', '', TRUE, '', TRUE),
+    'packing_slip_stone' => array('', '', TRUE, '', TRUE),
+    'packing_slip_code' => array('', '', TRUE, '', TRUE),
   );
  
   return $attributes[$table][$field];

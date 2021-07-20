@@ -10,13 +10,6 @@
   <div class="row">    
     <?php load_field('dropdown', array('field' => 'account_name','option'=>$account_name));?>
     <?php load_field('date',array('field' => 'date','class'=>'datepicker_js')); ?>
-    <?php load_field('text',array('field' => 'quantity','class'=>'')); ?>
-    <?php load_field('text',array('field' => 'net_weight','class'=>'')); ?>
-    <?php load_field('text',array('field' => 'stone','class'=>'')); ?>
-    <?php load_field('text',array('field' => 'description','class'=>'')); ?>
-    <?php load_field('text',array('field' => 'colour','class'=>'')); ?>
-    <?php load_field('text',array('field' => 'making_charge','class'=>'')); ?>
-
   </div>
     <?php $this->load->view('packing_slip_details/formlist');?>
   <?php load_buttons('submit', array('controller' => $controller, 'name' => 'SAVE' , 'class' => 'btn_blue')) ;

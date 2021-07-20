@@ -3,11 +3,18 @@
   <thead>
     <tr>
       <th><?php load_buttons('anchor', array('name'=>'Select All', 'class'=>'blue select_all')); ?></th>
-      <th>Packet No</th>
       <th>Date</th>
       <th>Narration</th>
       <th>Customer Name</th>
       <th class="text-right">Weight</th>
+      <th class="text-right">Purity</th>
+      <th class="text-right">Net weight</th>
+      <th class="text-right">Qauntity</th>
+      <th class="text-right">Stone</th>
+      <th class="text-right">Making Charge</th>
+      <th class="text-right">Colour</th>
+      <th class="text-right">Code</th>
+      <th class="text-right">Description</th>
       <th class="text-right">Factory Purity</th>
       <th class="text-right">Wastage</th>
       <th class="text-right">Issue Fine</th>
@@ -27,14 +34,17 @@
       <th></th>
       <th></th>
       <th></th>
-      <th></th>
       <th class="text-right"><?= four_decimal($weight) ?></th>
       <th></th>
       <th></th>
-      <?php if($this->router->class == 'chitti_exports'){ ?>
-      <th class="text-right"></th>
-      <th class="text-right"></th>
-      <?php }?>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
       <th class="text-right"><?= four_decimal($issue_fine) ?></th>
     </tr>
   </tbody>
