@@ -67,7 +67,7 @@ class Packing_slip_model extends BaseModel {
         $net_weight+=$value['packing_slip_net_weight'];
       }
     }
-
+      pd($packing_slip_details);
     $this->attributes['date']=date('Y-m-d',strtotime($this->attributes['date']));
     $this->attributes['weight']=$packing_slip_details['credit_weight'];
     $this->attributes['purity']=$packing_slip_details['purity'];
