@@ -101,6 +101,7 @@ class Packing_slip_model extends BaseModel {
         $packing_details['packing_slip_pure'] = $packing_slip_detail['packing_slip_net_weight']*$packing_details['purity']/100;
         $packing_details['packing_slip_making_charge'] = $packing_slip_detail['packing_slip_making_charge'];
         $packing_details['description'] = $packing_slip_detail['packing_slip_description'];
+        $packing_details['packing_slip_quantity'] = $packing_slip_detail['packing_slip_quantity'];
         $packing_details['packing_slip_colour'] = $packing_slip_detail['packing_slip_colour'];
         $packing_details['packing_slip_code'] = @$packing_slip_detail['packing_slip_code'];
         $packing_details['packing_slip_stone'] = $packing_slip_detail['packing_slip_stone'];
