@@ -72,7 +72,6 @@ class Packing_slip_model extends BaseModel {
     $this->attributes['purity']=$packing_slip_details['purity'];
     $this->attributes['factory_purity']=$packing_slip_details['factory_purity'];
     $this->attributes['net_weight']=$net_weight+$packing_slip_details['packing_slip_net_weight'];
-    $this->attributes['quantity']=$quantity+$packing_slip_details['packing_slip_quantity'];
     $this->attributes['making_charge']=$making_charge+$packing_slip_details['packing_slip_making_charge'];
     $this->attributes['stone']=$stone+$packing_slip_details['packing_slip_stone'];
     $this->attributes['pure']=($net_weight*$packing_slip_details['purity']/100)+$packing_slip_details['packing_slip_pure'];
