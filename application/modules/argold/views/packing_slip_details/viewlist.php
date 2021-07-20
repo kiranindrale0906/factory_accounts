@@ -10,6 +10,7 @@
             <th></th>
             <th class="text-right">Gross</th>
             <th class="text-right">Melting</th>
+            <th class="text-right">Qauntity</th>
             <th class="text-right">Net weight</th>
             <th class="text-right">Pure</th>
             <th class="text-right">Stone</th>
@@ -38,6 +39,7 @@
                   <td><?= $sr_no+1?></td>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['credit_weight']); ?></td>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['purity']) ?></td>
+                  <td class="text-right"><?= four_decimal($metal_voucher_detail['packing_slip_quantity']) ?></td>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['packing_slip_net_weight']) ?></td>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['packing_slip_pure']) ?></td>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['packing_slip_stone']) ?></td>
@@ -54,6 +56,7 @@
           <tr class="bg_gray bold">
             <td>Total</td>
             <td class="text-right"><?=four_decimal($sum_weight);?></td>
+            <td class="text-right"></td> 
             <td class="text-right"></td> 
             <td class="text-right"><?=four_decimal($sum_net_weight);?></td>
             <td class="text-right"><?=four_decimal($sum_pure);?></td> 
