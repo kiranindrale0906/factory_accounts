@@ -37,7 +37,7 @@ class Migration_add_table_packing_slip_details extends CI_Model {
 				// 		  `making_charge` decimal(16,4) NOT NULL,
 				// 		  `factory_fine` decimal(16,4) NOT NULL
 				// 		)");
-    $this->db->query("ALTER TABLE `packing_slip_details`ADD PRIMARY KEY (`id`);");
+    // $this->db->query("ALTER TABLE `packing_slip_details`ADD PRIMARY KEY (`id`);");
     $this->db->query("ALTER TABLE `packing_slip_details` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT");
   }
 
