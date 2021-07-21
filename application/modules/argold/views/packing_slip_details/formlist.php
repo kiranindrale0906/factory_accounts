@@ -48,7 +48,6 @@
       <th></th>
       <th></th>
       <th></th>
-      <th></th>
       <th class="text-right"><?= four_decimal($issue_fine) ?></th>
     </tr>
   </tbody>

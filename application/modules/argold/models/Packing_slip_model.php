@@ -71,12 +71,12 @@ class Packing_slip_model extends BaseModel {
     $this->attributes['weight']=$packing_slip_details['credit_weight'];
     $this->attributes['purity']=$packing_slip_details['purity'];
     $this->attributes['factory_purity']=$packing_slip_details['factory_purity'];
-    $this->attributes['net_weight']=$net_weight+$packing_slip_details['packing_slip_net_weight'];
-    $this->attributes['quantity']=$quantity+$packing_slip_details['packing_slip_quantity'];
-    $this->attributes['making_charge']=$making_charge+$packing_slip_details['packing_slip_making_charge'];
-    $this->attributes['stone']=$stone+$packing_slip_details['packing_slip_stone'];
-    $this->attributes['pure']=($net_weight*$packing_slip_details['purity']/100)+$packing_slip_details['packing_slip_pure'];
-    $this->attributes['total']=($net_weight*$making_charge)+$packing_slip_details['packing_slip_total'];
+    $this->attributes['net_weight']=$net_weight;
+    $this->attributes['quantity']=$quantity;
+    $this->attributes['making_charge']=$making_charge;
+    $this->attributes['stone']=$stone;
+    $this->attributes['pure']=($net_weight*$packing_slip_details['purity']/100);
+    $this->attributes['total']=($net_weight*$making_charge);
   }
 
    public function after_save($action){
@@ -105,21 +105,32 @@ class Packing_slip_model extends BaseModel {
         $packing_details['packing_slip_id'] = $this->attributes['id'];
         $packing_details['voucher_date'] = $this->attributes['date'];
         $packing_details['packing_slip_balance'] =$packing_details['packing_slip_balance']- $packing_slip_detail['packing_slip_net_weight'];
-        $packing_details['packing_slip_pure'] = $packing_slip_detail['packing_slip_net_weight']*$packing_details['purity']/100;
-        $packing_details['packing_slip_making_charge'] = $packing_slip_detail['packing_slip_making_charge'];
-        $packing_details['description'] = $packing_slip_detail['packing_slip_description'];
-        $packing_details['packing_slip_quantity'] = $packing_slip_detail['packing_slip_quantity'];
-        $packing_details['packing_slip_colour'] = $packing_slip_detail['packing_slip_colour'];
-        $packing_details['packing_slip_code'] = @$packing_slip_detail['packing_slip_code'];
-        $packing_details['packing_slip_stone'] = $packing_slip_detail['packing_slip_stone'];
-        $packing_details['packing_slip_net_weight'] = $packing_slip_detail['packing_slip_net_weight'];
-        $packing_details['packing_slip_total'] = $packing_slip_detail['packing_slip_net_weight']*$packing_slip_detail['packing_slip_making_charge'];
-        
         $voucher_obj = new voucher_model($packing_details);
         $voucher_obj->update(false);
+        $this->create_packing_slip_details($packing_details,$packing_slip_detail);
       }}
     }
   }
+  private function create_packing_slip_details($packing_details,$packing_slip_details) {
+    $this->load->model('argold/packing_slip_detail_model');
+     $packing_slip_detail_data = array();
+      $packing_slip_detail_data['weight'] = $packing_details['credit_weight'];
+      $packing_slip_detail_data['purity'] = $packing_details['purity'];
+      $packing_slip_detail_data['quantity'] = $packing_slip_details['packing_slip_quantity'];
+      $packing_slip_detail_data['packing_slip_id'] = $packing_details['packing_slip_id'];
+      $packing_slip_detail_data['voucher_id'] = $packing_details['id'];
+      $packing_slip_detail_data['balance'] = $packing_details['packing_slip_balance'];
+      $packing_slip_detail_data['net_weight'] = $packing_slip_details['packing_slip_net_weight'];
+      $packing_slip_detail_data['pure'] = $packing_slip_details['packing_slip_net_weight']*$packing_details['purity']/100;
+      $packing_slip_detail_data['making_charge'] = $packing_slip_details['packing_slip_making_charge'];
+      $packing_slip_detail_data['stone'] = $packing_slip_details['packing_slip_stone'];
+      $packing_slip_detail_data['colour'] = $packing_slip_details['packing_slip_colour'];
+      $packing_slip_detail_data['code'] = $packing_slip_details['packing_slip_code'];
+      $packing_slip_detail_data['description'] = $packing_slip_details['packing_slip_description'];
+      $packing_slip_detail_data['total'] = $packing_slip_details['packing_slip_net_weight']*$packing_slip_details['packing_slip_making_charge'];
+      $obj_packing_slip_detail=new packing_slip_detail_model($packing_slip_detail_data);
+      $obj_packing_slip_detail->save();
+  }  
   public function update_chitti_ids($voucher_details) {
     if(!empty($voucher_details)){
       foreach ($voucher_details as $index => $voucher_detail) {

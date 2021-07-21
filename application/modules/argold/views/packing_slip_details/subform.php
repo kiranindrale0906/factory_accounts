@@ -53,20 +53,20 @@
 	<td class=""><?php load_field('plain/text', array('field' => 'packing_slip_colour',
 			                             				  'class' => 'packing_slip_colour',
 														  'index' => $index,
-														  'value' => !empty($vouchers['packing_slip_colour'])?$vouchers['packing_slip_colour']:0,
+														  'value' => !empty($vouchers['packing_slip_colour'])?$vouchers['packing_slip_colour']:'',
 														  'controller' => 'packing_slip_details')); ?>
 		
 	</td>
 	<td class=""><?php load_field('plain/text', array('field' => 'packing_slip_code',
 			                             				  'class' => 'packing_slip_code',
 														  'index' => $index,
-														  'value' => !empty($vouchers['packing_slip_code'])?$vouchers['packing_slip_code']:0,
+														  'value' => !empty($vouchers['packing_slip_code'])?$vouchers['packing_slip_code']:'',
 														  'controller' => 'packing_slip_details')); ?>
 		
 	</td>
 	<td class=""><?php load_field('plain/text', array('field' => 'packing_slip_description',
 			                             				  'class' => 'packing_slip_description',
-			                             				  'value' => !empty($vouchers['packing_slip_description'])?$vouchers['packing_slip_description']:0,
+			                             				  'value' => !empty($vouchers['packing_slip_description'])?$vouchers['packing_slip_description']:'',
 														  'index' => $index,
 														  'controller' => 'packing_slip_details')); ?></td>
     <td class="text-right"><?= four_decimal($vouchers['factory_purity']) ?></td>
