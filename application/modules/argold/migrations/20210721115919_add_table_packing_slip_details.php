@@ -20,7 +20,6 @@ class Migration_add_table_packing_slip_details extends CI_Model {
 						  `fine` decimal(10,4) NOT NULL,
 						  `purity` decimal(10,4) NOT NULL,
 						  `account_name` varchar(100) NOT NULL,
-						  `voucher_id` int(11) NOT NULL DEFAULT 0,
 						  `packet_no` int(11) NOT NULL DEFAULT 0,
 						  `factory_purity` decimal(16,8) NOT NULL DEFAULT 0.00000000,
 						  `credit_weight` decimal(16,8) NOT NULL DEFAULT 0.00000000,
