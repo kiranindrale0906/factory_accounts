@@ -25,8 +25,13 @@
           array('id'=>'ARC Nov 2020','name'=>'ARC Nov 2020'),
           array('id'=>'ARC Jan 2020','name'=>'ARC Jan 2021')))); ?>
   </div>
-  <div class="row">        
-    <?php    if(in_array($record['voucher_type'], array('cash receipt voucher','cash issue voucher'))){
+  <div class="row">      
+
+    <?php  
+      load_field('text', array('field' => 'purity')); 
+      load_field('text', array('field' => 'factory_purity')); 
+
+      if(in_array($record['voucher_type'], array('cash receipt voucher','cash issue voucher'))){
           load_field('text', array('field' => 'taxable_amount')); 
           load_field('text', array('field' => 'cgst_amount'));  
         }?>
