@@ -22,10 +22,10 @@
   	<td class="text-right"><?= four_decimal($vouchers['credit_weight']) ;?></td>
   	<td class="text-right"><?= four_decimal($vouchers['packing_slip_balance']) ;?></td>
 	<td class="text-right"><?= four_decimal($vouchers['purity']); ?></td>
-	<td class="text-right"><?php load_field('plain/text', array('field' => 'packing_slip_net_weight',
+	<td class="text-right"><?php load_field('plain/text', array('field' => 'packing_slip_gross_weight',
 			                             				  'class' => 'packing_slip_net_weight',
 														  'index' => $index,
-														  'value' => !empty($vouchers['packing_slip_net_weight'])?$vouchers['packing_slip_net_weight']:0,
+														  'value' => !empty($vouchers['packing_slip_gross_weight'])?$vouchers['packing_slip_gross_weight']:0,
 														  'controller' => 'packing_slip_details')); ?>
 		
 	</td>

@@ -9,7 +9,7 @@
       <th class="text-right">Weight</th>
       <th class="text-right">Balance</th>
       <th class="text-right">Purity</th>
-      <th class="text-right">Net weight</th>
+      <th class="text-right">Gross weight</th>
       <th class="text-right">Qauntity</th>
       <th class="text-right">Stone</th>
       <th class="text-right">Making Charge</th>

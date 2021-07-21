@@ -100,6 +100,7 @@ function get_field_attribute($table, $field) {
     'packing_slip_making_charge' => array('', '', TRUE, '', TRUE),
     'packing_slip_stone' => array('', '', TRUE, '', TRUE),
     'packing_slip_code' => array('', '', TRUE, '', TRUE),
+    'packing_slip_gross_weight' => array('', '', TRUE, '', TRUE),
     'voucher_id' => array('', '', TRUE, '', TRUE),
   );
  

@@ -58,17 +58,19 @@ class Packing_slip_model extends BaseModel {
       $packing_slip_details=$this->voucher_model->find($select, array('packet_no' => $packet_nos,
                                                                 'argold_id' => $argold_ids,
                                                                 'account_name' => $this->attributes['account_name']));
-     $making_charge=$stone=$quantity=$net_weight=$pure=$total=0;
+     $making_charge=$stone=$quantity=$gross_weight=$net_weight=$pure=$total=0;
     foreach ($this->formdata['packing_slip_details'] as $index => $value) {
       if(!empty($value['packing_slip_id'])){
         $making_charge+=$value['packing_slip_making_charge'];
+        $gross_weight+=$value['packing_slip_gross_weight'];
         $stone+=$value['packing_slip_stone'];
         $quantity+=$value['packing_slip_quantity'];
-        $net_weight+=$value['packing_slip_net_weight'];
+        $net_weight+=$value['packing_slip_gross_weight']-$value['packing_slip_stone'];
       }
     }
     $this->attributes['date']=date('Y-m-d',strtotime($this->attributes['date']));
     $this->attributes['weight']=$packing_slip_details['credit_weight'];
+    $this->attributes['gross_weight']=$gross_weight;
     $this->attributes['purity']=$packing_slip_details['purity'];
     $this->attributes['factory_purity']=$packing_slip_details['factory_purity'];
     $this->attributes['net_weight']=$net_weight;
@@ -104,7 +106,7 @@ class Packing_slip_model extends BaseModel {
       }
         $packing_details['packing_slip_id'] = $this->attributes['id'];
         $packing_details['voucher_date'] = $this->attributes['date'];
-        $packing_details['packing_slip_balance'] =$packing_details['packing_slip_balance']- $packing_slip_detail['packing_slip_net_weight'];
+        $packing_details['packing_slip_balance'] =$packing_details['packing_slip_balance']- $packing_slip_detail['packing_slip_gross_weight'];
         $voucher_obj = new voucher_model($packing_details);
         $voucher_obj->update(false);
         $this->create_packing_slip_details($packing_details,$packing_slip_detail);
@@ -120,8 +122,9 @@ class Packing_slip_model extends BaseModel {
       $packing_slip_detail_data['packing_slip_id'] = $packing_details['packing_slip_id'];
       $packing_slip_detail_data['voucher_id'] = $packing_details['id'];
       $packing_slip_detail_data['balance'] = $packing_details['packing_slip_balance'];
-      $packing_slip_detail_data['net_weight'] = $packing_slip_details['packing_slip_net_weight'];
-      $packing_slip_detail_data['pure'] = $packing_slip_details['packing_slip_net_weight']*$packing_details['purity']/100;
+      $packing_slip_detail_data['gross_weight'] = $packing_slip_details['packing_slip_gross_weight'];
+      $packing_slip_detail_data['net_weight'] = $packing_slip_details['packing_slip_gross_weight']-$packing_slip_details['packing_slip_stone'];
+      $packing_slip_detail_data['pure'] = $packing_slip_detail_data['net_weight']*$packing_details['purity']/100;
       $packing_slip_detail_data['making_charge'] = $packing_slip_details['packing_slip_making_charge'];
       $packing_slip_detail_data['stone'] = $packing_slip_details['packing_slip_stone'];
       $packing_slip_detail_data['colour'] = $packing_slip_details['packing_slip_colour'];

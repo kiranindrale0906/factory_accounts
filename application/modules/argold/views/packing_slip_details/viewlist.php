@@ -28,7 +28,7 @@
             $sr_no=0;
             foreach ($metal_voucher_details as $index => $metal_voucher_detail) {
               //if($packet_no == $metal_voucher_detail['packet_no']) {
-                $sum_weight += $metal_voucher_detail['credit_weight'];
+                $sum_weight += $metal_voucher_detail['gross_weight'];
                 $sum_net_weight += $metal_voucher_detail['net_weight'];
                 $sum_pure += $metal_voucher_detail['pure'];
                 $sum_stone += $metal_voucher_detail['stone'];
@@ -38,7 +38,7 @@
 
                 <tr>
                   <td><?= $sr_no+1?></td>
-                  <td class="text-right"><?= four_decimal($metal_voucher_detail['weight']); ?></td>
+                  <td class="text-right"><?= four_decimal($metal_voucher_detail['gross_weight']); ?></td>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['purity']) ?></td>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['quantity']) ?></td>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['net_weight']) ?></td>
