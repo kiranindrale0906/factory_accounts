@@ -77,6 +77,8 @@ function get_field_attribute($table, $field) {
     'tcs_amount'     => array('TCS Amount', '', FALSE, '', TRUE),
     'purity'     => array('purity', '', FALSE, '', TRUE),
     'factory_purity'     => array('factory_purity', '', FALSE, '', TRUE),
+    'fine'     => array('fine', '', FALSE, '', TRUE),
+    'factory_fine'     => array('factory_fine', '', FALSE, '', TRUE),
     'is_export'     => array('Is Export', '', TRUE, '', TRUE),
    );
   return $attributes[$table][$field];
