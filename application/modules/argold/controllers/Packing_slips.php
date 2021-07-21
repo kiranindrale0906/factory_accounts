@@ -28,7 +28,7 @@ class Packing_slips extends BaseController {
 
   public function _get_form_data() {
 
-    $this->data['account_name']=$this->account_model->get('distinct(name) as name,name as id');
+    $this->data['account_name']=$this->account_model->get('distinct(name) as name,name as id',array('group_code'=>'Export'));
     $this->data['purity'] = $this->voucher_model->get('purity as name, purity as id', 
                                                        array('where'=>array(
                                                                'voucher_type' => 'metal issue voucher',
