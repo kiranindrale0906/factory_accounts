@@ -30,13 +30,13 @@
     <?php  
       load_field('text', array('field' => 'purity')); 
       load_field('text', array('field' => 'factory_purity')); 
-    load_field('text', array('field' => 'fine')); 
-          load_field('text', array('field' => 'factory_fine')); 
+      load_field('text', array('field' => 'fine')); 
+      load_field('text', array('field' => 'factory_fine')); 
 
       if(in_array($record['voucher_type'], array('cash receipt voucher','cash issue voucher'))){
-          load_field('text', array('field' => 'taxable_amount')); 
-          load_field('text', array('field' => 'cgst_amount'));  
-        }?>
+        load_field('text', array('field' => 'taxable_amount')); 
+        load_field('text', array('field' => 'cgst_amount'));  
+      }?>
   </div>
   <div class="row">        
     <?php    if(in_array($record['voucher_type'], array('cash receipt voucher','cash issue voucher'))){
