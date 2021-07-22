@@ -28,8 +28,10 @@
   <div class="row">      
 
     <?php  
-      // load_field('text', array('field' => 'purity')); 
-      // load_field('text', array('field' => 'factory_purity')); 
+      load_field('text', array('field' => 'purity')); 
+      load_field('text', array('field' => 'factory_purity')); 
+    load_field('text', array('field' => 'fine')); 
+          load_field('text', array('field' => 'factory_fine')); 
 
       if(in_array($record['voucher_type'], array('cash receipt voucher','cash issue voucher'))){
           load_field('text', array('field' => 'taxable_amount')); 

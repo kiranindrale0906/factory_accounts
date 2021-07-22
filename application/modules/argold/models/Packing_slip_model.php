@@ -130,7 +130,7 @@ class Packing_slip_model extends BaseModel {
       $packing_slip_detail_data['colour'] = $packing_slip_details['packing_slip_colour'];
       $packing_slip_detail_data['code'] = $packing_slip_details['packing_slip_code'];
       $packing_slip_detail_data['description'] = $packing_slip_details['packing_slip_description'];
-      $packing_slip_detail_data['total'] = $packing_slip_details['packing_slip_net_weight']*$packing_slip_details['packing_slip_making_charge'];
+      $packing_slip_detail_data['total'] = $packing_slip_detail_data['net_weight']*$packing_slip_details['packing_slip_making_charge'];
       $obj_packing_slip_detail=new packing_slip_detail_model($packing_slip_detail_data);
       $obj_packing_slip_detail->save();
   }  
