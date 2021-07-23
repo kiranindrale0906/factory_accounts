@@ -6,7 +6,7 @@
     <td><?= $record['account_name'];?></td>
   <?php endif; ?>
   <td><?= date('d-m-y', strtotime($record['str_voucher_date'])); ?></td>
-  <td><?= '#'.$record['chitti_no'].' '.$record['account_name'].' '.remove_duplicates_in_string($record['narration']).' '.$record['description']; ?>
+  <td><?= '#'.$record['chitti_no'].' '.remove_duplicates_in_string($record['narration']).' '.$record['description']; ?>
     <?php if(isset($record['chitti_no']) && $record['chitti_no']!=0) { ?>
       <a class=""  href='<?= base_url() ?>argold/chittis/view/<?=$record['chitti_no']?>'>view</a>
       <?php if ($record['account_name'] == 'OUTSIDE PARTY') { ?>

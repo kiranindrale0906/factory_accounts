@@ -12,7 +12,7 @@ class Unrecovarable_account_records extends BaseController {
     if(isset($_GET['from']) && $_GET['from']=='view') {
       $process=array(
         'account_name'=>$_GET['factory'],
-        'narration'=>$_GET['narration'],
+        'narration'=>$_GET['factory'].' '.$_GET['narration'],
         'receipt_type'=>$_GET['account_name'],
         'purity'=>100,
         'company_id'=>1,
