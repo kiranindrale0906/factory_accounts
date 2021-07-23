@@ -27,7 +27,7 @@ class Unrecovarable_account_records extends BaseController {
 
         $process=array(
         'account_name'=>$_GET['account_name'],
-        'narration'=>$_GET['narration'],
+        'narration'=>$_GET['factory'].' '.$_GET['narration'],
         'receipt_type'=>$_GET['account_name'],
         'debit_weight'=>$_GET['credit_weight'],
         'purity'=>100,
