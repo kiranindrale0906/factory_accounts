@@ -3,7 +3,7 @@
     //foreach ($packet_nos as $packet_index => $packet_no) { 
     ?>
       <!-- <h6>Packet No :<?=$packet_no ?> </h6>     -->
-      <div class="table-responsive" style="font-weight:500">
+      <div class="" style="font-weight:500">
       <table class="table table-sm table-default">
         <thead>
           <tr>
@@ -15,11 +15,13 @@
             <th class="text-right">Pure</th>
             <th class="text-right">Stone</th>
             <th class="text-right">Making Charge</th>
+            <th class="text-right">Category Name</th>
             <th class="text-right">Description</th>
             <th class="text-right">Code</th>
             <th class="text-right">Colour</th>
             <th class="text-right">Total</th>
-            <th class="text-right">Action</th>
+            <th class="text-right">Site Name</th>
+            <th class="text-right no-print">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -45,10 +47,12 @@
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['pure']) ?></td>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['stone']) ?></td>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['making_charge']) ?></td>
+                  <td class="text-right"><?= ($metal_voucher_detail['category_name']) ?></td>
                   <td class="text-right"><?= ($metal_voucher_detail['description']) ?></td>
                   <td class="text-right"><?= ($metal_voucher_detail['code']) ?></td>
                   <td class="text-right"><?= ($metal_voucher_detail['colour']) ?></td>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['total']) ?></td>
+                  <td class="text-right"><?= ($metal_voucher_detail['site_name']) ?></td>
                   <td class="text-right no-print"><a class='blue' href="<?=base_url().'argold/metal_issue_packing_slips/edit/'.$metal_voucher_detail['id']?>">edit</a></td>
                   </tr>
                 <?php $sr_no++; 
@@ -67,8 +71,10 @@
             <td class="text-right"></td> 
             <td class="text-right"></td>
             <td class="text-right"></td>
+            <td class="text-right"></td>
             <td class="text-right"><?=four_decimal($sum_total);?></td>
             <td class="text-right"></td>
+            <td class="text-right no-print"></td>
           </tr>
         </tbody>
       </table>

@@ -28,7 +28,7 @@ class Packing_slips extends BaseController {
 
   public function _get_form_data() {
 
-    $this->data['account_name']=$this->account_model->get('distinct(name) as name,name as id',array('group_code'=>'Export'));
+    $this->data['account_name']=$this->account_model->get('distinct(name) as name,name as id'/*,array('group_code'=>'Export')*/);
     $this->data['purity'] = $this->voucher_model->get('purity as name, purity as id', 
                                                        array('where'=>array(
                                                                'voucher_type' => 'metal issue voucher',
@@ -57,12 +57,12 @@ class Packing_slips extends BaseController {
                                                                 voucher_date,
                                                                 customer_name,
                                                                 group_concat(narration) as narration,
-                                                                argold_id as argold_id', 
+                                                                argold_id as argold_id,site_name', 
                                                                 $where, 
                                                                 array(), 
                                                                 array('group_by'=>'packet_no,
                                                                                    voucher_date, 
-                                                                                   argold_id,customer_name'));}
+                                                                                   argold_id,customer_name,site_name'));}
     
 
     } else{

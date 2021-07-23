@@ -1,4 +1,5 @@
 <h5 class="heading">Metal issue  voucher List</h5>
+<div class="table-responsive">
 <table class="table table-sm table_blue" id="tblAddRow">
   <thead>
     <tr>
@@ -11,6 +12,7 @@
       <th class="text-right">Purity</th>
       <th class="text-right">Gross weight</th>
       <th class="text-right">Qauntity</th>
+      <th class="text-right">Category</th>
       <th class="text-right">Stone</th>
       <th class="text-right">Making Charge</th>
       <th class="text-right">Colour</th>
@@ -19,6 +21,7 @@
       <th class="text-right">Factory Purity</th>
       <th class="text-right">Wastage</th>
       <th class="text-right">Issue Fine</th>
+      <th class="text-right">Site Name</th>
     </tr>
   </thead>
   <tbody>
@@ -48,8 +51,10 @@
       <th></th>
       <th></th>
       <th></th>
+      <th></th>
       <th class="text-right"><?= four_decimal($issue_fine) ?></th>
     </tr>
   </tbody>
 
 </table>
+</div>

@@ -36,6 +36,7 @@
 														  'controller' => 'packing_slip_details')); ?>
 		
 	</td>
+	
 	<td class="text-right"><?php load_field('plain/text', array('field' => 'packing_slip_stone',
 			                             				  'class' => 'packing_slip_stone',
 														  'index' => $index,
@@ -47,6 +48,18 @@
 			                             				  'class' => 'packing_slip_making_charge',
 														  'index' => $index,
 														  'value' => !empty($vouchers['packing_slip_making_charge'])?$vouchers['packing_slip_making_charge']:0,
+														  'controller' => 'packing_slip_details')); ?>
+		
+	</td>
+	<td class="text-right"><?php load_field('plain/dropdown', array('field' => 'packing_slip_category_name',
+			                             				  'class' => 'packing_slip_category_name',
+														  'index' => $index,
+														  'option'=>array(array('id'=>'CZ','name'=>'CZ'),
+														  				  array('id'=>'Meena','name'=>'Meena'),
+														  				  array('id'=>'Pearls','name'=>'Pearls'),
+														  				  array('id'=>'Plastic','name'=>'Plastic'),
+														  				  array('id'=>'Rudraksh','name'=>'Rudraksh')),
+														  'value' => !empty($vouchers['packing_slip_category_name'])?$vouchers['packing_slip_category_name']:'',
 														  'controller' => 'packing_slip_details')); ?>
 		
 	</td>
@@ -72,4 +85,5 @@
     <td class="text-right"><?= four_decimal($vouchers['factory_purity']) ?></td>
     <td class="text-right"><?= four_decimal($vouchers['factory_purity'] - $vouchers['purity']) ?></td>
     <td class="text-right"><?= four_decimal($vouchers['credit_weight']*$vouchers['factory_purity']/100); ?></td>
+    <td class="text-right"><?= four_decimal($vouchers['site_name']) ?></td>
 </tr>

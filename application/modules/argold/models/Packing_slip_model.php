@@ -99,7 +99,7 @@ class Packing_slip_model extends BaseModel {
 
           $packing_details = $this->voucher_model->find('sum(credit_weight) as credit_weight,sum(packing_slip_balance) as packing_slip_balance,
                    (sum(credit_weight*purity) / sum(credit_weight)) as purity,
-                   (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,id', array('packet_no' => $packing_slips[0],
+                   (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,id,site_name', array('packet_no' => $packing_slips[0],
                                                               'argold_id' => $packing_slips[1],
                                                               'account_name' => $this->attributes['account_name']
                                                               ));
@@ -130,6 +130,8 @@ class Packing_slip_model extends BaseModel {
       $packing_slip_detail_data['colour'] = $packing_slip_details['packing_slip_colour'];
       $packing_slip_detail_data['code'] = $packing_slip_details['packing_slip_code'];
       $packing_slip_detail_data['description'] = $packing_slip_details['packing_slip_description'];
+      $packing_slip_detail_data['category_name'] = $packing_slip_details['packing_slip_category_name'];
+      $packing_slip_detail_data['site_name'] = $packing_details['site_name'];
       $packing_slip_detail_data['total'] = $packing_slip_detail_data['net_weight']*$packing_slip_details['packing_slip_making_charge'];
       $obj_packing_slip_detail=new packing_slip_detail_model($packing_slip_detail_data);
       $obj_packing_slip_detail->save();

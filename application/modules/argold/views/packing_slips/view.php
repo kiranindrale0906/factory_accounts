@@ -12,6 +12,7 @@
   <div class="col-md-8 text-right">
   <a  href="<?=ADMIN_PATH.'argold/packing_slips/edit/'. $record['id']?>" class='btn bg_blue white no-print'>create metal receipt</a>
   </div>
+  <button class="btn btn-primary btn-sm d-print-none" id="btn_print" onclick="window.print()" data-title="Print this page"><i class="fas fa-print"></i> Print</button>
 
 </div>
 <div style="max-width:60%; margin-left:10%">
