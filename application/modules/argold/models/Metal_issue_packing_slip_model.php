@@ -29,7 +29,7 @@ class Metal_issue_packing_slip_model extends BaseModel {
                                                           sum(pure) as pure,
                                                           sum(total) as total,
                                                           sum(quantity) as quantity,
-                                                          sum(stone) as stone',
+                                                          sum(stone) as stone,site_name',
                                                         array('packing_slip_id'=>$this->formdata['metal_issue_packing_slips']['packing_slip_id']));
     $packing_slips['net_weight']=$packing_slip_details['net_weight'];
     $packing_slips['making_charge']=$packing_slip_details['making_charge'];

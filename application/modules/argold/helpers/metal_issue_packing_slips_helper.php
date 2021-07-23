@@ -72,6 +72,8 @@ function get_field_attribute($table, $field) {
     'colour' => array('Colour', '', TRUE, '', TRUE),
     'code' => array('Code', '', TRUE, '', TRUE),
     'description' => array('Description', '', TRUE, '', TRUE),
+    'category_name' => array('Category Name', '', TRUE, '', TRUE),
+    'site_name' => array('Site Name', '', TRUE, '', TRUE),
   );
   return $attributes[$table][$field];
 }
