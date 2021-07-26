@@ -54,12 +54,25 @@
 	<td class="text-right"><?php load_field('plain/dropdown', array('field' => 'packing_slip_category_name',
 			                             				  'class' => 'packing_slip_category_name',
 														  'index' => $index,
-														  'option'=>array(array('id'=>'CZ','name'=>'CZ'),
+														  'option'=>array(array('id'=>'-','name'=>'-'),
+														  				  array('id'=>'CZ','name'=>'CZ'),
 														  				  array('id'=>'Meena','name'=>'Meena'),
 														  				  array('id'=>'Pearls','name'=>'Pearls'),
 														  				  array('id'=>'Plastic','name'=>'Plastic'),
 														  				  array('id'=>'Rudraksh','name'=>'Rudraksh')),
 														  'value' => !empty($vouchers['packing_slip_category_name'])?$vouchers['packing_slip_category_name']:'',
+														  'controller' => 'packing_slip_details')); ?>
+		
+	</td><td class="text-right"><?php load_field('plain/dropdown', array('field' => 'packing_slip_category_2',
+			                             				  'class' => 'packing_slip_category_2',
+														  'index' => $index,
+														  'option'=>array(array('id'=>'-','name'=>'-'),
+														  				  array('id'=>'CZ','name'=>'CZ'),
+														  				  array('id'=>'Meena','name'=>'Meena'),
+														  				  array('id'=>'Pearls','name'=>'Pearls'),
+														  				  array('id'=>'Plastic','name'=>'Plastic'),
+														  				  array('id'=>'Rudraksh','name'=>'Rudraksh')),
+														  'value' => !empty($vouchers['packing_slip_category_2'])?$vouchers['packing_slip_category_2']:'',
 														  'controller' => 'packing_slip_details')); ?>
 		
 	</td>

@@ -15,6 +15,7 @@
       <th class="text-right">Stone</th>
       <th class="text-right">Making Charge</th>
       <th class="text-right">Category</th>
+      <th class="text-right">Category-1</th>
       <th class="text-right">Colour</th>
       <th class="text-right">Code</th>
       <th class="text-right">Description</th>

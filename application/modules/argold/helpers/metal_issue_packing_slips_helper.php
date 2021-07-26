@@ -69,11 +69,12 @@ function get_field_attribute($table, $field) {
     'gross_weight' => array('Gross weight', '', TRUE, '', TRUE),
     'making_charge' => array('Making Charge', '', TRUE, '', TRUE),
     'stone' => array('Stone', '', TRUE, '', TRUE),
-    'colour' => array('Colour', '', TRUE, '', TRUE),
-    'code' => array('Code', '', TRUE, '', TRUE),
-    'description' => array('Description', '', TRUE, '', TRUE),
-    'category_name' => array('Category Name', '', TRUE, '', TRUE),
-    'site_name' => array('Site Name', '', TRUE, '', TRUE),
+    'colour' => array('Colour', '', False, '', False),
+    'code' => array('Code', '', False, '', False),
+    'description' => array('Description', '', False, '', False),
+    'category_name' => array('Category Name', '', False, '', False),
+    'category_2' => array('Category Two', '', False, '', False),
+    'site_name' => array('Site Name', '', False, '', False),
   );
   return $attributes[$table][$field];
 }
