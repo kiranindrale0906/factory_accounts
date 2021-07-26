@@ -6,6 +6,7 @@
       action="<?= get_form_action($controller, $action, $record) ?>">
   <?php if ($action == 'edit' || $action == 'update'): ?>
     <?php load_field('hidden', array('field' => 'id')); ?>
+    <?php load_field('text', array('field' => 'sr_no')); ?>
     <?php load_field('text', array('field' => 'gross_weight')); ?>
     <?php load_field('text', array('field' => 'stone')); ?>
     <?php load_field('text', array('field' => 'making_charge')); ?>

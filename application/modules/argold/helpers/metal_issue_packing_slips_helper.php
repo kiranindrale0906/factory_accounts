@@ -75,6 +75,7 @@ function get_field_attribute($table, $field) {
     'category_name' => array('Category Name', '', False, '', False),
     'category_2' => array('Category Two', '', False, '', False),
     'site_name' => array('Site Name', '', False, '', False),
+    'sr_no' => array('Tag No', '', False, '', False),
   );
   return $attributes[$table][$field];
 }
