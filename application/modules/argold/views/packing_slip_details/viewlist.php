@@ -20,6 +20,7 @@
             <th class="text-right">Colour</th>
             <th class="text-right">Making Charge</th>
             <th class="text-right">Code</th>
+            <th class="text-right">Total</th>
             <th class="text-right">Site Name</th>
             <th class="text-right no-print">Action</th>
           </tr>
@@ -39,7 +40,7 @@
                ?>
 
                 <tr>
-                  <td><?= $sr_no+1?></td>
+                  <td><?= ($metal_voucher_detail['id'])?></td>
                   <td class="text-right"><?= ($metal_voucher_detail['quantity']) ?></td>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['gross_weight']); ?></td>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['net_weight']) ?></td>
@@ -52,6 +53,7 @@
                   <td class="text-right"><?= ($metal_voucher_detail['colour']) ?></td>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['making_charge']) ?></td>
                   <td class="text-right"><?= ($metal_voucher_detail['code']) ?></td>
+                  <td class="text-right"><?= four_decimal($metal_voucher_detail['total']) ?></td>
                   <td class="text-right"><?= ($metal_voucher_detail['site_name']) ?></td>
                   <td class="text-right no-print"><a class='blue' href="<?=base_url().'argold/metal_issue_packing_slips/edit/'.$metal_voucher_detail['id']?>">edit</a></td>
                   </tr>
@@ -73,6 +75,7 @@
             <td class="text-right"></td>
             <td class="text-right"><?=four_decimal($sum_making_charge);?></td> 
             <td class="text-right"></td>
+            <td class="text-right"><?=four_decimal($sum_total);?></td>
             <td class="text-right"></td>
             <td class="text-right no-print"></td>
           </tr>
