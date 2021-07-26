@@ -7,6 +7,7 @@
       <th>Date</th>
       <th>Narration</th>
       <th>Customer Name</th>
+      <th class="text-right">Tag No</th>
       <th class="text-right">Weight</th>
       <th class="text-right">Balance</th>
       <th class="text-right">Purity</th>
@@ -20,9 +21,6 @@
       <th class="text-right">Code</th>
       <th class="text-right">Description</th>
       <th class="text-right">Factory Purity</th>
-      <th class="text-right">Wastage</th>
-      <th class="text-right">Issue Fine</th>
-      <th class="text-right">Site Name</th>
     </tr>
   </thead>
   <tbody>
@@ -51,9 +49,6 @@
       <th></th>
       <th></th>
       <th></th>
-      <th></th>
-      <th></th>
-      <th class="text-right"><?= four_decimal($issue_fine) ?></th>
     </tr>
   </tbody>
 

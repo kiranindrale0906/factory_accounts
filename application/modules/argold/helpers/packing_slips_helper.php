@@ -96,6 +96,7 @@ function get_field_attribute($table, $field) {
     'packing_slip_net_weight' => array('', '', TRUE, '', TRUE),
     'packing_slip_category_name' => array('', '', TRUE, '', TRUE),
     'packing_slip_category_2' => array('', '', TRUE, '', TRUE),
+    'packing_slip_sr_no' => array('', '', TRUE, '', TRUE),
     'packing_slip_description' => array('', '', TRUE, '', TRUE),
     'packing_slip_colour' => array('', '', TRUE, '', TRUE),
     'packing_slip_quantity' => array('', '', TRUE, '', TRUE),

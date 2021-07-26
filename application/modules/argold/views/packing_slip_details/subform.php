@@ -19,6 +19,13 @@
 	<td><?php echo $vouchers['voucher_date'];?></td>
 	<td><?php echo $vouchers['narration'];?> </td>
   	<td class="text-right"><?= (!empty($vouchers['customer_name'])&& $vouchers['customer_name']!='Market Issue')?($vouchers['customer_name']):'' ;?></td>
+  	<td class="text-right"><?php load_field('plain/text', array('field' => 'packing_slip_sr_no',
+			                             				  'class' => 'packing_slip_sr_no',
+														  'index' => $index,
+														  'value' => !empty($vouchers['packing_slip_sr_no'])?$vouchers['packing_slip_sr_no']:0,
+														  'controller' => 'packing_slip_details')); ?>
+		
+	</td>
   	<td class="text-right"><?= four_decimal($vouchers['credit_weight']) ;?></td>
   	<td class="text-right"><?= four_decimal($vouchers['packing_slip_balance']) ;?></td>
 	<td class="text-right"><?= four_decimal($vouchers['purity']); ?></td>
@@ -95,8 +102,5 @@
 			                             				  'value' => !empty($vouchers['packing_slip_description'])?$vouchers['packing_slip_description']:'',
 														  'index' => $index,
 														  'controller' => 'packing_slip_details')); ?></td>
-    <td class="text-right"><?= four_decimal($vouchers['factory_purity']) ?></td>
-    <td class="text-right"><?= four_decimal($vouchers['factory_purity'] - $vouchers['purity']) ?></td>
-    <td class="text-right"><?= four_decimal($vouchers['credit_weight']*$vouchers['factory_purity']/100); ?></td>
     <td class="text-right"><?= four_decimal($vouchers['site_name']) ?></td>
 </tr>

@@ -9,7 +9,7 @@
             <?php foreach ($metal_voucher_details as $index => $metal_voucher_detail) {
                    ?>
             <td class="">Tag No.</td>
-            <td class="text-center"><?= ($metal_voucher_detail['id']); ?></td>
+            <td class="text-center"><?= ($metal_voucher_detail['sr_no']); ?></td>
             
            <?php 
             }?>
