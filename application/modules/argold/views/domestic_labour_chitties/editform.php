@@ -1,0 +1,19 @@
+<?php
+  if (!isset($record)) 
+    $record = array();
+?>
+<form method="post" class="form-horizontal fields-group-sm form_radius_none" enctype="multipart/form-data"
+      action="<?= get_form_action($controller, $action, $record) ?>">
+  <?php if ($action == 'edit' || $action == 'update'): ?>
+    <?php load_field('hidden', array('field' => 'id')); ?>
+  <?php endif; ?>     
+  <div class="row">    
+    <?php load_field('text', array('field' => 'account_name','option'=>$account_name,'readonly' => true));?>
+    <?php load_field('date',array('field' => 'date','class'=>'datepicker_js','value'=>(!empty($record['date'])?date('d-m-Y',strtotime($record['date'])):date('d-m-Y')), )); ?>
+  </div>
+    <?php $this->load->view('domestic_labour_chitti_details/formlist');?>
+  <?php load_buttons('submit', array('controller' => $controller, 'name' => 'SAVE' , 'class' => 'btn_blue')) ;
+    echo validation_errors();
+  ?>
+
+</form>

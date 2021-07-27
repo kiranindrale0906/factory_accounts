@@ -476,6 +476,10 @@ $('select[name*="packing_slips[account_name]"]').on('change', function() {
   var account_name = $(this).val(); 
   window.location = base_url+ 'argold/packing_slips/create?account_name='+account_name;  
 });
+$('select[name*="domestic_labour_chitties[account_name]"]').on('change', function() {
+  var account_name = $(this).val(); 
+  window.location = base_url+ 'argold/domestic_labour_chitties/create?account_name='+account_name;  
+});
 $('select[name*="chitti_exports[purity]"]').on('change', function() {
   var purity = $(this).val(); 
   var site_name = $('select[name*="chitti_exports[site_name]"] option:selected').text();

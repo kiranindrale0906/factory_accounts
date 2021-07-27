@@ -41,6 +41,7 @@
                                             'argold/chittis' => 'Chitti',
                                             'argold/chitti_exports' => 'Chitti Export',
                                             'argold/packing_slips' => 'Packing slips',
+                                            'argold/domestic_labour_chitties' => 'Domestic Labour Chitti',
                                             'argold/refresh' => 'Refresh',
                                             'transactions/loss_outs' => 'Loss Out',
 
