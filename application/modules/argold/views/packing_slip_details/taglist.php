@@ -4,7 +4,7 @@
     ?>
       <!-- <h6>Packet No :<?=$packet_no ?> </h6>     -->
       <div class="" style="font-weight:500">
-      <table class="">
+      <table class="table">
           <tr>
             <?php foreach ($metal_voucher_details as $index => $metal_voucher_detail) {
                    ?>
@@ -52,7 +52,7 @@
             foreach ($metal_voucher_details as $index => $metal_voucher_detail) {
                ?> 
             
-            <td class="">Description</td>
+            <td class="">Desc</td>
             <td class="text-center"><?= ($metal_voucher_detail['description']) ?></td>
          <?php 
             }

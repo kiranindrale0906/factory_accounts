@@ -27,9 +27,10 @@
         </thead>
         <tbody>
           <?php 
-            $sum_weight=$sum_balance=$sum_total=$sum_net_weight=$sum_pure=$sum_stone=$sum_making_charge=0;
+            $sum_weight=$sum_quantity=$sum_balance=$sum_total=$sum_net_weight=$sum_pure=$sum_stone=$sum_making_charge=0;
             $sr_no=0;
             foreach ($metal_voucher_details as $index => $metal_voucher_detail) {
+                $sum_quantity += $metal_voucher_detail['quantity'];
                 $sum_weight += $metal_voucher_detail['gross_weight'];
                 $sum_net_weight += $metal_voucher_detail['net_weight'];
                 $sum_pure += $metal_voucher_detail['pure'];
@@ -62,7 +63,7 @@
           ?>
           <tr class="bg_gray bold">
             <td>Total</td>
-            <td class="text-right"></td> 
+            <td class="text-right"><?=$sum_quantity?></td> 
             <td class="text-right"><?=four_decimal($sum_weight);?></td>
             <td class="text-right"><?=four_decimal($sum_net_weight);?></td>
             <td class="text-right"><?=four_decimal($sum_stone);?></td> 
@@ -71,8 +72,7 @@
             <td class="text-right"></td> 
             <td class="text-right"></td>
             <td class="text-right"></td>
-            <td class="text-right"></td>
-            <td class="text-right"><?=four_decimal($sum_making_charge);?></td> 
+            <td class="text-right"></td><?=four_decimal($sum_making_charge);?></td> 
             <td class="text-right"></td>
             <td class="text-right"><?=four_decimal($sum_total);?></td>
             <td class="text-right"></td>
