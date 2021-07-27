@@ -72,7 +72,8 @@
             <td class="text-right"></td> 
             <td class="text-right"></td>
             <td class="text-right"></td>
-            <td class="text-right"></td><?=four_decimal($sum_making_charge);?></td> 
+            <td class="text-right"></td>
+            <td class="text-right"></td>
             <td class="text-right"></td>
             <td class="text-right"><?=four_decimal($sum_total);?></td>
             <td class="text-right"></td>
