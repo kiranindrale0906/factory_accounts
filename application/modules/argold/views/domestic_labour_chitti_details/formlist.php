@@ -6,13 +6,10 @@
       <th><?php load_buttons('anchor', array('name'=>'Select All', 'class'=>'blue select_all')); ?></th>
       <th>Date</th>
       <th>Narration</th>
-      <th>Customer Name</th>
       <th class="text-right">Weight</th>
       <th class="text-right">Rate</th>
       <th class="text-right">Purity</th>
-      <th class="text-right">Factory Purity</th>
       <th class="text-right">Fine</th>
-      <th class="text-right">Factory Fine</th>
     </tr>
   </thead>
   <tbody>
@@ -28,10 +25,7 @@
       <th>Total</th>
       <th></th>
       <th></th>
-      <th></th>
       <th class="text-right"><?= four_decimal($weight) ?></th>
-      <th></th>
-      <th></th>
       <th></th>
       <th></th>
       <th></th>

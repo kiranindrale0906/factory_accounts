@@ -8,17 +8,13 @@
         <thead>
           <tr>
             <th></th>
-            <th>Design Name</th>
-            <th>Customer Name</th>
-            <th class="text-right">Gross</th>
-            <?php if ($detail==1): ?>
-              <th class="text-right">Factory Purity</th>
-            <?php endif; ?>
-            <th class="text-right">Melting</th>
-            <th class="text-right">Wastage</th>
+            <th>Date</th>
+            <th>Narration</th>
+            <th class="text-right">Weight</th>
+            <th class="text-right">Purity</th>
             <th class="text-right">Fine</th>
-            <th class="text-right">Rate</th>
-            <th class="text-right">Total</th>
+            <th class="text-right">Product Rate</th>
+            <th class="text-right">Total Amount</th>
             <!-- <th class="text-right no-print">Action</th> -->
           </tr>
         </thead>
@@ -37,6 +33,7 @@
 
                 <tr>
                   <td><?=$sr_no; ?></td>
+                  <td><?=$metal_voucher_detail['voucher_date']; ?></td>
                   <td>
                     <?php
                       $narration = explode(', ', $metal_voucher_detail['narration']);
@@ -46,13 +43,8 @@
                       echo str_replace('HCC', 'Hollow Choco Chain', $narration);
                     ?>
                   </td>
-                  <td class="text-right"><?= (!empty($metal_voucher_detail['customer_name'])&& $metal_voucher_detail['customer_name']!='Market Issue')?($metal_voucher_detail['customer_name']):'' ; ?></td>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['credit_weight']); ?></td>
-                  <td class="text-right"><?= four_decimal($metal_voucher_detail['factory_purity'] - $metal_voucher_detail['chitti_purity']) ?></td>
-                  <!-- <td class="text-right"><?//= four_decimal($metal_voucher_detail['usd_wastage_percentage']); ?></td>
-                  <td class="text-right"><?//= four_decimal($metal_voucher_detail['inr_wastage_percentage']); ?></td>
-                   -->
-                  <td class="text-right"><?= four_decimal($metal_voucher_detail['factory_fine']) ?></td>
+                  <td class="text-right"><?= four_decimal($metal_voucher_detail['purity']) ?></td>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['fine']) ?></td>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['process_rate']) ?></td>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['credit_weight']*$metal_voucher_detail['process_rate']) ?></td>
@@ -68,7 +60,6 @@
             <td></td>
             <td class="text-right"><?=four_decimal($sum_weight);?></td>
             <td class="text-right"></td>
-            <td class="text-right"><?=four_decimal($sum_factory_fine);?></td>
             <td class="text-right"><?=four_decimal($sum_fine);?></td>
             <td class="text-right"><?=four_decimal($sum_rate);?></td>
             <td class="text-right"><?=four_decimal($sum_total);?></td>

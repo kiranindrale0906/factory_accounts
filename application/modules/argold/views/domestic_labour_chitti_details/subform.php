@@ -18,8 +18,6 @@
 	</td>
 	<td><?php echo $vouchers['voucher_date'];?></td>
 	<td><?php echo $vouchers['narration'];?> </td>
-  	<td class="text-right"><?= (!empty($vouchers['customer_name'])&& $vouchers['customer_name']!='Market Issue')?($vouchers['customer_name']):'' ;?></td>
-  	
   	<td class="text-right"><?= four_decimal($vouchers['credit_weight']) ;?></td>
   	<td class="text-right"><?php load_field('plain/text', array('field' => 'rate',
 			                             				  'class' => 'rate',
@@ -29,7 +27,5 @@
 		
 	</td>
 	<td class="text-right"><?= four_decimal($vouchers['purity']); ?></td>
-	<td class="text-right"><?= four_decimal($vouchers['factory_purity']); ?></td>
 	<td class="text-right"><?= four_decimal($vouchers['fine']); ?></td>
-	<td class="text-right"><?= four_decimal($vouchers['factory_fine']); ?></td>
 </tr>
