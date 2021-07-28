@@ -50,7 +50,8 @@ class Packing_slips extends BaseController {
       $this->data['metal_vouchers'] = $this->voucher_model->get('',$where);
     
     }else{
-    $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,sum(packing_slip_balance) as packing_slip_balance,
+      $where['voucher_date > '] = '2021-07-27';
+      $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,sum(packing_slip_balance) as packing_slip_balance,
                                                                 (sum(credit_weight*purity) / sum(credit_weight)) as purity,
                                                                 (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,
                                                                 "" as voucher_number,
