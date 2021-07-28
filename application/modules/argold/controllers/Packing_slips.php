@@ -33,7 +33,8 @@ class Packing_slips extends BaseController {
                                                        array('where'=>array(
                                                                'voucher_type' => 'metal issue voucher',
                                                                'packing_slip_id' => 0,
-                                                               'receipt_type in ("Finish Good","GPC Out")'=>NULL
+                                                               'receipt_type in ("Finish Good","GPC Out")'=>NULL,
+                                                               'voucher_date > ' => '2021-07-27'
                                                              )) ,
                                                        array(), array('group_by' => 'purity'));
     
