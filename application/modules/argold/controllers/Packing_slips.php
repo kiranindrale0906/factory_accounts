@@ -33,7 +33,8 @@ class Packing_slips extends BaseController {
                                                        array('where'=>array(
                                                                'voucher_type' => 'metal issue voucher',
                                                                'packing_slip_id' => 0,
-                                                               'receipt_type in ("Finish Good","GPC Out")'=>NULL
+                                                               'receipt_type in ("Finish Good","GPC Out")'=>NULL,
+                                                               'voucher_date > ' => '2021-07-27'
                                                              )) ,
                                                        array(), array('group_by' => 'purity'));
     
@@ -49,7 +50,8 @@ class Packing_slips extends BaseController {
       $this->data['metal_vouchers'] = $this->voucher_model->get('',$where);
     
     }else{
-    $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,sum(packing_slip_balance) as packing_slip_balance,
+      $where['voucher_date > '] = '2021-07-27';
+      $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,sum(packing_slip_balance) as packing_slip_balance,
                                                                 (sum(credit_weight*purity) / sum(credit_weight)) as purity,
                                                                 (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,
                                                                 "" as voucher_number,
