@@ -62,7 +62,10 @@ class Packing_slips extends BaseController {
                                                                 array(), 
                                                                 array('group_by'=>'packet_no,
                                                                                    voucher_date, 
-                                                                                   argold_id,customer_name,site_name'));}
+                                                                                   argold_id,customer_name,site_name'));
+    pd($where);
+
+  }
     
 
     } else{
