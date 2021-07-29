@@ -11,7 +11,6 @@ class Packing_slips extends BaseController {
   }
   
   public function view($id) {
-    $this->db->query("update ac_vouchers set packing_slip_balance=credit_weight;");
     $this->data['layout'] = 'plain';
     parent::view($id);
   }
@@ -29,6 +28,7 @@ class Packing_slips extends BaseController {
 
   public function _get_form_data() {
 
+    $this->db->query("update ac_vouchers set packing_slip_balance=credit_weight;");
     $this->data['account_name']=$this->account_model->get('distinct(name) as name,name as id',array('group_code'=>'Export'));
     $this->data['purity'] = $this->voucher_model->get('purity as name, purity as id', 
                                                        array('where'=>array(
