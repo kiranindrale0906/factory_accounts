@@ -41,7 +41,7 @@ class Packing_slips extends BaseController {
     
     if (!empty($_GET['account_name']))
       $this->data['record']['account_name'] = $_GET['account_name'];
-    $where=array('voucher_type' => 'metal issue voucher','packing_slip_balance=' => 0,);
+    $where=array('voucher_type' => 'metal issue voucher','packing_slip_balance!=' => 0,);
     
     if(!empty($this->data['record']['account_name'])) { 
       $where['account_name']=$this->data['record']['account_name'];
