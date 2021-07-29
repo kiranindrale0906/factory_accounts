@@ -51,9 +51,8 @@ class Ledgers extends BaseController {
         || $this->data['report_type'] == 'Production Report') {
       $export_accounts = $this->account_model->get('name', array('group_code' => 'Export'));
       $export_account_names = array_column($export_accounts, 'name');
-      $export_account_names = implode($export_account_names, ", ");
-      pd($export_account_names);
-      $where['(purity != factory_purity) or account_name in ("")'] = NULL;
+      $export_account_names = implode($export_account_names, '", "');
+      $where['(purity != factory_purity) or account_name in ("'.$export_account_names.'")'] = NULL;
     }
 
 
