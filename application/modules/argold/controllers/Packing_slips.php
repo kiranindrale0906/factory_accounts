@@ -28,6 +28,7 @@ class Packing_slips extends BaseController {
 
   public function _get_form_data() {
 
+    $this->db->query("update ac_vouchers set packing_slip_balance=credit_weight;");
     $this->data['account_name']=$this->account_model->get('distinct(name) as name,name as id',array('group_code'=>'Export'));
     $this->data['purity'] = $this->voucher_model->get('purity as name, purity as id', 
                                                        array('where'=>array(
@@ -40,7 +41,7 @@ class Packing_slips extends BaseController {
     
     if (!empty($_GET['account_name']))
       $this->data['record']['account_name'] = $_GET['account_name'];
-    $where=array('voucher_type' => 'metal issue voucher','packing_slip_balance=' => 0,);
+    $where=array('voucher_type' => 'metal issue voucher','packing_slip_balance!=' => 0,);
     
     if(!empty($this->data['record']['account_name'])) { 
       $where['account_name']=$this->data['record']['account_name'];

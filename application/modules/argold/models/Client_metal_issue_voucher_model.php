@@ -27,6 +27,7 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
       $this->attributes['fine'] = 0;
     else
       $this->attributes['fine'] = $this->attributes['credit_weight'] * $this->attributes['purity'] / 100;
+    $this->attributes['packing_slip_balance'] =$this->attributes['credit_weight'];
 
     $this->set_factory_purity_and_factory_fine_from_narration();    
     $this->set_id_for_alloy_vodator_gpc_vodator_and_stone_vatav();
