@@ -3,7 +3,7 @@
 class Ledgers extends BaseController {
 	public function __construct() {
   	parent::__construct();
-    $this->load->model(array('transactions/ledger_model'));
+    $this->load->model(array('transactions/ledger_model', 'masters/account_model'));
   }
 
   protected function get_datewise_ledger_records() {
@@ -44,8 +44,21 @@ class Ledgers extends BaseController {
     if(!empty($this->data['record']['account_id']))        $where['account_id'] = $this->data['record']['account_id'];
     if (   !empty($this->data['site_name']) 
         && $this->data['site_name'] != 'All')              $where['site_name'] = $this->data['site_name'];
+
+
+    
     if (   $this->data['report_type'] == 'Vadotar Report'
-        || $this->data['report_type'] == 'Production Report')    $where['purity != factory_purity'] = NULL;
+        || $this->data['report_type'] == 'Production Report') {
+      $export_accounts = $this->account_model->get('name', array('group_code' => 'Export'));
+      $export_account_names = array_column($export_accounts, 'name');
+      $export_account_names = implode($export_account_names, '", "');
+      //$where['(purity != factory_purity) or account_name in ("'.$export_account_names.'")'] = NULL;
+      $where['(purity != factory_purity)'] = NULL;
+      //pd($where);
+    }
+
+
+
     if ($this->data['report_type'] == 'Production Report') $where['account_name != '] = 'VADOTAR';
     
     if ($this->data['report_type'] == 'Account Ledger' && $this->data['group'] == 'date')
