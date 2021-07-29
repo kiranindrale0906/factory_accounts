@@ -10,6 +10,7 @@
     <?php load_field('text', array('field' => 'gross_weight')); ?>
     <?php load_field('text', array('field' => 'stone')); ?>
     <?php load_field('text', array('field' => 'making_charge')); ?>
+    <?php load_field('text', array('field' => 'quantity')); ?>
     <?php load_field('dropdown', array('field' => 'category_name','option'=>array(array('id'=>'-','name'=>'-'),
                                         array('id'=>'CZ','name'=>'CZ'),
                                         array('id'=>'Meena','name'=>'Meena'),
