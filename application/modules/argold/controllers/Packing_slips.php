@@ -12,6 +12,7 @@ class Packing_slips extends BaseController {
   
   public function view($id) {
     $this->db->query("update ac_vouchers set packing_slip_balance=credit_weight;");
+    
     $this->data['layout'] = 'plain';
     parent::view($id);
   }
