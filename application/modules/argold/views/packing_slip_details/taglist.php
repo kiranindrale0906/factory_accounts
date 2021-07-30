@@ -78,8 +78,14 @@
 table, th, td {
   border: 1px solid #b0b0b0;
   border-collapse: collapse;
-  width: auto;
-  overflow: hidden;
-  word-wrap: break-word;
+
+}
+@media print
+{
+  table { page-break-after:auto }
+  tr    { page-break-inside:avoid; page-break-after:auto }
+  td    { page-break-inside:avoid; page-break-after:auto }
+  thead { display:table-header-group }
+  tfoot { display:table-footer-group }
 }
 </style>
