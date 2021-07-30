@@ -15,7 +15,7 @@ class Quator_wise_loss_reports extends BaseController {
     $this->load->render($this->router->class."/index",$this->data);
   }
   public function _get_form_data() {
-    $this->data['quators'] = $this->quator_model->get('name');
+    $this->data['quators'] = $this->quator_model->get('name,from_date,to_date');
     $this->data['quator_name']            = (!empty($_GET['quator'])) ? $_GET['quator'] : '';
     
     $this->data['factory_name']=!empty($_GET['site_name'])?$_GET['site_name']:'AR Gold';
