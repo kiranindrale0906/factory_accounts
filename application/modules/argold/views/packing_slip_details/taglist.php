@@ -46,15 +46,15 @@
             
             <td class="">Karat</td>
             <td class="text-center"><?php
-              if($metal_voucher_detail['purity'])>=91.50 && $metal_voucher_detail['purity'])<= 92){
+              if($metal_voucher_detail['purity']>=91.50 && $metal_voucher_detail['purity']<= 92){
                     echo "22 Kt";
-              }elseif($metal_voucher_detail['purity'])>=87.50 && $metal_voucher_detail['purity'])<= 88){
+              }elseif($metal_voucher_detail['purity']>=87.50 && $metal_voucher_detail['purity']<= 88){
                     echo "21 Kt";
-              }elseif($metal_voucher_detail['purity'])>=75 && $metal_voucher_detail['purity'])<= 75.50){
+              }elseif($metal_voucher_detail['purity']>=75 && $metal_voucher_detail['purity']<= 75.50){
                     echo "18 Kt";
-              }elseif($metal_voucher_detail['purity'])>=58 && $metal_voucher_detail['purity'])<= 58.50){
+              }elseif($metal_voucher_detail['purity']>=58 && $metal_voucher_detail['purity']<= 58.50){
                     echo "14 Kt";
-              }elseif($metal_voucher_detail['purity'])>=41 && $metal_voucher_detail['purity'])<= 42){
+              }elseif($metal_voucher_detail['purity']>=41 && $metal_voucher_detail['purity']<= 42){
                     echo "10 Kt";
               }
 
