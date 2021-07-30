@@ -78,5 +78,8 @@
 table, th, td {
   border: 1px solid #b0b0b0;
   border-collapse: collapse;
+  width: auto;
+  overflow: hidden;
+  word-wrap: break-word;
 }
 </style>
