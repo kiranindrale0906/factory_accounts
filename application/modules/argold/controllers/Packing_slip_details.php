@@ -11,4 +11,21 @@ class Packing_slip_details extends BaseController {
     $this->where = 'packing_slip_id ='.$packing_slip_id;
     parent::index();
   }
+  public function delete($id) {
+
+    $voucher_id=!empty($_GET['voucher_id'])?$_GET['voucher_id']:0;
+    $packing_details=$this->packing_slip_detail_model->find('',array('id'=>$id));
+    if(!empty($voucher_id) && $voucher_id!=0){
+      $voucher_details=$this->voucher_model->get('',array('packing_slip_id'=>$packing_details['packing_slip_id'],'id'=>$voucher_id));
+      $this->packing_slip_detail_model->update_packing_slip_ids($voucher_details,$packing_details);
+      parent::delete($id);
+      redirect(base_url().'argold/packing_slips/view/'.$packing_details['packing_slip_id']);
+    }else{
+      $voucher_details=$this->voucher_model->get('',array('packing_slip_id'=>$id));
+      if(!empty($voucher_details)){
+        $this->packing_slip_detail_model->update_packing_slip_ids($voucher_details,$packing_details);
+      }
+      parent::delete($id);
+    }
+  }
 }

@@ -27,7 +27,7 @@ class Packing_slips extends BaseController {
   }
 
   public function _get_form_data() {
-    $this->data['account_name']=$this->account_model->get('distinct(name) as name,name as id',array('group_code'=>'Export'));
+    $this->data['account_name']=$this->account_model->get('distinct(name) as name,name as id',/*array('group_code'=>'Export')*/);
     $this->data['purity'] = $this->voucher_model->get('purity as name, purity as id', 
                                                        array('where'=>array(
                                                                'voucher_type' => 'metal issue voucher',
@@ -47,24 +47,10 @@ class Packing_slips extends BaseController {
       unset($where['packing_slip_id']);
       $where['id']=$_GET['voucher_id'];
       $this->data['metal_vouchers'] = $this->voucher_model->get('',$where);
-    
     }else{
-      $where['voucher_date > '] = '2021-07-27';
-      $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,sum(packing_slip_balance) as packing_slip_balance,
-                                                                (sum(credit_weight*purity) / sum(credit_weight)) as purity,
-                                                                (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,
-                                                                "" as voucher_number,
-                                                                packet_no,
-                                                                voucher_date,
-                                                                customer_name,
-                                                                group_concat(narration) as narration,
-                                                                argold_id as argold_id,site_name', 
-                                                                $where, 
-                                                                array(), 
-                                                                array('group_by'=>'packet_no,
-                                                                                   voucher_date, 
-                                                                                   argold_id,customer_name,site_name'));
-
+      $where['date(voucher_date) > '] = '2021-07-27';
+      $this->data['metal_vouchers'] = $this->voucher_model->get('', $where);
+      
   }
     
 

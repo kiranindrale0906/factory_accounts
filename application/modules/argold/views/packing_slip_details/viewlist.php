@@ -55,7 +55,9 @@
                   <td class="text-right"><?= ($metal_voucher_detail['code']) ?></td>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['total']) ?></td>
                   <td class="text-right"><?= ($metal_voucher_detail['site_name']) ?></td>
-                  <td class="text-right no-print"><a class='blue' href="<?=base_url().'argold/metal_issue_packing_slips/edit/'.$metal_voucher_detail['id']?>">edit</a></td>
+                  <td class="text-right no-print">
+                    <a class='blue' href="<?=base_url().'argold/metal_issue_packing_slips/edit/'.$metal_voucher_detail['id']?>">edit</a>
+                    <a class='red' href="<?=base_url().'argold/packing_slip_details/delete/'.$metal_voucher_detail['id'].'?voucher_id='.$metal_voucher_detail['voucher_id']?>">remove</a></td>
                   </tr>
                 <?php $sr_no++; 
               //}

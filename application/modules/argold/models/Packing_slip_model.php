@@ -138,21 +138,7 @@ class Packing_slip_model extends BaseModel {
       $obj_packing_slip_detail=new packing_slip_detail_model($packing_slip_detail_data);
       $obj_packing_slip_detail->save();
   }  
-  public function update_chitti_ids($voucher_details) {
-    if(!empty($voucher_details)){
-      foreach ($voucher_details as $index => $voucher_detail) {
-        if (isset($voucher_detail['id'])) {
-        $voucher_obj = new voucher_model($voucher_detail);
-        $voucher_obj->attributes['packing_slip_id'] = 0;
-        $voucher_obj->update(false);
-        $ledger_details=$this->ledger_model->find('',array('voucher_id'=>$voucher_detail['id']));
-        $ledger_obj = new ledger_model($ledger_details);
-        $ledger_obj->attributes['packing_slip_id'] = 0;
-        $ledger_obj->update(false);
-        }
-      }
-    }
-  }
+  
   public function chitti_detail_exist($name) {
     if(empty($this->formdata['packing_slip_details'])){
       return false;
