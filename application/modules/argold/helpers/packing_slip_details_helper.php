@@ -2,7 +2,7 @@
 
 function getTableSettings($data=array(),$where=array()) {
   return array(
-    'page_title'          => 'packing slip List',
+    'page_title'          => 'Packing Slip Details List',
     'primary_table'       => 'packing_slip_details',
     'default_column'      => 'id',
     'table'               => 'packing_slip_details',
@@ -51,7 +51,6 @@ function list_settings() {
     array("Code", "code", FALSE, "code", FALSE, FALSE),
     array("Total", "total", FALSE, "total", FALSE, FALSE),
     array("Site Name", "site_name", FALSE, "site_name", FALSE, FALSE),
-    array("Action", "action", FALSE, "action", FALSE, FALSE),
   );
 }
 
