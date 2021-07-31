@@ -96,7 +96,6 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                                    array('account_name != ' => 'Tounch Loss Fine'));
 
       $this->attributes['debit_weight'] = empty($total_vadotar['vadotar']) ? 0 : -1 * $total_vadotar['vadotar'];    
-      pd($this->attributes['debit_weight']);
       if ($this->attributes['debit_weight'] == 0) {
         die();   //this needs to be converted into a validation
       }
