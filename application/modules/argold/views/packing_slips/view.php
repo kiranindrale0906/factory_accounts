@@ -17,8 +17,8 @@
   
   <a  href="<?=ADMIN_PATH.'argold/packing_slips/view/'. $record['id'].'?tag=1'?>" class='btn bg_blue white no-print'>Tagging</a>
 
-  <a  href="<?=ADMIN_PATH.'/argold//packing_slip_details//index?format=xlsx&amp;export=1&amp;xlsx&amp;packing_slip_id='. $record['id'] ?>" class='btn bg_blue white no-print'>Export</a>
-
+  <a  href="<?=ADMIN_PATH.'argold/packing_slip_details?packing_slip_id='. $record['id'] ?>" class='btn bg_blue white no-print'>Export</a>
+  
   <button class="btn btn-primary btn-sm d-print-none" id="btn_print" onclick="window.print()" data-title="Print this page"><i class="fas fa-print"></i> Print</button></div>
 
 </div>
