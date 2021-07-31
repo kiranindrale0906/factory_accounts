@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed.');
 
-function getTableSettings() {
+function getTableSettings($data=array(),$where=array()) {
   return array(
     'page_title'          => 'packing slip List',
     'primary_table'       => 'packing_slip_details',
@@ -8,7 +8,7 @@ function getTableSettings() {
     'table'               => 'packing_slip_details',
     'join_columns'        => '',
     'join_type'           => '',
-    'where'               => '',
+    'where'               => $where,
     'where_ids'           => '',
     'order_by'            => 'id desc',
     'limit'               => "20",
