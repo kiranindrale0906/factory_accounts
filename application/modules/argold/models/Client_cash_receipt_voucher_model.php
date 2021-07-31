@@ -16,10 +16,10 @@ class Client_cash_receipt_voucher_model extends Core_cash_receipt_voucher_model 
   }
   public function before_validate() {
 
-    if($this->attributes['usd_rate']>0 && $this->attributes['usd_debit_amount']>0){
+    if(!empty($this->attributes['usd_rate'])&&$this->attributes['usd_rate']>0 && $this->attributes['usd_debit_amount']>0){
     $this->attributes['debit_amount']=$this->attributes['usd_debit_amount']*$this->attributes['usd_rate'];
     }
-    if($this->attributes['usd_rate']>0 && $this->attributes['usd_debit_amount']==0){
+    if(!empty($this->attributes['usd_rate'])&&$this->attributes['usd_rate']>0 && $this->attributes['usd_debit_amount']==0){
     $this->attributes['usd_rate']=0;
     }
   }

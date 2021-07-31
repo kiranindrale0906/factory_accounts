@@ -7,7 +7,7 @@ class Domestic_labour_chitty_model extends BaseModel {
 
   public function __construct($data = array()){
 		parent::__construct($data);
-    $this->load->model(array('transactions/rate_cut_issue_voucher_model','transactions/ledger_model'));
+    $this->load->model(array('transactions/ledger_model'));
   }
   
   public function validation_rules($klass='') {
@@ -56,15 +56,30 @@ class Domestic_labour_chitty_model extends BaseModel {
      foreach ($this->formdata['domestic_labour_chitti_details'] as $index => $value) {
        $rate+=$value['rate'];
      }
-    
-    $this->attributes['date']=date('Y-m-d',strtotime($this->attributes['date']));
-    $this->attributes['weight']=$domestic_labour_chitti_details['credit_weight'];
-    $this->attributes['rate']=$rate;
-    $this->attributes['purity']=$domestic_labour_chitti_details['purity'];
-    $this->attributes['factory_purity']=$domestic_labour_chitti_details['factory_purity'];
+    if(!empty($domestic_labour_chitti_details)){
+      $this->attributes['date']=date('Y-m-d',strtotime($this->attributes['date']));
+      $this->attributes['weight']=$domestic_labour_chitti_details['credit_weight'];
+      $this->attributes['rate']=$rate;
+      $this->attributes['purity']=$domestic_labour_chitti_details['purity'];
+      $this->attributes['factory_purity']=$domestic_labour_chitti_details['factory_purity'];
+      $this->attributes['factory_fine']=$this->attributes['weight']*$domestic_labour_chitti_details['factory_purity']/100;
+      $this->attributes['fine']=$this->attributes['weight']*$domestic_labour_chitti_details['purity']/100;
+      $this->set_sales_amount_fields();
+    }
   }
+    private function set_sales_amount_fields() {
+      $gst_rate = 2.5;
+      $this->attributes['credit_weight'] = $this->attributes['factory_fine']; 
+      $this->attributes['taxable_amount']=$this->attributes['credit_weight']*$this->attributes['rate'];
+      $this->attributes['cgst_amount'] = $this->attributes['taxable_amount'] * $gst_rate / 100;
+      $this->attributes['sgst_amount'] = $this->attributes['taxable_amount'] * $gst_rate / 100;
+      $total_amount = $this->attributes['taxable_amount'] + $this->attributes['cgst_amount'] + $this->attributes['sgst_amount'];
+      $this->attributes['debit_amount'] = round($total_amount);
+    }
 
    public function after_save($action){
+    $this->load->model(array('transactions/cash_issue_voucher_model'));
+    $this->cash_issue_voucher_model->create_cash_vouchers_for_chitti($this->attributes['id']);
     if (!isset($this->formdata['domestic_labour_chitti_details']) || empty($this->formdata['domestic_labour_chitti_details'])) return;
     $this->set_domestic_labour_chitti_id_in_metal_issue_vouchers();
 	}  
