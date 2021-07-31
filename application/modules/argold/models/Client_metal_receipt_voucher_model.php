@@ -90,6 +90,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                                    array('created_at >= ' => $last_vodotar_voucher['created_at'],
                                          'receipt_type != ' => 'Vadotar',
                                          'account_name != ' => 'Tounch Loss Fine'));
+      lq();
       $this->attributes['debit_weight'] = empty($total_vadotar['vadotar']) ? 0 : -1 * $total_vadotar['vadotar'];    
       pd($this->attributes['debit_weight']);
       if ($this->attributes['debit_weight'] == 0) {
