@@ -74,7 +74,6 @@ function ajax_post_request(url,formData, reqOff) {
 
 function ajax_on_a_tag() {
   $('body').on('click', 'a.ajax', function(e) {
-    alert("ok");
     $('.onclick_ajaxloader_js').show();
     e.preventDefault();
     var url = $(this).attr('href');
