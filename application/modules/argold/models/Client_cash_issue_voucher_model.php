@@ -21,10 +21,10 @@ class Client_cash_issue_voucher_model extends Core_cash_issue_voucher_model {
 
   public function before_validate() {
     // $this->attributes['fine']=$this->attributes['credit_weight']*$this->attributes['purity']/100;
-    if($this->attributes['usd_rate']>0 && $this->attributes['usd_credit_amount']>0){
+    if(!empty($this->attributes['usd_rate'])&&$this->attributes['usd_rate']>0 && $this->attributes['usd_credit_amount']>0){
     $this->attributes['credit_amount']=$this->attributes['usd_credit_amount']*$this->attributes['usd_rate'];
     }
-    if($this->attributes['usd_rate']>0 && $this->attributes['usd_credit_amount']==0){
+    if(!empty($this->attributes['usd_rate'])&&$this->attributes['usd_rate']>0 && $this->attributes['usd_credit_amount']==0){
     $this->attributes['usd_rate']=0;
     }
   }
