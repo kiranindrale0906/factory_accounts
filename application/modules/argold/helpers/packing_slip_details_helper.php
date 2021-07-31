@@ -17,7 +17,7 @@ function getTableSettings() {
     'headingFunction'     => 'list_settings',
     'search_url'          => 'packing_slip_details',
     'add_title'           => '',
-    'export_title'        => '',
+    'export_title'        => 'Export',
     'edit'                => '',
   );
 }
@@ -36,11 +36,21 @@ function getTableSettings() {
 
 function list_settings() {
   return array(
-    array("Id", "id", FALSE, "id", FALSE, FALSE),
-    array("Date", "created_at", FALSE, "created_at", FALSE, FALSE,'DATE_FORMAT(created_at, "%d-%m-%Y") as created_at'),
-    array("Weight", "weight", FALSE, "weight", FALSE, FALSE),
-    array("Purity", "purity", FALSE, "purity", FALSE, FALSE),
-    array("Fine", "fine", FALSE, "fine", FALSE, FALSE),
+    array("Tag no", "sr_no", FALSE, "sr_no", FALSE, FALSE),
+    array("Quantity", "quantity", FALSE, "quantity", FALSE, FALSE),
+    array("Gross Wt", "gross_weight", FALSE, "gross_weight", FALSE, FALSE),
+    array("Net Wt", "net_weight", FALSE, "net_weight", FALSE, FALSE),
+    array("Stone", "stone", FALSE, "stone", FALSE, FALSE),
+    array("Melting", "purity", FALSE, "purity", FALSE, FALSE),
+    array("Pure", "pure", FALSE, "pure", FALSE, FALSE),
+    array("Category Name", "category_name", FALSE, "category_name", FALSE, FALSE),
+    array("Category 2", "category_2", FALSE, "category_2", FALSE, FALSE),
+    array("Description", "description", FALSE, "description", FALSE, FALSE),
+    array("Colour", "colour", FALSE, "colour", FALSE, FALSE),
+    array("Making Charge", "making_charge", FALSE, "making_charge", FALSE, FALSE),
+    array("Code", "code", FALSE, "code", FALSE, FALSE),
+    array("Total", "total", FALSE, "total", FALSE, FALSE),
+    array("Site Name", "site_name", FALSE, "site_name", FALSE, FALSE),
     array("Action", "action", FALSE, "action", FALSE, FALSE),
   );
 }
@@ -80,15 +90,15 @@ function get_field_attribute($table, $field) {
 function get_row_actions($row, $url, $select_url, $filter) {
   $actions = array();
   $controller = 'argold/packing_slip_details';
-  // $actions["View"] = array('request' => "http", 
-  //                          'url' => ADMIN_PATH.$controller.'/view/'.$row['id'],
-  //                          'confirm_message' => "",
-  //                          'class' => 'btn-sm btn_green');
+  $actions["Edit"] = array('request' => "http", 
+                           'url' => ADMIN_PATH.'argold/metal_issue_packing_slips/edit/'.$row['id'],
+                           'confirm_message' => "",
+                           'class' => 'btn-sm text-success');
 
-  // $actions["Delete"] = array('request' => "http",
-  //                              'url' => ADMIN_PATH.$controller.'/delete/'.$row['id'],
-  //                              'confirm_message' => "Do you want to delete",
-  //                              'js_function' => "",
-  //                              'class' => 'text-danger text-uppercase');
+  $actions["Delete"] = array('request' => "http",
+                               'url' => ADMIN_PATH.$controller.'/delete/'.$row['id'],
+                               'confirm_message' => "Do you want to delete",
+                               'js_function' => "",
+                               'class' => 'text-danger text-uppercase');
   return $actions;
 }
