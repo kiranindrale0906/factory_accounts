@@ -48,7 +48,9 @@ class Ledgers extends BaseController {
 
     
     if ($this->data['report_type'] == 'Vadotar Report') {
-      $where['(purity != factory_purity)'] = NULL;
+      $where["(   (purity != factory_purity)
+               or ('gold_rate != 0 and debit_amount != 0 and is_export = 1 and account_name = 'SALES ACCOUNT') )"] = NULL;
+
     }
 
     if ($this->data['report_type'] == 'Production Report') {
