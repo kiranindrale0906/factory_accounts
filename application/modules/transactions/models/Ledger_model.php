@@ -66,6 +66,7 @@ class Ledger_model extends BaseModel {
     $this->attributes['site_name'] = $voucher['site_name'];
     $this->attributes['sale_type'] = $voucher['sale_type'];
     $this->attributes['parent_id'] = $voucher['metal_receipt_voucher_reference_id'];
+    $this->attributes['is_export'] = $voucher['is_export'];
   }
   
   private function set_attributes_from_vouchers() {
