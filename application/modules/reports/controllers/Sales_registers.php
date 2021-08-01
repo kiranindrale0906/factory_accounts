@@ -15,7 +15,7 @@ class Sales_registers extends BaseController {
   	$this->data['sales_register_records']=$this->voucher_model->get('', array('gold_rate !='=>0, 
                                                                               'debit_amount !='=>0,
                                                                               'is_export'=>$this->data['is_export'],
-                                                                              'account_name' => 'SALES ACCOUNT'),array(),array('order_by'=>'id desc'));
+                                                                              'account_name' => 'SALES ACCOUNT'),array(),array('order_by'=>'voucher_date desc'));
   
   }
 }
