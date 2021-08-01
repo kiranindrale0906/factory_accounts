@@ -32,8 +32,8 @@
         <td class="text-right"><?= four_decimal($record['fine'] - $record['factory_fine'], '-'); ?></td>
         <td class="text-right"><?= four_decimal(($record['fine'] - $record['factory_fine']) / $record['debit_weight'] * 100, '-'); ?></td>
       <?php else: ?>
-        <td></td>
-        <td></td> 
+        <td>|</td>
+        <td>|</td> 
       <?php endif; ?>
     <?php endif; ?>
     <?php if ($report_type == 'Account Ledger' || $report_type == 'Vadotar Report'): ?>
