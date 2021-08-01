@@ -35,8 +35,10 @@
         <td></td>
         <td></td> 
       <?php endif; ?>
+      <td class="text-right"><?= four_decimal($record['credit_amount'], '-') ?></td>
+      <td class="text-right"><?= four_decimal($record['debit_amount'], '-') ?></td>
     <?php endif; ?>
-    <?php if ($report_type == 'Account Ledger' || $report_type == 'Vadotar Report'): ?>
+    <?php if ($report_type == 'Account Ledger'): ?>
       <?php if ($type=='issue') { ?>
         <td class="text-right"><?= four_decimal($record['credit_amount'], '-') ?></td>
         <td class="text-right"><?= four_decimal($record['usd_credit_amount'], '-') ?></td>
