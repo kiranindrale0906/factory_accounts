@@ -334,11 +334,11 @@ class Ledgers extends BaseController {
 
       if ($this->data['report_type'] == 'Vadotar Report') {
         $this->data['balance'][$voucher_date]['issue']['credit_weight'] = 0; 
-        $this->data['balance'][$voucher_date]['issue']['credit_amount'] = 0;
-        $this->data['balance'][$voucher_date]['issue']['usd_credit_amount'] = 0;
+        //$this->data['balance'][$voucher_date]['issue']['credit_amount'] = 0;
+        //$this->data['balance'][$voucher_date]['issue']['usd_credit_amount'] = 0;
         $this->data['balance'][$voucher_date]['receipt']['debit_weight'] = 0;
-        $this->data['balance'][$voucher_date]['receipt']['debit_amount'] = 0;
-        $this->data['balance'][$voucher_date]['receipt']['usd_debit_amount'] = 0;
+        //$this->data['balance'][$voucher_date]['receipt']['debit_amount'] = 0;
+        //$this->data['balance'][$voucher_date]['receipt']['usd_debit_amount'] = 0;
       }
       $previous_date = $voucher_date;
     } 
