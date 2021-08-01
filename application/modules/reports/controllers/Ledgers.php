@@ -70,7 +70,9 @@ class Ledgers extends BaseController {
     if ($this->data['report_type'] == 'Metal Receipt Type Report' && $this->data['group'] == 'date')
       $this->data['group'] = 'voucher_type, voucher_date, receipt_type';      
       
-    if ($this->data['report_type'] == 'Account Ledger' || $this->data['report_type'] == 'Rojmel Report'|| $this->data['report_type'] == 'Metal Receipt Type Report') {
+    if (   $this->data['report_type'] == 'Account Ledger' 
+        || $this->data['report_type'] == 'Rojmel Report'
+        || $this->data['report_type'] == 'Metal Receipt Type Report') {
       $receipt_issue_select = 'receipt_type, '.$period_select.' as voucher_date, 
                                date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
                                account_name, voucher_type, 
