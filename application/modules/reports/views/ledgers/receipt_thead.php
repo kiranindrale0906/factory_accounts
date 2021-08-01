@@ -16,8 +16,8 @@
     <?php if ($report_type == 'Vadotar Report' || $report_type == 'Production Report'): ?>
       <th class='text-right'>Vadotar</th>
       <th class='text-right'>%</th>
-      <th class='text-right'>Amount</th>
-    <?php elseif ($report_type == 'Account Ledger'): ?>
+    <?php endif; ?>  
+    <?php if ($report_type == 'Account Ledger' || $report_type == 'Vadotar Report'): ?>
       <th class='text-right'>Amount</th>
       <th class='text-right'>Usd Amount</th>
     <?php endif; ?>

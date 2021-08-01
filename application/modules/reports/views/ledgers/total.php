@@ -35,7 +35,7 @@
         <td></td>
         <td></td> 
       <?php endif; ?>
-    <?php elseif ($report_type == 'Account Ledger'): ?>
+    <?php if ($report_type == 'Account Ledger' || $report_type == 'Vadotar Report'): ?>
       <?php if ($type=='issue') { ?>
         <td class="text-right"><?= four_decimal($record['credit_amount'], '-') ?></td>
         <td class="text-right"><?= four_decimal($record['usd_credit_amount'], '-') ?></td>
