@@ -11,6 +11,7 @@ class Ledgers extends BaseController {
     $this->data['period']               = (!empty($_GET['period'])) ? $_GET['period'] : 'date';
     $this->data['detail']               = (!empty($_GET['detail'])) ? $_GET['detail'] : 'yes';
     $this->data['group']                = (!empty($_GET['group'])) ? $_GET['group'] : '';
+    $this->data['domestic_export']      = (!empty($_GET['domestic_export'])) ? $_GET['domestic_export'] : 'All';
     $this->data['account_id']           = (!empty($_GET['account_id'])) ? $_GET['account_id'] : 0;
     $this->data['account_name']           = (!empty($_GET['account_name'])) ? $_GET['account_name'] : 0;
     $this->data['record']['account_id'] = (!empty($_GET[$this->router->class]['account_id'])) ? $_GET[$this->router->class]['account_id'] : $this->data['account_id'];
@@ -58,11 +59,19 @@ class Ledgers extends BaseController {
       $export_accounts = $this->account_model->get('name', array('group_code' => 'Export'));
       $export_account_names = array_column($export_accounts, 'name');
       $export_account_names = implode($export_account_names, '", "');
-      $where['((purity != factory_purity) or account_name in ("'.$export_account_names.'"))'] = NULL;
-      $where['voucher_type not in ("rate cut receipt voucher", "rate cut issue voucher")'] = NULL;
+      if ($this->data['domestic_export'] == 'All') {
+        $where['(   purity != factory_purity 
+                 or (    account_name in ("'.$export_account_names.'") 
+                     and voucher_type = "metal issue voucher")
+                )'] = NULL;
+      } elseif ($this->data['domestic_export'] == 'Domestic') {
+        $where['purity != factory_purity'] = NULL;
+      } elseif ($this->data['domestic_export'] == 'Export') {
+        $where['(    account_name in ("'.$export_account_names.'") 
+                 and voucher_type = "metal issue voucher")'] = NULL;
+      }
+
     }
-
-
 
     if ($this->data['report_type'] == 'Production Report') $where['account_name != '] = 'VADOTAR';
     
