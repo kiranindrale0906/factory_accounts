@@ -84,14 +84,18 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $this->attributes['purity'] = 100;
       $this->attributes['factory_purity'] = 100;
       $this->attributes['narration'] = 'Vadotar internal transfer';
-      $last_vodotar_voucher = $this->find('created_at', array('receipt_type' => 'Vadotar'), array(), array('order_by' => 'id desc'));
-      if (empty($last_vodotar_voucher['created_at'])) $last_vodotar_voucher['created_at'] = '2019-04-01';
-      $total_vadotar = $this->find('sum(debit_weight * (purity - factory_purity) / 100) + sum(credit_weight * (purity - factory_purity) / 100) as vadotar',
-                                   array('created_at >= ' => $last_vodotar_voucher['created_at'],
-                                         'receipt_type != ' => 'Vadotar',
-                                         'account_name != ' => 'Tounch Loss Fine'));
-      $this->attributes['debit_weight'] = empty($total_vadotar['vadotar']) ? 0 : -1 * $total_vadotar['vadotar'];    
+      // $last_vodotar_voucher = $this->find('created_at', array('receipt_type' => 'Vadotar'), array(), array('order_by' => 'id desc'));
+      // if (empty($last_vodotar_voucher['created_at'])) $last_vodotar_voucher['created_at'] = '2019-04-01';
+      // $total_vadotar = $this->find('sum(debit_weight * (purity - factory_purity) / 100) + sum(credit_weight * (purity - factory_purity) / 100) as vadotar',
+      //                              array('created_at >= ' => $last_vodotar_voucher['created_at'],
+      //                                    'receipt_type != ' => 'Vadotar',
+      //                                    'account_name != ' => 'Tounch Loss Fine'));
 
+      $total_vadotar = $this->find('  sum(debit_weight * (purity - factory_purity) / 100) 
+                                    + sum(credit_weight * (purity - factory_purity) / 100) as vadotar',
+                                   array('account_name != ' => 'Tounch Loss Fine'));
+
+      $this->attributes['debit_weight'] = empty($total_vadotar['vadotar']) ? 0 : -1 * $total_vadotar['vadotar'];    
       if ($this->attributes['debit_weight'] == 0) {
         die();   //this needs to be converted into a validation
       }

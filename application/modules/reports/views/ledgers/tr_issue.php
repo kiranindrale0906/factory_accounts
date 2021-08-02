@@ -28,7 +28,8 @@
   <?php if ($report_type == 'Vadotar Report' || $report_type == 'Production Report'): ?>
     <td class="text-right"><?= four_decimal($record['factory_fine']-$record['fine'], '-'); ?></td>
     <td class="text-right"><?= four_decimal(($record['factory_fine']-$record['fine']) / $record['credit_weight'] * 100, '-'); ?></td>
-  <?php elseif ($report_type == 'Account Ledger'): ?>
+  <?php endif; ?>
+  <?php if ($report_type == 'Account Ledger' || $report_type == 'Vadotar Report'): ?>
     <td class="text-right"><a class=""  href='<?= base_url() ?>argold/voucher_details/view/<?=$record['chitti_no']?>'><?= four_decimal($record['credit_amount'], '-') ?></a></td>
     <td class="text-right"><?= four_decimal($record['usd_credit_amount'], '-') ?></td>
   <?php endif; ?>
