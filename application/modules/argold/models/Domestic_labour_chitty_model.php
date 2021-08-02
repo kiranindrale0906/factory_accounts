@@ -69,7 +69,7 @@ class Domestic_labour_chitty_model extends BaseModel {
   }
     private function set_sales_amount_fields() {
       $gst_rate = 2.5;
-      $this->attributes['credit_weight'] = $this->attributes['factory_fine']; 
+      $this->attributes['credit_weight'] = $this->attributes['weight']; 
       $this->attributes['taxable_amount']=$this->attributes['credit_weight']*$this->attributes['rate'];
       $this->attributes['cgst_amount'] = $this->attributes['taxable_amount'] * $gst_rate / 100;
       $this->attributes['sgst_amount'] = $this->attributes['taxable_amount'] * $gst_rate / 100;
