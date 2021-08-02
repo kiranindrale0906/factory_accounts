@@ -286,6 +286,7 @@ class Trial_balances extends Ledgers {
                                                                 - IFNULL(sum(credit_amount),0) as amount', 
                                                 array_merge($where, array('account_name' => array('DOMESTIC LABOUR ACCOUNT'))), 
                                                 array());
+    if (empty($this->data['domestic_labour_amount'])) $this->data['domestic_labour_amount'] = array('amount' => 0);
 
     $loss_account = array('account_name' => 'LOSS ACCOUNT',
                           'fine' => 0, 'vadotar' => 0, 'amount' => 0);

@@ -76,7 +76,7 @@
 
   $gross_profit_fine = 0;
   $gross_profit_rate = 0;
-  $gross_profit_amount = $total_income_amount - $purchase_domestic_amount - $purchase_export_amount;
+  $gross_profit_amount = $total_income_amount - $purchase_domestic_amount - $purchase_export_amount + $domestic_labour_amount['amount'];
 
   $total_expenses_amount = $purchase_domestic_amount + $purchase_export_amount + $gross_profit_amount;
   $total_expenses_fine = $purchase_domestic_fine + $purchase_export_fine + $main_vadotar_fine + $pending_vadotar_fine;
