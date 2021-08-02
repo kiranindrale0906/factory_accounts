@@ -61,12 +61,12 @@ class Ledgers extends BaseController {
       $export_account_names = implode($export_account_names, '", "');
       if ($this->data['domestic_export'] == 'All') {
         $where['((purity != factory_purity) or account_name in ("'.$export_account_names.'"))'] = NULL;
-        $where['voucher_type not in ("rate cut receipt voucher", "rate cut issue voucher")'] = NULL;
+        $where['voucher_type not in ("metal receipt voucher", "rate cut receipt voucher", "rate cut issue voucher")'] = NULL;
       } elseif ($this->data['domestic_export'] == 'Domestic') {
         $where['purity != factory_purity'] = NULL;
       } elseif ($this->data['domestic_export'] == 'Export') {
         $where['(account_name in ("'.$export_account_names.'"))'] = NULL;
-        $where['voucher_type not in ("rate cut receipt voucher", "rate cut issue voucher")'] = NULL;
+        $where['voucher_type not in ("metal receipt voucher", "rate cut receipt voucher", "rate cut issue voucher")'] = NULL;
       }
 
     }
