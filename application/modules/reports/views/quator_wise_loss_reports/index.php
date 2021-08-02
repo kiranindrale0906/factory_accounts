@@ -20,7 +20,7 @@
         <?php
           foreach ($quators as $index => $quator) { ?>
             <a class="ml-5 <?= ($quator_name== $quator) ? 'bold black underline' : '' ?>" 
-               href='<?= base_url().'reports/quator_wise_loss_reports' ?>?account_id=<?= $account_id ?>&site_name=<?= $site_name?>&quator=<?= $quator?>'><?= $quator['name'].' ('.date('d-m-Y',strtotime($quator['from_date'])).' to '.date('d-m-Y',strtotime($quator['to_date'])).')' ?></a>
+               href='<?= base_url().'reports/quator_wise_loss_reports' ?>?account_id=<?= $account_id ?>&site_name=<?= $site_name?>&quator=<?= $quator['name']?>'><?= $quator['name'].' ('.date('d-m-Y',strtotime($quator['from_date'])).' to '.date('d-m-Y',strtotime($quator['to_date'])).')' ?></a>
           <?php }
         ?>
       </h5>
