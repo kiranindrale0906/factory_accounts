@@ -257,7 +257,12 @@
             <td class="text-right">-</td>
             <td class="text-right">-</td>
           </tr>
-
+          <tr>
+            <td>Domestic Labour Amount</td>
+            <td class="text-right"><?= $domestic_labour_amount['amount'] ?></td>
+            <td class="text-right">-</td>
+            <td class="text-right">-</td>
+          </tr>
           <!-- <tr>
             <th>TOTAL SALE</th>
             <th class="text-right"><?= four_decimal($sales_amount, '-') ?>  </th>

@@ -282,7 +282,7 @@ class Trial_balances extends Ledgers {
                                                 array_merge($where, array('account_name' => array('SALES ACCOUNT', 'PURCHASE ACCOUNT'))), 
                                                 array(), array('group_by'=>'account_name, is_export'));
 
-    $this->data['domestic_labour_amount'] = $this->model->get('  IFNULL(sum(debit_amount),0) 
+    $this->data['domestic_labour_amount'] = $this->model->find('  IFNULL(sum(debit_amount),0) 
                                                                 - IFNULL(sum(credit_amount),0) as amount', 
                                                 array_merge($where, array('account_name' => array('DOMESTIC LABOUR ACCOUNT'))), 
                                                 array());
