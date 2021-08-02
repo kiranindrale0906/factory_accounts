@@ -282,6 +282,11 @@ class Trial_balances extends Ledgers {
                                                 array_merge($where, array('account_name' => array('SALES ACCOUNT', 'PURCHASE ACCOUNT'))), 
                                                 array(), array('group_by'=>'account_name, is_export'));
 
+    $this->data['domestic_labour_amount'] = $this->model->get('  IFNULL(sum(debit_amount),0) 
+                                                                - IFNULL(sum(credit_amount),0) as amount', 
+                                                array_merge($where, array('account_name' => array('DOMESTIC LABOUR ACCOUNT'))), 
+                                                array());
+
     $loss_account = array('account_name' => 'LOSS ACCOUNT',
                           'fine' => 0, 'vadotar' => 0, 'amount' => 0);
     $this->data['loss_account_records'] = array();
