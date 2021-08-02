@@ -84,7 +84,7 @@
 ?>
 
 <hr />
-<h5 class="ml-2 pl-2">Profit and Loss Account <?= $domestic_labour_amount['amount'] ?></h5>
+<h5 class="ml-2 pl-2">Profit and Loss Account</h5>
 
 <div class="row">
   <div class="col-md-6">
