@@ -21,7 +21,11 @@
   <td class="text-right"><?= four_decimal($record['fine'], '-'); ?></td>
   <?php if ($report_type == 'Vadotar Report' || $report_type == 'Production Report'): ?>
     <td class="text-right"><?= four_decimal($record['fine']-$record['factory_fine'], '-'); ?></td>
-    <td class="text-right"><?= four_decimal(($record['fine']-$record['factory_fine']) / $record['debit_weight'] * 100, '-'); ?></td>
+    <?php if ($record['debit_weight'] != 0) { ?>
+      <td class="text-right"><?= four_decimal(($record['fine']-$record['factory_fine']) / $record['debit_weight'] * 100, '-'); ?></td>
+    <?php } else { ?>
+      <td>-</td>
+    <?php } ?>
   <?php endif; ?>
   <?php if ($report_type == 'Account Ledger' || $report_type == 'Vadotar Report'): ?>
     <td class="text-right"><a class=""  href='<?= base_url() ?>argold/voucher_details/view/<?=$record['chitti_no']?>'><?= four_decimal($record['debit_amount'], '-'); ?></a></td>
