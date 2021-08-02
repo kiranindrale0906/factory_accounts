@@ -43,7 +43,7 @@ class Core_cash_issue_voucher_model extends Voucher_model {
     $cash_issue['account_name'] = 'DOMESTIC LABOUR ACCOUNT';
     $cash_issue['debit_amount'] = $chitti['debit_amount'];
     $cash_issue['credit_amount'] = 0;
-    $cash_issue['credit_weight'] = $chitti['credit_weight'];
+    $cash_issue['credit_weight'] = 0;
     $cash_issue['debit_weight'] = 0;
     $cash_issue['taxable_amount'] =  $chitti['taxable_amount'];
     $cash_issue['cgst_amount'] = $chitti['cgst_amount'];
