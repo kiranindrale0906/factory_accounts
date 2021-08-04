@@ -428,6 +428,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
     } elseif ($attributes['receipt_type'] == 'Stone') {
       $api_data = array_merge($api_data, array('type' => 'Pure',
+                                               'description' => $attributes['description'],
                                                'process_name' => 'Stone Receipt'));
       $send_data['stone_receipts'] = $api_data;
       $api_url="api/api_stone_receipts/store";
