@@ -47,7 +47,10 @@
 
   <div class="row">      
     <?php load_view('ac_vouchers/ac_vouchers/fields/account_name'); 
+        if(!empty($_GET['receipt_type']) && $_GET['receipt_type']!='Stone'){
           load_view('ac_vouchers/ac_vouchers/fields/narration');
+        }
+
           load_view('ac_vouchers/ac_vouchers/fields/to_group_name'); ?>
   </div>  
 
@@ -149,6 +152,7 @@
     if ($this->router->class == "metal_receipt_vouchers" 
         && !in_array($receipt_type, array('AR Gold Refresh',
                                           'ARC Refresh',
+                                          'Stone',
                                           'ARF Refresh',
                                           'AR Gold Finished Goods',
                                           'ARF Finished Goods',

@@ -46,6 +46,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
     $this->set_metal_issue_voucher_attributes_from_argold_software_metal_receipt();
     $this->set_metal_issue_voucher_attributes_from_receipt_type_for_refresh_and_chain_receipt();
+    $this->set_metal_issue_voucher_attributes_from_receipt_type_for_stone();
     $this->set_metal_issue_voucher_attributes_from_receipt_type_for_metal_and_chain_receipt();
     $this->set_id_for_alloy_vodator_gpc_vodator_and_stone_vatav();
     $this->set_metal_issue_voucher_attributes_for_alloy_vadotar_and_gpc_vadotar();
@@ -294,6 +295,18 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                                                     );
     }
   }
+  private function set_metal_issue_voucher_attributes_from_receipt_type_for_stone() {
+    if ($this->attributes['receipt_type'] == "Stone") {
+      unset($this->formdata['metal_issue_vouchers']);
+      $this->formdata['metal_issue_vouchers'] = array(array('account_name' => 'ARC Software Jan 2021',
+                                                            'credit_weight' => $this->attributes['debit_weight'],
+                                                            'purity' => $this->attributes['purity'],
+                                                            'fine' => $this->attributes['debit_weight'] * $this->attributes['purity'] / 100,
+                                                            'factory_fine' => 0,
+                                                            'factory_purity' => 0),
+                                                    );
+    }
+  }
 
   private function set_receipt_type_for_all_metal_issue_vouchers() {
     if (isset($this->formdata['metal_issue_vouchers'])) {
@@ -412,6 +425,12 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                                                'process_name' => 'Receipt'));
       $send_data['rhodium_receipts'] = $api_data;
       $api_url="api/api_rhodium_receipts/store";
+
+    } elseif ($attributes['receipt_type'] == 'Stone') {
+      $api_data = array_merge($api_data, array('type' => 'Pure',
+                                               'process_name' => 'Stone Receipt'));
+      $send_data['stone_receipts'] = $api_data;
+      $api_url="api/api_stone_receipts/store";
 
     } else if ($attributes['receipt_type'] == "Daily Drawer") {
       $api_data = array_merge($api_data, array('type' => $attributes['dd_type'],

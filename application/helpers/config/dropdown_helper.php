@@ -49,6 +49,7 @@
                   array('id' => 'Internal',                       'name' => 'Internal'),
                   array('id' => 'Vadotar',                        'name' => 'Vadotar'),
                   array('id' => 'Rhodium',                        'name' => 'Rhodium'),
+                  array('id' => 'Stone',                        'name' => 'Stone'),
                 );
     if(!empty($_GET['refresh_id']) && $_GET['refresh_id']!=''){
       $data[]=array('id' => 'AR Gold Refresh','name' => 'AR Gold Refresh');
