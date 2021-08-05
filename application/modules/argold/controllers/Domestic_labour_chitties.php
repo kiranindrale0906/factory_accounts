@@ -44,7 +44,8 @@ class Domestic_labour_chitties extends BaseController {
       $this->data['metal_vouchers'] = $this->voucher_model->get('',$where);
     
     }else{
-    $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,
+      $where['voucher_date > '] = '2021-08-04';
+      $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,
                                                                 sum(fine) as fine,
                                                                 sum(factory_fine) as factory_fine,
                                                                 (sum(credit_weight*purity) / sum(credit_weight)) as purity,
