@@ -46,15 +46,6 @@ class Ledgers extends BaseController {
     if (   !empty($this->data['site_name']) 
         && $this->data['site_name'] != 'All')              $where['site_name'] = $this->data['site_name'];
 
-
-    
-    // if ($this->data['report_type'] == 'Vadotar Report') {
-    //   // $where['(   (purity != factory_purity)
-    //   //          or (gold_rate != 0 and debit_amount != 0 and is_export = 1 and account_name = "SALES ACCOUNT") )'] = NULL;
-    //   $where['purity != factory_purity'] = NULL;
-
-    // }
-
     if ($this->data['report_type'] == 'Vadotar Report' || $this->data['report_type'] == 'Production Report') {
       $export_accounts = $this->account_model->get('name', array('group_code' => 'Export'));
       $export_account_names = array_column($export_accounts, 'name');
@@ -170,11 +161,12 @@ class Ledgers extends BaseController {
       !empty($this->data['account_name'])?$account_receipt_where['account_name']=$this->data['account_name']:$account_receipt_where['account_name not in ("MAIN VADOTAR","PURCHASE ACCOUNT","ARF Software Jan 2021","ARC Software Jan 2021","AR Gold Software Jan 2021") '] = NULL;                    
     }   
     
-    
-      $where_issue   = array_merge($where, array('(credit_weight != 0 or credit_amount != 0)' => NULL),$account_issue_where);
-      $where_receipt = array_merge($where, array('(debit_weight != 0 or debit_amount != 0)'   => NULL),$account_receipt_where);
-      $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(), array('order_by'=>'chitti_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
-      $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(), array('order_by'=>'parent_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
+    $where_issue   = array_merge($where, array('(credit_weight != 0 or credit_amount != 0)' => NULL),$account_issue_where);
+    $where_receipt = array_merge($where, array('(debit_weight != 0 or debit_amount != 0)'   => NULL),$account_receipt_where);
+    $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(), array('order_by'=>'chitti_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
+    lq();
+    $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(), array('order_by'=>'parent_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
+
 
     $issue_voucher_dates = array_column($issues, 'voucher_date');
     $receipt_voucher_dates = array_column($receipts, 'voucher_date');
