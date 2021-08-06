@@ -70,14 +70,6 @@
       <td class="text-right no-print"><h6><?=four_decimal($record['taxable_amount'])?></h6></td>
     </tr>
     <tr class="no-print">
-      <td class="no-print">CGST Amount (<?= $gst_rate ?>%)</td>
-      <td class="text-right no-print"><?=four_decimal($record['cgst_amount'])?></td>
-    </tr>
-    <tr class="no-print">
-      <td class="no-print">SGST Amount (<?= $gst_rate ?>%)</td>
-      <td class="text-right no-print"><?=four_decimal($record['sgst_amount'])?></td>
-    </tr>
-    <tr class="no-print">
       <td class="no-print">Hallmark rate</td>
       <td class="text-right no-print"><?=four_decimal($record['hallmark_rate'])?></td>
     </tr>
@@ -88,6 +80,18 @@
     <tr class="no-print">
       <td class="no-print">Hallmark Amount</td>
       <td class="text-right no-print"><?=four_decimal($record['hallmark_amount'])?></td>
+    </tr>
+    <tr class="no-print">
+      <td class="no-print">Hallmark Amount with GST(<?= $gst_rate ?>%)</td>
+      <td class="text-right no-print"><?=four_decimal(($record['taxable_amount']+$record['hallmark_amount'])*$gst_rate/100)?></td>
+    </tr>
+    <tr class="no-print">
+      <td class="no-print">CGST Amount (<?= $gst_rate ?>%)</td>
+      <td class="text-right no-print"><?=four_decimal($record['cgst_amount'])?></td>
+    </tr>
+    <tr class="no-print">
+      <td class="no-print">SGST Amount (<?= $gst_rate ?>%)</td>
+      <td class="text-right no-print"><?=four_decimal($record['sgst_amount'])?></td>
     </tr>
     <?php if ($record['sale_type'] != 'Labour') { 
 
