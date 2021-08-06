@@ -83,7 +83,7 @@
     </tr>
     <tr class="no-print">
       <td class="no-print">Hallmark Amount with GST(<?= $gst_rate ?>%)</td>
-      <td class="text-right no-print"><?=four_decimal(($record['taxable_amount']+$record['hallmark_amount'])*$gst_rate/100)?></td>
+      <td class="text-right no-print"><?=four_decimal($record['hallmark_taxable_amount'])?></td>
     </tr>
     <tr class="no-print">
       <td class="no-print">CGST Amount (<?= $gst_rate ?>%)</td>
