@@ -77,6 +77,18 @@
       <td class="no-print">SGST Amount (<?= $gst_rate ?>%)</td>
       <td class="text-right no-print"><?=four_decimal($record['sgst_amount'])?></td>
     </tr>
+    <tr class="no-print">
+      <td class="no-print">Hallmark rate</td>
+      <td class="text-right no-print"><?=four_decimal($record['hallmark_rate'])?></td>
+    </tr>
+    <tr class="no-print">
+      <td class="no-print">Hallmark Quantity</td>
+      <td class="text-right no-print"><?=four_decimal($record['hallmark_quantity'])?></td>
+    </tr>
+    <tr class="no-print">
+      <td class="no-print">Hallmark Amount</td>
+      <td class="text-right no-print"><?=four_decimal($record['hallmark_amount'])?></td>
+    </tr>
     <?php if ($record['sale_type'] != 'Labour') { 
 
       $tcs_rate=0;

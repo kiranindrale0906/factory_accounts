@@ -95,6 +95,8 @@ function get_field_attribute($table, $field) {
     'labour_rate'   => array('Labour Rate', '', FALSE, '', TRUE),
     'labour_usd_amount'   => array('Labour USD Amount', '', FALSE, '', TRUE),
     'freight_usd_amount'   => array('Freight USD Amount', '', FALSE, '', TRUE),
+    'hallmark_rate'   => array('Hallmark Rate', '', FALSE, '', TRUE),
+    'hallmark_quantity'   => array('Hallmark Quantity', '', FALSE, '', TRUE),
 
   );
   

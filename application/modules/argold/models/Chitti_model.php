@@ -118,8 +118,11 @@ class Chitti_model extends BaseModel {
     $this->attributes['taxable_usd_amount']=$this->attributes['credit_weight'] * four_decimal($ounce_gram_rate);
 
     $inr_amount=$this->attributes['usd_rate']*($this->attributes['taxable_usd_amount']+$this->attributes['premium_usd_amount']+$this->attributes['labour_usd_amount']+$this->attributes['freight_usd_amount']);
+    $this->attributes['hallmark_rate']=!empty($this->attributes['hallmark_rate'])?$this->attributes['hallmark_rate']:0;
+    $this->attributes['hallmark_quantity']=!empty($this->attributes['hallmark_quantity'])?$this->attributes['hallmark_quantity']:0;
+    $this->attributes['hallmark_amount']=$this->attributes['hallmark_quantity']*$this->attributes['hallmark_rate'];
    
-    $total_amount = $this->attributes['taxable_amount'] + $this->attributes['cgst_amount'] + $this->attributes['sgst_amount']+$inr_amount;
+    $total_amount = $this->attributes['taxable_amount'] + $this->attributes['cgst_amount'] + $this->attributes['sgst_amount']+$inr_amount+$this->attributes['hallmark_amount'];
 
     $tcs_rate=0;
     // pd(date('Y-m-d'));
