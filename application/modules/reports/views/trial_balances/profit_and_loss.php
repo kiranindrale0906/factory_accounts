@@ -288,10 +288,10 @@
           </tr>
 
           <tr>
-            <th>Total Sales</th>
-            <th class="text-right"><?= four_decimal($total_sales_amount, '-') ?></th>
-            <th class="text-right">-</th>
-            <th class="text-right"><?= four_decimal($total_sales_fine, '-'); ?></th>
+            <td>Total Sales</td>
+            <td class="text-right"><?= four_decimal($total_sales_amount, '-') ?></td>
+            <td class="text-right">-</td>
+            <td class="text-right"><?= four_decimal($total_sales_fine, '-'); ?></td>
           </tr>
         </table>
       </div>      
