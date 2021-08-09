@@ -121,10 +121,10 @@ class Chitti_model extends BaseModel {
     $this->attributes['hallmark_rate']=!empty($this->attributes['hallmark_rate'])?$this->attributes['hallmark_rate']:0;
     $this->attributes['hallmark_quantity']=!empty($this->attributes['hallmark_quantity'])?$this->attributes['hallmark_quantity']:0;
     $this->attributes['hallmark_amount']=$this->attributes['hallmark_quantity']*$this->attributes['hallmark_rate'];
-    $this->attributes['hallmark_taxable_amount']=$this->attributes['hallmark_amount']+$this->attributes['taxable_amount'];
+    $this->attributes['hallmark_taxable_amount']=(!empty($this->attributes['hallmark_amount'])&& $this->attributes['hallmark_amount']!=0)?($this->attributes['hallmark_amount']+$this->attributes['taxable_amount']):0;
     $this->attributes['hallmark_taxable_amount_gst']=$this->attributes['hallmark_taxable_amount'] * $gst_rate / 100;
-    $total_amount = $this->attributes['taxable_amount'] + $this->attributes['cgst_amount'] + $this->attributes['sgst_amount']+$inr_amount+$this->attributes['hallmark_taxable_amount_gst'];
 
+    $total_amount = $this->attributes['taxable_amount'] + $this->attributes['cgst_amount'] + $this->attributes['sgst_amount']+$inr_amount+$this->attributes['hallmark_taxable_amount_gst'];
     $tcs_rate=0;
     // pd(date('Y-m-d'));
     if(strtotime(date('Y-m-d'))>strtotime('2021-03-30') && strtotime(date('Y-m-d'))<strtotime('2021-07-01')){
