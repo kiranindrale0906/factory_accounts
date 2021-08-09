@@ -70,6 +70,22 @@
       <td class="text-right no-print"><h6><?=four_decimal($record['taxable_amount'])?></h6></td>
     </tr>
     <tr class="no-print">
+      <td class="no-print">Hallmark rate</td>
+      <td class="text-right no-print"><?=four_decimal($record['hallmark_rate'])?></td>
+    </tr>
+    <tr class="no-print">
+      <td class="no-print">Hallmark Quantity</td>
+      <td class="text-right no-print"><?=four_decimal($record['hallmark_quantity'])?></td>
+    </tr>
+    <tr class="no-print">
+      <td class="no-print">Hallmark Amount</td>
+      <td class="text-right no-print"><?=four_decimal($record['hallmark_amount'])?></td>
+    </tr>
+    <tr class="no-print">
+      <td class="no-print">Hallmark Amount with GST(<?= $gst_rate ?>%)</td>
+      <td class="text-right no-print"><?=four_decimal($record['hallmark_taxable_amount_gst'])?></td>
+    </tr>
+    <tr class="no-print">
       <td class="no-print">CGST Amount (<?= $gst_rate ?>%)</td>
       <td class="text-right no-print"><?=four_decimal($record['cgst_amount'])?></td>
     </tr>

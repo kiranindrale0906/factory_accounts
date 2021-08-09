@@ -73,6 +73,9 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
                               'cgst_amount'=>$tax_fields['cgst_amount'],
                               'sgst_amount'=>$tax_fields['sgst_amount'],
                               'tcs_amount'=>$tax_fields['tcs_amount'],
+                              'hallmark_amount'=>$chitti['hallmark_amount'],
+                              'hallmark_rate'=>$chitti['hallmark_rate'],
+                              'hallmark_quantity'=>$chitti['hallmark_quantity'],
                               'gold_rate' => $chitti['rate'],
                               'gold_rate_purity' => 100,
                               'description' => 'Chitti '.$chitti['id'],
@@ -96,6 +99,9 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
     $rate_cut_issue['cgst_amount'] = $tax_fields['cgst_amount'];
     $rate_cut_issue['sgst_amount'] = $tax_fields['sgst_amount'];
     $rate_cut_issue['tcs_amount'] = $tax_fields['tcs_amount'];
+    $rate_cut_issue['hallmark_amount'] = $chitti['hallmark_amount'];
+    $rate_cut_issue['hallmark_rate'] = $chitti['hallmark_rate'];
+    $rate_cut_issue['hallmark_quantity'] = $chitti['hallmark_quantity'];
     $rate_cut_issue['gold_rate'] =  $chitti['rate'];
     $rate_cut_issue['gold_rate_purity'] = 100;
     $rate_cut_issue['description'] = 'Chitti '.$chitti['id'];
