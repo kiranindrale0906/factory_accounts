@@ -83,7 +83,7 @@
   $total_expenses_rate = 0;
 
   $total_sales_amount = $sales_domestic_amount + $sales_export_amount + $export_labour_amount + $domestic_labour_amount['amount'];
-  $total_sales_fine = $total_domestic_fine + $sales_export_fine
+  $total_sales_fine = $sales_domestic_fine + $sales_export_fine;
 ?>
 
 <hr />
