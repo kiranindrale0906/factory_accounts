@@ -41,7 +41,7 @@
   $sales_rate = $sales_amount / $sales_fine;
 
   $domestic_closing_fine = $purchase_domestic_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_domestic_fine;
-  $closing_rate = $gold_rate / .999 / 10;
+  $closing_rate = $gold_rate / .995 / 10;
   $domestic_closing_amount = $domestic_closing_fine * $closing_rate;
 
   $export_closing_fine = $purchase_export_fine - $sales_export_fine;
@@ -81,6 +81,9 @@
   $total_expenses_amount = $purchase_domestic_amount + $purchase_export_amount + $gross_profit_amount;
   $total_expenses_fine = $purchase_domestic_fine + $purchase_export_fine + $main_vadotar_fine + $pending_vadotar_fine;
   $total_expenses_rate = 0;
+
+  $total_sales_amount = $sales_domestic_amount + $sales_export_amount + $export_labour_amount + $domestic_labour_amount['amount'];
+  $total_sales_fine = $sales_domestic_fine + $sales_export_fine;
 ?>
 
 <hr />
@@ -279,9 +282,16 @@
           </tr> -->
           <tr>
             <th>Total</th>
-            <th class="text-right"><?= four_decimal($total_income_amount, '-') ?>  </th>
-            <th class="text-right"><?= four_decimal($total_income_rate, '-'); ?>  </th>
+            <th class="text-right"><?= four_decimal($total_income_amount, '-') ?></th>
+            <th class="text-right"><?= four_decimal($total_income_rate, '-'); ?></th>
             <th class="text-right"><?= four_decimal($total_income_fine, '-'); ?></th>
+          </tr>
+
+          <tr>
+            <td>Total Sales</td>
+            <td class="text-right"><?= four_decimal($total_sales_amount, '-') ?></td>
+            <td class="text-right">-</td>
+            <td class="text-right"><?= four_decimal($total_sales_fine, '-'); ?></td>
           </tr>
         </table>
       </div>      
