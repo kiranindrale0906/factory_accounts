@@ -69,6 +69,7 @@
       <td class="no-print">Taxable Amount</td>
       <td class="text-right no-print"><h6><?=four_decimal($record['taxable_amount'])?></h6></td>
     </tr>
+    <?php if(!empty($record['hallmark_amount']) && $record['hallmark_amount']!=0){ ?>
     <tr class="no-print">
       <td class="no-print">Hallmark rate</td>
       <td class="text-right no-print"><?=four_decimal($record['hallmark_rate'])?></td>
@@ -85,6 +86,7 @@
       <td class="no-print">Hallmark Amount with GST(<?= $gst_rate ?>%)</td>
       <td class="text-right no-print"><?=four_decimal($record['hallmark_taxable_amount_gst'])?></td>
     </tr>
+  <?php }?>
     <tr class="no-print">
       <td class="no-print">CGST Amount (<?= $gst_rate ?>%)</td>
       <td class="text-right no-print"><?=four_decimal($record['cgst_amount'])?></td>
