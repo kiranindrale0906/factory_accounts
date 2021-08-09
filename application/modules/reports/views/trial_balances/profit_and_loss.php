@@ -81,6 +81,9 @@
   $total_expenses_amount = $purchase_domestic_amount + $purchase_export_amount + $gross_profit_amount;
   $total_expenses_fine = $purchase_domestic_fine + $purchase_export_fine + $main_vadotar_fine + $pending_vadotar_fine;
   $total_expenses_rate = 0;
+
+  $total_sales_amount = $sales_domestic_amount + $sales_export_amount + $export_labour_amount + $domestic_labour_amount['amount'];
+  $total_sales_fine = $total_domestic_fine + $sales_export_fine
 ?>
 
 <hr />
@@ -279,9 +282,16 @@
           </tr> -->
           <tr>
             <th>Total</th>
-            <th class="text-right"><?= four_decimal($total_income_amount, '-') ?>  </th>
-            <th class="text-right"><?= four_decimal($total_income_rate, '-'); ?>  </th>
+            <th class="text-right"><?= four_decimal($total_income_amount, '-') ?></th>
+            <th class="text-right"><?= four_decimal($total_income_rate, '-'); ?></th>
             <th class="text-right"><?= four_decimal($total_income_fine, '-'); ?></th>
+          </tr>
+
+          <tr>
+            <th>Total Sales</th>
+            <th class="text-right"><?= four_decimal($total_sales_amount, '-') ?></th>
+            <th class="text-right">-</th>
+            <th class="text-right"><?= four_decimal($total_sales_fine, '-'); ?></th>
           </tr>
         </table>
       </div>      
