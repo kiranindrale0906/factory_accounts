@@ -26,7 +26,8 @@ class Chalan_model extends BaseModel {
      $making_charge=$stone=$quantity=$gross_weight=$net_weight=$pure=$total=0;
      $chalan_ids=array_column($this->formdata['chalan_details'], 'chalan_id');
      
-      $select = 'sum(weight) as weight,
+      $select = 'sum(credit_weight) as credit_weight,
+                 sum(weight) as weight,
                  sum(sgst_amount) as sgst_amount,
                  sum(cgst_amount) as cgst_amount,
                  sum(taxable_amount) as taxable_amount,
@@ -38,6 +39,7 @@ class Chalan_model extends BaseModel {
     $this->attributes['sgst_amount']=$chalan_details['sgst_amount'];
     $this->attributes['cgst_amount']=$chalan_details['cgst_amount'];
     $this->attributes['taxable_amount']=$chalan_details['taxable_amount'];
+    $this->attributes['credit_weight']=$chalan_details['credit_weight'];
     $this->attributes['purity']=$chalan_details['purity'];
   }
   public function check_account_name_exist($name) {
