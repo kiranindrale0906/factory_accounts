@@ -39,6 +39,7 @@
                                             //'transactions/metal_receipt_voucher_details' => 'Metal Receipt Details',
                                             //'transactions/metal_issue_voucher_details' => 'Metal Issue Details',
                                             'argold/chittis' => 'Chitti',
+                                            'argold/chalans' => 'Chalans',
                                             'argold/chitti_exports' => 'Chitti Export',
                                             'argold/packing_slips' => 'Packing slips',
                                             'argold/domestic_labour_chitties' => 'Domestic Labour Chitti',

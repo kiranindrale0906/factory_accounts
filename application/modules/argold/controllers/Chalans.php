@@ -1,0 +1,69 @@
+<?php
+
+defined('BASEPATH') OR exit('No direct script access allowed');
+
+class Chalans extends BaseController {
+  public function __construct() {
+    parent::__construct();
+    $this->date_fields = array(array('chittis', 'date'));
+    $this->redirect_after_save = 'view';
+    $this->load->model(array('ac_vouchers/voucher_model','masters/account_model','masters/narration_model','argold/chitti_model','argold/packing_slip_detail_model'));
+  }
+  
+  public function view($id) {
+    $this->data['layout'] = 'plain';
+    parent::view($id);
+  }
+
+  public function _get_view_data() {
+    $this->data['detail'] = isset($_GET['detail']) ? 1 : 0;
+    $this->data['account_id']='';
+    $this->data['chitti_details'] = $this->chitti_model->get('', array('chalan_id' => $this->data['record']['id']));
+  }
+
+  public function _get_form_data() {
+    $this->data['account_name']=$this->chitti_model->get('distinct(account_name) as name,account_name as id');
+    $this->data['purity']=$this->chitti_model->get('distinct(purity) as name,purity as id');
+    if (!empty($_GET['account_name']))
+      $this->data['record']['account_name'] = $_GET['account_name'];
+      $this->data['record']['purity'] = @$_GET['purity'];
+    $where=array('chalan_id=' => 0);
+    
+    if(!empty($this->data['record']['account_name'])) { 
+      $where['account_name']=$this->data['record']['account_name'];
+      if(!empty($this->data['record']['purity'])){
+        $where['purity']=$this->data['record']['purity'];
+      }
+      $this->data['chitti_details'] = $this->chitti_model->get('', $where);
+    } else{
+      $this->data['chitti_details'] = array();
+      if ($this->router->method == 'store' || $this->router->method == 'update') {
+        $this->data['record']['chalans'] = $_POST['chalans'];
+        $this->data['chalan_details'] = @$_POST['chalan_details'];
+      }
+    }
+  }
+
+  public function store() {
+    $this->data['redirect_url'] = '/argold/chalans';
+    parent::store();
+  }
+  // public function delete($id) {
+  //   $voucher_id=!empty($_GET['voucher_id'])?$_GET['voucher_id']:0;
+  //   if(!empty($voucher_id) && $voucher_id!=0){
+  //     $voucher_details=$this->voucher_model->get('',array('chitti_id'=>$id,'id'=>$voucher_id));
+  //     $this->chitti_model->update_chitti_ids($voucher_details);
+  //     redirect(base_url().'argold/packing_slips/view/'.$id);
+  //   }else{
+  //     $voucher_details=$this->voucher_model->get('',array('chitti_id'=>$id));
+  //     if(!empty($voucher_details)){
+  //       $this->chitti_model->update_chitti_ids($voucher_details);
+  //     }
+  //     parent::delete($id);
+  //   }
+  // }
+  public function _after_save($formdata, $action){
+     $this->data['redirect_url']= ADMIN_PATH.'argold/chalans';
+    return $formdata;
+  }
+}
