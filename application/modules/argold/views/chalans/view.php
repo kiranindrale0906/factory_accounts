@@ -37,7 +37,7 @@
 <div style="max-width:45%; margin-left:10%; page-break-after:avoid">
   <table class="table table-sm">
     <tr>
-      <td>Weight</td><td class="text-right"><h6><?=four_decimal($sum_credit_weight)?></h6></td>
+      <td>Weight</td><td class="text-right"><h6><?=four_decimal($record['credit_weight'])?></h6></td>
     </tr><!-- <tr>
       <td>Rate</td><td class="text-right"><h6><?//=four_decimal($record['rate'])?></h6></td>
     </tr> -->
