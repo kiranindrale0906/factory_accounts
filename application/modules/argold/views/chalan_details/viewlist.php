@@ -21,7 +21,7 @@
             foreach ($chitti_details as $index => $chitti_detail) {
                 $sum_weight += $chitti_detail['weight'];
                 $sum_credit_weight += $chitti_detail['credit_weight'];
-                $sum_fine += $chitti_detail['fine'];
+                $sum_fine += $chitti_detail['factory_fine'];
                ?>
 
                 <tr>
