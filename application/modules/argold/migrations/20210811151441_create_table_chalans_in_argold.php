@@ -21,7 +21,7 @@ class Migration_create_table_chalans_in_argold extends CI_Model {
 								  `sgst_amount` decimal(16,8) NOT NULL DEFAULT 0.00000000,
 								  `cgst_amount` decimal(16,8) NOT NULL DEFAULT 0.00000000,
 								  `taxable_amount` decimal(16,8) NOT NULL DEFAULT 0.00000000,
-								  `chalan_hide` int(11) DEFAULT 0,
+								  `chalan_hide` int(11) DEFAULT 0
 											  )");
 	$this->db->query("ALTER TABLE `chalans`  ADD PRIMARY KEY (`id`)");
 	$this->db->query("ALTER TABLE `chalans` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT");
