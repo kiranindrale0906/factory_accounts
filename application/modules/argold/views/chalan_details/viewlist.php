@@ -7,7 +7,7 @@
       <table class="table table-sm table-default">
         <thead>
           <tr>
-            <th class="text-right">Chitti No</th>
+            <th class="">Chitti No</th>
             <th class="text-right">Gross Weight</th>
             <th class="text-right">Melting</th>
             <th class="text-right">Fine</th>
