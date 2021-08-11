@@ -16,20 +16,20 @@
         </thead>
         <tbody>
           <?php 
-            $sum_weight=$sum_debit_amount=$sum_fine=0;
+            $sum_weight=$sum_credit_weight=$sum_fine=0;
             $sr_no=0;
             foreach ($chitti_details as $index => $chitti_detail) {
-                $sum_debit_amount += $chitti_detail['credit_weight'];
                 $sum_weight += $chitti_detail['weight'];
+                $sum_credit_weight += $chitti_detail['credit_weight'];
                 $sum_fine += $chitti_detail['fine'];
                ?>
 
                 <tr>
                   <td><?= ($chitti_detail['id'])?></td>
-                  <td class="text-right"><?= four_decimal($chitti_detail['credit_weight']); ?></td>
+                  <td class="text-right"><?= four_decimal($chitti_detail['weight']); ?></td>
                   <td class="text-right"><?= four_decimal($chitti_detail['purity']) ?></td>
-                  <td class="text-right"><?= four_decimal($chitti_detail['fine']) ?></td>
-                  <td class="text-right"><?= four_decimal($chitti_detail['weight']) ?></td>
+                  <td class="text-right"><?= four_decimal($chitti_detail['factory_fine']) ?></td>
+                  <td class="text-right"><?= four_decimal($chitti_detail['credit_weight']) ?></td>
                   </tr>
                 <?php $sr_no++; 
               //}
@@ -37,10 +37,10 @@
           ?>
           <tr class="bg_gray bold">
             <td>Total</td>
-            <td class="text-right"><?=four_decimal($sum_debit_amount);?></td>
+            <td class="text-right"><?=four_decimal($sum_weight);?></td>
             <td class="text-right"></td>
             <td class="text-right"><?=four_decimal($sum_fine);?></td> 
-            <td class="text-right"><?=four_decimal($sum_weight);?></td> 
+            <td class="text-right"><?=four_decimal($sum_credit_weight);?></td> 
           </tr>
         </tbody>
       </table>
