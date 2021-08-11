@@ -18,7 +18,7 @@
 
 <div style="max-width:45%; margin-left:10%">
   <table class="table table-sm">
-    <tr><td class="text-right"><h6><?= date('d-m-Y',strtotime($record['date']))?></h6></td>
+    <tr><td>Date</td><td class="text-right"><h6><?= date('d-m-Y',strtotime($record['date']))?></h6></td>
     </tr>
   </table>
 </div>
