@@ -8,6 +8,7 @@
         <thead>
           <tr>
             <th class="">Chitti No</th>
+            <th class="">Type</th>
             <th class="text-right">Gross Weight</th>
             <th class="text-right">Melting</th>
             <th class="text-right">Fine</th>
@@ -26,6 +27,7 @@
 
                 <tr>
                   <td><?= ($chitti_detail['id'])?></td>
+                  <td><?= ($chitti_detail['sale_type'])?></td>
                   <td class="text-right"><?= four_decimal($chitti_detail['weight']); ?></td>
                   <td class="text-right"><?= four_decimal($chitti_detail['purity']) ?></td>
                   <td class="text-right"><?= four_decimal($chitti_detail['factory_fine']) ?></td>
@@ -37,6 +39,7 @@
           ?>
           <tr class="bg_gray bold">
             <td>Total</td>
+            <td></td>
             <td class="text-right"><?=four_decimal($sum_weight);?></td>
             <td class="text-right"></td>
             <td class="text-right"><?=four_decimal($sum_fine);?></td> 
