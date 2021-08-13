@@ -16,6 +16,7 @@ class Account_ledgers extends Ledgers {
   }
 
   public function create() {
+    ini_set('max_execution_time', '0');
     $this->ledger_model->regenerate_ledger_records();
   }
 
