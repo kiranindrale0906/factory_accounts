@@ -19,6 +19,7 @@ class Chalans extends BaseController {
     $this->data['detail'] = isset($_GET['detail']) ? 1 : 0;
     $this->data['account_id']='';
     $this->data['chitti_details'] = $this->chitti_model->get('', array('chalan_id' => $this->data['record']['id']));
+    $this->data['total_of_chitti_details'] = $this->chitti_model->find('sum(taxable_amount) as taxable_amount,sum(weight) as weight,sum(debit_amount) as debit_amount,sum(credit_weight) as credit_weight,sum(cgst_amount) as cgst_amount,sum(sgst_amount) as sgst_amount,(rate) as rate', array('chalan_id' => $this->data['record']['id']));
   }
 
   public function _get_form_data() {

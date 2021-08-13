@@ -37,25 +37,24 @@
 <div style="max-width:45%; margin-left:10%; page-break-after:avoid">
   <table class="table table-sm">
     <tr>
-      <td>Weight</td><td class="text-right"><h6><?=four_decimal($record['credit_weight'])?></h6></td>
-    </tr><!-- <tr>
-      <td>Rate</td><td class="text-right"><h6><?//=four_decimal($record['rate'])?></h6></td>
-    </tr> -->
+      <td>Weight</td><td class="text-right"><h6><?=four_decimal($total_of_chitti_details['credit_weight'])?></h6></td>
+    </tr><tr>
+      <td>Rate</td><td class="text-right"><h6><?=four_decimal($total_of_chitti_details['rate'])?></h6></td>
+    </tr>
     <tr class="no-print">
       <td class="no-print">Taxable Amount</td>
-      <td class="text-right no-print"><h6><?=four_decimal($record['taxable_amount'])?></h6></td>
-    </tr>
-   
-    <tr class="no-print">
-      <td class="no-print">CGST Amount (<?= $gst_rate ?>%)</td>
-      <td class="text-right no-print"><?=four_decimal($record['cgst_amount'])?></td>
+      <td class="text-right no-print"><h6><?=four_decimal($total_of_chitti_details['taxable_amount'])?></h6></td>
     </tr>
     <tr class="no-print">
-      <td class="no-print">SGST Amount (<?= $gst_rate ?>%)</td>
-      <td class="text-right no-print"><?=four_decimal($record['sgst_amount'])?></td>
+      <td class="no-print">CGST Amount</td>
+      <td class="text-right no-print"><?=four_decimal($total_of_chitti_details['cgst_amount'])?></td>
+    </tr>
+    <tr class="no-print">
+      <td class="no-print">SGST Amount</td>
+      <td class="text-right no-print"><?=four_decimal($total_of_chitti_details['sgst_amount'])?></td>
     </tr>
     <tr>
-      <td>Grand Total</td><td class="text-right"><h6><?=four_decimal($record['sgst_amount']+$record['cgst_amount']+$record['taxable_amount'])?></h6></td>
+      <td>Grand Total</td><td class="text-right"><h6><?=four_decimal($total_of_chitti_details['debit_amount'])?></h6></td>
     </tr>
   </table>
 </div>
