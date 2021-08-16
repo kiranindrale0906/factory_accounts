@@ -97,6 +97,9 @@ function get_field_attribute($table, $field) {
     'freight_usd_amount'   => array('Freight USD Amount', '', FALSE, '', TRUE),
     'hallmark_rate'   => array('Hallmark Rate', '', FALSE, '', TRUE),
     'hallmark_quantity'   => array('Hallmark Quantity', '', FALSE, '', TRUE),
+    'expected_weight'   => array('Expected Weight', '', FALSE, '', TRUE),
+    'empty_packet_weight'   => array('Empty Packet Weight', '', FALSE, '', TRUE),
+    'actual_weight'   => array('Empty Packet Weight', '', FALSE, '', TRUE),
 
   );
   

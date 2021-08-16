@@ -59,6 +59,14 @@
     <tr>
       <td>Weight</td><td class="text-right"><h6><?=four_decimal($record['credit_weight'])?></h6></td>
     </tr><tr>
+      <td>Empty Packet Weight</td><td class="text-right"><h6><?=four_decimal($record['empty_packet_weight'])?></h6></td>
+    </tr><tr>
+      <td>Actual Weight</td><td class="text-right"><h6><?=four_decimal($record['actual_weight'])?></h6></td>
+    </tr><tr>
+      <td>Expected Weight</td><td class="text-right"><h6><?=four_decimal($record['expected_weight'])?></h6></td>
+    </tr><tr>
+      <td>Diff Weight</td><td class="text-right"><h6><?=four_decimal($record['diff_weight'])?></h6></td>
+    </tr><tr>
       <td>Rate</td><td class="text-right"><h6><?=four_decimal($record['rate'])?></h6></td>
     </tr>
     <tr class="no-print">
