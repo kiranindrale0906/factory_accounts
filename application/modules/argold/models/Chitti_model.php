@@ -127,7 +127,7 @@ class Chitti_model extends BaseModel {
     $this->attributes['actual_weight']=(!empty($this->attributes['actual_weight'])&& $this->attributes['actual_weight']!=0)?($this->attributes['actual_weight']):0;
 
     $this->attributes['expected_weight']=(!empty($this->attributes['empty_packet_weight']))?($this->attributes['weight']+$this->attributes['empty_packet_weight']):0;
-    $this->attributes['diff_weight']=(!empty($this->attributes['expected_weight'])&&!empty($this->attributes['actual_weight']))?($this->attributes['expected_weight']-$this->attributes['actual_weight']):0;
+    $this->attributes['diff_weight']=(!empty($this->attributes['expected_weight'])||!empty($this->attributes['actual_weight']))?($this->attributes['expected_weight']-$this->attributes['actual_weight']):0;
 
     $total_amount = $this->attributes['taxable_amount'] + $this->attributes['cgst_amount'] + $this->attributes['sgst_amount']+$inr_amount+$this->attributes['hallmark_taxable_amount_gst'];
     $tcs_rate=0;
