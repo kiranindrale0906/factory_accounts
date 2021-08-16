@@ -47,7 +47,9 @@
 
   <div class="row">      
     <?php load_view('ac_vouchers/ac_vouchers/fields/account_name'); 
-        if(!empty($_GET['receipt_type']) && $_GET['receipt_type']!='Stone'){
+        if(!empty($_GET['receipt_type']) && $_GET['receipt_type']!='Stone' && ($this->router->class == 'metal_receipt_vouchers')){
+          load_view('ac_vouchers/ac_vouchers/fields/narration');
+        }else{
           load_view('ac_vouchers/ac_vouchers/fields/narration');
         }
 
