@@ -61,6 +61,8 @@
     </tr><tr>
       <td>Empty Packet Weight</td><td class="text-right"><h6><?=four_decimal($record['empty_packet_weight'])?></h6></td>
     </tr><tr>
+      <td>Empty Packet Quantity</td><td class="text-right"><h6><?=four_decimal($record['empty_packet_quantity'])?></h6></td>
+    </tr><tr>
       <td>Actual Weight</td><td class="text-right"><h6><?=four_decimal($record['actual_weight'])?></h6></td>
     </tr><tr>
       <td>Expected Weight</td><td class="text-right"><h6><?=four_decimal($record['expected_weight'])?></h6></td>

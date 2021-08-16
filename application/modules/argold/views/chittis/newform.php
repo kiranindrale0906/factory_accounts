@@ -28,7 +28,7 @@
     <?php load_field('text',array('field' => 'hallmark_quantity'));?>
     <?php load_field('text',array('field' => 'hallmark_rate'));  ?>
     <?php load_field('text',array('field' => 'empty_packet_weight'));  ?>
-    <?php load_field('text',array('field' => 'actual_weight'));  ?>
+    <?php load_field('text',array('field' => 'empty_packet_quantity'));  ?>
 
     <?php
       if($this->router->class == 'chitti_exports'){?>

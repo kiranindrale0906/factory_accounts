@@ -8,8 +8,12 @@ if ($filter_columns != '' && $table_data != '') : ?>
         <?php 
           if (@$value['reply_status']=='Pending') 
             $css_style = 'background-color:#E8F101; font-weight:bold';
+          $alert='';  
+          if($this->router->class=='chittis' &&(!empty($value['diff_weight']))&&($value['diff_weight']>5 || $value['diff_weight']<-5)){
+            $alert='red';
+          }
         ?>
-        <tr>
+        <tr class="<?=$alert?>">
           <?php if ($checkbox_option): ?>
             <td>
               <div class="col-md-2 demo-checkbox">

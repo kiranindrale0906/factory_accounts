@@ -12,7 +12,7 @@ function getTableSettings($data = array(), $where = array()) {
     'where_ids'           => '',
     'order_by'            => 'id desc',
     'limit'               => "20",
-    'extra_select_column' => 'id,chitti_hide',
+    'extra_select_column' => 'id,chitti_hide,diff_weight',
     'actionFunction'      => '',
     'headingFunction'     => 'list_settings',
     'search_url'          => 'chittis',
@@ -100,6 +100,7 @@ function get_field_attribute($table, $field) {
     'expected_weight'   => array('Expected Weight', '', FALSE, '', TRUE),
     'empty_packet_weight'   => array('Empty Packet Weight', '', FALSE, '', TRUE),
     'actual_weight'   => array('Actual Weight', '', FALSE, '', TRUE),
+    'empty_packet_quantity'   => array('Empty Packet Quantity', '', FALSE, '', TRUE),
 
   );
   
@@ -124,6 +125,10 @@ function get_row_actions($row, $url, $select_url, $filter) {
  
   $actions["Edit"] = array('request' => "http", 
                            'url' => ADMIN_PATH.$controller.'/edit/'.$row['id'],
+                           'confirm_message' => "",
+                           'class' => 'btn-sm');
+  $actions["Add Actual Weight"] = array('request' => "http", 
+                           'url' => ADMIN_PATH.'argold/chitti_actual_weights/edit/'.$row['id'],
                            'confirm_message' => "",
                            'class' => 'btn-sm');
   $actions["Detail"] = array('request' => "http", 

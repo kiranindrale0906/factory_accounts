@@ -46,6 +46,7 @@ class User_role_model extends Core_user_role_model {
                                             'ac_vouchers/voucher_listing',
                                             'argold/unrecovarable_account_records',
                                             'argold/ghiss_melting_quators',
+                                            'argold/chitti_actual_weights',
                                             'argold/change_account_names'),
                      // 'Reports' => array('reports/mis_reports','reports/stock_report', 
                      //                    'reports/order_report'),
