@@ -35,7 +35,7 @@ trait Export_trait {
     for ($i=0; $i <count($headerTitle) ; $i++):
       $objPHPExcel->getActiveSheet()->SetCellValue($cellAlphabtes[$i].'1', $headerTitle[$i]);
       $objPHPExcel->getActiveSheet()->getRowDimension(1)->setRowHeight(40);
-      $objPHPExcel->getActiveSheet()->getColumnDimensionByColumn($cellAlphabtes[$i])->setAutoSize(true);
+      //$objPHPExcel->getActiveSheet()->getColumnDimensionByColumn($cellAlphabtes[$i])->setAutoSize(true);
       $objPHPExcel->getActiveSheet()->getColumnDimension($cellAlphabtes[$i])->setAutoSize(true);
       $objPHPExcel->getActiveSheet()->getStyle($cellAlphabtes[$i].'1')->getAlignment()->setWrapText(true);
       $objPHPExcel->getActiveSheet()->getStyle($cellAlphabtes[$i].'1' , $headerTitle[$i])->applyFromArray(
