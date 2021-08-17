@@ -101,6 +101,11 @@ function get_field_attribute($table, $field) {
     'empty_packet_weight'   => array('Empty Packet Weight', '', FALSE, '', TRUE),
     'actual_weight'   => array('Actual Weight', '', FALSE, '', TRUE),
     'empty_packet_quantity'   => array('Empty Packet Quantity', '', FALSE, '', TRUE),
+    'plastic_tag'   => array('Plastic Tag', '', FALSE, '', TRUE),
+    'plastic_tag_quantity'   => array('Plastic Tag Quantity', '', FALSE, '', TRUE),
+    'order_tag'   => array('Order Tag', '', FALSE, '', TRUE),
+    'order_tag_quantity'   => array('Order Tag Quantity', '', FALSE, '', TRUE),
+    'other_item_gross'   => array('Other item gross ', '', FALSE, '', TRUE),
 
   );
   
