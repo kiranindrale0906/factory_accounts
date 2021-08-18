@@ -53,13 +53,14 @@ class Chalans extends BaseController {
   public function delete($id) {
       $chitti_id=!empty($_GET['chitti_id'])?$_GET['chitti_id']:0;
     if(!empty($chitti_id) && $chitti_id!=0){
-      $voucher_details=$this->chitti_model->get('',array('chalan_id'=>$id,'id'=>$chitti_id));
+      $chitti_details=$this->chitti_model->get('',array('chalan_id'=>$id,'id'=>$chitti_id));
+      
       $this->chalan_model->update_chalan_ids($chitti_details);
       redirect(base_url().'argold/chalans/view/'.$id);
     }else{
-      $voucher_details=$this->chitti_model->get('',array('chalan_id'=>$id));
-      if(!empty($voucher_details)){
-        $this->chalan_model->update_chalan_ids($voucher_details);
+      $chitti_details=$this->chitti_model->get('',array('chalan_id'=>$id));
+      if(!empty($chitti_details)){
+        $this->chalan_model->update_chalan_ids($chitti_details);
       }
       parent::delete($id);
     }
