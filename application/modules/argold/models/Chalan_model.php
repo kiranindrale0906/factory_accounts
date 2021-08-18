@@ -50,6 +50,17 @@ class Chalan_model extends BaseModel {
     }
     
   }
+  public function update_chalan_ids($chitti_details) {
+    if(!empty($chitti_details)){
+      foreach ($chitti_details as $index => $chitti_details) {
+        if (isset($chitti_details['id'])) {
+        $voucher_obj = new chitti_model($chitti_details);
+        $voucher_obj->attributes['chalan_id'] = 0;
+        $voucher_obj->update(false);
+        }
+      }
+    }
+  }
 
 
    public function after_save($action){
