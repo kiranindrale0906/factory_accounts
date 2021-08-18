@@ -46,6 +46,7 @@
             <td class="text-right"></td>
             <td class="text-right"><?=four_decimal($sum_fine);?></td> 
             <td class="text-right"><?=four_decimal($sum_credit_weight);?></td> 
+            <td class="text-right"></td> 
           </tr>
         </tbody>
       </table>
