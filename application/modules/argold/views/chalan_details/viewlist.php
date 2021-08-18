@@ -33,7 +33,7 @@
                   <td class="text-right"><?= four_decimal($chitti_detail['purity']) ?></td>
                   <td class="text-right"><?= four_decimal($chitti_detail['factory_fine']) ?></td>
                   <td class="text-right"><?= four_decimal($chitti_detail['credit_weight']) ?></td>
-                  <td class="text-right no-print"><a class='red' href="<?=base_url().'argold/chalan/delete/'.$record['id'].'?chitti_id='.$chitti_detail['id']?>">remove</a></td>
+                  <td class="text-right no-print"><a class='red' href="<?=base_url().'argold/chalans/delete/'.$record['id'].'?chitti_id='.$chitti_detail['id']?>">remove</a></td>
                   </tr>
                 <?php $sr_no++; 
               //}
