@@ -59,20 +59,6 @@
     <tr>
       <td>Weight</td><td class="text-right"><h6><?=four_decimal($record['credit_weight'])?></h6></td>
     </tr><tr>
-      <td>Empty Packet Weight</td><td class="text-right"><h6><?=four_decimal($record['empty_packet_weight'])?></h6></td>
-    </tr><tr>
-      <td>Empty Packet Quantity</td><td class="text-right"><h6><?=four_decimal($record['empty_packet_quantity'])?></h6></td>
-    </tr><tr>
-      <td>Order Tag</td><td class="text-right"><h6><?=four_decimal($record['order_tag'])?></h6></td>
-    </tr><tr>
-      <td>Order Tag Quantity</td><td class="text-right"><h6><?=four_decimal($record['order_tag_quantity'])?></h6></td>
-    </tr><tr>
-      <td>Plastic Tag</td><td class="text-right"><h6><?=four_decimal($record['plastic_tag'])?></h6></td>
-    </tr><tr>
-      <td>Plastic Tag Quantity</td><td class="text-right"><h6><?=four_decimal($record['plastic_tag_quantity'])?></h6></td>
-    </tr><tr>
-      <td>Other Item Gross</td><td class="text-right"><h6><?=four_decimal($record['other_item_gross'])?></h6></td>
-    </tr><tr>
       <td>Actual Weight</td><td class="text-right"><h6><?=four_decimal($record['actual_weight'])?></h6></td>
     </tr><tr>
       <td>Expected Weight</td><td class="text-right"><h6><?=four_decimal($record['expected_weight'])?></h6></td>
