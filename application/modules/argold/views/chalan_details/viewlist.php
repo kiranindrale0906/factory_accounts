@@ -8,6 +8,7 @@
         <thead>
           <tr>
             <th class="">Chitti No</th>
+            <th class="">Account Name</th>
             <th class="">Type</th>
             <th class="text-right">Gross Weight</th>
             <th class="text-right">Melting</th>
@@ -28,6 +29,7 @@
 
                 <tr>
                   <td><?= ($chitti_detail['id'])?></td>
+                  <td><?= ($chitti_detail['account_name'])?></td>
                   <td><?= ($chitti_detail['sale_type'])?></td>
                   <td class="text-right"><?= four_decimal($chitti_detail['weight']); ?></td>
                   <td class="text-right"><?= four_decimal($chitti_detail['purity']) ?></td>
