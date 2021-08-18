@@ -139,6 +139,7 @@ class Chitti_model extends BaseModel {
     $total_plastic_tag=($this->attributes['plastic_tag']*$this->attributes['plastic_tag_quantity']);
     $total_empty_packet_weight=($this->attributes['empty_packet_weight']*$this->attributes['empty_packet_quantity']);
     $this->attributes['expected_weight']=($this->attributes['weight']+$total_empty_packet_weight+$total_order_tag+$total_plastic_tag+$this->attributes['other_item_gross']);
+    $this->attributes['diff_weight'] = $this->attributes['expected_weight'] - $this->attributes['actual_weight'];
     $total_amount = $this->attributes['taxable_amount'] + $this->attributes['cgst_amount'] + $this->attributes['sgst_amount']+$inr_amount+$this->attributes['hallmark_taxable_amount_gst'];
     $tcs_rate=0;
     // pd(date('Y-m-d'));
