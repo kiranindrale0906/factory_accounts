@@ -22,8 +22,15 @@
                                                         array('id' => 'Labour', 'name' => 'Labour'))));?>
     <?php load_field('text',array('field' => 'rate'));  ?>
     <?php load_field('text',array('field' => 'product_rate'));  ?>
-    <?php load_field('text',array('field' => 'hallmark_quantity'));  ?>
+    <?php load_field('text',array('field' => 'hallmark_quantity'));?>
     <?php load_field('text',array('field' => 'hallmark_rate'));  ?>
+    <?php load_field('text',array('field' => 'empty_packet_weight'));  ?>
+    <?php load_field('text',array('field' => 'empty_packet_quantity'));  ?>
+    <?php load_field('text',array('field' => 'order_tag'));  ?>
+    <?php load_field('text',array('field' => 'order_tag_quantity'));  ?>
+    <?php load_field('text',array('field' => 'plastic_tag'));  ?>
+    <?php load_field('text',array('field' => 'plastic_tag_quantity'));  ?>
+    <?php load_field('text',array('field' => 'other_item_gross'));  ?>
 
     <?php
       if($this->router->class == 'chitti_exports'){ ?>
