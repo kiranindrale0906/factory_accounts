@@ -44,6 +44,13 @@
 		
 	</td>
 	
+	<td class="text-right"><?php load_field('plain/text', array('field' => 'packing_slip_stone_percentag',
+			                             				  'class' => 'packing_slip_stone_percentag',
+														  'index' => $index,
+														  'value' => !empty($vouchers['packing_slip_stone_percentag'])?$vouchers['packing_slip_stone_percentag']:0,
+														  'controller' => 'packing_slip_details')); ?>
+		
+	</td>
 	<td class="text-right"><?php load_field('plain/text', array('field' => 'packing_slip_stone',
 			                             				  'class' => 'packing_slip_stone',
 														  'index' => $index,

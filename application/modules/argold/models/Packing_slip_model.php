@@ -122,11 +122,11 @@ class Packing_slip_model extends BaseModel {
       $packing_slip_detail_data['packing_slip_id'] = $packing_details['packing_slip_id'];
       $packing_slip_detail_data['voucher_id'] = $packing_details['id'];
       $packing_slip_detail_data['balance'] = $packing_details['packing_slip_balance'];
+      $packing_slip_detail_data['stone'] = !empty($packing_slip_details['packing_slip_stone_percentag'])?($packing_slip_details['packing_slip_gross_weight']*$packing_slip_details['packing_slip_stone_percentag']/100):$packing_slip_details['packing_slip_stone'];
       $packing_slip_detail_data['gross_weight'] = $packing_slip_details['packing_slip_gross_weight'];
       $packing_slip_detail_data['net_weight'] = $packing_slip_details['packing_slip_gross_weight']-$packing_slip_details['packing_slip_stone'];
       $packing_slip_detail_data['pure'] = $packing_slip_detail_data['net_weight']*$packing_details['purity']/100;
       $packing_slip_detail_data['making_charge'] = $packing_slip_details['packing_slip_making_charge'];
-      $packing_slip_detail_data['stone'] = $packing_slip_details['packing_slip_stone'];
       $packing_slip_detail_data['colour'] = $packing_slip_details['packing_slip_colour'];
       $packing_slip_detail_data['code'] = $packing_slip_details['packing_slip_code'];
       $packing_slip_detail_data['description'] = $packing_slip_details['packing_slip_description'];

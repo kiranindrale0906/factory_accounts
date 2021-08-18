@@ -13,6 +13,7 @@
       <th class="text-right">Purity</th>
       <th class="text-right">Gross weight</th>
       <th class="text-right">Qauntity</th>
+      <th class="text-right">Stone %</th>
       <th class="text-right">Stone</th>
       <th class="text-right">Making Charge</th>
       <th class="text-right">Category</th>
