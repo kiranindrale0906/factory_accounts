@@ -104,6 +104,7 @@ class Packing_slip_model extends BaseModel {
                                                               'account_name' => $this->attributes['account_name']
                                                               ));
       }
+      pd($packing_details);
         $packing_details['packing_slip_id'] = $this->attributes['id'];
         $packing_details['voucher_date'] = $this->attributes['date'];
         $packing_details['packing_slip_balance'] =$packing_details['packing_slip_balance']- $packing_slip_detail['packing_slip_gross_weight'];
