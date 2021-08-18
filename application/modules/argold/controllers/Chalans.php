@@ -35,7 +35,7 @@ class Chalans extends BaseController {
       if(!empty($this->data['record']['purity'])){
         $where['purity']=$this->data['record']['purity'];
       }
-      // $where['date > '] = '2021-08-17';
+      $where['date > '] = '2021-08-17';
       $this->data['chitti_details'] = $this->chitti_model->get('', $where);
     } else{
       $this->data['chitti_details'] = array();
