@@ -55,7 +55,7 @@ class Chalans extends BaseController {
     if(!empty($chitti_id) && $chitti_id!=0){
       $voucher_details=$this->chitti_model->get('',array('chalan_id'=>$id,'id'=>$chitti_id));
       $this->chalan_model->update_chalan_ids($chitti_details);
-      redirect(base_url().'argold/chalan/view/'.$id);
+      redirect(base_url().'argold/chalans/view/'.$id);
     }else{
       $voucher_details=$this->chitti_model->get('',array('chalan_id'=>$id));
       if(!empty($voucher_details)){
