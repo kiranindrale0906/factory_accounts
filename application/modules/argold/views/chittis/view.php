@@ -116,9 +116,11 @@
       ?>
       <tr class="no-print">
         <td class="no-print">Total Amount</td>
-        <td class="text-right no-print"><?=four_decimal(  $record['taxable_amount']
-                                                                        + $record['cgst_amount']
-                                                                        + $record['sgst_amount'])?></td>
+        <td class="text-right no-print"><?php if(!empty($record['hallmark_taxable_amount'])){
+          echo four_decimal(  $record['hallmark_taxable_amount'] + $record['cgst_amount']+ $record['sgst_amount']);
+        }else{
+          echo four_decimal($record['hallmark_taxable_amount'] + $record['cgst_amount']+ $record['sgst_amount']);
+        }?></td>
       </tr>
       
       <tr class="no-print">
