@@ -78,21 +78,21 @@
       <td class="text-right no-print"><h6><?=four_decimal($record['taxable_amount'])?></h6></td>
     </tr>
     <?php if(!empty($record['hallmark_amount']) && $record['hallmark_amount']!=0){ ?>
-    <tr class="no-print">
-      <td class="no-print">Hallmark rate</td>
-      <td class="text-right no-print"><?=four_decimal($record['hallmark_rate'])?></td>
+    <tr class="">
+      <td class="">Hallmark rate</td>
+      <td class="text-right "><?=four_decimal($record['hallmark_rate'])?></td>
     </tr>
-    <tr class="no-print">
-      <td class="no-print">Hallmark Quantity</td>
-      <td class="text-right no-print"><?=four_decimal($record['hallmark_quantity'])?></td>
+    <tr class="">
+      <td class="">Hallmark Quantity</td>
+      <td class="text-right "><?=four_decimal($record['hallmark_quantity'])?></td>
     </tr>
-    <tr class="no-print">
-      <td class="no-print">Hallmark Amount</td>
-      <td class="text-right no-print"><?=four_decimal($record['hallmark_amount'])?></td>
+    <tr class="">
+      <td class="">Hallmark Amount</td>
+      <td class="text-right "><?=four_decimal($record['hallmark_amount'])?></td>
     </tr>
-    <tr class="no-print">
-      <td class="no-print">Hallmark Taxable Amount </td>
-      <td class="text-right no-print"><?=four_decimal($record['hallmark_taxable_amount'])?></td>
+    <tr class="">
+      <td class="">Hallmark Taxable Amount </td>
+      <td class="text-right "><?=four_decimal($record['hallmark_taxable_amount'])?></td>
     </tr>
   <?php }?>
     <tr class="no-print">
