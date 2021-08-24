@@ -31,7 +31,7 @@
       <td>Sale Type</td><td class="text-right"><h6><?= $record['sale_type'] ?></h6></td>
     </tr>
     <?php 
-    
+
     if (!empty($record['no_of_packets']) && $record['no_of_packets'] > 0) { ?>
       <tr>
         <td>No of Packets</td><td class="text-right"><h6><?=round($record['no_of_packets'])?></h6></td>
@@ -91,8 +91,8 @@
       <td class="text-right no-print"><?=four_decimal($record['hallmark_amount'])?></td>
     </tr>
     <tr class="no-print">
-      <td class="no-print">Hallmark Amount with GST(<?= $gst_rate ?>%)</td>
-      <td class="text-right no-print"><?=four_decimal($record['hallmark_taxable_amount_gst'])?></td>
+      <td class="no-print">Hallmark Taxable Amount </td>
+      <td class="text-right no-print"><?=four_decimal($record['hallmark_taxable_amount'])?></td>
     </tr>
   <?php }?>
     <tr class="no-print">

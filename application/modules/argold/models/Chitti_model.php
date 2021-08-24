@@ -122,7 +122,7 @@ class Chitti_model extends BaseModel {
     $this->attributes['hallmark_quantity']=!empty($this->attributes['hallmark_quantity'])?$this->attributes['hallmark_quantity']:0;
     $this->attributes['hallmark_amount']=$this->attributes['hallmark_quantity']*$this->attributes['hallmark_rate'];
     $this->attributes['hallmark_taxable_amount']=(!empty($this->attributes['hallmark_amount'])&& $this->attributes['hallmark_amount']!=0)?($this->attributes['hallmark_amount']+$this->attributes['taxable_amount']):0;
-    $this->attributes['hallmark_taxable_amount_gst']=$this->attributes['hallmark_taxable_amount'] * $gst_rate / 100;
+    //$this->attributes['hallmark_taxable_amount_gst']=$this->attributes['hallmark_taxable_amount'] * $gst_rate / 100;
     $this->attributes['empty_packet_weight']=(!empty($this->attributes['empty_packet_weight'])&& $this->attributes['empty_packet_weight']!=0)?($this->attributes['empty_packet_weight']):0;
     $this->attributes['order_tag']=(!empty($this->attributes['order_tag'])&& $this->attributes['order_tag']!=0)?($this->attributes['order_tag']):0;
     $this->attributes['plastic_tag']=(!empty($this->attributes['plastic_tag'])&& $this->attributes['plastic_tag']!=0)?($this->attributes['plastic_tag']):0;
@@ -140,7 +140,7 @@ class Chitti_model extends BaseModel {
     $total_empty_packet_weight=($this->attributes['empty_packet_weight']*$this->attributes['empty_packet_quantity']);
     $this->attributes['expected_weight']=($this->attributes['weight']+$total_empty_packet_weight+$total_order_tag+$total_plastic_tag+$this->attributes['other_item_gross']);
     $this->attributes['diff_weight'] = $this->attributes['expected_weight'] - $this->attributes['actual_weight'];
-    $total_amount = $this->attributes['taxable_amount'] + $this->attributes['cgst_amount'] + $this->attributes['sgst_amount']+$inr_amount+$this->attributes['hallmark_taxable_amount_gst'];
+    $total_amount = $this->attributes['taxable_amount'] + $this->attributes['cgst_amount'] + $this->attributes['sgst_amount']+$inr_amount+$this->attributes['hallmark_taxable_amount'];
     $tcs_rate=0;
     // pd(date('Y-m-d'));
     if(strtotime(date('Y-m-d'))>strtotime('2021-03-30') && strtotime(date('Y-m-d'))<strtotime('2021-07-01')){
