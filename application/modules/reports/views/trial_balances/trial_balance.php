@@ -99,7 +99,7 @@
                   <tr>
                     <td><?= $record['account_name']; ?>
                       <?php if ($loss_account==1 && !empty($loss_date)) { ?>
-                        <a href=<?= base_url()."argold/unrecovarable_account_records/store?from=view&account_name=".urlencode($record['account_name'])."&credit_weight=".four_decimal(-1 * $record['fine'])."&narration=Unrecovarable&factory=Unrecovarable&parent_id=".$record['id']."&voucher_date=".$loss_date ?> 
+                        <a href=<?= base_url()."argold/unrecovarable_account_records/store?from=view&account_name=".urlencode($record['account_name'])."&credit_weight=".four_decimal(-1 * $record['fine'])."&narration=".urlencode($record['account_name'])."&factory=Unrecovarable&parent_id=".$record['id']."&voucher_date=".$loss_date ?> 
                           target='_blank' onclick="return confirm('Do you want to add this in Unrecovarable?')" >Unrecovarable</a><?php echo'('.four_decimal(-1 * $record['fine'], '-').')'; ?>
                       <?php } ?>  
                     </td>
