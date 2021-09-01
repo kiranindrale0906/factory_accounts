@@ -7,7 +7,7 @@
 </style>
 <div class="row ">
   <div class="col-md-3">
-   <h4 style="margin-left:45%" class="heading">Chalan No #<?= $record['id']; ?></h4>
+   <h4 style="margin-left:45%" class="heading">Combine Chitti No #<?= $record['id']; ?></h4>
   </div>
   <div class="col-md-8 text-right">
   </div>
