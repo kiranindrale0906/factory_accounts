@@ -477,6 +477,11 @@ $('select[name*="chalans[purity]"]').on('change', function() {
   var account =$('select[name*="chalans[account_name]"] option:selected').val();  
   window.location = base_url+ 'argold/chalans/create?account_name='+account+'&purity='+purity;  
 });
+$('select[name*="combine_chitties[purity]"]').on('change', function() {
+  var purity = $(this).val();
+  var account =$('select[name*="combine_chitties[account_name]"] option:selected').val();  
+  window.location = base_url+ 'argold/combine_chitties/create?account_name='+account+'&purity='+purity;  
+});
 $('select[name*="packing_slips[account_name]"]').on('change', function() {
   var account_name = $(this).val(); 
   window.location = base_url+ 'argold/packing_slips/create?account_name='+account_name;  

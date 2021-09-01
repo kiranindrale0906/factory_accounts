@@ -37,6 +37,8 @@ class User_role_model extends Core_user_role_model {
                                             'argold/chittis',
                                             'argold/chalans',
                                             'argold/chalan_details',
+                                            'argold/combine_chitties',
+                                            'argold/combine_chitti_details',
                                             'argold/domestic_labour_chitties',
                                             'argold/domestic_labour_chitti_details',
                                             'argold/packing_slips','argold/chitti_exports','argold/metal_issue_chitties','argold/packing_slip_details','argold/metal_issue_packing_slips','argold/voucher_details',
