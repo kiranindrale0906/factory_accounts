@@ -36,9 +36,9 @@ class Combine_chitties extends BaseController {
         $where['purity']=$this->data['record']['purity'];
       }
       $where['date > '] = '2021-08-17';
-      $this->data['chitti_details'] = $this->chitti_model->get('', $where);
+      $this->data['combine_chitti_details'] = $this->chitti_model->get('', $where);
     } else{
-      $this->data['chitti_details'] = array();
+      $this->data['combine_chitti_details'] = array();
       if ($this->router->method == 'store' || $this->router->method == 'update') {
         $this->data['record']['combine_chitties'] = $_POST['combine_chitties'];
         $this->data['combine_chitti_details'] = @$_POST['combine_chitti_details'];

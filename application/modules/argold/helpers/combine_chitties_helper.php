@@ -69,7 +69,7 @@ function get_field_attribute($table, $field) {
   );
   
   $attributes['combine_chitti_details'] = array(
-    'chalan_id' => array('', '', TRUE, '', TRUE),
+    'combine_chitti_id' => array('', '', TRUE, '', TRUE),
     'voucher_id' => array('', '', TRUE, '', TRUE),
   );
  

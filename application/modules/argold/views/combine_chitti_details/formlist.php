@@ -14,7 +14,7 @@
   <tbody>
     <?php
       $weight = $issue_fine = $balance = 0;
-      foreach ($chitti_details as $index => $chittis) {
+      foreach ($combine_chitti_details as $index => $chittis) {
         $weight += $chittis['weight'];
         $issue_fine += $chittis['weight']*$chittis['purity']/100;
         $this->load->view('combine_chitti_details/subform',array('index'=> $index, 'chittis' => $chittis));
