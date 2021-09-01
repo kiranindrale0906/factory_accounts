@@ -1,15 +1,15 @@
 <tr class="process_<?= $chittis['id']?>">
 	<td>
-		<?php load_field('checkbox', array('field' => 'chalan_id',
+		<?php load_field('checkbox', array('field' => 'combine_chitti_id',
 																		 	 'index' => $index,
-																		 	 'class' => 'chalan_id',
+																		 	 'class' => 'combine_chitti_id',
 																		 	 'option' => array(
 																		 	 							array('chk_id' => $index,
 																		                      'value' => $chittis['id'],
 																		                      'label' => '',
-																		                      'checked' => (!empty($chalan_details[$index]['chalan_id']) ? 'checked' : ''),
+																		                      'checked' => (!empty($combine_chitti_details[$index]['chalan_id']) ? 'checked' : ''),
 																		 	 						        )),
-																		   'controller' => 'chalan_details'));?>																   
+																		   'controller' => 'combine_chitti_details'));?>																   
 	</td>
   	<td class="text-right"><?= four_decimal($chittis['weight']) ;?></td>
 	<td class="text-right"><?= four_decimal($chittis['purity']); ?></td>
