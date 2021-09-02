@@ -27,7 +27,7 @@
 <div style="max-width:45%; margin-left:10%">
   <table class="table table-sm">
     <tr>
-      <td><h6><?//=$chittis_details['account_name']?></h6></td><td class="text-right"><h6><?= date('d-m-Y',strtotime($value['chittis_details']['date']))?></h6></td>
+      <td><h6><?=$value['chittis_details']['account_name']?></h6></td><td class="text-right"><h6><?= date('d-m-Y',strtotime($value['chittis_details']['date']))?></h6></td>
     </tr><tr>
       <td>Sale Type</td><td class="text-right"><h6><?= $value['chittis_details']['sale_type'] ?></h6></td>
     </tr>
