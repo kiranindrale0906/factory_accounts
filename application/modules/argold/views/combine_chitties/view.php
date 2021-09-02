@@ -5,7 +5,7 @@
   }
 }
 </style>
-<?php foreach ($combine_chitti_details as $index => $value) {?>
+<?php foreach ($combine_chitti_details as $index => $value) { ?>
 <div class="row ">
   <div class="col-md-3">
    <h4 style="margin-left:45%" class="heading">Chitti #<?= $value['chittis_details']['id']; ?></h4>
@@ -162,6 +162,7 @@
     </tr>
   </table>
 </div>
+<?php } ?>
 
 <style type="text/css">
 
