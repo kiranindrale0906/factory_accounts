@@ -11,14 +11,14 @@
    <h4 style="margin-left:45%" class="heading">Chitti #<?= $value['chittis_details']['id']; ?></h4>
   </div>
   <div class="col-md-8 text-right">
-  <a  href="<?=ADMIN_PATH.'argold/metal_issue_chitties/edit/'. $value['chittis_details']['id']?>" class='btn bg_blue white no-print'>create metal receipt</a>
+  <!-- <a  href="<?//=ADMIN_PATH.'argold/metal_issue_chitties/edit/'. $value['chittis_details']['id']?>" class='btn bg_blue white no-print'>create metal receipt</a> -->
   </div>
   <div class="col-md-1 text-right">
-  <?php if($value['chittis_details']['chitti_hide'] == 0) {  
+  <?php /*if($value['chittis_details']['chitti_hide'] == 0) {  
         echo getHttpButton('HIDE', base_url().'argold/chitti_hides/update/'.$value['chittis_details']['id'].'?from=view', 'btn bg_blue white no-print');
       } elseif($value['chittis_details']['chitti_hide'] == 1) {
         echo getHttpButton('SHOW', base_url().'argold/chitti_hides/update/'.$value['chittis_details']['id'].'?from=view', 'btn bg_blue white no-print');
-      }
+      }*/
   ?>
   
   </div>
