@@ -8,7 +8,7 @@
             <?php foreach ($metal_voucher_details as $index => $metal_voucher_detail) {
               
                    ?>
-          <tr>
+          <tr class='bold'>
             <td class="text-center" style="padding: 2px;">Tag No.</td>
             <td style="padding: 2px" class="text-center">Net Wt</td>
             <td style="padding: 2px" class="text-center">Gross Wt</td>
