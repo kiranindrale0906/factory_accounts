@@ -16,10 +16,25 @@ class Combine_chitties extends BaseController {
   }
 
   public function _get_view_data() {
+    // $this->data['detail'] = isset($_GET['detail']) ? 1 : 0;
+    // $this->data['account_id']='';
+    $this->data['total_of_chitti_details'] = $this->chitti_model->get('', array('combine_chitti_id' => $this->data['record']['id']));
+    $chitti_ids= $this->chitti_model->get('id', array('combine_chitti_id' => $this->data['record']['id']));
+    $chitti_ids=array_column($chitti_ids,'id');
     $this->data['detail'] = isset($_GET['detail']) ? 1 : 0;
     $this->data['account_id']='';
-    $this->data['chitti_details'] = $this->chitti_model->get('', array('combine_chitti_id' => $this->data['record']['id']));
-    $this->data['total_of_chitti_details'] = $this->chitti_model->find('sum(taxable_amount) as taxable_amount,sum(weight) as weight,sum(debit_amount) as debit_amount,sum(credit_weight) as credit_weight,sum(cgst_amount) as cgst_amount,sum(sgst_amount) as sgst_amount,(rate) as rate', array('chalan_id' => $this->data['record']['id']));
+     
+    // $packet_no = array_column($this->data['metal_voucher_details'], 'packet_no');
+    // $this->data['packet_nos']=array_unique($packet_no);
+
+    $this->data['chittis_details'] = $this->chitti_model->find('account_name, date',
+                                                               array('id in ('.implode(',',$chitti_ids).')'=>NULL));
+    foreach ($chitti_ids as $index => $id) {
+      $this->data['combine_chitti_details'][$index]['metal_voucher_details'] = 
+                                                    $this->voucher_model->get('',
+                                                        array('voucher_type' => 'metal issue voucher','chitti_id' => $id));
+      $this->data['combine_chitti_details'][$index]['chittis_details'] = $this->chitti_model->find('',array('id'=>$id));
+    }
   }
 
   public function _get_form_data() {
@@ -28,14 +43,14 @@ class Combine_chitties extends BaseController {
     if (!empty($_GET['account_name']))
       $this->data['record']['account_name'] = $_GET['account_name'];
       $this->data['record']['purity'] = @$_GET['purity'];
-    $where=array('chalan_id=' => 0);
+    $where=array('combine_chitti_id=' => 0);
     
     if(!empty($this->data['record']['account_name'])) { 
       $where['account_name']=$this->data['record']['account_name'];
       if(!empty($this->data['record']['purity'])){
         $where['purity']=$this->data['record']['purity'];
       }
-      $where['date > '] = '2021-08-17';
+      // $where['date > '] = '2021-08-17';
       $this->data['combine_chitti_details'] = $this->chitti_model->get('', $where);
     } else{
       $this->data['combine_chitti_details'] = array();
@@ -55,12 +70,12 @@ class Combine_chitties extends BaseController {
     if(!empty($chitti_id) && $chitti_id!=0){
       $chitti_details=$this->chitti_model->get('',array('combine_chitti_id'=>$id,'id'=>$chitti_id));
       
-      $this->combine_chitti_model->update_combine_chitti_ids($chitti_details);
+      $this->combine_chitty_model->update_combine_chitti_ids($chitti_details);
       redirect(base_url().'argold/combine_chitties/view/'.$id);
     }else{
       $chitti_details=$this->chitti_model->get('',array('combine_chitti_id'=>$id));
       if(!empty($chitti_details)){
-        $this->combine_chitti_model->update_combine_chitti_ids($combine_chitti_details);
+        $this->combine_chitty_model->update_combine_chitti_ids($combine_chitti_details);
       }
       parent::delete($id);
     }
