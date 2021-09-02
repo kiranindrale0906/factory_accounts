@@ -9,12 +9,12 @@
               
                    ?>
           <tr>
-            <td class="" style="padding: 2px;">Tag No.</td>
-            <td style="padding: 2px" class="">Net Wt</td>
-            <td style="padding: 2px" class="">Gross Wt</td>
-            <td style="padding: 2px" class="">Karat</td>
-            <td style="padding: 2px" class="">Qty</td>
-            <td style="padding: 2px" class="">Desc</td>
+            <td class="text-center" style="padding: 2px;">Tag No.</td>
+            <td style="padding: 2px" class="text-center">Net Wt</td>
+            <td style="padding: 2px" class="text-center">Gross Wt</td>
+            <td style="padding: 2px" class="text-center">Karat</td>
+            <td style="padding: 2px" class="text-center">Qty</td>
+            <td style="padding: 2px">Desc</td>
           </tr>
           <tr>
             <td style="padding: 2px" class="text-center"><?= ($metal_voucher_detail['sr_no']); ?></td>
@@ -35,7 +35,7 @@
               }
 
             ?></td>
-            <td style="padding: 2px" class="text-center"><?= ($metal_voucher_detail['description']) ?></td>
+            <td style="padding: 2px" ><?= ($metal_voucher_detail['description']) ?></td>
           </tr>
          <?php 
             }
