@@ -7,7 +7,11 @@
   <?php if ($action == 'edit' || $action == 'update'): ?>
     <?php load_field('hidden', array('field' => 'id')); ?>
   <?php endif; ?>     
-  <div class="row">    
+  <div class="row">  
+    <?php load_field('dropdown', array('field' => 'site_name',
+                                       'option' => $site_names,
+                                       'value' => $record['site_name']));?>
+      
     <?php load_field('text', array('field' => 'account_name','option'=>$account_name,'readonly' => true));?>
     <?php load_field('dropdown', array('field' => 'purity','option'=>$purity));?>
     

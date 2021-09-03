@@ -63,6 +63,7 @@ function get_field_attribute($table, $field) {
   $attributes['combine_chitties'] = array(
     'id'            => array('', '', TRUE, '', TRUE),
     'account_name'  => array('Account Name', 'Select', TRUE, '', TRUE),
+    'site_name'  => array('Site Name', 'Select', TRUE, '', TRUE),
     'purity'        => array('Purity', 'Select Purity.', TRUE, '', TRUE),
     'date'          => array('Date', 'Enter Date.', TRUE, '', TRUE),
     'created_at'    => array('Created At', 'Enter Date.', TRUE, '', TRUE)

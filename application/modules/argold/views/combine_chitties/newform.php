@@ -8,6 +8,10 @@
     <?php load_field('hidden', array('field' => 'id')); ?>
   <?php endif; ?>     
   <div class="row">    
+    <?php load_field('dropdown', array('field' => 'site_name',
+                                       'option' => $site_names,
+                                       'value' => $record['site_name']));?>
+    
     <?php load_field('dropdown', array('field' => 'account_name','option'=>$account_name));?>
     <?php load_field('dropdown', array('field' => 'purity','option'=>$purity));?>
     <?php load_field('date',array('field' => 'date','class'=>'datepicker_js')); ?>
