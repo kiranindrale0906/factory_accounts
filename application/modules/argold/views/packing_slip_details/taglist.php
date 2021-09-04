@@ -9,19 +9,19 @@
               
                    ?>
           <tr class='bold'>
-            <td class="text-center" style="padding: 2px;">Tag No.</td>
-            <td style="padding: 2px" class="text-center">Net Wt</td>
-            <td style="padding: 2px" class="text-center">Gross Wt</td>
-            <td style="padding: 2px" class="text-center">Karat</td>
-            <td style="padding: 2px" class="text-center">Qty</td>
-            <td style="padding: 2px">Desc</td>
+            <td class="text-center" style="padding: 1px;">Tag No.</td>
+            <td style="padding: 1px" class="text-center">Net Wt</td>
+            <td style="padding: 1px" class="text-center">Gross Wt</td>
+            <td style="padding: 1px" class="text-center">Karat</td>
+            <td style="padding: 1px" class="text-center">Qty</td>
+            <td style="padding: 1px">Desc</td>
           </tr>
           <tr>
-            <td style="padding: 2px" class="text-center"><?= ($metal_voucher_detail['sr_no']); ?></td>
-            <td style="padding: 2px" class="text-center"><?= four_decimal($metal_voucher_detail['gross_weight']); ?></td>
-            <td style="padding: 2px" class="text-center"><?= four_decimal($metal_voucher_detail['net_weight']) ?></td>
-            <td style="padding: 2px" class="text-center"><?= ($metal_voucher_detail['quantity']) ?></td>
-            <td style="padding: 2px" class="text-center"><?php
+            <td style="padding: 1px" class="text-center"><?= ($metal_voucher_detail['sr_no']); ?></td>
+            <td style="padding: 1px" class="text-center"><?= four_decimal($metal_voucher_detail['gross_weight']); ?></td>
+            <td style="padding: 1px" class="text-center"><?= four_decimal($metal_voucher_detail['net_weight']) ?></td>
+            <td style="padding: 1px" class="text-center"><?= ($metal_voucher_detail['quantity']) ?></td>
+            <td style="padding: 1px" class="text-center"><?php
               if($metal_voucher_detail['purity']>=91.50 && $metal_voucher_detail['purity']<= 92){
                     echo "22 Kt";
               }elseif($metal_voucher_detail['purity']>=87.50 && $metal_voucher_detail['purity']<= 88){
@@ -35,7 +35,7 @@
               }
 
             ?></td>
-            <td style="padding: 2px" ><?= ($metal_voucher_detail['description']) ?></td>
+            <td style="padding: 1px" ><?= ($metal_voucher_detail['description']) ?></td>
           </tr>
          <?php 
             }
