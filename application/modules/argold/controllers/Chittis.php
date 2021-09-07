@@ -7,7 +7,7 @@ class Chittis extends BaseController {
     parent::__construct();
     $this->date_fields = array(array('chittis', 'date'));
     $this->redirect_after_save = 'view';
-    $this->load->model(array('ac_vouchers/voucher_model','masters/account_model','masters/narration_model'));
+    $this->load->model(array('ac_vouchers/voucher_model','masters/account_model','masters/narration_model','masters/empty_packet_model'));
   }
   
   public function view($id) {
@@ -162,6 +162,9 @@ class Chittis extends BaseController {
                                       array('id' => 'ARF Jan 2021', 'name' => 'ARF Jan 2021'),
                                       array('id' => 'ARC Jan 2021', 'name' => 'ARC Jan 2021')
                                      );
+
+    $this->data['empty_packet_weights'] = $this->empty_packet_model->get('distinct(weight) as name,weight as id',array('weight!='=>''));
+     $this->data['empty_packet_quantities'] = $this->empty_packet_model->get('distinct(qty) as name,qty as id',array('qty!='=>''));
 }
 
   public function store() {

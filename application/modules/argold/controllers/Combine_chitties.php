@@ -7,7 +7,7 @@ class Combine_chitties extends BaseController {
     parent::__construct();
     $this->date_fields = array(array('chittis', 'date'));
     $this->redirect_after_save = 'view';
-    $this->load->model(array('ac_vouchers/voucher_model','masters/account_model','masters/narration_model','argold/chitti_model','argold/Combine_chitti_detail_model'));
+    $this->load->model(array('ac_vouchers/voucher_model','masters/account_model','masters/narration_model','argold/chitti_model','argold/Combine_chitti_detail_model','masters/empty_bag_model'));
   }
   
   public function view($id) {
@@ -60,8 +60,11 @@ class Combine_chitties extends BaseController {
       if ($this->router->method == 'store' || $this->router->method == 'update') {
         $this->data['record']['combine_chitties'] = $_POST['combine_chitties'];
         $this->data['combine_chitti_details'] = @$_POST['combine_chitti_details'];
+
       }
     }
+      $this->data['empty_bag_weights'] = $this->empty_bag_model->get('distinct(weight) as name,weight as id',array('weight!='=>''));
+      $this->data['empty_bag_qty'] = $this->empty_bag_model->get('distinct(qty) as name,qty as id',array('qty!='=>''));
   }
 
   public function store() {

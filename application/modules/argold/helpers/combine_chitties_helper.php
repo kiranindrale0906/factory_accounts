@@ -66,7 +66,9 @@ function get_field_attribute($table, $field) {
     'site_name'  => array('Site Name', 'Select', TRUE, '', TRUE),
     'purity'        => array('Purity', 'Select Purity.', TRUE, '', TRUE),
     'date'          => array('Date', 'Enter Date.', TRUE, '', TRUE),
-    'created_at'    => array('Created At', 'Enter Date.', TRUE, '', TRUE)
+    'created_at'    => array('Created At', 'Enter Date.', TRUE, '', TRUE),
+    'empty_bag_weight'    => array('Empty Bag Weight', 'Select Empty Bag Weight', TRUE, '', TRUE),
+    'empty_bag_qty'    => array('Empty Bag Quantity', 'Select  Empty Bag Quantity', TRUE, '', TRUE)
   );
   
   $attributes['combine_chitti_details'] = array(

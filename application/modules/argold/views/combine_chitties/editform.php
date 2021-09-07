@@ -16,6 +16,8 @@
     <?php load_field('dropdown', array('field' => 'purity','option'=>$purity));?>
     
     <?php load_field('date',array('field' => 'date','class'=>'datepicker_js','value'=>(!empty($record['date'])?date('d-m-Y',strtotime($record['date'])):date('d-m-Y')), )); ?>
+    <?php load_field('dropdown',array('field' => 'empty_bag_weight','option' => $empty_bag_weights));  ?>
+    <?php load_field('dropdown',array('field' => 'empty_bag_qty','option' => $empty_bag_qty));  ?>
   </div>
     <?php $this->load->view('combine_chitti_details/formlist');?>
   <?php load_buttons('submit', array('controller' => $controller, 'name' => 'SAVE' , 'class' => 'btn_blue')) ;
