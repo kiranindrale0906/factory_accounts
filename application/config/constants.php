@@ -112,8 +112,8 @@ define('ADMIN_LAYOUTS_PATH', '');
 define('AUTH_TOKEN', '1234');
 define('ACCESS_TOKEN', '1234');
 define('ACCOUNT_NAME_REPORT','account_name');
-define('DB_BACKUP_FILE_PATH',APPPATH.'database_backups/');
-define('HOST','');
+//define('DB_BACKUP_FILE_PATH',APPPATH.'database_backups/');
+//define('HOST','');
 
 
 define('FIELDS_PER_ROW', 3);
