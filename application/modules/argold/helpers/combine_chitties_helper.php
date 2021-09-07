@@ -42,6 +42,8 @@ function list_settings() {
     array("Combine chittie No", "id", FALSE, "id", FALSE, FALSE),
     array("Date", "date", FALSE, "date", FALSE, FALSE,'DATE_FORMAT(date, "%d-%m-%Y") as date'),
     array("Account Name", "account_name", FALSE, "account_name", FALSE, FALSE),
+    array("Empty Bag Weight", "empty_bag_weight", FALSE, "empty_bag_weight", FALSE, FALSE),
+    array("Empty Bag Quantity", "empty_bag_qty", FALSE, "empty_bag_qty", FALSE, FALSE),
     array("Action", "action", FALSE, "action", FALSE, FALSE),
   );
 }
