@@ -13,7 +13,6 @@
                                        'value' => $record['site_name']));?>
     
     <?php load_field('dropdown', array('field' => 'account_name','option'=>$account_name));?>
-    <?php load_field('dropdown', array('field' => 'purity','option'=>$purity));?>
     <?php load_field('date',array('field' => 'date','class'=>'datepicker_js')); ?>
   </div>
     <?php $this->load->view('combine_chitti_details/formlist');?>

@@ -39,20 +39,19 @@ class Combine_chitties extends BaseController {
 
   public function _get_form_data() {
     $this->data['account_name']=$this->chitti_model->get('distinct(account_name) as name,account_name as id');
-    $this->data['purity']=$this->chitti_model->get('distinct(purity) as name,purity as id');
+    // $this->data['purity']=$this->chitti_model->get('distinct(purity) as name,purity as id');
     $this->data['site_names'] = $this->chitti_model->get('distinct(site_name) as name,site_name as id');
     if (!empty($_GET['account_name']))
       $this->data['record']['account_name'] = $_GET['account_name'];
       $this->data['record']['site_name'] = @$_GET['site_name'];
-      $this->data['record']['purity'] = @$_GET['purity'];
     $where=array('combine_chitti_id=' => 0);
     
     if(!empty($this->data['record']['account_name'])) { 
       $where['account_name']=$this->data['record']['account_name'];
       $where['site_name']=$this->data['record']['site_name'];
-      if(!empty($this->data['record']['purity'])){
-        $where['purity']=$this->data['record']['purity'];
-      }
+      // if(!empty($this->data['record']['purity'])){
+      //   $where['purity']=$this->data['record']['purity'];
+      // }
       // $where['date > '] = '2021-08-17';
       $this->data['combine_chitti_details'] = $this->chitti_model->get('', $where);
     } else{

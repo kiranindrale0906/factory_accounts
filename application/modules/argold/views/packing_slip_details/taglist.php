@@ -9,7 +9,7 @@
               
                    ?>
           <tr class='bold'>
-            <td class="text-center" style="padding: 1px;">Tag No.</td>
+            <td style="padding: 1px" class="text-center">Tag No.</td>
             <td style="padding: 1px" class="text-center">Net Wt</td>
             <td style="padding: 1px" class="text-center">Gross Wt</td>
             <td style="padding: 1px" class="text-center">Karat</td>
