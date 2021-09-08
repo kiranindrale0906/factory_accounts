@@ -5,11 +5,17 @@
   }
 }
 </style>
+<div style="max-width:45%; margin-left:10%">
+  <table class="table table-sm">
+    <tr>
+      <td><h6>Empty Bag Total Weight</h6></td><td class="text-right"><h6><?=$record['empty_bag_weight']+$chittis_details['expected_weight']?></h6></td>
+    </tr>
+  </table>
+</div> 
 <?php 
 $expected_weight=0;
 foreach ($combine_chitti_details as $index => $value) { 
-  $expected_weight+=$value['chittis_details']['expected_weight'];
-  ?>
+   ?>
 <div class="row ">
   <div class="col-md-3">
    <h4 style="margin-left:45%" class="heading">Chitti #<?= $value['chittis_details']['id']; ?></h4>
@@ -31,8 +37,6 @@ foreach ($combine_chitti_details as $index => $value) {
 <div style="max-width:45%; margin-left:10%">
   <table class="table table-sm">
     <tr>
-      <td><h6>Empty Bag Total Weight</h6></td><td class="text-right"><h6><?=$record['empty_bag_weight']+$expected_weight?></h6></td>
-    </tr><tr>
       <td><h6><?=$value['chittis_details']['account_name']?></h6></td><td class="text-right"><h6><?= date('d-m-Y',strtotime($value['chittis_details']['date']))?></h6></td>
     </tr><tr>
       <td>Sale Type</td><td class="text-right"><h6><?= $value['chittis_details']['sale_type'] ?></h6></td>

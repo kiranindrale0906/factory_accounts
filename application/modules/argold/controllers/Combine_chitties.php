@@ -27,8 +27,7 @@ class Combine_chitties extends BaseController {
     // $packet_no = array_column($this->data['metal_voucher_details'], 'packet_no');
     // $this->data['packet_nos']=array_unique($packet_no);
 
-    $this->data['chittis_details'] = $this->chitti_model->find('account_name, date',
-                                                               array('id in ('.implode(',',$chitti_ids).')'=>NULL));
+    $this->data['chittis_details'] = $this->chitti_model->find('sum(expected_weight) as expected_weight,account_name, date',array('id in ('.implode(',',$chitti_ids).')'=>NULL));
     foreach ($chitti_ids as $index => $id) {
       $this->data['combine_chitti_details'][$index]['metal_voucher_details'] = 
                                                     $this->voucher_model->get('',
