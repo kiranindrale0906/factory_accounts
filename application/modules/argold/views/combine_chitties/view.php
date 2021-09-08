@@ -8,6 +8,7 @@
 <div style="max-width:45%; margin-left:10%">
   <table class="table table-sm">
     <tr>
+      <td><h3>Combine Chitties</h3></td>
       <td><h6>Empty Bag Total Weight</h6></td><td class="text-right"><h6><?=$record['empty_bag_weight']+$chittis_details['expected_weight']?></h6></td>
     </tr>
   </table>
