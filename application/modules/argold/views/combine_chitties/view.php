@@ -5,10 +5,12 @@
   }
 }
 </style>
-<div style="max-width:45%; margin-left:10%">
+<div class="row ">
   <div class="col-md-3">
    <h4 style="margin-left:45%" class="heading">Combine Chitti #<?= $record['id']; ?></h4>
   </div>
+</div>
+<div style="max-width:45%; margin-left:10%">
   <table class="table table-sm">
     <tr>
       <td><h6>Empty Bag Total Weight</h6></td><td class="text-right"><h6><?=$record['empty_bag_weight']+$chittis_details['expected_weight']?></h6></td>
