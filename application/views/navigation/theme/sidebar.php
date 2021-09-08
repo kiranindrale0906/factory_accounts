@@ -30,6 +30,8 @@
                                         'masters/settings'=>'Settings',
                                         'users/ip_addresses'=>'Ip Addresses',
                                         'masters/quators'=>'Quators',
+                                        'masters/empty_packets'=>'Empty Packet',
+                                        'masters/empty_bags'=>'Empty Bag',
                                         ),
                     'Transactions' => array(
                                            'transactions/cash_receipt_vouchers' => 'Cash Voucher',

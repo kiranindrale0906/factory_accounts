@@ -7,7 +7,7 @@ class Combine_chitties extends BaseController {
     parent::__construct();
     $this->date_fields = array(array('chittis', 'date'));
     $this->redirect_after_save = 'view';
-    $this->load->model(array('ac_vouchers/voucher_model','masters/account_model','masters/narration_model','argold/chitti_model','argold/Combine_chitti_detail_model'));
+    $this->load->model(array('ac_vouchers/voucher_model','masters/account_model','masters/narration_model','argold/chitti_model','argold/Combine_chitti_detail_model','masters/empty_bag_model'));
   }
   
   public function view($id) {
@@ -27,8 +27,7 @@ class Combine_chitties extends BaseController {
     // $packet_no = array_column($this->data['metal_voucher_details'], 'packet_no');
     // $this->data['packet_nos']=array_unique($packet_no);
 
-    $this->data['chittis_details'] = $this->chitti_model->find('account_name, date',
-                                                               array('id in ('.implode(',',$chitti_ids).')'=>NULL));
+    $this->data['chittis_details'] = $this->chitti_model->find('sum(expected_weight) as expected_weight,account_name, date',array('id in ('.implode(',',$chitti_ids).')'=>NULL));
     foreach ($chitti_ids as $index => $id) {
       $this->data['combine_chitti_details'][$index]['metal_voucher_details'] = 
                                                     $this->voucher_model->get('',
@@ -39,20 +38,19 @@ class Combine_chitties extends BaseController {
 
   public function _get_form_data() {
     $this->data['account_name']=$this->chitti_model->get('distinct(account_name) as name,account_name as id');
-    $this->data['purity']=$this->chitti_model->get('distinct(purity) as name,purity as id');
+    // $this->data['purity']=$this->chitti_model->get('distinct(purity) as name,purity as id');
     $this->data['site_names'] = $this->chitti_model->get('distinct(site_name) as name,site_name as id');
     if (!empty($_GET['account_name']))
       $this->data['record']['account_name'] = $_GET['account_name'];
       $this->data['record']['site_name'] = @$_GET['site_name'];
-      $this->data['record']['purity'] = @$_GET['purity'];
     $where=array('combine_chitti_id=' => 0);
     
     if(!empty($this->data['record']['account_name'])) { 
       $where['account_name']=$this->data['record']['account_name'];
       $where['site_name']=$this->data['record']['site_name'];
-      if(!empty($this->data['record']['purity'])){
-        $where['purity']=$this->data['record']['purity'];
-      }
+      // if(!empty($this->data['record']['purity'])){
+      //   $where['purity']=$this->data['record']['purity'];
+      // }
       // $where['date > '] = '2021-08-17';
       $this->data['combine_chitti_details'] = $this->chitti_model->get('', $where);
     } else{
@@ -60,8 +58,11 @@ class Combine_chitties extends BaseController {
       if ($this->router->method == 'store' || $this->router->method == 'update') {
         $this->data['record']['combine_chitties'] = $_POST['combine_chitties'];
         $this->data['combine_chitti_details'] = @$_POST['combine_chitti_details'];
+
       }
     }
+      $this->data['empty_bag_weights'] = $this->empty_bag_model->get('distinct(weight) as name,weight as id',array('weight!='=>''));
+      $this->data['empty_bag_qty'] = $this->empty_bag_model->get('distinct(qty) as name,qty as id',array('qty!='=>''));
   }
 
   public function store() {
