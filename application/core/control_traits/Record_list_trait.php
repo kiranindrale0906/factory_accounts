@@ -21,7 +21,7 @@ trait Record_list_trait  {
   private $getData = '';
   private $sum = '';
 
-  private function set_attributes($param) {
+  private function set_attributes($param){
     $getData = $this->getData($param);
     $this->page_no    = $getData['page_no'];
     $this->search_url = $this->router->fetch_class();
@@ -36,11 +36,11 @@ trait Record_list_trait  {
     isset($param['limit']) ? $this->limit = $param['limit'] : $this->limit = "10";
     if (!empty($param['new_headers'])) {
       $this->theadColumn = $param['new_headers'];
-      $this->old_theadColumn = $param['old_header'];
     } else {
       $headingFunction = $this->headingFunction;
       $this->theadColumn = list_settings();
     }
+
   }
 
   private function _getAllRecords($where=array(), $count = FALSE,$arrange_coulmn=false,$select_column = false){
@@ -77,18 +77,19 @@ trait Record_list_trait  {
   
     $select_column_data = $this->column_prefrence_model->get_column_prefrences();
 
-    if(empty($this->input->post('selected_columns')))
+    if(empty($this->input->post('selected_columns')) && isset($select_column_data['select_column_json']))
       $select_column = json_decode($select_column_data['select_column_json']);
     else
       $select_column = $this->input->post('selected_columns');
-
-    if(empty($this->input->post('ordered_columns')))
-      $arrange_column = json_decode($select_column_data['arrange_column_json']);
+  
+    if(empty($this->input->post('ordered_columns')) && isset($select_column_data['arrange_column_json']))
+      $arrange_column = (array) json_decode($select_column_data['arrange_column_json']);
     else
       $arrange_column = $this->input->post('ordered_columns');
-      $id = $select_column_data['id'];
+      $id = isset($select_column_data['id']) ? $select_column_data['id'] : '';
     if ($this->input->post('selected_columns') == '') 
       $empty_headers = '';
+
     $new_headers = '';
     $arrange_column_array = '';
     if ($this->input->get('dashboard_id') != '') {
@@ -107,6 +108,7 @@ trait Record_list_trait  {
             }
           }
         }
+
       }else{
         $dashboard_headers = $this->$model_name->getDashboardColumns($this->input->get('dashboard_id'));
         foreach ($dashboard_headers as $newkey => $newkeyvalue) {
@@ -144,6 +146,8 @@ trait Record_list_trait  {
       }
       if(is_array($arrange_column)){
         $diff = array_diff($arrange_column_set,$arrange_column); 
+  
+        //pr($arrange_column_set);
         $arrange_column = $this->mergePerKey($diff,$arrange_column);
       }
       foreach ($arrange_column as $arrangeKey => $newselectvalue) {
@@ -154,7 +158,7 @@ trait Record_list_trait  {
       }
     }else 
       $new_headers = $old_header; 
-    
+  
     if($arrangecolumn == true || $selectcolumn == true){
       $column_prefrences =  array('filter_columns'=>$new_headers,
                     'table_columns'=>list_settings(),
@@ -166,7 +170,7 @@ trait Record_list_trait  {
     $table_settings['new_headers'] = $new_headers;
     if (isset($count) && $count == TRUE) 
       return  $this->getRecordCounts($table_settings);
-    $table_settings['old_header'] = $old_header;
+
     $records = $this->getRecords($table_settings, $extension);
     $records['master_name'] = $master_name;
     $records['page_title'] = getTableSettings()['page_title'];
@@ -232,17 +236,10 @@ trait Record_list_trait  {
   private function crateThead() //create thead
   {
     $this->thead = array();
-
     if(isset($this->theadColumn)){
       foreach ($this->theadColumn as $k => $heading) {
-        $key  = '';
-        foreach($this->old_theadColumn as $old_key => $heading_key){
-          if($heading[1] == $heading_key[1]){
-            $key = $old_key;
-          }
-        }
         $order_by = $this->getOrderHtml($heading);
-        $filter_by = $this->getFilterHtml($heading, $key);
+        $filter_by = $this->getFilterHtml($heading, $k);
         $this->thead[$k][0] = $order_by;
         $this->thead[$k][1] = $filter_by;
         $this->thead[$k][2] = $heading[0];
