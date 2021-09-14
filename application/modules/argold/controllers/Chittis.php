@@ -7,7 +7,7 @@ class Chittis extends BaseController {
     parent::__construct();
     $this->date_fields = array(array('chittis', 'date'));
     $this->redirect_after_save = 'view';
-    $this->load->model(array('ac_vouchers/voucher_model','masters/account_model','masters/narration_model','masters/empty_packet_model'));
+    $this->load->model(array('ac_vouchers/voucher_model','masters/account_model','argold/chitti_empty_packet_detail_model','masters/narration_model','masters/empty_packet_model'));
   }
   
   public function view($id) {
@@ -35,6 +35,7 @@ class Chittis extends BaseController {
     $this->data['account_id']='';
     $this->data['metal_voucher_details'] = $this->voucher_model->get('', array('voucher_type' => 'metal issue voucher',
                                                                                'chitti_id' => $this->data['record']['id']));
+    $this->data['empty_packet_details'] = $this->chitti_empty_packet_detail_model->get('', array('chitti_id' => $this->data['record']['id']));
     // $this->data['metal_voucher_details'] = $this->voucher_model->get('', array('voucher_type'=>'metal issue voucher',
     //                                                                            'chitti_id'=>$this->data['record']['id']));
     $packet_no = array_column($this->data['metal_voucher_details'], 'packet_no');

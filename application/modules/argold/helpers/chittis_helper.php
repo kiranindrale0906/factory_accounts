@@ -141,7 +141,7 @@ function get_row_actions($row, $url, $select_url, $filter) {
                            'confirm_message' => "",
                            'class' => 'btn-sm');
   $actions["Empty Packet Details"] = array('request' => "http", 
-                           'url' => ADMIN_PATH.'argold/chitti_empty_packet_details/create?chitti_id=1'.$row['id'],
+                           'url' => ADMIN_PATH.'argold/chitti_empty_packet_details/create?chitti_id='.$row['id'],
                            'confirm_message' => "",
                            'class' => 'btn-sm');
   $actions["Delete"] = array('request' => "http",

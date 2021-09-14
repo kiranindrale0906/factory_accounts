@@ -243,6 +243,11 @@ function delete_refresh(index){
   $("tr.table_refresh_details_"+index).remove();
 }
 
+function delete_empty_packet_details(index){
+  $("input[name*='table_chitti_empty_packet_details["+index+"][delete]']").val(1);
+  $("tr.table_empty_packet_details_"+index).remove();
+}
+
 $(document).on("change", ".gross_weight", function() {
     var sum = 0;
     $(".gross_weight").each(function(){

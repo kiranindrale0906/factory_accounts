@@ -53,7 +53,7 @@ class Combine_chitties extends BaseController {
       // if(!empty($this->data['record']['purity'])){
       //   $where['purity']=$this->data['record']['purity'];
       // }
-      $where['date > '] = '2021-09-14';
+      $where['date > '] = '2021-09-13';
       $this->data['combine_chitti_details'] = $this->chitti_model->get('', $where);
     } else{
       $this->data['combine_chitti_details'] = array();
