@@ -39,7 +39,9 @@ class Combine_chitties extends BaseController {
   public function _get_form_data() {
     $this->data['account_name']=$this->chitti_model->get('distinct(account_name) as name,account_name as id');
     // $this->data['purity']=$this->chitti_model->get('distinct(purity) as name,purity as id');
-    $this->data['site_names'] = $this->chitti_model->get('distinct(site_name) as name,site_name as id');
+    $this->data['site_names'] = array(array('id'=>'AR Gold Jan 2021','name'=>'AR Gold Jan 2021'),
+                                      array('id'=>'ARF Jan 2021','name'=>'ARF Jan 2021'),
+                                      array('id'=>'ARC Jan 2021','name'=>'ARC Jan 2021'));
     if (!empty($_GET['account_name']))
       $this->data['record']['account_name'] = $_GET['account_name'];
       $this->data['record']['site_name'] = @$_GET['site_name'];
@@ -51,7 +53,7 @@ class Combine_chitties extends BaseController {
       // if(!empty($this->data['record']['purity'])){
       //   $where['purity']=$this->data['record']['purity'];
       // }
-      // $where['date > '] = '2021-08-17';
+      $where['date > '] = '2021-09-14';
       $this->data['combine_chitti_details'] = $this->chitti_model->get('', $where);
     } else{
       $this->data['combine_chitti_details'] = array();
