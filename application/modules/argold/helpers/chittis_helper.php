@@ -140,6 +140,10 @@ function get_row_actions($row, $url, $select_url, $filter) {
                            'url' => ADMIN_PATH.$controller.'/view/'.$row['id'].'?detail=1',
                            'confirm_message' => "",
                            'class' => 'btn-sm');
+  $actions["Empty Packet Details"] = array('request' => "http", 
+                           'url' => ADMIN_PATH.'argold/chitti_empty_packet_details/create?chitti_id=1'.$row['id'],
+                           'confirm_message' => "",
+                           'class' => 'btn-sm');
   $actions["Delete"] = array('request' => "http",
                                'url' => ADMIN_PATH.$controller.'/delete/'.$row['id'],
                                'confirm_message' => "Do you want to delete",

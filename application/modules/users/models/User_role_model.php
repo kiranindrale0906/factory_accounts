@@ -43,7 +43,7 @@ class User_role_model extends Core_user_role_model {
                                             'argold/domestic_labour_chitties',
                                             'argold/domestic_labour_chitti_details',
                                             'argold/packing_slips','argold/chitti_exports','argold/metal_issue_chitties','argold/packing_slip_details','argold/metal_issue_packing_slips','argold/voucher_details',
-                                            'argold/refresh','argold/refresh_details','argold/chitti_hides','argold/refresh_hides',
+                                            'argold/refresh','argold/chitti_empty_packet_details','argold/refresh_details','argold/chitti_hides','argold/refresh_hides',
                                             'transactions/loss_outs',
                                             'transactions/mangalsutra_sales_return_voucher',
                                             'ac_vouchers/voucher_listing',
