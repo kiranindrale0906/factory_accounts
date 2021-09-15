@@ -11,21 +11,21 @@
           </tr>
         </thead>
         <tr>
-          <td>AR GOLD Jan 2021</td>
-          <td class="text-right"><?= $arg_balance=four_decimal(abs($live_argold_jan2021_rolling_balance)) ?></td>
-          <td class="text-right"><?= $arg_gpc_balance=four_decimal($live_argold_jan2021_rolling_gpc_balance) ?></td>
+          <td>AR GOLD</td>
+          <td class="text-right"><?= $arg_balance=four_decimal(abs($live_argold_rolling_balance)) ?></td>
+          <td class="text-right"><?= $arg_gpc_balance=four_decimal($live_argold_rolling_gpc_balance) ?></td>
           <td class="text-right"><?= $arg_rolling=!empty($arg_balance)?four_decimal($arg_gpc_balance/$arg_balance):0 ?></td>
         </tr>
         <tr>
-          <td>ARF Jan 2021</td>
-          <td class="text-right"><?= $arf_balance=four_decimal(abs($live_arf_jan2021_rolling_balance)) ?></td>
-          <td class="text-right"><?= $arf_gpc_balance=four_decimal($live_arf_jan2021_rolling_gpc_balance) ?></td>
+          <td>ARF</td>
+          <td class="text-right"><?= $arf_balance=four_decimal(abs($live_arf_rolling_balance)) ?></td>
+          <td class="text-right"><?= $arf_gpc_balance=four_decimal($live_arf_rolling_gpc_balance) ?></td>
           <td class="text-right"><?= $arf_rolling=!empty($arf_balance)?four_decimal($arf_gpc_balance/$arf_balance):0 ?></td>
         </tr>
         <tr>
-          <td>ARC Jan 2021</td>
-          <td class="text-right"><?= $arc_balance=four_decimal(abs($live_arc_jan2021_rolling_balance)) ?></td>
-          <td class="text-right"><?= $arc_gpc_balance=four_decimal($live_arc_jan2021_rolling_gpc_balance) ?></td>
+          <td>ARC</td>
+          <td class="text-right"><?= $arc_balance=four_decimal(abs($live_arc_rolling_balance)) ?></td>
+          <td class="text-right"><?= $arc_gpc_balance=four_decimal($live_arc_rolling_gpc_balance) ?></td>
           <td class="text-right"><?= $arc_rolling=!empty($arc_balance)?four_decimal($arc_gpc_balance/$arc_balance):0 ?></td>
         </tr>
         <tr>

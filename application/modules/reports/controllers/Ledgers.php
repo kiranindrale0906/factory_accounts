@@ -143,22 +143,17 @@ class Ledgers extends BaseController {
                                // pd($this->data['site_name'] );
        $account_receipt_where['site_name'] = '';                        
        $account_issue_where['site_name'] = '';                        
-      if ($this->data['site_name'] == 'ARF Jan 2021'){
-        $account_issue_where['account_name'] = 'ARF Software Jan 2021';
-      }elseif ($this->data['site_name'] == 'ARC Jan 2021'){
-        $account_issue_where['account_name'] = 'ARC Software Jan 2021';
-      }elseif ($this->data['site_name'] == 'AR Gold Jan 2021'){
-        $account_issue_where['account_name'] = 'AR Gold Software Jan 2021';
-      }elseif ($this->data['site_name'] == 'AR Gold Nov 2020'){
-        $account_issue_where['account_name'] = 'AR Gold Software Nov 2020';
-      }elseif ($this->data['site_name'] == 'ARF Nov 2020'){
-        $account_issue_where['account_name'] = 'ARF Software Jan 2020';
-      }elseif ($this->data['site_name'] == 'ARC Nov 2020'){
-        $account_issue_where['account_name'] = 'ARC Software Nov 2020';}
+      if ($this->data['site_name'] == 'ARF'){
+        $account_issue_where['account_name'] = 'ARF Software';
+      }elseif ($this->data['site_name'] == 'ARC'){
+        $account_issue_where['account_name'] = 'ARC Software';
+      }elseif ($this->data['site_name'] == 'AR Gold'){
+        $account_issue_where['account_name'] = 'AR Gold Software';
+      }
       else{
-        $account_issue_where['account_name in ("ARF Software Jan 2021","ARC Software Jan 2021","AR Gold Software Jan 2021") '] = NULL;
+        $account_issue_where['account_name in ("ARF Software","ARC Software","AR Gold Software") '] = NULL;
       }   
-      !empty($this->data['account_name'])?$account_receipt_where['account_name']=$this->data['account_name']:$account_receipt_where['account_name not in ("MAIN VADOTAR","PURCHASE ACCOUNT","ARF Software Jan 2021","ARC Software Jan 2021","AR Gold Software Jan 2021") '] = NULL;                    
+      !empty($this->data['account_name'])?$account_receipt_where['account_name']=$this->data['account_name']:$account_receipt_where['account_name not in ("MAIN VADOTAR","PURCHASE ACCOUNT","ARF Software","ARC Software","AR Gold Software") '] = NULL;                    
     }   
     
     $where_issue   = array_merge($where, array('(credit_weight != 0 or credit_amount != 0)' => NULL),$account_issue_where);

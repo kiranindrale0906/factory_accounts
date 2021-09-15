@@ -22,7 +22,7 @@ class Account_receipt_reports extends Ledgers {
     $this->data['voucher_dates'] = array();
     $this->data['account_name'] = (!empty($_GET['account_name'])) ? $_GET['account_name'] : '';
     $where_receipt=array('(debit_weight != 0 or debit_amount != 0)'=>NULL,
-                         'account_name not in ("MAIN VADOTAR","PURCHASE ACCOUNT","ARF Software Jan 2021","ARC Software Jan 2021","AR Gold Software Jan 2021")'=>NULL,
+                         'account_name not in ("MAIN VADOTAR","PURCHASE ACCOUNT","ARF Software","ARC Software","AR Gold Software")'=>NULL,
                          'purity>='=>98,
                          'purity<='=>100);
     $this->data['account_names'] = $this->ledger_model->get('account_name', $where_receipt);

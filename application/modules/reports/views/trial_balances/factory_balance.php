@@ -11,54 +11,31 @@
           </tr>
         </thead>
         <tr>
-          <td>AR GOLD Jan 2021</td>
-          <td class="text-right"><?= four_decimal(-1 * $accounts_argold_jan2021_balance) ?></td>
-          <td class="text-right"><?= four_decimal(-1 * $live_argold_jan2021_balance) ?></td>
-          <td class="text-right"><?= four_decimal($accounts_argold_jan2021_balance - $live_argold_jan2021_balance) ?></td>
+          <td>AR GOLD</td>
+          <td class="text-right"><?= four_decimal(-1 * $accounts_argold_balance) ?></td>
+          <td class="text-right"><?= four_decimal(-1 * $live_argold_balance) ?></td>
+          <td class="text-right"><?= four_decimal($accounts_argold_balance - $live_argold_balance) ?></td>
         </tr>
         <tr>
-          <td>ARF Jan 2021</td>
-          <td class="text-right"><?= four_decimal(-1 * $accounts_arf_jan2021_balance) ?></td>
-          <td class="text-right"><?= four_decimal(-1 * $live_arf_jan2021_balance) ?>  </td>
-          <td class="text-right"><?= four_decimal($accounts_arf_jan2021_balance - $live_arf_jan2021_balance) ?></td>
+          <td>ARF</td>
+          <td class="text-right"><?= four_decimal(-1 * $accounts_arf_balance) ?></td>
+          <td class="text-right"><?= four_decimal(-1 * $live_arf_balance) ?>  </td>
+          <td class="text-right"><?= four_decimal($accounts_arf_balance - $live_arf_balance) ?></td>
         </tr>
         <tr>
-          <td>ARC Jan 2021</td>
-          <td class="text-right"><?= four_decimal(-1 * $accounts_arc_jan2021_balance) ?></td>
-          <td class="text-right"><?= four_decimal(-1 * $live_arc_jan2021_balance) ?>  </td>
-          <td class="text-right"><?= four_decimal($accounts_arc_jan2021_balance - $live_arc_jan2021_balance) ?></td>
+          <td>ARC</td>
+          <td class="text-right"><?= four_decimal(-1 * $accounts_arc_balance) ?></td>
+          <td class="text-right"><?= four_decimal(-1 * $live_arc_balance) ?>  </td>
+          <td class="text-right"><?= four_decimal($accounts_arc_balance - $live_arc_balance) ?></td>
         </tr>
-        <!-- <tr>
-          <td>AR GOLD Nov 2020</td>
-          <td class="text-right"><?= four_decimal(-1 * $accounts_argold_nov2020_balance) ?></td>
-          <td class="text-right"><?= four_decimal(-1 * $live_argold_nov2020_balance) ?></td>
-          <td class="text-right"><?= four_decimal($accounts_argold_nov2020_balance - $live_argold_nov2020_balance) ?></td>
-        </tr>
-        <tr>
-          <td>ARF Nov 2020</td>
-          <td class="text-right"><?= four_decimal(-1 * $accounts_arf_nov2020_balance) ?></td>
-          <td class="text-right"><?= four_decimal(-1 * $live_arf_nov2020_balance) ?>  </td>
-          <td class="text-right"><?= four_decimal($accounts_arf_nov2020_balance - $live_arf_nov2020_balance) ?></td>
-        </tr>
-        <tr>
-          <td>ARC Nov 2020</td>
-          <td class="text-right"><?= four_decimal(-1 * $accounts_arc_nov2020_balance) ?></td>
-          <td class="text-right"><?= four_decimal(-1 * $live_arc_nov2020_balance) ?>  </td>
-          <td class="text-right"><?= four_decimal($accounts_arc_nov2020_balance - $live_arc_nov2020_balance) ?></td>
-        </tr> -->
 
         <tr>
           <td>Total</td>
-          <td class="text-right"><?= four_decimal(-1 * ($accounts_argold_jan2021_balance + $accounts_arf_jan2021_balance + $accounts_arc_jan2021_balance)) 
-                                                      //+ $accounts_argold_nov2020_balance + $accounts_arf_nov2020_balance + $accounts_arc_nov2020_balance ?></td>
-          <td class="text-right"><?= four_decimal(-1 * ($live_argold_jan2021_balance + $live_arf_jan2021_balance + $live_arc_jan2021_balance))
-                                                      //+ $live_argold_nov2020_balance + $live_arf_nov2020_balance + $live_arc_nov2020_balance)) ?>  </td>
-          <td class="text-right"><b><?= four_decimal(-1 * (  $accounts_argold_jan2021_balance  - $live_argold_jan2021_balance
-                                                           + $accounts_arf_jan2021_balance - $live_arf_jan2021_balance
-                                                           + $accounts_arc_jan2021_balance - $live_arc_jan2021_balance))
-                                                           //+ $accounts_argold_nov2020_balance  - $live_argold_nov2020_balance
-                                                           //+ $accounts_arf_nov2020_balance - $live_arf_nov2020_balance
-                                                           //+ $accounts_arc_nov2020_balance - $live_arc_nov2020_balance)) ?></b></td>
+          <td class="text-right"><?= four_decimal(-1 * ($accounts_argold_balance + $accounts_arf_balance + $accounts_arc_balance)) ?></td>
+          <td class="text-right"><?= four_decimal(-1 * ($live_argold_balance + $live_arf_balance + $live_arc_balance)) ?>  </td>
+          <td class="text-right"><b><?= four_decimal(-1 * (  $accounts_argold_balance  - $live_argold_balance
+                                                           + $accounts_arf_balance - $live_arf_balance
+                                                           + $accounts_arc_balance - $live_arc_balance)) ?></b></td>
         </tr>
       </table>
     </div>

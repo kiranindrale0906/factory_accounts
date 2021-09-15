@@ -64,7 +64,7 @@ class Chittis extends BaseController {
 
     
     
-    $this->data['record']['site_name'] = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'AR Gold Jan 2021';
+    $this->data['record']['site_name'] = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'AR Gold';
     if($this->router->class == 'chitti_exports'){ 
      $this->data['account_name']= $this->account_model->get('distinct(name) as name,name as id',array('group_code'=>"Export"));
       $where=array('voucher_type' => 'metal issue voucher',
@@ -159,9 +159,9 @@ class Chittis extends BaseController {
   }
         
     $this->data['site_names'] = array(
-                                      array('id' => 'AR Gold Jan 2021', 'name' => 'AR Gold Jan 2021'),
-                                      array('id' => 'ARF Jan 2021', 'name' => 'ARF Jan 2021'),
-                                      array('id' => 'ARC Jan 2021', 'name' => 'ARC Jan 2021')
+                                      array('id' => 'AR Gold', 'name' => 'AR Gold'),
+                                      array('id' => 'ARF Jan', 'name' => 'ARF'),
+                                      array('id' => 'ARC Jan', 'name' => 'ARC')
                                      );
 
     $this->data['empty_packet_weights'] = $this->empty_packet_model->get('distinct(weight) as name,weight as id',array('weight!='=>''));

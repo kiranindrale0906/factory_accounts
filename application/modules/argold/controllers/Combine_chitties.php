@@ -39,9 +39,9 @@ class Combine_chitties extends BaseController {
   public function _get_form_data() {
     $this->data['account_name']=$this->chitti_model->get('distinct(account_name) as name,account_name as id');
     // $this->data['purity']=$this->chitti_model->get('distinct(purity) as name,purity as id');
-    $this->data['site_names'] = array(array('id'=>'AR Gold Jan 2021','name'=>'AR Gold Jan 2021'),
-                                      array('id'=>'ARF Jan 2021','name'=>'ARF Jan 2021'),
-                                      array('id'=>'ARC Jan 2021','name'=>'ARC Jan 2021'));
+    $this->data['site_names'] = array(array('id'=>'AR Gold','name'=>'AR Gold'),
+                                      array('id'=>'ARF','name'=>'ARF'),
+                                      array('id'=>'ARC','name'=>'ARC'));
     if (!empty($_GET['account_name']))
       $this->data['record']['account_name'] = $_GET['account_name'];
       $this->data['record']['site_name'] = @$_GET['site_name'];

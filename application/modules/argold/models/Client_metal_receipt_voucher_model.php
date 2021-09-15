@@ -63,9 +63,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   }
 
   private function set_site_name_from_receipt_type() {
-    if ($this->attributes['receipt_type'] == 'AR Gold Refresh')  $this->attributes['site_name'] = 'AR Gold Jan 2021';
-    elseif ($this->attributes['receipt_type'] == 'ARF Refresh')  $this->attributes['site_name'] = 'ARF Jan 2021';
-    elseif ($this->attributes['receipt_type'] == 'ARC Refresh')  $this->attributes['site_name'] = 'ARC Jan 2021';
+    if ($this->attributes['receipt_type'] == 'AR Gold Refresh')  $this->attributes['site_name'] = 'AR Gold';
+    elseif ($this->attributes['receipt_type'] == 'ARF Refresh')  $this->attributes['site_name'] = 'ARF';
+    elseif ($this->attributes['receipt_type'] == 'ARC Refresh')  $this->attributes['site_name'] = 'ARC';
   }
 
   private function set_sale_type_from_receipt_type_for_metal() {
@@ -76,7 +76,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     if ($this->attributes['receipt_type'] == "AR Gold Finished Goods")      $this->attributes['account_name'] = 'AR Gold';
     if ($this->attributes['receipt_type'] == "ARF Finished Goods")          $this->attributes['account_name'] = 'ARF';
     if ($this->attributes['receipt_type'] == "ARC Finished Goods")          $this->attributes['account_name'] = 'ARC';
-    if ($this->attributes['receipt_type'] == "ARF Software Finished Goods") $this->attributes['account_name'] = 'ARF Software Jan 2021';
+    if ($this->attributes['receipt_type'] == "ARF Software Finished Goods") $this->attributes['account_name'] = 'ARF Software';
     if ($this->attributes['receipt_type'] == "Vadotar")                     $this->attributes['account_name'] = 'MAIN VADOTAR';
   }
 
@@ -135,7 +135,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $in_weight = $this->attributes['debit_weight'] - $credit_weight;
       if ($in_weight == 0) return true;
 
-      $this->formdata['metal_issue_vouchers'][] = array('account_name' => 'AR Gold Software Jan 2021',
+      $this->formdata['metal_issue_vouchers'][] = array('account_name' => 'AR Gold Software',
                                                         'credit_weight' => $in_weight,
                                                         'dd_type' => $this->attributes['dd_type']);
     } 
@@ -150,8 +150,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                                                           'AR Gold Finished Goods',
                                                           'AR Gold RND'))) {
       $set_metal_issue_voucher = 1;
-      $account_name = 'AR Gold Software Jan 2021';
-      $site_name = 'AR Gold Jan 2021';
+      $account_name = 'AR Gold Software';
+      $site_name = 'AR Gold';
     }
 
     if (     $this->attributes['receipt_type'] == 'Alloy Vodator'
@@ -161,12 +161,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
           || $this->attributes['receipt_type'] == 'Rhodium Vatav') {
       $set_metal_issue_voucher = 1;
       
-      if ($this->attributes['site_name'] == 'AR Gold Jan 2021') {
-        $account_name = 'AR Gold Software Jan 2021';
-        $site_name = 'AR Gold Jan 2021';
-      } elseif ($this->attributes['site_name'] == 'AR Gold Nov 2020') {
-        $account_name = 'AR Gold Software Nov 2020';
-        $site_name = 'AR Gold Nov 2020';
+      if ($this->attributes['site_name'] == 'AR Gold') {
+        $account_name = 'AR Gold Software';
+        $site_name = 'AR Gold';
       }
     }      
 
@@ -176,8 +173,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                                                           'ARF Finished Goods',
                                                           'ARF RND'))) {
       $set_metal_issue_voucher = 1;
-      $account_name = 'ARF Software Jan 2021';
-      $site_name = 'ARF Jan 2021';
+      $account_name = 'ARF Software';
+      $site_name = 'ARF';
     }
 
     if (     $this->attributes['receipt_type'] == 'Alloy Vodator'
@@ -187,12 +184,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
           || $this->attributes['receipt_type'] == 'Rhodium Vatav') {
       $set_metal_issue_voucher = 1;
       
-      if ($this->attributes['site_name'] == 'ARF Jan 2021') {
-        $account_name = 'ARF Software Jan 2021';
-        $site_name = 'ARF Jan 2021';
-      } elseif ($this->attributes['site_name'] == 'ARF Nov 2020') {
-        $account_name = 'ARF Software Nov 2020';
-        $site_name = 'ARF Nov 2020';
+      if ($this->attributes['site_name'] == 'ARF') {
+        $account_name = 'ARF Software';
+        $site_name = 'ARF';
       }
     }  
 
@@ -202,8 +196,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                                                           'ARC Finished Goods',
                                                           'ARC RND'))) {
       $set_metal_issue_voucher = 1;
-      $account_name = 'ARC Software Jan 2021';
-      $site_name = 'ARC Jan 2021';
+      $account_name = 'ARC Software';
+      $site_name = 'ARC';
     }
 
     if (     $this->attributes['receipt_type'] == 'Alloy Vodator'
@@ -213,13 +207,10 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
           || $this->attributes['receipt_type'] == 'Rhodium Vatav') {
       $set_metal_issue_voucher = 1;
       
-      if ($this->attributes['site_name'] == 'ARC Jan 2021') {
-        $account_name = 'ARC Software Jan 2021';
-        $site_name = 'ARC Jan 2021';
-      } elseif ($this->attributes['site_name'] == 'ARC Nov 2020') {
-        $account_name = 'ARC Software Nov 2020';
-        $site_name = 'ARC Nov 2020';
-      }
+      if ($this->attributes['site_name'] == 'ARC') {
+        $account_name = 'ARC Software';
+        $site_name = 'ARC';
+      } 
     }  
 
     if ($set_metal_issue_voucher==1) {
@@ -261,12 +252,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
          || $this->attributes['receipt_type'] == 'Rhodium Vatav') {
       unset($this->formdata['metal_issue_vouchers']);
 
-      if     ($this->attributes['site_name'] == 'AR Gold Nov 2020') $account_name = 'AR Gold Software Nov 2020';
-      elseif ($this->attributes['site_name'] == 'AR Gold Jan 2021') $account_name = 'AR Gold Software Jan 2021';
-      elseif ($this->attributes['site_name'] == 'ARF Nov 2020') $account_name = 'ARF Software Nov 2020';
-      elseif ($this->attributes['site_name'] == 'ARF Jan 2021') $account_name = 'ARF Software Jan 2021';
-      elseif ($this->attributes['site_name'] == 'ARC Nov 2020') $account_name = 'ARC Software Nov 2020';
-      elseif ($this->attributes['site_name'] == 'ARC Jan 2021') $account_name = 'ARC Software Jan 2021';
+      if     ($this->attributes['site_name'] == 'AR Gold') $account_name = 'AR Gold Software';
+      elseif ($this->attributes['site_name'] == 'ARF') $account_name = 'ARF Software';
+      elseif ($this->attributes['site_name'] == 'ARC') $account_name = 'ARC Software';
 
       $this->formdata['metal_issue_vouchers'] = array(array('account_name' => $account_name,
                                                             'site_name' => $this->attributes['site_name'],
@@ -298,7 +286,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   private function set_metal_issue_voucher_attributes_from_receipt_type_for_stone() {
     if ($this->attributes['receipt_type'] == "Stone") {
       unset($this->formdata['metal_issue_vouchers']);
-      $this->formdata['metal_issue_vouchers'] = array(array('account_name' => 'ARC Software Jan 2021',
+      $this->formdata['metal_issue_vouchers'] = array(array('account_name' => 'ARC Software',
                                                             'credit_weight' => $this->attributes['debit_weight'],
                                                             'purity' => $this->attributes['purity'],
                                                             'fine' => $this->attributes['debit_weight'] * $this->attributes['purity'] / 100,
@@ -465,8 +453,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $api_url = "api/api_internal_receipts/store";
 
     }elseif (    ($attributes['receipt_type'] == 'Melting Wastage' || $attributes['receipt_type'] == 'Daily Drawer Wastage' || $attributes['receipt_type'] == 'GPC Out') 
-              && (    $attributes['account_name'] == 'AR Gold Software Nov 2020' || $attributes['account_name'] == 'ARF Software Nov 2020' || $attributes['account_name'] == 'ARC Software Nov 2020'
-                   || $attributes['account_name'] == 'AR Gold Software Jan 2021' || $attributes['account_name'] == 'ARF Software Jan 2021' || $attributes['account_name'] == 'ARC Software Jan 2021')) {
+              && (  $attributes['account_name'] == 'AR Gold Software' || $attributes['account_name'] == 'ARF Software' || $attributes['account_name'] == 'ARC Software')) {
 
       $api_data = array_merge($api_data, array('type' => 'Pure','description' => $api_data['description'].'-'.$attributes['site_name']));
       $send_data['internal_receipts'] = $api_data;
@@ -502,24 +489,12 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $api_url = "api/api_pending_ghiss_receipts/store";
     }
     if (empty($api_url)) return true;
-    if ($attributes['account_name'] == 'AR Gold Software Jan 2021')
-      $api_url = API_ARG_JAN2021_PATH.$api_url;
-    elseif ($attributes['account_name'] == 'ARF Software Jan 2021')
-      $api_url = API_ARF_JAN2021_PATH.$api_url;
-    elseif ($attributes['account_name'] == 'ARC Software Jan 2021')
-      $api_url = API_ARC_JAN2021_PATH.$api_url;
-    elseif ($attributes['account_name'] == 'AR Gold Software Nov 2020')
-          $api_url = API_ARG_NOV2020_PATH.$api_url;
-    elseif ($attributes['account_name'] == 'ARC Software Nov 2020')
-          $api_url = API_ARC_NOV2020_PATH.$api_url;
-    elseif ($attributes['account_name'] == 'ARF Software Nov 2020')
-          $api_url = API_ARF_NOV2020_PATH.$api_url;
-    elseif ($attributes['account_name'] == 'AR Gold Software Staging')
-          $api_url = API_ARG_NOV2020_PATH.$api_url;
-    elseif ($attributes['account_name'] == 'ARC Software Staging')
-          $api_url = API_ARC_NOV2020_PATH.$api_url;
-    elseif ($attributes['account_name'] == 'ARF Software Staging')
-          $api_url = API_ARF_NOV2020_PATH.$api_url;
+    if ($attributes['account_name'] == 'AR Gold Software')
+      $api_url = API_ARG_PATH.$api_url;
+    elseif ($attributes['account_name'] == 'ARF Software')
+      $api_url = API_ARF_PATH.$api_url;
+    elseif ($attributes['account_name'] == 'ARC Software')
+      $api_url = API_ARC_PATH.$api_url;
     $result = curl_post_request($api_url, $send_data);
   }
 

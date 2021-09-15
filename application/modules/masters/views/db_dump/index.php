@@ -12,7 +12,7 @@
 				$db_display_name=!empty($db_name[1])?$db_name[1]:'';
 				$replace_db_name=str_replace("_", " ", $db_display_name);
 				$db_display_name=explode('.sql', $replace_db_name)[0];
-				if($file_name != "." && $file_name !='..' && $db_full_name=='accounts_nov2020_production'){?>
+				if($file_name != "." && $file_name !='..' && $db_full_name=='argold_accounts_production'){?>
 			<tr>
 				<td><a href="<?php echo base_url('masters/mysqldump/create/?file_name=').$file_name?>"><?php echo $db_display_name?></a></td>
 			</tr>

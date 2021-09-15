@@ -15,45 +15,45 @@
           </tr>
         </thead>
         <tr>
-          <td>AR GOLD Jan 2021</td>
-         <td class="text-right"><?= four_decimal($accounts_argold_jan2021_copper_vatav) ?></td>
-         <td class="text-right"><?= four_decimal($accounts_argold_jan2021_copper_vatav_fine) ?></td>
-          <td class="text-right"><?= four_decimal($live_argold_jan2021_copper_vatav) ?></td>
-          <td class="text-right"><?= four_decimal($live_argold_jan2021_copper_vatav_fine) ?></td>
-          <td class="text-right"><?= four_decimal($accounts_argold_jan2021_copper_vatav-$live_argold_jan2021_copper_vatav) ?></td>
-          <td class="text-right"><?= four_decimal($accounts_argold_jan2021_copper_vatav_fine-$live_argold_jan2021_copper_vatav_fine) ?></td>
+          <td>AR GOLD</td>
+         <td class="text-right"><?= four_decimal($accounts_argold_copper_vatav) ?></td>
+         <td class="text-right"><?= four_decimal($accounts_argold_copper_vatav_fine) ?></td>
+          <td class="text-right"><?= four_decimal($live_argold_copper_vatav) ?></td>
+          <td class="text-right"><?= four_decimal($live_argold_copper_vatav_fine) ?></td>
+          <td class="text-right"><?= four_decimal($accounts_argold_copper_vatav-$live_argold_copper_vatav) ?></td>
+          <td class="text-right"><?= four_decimal($accounts_argold_copper_vatav_fine-$live_argold_copper_vatav_fine) ?></td>
         </tr>
         <tr>
-          <td>ARF Jan 2021</td>
-          <td class="text-right"><?= four_decimal($accounts_arf_jan2021_copper_vatav) ?></td>
-          <td class="text-right"><?= four_decimal($accounts_arf_jan2021_copper_vatav_fine) ?></td>
-          <td class="text-right"><?= four_decimal($live_arf_jan2021_copper_vatav) ?>  </td>
-          <td class="text-right"><?= four_decimal($live_arf_jan2021_copper_vatav_fine) ?>  </td>
-          <td class="text-right"><?= four_decimal($accounts_arf_jan2021_copper_vatav-$live_arf_jan2021_copper_vatav) ?></td>
-          <td class="text-right"><?= four_decimal($accounts_arf_jan2021_copper_vatav_fine-$live_arf_jan2021_copper_vatav_fine) ?></td>
+          <td>ARF</td>
+          <td class="text-right"><?= four_decimal($accounts_arf_copper_vatav) ?></td>
+          <td class="text-right"><?= four_decimal($accounts_arf_copper_vatav_fine) ?></td>
+          <td class="text-right"><?= four_decimal($live_arf_copper_vatav) ?>  </td>
+          <td class="text-right"><?= four_decimal($live_arf_copper_vatav_fine) ?>  </td>
+          <td class="text-right"><?= four_decimal($accounts_arf_copper_vatav-$live_arf_copper_vatav) ?></td>
+          <td class="text-right"><?= four_decimal($accounts_arf_copper_vatav_fine-$live_arf_copper_vatav_fine) ?></td>
         </tr>
         <tr>
-          <td>ARC Jan 2021</td>
-         <td class="text-right"><?= four_decimal($accounts_arc_jan2021_copper_vatav) ?></td>
-         <td class="text-right"><?= four_decimal($accounts_arc_jan2021_copper_vatav_fine) ?></td>
-          <td class="text-right"><?= four_decimal($live_arc_jan2021_copper_vatav) ?>  </td>
-          <td class="text-right"><?= four_decimal($live_arc_jan2021_copper_vatav_fine) ?>  </td>
-          <td class="text-right"><?= four_decimal($accounts_arc_jan2021_copper_vatav - $live_arc_jan2021_copper_vatav) ?></td>
-          <td class="text-right"><?= four_decimal($accounts_arc_jan2021_copper_vatav_fine - $live_arc_jan2021_copper_vatav_fine) ?></td>
+          <td>ARC</td>
+         <td class="text-right"><?= four_decimal($accounts_arc_copper_vatav) ?></td>
+         <td class="text-right"><?= four_decimal($accounts_arc_copper_vatav_fine) ?></td>
+          <td class="text-right"><?= four_decimal($live_arc_copper_vatav) ?>  </td>
+          <td class="text-right"><?= four_decimal($live_arc_copper_vatav_fine) ?>  </td>
+          <td class="text-right"><?= four_decimal($accounts_arc_copper_vatav - $live_arc_copper_vatav) ?></td>
+          <td class="text-right"><?= four_decimal($accounts_arc_copper_vatav_fine - $live_arc_copper_vatav_fine) ?></td>
         </tr>
         <tr>
           <td><b>Total</b></td>
-           <td class="text-right"><b><?= four_decimal(($accounts_argold_jan2021_copper_vatav + $accounts_arf_jan2021_copper_vatav + $accounts_arc_jan2021_copper_vatav)) ?></b></td>
-           <td class="text-right"><b><?= four_decimal(($accounts_argold_jan2021_copper_vatav_fine + $accounts_arf_jan2021_copper_vatav_fine + $accounts_arc_jan2021_copper_vatav_fine)) ?></b></td>
-           <td class="text-right"><b><?= four_decimal(($live_argold_jan2021_copper_vatav + $live_arf_jan2021_copper_vatav + $live_arc_jan2021_copper_vatav)) ?></b>  </td>
-           <td class="text-right"><b><?= four_decimal(($live_argold_jan2021_copper_vatav_fine + $live_arf_jan2021_copper_vatav_fine + $live_arc_jan2021_copper_vatav_fine)) ?> </b> </td>
-          <td class="text-right"><b><?= four_decimal((($accounts_argold_jan2021_copper_vatav-$live_argold_jan2021_copper_vatav)
-                                                           +  ($accounts_arf_jan2021_copper_vatav-$live_arf_jan2021_copper_vatav)
-                                                           + ($accounts_arc_jan2021_copper_vatav-$live_arc_jan2021_copper_vatav)
+           <td class="text-right"><b><?= four_decimal(($accounts_argold_copper_vatav + $accounts_arf_copper_vatav + $accounts_arc_copper_vatav)) ?></b></td>
+           <td class="text-right"><b><?= four_decimal(($accounts_argold_copper_vatav_fine + $accounts_arf_copper_vatav_fine + $accounts_arc_copper_vatav_fine)) ?></b></td>
+           <td class="text-right"><b><?= four_decimal(($live_argold_copper_vatav + $live_arf_copper_vatav + $live_arc_copper_vatav)) ?></b>  </td>
+           <td class="text-right"><b><?= four_decimal(($live_argold_copper_vatav_fine + $live_arf_copper_vatav_fine + $live_arc_copper_vatav_fine)) ?> </b> </td>
+          <td class="text-right"><b><?= four_decimal((($accounts_argold_copper_vatav-$live_argold_copper_vatav)
+                                                           +  ($accounts_arf_copper_vatav-$live_arf_copper_vatav)
+                                                           + ($accounts_arc_copper_vatav-$live_arc_copper_vatav)
                                                            )) ?></b></td>
-          <td class="text-right"><b><?= four_decimal((($accounts_argold_jan2021_copper_vatav_fine-$live_argold_jan2021_copper_vatav_fine)
-                                                           +  ($accounts_arf_jan2021_copper_vatav_fine-$live_arf_jan2021_copper_vatav_fine)
-                                                           + ($accounts_arc_jan2021_copper_vatav_fine-$live_arc_jan2021_copper_vatav_fine)
+          <td class="text-right"><b><?= four_decimal((($accounts_argold_copper_vatav_fine-$live_argold_copper_vatav_fine)
+                                                           +  ($accounts_arf_copper_vatav_fine-$live_arf_copper_vatav_fine)
+                                                           + ($accounts_arc_copper_vatav_fine-$live_arc_copper_vatav_fine)
                                                            )) ?></b></td>
 
         </tr>

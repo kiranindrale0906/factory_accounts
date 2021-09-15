@@ -16,14 +16,9 @@ class Client_metal_receipt_vouchers extends Core_metal_receipt_vouchers {
     $this->data['record']['receipt_type']=!empty($_GET['receipt_type'])?$_GET['receipt_type']:"";
 
     if($this->data['record']['receipt_type']=='Metal'){
-      $this->data['account_names_for_metal_issue'][] = array('id' => 'AR Gold Software Jan 2021', 'name' => 'AR Gold Software Jan 2021');
-      $this->data['account_names_for_metal_issue'][] = array('id' => 'ARC Software Jan 2021', 'name' => 'ARC Software Jan 2021');
-      $this->data['account_names_for_metal_issue'][] = array('id' => 'ARF Software Jan 2021', 'name' => 'ARF Software Jan 2021'); 
-      // $this->data['account_names_for_metal_issue'][] = array('id' => 'AR Gold Software Nov 2020', 'name' => 'AR Gold Software Nov 2020');
-      // $this->data['account_names_for_metal_issue'][] = array('id' => 'ARC Software Nov 2020', 'name' => 'ARC Software Nov 2020');
-      // $this->data['account_names_for_metal_issue'][] = array('id' => 'ARF Software Nov 2020', 'name' => 'ARF Software Nov 2020'); 
-      // $this->data['account_names_for_metal_issue'][] = array('id' => 'AR Gold Software Staging', 'name' => 'AR Gold Software Staging'); 
-      // $this->data['account_names_for_metal_issue'][] = array('id' => 'ARF Software Staging', 'name' => 'AR Gold Software Staging'); 
+      $this->data['account_names_for_metal_issue'][] = array('id' => 'AR Gold Software', 'name' => 'AR Gold Software');
+      $this->data['account_names_for_metal_issue'][] = array('id' => 'ARC Software', 'name' => 'ARC Software');
+      $this->data['account_names_for_metal_issue'][] = array('id' => 'ARF Software', 'name' => 'ARF Software'); 
     }
 
     $this->data['refresh_id']=!empty($_GET['refresh_id'])?$_GET['refresh_id']:"";

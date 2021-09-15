@@ -16,9 +16,9 @@
     <?php load_field('text', array('field' => 'rate'));?>
     <?php load_field('text',array('field' => 'manual_taxable_amount'));  ?>
     <?php load_field('dropdown', array('field' => 'site_name','option'=>array(
-                                                                              array('id'=>'AR Gold Jan 2021','name'=>'AR Gold Jan 2021'),
-                                                                              array('id'=>'ARF Jan 2021','name'=>'ARF Jan 2021'),
-                                                                              array('id'=>'ARC Jan 2021','name'=>'ARC Jan 2021'))));?>
+                                                                              array('id'=>'AR Gold','name'=>'AR Gold'),
+                                                                              array('id'=>'ARF','name'=>'ARF'),
+                                                                              array('id'=>'ARC','name'=>'ARC'))));?>
   </div>
   <?php load_buttons('submit', array('controller' => $controller, 'name' => 'SAVE' , 'class' => 'btn_blue')) ?>
 </form>

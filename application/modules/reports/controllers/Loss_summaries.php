@@ -18,7 +18,7 @@ class Loss_summaries extends BaseController {
     $arc_loss_records=$this->loss_details('ARC', $this->data['quator']);
     $accounts_balance_select = 'sum(debit_weight)-sum(credit_weight) as balance,date_format(voucher_date,"%Y-%m") as voucher_date';
 
-    $argold_production = $this->ledger_model->get($accounts_balance_select, array('site_name = "AR Gold Jan 2021"' => NULL,'purity != factory_purity'=>NULL,'account_name != "VADOTAR"'=> NULL,'date(voucher_date)>='=>$this->data['quator']['from_date'],'date(voucher_date)<='=>$this->data['quator']['to_date']),array(),array('group_by'=>'date_format(voucher_date,"%Y-%m")'));
+    $argold_production = $this->ledger_model->get($accounts_balance_select, array('site_name = "AR Gold"' => NULL,'purity != factory_purity'=>NULL,'account_name != "VADOTAR"'=> NULL,'date(voucher_date)>='=>$this->data['quator']['from_date'],'date(voucher_date)<='=>$this->data['quator']['to_date']),array(),array('group_by'=>'date_format(voucher_date,"%Y-%m")'));
       $argold_vodator=array();
       $argold_total_production=0;
       foreach ($argold_production as $argold_key => $argold_value) {
@@ -26,7 +26,7 @@ class Loss_summaries extends BaseController {
         $argold_vodator[$argold_value['voucher_date']]=$argold_value;
       }
 
-    $arf_production = $this->ledger_model->get($accounts_balance_select, array('site_name` = "ARF Jan 2021"' => NULL,'purity != factory_purity'=>NULL,'account_name != "VADOTAR"'=> NULL,'date(voucher_date)>='=>$this->data['quator']['from_date'],'date(voucher_date)<='=>$this->data['quator']['to_date']),array(),array('group_by'=>'date_format(voucher_date,"%Y-%m")'));
+    $arf_production = $this->ledger_model->get($accounts_balance_select, array('site_name` = "ARF"' => NULL,'purity != factory_purity'=>NULL,'account_name != "VADOTAR"'=> NULL,'date(voucher_date)>='=>$this->data['quator']['from_date'],'date(voucher_date)<='=>$this->data['quator']['to_date']),array(),array('group_by'=>'date_format(voucher_date,"%Y-%m")'));
     $arf_vodator=array();
     $arf_total_production=0;
     foreach ($arf_production as $arf_key => $arf_value) {
@@ -34,7 +34,7 @@ class Loss_summaries extends BaseController {
       $arf_vodator[$arf_value['voucher_date']]=$arf_value;
     }
 
-    $arc_production = $this->ledger_model->get($accounts_balance_select, array('site_name = "ARC Jan 2021"' => NULL,'purity != factory_purity'=>NULL,'account_name != "VADOTAR"'=> NULL,'date(voucher_date)>='=>$this->data['quator']['from_date'],'date(voucher_date)<='=>$this->data['quator']['to_date']),array(),array('group_by'=>'date_format(voucher_date,"%Y-%m")'));
+    $arc_production = $this->ledger_model->get($accounts_balance_select, array('site_name = "ARC"' => NULL,'purity != factory_purity'=>NULL,'account_name != "VADOTAR"'=> NULL,'date(voucher_date)>='=>$this->data['quator']['from_date'],'date(voucher_date)<='=>$this->data['quator']['to_date']),array(),array('group_by'=>'date_format(voucher_date,"%Y-%m")'));
     $arc_vodator=array();
     $arc_total_production=0;
     foreach ($arc_production as $arc_key => $arc_value) {
@@ -59,7 +59,7 @@ class Loss_summaries extends BaseController {
     $this->data['arg_total_production'] =!empty($argold_total_production)?$argold_total_production:0;
     $this->data['arg_gpc_vodator'] = $this->voucher_model->find('
                                                 sum(debit_weight*factory_purity/100 - credit_weight*factory_purity/100) as amount',
-                                              array('account_name'=>"AR Gold Jan 2021 GPC Vodator",
+                                              array('account_name'=>"AR Gold GPC Vodator",
                                               'date(voucher_date)>='=>$this->data['quator']['from_date'],
                                               'date(voucher_date)<='=>$this->data['quator']['to_date']))['amount'];
     $this->data['arg_unrecoverable_loss'] =!empty($arg_loss_records['unrecovery_loss'])?$arg_loss_records['unrecovery_loss']:0;
@@ -77,7 +77,7 @@ class Loss_summaries extends BaseController {
     $this->data['arf_total_production'] =!empty($arf_total_production)?$arf_total_production:0;
     $this->data['arf_gpc_vodator'] =$this->voucher_model->find('
                                                 sum(debit_weight*factory_purity/100 - credit_weight*factory_purity/100) as amount',
-                                              array('account_name'=>"ARF Jan 2021 GPC Vodator",
+                                              array('account_name'=>"ARF GPC Vodator",
                                               'date(voucher_date)>='=>$this->data['quator']['from_date'],
                                               'date(voucher_date)<='=>$this->data['quator']['to_date']))['amount'];
     $this->data['arf_unrecoverable_loss'] =!empty($arf_loss_records['unrecovery_loss'])?$arf_loss_records['unrecovery_loss']:0;
@@ -95,7 +95,7 @@ class Loss_summaries extends BaseController {
     $this->data['arc_total_production'] =!empty($arc_total_production)?$arc_total_production:0;
     $this->data['arc_gpc_vodator'] =$this->voucher_model->find('
                                                 sum(debit_weight*factory_purity/100 - credit_weight*factory_purity/100) as amount',
-                                              array('account_name'=>"ARC Jan 2021 GPC Vodator",
+                                              array('account_name'=>"ARC GPC Vodator",
                                               'date(voucher_date)>='=>$this->data['quator']['from_date'],
                                               'date(voucher_date)<='=>$this->data['quator']['to_date']))['amount'];
     $this->data['arc_unrecoverable_loss'] =!empty($arc_loss_records['unrecovery_loss'])?$arc_loss_records['unrecovery_loss']:0;;
@@ -117,14 +117,14 @@ class Loss_summaries extends BaseController {
       $data['type']='category';
       $data['quator']='';
       if($site_name=='ARC'){
-        $path=API_ARC_JAN2021_PATH;
-        $factory_name='ARC Jan 2021';
+        $path=API_ARC_PATH;
+        $factory_name='ARC';
       }elseif($site_name=='ARF'){
-        $path=API_ARF_JAN2021_PATH;
-        $factory_name='AR Gold Jan 2021';
+        $path=API_ARF_PATH;
+        $factory_name='AR Gold';
       }else{
-        $path=API_ARG_JAN2021_PATH;
-        $factory_name='ARF Jan 2021';
+        $path=API_ARG_PATH;
+        $factory_name='ARF';
       }
       if(!empty($data['department_names'])){
           $url=$path."issue_and_receipts/loss_report_for_accounts/index";
