@@ -61,7 +61,10 @@
   $domestic_gain_loss_amount = $domestic_gain_loss_fine * $domestic_gain_loss_rate;
 
   $export_gain_loss_fine = $sales_export_fine + $export_closing_fine;
-  $export_gain_loss_rate = $purchase_export_rate - (($sales_export_amount + $export_closing_amount) / $export_gain_loss_fine);
+  if ($export_gain_loss_fine != 0)
+    $export_gain_loss_rate = $purchase_export_rate - (($sales_export_amount + $export_closing_amount) / $export_gain_loss_fine);
+  else 
+    $export_gain_loss_rate = 0;
   $export_gain_loss_amount = $export_gain_loss_fine * $export_gain_loss_rate;
 
   // $exchange_gain_loss_fine = $total_sales_with_closing_fine;
