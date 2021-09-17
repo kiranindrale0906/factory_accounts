@@ -24,8 +24,8 @@
   $purchase_export_amount = !empty($domestic_export_records['PURCHASE ACCOUNT'][1]['amount']) ? -1 * $domestic_export_records['PURCHASE ACCOUNT'][1]['amount'] : 0;
 
 
-  $domestic_export_records['SALES ACCOUNT'][0]['fine'] = $domestic_export_records['SALES ACCOUNT'][0]['fine'] - 158015.139;
-  $domestic_export_records['SALES ACCOUNT'][0]['amount'] = $domestic_export_records['SALES ACCOUNT'][0]['amount'] - 680599973.872 - 24813045.710;
+  $domestic_export_records['SALES ACCOUNT'][0]['fine'] = $domestic_export_records['SALES ACCOUNT'][0]['fine'] + 158015.139;
+  $domestic_export_records['SALES ACCOUNT'][0]['amount'] = $domestic_export_records['SALES ACCOUNT'][0]['amount'] + 680599973.872 + 24813045.710;
 
   $sales_domestic_fine = !empty($domestic_export_records['SALES ACCOUNT'][0]['fine']) ? -1 * $domestic_export_records['SALES ACCOUNT'][0]['fine'] : 0;
   $sales_domestic_rate = !empty($domestic_export_records['SALES ACCOUNT'][0]['fine']) ? -1 * $domestic_export_records['SALES ACCOUNT'][0]['amount'] / $domestic_export_records['SALES ACCOUNT'][0]['fine'] : 0;
