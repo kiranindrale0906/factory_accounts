@@ -125,6 +125,20 @@ class Production_summary extends BaseController {
        $where['item_name']    =$this->data['product_name'];
        $group_by=array('group_by' => 'date(created_at)');
     }
+    if ($this->data['group_by'] == 'Week') {
+      $period_from_date = 'DATE_SUB(
+                                DATE_ADD(MAKEDATE(date_format(created_at,"%Y"), 1), INTERVAL week(created_at) WEEK),
+                                INTERVAL WEEKDAY(
+                                   DATE_ADD(MAKEDATE(date_format(created_at,"%Y"), 1), INTERVAL week(created_at) WEEK)
+                                ) -1 DAY)';
+      $period_to_date = 'DATE_SUB(
+                                DATE_ADD(MAKEDATE(date_format(created_at,"%Y"), 1), INTERVAL week(created_at) WEEK),
+                                INTERVAL WEEKDAY(
+                                   DATE_ADD(MAKEDATE(date_format(created_at,"%Y"), 1), INTERVAL week(created_at) WEEK)
+                                ) -7 DAY)';
+      $period_select = 'CONCAT('.$period_from_date.' , " - ", '.$period_to_date.')';
+      $select .= ' , '.$period_select.' as str_created_date';
+    };
    
     $refresh_details = $this->refresh_detail_model->get($select, $where, array(),$group_by);
     $this->data['refresh_details'] = $this->get_grouped_records($refresh_details);
@@ -152,11 +166,10 @@ class Production_summary extends BaseController {
         $date_wise_data[substr($record['created_at'], 0, 4)]['records'][] = $record;
       }
     }elseif ($this->data['group_by'] == 'Week') {
-      pd($records);
-      foreach ($records as $record) {     
-        if (!isset($date_wise_data[$record['str_created_date']])) 
-          $date_wise_data[$record['str_created_date']] = array('records' => array(), 'issue_gpc_out' => 0);
-        $date_wise_data[$record['str_created_date']]['records'][] = $record;
+      foreach ($records as $record) {
+      if(!empty($record['str_created_date'])){
+        $date_wise_data[$record['str_created_date']] = array('records' => array(), 'issue_gpc_out' => 0);
+          $date_wise_data[$record['str_created_date']]['records'][] = $record;
       }
     } else {
       foreach ($records as $record) { 
