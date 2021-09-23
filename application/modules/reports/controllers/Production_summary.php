@@ -110,7 +110,6 @@ class Production_summary extends BaseController {
     $records = array_merge($argold_nov2020_records['data'], $argold_jan2021_records['data'], 
                            $arf_jan2021_records['data'], $arf_nov2020_records['data'],
                            $arc_jan2021_records['data'], $arc_nov2020_records['data']);
-    pd($records);
     $this->data['production_details'] = $this->get_grouped_records($records);
     $this->get_production_group_total();
   }
