@@ -151,6 +151,12 @@ class Production_summary extends BaseController {
           $date_wise_data[substr($record['created_at'], 0, 4)] = array('records' => array(), 'issue_gpc_out' => 0);
         $date_wise_data[substr($record['created_at'], 0, 4)]['records'][] = $record;
       }
+    }elseif ($this->data['group_by'] == 'Week') {
+      foreach ($records as $record) {     
+        if (!isset($date_wise_data[$record['str_created_date']])) 
+          $date_wise_data[$record['str_created_date']] = array('records' => array(), 'issue_gpc_out' => 0);
+        $date_wise_data[$record['str_created_date']]['records'][] = $record;
+      }
     } else {
       foreach ($records as $record) { 
         $date_wise_data['All']['records'][] = $record;
