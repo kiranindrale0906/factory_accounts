@@ -34,6 +34,7 @@ defined('BASEPATH') OR exit('No direct script access allowed.');
 
   if (!function_exists('curl_post_request')) {
     function curl_post_request($uri, $data = array()) {
+      pd($data);
       if(!empty($uri)) {
         $api_url=$uri;
         $curl = curl_init($api_url);
