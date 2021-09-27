@@ -506,11 +506,11 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $api_url = "api/api_pending_ghiss_receipts/store";
     }
     if (empty($api_url)) return true;
-    if ($attributes['account_name'] == 'AR Gold Software Jan 2021')
+    if ($attributes['account_name'] == 'AR Gold Software Jan 2021' || $attributes['account_name'] == 'AR Gold Software')
       $api_url = API_ARG_JAN2021_PATH.$api_url;
-    elseif ($attributes['account_name'] == 'ARF Software Jan 2021')
+    elseif ($attributes['account_name'] == 'ARF Software Jan 2021'|| $attributes['account_name'] == 'ARF Software')
       $api_url = API_ARF_JAN2021_PATH.$api_url;
-    elseif ($attributes['account_name'] == 'ARC Software Jan 2021')
+    elseif ($attributes['account_name'] == 'ARC Software Jan 2021' || $attributes['account_name'] == 'ARC Software')
       $api_url = API_ARC_JAN2021_PATH.$api_url;
     elseif ($attributes['account_name'] == 'AR Gold Software Nov 2020')
           $api_url = API_ARG_NOV2020_PATH.$api_url;
