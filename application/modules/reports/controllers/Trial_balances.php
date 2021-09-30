@@ -283,8 +283,8 @@ class Trial_balances extends Ledgers {
                                 'HCL LOSS', 'STONE VATAV ARF', 'TOUNCH LOSS FINE ARF', 
                                 'Loss Account', 'Tounch & Castic Dep.Loss', 'Tounch Loss Fine',
                                 'MEENA LOSS ARF', 'GPC Powder', 'Gpc Powder ARF', 'SISMA GHISS LOSS',
-                                'ARG Stone Loss', 'TOUNCH LOSS FINE ARC', 'PASSAGE SEPT', 'ARF GHISS LOSS',
-                                'BUFFING LOSS', 'GRINDING LOSS',
+                                'ARG Stone Loss', 'Tounch Loss Fine ARC', 'PASSAGE SEPT', 'ARF GHISS LOSS',
+                                'BUFFING LOSS', 'GRINDING LOSS', 'TOUNCH LOSS FINE ARF',
                                 'SHAMPOO AND STEEL VIBRATOR LOSS/WALNUT SHAMPO', 'ARG GHISS LOSS', 'GPC POWDER LOSS ARC');
     foreach($this->data['trial_balance'] as $index => $trail_balance_record) {
       if (in_array($trail_balance_record['account_name'], $loss_account_names)) {
