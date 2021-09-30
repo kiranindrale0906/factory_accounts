@@ -24,7 +24,6 @@ class Quator_wise_loss_reports extends BaseController {
     
     $this->data['loss_categories']=array();
     $categories= $this->voucher_model->get('description', array('account_name'=>'Loss Account','date(created_at)>='=>'2021-03-13'),array(),array('group_by'=>'description'));
-
     $loss_details= $this->voucher_model->get('description,fine,id', array('account_name'=>'Loss Account','parent_id'=>0),array());
     $category_names=array_column($categories,'description');
       $data['department_names']=$category_names;
@@ -88,7 +87,7 @@ class Quator_wise_loss_reports extends BaseController {
         foreach ($category_names as $category_name_index => $category_name) {
         $total_production=$total_loss_fine=$recoverd_loss_fine=$all_loss_before_recovery=$unrecovery_loss=$fine_loss=$total_out_weight=$per_kg_loss=$total_per_kg_loss=$before_recovery_loss=$total_before_recovery_loss=$recovered_loss=$total_recovery_loss=$after_recovery_loss=$total_after_recovery_loss=$total_unrecovery_loss=$after_recovered_loss=$total_after_recovered_loss=$total_balance=$balance=0;
           foreach ($arg_records as $index => $arg_loss_detail) {
-              if(strtolower($arg_loss_detail['description'])==$category_name){
+              if(trim(strtolower($arg_loss_detail['description']))==trim(strtolower($category_name))){
                 $factory_wise_record[$index]['production']=0;
                 $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$arg_loss_detail['parent_id'],'account_name!='=>'Unrecovarable'));
                 
@@ -107,14 +106,14 @@ class Quator_wise_loss_reports extends BaseController {
                 $total_unrecovery_loss+=$unrecovery_loss;
                 $total_balance+=$balance;
 
-                $this->data['loss_categories'][$arg_loss_detail['description']]['loss_fine']=$total_loss_fine;
-                $this->data['loss_categories'][$arg_loss_detail['description']]['out_weight']=$total_out_weight;
-                $this->data['loss_categories'][$arg_loss_detail['description']]['recoverd_loss_fine']=$total_recovery_loss;
-                $this->data['loss_categories'][$arg_loss_detail['description']]['after_recovered_loss']=$total_after_recovered_loss;
-                $this->data['loss_categories'][$arg_loss_detail['description']]['unrecoverable_loss']=$total_unrecovery_loss;
-                $this->data['loss_categories'][$arg_loss_detail['description']]['balance']=$total_balance;
+                $this->data['loss_categories'][$category_name]['loss_fine']=$total_loss_fine;
+                $this->data['loss_categories'][$category_name]['out_weight']=$total_out_weight;
+                $this->data['loss_categories'][$category_name]['recoverd_loss_fine']=$total_recovery_loss;
+                $this->data['loss_categories'][$category_name]['after_recovered_loss']=$total_after_recovered_loss;
+                $this->data['loss_categories'][$category_name]['unrecoverable_loss']=$total_unrecovery_loss;
+                $this->data['loss_categories'][$category_name]['balance']=$total_balance;
               }
-          }
+           }
         }
       }
     }

@@ -14,7 +14,7 @@ function get_field_data($data, $router, $record) {
   if (!isset($data['option'])) $data['option'] = array();
   if (!isset($data['error_message'])) $data['error_message'] = form_error($data['name']);
   $field_details = get_field_attribute($data['controller'], $data['field']);
-  $data['label'] = $field_details[0];
+  $data['label'] = @$field_details[0];
   $data['readonly'] = ((isset($data['readonly']) && $data['readonly'] == true )) ? 'readonly' : '';
   $data['disabled'] = ((isset($data['disabled']) && $data['disabled'] == true )) ? 'disabled' : '';
   $data['multiple'] = ((isset($data['multiple']) && $data['multiple'] == true )) ? 'multiple' : '';

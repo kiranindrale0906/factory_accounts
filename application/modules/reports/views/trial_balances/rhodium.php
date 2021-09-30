@@ -31,7 +31,7 @@
             <?php 
               $rhodium_purchase_amount = $rhodium['Dip R/d']['amount'] + $rhodium['Pen R/d']['amount'];
               $rhodium_purchase_fine = $rhodium['Dip R/d']['fine'] + $rhodium['Pen R/d']['fine'];
-              $rhodium_purchase_rate = $rhodium_purchase_amount / $rhodium_purchase_fine; 
+              $rhodium_purchase_rate = ($rhodium_purchase_fine==0) ? 0 : $rhodium_purchase_amount / $rhodium_purchase_fine; 
             ?>
             <th>Total</th>
             <th class="text-right"><?= four_decimal($rhodium_purchase_amount, '-'); ?></th>
@@ -84,7 +84,7 @@
                                      + $rhodium['Dip R/d Closing']['amount'] + $rhodium['Pen R/d Closing']['amount'];
               $rhodium_sale_fine = $rhodium['Dip R/d Issue']['fine'] + $rhodium['Pen R/d Issue']['fine'] 
                                      + $rhodium['Dip R/d Closing']['fine'] + $rhodium['Pen R/d Closing']['fine'];
-              $rhodium_sale_rate = $rhodium_sale_amount / $rhodium_sale_fine; 
+              $rhodium_sale_rate = ($rhodium_sale_fine==0) ? 0 : $rhodium_sale_amount / $rhodium_sale_fine; 
             ?>
             <th>Total</th>
             <th class="text-right"><?= four_decimal($rhodium_sale_amount, '-') ?>  </th>

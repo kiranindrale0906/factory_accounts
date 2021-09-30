@@ -81,10 +81,10 @@ class Loss_reports extends BaseController {
           }
       if(!empty($arg_records)){
         $category_names = array_map( 'strtolower', $category_names );
-        foreach ($category_names as $category_name_index => $category_name) {
+      foreach ($category_names as $category_name_index => $category_name) {
         $total_production=$total_loss_fine=$recoverd_loss_fine=$all_loss_before_recovery=$unrecovery_loss=$fine_loss=$total_out_weight=$per_kg_loss=$total_per_kg_loss=$before_recovery_loss=$total_before_recovery_loss=$recovered_loss=$total_recovery_loss=$after_recovery_loss=$total_after_recovery_loss=$total_unrecovery_loss=$after_recovered_loss=$total_after_recovered_loss=$total_balance=$balance=0;
           foreach ($arg_records as $index => $arg_loss_detail) {
-              if(strtolower($arg_loss_detail['description'])==$category_name){
+              if(trim(strtolower($arg_loss_detail['description']))==trim($category_name)){
                 $factory_wise_record[$index]['production']=0;
                 $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$arg_loss_detail['parent_id'],'account_name!='=>'Unrecovarable'));
                 
