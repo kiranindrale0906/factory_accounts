@@ -153,7 +153,7 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
 
     $rate_cut_receipt = $rate_cut_issue;
     $purchase_acccount_name = 'PURCHASE ACCOUNT';
-    if ($metal_receipt_voucher['account_name'] == 'Dip R/d' || $metal_receipt_voucher['account_name'] == 'Pen R/d')
+    if ($metal_receipt_voucher['account_name'] == 'Dip R/d' || $metal_receipt_voucher['account_name'] == 'Pen R/d' || $metal_receipt_voucher['account_name'] == 'RODIUM')
       $purchase_acccount_name = 'R/D PURCHASE ACCOUNT';
     $rate_cut_receipt['account_name']  = $purchase_acccount_name;
     $rate_cut_receipt['credit_amount'] = $tax_fields['grand_total'];
