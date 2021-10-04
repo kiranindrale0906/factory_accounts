@@ -10,4 +10,5 @@ define('API_ARF_NOV2020_PATH', 'http://staging-arf.ascratech.com/');
 define('OLD_DB_NAME', 'accounts');
 define('NEW_DB_NAME', 'account_new');
 define('ENABLE_API_FOR_RECEIPT', TRUE);  
+define('HOST','');  
 ?>
