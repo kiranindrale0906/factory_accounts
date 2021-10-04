@@ -84,9 +84,9 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
             || $account_name == 'AR Gold Software Jan 2021'
             || $account_name == 'ARF Software Jan 2021'
             || $account_name == 'ARC Software Jan 2021'
-            || $account_name == 'AR Gold Software'
-            || $account_name == 'ARF Software'
-            || $account_name == 'ARC Software'
+            // || $account_name == 'AR Gold Software'
+            // || $account_name == 'ARF Software'
+            // || $account_name == 'ARC Software'
             || $account_name == 'AR Gold Software Staging'
             || $account_name == 'ARF Software Staging'
             || $account_name == 'ARC Software Staging')){

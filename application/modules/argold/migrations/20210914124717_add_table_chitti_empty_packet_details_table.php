@@ -6,7 +6,7 @@ class Migration_add_table_chitti_empty_packet_details_table extends CI_Model {
 
   public function up()
   {
-    $this->db->query("CREATE TABLE `chitti_empty_packet_details` (
+    /*$this->db->query("CREATE TABLE `chitti_empty_packet_details` (
 											  `id` int(11) NOT NULL AUTO_INCREMENT,
 											  `weight` int(11) DEFAULT NULL,
 											  `quantity` varchar(45) NOT NULL,
@@ -18,7 +18,7 @@ class Migration_add_table_chitti_empty_packet_details_table extends CI_Model {
 											  `updated_by` int(11) DEFAULT '0',
 											  PRIMARY KEY (`id`)
 											) ENGINE=InnoDB DEFAULT CHARSET=latin1;");
-  }
+ */ }
 
 
 }
