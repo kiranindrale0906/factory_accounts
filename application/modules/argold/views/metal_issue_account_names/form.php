@@ -60,8 +60,8 @@
                     array('field'=>'calculate_tax',
                           'check_inline'=>true,
                           'option'=> array(
-                                      array('label_for' => 'Calculate Tax',
-                                            'label'=> 'Calculate Tax',
+                                      array('label_for' => 'Do Not Calculate Tax',
+                                            'label'=> 'Do Not Calculate Tax',
                                             'value' =>'1',))));
       ?>
    
