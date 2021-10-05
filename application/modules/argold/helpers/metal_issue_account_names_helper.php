@@ -80,7 +80,7 @@ function get_field_attribute($table, $field) {
     'fine'     => array('fine', '', FALSE, '', TRUE),
     'factory_fine'     => array('factory_fine', '', FALSE, '', TRUE),
     'is_export'     => array('', '', TRUE, '', TRUE),
-    'calculate_tax'     => array('', '', TRUE, '', TRUE),
+    'do_not_calculate_tax'     => array('', '', TRUE, '', TRUE),
    );
   return $attributes[$table][$field];
 }

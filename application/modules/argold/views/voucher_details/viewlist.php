@@ -3,6 +3,7 @@
     <thead>
       <tr>
         <th></th>
+        <th>Voucher ID</th>
         <th>Voucher Number</th>
         <th>Account Name</th>
         <th class="text-right">Credit Weight</th>
@@ -22,6 +23,7 @@
       ?>
       <tr>
         <td><?=$index+1?></td>
+        <td><?= $metal_voucher_detail['id'] ?></td>
         <td><?= $metal_voucher_detail['voucher_number'] ?></td>
         <td><?= $metal_voucher_detail['account_name'] ?></td>
         <td class="text-right"><?= $metal_voucher_detail['credit_weight']; ?></td>
@@ -32,6 +34,7 @@
     <?php }?>
       <tr class="bg_gray bold">
     <td>Total</td>
+    <td></td>
     <td></td>
     <td class="text-right"></td>
     <td class="text-right"><?=four_decimal($sum_weight);?></td>

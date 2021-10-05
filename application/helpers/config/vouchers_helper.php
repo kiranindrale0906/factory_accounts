@@ -1,6 +1,6 @@
 <?php
 
-function get_tax_fields($factory_fine, $fine, $sale_type, $gold_rate, $gold_rate_purity, $created_at,$export = 0,$calculate_tax = 0) {
+function get_tax_fields($factory_fine, $fine, $sale_type, $gold_rate, $gold_rate_purity, $created_at,$export = 0,$do_not_calculate_tax = 0) {
   $tcs_rate=0;
   if(strtotime($created_at)>strtotime('2021-03-30') && strtotime($created_at)<strtotime('2021-07-01'))
     $tcs_rate=0.1;
@@ -21,7 +21,7 @@ function get_tax_fields($factory_fine, $fine, $sale_type, $gold_rate, $gold_rate
     $fields['weight'] = ($factory_fine > $fine) ? $factory_fine : $fine;
     if ($fields['weight']==0) $fields['weight'] = $factory_fine;
   }
-  if($export==1 || $calculate_tax==1){
+  if($export==1 || $do_not_calculate_tax==1){
     $fields['taxable_amount'] = $fields['weight'] * $gold_rate * $gold_rate_purity / 100;
     $fields['cgst_amount']    = 0;
     $fields['sgst_amount']    = 0;

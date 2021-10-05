@@ -57,7 +57,7 @@
 
         <?php 
         load_field('checkbox',
-                    array('field'=>'calculate_tax',
+                    array('field'=>'do_not_calculate_tax',
                           'check_inline'=>true,
                           'option'=> array(
                                       array('label_for' => 'Do Not Calculate Tax',
