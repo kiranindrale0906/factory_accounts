@@ -45,14 +45,25 @@
     <?php    load_field('date',array('field' => 'voucher_date',
                                   'value'=>(!empty($record['voucher_date'])?date('d-m-Y',strtotime($record['voucher_date'])):date('d-m-Y')), 
                                   'class' => 'datepicker_js'));
-        load_field('plain/checkbox',
+        load_field('checkbox',
                   array('field'=>'is_export',
                         'check_inline'=>true,
                         'option'=> array(
                                     array('label_for' => 'Is Export',
                                           'label'=> 'Is Export',
-                                          'value' =>'1',))));
-    ?>
+                                          'value' =>'1',))));?>
+  </div>
+  <div class="row">                                        
+
+        <?php 
+        load_field('checkbox',
+                    array('field'=>'calculate_tax',
+                          'check_inline'=>true,
+                          'option'=> array(
+                                      array('label_for' => 'Calculate Tax',
+                                            'label'=> 'Calculate Tax',
+                                            'value' =>'1',))));
+      ?>
    
   </div>
   <?php load_buttons('submit', array('controller' => $controller, 'name' => 'SAVE' , 'class' => 'btn_blue')) ?>

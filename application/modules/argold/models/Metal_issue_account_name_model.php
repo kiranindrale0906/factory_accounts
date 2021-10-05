@@ -23,6 +23,7 @@ class Metal_issue_account_name_model extends BaseModel {
   }
   public function before_save($action) {
     $this->attributes['is_export']=!empty($_POST['metal_issue_account_names']['is_export'])?$_POST['metal_issue_account_names']['is_export']:0;
+    $this->attributes['calculate_tax']=!empty($_POST['metal_issue_account_names']['calculate_tax'])?$_POST['metal_issue_account_names']['calculate_tax']:0;
   }
   public function after_save($action) {
    $reference_voucher_details = $this->get('',array('metal_receipt_voucher_reference_id'=>$this->attributes['id']));
