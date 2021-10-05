@@ -25,5 +25,18 @@
     ?>
   </div>
 <?php }?>
+<div class="row"> 
+        <?php 
+        load_field('checkbox',
+                    array('field'=>'do_not_calculate_tax',
+                          'check_inline'=>true,
+                          'option'=> array(
+                                      array('label_for' => 'Do Not Calculate Tax',
+                                            'label'=> 'Do Not Calculate Tax',
+                                            'value' =>'1',))));
+      ?>
+   
+  </div>
+
   <?php load_buttons('submit', array('controller' => $controller, 'name' => 'SAVE' , 'class' => 'btn_blue')) ?>
 </form>

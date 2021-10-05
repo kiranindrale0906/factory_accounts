@@ -17,6 +17,7 @@ class Metal_receipt_gold_rate_model extends BaseModel {
   }
   public function before_save($action) {
     $this->attributes['is_export']=!empty($_POST['metal_receipt_gold_rates']['is_export'])?$_POST['metal_receipt_gold_rates']['is_export']:0;
+  $this->attributes['do_not_calculate_tax']=!empty($_POST['metal_receipt_gold_rates']['do_not_calculate_tax'])?$_POST['metal_receipt_gold_rates']['do_not_calculate_tax']:0;
   }
 
   public function validation_rules($klass='') {
