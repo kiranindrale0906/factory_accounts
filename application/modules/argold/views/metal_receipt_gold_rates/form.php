@@ -25,6 +25,7 @@
     ?>
   </div>
 <?php }?>
+
 <div class="row"> 
         <?php 
         load_field('checkbox',
