@@ -18,7 +18,9 @@ class Voucher_details extends BaseController {
                                                   'voucher_type not in ("rate cut receipt voucher", "rate cut issue voucher")' => NULL));
 
     $this->data['refresh'] = $this->refresh_model->find('',array('metal_receipt_id'=>$this->data['record']['id']));
+    if(!empty($this->data['refresh']['id'])){
     $this->data['refresh_details'] = $this->refresh_detail_model->get('',array('refresh_id'=>$this->data['refresh']['id']));
+    }
   }
   public function delete($id) {
     $voucher_details=$this->voucher_model->get('',array('metal_receipt_voucher_reference_id'=>$id));
