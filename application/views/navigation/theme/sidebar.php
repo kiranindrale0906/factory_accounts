@@ -99,7 +99,8 @@
                                         'reports/account_receipt_reports' => 'Account Receipt Reports',
                                         'reports/purchase_registers' => 'Purchase Register Reports',
                                         'reports/sales_registers' => 'Sales Register Reports',
-                                        'reports/cash_gst_registers' => 'Cash GST Register Reports'
+                                        'reports/cash_gst_registers' => 'Cash GST Register Reports',
+                                        'reports/domestic_export_ledgers' => 'Domestic Export Ledger',
                                         ),
                     //'Interests' => array('transactions/interest_issue_vouchers'=>'Interest Issue Voucher','transactions/interest_receipt_vouchers'=>'Interest Receipt Voucher'),
                     'Registers'   => array(
