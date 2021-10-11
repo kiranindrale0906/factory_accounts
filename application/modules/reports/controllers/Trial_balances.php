@@ -265,6 +265,7 @@ class Trial_balances extends Ledgers {
     $this->data['purchase_sales_account_domestic_export_records'] = $this->model->get($purchase_sales_account_domestic_export_select, 
                                                 array_merge($where, array('account_name' => array('SALES ACCOUNT', 'PURCHASE ACCOUNT'))), 
                                                 array(), array('group_by'=>'account_name, is_export'));
+    // pd($this->data['purchase_sales_account_domestic_export_records']);
 
     $this->data['domestic_labour_amount'] = $this->model->find('  IFNULL(sum(debit_amount),0) 
                                                                 - IFNULL(sum(credit_amount),0) as amount', 

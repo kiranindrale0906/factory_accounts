@@ -6,6 +6,8 @@
     <td><?= $record['account_name'];?></td>
   <?php endif; ?>
   <td><?= date('d-m-y', strtotime($record['str_voucher_date'])); ?></td>
+  <?php if (!in_array($report_type, array("Export Purchase Ledger","Domestic Purchase Ledger","Domestic Sale Ledger","Export Sale Ledger"))): ?>
+  
   <td>
     <?php
       //if (!empty($record['chitti_no']))
@@ -20,10 +22,13 @@
       <?php } ?>  
     <?php } ?>
   </td>
+  <?php endif; ?>
   <td class="text-right"><a class=""  href='<?= base_url() ?>argold/voucher_details/view/<?=$record['chitti_no']?>'><?= four_decimal($record['credit_weight'], '-') ?></a></td>
   <td class="text-right"><?= four_decimal($record['purity'], '-') ?></td>
   <td class="text-right"><?= four_decimal($record['fine'], '-'); ?></td>
+  <?php if (!in_array($report_type, array("Export Purchase Ledger","Domestic Purchase Ledger","Domestic Sale Ledger","Export Sale Ledger"))): ?>
   <td class="text-right"><?= four_decimal($record['factory_purity'], '-') ?></td>
+  <?php endif; ?>
   <td class="text-right"><?= four_decimal($record['factory_fine'], '-'); ?></td>
   <?php if ($report_type == 'Vadotar Report' || $report_type == 'Production Report'): ?>
     <td class="text-right"><?= four_decimal($record['factory_fine']-$record['fine'], '-'); ?></td>
