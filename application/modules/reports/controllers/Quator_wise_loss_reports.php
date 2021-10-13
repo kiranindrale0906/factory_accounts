@@ -20,7 +20,7 @@ class Quator_wise_loss_reports extends BaseController {
     $quator_details= $this->quator_model->find('name,from_date,to_date',array('name'=>$this->data['quator_name']));
     $this->data['trial_balance']=array();
     if(!empty($this->data['quator_name'])){
-      $where['where']=array('date(voucher_date) >='=>$quator_details['from_date'],'date(voucher_date) <='=>$quator_details['to_date'],'receipt_type!='=>'Unrecovarable');
+      $where['where']=array('date(voucher_date) >='=>$quator_details['from_date'],'date(voucher_date) <='=>$quator_details['to_date'],'receipt_type!='=>'Unrecovarable','account_name!='=>'Loss Account');
 
     $select = "account_name, 
                IFNULL((sum(debit_weight*purity)/100),0) - IFNULL((sum(credit_weight*factory_purity)/100),0) as fine,
