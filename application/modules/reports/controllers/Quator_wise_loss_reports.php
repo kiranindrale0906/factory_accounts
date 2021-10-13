@@ -18,7 +18,6 @@ class Quator_wise_loss_reports extends BaseController {
   public function loss_account_details(){
     $where=array();
     $quator_details= $this->quator_model->find('name,from_date,to_date',array('name'=>$this->data['quator_name']));
-    pd($quator_details);
     if(!empty($this->data['quator_name'])){
       $where['where']=array('date(voucher_date) >='=>$quator_details['from_date'],'date(voucher_date) <='=>$quator_details['to_date']);
     }
