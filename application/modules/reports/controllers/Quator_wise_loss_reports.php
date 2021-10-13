@@ -9,19 +9,17 @@ class Quator_wise_loss_reports extends BaseController {
   }
 
   public function index() {
-    $this->data['report_type'] = 'Rojmel Report';
+    // $this->data['report_type'] = 'Rojmel Report';
     $this->_get_form_data();
     $this->loss_account_details();
-    if(!empty($this->data['loss_date'])){
-      $where['date(voucher_date) <=']=date('Y-m-d', strtotime($this->data['loss_date']));
-    }
     // $this->get_loss_details();
     $this->load->render($this->router->class."/index",$this->data);
   }
   public function loss_account_details(){
     $where=array();
-    if(!empty($this->data['loss_date'])){
-      $where['date(voucher_date) <=']=date('Y-m-d', strtotime($this->data['loss_date']));
+    $quator_details= $this->quator_model->find('name,from_date,to_date',array('name'=>$this->data['quator_name']));
+    if(!empty($this->data['quator_name'])){
+      $where['where']=array('date(voucher_date) >='=>$quator_details['from_date'],'date(voucher_date) <='=>$quator_details['to_date']);
     }
 
     $select = "account_name, 
@@ -32,20 +30,22 @@ class Quator_wise_loss_reports extends BaseController {
     $this->data['trial_balance'] = $this->model->get($select,$where, array() , 
                                                       array('group_by'=>'account_name,',
                                                             'order_by'=>'account_name asc'));
-        $loss_account = array('account_name' => 'Loss Account',
+    $loss_account = array('account_name' => 'Loss Account',
                           'fine' => 0, 'vadotar' => 0, 'amount' => 0);
     $this->data['loss_account_records'] = array();
-    $loss_account_names = array('AR Gold Alloy Vodator', 'ARF Alloy Vodator', 'ARC Alloy Vodator',
-                                'AR Gold GPC Vodator', 'ARF GPC Vodator', 'ARC GPC Vodator',
-                                'AR Gold Stone Vatav', 'ARF Stone Vatav', 'ARC Stone Vatav',
-                                'AR Gold Copper Vatav', 'ARF Copper Vatav', 'ARC Copper Vatav',
-                                'AR Gold Rhodium Vatav', 'ARF Rhodium Vatav', 'ARC Rhodium Vatav',
-                                'HCL LOSS', 'STONE VATAV ARF', 'TOUNCH LOSS FINE ARF', 
-                                'Loss Account', 'Tounch & Castic Dep.Loss', 'Tounch Loss Fine',
-                                'MEENA LOSS ARF', 'GPC Powder', 'Gpc Powder ARF', 'Gpc Powder ARC', 'Gpc Powder AR Gold', 'SISMA GHISS LOSS',
-                                'ARG Stone Loss', 'Tounch Loss Fine ARC', 'PASSAGE SEPT', 'ARF GHISS LOSS',
-                                'BUFFING LOSS', 'GRINDING LOSS', 'TOUNCH LOSS FINE ARF',
-                                'SHAMPOO AND STEEL VIBRATOR LOSS/WALNUT SHAMPO', 'ARG GHISS LOSS', 'GPC POWDER LOSS ARC');
+    $loss_account_names=array();
+    if($this->data['site_name']=='ARF'){
+      $loss_account_names = array('ARF Alloy Vodator','ARF GPC Vodator','ARF Stone Vatav','ARF Copper Vatav','ARF Rhodium Vatav','STONE VATAV ARF', 'TOUNCH LOSS FINE ARF','Tounch & Castic Dep.Loss','MEENA LOSS ARF','Gpc Powder ARF','ARF GHISS LOSS','TOUNCH LOSS FINE ARF','SHAMPOO AND STEEL VIBRATOR LOSS/WALNUT SHAMPO', 'ARG GHISS LOSS', 'GPC POWDER LOSS ARC');
+    
+
+    }elseif($this->data['site_name']=='ARC'){
+      $loss_account_names = array('ARC Alloy Vodator','ARC GPC Vodator',
+                               'ARC Stone Vatav','ARC Copper Vatav','ARC Rhodium Vatav','Loss Account', 'Tounch & Castic Dep.Loss','Gpc Powder ARC','Tounch Loss Fine ARC','GPC POWDER LOSS ARC');
+    
+
+    }elseif($this->data['site_name']=='AR Gold'){
+      $loss_account_names = array('AR Gold Alloy Vodator','AR Gold GPC Vodator', 'ARF GPC Vodator','AR Gold Stone Vatav','AR Gold Copper Vatav','AR Gold Rhodium Vatav','HCL LOSS','Tounch Loss Fine','GPC Powder','Gpc Powder AR Gold', 'SISMA GHISS LOSS','ARG Stone Loss','SHAMPOO AND STEEL VIBRATOR LOSS/WALNUT SHAMPO', 'ARG GHISS LOSS',);
+    }
     foreach($this->data['trial_balance'] as $index => $trail_balance_record) {
       if (in_array($trail_balance_record['account_name'], $loss_account_names)) {
         $loss_account['fine'] += $trail_balance_record['fine'];
@@ -53,7 +53,6 @@ class Quator_wise_loss_reports extends BaseController {
         unset($this->data['trial_balance'][$index]);
       }
     }
-     pd($this->data['loss_account_records']);
    }
   public function _get_form_data() {
     $this->data['quators'] = $this->quator_model->get('name,from_date,to_date');
