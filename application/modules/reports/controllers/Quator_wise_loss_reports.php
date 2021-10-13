@@ -18,9 +18,9 @@ class Quator_wise_loss_reports extends BaseController {
   public function loss_account_details(){
     $where=array();
     $quator_details= $this->quator_model->find('name,from_date,to_date',array('name'=>$this->data['quator_name']));
+    $this->data['trial_balance']=array();
     if(!empty($this->data['quator_name'])){
-      $where['where']=array('date(voucher_date) >='=>$quator_details['from_date'],'date(voucher_date) <='=>$quator_details['to_date']);
-    }
+      $where['where']=array('date(voucher_date) >='=>$quator_details['from_date'],'date(voucher_date) <='=>$quator_details['to_date'],'receipt_type!='=>'Unrecovarable');
 
     $select = "account_name, 
                IFNULL((sum(debit_weight*purity)/100),0) - IFNULL((sum(credit_weight*factory_purity)/100),0) as fine,
@@ -30,6 +30,7 @@ class Quator_wise_loss_reports extends BaseController {
     $this->data['trial_balance'] = $this->model->get($select,$where, array() , 
                                                       array('group_by'=>'account_name,',
                                                             'order_by'=>'account_name asc'));
+    }
     $loss_account = array('account_name' => 'Loss Account',
                           'fine' => 0, 'vadotar' => 0, 'amount' => 0);
     $this->data['loss_account_records'] = array();
@@ -46,11 +47,13 @@ class Quator_wise_loss_reports extends BaseController {
     }elseif($this->data['site_name']=='AR Gold'){
       $loss_account_names = array('AR Gold Alloy Vodator','AR Gold GPC Vodator', 'ARF GPC Vodator','AR Gold Stone Vatav','AR Gold Copper Vatav','AR Gold Rhodium Vatav','HCL LOSS','Tounch Loss Fine','GPC Powder','Gpc Powder AR Gold', 'SISMA GHISS LOSS','ARG Stone Loss','SHAMPOO AND STEEL VIBRATOR LOSS/WALNUT SHAMPO', 'ARG GHISS LOSS',);
     }
-    foreach($this->data['trial_balance'] as $index => $trail_balance_record) {
-      if (in_array($trail_balance_record['account_name'], $loss_account_names)) {
-        $loss_account['fine'] += $trail_balance_record['fine'];
-        $this->data['loss_account_records'][] = $trail_balance_record;
-        unset($this->data['trial_balance'][$index]);
+    if(!empty($this->data['trial_balance'])){
+      foreach($this->data['trial_balance'] as $index => $trail_balance_record) {
+        if (in_array($trail_balance_record['account_name'], $loss_account_names)) {
+          $loss_account['fine'] += $trail_balance_record['fine'];
+          $this->data['loss_account_records'][] = $trail_balance_record;
+          unset($this->data['trial_balance'][$index]);
+        }
       }
     }
    }

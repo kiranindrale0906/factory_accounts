@@ -89,6 +89,8 @@
     </tbody>
   </table>
 </div>
+<h6 class="heading blue bold text-uppercase mb-0">Loss Account Details</h6>
+<hr>
 <div class="row">
   <div class="col-md-6">
     <div class="form-group container">
