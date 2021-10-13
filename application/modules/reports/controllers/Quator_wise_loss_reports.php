@@ -35,7 +35,7 @@ class Quator_wise_loss_reports extends BaseController {
     $this->data['loss_account_records'] = array();
     $loss_account_names=array();
     if($this->data['site_name']=='ARF'){
-      $loss_account_names = array('ARF Alloy Vodator','ARF GPC Vodator','ARF Stone Vatav','ARF Copper Vatav','ARF Rhodium Vatav','STONE VATAV ARF', 'TOUNCH LOSS FINE ARF','Tounch & Castic Dep.Loss','MEENA LOSS ARF','Gpc Powder ARF','ARF GHISS LOSS','TOUNCH LOSS FINE ARF','SHAMPOO AND STEEL VIBRATOR LOSS/WALNUT SHAMPO', 'ARG GHISS LOSS', 'GPC POWDER LOSS ARC');
+      $loss_account_names = array('ARF Alloy Vodator','ARF GPC Vodator','ARF Stone Vatav','ARF Copper Vatav','ARF Rhodium Vatav','STONE VATAV ARF', 'TOUNCH LOSS FINE ARF','MEENA LOSS ARF','Gpc Powder ARF','ARF GHISS LOSS','TOUNCH LOSS FINE ARF');
     
 
     }elseif($this->data['site_name']=='ARC'){
