@@ -167,8 +167,8 @@
               $assets_vadotar = 0;  
               $assets_amount = 0;  
               $assets_usd_amount = 0;  
-              if(!empty($trial_balance_records)) {
-                foreach ($trial_balance_records as $record) {
+              if(!empty($loss_account_records)) {
+                foreach ($loss_account_records as $record) {
                   if (  ($record['fine'] >= 0
                          && $record['account_name'] != 'Tounch Loss Fine')
                       || ($record['account_name'] == 'VADOTAR')) continue;

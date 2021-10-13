@@ -45,7 +45,7 @@ class Quator_wise_loss_reports extends BaseController {
     
 
     }elseif($this->data['site_name']=='AR Gold'){
-      $loss_account_names = array('AR Gold Alloy Vodator','AR Gold GPC Vodator', 'ARF GPC Vodator','AR Gold Stone Vatav','AR Gold Copper Vatav','AR Gold Rhodium Vatav','HCL LOSS','Tounch Loss Fine','GPC Powder','Gpc Powder AR Gold', 'SISMA GHISS LOSS','ARG Stone Loss','SHAMPOO AND STEEL VIBRATOR LOSS/WALNUT SHAMPO', 'ARG GHISS LOSS',);
+      $loss_account_names = array('AR Gold Alloy Vodator','AR Gold GPC Vodator','AR Gold Stone Vatav','AR Gold Copper Vatav','AR Gold Rhodium Vatav','HCL LOSS','Tounch Loss Fine','GPC Powder','Gpc Powder AR Gold', 'SISMA GHISS LOSS','ARG Stone Loss','SHAMPOO AND STEEL VIBRATOR LOSS/WALNUT SHAMPO', 'ARG GHISS LOSS',);
     }
     if(!empty($this->data['trial_balance'])){
       foreach($this->data['trial_balance'] as $index => $trail_balance_record) {
