@@ -197,6 +197,7 @@ class Ledgers extends BaseController {
     $receipt_voucher_dates = array_column($receipts, 'voucher_date');
     $this->data['voucher_dates'] = array_values(array_unique(array_merge($issue_voucher_dates, $receipt_voucher_dates)));
     asort($this->data['voucher_dates']);
+    pd($issues);
     $this->data['issues']   = $this->get_records_by_created_date($issues);
     $this->data['receipts'] = $this->get_records_by_created_date($receipts);
 
