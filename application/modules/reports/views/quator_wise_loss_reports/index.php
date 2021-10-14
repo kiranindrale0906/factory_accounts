@@ -213,7 +213,7 @@
         <table class="table table-sm fixedthead table-default">
           <tr class="bold">
             <td>Total Loss</td>
-            <td class="text-right"><?=$total_loss=four_decimal($liabilities_total-$assets_total); ?></td>
+            <td class="text-right"><?=$total_loss=four_decimal($assets_total-$liabilities_total); ?></td>
           </tr>
           <tr>
             <td>Total Fine Loss</td>
