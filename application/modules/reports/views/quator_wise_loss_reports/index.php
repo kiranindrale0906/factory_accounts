@@ -46,7 +46,7 @@
     </thead>
     <tbody>
     <?php 
-      $sum_loss_fine=$total_loss=$liabilities_total=$assets_total=$sum_after_recovery_loss=$sum_per_kg_loss=$sum_after_recoverd_loss_fine=$sum_before_recovery_loss=$sum_recoverd_loss_fine=$sum_out_weight=$sum_fine=$sum_unrecoverable_loss=$sum_balance=$sum_out_weight=0;
+      $sum_loss_fine=$total_unrecover_loss_vatav=$total_loss=$liabilities_total=$assets_total=$sum_after_recovery_loss=$sum_per_kg_loss=$sum_after_recoverd_loss_fine=$sum_before_recovery_loss=$sum_recoverd_loss_fine=$sum_out_weight=$sum_fine=$sum_unrecoverable_loss=$sum_balance=$sum_out_weight=0;
      foreach ($loss_categories as $index => $loss_category) {
       $sum_loss_fine+=four_decimal($loss_category['loss_fine']);
       $sum_after_recoverd_loss_fine+=four_decimal($loss_category['after_recovered_loss']);
@@ -229,15 +229,15 @@
           </tr>
           <tr>
             <td>Total Unrecoverable Loss with vatav and Other Loss</td>
-            <td class="text-right"><?= four_decimal($sum_unrecoverable_loss+$total_loss); ?></td>
+            <td class="text-right"><?= $total_unrecover_loss_vatav=four_decimal($sum_unrecoverable_loss+$total_loss); ?></td>
           </tr>
           <tr>
             <td>Work</td>
-            <td><?=!empty($work_details)?$work_details['amount']:0; ?></td>
+            <td class="text-right"><?=$work=!empty($work_details)?$work_details['amount']:0; ?></td>
           </tr>
           <tr>
             <td>Per Kg Loss</td>
-            <td></td>
+            <td><?=four_decimal($total_unrecover_loss_vatav/$work) ?></td>
           </tr>
         </table>
       </div>
