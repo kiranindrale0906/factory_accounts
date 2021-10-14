@@ -196,31 +196,39 @@
           ?>
           <tr>
             <th>Total</th>
-            <th class="text-right"><?=$assets_total= four_decimal(-1 * $assets_amount, '-'); ?></th>          
+            <th class="text-right"><?= four_decimal(-1 * $assets_amount, '-'); ?></th>          
             <th class="text-right"><?= four_decimal(-1 * $assets_usd_amount, '-'); ?></th>          
             <th class="text-right"><?= four_decimal(-1 * $assets_fine, '-'); ?></th>          
             <th class="text-right"><?= four_decimal(-1 * $assets_vadotar, '-'); ?></th>
           </tr>
           </table>
-          <div>Total Loss : <?=$total_loss=four_decimal($liabilities_total-$assets_total); ?></div>
-        <table class="table table-sm fixedthead table-default">
-          <tr>
-            <td>Total Fine Loss</td>
-            <td>Total Fine Loss Recovered</td>
-            <td>Recovery%</td>
-            <td>Total Unrecoverable Loss with vatav and Other Loss</td>
-            <td>Work</td>
-            <td>Per Kg Loss</td>
-          </tr>
-          <tr>
-            <td class="text-right"><?= four_decimal($sum_loss_fine)?></td>
-            <td class="text-right"><?= four_decimal($sum_recoverd_loss_fine)?></td>
-            <td class="text-right"><?= four_decimal($recovered_per) ?>  </td>
-            <td class="text-right"><?= four_decimal($total_loss+$sum_unrecoverable_loss); ?></td>
-            <td class="text-right"></td>
-          </tr>
-        </table>
-      </div>      
+        </div> 
+        <div class="bold">Total Loss : <?=$total_loss=four_decimal($liabilities_total-$assets_total); ?></div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group container">
+              <div class="table-responsive">          
+                <table class="table table-sm fixedthead table-default">
+                  <tr>
+                    <td>Total Fine Loss</td>
+                    <td>Total Fine Loss Recovered</td>
+                    <td>Recovery%</td>
+                    <td>Total Unrecoverable Loss with vatav and Other Loss</td>
+                    <td>Work</td>
+                    <td>Per Kg Loss</td>
+                  </tr>
+                  <tr>
+                    <td class="text-right"><?= four_decimal($sum_loss_fine)?></td>
+                    <td class="text-right"><?= four_decimal($sum_recoverd_loss_fine)?></td>
+                    <td class="text-right"><?= four_decimal($recovered_per) ?>  </td>
+                    <td class="text-right"><?= four_decimal($sum_unrecoverable_loss+$total_loss); ?></td>
+                    <td class="text-right"></td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
   </div>  
 </div>
