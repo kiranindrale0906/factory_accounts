@@ -23,7 +23,7 @@ class Quator_wise_loss_reports extends BaseController {
     $this->data['work_details']=$this->ac_ledger->find('IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount',
                array('(purity != factory_purity or (account_name in ("EXPORT ACCOUNT", "EXPORT DIFF.") and voucher_type = "metal issue voucher")
                 )'=>NULL,
-                'account_name !='=>"VADOTAR",'MONTH(voucher_date) in ('.$quator_details['from_month'].','.$quator_details['to_month'].')'=>NULL,'YEAR(voucher_date) in ('.$quator_details['from_year'].','.$quator_details['to_year'].')'=>NULL);
+                'account_name !='=>"VADOTAR",'MONTH(voucher_date) in ('.$quator_details['from_month'].','.$quator_details['to_month'].')'=>NULL,'YEAR(voucher_date) in ('.$quator_details['from_year'].','.$quator_details['to_year'].')'=>NULL));
 
     $this->data['trial_balance']=array();
     if(!empty($this->data['quator_name'])){
