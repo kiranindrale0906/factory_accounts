@@ -237,7 +237,7 @@
           </tr>
           <tr>
             <td>Per Kg Loss</td>
-            <td><?=four_decimal($total_unrecover_loss_vatav/$work) ?></td>
+            <td class="text-right"><?=four_decimal($total_unrecover_loss_vatav/$work) ?></td>
           </tr>
         </table>
       </div>
