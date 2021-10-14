@@ -69,9 +69,9 @@
     </tr><tr>
       <td>Rate</td><td class="text-right"><h6><?=four_decimal($record['rate'])?></h6></td>
     </tr>
-    <tr class="no-print">
-      <td class="no-print">Stone Amount</td>
-      <td class="text-right no-print"><h6><?=four_decimal($record['stone_amount'])?></h6></td>
+    <tr class=<?=($record['stone_amount']!=0)?'':'no-print'?>>
+      <td class=<?=($record['stone_amount']!=0)?'':'no-print'?>>Stone Amount</td>
+      <td class=<?=($record['stone_amount']!=0)?'text-right':'text-right no-print'?>><h6><?=four_decimal($record['stone_amount'])?></h6></td>
     </tr>
     <tr class="no-print">
       <td class="no-print">Taxable Amount</td>
