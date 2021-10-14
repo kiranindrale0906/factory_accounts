@@ -3,7 +3,7 @@
 class Quator_wise_loss_reports extends BaseController {
   public function __construct() {
     parent::__construct();
-     $this->load->model(array('masters/quator_model','masters/company_model', 'transactions/ledger_model',
+     $this->load->model(array('masters/quator_model','masters/company_model','masters/account_model', 'transactions/ledger_model',
                              'transactions/metal_receipt_voucher_model', 'transactions/metal_issue_voucher_model','transactions/ledger_model', 
                              'ac_vouchers/voucher_model', 'argold/chitti_model'));
   }
@@ -23,10 +23,15 @@ class Quator_wise_loss_reports extends BaseController {
     
     $this->data['trial_balance']=array();
     if(!empty($this->data['quator_name'])){
-      $this->data['work_details']=$this->ledger_model->find('IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount',
-               array('(purity != factory_purity or (account_name in ("EXPORT ACCOUNT", "EXPORT DIFF.") and voucher_type = "metal issue voucher")
-                )'=>NULL,
-                'account_name !='=>"VADOTAR",'MONTH(voucher_date) in ('.$quator_details['from_month'].','.$quator_details['to_month'].')'=>NULL,'YEAR(voucher_date) in ('.$quator_details['from_year'].','.$quator_details['to_year'].')'=>NULL));
+      $export_accounts = $this->account_model->get('name', array('group_code' => 'Export'));
+      $export_account_names = array_column($export_accounts, 'name');
+      $export_account_names = implode('", "',$export_account_names);
+      
+      $this->data['work_details']=$this->ledger_model->find('IFNULL(sum(debit_amount),0)
+                                                           - IFNULL(sum(credit_amount),0) as amount',
+                                                        array('site_name'=>$this->data['site_name'],
+                                                          '(purity != factory_purity or (account_name in ("EXPORT ACCOUNT", "EXPORT DIFF.") and voucher_type = "metal issue voucher"))'=>NULL,
+                                                          'account_name in ('.$export_account_names.')'=>NULL,'MONTH(voucher_date) in ('.$quator_details['from_month'].','.$quator_details['to_month'].')'=>NULL,'YEAR(voucher_date) in ('.$quator_details['from_year'].','.$quator_details['to_year'].')'=>NULL));
 
       $where['where']=array('date(voucher_date) >='=>$quator_details['from_date'],'date(voucher_date) <='=>$quator_details['to_date'],'receipt_type!='=>'Unrecovarable','account_name!='=>'Loss Account');
 
