@@ -17,7 +17,14 @@ class Quator_wise_loss_reports extends BaseController {
   }
   public function loss_account_details(){
     $where=array();
-    $quator_details= $this->quator_model->find('name,from_date,to_date',array('name'=>$this->data['quator_name']));
+    $quator_details= $this->quator_model->find('name,from_date,to_date,MONTH(from_date) as from_month,MONTH(to_date) as to_month,YEAR(from_date) as from_year,YEAR(to_date) as to_year',array('name'=>$this->data['quator_name']));
+
+
+    $this->data['work_details']=$this->ac_ledger->find('IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount',
+               array('(purity != factory_purity or (account_name in ("EXPORT ACCOUNT", "EXPORT DIFF.") and voucher_type = "metal issue voucher")
+                )'=>NULL,
+                'account_name !='=>"VADOTAR",'MONTH(voucher_date) in ('.$quator_details['from_month'].','.$quator_details['to_month'].')'=>NULL,'YEAR(voucher_date) in ('.$quator_details['from_year'].','.$quator_details['to_year'].')'=>NULL);
+
     $this->data['trial_balance']=array();
     if(!empty($this->data['quator_name'])){
       $where['where']=array('date(voucher_date) >='=>$quator_details['from_date'],'date(voucher_date) <='=>$quator_details['to_date'],'receipt_type!='=>'Unrecovarable','account_name!='=>'Loss Account');

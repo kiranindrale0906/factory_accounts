@@ -233,7 +233,7 @@
           </tr>
           <tr>
             <td>Work</td>
-            <td></td>
+            <td><?=!empty($work_details)?$work_details['amount']:0; ?></td>
           </tr>
           <tr>
             <td>Per Kg Loss</td>
