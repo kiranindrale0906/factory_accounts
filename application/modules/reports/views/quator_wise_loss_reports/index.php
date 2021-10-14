@@ -207,13 +207,14 @@
   </div>  
 </div>
 <div class="row">
-<div class="bold">Total Loss : <?=$total_loss=four_decimal($liabilities_total-$assets_total); ?></div>
-</div>
-<div class="row">
   <div class="col-md-6">
     <div class="form-group container">
       <div class="table-responsive">          
         <table class="table table-sm fixedthead table-default">
+          <tr>
+            <td>Total Loss</td>
+            <td class="text-right"><?=$total_loss=four_decimal($liabilities_total-$assets_total); ?></td>
+          </tr>
           <tr>
             <td>Total Fine Loss</td>
             <td class="text-right"><?= four_decimal($sum_loss_fine)?></td>
