@@ -4,7 +4,7 @@ class Quator_wise_loss_reports extends BaseController {
   public function __construct() {
     parent::__construct();
      $this->load->model(array('masters/quator_model','masters/company_model', 'transactions/ledger_model',
-                             'transactions/metal_receipt_voucher_model', 'transactions/metal_issue_voucher_model', 
+                             'transactions/metal_receipt_voucher_model', 'transactions/metal_issue_voucher_model','transactions/ledger_model', 
                              'ac_vouchers/voucher_model', 'argold/chitti_model'));
   }
 
@@ -20,7 +20,7 @@ class Quator_wise_loss_reports extends BaseController {
     $quator_details= $this->quator_model->find('name,from_date,to_date,MONTH(from_date) as from_month,MONTH(to_date) as to_month,YEAR(from_date) as from_year,YEAR(to_date) as to_year',array('name'=>$this->data['quator_name']));
 
 
-    $this->data['work_details']=$this->ac_ledger->find('IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount',
+    $this->data['work_details']=$this->ledger_model->find('IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount',
                array('(purity != factory_purity or (account_name in ("EXPORT ACCOUNT", "EXPORT DIFF.") and voucher_type = "metal issue voucher")
                 )'=>NULL,
                 'account_name !='=>"VADOTAR",'MONTH(voucher_date) in ('.$quator_details['from_month'].','.$quator_details['to_month'].')'=>NULL,'YEAR(voucher_date) in ('.$quator_details['from_year'].','.$quator_details['to_year'].')'=>NULL));
