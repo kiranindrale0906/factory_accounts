@@ -208,6 +208,8 @@
 </div>
 <div class="row">
 <div class="bold">Total Loss : <?=$total_loss=four_decimal($liabilities_total-$assets_total); ?></div>
+</div>
+<div class="row">
   <div class="col-md-6">
     <div class="form-group container">
       <div class="table-responsive">          
