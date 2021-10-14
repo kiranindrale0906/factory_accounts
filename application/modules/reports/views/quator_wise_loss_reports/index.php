@@ -46,7 +46,7 @@
     </thead>
     <tbody>
     <?php 
-      $sum_loss_fine=$sum_after_recovery_loss=$sum_per_kg_loss=$sum_after_recoverd_loss_fine=$sum_before_recovery_loss=$sum_recoverd_loss_fine=$sum_out_weight=$sum_fine=$sum_unrecoverable_loss=$sum_balance=$sum_out_weight=0;
+      $sum_loss_fine=$total_loss=$liabilities_total=$assets_total=$sum_after_recovery_loss=$sum_per_kg_loss=$sum_after_recoverd_loss_fine=$sum_before_recovery_loss=$sum_recoverd_loss_fine=$sum_out_weight=$sum_fine=$sum_unrecoverable_loss=$sum_balance=$sum_out_weight=0;
      foreach ($loss_categories as $index => $loss_category) {
       $sum_loss_fine+=four_decimal($loss_category['loss_fine']);
       $sum_after_recoverd_loss_fine+=four_decimal($loss_category['after_recovered_loss']);
@@ -84,7 +84,7 @@
     <td class="text-right"><?=!empty($sum_out_weight)?four_decimal(($sum_loss_fine-$sum_recoverd_loss_fine)/$sum_out_weight*1000):'-'?></td>
     <td class="text-right"><?=four_decimal($sum_unrecoverable_loss)?></td>
     <td class="text-right"><?=four_decimal($sum_balance)?></td>
-    <td class="text-right"><?=!empty($sum_loss_fine)?four_decimal($sum_after_recoverd_loss_fine/$sum_loss_fine*100):'-'?></td>
+    <td class="text-right"><?=$recovered_per=!empty($sum_loss_fine)?four_decimal($sum_after_recoverd_loss_fine/$sum_loss_fine*100):'-'?></td>
   </tr>
     </tbody>
   </table>
@@ -140,7 +140,7 @@
           ?>
           <tr>
             <th>Total</th>
-            <th class="text-right"><?= four_decimal($liabilities_amount, '-'); ?></th>
+            <th class="text-right"><?= $liabilities_total=four_decimal($liabilities_amount, '-'); ?></th>
             <th class="text-right"><?= four_decimal($liabilities_usd_amount, '-'); ?></th>
             <th class="text-right"><?= four_decimal($liabilities_fine, '-'); ?></th>          
             <th class="text-right"><?= four_decimal($liabilities_vadotar, '-'); ?></th>
@@ -196,13 +196,30 @@
           ?>
           <tr>
             <th>Total</th>
-            <th class="text-right"><?= four_decimal(-1 * $assets_amount, '-'); ?></th>          
+            <th class="text-right"><?=$assets_total= four_decimal(-1 * $assets_amount, '-'); ?></th>          
             <th class="text-right"><?= four_decimal(-1 * $assets_usd_amount, '-'); ?></th>          
             <th class="text-right"><?= four_decimal(-1 * $assets_fine, '-'); ?></th>          
             <th class="text-right"><?= four_decimal(-1 * $assets_vadotar, '-'); ?></th>
           </tr>
           </table>
-        <?php $profit_and_loss['pending_vadotar'] = ($liabilities_vadotar + $assets_vadotar); ?>
+          <div>Total Loss : <?=$total_loss=four_decimal($liabilities_total-$assets_total); ?></div>
+        <table class="table table-sm fixedthead table-default">
+          <tr>
+            <td>Total Fine Loss</td>
+            <td>Total Fine Loss Recovered</td>
+            <td>Recovery%</td>
+            <td>Total Unrecoverable Loss with vatav and Other Loss</td>
+            <td>Work</td>
+            <td>Per Kg Loss</td>
+          </tr>
+          <tr>
+            <td class="text-right"><?= four_decimal($sum_loss_fine)?></td>
+            <td class="text-right"><?= four_decimal($sum_recoverd_loss_fine)?></td>
+            <td class="text-right"><?= four_decimal($recovered_per) ?>  </td>
+            <td class="text-right"><?= four_decimal($total_loss+$sum_unrecoverable_loss); ?></td>
+            <td class="text-right"></td>
+          </tr>
+        </table>
       </div>      
     </div>
   </div>  
