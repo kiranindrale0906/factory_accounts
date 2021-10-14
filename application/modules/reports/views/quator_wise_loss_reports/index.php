@@ -142,7 +142,7 @@
             <th>Total</th>
             <th class="text-right"><?= four_decimal($liabilities_amount, '-'); ?></th>
             <th class="text-right"><?= four_decimal($liabilities_usd_amount, '-'); ?></th>
-            <th class="text-right"><?= $liabilities_total=four_decimal($liabilities_fine, '-'); ?></th>          
+            <th class="text-right"><?= $liabilities_total=four_decimal($liabilities_fine, '0'); ?></th>          
             <th class="text-right"><?= four_decimal($liabilities_vadotar, '-'); ?></th>
           </tr>
         </table>
@@ -198,7 +198,7 @@
             <th>Total</th>
             <th class="text-right"><?= four_decimal(-1 * $assets_amount, '-'); ?></th>          
             <th class="text-right"><?= four_decimal(-1 * $assets_usd_amount, '-'); ?></th>          
-            <th class="text-right"><?=$assets_total= four_decimal(-1 * $assets_fine, '-'); ?></th>          
+            <th class="text-right"><?=$assets_total= four_decimal(-1 * $assets_fine, '0'); ?></th>          
             <th class="text-right"><?= four_decimal(-1 * $assets_vadotar, '-'); ?></th>
           </tr>
           </table>
