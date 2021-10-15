@@ -31,7 +31,7 @@ class Quator_wise_loss_reports extends BaseController {
                                                            - IFNULL(sum(credit_amount),0) as amount',
                                                         array('site_name'=>$this->data['site_name'],
                                                           '(purity != factory_purity or (account_name in ("EXPORT ACCOUNT", "EXPORT DIFF.") and voucher_type = "metal issue voucher"))'=>NULL,
-                                                          'account_name in ('.$export_account_names.')'=>NULL,'MONTH(voucher_date) in ('.$quator_details['from_month'].','.$quator_details['to_month'].')'=>NULL,'YEAR(voucher_date) in ('.$quator_details['from_year'].','.$quator_details['to_year'].')'=>NULL));
+                                                          'account_name in ("'.$export_account_names.'")'=>NULL,'MONTH(voucher_date) in ('.$quator_details['from_month'].','.$quator_details['to_month'].')'=>NULL,'YEAR(voucher_date) in ('.$quator_details['from_year'].','.$quator_details['to_year'].')'=>NULL));
 
       $where['where']=array('date(voucher_date) >='=>$quator_details['from_date'],'date(voucher_date) <='=>$quator_details['to_date'],'receipt_type!='=>'Unrecovarable','account_name!='=>'Loss Account');
 
@@ -58,7 +58,7 @@ class Quator_wise_loss_reports extends BaseController {
     
 
     }elseif($this->data['site_name']=='AR Gold'){
-      $loss_account_names = array('AR Gold Alloy Vodator','AR Gold GPC Vodator','AR Gold Stone Vatav','AR Gold Copper Vatav','AR Gold Rhodium Vatav','HCL LOSS','Tounch Loss Fine','GPC Powder','Gpc Powder AR Gold', 'SISMA GHISS LOSS','ARG Stone Loss','SHAMPOO AND STEEL VIBRATOR LOSS/WALNUT SHAMPO', 'ARG GHISS LOSS',);
+      $loss_account_names = array('AR Gold Alloy Vodator','AR Gold GPC Vodator','AR Gold Stone Vatav','AR Gold Copper Vatav','AR Gold Rhodium Vatav','HCL LOSS','Tounch Loss Fine','GPC Powder','GPC Powder AR Gold', 'SISMA GHISS LOSS','ARG Stone Loss','SHAMPOO AND STEEL VIBRATOR LOSS/WALNUT SHAMPO', 'ARG GHISS LOSS',);
     }
     if(!empty($this->data['trial_balance'])){
       foreach($this->data['trial_balance'] as $index => $trail_balance_record) {
