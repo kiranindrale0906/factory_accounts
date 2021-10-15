@@ -282,8 +282,8 @@ class Trial_balances extends Ledgers {
                                 'AR Gold Copper Vatav', 'ARF Copper Vatav', 'ARC Copper Vatav',
                                 'AR Gold Rhodium Vatav', 'ARF Rhodium Vatav', 'ARC Rhodium Vatav',
                                 'HCL LOSS', 'STONE VATAV ARF', 'TOUNCH LOSS FINE ARF', 
-                                'Loss Account', 'Tounch & Castic Dep.Loss', 'Tounch Loss Fine',
-                                'MEENA LOSS ARF', 'GPC Powder', 'Gpc Powder ARF', 'Gpc Powder ARC', 'Gpc Powder AR Gold', 'SISMA GHISS LOSS',
+                                'Tounch & Castic Dep.Loss', 'Tounch Loss Fine',
+                                'MEENA LOSS ARF', 'GPC Powder', 'Gpc Powder ARF', 'Gpc Powder ARC', 'GPC Powder AR Gold', 'SISMA GHISS LOSS',
                                 'ARG Stone Loss', 'Tounch Loss Fine ARC', 'PASSAGE SEPT', 'ARF GHISS LOSS',
                                 'BUFFING LOSS', 'GRINDING LOSS', 'TOUNCH LOSS FINE ARF',
                                 'SHAMPOO AND STEEL VIBRATOR LOSS/WALNUT SHAMPO', 'ARG GHISS LOSS', 'GPC POWDER LOSS ARC');
