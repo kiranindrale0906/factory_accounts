@@ -27,13 +27,14 @@ class Quator_wise_loss_reports extends BaseController {
       $export_account_names = array_column($export_accounts, 'name');
       $export_account_names = implode('", "',$export_account_names);
       
-      $this->data['work_details']=$this->ledger_model->find('IFNULL(sum(debit_amount),0)
-                                                           - IFNULL(sum(credit_amount),0) as amount',
+      $this->data['work_details']=$this->ledger_model->find('IFNULL(sum(debit_weight),0)
+                                                           - IFNULL(sum(credit_weight),0) as amount',
                                                         array('site_name'=>$this->data['site_name'],
-                                                          '(purity != factory_purity or (account_name in ("EXPORT ACCOUNT", "EXPORT DIFF.") and voucher_type = "metal issue voucher"))'=>NULL,
-                                                          'account_name in ('.$export_account_names.')'=>NULL,'MONTH(voucher_date) in ('.$quator_details['from_month'].','.$quator_details['to_month'].')'=>NULL,'YEAR(voucher_date) in ('.$quator_details['from_year'].','.$quator_details['to_year'].')'=>NULL));
+                                                          '(purity != factory_purity or (account_name in ("'.$export_account_names.'") and voucher_type = "metal issue voucher"))'=>NULL,
+                                                          'account_name != "Vodator"'=>NULL,
+                                                          'date(voucher_date) >='=>$quator_details['from_date'],'date(voucher_date) <='=>$quator_details['to_date']));
 
-      $where['where']=array('date(voucher_date) >='=>$quator_details['from_date'],'date(voucher_date) <='=>$quator_details['to_date'],'receipt_type!='=>'Unrecovarable','account_name!='=>'Loss Account');
+      $where['where']=array('date(voucher_date) >='=>$quator_details['from_date'],'date(voucher_date) <='=>$quator_details['to_date'],'account_name'=>'Unrecovarable');
 
       $select = "account_name, 
                IFNULL((sum(debit_weight*purity)/100),0) - IFNULL((sum(credit_weight*factory_purity)/100),0) as fine,
@@ -47,22 +48,22 @@ class Quator_wise_loss_reports extends BaseController {
     $loss_account = array('account_name' => 'Loss Account',
                           'fine' => 0, 'vadotar' => 0, 'amount' => 0);
     $this->data['loss_account_records'] = array();
-    $loss_account_names=array();
+    $loss_receipt_types=array();
     if($this->data['site_name']=='ARF'){
       $loss_account_names = array('ARF Alloy Vodator','ARF GPC Vodator','ARF Stone Vatav','ARF Copper Vatav','ARF Rhodium Vatav','STONE VATAV ARF', 'TOUNCH LOSS FINE ARF','MEENA LOSS ARF','Gpc Powder ARF','ARF GHISS LOSS','TOUNCH LOSS FINE ARF');
     
 
     }elseif($this->data['site_name']=='ARC'){
-      $loss_account_names = array('ARC Alloy Vodator','ARC GPC Vodator',
+      $loss_receipt_types = array('ARC Alloy Vodator','ARC GPC Vodator',
                                'ARC Stone Vatav','ARC Copper Vatav','ARC Rhodium Vatav','Loss Account', 'Tounch & Castic Dep.Loss','Gpc Powder ARC','Tounch Loss Fine ARC','GPC POWDER LOSS ARC');
     
 
     }elseif($this->data['site_name']=='AR Gold'){
-      $loss_account_names = array('AR Gold Alloy Vodator','AR Gold GPC Vodator','AR Gold Stone Vatav','AR Gold Copper Vatav','AR Gold Rhodium Vatav','HCL LOSS','Tounch Loss Fine','GPC Powder','Gpc Powder AR Gold', 'SISMA GHISS LOSS','ARG Stone Loss','SHAMPOO AND STEEL VIBRATOR LOSS/WALNUT SHAMPO', 'ARG GHISS LOSS',);
+      $loss_receipt_types = array('AR Gold Alloy Vodator','AR Gold GPC Vodator','AR Gold Stone Vatav','AR Gold Copper Vatav','AR Gold Rhodium Vatav','HCL LOSS','Tounch Loss Fine','GPC Powder','Gpc Powder AR Gold', 'SISMA GHISS LOSS','ARG Stone Loss','SHAMPOO AND STEEL VIBRATOR LOSS/WALNUT SHAMPO', 'ARG GHISS LOSS',);
     }
     if(!empty($this->data['trial_balance'])){
       foreach($this->data['trial_balance'] as $index => $trail_balance_record) {
-        if (in_array($trail_balance_record['account_name'], $loss_account_names)) {
+        if (in_array($trail_balance_record['receipt_type'], $loss_receipt_types)) {
           $loss_account['fine'] += $trail_balance_record['fine'];
           $this->data['loss_account_records'][] = $trail_balance_record;
           unset($this->data['trial_balance'][$index]);
