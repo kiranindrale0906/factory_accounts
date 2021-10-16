@@ -113,12 +113,12 @@
 
               if(!empty($loss_account_records)) {
                 foreach ($loss_account_records as $record) {
-                  if (  ($record['fine'] >= 0
-                         && $record['account_name'] != 'Tounch Loss Fine')
-                      || ($record['account_name'] == 'VADOTAR')) continue;
+                  if (   ($record['fine'] <= 0
+                          && $record['receipt_type'] != 'VADOTAR')
+                      || ($record['receipt_type'] == 'Tounch Loss Fine')) continue;
 
-                  if ($record['account_name'] == 'SALES ACCOUNT') $profit_and_loss['sales_account'] = $record;
-                if (!empty($sales_accounts)) $profit_and_loss['sale_gst_accounts'] = $sales_accounts;
+                  if ($record['receipt_type'] == 'PURCHASE ACCOUNT') $profit_and_loss['purchase_account'] = $record;
+                  if ($record['receipt_type'] == 'MAIN VADOTAR')     $profit_and_loss['main_vadotar'] = $record;
 
                   $liabilities_vadotar = $liabilities_vadotar + $record['vadotar'];
                   $liabilities_fine = $liabilities_fine + $record['fine']; 
@@ -129,21 +129,21 @@
                   ?>
 
                   <tr>
-                    <td><?= $record['account_name']; ?></td>
-                    <td class="text-right"><?= four_decimal((-1 * $record['amount']), '-') ?>  </td>
-                    <td class="text-right"><?= four_decimal((-1 * @$record['usd_amount']), '-') ?>  </td>
-                    <td class="text-right"><?= four_decimal((-1 * $record['fine']), '-'); ?></td>
-                    <td class="text-right"><?= four_decimal((-1 * $record['vadotar']), '-') ?>  </td>
+                    <td><?= $record['receipt_type']; ?></td>
+                    <td class="text-right"><?= four_decimal(($record['amount']), '-') ?>  </td>
+                    <td class="text-right"><?= four_decimal((@$record['usd_amount']), '-') ?>  </td>
+                    <td class="text-right"><?= four_decimal(($record['fine']), '-'); ?></td>
+                    <td class="text-right"><?= four_decimal(($record['vadotar']), '-') ?>  </td>
                   </tr>
                 <?php }}
               } 
           ?>
           <tr>
             <th>Total</th>
-            <th class="text-right"><?= four_decimal(-1 * $liabilities_amount, '-'); ?></th>
-            <th class="text-right"><?= four_decimal(-1 * $liabilities_usd_amount, '-'); ?></th>
-            <th class="text-right"><?= $liabilities_total=four_decimal(-1 * $liabilities_fine, '0'); ?></th>          
-            <th class="text-right"><?= four_decimal(-1 * $liabilities_vadotar, '-'); ?></th>
+            <th class="text-right"><?= four_decimal($liabilities_amount, '-'); ?></th>
+            <th class="text-right"><?= four_decimal($liabilities_usd_amount, '-'); ?></th>
+            <th class="text-right"><?= $liabilities_total=four_decimal($liabilities_fine, '0'); ?></th>          
+            <th class="text-right"><?= four_decimal($liabilities_vadotar, '-'); ?></th>
           </tr>
         </table>
       </div>
@@ -169,13 +169,12 @@
               $assets_usd_amount = 0;  
               if(!empty($loss_account_records)) {
                 foreach ($loss_account_records as $record) {
-                  
-                if (   ($record['fine'] <= 0
-                          && $record['account_name'] != 'VADOTAR')
-                      || ($record['account_name'] == 'Tounch Loss Fine')) continue;
+                  if (  ($record['fine'] >= 0
+                         && $record['receipt_type'] != 'Tounch Loss Fine')
+                      || ($record['receipt_type'] == 'VADOTAR')) continue;
 
-                  if ($record['account_name'] == 'PURCHASE ACCOUNT') $profit_and_loss['purchase_account'] = $record;
-                  if ($record['account_name'] == 'MAIN VADOTAR')     $profit_and_loss['main_vadotar'] = $record;
+                  if ($record['receipt_type'] == 'SALES ACCOUNT') $profit_and_loss['sales_account'] = $record;
+                if (!empty($sales_accounts)) $profit_and_loss['sale_gst_accounts'] = $sales_accounts;
                     
                   $assets_vadotar = $assets_vadotar + $record['vadotar'];
                   $assets_fine = $assets_fine + $record['fine'];
@@ -185,11 +184,11 @@
                    ?>
 
                   <tr>
-                    <td><?= $record['account_name']; ?></td>
-                    <td class="text-right"><?= four_decimal($record['amount'], '-') ?>  </td>
-                    <td class="text-right"><?= four_decimal(@$record['usd_amount'], '-') ?>  </td>
-                    <td class="text-right"><?= four_decimal($record['fine'], '-') ?></td>
-                    <td class="text-right"><?= four_decimal($record['vadotar'], '-') ?>  </td>
+                    <td><?= $record['receipt_type']; ?></td>
+                    <td class="text-right"><?= four_decimal(-1 * $record['amount'], '-') ?>  </td>
+                    <td class="text-right"><?= four_decimal(-1 * @$record['usd_amount'], '-') ?>  </td>
+                    <td class="text-right"><?= four_decimal(-1 * $record['fine'], '-') ?></td>
+                    <td class="text-right"><?= four_decimal(-1 * $record['vadotar'], '-') ?>  </td>
                   </tr>
                 <?php }
                 }
@@ -197,10 +196,10 @@
           ?>
           <tr>
             <th>Total</th>
-            <th class="text-right"><?= four_decimal($assets_amount, '-'); ?></th>          
-            <th class="text-right"><?= four_decimal($assets_usd_amount, '-'); ?></th>          
-            <th class="text-right"><?=$assets_total= four_decimal($assets_fine, '0'); ?></th>          
-            <th class="text-right"><?= four_decimal($assets_vadotar, '-'); ?></th>
+            <th class="text-right"><?= four_decimal(-1 * $assets_amount, '-'); ?></th>          
+            <th class="text-right"><?= four_decimal(-1 * $assets_usd_amount, '-'); ?></th>          
+            <th class="text-right"><?=$assets_total= four_decimal(-1 * $assets_fine, '0'); ?></th>          
+            <th class="text-right"><?= four_decimal(-1 * $assets_vadotar, '-'); ?></th>
           </tr>
           </table>
         </div> 
@@ -238,7 +237,7 @@
           </tr>
           <tr>
             <td>Per Kg Loss</td>
-            <td class="text-right"><?=(!empty($work)&&$work!=0)?four_decimal(($total_unrecover_loss_vatav/$work)*1000):0 ?></td>
+            <td class="text-right"><?=(!empty($work)&&$work!=0)?four_decimal($total_unrecover_loss_vatav/$work):0 ?></td>
           </tr>
         </table>
       </div>
