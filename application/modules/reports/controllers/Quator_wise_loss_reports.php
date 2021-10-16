@@ -35,7 +35,7 @@ class Quator_wise_loss_reports extends BaseController {
                                                           'date(voucher_date) >='=>$quator_details['from_date'],'date(voucher_date) <='=>$quator_details['to_date']));
 
 
-      $where['where']=array('date(voucher_date) >='=>$quator_details['from_date'],'date(voucher_date) <='=>$quator_details['to_date'],'account_name'=>'Unrecovarable');
+      $where['where']=array('date(voucher_date) >='=>$quator_details['from_date'],'date(voucher_date) <='=>$quator_details['to_date'],'account_name'=>'Unrecovarable','receipt_type!='=>'Loss Account');
 
       $select = "account_name, 
                receipt_type, 
