@@ -114,11 +114,11 @@
               if(!empty($loss_account_records)) {
                 foreach ($loss_account_records as $record) {
                   if (   ($record['fine'] <= 0
-                          && $record['receipt_type'] != 'VADOTAR')
-                      || ($record['receipt_type'] == 'Tounch Loss Fine')) continue;
+                          && $record['account_name'] != 'VADOTAR')
+                      || ($record['account_name'] == 'Tounch Loss Fine')) continue;
 
-                  if ($record['receipt_type'] == 'PURCHASE ACCOUNT') $profit_and_loss['purchase_account'] = $record;
-                  if ($record['receipt_type'] == 'MAIN VADOTAR')     $profit_and_loss['main_vadotar'] = $record;
+                  if ($record['account_name'] == 'PURCHASE ACCOUNT') $profit_and_loss['purchase_account'] = $record;
+                  if ($record['account_name'] == 'MAIN VADOTAR')     $profit_and_loss['main_vadotar'] = $record;
 
                   $liabilities_vadotar = $liabilities_vadotar + $record['vadotar'];
                   $liabilities_fine = $liabilities_fine + $record['fine']; 
@@ -129,7 +129,7 @@
                   ?>
 
                   <tr>
-                    <td><?= $record['receipt_type']; ?></td>
+                    <td><?= $record['account_name']; ?></td>
                     <td class="text-right"><?= four_decimal(($record['amount']), '-') ?>  </td>
                     <td class="text-right"><?= four_decimal((@$record['usd_amount']), '-') ?>  </td>
                     <td class="text-right"><?= four_decimal(($record['fine']), '-'); ?></td>
@@ -170,10 +170,10 @@
               if(!empty($loss_account_records)) {
                 foreach ($loss_account_records as $record) {
                   if (  ($record['fine'] >= 0
-                         && $record['receipt_type'] != 'Tounch Loss Fine')
-                      || ($record['receipt_type'] == 'VADOTAR')) continue;
+                         && $record['account_name'] != 'Tounch Loss Fine')
+                      || ($record['account_name'] == 'VADOTAR')) continue;
 
-                  if ($record['receipt_type'] == 'SALES ACCOUNT') $profit_and_loss['sales_account'] = $record;
+                  if ($record['account_name'] == 'SALES ACCOUNT') $profit_and_loss['sales_account'] = $record;
                 if (!empty($sales_accounts)) $profit_and_loss['sale_gst_accounts'] = $sales_accounts;
                     
                   $assets_vadotar = $assets_vadotar + $record['vadotar'];
@@ -184,7 +184,7 @@
                    ?>
 
                   <tr>
-                    <td><?= $record['receipt_type']; ?></td>
+                    <td><?= $record['account_name']; ?></td>
                     <td class="text-right"><?= four_decimal(-1 * $record['amount'], '-') ?>  </td>
                     <td class="text-right"><?= four_decimal(-1 * @$record['usd_amount'], '-') ?>  </td>
                     <td class="text-right"><?= four_decimal(-1 * $record['fine'], '-') ?></td>
