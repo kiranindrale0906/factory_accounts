@@ -34,6 +34,7 @@ class Quator_wise_loss_reports extends BaseController {
                                                           'account_name != "Vodator"'=>NULL,
                                                           'date(voucher_date) >='=>$quator_details['from_date'],'date(voucher_date) <='=>$quator_details['to_date']));
 
+
       $where['where']=array('date(voucher_date) >='=>$quator_details['from_date'],'date(voucher_date) <='=>$quator_details['to_date'],'account_name'=>'Unrecovarable');
 
       $select = "account_name, 
@@ -59,7 +60,7 @@ class Quator_wise_loss_reports extends BaseController {
     
 
     }elseif($this->data['site_name']=='AR Gold'){
-      $loss_receipt_types = array('AR Gold Alloy Vodator','AR Gold GPC Vodator','AR Gold Stone Vatav','AR Gold Copper Vatav','AR Gold Rhodium Vatav','HCL LOSS','Tounch Loss Fine','GPC Powder','Gpc Powder AR Gold', 'SISMA GHISS LOSS','ARG Stone Loss','SHAMPOO AND STEEL VIBRATOR LOSS/WALNUT SHAMPO', 'ARG GHISS LOSS',);
+      $loss_receipt_types = array('AR Gold Alloy Vodator','AR Gold GPC Vodator','AR Gold Stone Vatav','AR Gold Copper Vatav','AR Gold Rhodium Vatav','HCL LOSS','Tounch Loss Fine','GPC Powder','Gpc Powder AR Gold', 'SISMA GHISS LOSS','ARG Stone Loss','SHAMPOO AND STEEL VIBRATOR LOSS/WALNUT SHAMPO', 'ARG GHISS LOSS');
     }
     if(!empty($this->data['trial_balance'])){
       foreach($this->data['trial_balance'] as $index => $trail_balance_record) {
