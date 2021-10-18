@@ -85,10 +85,10 @@ class Quator_wise_loss_reports extends BaseController {
     $this->data['account_id']           = (!empty($_GET['account_id'])) ? $_GET['account_id'] : 0;
     
     $this->data['loss_categories']=array();
-    $categories= $this->voucher_model->get('description', array('account_name'=>'Loss Account','date(created_at)>='=>'2021-03-13'),array(),array('group_by'=>'description'));
+    $categories= $this->voucher_model->get('trim(description) as description', array('account_name'=>'Loss Account','date(created_at)>='=>'2021-03-13'),array(),array('group_by'=>'description'));
     $loss_details= $this->voucher_model->get('description,fine,id', array('account_name'=>'Loss Account','parent_id'=>0),array());
     $category_names=array_column($categories,'description');
-      $data['department_names']=$category_names;
+      $data['department_names']=array_unique($category_names);
       $data['type']='category';
       $data['quator']=$this->data['quator_name'];
       if(!empty($data['department_names']) && !empty($this->data['quator_name'])){
