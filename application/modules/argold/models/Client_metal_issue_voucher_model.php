@@ -78,6 +78,7 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
     $account_name=trim($this->attributes['account_name']);
     if (   ENABLE_API_FOR_RECEIPT 
         && $this->attributes['receipt_type'] != 'Internal' 
+
         && (   $account_name == 'AR Gold Software'
             || $account_name == 'ARF Software'
             || $account_name == 'ARC Software'

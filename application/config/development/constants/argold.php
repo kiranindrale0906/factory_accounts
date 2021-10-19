@@ -7,4 +7,5 @@ define('API_ARC_PATH', 'https://staging-arc.ascratech.com/');
 define('OLD_DB_NAME', 'accounts');
 define('NEW_DB_NAME', 'account_new');
 define('ENABLE_API_FOR_RECEIPT', TRUE);  
+define('HOST','');  
 ?>

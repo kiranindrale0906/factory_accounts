@@ -85,7 +85,9 @@ class Quator_wise_loss_reports extends BaseController {
     $this->data['account_id']           = (!empty($_GET['account_id'])) ? $_GET['account_id'] : 0;
     
     $this->data['loss_categories']=array();
+
     $categories= $this->voucher_model->get('trim(description) as description', array('account_name'=>'Loss Account','date(created_at)>='=>'2021-03-13'),array(),array('group_by'=>'description'));
+
     $loss_details= $this->voucher_model->get('description,fine,id', array('account_name'=>'Loss Account','parent_id'=>0),array());
     $category_names=array_column($categories,'description');
       $data['department_names']=array_unique($category_names);
@@ -144,6 +146,7 @@ class Quator_wise_loss_reports extends BaseController {
           // pd($arg_records);
        // pd($arg_records);
         }
+
       if(!empty($arg_records)){
         $category_names = array_map( 'strtolower', $category_names );
         foreach ($category_names as $category_name_index => $category_name) {
@@ -168,14 +171,16 @@ class Quator_wise_loss_reports extends BaseController {
                 $total_unrecovery_loss+=$unrecovery_loss;
                 $total_balance+=$balance;
 
-                $this->data['loss_categories'][$category_name]['loss_fine']=$total_loss_fine;
-                $this->data['loss_categories'][$category_name]['out_weight']=$total_out_weight;
-                $this->data['loss_categories'][$category_name]['recoverd_loss_fine']=$total_recovery_loss;
-                $this->data['loss_categories'][$category_name]['after_recovered_loss']=$total_after_recovered_loss;
-                $this->data['loss_categories'][$category_name]['unrecoverable_loss']=$total_unrecovery_loss;
-                $this->data['loss_categories'][$category_name]['balance']=$total_balance;
+                $this->data['loss_categories'][$arg_loss_detail['description']]['loss_fine']=$total_loss_fine;
+                $this->data['loss_categories'][$arg_loss_detail['description']]['out_weight']=$total_out_weight;
+                $this->data['loss_categories'][$arg_loss_detail['description']]['recoverd_loss_fine']=$total_recovery_loss;
+                $this->data['loss_categories'][$arg_loss_detail['description']]['after_recovered_loss']=$total_after_recovered_loss;
+                $this->data['loss_categories'][$arg_loss_detail['description']]['unrecoverable_loss']=$total_unrecovery_loss;
+                $this->data['loss_categories'][$arg_loss_detail['description']]['balance']=$total_balance;
               }
+
            }
+
         }
       }
     }
