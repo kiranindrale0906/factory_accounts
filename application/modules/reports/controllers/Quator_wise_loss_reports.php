@@ -3,17 +3,79 @@
 class Quator_wise_loss_reports extends BaseController {
   public function __construct() {
     parent::__construct();
-     $this->load->model(array('masters/quator_model','masters/company_model', 'transactions/ledger_model',
-                             'transactions/metal_receipt_voucher_model', 'transactions/metal_issue_voucher_model', 
+     $this->load->model(array('masters/quator_model','masters/company_model','masters/account_model', 'transactions/ledger_model',
+                             'transactions/metal_receipt_voucher_model', 'transactions/metal_issue_voucher_model','transactions/ledger_model', 
                              'ac_vouchers/voucher_model', 'argold/chitti_model'));
   }
 
   public function index() {
-    $this->data['report_type'] = 'Rojmel Report';
+    // $this->data['report_type'] = 'Rojmel Report';
     $this->_get_form_data();
+    $this->loss_account_details();
     // $this->get_loss_details();
     $this->load->render($this->router->class."/index",$this->data);
   }
+  public function loss_account_details(){
+    $where=array();
+    $quator_details= $this->quator_model->find('name,from_date,to_date,MONTH(from_date) as from_month,MONTH(to_date) as to_month,YEAR(from_date) as from_year,YEAR(to_date) as to_year',array('name'=>$this->data['quator_name']));
+
+
+    
+    $this->data['trial_balance']=array();
+    if(!empty($this->data['quator_name'])){
+      $export_accounts = $this->account_model->get('name', array('group_code' => 'Export'));
+      $export_account_names = array_column($export_accounts, 'name');
+      $export_account_names = implode('", "',$export_account_names);
+      
+      $this->data['work_details']=$this->ledger_model->find('IFNULL(sum(debit_weight),0)
+                                                           - IFNULL(sum(credit_weight),0) as amount',
+                                                        array('site_name'=>$this->data['site_name'],
+                                                          '(purity != factory_purity or (account_name in ("'.$export_account_names.'") and voucher_type = "metal issue voucher"))'=>NULL,
+                                                          'account_name != "Vodator"'=>NULL,
+                                                          'date(voucher_date) >='=>$quator_details['from_date'],'date(voucher_date) <='=>$quator_details['to_date']));
+
+
+      $where['where']=array('date(voucher_date) >='=>$quator_details['from_date'],'date(voucher_date) <='=>$quator_details['to_date'],'account_name!='=>'Loss Account');
+
+      $select = "account_name, narration as item_name,
+               IFNULL((sum(debit_weight*purity)/100),0) - IFNULL((sum(credit_weight*factory_purity)/100),0) as fine,
+               IFNULL(sum((purity-factory_purity)*debit_weight/100),0) - IFNULL(sum((factory_purity-purity)*credit_weight/100),0) as vadotar,
+               IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount,
+               IFNULL(sum(usd_debit_amount),0) - IFNULL(sum(usd_credit_amount),0) as usd_amount,0 as id";
+      $this->data['trial_balance'] = $this->model->get($select,$where, array() , 
+                                                      array('group_by'=>'account_name,narration',
+                                                            'order_by'=>'receipt_type asc'));
+    }
+    $loss_account = array('account_name' => 'Loss Account',
+                          'fine' => 0, 'vadotar' => 0, 'amount' => 0);
+    $this->data['loss_account_records'] = array();
+    $loss_account_names=array();
+    if($this->data['site_name']=='ARF'){
+      $loss_account_names = array('ARF Alloy Vodator','ARF GPC Vodator','ARF Stone Vatav','ARF Copper Vatav','ARF Rhodium Vatav','STONE VATAV ARF', 'TOUNCH LOSS FINE ARF','MEENA LOSS ARF','Gpc Powder ARF','ARF GHISS LOSS','TOUNCH LOSS FINE ARF');
+    
+
+    }elseif($this->data['site_name']=='ARC'){
+      $loss_account_names = array('ARC Alloy Vodator','ARC GPC Vodator',
+                               'ARC Stone Vatav','ARC Copper Vatav','ARC Rhodium Vatav','Loss Account', 'Tounch & Castic Dep.Loss','Gpc Powder ARC','Tounch Loss Fine ARC','GPC POWDER LOSS ARC');
+    
+
+    }elseif($this->data['site_name']=='AR Gold'){
+      $loss_account_names = array('AR Gold Alloy Vodator','AR Gold GPC Vodator','AR Gold Stone Vatav','AR Gold Copper Vatav','AR Gold Rhodium Vatav','HCL LOSS','Tounch Loss Fine','GPC Powder','Gpc Powder AR Gold', 'SISMA GHISS LOSS','ARG Stone Loss','SHAMPOO AND STEEL VIBRATOR LOSS/WALNUT SHAMPO', 'ARG GHISS LOSS');
+    }
+    if(!empty($this->data['trial_balance'])){
+      $item_name='';
+      foreach($this->data['trial_balance'] as $index => $trail_balance_record) {
+        if (in_array($trail_balance_record['account_name'], $loss_account_names)) {
+          $item_name=$trail_balance_record['account_name'].' Unrecovarable';
+          if($trail_balance_record['item_name']==$item_name){
+            $loss_account['fine'] += $trail_balance_record['fine'];
+            $this->data['loss_account_records'][] = $trail_balance_record;
+            unset($this->data['trial_balance'][$index]);
+          }
+        }
+      }
+    }
+   }
   public function _get_form_data() {
     $this->data['quators'] = $this->quator_model->get('name,from_date,to_date');
     $this->data['quator_name']            = (!empty($_GET['quator'])) ? $_GET['quator'] : '';
@@ -23,10 +85,10 @@ class Quator_wise_loss_reports extends BaseController {
     $this->data['account_id']           = (!empty($_GET['account_id'])) ? $_GET['account_id'] : 0;
     
     $this->data['loss_categories']=array();
-    $categories= $this->voucher_model->get('description', array('account_name'=>'Loss Account','date(created_at)>='=>'2021-03-13'),array(),array('group_by'=>'description'));
+    $categories= $this->voucher_model->get('trim(description) as description', array('account_name'=>'Loss Account','date(created_at)>='=>'2021-03-13'),array(),array('group_by'=>'description'));
     $loss_details= $this->voucher_model->get('description,fine,id', array('account_name'=>'Loss Account','parent_id'=>0),array());
     $category_names=array_column($categories,'description');
-      $data['department_names']=$category_names;
+      $data['department_names']=array_unique($category_names);
       $data['type']='category';
       $data['quator']=$this->data['quator_name'];
       if(!empty($data['department_names']) && !empty($this->data['quator_name'])){

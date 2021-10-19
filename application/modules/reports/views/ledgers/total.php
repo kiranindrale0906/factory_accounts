@@ -19,7 +19,10 @@
       <td class="text-right"><?= four_decimal($record['factory_fine'], '-') ?></td>
     <?php } else { ?>  
       <td class="text-right"><?= four_decimal($record['debit_weight'], '-'); ?></td>
+      <?php if (!in_array($report_type, array("Export Purchase Ledger","Domestic Purchase Ledger","Domestic Sale Ledger","Export Sale Ledger"))): ?>
+  
       <td></td>
+    <?php endif;?>
       <td class="text-right"><?= four_decimal($record['factory_fine'], '-') ?></td>
       <td></td>
       <td class="text-right"><?= four_decimal($record['fine'], '-') ?></td>

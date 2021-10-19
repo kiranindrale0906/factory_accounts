@@ -49,7 +49,7 @@ class Ledgers extends BaseController {
     if ($this->data['report_type'] == 'Vadotar Report' || $this->data['report_type'] == 'Production Report') {
       $export_accounts = $this->account_model->get('name', array('group_code' => 'Export'));
       $export_account_names = array_column($export_accounts, 'name');
-      $export_account_names = implode($export_account_names, '", "');
+      $export_account_names = implode('", "',$export_account_names);
       if ($this->data['domestic_export'] == 'All') {
         $where['(   purity != factory_purity 
                  or (    account_name in ("'.$export_account_names.'") 
@@ -159,15 +159,14 @@ class Ledgers extends BaseController {
     $where_issue   = array_merge($where, array('(credit_weight != 0 or credit_amount != 0)' => NULL),$account_issue_where);
     $where_receipt = array_merge($where, array('(debit_weight != 0 or debit_amount != 0)'   => NULL),$account_receipt_where);
     $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(), array('order_by'=>'chitti_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
-    
     $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(), array('order_by'=>'parent_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
      $domestic_export_receipt_issue_select='account_name,voucher_date,date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,((debit_weight*purity)/100)- 
     ((credit_weight*factory_purity)/100) as fine, ((purity-factory_purity)*debit_weight/100) - 
-    ((factory_purity-purity)*credit_weight/100) as vadotar, (debit_amount - credit_amount) as credit_amount, 0 as `id`,0 as credit_weight,0 as usd_credit_amount,usd_debit_amount,account_id,0 as debit_weight,0 as debit_amount,description,narration,chitti_id as chitti_no,purity,factory_purity,factory_fine';
+    ((factory_purity-purity)*credit_weight/100) as vadotar, (debit_amount - credit_amount) as credit_weight, 0 as `id`,0 as debit_amount,0 as usd_credit_amount,usd_debit_amount,account_id,0 as debit_weight,0 as credit_amount,description,narration,chitti_id as chitti_no,purity,factory_purity,factory_fine';
 
     if($this->data['report_type']=='Domestic Sale Ledger'){
     $receipts = $this->voucher_model->get($domestic_export_receipt_issue_select,array('account_name' =>'SALES ACCOUNT','is_export'=> 0), array(), array('order_by'=>'parent_id, voucher_type asc', 'group_by' => $this->data['group']));
-     
+    // pd($receipts);
     $issues=array();
     $issue_voucher_dates=array();
 
@@ -198,7 +197,6 @@ class Ledgers extends BaseController {
     $receipt_voucher_dates = array_column($receipts, 'voucher_date');
     $this->data['voucher_dates'] = array_values(array_unique(array_merge($issue_voucher_dates, $receipt_voucher_dates)));
     asort($this->data['voucher_dates']);
-  
     $this->data['issues']   = $this->get_records_by_created_date($issues);
     $this->data['receipts'] = $this->get_records_by_created_date($receipts);
 

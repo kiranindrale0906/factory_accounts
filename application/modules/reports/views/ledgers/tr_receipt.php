@@ -6,6 +6,7 @@
     <td><?= $record['account_name'];?></td>
   <?php endif; ?>
   <td><?= date('d-m-y', strtotime($record['str_voucher_date'])); ?></td>
+  <?php if (!in_array($report_type, array("Export Purchase Ledger","Domestic Purchase Ledger","Domestic Sale Ledger","Export Sale Ledger"))): ?>
   <td><?= '#'.$record['chitti_no'].' '.remove_duplicates_in_string($record['narration']).' '.$record['description']; ?>
     <?php if(isset($record['chitti_no']) && $record['chitti_no']!=0) { ?>
       <a class=""  href='<?= base_url() ?>argold/chittis/view/<?=$record['chitti_no']?>'>view</a>
@@ -14,10 +15,13 @@
       <?php } ?>  
     <?php } ?>
   </td>
+  <?php endif; ?>
   <td class="text-right"><a class=""  href='<?= base_url() ?>argold/voucher_details/view/<?=$record['chitti_no']?>'><?= four_decimal($record['debit_weight'], '-') ?></a></td>
   <td class="text-right"><?= four_decimal($record['factory_purity'], '-')?></td>
   <td class="text-right"><?= four_decimal($record['factory_fine'], '-'); ?></td>
+  <?php if (!in_array($report_type, array("Export Purchase Ledger","Domestic Purchase Ledger","Domestic Sale Ledger","Export Sale Ledger"))): ?>
   <td class="text-right"><?= four_decimal($record['purity'], '-') ?></td>
+  <?php endif; ?>
   <td class="text-right"><?= four_decimal($record['fine'], '-'); ?></td>
   <?php if ($report_type == 'Vadotar Report' || $report_type == 'Production Report'): ?>
     <td class="text-right"><?= four_decimal($record['fine']-$record['factory_fine'], '-'); ?></td>

@@ -265,6 +265,7 @@ class Trial_balances extends Ledgers {
     $this->data['purchase_sales_account_domestic_export_records'] = $this->model->get($purchase_sales_account_domestic_export_select, 
                                                 array_merge($where, array('account_name' => array('SALES ACCOUNT', 'PURCHASE ACCOUNT'))), 
                                                 array(), array('group_by'=>'account_name, is_export'));
+    // pd($this->data['purchase_sales_account_domestic_export_records']);
 
     $this->data['domestic_labour_amount'] = $this->model->find('  IFNULL(sum(debit_amount),0) 
                                                                 - IFNULL(sum(credit_amount),0) as amount', 
@@ -281,8 +282,8 @@ class Trial_balances extends Ledgers {
                                 'AR Gold Copper Vatav', 'ARF Copper Vatav', 'ARC Copper Vatav',
                                 'AR Gold Rhodium Vatav', 'ARF Rhodium Vatav', 'ARC Rhodium Vatav',
                                 'HCL LOSS', 'STONE VATAV ARF', 'TOUNCH LOSS FINE ARF', 
-                                'Loss Account', 'Tounch & Castic Dep.Loss', 'Tounch Loss Fine',
-                                'MEENA LOSS ARF', 'GPC Powder', 'Gpc Powder ARF', 'Gpc Powder ARC', 'Gpc Powder AR Gold', 'SISMA GHISS LOSS',
+                                'Tounch & Castic Dep.Loss', 'Tounch Loss Fine',
+                                'MEENA LOSS ARF', 'GPC Powder', 'Gpc Powder ARF', 'Gpc Powder ARC', 'GPC Powder AR Gold', 'SISMA GHISS LOSS',
                                 'ARG Stone Loss', 'Tounch Loss Fine ARC', 'PASSAGE SEPT', 'ARF GHISS LOSS',
                                 'BUFFING LOSS', 'GRINDING LOSS', 'TOUNCH LOSS FINE ARF',
                                 'SHAMPOO AND STEEL VIBRATOR LOSS/WALNUT SHAMPO', 'ARG GHISS LOSS', 'GPC POWDER LOSS ARC');
@@ -293,7 +294,7 @@ class Trial_balances extends Ledgers {
         unset($this->data['trial_balance'][$index]);
       }
     }
-    $this->data['trial_balance'][] = $loss_account;
+    // $this->data['trial_balance'][] = $loss_account;
   }      
 
   private function calculate_gst_of_purchase_accounts($export, $sale_type) {
