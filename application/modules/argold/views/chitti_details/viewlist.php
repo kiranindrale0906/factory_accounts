@@ -59,7 +59,12 @@
                     <td class="text-right"><?= four_decimal($metal_voucher_detail['fine']) ?></td>
                   <?php endif; ?>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['factory_fine']) ?></td>
+                  <?php if($_GET['group_by']==''){
+                  ?>
                   <td class="text-right no-print"><a class='red' href="<?=base_url().'argold/chittis/delete/'.$record['id'].'?voucher_id='.$metal_voucher_detail['id']?>">remove</a></td>
+                  <?php
+                }
+                ?>
                 </tr>
                 <?php $sr_no++; 
               //}
