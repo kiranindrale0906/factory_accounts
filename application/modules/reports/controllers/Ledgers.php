@@ -49,8 +49,8 @@ class Ledgers extends BaseController {
     if ($this->data['report_type'] == 'Vadotar Report' || $this->data['report_type'] == 'Production Report') {
       $export_accounts = $this->account_model->get('name', array('group_code' => 'Export'));
       $export_account_names = array_column($export_accounts, 'name');
-      $export_account_names = implode('", "',$export_account_names);
       $export_account_names[] = 'Tanishq';
+      $export_account_names = implode('", "',$export_account_names);
       if ($this->data['domestic_export'] == 'All') {
         $where['(   purity != factory_purity 
                  or (    account_name in ("'.$export_account_names.'") 
