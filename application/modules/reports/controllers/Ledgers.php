@@ -67,9 +67,9 @@ class Ledgers extends BaseController {
     if ($this->data['report_type'] == 'Production Report') $where['account_name != '] = 'VADOTAR';
     
     if ($this->data['report_type'] == 'Account Ledger' && $this->data['group'] == 'date')
-      $this->data['group'] = 'voucher_type, voucher_date, chitti_no, receipt_type, account_name';
+      $this->data['group'] = 'voucher_type, voucher_date, chitti_no, receipt_type, account_name,site_name';
     if ($this->data['report_type'] == 'Metal Receipt Type Report' && $this->data['group'] == 'date')
-      $this->data['group'] = 'voucher_type, voucher_date, receipt_type';      
+      $this->data['group'] = 'voucher_type, voucher_date, receipt_type,site_name';      
       
     if (   $this->data['report_type'] == 'Account Ledger' 
         || $this->data['report_type'] == 'Rojmel Report'
