@@ -79,7 +79,7 @@ class Ledgers extends BaseController {
                                date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
                                account_name, voucher_type, 
                                site_name, voucher_type, 
-                               concat(voucher_number, ", ") as voucher_number, 
+                               GROUP_CONCAT(voucher_number, ", ") as voucher_number, 
                                sum(credit_amount) as credit_amount, 
                                sum(usd_credit_amount) as usd_credit_amount, 
                                sum(debit_amount) as debit_amount, 
