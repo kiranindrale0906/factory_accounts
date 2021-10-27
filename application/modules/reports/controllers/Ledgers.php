@@ -68,9 +68,9 @@ class Ledgers extends BaseController {
     if ($this->data['report_type'] == 'Production Report') $where['account_name != '] = 'VADOTAR';
     
     if ($this->data['report_type'] == 'Account Ledger' && $this->data['group'] == 'date')
-      $this->data['group'] = 'voucher_type, voucher_date, chitti_no, receipt_type, account_name,site_name';
+      $this->data['group'] = 'voucher_type, voucher_date, chitti_no, receipt_type, account_name,site_name,parent_id';
     if ($this->data['report_type'] == 'Metal Receipt Type Report' && $this->data['group'] == 'date')
-      $this->data['group'] = 'voucher_type, voucher_date, receipt_type,site_name,chitti_no';      
+      $this->data['group'] = 'voucher_type, voucher_date, receipt_type,site_name,chitti_no,parent_id';      
       
     if (   $this->data['report_type'] == 'Account Ledger' 
         || $this->data['report_type'] == 'Rojmel Report'
@@ -92,7 +92,7 @@ class Ledgers extends BaseController {
                                sum((credit_weight+debit_weight) * purity) / sum(credit_weight+debit_weight) as purity, 
                                sum((credit_weight+debit_weight) * factory_purity) / sum(credit_weight+debit_weight) as factory_purity, 
                                GROUP_CONCAT(narration, " ,") as narration, GROUP_CONCAT(description, " ,") as description, 
-                               chitti_id as chitti_no';
+                               chitti_id as chitti_no,parent_id';
     } else {
       //$this->data['group'] = 'voucher_date';
       $receipt_issue_select = '"" as receipt_type, '.$period_select.' as voucher_date, 
@@ -110,7 +110,7 @@ class Ledgers extends BaseController {
                               sum((credit_weight+debit_weight) * purity) /  sum(credit_weight+debit_weight)  as purity, 
                               sum((credit_weight+debit_weight) * factory_purity) /  sum(credit_weight+debit_weight)  as factory_purity,
                               ""  as narration, "" as description, 
-                              "" as chitti_no';       
+                              "" as chitti_no,"" as parent_id';       
     }
     if ($this->data['report_type'] == 'Metal Receipt Type Report')
       $where['receipt_type']='Metal';
