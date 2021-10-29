@@ -273,10 +273,10 @@ class Trial_balances extends Ledgers {
                                                 array());
     if (empty($this->data['domestic_labour_amount'])) $this->data['domestic_labour_amount'] = array('amount' => 0);
 
-    $loss_account = array('account_name' => 'Loss Account',
+    $loss_account = array('account_name' => 'Loss Account Details',
                           'fine' => 0, 'vadotar' => 0, 'amount' => 0);
     $this->data['loss_account_records'] = array();
-    $loss_account_names = array( 'ARF Alloy Vodator', 'ARC Alloy Vodator',
+    $loss_account_names = array('AR Gold Alloy Vodator', 'ARF Alloy Vodator', 'ARC Alloy Vodator',
                                 'AR Gold GPC Vodator', 'ARF GPC Vodator', 'ARC GPC Vodator',
                                 'AR Gold Stone Vatav', 'ARF Stone Vatav', 'ARC Stone Vatav',
                                 'AR Gold Copper Vatav', 'ARF Copper Vatav', 'ARC Copper Vatav',
