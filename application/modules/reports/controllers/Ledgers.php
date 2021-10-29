@@ -1,8 +1,8 @@
 <?php
-	
+  
 class Ledgers extends BaseController {
-	public function __construct() {
-  	parent::__construct();
+  public function __construct() {
+    parent::__construct();
     $this->load->model(array('transactions/ledger_model', 'masters/account_model'));
   }
 
@@ -68,9 +68,9 @@ class Ledgers extends BaseController {
     if ($this->data['report_type'] == 'Production Report') $where['account_name != '] = 'VADOTAR';
     
     if ($this->data['report_type'] == 'Account Ledger' && $this->data['group'] == 'date')
-      $this->data['group'] = 'voucher_type, voucher_date, chitti_no, receipt_type, account_name,site_name,parent_id';
+      $this->data['group'] = 'voucher_type, voucher_date, chitti_no, receipt_type, account_name';
     if ($this->data['report_type'] == 'Metal Receipt Type Report' && $this->data['group'] == 'date')
-      $this->data['group'] = 'voucher_type, voucher_date, receipt_type,site_name,chitti_no,parent_id';      
+      $this->data['group'] = 'voucher_type, voucher_date, receipt_type';      
       
     if (   $this->data['report_type'] == 'Account Ledger' 
         || $this->data['report_type'] == 'Rojmel Report'
@@ -79,7 +79,7 @@ class Ledgers extends BaseController {
                                date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
                                account_name, voucher_type, 
                                site_name, voucher_type, 
-                               GROUP_CONCAT(voucher_number, ", ") as voucher_number, 
+                               concat(voucher_number, ", ") as voucher_number, 
                                sum(credit_amount) as credit_amount, 
                                sum(usd_credit_amount) as usd_credit_amount, 
                                sum(debit_amount) as debit_amount, 
@@ -91,8 +91,8 @@ class Ledgers extends BaseController {
                                0 as purity_margin, 
                                sum((credit_weight+debit_weight) * purity) / sum(credit_weight+debit_weight) as purity, 
                                sum((credit_weight+debit_weight) * factory_purity) / sum(credit_weight+debit_weight) as factory_purity, 
-                               GROUP_CONCAT(narration, " ,") as narration, GROUP_CONCAT(description, " ,") as description, 
-                               chitti_id as chitti_no,parent_id';
+                               concat(narration, " ,") as narration, concat(description, " ,") as description, 
+                               chitti_id as chitti_no,parent_id as parent_id,id as id';
     } else {
       //$this->data['group'] = 'voucher_date';
       $receipt_issue_select = '"" as receipt_type, '.$period_select.' as voucher_date, 
@@ -110,7 +110,7 @@ class Ledgers extends BaseController {
                               sum((credit_weight+debit_weight) * purity) /  sum(credit_weight+debit_weight)  as purity, 
                               sum((credit_weight+debit_weight) * factory_purity) /  sum(credit_weight+debit_weight)  as factory_purity,
                               ""  as narration, "" as description, 
-                              "" as chitti_no,"" as parent_id';       
+                              "" as chitti_no,parent_id as parent_id,id as id';       
     }
     if ($this->data['report_type'] == 'Metal Receipt Type Report')
       $where['receipt_type']='Metal';
@@ -127,7 +127,7 @@ class Ledgers extends BaseController {
                                date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
                                account_name, voucher_type, 
                                site_name, voucher_type, 
-                               GROUP_CONCAT(voucher_number, ", ") as voucher_number, 
+                               concat(voucher_number, ", ") as voucher_number, 
                                (credit_amount) as credit_amount, 
                                (usd_credit_amount) as usd_credit_amount, 
                                (debit_amount) as debit_amount, 
@@ -139,11 +139,11 @@ class Ledgers extends BaseController {
                                0 as purity_margin, 
                                ((credit_weight+debit_weight) * purity) / (credit_weight+debit_weight) as purity, 
                                ((credit_weight+debit_weight) * factory_purity) / (credit_weight+debit_weight) as factory_purity, 
-                               GROUP_CONCAT(narration, " ,") as narration, GROUP_CONCAT(description, " ,") as description, 
+                               concat(narration, " ,") as narration, concat(description, " ,") as description, 
                                chitti_id as chitti_no,parent_id as parent_id,id as id';
-                               // pd($this->data['site_name']);
-       // $account_receipt_where['site_name'] = '';                        
-       // $account_issue_where['site_name'] = '';                        
+                               // pd($this->data['site_name'] );
+       $account_receipt_where['site_name'] = '';                        
+       $account_issue_where['site_name'] = '';                        
       if ($this->data['site_name'] == 'ARF'){
         $account_issue_where['account_name'] = 'ARF Software';
       }elseif ($this->data['site_name'] == 'ARC'){
