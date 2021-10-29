@@ -276,7 +276,7 @@ class Trial_balances extends Ledgers {
     $loss_account = array('account_name' => 'Loss Account',
                           'fine' => 0, 'vadotar' => 0, 'amount' => 0);
     $this->data['loss_account_records'] = array();
-    $loss_account_names = array('AR Gold Alloy Vodator', 'ARF Alloy Vodator', 'ARC Alloy Vodator',
+    $loss_account_names = array( 'ARF Alloy Vodator', 'ARC Alloy Vodator',
                                 'AR Gold GPC Vodator', 'ARF GPC Vodator', 'ARC GPC Vodator',
                                 'AR Gold Stone Vatav', 'ARF Stone Vatav', 'ARC Stone Vatav',
                                 'AR Gold Copper Vatav', 'ARF Copper Vatav', 'ARC Copper Vatav',
@@ -295,7 +295,7 @@ class Trial_balances extends Ledgers {
         unset($this->data['trial_balance'][$index]);
       }
     }
-    //$this->data['trial_balance'][] = $loss_account;
+    $this->data['trial_balance'][] = $loss_account;
   }      
 
   private function calculate_gst_of_purchase_accounts($export, $sale_type) {
