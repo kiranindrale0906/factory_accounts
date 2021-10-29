@@ -286,7 +286,8 @@ class Trial_balances extends Ledgers {
                                 'MEENA LOSS ARF', 'GPC Powder', 'Gpc Powder ARF', 'Gpc Powder ARC', 'GPC Powder AR Gold', 'SISMA GHISS LOSS',
                                 'ARG Stone Loss', 'Tounch Loss Fine ARC', 'PASSAGE SEPT', 'ARF GHISS LOSS',
                                 'BUFFING LOSS', 'GRINDING LOSS', 'TOUNCH LOSS FINE ARF',
-                                'SHAMPOO AND STEEL VIBRATOR LOSS/WALNUT SHAMPO', 'ARG GHISS LOSS', 'GPC POWDER LOSS ARC');
+                                'SHAMPOO AND STEEL VIBRATOR LOSS/WALNUT SHAMPO', 'ARG GHISS LOSS', 'GPC POWDER LOSS ARC',
+                                'LOSS ACCOUNT');
     foreach($this->data['trial_balance'] as $index => $trail_balance_record) {
       if (in_array($trail_balance_record['account_name'], $loss_account_names)) {
         $loss_account['fine'] += $trail_balance_record['fine'];
@@ -294,7 +295,7 @@ class Trial_balances extends Ledgers {
         unset($this->data['trial_balance'][$index]);
       }
     }
-    // $this->data['trial_balance'][] = $loss_account;
+    $this->data['trial_balance'][] = $loss_account;
   }      
 
   private function calculate_gst_of_purchase_accounts($export, $sale_type) {
