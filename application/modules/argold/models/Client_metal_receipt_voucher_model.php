@@ -459,6 +459,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                    || $attributes['account_name'] == 'AR Gold Software'
                    || $attributes['account_name'] == 'ARF Software' 
                    || $attributes['account_name'] == 'ARC Software'
+                   || $attributes['account_name'] == 'AR Golds Software'
+                   || $attributes['account_name'] == 'ARFs Software' 
+                   || $attributes['account_name'] == 'ARCs Software'
                  )) {
 
       $api_data = array_merge($api_data, array('type' => 'Pure','description' => $api_data['description'].'-'.$attributes['site_name']));
