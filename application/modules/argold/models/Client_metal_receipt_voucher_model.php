@@ -501,6 +501,12 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $api_url = API_ARF_PATH.$api_url;
     elseif ($attributes['account_name'] == 'ARC Software')
       $api_url = API_ARC_PATH.$api_url;
+    elseif ($attributes['account_name'] == 'AR Golds Software')
+      $api_url = API_ARGs_PATH.$api_url;
+    elseif ($attributes['account_name'] == 'ARFs Software')
+      $api_url = API_ARFs_PATH.$api_url;
+    elseif ($attributes['account_name'] == 'ARCs Software')
+      $api_url = API_ARCs_PATH.$api_url;
     $result = curl_post_request($api_url, $send_data);
   }
 
