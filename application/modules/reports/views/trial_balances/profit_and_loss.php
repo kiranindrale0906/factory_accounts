@@ -93,6 +93,8 @@
   $total_income_fine = $total_sales_with_closing_fine;
   $total_income_rate = $total_income_amount / $total_income_fine;
 
+  $domestic_labour_amount['amount'] += 1338473.000;
+
   $gross_profit_fine = 0;
   $gross_profit_rate = 0;
   $gross_profit_amount = $total_income_amount - $purchase_domestic_amount - $purchase_export_amount + $domestic_labour_amount['amount'];
