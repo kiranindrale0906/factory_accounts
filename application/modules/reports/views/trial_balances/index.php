@@ -22,7 +22,10 @@
 	</div>
 </form>
 
-<?php $this->load->view('trial_balances/trial_balance', array('trial_balance_records' => $loss_account_records, 'loss_account' => 1)); ?>
+<?php 
+  if (isset($loss_account_records))
+    $this->load->view('trial_balances/trial_balance', array('trial_balance_records' => $loss_account_records, 'loss_account' => 1)); 
+?>
 </div>
 <hr />
 <div class="col-md-12">
