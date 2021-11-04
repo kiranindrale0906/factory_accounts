@@ -61,6 +61,7 @@ class Production_summary extends BaseController {
       return;
     }
     $this->data['production_summary'] = $_GET;
+    $_GET['start_date'] = '2021-11-03';
 
     if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold') {
       $url = API_ARG_PATH."issue_departments/api_issue_departments/index";
