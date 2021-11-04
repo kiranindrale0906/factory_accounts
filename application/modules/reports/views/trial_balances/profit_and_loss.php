@@ -133,7 +133,7 @@
             <td>OPENING IMPORT</td>
             <td class="text-right">-</td>
             <td class="text-right">-</td>
-            <td class="text-right">33927.49</td>
+            <td class="text-right">0</td>
           </tr>
           <tr>
             <td>IMPORT</td>
@@ -145,13 +145,13 @@
             <th>TOTAL PURCHASE</th>
             <th class="text-right"><?= four_decimal($purchase_amount, '-') ?></th>
             <th class="text-right"><?= four_decimal($purchase_rate, '-'); ?></th>
-            <th class="text-right"><?= four_decimal($purchase_fine + 33927.49, '-'); ?></th>
+            <th class="text-right"><?= four_decimal($purchase_fine + 0, '-'); ?></th>
           </tr>
           <tr>
             <td>Main Vadotar</td>
             <td class="text-right"><?= four_decimal($main_vadotar_amount, '-') ?></td>
             <td class="text-right"><?= four_decimal($main_vadotar_rate, '-') ?></td>
-            <td class="text-right"><?= four_decimal($main_vadotar_fine - 33927.49, '-') ?></td>
+            <td class="text-right"><?= four_decimal($main_vadotar_fine - 0, '-') ?></td>
           </tr>
           <tr>
             <td>Pending Vadotar</td>
@@ -195,7 +195,7 @@
           </tr>
 
           <?php
-            $domestic_closing_fine =  $domestic_closing_fine - 33927.49;
+            $domestic_closing_fine =  $domestic_closing_fine - 0;
             $domestic_closing_amount = $domestic_closing_fine * $closing_rate;
           ?>
           <tr>
@@ -236,7 +236,7 @@
           </tr>
 
           <?php
-            $export_closing_fine = $export_closing_fine + 33927.49;
+            $export_closing_fine = $export_closing_fine + 0;
             $export_closing_amount = $export_closing_fine * $export_closing_rate;
           ?>
             <tr>
