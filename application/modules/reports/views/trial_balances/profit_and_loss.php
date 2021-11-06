@@ -79,7 +79,7 @@
 
   $total_sales_with_closing_amount = $sales_domestic_amount + $sales_export_amount + $domestic_closing_amount + $export_closing_amount;
   $total_sales_with_closing_fine = $sales_domestic_fine + $sales_export_fine + $domestic_closing_fine + $export_closing_fine;
-  $total_sales_with_closing_rate = $total_sales_with_closing_amount / $total_sales_with_closing_fine;
+  $total_sales_with_closing_rate = ($total_sales_with_closing_fine != 0) ? $total_sales_with_closing_amount / $total_sales_with_closing_fine : 0;
 
   $domestic_gain_loss_fine = $sales_domestic_fine + $domestic_closing_fine;
   $domestic_gain_loss_rate = $purchase_domestic_rate - (($sales_domestic_amount + $domestic_closing_amount) / $domestic_gain_loss_fine);
