@@ -52,6 +52,10 @@
   // $sales_rate = !empty($profit_and_loss['sales_account']['fine']) ? (-1 * $profit_and_loss['sales_account']['amount'] / $profit_and_loss['sales_account']['fine']) : 0;
   // $sales_amount = !empty($profit_and_loss['sales_account']['amount']) ? $profit_and_loss['sales_account']['amount'] : 0;
 
+  $domestic_opening_fine = 71950.427;
+  $domestic_opening_rate = 4883.300;
+  $domestic_opening_amount = 351356714.000;
+
   $sales_fine = $sales_domestic_fine + $sales_export_fine;
   $sales_amount = $sales_domestic_amount + $sales_export_amount;
   $sales_rate = $sales_amount / $sales_fine;
@@ -59,6 +63,10 @@
   $domestic_closing_fine = $purchase_domestic_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_domestic_fine;
   $closing_rate = $gold_rate / .995 / 10;
   $domestic_closing_amount = $domestic_closing_fine * $closing_rate;
+
+  $export_opening_fine = 22345.893;
+  $export_opening_rate = 4256.720;
+  $export_opening_amount = 95120251.000;
 
   $export_closing_fine = $purchase_export_fine - $sales_export_fine;
   $export_closing_rate = $spot_gold / 31.1034 * $usd_rate;
@@ -188,6 +196,12 @@
             </tr>
           </thead>
           <tr>
+            <td>Domestic Opening</td>
+            <td class="text-right"><?= four_decimal($domestic_opening_amount, '-') ?>  </td>
+            <td class="text-right"><?= four_decimal($domestic_opening_rate, '-'); ?>  </td>
+            <td class="text-right"><?= four_decimal($domestic_opening_fine, '-'); ?></td>
+          </tr>
+          <tr>
             <td>Domestic Sale</td>
             <td class="text-right"><?= four_decimal($sales_domestic_amount, '-') ?>  </td>
             <td class="text-right"><?= four_decimal($sales_domestic_rate, '-'); ?>  </td>
@@ -228,6 +242,12 @@
             <th class="text-right"><?= four_decimal($domestic_gain_loss_fine, '-'); ?></th>
           </tr>
           
+          <tr>
+            <td>Export Opening</td>
+            <td class="text-right"><?= four_decimal($export_opening_amount, '-') ?>  </td>
+            <td class="text-right"><?= four_decimal($export_opening_rate, '-'); ?>  </td>
+            <td class="text-right"><?= four_decimal($export_opening_fine, '-'); ?></td>
+          </tr>
           <tr>
             <td>Export Sale</td>
             <td class="text-right"><?= four_decimal($sales_export_amount, '-') ?>  </td>
