@@ -59,7 +59,7 @@
 
   $sales_fine = $sales_domestic_fine + $sales_export_fine;
   $sales_amount = $sales_domestic_amount + $sales_export_amount;
-  $sales_rate = $sales_amount / $sales_fine;
+  $sales_rate = ($sales_fine != 0) ? $sales_amount / $sales_fine : 0;
 
   $domestic_closing_fine = $purchase_domestic_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_domestic_fine;
   $closing_rate = $gold_rate / .995 / 10;
