@@ -108,7 +108,7 @@
   $gross_profit_amount = $total_income_amount - $purchase_domestic_amount - $purchase_export_amount + $domestic_labour_amount['amount'];
 
   $total_expenses_amount = $purchase_domestic_amount + $purchase_export_amount + $gross_profit_amount;
-  $total_expenses_fine = $purchase_domestic_fine + $purchase_export_fine + $main_vadotar_fine + $pending_vadotar_fine;
+  $total_expenses_fine = $purchase_domestic_fine + $purchase_export_fine + $main_vadotar_fine + $pending_vadotar_fine + 71950.427 + 22345.893;
   $total_expenses_rate = 0;
 
   $total_sales_amount = $sales_domestic_amount + $sales_export_amount + $export_labour_amount + $domestic_labour_amount['amount'];
