@@ -238,7 +238,7 @@
 
           <?php
             $domestic_gain_loss_fine = $sales_domestic_fine + $domestic_closing_fine;
-            $domestic_gain_loss_rate = $purchase_domestic_rate - (($sales_domestic_amount + $domestic_closing_amount) / $domestic_gain_loss_fine);
+            $domestic_gain_loss_rate = ($domestic_gain_loss_fine != 0) ? $purchase_domestic_rate - (($sales_domestic_amount + $domestic_closing_amount) / $domestic_gain_loss_fine) : 0;
             $domestic_gain_loss_amount = $domestic_gain_loss_fine * $domestic_gain_loss_rate;
           ?>
           <tr>
