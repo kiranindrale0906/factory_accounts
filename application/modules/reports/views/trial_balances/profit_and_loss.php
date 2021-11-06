@@ -130,7 +130,18 @@
               <th class="text-right">Fine</th>
             </tr>
           </thead>
-
+          <tr>
+            <td>Domestic Opening</td>
+            <td class="text-right"><?= four_decimal($domestic_opening_amount, '-') ?>  </td>
+            <td class="text-right"><?= four_decimal($domestic_opening_rate, '-'); ?>  </td>
+            <td class="text-right"><?= four_decimal($domestic_opening_fine, '-'); ?></td>
+          </tr>
+          <tr>
+            <td>Export Opening</td>
+            <td class="text-right"><?= four_decimal($export_opening_amount, '-') ?>  </td>
+            <td class="text-right"><?= four_decimal($export_opening_rate, '-'); ?>  </td>
+            <td class="text-right"><?= four_decimal($export_opening_fine, '-'); ?></td>
+          </tr>
           <tr>
             <td>DOMESTIC</td>
             <td class="text-right"><?= four_decimal($purchase_domestic_amount, '-') ?></td>
@@ -196,12 +207,6 @@
             </tr>
           </thead>
           <tr>
-            <td>Domestic Opening</td>
-            <td class="text-right"><?= four_decimal($domestic_opening_amount, '-') ?>  </td>
-            <td class="text-right"><?= four_decimal($domestic_opening_rate, '-'); ?>  </td>
-            <td class="text-right"><?= four_decimal($domestic_opening_fine, '-'); ?></td>
-          </tr>
-          <tr>
             <td>Domestic Sale</td>
             <td class="text-right"><?= four_decimal($sales_domestic_amount, '-') ?>  </td>
             <td class="text-right"><?= four_decimal($sales_domestic_rate, '-'); ?>  </td>
@@ -221,8 +226,8 @@
           <tr>
             <th>Total Domestic</th>
             <?php 
-              $total_domestic_amount = $domestic_opening_amount + $sales_domestic_amount + $domestic_closing_amount;
-              $total_domestic_fine = $domestic_opening_fine + $sales_domestic_fine + $domestic_closing_fine;
+              $total_domestic_amount = $sales_domestic_amount + $domestic_closing_amount;
+              $total_domestic_fine = $sales_domestic_fine + $domestic_closing_fine;
               $total_domestic_rate = $total_domestic_amount / $total_domestic_fine;
             ?>
             <th class="text-right"><?= four_decimal($total_domestic_amount, '-') ?>  </th>
@@ -241,13 +246,6 @@
             <th class="text-right"><?= four_decimal($domestic_gain_loss_rate, '-'); ?>  </th>
             <th class="text-right"><?= four_decimal($domestic_gain_loss_fine, '-'); ?></th>
           </tr>
-          
-          <tr>
-            <td>Export Opening</td>
-            <td class="text-right"><?= four_decimal($export_opening_amount, '-') ?>  </td>
-            <td class="text-right"><?= four_decimal($export_opening_rate, '-'); ?>  </td>
-            <td class="text-right"><?= four_decimal($export_opening_fine, '-'); ?></td>
-          </tr>
           <tr>
             <td>Export Sale</td>
             <td class="text-right"><?= four_decimal($sales_export_amount, '-') ?>  </td>
@@ -259,7 +257,7 @@
             $export_closing_fine = $export_closing_fine + 0;
             $export_closing_amount = $export_closing_fine * $export_closing_rate;
           ?>
-            <tr>
+          <tr>
             <td>Export Closing Stock</td>
             <td class="text-right"><?= four_decimal($export_closing_amount, '-') ?>  </td>
             <td class="text-right"><?= four_decimal($export_closing_rate, '-'); ?>  </td>
@@ -268,8 +266,8 @@
           <tr>
             <th>Total Export</th>
             <?php 
-              $total_export_amount = $export_opening_amount + $sales_export_amount + $export_closing_amount;
-              $total_export_fine = $export_opening_fine + $sales_export_fine + $export_closing_fine;
+              $total_export_amount = $sales_export_amount + $export_closing_amount;
+              $total_export_fine = $sales_export_fine + $export_closing_fine;
               $total_export_rate = ($total_export_fine !=0 ) ? $total_export_amount / $total_export_fine : 0;
             ?>
             <th class="text-right"><?= four_decimal($total_export_amount, '-') ?>  </th>
