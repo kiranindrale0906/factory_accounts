@@ -229,7 +229,7 @@
             <?php 
               $total_domestic_amount = $sales_domestic_amount + $domestic_closing_amount;
               $total_domestic_fine = $sales_domestic_fine + $domestic_closing_fine;
-              $total_domestic_rate = $total_domestic_amount / $total_domestic_fine;
+              $total_domestic_rate = ($total_domestic_fine != 0) ? $total_domestic_amount / $total_domestic_fine : 0;
             ?>
             <th class="text-right"><?= four_decimal($total_domestic_amount, '-') ?>  </th>
             <th class="text-right"><?= four_decimal($total_domestic_rate, '-'); ?>  </th>
