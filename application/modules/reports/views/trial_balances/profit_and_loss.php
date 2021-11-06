@@ -250,7 +250,7 @@
             <?php 
               $total_export_amount = $sales_export_amount + $export_closing_amount;
               $total_export_fine = $sales_export_fine + $export_closing_fine;
-              $total_export_rate = $total_export_amount / $total_export_fine;
+              $total_export_rate = ($total_export_fine !=0 ) ? $total_export_amount / $total_export_fine : 0;
             ?>
             <th class="text-right"><?= four_decimal($total_export_amount, '-') ?>  </th>
             <th class="text-right"><?= four_decimal($total_export_rate, '-'); ?>  </th>
@@ -259,7 +259,7 @@
 
           <?php
             $export_gain_loss_fine = $sales_export_fine + $export_closing_fine;
-            $export_gain_loss_rate = $purchase_export_rate - (($sales_export_amount + $export_closing_amount) / $export_gain_loss_fine);
+            $export_gain_loss_rate = ($export_gain_loss_fine != 0) ? $purchase_export_rate - (($sales_export_amount + $export_closing_amount) / $export_gain_loss_fine) : 0;
             $export_gain_loss_amount = $export_gain_loss_fine * $export_gain_loss_rate;
           ?>
           <tr>
