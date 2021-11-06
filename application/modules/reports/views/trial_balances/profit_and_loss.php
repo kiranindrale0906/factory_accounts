@@ -221,8 +221,8 @@
           <tr>
             <th>Total Domestic</th>
             <?php 
-              $total_domestic_amount = $sales_domestic_amount + $domestic_closing_amount;
-              $total_domestic_fine = $sales_domestic_fine + $domestic_closing_fine;
+              $total_domestic_amount = $domestic_opening_amount + $sales_domestic_amount + $domestic_closing_amount;
+              $total_domestic_fine = $domestic_opening_fine + $sales_domestic_fine + $domestic_closing_fine;
               $total_domestic_rate = $total_domestic_amount / $total_domestic_fine;
             ?>
             <th class="text-right"><?= four_decimal($total_domestic_amount, '-') ?>  </th>
@@ -268,8 +268,8 @@
           <tr>
             <th>Total Export</th>
             <?php 
-              $total_export_amount = $sales_export_amount + $export_closing_amount;
-              $total_export_fine = $sales_export_fine + $export_closing_fine;
+              $total_export_amount = $export_opening_amount + $sales_export_amount + $export_closing_amount;
+              $total_export_fine = $export_opening_fine + $sales_export_fine + $export_closing_fine;
               $total_export_rate = ($total_export_fine !=0 ) ? $total_export_amount / $total_export_fine : 0;
             ?>
             <th class="text-right"><?= four_decimal($total_export_amount, '-') ?>  </th>
