@@ -108,7 +108,7 @@
   $total_domestic_rate = ($total_domestic_fine != 0) ? $total_domestic_amount / $total_domestic_fine : 0;      
 
   $domestic_gain_loss_fine = $sales_domestic_fine + $domestic_closing_fine;
-  $domestic_gain_loss_rate = ($domestic_gain_loss_fine != 0) ? (($sales_domestic_amount + $domestic_closing_amount) / $domestic_gain_loss_fine) - $total_domestic_purchase_rate: 0;
+  $domestic_gain_loss_rate = ($domestic_gain_loss_fine != 0) ? $total_domestic_purchase_rate - (($sales_domestic_amount + $domestic_closing_amount) / $domestic_gain_loss_fine) : 0;
   $domestic_gain_loss_amount = $domestic_gain_loss_fine * $domestic_gain_loss_rate;
 
   $export_closing_amount = $export_closing_fine * $export_closing_rate;
@@ -118,11 +118,11 @@
   $total_export_rate = ($total_export_fine !=0 ) ? $total_export_amount / $total_export_fine : 0;
 
   $export_gain_loss_fine = $sales_export_fine + $export_closing_fine;
-  $export_gain_loss_rate = ($export_gain_loss_fine != 0) ? (($sales_export_amount + $export_closing_amount) / $export_gain_loss_fine) - $total_import_purchase_rate : 0;
+  $export_gain_loss_rate = ($export_gain_loss_fine != 0) ? $total_import_purchase_rate - (($sales_export_amount + $export_closing_amount) / $export_gain_loss_fine) : 0;
   $export_gain_loss_amount = $export_gain_loss_fine * $export_gain_loss_rate;
 
   $total_sales_amount = $total_domestic_amount + $total_export_amount + $export_labour_amount + $domestic_labour_amount['amount'];
-  $total_sales_fine = $sales_domestic_fine + $sales_export_fine;
+  $total_sales_fine = $total_domestic_fine + $total_export_fine;
 
   $total_income_amount = $total_sales_amount + $domestic_gain_loss_amount + $export_gain_loss_amount;
   $total_income_fine = $total_sales_with_closing_fine;
@@ -304,7 +304,7 @@
           
           <tr>
             <td>Domestic Labour Amount</td>
-            <td class="text-right"><?= $domestic_labour_amount['amount'] ?></td>
+            <td class="text-right"><?= four_decimal($domestic_labour_amount['amount'], '-') ?></td>
             <td class="text-right">-</td>
             <td class="text-right">-</td>
           </tr>
