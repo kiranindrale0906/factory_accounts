@@ -45,10 +45,6 @@
   $pending_vadotar_fine = -1 * $profit_and_loss['pending_vadotar'];
   $pending_vadotar_amount = $pending_vadotar_rate = 0;
 
-  $purchase_fine = !empty($profit_and_loss['purchase_account']['fine']) ? $profit_and_loss['purchase_account']['fine'] : 0;
-  $purchase_rate = !empty($profit_and_loss['purchase_account']['fine']) ? -1 * $profit_and_loss['purchase_account']['amount'] / $profit_and_loss['purchase_account']['fine'] : 0;
-  $purchase_amount = !empty($profit_and_loss['purchase_account']['amount']) ? -1 * $profit_and_loss['purchase_account']['amount'] : 0;
-
   // $sales_fine = !empty($profit_and_loss['sales_account']['fine']) ? -1 * $profit_and_loss['sales_account']['fine'] : 0;
   // $sales_rate = !empty($profit_and_loss['sales_account']['fine']) ? (-1 * $profit_and_loss['sales_account']['amount'] / $profit_and_loss['sales_account']['fine']) : 0;
   // $sales_amount = !empty($profit_and_loss['sales_account']['amount']) ? $profit_and_loss['sales_account']['amount'] : 0;
@@ -157,6 +153,13 @@
           </tr>
 
           <tr>
+            <td>-</td>
+            <td class="text-right">-</td>
+            <td class="text-right">-</td>
+            <td class="text-right">-</td>
+          </tr>
+
+          <tr>
             <td>Import Opening</td>
             <td class="text-right"><?= four_decimal($export_opening_amount, '-') ?>  </td>
             <td class="text-right"><?= four_decimal($export_opening_rate, '-'); ?>  </td>
@@ -183,12 +186,6 @@
           </tr>
 
           <tr>
-            <th>TOTAL PURCHASE</th>
-            <th class="text-right"><?= four_decimal($purchase_amount, '-') ?></th>
-            <th class="text-right"><?= four_decimal($purchase_rate, '-'); ?></th>
-            <th class="text-right"><?= four_decimal($purchase_fine + 0, '-'); ?></th>
-          </tr>
-          <tr>
             <td>Main Vadotar</td>
             <td class="text-right"><?= four_decimal($main_vadotar_amount, '-') ?></td>
             <td class="text-right"><?= four_decimal($main_vadotar_rate, '-') ?></td>
@@ -211,6 +208,18 @@
             <th class="text-right"><?= four_decimal($total_expenses_amount, '-'); ?></th>
             <th class="text-right"><?= four_decimal($total_expenses_rate, '-'); ?></th>
             <th class="text-right"><?= four_decimal($total_expenses_fine, '-'); ?></th>
+          </tr>
+
+          <?php
+            $total_purchase_amount = $total_domestic_purchase_amount + $total_import_purchase_amount;
+            $total_purchase_fine = $total_domestic_purchase_fine + $total_import_purchase_fine;
+            $total_purchase_rate = ($total_purchase_fine != 0) ? $total_purchase_amount  / $total_purchase_fine : 0;
+          ?>
+          <tr>
+            <td>Total Purchase</td>
+            <td class="text-right"><?= four_decimal($purchase_amount, '-') ?></td>
+            <td class="text-right"><?= four_decimal($purchase_rate, '-'); ?></td>
+            <td class="text-right"><?= four_decimal($purchase_fine + 0, '-'); ?></td>
           </tr>
         </table>
       </div>
