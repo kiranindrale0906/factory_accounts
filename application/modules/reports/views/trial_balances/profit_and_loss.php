@@ -100,9 +100,7 @@
   $total_income_rate = ($total_income_fine != 0) ? $total_income_amount / $total_income_fine : 0;
 
   
-  $total_expenses_amount = $purchase_domestic_amount + $purchase_export_amount + $gross_profit_amount;
-  $total_expenses_fine = $purchase_domestic_fine + $purchase_export_fine + $main_vadotar_fine + $pending_vadotar_fine + 71950.427 + 22345.893;
-  $total_expenses_rate = 0;  
+  
 ?>
 
 <?php
@@ -144,6 +142,10 @@
   $gross_profit_fine = 0;
   $gross_profit_rate = 0;
   $gross_profit_amount = $total_sales_amount - $total_purchase_amount - $domestic_gain_loss_amount - $export_gain_loss_amount + $domestic_labour_amount['amount'];
+
+  $total_expenses_amount = $purchase_domestic_amount + $purchase_export_amount + $gross_profit_amount;
+  $total_expenses_fine = $purchase_domestic_fine + $purchase_export_fine + $main_vadotar_fine + $pending_vadotar_fine + $domestic_opening_fine + $export_opening_fine;
+  $total_expenses_rate = 0;  
 ?>
 
 <hr />
