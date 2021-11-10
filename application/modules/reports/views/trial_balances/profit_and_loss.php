@@ -121,7 +121,7 @@
   $export_gain_loss_rate = ($export_gain_loss_fine != 0) ? (($sales_export_amount + $export_closing_amount) / $export_gain_loss_fine) - $total_import_purchase_rate : 0;
   $export_gain_loss_amount = $export_gain_loss_fine * $export_gain_loss_rate;
 
-  $total_sales_amount = $sales_domestic_amount + $sales_export_amount + $export_labour_amount + $domestic_labour_amount['amount'];
+  $total_sales_amount = $sales_domestic_amount + $total_export_amount + $export_labour_amount + $domestic_labour_amount['amount'];
   $total_sales_fine = $sales_domestic_fine + $sales_export_fine;
 
   $total_income_amount = $total_sales_amount + $domestic_gain_loss_amount + $export_gain_loss_amount;
