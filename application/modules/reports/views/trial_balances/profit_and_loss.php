@@ -153,13 +153,6 @@
           </tr>
 
           <tr>
-            <td>-</td>
-            <td class="text-right">-</td>
-            <td class="text-right">-</td>
-            <td class="text-right">-</td>
-          </tr>
-
-          <tr>
             <td>Import Opening</td>
             <td class="text-right"><?= four_decimal($export_opening_amount, '-') ?>  </td>
             <td class="text-right"><?= four_decimal($export_opening_rate, '-'); ?>  </td>
