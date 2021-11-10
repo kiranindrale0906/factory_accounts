@@ -7,8 +7,8 @@
                                                        'fine' =>  $sale_export_Sale['factory_fine']);
 
 
-  $domestic_export_records['PURCHASE ACCOUNT'][0]['fine'] = $domestic_export_records['PURCHASE ACCOUNT'][0]['fine'];
-  $domestic_export_records['PURCHASE ACCOUNT'][0]['amount'] = $domestic_export_records['PURCHASE ACCOUNT'][0]['amount'] - 0;
+  // $domestic_export_records['PURCHASE ACCOUNT'][0]['fine'] = $domestic_export_records['PURCHASE ACCOUNT'][0]['fine'];
+  // $domestic_export_records['PURCHASE ACCOUNT'][0]['amount'] = $domestic_export_records['PURCHASE ACCOUNT'][0]['amount'] - 0;
 
   $purchase_domestic_fine = !empty($domestic_export_records['PURCHASE ACCOUNT'][0]['fine']) ? $domestic_export_records['PURCHASE ACCOUNT'][0]['fine'] : 0;
   $purchase_domestic_rate = !empty($domestic_export_records['PURCHASE ACCOUNT'][0]['fine']) ? -1 * $domestic_export_records['PURCHASE ACCOUNT'][0]['amount'] / $domestic_export_records['PURCHASE ACCOUNT'][0]['fine'] : 0;
@@ -16,8 +16,8 @@
 
   $domestic_export_records['PURCHASE ACCOUNT'][1]['fine'] = $domestic_export_records['PURCHASE ACCOUNT'][1]['fine'] ?? 0;
   $domestic_export_records['PURCHASE ACCOUNT'][1]['amount'] = $domestic_export_records['PURCHASE ACCOUNT'][1]['amount'] ?? 0;
-  $domestic_export_records['PURCHASE ACCOUNT'][1]['fine'] = $domestic_export_records['PURCHASE ACCOUNT'][1]['fine'] + 0;
-  $domestic_export_records['PURCHASE ACCOUNT'][1]['amount'] = $domestic_export_records['PURCHASE ACCOUNT'][1]['amount'] - 0;
+  // $domestic_export_records['PURCHASE ACCOUNT'][1]['fine'] = $domestic_export_records['PURCHASE ACCOUNT'][1]['fine'] + 0;
+  // $domestic_export_records['PURCHASE ACCOUNT'][1]['amount'] = $domestic_export_records['PURCHASE ACCOUNT'][1]['amount'] - 0;
 
   $purchase_export_fine = !empty($domestic_export_records['PURCHASE ACCOUNT'][1]['fine']) ? $domestic_export_records['PURCHASE ACCOUNT'][1]['fine'] : 0;
   $purchase_export_rate = !empty($domestic_export_records['PURCHASE ACCOUNT'][1]['fine']) ? -1 * $domestic_export_records['PURCHASE ACCOUNT'][1]['amount'] / $domestic_export_records['PURCHASE ACCOUNT'][1]['fine'] : 0;
@@ -73,9 +73,9 @@
   // $closing_rate = $gold_rate / .995 / 10;
   // $closing_amount = $closing_fine * $closing_rate;
 
-  $total_sales_with_closing_amount = $sales_domestic_amount + $sales_export_amount + $domestic_closing_amount + $export_closing_amount;
-  $total_sales_with_closing_fine = $sales_domestic_fine + $sales_export_fine + $domestic_closing_fine + $export_closing_fine;
-  $total_sales_with_closing_rate = ($total_sales_with_closing_fine != 0) ? $total_sales_with_closing_amount / $total_sales_with_closing_fine : 0;
+  // $total_sales_with_closing_amount = $sales_domestic_amount + $sales_export_amount + $domestic_closing_amount + $export_closing_amount;
+  // $total_sales_with_closing_fine = $sales_domestic_fine + $sales_export_fine + $domestic_closing_fine + $export_closing_fine;
+  // $total_sales_with_closing_rate = ($total_sales_with_closing_fine != 0) ? $total_sales_with_closing_amount / $total_sales_with_closing_fine : 0;
 
   
   // $exchange_gain_loss_fine = $total_sales_with_closing_fine;

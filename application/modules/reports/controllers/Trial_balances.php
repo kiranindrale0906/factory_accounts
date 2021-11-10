@@ -276,18 +276,21 @@ class Trial_balances extends Ledgers {
     $loss_account = array('account_name' => 'Loss Account Details',
                           'fine' => 0, 'vadotar' => 0, 'amount' => 0);
     $this->data['loss_account_records'] = array();
-    $loss_account_names = array('AR Gold Alloy Vodator', 'ARF Alloy Vodator', 'ARC Alloy Vodator',
-                                'AR Gold GPC Vodator', 'ARF GPC Vodator', 'ARC GPC Vodator',
-                                'AR Gold Stone Vatav', 'ARF Stone Vatav', 'ARC Stone Vatav',
-                                'AR Gold Copper Vatav', 'ARF Copper Vatav', 'ARC Copper Vatav',
-                                'AR Gold Rhodium Vatav', 'ARF Rhodium Vatav', 'ARC Rhodium Vatav',
-                                'HCL LOSS', 'STONE VATAV ARF', 'TOUNCH LOSS FINE ARF', 
-                                'Tounch & Castic Dep.Loss', 'Tounch Loss Fine', 'Tounch Loss Fine ',
-                                'MEENA LOSS ARF', 'GPC Powder', 'Gpc Powder ARF', 'Gpc Powder ARC', 'GPC Powder AR Gold', 'SISMA GHISS LOSS',
-                                'ARG Stone Loss', 'Tounch Loss Fine ARC', 'PASSAGE SEPT', 'ARF GHISS LOSS',
-                                'BUFFING LOSS', 'GRINDING LOSS', 'TOUNCH LOSS FINE ARF',
-                                'SHAMPOO AND STEEL VIBRATOR LOSS/WALNUT SHAMPO', 'ARG GHISS LOSS', 'GPC POWDER LOSS ARC',
-                                'LOSS ACCOUNT', 'Loss Account');
+    // $loss_account_names = array('AR Gold Alloy Vodator', 'ARF Alloy Vodator', 'ARC Alloy Vodator',
+    //                             'AR Gold GPC Vodator', 'ARF GPC Vodator', 'ARC GPC Vodator',
+    //                             'AR Gold Stone Vatav', 'ARF Stone Vatav', 'ARC Stone Vatav',
+    //                             'AR Gold Copper Vatav', 'ARF Copper Vatav', 'ARC Copper Vatav',
+    //                             'AR Gold Rhodium Vatav', 'ARF Rhodium Vatav', 'ARC Rhodium Vatav',
+    //                             'HCL LOSS', 'STONE VATAV ARF', 'TOUNCH LOSS FINE ARF', 
+    //                             'Tounch & Castic Dep.Loss', 'Tounch Loss Fine', 'Tounch Loss Fine ',
+    //                             'MEENA LOSS ARF', 'GPC Powder', 'Gpc Powder ARF', 'Gpc Powder ARC', 'GPC Powder AR Gold', 'SISMA GHISS LOSS',
+    //                             'ARG Stone Loss', 'Tounch Loss Fine ARC', 'PASSAGE SEPT', 'ARF GHISS LOSS',
+    //                             'BUFFING LOSS', 'GRINDING LOSS', 'TOUNCH LOSS FINE ARF',
+    //                             'SHAMPOO AND STEEL VIBRATOR LOSS/WALNUT SHAMPO', 'ARG GHISS LOSS', 'GPC POWDER LOSS ARC',
+    //                             'LOSS ACCOUNT', 'Loss Account');
+    $loss_account_names =  $this->account_model->get('name', array('group_id' => 3));
+    $loss_account_names = array_column($loss_account_names, 'name');
+    
     foreach($this->data['trial_balance'] as $index => $trail_balance_record) {
       if (in_array($trail_balance_record['account_name'], $loss_account_names)) {
         $loss_account['fine'] += $trail_balance_record['fine'];
