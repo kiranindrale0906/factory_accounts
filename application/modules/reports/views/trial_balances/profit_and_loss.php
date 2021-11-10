@@ -39,7 +39,7 @@
   $sales_export_amount = !empty($domestic_export_records['SALES ACCOUNT'][1]['amount']) ? $domestic_export_records['SALES ACCOUNT'][1]['amount'] : 0;
 
   $main_vadotar_fine = @$profit_and_loss['main_vadotar']['fine'];
-  $main_vadotar_fine = $main_vadotar_fine - 206256.607;
+  $main_vadotar_fine = $main_vadotar_fine;
   $main_vadotar_amount = $main_vadotar_rate = 0;
 
   $pending_vadotar_fine = -1 * $profit_and_loss['pending_vadotar'];
