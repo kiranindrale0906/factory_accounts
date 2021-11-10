@@ -143,8 +143,8 @@
   $gross_profit_rate = 0;
   $gross_profit_amount = $total_sales_amount - $total_purchase_amount - $domestic_gain_loss_amount - $export_gain_loss_amount + $domestic_labour_amount['amount'];
 
-  $total_expenses_amount = $purchase_domestic_amount + $purchase_export_amount + $gross_profit_amount;
-  $total_expenses_fine = $purchase_domestic_fine + $purchase_export_fine + $main_vadotar_fine + $pending_vadotar_fine + $domestic_opening_fine + $export_opening_fine;
+  $total_expenses_amount = $total_purchase_amount + $gross_profit_amount;
+  $total_expenses_fine = $total_purchase_fine + $main_vadotar_fine + $pending_vadotar_fine;
   $total_expenses_rate = 0;  
 ?>
 
