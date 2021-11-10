@@ -125,7 +125,7 @@
   $total_sales_fine = $total_domestic_fine + $total_export_fine;
 
   $total_income_amount = $total_sales_amount + $domestic_gain_loss_amount + $export_gain_loss_amount;
-  $total_income_fine = $total_sales_with_closing_fine;
+  $total_income_fine = $total_sales_fine;
   $total_income_rate = ($total_income_fine != 0) ? $total_income_amount / $total_income_fine : 0;
 
   $gross_profit_fine = 0;
