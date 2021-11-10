@@ -217,9 +217,9 @@
           ?>
           <tr>
             <td>Total Purchase</td>
-            <td class="text-right"><?= four_decimal($purchase_amount, '-') ?></td>
-            <td class="text-right"><?= four_decimal($purchase_rate, '-'); ?></td>
-            <td class="text-right"><?= four_decimal($purchase_fine + 0, '-'); ?></td>
+            <td class="text-right"><?= four_decimal($total_purchase_amount, '-') ?></td>
+            <td class="text-right"><?= four_decimal($total_purchase_rate, '-'); ?></td>
+            <td class="text-right"><?= four_decimal($total_purchase_fine + 0, '-'); ?></td>
           </tr>
         </table>
       </div>
