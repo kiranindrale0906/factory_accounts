@@ -130,7 +130,7 @@
 
   $gross_profit_fine = 0;
   $gross_profit_rate = 0;
-  $gross_profit_amount = $total_income_amount + $domestic_gain_loss_amount + $export_gain_loss_amount + $domestic_labour_amount['amount'] - $total_purchase_amount;
+  $gross_profit_amount = $total_income_amount - $total_purchase_amount;
 
   $total_expenses_amount = $total_purchase_amount + $gross_profit_amount;
   $total_expenses_fine = $total_purchase_fine + $main_vadotar_fine + $pending_vadotar_fine;
@@ -301,12 +301,7 @@
             <td class="text-right">-</td>
             <td class="text-right">-</td>
           </tr>
-          <tr>
-            <td>Export Loss</td>
-            <td class="text-right">-</td>
-            <td class="text-right">-</td>
-            <td class="text-right">-</td>
-          </tr>
+          
           <tr>
             <td>Domestic Labour Amount</td>
             <td class="text-right"><?= $domestic_labour_amount['amount'] ?></td>
