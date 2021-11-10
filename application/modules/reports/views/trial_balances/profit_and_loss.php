@@ -7,7 +7,7 @@
                                                        'fine' =>  $sale_export_Sale['factory_fine']);
 
 
-  $domestic_export_records['PURCHASE ACCOUNT'][0]['fine'] = $domestic_export_records['PURCHASE ACCOUNT'][0]['fine'] - 1005230.209;
+  $domestic_export_records['PURCHASE ACCOUNT'][0]['fine'] = $domestic_export_records['PURCHASE ACCOUNT'][0]['fine'];
   $domestic_export_records['PURCHASE ACCOUNT'][0]['amount'] = $domestic_export_records['PURCHASE ACCOUNT'][0]['amount'] - 0;
 
   $purchase_domestic_fine = !empty($domestic_export_records['PURCHASE ACCOUNT'][0]['fine']) ? $domestic_export_records['PURCHASE ACCOUNT'][0]['fine'] : 0;
@@ -24,7 +24,7 @@
   $purchase_export_amount = !empty($domestic_export_records['PURCHASE ACCOUNT'][1]['amount']) ? -1 * $domestic_export_records['PURCHASE ACCOUNT'][1]['amount'] : 0;
 
 
-  $domestic_export_records['SALES ACCOUNT'][0]['fine'] = $domestic_export_records['SALES ACCOUNT'][0]['fine'] + 1117190.500;
+  $domestic_export_records['SALES ACCOUNT'][0]['fine'] = $domestic_export_records['SALES ACCOUNT'][0]['fine'];
   $domestic_export_records['SALES ACCOUNT'][0]['amount'] = $domestic_export_records['SALES ACCOUNT'][0]['amount'];
 
   $sales_domestic_fine = !empty($domestic_export_records['SALES ACCOUNT'][0]['fine']) ? -1 * $domestic_export_records['SALES ACCOUNT'][0]['fine'] : 0;
@@ -45,7 +45,7 @@
   $pending_vadotar_fine = -1 * $profit_and_loss['pending_vadotar'];
   $pending_vadotar_amount = $pending_vadotar_rate = 0;
 
-  $purchase_fine = !empty($profit_and_loss['purchase_account']['fine']) ? $profit_and_loss['purchase_account']['fine'] - 1005230.209 : 0;
+  $purchase_fine = !empty($profit_and_loss['purchase_account']['fine']) ? $profit_and_loss['purchase_account']['fine'] : 0;
   $purchase_rate = !empty($profit_and_loss['purchase_account']['fine']) ? -1 * $profit_and_loss['purchase_account']['amount'] / $profit_and_loss['purchase_account']['fine'] : 0;
   $purchase_amount = !empty($profit_and_loss['purchase_account']['amount']) ? -1 * $profit_and_loss['purchase_account']['amount'] : 0;
 
@@ -132,35 +132,56 @@
             </tr>
           </thead>
           <tr>
-            <td>Domestic Opening</td>
+            <td>Domestic Purchase Opening</td>
             <td class="text-right"><?= four_decimal($domestic_opening_amount, '-') ?>  </td>
             <td class="text-right"><?= four_decimal($domestic_opening_rate, '-'); ?>  </td>
             <td class="text-right"><?= four_decimal($domestic_opening_fine, '-'); ?></td>
           </tr>
           <tr>
-            <td>Export Opening</td>
-            <td class="text-right"><?= four_decimal($export_opening_amount, '-') ?>  </td>
-            <td class="text-right"><?= four_decimal($export_opening_rate, '-'); ?>  </td>
-            <td class="text-right"><?= four_decimal($export_opening_fine, '-'); ?></td>
-          </tr>
-          <tr>
-            <td>DOMESTIC</td>
+            <td>Domestic Purchase</td>
             <td class="text-right"><?= four_decimal($purchase_domestic_amount, '-') ?></td>
             <td class="text-right"><?= four_decimal($purchase_domestic_rate, '-'); ?></td>
             <td class="text-right"><?= four_decimal($purchase_domestic_fine, '-'); ?></td>
           </tr>
+
+          <?php
+            $total_domestic_purchase_amount = $domestic_opening_amount + $purchase_domestic_amount;
+            $total_domestic_purchase_fine = $domestic_opening_fine + $purchase_domestic_fine;
+            $total_domestic_purchase_rate = ($total_domestic_purchase_fine != 0) ? $total_domestic_purchase_amount / $total_domestic_purchase_fine : 0;
+          ?>
           <tr>
-            <td>OPENING IMPORT</td>
-            <td class="text-right">-</td>
-            <td class="text-right">-</td>
-            <td class="text-right">0</td>
+            <th>Total Domestic Purchase</th>
+            <th class="text-right"><?= four_decimal($total_domestic_purchase_amount, '-') ?></th>
+            <th class="text-right"><?= four_decimal($total_domestic_purchase_rate, '-'); ?></th>
+            <th class="text-right"><?= four_decimal($total_domestic_purchase_fine, '-'); ?></th>
           </tr>
+
           <tr>
-            <td>IMPORT</td>
+            <td>Import Opening</td>
+            <td class="text-right"><?= four_decimal($export_opening_amount, '-') ?>  </td>
+            <td class="text-right"><?= four_decimal($export_opening_rate, '-'); ?>  </td>
+            <td class="text-right"><?= four_decimal($export_opening_fine, '-'); ?></td>
+          </tr>
+          
+          <tr>
+            <td>Import</td>
             <td class="text-right"><?= four_decimal($purchase_export_amount, '-') ?></td>
             <td class="text-right"><?= four_decimal($purchase_export_rate, '-'); ?></td>
             <td class="text-right"><?= four_decimal($purchase_export_fine, '-'); ?></td>
           </tr>
+
+          <?php
+            $total_import_purchase_amount = $export_opening_amount + $purchase_export_amount;
+            $total_import_purchase_fine = $export_opening_fine + $purchase_export_fine;
+            $total_import_purchase_rate = ($total_import_purchase_fine != 0) ? $total_import_purchase_amount / $total_import_purchase_fine : 0;
+          ?>
+          <tr>
+            <th>Total Import Purchase</th>
+            <th class="text-right"><?= four_decimal($total_import_purchase_amount, '-') ?></th>
+            <th class="text-right"><?= four_decimal($total_import_purchase_rate, '-'); ?></th>
+            <th class="text-right"><?= four_decimal($total_import_purchase_fine, '-'); ?></th>
+          </tr>
+
           <tr>
             <th>TOTAL PURCHASE</th>
             <th class="text-right"><?= four_decimal($purchase_amount, '-') ?></th>
@@ -225,7 +246,7 @@
             <td class="text-right"><?= four_decimal($domestic_closing_fine, '-'); ?></td>
           </tr>
           <tr>
-            <th>Total Domestic</th>
+            <th>Total Domestic Sale</th>
             <?php 
               $total_domestic_amount = $sales_domestic_amount + $domestic_closing_amount;
               $total_domestic_fine = $sales_domestic_fine + $domestic_closing_fine;
@@ -265,7 +286,7 @@
             <td class="text-right"><?= four_decimal($export_closing_fine, '-'); ?></td>
           </tr>
           <tr>
-            <th>Total Export</th>
+            <th>Total Export Sale</th>
             <?php 
               $total_export_amount = $sales_export_amount + $export_closing_amount;
               $total_export_fine = $sales_export_fine + $export_closing_fine;
