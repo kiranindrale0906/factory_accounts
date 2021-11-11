@@ -17,7 +17,6 @@
               $liabilities_vadotar = 0;  
               $liabilities_amount = 0;
               $liabilities_usd_amount = 0;
-              pd($trial_balance_records);
               if(!empty($trial_balance_records)) {
                 foreach ($trial_balance_records as $record) {
                   if (   ($record['fine'] <= 0
@@ -36,7 +35,7 @@
                   ?>
 
                   <tr>
-                    <td><?= $record['account_name']; ?>
+                    <td><?=pd($record); $record['account_name']; ?>
                       
                       <?php if ($loss_account==1 && !empty($loss_date)){
                         ?>
