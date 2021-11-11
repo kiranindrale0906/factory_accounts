@@ -292,8 +292,12 @@ class Trial_balances extends Ledgers {
     $loss_account_names = array_column($loss_account_names, 'name');
     
     foreach($this->data['trial_balance'] as $index => $trail_balance_record) {
+        $account_data=$this->account_model->find('unrecoverable_account_name',array('name'=>$trail_balance_record['account_name']));
+       $this->data['trial_balance'][$index]['unrecoverable_account_name']= !empty($account_data)?$account_data['unrecoverable_account_name']:'';
       if (in_array($trail_balance_record['account_name'], $loss_account_names)) {
         $loss_account['fine'] += $trail_balance_record['fine'];
+        $account_data=$this->account_model->find('unrecoverable_account_name',array('name'=>$trail_balance_record['account_name']));
+        $trail_balance_record['unrecoverable_account_name'] =$account_data['unrecoverable_account_name'] ;
         $this->data['loss_account_records'][] = $trail_balance_record;
         unset($this->data['trial_balance'][$index]);
       }

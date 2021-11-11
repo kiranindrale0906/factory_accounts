@@ -66,7 +66,7 @@
         </td>
         <td class="text-right">
         <?php if(!empty($loss_out_detail['balance']) && four_decimal($loss_out_detail['balance'])!=0){ ?>
-          <a href=<?= base_url()."argold/unrecovarable_account_records/store?from=view&account_name=".urlencode("Loss Account")."&factory=Unrecovarable&credit_weight=".$loss."&narration=".urlencode($category)."&parent_id=".$loss_out_detail['parent_id'] ?> target='_blank' onclick="return confirm('Do you want to add this in Unrecovarable?')" >Unrecovarable</a>
+          <a href=<?= base_url()."argold/unrecovarable_account_records/store?from=view&account_name=".urlencode("Loss Account")."&factory=".urlencode('Unrecovarable '.$factory_name)."&credit_weight=".$loss."&narration=".urlencode($category)."&parent_id=".$loss_out_detail['parent_id'] ?> target='_blank' onclick="return confirm('Do you want to add this in Unrecovarable?')" >Unrecovarable</a>
           <?php }?>
         </td>
         <?php if(!empty($loss_out_detail['id'])&&$loss_out_detail['receipt_type']=="Ghiss Melting Loss"){?>

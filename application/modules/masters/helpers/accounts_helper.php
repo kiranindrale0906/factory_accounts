@@ -5,7 +5,7 @@ function getTableSettings() {
     'page_title'          => 'ALL ACCOUNTS',
     'primary_table'       => 'ac_account',
     'default_column'      => 'name',
-    'table'               => 'ac_account',
+    'table'               => 'ac_account ac',
     'join_conditions'     => '',
     'join_type'           => '',
     'where'               => '',
@@ -37,6 +37,7 @@ function getTableSettings() {
 function list_settings() {
   return array(
     array("Name", "name", true, "name", true, true),
+    array("Unrecoverable Account", "unrecoverable_account_name", true, "unrecoverable_account_name", true, true),
     array("Sub Group Name", "sub_group_code", true, "sub_group_code", true, true),
     array("Area", "area", true, "area", true, true),
     array("Group", "group_code", true, "group_code", true, true),
@@ -85,6 +86,7 @@ function get_field_attribute($table, $field) {
     'pan_no'        => array('Pan No', 'Enter Pan No.', FALSE, '', TRUE),
     'srv_tax_no'    => array('Srv. Tax No', 'Enter Srv. Tax No.', FALSE, '', TRUE),
     'sms_mobile_no' => array('Sms Mobile No', 'Enter Sms Mobile No.', FALSE, '', TRUE),
+    'unrecoverable_account_name' => array('Unrecoverable Account Name', 'Enter Unrecoverable Account Name.', FALSE, '', TRUE),
     'fine_wt_limit' => array('Fine Weight Limit', 'Enter Fine Weight Limit.', FALSE, '', TRUE),
     'remark'        => array('Remark', 'Enter Remark.', FALSE, '', TRUE));
   return $attributes[$table][$field];

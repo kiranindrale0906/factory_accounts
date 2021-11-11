@@ -9,12 +9,22 @@
   <?php endif; ?>     
   <div class="row">    
     <?php load_field('text', array('field' => 'name')) ?>
-    <?php load_field('text', array('field' => 'sub_group_code', 
+    <?php load_field('text', array('field' => 'unrecoverable_account_name',
+                             'class' => 'autocomplete_list_selection',
+                             'data-table'=>'ac_account',
+                             'data-column'=>'name',
+                             'data-where_condition'=>'group_code!=\'bank\'',
+                             'data-list-title'=>'Account Name')); ?>
+
+   </div>
+  <div class="row"> 
+     <?php load_field('text', array('field' => 'sub_group_code', 
                                'data-table'=>'ac_sub_groups',
                                'class' => 'autocomplete_list_selection',
                                'data-column'=>'name',
                                'data-list-title'=>'Sub Group Name')); ?>
-  </div>
+  
+  </div>   
   <div class="row">    
     <?php load_field('dropdown', array('field' => 'payment_terms',
                                            'option'=>@$payment_terms,

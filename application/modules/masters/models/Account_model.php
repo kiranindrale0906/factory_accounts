@@ -9,6 +9,7 @@ class Account_model extends BaseModel {
 
   public function before_validate() {
     $this->set_group_data();
+    $this->set_account_name_data();
   }
 
   public function validation_rules($klass='') {
@@ -130,6 +131,10 @@ class Account_model extends BaseModel {
     $this->formdata[$this->router_class]['group_id'] =$sub_groups['group_id'];    
     $this->formdata[$this->router_class]['group_code'] =$sub_groups['group_name'];
     $this->formdata[$this->router_class]['route_group'] =$sub_groups['route_group'];
+  }
+  private function set_account_name_data(){
+    $account = $this->account_model->find('id',array('name'=>$this->attributes['unrecoverable_account_name']));
+    $this->formdata[$this->router_class]['unrecoverable_account_id'] =$account['id'];    
   }
 
   public function check_repeated_account_name($account_name) {
