@@ -31,7 +31,7 @@
                   $liabilities_fine = $liabilities_fine + $record['fine']; 
                   $liabilities_amount = $liabilities_amount + $record['amount']; 
                   $liabilities_usd_amount = $liabilities_usd_amount + @$record['usd_amount']; 
-                  print_r($record);
+                  echo'<pre>';print_r($record);
                   if(round($record['fine'],2)!=0){
 
                   ?>
