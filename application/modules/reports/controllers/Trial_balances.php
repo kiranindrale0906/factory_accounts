@@ -297,6 +297,7 @@ class Trial_balances extends Ledgers {
         unset($this->data['trial_balance'][$index]);
       }
     }
+    pd($this->data['trial_balance']);
     $this->data['trial_balance'][] = $loss_account;
   }      
 
