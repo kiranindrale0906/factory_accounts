@@ -19,6 +19,7 @@
               $liabilities_usd_amount = 0;
 
               if(!empty($trial_balance_records)) {
+                pd($trial_balance_records);
                 foreach ($trial_balance_records as $record) {
                   if (   ($record['fine'] <= 0
                           && $record['account_name'] != 'VADOTAR')
