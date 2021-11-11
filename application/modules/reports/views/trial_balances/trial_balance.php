@@ -35,7 +35,7 @@
                   ?>
 
                   <tr>
-                    <td><?=pd($record); $record['account_name']; ?>
+                    <td><?=$record['unrecoverable_account_name']; ?>
                       
                       <?php if ($loss_account==1 && !empty($loss_date)){
                         ?>
