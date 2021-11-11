@@ -19,6 +19,8 @@ class Loss_report_details extends Ledgers {
   private function get_loss_details() {
     $this->data['factory_name']=!empty($_GET['factory_name'])?$_GET['factory_name']:'';
     $data['department_name']=$_GET['category'];
+    $account_data=$this->account_model->find('unrecoverable_account_name',array('name'=>$data['department_name']));
+    $this->data['unrecoverable_account_name']=!empty($account_data)?$account_data['unrecoverable_account_name']:'';
     $data['quator']='';
     $url=API_ARG_PATH."issue_and_receipts/loss_report_for_accounts/index";
     $arg_records=json_decode(curl_post_request($url,$data),true);
