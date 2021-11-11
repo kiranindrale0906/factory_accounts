@@ -17,7 +17,7 @@
               $liabilities_vadotar = 0;  
               $liabilities_amount = 0;
               $liabilities_usd_amount = 0;
-
+              pd($trial_balance_records);
               if(!empty($trial_balance_records)) {
                 foreach ($trial_balance_records as $record) {
                   if (   ($record['fine'] <= 0
@@ -31,7 +31,6 @@
                   $liabilities_fine = $liabilities_fine + $record['fine']; 
                   $liabilities_amount = $liabilities_amount + $record['amount']; 
                   $liabilities_usd_amount = $liabilities_usd_amount + @$record['usd_amount']; 
-                  echo'<pre>';print_r($record);
                   if(round($record['fine'],2)!=0){
 
                   ?>
