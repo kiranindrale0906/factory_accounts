@@ -293,12 +293,14 @@ class Trial_balances extends Ledgers {
        $this->data['trial_balance'][$index]['unrecoverable_account_name']= !empty($account_data)?$account_data['unrecoverable_account_name']:'';
       if (in_array($trail_balance_record['account_name'], $loss_account_names)) {
         $loss_account['fine'] += $trail_balance_record['fine'];
-        $loss_account['unrecoverable_account_name'] = '';
+        $account_data=$this->account_model->find('unrecoverable_account_name',array('name'=>$trail_balance_record['account_name']));
+        $loss_account['unrecoverable_account_name'] =$account_data['unrecoverable_account_name'] ;
         $this->data['loss_account_records'][] = $trail_balance_record;
         unset($this->data['trial_balance'][$index]);
       }
     }
     $this->data['trial_balance'][] = $loss_account;
+    pd($this->data['trial_balance']);
   }      
 
   private function calculate_gst_of_purchase_accounts($export, $sale_type) {
