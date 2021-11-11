@@ -288,9 +288,8 @@ class Trial_balances extends Ledgers {
                                 'BUFFING LOSS', 'GRINDING LOSS', 'TOUNCH LOSS FINE ARF',
                                 'SHAMPOO AND STEEL VIBRATOR LOSS/WALNUT SHAMPO', 'ARG GHISS LOSS', 'GPC POWDER LOSS ARC',
                                 'LOSS ACCOUNT', 'Loss Account');
-    pd($this->data['trial_balance']);
     foreach($this->data['trial_balance'] as $index => $trail_balance_record) {
-        $account_data=$this->account_model->find('unrecoverable_account_name',array('account_name'=>$trail_balance_record['account_name']));
+        $account_data=$this->account_model->find('unrecoverable_account_name',array('name'=>$trail_balance_record['account_name']));
        $this->data['trial_balance'][$index]['unrecoverable_account_name']= !empty($account_data)?$account_data['unrecoverable_account_name']:'';
       if (in_array($trail_balance_record['account_name'], $loss_account_names)) {
         $loss_account['fine'] += $trail_balance_record['fine'];
