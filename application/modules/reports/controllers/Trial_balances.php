@@ -299,8 +299,8 @@ class Trial_balances extends Ledgers {
         unset($this->data['trial_balance'][$index]);
       }
     }
+    pd($this->data['loss_account_records']);
     $this->data['trial_balance'][] = $loss_account;
-    pd($this->data['trial_balance']);
   }      
 
   private function calculate_gst_of_purchase_accounts($export, $sale_type) {
