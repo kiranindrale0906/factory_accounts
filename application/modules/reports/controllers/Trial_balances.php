@@ -293,6 +293,7 @@ class Trial_balances extends Ledgers {
        $this->data['trial_balance'][$index]['unrecoverable_account_name']= !empty($account_data)?$account_data['unrecoverable_account_name']:'';
       if (in_array($trail_balance_record['account_name'], $loss_account_names)) {
         $loss_account['fine'] += $trail_balance_record['fine'];
+        $loss_account['unrecoverable_account_name'] = '';
         $this->data['loss_account_records'][] = $trail_balance_record;
         unset($this->data['trial_balance'][$index]);
       }
