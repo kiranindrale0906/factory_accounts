@@ -19,6 +19,7 @@
               $liabilities_usd_amount = 0;
               if(!empty($trial_balance_records)) {
                 foreach ($trial_balance_records as $record) {
+                  echo"<pre>12";print_r($record['unrecoverable_account_name']);
                   if (   ($record['fine'] <= 0
                           && $record['account_name'] != 'VADOTAR')
                       || ($record['account_name'] == 'Tounch Loss Fine')) continue;
@@ -35,7 +36,7 @@
                   ?>
 
                   <tr>
-                    <td><?=$record['unrecoverable_account_name']; ?>
+                    <td><?=$record['account_name']; ?>
                       
                       <?php if ($loss_account==1 && !empty($loss_date)){
                         ?>
