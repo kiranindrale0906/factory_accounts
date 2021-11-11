@@ -19,6 +19,7 @@
               $liabilities_usd_amount = 0;
 
               if(!empty($trial_balance_records)) {
+                pd($trial_balance_records);
                 foreach ($trial_balance_records as $record) {
                   if (   ($record['fine'] <= 0
                           && $record['account_name'] != 'VADOTAR')
@@ -100,7 +101,7 @@
                     <td><?= $record['account_name']; ?>
                       <?php if ($loss_account==1 && !empty($loss_date)) { ?>
                         <a href=<?= base_url()."argold/unrecovarable_account_records/store?from=view&account_name=".urlencode($record['account_name'])."&credit_weight=".four_decimal(-1 * $record['fine'])."&narration=".urlencode($record['account_name'])."&factory=".urlencode($record['unrecoverable_account_name'])."&parent_id=".$record['id']."&voucher_date=".$loss_date ?> 
-                          target='_blank' onclick="return confirm('Do you want to add this in Unrecovarable?')" ><?=$record['unrecoverable_account_name']?></a><?php echo'('.four_decimal(-1 * $record['fine'], '-').')'; ?>
+                          target='_blank' onclick="return confirm('Do you want to add this in Unrecovarable?')" ><?=@$record['unrecoverable_account_name']?></a><?php echo'('.four_decimal(-1 * $record['fine'], '-').')'; ?>
                       <?php } ?>  
                     </td>
                     <td class="text-right"><?= four_decimal(-1 * $record['amount'], '-') ?>  </td>
