@@ -40,8 +40,8 @@ class Unrecovarable_account_records extends BaseController {
       $receipt_obj = new metal_receipt_voucher_model($process);
       $receipt_obj->before_validate();
       $receipt_obj->save(true);
-      $url = strtok($_SERVER['HTTP_REFERER'], '?');
-      redirect($url);
+      // $url = strtok($_SERVER['HTTP_REFERER'], '?');
+      redirect('reports/loss_reports');
     } else {
       parent::store();
     }
