@@ -35,8 +35,10 @@ class Account_model extends BaseModel {
     $this->formdata[$this->router_class]['route_group'] =$sub_groups['route_group'];
   }
   private function set_account_name_data(){
+    if(!empty($this->attributes['unrecoverable_account_name'])){
     $account = $this->account_model->find('id',array('name'=>$this->attributes['unrecoverable_account_name']));
-    $this->formdata[$this->router_class]['unrecoverable_account_id'] =$account['id'];    
+    $this->formdata[$this->router_class]['unrecoverable_account_id'] =!empty($account['id'])?$account['id']:0;    
+    }
   }
 
   public function check_repeated_account_name($account_name) {
