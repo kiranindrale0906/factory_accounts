@@ -46,7 +46,7 @@ function get_field_attribute($table, $field) {
                                              || $_GET['receipt_type'] == 'ARF Refresh'
                                              || $_GET['receipt_type'] == 'AR Gold Refresh')) {
     $required_fields=array('id', 'voucher_date', 'receipt_type', 'account_name',
-                           'debit_weight', 'factory_purity','factory_fine', 'purity', 'fine', 'narration','description', 'hook_kdm_purity', 'gold_rate', 'sale_type', 'hallmark_rate', 'hallmark_quantity');
+                           'debit_weight', 'factory_purity','factory_fine', 'purity', 'fine', 'narration','description', 'hook_kdm_purity', 'gold_rate', 'sale_type', 'hallmark_rate', 'hallmark_qty');
 
   } else {
     $required_fields=array('id', 'voucher_date', 'receipt_type', 'account_name',
