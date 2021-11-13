@@ -10,9 +10,12 @@
   <div class="row">    
     <?php 
       load_field('text', array('field' => 'gold_rate')); 
-      load_field('text', array('field' => 'hallmark_rate')); 
-      load_field('text', array('field' => 'hallmark_quantity')); 
       load_field('dropdown', array('field' => 'gold_rate_purity', 'option' => get_gold_rate_purities())); ?>
+  </div>
+  <div class="row">    
+    <?php 
+      load_field('text', array('field' => 'hallmark_rate')); 
+      load_field('text', array('field' => 'hallmark_quantity')); ?>
   </div>
   <?php    if(in_array($record['voucher_type'], array('metal receipt voucher'))){?>
   <div class="row">        
