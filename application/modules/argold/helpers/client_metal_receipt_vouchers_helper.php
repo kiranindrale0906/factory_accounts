@@ -10,14 +10,13 @@ function list_settings() {
 
 function get_field_attribute($table, $field) {
   if(!empty($_GET['receipt_type']) && ($_GET['receipt_type'] == 'Metal' || $_GET['receipt_type'] == 'Rhodium')) {
-    if(!empty($_GET['parent_id'])){
-    $required_fields=array('id', 'voucher_date', 'receipt_type', 'account_name', 
-                           'debit_weight', 'purity', 'fine','description');
-    }else{
-    $required_fields=array('id', 'voucher_date', 'receipt_type', 'account_name', 
-                           'debit_weight', 'purity', 'fine', 'narration', 'description', 'sale_type', 'gold_rate', 'gold_rate_purity');
-    }
-  }elseif(!empty($_GET['receipt_type']) && (  $_GET['receipt_type'] == 'AR Gold Chain Receipt'
+    if(!empty($_GET['parent_id']))
+      $required_fields=array('id', 'voucher_date', 'receipt_type', 'account_name', 
+                             'debit_weight', 'purity', 'fine','description');
+    else
+      $required_fields=array('id', 'voucher_date', 'receipt_type', 'account_name', 
+                             'debit_weight', 'purity', 'fine', 'narration', 'description', 'sale_type', 'gold_rate', 'gold_rate_purity');
+  } elseif(!empty($_GET['receipt_type']) && (  $_GET['receipt_type'] == 'AR Gold Chain Receipt'
                                           || $_GET['receipt_type'] == 'ARF Chain Receipt'
                                           || $_GET['receipt_type'] == 'ARC Chain Receipt'
                                           || $_GET['receipt_type'] == 'AR Gold Finished Goods Receipt'
@@ -47,7 +46,7 @@ function get_field_attribute($table, $field) {
                                              || $_GET['receipt_type'] == 'ARF Refresh'
                                              || $_GET['receipt_type'] == 'AR Gold Refresh')) {
     $required_fields=array('id', 'voucher_date', 'receipt_type', 'account_name',
-                           'debit_weight', 'factory_purity','factory_fine', 'purity', 'fine', 'narration','description', 'hook_kdm_purity', 'gold_rate', 'sale_type');
+                           'debit_weight', 'factory_purity','factory_fine', 'purity', 'fine', 'narration','description', 'hook_kdm_purity', 'gold_rate', 'sale_type', 'hallmark_rate', 'hallmark_quantity');
 
   } else {
     $required_fields=array('id', 'voucher_date', 'receipt_type', 'account_name',
