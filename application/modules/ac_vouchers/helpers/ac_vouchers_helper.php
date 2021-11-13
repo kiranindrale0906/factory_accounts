@@ -248,7 +248,7 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['hallmark_number'] = array('Hallmark Number', 'Hallmark Number', false, '', TRUE);
   $attributes['has_hallmark'] = array('', 'Has Hallmark', TRUE, '', TRUE);
   $attributes['hallmark_rate'] = array('Hallmark Rate', 'Hallmark Rate', false, '', TRUE);
-  $attributes['hallmark_qty'] = array('Hallmark Qty', 'Hallmark Qty', false, '', TRUE);
+  $attributes['hallmark_quantity'] = array('Hallmark Qty', 'Hallmark Qty', false, '', TRUE);
   $attributes['total_value'] = array('Value', 'Value', FALSE, '',TRUE);
   $attributes['description'] = array('Description', 'Description', FALSE, '',TRUE);
   
