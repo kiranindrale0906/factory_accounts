@@ -12,10 +12,10 @@ class Voucher_details extends BaseController {
 
   public function _get_view_data() {
     $this->data['account_id']='';
-    $this->data['metal_vouchers'] = $this->voucher_model->get('',array('id'=>$this->data['record']['id']));
+    $this->data['metal_vouchers'] = $this->voucher_model->get('', array('id'=>$this->data['record']['id']));
     $this->data['metal_voucher_details'] = $this->voucher_model->get('',
-                                            array('metal_receipt_voucher_reference_id' => $this->data['record']['id'],
-                                                  'voucher_type not in ("rate cut receipt voucher", "rate cut issue voucher")' => NULL));
+                                            array('metal_receipt_voucher_reference_id' => $this->data['record']['id']));
+                                                  //'voucher_type not in ("rate cut receipt voucher", "rate cut issue voucher")' => NULL));
 
     $this->data['refresh'] = $this->refresh_model->find('',array('metal_receipt_id'=>$this->data['record']['id']));
     if(!empty($this->data['refresh']['id'])){
