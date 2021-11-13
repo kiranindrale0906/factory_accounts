@@ -65,7 +65,7 @@
   $export_opening_rate = 4250.000;
   $export_opening_amount = $export_opening_fine * $export_opening_rate; //95120251.000;
 
-  $export_closing_fine = $purchase_export_fine - $sales_export_fine + 22345.893;
+  $export_closing_fine = $purchase_export_fine - $sales_export_fine + $export_opening_fine;
   $export_closing_rate = $spot_gold / 31.1034 * $usd_rate;
   $export_closing_amount = $export_closing_fine * $export_closing_rate;
 
