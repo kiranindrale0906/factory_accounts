@@ -66,6 +66,8 @@ function get_field_attribute($table, $field) {
     'id'            => array('', '', TRUE, '', TRUE),
     'gold_rate'     => array('Gold Rate', '', TRUE, '', TRUE),
     'gold_rate_purity'     => array('Gold Rate Purity', '', TRUE, '', TRUE),
+    'hallmark_rate' => array('Hallmark Rate', '', TRUE, '', TRUE),
+    'hallmark_quantity' => array('Hallmark Qty', '', TRUE, '', TRUE),
     'sale_type'     => array('Sale Type', '', TRUE, '', TRUE),
     'is_export'     => array('Is Export', '', TRUE, '', TRUE),
     'do_not_calculate_tax'     => array('', '', TRUE, '', TRUE),
