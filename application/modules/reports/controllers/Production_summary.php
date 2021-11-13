@@ -104,7 +104,7 @@ class Production_summary extends BaseController {
     }
 
     if(!empty($this->data['in_purity'])){
-       $where['purity']    =$this->data['in_purity'];
+       $where['factory_purity']    =$this->data['in_purity'];
     }
     
     if ($this->data['group_by'] == 'Week') {
