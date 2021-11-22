@@ -1,6 +1,6 @@
 <?php
 
-function get_tax_fields($factory_fine, $fine, $sale_type, $gold_rate, $gold_rate_purity, $created_at,$export = 0,$do_not_calculate_tax = 0) {
+function get_tax_fields($factory_fine, $fine, $sale_type, $gold_rate, $gold_rate_purity, $created_at,$export = 0,$do_not_calculate_tax = 0, $hallmark_rate = 0, $hallmark_qty = 0) {
   $tcs_rate=0;
   if(strtotime($created_at)>strtotime('2021-03-30') && strtotime($created_at)<strtotime('2021-07-01'))
     $tcs_rate=0.1;
@@ -30,7 +30,7 @@ function get_tax_fields($factory_fine, $fine, $sale_type, $gold_rate, $gold_rate
     $fields['grand_total']    = round($fields['total_amount'] + $fields['tcs_amount']);
   
   }else{
-    $fields['taxable_amount'] = $fields['weight'] * $gold_rate * $gold_rate_purity / 100;
+    $fields['taxable_amount'] = ($fields['weight'] * $gold_rate * $gold_rate_purity / 100) + ($hallmark_qty * $hallmark_rate);
     $fields['cgst_amount']    = $fields['taxable_amount'] * $fields['gst_rate'] / 100;
     $fields['sgst_amount']    = $fields['taxable_amount'] * $fields['gst_rate'] / 100;
     $fields['total_amount']   = $fields['taxable_amount'] + $fields['cgst_amount'] + $fields['sgst_amount'];

@@ -341,7 +341,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
         && $this->attributes['receipt_type'] != 'Rhodium')
       return;
 
-    if (!empty($this->attributes['gold_rate']) && $this->attributes['gold_rate'] <= 0 ) return;
+    if (   !empty($this->attributes['gold_rate']) && $this->attributes['gold_rate'] <= 0 
+        && !empty($this->attributes['hallmark_rate']) && $this->attributes['hallmark_rate'] <= 0 ) return;
 
     $this->rate_cut_issue_voucher_model->create_rate_cut_vouchers_for_metal_and_refresh($this->attributes['id'], $this->attributes['receipt_type']);
   } 

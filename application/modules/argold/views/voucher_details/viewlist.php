@@ -23,7 +23,7 @@
       ?>
       <tr>
         <td><?=$index+1?></td>
-        <td><?= $metal_voucher_detail['id'] ?></td>
+        <td><a href='/argold/voucher_details/view/<?= $metal_voucher_detail['id'] ?>'><?= $metal_voucher_detail['id'] ?></td>
         <td><?= $metal_voucher_detail['voucher_number'] ?></td>
         <td><?= $metal_voucher_detail['account_name'] ?></td>
         <td class="text-right"><?= $metal_voucher_detail['credit_weight']; ?></td>

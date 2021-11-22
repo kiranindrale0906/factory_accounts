@@ -121,14 +121,14 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
     $this->rate_cut_receipt_voucher_model->delete('', array('description' => $receipt_type.' '.$metal_receipt_voucher['voucher_number'],
                                                             'voucher_type' => 'rate cut receipt voucher'));
 
-    if ($metal_receipt_voucher['gold_rate'] == 0) return;
+    if ($metal_receipt_voucher['gold_rate'] == 0 && $metal_receipt_voucher['hallmark_rate'] == 0) return;
 
     if (   $metal_receipt_voucher['account_name'] == 'Dip R/d' 
         || $metal_receipt_voucher['account_name'] == 'Pen R/d') {
       $metal_receipt_voucher['is_export'] = 1;
     }
 
-    $tax_fields = get_tax_fields($metal_receipt_voucher['factory_fine'], $metal_receipt_voucher['fine'], $metal_receipt_voucher['sale_type'], $metal_receipt_voucher['gold_rate'], $metal_receipt_voucher['gold_rate_purity'],$metal_receipt_voucher['created_at'], $metal_receipt_voucher['is_export'], $metal_receipt_voucher['do_not_calculate_tax']);
+    $tax_fields = get_tax_fields($metal_receipt_voucher['factory_fine'], $metal_receipt_voucher['fine'], $metal_receipt_voucher['sale_type'], $metal_receipt_voucher['gold_rate'], $metal_receipt_voucher['gold_rate_purity'],$metal_receipt_voucher['created_at'], $metal_receipt_voucher['is_export'], $metal_receipt_voucher['do_not_calculate_tax'], $metal_receipt_voucher['hallmark_rate'], $metal_receipt_voucher['hallmark_quantity']);
 
     $rate_cut_issue = array('company_id'    => 1,
                             'account_name'  => $metal_receipt_voucher['account_name'],

@@ -135,6 +135,8 @@
           load_view('ac_vouchers/ac_vouchers/fields/gold_rate'); 
           load_view('ac_vouchers/ac_vouchers/fields/rate'); 
           load_view('ac_vouchers/ac_vouchers/fields/gold_rate_purity'); 
+          load_view('ac_vouchers/ac_vouchers/fields/hallmark_rate'); 
+          load_view('ac_vouchers/ac_vouchers/fields/hallmark_quantity'); 
           load_view('ac_vouchers/ac_vouchers/fields/description');  ?>
   </div>  
 

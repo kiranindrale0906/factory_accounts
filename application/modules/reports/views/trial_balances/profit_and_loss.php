@@ -49,7 +49,7 @@
   // $sales_rate = !empty($profit_and_loss['sales_account']['fine']) ? (-1 * $profit_and_loss['sales_account']['amount'] / $profit_and_loss['sales_account']['fine']) : 0;
   // $sales_amount = !empty($profit_and_loss['sales_account']['amount']) ? $profit_and_loss['sales_account']['amount'] : 0;
 
-  $domestic_opening_fine = 71950.427;
+  $domestic_opening_fine = 71950.427+6306.923;
   $domestic_opening_rate = 4850.000;
   $domestic_opening_amount = $domestic_opening_fine * $domestic_opening_rate; //351356714.000;
 
@@ -57,15 +57,15 @@
   $sales_amount = $sales_domestic_amount + $sales_export_amount;
   $sales_rate = ($sales_fine != 0) ? $sales_amount / $sales_fine : 0;
 
-  $domestic_closing_fine = $purchase_domestic_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_domestic_fine + 71950.427;
+  $domestic_closing_fine = $purchase_domestic_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_domestic_fine + $domestic_opening_fine;
   $closing_rate = $gold_rate / .995 / 10;
   $domestic_closing_amount = $domestic_closing_fine * $closing_rate;
 
-  $export_opening_fine = 22345.893;
+  $export_opening_fine = 22345.893-6306.923;
   $export_opening_rate = 4250.000;
   $export_opening_amount = $export_opening_fine * $export_opening_rate; //95120251.000;
 
-  $export_closing_fine = $purchase_export_fine - $sales_export_fine + 22345.893;
+  $export_closing_fine = $purchase_export_fine - $sales_export_fine + $export_opening_fine;
   $export_closing_rate = $spot_gold / 31.1034 * $usd_rate;
   $export_closing_amount = $export_closing_fine * $export_closing_rate;
 

@@ -102,6 +102,11 @@ class Production_summary extends BaseController {
        $where['item_name']    =$this->data['product_name'];
        $group_by=array('group_by' => 'date(created_at)');
     }
+
+    if(!empty($this->data['in_purity'])){
+       $where['factory_purity']    =$this->data['in_purity'];
+    }
+    
     if ($this->data['group_by'] == 'Week') {
       $period_from_date = 'DATE_SUB(
                                 DATE_ADD(MAKEDATE(date_format(created_at,"%Y"), 1), INTERVAL week(created_at) WEEK),
