@@ -38,6 +38,8 @@ class Login extends Core_login {
 
       if(HOST == 'BACKUP ACCOUNTS'){
         redirect('reports/account_ledgers');
+      }elseif(HOST == 'REPORT ACCOUNTS'){
+        redirect('reports/account_ledgers');
       } else{
         redirect($redirect_url);
       }
