@@ -194,19 +194,23 @@
             <th class="text-right"><?= four_decimal($total_import_purchase_rate, '-'); ?></th>
             <th class="text-right"><?= four_decimal($total_import_purchase_fine, '-'); ?></th>
           </tr>
-
+          <?php if(HOST=='REPORT ACCOUNTS'){ ?>
           <tr>
             <td>Main Vadotar</td>
             <td class="text-right"><?= four_decimal($main_vadotar_amount, '-') ?></td>
             <td class="text-right"><?= four_decimal($main_vadotar_rate, '-') ?></td>
             <td class="text-right"><?= four_decimal($main_vadotar_fine - 0, '-') ?></td>
           </tr>
+        <?php }?>
           <tr>
             <td>Pending Vadotar</td>
             <td class="text-right"><?= four_decimal($pending_vadotar_amount, '-'); ?></td>
             <td class="text-right"><?= four_decimal($pending_vadotar_rate, '-'); ?></td>
             <td class="text-right"><?= four_decimal($pending_vadotar_fine, '-'); ?></td>
           </tr>
+          <?php
+          
+           if(HOST=='REPORT ACCOUNTS'){ ?>
           <tr>
             <td>Gross Profit</td>
             <td class="text-right"><?= four_decimal($gross_profit_amount, '-'); ?></td>
@@ -214,6 +218,7 @@
             <td class="text-right"><?= four_decimal($gross_profit_fine, '-'); ?></td>
           </tr>
           <tr>
+          <?php }?>
             <th>Total</th>
             <th class="text-right"><?= four_decimal($total_expenses_amount, '-'); ?></th>
             <th class="text-right"><?= four_decimal($total_expenses_rate, '-'); ?></th>

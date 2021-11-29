@@ -84,27 +84,8 @@ class User_role_model extends Core_user_role_model {
                      'Migrations' => array('sys/migrations'),
                      'api' => array('api/api_metal_issue_vouchers'));
     $bk_modules= array('database_restore'=>array('masters/mysqldump'));
-    $report_modules= array('Reports' => array('reports/account_ledgers',
-                                        'reports/outstanding_report',
-                                        'reports/trial_balances',
-                                        'reports/vadotar_reports',
-                                        'reports/account_receipt_reports',
-                                        'reports/rojmel_reports',
-                                        'reports/metal_receipt_type_ledgers',
-                                        'reports/bw_accounts',
-                                        'reports/production_summary',
-                                        'reports/loss_accounts',
-                                        'reports/loss_summaries',
-                                        'reports/loss_reports',
-                                        'reports/category_wise_loss_reports',
-                                        'reports/loss_report_details',
-                                        'reports/quator_wise_loss_reports',
-                                        'reports/quator_wise_loss_report_details',
-                                        'reports/loss_account_details',
-                                        'reports/purchase_registers',
-                                        'reports/sales_registers',
-                                        'reports/cash_gst_registers',
-                                        'reports/domestic_export_ledgers',
+    $report_modules= array('Reports' => array(
+                                        'reports/trial_balances'
                                         ));
     if(HOST=='BACKUP ACCOUNTS') {
       $modules = array_merge($modules,$bk_modules);

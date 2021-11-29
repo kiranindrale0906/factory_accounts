@@ -126,27 +126,7 @@
 
                 ); 
    $database_backup_menu = array('Backup Database' => 'masters/mysqldump');
-   $report_menu = array('Reports'   => array(
-                                        'reports/account_ledgers' => 'Account Ledger',
-                                        // 'reports/account_ledgers' => 'Account Ledger Report',
-                                        // 'reports/outstanding_report' => 'Outstanding Report',
-                                        'reports/trial_balances' => 'Trial Balance',
-                                        'reports/vadotar_reports' => 'Vadotar Report',
-                                        'reports/rojmel_reports' => 'Rojmel Report',
-                                        'reports/production_summary' => 'Production Summary',
-                                        'reports/bw_accounts' => 'Bw Accounts',
-                                        'reports/loss_accounts' => 'Loss Accounts',
-                                        'reports/loss_reports' => 'Loss Reports',
-                                        //'reports/loss_summaries' => 'Loss Summary',
-                                        //'reports/category_wise_loss_reports' => 'Category Wise Loss Reports',
-                                        'reports/quator_wise_loss_reports' => 'Quator Wise Loss Reports',
-                                        'reports/metal_receipt_type_ledgers' => 'Receipt Type Ledger',
-                                        'reports/account_receipt_reports' => 'Account Receipt Reports',
-                                        'reports/purchase_registers' => 'Purchase Register Reports',
-                                        'reports/sales_registers' => 'Sales Register Reports',
-                                        'reports/cash_gst_registers' => 'Cash GST Register Reports',
-                                        'reports/domestic_export_ledgers' => 'Domestic Export Ledger',
-                                        ));
+   $report_menu = array('Reports'   => array('reports/trial_balances' => 'Trial Balance'));
   if(HOST=='BACKUP ACCOUNTS') 
     $main_menu=array_merge($database_backup_menu,$main_menu);
   if(HOST=='REPORT ACCOUNTS') 
