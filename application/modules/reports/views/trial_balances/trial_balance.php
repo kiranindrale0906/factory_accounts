@@ -31,7 +31,7 @@
                   $liabilities_amount = $liabilities_amount + $record['amount']; 
                   $liabilities_usd_amount = $liabilities_usd_amount + @$record['usd_amount']; 
                   if(round($record['fine'],2)!=0){
-
+                    if($record['account_name']!="MAIN VADOTAR"){
                   ?>
 
                   <tr>
@@ -47,7 +47,7 @@
                     <td class="text-right"><?= four_decimal(($record['fine']), '-'); ?></td>
                     <td class="text-right"><?= four_decimal(($record['vadotar']), '-') ?>  </td>
                   </tr>
-                <?php }}
+                <?php }}}
               } 
           ?>
           <tr>
