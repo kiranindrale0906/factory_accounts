@@ -46,6 +46,7 @@ class Quator_wise_loss_reports extends BaseController {
                                                       array('group_by'=>'account_name,narration',
                                                             'order_by'=>'receipt_type asc'));
     }
+    pd($this->data['trial_balance']);
     $loss_account = array('account_name' => 'Loss Account',
                           'fine' => 0, 'vadotar' => 0, 'amount' => 0);
     $this->data['loss_account_records'] = array();
