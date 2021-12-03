@@ -50,20 +50,15 @@ class Quator_wise_loss_reports extends BaseController {
                           'fine' => 0, 'vadotar' => 0, 'amount' => 0);
     $this->data['loss_account_records'] = array();
     $loss_account_names=array();
+    $loss_account_where=array('group_id'=>3);
     if($this->data['site_name']=='ARF'){
-      $loss_account_names = array('ARF Alloy Vodator','ARF GPC Vodator','ARF Stone Vatav','ARF Copper Vatav','ARF Rhodium Vatav','STONE VATAV ARF', 'TOUNCH LOSS FINE ARF','MEENA LOSS ARF','Gpc Powder ARF','ARF GHISS LOSS','TOUNCH LOSS FINE ARF');
-    
-
+      $loss_account_where['unrecoverable_account_name']='Unrecovarable ARF';
     }elseif($this->data['site_name']=='ARC'){
-      $loss_account_names = array('ARC Alloy Vodator','ARC GPC Vodator',
-                                   'ARC Stone Vatav','ARC Copper Vatav','ARC Rhodium Vatav','Loss Account', 'Tounch & Castic Dep.Loss','Gpc Powder ARC','Tounch Loss Fine ARC','GPC POWDER LOSS ARC');
-    
-
+      $loss_account_where['unrecoverable_account_name']='Unrecovarable ARC';
     }elseif($this->data['site_name']=='AR Gold'){
-      $loss_account_names = array('AR Gold Alloy Vodator','AR Gold GPC Vodator','AR Gold Stone Vatav','AR Gold Copper Vatav','AR Gold Rhodium Vatav','HCL LOSS','Tounch Loss Fine','GPC Powder','Gpc Powder AR Gold', 'SISMA GHISS LOSS','ARG Stone Loss','SHAMPOO AND STEEL VIBRATOR LOSS/WALNUT SHAMPO', 'ARG GHISS LOSS');
+      $loss_account_where['unrecoverable_account_name']='Unrecovarable AR Gold';
     }
-
-    $loss_account_names =  $this->account_model->get('name', array('group_id' => 3));
+    $loss_account_names =  $this->account_model->get('name',$loss_account_where);
     $loss_account_names = array_column($loss_account_names, 'name');
     
     if(!empty($this->data['trial_balance'])){
