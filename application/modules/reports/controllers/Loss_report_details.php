@@ -97,9 +97,9 @@ class Loss_report_details extends Ledgers {
         $total_production=$total_loss_fine=$recoverd_loss_fine=$all_loss_before_recovery=$unrecovery_loss=$fine_loss=$total_out_weight=$per_kg_loss=$total_per_kg_loss=$before_recovery_loss=$total_before_recovery_loss=$recovered_loss=$total_recovery_loss=$after_recovery_loss=$total_after_recovery_loss=$total_unrecovery_loss=$total_balance=$balance=0;
         foreach ($loss_details as $index => $loss_detail) {
             $factory_wise_record[$index]['production']=0;
-            $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$loss_detail['parent_id'],'account_name!='=>'Unrecovarable'));
+            $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$loss_detail['parent_id'],'account_name!='=>'Unrecovarable'.''.$this->data['factory_name']));
             
-            $unrecovery_details = $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$loss_detail['parent_id'],'account_name'=>'Unrecovarable'));
+            $unrecovery_details = $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$loss_detail['parent_id'],'account_name'=>'Unrecovarable'.''.$this->data['factory_name']));
 
             $fine_loss=($loss_detail['in_weight']*$loss_detail['in_lot_purity']/100);
             $after_recovered_loss=($loss_account_details['weight']);

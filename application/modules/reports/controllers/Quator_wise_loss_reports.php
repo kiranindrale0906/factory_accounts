@@ -64,10 +64,12 @@ class Quator_wise_loss_reports extends BaseController {
     
     if(!empty($this->data['trial_balance'])){
       $item_name='';
+      $item_name_with_factory='';
       foreach($this->data['trial_balance'] as $index => $trail_balance_record) {
         if (in_array($trail_balance_record['account_name'], $loss_account_names)) {
           $item_name=$trail_balance_record['account_name'].' Unrecovarable';
-          if($trail_balance_record['item_name']==$item_name){
+          $item_name_with_factory=$trail_balance_record['account_name'].' '.$loss_account_names;
+          if($trail_balance_record['item_name']==$item_name || $trail_balance_record['item_name']==$item_name_with_factory){
             $loss_account['fine'] += $trail_balance_record['fine'];
             $this->data['loss_account_records'][] = $trail_balance_record;
             unset($this->data['trial_balance'][$index]);

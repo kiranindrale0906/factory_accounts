@@ -86,9 +86,9 @@ class Loss_reports extends BaseController {
           foreach ($arg_records as $index => $arg_loss_detail) {
               if(trim(strtolower($arg_loss_detail['description']))==trim($category_name)){
                 $factory_wise_record[$index]['production']=0;
-                $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$arg_loss_detail['parent_id'],'account_name!='=>'Unrecovarable'));
+                $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$arg_loss_detail['parent_id'],'account_name!='=>'Unrecovarable'.''.$this->data['factory_name']));
                 
-                $unrecovery_details = $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$arg_loss_detail['parent_id'],'account_name'=>'Unrecovarable'));
+                $unrecovery_details = $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$arg_loss_detail['parent_id'],'account_name'=>'Unrecovarable'.''.$this->data['factory_name']));
 
                 $fine_loss=($arg_loss_detail['in_weight']*$arg_loss_detail['in_lot_purity']/100);
                 $recovered_loss=($loss_account_details['fine']);
