@@ -28,6 +28,7 @@ class Loss_reports extends BaseController {
       $data['department_names']=$category_names;
       $data['type']='category';
       $data['quator']='';
+      $data['completed_at']='2021-11-05';
       if(!empty($data['department_names'])){
         if(isset($_GET['site_name'])&&$_GET['site_name']=='ARC'){
           $ghiss_melting_loss=array();
