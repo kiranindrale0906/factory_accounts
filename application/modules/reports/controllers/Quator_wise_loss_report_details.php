@@ -20,6 +20,7 @@ class Quator_wise_loss_report_details extends Ledgers {
     $this->data['factory_name']=!empty($_GET['factory_name'])?$_GET['factory_name']:'';
     $data['department_name']=$_GET['category'];
     $data['quator']=$_GET['quator'];
+    $data['completed_at']='2021-11-05';
     $url=API_ARG_PATH."issue_and_receipts/loss_report_for_accounts/index";
     $arg_records=json_decode(curl_post_request($url,$data),true);
     $ghiss_melting_loss=array();
