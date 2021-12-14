@@ -22,6 +22,7 @@ class Loss_report_details extends Ledgers {
     $account_data=$this->account_model->find('unrecoverable_account_name',array('name'=>$data['department_name']));
     $this->data['unrecoverable_account_name']=!empty($account_data)?$account_data['unrecoverable_account_name']:'';
     $data['quator']='';
+$data['completed_at'] = '2021-11-05';
     $url=API_ARG_PATH."issue_and_receipts/loss_report_for_accounts/index";
     $arg_records=json_decode(curl_post_request($url,$data),true);
     $ghiss_melting_loss=array();
@@ -58,6 +59,7 @@ class Loss_report_details extends Ledgers {
     $url=API_ARC_PATH."issue_and_receipts/loss_report_for_accounts/index";
     $arc_records=json_decode(curl_post_request($url,$data),true);
     $arc_records=!empty($arc_records)?$arc_records['data']['loss_details']['loss_detail']:$jan2021_records['data']['loss_details']['loss_detail']=array();
+
     $ghiss_melting_loss=$this->voucher_model->get('receipt_type,description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight,id as id,created_at,created_at as first_date,created_at as last_date', array('account_name'=>'Loss Account','site_name'=>'ARC','date(created_at)>='=>'2021-03-13','receipt_type'=>'Ghiss Melting Loss','description'=>$_GET['category'],'quator'=>$data['quator']),array());
     foreach ($ghiss_melting_loss as $ghiss_melting_loss_index => $ghiss_melting_loss_value) {
           $data['issue_department_id']=$ghiss_melting_loss_value['parent_id'];
