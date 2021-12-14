@@ -44,7 +44,7 @@
         <td class="text-right"><?=$fine=!empty($loss_out_detail['loss_fine'])?four_decimal($loss_out_detail['loss_fine']):'-';?></td>
         <td class="text-right"><?=(!empty($loss_out_detail['out_weight'])|| $loss_out_detail['out_weight']!=0)?four_decimal($loss_out_detail['out_weight']):'-';?></td>
 
-        <td class="text-right"><?=(!empty($loss_out_detail['out_weight'])|| $loss_out_detail['out_weight']!=0)?four_decimal(($loss_out_detail['loss_fine']/$loss_out_detail['out_weight']*1000)):'-';?></td>
+        <td class="text-right"><?=(!empty($loss_out_detail['out_weight'])|| $loss_out_detail['out_weight']!=0 || !empty($loss_out_detail['loss_fine']))?four_decimal(($loss_out_detail['loss_fine']/$loss_out_detail['out_weight']*1000)):'-';?></td>
 
 
         <!-- <td class="text-right"><?//=four_decimal($loss_out_detail['production']);?></td> -->
