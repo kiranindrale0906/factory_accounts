@@ -94,6 +94,7 @@ class Quator_wise_loss_reports extends BaseController {
     $category_names=array_column($categories,'description');
      $data['department_names']=array_unique($category_names);
       $data['type']='category';
+      $data['completed_at']='2021-11-04';
       $data['quator']=$this->data['quator_name'];
       if(!empty($data['department_names']) && !empty($this->data['quator_name'])){
         if(isset($_GET['site_name'])&&$_GET['site_name']=='ARC'){
