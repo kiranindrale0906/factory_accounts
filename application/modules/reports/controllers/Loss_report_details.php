@@ -22,7 +22,6 @@ class Loss_report_details extends Ledgers {
     $account_data=$this->account_model->find('unrecoverable_account_name',array('name'=>$data['department_name']));
     $this->data['unrecoverable_account_name']=!empty($account_data)?$account_data['unrecoverable_account_name']:'';
     $data['quator']='';
-    $data['completed_at']='2021-11-05';
     $url=API_ARG_PATH."issue_and_receipts/loss_report_for_accounts/index";
     $arg_records=json_decode(curl_post_request($url,$data),true);
     $ghiss_melting_loss=array();
