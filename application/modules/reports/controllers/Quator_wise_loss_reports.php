@@ -92,8 +92,9 @@ class Quator_wise_loss_reports extends BaseController {
 
     $loss_details= $this->voucher_model->get('description,fine,id', array('account_name'=>'Loss Account','parent_id'=>0),array());
     $category_names=array_column($categories,'description');
-      $data['department_names']=array_unique($category_names);
+     $data['department_names']=array_unique($category_names);
       $data['type']='category';
+      $data['completed_at']='2021-11-05';
       $data['quator']=$this->data['quator_name'];
       if(!empty($data['department_names']) && !empty($this->data['quator_name'])){
         if(isset($_GET['site_name'])&&$_GET['site_name']=='ARC'){
@@ -133,6 +134,7 @@ class Quator_wise_loss_reports extends BaseController {
         }else{
           $ghiss_melting_loss=array();
           $url=API_ARG_PATH."issue_and_receipts/loss_report_for_accounts/index";
+          // pd($data);
           $jan2021_records=json_decode(curl_post_request($url,$data),true);
           $records=!empty($jan2021_records)?$jan2021_records['data']['loss_details']['loss_detail']:$jan2021_records['data']['loss_details']['loss_detail']=array();
           $ghiss_melting_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight', array('account_name'=>'Loss Account','site_name'=>'AR Gold','receipt_type'=>'Ghiss Melting Loss','quator'=>$data['quator']),array());
