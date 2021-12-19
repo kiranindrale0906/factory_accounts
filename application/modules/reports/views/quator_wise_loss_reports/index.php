@@ -262,7 +262,7 @@
         <table class="table table-sm fixedthead table-default">
           <tr class="bold">
             <td>Total Loss</td>
-            <td class="text-right"><?=$without_total_loss=four_decimal($gpc_vodator_fine); ?></td>
+            <td class="text-right"><?=$without_total_loss=four_decimal($gpc_powder_fine-$gpc_vodator_fine); ?></td>
           </tr>
           <tr>
             <td>Total Fine Loss</td>
