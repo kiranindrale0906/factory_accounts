@@ -124,7 +124,12 @@
                   $liabilities_fine = $liabilities_fine + $record['fine']; 
                   $liabilities_amount = $liabilities_amount + $record['amount']; 
                   $liabilities_usd_amount = $liabilities_usd_amount + @$record['usd_amount']; 
+                  $gpc_vodator_fine=0;
                   if(round($record['fine'],2)!=0){
+
+                    if(in_array($record['account_name'], array("AR Gold GPC Vodator","ARF GPC Vodator","ARC GPC Vodator"))){
+                      $gpc_vodator_fine=four_decimal((-1 * $record['fine']), '-');
+                    }
 
                   ?>
 
@@ -180,7 +185,11 @@
                   $assets_fine = $assets_fine + $record['fine'];
                   $assets_amount= $assets_amount + $record['amount'];
                   $assets_usd_amount= $assets_usd_amount + @$record['usd_amount'];
+                  $gpc_powder_fine=0;
                   if(round($record['fine'],2)!=0){
+                    if(in_array($record['account_name'], array("GPC Powder ARC","GPC Powder ARF","GPC Powder AR Gold"))){
+                      $gpc_powder_fine=four_decimal((-1 * $record['fine']), '-');
+                    }
                    ?>
 
                   <tr>
@@ -208,6 +217,8 @@
 </div>
 <div class="row">
   <div class="col-md-6">
+    <h6 class="heading blue bold text-uppercase mb-0">Total Per Kg Loss with Vatav</h6>
+  <hr>
     <div class="form-group container">
       <div class="table-responsive">          
         <table class="table table-sm fixedthead table-default">
@@ -237,7 +248,45 @@
           </tr>
           <tr>
             <td>Per Kg Loss</td>
-            <td class="text-right"><?=(!empty($work)&&$work!=0)?four_decimal($total_unrecover_loss_vatav/$work):0 ?></td>
+            <td class="text-right"><?=($work!=0)?four_decimal($total_unrecover_loss_vatav/$work):0 ?></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <h6 class="heading blue bold text-uppercase mb-0">Total Per Kg Loss without Vatav</h6>
+  <hr>
+    <div class="form-group container">
+      <div class="table-responsive">          
+        <table class="table table-sm fixedthead table-default">
+          <tr class="bold">
+            <td>Total Loss</td>
+            <td class="text-right"><?=$without_total_loss=four_decimal($gpc_powder_fine-$gpc_vodator_fine); ?></td>
+          </tr>
+          <tr>
+            <td>Total Fine Loss</td>
+            <td class="text-right"><?= four_decimal($sum_loss_fine)?></td>
+          </tr> 
+          <tr>
+            <td>Total Fine Loss Recovered</td>
+            <td class="text-right"><?= four_decimal($sum_recoverd_loss_fine)?></td>
+          </tr>
+          <tr>
+            <td>Recovery%</td>
+            <td class="text-right"><?= four_decimal($recovered_per) ?>  </td>
+          </tr>
+          <tr>
+            <td>Total Unrecoverable Loss with vatav and Other Loss</td>
+            <td class="text-right"><?= $total_unrecover_loss_vatav=four_decimal($sum_unrecoverable_loss+$without_total_loss); ?></td>
+          </tr>
+          <tr>
+            <td>Work</td>
+            <td class="text-right"><?=$work=!empty($work_details)?abs(four_decimal($work_details['amount'])):0; ?></td>
+          </tr>
+          <tr>
+            <td>Per Kg Loss</td>
+            <td class="text-right"><?=($work!=0)?four_decimal($total_unrecover_loss_vatav/$work):0 ?></td>
           </tr>
         </table>
       </div>
