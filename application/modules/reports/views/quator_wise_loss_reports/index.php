@@ -188,7 +188,7 @@
                   $gpc_powder_fine=0;
                   if(round($record['fine'],2)!=0){
                     if(in_array($record['account_name'], array("GPC Powder ARC","GPC Powder ARF","GPC Powder AR Gold"))){
-                      $gpc_powder_fine=four_decimal((-1 * $record['fine']), '-');
+                      $gpc_powder_fine=four_decimal(($record['fine']), '-');
                     }
                    ?>
 
@@ -262,7 +262,7 @@
         <table class="table table-sm fixedthead table-default">
           <tr class="bold">
             <td>Total Loss</td>
-            <td class="text-right"><?=$without_total_loss=four_decimal($gpc_powder_fine); ?></td>
+            <td class="text-right"><?=$without_total_loss=four_decimal($$gpc_vodator_fine); ?></td>
           </tr>
           <tr>
             <td>Total Fine Loss</td>
