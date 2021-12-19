@@ -269,7 +269,7 @@ class Trial_balances extends Ledgers {
 
     $this->data['domestic_labour_amount'] = $this->model->find('  IFNULL(sum(debit_amount),0) 
                                                                 - IFNULL(sum(credit_amount),0) as amount', 
-                                                array_merge($where, array('account_name' => array('DOMESTIC LABOUR ACCOUNT'))), 
+                                                array_merge($where, array('account_name' => array('Domestic Labour Amount'))), 
                                                 array());
     if (empty($this->data['domestic_labour_amount'])) $this->data['domestic_labour_amount'] = array('amount' => 0);
 
