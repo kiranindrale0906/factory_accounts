@@ -127,7 +127,7 @@
                   $liabilities_amount = $liabilities_amount + $record['amount']; 
                   $liabilities_usd_amount = $liabilities_usd_amount + @$record['usd_amount']; 
                   if(round($record['fine'],2)!=0){
-                    if($record['account_name']="AR Gold GPC Vodator","ARF GPC Vodator","ARC GPC Vodator"))){
+                    if(in_array($record['account_name'],array("AR Gold GPC Vodator","ARF GPC Vodator","ARC GPC Vodator"))){
                       $gpc_vodator_fine=four_decimal((-1 * $record['fine']), '-');
                     }
                   ?>
