@@ -3,7 +3,7 @@
 class Ledgers extends BaseController {
   public function __construct() {
     parent::__construct();
-    $this->load->model(array('transactions/ledger_model', 'masters/account_model'));
+    $this->load->model(array('transactions/ledger_model', 'masters/account_model', 'argold/chitti_model'));
   }
 
   protected function get_datewise_ledger_records() {
