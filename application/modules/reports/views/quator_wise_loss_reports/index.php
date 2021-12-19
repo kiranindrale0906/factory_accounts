@@ -110,6 +110,7 @@
               $liabilities_vadotar = 0;  
               $liabilities_amount = 0;
               $liabilities_usd_amount = 0;
+              $gpc_vodator_fine=0;
 
               if(!empty($loss_account_records)) {
                 foreach ($loss_account_records as $record) {
@@ -120,17 +121,15 @@
                   if ($record['account_name'] == 'SALES ACCOUNT') $profit_and_loss['sales_account'] = $record;
                   if (!empty($sales_accounts)) $profit_and_loss['sale_gst_accounts'] = $sales_accounts;
 
+                  
                   $liabilities_vadotar = $liabilities_vadotar + $record['vadotar'];
                   $liabilities_fine = $liabilities_fine + $record['fine']; 
                   $liabilities_amount = $liabilities_amount + $record['amount']; 
                   $liabilities_usd_amount = $liabilities_usd_amount + @$record['usd_amount']; 
-                  $gpc_vodator_fine=0;
                   if(round($record['fine'],2)!=0){
-
-                    if($record['account_name']=="AR Gold GPC Vodator"){
+                    if($record['account_name']="AR Gold GPC Vodator","ARF GPC Vodator","ARC GPC Vodator"))){
                       $gpc_vodator_fine=four_decimal((-1 * $record['fine']), '-');
                     }
-
                   ?>
 
                   <tr>
@@ -172,6 +171,7 @@
               $assets_vadotar = 0;  
               $assets_amount = 0;  
               $assets_usd_amount = 0;  
+              $gpc_powder_fine=0;
               if(!empty($loss_account_records)) {
                 foreach ($loss_account_records as $record) {
                   if (   ($record['fine'] <= 0
@@ -185,7 +185,7 @@
                   $assets_fine = $assets_fine + $record['fine'];
                   $assets_amount= $assets_amount + $record['amount'];
                   $assets_usd_amount= $assets_usd_amount + @$record['usd_amount'];
-                  $gpc_powder_fine=0;
+                  
                   if(round($record['fine'],2)!=0){
                     if(in_array($record['account_name'], array("GPC Powder ARC","GPC Powder ARF","GPC Powder AR Gold"))){
                       $gpc_powder_fine=four_decimal(($record['fine']), '-');
