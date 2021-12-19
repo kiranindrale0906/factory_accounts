@@ -17,6 +17,10 @@ class Domestic_export_ledgers extends Ledgers {
     $this->data['report_type'] = 'Export Sale Ledger';
     }elseif(!empty($_GET['report_type'])&&$_GET['report_type']=='domestic_purchase'){
     $this->data['report_type'] = 'Domestic Purchase Ledger';
+    }elseif(!empty($_GET['report_type'])&&$_GET['report_type']=='domestic_labour'){
+    $this->data['report_type'] = 'Domestic Labour Ledger';
+    }elseif(!empty($_GET['report_type'])&&$_GET['report_type']=='export_labour'){
+    $this->data['report_type'] = 'Export Labour Ledger';
     }else{
     $this->data['report_type'] = 'Domestic Sale Ledger';
     }
