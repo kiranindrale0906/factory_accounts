@@ -127,7 +127,7 @@
                   $gpc_vodator_fine=0;
                   if(round($record['fine'],2)!=0){
 
-                    if(in_array($record['account_name'], array("AR Gold GPC Vodator","ARF GPC Vodator","ARC GPC Vodator"))){
+                    if($record['account_name']="AR Gold GPC Vodator"){
                       $gpc_vodator_fine=four_decimal((-1 * $record['fine']), '-');
                     }
 
