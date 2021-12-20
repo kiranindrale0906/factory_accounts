@@ -3,7 +3,7 @@
 class Ledgers extends BaseController {
   public function __construct() {
     parent::__construct();
-    $this->load->model(array('transactions/ledger_model', 'masters/account_model'));
+    $this->load->model(array('transactions/ledger_model', 'masters/account_model', 'argold/chitti_model'));
   }
 
   protected function get_datewise_ledger_records() {
@@ -166,7 +166,7 @@ class Ledgers extends BaseController {
     $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(), array('order_by'=>'parent_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
      $domestic_export_receipt_issue_select='account_name,voucher_date,date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,((debit_weight*purity)/100)- 
     ((credit_weight*factory_purity)/100) as fine, ((purity-factory_purity)*debit_weight/100) - 
-    ((factory_purity-purity)*credit_weight/100) as vadotar, (debit_amount - credit_amount) as credit_weight, 0 as `id`,0 as debit_amount,0 as usd_credit_amount,usd_debit_amount,account_id,0 as debit_weight,0 as credit_amount,description,narration,chitti_id as chitti_no,purity,factory_purity,factory_fine';
+    ((factory_purity-purity)*credit_weight/100) as vadotar, (debit_amount - credit_amount) as credit_weight, 0 as `id`,0 as debit_amount,account_id,0 as debit_weight,0 as usd_credit_amount,0 as usd_debit_amount,0 as credit_amount,description,narration,chitti_id as chitti_no,purity,factory_purity,factory_fine';
 
     if($this->data['report_type']=='Domestic Sale Ledger'){
     $receipts = $this->voucher_model->get($domestic_export_receipt_issue_select,array('account_name' =>'SALES ACCOUNT','is_export'=> 0), array(), array('order_by'=>'parent_id, voucher_type asc', 'group_by' => $this->data['group']));
@@ -192,6 +192,22 @@ class Ledgers extends BaseController {
 
     if($this->data['report_type']=='Export Purchase Ledger'){
      $receipts = $this->voucher_model->get($domestic_export_receipt_issue_select,array('account_name' => 'PURCHASE ACCOUNT','is_export'=> 1), array(), array('order_by'=>'parent_id, voucher_type asc', 'group_by' => $this->data['group']));
+
+    $issues=array();
+    $issue_voucher_dates=array();
+    }
+    if($this->data['report_type']=='Domestic Labour Ledger'){
+     $receipts = $this->voucher_model->get($domestic_export_receipt_issue_select,array('account_name' => 'DOMESTIC LABOUR ACCOUNT'), array(), array('order_by'=>'parent_id, voucher_type asc', 'group_by' => $this->data['group']));
+
+    $issues=array();
+    $issue_voucher_dates=array();
+    }
+    if($this->data['report_type']=='Export Labour Ledger'){
+    $where['chitties.usd_rate != 0'] = NULL;
+    $where['chitties.ounce_rate != 0 or chitties.usd_rate != 0'] = NULL;
+      $domestic_export_receipt_issue_select='ac_vouchers.account_name,date as voucher_date,date_format(chitties.date,"%Y-%m-%d") as str_voucher_date,0 as fine, 0 as vadotar, (chitties.labour_usd_amount * chitties.usd_rate) + (chitties.freight_usd_amount * chitties.usd_rate) as credit_weight, 0 as `id`,0 as debit_amount,0 as usd_credit_amount,0 as account_id,0 as debit_weight,0 as credit_amount,0 as usd_credit_amount,0 as usd_debit_amount,"" as description,"" as narration,chitties.id as chitti_no,ac_vouchers.purity,ac_vouchers.factory_purity,ac_vouchers.factory_fine';
+
+     $receipts = $this->chitti_model->get($domestic_export_receipt_issue_select,$where,array(array('ac_vouchers',  'ac_vouchers.chitti_id=chitties.id'))/*, array('order_by'=>'parent_id, voucher_type asc', 'group_by' => $this->data['group']*/);
 
     $issues=array();
     $issue_voucher_dates=array();

@@ -12,6 +12,12 @@
           <a class="ml-5" 
              href='<?= base_url()?>reports/domestic_export_ledgers?report_type=export_purchase'>Export Purchase</a>
 
+          <a class="ml-5" 
+             href='<?= base_url()?>reports/domestic_export_ledgers?report_type=domestic_labour'>Domestic Labour</a>
+          <a class="ml-5" 
+             href='<?= base_url()?>reports/domestic_export_ledgers?report_type=export_labour'>Export Labour</a>
+
+        
         </h5>
       </div>
   </div>
