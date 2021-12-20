@@ -10,7 +10,12 @@
     <?php if (!in_array($report_type, array("Export Purchase Ledger","Domestic Purchase Ledger","Domestic Sale Ledger","Export Sale Ledger"))): ?>
     <th>Narration</th>
     <?php endif; ?>
+    <?php if (in_array($report_type, array("Export Labour Ledger","Domestic Labour Ledger"))){ ?>
+    <th class='text-right'>Amount</th>
+    <?php }else{ ?>
     <th class='text-right'>Gross Wt</th>
+    <?php } ?>
+    
     <th class='text-right'>Factory Melting</th>
     <th class='text-right'>Factory Fine</th>
     <?php if (!in_array($report_type, array("Export Purchase Ledger","Domestic Purchase Ledger","Domestic Sale Ledger","Export Sale Ledger"))): ?>
