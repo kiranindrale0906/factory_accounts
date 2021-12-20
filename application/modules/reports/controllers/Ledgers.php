@@ -200,8 +200,8 @@ class Ledgers extends BaseController {
     $issue_voucher_dates=array();
     }
     if($this->data['report_type']=='Export Labour Ledger'){
-    $where['usd_rate != 0'] = NULL;
-    $where['ounce_rate != 0 or usd_rate != 0'] = NULL;
+    $where['chitties.usd_rate != 0'] = NULL;
+    $where['chitties.ounce_rate != 0 or chitties.usd_rate != 0'] = NULL;
       $domestic_export_receipt_issue_select='ac_vouchers.account_name,date as voucher_date,date_format(chitties.date,"%Y-%m-%d") as str_voucher_date,0 as fine, 0 as vadotar, (chitties.labour_usd_amount * chitties.usd_rate) + (chitties.freight_usd_amount * chitties.usd_rate) as credit_weight, 0 as `id`,0 as debit_amount,0 as usd_credit_amount,0 as account_id,0 as debit_weight,0 as credit_amount,"" as description,"" as narration,chitties.id as chitti_no,ac_vouchers.purity,ac_vouchers.factory_purity,ac_vouchers.factory_fine';
 
      $receipts = $this->chitti_model->get($domestic_export_receipt_issue_select,$where,array(array('ac_vouchers',  'ac_vouchers.chitti_id=chitties.id'))/*, array('order_by'=>'parent_id, voucher_type asc', 'group_by' => $this->data['group']*/);
