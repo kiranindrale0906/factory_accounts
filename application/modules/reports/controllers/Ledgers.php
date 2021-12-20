@@ -58,6 +58,9 @@ class Ledgers extends BaseController {
                 )'] = NULL;
       } elseif ($this->data['domestic_export'] == 'Domestic') {
         $where['purity != factory_purity'] = NULL;
+      } elseif ($this->data['domestic_export'] == 'Tanishq') {
+        $where['account_name'] = 'Tanishq';
+        $where['voucher_type'] = 'metal issue voucher';
       } elseif ($this->data['domestic_export'] == 'Export') {
         $where['(    account_name in ("'.$export_account_names.'") 
                  and voucher_type = "metal issue voucher")'] = NULL;
