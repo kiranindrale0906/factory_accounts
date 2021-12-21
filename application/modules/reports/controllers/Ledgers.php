@@ -199,7 +199,7 @@ class Ledgers extends BaseController {
     }
     if($this->data['report_type']=='Domestic Labour Ledger'){
       $where_receipt['account_name']="Domestic Labour Amount";
-     $receipts = $this->ledger_model->get('receipt_type, '.$period_select.' as voucher_date, 
+     $receipts = $this->ledger_model->get('receipt_type, date_format(voucher_date,"%Y-%m-%d") as voucher_date, 
                                date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
                                account_name, voucher_type, 
                                site_name, voucher_type, 
