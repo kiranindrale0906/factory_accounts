@@ -10,11 +10,7 @@
     <?php if (!in_array($report_type, array("Export Purchase Ledger","Domestic Purchase Ledger","Domestic Sale Ledger","Export Sale Ledger"))): ?>
     <th>Narration</th>
     <?php endif; ?>
-    <?php if (in_array($report_type, array("Export Labour Ledger","Domestic Labour Ledger"))){ ?>
-    <th class='text-right'>Amount</th>
-    <?php }else{ ?>
     <th class='text-right'>Gross Wt</th>
-    <?php } ?>
     
     <th class='text-right'>Factory Melting</th>
     <th class='text-right'>Factory Fine</th>
@@ -26,7 +22,7 @@
       <th class='text-right'>Vadotar</th>
       <th class='text-right'>%</th>
     <?php endif; ?>  
-    <?php if ($report_type == 'Account Ledger' || $report_type == 'Vadotar Report'): ?>
+    <?php if ($report_type == 'Domestic Labour Ledger' || $report_type == 'Export Labour Ledger' ||$report_type == 'Account Ledger' || $report_type == 'Vadotar Report'): ?>
       <th class='text-right'>Amount</th>
       <th class='text-right'>Usd Amount</th>
     <?php endif; ?>
