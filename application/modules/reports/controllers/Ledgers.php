@@ -198,7 +198,7 @@ class Ledgers extends BaseController {
     }
     if($this->data['report_type']=='Domestic Labour Ledger'){
       $where_receipt['account_name']="Domestic Labour Amount";
-     $receipts = $this->voucher_model->get($receipt_issue_select, $where_issue,array(), array('order_by'=>'parent_id, voucher_type asc', 'group_by' => $this->data['group']));
+     $this->ledger_model->get($receipt_issue_select, $where_receipt, array(), array('order_by'=>'parent_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
 
     $issues=array();
     $issue_voucher_dates=array();
