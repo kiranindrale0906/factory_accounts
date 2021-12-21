@@ -17,7 +17,7 @@ class Ledgers extends BaseController {
     $this->data['record']['account_id'] = (!empty($_GET[$this->router->class]['account_id'])) ? $_GET[$this->router->class]['account_id'] : $this->data['account_id'];
     if (empty($this->data['account_id'])) $this->data['account_id'] = $this->data['record']['account_id'];
 
-    if ($this->data['period'] == 'date' && ($this->data['report_type'] == 'Account Ledger'))
+    if ($this->data['period'] == 'date' && ($this->data['report_type'] == 'Account Ledger' || $this->data['report_type'] == 'Domestic Labour Ledger'))
       $this->data['group'] = 'date';
     elseif ($this->data['period'] == 'date' && ($this->data['report_type'] == 'Metal Receipt Type Report'))
       $this->data['group'] = 'date';
@@ -70,7 +70,7 @@ class Ledgers extends BaseController {
 
     if ($this->data['report_type'] == 'Production Report') $where['account_name != '] = 'VADOTAR';
     
-    if ($this->data['report_type'] == 'Account Ledger' && $this->data['group'] == 'date')
+    if (($this->data['report_type'] == 'Account Ledger'|| $this->data['report_type'] == 'Domestic Labour Ledger') && $this->data['group'] == 'date')
       $this->data['group'] = 'voucher_type, voucher_date, chitti_no, receipt_type, account_name';
     if ($this->data['report_type'] == 'Metal Receipt Type Report' && $this->data['group'] == 'date')
       $this->data['group'] = 'voucher_type, voucher_date, receipt_type';      
