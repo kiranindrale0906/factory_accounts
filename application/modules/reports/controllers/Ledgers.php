@@ -207,7 +207,7 @@ class Ledgers extends BaseController {
     $where['chitties.ounce_rate != 0 or chitties.usd_rate != 0'] = NULL;
       $domestic_export_receipt_issue_select='ac_vouchers.account_name,date as voucher_date,date_format(chitties.date,"%Y-%m-%d") as str_voucher_date,0 as fine, 0 as vadotar, (chitties.labour_usd_amount * chitties.usd_rate) + (chitties.freight_usd_amount * chitties.usd_rate) as credit_weight, 0 as `id`,0 as debit_amount,0 as usd_credit_amount,0 as account_id,0 as debit_weight,0 as credit_amount,0 as usd_credit_amount,0 as usd_debit_amount,"" as description,"" as narration,chitties.id as chitti_no,ac_vouchers.purity,ac_vouchers.factory_purity,ac_vouchers.factory_fine';
 
-     $receipts = $this->chitti_model->get($domestic_export_receipt_issue_select,$where,array(array('ac_vouchers',  'ac_vouchers.chitti_id=chitties.id')), array('order_by'=>'ac_vouchers.parent_id, ac_vouchers.voucher_type asc'));
+     $receipts = $this->chitti_model->get($domestic_export_receipt_issue_select,$where,array(array('ac_vouchers',  'ac_vouchers.chitti_id=chitties.id','left')), array('order_by'=>'ac_vouchers.parent_id, ac_vouchers.voucher_type asc'));
 
     $issues=array();
     $issue_voucher_dates=array();
