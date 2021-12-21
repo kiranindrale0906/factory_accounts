@@ -164,7 +164,7 @@ class Ledgers extends BaseController {
     $where_receipt = array_merge($where, array('(debit_weight != 0 or debit_amount != 0)'   => NULL),$account_receipt_where);
     $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(), array('order_by'=>'chitti_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
     $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(), array('order_by'=>'parent_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
-    
+
      $domestic_export_receipt_issue_select='account_name,voucher_date,date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,((debit_weight*purity)/100)- 
     ((credit_weight*factory_purity)/100) as fine, ((purity-factory_purity)*debit_weight/100) - 
     ((factory_purity-purity)*credit_weight/100) as vadotar, (debit_amount - credit_amount) as credit_weight, 0 as `id`,0 as debit_amount,account_id,0 as debit_weight,0 as usd_credit_amount,0 as usd_debit_amount,0 as credit_amount,description,narration,chitti_id as chitti_no,purity,factory_purity,factory_fine';
@@ -199,7 +199,24 @@ class Ledgers extends BaseController {
     }
     if($this->data['report_type']=='Domestic Labour Ledger'){
       $where_receipt['account_name']="Domestic Labour Amount";
-     $receipts = $this->voucher_model->get($receipt_issue_select, $where_issue,array(), array('order_by'=>'parent_id, voucher_type asc', 'group_by' => $this->data['group']));
+     $receipts = $this->ledger_model->get('receipt_type, '.$period_select.' as voucher_date, 
+                               date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
+                               account_name, voucher_type, 
+                               site_name, voucher_type, 
+                               concat(voucher_number, ", ") as voucher_number, 
+                               sum(credit_amount) as credit_amount, 
+                               sum(usd_credit_amount) as usd_credit_amount, 
+                               sum(debit_amount) as debit_amount, 
+                               sum(usd_debit_amount) as usd_debit_amount, 
+                               sum(credit_weight) as credit_weight, 
+                               sum(debit_weight) as debit_weight,
+                               sum(fine) as fine,
+                               sum(factory_fine) as factory_fine,
+                               0 as purity_margin, 
+                               sum((credit_weight+debit_weight) * purity) / sum(credit_weight+debit_weight) as purity, 
+                               sum((credit_weight+debit_weight) * factory_purity) / sum(credit_weight+debit_weight) as factory_purity, 
+                               concat(narration, " ,") as narration, concat(description, " ,") as description, 
+                               chitti_id as chitti_no,parent_id as parent_id,id as id', $where_receipt,array(), array('order_by'=>'parent_id, voucher_type asc', 'group_by' => $this->data['group']));
 
     $issues=array();
     $issue_voucher_dates=array();
