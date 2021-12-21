@@ -248,7 +248,7 @@
           </tr>
           <tr>
             <td>Per Kg Loss</td>
-            <td class="text-right"><?=($work!=0)?four_decimal($total_unrecover_loss_vatav/$work):0 ?></td>
+            <td class="text-right"><?=($work!=0)?four_decimal(($total_unrecover_loss_vatav/$work)*1000):0 ?></td>
           </tr>
         </table>
       </div>
@@ -278,15 +278,15 @@
           </tr>
           <tr>
             <td>Total Unrecoverable Loss with vatav and Other Loss</td>
-            <td class="text-right"><?= $total_unrecover_loss_vatav=four_decimal($sum_unrecoverable_loss+$without_total_loss); ?></td>
+            <td class="text-right"><?= $total_unrecover_loss_withoutvatav=four_decimal($sum_unrecoverable_loss+$without_total_loss); ?></td>
           </tr>
           <tr>
             <td>Work</td>
-            <td class="text-right"><?=$work=!empty($work_details)?abs(four_decimal($work_details['amount'])):0; ?></td>
+            <td class="text-right"><?=$without_vatav_work=!empty($work_details)?abs(four_decimal($work_details['amount'])):0; ?></td>
           </tr>
           <tr>
             <td>Per Kg Loss</td>
-            <td class="text-right"><?=($work!=0)?four_decimal($total_unrecover_loss_vatav/$work):0 ?></td>
+            <td class="text-right"><?=($without_vatav_work!=0)?four_decimal(($total_unrecover_loss_withoutvatav/$without_vatav_work)*1000):0 ?></td>
           </tr>
         </table>
       </div>
