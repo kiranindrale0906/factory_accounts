@@ -11,110 +11,112 @@ class Loss_reports extends BaseController {
   public function index() {
     $this->data['report_type'] = 'Rojmel Report';
     $this->_get_form_data();
-    // $this->get_loss_details();
     $this->load->render($this->router->class."/index",$this->data);
   }
-  public function _get_form_data() {
 
-    $this->data['factory_name']=!empty($_GET['site_name'])?$_GET['site_name']:'AR Gold';
+  public function _get_form_data() {
     $this->data['site_name']            = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'All';
     $this->data['account_id']           = (!empty($_GET['account_id'])) ? $_GET['account_id'] : 0;
+    $this->data['factory_name'] = $this->data['site_name'];
     
-    $this->data['loss_categories']=array();
-    $categories= $this->voucher_model->get('description', array('account_name'=>'Loss Account','date(created_at)>='=>'2021-03-13'),array(),array('group_by'=>'description'));
+    $this->data['loss_categories'] = array();
+    
+    $data['department_names'] = $this->get_loss_department_names();
+    $data['quator'] = '';
+    $data['type'] = 'category';
+    $data['completed_at'] = '2021-11-05';
+    
+    if (empty($data['department_names'])) return;
+    if (!isset($this->data['site_name']) || $this->data['site_name']=='All') return;
 
-    $loss_details= $this->voucher_model->get('description,fine,id', array('account_name'=>'Loss Account','parent_id'=>0),array());
-    $category_names=array_column($categories,'description');
-      $data['department_names']=$category_names;
-      $data['type']='category';
-      $data['quator']='';
-      $data['completed_at']='2021-11-05';
-      if(!empty($data['department_names'])){
-        if(isset($_GET['site_name'])&&$_GET['site_name']=='ARC'){
-          $ghiss_melting_loss=array();
-          $url=API_ARC_PATH."issue_and_receipts/loss_report_for_accounts/index";
-          $jan2021_records=json_decode(curl_post_request($url,$data),true);
+    $factory_loss_records = $this->get_loss_records_from_factory($data);
+    $ghiss_melting_loss_records = $this->get_ghiss_melting_loss($data);
+    $loss_records = array_merge($factory_loss_records, $ghiss_melting_loss_records);
 
-          $records=!empty($jan2021_records)?$jan2021_records['data']['loss_details']['loss_detail']:$jan2021_records['data']['loss_details']['loss_detail']=array();
-          $ghiss_melting_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight', array('account_name'=>'Loss Account','site_name'=>'ARC','receipt_type'=>'Ghiss Melting Loss','quator'=>$data['quator']),array());
-          foreach ($ghiss_melting_loss as $ghiss_melting_loss_index => $ghiss_melting_loss_value) {
-            $data['issue_department_id']=$ghiss_melting_loss_value['parent_id'];
-            $data['quator']='';
-            $url=API_ARC_PATH."issue_and_receipts/loss_report_for_accounts/index";
-            $ghiss_details=json_decode(curl_post_request($url,$data),true);
-            $out_weight=!empty($ghiss_details)&&(!empty($ghiss_details['data']['ghiss_melting_out_weights']))?$ghiss_details['data']['ghiss_melting_out_weights']:0;
-            $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight']=$out_weight;
-          }
-          $arg_records=array_merge($records,$ghiss_melting_loss);
+    if (empty($loss_records)) return;    
+  
+    $category_names = array_map('strtolower', $data['department_names']);
+    foreach ($category_names as $category_name_index => $category_name) {
+      $total_loss_fine = $recoverd_loss_fine = $unrecovery_loss = $fine_loss = $total_out_weight = 0;
+      $recovered_loss = $total_recovery_loss = $total_unrecovery_loss = $after_recovered_loss = 0;
+      $total_after_recovered_loss = $total_balance = $balance = 0;
 
-        }elseif(isset($_GET['site_name'])&&$_GET['site_name']=='ARF'){
-          $ghiss_melting_loss=array();
-          $url=API_ARF_PATH."issue_and_receipts/loss_report_for_accounts/index";
-          $jan2021_records=json_decode(curl_post_request($url,$data),true);
-           $records=!empty($jan2021_records)?$jan2021_records['data']['loss_details']['loss_detail']:$jan2021_records['data']['loss_details']['loss_detail']=array();
+      foreach ($loss_records as $index => $loss_record) {
+        if (trim(strtolower($loss_record['description'])) == trim($category_name)) {
+          $factory_wise_record[$index]['production']=0;
           
-          $ghiss_melting_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight', array('account_name'=>'Loss Account','site_name'=>'ARF','receipt_type'=>'Ghiss Melting Loss','quator'=>$data['quator']),array());
-          foreach ($ghiss_melting_loss as $ghiss_melting_loss_index => $ghiss_melting_loss_value) {
-          $data['issue_department_id']=$ghiss_melting_loss_value['parent_id'];
-          $data['quator']='';
-          $url=API_ARF_PATH."issue_and_receipts/loss_report_for_accounts/index";
-          $ghiss_details=json_decode(curl_post_request($url,$data),true);
-          $out_weight=!empty($ghiss_details)&&(!empty($ghiss_details['data']['ghiss_melting_out_weights']))?$ghiss_details['data']['ghiss_melting_out_weights']:0;
-          $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight']=$out_weight;
-          }
-          $arg_records=array_merge($records,$ghiss_melting_loss);
+          $recovered_details = $this->voucher_model->find('sum(debit_weight) as weight,
+                                                              factory_purity, sum(fine) as fine',
+                                              array('parent_id' => $loss_record['parent_id'],
+                                                    'account_name!=' => 'Unrecovarable'.' '.$this->data['site_name']));
+          
+          $unrecovered_details = $this->voucher_model->find('sum(credit_weight) as weight',
+                                               array('parent_id' => $loss_record['parent_id'],
+                                                     'account_name' => 'Unrecovarable'.' '.$this->data['site_name']));
 
-        }else{
-          $ghiss_melting_loss=array();
-          $url=API_ARG_PATH."issue_and_receipts/loss_report_for_accounts/index";
-          $jan2021_records=json_decode(curl_post_request($url,$data),true);
-          $records=!empty($jan2021_records)?$jan2021_records['data']['loss_details']['loss_detail']:$jan2021_records['data']['loss_details']['loss_detail']=array();
-          $ghiss_melting_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight', array('account_name'=>'Loss Account','site_name'=>'AR Gold','receipt_type'=>'Ghiss Melting Loss','quator'=>$data['quator']),array());
-          foreach ($ghiss_melting_loss as $ghiss_melting_loss_index => $ghiss_melting_loss_value) {
-          $data['issue_department_id']=$ghiss_melting_loss_value['parent_id'];
-          $data['quator']='';
-          $url=API_ARG_PATH."issue_and_receipts/loss_report_for_accounts/index";
-          $ghiss_details=json_decode(curl_post_request($url,$data),true);
-          $out_weight=!empty($ghiss_details)&&(!empty($ghiss_details['data']['ghiss_melting_out_weights']))?$ghiss_details['data']['ghiss_melting_out_weights']:0;
-          $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight']=$out_weight;
-          }
-          $arg_records=array_merge($records,$ghiss_melting_loss);
-          }
-      if(!empty($arg_records)){
-        $category_names = array_map( 'strtolower', $category_names );
-      foreach ($category_names as $category_name_index => $category_name) {
-        $total_production=$total_loss_fine=$recoverd_loss_fine=$all_loss_before_recovery=$unrecovery_loss=$fine_loss=$total_out_weight=$per_kg_loss=$total_per_kg_loss=$before_recovery_loss=$total_before_recovery_loss=$recovered_loss=$total_recovery_loss=$after_recovery_loss=$total_after_recovery_loss=$total_unrecovery_loss=$after_recovered_loss=$total_after_recovered_loss=$total_balance=$balance=0;
-          foreach ($arg_records as $index => $arg_loss_detail) {
-              if(trim(strtolower($arg_loss_detail['description']))==trim($category_name)){
-                $factory_wise_record[$index]['production']=0;
-                $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$arg_loss_detail['parent_id'],'account_name!='=>'Unrecovarable'.' '.$this->data['factory_name']));
-                
-                $unrecovery_details = $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$arg_loss_detail['parent_id'],'account_name'=>'Unrecovarable'.' '.$this->data['factory_name']));
+          $fine_loss = ($loss_record['in_weight'] * $loss_record['in_lot_purity'] / 100);
+          $recovered_loss = $recovered_details['fine'];
+          $after_recovered_loss = $recovered_details['weight'];
+          $unrecovery_loss = !empty($unrecovered_details) ? $unrecovered_details['weight'] : 0;
+          $balance = $fine_loss - $recovered_loss - $unrecovery_loss;
+       
+          if (!isset($this->data['loss_categories'][$category_name])) 
+            $this->data['loss_categories'][$category_name] = array('loss_fine' => 0,
+                                                                   'out_weight' => 0,
+                                                                   'recoverd_loss_fine' => 0,
+                                                                   'after_recovered_loss' => 0,
+                                                                   'unrecoverable_loss' => 0,
+                                                                   'balance' => 0);
 
-                $fine_loss=($arg_loss_detail['in_weight']*$arg_loss_detail['in_lot_purity']/100);
-                $recovered_loss=($loss_account_details['fine']);
-                $after_recovered_loss=($loss_account_details['weight']);
-                $unrecovery_loss=!empty($unrecovery_details)?$unrecovery_details['weight']:0;
-                $balance=$fine_loss-$recovered_loss-$unrecovery_loss;
-             
-                $total_out_weight+=$arg_loss_detail['out_weight'];
-                $total_loss_fine+=$fine_loss;
-                $total_recovery_loss+=$recovered_loss;
-                $total_after_recovered_loss+=$after_recovered_loss;
-                $total_unrecovery_loss+=$unrecovery_loss;
-                $total_balance+=$balance;
-
-                $this->data['loss_categories'][$arg_loss_detail['description']]['loss_fine']=$total_loss_fine;
-                $this->data['loss_categories'][$arg_loss_detail['description']]['out_weight']=$total_out_weight;
-                $this->data['loss_categories'][$arg_loss_detail['description']]['recoverd_loss_fine']=$total_recovery_loss;
-                $this->data['loss_categories'][$arg_loss_detail['description']]['after_recovered_loss']=$total_after_recovered_loss;
-                $this->data['loss_categories'][$arg_loss_detail['description']]['unrecoverable_loss']=$total_unrecovery_loss;
-                $this->data['loss_categories'][$arg_loss_detail['description']]['balance']=$total_balance;
-              }
-          }
+          $this->data['loss_categories'][$category_name]['out_weight'] += $loss_record['out_weight'];
+          $this->data['loss_categories'][$category_name]['loss_fine'] += $fine_loss;
+          $this->data['loss_categories'][$category_name]['recoverd_loss_fine'] += $recovered_loss;
+          $this->data['loss_categories'][$category_name]['after_recovered_loss'] += $after_recovered_loss;
+          $this->data['loss_categories'][$category_name]['unrecoverable_loss'] += $unrecovery_loss;
+          $this->data['loss_categories'][$category_name]['balance'] += $balance;
         }
       }
-    }
-  }  
-}
+    }  
+  }
 
+  private function get_loss_department_names() {
+    $category_names = $this->voucher_model->get('distinct(description) as description', 
+                                           array('account_name' => 'Loss Account',
+                                                 'date(created_at)>=' => '2021-03-13'));
+    return array_column($category_names, 'description');
+  }
+
+  private function get_loss_records_from_factory($postdata) {
+    if ($this->data['site_name']=='ARC')         $path = API_ARC_PATH;
+    elseif ($this->data['site_name']=='ARF')     $path = API_ARF_PATH;
+    elseif ($this->data['site_name']=='AR Gold') $path = API_ARG_PATH;
+    else return array();
+
+    $url = $path.'issue_and_receipts/loss_report_for_accounts/index';
+    $factory_loss_records = json_decode(curl_post_request($url, $postdata), true);
+    return !empty($factory_loss_records) ? $factory_loss_records['data']['loss_details']['loss_detail'] : array();
+  }  
+
+  private function get_ghiss_melting_loss($data) {
+    $ghiss_melting_loss = $this->voucher_model->get('description, site_name, credit_weight as in_weight, 
+                                                     purity as in_lot_purity, argold_id as parent_id,
+                                                     0 as out_weight', 
+                                                     array('account_name' => 'Loss Account',
+                                                           'site_name' => $this->data['site_name'],
+                                                           'receipt_type' => 'Ghiss Melting Loss',
+                                                           'quator'=> ''));
+    foreach ($ghiss_melting_loss as $ghiss_melting_loss_index => $ghiss_melting_loss_value) {
+      $data['issue_department_id'] = $ghiss_melting_loss_value['parent_id'];
+      $data['quator'] = '';
+
+      $ghiss_details = $this->get_loss_records_from_factory($data);
+
+      $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight'] = 0;
+      if (   !empty($ghiss_details) 
+          && !empty($ghiss_details['data']['ghiss_melting_out_weights']) ) 
+        $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight'] = $ghiss_details['data']['ghiss_melting_out_weights'];
+    }
+
+    return $ghiss_melting_loss;
+  }
+}
