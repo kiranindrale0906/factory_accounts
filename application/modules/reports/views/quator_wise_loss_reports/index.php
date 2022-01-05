@@ -187,7 +187,7 @@
                   $assets_usd_amount= $assets_usd_amount + @$record['usd_amount'];
                   
                   if(round($record['fine'],2)!=0){
-                    if(in_array($record['account_name'], array("GPC Powder ARC","GPC Powder ARF","GPC Powder AR Gold"))){
+                    if(in_array($record['account_name'], array("GPC Powder ARC","Gpc Powder ARF","GPC Powder AR Gold"))){
                       $gpc_powder_fine=four_decimal(($record['fine']), '-');
                     }
                    ?>
