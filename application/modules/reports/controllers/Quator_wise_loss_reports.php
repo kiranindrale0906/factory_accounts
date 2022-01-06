@@ -14,7 +14,6 @@ class Quator_wise_loss_reports extends BaseController {
     $this->loss_account_details();
     $this->get_production_summary();
     $this->get_refresh_details();
-    pd($this->data);
     $this->load->render($this->router->class."/index",$this->data);
   }
   public function loss_account_details(){
