@@ -12,7 +12,9 @@ class Quator_wise_loss_reports extends BaseController {
     // $this->data['report_type'] = 'Rojmel Report';
     $this->_get_form_data();
     $this->loss_account_details();
-    // $this->get_loss_details();
+    $this->get_production_summary();
+    $this->get_refresh_details();
+    pd($this->data);
     $this->load->render($this->router->class."/index",$this->data);
   }
   public function loss_account_details(){
@@ -188,6 +190,73 @@ class Quator_wise_loss_reports extends BaseController {
         }
       }
     }
-  }  
+  }
+  private function get_production_summary() {
+    $_GET['start_date'] = '2021-11-04';
+   if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARC') {
+      $url = API_ARC_PATH."issue_departments/api_issue_departments/index";
+      $records = json_decode(curl_post_request($url, $_GET));
+      $arc_records = json_decode(json_encode($records), true);
+    }
+    if (empty($arc_records['data'])) $arc_records['data'] = array();
+
+    $records = array_merge($arc_records['data']);
+    $this->data['production_details'] = $this->get_grouped_records($records);
+    $this->get_production_group_total();
+  }
+
+  private function get_refresh_details() {
+    $select = 'date(created_at) as created_at, item_name, sum(weight) as weight, sum(weight * purity) / sum(weight) as purity, sum(weight * factory_purity) / sum(weight) as factory_purity';
+    $where=array();
+    $group_by=array('group_by' => 'date(created_at), item_name');
+    if(!empty($this->data['site_name'])){
+       $where['site_name']    =$this->data['site_name'];
+    }
+    if(!empty($this->data['product_name'])){
+       $where['item_name']    =$this->data['product_name'];
+       $group_by=array('group_by' => 'date(created_at)');
+    }
+
+    if(!empty($this->data['in_purity'])){
+       $where['factory_purity']    =$this->data['in_purity'];
+    }
+   
+    $refresh_details = $this->refresh_detail_model->get($select, $where, array(),$group_by);
+    $this->data['refresh_details'] = $this->get_grouped_records($refresh_details);
+    $this->get_refresh_group_total();
+  }
+
+  private function get_grouped_records($records) {
+    $date_wise_data = array();
+      foreach ($records as $record) {      
+        if (!isset($date_wise_data[substr($record['created_at'], 0, 7)])) 
+          $date_wise_data[substr($record['created_at'], 0, 7)] = array('records' => array(), 'issue_gpc_out' => 0);
+        $date_wise_data[substr($record['created_at'], 0, 7)]['records'][] = $record;
+      }
+    ksort($date_wise_data);
+    return $date_wise_data;
+  }
+
+  private function get_production_group_total() {
+    $this->data['production_total'] = array();
+    foreach ($this->data['production_details'] as $group => $production_detail) {
+      $this->data['production_total'][$group] = array('weight' => 0, 'vadotar' => 0);
+      foreach ($production_detail['records'] as $record) {
+        $this->data['production_total'][$group]['weight'] += $record['issue_gpc_out'];
+        $this->data['production_total'][$group]['vadotar'] += $record['issue_gpc_out'] * ($record['out_purity'] - $record['in_purity']) / 100;
+      }
+    }
+  }
+
+  private function get_refresh_group_total() {
+    $this->data['refresh_total'] = array();
+    foreach ($this->data['refresh_details'] as $group => $refresh_detail) {
+      $this->data['refresh_total'][$group] = array('weight' => 0, 'vadotar' => 0);
+      foreach ($refresh_detail['records'] as $record) {
+        $this->data['refresh_total'][$group]['weight'] += $record['weight'];
+        $this->data['refresh_total'][$group]['vadotar'] += $record['weight'] * ($record['purity'] - $record['factory_purity']) / 100;
+      }
+    }
+  }
 }
 
