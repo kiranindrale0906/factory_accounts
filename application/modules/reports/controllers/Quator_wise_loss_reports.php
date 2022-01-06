@@ -4,7 +4,7 @@ class Quator_wise_loss_reports extends BaseController {
   public function __construct() {
     parent::__construct();
      $this->load->model(array('masters/quator_model','masters/company_model','masters/account_model', 'transactions/ledger_model',
-                             'transactions/metal_receipt_voucher_model', 'transactions/metal_issue_voucher_model','transactions/ledger_model', 
+                             'transactions/metal_receipt_voucher_model', 'transactions/metal_issue_voucher_model','transactions/ledger_model','argold/refresh_detail_model', 
                              'ac_vouchers/voucher_model', 'argold/chitti_model'));
   }
 
