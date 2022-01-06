@@ -286,7 +286,11 @@
           </tr>
           <tr>
             <td>Work</td>
+            <?php if(!empty($site_name) && $site_name=='ARC'){ ?>
+            <td class="text-right"><?=$without_vatav_work=!empty($work_arc)?abs(four_decimal($work_arc)):0; ?></td>
+          <?php }else{ ?>
             <td class="text-right"><?=$without_vatav_work=!empty($work_details)?abs(four_decimal($work_details['amount'])):0; ?></td>
+          <?php }?>
           </tr>
           <tr>
             <td>Per Kg Loss</td>
