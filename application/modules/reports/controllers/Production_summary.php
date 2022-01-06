@@ -15,7 +15,6 @@ class Production_summary extends BaseController {
     //   $this->data['refresh_details'] = array();
     $this->get_groups();
     // pd($this->data);
-    pd($this->data);
     $this->load->render($this->router->class."/index", $this->data);
   }
 
