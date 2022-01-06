@@ -16,6 +16,7 @@ class Quator_wise_loss_reports extends BaseController {
     $this->get_refresh_details();
     if(!empty($this->data['quator_name'])){
     $quator_details= $this->quator_model->find('name,from_date,to_date,MONTH(from_date) as from_month,MONTH(to_date) as to_month,YEAR(from_date) as from_year,YEAR(to_date) as to_year',array('name'=>$this->data['quator_name']));
+    pd($quator_details);
     $this->data['work_arc']=four_decimal($this->data['production_total'][$quator_details['from_year'].'-'.$quator_details['from_month']]-$this->data['refresh_total'][$quator_details['from_year'].'-'.$quator_details['from_month']]);
     }
     $this->load->render($this->router->class."/index",$this->data);
