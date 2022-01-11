@@ -187,7 +187,7 @@
                   $assets_usd_amount= $assets_usd_amount + @$record['usd_amount'];
                   
                   if(round($record['fine'],2)!=0){
-                    if(in_array($record['account_name'], array("GPC Powder ARC","GPC Powder ARF","GPC Powder AR Gold"))){
+                    if(in_array($record['account_name'], array("GPC Powder ARC","Gpc Powder ARF","GPC Powder AR Gold"))){
                       $gpc_powder_fine=four_decimal(($record['fine']), '-');
                     }
                    ?>
@@ -244,7 +244,11 @@
           </tr>
           <tr>
             <td>Work</td>
+            <?php if(!empty($site_name) && $site_name=='ARC'){ ?>
+            <td class="text-right"><?=$work=!empty($work_arc)?abs(four_decimal($work_arc)):0; ?></td>
+          <?php }else{ ?>
             <td class="text-right"><?=$work=!empty($work_details)?abs(four_decimal($work_details['amount'])):0; ?></td>
+          <?php }?>
           </tr>
           <tr>
             <td>Per Kg Loss</td>
@@ -282,7 +286,11 @@
           </tr>
           <tr>
             <td>Work</td>
+            <?php if(!empty($site_name) && $site_name=='ARC'){ ?>
+            <td class="text-right"><?=$without_vatav_work=!empty($work_arc)?abs(four_decimal($work_arc)):0; ?></td>
+          <?php }else{ ?>
             <td class="text-right"><?=$without_vatav_work=!empty($work_details)?abs(four_decimal($work_details['amount'])):0; ?></td>
+          <?php }?>
           </tr>
           <tr>
             <td>Per Kg Loss</td>
