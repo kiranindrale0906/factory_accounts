@@ -90,9 +90,8 @@ class Loss_report_details extends Ledgers {
       $ghiss_details = $this->get_loss_records_from_factory($data);
 
       $out_weight = 0;
-      if (   !empty($ghiss_details)
-          && !empty($ghiss_details['data']['ghiss_melting_out_weights']))
-        $out_weight = $ghiss_details['data']['ghiss_melting_out_weights'];
+      if (!empty($ghiss_details))
+        $out_weight = $ghiss_details;
 
       $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight'] = $out_weight;
       $ghiss_melting_loss[$ghiss_melting_loss_index]['id'] = $ghiss_melting_loss_value['id'];
@@ -109,6 +108,15 @@ class Loss_report_details extends Ledgers {
 
     $url = $this->data['factory_url'].'issue_and_receipts/loss_report_for_accounts/index';
     $factory_loss_records =  json_decode(curl_post_request($url, $postdata), true);
-    return !empty($factory_loss_records) ? $factory_loss_records['data']['loss_details']['loss_detail'] : array();
+    if (!empty($factory_loss_records))
+      if (   isset($factory_loss_records['data']['loss_details'])
+          && !empty($factory_loss_records['data']['loss_details']['loss_detail']))
+        return $factory_loss_records['data']['loss_details']['loss_detail'];
+      elseif (isset($factory_loss_records['data']['ghiss_melting_out_weights']))
+        return $factory_loss_records['data']['ghiss_melting_out_weights'];
+      else
+        return array();
+    else
+      return array();
   }  
 }
