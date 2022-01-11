@@ -95,7 +95,8 @@ class Loss_reports extends BaseController {
     $url = $path.'issue_and_receipts/loss_report_for_accounts/index';
     $factory_loss_records = json_decode(curl_post_request($url, $postdata), true);
     if (!empty($factory_loss_records))
-      if (isset($factory_loss_records['data']['loss_details']))
+      if (   isset($factory_loss_records['data']['loss_details'])
+          && !empty($factory_loss_records['data']['loss_details']['loss_detail']))
         return $factory_loss_records['data']['loss_details']['loss_detail'];
       elseif (isset($factory_loss_records['data']['ghiss_melting_out_weights']))
         return $factory_loss_records['data']['ghiss_melting_out_weights'];
