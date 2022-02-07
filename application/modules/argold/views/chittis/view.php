@@ -28,13 +28,13 @@
     <tr>
       <td><h6><?=$chittis_details['account_name']?></h6></td>
       <td class=""><h6><?= date('d-m-Y',strtotime($record['date']))?></h6></td>
-      <td rowspan="3">
+      <td rowspan="3" style="text-align: center">
         <?php 
             $string=$record['id'];      
-            $qr_code = generate_qrcode($string,'48');
+            $qr_code = generate_qrcode($string,'96');
             echo $qr_code;
-
-        ?></td>
+        ?>
+      </td>
     </tr><tr>
       <td>Sale Type</td><td class=""><h6><?= $record['sale_type'] ?></h6></td>
     </tr>
