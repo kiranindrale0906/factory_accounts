@@ -8,4 +8,6 @@ define('OLD_DB_NAME', 'accounts');
 define('NEW_DB_NAME', 'account_new');
 define('ENABLE_API_FOR_RECEIPT', TRUE);  
 define('HOST','');  
+define('API_ACCESS_TOKEN', 'd2fb9e85bc2ad865a3b3084787299e88');
+
 ?>
