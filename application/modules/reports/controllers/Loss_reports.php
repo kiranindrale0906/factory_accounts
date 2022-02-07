@@ -94,7 +94,16 @@ class Loss_reports extends BaseController {
 
     $url = $path.'issue_and_receipts/loss_report_for_accounts/index';
     $factory_loss_records = json_decode(curl_post_request($url, $postdata), true);
-    return !empty($factory_loss_records) ? $factory_loss_records['data']['loss_details']['loss_detail'] : array();
+    if (!empty($factory_loss_records))
+      if (   isset($factory_loss_records['data']['loss_details'])
+          && !empty($factory_loss_records['data']['loss_details']['loss_detail']))
+        return $factory_loss_records['data']['loss_details']['loss_detail'];
+      elseif (isset($factory_loss_records['data']['ghiss_melting_out_weights']))
+        return $factory_loss_records['data']['ghiss_melting_out_weights'];
+      else
+        return array();
+    else
+      return array();
   }  
 
   private function get_ghiss_melting_loss($data) {
@@ -106,15 +115,15 @@ class Loss_reports extends BaseController {
                                                            'receipt_type' => 'Ghiss Melting Loss',
                                                            'quator'=> ''));
     foreach ($ghiss_melting_loss as $ghiss_melting_loss_index => $ghiss_melting_loss_value) {
+      unset($data['department_names']);
       $data['issue_department_id'] = $ghiss_melting_loss_value['parent_id'];
       $data['quator'] = '';
 
       $ghiss_details = $this->get_loss_records_from_factory($data);
 
       $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight'] = 0;
-      if (   !empty($ghiss_details) 
-          && !empty($ghiss_details['data']['ghiss_melting_out_weights']) ) 
-        $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight'] = $ghiss_details['data']['ghiss_melting_out_weights'];
+      if (!empty($ghiss_details)) 
+        $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight'] = $ghiss_details;
     }
 
     return $ghiss_melting_loss;
