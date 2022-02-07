@@ -23,7 +23,7 @@
   
   </div>
 </div>
-<div style="max-width:30%; margin-left:10%">
+<div style="max-width:45%; margin-left:10%">
   <table class="table table-sm">
     <tr>
       <td><h6><?=$chittis_details['account_name']?></h6></td>
