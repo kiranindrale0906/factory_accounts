@@ -83,7 +83,7 @@ class User_role_model extends Core_user_role_model {
                      'Users' => array('users/users','users/user_roles','users/ip_addresses'),
                      'Qr_Code' => array('qr_codes/qr_codes','qr_codes/Qr_code_details','qr_codes/design_details'),
                      'Migrations' => array('sys/migrations'),
-                     'api' => array('api/api_metal_issue_vouchers'));
+                     'api' => array('api/api_metal_issue_vouchers','api/api_chittis'));
     $bk_modules= array('database_restore'=>array('masters/mysqldump'));
     $report_modules= array('Reports' => array(
                                         'reports/trial_balances'
