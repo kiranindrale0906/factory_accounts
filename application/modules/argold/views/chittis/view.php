@@ -47,16 +47,17 @@
       </div>
     
   </table>
+  </div>
   <div class="container" style="display: flex; height: 'auto'; align-items: center; justify-content: center;">
         <div style="width: 'auto'">
           <?php 
             $string=$record['id'];      
             $qr_code = generate_qrcode($string,'48');
             echo $qr_code;
+
           ?>
         </div>
         
-</div>
 
 <div style="max-width:45%; margin-left:10%">
   <?php $this->load->view('chitti_details/viewlist'); ?>
