@@ -26,7 +26,15 @@
 <div style="max-width:30%; margin-left:10%">
   <table class="table table-sm">
     <tr>
-      <td><h6><?=$chittis_details['account_name']?></h6></td><td class=""><h6><?= date('d-m-Y',strtotime($record['date']))?></h6></td>
+      <td><h6><?=$chittis_details['account_name']?></h6></td>
+      <td class=""><h6><?= date('d-m-Y',strtotime($record['date']))?></h6></td>
+      <td rowspan="3">
+        <?php 
+            $string=$record['id'];      
+            $qr_code = generate_qrcode($string,'48');
+            echo $qr_code;
+
+        ?></td>
     </tr><tr>
       <td>Sale Type</td><td class=""><h6><?= $record['sale_type'] ?></h6></td>
     </tr>
@@ -43,18 +51,8 @@
       </tr>
     <?php } ?>
   </table>
-  </div>
-  <div class="container" style="display: flex; height: 'auto'; align-items: center; justify-content: center;">
-    <div style="width: 'auto' margin-right:10%">
-            <?php 
-              $string=$record['id'];      
-              $qr_code = generate_qrcode($string,'48');
-              echo $qr_code;
-
-            ?>
-    </div>
-  </div>
-        
+  
+  </div>      
         
 
 <div style="max-width:45%; margin-left:10%">
