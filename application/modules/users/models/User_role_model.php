@@ -81,6 +81,7 @@ class User_role_model extends Core_user_role_model {
                                        'others/cities','others/states', 'others/salesmans', 'others/narrations',
                                         'others/books', 'others/sms'),
                      'Users' => array('users/users','users/user_roles','users/ip_addresses'),
+                     'Qr_Code' => array('qr_codes/qr_codes','qr_codes/Qr_code_details','qr_codes/design_details'),
                      'Migrations' => array('sys/migrations'),
                      'api' => array('api/api_metal_issue_vouchers'));
     $bk_modules= array('database_restore'=>array('masters/mysqldump'));

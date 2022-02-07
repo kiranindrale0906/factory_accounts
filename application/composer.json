@@ -24,6 +24,8 @@
         "picqer/php-barcode-generator": "^0.3.0",
         "box/spout": "^2.7",
         "facebook/graph-sdk": "^5.7",
+        "2amigos/qrcode-library": "~1.1",
+        "tecnickcom/tc-lib-barcode": "^1.16",
         "telegram-bot/api": "*"
     },
     "suggest": {

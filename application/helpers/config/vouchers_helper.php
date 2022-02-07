@@ -46,3 +46,12 @@ function parent_id_exist($parent_id){
     $parent_id = $ci->voucher_model->find('parent_id',array('parent_id'=>$parent_id))['parent_id'];
     return $parent_id;
 }
+if (!function_exists('generate_qrcode')) {
+  function generate_qrcode($string,$size=50,$margin=200) {
+    $qrCode = (new QrCode($string))
+    ->setSize(2048)
+    ->setMargin($margin)
+    ->useForegroundColor(0,0,0);
+    return '<img width="'.$size.'" src="'.$qrCode->writeDataUri().'" alt="QR Code" />';
+  }
+}
