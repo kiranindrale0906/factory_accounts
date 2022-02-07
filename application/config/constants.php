@@ -30,6 +30,7 @@ defined('FILE_READ_MODE')  OR define('FILE_READ_MODE', 0644);
 defined('FILE_WRITE_MODE') OR define('FILE_WRITE_MODE', 0666);
 defined('DIR_READ_MODE')   OR define('DIR_READ_MODE', 0755);
 defined('DIR_WRITE_MODE')  OR define('DIR_WRITE_MODE', 0755);
+define('API_ACCESS_TOKEN', 'd2fb9e85bc2ad865a3b3084787299e88');
 
 /*
 |--------------------------------------------------------------------------
