@@ -23,7 +23,6 @@
   
   </div>
 </div>
-<div>
 <div style="max-width:30%; margin-left:10%">
   <table class="table table-sm">
     <tr>
@@ -44,7 +43,6 @@
       </tr>
     <?php } ?>
   </table>
-  </div>
   <div style="width: 'auto'">
           <?php 
             $string=$record['id'];      
