@@ -48,7 +48,7 @@
     
   </table>
   </div>
-  <div class="container" style="display: flex; height: 'auto'; align-items: center; justify-content: center;">
+  <div class="container" style="max-width:45%; margin-right:10%">
         <div style="width: 'auto'">
           <?php 
             $string=$record['id'];      
@@ -57,6 +57,7 @@
 
           ?>
         </div>
+  </div>      
         
 
 <div style="max-width:45%; margin-left:10%">
