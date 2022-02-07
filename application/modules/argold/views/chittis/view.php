@@ -31,7 +31,7 @@
       <td rowspan="3" style="text-align: center">
         <?php 
             $string=$record['id'];      
-            $qr_code = generate_qrcode($string,'96');
+            $qr_code = generate_qrcode($string,'72');
             echo $qr_code;
         ?>
       </td>
