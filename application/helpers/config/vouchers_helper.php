@@ -1,4 +1,5 @@
 <?php
+use Da\QrCode\QrCode;
 
 function get_tax_fields($factory_fine, $fine, $sale_type, $gold_rate, $gold_rate_purity, $created_at,$export = 0,$do_not_calculate_tax = 0, $hallmark_rate = 0, $hallmark_qty = 0) {
   $tcs_rate=0;

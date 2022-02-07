@@ -10,7 +10,6 @@
    <h4 style="margin-left:45%" class="heading">Chitti #<?= $record['id']; ?></h4>
   </div>
   <div class="col-md-8 text-right">
-  <a  href="<?=ADMIN_PATH.'qr_codes/qr_code_details/view/'. $record['id'].''?>" class='btn bg_blue white no-print'>QR Code</a>
   <a  href="<?=ADMIN_PATH.'argold/metal_issue_chitties/edit/'. $record['id']?>" class='btn bg_blue white no-print'>create metal receipt</a>
   <a  href="<?=ADMIN_PATH.'argold/chittis/view/'. $record['id'].'?group_by=1'?>" class='btn bg_blue white no-print'>Melting Detail In Group</a>
   </div>
@@ -30,21 +29,36 @@
     <tr>
       <td><h6><?=$chittis_details['account_name']?></h6></td><td class="text-right"><h6><?= date('d-m-Y',strtotime($record['date']))?></h6></td>
     </tr><tr>
-      <td>Sale Type</td><td class="text-right"><h6><?= $record['sale_type'] ?></h6></td>
+      <td>Sale Type</td><td class=""><h6><?= $record['sale_type'] ?></h6></td>
     </tr>
     <?php 
 
     if (!empty($record['no_of_packets']) && $record['no_of_packets'] > 0) { ?>
       <tr>
-        <td>No of Packets</td><td class="text-right"><h6><?=round($record['no_of_packets'])?></h6></td>
+        <td>No of Packets</td><td class=""><h6><?=round($record['no_of_packets'])?></h6></td>
       </tr>
     <?php } ?>
     <?php if (!empty($record['packet_gross_weight']) && $record['packet_gross_weight'] > 0) { ?>
       <tr>
-        <td>Packet Gross Weight</td><td class="text-right"><h6><?=four_decimal($record['packet_gross_weight'])?></h6></td>
+        <td>Packet Gross Weight</td><td class=""><h6><?=four_decimal($record['packet_gross_weight'])?></h6></td>
       </tr>
     <?php } ?>
+
+      </div>
+    
   </table>
+  <div class="container" style="display: flex; height: 'auto'; align-items: center; justify-content: center;">
+        <div style="width: 'auto'">
+          <?php 
+            $string=$qr_code_detail['id'];      
+            $qr_code = generate_qrcode($string,'48');
+            echo $qr_code;
+          ?>
+        </div>
+        <div style="font-size: 7px; font-weight: bold; font-family: Helvetica">
+          <?php echo 'Chitti No - '.$qr_code_detail['id']; ?>
+        </div>
+        
 </div>
 
 <div style="max-width:45%; margin-left:10%">

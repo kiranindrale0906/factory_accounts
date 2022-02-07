@@ -8,11 +8,10 @@
 					?>
 	      </div>
 	      <div style="font-size: 7px; font-weight: bold; font-family: Helvetica">
-	    		<?php echo 'Chitti No - '.number_format($qr_code_detail['net_weight'], 2); ?>
+	    		<?php echo 'Chitti No - '.$qr_code_detail['id']; ?>
 	      </div>
 	      
 	    </div>
-	?>	
 </body>
 
 
