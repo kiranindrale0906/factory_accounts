@@ -43,14 +43,16 @@
       </tr>
     <?php } ?>
   </table>
-  <div style="width: 'auto'">
-          <?php 
-            $string=$record['id'];      
-            $qr_code = generate_qrcode($string,'48');
-            echo $qr_code;
-
-          ?>
   </div>
+  <div class="container" style="display: flex; height: 'auto'; align-items: center; justify-content: center;">
+    <div style="width: 'auto' margin-right:10%">
+            <?php 
+              $string=$record['id'];      
+              $qr_code = generate_qrcode($string,'48');
+              echo $qr_code;
+
+            ?>
+    </div>
   </div>
         
         
