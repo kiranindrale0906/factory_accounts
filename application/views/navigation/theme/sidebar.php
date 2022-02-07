@@ -8,7 +8,7 @@
                      'Stock Report' => 'fa fa-line-chart',
                      'Order Report' => 'fa fa-line-chart',
                      'Interest'     => 'fa fa-percent',
-                     'QR Code'     => '',
+                     // 'QR Code'     => '',
                      'Other'        => 'fa fa-question-circle');
 
   $main_menu =  array('Users'  => array('users/users'=>'Users',
@@ -115,7 +115,7 @@
                       'registers/rate_cut_booking_value_registers' => 'Rate Cut Booking Value Register',
                       'registers/rate_cut_booking_weight_registers' => 'Rate Cut Booking Weight Register',
                       'registers/expense_registers' => 'Expense Registers'),
-                    'QR Code' => 'qr_codes/qr_codes',
+                    // 'QR Code' => 'qr_codes/qr_codes',
                     'Others'    => array('others/account_wise_details'=>'Account Wise Details',
                                         'others/categories'=>'Category',
                                         'others/items'=>'Item',
