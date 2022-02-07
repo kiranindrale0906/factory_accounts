@@ -24,7 +24,7 @@
   </div>
 </div>
 
-<div style="max-width:45%; margin-left:10%">
+<div style="max-width:30%; margin-left:5%">
   <table class="table table-sm">
     <tr>
       <td><h6><?=$chittis_details['account_name']?></h6></td><td class="text-right"><h6><?= date('d-m-Y',strtotime($record['date']))?></h6></td>
@@ -43,12 +43,7 @@
         <td>Packet Gross Weight</td><td class=""><h6><?=four_decimal($record['packet_gross_weight'])?></h6></td>
       </tr>
     <?php } ?>
-
-      </div>
-    
-  </table>
-  </div>
-  <div class="container" style="max-width:45%; margin-right:10%">
+    <div class="container" style="max-width:45%; margin-right:10%">
         <div style="width: 'auto'">
           <?php 
             $string=$record['id'];      
@@ -57,7 +52,10 @@
 
           ?>
         </div>
-  </div>      
+  </div>
+  </table>
+  </div>
+        
         
 
 <div style="max-width:45%; margin-left:10%">
