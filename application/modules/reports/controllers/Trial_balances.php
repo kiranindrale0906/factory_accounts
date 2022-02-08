@@ -37,6 +37,7 @@ class Trial_balances extends Ledgers {
     $this->get_stone_vatav_balance();
     $this->get_copper_vatav_balance();
     $this->get_rhodium_vatav_balance();
+    $this->get_tounch_loss_fine_balance();
 
     $this->get_overall_rolling();
 
@@ -222,6 +223,36 @@ class Trial_balances extends Ledgers {
     $this->data['live_arf_rhodium_vatav_fine']    = !empty($arf_records->data->rhodium_vatav[0]) ? $arf_records->data->rhodium_vatav[0]->fine : 0;
     $this->data['live_arc_rhodium_vatav_fine']    = !empty($arc_records->data->rhodium_vatav[0]) ? $arc_records->data->rhodium_vatav[0]->fine : 0;
   }
+
+  private function get_tounch_loss_fine_balance() {
+    //get alloy vadotar balance and balance fine from account ledgers
+    $accounts_balance_select = '(sum(debit_weight) - sum(credit_weight)) as balance, 
+                                (sum(debit_weight*purity/100) - sum(credit_weight*purity/100)) as balance_fine';
+    $argold_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Tounch Loss Fine'));
+    $arf_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Tounch Loss Fine'));
+    $arc_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARC Tounch Loss Fine'));
+
+    $this->data['accounts_argold_tounch_loss_fine'] = $argold_vouchers['balance'];
+    $this->data['accounts_arf_tounch_loss_fine']    = $arf_vouchers['balance'];
+    $this->data['accounts_arc_tounch_loss_fine']    = $arc_vouchers['balance'];
+
+    $this->data['accounts_argold_tounch_loss_fine_fine'] = $argold_vouchers['balance_fine'];
+    $this->data['accounts_arf_tounch_loss_fine_fine']    = $arf_vouchers['balance_fine'];
+    $this->data['accounts_arc_tounch_loss_fine_fine']    = $arc_vouchers['balance_fine'];
+
+    //get alloy vadotar balance and balance fine from factory records
+    $arg_records = $this->data['arg_vadotar_records'];
+    $arf_records = $this->data['arf_vadotar_records'];
+    $arc_records = $this->data['arc_vadotar_records'];
+    
+    $this->data['live_argold_tounch_loss_fine'] = !empty($arg_records->data->tounch_loss_fine[0]) ? $arg_records->data->tounch_loss_fine[0]->weight : 0;
+    $this->data['live_arf_tounch_loss_fine']    = !empty($arf_records->data->tounch_loss_fine[0]) ? $arf_records->data->tounch_loss_fine[0]->weight : 0;
+    $this->data['live_arc_tounch_loss_fine']    = !empty($arc_records->data->tounch_loss_fine[0]) ? $arc_records->data->tounch_loss_fine[0]->weight : 0;
+
+    $this->data['live_argold_tounch_loss_fine_fine'] = !empty($arg_records->data->tounch_loss_fine[0]) ? $arg_records->data->tounch_loss_fine[0]->fine : 0;
+    $this->data['live_arf_tounch_loss_fine_fine']    = !empty($arf_records->data->tounch_loss_fine[0]) ? $arf_records->data->tounch_loss_fine[0]->fine : 0;
+    $this->data['live_arc_tounch_loss_fine_fine']    = !empty($arc_records->data->tounch_loss_fine[0]) ? $arc_records->data->tounch_loss_fine[0]->fine : 0;
+  } 
 
   private function get_overall_rolling() {  
     $url=API_ARG_PATH."stock_summary_reports/overall_rolling_reports/index?overall_rolling=1";
@@ -421,10 +452,12 @@ class Trial_balances extends Ledgers {
     $update_vadotar = isset($_GET['update_vadotar']) ? TRUE : FALSE;
     
     if ($update_vadotar) {
-      $incorrect_vadotar_vouchers = $this->voucher_model->get('receipt_type, site_name, voucher_date, sum(credit_weight) as credit_weight, sum(debit_weight) as debit_weight',
-                                           array('receipt_type' => array('Alloy Vodator', 'GPC Vodator', 'Stone Vatav', 'Copper Vatav', 'Rhodium Vatav')),
-                                           array(), array('group_by' => 'receipt_type, site_name, voucher_date',
-                                                          'having' => 'credit_weight != debit_weight'));
+      $incorrect_vadotar_vouchers = $this->voucher_model->get('receipt_type, site_name, voucher_date, 
+                                                               sum(credit_weight) as credit_weight, 
+                                                               sum(debit_weight) as debit_weight',
+                                         array('receipt_type' => array('Alloy Vodator', 'GPC Vodator', 'Stone Vatav', 'Copper Vatav', 'Rhodium Vatav')),
+                                         array(), array('group_by' => 'receipt_type, site_name, voucher_date',
+                                                        'having' => 'credit_weight != debit_weight'));
       foreach($incorrect_vadotar_vouchers as $incorrect_vadotar_voucher) {
         $this->voucher_model->delete('', array('receipt_type' => $incorrect_vadotar_voucher['receipt_type'],
                                                'site_name' => $incorrect_vadotar_voucher['site_name'],
@@ -434,24 +467,28 @@ class Trial_balances extends Ledgers {
 
       $url = API_ARG_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
       $records = json_decode(curl_post_request($url));
+      
       if (!empty($records)) {
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator_group_by_date, 'Alloy Vodator', 'AR Gold', '');
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator_group_by_date, 'GPC Vodator', 'AR Gold', '');
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav_group_by_date, 'Stone Vatav', 'AR Gold', '');
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->copper_vatav_group_by_date, 'Copper Vatav', 'AR Gold', '');
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->rhodium_vatav_group_by_date, 'Rhodium Vatav', 'AR Gold', '');
+        $this->metal_receipt_voucher_model->create_vodator_records($records->data->tounch_loss_fine_group_by_date, 'Tounch Loss Fine', 'AR Gold', '');
       }
 
       $url = API_ARF_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
       $records = json_decode(curl_post_request($url));
+      
       if (!empty($records)) {
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator_group_by_date, 'Alloy Vodator', 'ARF', '');
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator_group_by_date, 'GPC Vodator', 'ARF', '');
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav_group_by_date, 'Stone Vatav', 'ARF', '');
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->copper_vatav_group_by_date, 'Copper Vatav', 'ARF', '');
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->rhodium_vatav_group_by_date, 'Rhodium Vatav', 'ARF', '');
+        $this->metal_receipt_voucher_model->create_vodator_records($records->data->tounch_loss_fine_group_by_date, 'Tounch Loss Fine', 'ARF', '');
       }
-
+      
       $url = API_ARC_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
       $records = json_decode(curl_post_request($url));
       if (!empty($records)) {
@@ -460,6 +497,7 @@ class Trial_balances extends Ledgers {
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav_group_by_date, 'Stone Vatav', 'ARC', '');
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->copper_vatav_group_by_date, 'Copper Vatav', 'ARC', '');
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->rhodium_vatav_group_by_date, 'Rhodium Vatav', 'ARC', '');
+        $this->metal_receipt_voucher_model->create_vodator_records($records->data->tounch_loss_fine_group_by_date, 'Tounch Loss Fine', 'ARC', '');
       }
     }
   }

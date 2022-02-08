@@ -47,5 +47,8 @@
   <?php $this->load->view('trial_balances/rhodium_vatav_balance'); ?>
 </div>
 <div class="row">
-<?php $this->load->view('trial_balances/overall_rolling_balance'); ?>
+  <?php $this->load->view('trial_balances/tounch_loss_fine_balance'); ?>
+</div>
+<div class="row">
+  <?php $this->load->view('trial_balances/overall_rolling_balance'); ?>
 </div>
