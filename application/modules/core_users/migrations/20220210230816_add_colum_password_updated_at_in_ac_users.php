@@ -6,7 +6,7 @@ class Migration_add_colum_password_updated_at_in_ac_users extends CI_Model {
 
   public function up()
   {
-    $this->db->query("");
+    $this->db->query("ALTER TABLE `ac_users` ADD `password_updated_at` datetime  NOT NULL");
   }
 
 
