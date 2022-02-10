@@ -7,4 +7,7 @@ class Change_password extends Core_change_password {
     parent::__construct();
     $this->load->helper('core_users/core_change_password');
   }
+  public function index(){
+  	parent::create();
+  }
 }

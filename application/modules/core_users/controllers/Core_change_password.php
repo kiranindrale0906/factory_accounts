@@ -13,7 +13,7 @@ class Core_change_password extends BaseController {
   }
   public function _before_save($formdata, $action){
     $formdata['change_password']['id'] = $_SESSION['user_id'];
-    $formdata['change_password']['encrypted_password'] = md5($formdata['change_password']['new_password']);
+    $formdata['change_password']['password'] = md5($formdata['change_password']['new_password']);
     $formdata['change_password']['password_updated_at'] = date('Y-m-d H:i:s');
     unset($formdata['change_password']['old_password']);
     unset($formdata['change_password']['new_password']);

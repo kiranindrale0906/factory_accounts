@@ -1,6 +1,6 @@
 <?php
 class  Core_change_password_model extends BaseModel {
-  protected $table_name = 'users'; 
+  protected $table_name = 'ac_users'; 
   protected $id = 'id';
   public $router_class = 'change_password';
   public function __construct($data=array()) {
@@ -23,7 +23,9 @@ class  Core_change_password_model extends BaseModel {
     return $rules;
   }
   public function verify_old_password($old_password) {
-    $encrypted_password = $this->change_password_model->find('encrypted_password', array("email_id" => $_SESSION['email_id'], "id" => $_SESSION['user_id']));
-    return ( !empty($encrypted_password) && ($encrypted_password['encrypted_password'] == md5($this->attributes['old_password'])) ) ? true : false;
+    
+    $encrypted_password = $this->change_password_model->find('password', array("email_id" => $_SESSION['email_id'], "id" => $_SESSION['user_id']));
+    
+    return ( !empty($encrypted_password) && ($encrypted_password['password'] == md5($this->attributes['old_password'])) ) ? true : false;
   }
 }

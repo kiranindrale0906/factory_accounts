@@ -12,7 +12,8 @@
                      'Other'        => 'fa fa-question-circle');
 
   $main_menu =  array('Users'  => array('users/users'=>'Users',
-                                      'users/user_roles'=>'User roles'),
+                                      'users/user_roles'=>'User roles',
+                                      'users/change_password' => 'Change Password'),
                      // 'Rojmel'  => array('rojmel/rojmel'=>'Rojmel'),
                      'Masters' => array(
                                         'masters/account_listing'=>'Account List',
@@ -102,6 +103,7 @@
                                         'reports/sales_registers' => 'Sales Register Reports',
                                         'reports/cash_gst_registers' => 'Cash GST Register Reports',
                                         'reports/domestic_export_ledgers' => 'Domestic Export Ledger',
+                                        'reports/person_production_charts' => 'Person Production Charts',
                                         ),
                     //'Interests' => array('transactions/interest_issue_vouchers'=>'Interest Issue Voucher','transactions/interest_receipt_vouchers'=>'Interest Receipt Voucher'),
                     'Registers'   => array(
