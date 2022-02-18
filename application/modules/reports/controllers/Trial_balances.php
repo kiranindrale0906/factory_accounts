@@ -455,7 +455,7 @@ class Trial_balances extends Ledgers {
       $incorrect_vadotar_vouchers = $this->voucher_model->get('receipt_type, site_name, voucher_date, 
                                                                sum(credit_weight) as credit_weight, 
                                                                sum(debit_weight) as debit_weight',
-                                         array('receipt_type' => array('Alloy Vodator', 'GPC Vodator', 'Stone Vatav', 'Copper Vatav', 'Rhodium Vatav'. 'Auto Tounch Loss Fine')),
+                                         array('receipt_type' => array('Alloy Vodator', 'GPC Vodator', 'Stone Vatav', 'Copper Vatav', 'Rhodium Vatav', 'Auto Tounch Loss Fine')),
                                          array(), array('group_by' => 'receipt_type, site_name, voucher_date',
                                                         'having' => 'credit_weight != debit_weight'));
       foreach($incorrect_vadotar_vouchers as $incorrect_vadotar_voucher) {
