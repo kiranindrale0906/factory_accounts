@@ -148,7 +148,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                                                           'AR Gold Chain Receipt',
                                                           'AR Gold Finished Goods Receipt',
                                                           'AR Gold Finished Goods',
-                                                          'AR Gold RND'))) {
+                                                          'AR Gold RND',
+                                                          'Tounch Loss Fine'))) {
       $set_metal_issue_voucher = 1;
       $account_name = 'AR Gold Software';
       $site_name = 'AR Gold';
@@ -158,7 +159,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
           || $this->attributes['receipt_type'] == 'GPC Vodator'
           || $this->attributes['receipt_type'] == 'Stone Vatav'
           || $this->attributes['receipt_type'] == 'Copper Vatav'
-          || $this->attributes['receipt_type'] == 'Rhodium Vatav') {
+          || $this->attributes['receipt_type'] == 'Rhodium Vatav'
+          || $this->attributes['receipt_type'] == 'Tounch Loss Fine') {
       $set_metal_issue_voucher = 1;
       
       if ($this->attributes['site_name'] == 'AR Gold') {
@@ -171,7 +173,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                                                           'ARF Chain Receipt',
                                                           'ARF Finished Goods Receipt',
                                                           'ARF Finished Goods',
-                                                          'ARF RND'))) {
+                                                          'ARF RND',
+                                                          'Tounch Loss Fine'))) {
       $set_metal_issue_voucher = 1;
       $account_name = 'ARF Software';
       $site_name = 'ARF';
@@ -181,7 +184,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
           || $this->attributes['receipt_type'] == 'GPC Vodator'
           || $this->attributes['receipt_type'] == 'Stone Vatav'
           || $this->attributes['receipt_type'] == 'Copper Vatav'
-          || $this->attributes['receipt_type'] == 'Rhodium Vatav') {
+          || $this->attributes['receipt_type'] == 'Rhodium Vatav'
+          || $this->attributes['receipt_type'] == 'Tounch Loss Fine') {
       $set_metal_issue_voucher = 1;
       
       if ($this->attributes['site_name'] == 'ARF') {
@@ -194,7 +198,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                                                           'ARC Chain Receipt',
                                                           'ARC Finished Goods Receipt',
                                                           'ARC Finished Goods',
-                                                          'ARC RND'))) {
+                                                          'ARC RND',
+                                                          'Tounch Loss Fine'))) {
       $set_metal_issue_voucher = 1;
       $account_name = 'ARC Software';
       $site_name = 'ARC';
@@ -205,6 +210,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
           || $this->attributes['receipt_type'] == 'Stone Vatav'
           || $this->attributes['receipt_type'] == 'Copper Vatav'
           || $this->attributes['receipt_type'] == 'Rhodium Vatav') {
+          || $this->attributes['receipt_type'] == 'Tounch Loss Fine'
       $set_metal_issue_voucher = 1;
       
       if ($this->attributes['site_name'] == 'ARC') {
@@ -319,7 +325,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
         && $this->attributes['receipt_type'] != 'GPC Vodator'
         && $this->attributes['receipt_type'] != 'Stone Vatav'
         && $this->attributes['receipt_type'] != 'Copper Vatav'
-        && $this->attributes['receipt_type'] != 'Rhodium Vatav') return;
+        && $this->attributes['receipt_type'] != 'Rhodium Vatav'
+        && $this->attributes['receipt_type'] != 'Tounch Loss Fine') return;
 
     $metal_receipt_voucher = $this->find('id', array('receipt_type' => $this->attributes['receipt_type'],
                                                      'site_name' => $this->attributes['site_name'],
