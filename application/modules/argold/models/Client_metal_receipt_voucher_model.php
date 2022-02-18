@@ -209,8 +209,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
           || $this->attributes['receipt_type'] == 'GPC Vodator'
           || $this->attributes['receipt_type'] == 'Stone Vatav'
           || $this->attributes['receipt_type'] == 'Copper Vatav'
-          || $this->attributes['receipt_type'] == 'Rhodium Vatav') {
-          || $this->attributes['receipt_type'] == 'Tounch Loss Fine'
+          || $this->attributes['receipt_type'] == 'Rhodium Vatav'
+          || $this->attributes['receipt_type'] == 'Tounch Loss Fine') {
       $set_metal_issue_voucher = 1;
       
       if ($this->attributes['site_name'] == 'ARC') {
