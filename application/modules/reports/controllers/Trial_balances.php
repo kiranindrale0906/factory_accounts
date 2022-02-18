@@ -228,9 +228,9 @@ class Trial_balances extends Ledgers {
     //get alloy vadotar balance and balance fine from account ledgers
     $accounts_balance_select = '(sum(debit_weight) - sum(credit_weight)) as balance, 
                                 (sum(debit_weight*purity/100) - sum(credit_weight*purity/100)) as balance_fine';
-    $argold_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Tounch Loss Fine'));
-    $arf_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Tounch Loss Fine'));
-    $arc_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARC Tounch Loss Fine'));
+    $argold_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Auto Tounch Loss Fine'));
+    $arf_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Auto Tounch Loss Fine'));
+    $arc_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARC Auto Tounch Loss Fine'));
 
     $this->data['accounts_argold_tounch_loss_fine'] = $argold_vouchers['balance'];
     $this->data['accounts_arf_tounch_loss_fine']    = $arf_vouchers['balance'];
