@@ -249,7 +249,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
          || $this->attributes['receipt_type'] == "GPC Vodator"
          || $this->attributes['receipt_type'] == 'Stone Vatav'
          || $this->attributes['receipt_type'] == 'Copper Vatav'
-         || $this->attributes['receipt_type'] == 'Rhodium Vatav') {
+         || $this->attributes['receipt_type'] == 'Rhodium Vatav'
+         || $this->attributes['receipt_type'] == 'Tounch Loss Fine') {
       unset($this->formdata['metal_issue_vouchers']);
 
       if     ($this->attributes['site_name'] == 'AR Gold') $account_name = 'AR Gold Software';
