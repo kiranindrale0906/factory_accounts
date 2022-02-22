@@ -14,19 +14,21 @@ class Refresh_model extends BaseModel {
     if (!empty($this->formdata['refresh_details'])) {
       $total_weight=$total_fine=$total_factory_fine=0;
       foreach ($this->formdata['refresh_details'] as $refresh_detail) {
-        $total_weight+=$refresh_detail['weight'];
-        $total_fine+=$refresh_detail['fine'];
-        $total_factory_fine+=$refresh_detail['factory_fine'];
+        $total_weight+=!empty($refresh_detail['weight'])?$refresh_detail['weight']:0;
+        $total_fine+=!empty($refresh_detail['fine'])?$refresh_detail['fine']:0;
+        $total_factory_fine+=!empty($refresh_detail['factory_fine'])?$refresh_detail['factory_fine']:0;
       }
-      $this->attributes['weight']=$total_weight;
-      $this->attributes['fine']=$total_fine;
-      $this->attributes['factory_fine']=$total_factory_fine;
+      $this->attributes['weight']=!empty($total_weight)?$total_weight:0;
+      $this->attributes['fine']=!empty($total_fine)?$total_fine:0;
+      $this->attributes['factory_fine']=!empty($total_factory_fine)?$total_factory_fine:0;
       $this->attributes['purity']=!empty($total_weight)?($total_fine/$total_weight)*100:0;
-      $this->attributes['factory_purity']=!empty($total_weight)?($total_factory_fine/$total_weight)*100:0; 
+      $this->attributes['factory_purity']=!empty($total_weight)?($total_factory_fine/$total_weight)*100:0;
     }
 
     $gst_rate = 1.5;
-    $this->attributes['debit_weight'] = $this->attributes['fine']; 
+    $this->attributes['debit_weight'] = $this->attributes['fine'];
+    $this->attributes['rate'] = !empty($this->attributes['rate'])?$this->attributes['rate']:0;
+    $this->attributes['manual_taxable_amount'] = !empty($this->attributes['manual_taxable_amount'])?$this->attributes['manual_taxable_amount']:0;
     $taxable_amount = $this->attributes['debit_weight'] * $this->attributes['rate'];
     $this->attributes['discount']=$taxable_amount-$this->attributes['manual_taxable_amount'];
     if(!empty($this->attributes['manual_taxable_amount']) && $this->attributes['manual_taxable_amount']==0){
@@ -68,6 +70,12 @@ class Refresh_model extends BaseModel {
     $rules[] = array('field' => 'refresh[site_name]', 
                      'label' => 'Site Name',
                      'rules' => 'trim|required');
+    if(!empty($this->formdata['refresh_details'])){
+      foreach($this->formdata['refresh_details'] as $index => $refresh_detail) {
+       $rules[]= array('field' => 'refresh_details['.$index.'][item_name]', 'label' => 'item name','rules' => array('trim', 'required'));
+      
+      }
+    }
     return $rules;
   }
 }

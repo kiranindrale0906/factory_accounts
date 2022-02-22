@@ -12,6 +12,7 @@ class Refresh_detail_model extends BaseModel {
     $rules[] = array('field' => 'refresh_details[refresh_id]', 
                      'label' => 'refresh_id',
                      'rules' => 'trim|required');
+    
     return $rules;
   }
 }
