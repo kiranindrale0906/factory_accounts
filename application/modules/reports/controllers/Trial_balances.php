@@ -81,7 +81,7 @@ class Trial_balances extends Ledgers {
 
   private function get_alloy_vodator_balance() {
     //get alloy vadotar balance and balance fine from account ledgers
-    $accounts_balance_select = '(sum(debit_weight) - sum(credit_weight)) as balance, (sum(debit_weight*purity/100) - sum(credit_weight*purity/100)) as balance_fine';
+    $accounts_balance_select = '(sum(debit_weight)) as balance, (sum(debit_weight*purity/100)) as balance_fine';
     $argold_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Alloy Vodator'));
     $arf_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Alloy Vodator'));
     $arc_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARC Alloy Vodator'));
@@ -110,7 +110,7 @@ class Trial_balances extends Ledgers {
 
   private function get_gpc_vodator_balance() {
     //get gpc vadotar balance and balance fine from account ledgers
-    $accounts_balance_select = '(sum(debit_weight) - sum(credit_weight)) as balance, (sum(debit_weight*purity/100) - sum(credit_weight*purity/100)) as balance_fine';
+    $accounts_balance_select = '(sum(debit_weight)) as balance, (sum(debit_weight*purity/100)) as balance_fine';
     $argold_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold GPC Vodator'));
     $arf_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF GPC Vodator'));
     $arc_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARC GPC Vodator'));
@@ -139,7 +139,7 @@ class Trial_balances extends Ledgers {
 
   private function get_stone_vatav_balance() {
     //get stone vatav balance and balance fine from account ledgers
-    $accounts_balance_select = '(sum(debit_weight) - sum(credit_weight)) as balance, (sum(debit_weight*purity/100) - sum(credit_weight*purity/100)) as balance_fine';
+    $accounts_balance_select = '(sum(debit_weight)) as balance, (sum(debit_weight*purity/100)) as balance_fine';
     $argold_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Stone Vatav'));
     $arf_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Stone Vatav'));
     $arc_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARC Stone Vatav'));
@@ -168,7 +168,7 @@ class Trial_balances extends Ledgers {
 
   private function get_copper_vatav_balance() {
     //get stone vatav balance and balance fine from account ledgers
-    $accounts_balance_select = '(sum(debit_weight) - sum(credit_weight)) as balance, (sum(debit_weight*purity/100) - sum(credit_weight*purity/100)) as balance_fine';
+    $accounts_balance_select = '(sum(debit_weight)) as balance, (sum(debit_weight*purity/100)) as balance_fine';
     $argold_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Copper Vatav'));
     $arf_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Copper Vatav'));
     $arc_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARC Copper Vatav'));
@@ -197,7 +197,7 @@ class Trial_balances extends Ledgers {
 
   private function get_rhodium_vatav_balance() {
     //get stone vatav balance and balance fine from account ledgers
-    $accounts_balance_select = '(sum(debit_weight) - sum(credit_weight)) as balance, (sum(debit_weight*purity/100) - sum(credit_weight*purity/100)) as balance_fine';
+    $accounts_balance_select = '(sum(debit_weight)) as balance, (sum(debit_weight*purity/100)) as balance_fine';
     $argold_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Rhodium Vatav'));
     $arf_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Rhodium Vatav'));
     $arc_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARC Rhodium Vatav'));
