@@ -118,14 +118,14 @@
                       'registers/rate_cut_booking_weight_registers' => 'Rate Cut Booking Weight Register',
                       'registers/expense_registers' => 'Expense Registers'),
                     // 'QR Code' => 'qr_codes/qr_codes',
-                    'Others'    => array('others/account_wise_details'=>'Account Wise Details',
+                    /*'Others'    => array('others/account_wise_details'=>'Account Wise Details',
                                         'others/categories'=>'Category',
                                         'others/items'=>'Item',
                                         'others/cities'=>'City',
                                         'others/states'=>'State',
                                         'others/salesmans'=>'Sales Man',
                                         'others/books'=>'Book',
-                                        'others/sms'=>'SMS'),
+                                        'others/sms'=>'SMS'), */
 
                 ); 
    $database_backup_menu = array('Backup Database' => 'masters/mysqldump');
