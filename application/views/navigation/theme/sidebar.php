@@ -15,7 +15,7 @@
                                       'users/user_roles'=>'User roles',
                                       'users/change_password' => 'Change Password'),
                      // 'Rojmel'  => array('rojmel/rojmel'=>'Rojmel'),
-                     'Masters' => array(
+                     /*'Masters' => array(
                                         'masters/account_listing'=>'Account List',
                                         'masters/accounts'=>'Accounts',
                                         'masters/groups' =>'Group',
@@ -34,28 +34,28 @@
                                         'masters/quators'=>'Quators',
                                         'masters/empty_packets'=>'Empty Packet',
                                         'masters/empty_bags'=>'Empty Bag',
-                                        ),
+                                        ), */
                     'Transactions' => array(
-                                           'transactions/cash_receipt_vouchers' => 'Cash Voucher',
+                                            //'transactions/cash_receipt_vouchers' => 'Cash Voucher',
                                             // 'transactions/bank_receipt_vouchers' => 'Bank Voucher',
                                             'transactions/metal_receipt_vouchers' => 'Metal Voucher',
                                             
                                             //'transactions/metal_receipt_voucher_details' => 'Metal Receipt Details',
                                             //'transactions/metal_issue_voucher_details' => 'Metal Issue Details',
                                             'argold/chittis' => 'Chitti',
-                                            'argold/chalans' => 'Chalans',
-                                            'argold/combine_chitties' => 'Combine Chitties',
+                                            //'argold/chalans' => 'Chalans',
+                                            //'argold/combine_chitties' => 'Combine Chitties',
                                             'argold/chitti_exports' => 'Chitti Export',
-                                            'argold/packing_slips' => 'Packing slips',
-                                            'argold/domestic_labour_chitties' => 'Domestic Labour Chitti',
+                                            //'argold/packing_slips' => 'Packing slips',
+                                            //'argold/domestic_labour_chitties' => 'Domestic Labour Chitti',
                                             'argold/refresh' => 'Refresh',
-                                            'transactions/loss_outs' => 'Loss Out',
+                                            //'transactions/loss_outs' => 'Loss Out',
 
                                            //  'transactions/sales_vouchers' => 'Sales Voucher',//
                                            //  'transactions/purchase_vouchers' => 'Purchase Voucher',//
                                            //  'transactions/journal_vouchers' => 'Journal Voucher',//
                                            //  'transactions/contra_vouchers' => 'Contra Voucher',//
-                                            'transactions/rate_cut_receipt_vouchers' => 'Bhav Cut Voucher',
+                                            //'transactions/rate_cut_receipt_vouchers' => 'Bhav Cut Voucher',
                                             // 'transactions/rate_cut_issue_vouchers' => 'Bhav Cut Issue Voucher',
                                             // 'transactions/rate_cut_booking_price_receipt_vouchers' => 'Bhav Cut Booking Price Voucher',
                                             // 'transactions/rate_cut_booking_weight_receipt_vouchers' => 'Bhav Cut Booking Weight Voucher',
@@ -71,8 +71,8 @@
                                             // 'transactions/transfer_voucher' => 'Transfer Voucher',
                                             // 'transactions/repair_voucher_out' => 'Repair Voucher Out',
                                             // 'transactions/approval_in_voucher' => 'Approval in Voucher',
-                                             'transactions/opening_stock_vouchers' => 'Opening Stock Voucher',
-                                             'transactions/transfer_vouchers' => 'Transfer Vouchers',//
+                                            // 'transactions/opening_stock_vouchers' => 'Opening Stock Voucher',
+                                            // 'transactions/transfer_vouchers' => 'Transfer Vouchers',//
                                             // 'transactions/antique_sales_voucher' => 'Antique Sales Voucher',
                                             // 'transactions/mangalsutra_sales_voucher' => 'Mangalsutra Sales Voucher',
                                             // 'transactions/platinum_sales_voucher' => 'Platinum Sales Voucher',
@@ -83,7 +83,7 @@
                     // 'Reports'   => array('reports/mis_reports'=>'MIS Reports',
                     //                     'reports/stock_report' =>'Stock Report',
                     //                     'reports/order_report'=>'Order Report'),
-                    'Reports'   => array(
+                    /*'Reports'   => array(
                                         'reports/account_ledgers' => 'Account Ledger',
                                         // 'reports/account_ledgers' => 'Account Ledger Report',
                                         // 'reports/outstanding_report' => 'Outstanding Report',
@@ -104,7 +104,7 @@
                                         'reports/cash_gst_registers' => 'Cash GST Register Reports',
                                         'reports/domestic_export_ledgers' => 'Domestic Export Ledger',
                                         'reports/person_production_charts' => 'Person Production Charts',
-                                        ),
+                                        ), */
                     //'Interests' => array('transactions/interest_issue_vouchers'=>'Interest Issue Voucher','transactions/interest_receipt_vouchers'=>'Interest Receipt Voucher'),
                     'Registers'   => array(
                       'registers/cash_registers' => 'Cash Register',
