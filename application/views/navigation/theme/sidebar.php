@@ -15,7 +15,7 @@
                                       'users/user_roles'=>'User roles',
                                       'users/change_password' => 'Change Password'),
                      // 'Rojmel'  => array('rojmel/rojmel'=>'Rojmel'),
-                     /*'Masters' => array(
+                     'Masters' => array(
                                         'masters/account_listing'=>'Account List',
                                         'masters/accounts'=>'Accounts',
                                         'masters/groups' =>'Group',
@@ -34,7 +34,7 @@
                                         'masters/quators'=>'Quators',
                                         'masters/empty_packets'=>'Empty Packet',
                                         'masters/empty_bags'=>'Empty Bag',
-                                        ), */
+                                        ), 
                     'Transactions' => array(
                                             //'transactions/cash_receipt_vouchers' => 'Cash Voucher',
                                             // 'transactions/bank_receipt_vouchers' => 'Bank Voucher',
