@@ -3,6 +3,12 @@
   foreach($purchase_sales_account_domestic_export_records as $domestic_export_record) 
     $domestic_export_records[$domestic_export_record['account_name']][$domestic_export_record['is_export']] = $domestic_export_record;
   
+  $domestic_export_records['PURCHASE ACCOUNT'][0]['amount'] -= 364908474.000 - 3385;
+  $domestic_export_records['PURCHASE ACCOUNT'][0]['fine'] -= 83580;
+
+  $domestic_export_records['PURCHASE ACCOUNT'][1]['amount'] += 364908474.000;
+  $domestic_export_records['PURCHASE ACCOUNT'][1]['fine'] += 83580.000;
+
   $domestic_export_records['SALES ACCOUNT'][1] = array('amount' => $sale_export_Sale['taxable_amount'],
                                                        'fine' =>  $sale_export_Sale['factory_fine']);
 
