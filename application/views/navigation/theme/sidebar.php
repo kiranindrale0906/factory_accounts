@@ -36,7 +36,7 @@
                                         'masters/empty_bags'=>'Empty Bag',
                                         ), 
                     'Transactions' => array(
-                                            //'transactions/cash_receipt_vouchers' => 'Cash Voucher',
+                                            'transactions/cash_receipt_vouchers' => 'Cash Voucher',
                                             // 'transactions/bank_receipt_vouchers' => 'Bank Voucher',
                                             'transactions/metal_receipt_vouchers' => 'Metal Voucher',
                                             
