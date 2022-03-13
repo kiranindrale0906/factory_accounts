@@ -14,7 +14,7 @@
 
   $domestic_export_records['PURCHASE ACCOUNT'][0]['fine'] = $domestic_export_records['PURCHASE ACCOUNT'][0]['fine'] ?? 0;
   $domestic_export_records['PURCHASE ACCOUNT'][0]['amount'] = $domestic_export_records['PURCHASE ACCOUNT'][0]['amount'] ?? 0;
-  $domestic_export_records['PURCHASE ACCOUNT'][0]['amount'] -= 364908474.000 - 3385;
+  $domestic_export_records['PURCHASE ACCOUNT'][0]['amount'] += 364908474.000 - 3385;
   $domestic_export_records['PURCHASE ACCOUNT'][0]['fine'] -= 83580;
    
   $purchase_domestic_fine = !empty($domestic_export_records['PURCHASE ACCOUNT'][0]['fine']) ? $domestic_export_records['PURCHASE ACCOUNT'][0]['fine'] : 0;
