@@ -3,9 +3,6 @@
   foreach($purchase_sales_account_domestic_export_records as $domestic_export_record) 
     $domestic_export_records[$domestic_export_record['account_name']][$domestic_export_record['is_export']] = $domestic_export_record;
   
-  401904347.230
-  
-  
   $domestic_export_records['SALES ACCOUNT'][1] = array('amount' => $sale_export_Sale['taxable_amount'],
                                                        'fine' =>  $sale_export_Sale['factory_fine']);
 
