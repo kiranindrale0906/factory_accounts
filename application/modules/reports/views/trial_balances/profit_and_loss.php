@@ -3,6 +3,7 @@
   foreach($purchase_sales_account_domestic_export_records as $domestic_export_record) 
     $domestic_export_records[$domestic_export_record['account_name']][$domestic_export_record['is_export']] = $domestic_export_record;
   
+  401904347.230
   
   
   $domestic_export_records['SALES ACCOUNT'][1] = array('amount' => $sale_export_Sale['taxable_amount'],
@@ -33,6 +34,11 @@
   $purchase_export_rate = !empty($domestic_export_records['PURCHASE ACCOUNT'][1]['fine']) ? -1 * $domestic_export_records['PURCHASE ACCOUNT'][1]['amount'] / $domestic_export_records['PURCHASE ACCOUNT'][1]['fine'] : 0;
   $purchase_export_amount = !empty($domestic_export_records['PURCHASE ACCOUNT'][1]['amount']) ? -1 * $domestic_export_records['PURCHASE ACCOUNT'][1]['amount'] : 0;
 
+  $domestic_export_records['SALES ACCOUNT'][0]['amount'] = $domestic_export_records['SALES ACCOUNT'][0]['amount'] ?? 0
+  $domestic_export_records['SALES ACCOUNT'][0]['amount'] -= 401904347.230;
+
+  $domestic_export_records['SALES ACCOUNT'][0]['fine'] == $domestic_export_records['SALES ACCOUNT'][0]['fine'] ?? 0;
+  $domestic_export_records['SALES ACCOUNT'][0]['fine'] -= 87103.83780000;
 
   $domestic_export_records['SALES ACCOUNT'][0]['fine'] = $domestic_export_records['SALES ACCOUNT'][0]['fine'];
   $domestic_export_records['SALES ACCOUNT'][0]['amount'] = $domestic_export_records['SALES ACCOUNT'][0]['amount'];
