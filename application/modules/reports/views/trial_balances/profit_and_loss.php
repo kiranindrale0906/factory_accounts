@@ -35,7 +35,7 @@
   $domestic_export_records['SALES ACCOUNT'][0]['amount'] -= 401904347.230;
 
   $domestic_export_records['SALES ACCOUNT'][0]['fine'] == $domestic_export_records['SALES ACCOUNT'][0]['fine'] ?? 0;
-  $domestic_export_records['SALES ACCOUNT'][0]['fine'] -= 87103.83780000;
+  $domestic_export_records['SALES ACCOUNT'][0]['fine'] += 87103.83780000;
 
   $domestic_export_records['SALES ACCOUNT'][0]['fine'] = $domestic_export_records['SALES ACCOUNT'][0]['fine'];
   $domestic_export_records['SALES ACCOUNT'][0]['amount'] = $domestic_export_records['SALES ACCOUNT'][0]['amount'];
