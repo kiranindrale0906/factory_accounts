@@ -95,8 +95,8 @@
   // $exchange_gain_loss_rate = $purchase_rate - $total_sales_with_closing_rate;
   // $exchange_gain_loss_amount = $exchange_gain_loss_fine * $exchange_gain_loss_rate;
 
-  $export_labour_amount = $sale_export_Labour['taxable_amount'] + 0;
-  $domestic_labour_amount['amount'] += 0;
+  $export_labour_amount = $sale_export_Labour['taxable_amount'] + 37137713.028;
+  $domestic_labour_amount['amount'] += 6012267.000;
 
   
 ?>
