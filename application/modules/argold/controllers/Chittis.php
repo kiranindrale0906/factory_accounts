@@ -14,6 +14,7 @@ class Chittis extends BaseController {
     $this->data['layout'] = 'plain';
     parent::view($id);
   } 
+  
   public function index() {
       $show = (isset($_GET['show_all'])) ? $_GET['show_all'] : '';
       $account_names= $this->account_model->get('distinct(name) as name,name as id',array('group_code'=>"Domestic"));
