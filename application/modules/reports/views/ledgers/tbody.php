@@ -6,10 +6,11 @@
 
     if (!isset($detail) || $detail == 'yes') {
       foreach ($voucher_date_records as $index => $record) {
-        if (($record['debit_weight'] != 0 || $record['debit_amount'] != 0))
-          $this->load->view('reports/ledgers/tr_receipt', array('record' => $record));   
-        elseif (($record['credit_weight'] != 0 || $record['credit_amount'] != 0)) 
-          $this->load->view('reports/ledgers/tr_issue', array('record' => $record));  
+        if ($record['voucher_type'] != 'opening stock voucher')
+          if (($record['debit_weight'] != 0 || $record['debit_amount'] != 0))
+            $this->load->view('reports/ledgers/tr_receipt', array('record' => $record));   
+          elseif (($record['credit_weight'] != 0 || $record['credit_amount'] != 0)) 
+            $this->load->view('reports/ledgers/tr_issue', array('record' => $record));  
       }
     } 
 
