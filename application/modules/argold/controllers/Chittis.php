@@ -14,6 +14,7 @@ class Chittis extends BaseController {
     $this->data['layout'] = 'plain';
     parent::view($id);
   } 
+  
   public function index() {
       $show = (isset($_GET['show_all'])) ? $_GET['show_all'] : '';
       $account_names= $this->account_model->get('distinct(name) as name,name as id',array('group_code'=>"Domestic"));
@@ -99,7 +100,7 @@ class Chittis extends BaseController {
                                                                'account_name in ("'.implode('", "', $account_name).'")' => NULL,
                                                                'voucher_type' => 'metal issue voucher',
                                                                'chitti_id' => 0,
-                                                               'receipt_type in ("Finish Good","GPC Out")'=>NULL
+                                                               'receipt_type in ("Finish Good","GPC Out","Melting Wastage")'=>NULL
                                                              )) ,
                                                        array(), array('group_by' => 'purity'));
     
