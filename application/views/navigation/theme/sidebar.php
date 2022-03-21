@@ -42,6 +42,7 @@
                                             
                                             //'transactions/metal_receipt_voucher_details' => 'Metal Receipt Details',
                                             //'transactions/metal_issue_voucher_details' => 'Metal Issue Details',
+                                            'argold/opening_loss_vouchers' => 'Opening Loss Vouchers',
                                             'argold/chittis' => 'Chitti',
                                             //'argold/chalans' => 'Chalans',
                                             //'argold/combine_chitties' => 'Combine Chitties',
