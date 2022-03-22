@@ -6,7 +6,7 @@ class Migration_add_narrations_filed_in_chitties extends CI_Model {
 
   public function up()
   {
-    $this->db->query("");
+    $this->db->query("ALTER TABLE `chitties` ADD narration varchar(500) NULL DEFAULT NULL;");
   }
 
 
