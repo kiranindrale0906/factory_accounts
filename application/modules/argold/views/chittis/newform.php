@@ -47,7 +47,7 @@
       <?php load_field('text',array('field' => 'labour_usd_amount'));  ?>
       <?php load_field('text',array('field' => 'freight_usd_amount'));  
     } ?>
-     <?php load_field('text',array('field' => 'narrations'));  ?>
+     <?php load_field('text',array('field' => 'narration'));  ?>
     
   </div>
     <?php $this->load->view('chitti_details/formlist');?>
