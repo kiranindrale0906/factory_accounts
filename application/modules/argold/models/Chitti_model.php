@@ -73,6 +73,7 @@ class Chitti_model extends BaseModel {
       $this->attributes['packet_no'] = isset($chitti_details['packet_no'])?$chitti_details['packet_no']:0;
       $this->set_sales_amount_fields();
     }
+      $this->attributes['narration'] = $this->attributes['narration'];
   }
 
   private function set_sales_amount_fields() {

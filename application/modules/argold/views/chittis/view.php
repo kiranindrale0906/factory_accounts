@@ -171,6 +171,9 @@
       <td>Grand Total</td><td class="text-right"><h6><?=four_decimal($record['debit_amount'])?></h6></td>
     </tr>
   </table>
+  <div class="col-md-3">
+   <h4 style="margin-left:45%" class="heading"><?= $record['narration']; ?></h4>
+  </div>
   <?php $this->load->view('chitti_details/empty_packet_view'); ?>
 </div>
 

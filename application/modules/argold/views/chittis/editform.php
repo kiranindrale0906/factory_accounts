@@ -45,7 +45,7 @@
     <?php load_field('text',array('field' => 'labour_usd_amount'));  ?>
     <?php load_field('text',array('field' => 'freight_usd_amount'));  } ?>
     
-    <?php //load_field('text',array('field' => 'taxable_amount'));  ?>
+    <?php load_field('text',array('field' => 'narrations'));  ?>
   </div>
   <?php load_buttons('submit', array('controller' => $controller, 'name' => 'SAVE' , 'class' => 'btn_blue')) ;
     echo validation_errors();
