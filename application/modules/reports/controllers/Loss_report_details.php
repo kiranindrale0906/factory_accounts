@@ -56,9 +56,10 @@ class Loss_report_details extends Ledgers {
 
       $fine_loss = $loss_detail['in_weight'] * $loss_detail['in_lot_purity'] / 100;
       $opening_after_recovery=!empty($loss_detail['opening_after_recovery'])?$loss_detail['opening_after_recovery']:0;
+      $opening_recovery_fine=!empty($loss_detail['opening_recovery_fine'])?$loss_detail['opening_recovery_fine']:0;
       $opening_unrecoverable=!empty($loss_detail['opening_unrecoverable'])?$loss_detail['opening_unrecoverable']:0;
       $after_recovered_loss = $loss_account_details['weight']+$opening_after_recovery;
-      $recovered_loss = $loss_account_details['fine'];
+      $recovered_loss = $loss_account_details['fine']+$opening_recovery_fine;
       $unrecovery_loss = !empty($unrecovery_details) ? $unrecovery_details['weight'] : 0;
       $unrecoverable_loss=$unrecovery_loss+$opening_unrecoverable;
       $balance = $fine_loss - $recovered_loss - $unrecoverable_loss;
@@ -139,8 +140,9 @@ class Loss_report_details extends Ledgers {
       $opening_loss_details[$opening_loss_index]['first_date'] = $opening_loss_value['created_at'];
       $opening_loss_details[$opening_loss_index]['last_date'] = $opening_loss_value['created_at'];
       $opening_loss_details[$opening_loss_index]['receipt_type'] = "Opening Loss";
-      $opening_loss_details[$opening_loss_index]['opening_after_recovery'] = $opening_loss_value['recovered_loss'];
+      $opening_loss_details[$opening_loss_index]['opening_after_recovery'] = $opening_loss_value['after_recovered'];
       $opening_loss_details[$opening_loss_index]['opening_unrecoverable'] = $opening_loss_value['unrecovered_loss'];
+      $opening_loss_details[$opening_loss_index]['opening_recovery_fine'] = $opening_loss_value['recovered_loss'];
       
       $opening_loss_details[$opening_loss_index]['quator'] = $opening_loss_value['quator'];
 

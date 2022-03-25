@@ -42,7 +42,8 @@ function list_settings() {
     array("Loss", "loss", TRUE, "loss", TRUE, TRUE),
     array("Purity", "purity", TRUE, "purity", TRUE, TRUE),
     array("Out Weight", "out_weight", TRUE, "out_weight", TRUE, TRUE),
-    array("Metal Receive After Recovery", "recovered_loss", TRUE, "recovered_loss", TRUE, TRUE),
+    array("Metal Receive After Recovery", "after_recovered", TRUE, "after_recovered", TRUE, TRUE),
+    array("Recovered Fine", "recovered_loss", TRUE, "recovered_loss", TRUE, TRUE),
     array("Unrecoverable", "unrecovered_loss", TRUE, "unrecovered_loss", TRUE, TRUE),
     array("Quator", "quator", TRUE, "quator", TRUE, TRUE),
     array("Action", "action", FALSE, "action", FALSE, FALSE),
@@ -72,7 +73,8 @@ function get_field_attribute($table, $field) {
     'factory_name'      => array('Factory name', 'Factory Name', FALSE, '', TRUE),
     'type_of_loss'      => array('Type of Loss', 'Enter Type of Loss', FALSE, '', TRUE),
     'out_weight'      => array('Out Weight', 'Enter Out Weight', FALSE, '', TRUE),
-    'recovered_loss'      => array('Metal Receive After Recovery', 'Enter Metal Receive After Recovery', FALSE, '', TRUE),
+    'after_recovered'      => array('Metal Receive After Recovery', 'Enter Metal Receive After Recovery', FALSE, '', TRUE),
+    'recovered_loss'      => array('Recovery Fine', 'Enter Recovery Fine', FALSE, '', TRUE),
     'unrecovered_loss'      => array('Unrecoverable', 'Enter Unrecoverable', FALSE, '', TRUE),
   );
  

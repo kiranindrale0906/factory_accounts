@@ -18,6 +18,7 @@
     <?php load_field('text', array('field' => 'loss')) ?>
     <?php load_field('text', array('field' => 'out_weight')) ?>
     <?php load_field('text', array('field' => 'purity')) ?>
+    <?php load_field('text', array('field' => 'after_recovered')) ?>
     <?php load_field('text', array('field' => 'recovered_loss')) ?>
     <?php load_field('text', array('field' => 'unrecovered_loss')) ?>
   </div>

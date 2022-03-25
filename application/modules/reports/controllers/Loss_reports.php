@@ -55,7 +55,8 @@ class Loss_reports extends BaseController {
                                                      'account_name' => 'Unrecovarable'.' '.$this->data['site_name']));
 
           $fine_loss = ($loss_record['in_weight'] * $loss_record['in_lot_purity'] / 100);
-          $recovered_loss = $recovered_details['fine'];
+          $opening_recovered_loss=!empty($loss_record['opening_recovered_loss'])?$loss_record['opening_recovered_loss']:0;
+          $recovered_loss = $recovered_details['fine']+$opening_recovered_loss;
           $opening_after_recovery=!empty($loss_record['opening_after_recovery'])?$loss_record['opening_after_recovery']:0;
           $opening_unrecoverable=!empty($loss_record['opening_unrecoverable'])?$loss_record['opening_unrecoverable']:0;
           $after_recovered_loss = $recovered_details['weight']+$opening_after_recovery;
@@ -146,7 +147,8 @@ class Loss_reports extends BaseController {
       $opening_loss_details[$opening_loss_index]['in_lot_purity'] = $opening_loss_value['purity'];
       $opening_loss_details[$opening_loss_index]['out_weight'] = $opening_loss_value['out_weight'];
       $opening_loss_details[$opening_loss_index]['description'] = $opening_loss_value['type_of_loss'];
-      $opening_loss_details[$opening_loss_index]['opening_after_recovery'] = $opening_loss_value['recovered_loss'];
+      $opening_loss_details[$opening_loss_index]['opening_after_recovery'] = $opening_loss_value['after_recovered'];
+      $opening_loss_details[$opening_loss_index]['opening_recovered_loss'] = $opening_loss_value['recovered_loss'];
       $opening_loss_details[$opening_loss_index]['opening_unrecoverable'] = $opening_loss_value['unrecovered_loss'];
       $opening_loss_details[$opening_loss_index]['parent_id'] = $opening_loss_value['id'];
 
