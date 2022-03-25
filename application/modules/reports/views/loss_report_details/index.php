@@ -73,8 +73,11 @@
           <td class="text-right">
             <a href=<?= base_url()."argold/ghiss_melting_quators/edit/".$loss_out_detail['id'] ?> target='_blank' >Add Quartor</a>
           </td>
-        <?php }?>
-        <?php if(!empty($loss_out_detail['id'])&&$loss_out_detail['receipt_type']!="Ghiss Melting Loss"){?>
+        <?php }else if(!empty($loss_out_detail['id'])&&$loss_out_detail['receipt_type']=="Opening Loss"&&$loss_out_detail['quator']==""){?>
+          <td class="text-right">
+            <a href=<?= base_url()."argold/opening_quators/edit/".$loss_out_detail['id'] ?> target='_blank' >Add Quartor</a>
+          </td>
+        <?php }elseif(!empty($loss_out_detail['id'])&&($loss_out_detail['receipt_type']!="Ghiss Melting Loss"&&$loss_out_detail['receipt_type']!="Opening Loss")){?>
           <td class="text-right">
             <a href=<?= $factory_url."processes/process_quators/edit/".$loss_out_detail['id'] ?> target='_blank' >Add Quartor</a>
           </td>

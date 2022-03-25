@@ -5,7 +5,7 @@ class Loss_reports extends BaseController {
     parent::__construct();
      $this->load->model(array('masters/account_model','masters/company_model', 'transactions/ledger_model',
                              'transactions/metal_receipt_voucher_model', 'transactions/metal_issue_voucher_model', 
-                             'ac_vouchers/voucher_model', 'argold/chitti_model'));
+                             'ac_vouchers/voucher_model', 'argold/chitti_model', 'argold/opening_loss_voucher_model'));
   }
 
   public function index() {
@@ -25,13 +25,13 @@ class Loss_reports extends BaseController {
     $data['quator'] = '';
     $data['type'] = 'category';
     $data['completed_at'] = '2021-11-05';
-    
     if (empty($data['department_names'])) return;
     if (!isset($this->data['site_name']) || $this->data['site_name']=='All') return;
 
     $factory_loss_records = $this->get_loss_records_from_factory($data);
     $ghiss_melting_loss_records = $this->get_ghiss_melting_loss($data);
-    $loss_records = array_merge($factory_loss_records, $ghiss_melting_loss_records);
+    $opening_loss_records = $this->get_opening_loss($data);
+    $loss_records = array_merge($factory_loss_records, $ghiss_melting_loss_records,$opening_loss_records);
 
     if (empty($loss_records)) return;    
   
@@ -83,6 +83,9 @@ class Loss_reports extends BaseController {
     $category_names = $this->voucher_model->get('distinct(description) as description', 
                                            array('account_name' => 'Loss Account',
                                                  'date(created_at)>=' => '2021-03-13'));
+
+     $opening_category_names = $this->opening_loss_voucher_model->get('distinct(type_of_loss) as description',array('type_of_loss!=' => ''));
+    $category_names=array_merge($category_names,$opening_category_names);
     return array_column($category_names, 'description');
   }
 
@@ -127,5 +130,23 @@ class Loss_reports extends BaseController {
     }
 
     return $ghiss_melting_loss;
+  }
+  private function get_opening_loss($data) {
+    $opening_loss = $this->opening_loss_voucher_model->get('', 
+                                                     array('factory_name' => $this->data['site_name'],
+                                                      'quator' => NULL));
+    $opening_loss_details=array();
+    foreach ($opening_loss as $opening_loss_index => $opening_loss_value) {
+      $data['issue_department_id'] = $opening_loss_value['id'];
+      $data['quator'] = '';
+      $opening_loss_details[$opening_loss_index]['in_weight'] = $opening_loss_value['loss'];
+      $opening_loss_details[$opening_loss_index]['in_lot_purity'] = $opening_loss_value['purity'];
+      $opening_loss_details[$opening_loss_index]['out_weight'] = $opening_loss_value['out_weight'];
+      $opening_loss_details[$opening_loss_index]['description'] = $opening_loss_value['type_of_loss'];
+      $opening_loss_details[$opening_loss_index]['parent_id'] = $opening_loss_value['id'];
+
+    }
+
+    return $opening_loss_details;
   }
 }

@@ -11,11 +11,15 @@
      <?php endif; ?>     
   <div class="row">    
      <?php load_field('date',array('field' => 'date','class'=>'datepicker_js','value'=>(!empty($record['date'])?date('d-m-Y',strtotime($record['date'])):date('d-m-Y')), )); ?>
+    <?php load_field('dropdown', array('field' => 'factory_name',
+                                      'option'=>array(
+                                        array('id'=>'AR Gold','name'=>'AR Gold'),array('id'=>'ARF','name'=>'ARF'),array('id'=>'ARC','name'=>'ARC')))) ?>
+    <?php load_field('text', array('field' => 'type_of_loss')) ?>
     <?php load_field('text', array('field' => 'loss')) ?>
     <?php load_field('text', array('field' => 'out_weight')) ?>
     <?php load_field('text', array('field' => 'purity')) ?>
-    <?php load_field('text', array('field' => 'recovered_loss')) ?>
-    <?php load_field('text', array('field' => 'unrecovered_loss')) ?>
+    <?php //load_field('text', array('field' => 'recovered_loss')) ?>
+    <?php //load_field('text', array('field' => 'unrecovered_loss')) ?>
   </div>
   <?php load_buttons('submit', array('controller' => $controller, 'name' => 'SAVE' , 'class' => 'btn_blue')); ?>
 </form>

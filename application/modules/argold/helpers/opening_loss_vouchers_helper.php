@@ -37,11 +37,12 @@ function getTableSettings() {
 function list_settings() {
   return array(
     array("Date", "date", TRUE, "date", TRUE, TRUE),
+    array("Type of Loss", "type_of_loss", TRUE, "type_of_loss", TRUE, TRUE),
+    array("Factory Name", "factory_name", TRUE, "factory_name", TRUE, TRUE),
     array("Loss", "loss", TRUE, "loss", TRUE, TRUE),
     array("Purity", "purity", TRUE, "purity", TRUE, TRUE),
     array("Out Weight", "out_weight", TRUE, "out_weight", TRUE, TRUE),
-    array("Recovered Loss", "recovered_loss", TRUE, "recovered_loss", TRUE, TRUE),
-    array("Unrecovered Loss", "unrecovered_loss", TRUE, "unrecovered_loss", TRUE, TRUE),
+    array("Quator", "quator", TRUE, "quator", TRUE, TRUE),
     array("Action", "action", FALSE, "action", FALSE, FALSE),
   );
 }
@@ -65,6 +66,9 @@ function get_field_attribute($table, $field) {
     'date'            => array('Date', '', TRUE, '', TRUE),
     'loss'          => array('Loss', 'Enter Loss', TRUE, '', TRUE),
     'purity'      => array('Purity', 'Enter Purity', FALSE, '', TRUE),
+    'quator'      => array('quator', 'Enter quator', FALSE, '', TRUE),
+    'factory_name'      => array('Factory name', 'Factory Name', FALSE, '', TRUE),
+    'type_of_loss'      => array('Type of Loss', 'Enter Type of Loss', FALSE, '', TRUE),
     'out_weight'      => array('Out Weight', 'Enter Out Weight', FALSE, '', TRUE),
     'recovered_loss'      => array('Recovered Loss', 'Enter Recovered Loss', FALSE, '', TRUE),
     'unrecovered_loss'      => array('Unrecovered Loss', 'Enter Unrecovered Loss', FALSE, '', TRUE),
