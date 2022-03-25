@@ -56,9 +56,13 @@ class Loss_reports extends BaseController {
 
           $fine_loss = ($loss_record['in_weight'] * $loss_record['in_lot_purity'] / 100);
           $recovered_loss = $recovered_details['fine'];
-          $after_recovered_loss = $recovered_details['weight'];
+          $opening_after_recovery=!empty($loss_record['opening_after_recovery'])?$loss_record['opening_after_recovery']:0;
+          $opening_unrecoverable=!empty($loss_record['opening_unrecoverable'])?$loss_record['opening_unrecoverable']:0;
+          $after_recovered_loss = $recovered_details['weight']+$opening_after_recovery;
+
           $unrecovery_loss = !empty($unrecovered_details) ? $unrecovered_details['weight'] : 0;
-          $balance = $fine_loss - $recovered_loss - $unrecovery_loss;
+          $unrecoverable_loss=$unrecovery_loss+$opening_unrecoverable;
+          $balance = $fine_loss - $recovered_loss - $unrecoverable_loss;
        
           if (!isset($this->data['loss_categories'][$category_name])) 
             $this->data['loss_categories'][$category_name] = array('loss_fine' => 0,
@@ -72,7 +76,7 @@ class Loss_reports extends BaseController {
           $this->data['loss_categories'][$category_name]['loss_fine'] += $fine_loss;
           $this->data['loss_categories'][$category_name]['recoverd_loss_fine'] += $recovered_loss;
           $this->data['loss_categories'][$category_name]['after_recovered_loss'] += $after_recovered_loss;
-          $this->data['loss_categories'][$category_name]['unrecoverable_loss'] += $unrecovery_loss;
+          $this->data['loss_categories'][$category_name]['unrecoverable_loss'] += $unrecoverable_loss;
           $this->data['loss_categories'][$category_name]['balance'] += $balance;
         }
       }
@@ -133,8 +137,7 @@ class Loss_reports extends BaseController {
   }
   private function get_opening_loss($data) {
     $opening_loss = $this->opening_loss_voucher_model->get('', 
-                                                     array('factory_name' => $this->data['site_name'],
-                                                      'quator' => NULL));
+                                                     array('factory_name' => $this->data['site_name']));
     $opening_loss_details=array();
     foreach ($opening_loss as $opening_loss_index => $opening_loss_value) {
       $data['issue_department_id'] = $opening_loss_value['id'];
@@ -143,10 +146,11 @@ class Loss_reports extends BaseController {
       $opening_loss_details[$opening_loss_index]['in_lot_purity'] = $opening_loss_value['purity'];
       $opening_loss_details[$opening_loss_index]['out_weight'] = $opening_loss_value['out_weight'];
       $opening_loss_details[$opening_loss_index]['description'] = $opening_loss_value['type_of_loss'];
+      $opening_loss_details[$opening_loss_index]['opening_after_recovery'] = $opening_loss_value['recovered_loss'];
+      $opening_loss_details[$opening_loss_index]['opening_unrecoverable'] = $opening_loss_value['unrecovered_loss'];
       $opening_loss_details[$opening_loss_index]['parent_id'] = $opening_loss_value['id'];
 
     }
-
     return $opening_loss_details;
   }
 }
