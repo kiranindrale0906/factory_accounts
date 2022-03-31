@@ -106,7 +106,7 @@ class Quator_wise_loss_report_details extends Ledgers {
             $opening_unrecoverable=!empty($loss_detail['opening_unrecoverable'])?$loss_detail['opening_unrecoverable']:0;
       
             $fine_loss=($loss_detail['in_weight']*$loss_detail['in_lot_purity']/100);
-            $after_recovered_loss=($loss_account_details['weight']+$opening_after_recovery;);
+            $after_recovered_loss=($loss_account_details['weight']+$opening_after_recovery);
             $recovered_loss=($loss_account_details['fine']+$opening_recovery_fine);
             $unrecovery_loss=!empty($unrecovery_details)?$unrecovery_details['weight']:0;
             $unrecoverable_loss=$unrecovery_loss+$opening_unrecoverable;
