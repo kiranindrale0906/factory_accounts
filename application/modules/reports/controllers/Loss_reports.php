@@ -89,7 +89,7 @@ class Loss_reports extends BaseController {
                                            array('account_name' => 'Loss Account',
                                                  'date(created_at)>=' => '2021-03-13'));
 
-     $opening_category_names = $this->opening_loss_voucher_model->get('distinct(type_of_loss) as description',array('type_of_loss!=' => ''));
+     $opening_category_names = $this->opening_loss_voucher_model->get('distinct(type_of_loss) as description',array('type_of_loss!=' => '','quator' => ''));
     $category_names=array_merge($category_names,$opening_category_names);
     return array_column($category_names, 'description');
   }
@@ -138,7 +138,7 @@ class Loss_reports extends BaseController {
   }
   private function get_opening_loss($data) {
     $opening_loss = $this->opening_loss_voucher_model->get('', 
-                                                     array('factory_name' => $this->data['site_name']));
+                                                     array('factory_name' => $this->data['site_name'],'quator'=>""));
     $opening_loss_details=array();
     foreach ($opening_loss as $opening_loss_index => $opening_loss_value) {
       $data['issue_department_id'] = $opening_loss_value['id'];
