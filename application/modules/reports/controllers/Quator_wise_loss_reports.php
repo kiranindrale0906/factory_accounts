@@ -208,7 +208,7 @@ class Quator_wise_loss_reports extends BaseController {
   private function get_opening_loss() {
     $opening_loss = $this->opening_loss_voucher_model->get('', 
                                                      array('factory_name' => $this->data['site_name'],
-                                                           'quator' => $this->data['quator']));
+                                                           'quator' => $this->data['quator_name']));
     $opening_loss_details=array();
     foreach ($opening_loss as $opening_loss_index => $opening_loss_value) {
       $data['issue_department_id'] = $opening_loss_value['id'];
