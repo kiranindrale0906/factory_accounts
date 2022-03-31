@@ -95,7 +95,7 @@ class Quator_wise_loss_reports extends BaseController {
 
     $categories= $this->voucher_model->get('trim(description) as description', array('account_name'=>'Loss Account','date(created_at)>='=>'2021-03-13'),array(),array('group_by'=>'description'));
     $opening_category_names = $this->opening_loss_voucher_model->get('distinct(type_of_loss) as description',array('type_of_loss!=' => ''));
-    $categories=array_merge($category_names,$opening_category_names);
+    $categories=array_merge($categories,$opening_category_names);
 
     $loss_details= $this->voucher_model->get('description,fine,id', array('account_name'=>'Loss Account','parent_id'=>0),array());
     $category_names=array_column($categories,'description');
