@@ -8,7 +8,7 @@ class Quator_wise_loss_report_details extends Ledgers {
     parent::__construct();
     $this->load->model(array('masters/account_model','masters/company_model', 'transactions/ledger_model',
                              'transactions/metal_receipt_voucher_model', 'transactions/metal_issue_voucher_model', 
-                             'ac_vouchers/voucher_model', 'argold/chitti_model'));
+                             'ac_vouchers/voucher_model', 'argold/chitti_model', 'argold/opening_loss_voucher_model'));
   }
 
   public function index() {
@@ -19,7 +19,9 @@ class Quator_wise_loss_report_details extends Ledgers {
   private function get_loss_details() {
     $this->data['factory_name']=!empty($_GET['factory_name'])?$_GET['factory_name']:'';
     $data['department_name']=$_GET['category'];
+    $this->data['department_name']=$_GET['category'];
     $data['quator']=$_GET['quator'];
+    $this->data['quator']=$_GET['quator'];
     $data['completed_at']='2021-11-05';
     $url=API_ARG_PATH."issue_and_receipts/loss_report_for_accounts/index";
     $arg_records=json_decode(curl_post_request($url,$data),true);
@@ -34,7 +36,8 @@ class Quator_wise_loss_report_details extends Ledgers {
            $out_weight=!empty($ghiss_details)&&!empty($ghiss_details['data']['ghiss_melting_out_weights'])?$ghiss_details['data']['ghiss_melting_out_weights']:0;
           $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight']=$out_weight;
     }
-    $arg_records=array_merge($arg_records,$ghiss_melting_loss);
+    $opening_loss_records = $this->get_opening_loss();
+    $arg_records=array_merge($arg_records,$ghiss_melting_loss,$opening_loss_records);
 
 
     $url=API_ARF_PATH."issue_and_receipts/loss_report_for_accounts/index";
@@ -49,7 +52,8 @@ class Quator_wise_loss_report_details extends Ledgers {
            $out_weight=!empty($ghiss_details)&&!empty($ghiss_details['data']['ghiss_melting_out_weights'])?$ghiss_details['data']['ghiss_melting_out_weights']:0;
           $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight']=$out_weight;
     }
-    $arf_records=array_merge($arf_records,$ghiss_melting_loss);
+    $opening_loss_records = $this->get_opening_loss();
+    $arf_records=array_merge($arf_records,$ghiss_melting_loss,$opening_loss_records);
 
     
     $url=API_ARC_PATH."issue_and_receipts/loss_report_for_accounts/index";
@@ -64,7 +68,8 @@ class Quator_wise_loss_report_details extends Ledgers {
            $out_weight=!empty($ghiss_details)&&!empty($ghiss_details['data']['ghiss_melting_out_weights'])?$ghiss_details['data']['ghiss_melting_out_weights']:0;
           $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight']=$out_weight;
     }
-    $arc_records=array_merge($arc_records,$ghiss_melting_loss);
+    $opening_loss_records = $this->get_opening_loss();
+    $arc_records=array_merge($arc_records,$ghiss_melting_loss,$opening_loss_records );
 
     $arg_records=$this->factory_wise_record_array($arg_records);
     $arf_records=$this->factory_wise_record_array($arf_records);
@@ -96,12 +101,16 @@ class Quator_wise_loss_report_details extends Ledgers {
             $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$loss_detail['parent_id'],'account_name!='=>'Unrecovarable'.' '.$this->data['factory_name']));
             
             $unrecovery_details = $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$loss_detail['parent_id'],'account_name'=>'Unrecovarable'.' '.$this->data['factory_name']));
-
+            $opening_after_recovery=!empty($loss_detail['opening_after_recovery'])?$loss_detail['opening_after_recovery']:0;
+            $opening_recovery_fine=!empty($loss_detail['opening_recovery_fine'])?$loss_detail['opening_recovery_fine']:0;
+            $opening_unrecoverable=!empty($loss_detail['opening_unrecoverable'])?$loss_detail['opening_unrecoverable']:0;
+      
             $fine_loss=($loss_detail['in_weight']*$loss_detail['in_lot_purity']/100);
-            $after_recovered_loss=($loss_account_details['weight']);
-            $recovered_loss=($loss_account_details['fine']);
+            $after_recovered_loss=($loss_account_details['weight']+$opening_after_recovery;);
+            $recovered_loss=($loss_account_details['fine']+$opening_recovery_fine);
             $unrecovery_loss=!empty($unrecovery_details)?$unrecovery_details['weight']:0;
-            $balance=$fine_loss-$recovered_loss-$unrecovery_loss;
+            $unrecoverable_loss=$unrecovery_loss+$opening_unrecoverable;
+            $balance=$fine_loss-$recovered_loss-$unrecoverable_loss;
             $factory_wise_record[$index]=$loss_detail;
             $factory_wise_record[$index]['loss_fine']=$fine_loss;
             $factory_wise_record[$index]['after_recovery']=$after_recovered_loss;
@@ -114,4 +123,32 @@ class Quator_wise_loss_report_details extends Ledgers {
     return $factory_wise_record;
 
   }      
+  private function get_opening_loss() {
+    $opening_loss = $this->opening_loss_voucher_model->get('', 
+                                                     array('factory_name' => $this->data['factory_name'],
+                                                           'quator' => $this->data['quator'],
+                                                           'type_of_loss' => $this->data['department_name']));
+    $opening_loss_details=array();
+    foreach ($opening_loss as $opening_loss_index => $opening_loss_value) {
+      $data['issue_department_id'] = $opening_loss_value['id'];
+      $data['quator'] = $this->data['quator'];
+      $opening_loss_details[$opening_loss_index]['in_weight'] = $opening_loss_value['loss'];
+      $opening_loss_details[$opening_loss_index]['in_lot_purity'] = $opening_loss_value['purity'];
+      $opening_loss_details[$opening_loss_index]['out_weight'] = $opening_loss_value['out_weight'];
+      $opening_loss_details[$opening_loss_index]['description'] = $opening_loss_value['type_of_loss'];
+      $opening_loss_details[$opening_loss_index]['parent_id'] = $opening_loss_value['id'];
+      $opening_loss_details[$opening_loss_index]['id'] = $opening_loss_value['id'];
+      $opening_loss_details[$opening_loss_index]['created_at'] = $opening_loss_value['created_at'];
+      $opening_loss_details[$opening_loss_index]['first_date'] = $opening_loss_value['created_at'];
+      $opening_loss_details[$opening_loss_index]['last_date'] = $opening_loss_value['created_at'];
+      $opening_loss_details[$opening_loss_index]['receipt_type'] = "Opening Loss";
+      $opening_loss_details[$opening_loss_index]['opening_after_recovery'] = $opening_loss_value['after_recovered'];
+      $opening_loss_details[$opening_loss_index]['opening_unrecoverable'] = $opening_loss_value['unrecovered_loss'];
+      $opening_loss_details[$opening_loss_index]['opening_recovery_fine'] = $opening_loss_value['recovered_loss'];
+      
+      $opening_loss_details[$opening_loss_index]['quator'] = $opening_loss_value['quator'];
+
+    }
+    return $opening_loss_details;
+  }
 }
