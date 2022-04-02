@@ -10,9 +10,9 @@
   <td><?= '#'.$record['chitti_no'].' '.remove_duplicates_in_string($record['narration']).' '.$record['description']; ?>
     <?php if(isset($record['chitti_no']) && $record['chitti_no']!=0) { ?>
       <a class=""  href='<?= base_url() ?>argold/chittis/view/<?=$record['chitti_no']?>'>view</a>
-      <?php if ($record['account_name'] == 'OUTSIDE PARTY') { ?>
-        | <a class="" href='<?= base_url() ?>argold/change_account_names/index?chitti_no=<?=$record['chitti_no']?>&account_name=SS1'>SS1</a>
-      <?php } ?>  
+      <!-- <?php //if ($record['account_name'] == 'OUTSIDE PARTY') { ?>
+        | <a class="" href='<?//= base_url() ?>argold/change_account_names/index?chitti_no=<?//=$record['chitti_no']?>&account_name=SS1'>SS1</a>
+      <?php //} ?>  --> 
     <?php } ?>
   </td>
   <?php endif; ?>
