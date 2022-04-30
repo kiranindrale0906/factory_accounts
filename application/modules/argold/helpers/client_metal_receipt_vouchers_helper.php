@@ -28,6 +28,9 @@ function get_field_attribute($table, $field) {
     $required_fields=array('id', 'voucher_date', 'receipt_type', 'account_name', 
                            'debit_weight', 'purity', 'fine', 'narration','description');
 
+  }elseif(!empty($_GET['receipt_type']) && (  $_GET['receipt_type'] == 'Export Internal')) {
+    $required_fields=array('id', 'voucher_date', 'receipt_type','debit_weight', 'purity', 'fine','description');
+
   }elseif (!empty($_GET['receipt_type']) && (   $_GET['receipt_type'] == 'ARC Finished Goods' 
                                              || $_GET['receipt_type'] == 'ARF Finished Goods'
                                              || $_GET['receipt_type'] == 'AR Gold Finished Goods'

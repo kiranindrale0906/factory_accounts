@@ -166,6 +166,7 @@
                                           'ARF Chain Receipt',
                                           'ARC Chain Receipt',
                                           'AR Gold RND',
+                                          'Export Internal',
                                           'ARF RND',
                                           'ARC RND',
                                           'AR Gold Finished Goods Receipt',
