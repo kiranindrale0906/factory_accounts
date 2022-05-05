@@ -475,8 +475,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                    || $attributes['account_name'] == 'AR Gold Software'
                    || $attributes['account_name'] == 'ARF Software' 
                    || $attributes['account_name'] == 'ARC Software'
-                   || $attributes['account_name'] == 'Export Internal Software'
-                 )) {
+                    )) {
 
       $api_data = array_merge($api_data, array('type' => 'Pure','description' => $api_data['description'].'-'.$attributes['site_name']));
       $send_data['internal_receipts'] = $api_data;
@@ -488,7 +487,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $send_data['rnd_receipts'] = $api_data;
       $api_url = "api/api_rnd_receipts/store";  
 
-    }elseif (   $attributes['receipt_type'] == 'Export Internal') {
+    }elseif (   $attributes['receipt_type'] == 'Export Internal ISSUE') {
       $send_data['export_internal_receipts'] = $api_data;
       $api_url = "api/api_export_internal_receipts/store";  
 
