@@ -76,7 +76,6 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
     parent::after_save($action);
     //$this->create_metal_receipt_voucher_for_finished_goods();
     $account_name=trim($this->attributes['account_name']);
-      pd($account_name);
     if (   ENABLE_API_FOR_RECEIPT 
         && $this->attributes['receipt_type'] != 'Internal' 
 
@@ -87,6 +86,7 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
             || $account_name == 'AR Gold Software Staging'
             || $account_name == 'ARF Software Staging'
             || $account_name == 'ARC Software Staging')){
+      pd($account_name);
 
       $this->client_metal_receipt_voucher_model->send_request_to_factory($this->attributes);
     }
