@@ -472,6 +472,8 @@ class Trial_balances extends Ledgers {
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator_group_by_date, 'Alloy Vodator', 'AR Gold', '');
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator_group_by_date, 'GPC Vodator', 'AR Gold', '');
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav_group_by_date, 'Stone Vatav', 'AR Gold', '');
+        $this->metal_receipt_voucher_model->create_vodator_records($records->data->meena_vatav_group_by_date, 'Meena Vatav', 'AR Gold', '');
+
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->copper_vatav_group_by_date, 'Copper Vatav', 'AR Gold', '');
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->rhodium_vatav_group_by_date, 'Rhodium Vatav', 'AR Gold', '');
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->tounch_loss_fine_group_by_date, 'Auto Tounch Loss Fine', 'AR Gold', '');
@@ -484,6 +486,7 @@ class Trial_balances extends Ledgers {
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator_group_by_date, 'Alloy Vodator', 'ARF', '');
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator_group_by_date, 'GPC Vodator', 'ARF', '');
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav_group_by_date, 'Stone Vatav', 'ARF', '');
+        $this->metal_receipt_voucher_model->create_vodator_records($records->data->meena_vatav_group_by_date, 'Meena Vatav', 'ARF', '');
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->copper_vatav_group_by_date, 'Copper Vatav', 'ARF', '');
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->rhodium_vatav_group_by_date, 'Rhodium Vatav', 'ARF', '');
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->tounch_loss_fine_group_by_date, 'Auto Tounch Loss Fine', 'ARF', '');
@@ -495,6 +498,7 @@ class Trial_balances extends Ledgers {
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator_group_by_date, 'Alloy Vodator', 'ARC', '');
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator_group_by_date, 'GPC Vodator', 'ARC', '');
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav_group_by_date, 'Stone Vatav', 'ARC', '');
+        $this->metal_receipt_voucher_model->create_vodator_records($records->data->meena_vatav_group_by_date, 'Meena Vatav', 'ARC', '');
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->copper_vatav_group_by_date, 'Copper Vatav', 'ARC', '');
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->rhodium_vatav_group_by_date, 'Rhodium Vatav', 'ARC', '');
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->tounch_loss_fine_group_by_date, 'Auto Tounch Loss Fine', 'ARC', '');
