@@ -514,7 +514,6 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $send_data['pending_ghiss_receipts'] = array_merge($api_data, array('department_name' => $department_name));
       $api_url = "api/api_pending_ghiss_receipts/store";
     }
-    pd($api_url);
     if (empty($api_url)) return true;
     if ($attributes['account_name'] == 'AR Gold Software')
       $api_url = API_ARG_PATH.$api_url;
