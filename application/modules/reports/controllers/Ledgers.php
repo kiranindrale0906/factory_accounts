@@ -128,7 +128,7 @@ class Ledgers extends BaseController {
     $account_issue_where['purity<='] = 100;
     $receipt_issue_select = 'receipt_type, '.$period_select.' as voucher_date, 
                                date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
-                               account_name, voucher_type, 
+                               account_name, voucher_type, voucher_id, 
                                site_name, voucher_type, 
                                concat(voucher_number, ", ") as voucher_number, 
                                (credit_amount) as credit_amount, 
