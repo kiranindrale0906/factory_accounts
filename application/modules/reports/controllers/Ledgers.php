@@ -171,6 +171,7 @@ class Ledgers extends BaseController {
       $ac_voucher_issue_detail=$this->voucher_model->get('metal_receipt_voucher_reference_id',array('where_in'=>array('id'=>$voucher_id)));
       $metal_receipt_voucher_reference_id=array_column($ac_voucher_issue_detail,'metal_receipt_voucher_reference_id');
        $reference_ac_voucher_issue_detail=$this->voucher_model->find('GROUP_CONCAT(DISTINCT(account_name)) as account_name',array('where_in'=>array('id'=>$metal_receipt_voucher_reference_id)));
+       pd($reference_ac_voucher_issue_detail);
       $issues[$issue_index]['reference_account_name']=$reference_ac_voucher_issue_detail['account_name'];
     }
     $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(), array('order_by'=>'parent_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
