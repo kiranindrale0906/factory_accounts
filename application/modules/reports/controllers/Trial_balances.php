@@ -35,6 +35,7 @@ class Trial_balances extends Ledgers {
     $this->get_alloy_vodator_balance();
     $this->get_gpc_vodator_balance();
     $this->get_stone_vatav_balance();
+    $this->get_meena_vatav_balance();
     $this->get_copper_vatav_balance();
     $this->get_rhodium_vatav_balance();
     $this->get_tounch_loss_fine_balance();
