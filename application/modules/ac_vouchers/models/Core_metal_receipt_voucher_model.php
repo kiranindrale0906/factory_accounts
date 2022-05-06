@@ -17,7 +17,7 @@ class Core_metal_receipt_voucher_model extends Voucher_model {
   function validation_rules($klass='') {
     $rules = parent::validation_rules($klass);
     $rules[] = $this->get_purity_validation_rules();
-    if (!in_array($this->attributes['receipt_type'], array('Alloy Vodator', 'GPC Vodator', 'Stone Vatav', 'Copper Vatav', 'Rhodium Vatav', 'HCL Loss', 'Tounch Loss Fine', 'AR Gold Loss Out', 'ARF Loss Out', 'ARC Loss Out')))
+    if (!in_array($this->attributes['receipt_type'], array('Alloy Vodator', 'GPC Vodator', 'Stone Vatav', 'Meena Vatav', 'Copper Vatav', 'Rhodium Vatav', 'HCL Loss', 'Tounch Loss Fine', 'AR Gold Loss Out', 'ARF Loss Out', 'ARC Loss Out')))
       $rule[] = $this->get_debit_weight_validation_rules();
     return $rules;
   }

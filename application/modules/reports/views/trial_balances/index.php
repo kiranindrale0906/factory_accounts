@@ -41,6 +41,9 @@
   <?php $this->load->view('trial_balances/stone_vatav_balance'); ?>
 </div>
 <div class="row">
+  <?php $this->load->view('trial_balances/meena_vatav_balance'); ?>
+</div>
+<div class="row">
   <?php $this->load->view('trial_balances/copper_vatav_balance'); ?>
 </div>
 <div class="row">

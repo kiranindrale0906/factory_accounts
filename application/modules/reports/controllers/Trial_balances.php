@@ -165,6 +165,34 @@ class Trial_balances extends Ledgers {
     $this->data['live_arf_stone_vatav_fine']    = !empty($arf_records->data->stone_vatav[0]) ? $arf_records->data->stone_vatav[0]->fine : 0;
     $this->data['live_arc_stone_vatav_fine']    = !empty($arc_records->data->stone_vatav[0]) ? $arc_records->data->stone_vatav[0]->fine : 0;
   }
+  private function get_meena_vatav_balance() {
+    //get stone vatav balance and balance fine from account ledgers
+    $accounts_balance_select = '(sum(debit_weight)) as balance, (sum(debit_weight*purity/100)) as balance_fine';
+    $argold_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Meena Vatav'));
+    $arf_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Meena Vatav'));
+    $arc_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARC Meena Vatav'));
+
+    $this->data['accounts_argold_meena_vatav'] = $argold_vouchers['balance'];
+    $this->data['accounts_arf_meena_vatav']    = $arf_vouchers['balance'];
+    $this->data['accounts_arc_meena_vatav']    = $arc_vouchers['balance'];
+
+    $this->data['accounts_argold_meena_vatav_fine'] = $argold_vouchers['balance_fine'];
+    $this->data['accounts_arf_meena_vatav_fine']    = $arf_vouchers['balance_fine'];
+    $this->data['accounts_arc_meena_vatav_fine']    = $arc_vouchers['balance_fine'];
+
+    //get gpc vadotar balance and balance fine from factory records
+    $arg_records = $this->data['arg_vadotar_records'];
+    $arf_records = $this->data['arf_vadotar_records'];
+    $arc_records = $this->data['arc_vadotar_records'];
+    
+    $this->data['live_argold_meena_vatav'] = !empty($arg_records->data->meena_vatav[0]) ? $arg_records->data->meena_vatav[0]->weight : 0;
+    $this->data['live_arf_meena_vatav']    = !empty($arf_records->data->meena_vatav[0]) ? $arf_records->data->meena_vatav[0]->weight : 0;
+    $this->data['live_arc_meena_vatav']    = !empty($arc_records->data->meena_vatav[0]) ? $arc_records->data->meena_vatav[0]->weight : 0;
+
+    $this->data['live_argold_meena_vatav_fine'] = !empty($arg_records->data->meena_vatav[0]) ? $arg_records->data->meena_vatav[0]->fine : 0;
+    $this->data['live_arf_meena_vatav_fine']    = !empty($arf_records->data->meena_vatav[0]) ? $arf_records->data->meena_vatav[0]->fine : 0;
+    $this->data['live_arc_meena_vatav_fine']    = !empty($arc_records->data->meena_vatav[0]) ? $arc_records->data->stone_vatav[0]->fine : 0;
+  }
 
   private function get_copper_vatav_balance() {
     //get stone vatav balance and balance fine from account ledgers
@@ -455,7 +483,7 @@ class Trial_balances extends Ledgers {
       $incorrect_vadotar_vouchers = $this->voucher_model->get('receipt_type, site_name, voucher_date, 
                                                                sum(credit_weight) as credit_weight, 
                                                                sum(debit_weight) as debit_weight',
-                                         array('receipt_type' => array('Alloy Vodator', 'GPC Vodator', 'Stone Vatav', 'Copper Vatav', 'Rhodium Vatav', 'Auto Tounch Loss Fine')),
+                                         array('receipt_type' => array('Alloy Vodator', 'GPC Vodator', 'Stone Vatav','Meena Vatav', 'Copper Vatav', 'Rhodium Vatav', 'Auto Tounch Loss Fine')),
                                          array(), array('group_by' => 'receipt_type, site_name, voucher_date',
                                                         'having' => 'credit_weight != debit_weight'));
       foreach($incorrect_vadotar_vouchers as $incorrect_vadotar_voucher) {

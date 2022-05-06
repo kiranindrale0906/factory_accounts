@@ -37,6 +37,7 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
     if (   $this->attributes['receipt_type'] != 'Alloy Vodator'
         && $this->attributes['receipt_type'] != 'GPC Vodator'
         && $this->attributes['receipt_type'] != 'Stone Vatav'
+        && $this->attributes['receipt_type'] != 'Meena Vatav'
         && $this->attributes['receipt_type'] != 'Copper Vatav'
         && $this->attributes['receipt_type'] != 'Rhodium Vatav') return;
 
