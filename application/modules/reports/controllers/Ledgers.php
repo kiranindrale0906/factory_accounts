@@ -81,10 +81,9 @@ class Ledgers extends BaseController {
       $receipt_issue_select = 'receipt_type, '.$period_select.' as voucher_date, 
                                date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
                                account_name, voucher_type, 
-                               GROUP_CONCAT(DISTINCT(voucher_id)) as voucher_id, 
-                               
                                site_name, voucher_type, 
                                concat(voucher_number, ", ") as voucher_number, 
+                               GROUP_CONCAT(DISTINCT(voucher_id)) as voucher_id, 
                                sum(credit_amount) as credit_amount, 
                                sum(usd_credit_amount) as usd_credit_amount, 
                                sum(debit_amount) as debit_amount, 
@@ -103,9 +102,8 @@ class Ledgers extends BaseController {
       $receipt_issue_select = '"" as receipt_type, '.$period_select.' as voucher_date, 
                               date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
                               account_name as account_name, "" as voucher_type,site_name , "" as voucher_number, 
-                              sum(credit_amount) as credit_amount,
                               GROUP_CONCAT(DISTINCT(voucher_id)) as voucher_id, 
-                                
+                              sum(credit_amount) as credit_amount, 
                               sum(usd_credit_amount) as usd_credit_amount, 
                               sum(debit_amount) as debit_amount, 
                               sum(usd_debit_amount) as usd_debit_amount, 
@@ -132,7 +130,7 @@ class Ledgers extends BaseController {
     $account_issue_where['purity<='] = 100;
     $receipt_issue_select = 'receipt_type, '.$period_select.' as voucher_date, 
                                date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
-                               account_name, voucher_type, 
+                               account_name, voucher_type, voucher_id, 
                                site_name, voucher_type, 
                                concat(voucher_number, ", ") as voucher_number, 
                                (credit_amount) as credit_amount, 
