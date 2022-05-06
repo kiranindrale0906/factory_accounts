@@ -83,7 +83,7 @@ class Ledgers extends BaseController {
                                account_name, voucher_type, 
                                site_name, voucher_type, 
                                concat(voucher_number, ", ") as voucher_number, 
-                               concat(voucher_id, ", ") as voucher_id, 
+                               group_concat(voucher_id) as voucher_id, 
                                sum(credit_amount) as credit_amount, 
                                sum(usd_credit_amount) as usd_credit_amount, 
                                sum(debit_amount) as debit_amount, 
