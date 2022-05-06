@@ -166,14 +166,16 @@ class Ledgers extends BaseController {
     $where_receipt = array_merge($where, array('(debit_weight != 0 or debit_amount != 0)'   => NULL),$account_receipt_where);
     $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(), array('order_by'=>'chitti_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
     foreach ($issues as $issue_index => $issue_value) {
-      $ac_voucher_issue_detail=$this->voucher_model->get('metal_receipt_voucher_reference_id',array('id in ('.$issue_value['voucher_id'].')'=>NULL));
+      $voucher_id=explode(',', $issue_value['metal_receipt_voucher_reference_id']);
+      $ac_voucher_issue_detail=$this->voucher_model->get('metal_receipt_voucher_reference_id',array('where_in'=>array('id'=>$voucher_id)));
       $metal_receipt_voucher_reference_id=array_column($ac_voucher_issue_detail,'metal_receipt_voucher_reference_id');
        $reference_ac_voucher_issue_detail=$this->voucher_model->find('GROUP_CONCAT(DISTINCT(account_name)) as account_name',array('where_in'=>array('id'=>$metal_receipt_voucher_reference_id)));
       $issues[$issue_index]['reference_account_name']=$reference_ac_voucher_issue_detail['account_name'];
     }
     $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(), array('order_by'=>'parent_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
     foreach ($receipts as $receipt_index => $receipt_value) {
-      $ac_voucher_receipt_detail=$this->voucher_model->get('metal_receipt_voucher_reference_id',array('id in ('.$receipt_value['voucher_id'].')'=>NULL));
+      $voucher_id=explode(',', $receipt_value['metal_receipt_voucher_reference_id']);
+      $ac_voucher_receipt_detail=$this->voucher_model->get('metal_receipt_voucher_reference_id',array('where_in'=>array('id'=>$voucher_id)));
       $metal_receipt_voucher_reference_id=array_column($ac_voucher_receipt_detail,'metal_receipt_voucher_reference_id');
       $reference_ac_voucher_receipt_detail=$this->voucher_model->find('GROUP_CONCAT(DISTINCT(account_name)) as account_name',array('where_in'=>array('id'=>$metal_receipt_voucher_reference_id)));
       $receipts[$receipt_index]['reference_account_name']=$reference_ac_voucher_receipt_detail['account_name'];
