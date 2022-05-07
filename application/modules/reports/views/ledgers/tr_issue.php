@@ -1,5 +1,8 @@
 <tr>
-  <?php if ($report_type == 'Vadotar Report'): ?>
+  <?php
+  $reference_account_name=($report_type == 'Account Ledger'):$record['reference_account_name'] ? "";
+  
+   if ($report_type == 'Vadotar Report'): ?>
     <td><?= $record['receipt_type'];?></td>
   <?php endif; ?>
   <?php if ($report_type != 'Account Ledger'): ?>
@@ -11,7 +14,7 @@
   <td>
     <?php
       //if (!empty($record['chitti_no']))
-        echo ' #'.$record['chitti_no'].' '.remove_duplicates_in_string($record['narration']).' '.$record['description'].' '.($report_type == 'Account Ledger'):$record['reference_account_name'] ? "";
+        echo ' #'.$record['chitti_no'].' '.remove_duplicates_in_string($record['narration']).' '.$record['description'].' '.$reference_account_name;
       // else
       //   echo $record['voucher_number'].' '.remove_duplicates_in_string($record['narration']).' '.$record['description'];
       
