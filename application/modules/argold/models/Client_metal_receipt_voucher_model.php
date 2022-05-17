@@ -447,6 +447,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
     } else if(   $attributes['receipt_type'] == "AR Gold Refresh"
               || $attributes['receipt_type'] == "ARF Refresh"
+              || $attributes['receipt_type'] == "Export Internal"
               || $attributes['receipt_type'] == "ARC Refresh") {
       $api_data = array_merge($api_data, array('type'=>'Pure',
                                                'hook_kdm_purity' => $attributes['hook_kdm_purity'],
