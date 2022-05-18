@@ -75,6 +75,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   private function set_account_name_from_receipt_type() {
     if ($this->attributes['receipt_type'] == "AR Gold Finished Goods")      $this->attributes['account_name'] = 'AR Gold';
      if ($this->attributes['receipt_type'] == "Export Internal")      $this->attributes['account_name'] = 'Export Internal Software';
+     if ($this->attributes['receipt_type'] == "Packing Slip")      $this->attributes['account_name'] = 'Export Internal Software';
     if ($this->attributes['receipt_type'] == "ARF Finished Goods")          $this->attributes['account_name'] = 'ARF';
     if ($this->attributes['receipt_type'] == "ARC Finished Goods")          $this->attributes['account_name'] = 'ARC';
     if ($this->attributes['receipt_type'] == "ARF Software Finished Goods") $this->attributes['account_name'] = 'ARF Software';
@@ -107,7 +108,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   private function set_factory_purity_from_receipt_type_for_metal_and_finished_goods_and_chain_receipt() {
     if (in_array($this->attributes['receipt_type'], array('Metal', 
                                                           'Rhodium', 
-                                                          'AR Gold Finished Goods', 'AR Gold Chain Receipt', 'AR Gold Finished Goods Receipt', 'AR Gold RND','Export Internal',
+                                                          'AR Gold Finished Goods', 'AR Gold Chain Receipt', 'AR Gold Finished Goods Receipt', 'AR Gold RND','Export Internal','Packing Slip',
                                                           'ARF Finished Goods', 'ARF Software Finished Goods', 'ARF Chain Receipt', 'ARF Finished Goods Receipt', 'ARF RND',
                                                           'ARC Finished Goods', 'ARC Chain Receipt', 'ARC Finished Goods Receipt', 'ARC RND'))) {
       $this->formdata['metal_receipt_vouchers']['factory_purity'] = $this->attributes['purity'];
@@ -203,7 +204,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $site_name = 'ARC';
     }
 
-    if (in_array($this->attributes['receipt_type'], array('Export Internal'))) {
+    if (in_array($this->attributes['receipt_type'], array('Export Internal','Packing Slip'))) {
       $set_metal_issue_voucher = 1;
       $account_name = 'Export Internal Software';
       $site_name = 'Export';
@@ -244,6 +245,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
             || $this->attributes['receipt_type'] == 'ARF RND'
             || $this->attributes['receipt_type'] == 'ARC RND'
             || $this->attributes['receipt_type'] == 'Export Internal'
+            || $this->attributes['receipt_type'] == 'Packing Slip'
             || $this->attributes['receipt_type'] == 'AR Gold Finished Goods Receipt'
             || $this->attributes['receipt_type'] == 'ARF Finished Goods Receipt'
             || $this->attributes['receipt_type'] == 'ARC Finished Goods Receipt') {
