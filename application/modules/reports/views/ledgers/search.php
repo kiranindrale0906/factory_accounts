@@ -37,9 +37,9 @@
         if($_SESSION['arc_details']==1){
           $arc_companies = array('ARC');
         }
-        if($_SESSION['export_details']==1){
-          $export_companies = array('Export');
-        }
+        // if($_SESSION['export_details']==1){
+        //   $export_companies = array('Export');
+        // }
           $companies=array_merge($all_companies,$arg_companies,$arf_companies,$arc_companies,$export_companies);
           foreach ($companies as $index => $company) { ?>
             <a class="ml-5 <?= ($site_name== $company) ? 'bold black underline' : '' ?>" 
