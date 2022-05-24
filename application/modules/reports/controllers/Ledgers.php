@@ -153,13 +153,15 @@ class Ledgers extends BaseController {
         $account_issue_where['account_name'] = 'ARF Software';
       }elseif ($this->data['site_name'] == 'ARC'){
         $account_issue_where['account_name'] = 'ARC Software';
+      }elseif ($this->data['site_name'] == 'Export'){
+        $account_issue_where['account_name'] = 'Export Internal Software';
       }elseif ($this->data['site_name'] == 'AR Gold'){
         $account_issue_where['account_name'] = 'AR Gold Software';
       }
       else{
-        $account_issue_where['account_name in ("ARF Software","ARC Software","AR Gold Software") '] = NULL;
+        $account_issue_where['account_name in ("ARF Software","ARC Software","AR Gold Software","Export Internal Software") '] = NULL;
       }   
-      !empty($this->data['account_name'])?$account_receipt_where['account_name']=$this->data['account_name']:$account_receipt_where['account_name not in ("MAIN VADOTAR","PURCHASE ACCOUNT","ARF Software","ARC Software","AR Gold Software") '] = NULL;                    
+      !empty($this->data['account_name'])?$account_receipt_where['account_name']=$this->data['account_name']:$account_receipt_where['account_name not in ("MAIN VADOTAR","PURCHASE ACCOUNT","ARF Software","ARC Software","AR Gold Software","Export Internal Software") '] = NULL;                    
     }   
     
     $where_issue   = array_merge($where, array('(credit_weight != 0 or credit_amount != 0)' => NULL),$account_issue_where);
