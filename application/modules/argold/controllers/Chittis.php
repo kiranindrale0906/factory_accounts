@@ -165,7 +165,7 @@ class Chittis extends BaseController {
     }
 
   }
-    if($this->router->class == 'chitti_exports'){ 
+    // if($this->router->class == 'chitti_exports'){ 
     if($this->router->class == 'chitti_exports'){ 
       $this->data['site_names'] = array(
                                       array('id' => 'AR Gold', 'name' => 'AR Gold'),
