@@ -83,10 +83,11 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
         && (   $account_name == 'AR Gold Software'
             || $account_name == 'ARF Software'
             || $account_name == 'ARC Software'
+            || $account_name == 'Export Internal Software'
             || $account_name == 'AR Gold Software Staging'
             || $account_name == 'ARF Software Staging'
             || $account_name == 'ARC Software Staging')){
-
+      
       $this->client_metal_receipt_voucher_model->send_request_to_factory($this->attributes);
     }
             // || $this->attributes['receipt_type'] == 'ARF Chain Receipt'

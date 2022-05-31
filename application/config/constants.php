@@ -115,6 +115,8 @@ define('ACCESS_TOKEN', '1234');
 define('ACCOUNT_NAME_REPORT','account_name');
 //define('DB_BACKUP_FILE_PATH',APPPATH.'database_backups/');
 //define('HOST','');
+define('API_EXPORT_INTERNAL_PATH','https://staging-exports.ascratech.com/');
+define('ENABLE_API_FOR_RECEIPT', TRUE);
 
 
 define('FIELDS_PER_ROW', 3);
