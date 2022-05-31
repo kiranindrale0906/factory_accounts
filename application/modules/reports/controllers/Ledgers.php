@@ -170,7 +170,8 @@ class Ledgers extends BaseController {
     $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(), array('order_by'=>'chitti_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
     foreach ($issues as $issue_index => $issue_value) {
       // $voucher_id=explode(',', $issue_value['voucher_id']);
-      $ac_voucher_issue_detail=$this->voucher_model->get('metal_receipt_voucher_reference_id,id',array('where'=>array('metal_receipt_voucher_reference_id is not NULL'=>NULL,'id in ('.$issue_value['voucher_id'].')'=>NULL)));
+      $voucher_id = rtrim($issue_value['voucher_id'], ", ");
+      $ac_voucher_issue_detail=$this->voucher_model->get('metal_receipt_voucher_reference_id,id',array('where'=>array('metal_receipt_voucher_reference_id is not NULL'=>NULL,'id in ('.$voucher_id.')'=>NULL)));
       $metal_receipt_voucher_reference_id=array_column($ac_voucher_issue_detail,'metal_receipt_voucher_reference_id');
       $issues[$issue_index]['reference_account_name']="";
       if(!empty($metal_receipt_voucher_reference_id)){
@@ -183,7 +184,8 @@ class Ledgers extends BaseController {
     if ($this->data['report_type'] == 'Account Ledger'){
       foreach ($issues as $issue_index => $issue_value) {
        // $voucher_id=explode(',', $issue_value['voucher_id']);
-        $ac_voucher_issue_detail=$this->voucher_model->get('metal_receipt_voucher_reference_id,id',array('where'=>array('metal_receipt_voucher_reference_id is not NULL'=>NULL,'id in ('.$issue_value['voucher_id'].')'=>NULL)));
+        $voucher_id = rtrim($issue_value['voucher_id'], ", ");
+        $ac_voucher_issue_detail=$this->voucher_model->get('metal_receipt_voucher_reference_id,id',array('where'=>array('metal_receipt_voucher_reference_id is not NULL'=>NULL,'id in ('.$voucher_id.')'=>NULL)));
         $metal_receipt_voucher_reference_id=array_column($ac_voucher_issue_detail,'metal_receipt_voucher_reference_id');
         $issues[$issue_index]['reference_account_name']="";
         if(!empty($metal_receipt_voucher_reference_id)){
@@ -193,8 +195,9 @@ class Ledgers extends BaseController {
       }
 
       foreach ($receipts as $receipt_index => $receipt_value) {
-        $voucher_id=explode(',', $receipt_value['voucher_id']);
-        $ac_voucher_receipt_detail=$this->voucher_model->get('metal_receipt_voucher_reference_id',array('where'=>array('metal_receipt_voucher_reference_id is not NULL'=>NULL,'id in ('.$issue_value['voucher_id'].')'=>NULL)));
+        // $voucher_id=explode(',', $receipt_value['voucher_id']);
+        $voucher_id = rtrim($receipt_value['voucher_id'], ", ");
+        $ac_voucher_receipt_detail=$this->voucher_model->get('metal_receipt_voucher_reference_id',array('where'=>array('metal_receipt_voucher_reference_id is not NULL'=>NULL,'id in ('.$voucher_id.')'=>NULL)));
         $metal_receipt_voucher_reference_id=array_column($ac_voucher_receipt_detail,'metal_receipt_voucher_reference_id');
         $receipts[$receipt_index]['reference_account_name']="";
         if(!empty($metal_receipt_voucher_reference_id)){
