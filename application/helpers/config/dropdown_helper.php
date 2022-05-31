@@ -43,6 +43,7 @@
                   array('id' => 'AR Gold Finished Goods Receipt', 'name' => 'AR Gold Finished Goods Receipt'),
                   array('id' => 'ARF Finished Goods Receipt',     'name' => 'ARF Finished Goods Receipt'),
                   array('id' => 'ARC Finished Goods Receipt',     'name' => 'ARC Finished Goods Receipt'),
+                  array('id' => 'Export Internal',                    'name' => 'Export Internal'),
                   array('id' => 'AR Gold RND',                    'name' => 'AR Gold RND'),
                   array('id' => 'ARF RND',                        'name' => 'ARF RND'),
                   array('id' => 'ARC RND',                        'name' => 'ARC RND'),

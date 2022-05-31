@@ -20,11 +20,13 @@
         $arg_companies = array();
         $arf_companies = array();
         $arc_companies = array();
+        $export_companies = array();
         if($_SESSION['all_details']==1){
           $all_companies = array('All');
           $arg_companies = array('AR Gold');
           $arf_companies = array('ARF');
           $arc_companies = array('ARC');
+          $export_companies = array('Export');
         }
         if($_SESSION['arg_details']==1){
           $arg_companies = array('AR Gold');
@@ -35,7 +37,10 @@
         if($_SESSION['arc_details']==1){
           $arc_companies = array('ARC');
         }
-          $companies=array_merge($all_companies,$arg_companies,$arf_companies,$arc_companies);
+        // if($_SESSION['export_details']==1){
+        //   $export_companies = array('Export');
+        // }
+          $companies=array_merge($all_companies,$arg_companies,$arf_companies,$arc_companies,$export_companies);
           foreach ($companies as $index => $company) { ?>
             <a class="ml-5 <?= ($site_name== $company) ? 'bold black underline' : '' ?>" 
                href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&site_name=<?= $company?>&period=<?= $period ?>&report_type=<?= $report_type ?>&detail=<?= $detail ?>&group=<?= $group ?>'><?= $company ?></a>

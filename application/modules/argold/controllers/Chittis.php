@@ -165,12 +165,22 @@ class Chittis extends BaseController {
     }
 
   }
-        
+    // if($this->router->class == 'chitti_exports'){ 
+    if($this->router->class == 'chitti_exports'){ 
+      $this->data['site_names'] = array(
+                                      array('id' => 'AR Gold', 'name' => 'AR Gold'),
+                                      array('id' => 'ARF', 'name' => 'ARF'),
+                                      array('id' => 'ARC', 'name' => 'ARC'),
+                                      array('id' => 'Export', 'name' => 'Export'),
+                                     );
+    }else{
+
     $this->data['site_names'] = array(
                                       array('id' => 'AR Gold', 'name' => 'AR Gold'),
                                       array('id' => 'ARF', 'name' => 'ARF'),
                                       array('id' => 'ARC', 'name' => 'ARC')
                                      );
+    }
 
     $this->data['empty_packet_weights'] = $this->empty_packet_model->get('distinct(weight) as name,weight as id',array('weight!='=>''));
      $this->data['empty_packet_quantities'] = $this->empty_packet_model->get('distinct(qty) as name,qty as id',array('qty!='=>''));

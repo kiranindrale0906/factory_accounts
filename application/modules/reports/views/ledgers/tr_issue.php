@@ -14,7 +14,7 @@
   <td>
     <?php
       //if (!empty($record['chitti_no']))
-        echo ' #'.$record['chitti_no'].' '.remove_duplicates_in_string($record['narration']).' '.$record['description'].' '.$reference_account_name;
+    echo ' #'.$record['chitti_no'].' '.remove_duplicates_in_string($record['narration']).' '.$record['description'].' '.$reference_account_name;
       // else
       //   echo $record['voucher_number'].' '.remove_duplicates_in_string($record['narration']).' '.$record['description'];
       
