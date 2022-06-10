@@ -65,7 +65,9 @@ class Ledgers extends BaseController {
         $where['(    account_name in ("'.$export_account_names.'") 
                  and voucher_type = "metal issue voucher")'] = NULL;
       }
-
+      if($this->data['report_type'] == 'Vadotar Report'){
+        
+      }
     }
 
     if ($this->data['report_type'] == 'Production Report') $where['account_name != '] = 'VADOTAR';
