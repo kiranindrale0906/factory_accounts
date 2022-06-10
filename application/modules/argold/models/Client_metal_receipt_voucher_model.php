@@ -532,10 +532,11 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $api_url = API_ARC_PATH.$api_url;
     elseif ($attributes['account_name'] == 'Export Internal Software')
       $api_url = API_EXPORT_INTERNAL_PATH.$api_url;
-    print_r($send_data);
-    pd($api_url);
+    //print_r($send_data);
+    //pd($api_url);
     $result = curl_post_request($api_url, $send_data);
-  }
+//print_r($result);  
+}
 
   public function create_vodator_records($records, $receipt_type, $site_name, $hostversion) {
     if (empty($records)) return true;
