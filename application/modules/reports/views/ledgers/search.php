@@ -26,7 +26,7 @@
           $arg_companies = array('AR Gold');
           $arf_companies = array('ARF');
           $arc_companies = array('ARC');
-          $export_companies = array('Export');
+          // $export_companies = array('Export');
         }
         if($_SESSION['arg_details']==1){
           $arg_companies = array('AR Gold');
