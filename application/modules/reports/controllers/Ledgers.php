@@ -69,6 +69,10 @@ class Ledgers extends BaseController {
       if($this->data['report_type'] == 'Vadotar Report'){
         
       }
+	if($this->data['report_type'] == 'Vadotar Report'){
+          $where['receipt_type!=']='Packing Slip';
+      }
+
     }
 
     if ($this->data['report_type'] == 'Production Report') $where['account_name != '] = 'VADOTAR';
