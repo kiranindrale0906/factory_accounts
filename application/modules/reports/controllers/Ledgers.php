@@ -51,9 +51,10 @@ class Ledgers extends BaseController {
       $export_account_names = array_column($export_accounts, 'name');
       //$export_account_names[] = 'Tanishq';
       $export_account_names = implode('", "',$export_account_names);
+
       if ($this->data['domestic_export'] == 'All') {
         $where['(   purity != factory_purity 
-                 or (    account_name in ("'.$export_account_names.'") 
+                 or (    account_name in ("'.$export_account_names.',"Tanishq"") 
                      and voucher_type = "metal issue voucher")
                 )'] = NULL;
       } elseif ($this->data['domestic_export'] == 'Domestic') {
