@@ -104,6 +104,28 @@ class Ledgers extends BaseController {
                                sum((credit_weight+debit_weight) * factory_purity) / sum(credit_weight+debit_weight) as factory_purity, 
                                concat(narration, " ,") as narration, concat(description, " ,") as description, 
                                chitti_id as chitti_no,parent_id as parent_id,id as id';
+    } elseif (   $this->data['domestic_export'] =="Export") {
+      $receipt_issue_select = 'receipt_type, '.$period_select.' as voucher_date, 
+                               date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
+                               account_name, voucher_type, 
+                               site_name, voucher_type, 
+                               concat(voucher_number, ", ") as voucher_number, 
+                               GROUP_CONCAT(DISTINCT(voucher_id)) as voucher_id, 
+                               sum(debit_amount) as credit_amount, 
+                               sum(usd_credit_amount) as usd_credit_amount, 
+                               sum(credit_amount) as debit_amount, 
+                               sum(usd_debit_amount) as usd_debit_amount, 
+                               sum(debit_weight) as credit_weight, 
+                               sum(credit_weight) as debit_weight,
+                               sum(fine) as fine,
+                               sum(factory_fine) as factory_fine,
+                               0 as purity_margin, 
+                               sum((credit_weight+debit_weight) * purity) / sum(credit_weight+debit_weight) as purity, 
+                               sum((credit_weight+debit_weight) * factory_purity) / sum(credit_weight+debit_weight) as factory_purity, 
+                               concat(narration, " ,") as narration, concat(description, " ,") as description, 
+                               chitti_id as chitti_no,parent_id as parent_id,id as id';
+      $where['(account_name in ("Export Internal Software") 
+                 and voucher_type = "metal issue voucher")'] = NULL;
     } else {
       //$this->data['group'] = 'voucher_date';
       $receipt_issue_select = '"" as receipt_type, '.$period_select.' as voucher_date, 
@@ -172,7 +194,11 @@ class Ledgers extends BaseController {
     }   
     
     $where_issue   = array_merge($where, array('(credit_weight != 0 or credit_amount != 0)' => NULL),$account_issue_where);
-    $where_receipt = array_merge($where, array('(debit_weight != 0 or debit_amount != 0)'   => NULL),$account_receipt_where);
+    if($this->data['domestic_export'] == 'Export'){
+      $where_receipt = array_merge($where, array('(credit_weight != 0 or credit_amount != 0)'   => NULL),$account_receipt_where);
+    }else{
+      $where_receipt = array_merge($where, array('(debit_weight != 0 or debit_amount != 0)'   => NULL),$account_receipt_where);
+    }
     // $where_issue['voucher_id !=']="";
     $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(), array('order_by'=>'chitti_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
     foreach ($issues as $issue_index => $issue_value) {
