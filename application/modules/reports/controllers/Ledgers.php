@@ -174,8 +174,17 @@ class Ledgers extends BaseController {
     $where_issue   = array_merge($where, array('(credit_weight != 0 or credit_amount != 0)' => NULL),$account_issue_where);
     $where_receipt = array_merge($where, array('(debit_weight != 0 or debit_amount != 0)'   => NULL),$account_receipt_where);
     if ($this->data['domestic_export'] == 'Export') {
+
+
         $where_receipt['(account_name = ("Export Internal Software") 
                  and voucher_type = "metal receipt voucher") and (debit_weight != 0 or debit_amount != 0)'] = NULL;
+        if ($this->data['site_name'] == 'ARF'){
+          $where_receipt['description'] = 'ARF Software';
+        }elseif ($this->data['site_name'] == 'ARC'){
+          $where_receipt['description'] = 'ARC Software';
+        }elseif ($this->data['site_name'] == 'AR Gold'){
+          $where_receipt['description'] = 'AR Gold Software';
+        }         
     }
 
     // $where_issue['voucher_id !=']="";
