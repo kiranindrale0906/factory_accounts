@@ -49,12 +49,15 @@ class Ledgers extends BaseController {
     if ($this->data['report_type'] == 'Vadotar Report' || $this->data['report_type'] == 'Production Report') {
       $export_accounts = $this->account_model->get('name', array('group_code' => 'Export'));
       $export_account_names = array_column($export_accounts, 'name');
-      //$export_account_names[] = 'Tanishq';
+            if ($this->data['domestic_export'] == 'All') {
+       $export_account_names[] = 'Tanishq';}
+
       $export_account_names = implode('", "',$export_account_names);
 
       if ($this->data['domestic_export'] == 'All') {
+
         $where['(   purity != factory_purity 
-                 or (    account_name in ("'.$export_account_names.',"Tanishq"") 
+                 or (    account_name in ("'.$export_account_names.'") 
                      and voucher_type = "metal issue voucher")
                 )'] = NULL;
       } elseif ($this->data['domestic_export'] == 'Domestic') {
@@ -185,6 +188,7 @@ class Ledgers extends BaseController {
     }
     // $where_receipt['voucher_id !=']="";
     $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(), array('order_by'=>'parent_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
+
     if ($this->data['report_type'] == 'Account Ledger'){
       foreach ($issues as $issue_index => $issue_value) {
        // $voucher_id=explode(',', $issue_value['voucher_id']);
