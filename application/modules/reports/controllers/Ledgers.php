@@ -174,10 +174,8 @@ class Ledgers extends BaseController {
     $where_issue   = array_merge($where, array('(credit_weight != 0 or credit_amount != 0)' => NULL),$account_issue_where);
     $where_receipt = array_merge($where, array('(debit_weight != 0 or debit_amount != 0)'   => NULL),$account_receipt_where);
     if ($this->data['domestic_export'] == 'Export') {
-
-
-        $where_receipt['(account_name = ("Export Internal Software") 
-                 and voucher_type = "metal receipt voucher") and (debit_weight != 0 or debit_amount != 0)'] = NULL;
+        $where_receipt=array('(account_name = ("Export Internal Software")  and receipt_type="Export Internal" 
+                 and voucher_type = "metal receipt voucher") and (debit_weight != 0 or debit_amount != 0)' => NULL);
         if ($this->data['site_name'] == 'ARF'){
           $where_receipt['description'] = 'ARF Software';
         }elseif ($this->data['site_name'] == 'ARC'){
@@ -200,9 +198,10 @@ class Ledgers extends BaseController {
       $issues[$issue_index]['reference_account_name']=$reference_ac_voucher_issue_detail['account_name'];
       }
     }
-    // $where_receipt['voucher_id !=']="";
+//pd($where_receipt);  
+  // $where_receipt['voucher_id !=']="";
     $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(), array('order_by'=>'parent_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
-
+//lq();
     if ($this->data['report_type'] == 'Account Ledger'){
       foreach ($issues as $issue_index => $issue_value) {
        // $voucher_id=explode(',', $issue_value['voucher_id']);
