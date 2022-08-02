@@ -232,7 +232,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     $hook_kdm_purity = (empty($this->attributes['hook_kdm_purity'])) ? $this->attributes['factory_purity'] : $this->attributes['hook_kdm_purity'];
     if ($set_metal_issue_voucher==1) {
       $this->formdata['metal_issue_vouchers'] = array(array('account_name' => $account_name,
-                                  'site_name' => $this->attributes['site_name'] //$site_name,
+                                  'site_name' => $this->attributes['site_name'], //$site_name,
                                   'credit_weight' => $this->attributes['debit_weight'],
                                   'purity' => $this->attributes['purity'],
                                   'factory_purity' => $this->attributes['factory_purity'],
@@ -529,7 +529,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     }
     if (empty($api_url)) return true;
     $api_url = get_api_path_from_account_name($attributes['account_name']).$api_url;
-    
+
     // if ($attributes['account_name'] == 'AR Gold Software')
     //   $api_url = API_ARG_PATH.$api_url;
     // elseif ($attributes['account_name'] == 'ARF Software')
