@@ -105,9 +105,9 @@ class Loss_report_details extends Ledgers {
   }  
 
   private function get_loss_records_from_factory($postdata) {
-    if ($this->data['factory_name']=='ARC')         $this->data['factory_url'] = API_ARC_PATH;
-    elseif ($this->data['factory_name']=='ARF')     $this->data['factory_url'] = API_ARF_PATH;
-    elseif ($this->data['factory_name']=='AR Gold') $this->data['factory_url'] = API_ARG_PATH;
+    if ($this->data['factory_name']=='ARC')         $this->data['factory_url'] = API_MAY2022_ARC_PATH;
+    elseif ($this->data['factory_name']=='ARF')     $this->data['factory_url'] = API_MAY2022_ARF_PATH;
+    elseif ($this->data['factory_name']=='AR Gold') $this->data['factory_url'] = API_MAY2022_ARG_PATH;
     else return array();
 
     $url = $this->data['factory_url'].'issue_and_receipts/loss_report_for_accounts/index';

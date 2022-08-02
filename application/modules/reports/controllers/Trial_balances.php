@@ -47,13 +47,13 @@ class Trial_balances extends Ledgers {
   }
 
   private function get_factory_balance() {
-    $url=API_ARG_PATH."issue_and_receipts/ledger_balance/index";
+    $url=API_MAY2022_ARG_PATH."issue_and_receipts/ledger_balance/index";
     $arg_records=json_decode(curl_post_request($url));
 
-    $url=API_ARF_PATH."issue_and_receipts/ledger_balance/index";
+    $url=API_MAY2022_ARF_PATH."issue_and_receipts/ledger_balance/index";
     $arf_records=json_decode(curl_post_request($url));
     
-    $url=API_ARC_PATH."issue_and_receipts/ledger_balance/index";
+    $url=API_MAY2022_ARC_PATH."issue_and_receipts/ledger_balance/index";
     $arc_records=json_decode(curl_post_request($url));
     
     $url=API_EXPORT_INTERNAL_PATH."issue_and_receipts/ledger_balance/index";
@@ -76,13 +76,13 @@ class Trial_balances extends Ledgers {
   }
 
   private function get_vadotar_from_factory() {
-    $url=API_ARG_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
+    $url=API_MAY2022_ARG_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
     $this->data['arg_vadotar_records'] = json_decode(curl_post_request($url));
     
-    $url=API_ARF_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
+    $url=API_MAY2022_ARF_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
     $this->data['arf_vadotar_records'] = json_decode(curl_post_request($url));
     
-    $url=API_ARC_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
+    $url=API_MAY2022_ARC_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
     $this->data['arc_vadotar_records'] = json_decode(curl_post_request($url));
   }
 
@@ -290,17 +290,17 @@ class Trial_balances extends Ledgers {
   } 
 
   private function get_overall_rolling() {  
-    $url=API_ARG_PATH."stock_summary_reports/overall_rolling_reports/index?overall_rolling=1";
+    $url=API_MAY2022_ARG_PATH."stock_summary_reports/overall_rolling_reports/index?overall_rolling=1";
     $arg_rolling_records=json_decode(curl_post_request($url));
     $this->data['live_argold_rolling_balance'] =!empty($arg_rolling_records->data->balance)?$arg_rolling_records->data->balance:0;
     $this->data['live_argold_rolling_gpc_balance']=!empty($arg_rolling_records->data->gpc_out_balance)? $arg_rolling_records->data->gpc_out_balance:0;
     
-    $url=API_ARF_PATH."stock_summary_reports/overall_rolling_reports/index?overall_rolling=1";
+    $url=API_MAY2022_ARF_PATH."stock_summary_reports/overall_rolling_reports/index?overall_rolling=1";
     $arf_rolling_records=json_decode(curl_post_request($url));
     $this->data['live_arf_rolling_balance'] =!empty($arf_rolling_records->data->balance)? $arf_rolling_records->data->balance:0;
     $this->data['live_arf_rolling_gpc_balance']=!empty($arf_rolling_records->data->gpc_out_balance)? $arf_rolling_records->data->gpc_out_balance:0;
     
-    $url=API_ARC_PATH."stock_summary_reports/overall_rolling_reports/index?overall_rolling=1";
+    $url=API_MAY2022_ARC_PATH."stock_summary_reports/overall_rolling_reports/index?overall_rolling=1";
     $arc_rolling_records=json_decode(curl_post_request($url));
     $this->data['live_arc_rolling_balance'] =!empty($arc_rolling_records->data->balance)?$arc_rolling_records->data->balance:0;
     $this->data['live_arc_rolling_gpc_balance']=!empty($arc_rolling_records->data->gpc_out_balance)? $arc_rolling_records->data->gpc_out_balance:0;
@@ -504,7 +504,7 @@ class Trial_balances extends Ledgers {
         $this->ledger_model->delete('', array('parent_id not in (select id from ac_vouchers)' => NULL));
       }
 
-      $url = API_ARG_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
+      $url = API_MAY2022_ARG_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
       $records = json_decode(curl_post_request($url));
       
       if (!empty($records)) {
@@ -517,7 +517,7 @@ class Trial_balances extends Ledgers {
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->tounch_loss_fine_group_by_date, 'Auto Tounch Loss Fine', 'AR Gold', '');
       }
 
-      $url = API_ARF_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
+      $url = API_MAY2022_ARF_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
       $records = json_decode(curl_post_request($url));
       
       if (!empty($records)) {
@@ -530,7 +530,7 @@ class Trial_balances extends Ledgers {
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->tounch_loss_fine_group_by_date, 'Auto Tounch Loss Fine', 'ARF', '');
       }
       
-      $url = API_ARC_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
+      $url = API_MAY2022_ARC_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
       $records = json_decode(curl_post_request($url));
       if (!empty($records)) {
         $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator_group_by_date, 'Alloy Vodator', 'ARC', '');

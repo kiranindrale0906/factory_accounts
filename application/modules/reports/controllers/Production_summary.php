@@ -32,9 +32,9 @@ class Production_summary extends BaseController {
 
     $this->data['site_names']   = array('AR Gold', 'ARC', 'ARF');
     $url = '';
-    if     ($this->data['site_name'] == 'AR Gold') $url = API_ARG_PATH."issue_departments/api_issue_departments/create";
-    elseif ($this->data['site_name'] == 'ARF')     $url = API_ARF_PATH."issue_departments/api_issue_departments/create";
-    elseif ($this->data['site_name'] == 'ARC')     $url = API_ARC_PATH."issue_departments/api_issue_departments/create";
+    if     ($this->data['site_name'] == 'AR Gold') $url = API_MAY2022_ARG_PATH."issue_departments/api_issue_departments/create";
+    elseif ($this->data['site_name'] == 'ARF')     $url = API_MAY2022_ARF_PATH."issue_departments/api_issue_departments/create";
+    elseif ($this->data['site_name'] == 'ARC')     $url = API_MAY2022_ARC_PATH."issue_departments/api_issue_departments/create";
       
     if (!empty($url)) {
       $records = json_decode(curl_post_request($url, $this->data));
@@ -65,21 +65,21 @@ class Production_summary extends BaseController {
     $_GET['start_date'] = '2021-11-04';
 
     if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold') {
-      $url = API_ARG_PATH."issue_departments/api_issue_departments/index";
+      $url = API_MAY2022_ARG_PATH."issue_departments/api_issue_departments/index";
       $records = json_decode(curl_post_request($url, $_GET));
       $argold_records = json_decode(json_encode($records), true);    
     }
     if (empty($argold_records['data'])) $argold_records['data'] = array();
 
     if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARF') {
-      $url = API_ARF_PATH."issue_departments/api_issue_departments/index";
+      $url = API_MAY2022_ARF_PATH."issue_departments/api_issue_departments/index";
       $records = json_decode(curl_post_request($url, $_GET));
       $arf_records = json_decode(json_encode($records), true);
     }
     if (empty($arf_records['data'])) $arf_records['data'] = array();
 
     if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARC') {
-      $url = API_ARC_PATH."issue_departments/api_issue_departments/index";
+      $url = API_MAY2022_ARC_PATH."issue_departments/api_issue_departments/index";
       $records = json_decode(curl_post_request($url, $_GET));
       $arc_records = json_decode(json_encode($records), true);
     }

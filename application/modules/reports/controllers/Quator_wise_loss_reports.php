@@ -107,7 +107,7 @@ class Quator_wise_loss_reports extends BaseController {
       if(!empty($data['department_names']) && !empty($this->data['quator_name'])){
         if(isset($_GET['site_name'])&&$_GET['site_name']=='ARC'){
           $ghiss_melting_loss=array();
-          $url=API_ARC_PATH."issue_and_receipts/loss_report_for_accounts/index";
+          $url=API_MAY2022_ARC_PATH."issue_and_receipts/loss_report_for_accounts/index";
           $jan2021_records=json_decode(curl_post_request($url,$data),true);
 
           $records=!empty($jan2021_records)?$jan2021_records['data']['loss_details']['loss_detail']:$jan2021_records['data']['loss_details']['loss_detail']=array();
@@ -116,7 +116,7 @@ class Quator_wise_loss_reports extends BaseController {
           foreach ($ghiss_melting_loss as $ghiss_melting_loss_index => $ghiss_melting_loss_value) {
           $data['issue_department_id']=$ghiss_melting_loss_value['parent_id'];
           $data['quator']=$this->data['quator_name'];
-          $url=API_ARC_PATH."issue_and_receipts/loss_report_for_accounts/index";
+          $url=API_MAY2022_ARC_PATH."issue_and_receipts/loss_report_for_accounts/index";
           $ghiss_details=json_decode(curl_post_request($url,$data),true);
           $out_weight=!empty($ghiss_details)&&(!empty($ghiss_details['data']['ghiss_melting_out_weights']))?$ghiss_details['data']['ghiss_melting_out_weights']:0;
           $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight']=$out_weight;
@@ -125,7 +125,7 @@ class Quator_wise_loss_reports extends BaseController {
 
         }elseif(isset($_GET['site_name'])&&$_GET['site_name']=='ARF'){
           $ghiss_melting_loss=array();
-          $url=API_ARF_PATH."issue_and_receipts/loss_report_for_accounts/index";
+          $url=API_MAY2022_ARF_PATH."issue_and_receipts/loss_report_for_accounts/index";
           $jan2021_records=json_decode(curl_post_request($url,$data),true);
           $records=!empty($jan2021_records)&&(!empty($jan2021_records['data']['loss_details']))?$jan2021_records['data']['loss_details']['loss_detail']:$jan2021_records['data']['loss_details']['loss_detail']=array();
 
@@ -133,7 +133,7 @@ class Quator_wise_loss_reports extends BaseController {
           foreach ($ghiss_melting_loss as $ghiss_melting_loss_index => $ghiss_melting_loss_value) {
           $data['issue_department_id']=$ghiss_melting_loss_value['parent_id'];
           $data['quator']=$this->data['quator_name'];
-          $url=API_ARF_PATH."issue_and_receipts/loss_report_for_accounts/index";
+          $url=API_MAY2022_ARF_PATH."issue_and_receipts/loss_report_for_accounts/index";
           $ghiss_details=json_decode(curl_post_request($url,$data),true);
           $out_weight=!empty($ghiss_details)&&(!empty($ghiss_details['data']['ghiss_melting_out_weights']))?$ghiss_details['data']['ghiss_melting_out_weights']:0;
           $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight']=$out_weight;
@@ -143,7 +143,7 @@ class Quator_wise_loss_reports extends BaseController {
 
         }else{
           $ghiss_melting_loss=array();
-          $url=API_ARG_PATH."issue_and_receipts/loss_report_for_accounts/index";
+          $url=API_MAY2022_ARG_PATH."issue_and_receipts/loss_report_for_accounts/index";
           // pd($data);
           $jan2021_records=json_decode(curl_post_request($url,$data),true);
           $records=!empty($jan2021_records)?$jan2021_records['data']['loss_details']['loss_detail']:$jan2021_records['data']['loss_details']['loss_detail']=array();
@@ -151,7 +151,7 @@ class Quator_wise_loss_reports extends BaseController {
           foreach ($ghiss_melting_loss as $ghiss_melting_loss_index => $ghiss_melting_loss_value) {
           $data['issue_department_id']=$ghiss_melting_loss_value['parent_id'];
           $data['quator']=$this->data['quator_name'];
-          $url=API_ARG_PATH."issue_and_receipts/loss_report_for_accounts/index";
+          $url=API_MAY2022_ARG_PATH."issue_and_receipts/loss_report_for_accounts/index";
           $ghiss_details=json_decode(curl_post_request($url,$data),true);
           $out_weight=!empty($ghiss_details)&&(!empty($ghiss_details['data']['ghiss_melting_out_weights']))?$ghiss_details['data']['ghiss_melting_out_weights']:0;
           $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight']=$out_weight;
@@ -229,7 +229,7 @@ class Quator_wise_loss_reports extends BaseController {
   private function get_production_summary() {
     $_GET['start_date'] = '2021-11-04';
    if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARC') {
-      $url = API_ARC_PATH."issue_departments/api_issue_departments/index";
+      $url = API_MAY2022_ARC_PATH."issue_departments/api_issue_departments/index";
       $records = json_decode(curl_post_request($url, $_GET));
       $arc_records = json_decode(json_encode($records), true);
     }
