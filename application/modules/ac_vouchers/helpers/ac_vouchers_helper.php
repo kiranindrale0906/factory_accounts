@@ -253,6 +253,8 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['description'] = array('Description', 'Description', FALSE, '',TRUE);
   
   $attributes['add_more'] = array('', 'add_more', FALSE, '',TRUE);
+  $attributes['site_name'] = array('Site Name', 'Site Name', TRUE, '', FALSE, FALSE);
+  
   if(!empty($required_field)) {
     $attributes[$ci->router->class] = array_intersect_key($attributes, array_flip($required_field));
   }

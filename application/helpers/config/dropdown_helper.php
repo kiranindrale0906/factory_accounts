@@ -149,20 +149,56 @@
   }
 
   function get_site_url($site_name) {
-    if ($site_name=='AR Gold') return API_ARG_PATH;
-    elseif ($site_name=='ARF') return API_ARF_PATH;
-    elseif ($site_name=='ARC') return API_ARC_PATH;
+    if     ($site_name=='AR Gold (May 2022)') return API_MAY2022_ARG_PATH;
+    elseif ($site_name=='ARF (May 2022)')     return API_MAY2022_ARF_PATH;
+    elseif ($site_name=='ARC (May 2022)')     return API_MAY2022_ARC_PATH;
+    elseif ($site_name=='AR Gold (Aug 2022)') return API_AUG2022_ARG_PATH;
+    elseif ($site_name=='ARF (Aug 2022)')     return API_AUG2022_ARF_PATH;
+    elseif ($site_name=='ARC (Aug 2022)')     return API_AUG2022_ARC_PATH;
   }
 
-  
-function remove_duplicates_in_string($str) {
-  $words  = explode(",", $str);
-  $sanitized_words = array();
-  foreach ($words as $word) {
-    if (trim($word) == '') continue;
-    if (trim($word) == '0') continue;
-    $sanitized_words[] = trim($word);
+  function get_site_names() {
+    return array(
+      array('id' => 'AR Gold (May 2022)', 'name' => 'AR Gold (May 2022)'),
+      array('id' => 'ARF (May 2022)',     'name' => 'ARF (May 2022)'),
+      array('id' => 'ARC (May 2022)',     'name' => 'ARC (May 2022)'),
+      array('id' => 'AR Gold (Aug 2022)', 'name' => 'AR Gold (Aug 2022)'),
+      array('id' => 'ARF (Aug 2022)',     'name' => 'ARF (Aug 2022)'),
+      array('id' => 'ARC (Aug 2022)',     'name' => 'ARC (Aug 2022)'),
+      array('id' => 'Export',             'name' => 'Export'),
+    );
   }
-  $unique_words = array_unique($sanitized_words);
-  return implode(', ', $unique_words);
-}
+
+  function get_account_name_from_site_name($site_name) {
+    $account_name = array('AR Gold (May 2022)' => 'AR Gold Software (May 2022)',
+                          'ARF (May 2022)'     => 'ARF Software (May 2022)',
+                          'ARC (May 2022)'     => 'ARC Software (May 2022)',
+                          'AR Gold (Aug 2022)' => 'AR Gold Software (Aug 2022)',
+                          'ARF (Aug 2022)'     => 'ARF Software (Aug 2022)',
+                          'ARC (Aug 2022)'     => 'ARC Software (Aug 2022)',
+                          'Export'             => 'Export Internal Software');
+    return $account_name['site_name'];
+  }
+  
+  function get_api_path_from_account_name($account_name) {
+    $api_path = array('AR Gold Software (May 2022)' => API_MAY2022_ARG_PATH,
+                      'ARF Software (May 2022)'     => API_MAY2022_ARF_PATH,
+                      'ARC Software (May 2022)'     => API_MAY2022_ARC_PATH,
+                      'AR Gold Software (Aug 2022)' => API_AUG2022_ARG_PATH,
+                      'ARF Software (Aug 2022)'     => API_AUG2022_ARF_PATH,
+                      'ARC Software (Aug 2022)'     => API_AUG2022_ARC_PATH,
+                      'Export Internal Software'    => API_EXPORT_INTERNAL_PATH);
+    return $api_path[$account_name];
+  }
+
+  function remove_duplicates_in_string($str) {
+    $words  = explode(",", $str);
+    $sanitized_words = array();
+    foreach ($words as $word) {
+      if (trim($word) == '') continue;
+      if (trim($word) == '0') continue;
+      $sanitized_words[] = trim($word);
+    }
+    $unique_words = array_unique($sanitized_words);
+    return implode(', ', $unique_words);
+  }
