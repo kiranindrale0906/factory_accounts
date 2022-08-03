@@ -12,7 +12,17 @@
           $companies=array_merge($all_companies);
           foreach ($companies as $index => $company) { ?>
             <a class="ml-5 <?= ($site_name== $company) ? 'bold black underline' : '' ?>" 
-               href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&site_name=<?= $company?>'><?= $company ?></a>
+               href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&site_name=<?= $company?>&branch=<?= $branch?>'><?= $company ?></a>
+          <?php }
+        ?>
+      </h5>
+      <h5> Select Branch:
+        <?php 
+        $all_company_branch = array('MAY2022','AUG2022');
+          $company_branchs=array_merge($all_company_branch);
+          foreach ($company_branchs as $index => $company_branch) { ?>
+            <a class="ml-5 <?= ($branch== $company_branch) ? 'bold black underline' : '' ?>" 
+               href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&site_name=<?= $site_name?>&branch=<?= $company_branch?>'><?= $company_branch ?></a>
           <?php }
         ?>
       </h5>

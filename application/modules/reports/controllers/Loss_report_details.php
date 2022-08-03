@@ -18,9 +18,9 @@ class Loss_report_details extends Ledgers {
 
   private function get_loss_details() {
     $this->data['factory_name'] = !empty($_GET['factory_name']) ? $_GET['factory_name'] : '';
+    $this->data['branch'] = !empty($_GET['branch']) ? $_GET['branch'] : '';
     $this->data['department_name'] = $_GET['category'];
     $data['department_name'] = $this->data['department_name'];
-    
     $account_data = $this->account_model->find('unrecoverable_account_name', array('name' => $this->data['department_name']));
     $this->data['unrecoverable_account_name'] = !empty($account_data) ? $account_data['unrecoverable_account_name'] : '';
     
@@ -105,10 +105,15 @@ class Loss_report_details extends Ledgers {
   }  
 
   private function get_loss_records_from_factory($postdata) {
-    if ($this->data['factory_name']=='ARC')         $this->data['factory_url'] = API_MAY2022_ARC_PATH;
-    elseif ($this->data['factory_name']=='ARF')     $this->data['factory_url'] = API_MAY2022_ARF_PATH;
-    elseif ($this->data['factory_name']=='AR Gold') $this->data['factory_url'] = API_MAY2022_ARG_PATH;
-    else return array();
+    if ($this->data['factory_name']=='ARC'){
+    $this->data['factory_url'] = ($this->data['branch']=="AUG2022")?API_AUG2022_ARC_PATH:API_MAY2022_ARC_PATH;
+    }         
+    elseif ($this->data['factory_name']=='ARF'){
+      $this->data['factory_url'] = ($this->data['branch']=="AUG2022")?API_AUG2022_ARF_PATH:API_MAY2022_ARF_PATH;
+    }
+    elseif ($this->data['factory_name']=='AR Gold'){
+      $this->data['factory_url'] = ($this->data['branch']=="AUG2022")?API_AUG2022_ARG_PATH:API_MAY2022_ARG_PATH;
+    }else {return array();} 
 
     $url = $this->data['factory_url'].'issue_and_receipts/loss_report_for_accounts/index';
     $factory_loss_records =  json_decode(curl_post_request($url, $postdata), true);

@@ -95,10 +95,16 @@ class Loss_reports extends BaseController {
   }
 
   private function get_loss_records_from_factory($postdata) {
-    if ($this->data['site_name']=='ARC')         $path = API_MAY2022_ARC_PATH;
-    elseif ($this->data['site_name']=='ARF')     $path = API_MAY2022_ARF_PATH;
-    elseif ($this->data['site_name']=='AR Gold') $path = API_MAY2022_ARG_PATH;
-    else return array();
+    if ($this->data['factory_name']=='ARC'){
+    $path = ($this->data['branch']=="AUG2022")?API_AUG2022_ARC_PATH:API_MAY2022_ARC_PATH;
+    }         
+    elseif ($this->data['factory_name']=='ARF'){
+      $path = ($this->data['branch']=="AUG2022")?API_AUG2022_ARF_PATH:API_MAY2022_ARF_PATH;
+    }
+    elseif ($this->data['factory_name']=='AR Gold'){
+      $path = ($this->data['branch']=="AUG2022")?API_AUG2022_ARG_PATH:API_MAY2022_ARG_PATH;
+    }else {return array();} 
+
 
     $url = $path.'issue_and_receipts/loss_report_for_accounts/index';
     $factory_loss_records = json_decode(curl_post_request($url, $postdata), true);
