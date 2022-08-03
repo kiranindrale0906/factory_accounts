@@ -53,9 +53,10 @@
                   array('id' => 'Stone',                        'name' => 'Stone'),
                 );
     if(!empty($_GET['refresh_id']) && $_GET['refresh_id']!=''){
-      $data[]=array('id' => 'AR Gold Refresh','name' => 'AR Gold Refresh');
-      $data[]=array('id' => 'ARC Refresh','name' => 'ARC Refresh');
-      $data[]=array('id' => 'ARF Refresh','name' => 'ARF Refresh');
+      // $data[]=array('id' => 'AR Gold Refresh','name' => 'AR Gold Refresh');
+      // $data[]=array('id' => 'ARC Refresh','name' => 'ARC Refresh');
+      // $data[]=array('id' => 'ARF Refresh','name' => 'ARF Refresh');
+      $data[]=array('id' => 'Refresh','name' => 'Refresh');
     }
     return $data;
   }
