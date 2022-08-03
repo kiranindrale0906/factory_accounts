@@ -552,8 +552,6 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     //print_r($send_data);
     //pd($api_url);
     $result = curl_post_request($api_url, $send_data);
-    pd($api_url, 0);
-    pd($result);
 //print_r($result);  
 }
 
