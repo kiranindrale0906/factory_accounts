@@ -18,6 +18,8 @@ class Loss_reports extends BaseController {
     $this->data['site_name']            = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'All';
     $this->data['account_id']           = (!empty($_GET['account_id'])) ? $_GET['account_id'] : 0;
     $this->data['factory_name'] = $this->data['site_name'];
+    $this->data['branch'] = !empty($_GET['branch']) ? $_GET['branch'] : '';
+    
     
     $this->data['loss_categories'] = array();
     
