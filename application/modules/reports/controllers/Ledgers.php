@@ -190,7 +190,10 @@ class Ledgers extends BaseController {
     foreach ($issues as $issue_index => $issue_value) {
       // $voucher_id=explode(',', $issue_value['voucher_id']);
       $voucher_id = rtrim($issue_value['voucher_id'], ", ");
+      if(!empty($voucher_id)){
+
       $ac_voucher_issue_detail=$this->voucher_model->get('metal_receipt_voucher_reference_id,id',array('where'=>array('metal_receipt_voucher_reference_id is not NULL'=>NULL,'id in ('.$voucher_id.')'=>NULL)));
+      }
       $metal_receipt_voucher_reference_id=array_column($ac_voucher_issue_detail,'metal_receipt_voucher_reference_id');
       $issues[$issue_index]['reference_account_name']="";
       if(!empty($metal_receipt_voucher_reference_id)){
