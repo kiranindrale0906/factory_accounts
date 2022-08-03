@@ -25,12 +25,13 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $rules[] = $this->get_narration_validation_rules();
     }
 
-    if ($this->attributes['receipt_type'] == 'AR Gold Refresh'
-        || $this->attributes['receipt_type'] == 'ARF Refresh'
-        || $this->attributes['receipt_type'] == 'ARC Refresh')
+    // if ($this->attributes['receipt_type'] == 'AR Gold Refresh'
+    //     || $this->attributes['receipt_type'] == 'ARF Refresh'
+    //     || $this->attributes['receipt_type'] == 'ARC Refresh')
+    if ($this->attributes['receipt_type'] == 'Refresh')  
       $rules[] = $this->get_sale_type_validation_rules();
 
-    $rules[] = $this->get_site_name_validation_rules();
+    //$rules[] = $this->get_site_name_validation_rules();
   
     $rules[] = $this->get_receipt_type_validation_rules();
     $rules[] = $this->get_factory_purity_validation_rules();
@@ -148,7 +149,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   private function set_metal_issue_voucher_attributes_from_receipt_type_for_refresh_and_chain_receipt() {
     $set_metal_issue_voucher = 0;
 
-    if (in_array($this->attributes['receipt_type'], array('AR Gold Refresh', 
+    if (in_array($this->attributes['receipt_type'], array('Refresh'
+                                                        //'AR Gold Refresh', 
                                                           'AR Gold Chain Receipt',
                                                           'AR Gold Finished Goods Receipt',
                                                           'AR Gold Finished Goods',
@@ -172,7 +174,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       // }
     }   
 
-    if (in_array($this->attributes['receipt_type'], array('ARF Refresh', 
+    if (in_array($this->attributes['receipt_type'], array(//'ARF Refresh', 
                                                           'ARF Chain Receipt',
                                                           'ARF Finished Goods Receipt',
                                                           'ARF Finished Goods',
@@ -197,7 +199,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       // }
     }  
 
-    if (in_array($this->attributes['receipt_type'], array('ARC Refresh', 
+    if (in_array($this->attributes['receipt_type'], array(//'ARC Refresh', 
                                                           'ARC Chain Receipt',
                                                           'ARC Finished Goods Receipt',
                                                           'ARC Finished Goods',
@@ -361,9 +363,10 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
   private function create_rate_cut_vouchers_for_metal_and_refresh() {
     if (   $this->attributes['receipt_type'] != 'Metal'
-        && $this->attributes['receipt_type'] != 'AR Gold Refresh'
-        && $this->attributes['receipt_type'] != 'ARF Refresh'
-        && $this->attributes['receipt_type'] != 'ARC Refresh'
+        && $this->attributes['receipt_type'] != 'Refresh'
+        // && $this->attributes['receipt_type'] != 'AR Gold Refresh'
+        // && $this->attributes['receipt_type'] != 'ARF Refresh'
+        // && $this->attributes['receipt_type'] != 'ARC Refresh'
         && $this->attributes['receipt_type'] != 'Rhodium')
       return;
 
@@ -455,10 +458,11 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $send_data['daily_drawer_receipts'] = $api_data;
       $api_url="api/api_daily_drawer_receipts/store";  
 
-    } else if(   $attributes['receipt_type'] == "AR Gold Refresh"
-              || $attributes['receipt_type'] == "ARF Refresh"
-              || $attributes['receipt_type'] == "Export Internal"
-              || $attributes['receipt_type'] == "ARC Refresh") {
+    } else if(   $attributes['receipt_type'] == "Refresh"
+              //    $attributes['receipt_type'] == "AR Gold Refresh"
+              // || $attributes['receipt_type'] == "ARF Refresh"
+              || $attributes['receipt_type'] == "Export Internal") {
+              // || $attributes['receipt_type'] == "ARC Refresh"
       $api_data = array_merge($api_data, array('type'=>'Pure',
                                                'hook_kdm_purity' => $attributes['hook_kdm_purity'],
                                                'description' => $attributes['description'],
