@@ -11,22 +11,40 @@
           </tr>
         </thead>
         <tr>
-          <td>AR GOLD</td>
+          <td>AR GOLD (May 2022)</td>
           <td class="text-right"><?= four_decimal(-1 * $accounts_argold_balance) ?></td>
           <td class="text-right"><?= four_decimal(-1 * $live_argold_balance) ?></td>
           <td class="text-right"><?= four_decimal($accounts_argold_balance - $live_argold_balance) ?></td>
         </tr>
         <tr>
-          <td>ARF</td>
+          <td>ARF (May 2022)</td>
           <td class="text-right"><?= four_decimal(-1 * $accounts_arf_balance) ?></td>
           <td class="text-right"><?= four_decimal(-1 * $live_arf_balance) ?>  </td>
           <td class="text-right"><?= four_decimal($accounts_arf_balance - $live_arf_balance) ?></td>
         </tr>
         <tr>
-          <td>ARC</td>
+          <td>ARC (May 2022)</td>
           <td class="text-right"><?= four_decimal(-1 * $accounts_arc_balance) ?></td>
           <td class="text-right"><?= four_decimal(-1 * $live_arc_balance) ?>  </td>
           <td class="text-right"><?= four_decimal($accounts_arc_balance - $live_arc_balance) ?></td>
+        </tr>
+        <tr>
+          <td>AR GOLD (Aug 2022)</td>
+          <td class="text-right"><?= four_decimal(-1 * $accounts_aug2022_argold_balance) ?></td>
+          <td class="text-right"><?= four_decimal(-1 * $live_aug2022_argold_balance) ?></td>
+          <td class="text-right"><?= four_decimal($accounts_aug2022_argold_balance - $live_aug2022_argold_balance) ?></td>
+        </tr>
+        <tr>
+          <td>ARF (Aug 2022)</td>
+          <td class="text-right"><?= four_decimal(-1 * $accounts_aug2022_arf_balance) ?></td>
+          <td class="text-right"><?= four_decimal(-1 * $live_aug2022_arf_balance) ?>  </td>
+          <td class="text-right"><?= four_decimal($accounts_aug2022_arf_balance - $live_aug2022_arf_balance) ?></td>
+        </tr>
+        <tr>
+          <td>ARC (Aug 2022)</td>
+          <td class="text-right"><?= four_decimal(-1 * $accounts_aug2022_arc_balance) ?></td>
+          <td class="text-right"><?= four_decimal(-1 * $live_aug2022_arc_balance) ?>  </td>
+          <td class="text-right"><?= four_decimal($accounts_aug2022_arc_balance - $live_aug2022_arc_balance) ?></td>
         </tr>
 
         <tr>
