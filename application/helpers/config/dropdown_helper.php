@@ -157,16 +157,18 @@
     elseif ($site_name=='ARC (Aug 2022)')     return API_AUG2022_ARC_PATH;
   }
 
-  function get_site_names() {
-    return array(
+  function get_site_names($export=1) {
+    $site_names = array(
+      array('id' => '', 'name' => ''),
       array('id' => 'AR Gold (May 2022)', 'name' => 'AR Gold (May 2022)'),
       array('id' => 'ARF (May 2022)',     'name' => 'ARF (May 2022)'),
       array('id' => 'ARC (May 2022)',     'name' => 'ARC (May 2022)'),
       array('id' => 'AR Gold (Aug 2022)', 'name' => 'AR Gold (Aug 2022)'),
       array('id' => 'ARF (Aug 2022)',     'name' => 'ARF (Aug 2022)'),
       array('id' => 'ARC (Aug 2022)',     'name' => 'ARC (Aug 2022)'),
-      array('id' => 'Export',             'name' => 'Export'),
     );
+    if ($export==1) $site_names[] = array('id' => 'Export', 'name' => 'Export');
+    return $site_names;
   }
 
   function get_account_name_from_site_name($site_name) {
