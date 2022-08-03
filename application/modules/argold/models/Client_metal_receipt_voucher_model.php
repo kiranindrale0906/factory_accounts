@@ -149,7 +149,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   private function set_metal_issue_voucher_attributes_from_receipt_type_for_refresh_and_chain_receipt() {
     $set_metal_issue_voucher = 0;
 
-    if (in_array($this->attributes['receipt_type'], array('Refresh'
+    if (in_array($this->attributes['receipt_type'], array('Refresh',
                                                         //'AR Gold Refresh', 
                                                           'AR Gold Chain Receipt',
                                                           'AR Gold Finished Goods Receipt',
