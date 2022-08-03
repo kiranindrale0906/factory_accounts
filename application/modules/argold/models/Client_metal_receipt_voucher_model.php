@@ -47,8 +47,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     $this->set_metal_receipt_attributes_from_receipt_type_for_vadotar();
     $this->set_metal_receipt_attributes();
 
-    $this->set_metal_issue_voucher_attributes_from_argold_software_metal_receipt();
-    $this->set_metal_issue_voucher_attributes_from_receipt_type_for_refresh_and_chain_receipt();
+    $this->set_metal_issue_voucher_attributes_from_argold_software_metal_receipt_and_refresh();
+    $this->set_metal_issue_voucher_attributes_from_receipt_type_for_chain_receipt();
     $this->set_metal_issue_voucher_attributes_from_receipt_type_for_stone();
     $this->set_metal_issue_voucher_attributes_from_receipt_type_for_metal_and_chain_receipt();
     $this->set_id_for_alloy_vodator_gpc_vodator_and_stone_vatav();
@@ -125,9 +125,10 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $this->formdata['metal_receipt_vouchers']['factory_fine'] = $this->attributes['debit_weight'] * $this->attributes['purity']/100;
   }
 
-  private function set_metal_issue_voucher_attributes_from_argold_software_metal_receipt() {
+  private function set_metal_issue_voucher_attributes_from_argold_software_metal_receipt_and_refresh() {
     if (   $this->attributes['receipt_type'] == 'Metal'
-        || $this->attributes['receipt_type'] == 'Daily Drawer') {
+        || $this->attributes['receipt_type'] == 'Daily Drawer'
+        || $this->attributes['receipt_type'] == 'Refresh') {
       $credit_weight = 0;
 
       $this->attributes['dd_type'] = isset($this->attributes['dd_type']) ? $this->attributes['dd_type'] : '';
@@ -140,17 +141,16 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $in_weight = $this->attributes['debit_weight'] - $credit_weight;
       if ($in_weight == 0) return true;
 
-      $this->formdata['metal_issue_vouchers'][] = array('account_name' => 'AR Gold Software',
+      $this->formdata['metal_issue_vouchers'][] = array('account_name'  => 'AR Gold Software (May 2022)',
                                                         'credit_weight' => $in_weight,
-                                                        'dd_type' => $this->attributes['dd_type']);
+                                                        'dd_type'       => $this->attributes['dd_type']);
     } 
   }
   
-  private function set_metal_issue_voucher_attributes_from_receipt_type_for_refresh_and_chain_receipt() {
+  private function set_metal_issue_voucher_attributes_from_receipt_type_for_chain_receipt() {
     $set_metal_issue_voucher = 0;
 
-    if (in_array($this->attributes['receipt_type'], array('Refresh',
-                                                        //'AR Gold Refresh', 
+    if (in_array($this->attributes['receipt_type'], array(//'AR Gold Refresh', 
                                                           'AR Gold Chain Receipt',
                                                           'AR Gold Finished Goods Receipt',
                                                           'AR Gold Finished Goods',
@@ -402,7 +402,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $metal_issue_data['company_id']  = $this->attributes['company_id'];
       $metal_issue_data['metal_receipt_voucher_reference_id'] = $this->attributes['id'];
       $metal_issue_data['voucher_date'] = $this->attributes['voucher_date'];
-      $metal_issue_data['account_id'] = $this->attributes['account_id'];
+      $metal_issue_data['site_name'] = get_site_name_from_account_name($metal_issue_voucher['account_name']);
+      //$metal_issue_data['account_id'] = $this->attributes['account_id'];
 
       if ($this->attributes['receipt_type'] != 'Vadotar') {
         $metal_issue_data['purity'] = $this->attributes['factory_purity'];

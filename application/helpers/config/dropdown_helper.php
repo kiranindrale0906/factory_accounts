@@ -172,6 +172,20 @@
     return $site_names;
   }
 
+  function get_account_names($export=1) {
+    $site_names = array(
+      array('id' => '', 'name' => ''),
+      array('id' => 'AR Gold Software (May 2022)', 'name' => 'AR Gold Software (May 2022)'),
+      array('id' => 'ARF Software (May 2022)',     'name' => 'ARF Software (May 2022)'),
+      array('id' => 'ARC Software (May 2022)',     'name' => 'ARC Software (May 2022)'),
+      array('id' => 'AR Gold Software (Aug 2022)', 'name' => 'AR Gold Software (Aug 2022)'),
+      array('id' => 'ARF Software (Aug 2022)',     'name' => 'ARF Software (Aug 2022)'),
+      array('id' => 'ARC Software (Aug 2022)',     'name' => 'ARC Software (Aug 2022)'),
+    );
+    if ($export==1) $site_names[] = array('id' => 'Export', 'name' => 'Export');
+    return $site_names;
+  }
+
   function get_site_name_from_account_name($account_name) {
     $site_name = array('AR Gold Software (May 2022)' => 'AR Gold (May 2022)',
                        'ARF Software (May 2022)'     => 'ARF (May 2022)',
