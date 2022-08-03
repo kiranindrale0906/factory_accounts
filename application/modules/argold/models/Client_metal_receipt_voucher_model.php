@@ -230,11 +230,11 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       // } 
     }  
 
-    $site_name = get_site_name_from_account_name($this->attributes['account_name']);
+    //$site_name = get_site_name_from_account_name($this->attributes['account_name']);
     $hook_kdm_purity = (empty($this->attributes['hook_kdm_purity'])) ? $this->attributes['factory_purity'] : $this->attributes['hook_kdm_purity'];
     if ($set_metal_issue_voucher==1) {
       $this->formdata['metal_issue_vouchers'] = array(array('account_name' => $this->attributes['account_name'],
-                                  'site_name' => $site_name,
+                                  //'site_name' => $site_name,
                                   'credit_weight' => $this->attributes['debit_weight'],
                                   'purity' => $this->attributes['purity'],
                                   'factory_purity' => $this->attributes['factory_purity'],
@@ -552,6 +552,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     //print_r($send_data);
     //pd($api_url);
     $result = curl_post_request($api_url, $send_data);
+    pd($api_url, 0);
+    pd($result);
 //print_r($result);  
 }
 
