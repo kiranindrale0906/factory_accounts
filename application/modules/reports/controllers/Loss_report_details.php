@@ -104,15 +104,19 @@ class Loss_report_details extends Ledgers {
     return $ghiss_melting_loss;
   }  
 
-  private function get_loss_records_from_factory($postdata) {
-    if ($this->data['factory_name']=='ARC'){
-    $this->data['factory_url'] = ($this->data['branch']=="AUG2022")?API_AUG2022_ARC_PATH:API_MAY2022_ARC_PATH;
-    }         
-    elseif ($this->data['factory_name']=='ARF'){
-      $this->data['factory_url'] = ($this->data['branch']=="AUG2022")?API_AUG2022_ARF_PATH:API_MAY2022_ARF_PATH;
-    }
-    elseif ($this->data['factory_name']=='AR Gold'){
-      $this->data['factory_url'] = ($this->data['branch']=="AUG2022")?API_AUG2022_ARG_PATH:API_MAY2022_ARG_PATH;
+  private function get_loss_records_from_factory($postdata) { 
+    if ($this->data['factory_name']=='ARC (May 2022)'){
+    $this->data['factory_url'] = API_MAY2022_ARC_PATH;
+    }elseif ($this->data['factory_name']=='ARF (May 2022)'){
+      $this->data['factory_url'] =API_MAY2022_ARF_PATH;
+    }elseif ($this->data['factory_name']=='AR Gold (May 2022)'){
+      $this->data['factory_url'] = API_MAY2022_ARG_PATH;
+    }elseif ($this->data['factory_name']=='AR Gold (Aug 2022)'){
+      $this->data['factory_url'] = API_AUG2022_ARG_PATH;
+    }elseif ($this->data['factory_name']=='ARC (Aug 2022)'){
+      $this->data['factory_url'] = API_AUG2022_ARC_PATH;
+    }elseif ($this->data['factory_name']=='ARF (Aug 2022)'){
+      $this->data['factory_url'] = API_AUG2022_ARF_PATH;
     }else {return array();} 
 
     $url = $this->data['factory_url'].'issue_and_receipts/loss_report_for_accounts/index';

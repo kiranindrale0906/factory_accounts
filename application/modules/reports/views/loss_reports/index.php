@@ -8,21 +8,11 @@
     <div class="form-group container"> 
       <h5> Select Factory:
         <?php 
-        $all_companies = array('AR Gold','ARF','ARC');
+        $all_companies = array('AR Gold (May 2022)','ARF  (May 2022)','ARC  (May 2022)','AR Gold (Aug 2022)','ARF  (Aug 2022)','ARC  (Aug 2022)');
           $companies=array_merge($all_companies);
           foreach ($companies as $index => $company) { ?>
             <a class="ml-5 <?= ($site_name== $company) ? 'bold black underline' : '' ?>" 
-               href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&site_name=<?= $company?>&branch=<?= $branch?>'><?= $company ?></a>
-          <?php }
-        ?>
-      </h5>
-      <h5> Select Branch:
-        <?php 
-        $all_company_branch = array('MAY2022','AUG2022');
-          $company_branchs=array_merge($all_company_branch);
-          foreach ($company_branchs as $index => $company_branch) { ?>
-            <a class="ml-5 <?= ($branch== $company_branch) ? 'bold black underline' : '' ?>" 
-               href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&site_name=<?= $site_name?>&branch=<?= $company_branch?>'><?= $company_branch ?></a>
+               href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&site_name=<?= $company?>'><?= $company ?></a>
           <?php }
         ?>
       </h5>
@@ -61,7 +51,7 @@
       $sum_balance+=four_decimal($loss_category['balance']);
       ?>
       <tr>
-        <td class=""><a href="<?=base_url()?>reports/loss_report_details?category=<?=$index ?>&factory_name=<?=$factory_name ?>&branch=<?=$branch ?>"><?=$index?></a></td>
+        <td class=""><a href="<?=base_url()?>reports/loss_report_details?category=<?=$index ?>&factory_name=<?=$factory_name ?>"><?=$index?></a></td>
         <td class="text-right"><?=!empty($loss_category['loss_fine'])?four_decimal($loss_category['loss_fine']):'-'?></td>
         <td class="text-right"><?=!empty($loss_category['out_weight'])?four_decimal($loss_category['out_weight']):'-';?></td>
         <td class="text-right"><?=!empty($loss_category['out_weight'])?four_decimal(($loss_category['loss_fine']/$loss_category['out_weight']*1000)):'-';?></td>
