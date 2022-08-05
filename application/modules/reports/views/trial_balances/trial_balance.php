@@ -19,8 +19,7 @@
               $liabilities_usd_amount = 0;
               if(!empty($trial_balance_records)) {
                 foreach ($trial_balance_records as $record) {
-                  if (   ($record['fine'] <= 0
-                          && $record['account_name'] != 'VADOTAR')
+                  if (   ($record['account_name'] != 'VADOTAR')
                       || ($record['account_name'] == 'Tounch Loss Fine')) continue;
 
                   if ($record['account_name'] == 'PURCHASE ACCOUNT') $profit_and_loss['purchase_account'] = $record;
@@ -81,8 +80,7 @@
               $assets_usd_amount = 0;  
               if(!empty($trial_balance_records)) {
                 foreach ($trial_balance_records as $record) {
-                  if (  ($record['fine'] >= 0
-                         && $record['account_name'] != 'Tounch Loss Fine')
+                  if (  ($record['account_name'] != 'Tounch Loss Fine')
                       || ($record['account_name'] == 'VADOTAR')) continue;
 
                   if ($record['account_name'] == 'SALES ACCOUNT') $profit_and_loss['sales_account'] = $record;
