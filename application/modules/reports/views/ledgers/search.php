@@ -12,7 +12,7 @@
 ?>
 
 <div class="row"> 
-  <div class="col-md-6">
+  <div class="col-md-12">
     <div class="form-group container"> 
       <h5> Select Factory:
         <?php 
@@ -35,7 +35,7 @@
           $arf_companies = array('ARF (May 2022)','ARF (Aug 2022)');
         }
         if($_SESSION['arc_details']==1){
-          $arc_companies = array('ARC (May 2022)',,'ARC (Aug 2022)');
+          $arc_companies = array('ARC (May 2022)','ARC (Aug 2022)');
         }
         // if($_SESSION['export_details']==1){
         //   $export_companies = array('Export');

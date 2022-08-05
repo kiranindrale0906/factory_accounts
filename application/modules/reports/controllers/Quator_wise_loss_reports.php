@@ -58,23 +58,29 @@ class Quator_wise_loss_reports extends BaseController {
     $this->data['loss_account_records'] = array();
     $loss_account_names=array();
     $loss_account_where=array('group_id'=>3);
-    if($this->data['site_name']=='ARF'){
-      $loss_account_where['unrecoverable_account_name']='Unrecovarable ARF';
-    }elseif($this->data['site_name']=='ARC'){
-      $loss_account_where['unrecoverable_account_name']='Unrecovarable ARC';
-    }elseif($this->data['site_name']=='AR Gold'){
-      $loss_account_where['unrecoverable_account_name']='Unrecovarable AR Gold';
+    if($this->data['site_name']=='ARF (May 2022)'){
+      $loss_account_where['(unrecoverable_account_name ="Unrecovarable ARF" OR unrecoverable_account_name ="Unrecovarable ARF (May 2022)")']=NULL;
+    }elseif($this->data['site_name']=='ARC (May 2022)'){
+      $loss_account_where['(unrecoverable_account_name ="Unrecovarable ARC" OR unrecoverable_account_name ="Unrecovarable ARC (May 2022)")']=NULL;
+    }elseif($this->data['site_name']=='AR Gold (May 2022)'){
+      $loss_account_where['(unrecoverable_account_name ="Unrecovarable AR Gold" OR unrecoverable_account_name ="Unrecovarable AR Gold (May 2022)")']=NULL;
+    }elseif($this->data['site_name']=='ARF (Aug 2022)'){
+      $loss_account_where['unrecoverable_account_name']='Unrecovarable ARF (Aug 2022)';
+    }elseif($this->data['site_name']=='ARC (Aug 2022)'){
+      $loss_account_where['unrecoverable_account_name']='Unrecovarable ARC (Aug 2022)';
+    }elseif($this->data['site_name']=='AR Gold (Aug 2022)'){
+      $loss_account_where['unrecoverable_account_name']='Unrecovarable AR Gold (Aug 2022)';
     }
     $loss_account_names =  $this->account_model->get('name',$loss_account_where);
     $loss_account_names = array_column($loss_account_names, 'name');
-    
     if(!empty($this->data['trial_balance'])){
       $item_name='';
       $item_name_with_factory='';
       foreach($this->data['trial_balance'] as $index => $trail_balance_record) {
         if (in_array($trail_balance_record['account_name'], $loss_account_names)) {
+          $unrecoverable_loss_account=$this->account_model->find('unrecoverable_account_name',array('name'=>$trail_balance_record['account_name']));
           $item_name=$trail_balance_record['account_name'].' Unrecovarable';
-          $item_name_with_factory=$trail_balance_record['account_name'].' '.$loss_account_where['unrecoverable_account_name'];
+          $item_name_with_factory=$trail_balance_record['account_name'].' '.$unrecoverable_loss_account['unrecoverable_account_name'];
           if($trail_balance_record['item_name']==$item_name || $trail_balance_record['item_name']==$item_name_with_factory){
             $loss_account['fine'] += $trail_balance_record['fine'];
             $this->data['loss_account_records'][] = $trail_balance_record;
