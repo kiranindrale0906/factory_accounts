@@ -574,7 +574,7 @@ class Trial_balances extends Ledgers {
   private function create_update_vadotar_records($api_path, $site_name, $hostversion) {
     $url = $api_path."issue_and_receipts/alloy_gpc_vodator_ledger/index";
     $records = json_decode(curl_post_request($url));
-      
+    pd($records); 
     if (!empty($records)) {
       $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator_group_by_date, 'Alloy Vodator', $site_name, $hostversion);
       $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator_group_by_date, 'GPC Vodator', $site_name, $hostversion);
