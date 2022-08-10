@@ -28,7 +28,6 @@ class Account_ledgers extends Ledgers {
                                                               array('order_by' => 'ac_account.name asc'));
     $account_id = (!empty($_GET['account_ledgers']['account_id'])) ? $_GET['account_ledgers']['account_id'] : 0;
     $this->data['account_id'] = $account_id;  
-    pd($this->data);
     if ($this->data['account_id'] != 0)
       $this->get_datewise_ledger_records();
   }
