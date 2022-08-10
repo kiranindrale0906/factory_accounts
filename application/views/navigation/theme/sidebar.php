@@ -72,7 +72,7 @@
                                             // 'transactions/transfer_voucher' => 'Transfer Voucher',
                                             // 'transactions/repair_voucher_out' => 'Repair Voucher Out',
                                             // 'transactions/approval_in_voucher' => 'Approval in Voucher',
-                                             'transactions/opening_stock_vouchers' => 'Opening Stock Voucher',
+//                                             'transactions/opening_stock_vouchers' => 'Opening Stock Voucher',
                                             // 'transactions/transfer_vouchers' => 'Transfer Vouchers',//
                                             // 'transactions/antique_sales_voucher' => 'Antique Sales Voucher',
                                             // 'transactions/mangalsutra_sales_voucher' => 'Mangalsutra Sales Voucher',
@@ -84,7 +84,7 @@
                     // 'Reports'   => array('reports/mis_reports'=>'MIS Reports',
                     //                     'reports/stock_report' =>'Stock Report',
                     //                     'reports/order_report'=>'Order Report'),
-                    'Reports'   => array(
+/*                    'Reports'   => array(
                                         'reports/account_ledgers' => 'Account Ledger',
                                         // 'reports/account_ledgers' => 'Account Ledger Report',
                                         // 'reports/outstanding_report' => 'Outstanding Report',
@@ -105,7 +105,7 @@
                                         'reports/cash_gst_registers' => 'Cash GST Register Reports',
                                         'reports/domestic_export_ledgers' => 'Domestic Export Ledger',
                                         'reports/person_production_charts' => 'Person Production Charts',
-                                        ), 
+                                        ), */
                     //'Interests' => array('transactions/interest_issue_vouchers'=>'Interest Issue Voucher','transactions/interest_receipt_vouchers'=>'Interest Receipt Voucher'),
                     'Registers'   => array(
                       'registers/cash_registers' => 'Cash Register',
