@@ -194,7 +194,7 @@
                        'ARF Software (Aug 2022)'     => 'ARF Aug 2022',
                        'ARC Software (Aug 2022)'     => 'ARC Aug 2022',
                        'Export Internal Software'    => 'Export');
-    return $site_name[$account_name];
+    return $site_name[$account_name] ?? '';
   }
 
   function get_account_name_from_site_name($site_name) {
@@ -205,7 +205,7 @@
                           'ARF Aug 2022'     => 'ARF Software (Aug 2022)',
                           'ARC Aug 2022'     => 'ARC Software (Aug 2022)',
                           'Export'           => 'Export Internal Software');
-    return $account_name[$site_name];
+    return $account_name[$site_name] ?? '';
   }
   
   function get_api_path_from_account_name($account_name) {

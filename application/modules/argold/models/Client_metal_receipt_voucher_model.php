@@ -402,7 +402,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $metal_issue_data['company_id']  = $this->attributes['company_id'];
       $metal_issue_data['metal_receipt_voucher_reference_id'] = $this->attributes['id'];
       $metal_issue_data['voucher_date'] = $this->attributes['voucher_date'];
-      $metal_issue_data['site_name'] = get_site_name_from_account_name($metal_issue_voucher['account_name']);
+      $metal_issue_data['site_name'] = get_site_name_from_account_name($metal_issue_voucher['account_name']) ?? $this->attributes['site_name'];
       //$metal_issue_data['account_id'] = $this->attributes['account_id'];
 
       if ($this->attributes['receipt_type'] != 'Vadotar') {
