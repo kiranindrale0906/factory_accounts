@@ -285,7 +285,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                                                   'credit_weight' => $this->attributes['debit_weight'],
                                                   'purity' => $this->attributes['purity'],
                                                   'factory_purity' => $this->attributes['factory_purity']));
-
+      pd($this->attributes);
       $account_name = get_account_name_from_site_name($this->attributes['site_name']);
       if ($this->attributes['receipt_type'] != 'Auto Tounch Loss Fine') {
         $metal_issue_voucher = $this->find('id',array('receipt_type' => $this->attributes['receipt_type'],
