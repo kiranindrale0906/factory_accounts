@@ -279,13 +279,13 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       // elseif ($this->attributes['site_name'] == 'ARF') $account_name = 'ARF Software';
       // elseif ($this->attributes['site_name'] == 'ARC') $account_name = 'ARC Software';
 
-      //$site_name = get_site_name_from_account_name($this->attributes['account_name']);
-      $this->formdata['metal_issue_vouchers'] = array(array('account_name' => $this->attributes['account_name'],
+      $account_name = get_account_name_from_site_name($this->attributes['site_name']);
+      $this->formdata['metal_issue_vouchers'] = array(array('account_name' => $account_name,
                                                   'site_name' => $this->attributes['site_name'],
                                                   'credit_weight' => $this->attributes['debit_weight'],
                                                   'purity' => $this->attributes['purity'],
                                                   'factory_purity' => $this->attributes['factory_purity']));
-      $account_name = get_account_name_from_site_name($this->attributes['site_name']);
+      
       if ($this->attributes['receipt_type'] != 'Auto Tounch Loss Fine') {
         $metal_issue_voucher = $this->find('id',array('receipt_type' => $this->attributes['receipt_type'],
                                                       'account_name' => $account_name, //$this->attributes['site_name'].' Software',
