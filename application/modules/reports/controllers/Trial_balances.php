@@ -524,43 +524,65 @@ class Trial_balances extends Ledgers {
         $this->ledger_model->delete('', array('parent_id not in (select id from ac_vouchers)' => NULL));
       }
 
-      $url = API_MAY2022_ARG_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
-      $records = json_decode(curl_post_request($url));
-      
-      if (!empty($records)) {
-        $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator_group_by_date, 'Alloy Vodator', 'AR Gold', '');
-        $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator_group_by_date, 'GPC Vodator', 'AR Gold', '');
-        $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav_group_by_date, 'Stone Vatav', 'AR Gold', '');
-        $this->metal_receipt_voucher_model->create_vodator_records($records->data->meena_vatav_group_by_date, 'Meena Vatav', 'AR Gold', '');
-        $this->metal_receipt_voucher_model->create_vodator_records($records->data->copper_vatav_group_by_date, 'Copper Vatav', 'AR Gold', '');
-        $this->metal_receipt_voucher_model->create_vodator_records($records->data->rhodium_vatav_group_by_date, 'Rhodium Vatav', 'AR Gold', '');
-        $this->metal_receipt_voucher_model->create_vodator_records($records->data->tounch_loss_fine_group_by_date, 'Auto Tounch Loss Fine', 'AR Gold', '');
-      }
+      $this->create_update_vadotar_records(API_MAY2022_ARG_PATH, 'AR Gold', 'May 2022');
+      $this->create_update_vadotar_records(API_MAY2022_ARF_PATH, 'ARF', 'May 2022');
+      $this->create_update_vadotar_records(API_MAY2022_ARC_PATH, 'ARC', 'May 2022');
+      $this->create_update_vadotar_records(API_AUG2022_ARG_PATH, 'AR Gold', 'Aug 2022');
+      $this->create_update_vadotar_records(API_AUG2022_ARF_PATH, 'ARF', 'Aug 2022');
+      $this->create_update_vadotar_records(API_AUG2022_ARC_PATH, 'ARC', 'Aug 2022');
 
-      $url = API_MAY2022_ARF_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
-      $records = json_decode(curl_post_request($url));
+      // $url = API_MAY2022_ARG_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
+      // $records = json_decode(curl_post_request($url));
       
-      if (!empty($records)) {
-        $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator_group_by_date, 'Alloy Vodator', 'ARF', '');
-        $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator_group_by_date, 'GPC Vodator', 'ARF', '');
-        $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav_group_by_date, 'Stone Vatav', 'ARF', '');
-        $this->metal_receipt_voucher_model->create_vodator_records($records->data->meena_vatav_group_by_date, 'Meena Vatav', 'ARF', '');
-      $this->metal_receipt_voucher_model->create_vodator_records($records->data->copper_vatav_group_by_date, 'Copper Vatav', 'ARF', '');
-        $this->metal_receipt_voucher_model->create_vodator_records($records->data->rhodium_vatav_group_by_date, 'Rhodium Vatav', 'ARF', '');
-        $this->metal_receipt_voucher_model->create_vodator_records($records->data->tounch_loss_fine_group_by_date, 'Auto Tounch Loss Fine', 'ARF', '');
-      }
+      // if (!empty($records)) {
+      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator_group_by_date, 'Alloy Vodator', 'AR Gold', 'May 2022');
+      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator_group_by_date, 'GPC Vodator', 'AR Gold', 'May 2022');
+      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav_group_by_date, 'Stone Vatav', 'AR Gold', 'May 2022');
+      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->meena_vatav_group_by_date, 'Meena Vatav', 'AR Gold', 'May 2022');
+      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->copper_vatav_group_by_date, 'Copper Vatav', 'AR Gold', 'May 2022');
+      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->rhodium_vatav_group_by_date, 'Rhodium Vatav', 'AR Gold', 'May 2022');
+      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->tounch_loss_fine_group_by_date, 'Auto Tounch Loss Fine', 'AR Gold', 'May 2022');
+      // }
+
+      // $url = API_MAY2022_ARF_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
+      // $records = json_decode(curl_post_request($url));
       
-      $url = API_MAY2022_ARC_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
-      $records = json_decode(curl_post_request($url));
-      if (!empty($records)) {
-        $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator_group_by_date, 'Alloy Vodator', 'ARC', '');
-        $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator_group_by_date, 'GPC Vodator', 'ARC', '');
-        $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav_group_by_date, 'Stone Vatav', 'ARC', '');
-        $this->metal_receipt_voucher_model->create_vodator_records($records->data->meena_vatav_group_by_date, 'Meena Vatav', 'ARC', '');
-       $this->metal_receipt_voucher_model->create_vodator_records($records->data->copper_vatav_group_by_date, 'Copper Vatav', 'ARC', '');
-        $this->metal_receipt_voucher_model->create_vodator_records($records->data->rhodium_vatav_group_by_date, 'Rhodium Vatav', 'ARC', '');
-        $this->metal_receipt_voucher_model->create_vodator_records($records->data->tounch_loss_fine_group_by_date, 'Auto Tounch Loss Fine', 'ARC', '');
-      }
+      // if (!empty($records)) {
+      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator_group_by_date, 'Alloy Vodator', 'ARF', 'May 2022');
+      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator_group_by_date, 'GPC Vodator', 'ARF', 'May 2022');
+      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav_group_by_date, 'Stone Vatav', 'ARF', 'May 2022');
+      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->meena_vatav_group_by_date, 'Meena Vatav', 'ARF', 'May 2022');
+      // $this->metal_receipt_voucher_model->create_vodator_records($records->data->copper_vatav_group_by_date, 'Copper Vatav', 'ARF', 'May 2022');
+      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->rhodium_vatav_group_by_date, 'Rhodium Vatav', 'ARF', 'May 2022');
+      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->tounch_loss_fine_group_by_date, 'Auto Tounch Loss Fine', 'ARF', 'May 2022');
+      // }
+      
+      // $url = API_MAY2022_ARC_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
+      // $records = json_decode(curl_post_request($url));
+      // if (!empty($records)) {
+      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator_group_by_date, 'Alloy Vodator', 'ARC', 'May 2022');
+      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator_group_by_date, 'GPC Vodator',  'ARC', 'May 2022');
+      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav_group_by_date, 'Stone Vatav',  'ARC', 'May 2022');
+      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->meena_vatav_group_by_date, 'Meena Vatav',  'ARC', 'May 2022');
+      //  $this->metal_receipt_voucher_model->create_vodator_records($records->data->copper_vatav_group_by_date, 'Copper Vatav',  'ARC', 'May 2022');
+      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->rhodium_vatav_group_by_date, 'Rhodium Vatav',  'ARC', 'May 2022');
+      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->tounch_loss_fine_group_by_date, 'Auto Tounch Loss Fine',  'ARC', 'May 2022');
+      // }
+    }
+  }
+
+  private function create_update_vadotar_records(API_PATH, $site_name, $hostversion) {
+    $url = API_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
+    $records = json_decode(curl_post_request($url));
+      
+    if (!empty($records)) {
+      $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator_group_by_date, 'Alloy Vodator', $site_name, $hostversion);
+      $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator_group_by_date, 'GPC Vodator', $site_name, $hostversion);
+      $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav_group_by_date, 'Stone Vatav', $site_name, $hostversion);
+      $this->metal_receipt_voucher_model->create_vodator_records($records->data->meena_vatav_group_by_date, 'Meena Vatav', $site_name, $hostversion);
+      $this->metal_receipt_voucher_model->create_vodator_records($records->data->copper_vatav_group_by_date, 'Copper Vatav', $site_name, $hostversion);
+      $this->metal_receipt_voucher_model->create_vodator_records($records->data->rhodium_vatav_group_by_date, 'Rhodium Vatav', $site_name, $hostversion);
+      $this->metal_receipt_voucher_model->create_vodator_records($records->data->tounch_loss_fine_group_by_date, 'Auto Tounch Loss Fine', $site_name, $hostversion);
     }
   }
 
