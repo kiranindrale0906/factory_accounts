@@ -279,9 +279,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       // elseif ($this->attributes['site_name'] == 'ARF') $account_name = 'ARF Software';
       // elseif ($this->attributes['site_name'] == 'ARC') $account_name = 'ARC Software';
 
-      $site_name = get_site_name_from_account_name($this->attributes['account_name']);
+      //$site_name = get_site_name_from_account_name($this->attributes['account_name']);
       $this->formdata['metal_issue_vouchers'] = array(array('account_name' => $this->attributes['account_name'],
-                                                  'site_name' => $site_name,
+                                                  'site_name' => $this->attributes['site_name'],
                                                   'credit_weight' => $this->attributes['debit_weight'],
                                                   'purity' => $this->attributes['purity'],
                                                   'factory_purity' => $this->attributes['factory_purity']));
@@ -581,7 +581,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                   'fine' => $record['fine'],
                   'factory_fine' => $record['fine'],
                   'narration' => $site_name.' '.$receipt_type,
-                  'site_name' => $site_name.''.$hostversion);
+                  'site_name' => $site_name.' '.$hostversion);
       $data['id'] = '';
       if (!empty($metal_receipt_voucher)) $data['id'] = $metal_receipt_voucher['id'];
       if (empty($record['weight'])) return;
