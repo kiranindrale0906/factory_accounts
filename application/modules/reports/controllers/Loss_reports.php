@@ -18,6 +18,8 @@ class Loss_reports extends BaseController {
     $this->data['site_name']            = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'All';
     $this->data['account_id']           = (!empty($_GET['account_id'])) ? $_GET['account_id'] : 0;
     $this->data['factory_name'] = $this->data['site_name'];
+    $this->data['branch'] = !empty($_GET['branch']) ? $_GET['branch'] : '';
+    
     
     $this->data['loss_categories'] = array();
     
@@ -95,10 +97,20 @@ class Loss_reports extends BaseController {
   }
 
   private function get_loss_records_from_factory($postdata) {
-    if ($this->data['site_name']=='ARC')         $path = API_MAY2022_ARC_PATH;
-    elseif ($this->data['site_name']=='ARF')     $path = API_MAY2022_ARF_PATH;
-    elseif ($this->data['site_name']=='AR Gold') $path = API_MAY2022_ARG_PATH;
-    else return array();
+    if ($this->data['factory_name']=='ARC (May 2022)'){
+    $path = API_MAY2022_ARC_PATH;
+    }elseif ($this->data['factory_name']=='ARF (May 2022)'){
+      $path =API_MAY2022_ARF_PATH;
+    }elseif ($this->data['factory_name']=='AR Gold (May 2022)'){
+      $path = API_MAY2022_ARG_PATH;
+    }elseif ($this->data['factory_name']=='AR Gold (Aug 2022)'){
+      $path = API_AUG2022_ARG_PATH;
+    }elseif ($this->data['factory_name']=='ARC (Aug 2022)'){
+      $path = API_AUG2022_ARC_PATH;
+    }elseif ($this->data['factory_name']=='ARF (Aug 2022)'){
+      $path = API_AUG2022_ARF_PATH;
+    }else {return array();} 
+
 
     $url = $path.'issue_and_receipts/loss_report_for_accounts/index';
     $factory_loss_records = json_decode(curl_post_request($url, $postdata), true);

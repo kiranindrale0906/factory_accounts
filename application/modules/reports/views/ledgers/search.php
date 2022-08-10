@@ -23,19 +23,19 @@
         $export_companies = array();
         if($_SESSION['all_details']==1){
           $all_companies = array('All');
-          $arg_companies = array('AR Gold');
-          $arf_companies = array('ARF');
-          $arc_companies = array('ARC');
+          $arg_companies = array('AR Gold (May 2022)','AR Gold (Aug 2022)');
+          $arf_companies = array('ARF (May 2022)','AR Gold (Aug 2022)');
+          $arc_companies = array('ARC (May 2022)','AR Gold (Aug 2022)');
           // $export_companies = array('Export');
         }
         if($_SESSION['arg_details']==1){
-          $arg_companies = array('AR Gold');
+          $arg_companies = array('AR Gold (May 2022)','AR Gold (Aug 2022)');
         }
         if($_SESSION['arf_details']==1){
-          $arf_companies = array('ARF');
+          $arf_companies = array('ARF (May 2022)','ARF (Aug 2022)');
         }
         if($_SESSION['arc_details']==1){
-          $arc_companies = array('ARC');
+          $arc_companies = array('ARC (May 2022)',,'ARC (Aug 2022)');
         }
         // if($_SESSION['export_details']==1){
         //   $export_companies = array('Export');

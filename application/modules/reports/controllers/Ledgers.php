@@ -156,13 +156,13 @@ class Ledgers extends BaseController {
                                // pd($this->data['site_name'] );
        $account_receipt_where['site_name'] = '';                        
        $account_issue_where['site_name'] = '';                        
-      if ($this->data['site_name'] == 'ARF'){
+      if ($this->data['site_name'] == 'ARF' || $this->data['site_name'] == 'ARF (May 2022)'|| $this->data['site_name'] == 'ARF (Aug 2022)'){
         $account_issue_where['account_name'] = 'ARF Software';
-      }elseif ($this->data['site_name'] == 'ARC'){
+      }elseif ($this->data['site_name'] == 'ARC' || $this->data['site_name'] == 'ARC (May 2022)'|| $this->data['site_name'] == 'ARC (Aug 2022)'){
         $account_issue_where['account_name'] = 'ARC Software';
       }elseif ($this->data['site_name'] == 'Export'){
         $account_issue_where['account_name'] = 'Export Internal Software';
-      }elseif ($this->data['site_name'] == 'AR Gold'){
+      }elseif ($this->data['site_name'] == 'AR Gold' || $this->data['site_name'] == 'AR Gold (May 2022)'|| $this->data['site_name'] == 'AR Gold (Aug 2022)'){
         $account_issue_where['account_name'] = 'AR Gold Software';
       }
       else{
@@ -176,11 +176,10 @@ class Ledgers extends BaseController {
     if ($this->data['domestic_export'] == 'Export') {
         $where_receipt=array('(account_name = ("Export Internal Software")  and receipt_type="Export Internal" 
                  and voucher_type = "metal receipt voucher") and (debit_weight != 0 or debit_amount != 0)' => NULL);
-        if ($this->data['site_name'] == 'ARF'){
+        if ($this->data['site_name'] == 'ARF' || $this->data['site_name'] == 'ARF (May 2022)'|| $this->data['site_name'] == 'ARF (Aug 2022)')
           $where_receipt['description'] = 'ARF Software';
-        }elseif ($this->data['site_name'] == 'ARC'){
-          $where_receipt['description'] = 'ARC Software';
-        }elseif ($this->data['site_name'] == 'AR Gold'){
+        }elseif ($this->data['site_name'] == 'ARC' || $this->data['site_name'] == 'ARC (May 2022)'|| $this->data['site_name'] == 'ARC (Aug 2022)') $where_receipt['description'] = 'ARC Software';
+        }elseif ($this->data['site_name'] == 'AR Gold' || $this->data['site_name'] == 'AR Gold (May 2022)'|| $this->data['site_name'] == 'AR Gold (Aug 2022)'){
           $where_receipt['description'] = 'AR Gold Software';
         }         
     }
@@ -190,9 +189,12 @@ class Ledgers extends BaseController {
     foreach ($issues as $issue_index => $issue_value) {
       // $voucher_id=explode(',', $issue_value['voucher_id']);
       $voucher_id = rtrim($issue_value['voucher_id'], ", ");
+      if(!empty($voucher_id)){
+
       $ac_voucher_issue_detail=$this->voucher_model->get('metal_receipt_voucher_reference_id,id',array('where'=>array('metal_receipt_voucher_reference_id is not NULL'=>NULL,'id in ('.$voucher_id.')'=>NULL)));
       $metal_receipt_voucher_reference_id=array_column($ac_voucher_issue_detail,'metal_receipt_voucher_reference_id');
-      $issues[$issue_index]['reference_account_name']="";
+      }
+     $issues[$issue_index]['reference_account_name']="";
       if(!empty($metal_receipt_voucher_reference_id)){
       $reference_ac_voucher_issue_detail=$this->voucher_model->find('GROUP_CONCAT(DISTINCT(account_name)) as account_name',array('where_in'=>array('id'=>$metal_receipt_voucher_reference_id)));
       $issues[$issue_index]['reference_account_name']=$reference_ac_voucher_issue_detail['account_name'];
