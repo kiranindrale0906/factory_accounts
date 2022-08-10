@@ -571,8 +571,8 @@ class Trial_balances extends Ledgers {
     }
   }
 
-  private function create_update_vadotar_records(API_PATH, $site_name, $hostversion) {
-    $url = API_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
+  private function create_update_vadotar_records($api_path, $site_name, $hostversion) {
+    $url = $api_path."issue_and_receipts/alloy_gpc_vodator_ledger/index";
     $records = json_decode(curl_post_request($url));
       
     if (!empty($records)) {
