@@ -113,31 +113,31 @@ class Trial_balances extends Ledgers {
     $response = json_decode(curl_post_request($url));
     
     foreach ($this->data['receipt_types'] as $receipt_type) {
-      $this->data[$receipt_type] ??= [];
-      $this->data[$receipt_type][$site_name] ??= [];
-      $this->data[$receipt_type][$site_name][$hostversion] ??= [];
-      $this->data[$receipt_type][$site_name][$hostversion]['factory_vadotar_records'] ??= [];
+      $this->data['factory_vadotar_records'] ??= [];
+      $this->data['factory_vadotar_records'][$receipt_type] ??= [];
+      $this->data['factory_vadotar_records'][$receipt_type][$site_name] ??= [];
+      $this->data['factory_vadotar_records'][$receipt_type][$site_name][$hostversion] ??= [];
+      
 
-      $this->data[$receipt_type][$site_name][$hostversion]['factory_vadotar_records']['balance'] = $response->data->$receipt_type[0]->weight;
-      $this->data[$receipt_type][$site_name][$hostversion]['factory_vadotar_records']['balance_fine'] = $response->data->$receipt_type[0]->fine;
+      $this->data['factory_vadotar_records'][$receipt_type][$site_name][$hostversion]['balance'] = $response->data->$receipt_type[0]->weight;
+      $this->data['factory_vadotar_records'][$receipt_type][$site_name][$hostversion]['balance_fine'] = $response->data->$receipt_type[0]->fine;
 
       $this->get_accounts_vodator_balance($site_name, $receipt_type, $hostversion);
     }
   }
 
   private function get_accounts_vodator_balance($site_name, $receipt_type, $hostversion) {
-    $this->data ??= [];
-    $this->data[$receipt_type] ??= [];
-    $this->data[$receipt_type][$site_name] ??= [];
-    $this->data[$receipt_type][$site_name][$hostversion] ??= [];
-    $this->data[$receipt_type][$site_name][$hostversion]['account_vadotar_balance'] ??= [];
-
+    $this->data['account_vadotar_balance'] ??= [];
+    $this->data['account_vadotar_balance'][$receipt_type] ??= [];
+    $this->data['account_vadotar_balance'][$receipt_type][$site_name] ??= [];
+    $this->data['account_vadotar_balance'][$receipt_type][$site_name][$hostversion] ??= [];
+    
     $account_name = $site_name.' '.$receipt_type.' ('.$hostversion.') ';
     $accounts_balance_select = '(sum(debit_weight)) as balance, (sum(debit_weight*purity/100)) as balance_fine';
     $account_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => $account_name));
     
-    $this->data[$receipt_type][$site_name][$hostversion]['account_vadotar_balance']['balance'] = $account_vouchers['balance'];      
-    $this->data[$receipt_type][$site_name][$hostversion]['account_vadotar_balance']['balance_fine'] = $account_vouchers['balance_fine'];
+    $this->data['account_vadotar_balance'][$receipt_type][$site_name][$hostversion]['balance'] = $account_vouchers['balance'];      
+    $this->data['account_vadotar_balance'][$receipt_type][$site_name][$hostversion]['balance_fine'] = $account_vouchers['balance_fine'];
   } 
 
   // private function get_alloy_vodator_balance() {
