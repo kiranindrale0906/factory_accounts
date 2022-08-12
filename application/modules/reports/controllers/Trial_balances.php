@@ -31,7 +31,7 @@ class Trial_balances extends Ledgers {
     $this->calculate_profit_loss_of_export_sales_accounts('Sale');
     $this->calculate_profit_loss_of_export_sales_accounts('Labour');
 
-    $this->get_vadotar_from_factory();
+    $this->get_vadotar_from_factories();
     $this->get_alloy_vodator_balance();
     $this->get_gpc_vodator_balance();
     $this->get_stone_vatav_balance();
@@ -95,6 +95,15 @@ class Trial_balances extends Ledgers {
     $this->data['live_export_balance'] = @$export_records->data->record->argold;
   }
 
+  private function get_vadotar_from_factories() {
+    $this->get_vadotar_from_factory('AR Gold', 'May 2022');    
+    $this->get_vadotar_from_factory('ARF', 'May 2022');    
+    $this->get_vadotar_from_factory('ARC', 'May 2022');    
+    $this->get_vadotar_from_factory('AR Gold', 'Aug 2022');    
+    $this->get_vadotar_from_factory('ARF', 'Aug 2022');    
+    $this->get_vadotar_from_factory('ARC', 'Aug 2022');    
+  }
+
   private function get_vadotar_from_factory($site_name = 'AR Gold', $hostversion = 'May 2022') {
     $receipt_types = ['Alloy Vodator', 'GPC Vodator', 'Stone Vatav', 'Meeva Vatav', 'Copper Vatav', 'Rhodium Vatav', 'Tounch Loss Fine'];
 
@@ -111,28 +120,9 @@ class Trial_balances extends Ledgers {
       $this->data['factory_vadotar_records'][$receipt_type][$site_name][$hostversion]['balance'] = $response->data->$receipt_type[0]->weight;
       $this->data['factory_vadotar_records'][$receipt_type][$site_name][$hostversion]['balance_fine'] = $response->data->$receipt_type[0]->fine;
     }
-    pd($this->data['factory_vadotar_records']);
     
-    // $url=API_MAY2022_ARF_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
-    // $this->data['factory_vadotar_records']['ARF']['May 2022'] = json_decode(curl_post_request($url));
-    
-    // $url=API_MAY2022_ARC_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
-    // $this->data['factory_vadotar_records']['ARC']['May 2022'] = json_decode(curl_post_request($url));
-
-    // $url=API_AUG2022_ARG_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
-    // $this->data['factory_vadotar_records']['AR Gold']['Aug 2022'] = json_decode(curl_post_request($url));
-    
-    // $url=API_AUG2022_ARF_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
-    // $this->data['factory_vadotar_records']['ARF']['Aug 2022'] = json_decode(curl_post_request($url));
-    
-    // $url=API_AUG2022_ARC_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
-    // $this->data['factory_vadotar_records']['ARC']['Aug 2022'] = json_decode(curl_post_request($url));
-
     $this->get_accounts_vodator_balance('AR Gold', 'Alloy Vodator', 'May 2022');
-    // $this->get_accounts_vodator_balance('AR Gold', 'GPC Vodator', 'May 2022');
-    // $this->get_accounts_vodator_balance('AR Gold', 'Stone Vatav', 'May 2022');
-    // $this->get_accounts_vodator_balance('AR Gold', 'Meena Vatav', 'May 2022');
-
+    
     pd($this->data['factory_vadotar_records'], 0);
     pd($this->data['account_vadotar_balance']);
   }
