@@ -95,17 +95,18 @@ class Trial_balances extends Ledgers {
     $this->data['live_export_balance'] = @$export_records->data->record->argold;
   }
 
-  private function get_vadotar_from_factory() {
-    $this->data['factory_vadotar_records'] ??= [];
-    $this->data['factory_vadotar_records']['AR Gold'] ??= [];
-    $this->data['factory_vadotar_records']['AR Gold']['May 2022'] ??= [];
+  private function get_vadotar_from_factory($site_name = 'AR Gold', $hostversion = 'May 2022') {
+    $this->data['factory_vadotar_balance'] ??= [];
+    $this->data['factory_vadotar_balance'][$receipt_type] ??= [];
+    $this->data['factory_vadotar_balance'][$receipt_type][$site_name] ??= [];
+    $this->data['factory_vadotar_balance'][$receipt_type][$site_name][$hostversion] ??= [];
 
-    $url=API_MAY2022_ARG_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
+    $url = API_MAY2022_ARG_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
     $response = json_decode(curl_post_request($url));
     $receipt_type = 'Alloy Vodator';
-    pd($response->data->$receipt_type);
-    $this->data['factory_vadotar_records']['AR Gold']['May 2022'] = $response->data;
-    pd($this->data['factory_vadotar_records']['AR Gold']['May 2022']);
+    
+    $this->data['factory_vadotar_records'][$receipt_type][$site_name][$hostversion]['balance'] = $response->data->$receipt_type[0]->weight;
+    pd($this->data['factory_vadotar_records']);
     
     // $url=API_MAY2022_ARF_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
     // $this->data['factory_vadotar_records']['ARF']['May 2022'] = json_decode(curl_post_request($url));
