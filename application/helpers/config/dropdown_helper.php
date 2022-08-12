@@ -150,12 +150,21 @@
   }
 
   function get_site_url($site_name) {
-    if     ($site_name=='AR Gold (May 2022)') return API_MAY2022_ARG_PATH;
-    elseif ($site_name=='ARF (May 2022)')     return API_MAY2022_ARF_PATH;
-    elseif ($site_name=='ARC (May 2022)')     return API_MAY2022_ARC_PATH;
-    elseif ($site_name=='AR Gold (Aug 2022)') return API_AUG2022_ARG_PATH;
-    elseif ($site_name=='ARF (Aug 2022)')     return API_AUG2022_ARF_PATH;
-    elseif ($site_name=='ARC (Aug 2022)')     return API_AUG2022_ARC_PATH;
+    if     ($site_name=='AR Gold May 2022') return API_MAY2022_ARG_PATH;
+    elseif ($site_name=='ARF May 2022')     return API_MAY2022_ARF_PATH;
+    elseif ($site_name=='ARC May 2022')     return API_MAY2022_ARC_PATH;
+    elseif ($site_name=='AR Gold Aug 2022') return API_AUG2022_ARG_PATH;
+    elseif ($site_name=='ARF Aug 2022')     return API_AUG2022_ARF_PATH;
+    elseif ($site_name=='ARC Aug 2022')     return API_AUG2022_ARC_PATH;
+  }
+
+  function get_api_path($site_name, $hostversion) {
+    if     ($site_name.' '.$hostversion=='AR Gold May 2022') return API_MAY2022_ARG_PATH;
+    elseif ($site_name.' '.$hostversion=='ARF May 2022')     return API_MAY2022_ARF_PATH;
+    elseif ($site_name.' '.$hostversion=='ARC May 2022')     return API_MAY2022_ARC_PATH;
+    elseif ($site_name.' '.$hostversion=='AR Gold Aug 2022') return API_AUG2022_ARG_PATH;
+    elseif ($site_name.' '.$hostversion=='ARF Aug 2022')     return API_AUG2022_ARF_PATH;
+    elseif ($site_name.' '.$hostversion=='ARC Aug 2022')     return API_AUG2022_ARC_PATH;
   }
 
   function get_site_names($export=1) {
