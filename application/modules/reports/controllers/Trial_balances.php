@@ -104,7 +104,7 @@ class Trial_balances extends Ledgers {
     $this->get_vadotar_from_factory('ARC', 'Aug 2022');    
   }
 
-  private function get_vadotar_from_factory($site_name = 'AR Gold', $hostversion = 'May 2022') {
+  private function get_vadotar_from_factory($site_name, $hostversion) {
     $receipt_types = ['Alloy Vodator', 'GPC Vodator', 'Stone Vatav', 'Meeva Vatav', 'Copper Vatav', 'Rhodium Vatav', 'Tounch Loss Fine'];
 
     $url = get_api_path($site_name, $hostversion)."issue_and_receipts/alloy_gpc_vodator_ledger/index";
@@ -114,15 +114,13 @@ class Trial_balances extends Ledgers {
       $this->data[$receipt_type] ??= [];
       $this->data[$receipt_type][$site_name] ??= [];
       $this->data[$receipt_type][$site_name][$hostversion] ??= [];
-      $this->data[$receipt_type][$site_name][$hostversion]['factory_vadotar_balance'] ??= [];
+      $this->data[$receipt_type][$site_name][$hostversion]['factory_vadotar_records'] ??= [];
 
       $this->data[$receipt_type][$site_name][$hostversion]['factory_vadotar_records']['balance'] = $response->data->$receipt_type[0]->weight;
       $this->data[$receipt_type][$site_name][$hostversion]['factory_vadotar_records']['balance_fine'] = $response->data->$receipt_type[0]->fine;
 
       $this->get_accounts_vodator_balance($site_name, $receipt_type, $hostversion);
     }
-
-    pd($this->data);
   }
 
   private function get_accounts_vodator_balance($site_name, $receipt_type, $hostversion) {
