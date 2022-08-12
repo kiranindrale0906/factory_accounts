@@ -32,7 +32,7 @@
   <?= getHttpButton('Update Vadotar / Vatav', base_url().'reports/trial_balances?update_vadotar=1', 'float-right btn-success ml-5'); ?>
 </div>
 <div class="row">
-  <?php //$this->load->view('trial_balances/alloy_vodator_balance'); ?>
+  <?php $this->load->view('trial_balances/alloy_vodator_balance'); ?>
 </div>
 <div class="row">
   <?php //$this->load->view('trial_balances/gpc_vodator_balance'); ?>
