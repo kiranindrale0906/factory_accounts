@@ -28,7 +28,7 @@
             <td class="text-right"><?= four_decimal($factory_vadotar_records[$receipt_type][$site_name][$hostversion]['balance']) ?></td>
             <td class="text-right"><?= four_decimal($factory_vadotar_records[$receipt_type][$site_name][$hostversion]['balance_fine']) ?></td>
             <td class="text-right"><?= four_decimal($account_vadotar_balance[$receipt_type][$site_name][$hostversion]['balance'] - $receipt_type[$site_name][$hostversion]['factory_vadotar_records']['balance']) ?></td>
-            <td class="text-right"><?= four_decimal($['factory_vadotar_records'][$receipt_type][$site_name][$hostversion]['balance'] - $receipt_type['factory_vadotar_records'][$site_name][$hostversion]['balance_fine']) ?></td>
+            <td class="text-right"><?= four_decimal($factory_vadotar_records[$receipt_type][$site_name][$hostversion]['balance'] - $account_vadotar_balance[$receipt_type][$site_name][$hostversion]['balance']) ?></td>
         </tr>
         
       </table>
