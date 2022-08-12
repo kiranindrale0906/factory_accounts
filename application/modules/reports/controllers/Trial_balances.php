@@ -139,21 +139,6 @@ class Trial_balances extends Ledgers {
     
     $this->data['account_vadotar_balance'][$receipt_type][$site_name][$hostversion]['balance'] = $account_vouchers['balance'];      
     $this->data['account_vadotar_balance'][$receipt_type][$site_name][$hostversion]['balance_fine'] = $account_vouchers['balance_fine'];
-
-    $this->data['factory_vadotar_balance'] ??= [];
-    $this->data['factory_vadotar_balance'][$receipt_type] ??= [];
-    $this->data['factory_vadotar_balance'][$receipt_type][$site_name] ??= [];
-    $this->data['factory_vadotar_balance'][$receipt_type][$site_name][$hostversion] ??= [];
-
-    $arg_records = $this->data['arg_vadotar_records'];
-    $arf_records = $this->data['arf_vadotar_records'];
-    $arc_records = $this->data['arc_vadotar_records'];
-
-    $this->data['factory_vadotar_balance'][$receipt_type][$site_name][$hostversion]['balance'] 
-      = $this->data['factory_vadotar_records'][$site_name][$hostversion]->data->alloy_vodator[0]->weight || 0;      
-
-    $this->data['factory_vadotar_balance'][$receipt_type][$site_name][$hostversion]['balance'] 
-      = $this->data['factory_vadotar_records'][$site_name][$hostversion]->data->alloy_vodator[0]->fine || 0;
   } 
 
   private function get_alloy_vodator_balance() {
