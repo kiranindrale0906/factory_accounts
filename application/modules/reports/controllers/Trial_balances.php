@@ -97,8 +97,8 @@ class Trial_balances extends Ledgers {
 
   private function get_vadotar_from_factory() {
     $this->data['factory_vadotar_records'] ??= [];
-    $this->data['factory_vadotar_records'][$site_name] ??= [];
-    $this->data['factory_vadotar_records'][$site_name][$hostversion] ??= [];
+    $this->data['factory_vadotar_records']['AR Gold'] ??= [];
+    $this->data['factory_vadotar_records']['AR Gold']['May 2022'] ??= [];
 
     $url=API_MAY2022_ARG_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
     $this->data['factory_vadotar_records']['AR Gold']['May 2022'] = json_decode(curl_post_request($url));
