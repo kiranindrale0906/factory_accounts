@@ -521,6 +521,7 @@ class Trial_balances extends Ledgers {
         $this->voucher_model->delete('', array('receipt_type' => $incorrect_vadotar_voucher['receipt_type'],
                                                'site_name' => $incorrect_vadotar_voucher['site_name'],
                                                'voucher_date' => $incorrect_vadotar_voucher['voucher_date']));
+        lq();
         $this->ledger_model->delete('', array('parent_id not in (select id from ac_vouchers)' => NULL));
       }
 
