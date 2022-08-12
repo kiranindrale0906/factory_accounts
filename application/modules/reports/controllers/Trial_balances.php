@@ -31,14 +31,14 @@ class Trial_balances extends Ledgers {
     $this->calculate_profit_loss_of_export_sales_accounts('Sale');
     $this->calculate_profit_loss_of_export_sales_accounts('Labour');
 
-    $this->get_vadotar_from_factories();
-    $this->get_alloy_vodator_balance();
-    $this->get_gpc_vodator_balance();
-    $this->get_stone_vatav_balance();
-    $this->get_meena_vatav_balance();
-    $this->get_copper_vatav_balance();
-    $this->get_rhodium_vatav_balance();
-    $this->get_tounch_loss_fine_balance();
+    $this->get_vadotar_from_factories_and_accounts();
+    // $this->get_alloy_vodator_balance();
+    // $this->get_gpc_vodator_balance();
+    // $this->get_stone_vatav_balance();
+    // $this->get_meena_vatav_balance();
+    // $this->get_copper_vatav_balance();
+    // $this->get_rhodium_vatav_balance();
+    // $this->get_tounch_loss_fine_balance();
 
     $this->get_overall_rolling();
 
@@ -95,7 +95,7 @@ class Trial_balances extends Ledgers {
     $this->data['live_export_balance'] = @$export_records->data->record->argold;
   }
 
-  private function get_vadotar_from_factories() {
+  private function get_vadotar_from_factories_and_accounts() {
     $this->get_vadotar_from_factory('AR Gold', 'May 2022');    
     $this->get_vadotar_from_factory('ARF', 'May 2022');    
     $this->get_vadotar_from_factory('ARC', 'May 2022');    
@@ -111,33 +111,33 @@ class Trial_balances extends Ledgers {
     $response = json_decode(curl_post_request($url));
     
     foreach ($receipt_types as $receipt_type) {
-      $this->data['factory_vadotar_balance'] ??= [];
-      $this->data['factory_vadotar_balance'][$receipt_type] ??= [];
-      $this->data['factory_vadotar_balance'][$receipt_type][$site_name] ??= [];
-      $this->data['factory_vadotar_balance'][$receipt_type][$site_name][$hostversion] ??= [];
+      $this->data[$receipt_type] ??= [];
+      $this->data[$receipt_type][$site_name] ??= [];
+      $this->data[$receipt_type][$site_name][$hostversion] ??= [];
+      $this->data[$receipt_type][$site_name][$hostversion]['factory_vadotar_balance'] ??= [];
 
-      $this->data['factory_vadotar_records'][$receipt_type][$site_name][$hostversion]['balance'] = $response->data->$receipt_type[0]->weight;
-      $this->data['factory_vadotar_records'][$receipt_type][$site_name][$hostversion]['balance_fine'] = $response->data->$receipt_type[0]->fine;
+      $this->data[$receipt_type][$site_name][$hostversion]['factory_vadotar_records']['balance'] = $response->data->$receipt_type[0]->weight;
+      $this->data[$receipt_type][$site_name][$hostversion]['factory_vadotar_records']['balance_fine'] = $response->data->$receipt_type[0]->fine;
 
       $this->get_accounts_vodator_balance($site_name, $receipt_type, $hostversion);
     }
-        
-    pd($this->data['factory_vadotar_records'], 0);
-    pd($this->data['account_vadotar_balance']);
+
+    pd($this->data);
   }
 
   private function get_accounts_vodator_balance($site_name, $receipt_type, $hostversion) {
-    $this->data['account_vadotar_balance'] ??= [];
-    $this->data['account_vadotar_balance'][$receipt_type] ??= [];
-    $this->data['account_vadotar_balance'][$receipt_type][$site_name] ??= [];
-    $this->data['account_vadotar_balance'][$receipt_type][$site_name][$hostversion] ??= [];
+    $this->data ??= [];
+    $this->data[$receipt_type] ??= [];
+    $this->data[$receipt_type][$site_name] ??= [];
+    $this->data[$receipt_type][$site_name][$hostversion] ??= [];
+    $this->data[$receipt_type][$site_name][$hostversion]['account_vadotar_balance'] ??= [];
 
     $account_name = $site_name.' '.$receipt_type.' ('.$hostversion.') ';
     $accounts_balance_select = '(sum(debit_weight)) as balance, (sum(debit_weight*purity/100)) as balance_fine';
     $account_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => $account_name));
     
-    $this->data['account_vadotar_balance'][$receipt_type][$site_name][$hostversion]['balance'] = $account_vouchers['balance'];      
-    $this->data['account_vadotar_balance'][$receipt_type][$site_name][$hostversion]['balance_fine'] = $account_vouchers['balance_fine'];
+    $this->data[$receipt_type][$site_name][$hostversion]['account_vadotar_balance']['balance'] = $account_vouchers['balance'];      
+    $this->data[$receipt_type][$site_name][$hostversion]['account_vadotar_balance']['balance_fine'] = $account_vouchers['balance_fine'];
   } 
 
   // private function get_alloy_vodator_balance() {
