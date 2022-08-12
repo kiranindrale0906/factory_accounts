@@ -104,7 +104,7 @@ class Trial_balances extends Ledgers {
     $response = json_decode(curl_post_request($url));
     $receipt_type = 'Alloy Vodator';
     pd($response->data->$receipt_type);
-    $this->data['factory_vadotar_records']['AR Gold']['May 2022'] = $response->data->'Alloy Vodator';
+    $this->data['factory_vadotar_records']['AR Gold']['May 2022'] = $response->data;
     pd($this->data['factory_vadotar_records']['AR Gold']['May 2022']);
     
     // $url=API_MAY2022_ARF_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
