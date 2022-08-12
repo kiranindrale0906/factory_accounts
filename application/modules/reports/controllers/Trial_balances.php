@@ -96,9 +96,9 @@ class Trial_balances extends Ledgers {
   }
 
   private function get_vadotar_from_factory() {
-    $this->data['factory_vadotar_records'] ||= [];
-    $this->data['factory_vadotar_records'][$site_name] ||= [];
-    $this->data['factory_vadotar_records'][$site_name][$hostversion] ||= [];
+    $this->data['factory_vadotar_records'] ??= [];
+    $this->data['factory_vadotar_records'][$site_name] ??= [];
+    $this->data['factory_vadotar_records'][$site_name][$hostversion] ??= [];
 
     $url=API_MAY2022_ARG_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
     $this->data['factory_vadotar_records']['AR Gold']['May 2022'] = json_decode(curl_post_request($url));
@@ -128,10 +128,10 @@ class Trial_balances extends Ledgers {
   }
 
   private function get_accounts_vodator_balance($site_name, $receipt_type, $hostversion) {
-    $this->data['account_vadotar_balance'] ||= [];
-    $this->data['account_vadotar_balance'][$receipt_type] ||= [];
-    $this->data['account_vadotar_balance'][$receipt_type][$site_name] ||= [];
-    $this->data['account_vadotar_balance'][$receipt_type][$site_name][$hostversion] ||= [];
+    $this->data['account_vadotar_balance'] ??= [];
+    $this->data['account_vadotar_balance'][$receipt_type] ??= [];
+    $this->data['account_vadotar_balance'][$receipt_type][$site_name] ??= [];
+    $this->data['account_vadotar_balance'][$receipt_type][$site_name][$hostversion] ??= [];
 
     $account_name = $site_name.' '.$receipt_type.' ('.$hostversion.') ';
     $accounts_balance_select = '(sum(debit_weight)) as balance, (sum(debit_weight*purity/100)) as balance_fine';
@@ -140,10 +140,10 @@ class Trial_balances extends Ledgers {
     $this->data['account_vadotar_balance'][$receipt_type][$site_name][$hostversion]['balance'] = $account_vouchers['balance'];      
     $this->data['account_vadotar_balance'][$receipt_type][$site_name][$hostversion]['balance_fine'] = $account_vouchers['balance_fine'];
 
-    $this->data['factory_vadotar_balance'] ||= [];
-    $this->data['factory_vadotar_balance'][$receipt_type] ||= [];
-    $this->data['factory_vadotar_balance'][$receipt_type][$site_name] ||= [];
-    $this->data['factory_vadotar_balance'][$receipt_type][$site_name][$hostversion] ||= [];
+    $this->data['factory_vadotar_balance'] ??= [];
+    $this->data['factory_vadotar_balance'][$receipt_type] ??= [];
+    $this->data['factory_vadotar_balance'][$receipt_type][$site_name] ??= [];
+    $this->data['factory_vadotar_balance'][$receipt_type][$site_name][$hostversion] ??= [];
 
     $arg_records = $this->data['arg_vadotar_records'];
     $arf_records = $this->data['arf_vadotar_records'];
