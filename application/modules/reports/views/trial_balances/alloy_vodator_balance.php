@@ -2,7 +2,7 @@
   foreach($receipt_types as $receipt_type) {
     foreach($site_names as $site_name) {
       foreach($hostversions as $hostversion) {
-  
+?>
     
 
 <div class="col-md-12">
