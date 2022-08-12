@@ -144,6 +144,7 @@ class BaseModel extends CI_Model {
     if(isset($operations['order_by'])) $this->db->order_by($operations['order_by']);
     if(isset($operations['limit']) && !empty($operations['limit'][1])) $this->db->limit($operations['limit'][1],$operations['limit'][0]);
     if(isset($operations['group_by'])) $this->db->group_by($operations['group_by']);
+    if(isset($operations['having'])) $this->db->having($operations['having']);
     $this->db->where($this->table_name.'.is_delete !=',1);
    
     $query = $this->db->get();
