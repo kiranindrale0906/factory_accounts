@@ -568,7 +568,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       
       //if ($start_date_timestamp > $voucher_date_timestamp) continue;
       $metal_receipt_voucher = $this->find('id, debit_weight', array('receipt_type' => $receipt_type,
-                                                                     'account_name' => $site_name.' '.$hostversion.''.$receipt_type,
+                                                                     'account_name' => $site_name.' '.$receipt_type.' ('.$hostversion.')',
                                                                      'narration' => $site_name.' '.$receipt_type,
                                                                      'voucher_date' => $record['created_date']));
       lq();
