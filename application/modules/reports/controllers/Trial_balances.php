@@ -517,6 +517,7 @@ class Trial_balances extends Ledgers {
                                          array('receipt_type' => array('Alloy Vodator', 'GPC Vodator', 'Stone Vatav','Meena Vatav', 'Copper Vatav', 'Rhodium Vatav', 'Auto Tounch Loss Fine')),
                                          array(), array('group_by' => 'receipt_type, site_name, voucher_date',
                                                         'having' => 'credit_weight != debit_weight'));
+      pd($incorrect_vadotar_vouchers);
       foreach($incorrect_vadotar_vouchers as $incorrect_vadotar_voucher) {
         $this->voucher_model->delete('', array('receipt_type' => $incorrect_vadotar_voucher['receipt_type'],
                                                'site_name' => $incorrect_vadotar_voucher['site_name'],
