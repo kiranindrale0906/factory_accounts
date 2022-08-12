@@ -571,7 +571,6 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                                                                      'account_name' => $site_name.' '.$receipt_type.' ('.$hostversion.')',
                                                                      'narration' => $site_name.' '.$receipt_type,
                                                                      'voucher_date' => $record['created_date']));
-      lq();
       $data=array('company_id' => 1,
                   'voucher_date' => $record['created_date'],
                   'receipt_type' => $receipt_type,
@@ -588,7 +587,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       if (empty($record['weight'])) return;
       if(empty($metal_receipt_voucher['debit_weight'])
          || ($metal_receipt_voucher['debit_weight'] != $record['weight'])) {
-        pd($data, 0); pd($record);
+        pd($metal_receipt_voucher, 0); pd($record);
         $metal_receipt_obj = new metal_receipt_voucher_model($data);
         $metal_receipt_obj->before_validate();
         $metal_receipt_obj->save();
