@@ -105,12 +105,12 @@ class Trial_balances extends Ledgers {
   }
 
   private function get_vadotar_from_factory($site_name, $hostversion) {
-    $receipt_types = ['Alloy Vodator', 'GPC Vodator', 'Stone Vatav', 'Meeva Vatav', 'Copper Vatav', 'Rhodium Vatav', 'Tounch Loss Fine'];
+    $this->data['receipt_types'] = ['Alloy Vodator', 'GPC Vodator', 'Stone Vatav', 'Meeva Vatav', 'Copper Vatav', 'Rhodium Vatav', 'Tounch Loss Fine'];
 
     $url = get_api_path($site_name, $hostversion)."issue_and_receipts/alloy_gpc_vodator_ledger/index";
     $response = json_decode(curl_post_request($url));
     
-    foreach ($receipt_types as $receipt_type) {
+    foreach ($this->data['receipt_types'] as $receipt_type) {
       $this->data[$receipt_type] ??= [];
       $this->data[$receipt_type][$site_name] ??= [];
       $this->data[$receipt_type][$site_name][$hostversion] ??= [];
