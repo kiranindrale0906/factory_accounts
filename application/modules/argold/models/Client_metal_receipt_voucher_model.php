@@ -590,6 +590,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
         $metal_receipt_obj = new metal_receipt_voucher_model($data);
         $metal_receipt_obj->before_validate();
         $metal_receipt_obj->save();
+        lq();
       } 
     }
   }
