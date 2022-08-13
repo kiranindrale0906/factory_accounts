@@ -19,16 +19,20 @@
           foreach($receipt_types as $receipt_type) {
             foreach($site_names as $site_name) {
               foreach($hostversions as $hostversion) {
-                $balance_diff = $account_vadotar_balance[$receipt_type][$site_name][$hostversion]['balance'] - $factory_vadotar_records[$receipt_type][$site_name][$hostversion]['balance'];
-                $balance_fine_diff = $factory_vadotar_records[$receipt_type][$site_name][$hostversion]['balance'] - $account_vadotar_balance[$receipt_type][$site_name][$hostversion]['balance'];
+                $accounts_weight = four_decimal($account_vadotar_balance[$receipt_type][$site_name][$hostversion]['balance']);
+                $accounts_fine = four_decimal($account_vadotar_balance[$receipt_type][$site_name][$hostversion]['balance_fine']);
+                $factory_weight = four_decimal($factory_vadotar_records[$receipt_type][$site_name][$hostversion]['balance']);
+                $factory_fine = four_decimal($factory_vadotar_records[$receipt_type][$site_name][$hostversion]['balance_fine']);
+                $balance_diff = $accounts_weight - $factory_weight;
+                $balance_fine_diff = $accounts_fine - $factory_fine;
         ?>
                 <tr>
                   <td><?= $site_name.' '.$hostversion ?></td>
                     <td><?= $receipt_type ?></td>
-                    <td class="text-right"><?= four_decimal($account_vadotar_balance[$receipt_type][$site_name][$hostversion]['balance']) ?></td>
-                    <td class="text-right"><?= four_decimal($account_vadotar_balance[$receipt_type][$site_name][$hostversion]['balance_fine']) ?></td>
-                    <td class="text-right"><?= four_decimal($factory_vadotar_records[$receipt_type][$site_name][$hostversion]['balance']) ?></td>
-                    <td class="text-right"><?= four_decimal($factory_vadotar_records[$receipt_type][$site_name][$hostversion]['balance_fine']) ?></td>
+                    <td class="text-right"><?= (round($accounts_weight,2)==0) ? '-' : four_decimal($accounts_weight) ?></td>
+                    <td class="text-right"><?= (round($accounts_fine,2)==0) ? '-' : four_decimal($accounts_fine) ?></td>
+                    <td class="text-right"><?= (round($factory_weight,2)==0) ? '-' : four_decimal($factory_weight) ?></td>
+                    <td class="text-right"><?= (round($factory_fine,2)==0) ? '-' : four_decimal($factory_fine) ?></td>
                     <td class="text-right"><?= (round($balance_diff,2)==0) ? '-' : four_decimal($balance_diff) ?></td>
                     <td class="text-right"><?= (round($balance_fine_diff,2)==0) ? '-' : four_decimal($balance_fine_diff) ?></td>
                 </tr>
