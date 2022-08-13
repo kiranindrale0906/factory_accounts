@@ -58,12 +58,18 @@ class Quator_wise_loss_reports extends BaseController {
     $this->data['loss_account_records'] = array();
     $loss_account_names=array();
     $loss_account_where=array('group_id'=>3);
-    if($this->data['site_name']=='ARF'){
-      $loss_account_where['unrecoverable_account_name']='Unrecovarable ARF';
-    }elseif($this->data['site_name']=='ARC'){
-      $loss_account_where['unrecoverable_account_name']='Unrecovarable ARC';
-    }elseif($this->data['site_name']=='AR Gold'){
-      $loss_account_where['unrecoverable_account_name']='Unrecovarable AR Gold';
+    if($this->data['site_name']=='ARF (May 2022)'){
+      $loss_account_where['unrecoverable_account_name']= ('Unrecovarable ARF (May 2022)';
+    }elseif($this->data['site_name']=='ARC (May 2022)'){
+      $loss_account_where['unrecoverable_account_name']='Unrecovarable ARC (May 2022)';
+    }elseif($this->data['site_name']=='AR Gold (May 2022)'){
+      $loss_account_where['unrecoverable_account_name']='Unrecovarable AR Gold (May 2022)';
+    }elseif($this->data['site_name']=='ARF (Aug 2022)'){
+      $loss_account_where['unrecoverable_account_name']= ('Unrecovarable ARF (Aug 2022)';
+    }elseif($this->data['site_name']=='ARC (Aug 2022)'){
+      $loss_account_where['unrecoverable_account_name']='Unrecovarable ARC (Aug 2022)';
+    }elseif($this->data['site_name']=='AR Gold (Aug 2022)'){
+      $loss_account_where['unrecoverable_account_name']='Unrecovarable AR Gold (Aug 2022)';
     }
     $loss_account_names =  $this->account_model->get('name',$loss_account_where);
     $loss_account_names = array_column($loss_account_names, 'name');
@@ -224,7 +230,7 @@ class Quator_wise_loss_reports extends BaseController {
           foreach ($arg_records as $index => $arg_loss_detail) {
               if(trim(strtolower($arg_loss_detail['description']))==trim(strtolower($category_name))){
                 $factory_wise_record[$index]['production']=0;
-                $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$arg_loss_detail['parent_id'],'account_name!='=>'Unrecovarable'.' '.$this->data['factory_name']));
+                $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$arg_loss_detail['parent_id'],'account_name!='=>'Unrecovarable'.' '.$this->data['site_name']));
                 
                 $unrecovery_details = $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$arg_loss_detail['parent_id'],'account_name'=>'Unrecovarable'.' '.$this->data['factory_name']));
 
