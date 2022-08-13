@@ -111,8 +111,8 @@ class Loss_reports extends BaseController {
       $path = API_AUG2022_ARF_PATH;
     }else {return array();} 
 
-
     $url = $path.'issue_and_receipts/loss_report_for_accounts/index';
+//	pd($url);
     $factory_loss_records = json_decode(curl_post_request($url, $postdata), true);
     if (!empty($factory_loss_records))
       if (   isset($factory_loss_records['data']['loss_details'])
