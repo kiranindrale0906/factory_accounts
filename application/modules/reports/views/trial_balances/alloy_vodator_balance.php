@@ -1,6 +1,13 @@
+<?php 
+  foreach($receipt_types as $receipt_type) {
+    foreach($site_names as $site_name) {
+      foreach($hostversions as $hostversion) {
+?>
+    
+
 <div class="col-md-12">
   <div class="form-group container">
-    <h5 class="ml-2 pl-2">Alloy Vodator</h5>
+    <h5 class="ml-2 pl-2"><?= $receipt_type ?></h5>
     <div class="table-responsive m-t-20">
       <table class="table table-sm fixedthead table-default">
         <thead>
@@ -15,49 +22,22 @@
           </tr>
         </thead>
         <tr>
-          <td>AR GOLD</td>
-         <td class="text-right"><?= four_decimal($accounts_argold_alloy_vodator) ?></td>
-         <td class="text-right"><?= four_decimal($accounts_argold_alloy_vodator_fine) ?></td>
-          <td class="text-right"><?= four_decimal($live_argold_alloy_vodator) ?></td>
-          <td class="text-right"><?= four_decimal($live_argold_alloy_vodator_fine) ?></td>
-          <td class="text-right"><?= four_decimal($accounts_argold_alloy_vodator-$live_argold_alloy_vodator) ?></td>
-          <td class="text-right"><?= four_decimal($accounts_argold_alloy_vodator_fine-$live_argold_alloy_vodator_fine) ?></td>
+          <td><?= $site_name.' '.$hostversion ?></td>
+            <td class="text-right"><?= four_decimal($account_vadotar_balance[$receipt_type][$site_name][$hostversion]['balance']) ?></td>
+            <td class="text-right"><?= four_decimal($account_vadotar_balance[$receipt_type][$site_name][$hostversion]['balance_fine']) ?></td>
+            <td class="text-right"><?= four_decimal($factory_vadotar_records[$receipt_type][$site_name][$hostversion]['balance']) ?></td>
+            <td class="text-right"><?= four_decimal($factory_vadotar_records[$receipt_type][$site_name][$hostversion]['balance_fine']) ?></td>
+            <td class="text-right"><?= four_decimal($account_vadotar_balance[$receipt_type][$site_name][$hostversion]['balance'] - $factory_vadotar_records[$receipt_type][$site_name][$hostversion]['balance']) ?></td>
+            <td class="text-right"><?= four_decimal($factory_vadotar_records[$receipt_type][$site_name][$hostversion]['balance'] - $account_vadotar_balance[$receipt_type][$site_name][$hostversion]['balance']) ?></td>
         </tr>
-        <tr>
-          <td>ARF</td>
-          <td class="text-right"><?= four_decimal($accounts_arf_alloy_vodator) ?></td>
-          <td class="text-right"><?= four_decimal($accounts_arf_alloy_vodator_fine) ?></td>
-          <td class="text-right"><?= four_decimal($live_arf_alloy_vodator) ?>  </td>
-          <td class="text-right"><?= four_decimal($live_arf_alloy_vodator_fine) ?>  </td>
-          <td class="text-right"><?= four_decimal($accounts_arf_alloy_vodator-$live_arf_alloy_vodator) ?></td>
-          <td class="text-right"><?= four_decimal($accounts_arf_alloy_vodator_fine-$live_arf_alloy_vodator_fine) ?></td>
-        </tr>
-        <tr>
-          <td>ARC</td>
-         <td class="text-right"><?= four_decimal($accounts_arc_alloy_vodator) ?></td>
-         <td class="text-right"><?= four_decimal($accounts_arc_alloy_vodator_fine) ?></td>
-          <td class="text-right"><?= four_decimal($live_arc_alloy_vodator) ?>  </td>
-          <td class="text-right"><?= four_decimal($live_arc_alloy_vodator_fine) ?>  </td>
-          <td class="text-right"><?= four_decimal($accounts_arc_alloy_vodator - $live_arc_alloy_vodator) ?></td>
-          <td class="text-right"><?= four_decimal($accounts_arc_alloy_vodator_fine - $live_arc_alloy_vodator_fine) ?></td>
-        </tr>
-        <tr>
-          <td><b>Total</b></td>
-           <td class="text-right"><b><?= four_decimal(($accounts_argold_alloy_vodator + $accounts_arf_alloy_vodator + $accounts_arc_alloy_vodator)) ?></b></td>
-           <td class="text-right"><b><?= four_decimal(($accounts_argold_alloy_vodator_fine + $accounts_arf_alloy_vodator_fine + $accounts_arc_alloy_vodator_fine)) ?></b></td>
-           <td class="text-right"><b><?= four_decimal(($live_argold_alloy_vodator + $live_arf_alloy_vodator + $live_arc_alloy_vodator)) ?>  </b></td>
-           <td class="text-right"><b><?= four_decimal(($live_argold_alloy_vodator_fine + $live_arf_alloy_vodator_fine + $live_arc_alloy_vodator_fine)) ?>  </b></td>
-          <td class="text-right"><b><?= four_decimal((($accounts_argold_alloy_vodator-$live_argold_alloy_vodator)
-                                                           +  ($accounts_arf_alloy_vodator-$live_arf_alloy_vodator)
-                                                           + ($accounts_arc_alloy_vodator-$live_arc_alloy_vodator)
-                                                           )) ?></b></td>
-          <td class="text-right"><b><?= four_decimal((($accounts_argold_alloy_vodator_fine-$live_argold_alloy_vodator_fine)
-                                                           +  ($accounts_arf_alloy_vodator_fine-$live_arf_alloy_vodator_fine)
-                                                           + ($accounts_arc_alloy_vodator_fine-$live_arc_alloy_vodator_fine)
-                                                           )) ?></b></td>
-
-        </tr>
+        
       </table>
     </div>
   </div>
 </div>
+
+<?php  
+      }
+    }
+  }
+?>

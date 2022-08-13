@@ -279,13 +279,13 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       // elseif ($this->attributes['site_name'] == 'ARF') $account_name = 'ARF Software';
       // elseif ($this->attributes['site_name'] == 'ARC') $account_name = 'ARC Software';
 
-      $site_name = get_site_name_from_account_name($this->attributes['account_name']);
-      $this->formdata['metal_issue_vouchers'] = array(array('account_name' => $this->attributes['account_name'],
-                                                  'site_name' => $site_name,
+      $account_name = get_account_name_from_site_name($this->attributes['site_name']);
+      $this->formdata['metal_issue_vouchers'] = array(array('account_name' => $account_name,
+                                                  'site_name' => $this->attributes['site_name'],
                                                   'credit_weight' => $this->attributes['debit_weight'],
                                                   'purity' => $this->attributes['purity'],
                                                   'factory_purity' => $this->attributes['factory_purity']));
-
+      
       if ($this->attributes['receipt_type'] != 'Auto Tounch Loss Fine') {
         $metal_issue_voucher = $this->find('id',array('receipt_type' => $this->attributes['receipt_type'],
                                                       'account_name' => $account_name, //$this->attributes['site_name'].' Software',
@@ -402,7 +402,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $metal_issue_data['company_id']  = $this->attributes['company_id'];
       $metal_issue_data['metal_receipt_voucher_reference_id'] = $this->attributes['id'];
       $metal_issue_data['voucher_date'] = $this->attributes['voucher_date'];
-      $metal_issue_data['site_name'] = get_site_name_from_account_name($metal_issue_voucher['account_name']);
+      $metal_issue_data['site_name'] = get_site_name_from_account_name($metal_issue_voucher['account_name']) ?? $this->attributes['site_name'];
       //$metal_issue_data['account_id'] = $this->attributes['account_id'];
 
       if ($this->attributes['receipt_type'] != 'Vadotar') {
@@ -568,25 +568,25 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       
       //if ($start_date_timestamp > $voucher_date_timestamp) continue;
       $metal_receipt_voucher = $this->find('id, debit_weight', array('receipt_type' => $receipt_type,
-                                                                     'account_name' => $site_name.' '.$hostversion.''.$receipt_type,
+                                                                     'account_name' => $site_name.' '.$receipt_type.' ('.$hostversion.')',
                                                                      'narration' => $site_name.' '.$receipt_type,
                                                                      'voucher_date' => $record['created_date']));
       $data=array('company_id' => 1,
                   'voucher_date' => $record['created_date'],
                   'receipt_type' => $receipt_type,
-                  'account_name' => $site_name.' '.$hostversion.''.$receipt_type,
+                  'account_name' => $site_name.' '.$receipt_type.' ('.$hostversion.')',
                   'debit_weight' => $record['weight'],
                   'purity' => $record['purity'],
                   'factory_purity' => $record['purity'],
                   'fine' => $record['fine'],
                   'factory_fine' => $record['fine'],
                   'narration' => $site_name.' '.$receipt_type,
-                  'site_name' => $site_name.''.$hostversion);
+                  'site_name' => $site_name.' '.$hostversion);
       $data['id'] = '';
       if (!empty($metal_receipt_voucher)) $data['id'] = $metal_receipt_voucher['id'];
       if (empty($record['weight'])) return;
       if(empty($metal_receipt_voucher['debit_weight'])
-         || ($metal_receipt_voucher['debit_weight'] != $record['weight'])) {
+         || ($metal_receipt_voucher['debit_weight'] != round($record['weight'], 4) )) {
         $metal_receipt_obj = new metal_receipt_voucher_model($data);
         $metal_receipt_obj->before_validate();
         $metal_receipt_obj->save();
