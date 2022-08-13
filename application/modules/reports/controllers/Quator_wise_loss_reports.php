@@ -59,13 +59,13 @@ class Quator_wise_loss_reports extends BaseController {
     $loss_account_names=array();
     $loss_account_where=array('group_id'=>3);
     if($this->data['site_name']=='ARF (May 2022)'){
-      $loss_account_where['unrecoverable_account_name']= ('Unrecovarable ARF (May 2022)';
+      $loss_account_where['unrecoverable_account_name']='Unrecovarable ARF (May 2022)';
     }elseif($this->data['site_name']=='ARC (May 2022)'){
       $loss_account_where['unrecoverable_account_name']='Unrecovarable ARC (May 2022)';
     }elseif($this->data['site_name']=='AR Gold (May 2022)'){
       $loss_account_where['unrecoverable_account_name']='Unrecovarable AR Gold (May 2022)';
     }elseif($this->data['site_name']=='ARF (Aug 2022)'){
-      $loss_account_where['unrecoverable_account_name']= ('Unrecovarable ARF (Aug 2022)';
+      $loss_account_where['unrecoverable_account_name']='Unrecovarable ARF (Aug 2022)';
     }elseif($this->data['site_name']=='ARC (Aug 2022)'){
       $loss_account_where['unrecoverable_account_name']='Unrecovarable ARC (Aug 2022)';
     }elseif($this->data['site_name']=='AR Gold (Aug 2022)'){
