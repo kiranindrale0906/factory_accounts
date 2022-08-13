@@ -105,7 +105,7 @@ class Trial_balances extends Ledgers {
   }
 
   private function get_vadotar_from_factory($site_name, $hostversion) {
-    $this->data['receipt_types'] = ['Alloy Vodator', 'GPC Vodator', 'Stone Vatav', 'Meeva Vatav', 'Copper Vatav', 'Rhodium Vatav', 'Auto Tounch Loss Fine'];
+    $this->data['receipt_types'] = ['Alloy Vodator', 'GPC Vodator', 'Stone Vatav', 'Meena Vatav', 'Copper Vatav', 'Rhodium Vatav', 'Auto Tounch Loss Fine'];
     $this->data['site_names'] = ['AR Gold', 'ARF', 'ARC'];
     $this->data['hostversions'] = ['May 2022', 'Aug 2022'];
 
