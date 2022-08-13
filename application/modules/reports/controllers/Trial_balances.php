@@ -136,7 +136,7 @@ class Trial_balances extends Ledgers {
     $accounts_balance_select = '(sum(debit_weight)) as balance, (sum(debit_weight*purity/100)) as balance_fine';
     $account_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => $account_name,
                                                                                    'voucher_type != ' => 'opening stock voucher',
-                                                                                   'receipt_type != ' => 'Metal'));
+                                                                                   'receipt_type' => $receipt_type));
     
     $this->data['account_vadotar_balance'][$receipt_type][$site_name][$hostversion]['balance'] = $account_vouchers['balance'];      
     $this->data['account_vadotar_balance'][$receipt_type][$site_name][$hostversion]['balance_fine'] = $account_vouchers['balance_fine'];
