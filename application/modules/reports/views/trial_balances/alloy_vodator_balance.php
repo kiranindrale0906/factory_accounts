@@ -19,6 +19,8 @@
           foreach($receipt_types as $receipt_type) {
             foreach($site_names as $site_name) {
               foreach($hostversions as $hostversion) {
+                $balance_diff = $account_vadotar_balance[$receipt_type][$site_name][$hostversion]['balance'] - $factory_vadotar_records[$receipt_type][$site_name][$hostversion]['balance'];
+                $balance_fine_diff = $factory_vadotar_records[$receipt_type][$site_name][$hostversion]['balance'] - $account_vadotar_balance[$receipt_type][$site_name][$hostversion]['balance'];
         ?>
                 <tr>
                   <td><?= $site_name.' '.$hostversion ?></td>
@@ -27,8 +29,8 @@
                     <td class="text-right"><?= four_decimal($account_vadotar_balance[$receipt_type][$site_name][$hostversion]['balance_fine']) ?></td>
                     <td class="text-right"><?= four_decimal($factory_vadotar_records[$receipt_type][$site_name][$hostversion]['balance']) ?></td>
                     <td class="text-right"><?= four_decimal($factory_vadotar_records[$receipt_type][$site_name][$hostversion]['balance_fine']) ?></td>
-                    <td class="text-right"><?= four_decimal($account_vadotar_balance[$receipt_type][$site_name][$hostversion]['balance'] - $factory_vadotar_records[$receipt_type][$site_name][$hostversion]['balance']) ?></td>
-                    <td class="text-right"><?= four_decimal($factory_vadotar_records[$receipt_type][$site_name][$hostversion]['balance'] - $account_vadotar_balance[$receipt_type][$site_name][$hostversion]['balance']) ?></td>
+                    <td class="text-right"><?= ($balance_diff==0) ? '-' : four_decimal($balance_diff) ?></td>
+                    <td class="text-right"><?= ($balance_fine_diff==0) ? '-' : four_decimal($balance_fine_diff) ?></td>
                 </tr>
         <?php  
               }
