@@ -32,6 +32,7 @@
   $purchase_export_amount = !empty($domestic_export_records['PURCHASE ACCOUNT'][1]['amount']) ? -1 * $domestic_export_records['PURCHASE ACCOUNT'][1]['amount'] : 0;
 
   $domestic_export_records['SALES ACCOUNT'][0]['amount'] = $domestic_export_records['SALES ACCOUNT'][0]['amount'] ?? 0;
+  $domestic_export_records['SALES ACCOUNT'][0]['amount'] -= $hallmark_amount;
   $domestic_export_records['SALES ACCOUNT'][0]['amount'] -= (116042947.000); // + 5022732); //1296234161.00;
 
   $domestic_export_records['SALES ACCOUNT'][0]['fine'] == $domestic_export_records['SALES ACCOUNT'][0]['fine'] ?? 0;
@@ -134,7 +135,7 @@
   $export_gain_loss_rate = ($export_gain_loss_fine != 0) ? $total_import_purchase_rate - (($sales_export_amount + $export_closing_amount) / $export_gain_loss_fine) : 0;
   $export_gain_loss_amount = $export_gain_loss_fine * $export_gain_loss_rate;
 
-  $total_sales_amount = $total_domestic_amount + $total_export_amount + $export_labour_amount + $domestic_labour_amount['amount'];
+  $total_sales_amount = $total_domestic_amount + $total_export_amount + $export_labour_amount + $domestic_labour_amount['amount'] + $hallmark_amount;
   $total_sales_fine = $total_domestic_fine + $total_export_fine;
 
   $total_income_amount = $total_sales_amount + $domestic_gain_loss_amount + $export_gain_loss_amount;
@@ -323,6 +324,12 @@
           <tr>
             <td>Domestic Labour Amount</td>
             <td class="text-right"><?= four_decimal($domestic_labour_amount['amount'], '-') ?></td>
+            <td class="text-right">-</td>
+            <td class="text-right">-</td>
+          </tr>
+          <tr>
+            <td>Hallmark Amount</td>
+            <td class="text-right"><?= four_decimal($hallmark_amount, '-') ?></td>
             <td class="text-right">-</td>
             <td class="text-right">-</td>
           </tr>
