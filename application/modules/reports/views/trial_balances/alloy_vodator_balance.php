@@ -29,8 +29,8 @@
                     <td class="text-right"><?= four_decimal($account_vadotar_balance[$receipt_type][$site_name][$hostversion]['balance_fine']) ?></td>
                     <td class="text-right"><?= four_decimal($factory_vadotar_records[$receipt_type][$site_name][$hostversion]['balance']) ?></td>
                     <td class="text-right"><?= four_decimal($factory_vadotar_records[$receipt_type][$site_name][$hostversion]['balance_fine']) ?></td>
-                    <td class="text-right"><?= ($balance_diff==0) ? '-' : four_decimal($balance_diff) ?></td>
-                    <td class="text-right"><?= ($balance_fine_diff==0) ? '-' : four_decimal($balance_fine_diff) ?></td>
+                    <td class="text-right"><?= (round($balance_diff,2)==0) ? '-' : four_decimal($balance_diff) ?></td>
+                    <td class="text-right"><?= (round($balance_fine_diff,2)==0) ? '-' : four_decimal($balance_fine_diff) ?></td>
                 </tr>
         <?php  
               }
