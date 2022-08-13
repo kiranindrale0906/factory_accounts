@@ -233,8 +233,7 @@ class Quator_wise_loss_reports extends BaseController {
                 $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$arg_loss_detail['parent_id'],'account_name!='=>'Unrecovarable'.' '.$this->data['site_name']));
                 
                 $unrecovery_details = $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$arg_loss_detail['parent_id'],'account_name'=>'Unrecovarable'.' '.$this->data['site_name']));
-                lq();
-
+                
                 $opening_recovered_loss=!empty($arg_loss_detail['opening_recovered_loss'])?$arg_loss_detail['opening_recovered_loss']:0;
                 $opening_after_recovery=!empty($arg_loss_detail['opening_after_recovery'])?$arg_loss_detail['opening_after_recovery']:0;
                 $opening_unrecoverable=!empty($arg_loss_detail['opening_unrecoverable'])?$arg_loss_detail['opening_unrecoverable']:0;
