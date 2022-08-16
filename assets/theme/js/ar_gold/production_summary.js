@@ -40,11 +40,18 @@ function onchange_of_machine_size_set_design_code() {
   });
 }
 function onclick_checkbox_calculate_chitti_quantity(){
+  $('.chitti_details_id').click(function(){
+    calculate_chitti_fields();
+  });
+}
+
+function calculate_chitti_fields(){
   alert('hhihihihi');
   var total_quantity = 0;
   $('.chitti_details_id:checked').each(function() {
     total_quantity = total_quantity + parseFloat($(this).closest("tr").find(".quantity").text());
     });
+  alert(total_quantity);
   calculate_total_weights(total_quantity);
 }
 
