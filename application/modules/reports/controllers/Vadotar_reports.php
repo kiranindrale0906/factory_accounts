@@ -18,7 +18,6 @@ class Vadotar_reports extends Ledgers {
   public function _get_form_data() {
     $this->data['voucher_dates'] = array();
     $this->get_datewise_ledger_records();
-    pd($this->data);
     $this->get_companywise_vadotar();
   }
 
