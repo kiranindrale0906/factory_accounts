@@ -46,12 +46,12 @@ function onclick_checkbox_calculate_chitti_quantity(){
 }
 
 function calculate_chitti_fields(){
-  alert('hhihihihi');
+  // alert('hhihihihi');
   var total_quantity = 0;
   $('.chitti_details_id:checked').each(function() {
     total_quantity = total_quantity + parseFloat($(this).closest("tr").find(".quantity").text());
     });
-  alert(total_quantity);
+  // alert(total_quantity);
   calculate_total_weights(total_quantity);
 }
 
