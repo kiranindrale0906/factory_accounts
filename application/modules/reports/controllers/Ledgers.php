@@ -153,7 +153,7 @@ class Ledgers extends BaseController {
                                ((credit_weight+debit_weight) * factory_purity) / (credit_weight+debit_weight) as factory_purity, 
                                concat(narration, " ,") as narration, concat(description, " ,") as description, 
                                chitti_id as chitti_no,parent_id as parent_id,id as id';
-                               // pd($this->data['site_name'] );
+
        $account_receipt_where['site_name'] = '';                        
        $account_issue_where['site_name'] = '';                        
       if ($this->data['site_name'] == 'ARF' || $this->data['site_name'] == 'ARF (May 2022)'|| $this->data['site_name'] == 'ARF (Aug 2022)'){

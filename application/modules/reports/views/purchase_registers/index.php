@@ -33,7 +33,6 @@
     <tbody>
     <?php 
       $total_taxable_amount=$total_cgst_amount=$total_sgst_amount=$total_tcs_amount=$total_debit=0;
-      // pd($purchase_register_records);
      foreach ($purchase_register_records as $index => $record) {
       $total_taxable_amount+=four_decimal($record['taxable_amount']);
       $total_cgst_amount+=four_decimal($record['cgst_amount']);
