@@ -196,23 +196,23 @@
   }
 
   function get_site_name_from_account_name($account_name) {
-    $site_name = array('AR Gold Software (May 2022)' => 'AR Gold May 2022',
-                       'ARF Software (May 2022)'     => 'ARF May 2022',
-                       'ARC Software (May 2022)'     => 'ARC May 2022',
-                       'AR Gold Software (Aug 2022)' => 'AR Gold Aug 2022',
-                       'ARF Software (Aug 2022)'     => 'ARF Aug 2022',
-                       'ARC Software (Aug 2022)'     => 'ARC Aug 2022',
+    $site_name = array('AR Gold Software (May 2022)' => 'AR Gold (May 2022)',
+                       'ARF Software (May 2022)'     => 'ARF (May 2022)',
+                       'ARC Software (May 2022)'     => 'ARC (May 2022)',
+                       'AR Gold Software (Aug 2022)' => 'AR Gold (Aug 2022)',
+                       'ARF Software (Aug 2022)'     => 'ARF (Aug 2022)',
+                       'ARC Software (Aug 2022)'     => 'ARC (Aug 2022)',
                        'Export Internal Software'    => 'Export');
     return $site_name[$account_name] ?? '';
   }
 
   function get_account_name_from_site_name($site_name) {
-    $account_name = array('AR Gold May 2022' => 'AR Gold Software (May 2022)',
-                          'ARF May 2022'     => 'ARF Software (May 2022)',
-                          'ARC May 2022'     => 'ARC Software (May 2022)',
-                          'AR Gold Aug 2022' => 'AR Gold Software (Aug 2022)',
-                          'ARF Aug 2022'     => 'ARF Software (Aug 2022)',
-                          'ARC Aug 2022'     => 'ARC Software (Aug 2022)',
+    $account_name = array('AR Gold (May 2022)' => 'AR Gold Software (May 2022)',
+                          'ARF (May 2022)'     => 'ARF Software (May 2022)',
+                          'ARC (May 2022)'     => 'ARC Software (May 2022)',
+                          'AR Gold (Aug 2022)' => 'AR Gold Software (Aug 2022)',
+                          'ARF (Aug 2022)'     => 'ARF Software (Aug 2022)',
+                          'ARC (Aug 2022)'     => 'ARC Software (Aug 2022)',
                           'Export'           => 'Export Internal Software');
     return $account_name[$site_name] ?? '';
   }
