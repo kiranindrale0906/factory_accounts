@@ -90,7 +90,7 @@ class Ledgers extends BaseController {
     // if ($this->data['report_type'] == 'Production Report') $where['account_name != '] = 'VADOTAR';
     
 
-    $receipt_issue_select = $this->get_receipt_issue_select();  
+    $receipt_issue_select = $this->get_receipt_issue_select($period_select);  
     // if (   $this->data['report_type'] == 'Account Ledger' 
     //     || $this->data['report_type'] == 'Rojmel Report'
     //     || $this->data['report_type'] == 'Metal Receipt Type Report') {
@@ -588,7 +588,7 @@ class Ledgers extends BaseController {
     if ($this->data['report_type'] == 'Metal Receipt Type Report') $where['receipt_type']='Metal';
   }
 
-  private function get_receipt_issue_select() {
+  private function get_receipt_issue_select($period_select) {
     if (   $this->data['report_type'] == 'Account Ledger' 
         || $this->data['report_type'] == 'Rojmel Report'
         || $this->data['report_type'] == 'Metal Receipt Type Report') {
