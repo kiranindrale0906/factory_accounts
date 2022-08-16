@@ -57,7 +57,7 @@ function calculate_chitti_fields(){
 
 function calculate_total_weights(quantity) {
   total_quantity=0;
-  if (total_quantity != 0) {
+  if (quantity != 0) {
     total_quantity = (quantity).toFixed(1);
     }
     set_issue_department_field_value('hallmark_quantity', total_quantity);
