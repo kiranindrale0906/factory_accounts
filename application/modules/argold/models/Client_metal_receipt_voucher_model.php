@@ -41,7 +41,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
   public function before_validate() {
     $this->set_account_name_from_receipt_type();
-    //$this->set_site_name_from_receipt_type();
+    $this->set_site_name_from_receipt_type();
     $this->set_sale_type_from_receipt_type_for_metal();
     $this->set_factory_purity_from_receipt_type_for_metal_and_finished_goods_and_chain_receipt();
     $this->set_metal_receipt_attributes_from_receipt_type_for_vadotar();
@@ -65,11 +65,17 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
         || $this->attributes['gold_rate_purity'] > 0)  $this->attributes['gold_rate_purity'] = 100;
   }
 
-  // private function set_site_name_from_receipt_type() {
+  private function set_site_name_from_receipt_type() {
   //   if ($this->attributes['receipt_type'] == 'AR Gold Refresh')  $this->attributes['site_name'] = 'AR Gold';
   //   elseif ($this->attributes['receipt_type'] == 'ARF Refresh')  $this->attributes['site_name'] = 'ARF';
   //   elseif ($this->attributes['receipt_type'] == 'ARC Refresh')  $this->attributes['site_name'] = 'ARC';
-  // }
+    if ($this->attributes['receipt_type'] == 'Refresh') {
+      foreach ($this->formdata['metal_issue_vouchers'] as $metal_issue_voucher) {
+        $this->attributes['site_name'] = get_site_name_from_account_name($metal_issue_voucher['account_name']);
+        break;
+      }
+    }
+  }
 
   private function set_sale_type_from_receipt_type_for_metal() {
     if ($this->attributes['receipt_type'] == 'Metal' && empty($this->attributes['parent_id'])) $this->attributes['sale_type'] == 'Sale';
@@ -141,9 +147,10 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $in_weight = $this->attributes['debit_weight'] - $credit_weight;
       if ($in_weight == 0) return true;
 
-      $this->formdata['metal_issue_vouchers'][] = array('account_name'  => 'AR Gold Software (May 2022)',
-                                                        'credit_weight' => $in_weight,
-                                                        'dd_type'       => $this->attributes['dd_type']);
+      pd('Please select account name to issue '.$this->attributes['receipt_type'].' to factory');
+      // $this->formdata['metal_issue_vouchers'][] = array('account_name'  => 'AR Gold Software (Aug 2022)',
+      //                                                   'credit_weight' => $in_weight,
+      //                                                   'dd_type'       => $this->attributes['dd_type']);
     } 
   }
   
