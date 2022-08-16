@@ -40,6 +40,7 @@ function onchange_of_machine_size_set_design_code() {
   });
 }
 function onclick_checkbox_calculate_chitti_quantity(){
+  alert('hhihihihi');
   var total_quantity = 0;
   $('.chitti_details_id:checked').each(function() {
     total_quantity = total_quantity + parseFloat($(this).closest("tr").find(".quantity").text());
