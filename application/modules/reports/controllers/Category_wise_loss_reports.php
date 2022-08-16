@@ -75,8 +75,6 @@ class Category_wise_loss_reports extends BaseController {
           $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight']=$out_weight;
           }
           $arg_records=array_merge($records,$ghiss_melting_loss);
-          // pd($arg_records);
-       // pd($arg_records);
         }
       if(!empty($arg_records)){
         $category_names = array_map( 'strtolower', $category_names );
