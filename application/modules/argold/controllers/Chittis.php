@@ -113,6 +113,7 @@ class Chittis extends BaseController {
       $where['account_name']=$this->data['record']['account_name'];
       if($this->router->class == 'chitti_exports'){ 
       $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,
+                                                                  sum(quantity) as quantity,
                                                                   (sum(credit_weight*purity) / sum(credit_weight)) as purity,
                                                                   (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,
                                                                   "" as voucher_number,
@@ -131,7 +132,8 @@ class Chittis extends BaseController {
                                                                                      inr_wastage_percentage,
                                                                                      argold_id,customer_name'));
     }else{
-      $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,
+      $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,sum(quantity) as quantity,
+                                                                  
                                                                   (sum(credit_weight*purity) / sum(credit_weight)) as purity,
                                                                   (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,
                                                                   "" as voucher_number,
