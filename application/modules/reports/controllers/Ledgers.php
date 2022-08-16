@@ -586,6 +586,8 @@ class Ledgers extends BaseController {
 
     if ($this->data['report_type'] == 'Production Report') $where['account_name != '] = 'VADOTAR';
     if ($this->data['report_type'] == 'Metal Receipt Type Report') $where['receipt_type']='Metal';
+
+    return $where;
   }
 
   private function get_receipt_issue_select($period_select) {
