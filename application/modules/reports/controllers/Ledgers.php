@@ -7,155 +7,164 @@ class Ledgers extends BaseController {
   }
 
   protected function get_datewise_ledger_records() {
-    $this->data['site_name']            = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'All';
-    $this->data['period']               = (!empty($_GET['period'])) ? $_GET['period'] : 'date';
-    $this->data['detail']               = (!empty($_GET['detail'])) ? $_GET['detail'] : 'yes';
-    $this->data['group']                = (!empty($_GET['group'])) ? $_GET['group'] : '';
-    $this->data['domestic_export']      = (!empty($_GET['domestic_export'])) ? $_GET['domestic_export'] : 'All';
-    $this->data['account_id']           = (!empty($_GET['account_id'])) ? $_GET['account_id'] : 0;
-    $this->data['account_name']           = (!empty($_GET['account_name'])) ? $_GET['account_name'] : 0;
-    $this->data['record']['account_id'] = (!empty($_GET[$this->router->class]['account_id'])) ? $_GET[$this->router->class]['account_id'] : $this->data['account_id'];
-    if (empty($this->data['account_id'])) $this->data['account_id'] = $this->data['record']['account_id'];
+    $this->set_variables_from_get_parameters();
+    // $this->data['site_name']            = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'All';
+    // $this->data['period']               = (!empty($_GET['period'])) ? $_GET['period'] : 'date';
+    // $this->data['detail']               = (!empty($_GET['detail'])) ? $_GET['detail'] : 'yes';
+    // $this->data['group']                = (!empty($_GET['group'])) ? $_GET['group'] : '';
+    // $this->data['domestic_export']      = (!empty($_GET['domestic_export'])) ? $_GET['domestic_export'] : 'All';
+    // $this->data['account_id']           = (!empty($_GET['account_id'])) ? $_GET['account_id'] : 0;
+    // $this->data['account_name']         = (!empty($_GET['account_name'])) ? $_GET['account_name'] : 0;
+    // $this->data['record']['account_id'] = (!empty($_GET[$this->router->class]['account_id'])) ? $_GET[$this->router->class]['account_id'] : $this->data['account_id'];
+    // if (empty($this->data['account_id'])) $this->data['account_id'] = $this->data['record']['account_id'];
 
-    if ($this->data['period'] == 'date' && ($this->data['report_type'] == 'Account Ledger' || $this->data['report_type'] == 'Domestic Labour Ledger'))
-      $this->data['group'] = 'date';
-    elseif ($this->data['period'] == 'date' && ($this->data['report_type'] == 'Metal Receipt Type Report'))
-      $this->data['group'] = 'date';
-    elseif ($this->data['report_type'] == 'Rojmel Report')
-      $this->data['group'] = 'id';
+    $this->get_group_by();
+
+    // if (    $this->data['period'] == 'date' 
+    //     && (   $this->data['report_type'] == 'Account Ledger'   
+    //         || $this->data['report_type'] == 'Domestic Labour Ledger'))
+    //   $this->data['group'] = 'date';
+    // elseif (   $this->data['period'] == 'date' 
+    //         && $this->data['report_type'] == 'Metal Receipt Type Report')
+    //   $this->data['group'] = 'date';
+    // elseif ($this->data['report_type'] == 'Rojmel Report')
+    //   $this->data['group'] = 'id';
+
+    // if (($this->data['report_type'] == 'Account Ledger'|| $this->data['report_type'] == 'Domestic Labour Ledger') && $this->data['group'] == 'date')
+    //   $this->data['group'] = 'voucher_type, voucher_date, chitti_no, receipt_type, account_name';
+    // if ($this->data['report_type'] == 'Metal Receipt Type Report' && $this->data['group'] == 'date')
+    //   $this->data['group'] = 'voucher_type, voucher_date, receipt_type';      
     
-    if     ($this->data['period'] == 'date')  $period_select = 'date_format(voucher_date,"%Y-%m-%d")';
-    elseif ($this->data['period'] == 'month') $period_select = 'date_format(voucher_date,"%Y-%m")';
-    elseif ($this->data['period'] == 'year') $period_select = 'date_format(voucher_date,"%Y")';
-    elseif ($this->data['period'] == 'week') {
-      $period_from_date = 'DATE_SUB(
-                                DATE_ADD(MAKEDATE(date_format(voucher_date,"%Y"), 1), INTERVAL week(voucher_date) WEEK),
-                                INTERVAL WEEKDAY(
-                                   DATE_ADD(MAKEDATE(date_format(voucher_date,"%Y"), 1), INTERVAL week(voucher_date) WEEK)
-                                ) -1 DAY)';
-      $period_to_date = 'DATE_SUB(
-                                DATE_ADD(MAKEDATE(date_format(voucher_date,"%Y"), 1), INTERVAL week(voucher_date) WEEK),
-                                INTERVAL WEEKDAY(
-                                   DATE_ADD(MAKEDATE(date_format(voucher_date,"%Y"), 1), INTERVAL week(voucher_date) WEEK)
-                                ) -7 DAY)';
-      $period_select = 'CONCAT('.$period_from_date.' , " - ", '.$period_to_date.')';
-    };
-
-    $where = array();
-    if(!empty($this->data['record']['account_id']))        $where['account_id'] = $this->data['record']['account_id'];
-    if (   !empty($this->data['site_name']) 
-        && $this->data['site_name'] != 'All')              $where['site_name'] = $this->data['site_name'];
-
-    if ($this->data['report_type'] == 'Vadotar Report' || $this->data['report_type'] == 'Production Report') {
-      $export_accounts = $this->account_model->get('name', array('group_code in ("Domestic","Export","Export Labour")' => NULL ));
-      $export_account_names = array_column($export_accounts, 'name');
-            if ($this->data['domestic_export'] == 'All') {
-       $export_account_names[] = 'Tanishq';}
-
-      $export_account_names = implode('", "',$export_account_names);
-
-      if ($this->data['domestic_export'] == 'All') {
-
-        $where['(   purity != factory_purity 
-                 or (    account_name in ("'.$export_account_names.'") 
-                     and voucher_type = "metal issue voucher")
-                )'] = NULL;
-      } elseif ($this->data['domestic_export'] == 'Domestic') {
-        $where['purity != factory_purity'] = NULL;
-      } elseif ($this->data['domestic_export'] == 'Tanishq') {
-        $where['account_name'] = 'Tanishq';
-        $where['voucher_type'] = 'metal issue voucher';
-      } elseif ($this->data['domestic_export'] == 'Export') {
-        $where['(account_name in ("'.$export_account_names.'") 
-                 and voucher_type = "metal issue voucher")'] = NULL;
-      }
-      
-	    $where['receipt_type!=']='Packing Slip';
-      //}
-
-    }
-
-    if ($this->data['report_type'] == 'Production Report') $where['account_name != '] = 'VADOTAR';
     
-    if (($this->data['report_type'] == 'Account Ledger'|| $this->data['report_type'] == 'Domestic Labour Ledger') && $this->data['group'] == 'date')
-      $this->data['group'] = 'voucher_type, voucher_date, chitti_no, receipt_type, account_name';
-    if ($this->data['report_type'] == 'Metal Receipt Type Report' && $this->data['group'] == 'date')
-      $this->data['group'] = 'voucher_type, voucher_date, receipt_type';      
+    $period_select = $this->get_period_select();
+    // if     ($this->data['period'] == 'date')  $period_select = 'date_format(voucher_date,"%Y-%m-%d")';
+    // elseif ($this->data['period'] == 'month') $period_select = 'date_format(voucher_date,"%Y-%m")';
+    // elseif ($this->data['period'] == 'year')  $period_select = 'date_format(voucher_date,"%Y")';
+    // elseif ($this->data['period'] == 'week') {
+    //   $period_from_date = 'DATE_SUB(
+    //                             DATE_ADD(MAKEDATE(date_format(voucher_date,"%Y"), 1), INTERVAL week(voucher_date) WEEK),
+    //                             INTERVAL WEEKDAY(
+    //                                DATE_ADD(MAKEDATE(date_format(voucher_date,"%Y"), 1), INTERVAL week(voucher_date) WEEK)
+    //                             ) -1 DAY)';
+    //   $period_to_date = 'DATE_SUB(
+    //                             DATE_ADD(MAKEDATE(date_format(voucher_date,"%Y"), 1), INTERVAL week(voucher_date) WEEK),
+    //                             INTERVAL WEEKDAY(
+    //                                DATE_ADD(MAKEDATE(date_format(voucher_date,"%Y"), 1), INTERVAL week(voucher_date) WEEK)
+    //                             ) -7 DAY)';
+    //   $period_select = 'CONCAT('.$period_from_date.' , " - ", '.$period_to_date.')';
+    // };
+
+    $where = $this->get_where_condition();
+    // $where = array();
+    // if(!empty($this->data['record']['account_id']))        $where['account_id'] = $this->data['record']['account_id'];
+    // if (   !empty($this->data['site_name']) 
+    //     && $this->data['site_name'] != 'All')              $where['site_name'] = $this->data['site_name'];
+
+    // if ($this->data['report_type'] == 'Vadotar Report' || $this->data['report_type'] == 'Production Report') {
+    //   $export_accounts = $this->account_model->get('name', array('group_code in ("Domestic","Export","Export Labour")' => NULL ));
+    //   $export_account_names = array_column($export_accounts, 'name');
+    //         if ($this->data['domestic_export'] == 'All') {
+    //    $export_account_names[] = 'Tanishq';}
+
+    //   $export_account_names = implode('", "',$export_account_names);
+
+    //   if ($this->data['domestic_export'] == 'All') {
+
+    //     $where['(   purity != factory_purity 
+    //              or (    account_name in ("'.$export_account_names.'") 
+    //                  and voucher_type = "metal issue voucher")
+    //             )'] = NULL;
+    //   } elseif ($this->data['domestic_export'] == 'Domestic') {
+    //     $where['purity != factory_purity'] = NULL;
+    //   } elseif ($this->data['domestic_export'] == 'Tanishq') {
+    //     $where['account_name'] = 'Tanishq';
+    //     $where['voucher_type'] = 'metal issue voucher';
+    //   } elseif ($this->data['domestic_export'] == 'Export') {
+    //     $where['(account_name in ("'.$export_account_names.'") 
+    //              and voucher_type = "metal issue voucher")'] = NULL;
+    //   }
       
-    if (   $this->data['report_type'] == 'Account Ledger' 
-        || $this->data['report_type'] == 'Rojmel Report'
-        || $this->data['report_type'] == 'Metal Receipt Type Report') {
-      $receipt_issue_select = 'receipt_type, '.$period_select.' as voucher_date, 
-                               date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
-                               account_name, voucher_type, 
-                               site_name, voucher_type, 
-                               concat(voucher_number, ", ") as voucher_number, 
-                               GROUP_CONCAT(DISTINCT(voucher_id)) as voucher_id, 
-                               sum(credit_amount) as credit_amount, 
-                               sum(usd_credit_amount) as usd_credit_amount, 
-                               sum(debit_amount) as debit_amount, 
-                               sum(usd_debit_amount) as usd_debit_amount, 
-                               sum(credit_weight) as credit_weight, 
-                               sum(debit_weight) as debit_weight,
-                               sum(fine) as fine,
-                               sum(factory_fine) as factory_fine,
-                               0 as purity_margin, 
-                               sum((credit_weight+debit_weight) * purity) / sum(credit_weight+debit_weight) as purity, 
-                               sum((credit_weight+debit_weight) * factory_purity) / sum(credit_weight+debit_weight) as factory_purity, 
-                               concat(narration, " ,") as narration, concat(description, " ,") as description, 
-                               chitti_id as chitti_no,parent_id as parent_id,id as id';
-    } else {
-      //$this->data['group'] = 'voucher_date';
-      $receipt_issue_select = '"" as receipt_type, '.$period_select.' as voucher_date, 
-                              date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
-                              account_name as account_name, "" as voucher_type,site_name , "" as voucher_number, 
-                              GROUP_CONCAT(DISTINCT(voucher_id)) as voucher_id, 
-                              sum(credit_amount) as credit_amount, 
-                              sum(usd_credit_amount) as usd_credit_amount, 
-                              sum(debit_amount) as debit_amount, 
-                              sum(usd_debit_amount) as usd_debit_amount, 
-                              sum(credit_weight) as credit_weight, 
-                              sum(debit_weight) as debit_weight, 
-                              sum(fine) as fine,
-                              sum(factory_fine) as factory_fine,
-                              0 as purity_margin, 
-                              sum((credit_weight+debit_weight) * purity) /  sum(credit_weight+debit_weight)  as purity, 
-                              sum((credit_weight+debit_weight) * factory_purity) /  sum(credit_weight+debit_weight)  as factory_purity,
-                              ""  as narration, "" as description, 
-                              "" as chitti_no,parent_id as parent_id,id as id';       
-    }
-    if ($this->data['report_type'] == 'Metal Receipt Type Report')
-      $where['receipt_type']='Metal';
+	   //  $where['receipt_type!=']='Packing Slip';
+
+    // }
+
+    // if ($this->data['report_type'] == 'Production Report') $where['account_name != '] = 'VADOTAR';
+    
+
+    $receipt_issue_select = $this->get_receipt_issue_select();  
+    // if (   $this->data['report_type'] == 'Account Ledger' 
+    //     || $this->data['report_type'] == 'Rojmel Report'
+    //     || $this->data['report_type'] == 'Metal Receipt Type Report') {
+    //   $receipt_issue_select = 'receipt_type, '.$period_select.' as voucher_date, 
+    //                            date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
+    //                            account_name, voucher_type, 
+    //                            site_name, voucher_type, 
+    //                            concat(voucher_number, ", ") as voucher_number, 
+    //                            GROUP_CONCAT(DISTINCT(voucher_id)) as voucher_id, 
+    //                            sum(credit_amount) as credit_amount, 
+    //                            sum(usd_credit_amount) as usd_credit_amount, 
+    //                            sum(debit_amount) as debit_amount, 
+    //                            sum(usd_debit_amount) as usd_debit_amount, 
+    //                            sum(credit_weight) as credit_weight, 
+    //                            sum(debit_weight) as debit_weight,
+    //                            sum(fine) as fine,
+    //                            sum(factory_fine) as factory_fine,
+    //                            0 as purity_margin, 
+    //                            sum((credit_weight+debit_weight) * purity) / sum(credit_weight+debit_weight) as purity, 
+    //                            sum((credit_weight+debit_weight) * factory_purity) / sum(credit_weight+debit_weight) as factory_purity, 
+    //                            concat(narration, " ,") as narration, concat(description, " ,") as description, 
+    //                            chitti_id as chitti_no,parent_id as parent_id,id as id';
+    // } else {
+    //   $receipt_issue_select = '"" as receipt_type, '.$period_select.' as voucher_date, 
+    //                           date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
+    //                           account_name as account_name, "" as voucher_type,site_name , "" as voucher_number, 
+    //                           GROUP_CONCAT(DISTINCT(voucher_id)) as voucher_id, 
+    //                           sum(credit_amount) as credit_amount, 
+    //                           sum(usd_credit_amount) as usd_credit_amount, 
+    //                           sum(debit_amount) as debit_amount, 
+    //                           sum(usd_debit_amount) as usd_debit_amount, 
+    //                           sum(credit_weight) as credit_weight, 
+    //                           sum(debit_weight) as debit_weight, 
+    //                           sum(fine) as fine,
+    //                           sum(factory_fine) as factory_fine,
+    //                           0 as purity_margin, 
+    //                           sum((credit_weight+debit_weight) * purity) /  sum(credit_weight+debit_weight)  as purity, 
+    //                           sum((credit_weight+debit_weight) * factory_purity) /  sum(credit_weight+debit_weight)  as factory_purity,
+    //                           ""  as narration, "" as description, 
+    //                           "" as chitti_no,parent_id as parent_id,id as id';       
+    // }
+
+    // if ($this->data['report_type'] == 'Metal Receipt Type Report') $where['receipt_type']='Metal';
     $account_issue_where=array();
     $account_receipt_where=array();
     if ($this->data['report_type'] == 'Account Receipt Report'){
 
-    $account_receipt_where['purity>='] = 98;
-    $account_receipt_where['purity<='] = 100;
-    
-    $account_issue_where['purity>='] = 98;
-    $account_issue_where['purity<='] = 100;
-    $receipt_issue_select = 'receipt_type, '.$period_select.' as voucher_date, 
-                               date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
-                               account_name, voucher_type, voucher_id, 
-                               site_name, voucher_type, 
-                               concat(voucher_number, ", ") as voucher_number, 
-                               (credit_amount) as credit_amount, 
-                               (usd_credit_amount) as usd_credit_amount, 
-                               (debit_amount) as debit_amount, 
-                               (usd_debit_amount) as usd_debit_amount, 
-                               (credit_weight) as credit_weight, 
-                               (debit_weight) as debit_weight,
-                               (fine) as fine,
-                               (factory_fine) as factory_fine,
-                               0 as purity_margin, 
-                               ((credit_weight+debit_weight) * purity) / (credit_weight+debit_weight) as purity, 
-                               ((credit_weight+debit_weight) * factory_purity) / (credit_weight+debit_weight) as factory_purity, 
-                               concat(narration, " ,") as narration, concat(description, " ,") as description, 
-                               chitti_id as chitti_no,parent_id as parent_id,id as id';
+      $account_receipt_where['purity>='] = 98;
+      $account_receipt_where['purity<='] = 100;
+      
+      $account_issue_where['purity>='] = 98;
+      $account_issue_where['purity<='] = 100;
+      // $receipt_issue_select = 'receipt_type, '.$period_select.' as voucher_date, 
+      //                            date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
+      //                            account_name, voucher_type, voucher_id, 
+      //                            site_name, voucher_type, 
+      //                            concat(voucher_number, ", ") as voucher_number, 
+      //                            (credit_amount) as credit_amount, 
+      //                            (usd_credit_amount) as usd_credit_amount, 
+      //                            (debit_amount) as debit_amount, 
+      //                            (usd_debit_amount) as usd_debit_amount, 
+      //                            (credit_weight) as credit_weight, 
+      //                            (debit_weight) as debit_weight,
+      //                            (fine) as fine,
+      //                            (factory_fine) as factory_fine,
+      //                            0 as purity_margin, 
+      //                            ((credit_weight+debit_weight) * purity) / (credit_weight+debit_weight) as purity, 
+      //                            ((credit_weight+debit_weight) * factory_purity) / (credit_weight+debit_weight) as factory_purity, 
+      //                            concat(narration, " ,") as narration, concat(description, " ,") as description, 
+      //                            chitti_id as chitti_no,parent_id as parent_id,id as id';
 
-       $account_receipt_where['site_name'] = '';                        
-       $account_issue_where['site_name'] = '';                        
+      $account_receipt_where['site_name'] = '';                        
+      $account_issue_where['site_name'] = '';                        
       if ($this->data['site_name'] == 'ARF' || $this->data['site_name'] == 'ARF (May 2022)'|| $this->data['site_name'] == 'ARF (Aug 2022)'){
         $account_issue_where['account_name'] = 'ARF Software';
       }elseif ($this->data['site_name'] == 'ARC' || $this->data['site_name'] == 'ARC (May 2022)'|| $this->data['site_name'] == 'ARC (Aug 2022)'){
@@ -184,10 +193,9 @@ class Ledgers extends BaseController {
         }         
     }
 
-    // $where_issue['voucher_id !=']="";
+    
     $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(), array('order_by'=>'chitti_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
     foreach ($issues as $issue_index => $issue_value) {
-      // $voucher_id=explode(',', $issue_value['voucher_id']);
       $voucher_id = rtrim($issue_value['voucher_id'], ", ");
       if(!empty($voucher_id)){
 
@@ -200,13 +208,12 @@ class Ledgers extends BaseController {
       $issues[$issue_index]['reference_account_name']=$reference_ac_voucher_issue_detail['account_name'];
       }
     }
-//pd($where_receipt);  
-  // $where_receipt['voucher_id !=']="";
-    $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(), array('order_by'=>'parent_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
 
+    $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(), array('order_by'=>'parent_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
+    lq(); 
+    
     if ($this->data['report_type'] == 'Account Ledger'){
       foreach ($issues as $issue_index => $issue_value) {
-       // $voucher_id=explode(',', $issue_value['voucher_id']);
         $voucher_id = rtrim($issue_value['voucher_id'], ", ");
         $ac_voucher_issue_detail=$this->voucher_model->get('metal_receipt_voucher_reference_id,id',array('where'=>array('metal_receipt_voucher_reference_id is not NULL'=>NULL,'id in ('.$voucher_id.')'=>NULL)));
         $metal_receipt_voucher_reference_id=array_column($ac_voucher_issue_detail,'metal_receipt_voucher_reference_id');
@@ -217,8 +224,7 @@ class Ledgers extends BaseController {
         }
       }
 
-      foreach ($receipts as $receipt_index => $receipt_value) {
-        // $voucher_id=explode(',', $receipt_value['voucher_id']);
+      foreach ($receipts as $receipt_index => $receipt_value) {      
         $voucher_id = rtrim($receipt_value['voucher_id'], ", ");
         $ac_voucher_receipt_detail=$this->voucher_model->get('metal_receipt_voucher_reference_id',array('where'=>array('metal_receipt_voucher_reference_id is not NULL'=>NULL,'id in ('.$voucher_id.')'=>NULL)));
         $metal_receipt_voucher_reference_id=array_column($ac_voucher_receipt_detail,'metal_receipt_voucher_reference_id');
@@ -260,6 +266,7 @@ class Ledgers extends BaseController {
     $issues=array();
     $issue_voucher_dates=array();
     }
+
     if($this->data['report_type']=='Domestic Labour Ledger'){
       $where_receipt['account_name']="Domestic Labour Amount";
      $receipts = $this->ledger_model->get('receipt_type, date_format(voucher_date,"%Y-%m-%d") as voucher_date, 
@@ -492,5 +499,160 @@ class Ledgers extends BaseController {
       $this->data['closing'][$last_voucher_date]['receipt']['fine'] = !empty($this->data['balance'][$last_voucher_date]['issue']['factory_fine'])?$this->data['balance'][$last_voucher_date]['issue']['factory_fine']:0;
     }
   }  
+
+  private get_period_select() {
+    if     ($this->data['period'] == 'date')  $period_select = 'date_format(voucher_date,"%Y-%m-%d")';
+    elseif ($this->data['period'] == 'month') $period_select = 'date_format(voucher_date,"%Y-%m")';
+    elseif ($this->data['period'] == 'year')  $period_select = 'date_format(voucher_date,"%Y")';
+    elseif ($this->data['period'] == 'week') {
+      $period_from_date = 'DATE_SUB(
+                                DATE_ADD(MAKEDATE(date_format(voucher_date,"%Y"), 1), INTERVAL week(voucher_date) WEEK),
+                                INTERVAL WEEKDAY(
+                                   DATE_ADD(MAKEDATE(date_format(voucher_date,"%Y"), 1), INTERVAL week(voucher_date) WEEK)
+                                ) -1 DAY)';
+      $period_to_date = 'DATE_SUB(
+                                DATE_ADD(MAKEDATE(date_format(voucher_date,"%Y"), 1), INTERVAL week(voucher_date) WEEK),
+                                INTERVAL WEEKDAY(
+                                   DATE_ADD(MAKEDATE(date_format(voucher_date,"%Y"), 1), INTERVAL week(voucher_date) WEEK)
+                                ) -7 DAY)';
+      $period_select = 'CONCAT('.$period_from_date.' , " - ", '.$period_to_date.')';
+    }
+    return $period_select;
+  }
+
+  private function get_group_by() {
+    if (   $this->data['period'] == 'date' 
+        && (   $this->data['report_type'] == 'Account Ledger'   
+            || $this->data['report_type'] == 'Domestic Labour Ledger'))
+      $this->data['group'] = 'voucher_type, voucher_date, chitti_no, receipt_type, account_name';
+    elseif (   $this->data['period'] == 'date' 
+            && $this->data['report_type'] == 'Metal Receipt Type Report')
+      $this->data['group'] = 'voucher_type, voucher_date, receipt_type';      
+    elseif ($this->data['report_type'] == 'Rojmel Report')
+      $this->data['group'] = 'id';
+
+    // if (   (   $this->data['report_type'] == 'Account Ledger'
+    //         || $this->data['report_type'] == 'Domestic Labour Ledger') 
+    //     && $this->data['group'] == 'date')
+    //   $this->data['group'] = 'voucher_type, voucher_date, chitti_no, receipt_type, account_name';
+    
+    // if ($this->data['report_type'] == 'Metal Receipt Type Report' && $this->data['group'] == 'date')
+    //   $this->data['group'] = 'voucher_type, voucher_date, receipt_type';      
+  }
+
+  private function set_variables_from_get_parameters() {
+    $this->data['site_name']            = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'All';
+    $this->data['period']               = (!empty($_GET['period'])) ? $_GET['period'] : 'date';
+    $this->data['detail']               = (!empty($_GET['detail'])) ? $_GET['detail'] : 'yes';
+    $this->data['group']                = (!empty($_GET['group'])) ? $_GET['group'] : '';
+    $this->data['domestic_export']      = (!empty($_GET['domestic_export'])) ? $_GET['domestic_export'] : 'All';
+    $this->data['account_id']           = (!empty($_GET['account_id'])) ? $_GET['account_id'] : 0;
+    $this->data['account_name']         = (!empty($_GET['account_name'])) ? $_GET['account_name'] : 0;
+    $this->data['record']['account_id'] = (!empty($_GET[$this->router->class]['account_id'])) ? $_GET[$this->router->class]['account_id'] : $this->data['account_id'];
+    if (empty($this->data['account_id'])) $this->data['account_id'] = $this->data['record']['account_id'];
+  }
+
+  private function get_where_condition() {
+    $where = array();
+    if (!empty($this->data['record']['account_id']))  $where['account_id'] = $this->data['record']['account_id'];
+    
+    if (!empty($this->data['site_name']) && $this->data['site_name'] != 'All')              
+      $where['site_name'] = $this->data['site_name'];
+
+    if (   $this->data['report_type'] == 'Vadotar Report' || $this->data['report_type'] == 'Production Report') {
+      $export_accounts = $this->account_model->get('name', array('group_code in ("Domestic","Export","Export Labour")' => NULL ));
+      $export_account_names = array_column($export_accounts, 'name');
+            
+      if ($this->data['domestic_export'] == 'All') $export_account_names[] = 'Tanishq';
+
+      $export_account_names = implode('", "',$export_account_names);
+
+      if ($this->data['domestic_export'] == 'All') {
+        $where['(   purity != factory_purity 
+                 or (    account_name in ("'.$export_account_names.'") 
+                     and voucher_type = "metal issue voucher")
+              )'] = NULL;
+      } elseif ($this->data['domestic_export'] == 'Domestic') {
+        $where['purity != factory_purity'] = NULL;
+      } elseif ($this->data['domestic_export'] == 'Tanishq') {
+        $where['account_name'] = 'Tanishq';
+        $where['voucher_type'] = 'metal issue voucher';
+      } elseif ($this->data['domestic_export'] == 'Export') {
+        $where['(account_name in ("'.$export_account_names.'") 
+                 and voucher_type = "metal issue voucher")'] = NULL;
+      }
+    
+      $where['receipt_type!=']='Packing Slip';
+    }
+
+    if ($this->data['report_type'] == 'Production Report') $where['account_name != '] = 'VADOTAR';
+    if ($this->data['report_type'] == 'Metal Receipt Type Report') $where['receipt_type']='Metal';
+  }
+
+  private funtion get_receipt_issue_select() {
+    if (   $this->data['report_type'] == 'Account Ledger' 
+        || $this->data['report_type'] == 'Rojmel Report'
+        || $this->data['report_type'] == 'Metal Receipt Type Report') {
+      $receipt_issue_select = 'receipt_type, '.$period_select.' as voucher_date, 
+                               date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
+                               account_name, voucher_type, 
+                               site_name, voucher_type, 
+                               concat(voucher_number, ", ") as voucher_number, 
+                               GROUP_CONCAT(DISTINCT(voucher_id)) as voucher_id, 
+                               sum(credit_amount) as credit_amount, 
+                               sum(usd_credit_amount) as usd_credit_amount, 
+                               sum(debit_amount) as debit_amount, 
+                               sum(usd_debit_amount) as usd_debit_amount, 
+                               sum(credit_weight) as credit_weight, 
+                               sum(debit_weight) as debit_weight,
+                               sum(fine) as fine,
+                               sum(factory_fine) as factory_fine,
+                               0 as purity_margin, 
+                               sum((credit_weight+debit_weight) * purity) / sum(credit_weight+debit_weight) as purity, 
+                               sum((credit_weight+debit_weight) * factory_purity) / sum(credit_weight+debit_weight) as factory_purity, 
+                               concat(narration, " ,") as narration, concat(description, " ,") as description, 
+                               chitti_id as chitti_no,parent_id as parent_id,id as id';
+
+    } elseif ($this->data['report_type'] == 'Account Receipt Report') {
+      $receipt_issue_select = 'receipt_type, '.$period_select.' as voucher_date, 
+                                 date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
+                                 account_name, voucher_type, voucher_id, 
+                                 site_name, voucher_type, 
+                                 concat(voucher_number, ", ") as voucher_number, 
+                                 (credit_amount) as credit_amount, 
+                                 (usd_credit_amount) as usd_credit_amount, 
+                                 (debit_amount) as debit_amount, 
+                                 (usd_debit_amount) as usd_debit_amount, 
+                                 (credit_weight) as credit_weight, 
+                                 (debit_weight) as debit_weight,
+                                 (fine) as fine,
+                                 (factory_fine) as factory_fine,
+                                 0 as purity_margin, 
+                                 ((credit_weight+debit_weight) * purity) / (credit_weight+debit_weight) as purity, 
+                                 ((credit_weight+debit_weight) * factory_purity) / (credit_weight+debit_weight) as factory_purity, 
+                                 concat(narration, " ,") as narration, concat(description, " ,") as description, 
+                                 chitti_id as chitti_no,parent_id as parent_id,id as id';
+    } else {
+      $receipt_issue_select = '"" as receipt_type, '.$period_select.' as voucher_date, 
+                              date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
+                              account_name as account_name, "" as voucher_type,site_name , "" as voucher_number, 
+                              GROUP_CONCAT(DISTINCT(voucher_id)) as voucher_id, 
+                              sum(credit_amount) as credit_amount, 
+                              sum(usd_credit_amount) as usd_credit_amount, 
+                              sum(debit_amount) as debit_amount, 
+                              sum(usd_debit_amount) as usd_debit_amount, 
+                              sum(credit_weight) as credit_weight, 
+                              sum(debit_weight) as debit_weight, 
+                              sum(fine) as fine,
+                              sum(factory_fine) as factory_fine,
+                              0 as purity_margin, 
+                              sum((credit_weight+debit_weight) * purity) /  sum(credit_weight+debit_weight)  as purity, 
+                              sum((credit_weight+debit_weight) * factory_purity) /  sum(credit_weight+debit_weight)  as factory_purity,
+                              ""  as narration, "" as description, 
+                              "" as chitti_no,parent_id as parent_id,id as id';       
+    }
+
+    return $receipt_issue_select;
+  }
 }
 ?>
