@@ -209,7 +209,6 @@ class Ledgers extends BaseController {
     }
 
     $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(), array('order_by'=>'parent_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
-    lq(); 
     
     if ($this->data['report_type'] == 'Account Ledger'){
       foreach ($issues as $issue_index => $issue_value) {
