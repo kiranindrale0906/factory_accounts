@@ -39,7 +39,7 @@ function onchange_of_machine_size_set_design_code() {
     window.location = base_url+ 'reports/production_summary/index?production_summary[product_name]='+product_name+'&production_summary[in_purity]='+in_purity+'&production_summary[category_one]='+category_one+'&production_summary[machine_size]='+machine_size;
   });
 }
-function calculate_issue_department_fields(){
+function onclick_checkbox_calculate_chitti_quantity(){
   var total_quantity = 0;
   $('.chitti_details_id:checked').each(function() {
     total_quantity = total_quantity + parseFloat($(this).closest("tr").find(".quantity").text());
