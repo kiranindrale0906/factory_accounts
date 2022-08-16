@@ -239,7 +239,7 @@ class Ledgers extends BaseController {
 
     if($this->data['report_type']=='Domestic Sale Ledger'){
     $receipts = $this->voucher_model->get($domestic_export_receipt_issue_select,array('account_name' =>'SALES ACCOUNT','is_export'=> 0), array(), array('order_by'=>'parent_id, voucher_type asc', 'group_by' => $this->data['group']));
-    // pd($receipts);
+    
     $issues=array();
     $issue_voucher_dates=array();
 
