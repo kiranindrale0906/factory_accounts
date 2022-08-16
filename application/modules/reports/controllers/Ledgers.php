@@ -47,7 +47,7 @@ class Ledgers extends BaseController {
         && $this->data['site_name'] != 'All')              $where['site_name'] = $this->data['site_name'];
 
     if ($this->data['report_type'] == 'Vadotar Report' || $this->data['report_type'] == 'Production Report') {
-      $export_accounts = $this->account_model->get('name', array('group_code in ("Domestic","Export","Export Labour")' => NULL ));
+      $export_accounts = $this->account_model->get('name', array('group_code' => 'Export'));
       $export_account_names = array_column($export_accounts, 'name');
             if ($this->data['domestic_export'] == 'All') {
        $export_account_names[] = 'Tanishq';}
@@ -176,9 +176,9 @@ class Ledgers extends BaseController {
     if ($this->data['domestic_export'] == 'Export') {
         $where_receipt=array('(account_name = ("Export Internal Software")  and receipt_type="Export Internal" 
                  and voucher_type = "metal receipt voucher") and (debit_weight != 0 or debit_amount != 0)' => NULL);
-        if ($this->data['site_name'] == 'ARF' || $this->data['site_name'] == 'ARF (May 2022)'|| $this->data['site_name'] == 'ARF (Aug 2022)'){
+        if ($this->data['site_name'] == 'ARF' || $this->data['site_name'] == 'ARF (May 2022)'|| $this->data['site_name'] == 'ARF (Aug 2022)')
           $where_receipt['description'] = 'ARF Software';
-        }elseif ($this->data['site_name'] == 'ARC' || $this->data['site_name'] == 'ARC (May 2022)'|| $this->data['site_name'] == 'ARC (Aug 2022)'){ $where_receipt['description'] = 'ARC Software';
+        }elseif ($this->data['site_name'] == 'ARC' || $this->data['site_name'] == 'ARC (May 2022)'|| $this->data['site_name'] == 'ARC (Aug 2022)') $where_receipt['description'] = 'ARC Software';
         }elseif ($this->data['site_name'] == 'AR Gold' || $this->data['site_name'] == 'AR Gold (May 2022)'|| $this->data['site_name'] == 'AR Gold (Aug 2022)'){
           $where_receipt['description'] = 'AR Gold Software';
         }         
