@@ -30,15 +30,9 @@ class Trial_balances extends Ledgers {
     $this->calculate_gst_of_sales_accounts(0, 'Labour');
     $this->calculate_profit_loss_of_export_sales_accounts('Sale');
     $this->calculate_profit_loss_of_export_sales_accounts('Labour');
+    $this->calculate_hallmark_amount_with_tax();
 
     $this->get_vadotar_from_factories_and_accounts();
-    // $this->get_alloy_vodator_balance();
-    // $this->get_gpc_vodator_balance();
-    // $this->get_stone_vatav_balance();
-    // $this->get_meena_vatav_balance();
-    // $this->get_copper_vatav_balance();
-    // $this->get_rhodium_vatav_balance();
-    // $this->get_tounch_loss_fine_balance();
 
     $this->get_overall_rolling();
 
@@ -105,7 +99,7 @@ class Trial_balances extends Ledgers {
   }
 
   private function get_vadotar_from_factory($site_name, $hostversion) {
-    $this->data['receipt_types'] = ['Alloy Vodator', 'GPC Vodator', 'Stone Vatav', 'Meeva Vatav', 'Copper Vatav', 'Rhodium Vatav', 'Auto Tounch Loss Fine'];
+    $this->data['receipt_types'] = ['Alloy Vodator', 'GPC Vodator', 'Stone Vatav', 'Meena Vatav', 'Copper Vatav', 'Rhodium Vatav', 'Auto Tounch Loss Fine'];
     $this->data['site_names'] = ['AR Gold', 'ARF', 'ARC'];
     $this->data['hostversions'] = ['May 2022', 'Aug 2022'];
 
@@ -132,216 +126,15 @@ class Trial_balances extends Ledgers {
     $this->data['account_vadotar_balance'][$receipt_type][$site_name] ??= [];
     $this->data['account_vadotar_balance'][$receipt_type][$site_name][$hostversion] ??= [];
     
-    $account_name = $site_name.' '.$receipt_type.' ('.$hostversion.') ';
+    $account_name = $site_name.' '.$receipt_type.' ('.$hostversion.')';
     $accounts_balance_select = '(sum(debit_weight)) as balance, (sum(debit_weight*purity/100)) as balance_fine';
-    $account_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => $account_name));
-    
+    $account_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => $account_name,
+                                                                                   'voucher_type != ' => 'opening stock voucher',
+                                                                                   'receipt_type' => $receipt_type));
+
     $this->data['account_vadotar_balance'][$receipt_type][$site_name][$hostversion]['balance'] = $account_vouchers['balance'];      
     $this->data['account_vadotar_balance'][$receipt_type][$site_name][$hostversion]['balance_fine'] = $account_vouchers['balance_fine'];
   } 
-
-  // private function get_alloy_vodator_balance() {
-  //   //get alloy vadotar balance and balance fine from account ledgers
-  //   $accounts_balance_select = '(sum(debit_weight)) as balance, (sum(debit_weight*purity/100)) as balance_fine';
-  //   $argold_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Alloy Vodator'));
-  //   $arf_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Alloy Vodator'));
-  //   $arc_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARC Alloy Vodator'));
-
-  //   $this->data['accounts_argold_alloy_vodator'] = $argold_vouchers['balance'];
-  //   $this->data['accounts_arf_alloy_vodator']    = $arf_vouchers['balance'];
-  //   $this->data['accounts_arc_alloy_vodator']    = $arc_vouchers['balance'];
-
-  //   $this->data['accounts_argold_alloy_vodator_fine'] = $argold_vouchers['balance_fine'];
-  //   $this->data['accounts_arf_alloy_vodator_fine']    = $arf_vouchers['balance_fine'];
-  //   $this->data['accounts_arc_alloy_vodator_fine']    = $arc_vouchers['balance_fine'];
-
-  //   //get alloy vadotar balance and balance fine from factory records
-  //   $arg_records = $this->data['arg_vadotar_records'];
-  //   $arf_records = $this->data['arf_vadotar_records'];
-  //   $arc_records = $this->data['arc_vadotar_records'];
-    
-  //   $this->data['live_argold_alloy_vodator'] = !empty($arg_records->data->alloy_vodator[0]) ? $arg_records->data->alloy_vodator[0]->weight : 0;
-  //   $this->data['live_arf_alloy_vodator']    = !empty($arf_records->data->alloy_vodator[0]) ? $arf_records->data->alloy_vodator[0]->weight : 0;
-  //   $this->data['live_arc_alloy_vodator']    = !empty($arc_records->data->alloy_vodator[0]) ? $arc_records->data->alloy_vodator[0]->weight : 0;
-
-  //   $this->data['live_argold_alloy_vodator_fine'] = !empty($arg_records->data->alloy_vodator[0]) ? $arg_records->data->alloy_vodator[0]->fine : 0;
-  //   $this->data['live_arf_alloy_vodator_fine']    = !empty($arf_records->data->alloy_vodator[0]) ? $arf_records->data->alloy_vodator[0]->fine : 0;
-  //   $this->data['live_arc_alloy_vodator_fine']    = !empty($arc_records->data->alloy_vodator[0]) ? $arc_records->data->alloy_vodator[0]->fine : 0;
-  // } 
-
-  // private function get_gpc_vodator_balance() {
-  //   //get gpc vadotar balance and balance fine from account ledgers
-  //   $accounts_balance_select = '(sum(debit_weight)) as balance, (sum(debit_weight*purity/100)) as balance_fine';
-  //   $argold_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold GPC Vodator'));
-  //   $arf_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF GPC Vodator'));
-  //   $arc_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARC GPC Vodator'));
-
-  //   $this->data['accounts_argold_gpc_vodator'] = $argold_vouchers['balance'];
-  //   $this->data['accounts_arf_gpc_vodator']    = $arf_vouchers['balance'];
-  //   $this->data['accounts_arc_gpc_vodator']    = $arc_vouchers['balance'];
-
-  //   $this->data['accounts_argold_gpc_vodator_fine'] = $argold_vouchers['balance_fine'];
-  //   $this->data['accounts_arf_gpc_vodator_fine']    = $arf_vouchers['balance_fine'];
-  //   $this->data['accounts_arc_gpc_vodator_fine']    = $arc_vouchers['balance_fine'];
-
-  //   //get gpc vadotar balance and balance fine from factory records
-  //   $arg_records = $this->data['arg_vadotar_records'];
-  //   $arf_records = $this->data['arf_vadotar_records'];
-  //   $arc_records = $this->data['arc_vadotar_records'];
-    
-  //   $this->data['live_argold_gpc_vodator'] = !empty($arg_records->data->gpc_vodator[0]) ? $arg_records->data->gpc_vodator[0]->weight : 0;
-  //   $this->data['live_arf_gpc_vodator']    = !empty($arf_records->data->gpc_vodator[0]) ? $arf_records->data->gpc_vodator[0]->weight : 0;
-  //   $this->data['live_arc_gpc_vodator']    = !empty($arc_records->data->gpc_vodator[0]) ? $arc_records->data->gpc_vodator[0]->weight : 0;
-
-  //   $this->data['live_argold_gpc_vodator_fine'] = !empty($arg_records->data->gpc_vodator[0]) ? $arg_records->data->gpc_vodator[0]->fine : 0;
-  //   $this->data['live_arf_gpc_vodator_fine']    = !empty($arf_records->data->gpc_vodator[0]) ? $arf_records->data->gpc_vodator[0]->fine : 0;
-  //   $this->data['live_arc_gpc_vodator_fine']    = !empty($arc_records->data->gpc_vodator[0]) ? $arc_records->data->gpc_vodator[0]->fine : 0;
-  // }
-
-  // private function get_stone_vatav_balance() {
-  //   //get stone vatav balance and balance fine from account ledgers
-  //   $accounts_balance_select = '(sum(debit_weight)) as balance, (sum(debit_weight*purity/100)) as balance_fine';
-  //   $argold_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Stone Vatav'));
-  //   $arf_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Stone Vatav'));
-  //   $arc_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARC Stone Vatav'));
-
-  //   $this->data['accounts_argold_stone_vatav'] = $argold_vouchers['balance'];
-  //   $this->data['accounts_arf_stone_vatav']    = $arf_vouchers['balance'];
-  //   $this->data['accounts_arc_stone_vatav']    = $arc_vouchers['balance'];
-
-  //   $this->data['accounts_argold_stone_vatav_fine'] = $argold_vouchers['balance_fine'];
-  //   $this->data['accounts_arf_stone_vatav_fine']    = $arf_vouchers['balance_fine'];
-  //   $this->data['accounts_arc_stone_vatav_fine']    = $arc_vouchers['balance_fine'];
-
-  //   //get gpc vadotar balance and balance fine from factory records
-  //   $arg_records = $this->data['arg_vadotar_records'];
-  //   $arf_records = $this->data['arf_vadotar_records'];
-  //   $arc_records = $this->data['arc_vadotar_records'];
-    
-  //   $this->data['live_argold_stone_vatav'] = !empty($arg_records->data->stone_vatav[0]) ? $arg_records->data->stone_vatav[0]->weight : 0;
-  //   $this->data['live_arf_stone_vatav']    = !empty($arf_records->data->stone_vatav[0]) ? $arf_records->data->stone_vatav[0]->weight : 0;
-  //   $this->data['live_arc_stone_vatav']    = !empty($arc_records->data->stone_vatav[0]) ? $arc_records->data->stone_vatav[0]->weight : 0;
-
-  //   $this->data['live_argold_stone_vatav_fine'] = !empty($arg_records->data->stone_vatav[0]) ? $arg_records->data->stone_vatav[0]->fine : 0;
-  //   $this->data['live_arf_stone_vatav_fine']    = !empty($arf_records->data->stone_vatav[0]) ? $arf_records->data->stone_vatav[0]->fine : 0;
-  //   $this->data['live_arc_stone_vatav_fine']    = !empty($arc_records->data->stone_vatav[0]) ? $arc_records->data->stone_vatav[0]->fine : 0;
-  // }
-  // private function get_meena_vatav_balance() {
-  //   //get stone vatav balance and balance fine from account ledgers
-  //   $accounts_balance_select = '(sum(debit_weight)) as balance, (sum(debit_weight*purity/100)) as balance_fine';
-  //   $argold_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Meena Vatav'));
-  //   $arf_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Meena Vatav'));
-  //   $arc_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARC Meena Vatav'));
-
-  //   $this->data['accounts_argold_meena_vatav'] = $argold_vouchers['balance'];
-  //   $this->data['accounts_arf_meena_vatav']    = $arf_vouchers['balance'];
-  //   $this->data['accounts_arc_meena_vatav']    = $arc_vouchers['balance'];
-
-  //   $this->data['accounts_argold_meena_vatav_fine'] = $argold_vouchers['balance_fine'];
-  //   $this->data['accounts_arf_meena_vatav_fine']    = $arf_vouchers['balance_fine'];
-  //   $this->data['accounts_arc_meena_vatav_fine']    = $arc_vouchers['balance_fine'];
-
-  //   //get gpc vadotar balance and balance fine from factory records
-  //   $arg_records = $this->data['arg_vadotar_records'];
-  //   $arf_records = $this->data['arf_vadotar_records'];
-  //   $arc_records = $this->data['arc_vadotar_records'];
-    
-  //   $this->data['live_argold_meena_vatav'] = !empty($arg_records->data->meena_vatav[0]) ? $arg_records->data->meena_vatav[0]->weight : 0;
-  //   $this->data['live_arf_meena_vatav']    = !empty($arf_records->data->meena_vatav[0]) ? $arf_records->data->meena_vatav[0]->weight : 0;
-  //   $this->data['live_arc_meena_vatav']    = !empty($arc_records->data->meena_vatav[0]) ? $arc_records->data->meena_vatav[0]->weight : 0;
-
-  //   $this->data['live_argold_meena_vatav_fine'] = !empty($arg_records->data->meena_vatav[0]) ? $arg_records->data->meena_vatav[0]->fine : 0;
-  //   $this->data['live_arf_meena_vatav_fine']    = !empty($arf_records->data->meena_vatav[0]) ? $arf_records->data->meena_vatav[0]->fine : 0;
-  //   $this->data['live_arc_meena_vatav_fine']    = !empty($arc_records->data->meena_vatav[0]) ? $arc_records->data->stone_vatav[0]->fine : 0;
-  // }
-
-  // private function get_copper_vatav_balance() {
-  //   //get stone vatav balance and balance fine from account ledgers
-  //   $accounts_balance_select = '(sum(debit_weight)) as balance, (sum(debit_weight*purity/100)) as balance_fine';
-  //   $argold_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Copper Vatav'));
-  //   $arf_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Copper Vatav'));
-  //   $arc_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARC Copper Vatav'));
-
-  //   $this->data['accounts_argold_copper_vatav'] = $argold_vouchers['balance'];
-  //   $this->data['accounts_arf_copper_vatav']    = $arf_vouchers['balance'];
-  //   $this->data['accounts_arc_copper_vatav']    = $arc_vouchers['balance'];
-
-  //   $this->data['accounts_argold_copper_vatav_fine'] = $argold_vouchers['balance_fine'];
-  //   $this->data['accounts_arf_copper_vatav_fine']    = $arf_vouchers['balance_fine'];
-  //   $this->data['accounts_arc_copper_vatav_fine']    = $arc_vouchers['balance_fine'];
-
-  //   //get gpc vadotar balance and balance fine from factory records
-  //   $arg_records = $this->data['arg_vadotar_records'];
-  //   $arf_records = $this->data['arf_vadotar_records'];
-  //   $arc_records = $this->data['arc_vadotar_records'];
-    
-  //   $this->data['live_argold_copper_vatav'] = !empty($arg_records->data->copper_vatav[0]) ? $arg_records->data->copper_vatav[0]->weight : 0;
-  //   $this->data['live_arf_copper_vatav']    = !empty($arf_records->data->copper_vatav[0]) ? $arf_records->data->copper_vatav[0]->weight : 0;
-  //   $this->data['live_arc_copper_vatav']    = !empty($arc_records->data->copper_vatav[0]) ? $arc_records->data->copper_vatav[0]->weight : 0;
-
-  //   $this->data['live_argold_copper_vatav_fine'] = !empty($arg_records->data->copper_vatav[0]) ? $arg_records->data->copper_vatav[0]->fine : 0;
-  //   $this->data['live_arf_copper_vatav_fine']    = !empty($arf_records->data->copper_vatav[0]) ? $arf_records->data->copper_vatav[0]->fine : 0;
-  //   $this->data['live_arc_copper_vatav_fine']    = !empty($arc_records->data->copper_vatav[0]) ? $arc_records->data->copper_vatav[0]->fine : 0;
-  // }
-
-  // private function get_rhodium_vatav_balance() {
-  //   //get stone vatav balance and balance fine from account ledgers
-  //   $accounts_balance_select = '(sum(debit_weight)) as balance, (sum(debit_weight*purity/100)) as balance_fine';
-  //   $argold_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Rhodium Vatav'));
-  //   $arf_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Rhodium Vatav'));
-  //   $arc_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARC Rhodium Vatav'));
-
-  //   $this->data['accounts_argold_rhodium_vatav'] = $argold_vouchers['balance'];
-  //   $this->data['accounts_arf_rhodium_vatav']    = $arf_vouchers['balance'];
-  //   $this->data['accounts_arc_rhodium_vatav']    = $arc_vouchers['balance'];
-
-  //   $this->data['accounts_argold_rhodium_vatav_fine'] = $argold_vouchers['balance_fine'];
-  //   $this->data['accounts_arf_rhodium_vatav_fine']    = $arf_vouchers['balance_fine'];
-  //   $this->data['accounts_arc_rhodium_vatav_fine']    = $arc_vouchers['balance_fine'];
-
-  //   //get gpc vadotar balance and balance fine from factory records
-  //   $arg_records = $this->data['arg_vadotar_records'];
-  //   $arf_records = $this->data['arf_vadotar_records'];
-  //   $arc_records = $this->data['arc_vadotar_records'];
-    
-  //   $this->data['live_argold_rhodium_vatav'] = !empty($arg_records->data->rhodium_vatav[0]) ? $arg_records->data->rhodium_vatav[0]->weight : 0;
-  //   $this->data['live_arf_rhodium_vatav']    = !empty($arf_records->data->rhodium_vatav[0]) ? $arf_records->data->rhodium_vatav[0]->weight : 0;
-  //   $this->data['live_arc_rhodium_vatav']    = !empty($arc_records->data->rhodium_vatav[0]) ? $arc_records->data->rhodium_vatav[0]->weight : 0;
-
-  //   $this->data['live_argold_rhodium_vatav_fine'] = !empty($arg_records->data->rhodium_vatav[0]) ? $arg_records->data->rhodium_vatav[0]->fine : 0;
-  //   $this->data['live_arf_rhodium_vatav_fine']    = !empty($arf_records->data->rhodium_vatav[0]) ? $arf_records->data->rhodium_vatav[0]->fine : 0;
-  //   $this->data['live_arc_rhodium_vatav_fine']    = !empty($arc_records->data->rhodium_vatav[0]) ? $arc_records->data->rhodium_vatav[0]->fine : 0;
-  // }
-
-  // private function get_tounch_loss_fine_balance() {
-  //   //get alloy vadotar balance and balance fine from account ledgers
-  //   $accounts_balance_select = '(sum(debit_weight)) as balance, 
-  //                               (sum(debit_weight*purity/100)) as balance_fine';
-  //   $argold_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'AR Gold Auto Tounch Loss Fine'));
-  //   $arf_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARF Auto Tounch Loss Fine'));
-  //   $arc_vouchers = $this->voucher_model->find($accounts_balance_select, array('account_name' => 'ARC Auto Tounch Loss Fine'));
-
-  //   $this->data['accounts_argold_tounch_loss_fine'] = $argold_vouchers['balance'];
-  //   $this->data['accounts_arf_tounch_loss_fine']    = $arf_vouchers['balance'];
-  //   $this->data['accounts_arc_tounch_loss_fine']    = $arc_vouchers['balance'];
-
-  //   $this->data['accounts_argold_tounch_loss_fine_fine'] = $argold_vouchers['balance_fine'];
-  //   $this->data['accounts_arf_tounch_loss_fine_fine']    = $arf_vouchers['balance_fine'];
-  //   $this->data['accounts_arc_tounch_loss_fine_fine']    = $arc_vouchers['balance_fine'];
-
-  //   //get alloy vadotar balance and balance fine from factory records
-  //   $arg_records = $this->data['arg_vadotar_records'];
-  //   $arf_records = $this->data['arf_vadotar_records'];
-  //   $arc_records = $this->data['arc_vadotar_records'];
-    
-  //   $this->data['live_argold_tounch_loss_fine'] = !empty($arg_records->data->tounch_loss_fine[0]) ? $arg_records->data->tounch_loss_fine[0]->weight : 0;
-  //   $this->data['live_arf_tounch_loss_fine']    = !empty($arf_records->data->tounch_loss_fine[0]) ? $arf_records->data->tounch_loss_fine[0]->weight : 0;
-  //   $this->data['live_arc_tounch_loss_fine']    = !empty($arc_records->data->tounch_loss_fine[0]) ? $arc_records->data->tounch_loss_fine[0]->weight : 0;
-
-  //   $this->data['live_argold_tounch_loss_fine_fine'] = !empty($arg_records->data->tounch_loss_fine[0]) ? $arg_records->data->tounch_loss_fine[0]->fine : 0;
-  //   $this->data['live_arf_tounch_loss_fine_fine']    = !empty($arf_records->data->tounch_loss_fine[0]) ? $arf_records->data->tounch_loss_fine[0]->fine : 0;
-  //   $this->data['live_arc_tounch_loss_fine_fine']    = !empty($arc_records->data->tounch_loss_fine[0]) ? $arc_records->data->tounch_loss_fine[0]->fine : 0;
-  // } 
 
   private function get_overall_rolling() {  
     $url=API_MAY2022_ARG_PATH."stock_summary_reports/overall_rolling_reports/index?overall_rolling=1";
@@ -385,8 +178,7 @@ class Trial_balances extends Ledgers {
     $this->data['purchase_sales_account_domestic_export_records'] = $this->model->get($purchase_sales_account_domestic_export_select, 
                                                 array_merge($where, array('account_name' => array('SALES ACCOUNT', 'PURCHASE ACCOUNT'))), 
                                                 array(), array('group_by'=>'account_name, is_export'));
-    // pd($this->data['purchase_sales_account_domestic_export_records']);
-
+    
     $this->data['domestic_labour_amount'] = $this->model->find('  IFNULL(sum(debit_amount),0) 
                                                                 - IFNULL(sum(credit_amount),0) as amount', 
                                                 array_merge($where, array('account_name' => array('Domestic Labour Amount'))), 
@@ -396,18 +188,6 @@ class Trial_balances extends Ledgers {
     $loss_account = array('account_name' => 'Loss Account Details',
                           'fine' => 0, 'vadotar' => 0, 'amount' => 0);
     $this->data['loss_account_records'] = array();
-    // $loss_account_names = array('AR Gold Alloy Vodator', 'ARF Alloy Vodator', 'ARC Alloy Vodator',
-    //                             'AR Gold GPC Vodator', 'ARF GPC Vodator', 'ARC GPC Vodator',
-    //                             'AR Gold Stone Vatav', 'ARF Stone Vatav', 'ARC Stone Vatav',
-    //                             'AR Gold Copper Vatav', 'ARF Copper Vatav', 'ARC Copper Vatav',
-    //                             'AR Gold Rhodium Vatav', 'ARF Rhodium Vatav', 'ARC Rhodium Vatav',
-    //                             'HCL LOSS', 'STONE VATAV ARF', 'TOUNCH LOSS FINE ARF', 
-    //                             'Tounch & Castic Dep.Loss', 'Tounch Loss Fine', 'Tounch Loss Fine ',
-    //                             'MEENA LOSS ARF', 'GPC Powder', 'Gpc Powder ARF', 'Gpc Powder ARC', 'GPC Powder AR Gold', 'SISMA GHISS LOSS',
-    //                             'ARG Stone Loss', 'Tounch Loss Fine ARC', 'PASSAGE SEPT', 'ARF GHISS LOSS',
-    //                             'BUFFING LOSS', 'GRINDING LOSS', 'TOUNCH LOSS FINE ARF',
-    //                             'SHAMPOO AND STEEL VIBRATOR LOSS/WALNUT SHAMPO', 'ARG GHISS LOSS', 'GPC POWDER LOSS ARC',
-    //                             'LOSS ACCOUNT', 'Loss Account');
     $loss_account_names =  $this->account_model->get('name', array('group_id' => 3));
     $loss_account_names = array_column($loss_account_names, 'name');
     
@@ -540,8 +320,6 @@ class Trial_balances extends Ledgers {
   }  
 
   private function update_alloy_gpc_stone_vadotar() {
-    //$this->metal_receipt_voucher_model->delete_vodator_records(date('Y-m-d'));
-    //$this->metal_issue_voucher_model->delete_vodator_records(date('Y-m-d'));
     $update_vadotar = isset($_GET['update_vadotar']) ? TRUE : FALSE;
     
     if ($update_vadotar) {
@@ -565,44 +343,6 @@ class Trial_balances extends Ledgers {
       $this->create_update_vadotar_records(API_AUG2022_ARG_PATH, 'AR Gold', 'Aug 2022');
       $this->create_update_vadotar_records(API_AUG2022_ARF_PATH, 'ARF', 'Aug 2022');
       $this->create_update_vadotar_records(API_AUG2022_ARC_PATH, 'ARC', 'Aug 2022');
-
-      // $url = API_MAY2022_ARG_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
-      // $records = json_decode(curl_post_request($url));
-      
-      // if (!empty($records)) {
-      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator_group_by_date, 'Alloy Vodator', 'AR Gold', 'May 2022');
-      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator_group_by_date, 'GPC Vodator', 'AR Gold', 'May 2022');
-      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav_group_by_date, 'Stone Vatav', 'AR Gold', 'May 2022');
-      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->meena_vatav_group_by_date, 'Meena Vatav', 'AR Gold', 'May 2022');
-      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->copper_vatav_group_by_date, 'Copper Vatav', 'AR Gold', 'May 2022');
-      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->rhodium_vatav_group_by_date, 'Rhodium Vatav', 'AR Gold', 'May 2022');
-      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->tounch_loss_fine_group_by_date, 'Auto Tounch Loss Fine', 'AR Gold', 'May 2022');
-      // }
-
-      // $url = API_MAY2022_ARF_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
-      // $records = json_decode(curl_post_request($url));
-      
-      // if (!empty($records)) {
-      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator_group_by_date, 'Alloy Vodator', 'ARF', 'May 2022');
-      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator_group_by_date, 'GPC Vodator', 'ARF', 'May 2022');
-      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav_group_by_date, 'Stone Vatav', 'ARF', 'May 2022');
-      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->meena_vatav_group_by_date, 'Meena Vatav', 'ARF', 'May 2022');
-      // $this->metal_receipt_voucher_model->create_vodator_records($records->data->copper_vatav_group_by_date, 'Copper Vatav', 'ARF', 'May 2022');
-      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->rhodium_vatav_group_by_date, 'Rhodium Vatav', 'ARF', 'May 2022');
-      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->tounch_loss_fine_group_by_date, 'Auto Tounch Loss Fine', 'ARF', 'May 2022');
-      // }
-      
-      // $url = API_MAY2022_ARC_PATH."issue_and_receipts/alloy_gpc_vodator_ledger/index";
-      // $records = json_decode(curl_post_request($url));
-      // if (!empty($records)) {
-      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator_group_by_date, 'Alloy Vodator', 'ARC', 'May 2022');
-      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator_group_by_date, 'GPC Vodator',  'ARC', 'May 2022');
-      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav_group_by_date, 'Stone Vatav',  'ARC', 'May 2022');
-      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->meena_vatav_group_by_date, 'Meena Vatav',  'ARC', 'May 2022');
-      //  $this->metal_receipt_voucher_model->create_vodator_records($records->data->copper_vatav_group_by_date, 'Copper Vatav',  'ARC', 'May 2022');
-      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->rhodium_vatav_group_by_date, 'Rhodium Vatav',  'ARC', 'May 2022');
-      //   $this->metal_receipt_voucher_model->create_vodator_records($records->data->tounch_loss_fine_group_by_date, 'Auto Tounch Loss Fine',  'ARC', 'May 2022');
-      // }
     }
   }
 
@@ -663,4 +403,13 @@ class Trial_balances extends Ledgers {
     }
 
   }
+
+  private function calculate_hallmark_amount_with_tax(){               
+    $select_labour = 'sum(hallmark_amount) * 1.05 as hallmark_amount';
+    $select_sale = 'sum(hallmark_amount) * 1.03 as hallmark_amount';
+    $hallmark_amount_labour = $this->chitti_model->find($select_labour, array('usd_rate != 0', 'sale_type' => 'Labour'));
+    $hallmark_amount_sale = $this->chitti_model->find($select_sale, array('usd_rate != 0', 'sale_type' => 'Sale'));
+    $this->data['hallmark_amount'] = $hallmark_amount_labour['hallmark_amount'] + $hallmark_amount_sale['hallmark_amount'];
+  }
+
 }
