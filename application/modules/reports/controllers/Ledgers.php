@@ -499,7 +499,7 @@ class Ledgers extends BaseController {
     }
   }  
 
-  private get_period_select() {
+  private function get_period_select() {
     if     ($this->data['period'] == 'date')  $period_select = 'date_format(voucher_date,"%Y-%m-%d")';
     elseif ($this->data['period'] == 'month') $period_select = 'date_format(voucher_date,"%Y-%m")';
     elseif ($this->data['period'] == 'year')  $period_select = 'date_format(voucher_date,"%Y")';
@@ -588,7 +588,7 @@ class Ledgers extends BaseController {
     if ($this->data['report_type'] == 'Metal Receipt Type Report') $where['receipt_type']='Metal';
   }
 
-  private funtion get_receipt_issue_select() {
+  private function get_receipt_issue_select() {
     if (   $this->data['report_type'] == 'Account Ledger' 
         || $this->data['report_type'] == 'Rojmel Report'
         || $this->data['report_type'] == 'Metal Receipt Type Report') {
