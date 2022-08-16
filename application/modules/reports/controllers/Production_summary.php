@@ -35,8 +35,8 @@ class Production_summary extends BaseController {
     if     ($this->data['site_name'] == 'AR Gold (May 2022)') $url = API_MAY2022_ARG_PATH."issue_departments/api_issue_departments/create";
     elseif ($this->data['site_name'] == 'ARF (May 2022)')     $url = API_MAY2022_ARF_PATH."issue_departments/api_issue_departments/create";
     elseif ($this->data['site_name'] == 'ARC (May 2022)')     $url = API_MAY2022_ARC_PATH."issue_departments/api_issue_departments/create";
-    elseif ($this->data['site_name'] == 'AR Gold (Aug 2022)')     $url = API_AUG2022_ARC_PATH."issue_departments/api_issue_departments/create";
-    elseif ($this->data['site_name'] == 'ARF (Aug 2022)')     $url = API_AUG2022_ARC_PATH."issue_departments/api_issue_departments/create";
+    elseif ($this->data['site_name'] == 'AR Gold (Aug 2022)')     $url = API_AUG2022_ARG_PATH."issue_departments/api_issue_departments/create";
+    elseif ($this->data['site_name'] == 'ARF (Aug 2022)')     $url = API_AUG2022_ARF_PATH."issue_departments/api_issue_departments/create";
     elseif ($this->data['site_name'] == 'ARC (Aug 2022)')     $url = API_AUG2022_ARC_PATH."issue_departments/api_issue_departments/create";
       
     if (!empty($url)) {
