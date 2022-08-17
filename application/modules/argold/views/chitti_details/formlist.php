@@ -7,6 +7,7 @@
       <th>Date</th>
       <th>Narration</th>
       <th>Customer Name</th>
+      <th>Quantity</th>
       <th class="text-right">Weight</th>
       <th class="text-right">Factory Purity</th>
       <th class="text-right">Wastage</th>
@@ -28,6 +29,7 @@
     ?>
     <tr>
       <th>Total</th>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>
