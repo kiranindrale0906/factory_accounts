@@ -59,11 +59,11 @@ class Ledgers extends BaseController {
     // if (   !empty($this->data['site_name']) 
     //     && $this->data['site_name'] != 'All')              $where['site_name'] = $this->data['site_name'];
 
-    if ($this->data['report_type'] == 'Vadotar Report' || $this->data['report_type'] == 'Production Report') {
-      $export_accounts = $this->account_model->get('name', array('group_code' => 'Export'));
-      $export_account_names = array_column($export_accounts, 'name');
-            if ($this->data['domestic_export'] == 'All') {
-       $export_account_names[] = 'Tanishq';}
+    // if ($this->data['report_type'] == 'Vadotar Report' || $this->data['report_type'] == 'Production Report') {
+    //   $export_accounts = $this->account_model->get('name', array('group_code' => 'Export'));
+    //   $export_account_names = array_column($export_accounts, 'name');
+    //   if ($this->data['domestic_export'] == 'All') {
+    //     $export_account_names[] = 'Tanishq';}
 
 
     //   $export_account_names = implode('", "',$export_account_names);
@@ -187,11 +187,11 @@ class Ledgers extends BaseController {
                  and voucher_type = "metal receipt voucher") and (debit_weight != 0 or debit_amount != 0)' => NULL);
         if ($this->data['site_name'] == 'ARF' || $this->data['site_name'] == 'ARF (May 2022)'|| $this->data['site_name'] == 'ARF (Aug 2022)')
           $where_receipt['description'] = 'ARF Software';
-        elseif ($this->data['site_name'] == 'ARC' || $this->data['site_name'] == 'ARC (May 2022)'|| $this->data['site_name'] == 'ARC (Aug 2022)') $where_receipt['description'] = 'ARC Software';
+        elseif ($this->data['site_name'] == 'ARC' || $this->data['site_name'] == 'ARC (May 2022)'|| $this->data['site_name'] == 'ARC (Aug 2022)') 
+          $where_receipt['description'] = 'ARC Software';
         elseif ($this->data['site_name'] == 'AR Gold' || $this->data['site_name'] == 'AR Gold (May 2022)'|| $this->data['site_name'] == 'AR Gold (Aug 2022)')
           $where_receipt['description'] = 'AR Gold Software';    
     }
-
     
     $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(), array('order_by'=>'chitti_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
     foreach ($issues as $issue_index => $issue_value) {
