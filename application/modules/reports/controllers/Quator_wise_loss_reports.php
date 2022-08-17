@@ -53,43 +53,62 @@ class Quator_wise_loss_reports extends BaseController {
                                                             'order_by'=>'receipt_type asc'));
     }
 
-    $loss_account = array('account_name' => 'Loss Account',
+    // $loss_account = array('account_name' => 'Loss Account',
+    //                       'fine' => 0, 'vadotar' => 0, 'amount' => 0);
+    // $this->data['loss_account_records'] = array();
+    // $loss_account_names=array();
+    // $loss_account_where=array('group_id'=>3);
+    // if($this->data['site_name']=='ARF (May 2022)'){
+    //   $loss_account_where['unrecoverable_account_name']='Unrecovarable ARF (May 2022)';
+    // }elseif($this->data['site_name']=='ARC (May 2022)'){
+    //   $loss_account_where['unrecoverable_account_name']='Unrecovarable ARC (May 2022)';
+    // }elseif($this->data['site_name']=='AR Gold (May 2022)'){
+    //   $loss_account_where['unrecoverable_account_name']='Unrecovarable AR Gold (May 2022)';
+    // }elseif($this->data['site_name']=='ARF (Aug 2022)'){
+    //   $loss_account_where['unrecoverable_account_name']='Unrecovarable ARF (Aug 2022)';
+    // }elseif($this->data['site_name']=='ARC (Aug 2022)'){
+    //   $loss_account_where['unrecoverable_account_name']='Unrecovarable ARC (Aug 2022)';
+    // }elseif($this->data['site_name']=='AR Gold (Aug 2022)'){
+    //   $loss_account_where['unrecoverable_account_name']='Unrecovarable AR Gold (Aug 2022)';
+    // }
+    // $loss_account_names =  $this->account_model->get('name',$loss_account_where);
+
+    // $loss_account_names = array_column($loss_account_names, 'name');
+    // if(!empty($this->data['trial_balance'])){
+    //   $item_name='';
+    //   $item_name_with_factory='';
+    //   foreach($this->data['trial_balance'] as $index => $trail_balance_record) {
+    //     if (in_array($trail_balance_record['account_name'], $loss_account_names)) {
+    //       $unrecoverable_loss_account=$this->account_model->find('unrecoverable_account_name',array('name'=>$trail_balance_record['account_name']));
+    //       $item_name=$trail_balance_record['account_name'].' Unrecovarable';
+    //       $item_name_with_factory=$trail_balance_record['account_name'].' '.$unrecoverable_loss_account['unrecoverable_account_name'];
+    //       if($trail_balance_record['item_name']==$item_name || $trail_balance_record['item_name']==$item_name_with_factory){
+    //         $loss_account['fine'] += $trail_balance_record['fine'];
+    //         $this->data['loss_account_records'][] = $trail_balance_record;
+    //         unset($this->data['trial_balance'][$index]);
+    //       }
+    //     }
+    //   }
+    // }
+    $loss_account = array('account_name' => 'Loss Account Details',
                           'fine' => 0, 'vadotar' => 0, 'amount' => 0);
     $this->data['loss_account_records'] = array();
-    $loss_account_names=array();
-    $loss_account_where=array('group_id'=>3);
-    if($this->data['site_name']=='ARF (May 2022)'){
-      $loss_account_where['unrecoverable_account_name']='Unrecovarable ARF (May 2022)';
-    }elseif($this->data['site_name']=='ARC (May 2022)'){
-      $loss_account_where['unrecoverable_account_name']='Unrecovarable ARC (May 2022)';
-    }elseif($this->data['site_name']=='AR Gold (May 2022)'){
-      $loss_account_where['unrecoverable_account_name']='Unrecovarable AR Gold (May 2022)';
-    }elseif($this->data['site_name']=='ARF (Aug 2022)'){
-      $loss_account_where['unrecoverable_account_name']='Unrecovarable ARF (Aug 2022)';
-    }elseif($this->data['site_name']=='ARC (Aug 2022)'){
-      $loss_account_where['unrecoverable_account_name']='Unrecovarable ARC (Aug 2022)';
-    }elseif($this->data['site_name']=='AR Gold (Aug 2022)'){
-      $loss_account_where['unrecoverable_account_name']='Unrecovarable AR Gold (Aug 2022)';
-    }
-    $loss_account_names =  $this->account_model->get('name',$loss_account_where);
-
+    $loss_account_names =  $this->account_model->get('name', array('group_id' => 3));
     $loss_account_names = array_column($loss_account_names, 'name');
     if(!empty($this->data['trial_balance'])){
-      $item_name='';
-      $item_name_with_factory='';
-      foreach($this->data['trial_balance'] as $index => $trail_balance_record) {
-        if (in_array($trail_balance_record['account_name'], $loss_account_names)) {
-          $unrecoverable_loss_account=$this->account_model->find('unrecoverable_account_name',array('name'=>$trail_balance_record['account_name']));
-          $item_name=$trail_balance_record['account_name'].' Unrecovarable';
-          $item_name_with_factory=$trail_balance_record['account_name'].' '.$unrecoverable_loss_account['unrecoverable_account_name'];
-          if($trail_balance_record['item_name']==$item_name || $trail_balance_record['item_name']==$item_name_with_factory){
-            $loss_account['fine'] += $trail_balance_record['fine'];
-            $this->data['loss_account_records'][] = $trail_balance_record;
-            unset($this->data['trial_balance'][$index]);
-          }
-        }
+    foreach($this->data['trial_balance'] as $index => $trail_balance_record) {
+        $account_data=$this->account_model->find('unrecoverable_account_name',array('name'=>$trail_balance_record['account_name']));
+       $this->data['trial_balance'][$index]['unrecoverable_account_name']= !empty($account_data)?$account_data['unrecoverable_account_name']:'';
+      if (in_array($trail_balance_record['account_name'], $loss_account_names)) {
+        $loss_account['fine'] += $trail_balance_record['fine'];
+        $account_data=$this->account_model->find('unrecoverable_account_name',array('name'=>$trail_balance_record['account_name']));
+        $trail_balance_record['unrecoverable_account_name'] =$account_data['unrecoverable_account_name'] ;
+        $this->data['loss_account_records'][] = $trail_balance_record;
+        unset($this->data['trial_balance'][$index]);
       }
-    }
+    }}
+    $this->data['trial_balance'][] = $loss_account;
+
    }
   public function _get_form_data() {
     $this->data['quators'] = $this->quator_model->get('name,from_date,to_date');
