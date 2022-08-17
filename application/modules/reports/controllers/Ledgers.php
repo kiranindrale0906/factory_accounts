@@ -210,7 +210,7 @@ class Ledgers extends BaseController {
     }
 
     $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(), array('order_by'=>'parent_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
-    lq(); 
+    
     
     if ($this->data['report_type'] == 'Account Ledger'){
       foreach ($issues as $issue_index => $issue_value) {
@@ -240,7 +240,7 @@ class Ledgers extends BaseController {
 
     if($this->data['report_type']=='Domestic Sale Ledger'){
     $receipts = $this->voucher_model->get($domestic_export_receipt_issue_select,array('account_name' =>'SALES ACCOUNT','is_export'=> 0), array(), array('order_by'=>'parent_id, voucher_type asc', 'group_by' => $this->data['group']));
-    // pd($receipts);
+    
     $issues=array();
     $issue_voucher_dates=array();
 
@@ -560,7 +560,7 @@ class Ledgers extends BaseController {
       $where['site_name'] = $this->data['site_name'];
 
     if (   $this->data['report_type'] == 'Vadotar Report' || $this->data['report_type'] == 'Production Report') {
-      $export_accounts = $this->account_model->get('name', array('group_code in ("Domestic","Export","Export Labour")' => NULL ));
+      $export_accounts = $this->account_model->get('name', array('group_code in ("Export")' => NULL ));
       $export_account_names = array_column($export_accounts, 'name');
             
       if ($this->data['domestic_export'] == 'All') $export_account_names[] = 'Tanishq';
@@ -576,6 +576,7 @@ class Ledgers extends BaseController {
         $where['purity != factory_purity'] = NULL;
       } elseif ($this->data['domestic_export'] == 'Tanishq') {
         $where['account_name'] = 'Tanishq';
+        $where['receipt_type != "Metal"'] = NULL;
         $where['voucher_type'] = 'metal issue voucher';
       } elseif ($this->data['domestic_export'] == 'Export') {
         $where['(account_name in ("'.$export_account_names.'") 
@@ -587,7 +588,7 @@ class Ledgers extends BaseController {
 
     if ($this->data['report_type'] == 'Production Report') $where['account_name != '] = 'VADOTAR';
     if ($this->data['report_type'] == 'Metal Receipt Type Report') $where['receipt_type']='Metal';
-
+    
     return $where;
   }
 
