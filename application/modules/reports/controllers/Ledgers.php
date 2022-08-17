@@ -187,10 +187,9 @@ class Ledgers extends BaseController {
                  and voucher_type = "metal receipt voucher") and (debit_weight != 0 or debit_amount != 0)' => NULL);
         if ($this->data['site_name'] == 'ARF' || $this->data['site_name'] == 'ARF (May 2022)'|| $this->data['site_name'] == 'ARF (Aug 2022)')
           $where_receipt['description'] = 'ARF Software';
-        }elseif ($this->data['site_name'] == 'ARC' || $this->data['site_name'] == 'ARC (May 2022)'|| $this->data['site_name'] == 'ARC (Aug 2022)') $where_receipt['description'] = 'ARC Software';
-        }elseif ($this->data['site_name'] == 'AR Gold' || $this->data['site_name'] == 'AR Gold (May 2022)'|| $this->data['site_name'] == 'AR Gold (Aug 2022)'){
-          $where_receipt['description'] = 'AR Gold Software';
-        }         
+        elseif ($this->data['site_name'] == 'ARC' || $this->data['site_name'] == 'ARC (May 2022)'|| $this->data['site_name'] == 'ARC (Aug 2022)') $where_receipt['description'] = 'ARC Software';
+        elseif ($this->data['site_name'] == 'AR Gold' || $this->data['site_name'] == 'AR Gold (May 2022)'|| $this->data['site_name'] == 'AR Gold (Aug 2022)')
+          $where_receipt['description'] = 'AR Gold Software';    
     }
 
     
