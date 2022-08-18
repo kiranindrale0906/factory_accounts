@@ -106,10 +106,10 @@
             </tr>
           </thead>
           <?php 
-              $assets_fine = 0;  
-              $assets_vadotar = 0;  
-              $assets_amount = 0;  
-              $assets_usd_amount = 0;  
+              $liabilities_fine = 0;  
+              $liabilities_vadotar = 0;  
+              $liabilities_amount = 0;  
+              $liabilities_usd_amount = 0;  
               $gpc_powder_fine=0;
               if(!empty($loss_account_records)) {
                 foreach ($loss_account_records as $record) {
@@ -120,10 +120,10 @@
                   if ($record['account_name'] == 'PURCHASE ACCOUNT') $profit_and_loss['purchase_account'] = $record;
                   if ($record['account_name'] == 'MAIN VADOTAR')     $profit_and_loss['main_vadotar'] = $record;
                     
-                  $assets_vadotar = $assets_vadotar + $record['vadotar'];
-                  $assets_fine = $assets_fine + $record['fine'];
-                  $assets_amount= $assets_amount + $record['amount'];
-                  $assets_usd_amount= $assets_usd_amount + @$record['usd_amount'];
+                  $liabilities_vadotar = $liabilities_vadotar + $record['vadotar'];
+                  $liabilities_fine = $liabilities_fine + $record['fine'];
+                  $liabilities_amount= $liabilities_amount + $record['amount'];
+                  $liabilities_usd_amount= $liabilities_usd_amount + @$record['usd_amount'];
                   
                   if(round($record['fine'],2)!=0){
                     if(in_array($record['account_name'], array("GPC Powder ARC","Gpc Powder ARF","GPC Powder AR Gold"))){
@@ -144,10 +144,10 @@
           ?>
           <tr>
             <th>Total</th>
-            <th class="text-right"><?= four_decimal($assets_amount, '-'); ?></th>          
-            <th class="text-right"><?= four_decimal($assets_usd_amount, '-'); ?></th>          
-            <th class="text-right"><?=$assets_total= four_decimal($assets_fine, '0'); ?></th>          
-            <th class="text-right"><?= four_decimal($assets_vadotar, '-'); ?></th>
+            <th class="text-right"><?= four_decimal($liabilities_amount, '-'); ?></th>          
+            <th class="text-right"><?= four_decimal($liabilities_usd_amount, '-'); ?></th>          
+            <th class="text-right"><?=$liabilities_total= four_decimal($liabilities_fine, '0'); ?></th>          
+            <th class="text-right"><?= four_decimal($liabilities_vadotar, '-'); ?></th>
           </tr>
         </table>
       </div>
@@ -168,10 +168,10 @@
           </thead>
 
           <?php
-              $liabilities_fine = 0; 
-              $liabilities_vadotar = 0;  
-              $liabilities_amount = 0;
-              $liabilities_usd_amount = 0;
+              $assets_fine = 0; 
+              $assets_vadotar = 0;  
+              $assets_amount = 0;
+              $assets_usd_amount = 0;
               $gpc_vodator_fine=0;
 
               if(!empty($loss_account_records)) {
@@ -184,10 +184,10 @@
                   if (!empty($sales_accounts)) $profit_and_loss['sale_gst_accounts'] = $sales_accounts;
 
                   
-                  $liabilities_vadotar = $liabilities_vadotar + $record['vadotar'];
-                  $liabilities_fine = $liabilities_fine + $record['fine']; 
-                  $liabilities_amount = $liabilities_amount + $record['amount']; 
-                  $liabilities_usd_amount = $liabilities_usd_amount + @$record['usd_amount']; 
+                  $assets_vadotar = $assets_vadotar + $record['vadotar'];
+                  $assets_fine = $assets_fine + $record['fine']; 
+                  $assets_amount = $assets_amount + $record['amount']; 
+                  $assets_usd_amount = $assets_usd_amount + @$record['usd_amount']; 
                   if(round($record['fine'],2)!=0){
                     if(in_array($record['account_name'],array("AR Gold GPC Vodator","ARF GPC Vodator","ARC GPC Vodator"))){
                       $gpc_vodator_fine=four_decimal((-1 * $record['fine']), '-');
@@ -206,10 +206,10 @@
           ?>
           <tr>
             <th>Total</th>
-            <th class="text-right"><?= four_decimal(-1 * $liabilities_amount, '-'); ?></th>
-            <th class="text-right"><?= four_decimal(-1 * $liabilities_usd_amount, '-'); ?></th>
-            <th class="text-right"><?= $liabilities_total=four_decimal(-1 * $liabilities_fine, '0'); ?></th>          
-            <th class="text-right"><?= four_decimal(-1 * $liabilities_vadotar, '-'); ?></th>
+            <th class="text-right"><?= four_decimal(-1 * $assets_amount, '-'); ?></th>
+            <th class="text-right"><?= four_decimal(-1 * $assets_usd_amount, '-'); ?></th>
+            <th class="text-right"><?= $assets_total=four_decimal(-1 * $assets_fine, '0'); ?></th>          
+            <th class="text-right"><?= four_decimal(-1 * $assets_vadotar, '-'); ?></th>
           </tr>
           </table>
         </div> 
