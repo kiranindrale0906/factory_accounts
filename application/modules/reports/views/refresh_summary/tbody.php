@@ -4,7 +4,7 @@
     <td>
       <?= $record['item_name'] ?> 
       <?php 
-        $refresh_ids = explode(",", $record['refresh_id'])
+        $refresh_ids = explode(",", $record['refresh_id']);
         foreach ($refresh_ids as $refresh_id) { ?>
           <a href='<?= base_url() ?>argold/voucher_details/view/<?=$refresh_id?>'><?= $refresh_id ?></a>
           <?php 
