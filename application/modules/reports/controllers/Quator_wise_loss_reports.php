@@ -42,7 +42,7 @@ class Quator_wise_loss_reports extends BaseController {
       $where['where']=array('date(voucher_date) >='=>$quator_details['from_date'],
                             'date(voucher_date) <='=>$quator_details['to_date'],
                             'account_name!=' => 'Loss Account',
-                            'site_name' = $this->data['site_name']);
+                            'site_name' => $this->data['site_name']);
 
       $loss_account_names =  $this->account_model->get('name', array('group_id' => 3));
       $loss_account_names = array_column($loss_account_names, 'name');
