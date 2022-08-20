@@ -5,8 +5,9 @@
       <?= $record['item_name'] ?> 
       <?php 
         $refresh_ids = explode(",", $record['refresh_id']);
-        foreach ($refresh_ids as $refresh_id) { ?>
-          <a href='<?= base_url() ?>argold/refresh/view/<?=$refresh_id?>'><?= decimal_number_format($refresh_id, 2) ?></a>
+        $refresh_weights = explode(",", $record['refresh_weight']);
+        foreach ($refresh_ids as $index => $refresh_id) { ?>
+          <a href='<?= base_url() ?>argold/refresh/view/<?=$refresh_id?>'><?= decimal_number_format($$refresh_weights[$index], 2) ?></a>
           <?php 
         } 
       ?>    
