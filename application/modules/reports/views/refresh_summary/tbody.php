@@ -2,8 +2,7 @@
   <tr>
     <td><?= $record['created_at'] ?></td>
     <td>
-      <?= $record['item_name'] ?>
-      <a class=""  href='<?= base_url() ?>argold/refresh/view/<?=$record['refresh_id']?>'>view</a>  
+      <?= $record['item_name'] ?> <?=$record['refresh_id']?>
     </td>
     <td><?= four_decimal($record['factory_purity']) ?></td>
     <td><?= four_decimal($record['purity']) ?></td>
