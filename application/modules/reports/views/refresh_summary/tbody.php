@@ -1,7 +1,7 @@
 <tbody>
   <tr>
     <td><?= $record['created_at'] ?></td>
-    <td><?= $record['item_name'] ?></td>
+    <td><?= $record['item_name'].' '.$record['refresh_id'] ?></td>
     <td><?= four_decimal($record['factory_purity']) ?></td>
     <td><?= four_decimal($record['purity']) ?></td>
     <td class='text-right'><?= four_decimal($record['weight']) ?></td>
