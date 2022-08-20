@@ -45,7 +45,7 @@ class Quator_wise_loss_reports extends BaseController {
 
       $loss_account_names =  $this->account_model->get('name', array('group_id' => 3));
       $loss_account_names = array_column($loss_account_names, 'name');
-      $where['where']["account_name in ('".implode("' ,'",$loss_account_names)."')"] => NULL;
+      $where['where']["account_name in ('".implode("' ,'",$loss_account_names)."')"] = NULL;
 
       $select = "account_name, narration as item_name,
                IFNULL((sum(debit_weight*purity)/100),0) - IFNULL((sum(credit_weight*factory_purity)/100),0) as fine,
