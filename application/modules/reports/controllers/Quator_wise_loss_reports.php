@@ -53,7 +53,7 @@ class Quator_wise_loss_reports extends BaseController {
                IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount,
                IFNULL(sum(usd_debit_amount),0) - IFNULL(sum(usd_credit_amount),0) as usd_amount,0 as id";
       $this->data['trial_balance'] = $this->model->get($select, $where, array() , 
-                                                      array('group_by'=>'account_name,narration',
+                                                      array('group_by'=>'account_name',
                                                             'order_by'=>'receipt_type asc'));
       lq();
     }
