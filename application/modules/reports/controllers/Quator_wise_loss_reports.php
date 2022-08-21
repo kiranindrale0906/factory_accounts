@@ -47,10 +47,11 @@ class Quator_wise_loss_reports extends BaseController {
       $loss_account_names =  $this->account_model->get('name', array('group_id' => 3));
       $loss_account_names = array_column($loss_account_names, 'name');
       $where['where']["account_name in ('".implode("' ,'",$loss_account_names)."')"] = NULL;
+      $where['where']["narration like '%Unrecovarable%'"] = NULL;
 
-      //- IFNULL((sum(credit_weight*factory_purity)/100),0)
+      
       $select = "account_name, narration as item_name,
-               IFNULL((sum(debit_weight*purity)/100),0) * -1  as fine,
+               IFNULL((sum(debit_weight*purity)/100),0) - IFNULL((sum(credit_weight*factory_purity)/100),0) as fine,
                IFNULL(sum((purity-factory_purity)*debit_weight/100),0) - IFNULL(sum((factory_purity-purity)*credit_weight/100),0) as vadotar,
                IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount,
                IFNULL(sum(usd_debit_amount),0) - IFNULL(sum(usd_credit_amount),0) as usd_amount,0 as id";
