@@ -165,17 +165,23 @@ class Ledgers extends BaseController {
 
       $account_receipt_where['site_name'] = '';                        
       $account_issue_where['site_name'] = '';                        
-      if ($this->data['site_name'] == 'ARF' || $this->data['site_name'] == 'ARF (May 2022)'|| $this->data['site_name'] == 'ARF (Aug 2022)'){
-        $account_issue_where['account_name'] = 'ARF Software';
-      }elseif ($this->data['site_name'] == 'ARC' || $this->data['site_name'] == 'ARC (May 2022)'|| $this->data['site_name'] == 'ARC (Aug 2022)'){
-        $account_issue_where['account_name'] = 'ARC Software';
+      if ($this->data['site_name'] == 'ARF' || $this->data['site_name'] == 'ARF (May 2022)'){
+        $account_issue_where['account_name'] = 'ARF Software (May 2022)';
+      }elseif ($this->data['site_name'] == 'ARF (Aug 2022)'){
+        $account_issue_where['account_name'] = 'ARF Software (Aug 2022)';
+      }elseif ($this->data['site_name'] == 'ARC (Aug 2022)'){
+        $account_issue_where['account_name'] = 'ARC Software (Aug 2022)';
+      }elseif ($this->data['site_name'] == 'ARC' || $this->data['site_name'] == 'ARC (May 2022)'){
+        $account_issue_where['account_name'] = 'ARC Software (May 2022)';
       }elseif ($this->data['site_name'] == 'Export'){
         $account_issue_where['account_name'] = 'Export Internal Software';
-      }elseif ($this->data['site_name'] == 'AR Gold' || $this->data['site_name'] == 'AR Gold (May 2022)'|| $this->data['site_name'] == 'AR Gold (Aug 2022)'){
-        $account_issue_where['account_name'] = 'AR Gold Software';
+      }elseif ($this->data['site_name'] == 'AR Gold' || $this->data['site_name'] == 'AR Gold (May 2022)'){
+        $account_issue_where['account_name'] = 'AR Gold Software (May 2022)';
+      }elseif ($this->data['site_name'] == 'AR Gold (Aug 2022)'){
+        $account_issue_where['account_name'] = 'AR Gold Software (Aug 2022)';
       }
       else{
-        $account_issue_where['account_name in ("ARF Software","ARC Software","AR Gold Software","Export Internal Software") '] = NULL;
+        $account_issue_where['account_name in ("ARF Software","ARC Software","AR Gold Software","ARF Software (May 2022)","ARC Software (May 2022)","AR Gold Software (May 2022)","ARF Software (Aug 2022)","ARC Software (Aug 2022)","AR Gold Software (Aug 2022)","Export Internal Software") '] = NULL;
       }   
       !empty($this->data['account_name'])?$account_receipt_where['account_name']=$this->data['account_name']:$account_receipt_where['account_name not in ("MAIN VADOTAR","PURCHASE ACCOUNT","ARF Software","ARC Software","AR Gold Software","Export Internal Software") '] = NULL;                    
     }   
