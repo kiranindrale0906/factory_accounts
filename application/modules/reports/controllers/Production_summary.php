@@ -110,7 +110,7 @@ class Production_summary extends BaseController {
   }
 
   private function get_refresh_details() {
-    $select = 'date(created_at) as created_at, item_name, sum(weight) as weight, sum(weight * purity) / sum(weight) as purity, sum(weight * factory_purity) / sum(weight) as factory_purity';
+    $select = 'date(created_at) as created_at, item_name, GROUP_CONCAT(refresh_id) as refresh_id, GROUP_CONCAT(weight) as refresh_weight, sum(weight) as weight, sum(weight * purity) / sum(weight) as purity, sum(weight * factory_purity) / sum(weight) as factory_purity';
     $where=array();
     $group_by=array('group_by' => 'date(created_at), item_name');
     if(!empty($this->data['site_name'])){
@@ -141,6 +141,7 @@ class Production_summary extends BaseController {
     };
    
     $refresh_details = $this->refresh_detail_model->get($select, $where, array(),$group_by);
+
     $this->data['refresh_details'] = $this->get_grouped_records($refresh_details);
     $this->get_refresh_group_total();
   }

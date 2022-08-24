@@ -23,10 +23,9 @@ class Quator_wise_loss_reports extends BaseController {
   }
   public function loss_account_details(){
     $where=array();
-    $quator_details= $this->quator_model->find('name,from_date,to_date,MONTH(from_date) as from_month,MONTH(to_date) as to_month,YEAR(from_date) as from_year,YEAR(to_date) as to_year',array('name'=>$this->data['quator_name']));
-
-
-    
+    $quator_details= $this->quator_model->find('name, from_date, to_date, MONTH(from_date) as from_month, MONTH(to_date) as to_month,
+                                                YEAR(from_date) as from_year,YEAR(to_date) as to_year',
+                                                array('name' => $this->data['quator_name']));
     $this->data['trial_balance']=array();
     if(!empty($this->data['quator_name'])){
       $export_accounts = $this->account_model->get('name', array('group_code' => 'Export'));
@@ -40,16 +39,24 @@ class Quator_wise_loss_reports extends BaseController {
                                                           'account_name != "Vodator"'=>NULL,
                                                           'date(voucher_date) >='=>$quator_details['from_date'],'date(voucher_date) <='=>$quator_details['to_date']));
 
+      $where['where']=array('date(voucher_date) >='=>$quator_details['from_date'],
+                            'date(voucher_date) <='=>$quator_details['to_date'],
+                            'account_name!=' => 'Loss Account',
+                            'site_name' => $this->data['site_name']);
 
-      $where['where']=array('date(voucher_date) >='=>$quator_details['from_date'],'date(voucher_date) <='=>$quator_details['to_date'],'account_name!='=>'Loss Account');
+      $loss_account_names =  $this->account_model->get('name', array('group_id' => 3));
+      $loss_account_names = array_column($loss_account_names, 'name');
+      $where['where']["account_name in ('".implode("' ,'",$loss_account_names)."')"] = NULL;
+      $where['where']["narration like '%Unrecovarable%'"] = NULL;
 
+      
       $select = "account_name, narration as item_name,
-               IFNULL((sum(debit_weight*purity)/100),0) - IFNULL((sum(credit_weight*factory_purity)/100),0) as fine,
+               IFNULL((sum(credit_weight*purity)/100),0) - IFNULL((sum(debit_weight*factory_purity)/100),0) as fine,
                IFNULL(sum((purity-factory_purity)*debit_weight/100),0) - IFNULL(sum((factory_purity-purity)*credit_weight/100),0) as vadotar,
                IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount,
                IFNULL(sum(usd_debit_amount),0) - IFNULL(sum(usd_credit_amount),0) as usd_amount,0 as id";
-      $this->data['trial_balance'] = $this->model->get($select,$where, array() , 
-                                                      array('group_by'=>'account_name,narration',
+      $this->data['trial_balance'] = $this->model->get($select, $where, array() , 
+                                                      array('group_by'=>'account_name',
                                                             'order_by'=>'receipt_type asc'));
     }
 
@@ -91,25 +98,28 @@ class Quator_wise_loss_reports extends BaseController {
     //   }
     // }
     $loss_account = array('account_name' => 'Loss Account Details',
-                          'fine' => 0, 'vadotar' => 0, 'amount' => 0);
+                          'fine' => 0, 
+                          'vadotar' => 0, 
+                          'amount' => 0);
     $this->data['loss_account_records'] = array();
     $loss_account_names =  $this->account_model->get('name', array('group_id' => 3));
     $loss_account_names = array_column($loss_account_names, 'name');
     if(!empty($this->data['trial_balance'])){
-    foreach($this->data['trial_balance'] as $index => $trail_balance_record) {
-        $account_data=$this->account_model->find('unrecoverable_account_name',array('name'=>$trail_balance_record['account_name']));
-       $this->data['trial_balance'][$index]['unrecoverable_account_name']= !empty($account_data)?$account_data['unrecoverable_account_name']:'';
-      if (in_array($trail_balance_record['account_name'], $loss_account_names)) {
-        $loss_account['fine'] += $trail_balance_record['fine'];
-        $account_data=$this->account_model->find('unrecoverable_account_name',array('name'=>$trail_balance_record['account_name']));
-        $trail_balance_record['unrecoverable_account_name'] =$account_data['unrecoverable_account_name'] ;
-        $this->data['loss_account_records'][] = $trail_balance_record;
-        unset($this->data['trial_balance'][$index]);
+      foreach($this->data['trial_balance'] as $index => $trail_balance_record) {
+        $account_data=$this->account_model->find('unrecoverable_account_name', array('name'=>$trail_balance_record['account_name']));
+        $this->data['trial_balance'][$index]['unrecoverable_account_name'] = !empty($account_data)?$account_data['unrecoverable_account_name']:'';
+        if (in_array($trail_balance_record['account_name'], $loss_account_names)) {
+          $loss_account['fine'] += $trail_balance_record['fine'];
+          $account_data=$this->account_model->find('unrecoverable_account_name', array('name'=>$trail_balance_record['account_name']));
+          $trail_balance_record['unrecoverable_account_name'] =$account_data['unrecoverable_account_name'] ;
+          $this->data['loss_account_records'][] = $trail_balance_record;
+          unset($this->data['trial_balance'][$index]);
+        }
       }
-    }}
+    }
     $this->data['trial_balance'][] = $loss_account;
-
    }
+
   public function _get_form_data() {
     $this->data['quators'] = $this->quator_model->get('name,from_date,to_date');
     $this->data['quator_name']          = (!empty($_GET['quator'])) ? $_GET['quator'] : '';
