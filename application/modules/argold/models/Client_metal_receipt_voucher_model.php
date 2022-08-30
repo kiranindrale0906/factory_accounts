@@ -437,6 +437,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $metal_issue_data['voucher_type'] = "metal issue voucher";
       $metal_issue_data['transaction_type'] = 'account';
       $metal_issue_data['is_export'] = $is_export;
+      $metal_issue_data['dd_type'] = $this->attributes['dd_type'];
       $obj_metal_issue_voucher=new metal_issue_voucher_model($metal_issue_data);
       $obj_metal_issue_voucher->save();
     }    
