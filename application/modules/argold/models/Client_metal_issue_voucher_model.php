@@ -79,6 +79,7 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
     $account_name=trim($this->attributes['account_name']);
     if (   ENABLE_API_FOR_RECEIPT 
         && $this->attributes['receipt_type'] != 'Internal' 
+        && $this->attributes['receipt_type'] != 'Internal' 
 
         && (   $account_name == 'AR Gold Software (May 2022)'
             || $account_name == 'ARF Software (May 2022)'
@@ -87,6 +88,7 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
             || $account_name == 'ARF Software (Aug 2022)'
             || $account_name == 'ARC Software (Aug 2022)'
             || $account_name == 'Export Internal Software'
+            || $account_name == 'Domestic Internal Software'
             || $account_name == 'AR Gold Software Staging'
             || $account_name == 'ARF Software Staging'
             || $account_name == 'ARC Software Staging')){

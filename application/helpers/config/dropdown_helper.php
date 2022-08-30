@@ -224,7 +224,8 @@
                       'AR Gold Software (Aug 2022)' => API_AUG2022_ARG_PATH,
                       'ARF Software (Aug 2022)'     => API_AUG2022_ARF_PATH,
                       'ARC Software (Aug 2022)'     => API_AUG2022_ARC_PATH,
-                      'Export Internal Software'    => API_EXPORT_INTERNAL_PATH);
+                      'Export Internal Software'    => API_EXPORT_INTERNAL_PATH,
+                      'Domestic Internal Software'    => API_DOMESTIC_INTERNAL_PATH);
     return $api_path[$account_name];
   }
 
