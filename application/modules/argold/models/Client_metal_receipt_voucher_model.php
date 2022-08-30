@@ -85,6 +85,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   private function set_account_name_from_receipt_type() {
     if ($this->attributes['receipt_type'] == "AR Gold Finished Goods")      $this->attributes['account_name'] = 'AR Gold';
      if ($this->attributes['receipt_type'] == "Export Internal")      $this->attributes['account_name'] = 'Export Internal Software';
+     if ($this->attributes['receipt_type'] == "Domestic Internal")      $this->attributes['account_name'] = 'Domestic Internal Software';
+     if ($this->attributes['receipt_type'] == "QC Out")      $this->attributes['account_name'] = 'Domestic Internal Software';
      if ($this->attributes['receipt_type'] == "Packing Slip")      $this->attributes['account_name'] = 'Export Internal Software';
     if ($this->attributes['receipt_type'] == "ARF Finished Goods")          $this->attributes['account_name'] = 'ARF';
     if ($this->attributes['receipt_type'] == "ARC Finished Goods")          $this->attributes['account_name'] = 'ARC';
@@ -118,7 +120,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   private function set_factory_purity_from_receipt_type_for_metal_and_finished_goods_and_chain_receipt() {
     if (in_array($this->attributes['receipt_type'], array('Metal', 
                                                           'Rhodium', 
-                                                          'AR Gold Finished Goods', 'AR Gold Chain Receipt', 'AR Gold Finished Goods Receipt', 'AR Gold RND','Export Internal','Packing Slip',
+                                                          'AR Gold Finished Goods', 'AR Gold Chain Receipt', 'AR Gold Finished Goods Receipt', 'AR Gold RND','Export Internal','Domestic Internal','Packing Slip','QC Out',
                                                           'ARF Finished Goods', 'ARF Software Finished Goods', 'ARF Chain Receipt', 'ARF Finished Goods Receipt', 'ARF RND',
                                                           'ARC Finished Goods', 'ARC Chain Receipt', 'ARC Finished Goods Receipt', 'ARC RND'))) {
       $this->formdata['metal_receipt_vouchers']['factory_purity'] = $this->attributes['purity'];
@@ -222,6 +224,11 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       //$account_name = 'Export Internal Software';
       $site_name = 'Export';
     }
+    if (in_array($this->attributes['receipt_type'], array('Domestic Internal','QC Out'))) {
+      $set_metal_issue_voucher = 1;
+      //$account_name = 'Export Internal Software';
+      $site_name = 'Domestic';
+    }
 
     if (     $this->attributes['receipt_type'] == 'Alloy Vodator'
           || $this->attributes['receipt_type'] == 'GPC Vodator'
@@ -261,7 +268,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
             || $this->attributes['receipt_type'] == 'ARF RND'
             || $this->attributes['receipt_type'] == 'ARC RND'
             || $this->attributes['receipt_type'] == 'Export Internal'
+            || $this->attributes['receipt_type'] == 'Domestic Internal'
             || $this->attributes['receipt_type'] == 'Packing Slip'
+            || $this->attributes['receipt_type'] == 'QC Out'
             || $this->attributes['receipt_type'] == 'AR Gold Finished Goods Receipt'
             || $this->attributes['receipt_type'] == 'ARF Finished Goods Receipt'
             || $this->attributes['receipt_type'] == 'ARC Finished Goods Receipt') {
@@ -472,7 +481,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     } else if(   $attributes['receipt_type'] == "Refresh"
               //    $attributes['receipt_type'] == "AR Gold Refresh"
               // || $attributes['receipt_type'] == "ARF Refresh"
-              || $attributes['receipt_type'] == "Export Internal") {
+              || $attributes['receipt_type'] == "Export Internal"
+              || $attributes['receipt_type'] == "Domestic Internal") {
               // || $attributes['receipt_type'] == "ARC Refresh"
       $api_data = array_merge($api_data, array('type'=>'Pure',
                                                'hook_kdm_purity' => $attributes['hook_kdm_purity'],
@@ -511,6 +521,12 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $api_data = array_merge($api_data, array('type' => 'Pure','description' => $api_data['description'].'-'.$attributes['site_name']));
       $send_data['internal_receipts'] = $api_data;
       $api_url = "api/api_internal_receipts/store";
+
+    }elseif ($attributes['account_name'] == 'Domestic Internal Software') {
+
+      $api_data = array_merge($api_data, array('type' => 'Pure','description' => $api_data['description'].'-'.$attributes['site_name']));
+      $send_data['internal_receipts'] = $api_data;
+      $api_url = "api/api_domestic_internal_receipts/store";
 
     } elseif (   $attributes['receipt_type'] == 'AR Gold RND'
               || $attributes['receipt_type'] == 'ARF RND'
