@@ -364,8 +364,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   }
 
   public function before_save($action) {
-    if ($this->attributes['receipt_type']=='Daily Drawer')
-      pd($this->formdata['metal_issue_vouchers']);
+    // if ($this->attributes['receipt_type']=='Daily Drawer')
+    //   pd($this->formdata['metal_issue_vouchers']);
     $this->attributes['fine'] = $this->attributes['debit_weight'] * $this->attributes['purity'] / 100;
     $this->attributes['factory_fine'] = $this->attributes['debit_weight'] * $this->attributes['factory_purity'] / 100;
     parent::before_save($action);
