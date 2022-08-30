@@ -16,7 +16,8 @@ class Client_metal_receipt_vouchers extends Core_metal_receipt_vouchers {
     $this->data['record']['receipt_type']=!empty($_GET['receipt_type'])?$_GET['receipt_type']:"";
 
     if(   $this->data['record']['receipt_type']=='Metal'
-       || $this->data['record']['receipt_type']=='Refresh'){
+       || $this->data['record']['receipt_type']=='Refresh'
+       || $this->data['record']['receipt_type']=='Daily Drawer'){
       // $this->data['account_names_for_metal_issue'][] = array('id' => 'AR Gold Software', 'name' => 'AR Gold Software');
       // $this->data['account_names_for_metal_issue'][] = array('id' => 'ARC Software', 'name' => 'ARC Software');
       // $this->data['account_names_for_metal_issue'][] = array('id' => 'ARF Software', 'name' => 'ARF Software'); 
