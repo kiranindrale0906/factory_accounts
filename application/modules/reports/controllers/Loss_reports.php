@@ -113,7 +113,6 @@ class Loss_reports extends BaseController {
     }else {return array();} 
 
     $url = $path.'issue_and_receipts/loss_report_for_accounts/index';
-//	pd($url);
     $factory_loss_records = json_decode(curl_post_request($url, $postdata), true);
     if (!empty($factory_loss_records))
       if (   isset($factory_loss_records['data']['loss_details'])
@@ -149,9 +148,10 @@ class Loss_reports extends BaseController {
 
     return $ghiss_melting_loss;
   }
+
   private function get_opening_loss($data) {
-    $opening_loss = $this->opening_loss_voucher_model->get('', 
-                                                     array('factory_name' => $this->data['site_name'],'quator IS NULL'=>NULL));
+    $opening_loss = $this->opening_loss_voucher_model->get('',  array('factory_name' => $this->data['site_name'],
+                                                                      'quator IS NULL'=>NULL));
     $opening_loss_details=array();
     foreach ($opening_loss as $opening_loss_index => $opening_loss_value) {
       $data['issue_department_id'] = $opening_loss_value['id'];
