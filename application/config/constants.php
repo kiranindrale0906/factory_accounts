@@ -133,7 +133,7 @@ define('FIELDS_PER_ROW', 3);
 
 
   define('API_EXPORT_INTERNAL_PATH', 'https://staging-exports.ascratech.com/');
-  define('API_DOMESTIC_INTERNAL_PATH', 'https://staging-domestics.ascratech.com/');
+  define('API_DOMESTIC_INTERNAL_PATH', 'https://staging-domestic.ascratech.com/');
 
 // define('API_ARGs_PATH', 'https://argolds.ascratech.com/');
 //  define('API_ARFs_PATH', 'https://arfs.ascratech.com/');
