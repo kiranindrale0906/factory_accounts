@@ -517,19 +517,18 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                    || $attributes['account_name'] == 'ARF Software (Aug 2022)' 
                    || $attributes['account_name'] == 'ARC Software (Aug 2022)'
                    || $attributes['account_name'] == 'Export Internal Software'
+                   || $attributes['account_name'] == 'Domestic Internal Software'
                     )) {
 
       $api_data = array_merge($api_data, array('type' => 'Pure','description' => $api_data['description'].'-'.$attributes['site_name']));
       $send_data['internal_receipts'] = $api_data;
-      $api_url = "api/api_internal_receipts/store";
-
-    }elseif ($attributes['account_name'] == 'Domestic Internal Software') {
-
-      $api_data = array_merge($api_data, array('type' => 'Pure','description' => $api_data['description'].'-'.$attributes['site_name']));
-      $send_data['internal_receipts'] = $api_data;
+      if($attributes['account_name'] == 'Domestic Internal Software'){
       $api_url = "api/api_domestic_internal_receipts/store";
+      }else{
+      $api_url = "api/api_internal_receipts/store";
+      }
 
-    } elseif (   $attributes['receipt_type'] == 'AR Gold RND'
+    }elseif (   $attributes['receipt_type'] == 'AR Gold RND'
               || $attributes['receipt_type'] == 'ARF RND'
               || $attributes['receipt_type'] == 'ARC RND') {
       $send_data['rnd_receipts'] = $api_data;
