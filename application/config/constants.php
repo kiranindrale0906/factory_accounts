@@ -121,3 +121,32 @@ define('ACCOUNT_NAME_REPORT','account_name');
 
 
 define('FIELDS_PER_ROW', 3);
+  define('HOST','ARG');
+  define('CLIENT_NAME', 'argold');
+
+  define('API_ARG_NOV2020_PATH', '');
+  define('API_ARF_NOV2020_PATH', '');
+  define('API_ARC_NOV2020_PATH', '');
+
+  define('API_MAY2022_ARG_PATH', 'https://staging-argold.ascratech.com/');
+  define('API_MAY2022_ARF_PATH', 'https://staging-arf.ascratech.com/');
+  define('API_MAY2022_ARC_PATH', 'https://staging-arc.ascratech.com/');
+
+  define('API_AUG2022_ARG_PATH', 'https:/staging-argold.ascratech.com/');
+  define('API_AUG2022_ARF_PATH', 'https:/staging-arf.ascratech.com/');
+  define('API_AUG2022_ARC_PATH', 'https:/staging-arc.ascratech.com/');
+
+
+  define('API_EXPORT_INTERNAL_PATH', 'https://staging-exports.ascratech.com/');
+
+// define('API_ARGs_PATH', 'https://argolds.ascratech.com/');
+//  define('API_ARFs_PATH', 'https://arfs.ascratech.com/');
+//  define('API_ARCs_PATH', 'https://arcs.ascratech.com/');
+//  define('API_LIVE_BASE_PATH', 'https://june2020-argold.ascratech.com/');
+//  define('API_ARF_BASE_PATH', 'https://arf.ascratech.com/');
+
+//  define('API_BASE_PATH', 'https://june2020-argold.ascratech.com/');
+//  define('ARF_API_BASE_PATH', 'https://arf.ascratech.com/');
+
+  define('ENABLE_API_FOR_RECEIPT', TRUE);
+?>
