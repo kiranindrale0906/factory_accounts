@@ -15,10 +15,8 @@ class Client_metal_receipt_vouchers extends Core_metal_receipt_vouchers {
   	$this->data['account_names_for_metal_issue'] = array(); //array(array('id' => '', 'name' => ''));
     $this->data['record']['receipt_type']=!empty($_GET['receipt_type'])?$_GET['receipt_type']:"";
 
-    if (!empty($_GET['site_name'])) {
-      $this->data['record']['site_name'] = $_GET['site_name'];
-      pd($this->data['record']['site_name']);
-    }
+    if (!empty($_GET['site_name'])) $this->data['record']['site_name'] = $_GET['site_name'];
+    
 
     if(   $this->data['record']['receipt_type']=='Metal'
        || $this->data['record']['receipt_type']=='Refresh'
