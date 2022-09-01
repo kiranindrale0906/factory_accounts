@@ -51,7 +51,7 @@ class Loss_reports extends BaseController {
                                                               factory_purity, sum(fine) as fine',
                                               array('parent_id' => $loss_record['parent_id'],
                                                     'account_name!=' => 'Unrecovarable'.' '.$this->data['site_name'],
-                                                    'site_name' => $this->data['site_name']);
+                                                    'site_name' => $this->data['site_name']));
           
           $unrecovered_details = $this->voucher_model->find('sum(credit_weight) as weight',
                                                array('parent_id' => $loss_record['parent_id'],
