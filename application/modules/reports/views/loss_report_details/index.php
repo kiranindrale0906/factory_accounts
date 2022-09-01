@@ -61,7 +61,7 @@
          
         <td class="text-right">
         <?php //if($parent_id==0){ ?>
-          <a href=<?= base_url()."transactions/metal_receipt_vouchers?receipt_type=Metal&site_name=".$factory_name."&parent_id=".$loss_out_detail['parent_id'] ?> target='_blank'>create metal receipt</a>
+          <a href=<?= base_url()."transactions/metal_receipt_vouchers?receipt_type=Metal&site_name=".urlencode($factory_name)."&parent_id=".$loss_out_detail['parent_id'] ?> target='_blank'>create metal receipt</a>
           <?php //}?>
         </td>
         <td class="text-right">
