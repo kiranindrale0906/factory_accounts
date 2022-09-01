@@ -121,12 +121,12 @@ define('ACCOUNT_NAME_REPORT','account_name');
 
 
 define('FIELDS_PER_ROW', 3);
-  define('HOST','ARG');
-  define('CLIENT_NAME', 'argold');
+  // define('HOST','ARG');
+  // define('CLIENT_NAME', 'argold');
 
-  define('API_ARG_NOV2020_PATH', '');
-  define('API_ARF_NOV2020_PATH', '');
-  define('API_ARC_NOV2020_PATH', '');
+  // define('API_ARG_NOV2020_PATH', '');
+  // define('API_ARF_NOV2020_PATH', '');
+  // define('API_ARC_NOV2020_PATH', '');
 
   define('API_MAY2022_ARG_PATH', 'https://staging-argold.ascratech.com/');
   define('API_MAY2022_ARF_PATH', 'https://staging-arf.ascratech.com/');
