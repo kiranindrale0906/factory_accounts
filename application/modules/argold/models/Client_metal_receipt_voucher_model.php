@@ -522,6 +522,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $api_data = array_merge($api_data, array('type' => 'Pure','description' => $api_data['description'].'-'.$attributes['site_name']));
       $send_data['internal_receipts'] = $api_data;
       if($attributes['account_name'] == 'Domestic Internal Software'){
+      $send_data['domestic_internal_receipts'] = $api_data;
       $api_url = "api/api_domestic_internal_receipts/store";
       }else{
       $api_url = "api/api_internal_receipts/store";
