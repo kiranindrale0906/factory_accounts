@@ -443,7 +443,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   }
 
   public function send_request_to_factory($attributes) {
-    pd($attributes);
+    // pd($attributes);
     $attributes['account_name']=trim($attributes['account_name']);
     if ($attributes['credit_weight'] == 0) return true;
 
@@ -578,8 +578,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     //   $api_url = API_2_ARC_PATH.$api_url;
     // elseif ($attributes['account_name'] == 'Export Internal Software')
     //   $api_url = API_EXPORT_INTERNAL_PATH.$api_url;
-    // print_r($send_data);
-    // pd($api_url);
+    print_r($send_data);
+    pd($api_url);
     $result = curl_post_request($api_url, $send_data);
 print_r($result);  die();
 }
