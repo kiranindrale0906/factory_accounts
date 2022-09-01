@@ -123,6 +123,11 @@ class Voucher_model extends BaseModel {
                  'rules' => 'trim|required');
   }
 
+  protected function get_site_name_validation_rules() {
+    return array('field' => $this->router_class.'[site_name]', 'label' => 'Site Name',
+                 'rules' => 'trim|required');
+  }
+
 
   public function check_group_name_exist($name) {
     if($name=="" && !isset($name))

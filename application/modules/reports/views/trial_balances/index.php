@@ -35,20 +35,23 @@
   <?php $this->load->view('trial_balances/alloy_vodator_balance'); ?>
 </div>
 <div class="row">
-  <?php $this->load->view('trial_balances/gpc_vodator_balance'); ?>
+  <?php //$this->load->view('trial_balances/gpc_vodator_balance'); ?>
 </div>
 <div class="row">
-  <?php $this->load->view('trial_balances/stone_vatav_balance'); ?>
+  <?php //$this->load->view('trial_balances/stone_vatav_balance'); ?>
 </div>
 <div class="row">
-  <?php $this->load->view('trial_balances/copper_vatav_balance'); ?>
+  <?php //$this->load->view('trial_balances/meena_vatav_balance'); ?>
 </div>
 <div class="row">
-  <?php $this->load->view('trial_balances/rhodium_vatav_balance'); ?>
+  <?php //$this->load->view('trial_balances/copper_vatav_balance'); ?>
 </div>
 <div class="row">
-  <?php $this->load->view('trial_balances/tounch_loss_fine_balance'); ?>
+  <?php //$this->load->view('trial_balances/rhodium_vatav_balance'); ?>
 </div>
 <div class="row">
-  <?php $this->load->view('trial_balances/overall_rolling_balance'); ?>
+  <?php //$this->load->view('trial_balances/tounch_loss_fine_balance'); ?>
+</div>
+<div class="row">
+  <?php //$this->load->view('trial_balances/overall_rolling_balance'); ?>
 </div>

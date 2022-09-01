@@ -15,6 +15,8 @@
       <p><h6>Purity :<?=four_decimal($refresh['purity'])?></h6></p>
       <p><h6>Fine :<?=four_decimal($refresh['fine'])?></h6></p>
       <p><h6>Factory Purity :<?=four_decimal($refresh['factory_purity']);?></h6></p>
+      <p><h6>Site Name :<?=four_decimal($refresh['site_name']);?></h6></p>
+      <p><a href='<?= base_url() ?>argold/voucher_details/view/<?=$record['metal_receipt_id']?>'>view metal receipt voucher</a> </p>
       
      <!-- <p><h6>AC Name :<?=four_decimal($metal_receipt_details['account_name']);?> </h6></p>
       <p><h6>Voucher No :<?=four_decimal($metal_receipt_details['voucher_number']);?> </h6></p>

@@ -19,15 +19,15 @@ class Telegram_production_summary extends BaseController {
 
   //get issue department records
   private function send_issue_gpc_out_records($date) {
-    $url  = API_ARG_PATH."issue_departments/api_issue_departments/index?issue_at=".$date;
+    $url  = API_MAY2022_ARG_PATH."issue_departments/api_issue_departments/index?issue_at=".$date;
     $argold_records = json_decode(curl_post_request($url));
     $this->send_issue_gpc_out_message($argold_records->data);
     
-    $url  = API_ARF_PATH."issue_departments/api_issue_departments/index?issue_at=".$date;
+    $url  = API_MAY2022_ARF_PATH."issue_departments/api_issue_departments/index?issue_at=".$date;
     $arf_records = json_decode(curl_post_request($url));
     $this->send_issue_gpc_out_message($arf_records->data);
     
-    $url  = API_ARC_PATH."issue_departments/api_issue_departments/index?issue_at=".$date;
+    $url  = API_MAY2022_ARC_PATH."issue_departments/api_issue_departments/index?issue_at=".$date;
     $arc_records = json_decode(curl_post_request($url));
     $this->send_issue_gpc_out_message($arc_records->data);
   }
@@ -35,7 +35,7 @@ class Telegram_production_summary extends BaseController {
   //get refresh receipt records
   private function send_refresh_records($date) {
     $refresh_records = $this->voucher_model->get('receipt_type, sum(debit_weight) as weight',
-                                           array('receipt_type' => array('AR Gold Refresh', 'ARF Refresh', 'ARC Refresh'),
+                                           array('receipt_type' => array('Refresh'), //'AR Gold Refresh', 'ARF Refresh', 'ARC Refresh',
                                                  'voucher_date' => $date), array(), array('group_by' => 'receipt_type'));
     $this->send_refresh_message($refresh_records);      
   }

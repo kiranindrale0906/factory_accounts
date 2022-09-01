@@ -50,6 +50,7 @@ class Refresh extends BaseController {
                                       array('id'=>'Pendent Set Plain','name'=>'Pendent Set Plain'),
                                       array('id'=>'Lock Process','name'=>'Lock Process'),
                                       array('id'=>'Daily Drawer','name'=>'Daily Drawer'),
+                                      array('id'=>'Pipe and Para Process','name'=>'Pipe and Para Process'),
                                     );//$this->narration_model->get('name as name, name as  id, chain_purity, chain_margin', array() ,array(), array('order_by'=>'name asc'));
     
   }

@@ -32,6 +32,7 @@
 
   <div class="row">                                  
     <?php load_view('ac_vouchers/ac_vouchers/fields/voucher_date');
+          load_view('ac_vouchers/ac_vouchers/fields/site_name'); 
           load_view('ac_vouchers/ac_vouchers/fields/receipt_type'); 
           load_view('ac_vouchers/ac_vouchers/fields/dd_type');
           load_view('ac_vouchers/ac_vouchers/fields/hook_kdm_purity'); ?>  
@@ -154,10 +155,10 @@
   <?php 
     $receipt_type=!empty($_GET['receipt_type'])?$_GET['receipt_type']:'';
     if ($this->router->class == "metal_receipt_vouchers" 
-        && !in_array($receipt_type, array('AR Gold Refresh',
-                                          'ARC Refresh',
+        && !in_array($receipt_type, array(//'AR Gold Refresh',
+                                          //'ARC Refresh',
                                           'Stone',
-                                          'ARF Refresh',
+                                          //'ARF Refresh',
                                           'AR Gold Finished Goods',
                                           'ARF Finished Goods',
                                           'ARF Software Finished Goods',

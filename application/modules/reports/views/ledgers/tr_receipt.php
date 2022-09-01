@@ -1,5 +1,8 @@
 <tr>
-  <?php if ($report_type == 'Vadotar Report'): ?>
+  <?php 
+  $reference_account_name=($report_type == 'Account Ledger')?$record['reference_account_name'] : "";
+  
+  if ($report_type == 'Vadotar Report'): ?>
     <td><?= $record['receipt_type'];?></td>
   <?php endif; ?>
   <?php if ($report_type != 'Account Ledger'): ?>
@@ -7,7 +10,7 @@
   <?php endif; ?>
   <td><?= date('d-m-y', strtotime($record['str_voucher_date'])); ?></td>
   <?php if (!in_array($report_type, array("Export Purchase Ledger","Domestic Purchase Ledger","Domestic Sale Ledger","Export Sale Ledger"))): ?>
-  <td><?= '#'.$record['chitti_no'].' '.remove_duplicates_in_string($record['narration']).' '.$record['description'].' '.$record['reference_account_name']; ?>
+  <td><?= '#'.$record['chitti_no'].' '.remove_duplicates_in_string($record['narration']).' '.$record['description'].' '.$reference_account_name; ?>
     <?php if(isset($record['chitti_no']) && $record['chitti_no']!=0) { ?>
       <a class=""  href='<?= base_url() ?>argold/chittis/view/<?=$record['chitti_no']?>'>view</a>
       <!-- <?php //if ($record['account_name'] == 'OUTSIDE PARTY') { ?>

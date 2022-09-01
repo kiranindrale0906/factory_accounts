@@ -19,8 +19,7 @@
               $liabilities_usd_amount = 0;
               if(!empty($trial_balance_records)) {
                 foreach ($trial_balance_records as $record) {
-                  if (   ($record['fine'] <= 0
-                          && $record['account_name'] != 'VADOTAR')
+                  if (   ($record['fine']<=0 && $record['account_name'] != 'VADOTAR')
                       || ($record['account_name'] == 'Tounch Loss Fine')) continue;
 
                   if ($record['account_name'] == 'PURCHASE ACCOUNT') $profit_and_loss['purchase_account'] = $record;
@@ -30,7 +29,7 @@
                   $liabilities_fine = $liabilities_fine + $record['fine']; 
                   $liabilities_amount = $liabilities_amount + $record['amount']; 
                   $liabilities_usd_amount = $liabilities_usd_amount + @$record['usd_amount']; 
-                  if(round($record['fine'],2)!=0){
+                  if(round($record['fine'],2)!=0 || round($record['amount'],2)!=0){
                     if($record['account_name']!="MAIN VADOTAR"){
                   ?>
 
@@ -81,8 +80,7 @@
               $assets_usd_amount = 0;  
               if(!empty($trial_balance_records)) {
                 foreach ($trial_balance_records as $record) {
-                  if (  ($record['fine'] >= 0
-                         && $record['account_name'] != 'Tounch Loss Fine')
+                  if (  ($record['fine']>=0 && $record['account_name'] != 'Tounch Loss Fine')
                       || ($record['account_name'] == 'VADOTAR')) continue;
 
                   if ($record['account_name'] == 'SALES ACCOUNT') $profit_and_loss['sales_account'] = $record;
@@ -92,7 +90,7 @@
                   $assets_fine = $assets_fine + $record['fine'];
                   $assets_amount= $assets_amount + $record['amount'];
                   $assets_usd_amount= $assets_usd_amount + @$record['usd_amount'];
-                  if(round($record['fine'],2)!=0){
+                  if(round($record['fine'],2)!=0||round($record['amount'],2)!=0){
                    ?>
 
                   <tr>

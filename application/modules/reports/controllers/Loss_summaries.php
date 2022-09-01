@@ -117,13 +117,13 @@ class Loss_summaries extends BaseController {
       $data['type']='category';
       $data['quator']='';
       if($site_name=='ARC'){
-        $path=API_ARC_PATH;
+        $path=API_MAY2022_ARC_PATH;
         $factory_name='ARC';
       }elseif($site_name=='ARF'){
-        $path=API_ARF_PATH;
+        $path=API_MAY2022_ARF_PATH;
         $factory_name='AR Gold';
       }else{
-        $path=API_ARG_PATH;
+        $path=API_MAY2022_ARG_PATH;
         $factory_name='ARF';
       }
       if(!empty($data['department_names'])){

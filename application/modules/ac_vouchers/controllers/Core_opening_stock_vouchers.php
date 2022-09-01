@@ -16,7 +16,7 @@ class Core_opening_stock_vouchers extends Vouchers {
   }
 
   public function _get_form_data() {
-    $this->data['record']['voucher_date'] = '2021-04-01';
+    $this->data['record']['voucher_date'] = '2022-04-01';
     parent::_get_form_data();
   }
 }

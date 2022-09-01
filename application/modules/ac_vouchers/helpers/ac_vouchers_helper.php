@@ -10,7 +10,7 @@ function ac_vouchers_getTableSettings($table_setting_arg=array()) {
   if ($ci->router->class != "cash_issue_vouchers"
       and $ci->router->class != "opening_stock_vouchers"
       and $ci->router->class != "cash_receipt_vouchers") {
-  $table_setting_arg['where'] .= ' and receipt_type not in ("Alloy Vodator", "GPC Vodator", "Stone Vatav", "Copper Vatav", "Rhodium Vatav")';
+  $table_setting_arg['where'] .= ' and receipt_type not in ("Alloy Vodator", "GPC Vodator", "Stone Vatav", "Meena Vatav", "Copper Vatav", "Rhodium Vatav")';
   }
   $table_setting= array('page_title'          => '',
                         'primary_table'       => 'ac_vouchers',
@@ -253,6 +253,8 @@ function ac_voucher_get_field_attribute($table, $field,$required_field) {
   $attributes['description'] = array('Description', 'Description', FALSE, '',TRUE);
   
   $attributes['add_more'] = array('', 'add_more', FALSE, '',TRUE);
+  $attributes['site_name'] = array('Site Name', 'Site Name', TRUE, '', FALSE, FALSE);
+  
   if(!empty($required_field)) {
     $attributes[$ci->router->class] = array_intersect_key($attributes, array_flip($required_field));
   }

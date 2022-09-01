@@ -4,11 +4,11 @@
   <h6 class="heading blue bold text-uppercase mb-0">Loss Reports</h6>
   <hr>
 <div class="row"> 
-  <div class="col-md-6">
+  <div class="col-md-12">
     <div class="form-group container"> 
       <h5> Select Factory:
         <?php 
-        $all_companies = array('AR Gold','ARF','ARC');
+        $all_companies = array('AR Gold (May 2022)','ARF (May 2022)','ARC (May 2022)','AR Gold (Aug 2022)','ARF (Aug 2022)','ARC (Aug 2022)');
           $companies=array_merge($all_companies);
           foreach ($companies as $index => $company) { ?>
             <a class="ml-5 <?= ($site_name== $company) ? 'bold black underline' : '' ?>" 
