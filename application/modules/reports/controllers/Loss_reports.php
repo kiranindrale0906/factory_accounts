@@ -89,7 +89,7 @@ class Loss_reports extends BaseController {
 
   private function get_loss_department_names() {
     $category_names = $this->voucher_model->get('distinct(description) as description', 
-                                           array('account_name' => 'Loss Account',
+                                           array('account_name like "%Loss Account%"' => null,
                                                  'date(created_at)>=' => '2021-03-13'));
 
      $opening_category_names = $this->opening_loss_voucher_model->get('distinct(type_of_loss) as description',array('type_of_loss!=' => '','quator IS NULL'=>NULL));
@@ -127,10 +127,24 @@ class Loss_reports extends BaseController {
   }  
 
   private function get_ghiss_melting_loss($data) {
+    if ($this->data['factory_name']=='ARC (May 2022)'){
+      $loss_account_name = 'ARC Loss Account (May 2022)';
+    }elseif ($this->data['factory_name']=='ARF (May 2022)'){
+      $loss_account_name = 'ARF Loss Account (May 2022)';
+    }elseif ($this->data['factory_name']=='AR Gold (May 2022)'){
+      $loss_account_name = 'AR Gold Loss Account (May 2022)';
+    }elseif ($this->data['factory_name']=='AR Gold (Aug 2022)'){
+      $loss_account_name = 'AR Gold Loss Account (Aug 2022)';
+    }elseif ($this->data['factory_name']=='ARC (Aug 2022)'){
+      $loss_account_name = 'ARC Loss Account (May 2022)';
+    }elseif ($this->data['factory_name']=='ARF (Aug 2022)'){
+      $loss_account_name = 'ARF Loss Account (May 2022)';
+    }
+
     $ghiss_melting_loss = $this->voucher_model->get('description, site_name, credit_weight as in_weight, 
                                                      purity as in_lot_purity, argold_id as parent_id,
                                                      0 as out_weight', 
-                                                     array('account_name' => 'Loss Account',
+                                                     array('account_name' => $loss_account_name,
                                                            'site_name' => $this->data['site_name'],
                                                            'receipt_type' => 'Ghiss Melting Loss',
                                                            'quator'=> ''));
