@@ -136,9 +136,9 @@ class Loss_reports extends BaseController {
     }elseif ($this->data['factory_name']=='AR Gold (Aug 2022)'){
       $loss_account_name = 'AR Gold Loss Account (Aug 2022)';
     }elseif ($this->data['factory_name']=='ARC (Aug 2022)'){
-      $loss_account_name = 'ARC Loss Account (May 2022)';
+      $loss_account_name = 'ARC Loss Account (Aug 2022)';
     }elseif ($this->data['factory_name']=='ARF (Aug 2022)'){
-      $loss_account_name = 'ARF Loss Account (May 2022)';
+      $loss_account_name = 'ARF Loss Account (Aug 2022)';
     }
 
     $ghiss_melting_loss = $this->voucher_model->get('description, site_name, credit_weight as in_weight, 
