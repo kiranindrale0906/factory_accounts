@@ -246,7 +246,7 @@
           <tr>
             <td>Work</td>
             <?php if(!empty($site_name) && in_array($site_name,array('ARC (May 2022)','ARC (Aug 2022)'))){ ?>
-            <td class="text-right"><?=$work=!empty($work_arc)?abs(four_decimal($work_arc)):0; ?></td>
+            <td class="text-right"><?=$work=!empty($work)?abs(four_decimal($work)):0; ?></td>
           <?php }else{ ?>
             <td class="text-right"><?=$work=!empty($work_details)?abs(four_decimal($work_details['amount'])):0; ?></td>
           <?php }?>
@@ -288,7 +288,7 @@
           <tr>
             <td>Work</td>
             <?php if(!empty($site_name) && $site_name=='ARC'){ ?>
-            <td class="text-right"><?=$without_vatav_work=!empty($work_arc)?abs(four_decimal($work_arc)):0; ?></td>
+            <td class="text-right"><?=$without_vatav_work=!empty($work)?abs(four_decimal($work)):0; ?></td>
           <?php }else{ ?>
             <td class="text-right"><?=$without_vatav_work=!empty($work_details)?abs(four_decimal($work_details['amount'])):0; ?></td>
           <?php }?>

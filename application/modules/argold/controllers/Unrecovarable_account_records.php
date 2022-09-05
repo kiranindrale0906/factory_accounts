@@ -11,9 +11,9 @@ class Unrecovarable_account_records extends BaseController {
   public function store() {
     if(isset($_GET['from']) && $_GET['from']=='view') {
       $process=array(
-        'account_name'=>$_GET['factory'],
-        'narration'=>$_GET['factory'].' '.$_GET['narration'],
-        'receipt_type'=>$_GET['account_name'],
+        'account_name' => $_GET['issue_account_name'],
+        'narration' => $_GET['issue_account_name'].' '.$_GET['narration'],
+        'receipt_type' => $_GET['receipt_type'],
         'purity'=>100,
         'company_id'=>1,
         'parent_id'=>$_GET['parent_id'],
@@ -25,10 +25,15 @@ class Unrecovarable_account_records extends BaseController {
       $issue_obj->before_validate();
       $issue_obj->save(true);
 
-        $process=array(
-        'account_name'=>$_GET['account_name'],
-        'narration'=>$_GET['narration'].' '.$_GET['factory'],
-        'receipt_type'=>$_GET['account_name'],
+      if ($_GET['receipt_type'] == 'Loss Account')
+        $receipt_account_name = get_loss_account_name_from_site_name($_GET['site_name']);
+      else 
+        $receipt_account_name = $_GET['receipt_account_name'];
+
+      $process=array(
+        'account_name' => $receipt_account_name,
+        'narration' => $_GET['issue_account_name'].' '.$_GET['narration'],
+        'receipt_type' => $_GET['receipt_type'],
         'debit_weight'=>$_GET['credit_weight'],
         'purity'=>100,
         'factory_purity'=>100,
