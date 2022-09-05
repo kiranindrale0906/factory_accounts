@@ -75,6 +75,16 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
         $this->attributes['site_name'] = get_site_name_from_account_name($metal_issue_voucher['account_name']);
         break;
       }
+    } else {
+      if (str_contains($this->attributes['account_name'], 'AR Gold'))
+        if (str_contains($this->attributes['account_name'], 'May 2022')) $this->attributes['site_name'] = 'AR Gold (May 2022)';
+        elseif (str_contains($this->attributes['account_name'], 'Aug 2022')) $this->attributes['site_name'] = 'AR Gold (Aug 2022)';
+      elseif (str_contains($this->attributes['account_name'], 'ARF'))
+        if (str_contains($this->attributes['account_name'], 'May 2022')) $this->attributes['site_name'] = 'ARF (May 2022)';
+        elseif (str_contains($this->attributes['account_name'], 'Aug 2022')) $this->attributes['site_name'] = 'ARF (Aug 2022)';
+      elseif (str_contains($this->attributes['account_name'], 'ARC'))
+        if (str_contains($this->attributes['account_name'], 'May 2022')) $this->attributes['site_name'] = 'ARC (May 2022)';
+        elseif (str_contains($this->attributes['account_name'], 'Aug 2022')) $this->attributes['site_name'] = 'ARC (Aug 2022)';
     }
   }
 
