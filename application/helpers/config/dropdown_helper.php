@@ -149,13 +149,13 @@
 
   }
 
-  function get_site_url($site_name) {
-    if     ($site_name=='AR Gold May 2022') return API_MAY2022_ARG_PATH;
-    elseif ($site_name=='ARF May 2022')     return API_MAY2022_ARF_PATH;
-    elseif ($site_name=='ARC May 2022')     return API_MAY2022_ARC_PATH;
-    elseif ($site_name=='AR Gold Aug 2022') return API_AUG2022_ARG_PATH;
-    elseif ($site_name=='ARF Aug 2022')     return API_AUG2022_ARF_PATH;
-    elseif ($site_name=='ARC Aug 2022')     return API_AUG2022_ARC_PATH;
+  function get_api_url_from_site_name($site_name) {
+    if     ($site_name=='AR Gold (May 2022)') return API_MAY2022_ARG_PATH;
+    elseif ($site_name=='ARF (May 2022)')     return API_MAY2022_ARF_PATH;
+    elseif ($site_name=='ARC (May 2022)')     return API_MAY2022_ARC_PATH;
+    elseif ($site_name=='AR Gold (Aug 2022)') return API_AUG2022_ARG_PATH;
+    elseif ($site_name=='ARF (Aug 2022)')     return API_AUG2022_ARF_PATH;
+    elseif ($site_name=='ARC (Aug 2022)')     return API_AUG2022_ARC_PATH;
   }
 
   function get_api_path($site_name, $hostversion) {
@@ -203,7 +203,17 @@
                        'ARF Software (Aug 2022)'     => 'ARF (Aug 2022)',
                        'ARC Software (Aug 2022)'     => 'ARC (Aug 2022)',
                        'Export Internal Software'    => 'Export');
-    return $site_name[$account_name] ?? '';
+    if (!empty($site_name[$account_name])) return $site_name[$account_name];
+
+    if (str_contains($account_name, 'AR Gold'))
+      if (str_contains($account_name, 'May 2022')) return 'AR Gold (May 2022)';
+      elseif (str_contains($account_name, 'Aug 2022')) return 'AR Gold (Aug 2022)';
+    elseif (str_contains($account_name, 'ARF'))
+      if (str_contains($account_name, 'May 2022')) return 'ARF (May 2022)';
+      elseif (str_contains($account_name, 'Aug 2022')) return 'ARF (Aug 2022)';
+    elseif (str_contains($account_name, 'ARC'))
+      if (str_contains($account_name, 'May 2022')) return 'ARC (May 2022)';
+      elseif (str_contains($account_name, 'Aug 2022')) return 'ARC (Aug 2022)';
   }
 
   function get_account_name_from_site_name($site_name) {
@@ -227,6 +237,16 @@
                       'Export Internal Software'    => API_EXPORT_INTERNAL_PATH,
                       'Domestic Internal Software'    => API_DOMESTIC_INTERNAL_PATH);
     return $api_path[$account_name];
+  }
+
+  function get_loss_account_name_from_site_name($site_name) {
+    $loss_account_name = array('ARC (May 2022)' => 'ARC Loss Account (May 2022)',
+                          'ARF (May 2022)' => 'ARF Loss Account (May 2022)',
+                          'AR Gold (May 2022)' => 'AR Gold Loss Account (May 2022)',
+                          'AR Gold (Aug 2022)' => 'AR Gold Loss Account (Aug 2022)',
+                          'ARC (Aug 2022)' => 'ARC Loss Account (Aug 2022)',
+                          'ARF (Aug 2022)' => 'ARF Loss Account (Aug 2022)');
+    return $loss_account_name[$site_name]; 
   }
 
   function remove_duplicates_in_string($str) {

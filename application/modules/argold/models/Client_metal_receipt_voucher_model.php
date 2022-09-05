@@ -66,9 +66,6 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   }
 
   private function set_site_name_from_receipt_type() {
-  //   if ($this->attributes['receipt_type'] == 'AR Gold Refresh')  $this->attributes['site_name'] = 'AR Gold';
-  //   elseif ($this->attributes['receipt_type'] == 'ARF Refresh')  $this->attributes['site_name'] = 'ARF';
-  //   elseif ($this->attributes['receipt_type'] == 'ARC Refresh')  $this->attributes['site_name'] = 'ARC';
     if (   $this->attributes['receipt_type'] == 'Refresh'
         || $this->attributes['receipt_type'] == 'Daily Drawer') {
       foreach ($this->formdata['metal_issue_vouchers'] as $metal_issue_voucher) {
@@ -76,15 +73,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
         break;
       }
     } else {
-      if (str_contains($this->attributes['account_name'], 'AR Gold'))
-        if (str_contains($this->attributes['account_name'], 'May 2022')) $this->attributes['site_name'] = 'AR Gold (May 2022)';
-        elseif (str_contains($this->attributes['account_name'], 'Aug 2022')) $this->attributes['site_name'] = 'AR Gold (Aug 2022)';
-      elseif (str_contains($this->attributes['account_name'], 'ARF'))
-        if (str_contains($this->attributes['account_name'], 'May 2022')) $this->attributes['site_name'] = 'ARF (May 2022)';
-        elseif (str_contains($this->attributes['account_name'], 'Aug 2022')) $this->attributes['site_name'] = 'ARF (Aug 2022)';
-      elseif (str_contains($this->attributes['account_name'], 'ARC'))
-        if (str_contains($this->attributes['account_name'], 'May 2022')) $this->attributes['site_name'] = 'ARC (May 2022)';
-        elseif (str_contains($this->attributes['account_name'], 'Aug 2022')) $this->attributes['site_name'] = 'ARC (Aug 2022)';
+      $site_name = get_site_name_from_account_name($this->attributes['account_name']);
+      if (!empty($site_name)) $this->attributes['site_name'] = $site_name;
     }
   }
 
