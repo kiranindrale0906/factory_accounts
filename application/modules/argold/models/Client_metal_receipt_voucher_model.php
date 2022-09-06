@@ -484,13 +484,14 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
               || $attributes['receipt_type'] == "Export Internal"
               || $attributes['receipt_type'] == "Domestic Internal") {
               // || $attributes['receipt_type'] == "ARC Refresh"
-      // pd($attributes);
       $api_data = array_merge($api_data, array('type'=>'Pure',
                                                'hook_kdm_purity' => (empty($attributes['hook_kdm_purity'])) ? $attributes['factory_purity'] : $attributes['hook_kdm_purity'];
                                                'description' => $attributes['description'],
                                                'process_name'=>'Refresh'));
       $send_data['refresh_departments'] = $api_data;
       $api_url="api/api_refresh_departments/store";
+      pd($api_url);
+      
 
     } elseif (   $attributes['receipt_type'] == 'AR Gold Chain Receipt'
               || $attributes['receipt_type'] == 'ARF Chain Receipt'
