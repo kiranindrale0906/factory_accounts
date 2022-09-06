@@ -564,7 +564,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     }
     if (empty($api_url)) return true;
     $api_url = get_api_path_from_account_name($attributes['account_name']).$api_url;
-print_r($api_url);  die();
+// print_r($api_url);  die();
 
     // if ($attributes['account_name'] == 'AR Gold Software')
     //   $api_url = API_ARG_PATH.$api_url;
@@ -580,8 +580,8 @@ print_r($api_url);  die();
     //   $api_url = API_2_ARC_PATH.$api_url;
     // elseif ($attributes['account_name'] == 'Export Internal Software')
     //   $api_url = API_EXPORT_INTERNAL_PATH.$api_url;
-    // print_r($send_data);
-    // pd($api_url); 
+    print_r($send_data);
+    pd($api_url); 
     $result = curl_post_request($api_url, $send_data);
 }
 
