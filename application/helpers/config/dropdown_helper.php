@@ -203,7 +203,6 @@
   }
 
   function get_site_name_from_account_name($account_name) {
-    pd(str_contains($account_name, 'ARC'), 0);
     if (str_contains($account_name, 'AR Gold'))
       if (str_contains($account_name, 'May 2022')) return 'AR Gold (May 2022)';
       elseif (str_contains($account_name, 'Aug 2022')) return 'AR Gold (Aug 2022)';
@@ -213,7 +212,7 @@
     elseif (str_contains($account_name, 'ARC'))
       if (str_contains($account_name, 'May 2022')) return 'ARC (May 2022)';
       elseif (str_contains($account_name, 'Aug 2022')) return 'ARC (Aug 2022)';
-
+    pd('site_name', 0);
     $site_name = array('AR Gold Software (May 2022)' => 'AR Gold (May 2022)',
                        'ARF Software (May 2022)'     => 'ARF (May 2022)',
                        'ARC Software (May 2022)'     => 'ARC (May 2022)',
