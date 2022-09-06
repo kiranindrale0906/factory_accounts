@@ -581,7 +581,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     // elseif ($attributes['account_name'] == 'ARC Software (Aug 2022)')
     //   $api_url = API_2_ARC_PATH.$api_url;
     // elseif ($attributes['account_name'] == 'Export Internal Software')
-    //   $api_url = API_EXPORT_INTERNAL_PATH.$api_url; 
+    //   $api_url = API_EXPORT_INTERNAL_PATH.$api_url;
+    print_r($send_data);
+    print_r($api_url); 
     $result = curl_post_request($api_url, $send_data);
     pd($result);
 }
