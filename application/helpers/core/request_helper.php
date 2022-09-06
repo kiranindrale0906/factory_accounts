@@ -43,11 +43,7 @@ defined('BASEPATH') OR exit('No direct script access allowed.');
         curl_setopt($curl, CURLOPT_HTTPHEADER, [
           'access_token:'.ACCESS_TOKEN
         ]);
-        curl_setopt($curl, CURLE_COULDNT_RESOLVE_HOST, true);
         $response = curl_exec($curl);
-        print_r(ACCESS_TOKEN);
-        print_r($);
-        pd(curl_errno($curl));
         if(curl_errno($curl))
           $response=array('status'=>'error','response'=>json_encode($response));
         
