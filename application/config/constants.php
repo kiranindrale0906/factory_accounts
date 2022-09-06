@@ -127,9 +127,9 @@ define('FIELDS_PER_ROW', 3);
   define('API_MAY2022_ARF_PATH', 'https://staging-arf.ascratech.com/');
   define('API_MAY2022_ARC_PATH', 'https://staging-arc.ascratech.com/');
 
-  define('API_AUG2022_ARG_PATH', 'https:/staging-argold.ascratech.com/');
-  define('API_AUG2022_ARF_PATH', 'https:/staging-arf.ascratech.com/');
-  define('API_AUG2022_ARC_PATH', 'https:/staging-arc.ascratech.com/');
+  define('API_AUG2022_ARG_PATH', 'https://staging-argold.ascratech.com/');
+  define('API_AUG2022_ARF_PATH', 'https://staging-arf.ascratech.com/');
+  define('API_AUG2022_ARC_PATH', 'https://staging-arc.ascratech.com/');
 
 
   define('API_EXPORT_INTERNAL_PATH', 'https://staging-exports.ascratech.com/');
