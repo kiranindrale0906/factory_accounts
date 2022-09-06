@@ -33,7 +33,7 @@ class Unrecovarable_account_records extends BaseController {
 
       $process=array(
         'account_name' => $receipt_account_name,
-        'site_name' => get_site_name_from_account_name($_GET['issue_account_name']),
+        'site_name' => get_site_name_from_account_name($_GET['receipt_account_name']),
         'narration' => $_GET['issue_account_name'].' '.$_GET['narration'],
         'receipt_type' => $_GET['receipt_type'],
         'debit_weight'=>$_GET['credit_weight'],
