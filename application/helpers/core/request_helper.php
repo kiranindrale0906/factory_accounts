@@ -43,6 +43,7 @@ defined('BASEPATH') OR exit('No direct script access allowed.');
         curl_setopt($curl, CURLOPT_HTTPHEADER, [
           'access_token:'.ACCESS_TOKEN
         ]);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         $response = curl_exec($curl);
         pd($response);
         if(curl_errno($curl))
