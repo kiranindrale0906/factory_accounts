@@ -10,10 +10,6 @@ class Unrecovarable_account_records extends BaseController {
   }
   public function store() {
     if(isset($_GET['from']) && $_GET['from']=='view') {
-      pd($_GET['issue_account_name'], 0);
-      pd(get_site_name_from_account_name($_GET['issue_account_name']), 0);
-      pd($_GET['receipt_account_name'], 0);
-      pd(get_site_name_from_account_name($_GET['receipt_account_name']));
       $process=array(
         'account_name' => $_GET['issue_account_name'],
         'site_name' => get_site_name_from_account_name($_GET['issue_account_name']),
