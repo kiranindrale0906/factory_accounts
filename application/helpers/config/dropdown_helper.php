@@ -1,4 +1,11 @@
 <?php
+  if (!function_exists('str_contains')) {
+      function str_contains(string $haystack, string $needle): bool
+      {
+          return '' === $needle || false !== strpos($haystack, $needle);
+      }
+  }
+
   function get_dropdown_array($simple_array, $empty_value=false) {
     $dropdown_array = array();
     if ($empty_value)
