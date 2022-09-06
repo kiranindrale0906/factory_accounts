@@ -486,7 +486,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
               // || $attributes['receipt_type'] == "ARC Refresh"
       // pd($attributes);
       $api_data = array_merge($api_data, array('type'=>'Pure',
-                                               'hook_kdm_purity' => (empty($attributes['hook_kdm_purity'])) ? $attributes['factory_purity'] : $attributes['hook_kdm_purity'];
+                                               'hook_kdm_purity' => (empty($attributes['hook_kdm_purity'])) ? $attributes['factory_purity'] : $attributes['hook_kdm_purity'],
                                                'description' => $attributes['description'],
                                                'process_name'=>'Refresh'));
       $send_data['refresh_departments'] = $api_data;
@@ -580,10 +580,10 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     //   $api_url = API_2_ARC_PATH.$api_url;
     // elseif ($attributes['account_name'] == 'Export Internal Software')
     //   $api_url = API_EXPORT_INTERNAL_PATH.$api_url;
-    print_r($send_data);
+    // print_r($send_data);
     // pd($api_url); 
     $result = curl_post_request($api_url, $send_data);
-    pd($result);
+    // pd($result);
 }
 
   public function create_vodator_records($records, $receipt_type, $site_name, $hostversion) {
