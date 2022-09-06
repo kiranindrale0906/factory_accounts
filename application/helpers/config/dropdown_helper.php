@@ -203,15 +203,6 @@
   }
 
   function get_site_name_from_account_name($account_name) {
-    $site_name = array('AR Gold Software (May 2022)' => 'AR Gold (May 2022)',
-                       'ARF Software (May 2022)'     => 'ARF (May 2022)',
-                       'ARC Software (May 2022)'     => 'ARC (May 2022)',
-                       'AR Gold Software (Aug 2022)' => 'AR Gold (Aug 2022)',
-                       'ARF Software (Aug 2022)'     => 'ARF (Aug 2022)',
-                       'ARC Software (Aug 2022)'     => 'ARC (Aug 2022)',
-                       'Export Internal Software'    => 'Export');
-    if (!empty($site_name[$account_name])) return $site_name[$account_name];
-
     if (str_contains($account_name, 'AR Gold'))
       if (str_contains($account_name, 'May 2022')) return 'AR Gold (May 2022)';
       elseif (str_contains($account_name, 'Aug 2022')) return 'AR Gold (Aug 2022)';
@@ -221,6 +212,15 @@
     elseif (str_contains($account_name, 'ARC'))
       if (str_contains($account_name, 'May 2022')) return 'ARC (May 2022)';
       elseif (str_contains($account_name, 'Aug 2022')) return 'ARC (Aug 2022)';
+
+    $site_name = array('AR Gold Software (May 2022)' => 'AR Gold (May 2022)',
+                       'ARF Software (May 2022)'     => 'ARF (May 2022)',
+                       'ARC Software (May 2022)'     => 'ARC (May 2022)',
+                       'AR Gold Software (Aug 2022)' => 'AR Gold (Aug 2022)',
+                       'ARF Software (Aug 2022)'     => 'ARF (Aug 2022)',
+                       'ARC Software (Aug 2022)'     => 'ARC (Aug 2022)',
+                       'Export Internal Software'    => 'Export');
+    if (!empty($site_name[$account_name])) return $site_name[$account_name];
   }
 
   function get_account_name_from_site_name($site_name) {
