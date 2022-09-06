@@ -486,7 +486,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       pd($attributes);
               // || $attributes['receipt_type'] == "ARC Refresh"
       $api_data = array_merge($api_data, array('type'=>'Pure',
-                                               'hook_kdm_purity' => (empty($attributes['hook_kdm_purity'])) ? $attributes['factory_purity'] : $attributes['hook_kdm_purity'];
+                                               'hook_kdm_purity' => (empty($attributes['hook_kdm_purity'])) ? $attributes['factory_purity'] : $attributes['hook_kdm_purity'],
                                                'description' => $attributes['description'],
                                                'process_name'=>'Refresh'));
       $send_data['refresh_departments'] = $api_data;
