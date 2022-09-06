@@ -44,6 +44,7 @@ defined('BASEPATH') OR exit('No direct script access allowed.');
           'access_token:'.ACCESS_TOKEN
         ]);
         $response = curl_exec($curl);
+        pd($response);
         if(curl_errno($curl))
           $response=array('status'=>'error','response'=>json_encode($response));
         
