@@ -14,7 +14,7 @@
 	<td><?php echo $vouchers['packet_no'];?></td>
 	<td><?php echo $vouchers['voucher_date'];?></td>
 	<td><?php echo $vouchers['narration'];?> 
-	<a href=<?= get_site_url($record['site_name'])."issue_departments/issue_departments/view/".$vouchers['argold_id'] ?> target='_blank'>View</a></td>
+	<a href=<?= get_api_url_from_site_name($record['site_name'])."issue_departments/issue_departments/view/".$vouchers['argold_id'] ?> target='_blank'>View</a></td>
         <td class="text-right"><?= (!empty($vouchers['customer_name'])&& $vouchers['customer_name']!='Market Issue')?($vouchers['customer_name']):'' ;?></td>
 	<td class="quantity"><?php echo $vouchers['quantity'];?></td>
   	<td class="text-right"><?= four_decimal($vouchers['credit_weight']) ;?></td>
