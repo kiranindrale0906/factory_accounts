@@ -50,7 +50,8 @@ class Loss_reports extends BaseController {
           $recovered_details = $this->voucher_model->find('sum(debit_weight) as weight,
                                                               factory_purity, sum(fine) as fine',
                                               array('parent_id' => $loss_record['parent_id'],
-                                                    'account_name!=' => 'Unrecovarable'.' '.$this->data['site_name']));
+                                                    'account_name!=' => 'Unrecovarable'.' '.$this->data['site_name'],
+                                                    'site_name' => $this->data['site_name']));
           
           $unrecovered_details = $this->voucher_model->find('sum(credit_weight) as weight',
                                                array('parent_id' => $loss_record['parent_id'],
@@ -88,7 +89,7 @@ class Loss_reports extends BaseController {
 
   private function get_loss_department_names() {
     $category_names = $this->voucher_model->get('distinct(description) as description', 
-                                           array('account_name' => 'Loss Account',
+                                           array('account_name like "%Loss Account%"' => null,
                                                  'date(created_at)>=' => '2021-03-13'));
 
      $opening_category_names = $this->opening_loss_voucher_model->get('distinct(type_of_loss) as description',array('type_of_loss!=' => '','quator IS NULL'=>NULL));
@@ -97,22 +98,22 @@ class Loss_reports extends BaseController {
   }
 
   private function get_loss_records_from_factory($postdata) {
-    if ($this->data['factory_name']=='ARC (May 2022)'){
-    $path = API_MAY2022_ARC_PATH;
-    }elseif ($this->data['factory_name']=='ARF (May 2022)'){
-      $path =API_MAY2022_ARF_PATH;
-    }elseif ($this->data['factory_name']=='AR Gold (May 2022)'){
-      $path = API_MAY2022_ARG_PATH;
-    }elseif ($this->data['factory_name']=='AR Gold (Aug 2022)'){
-      $path = API_AUG2022_ARG_PATH;
-    }elseif ($this->data['factory_name']=='ARC (Aug 2022)'){
-      $path = API_AUG2022_ARC_PATH;
-    }elseif ($this->data['factory_name']=='ARF (Aug 2022)'){
-      $path = API_AUG2022_ARF_PATH;
-    }else {return array();} 
+    // if ($this->data['factory_name']=='ARC (May 2022)'){
+    // $path = API_MAY2022_ARC_PATH;
+    // }elseif ($this->data['factory_name']=='ARF (May 2022)'){
+    //   $path =API_MAY2022_ARF_PATH;
+    // }elseif ($this->data['factory_name']=='AR Gold (May 2022)'){
+    //   $path = API_MAY2022_ARG_PATH;
+    // }elseif ($this->data['factory_name']=='AR Gold (Aug 2022)'){
+    //   $path = API_AUG2022_ARG_PATH;
+    // }elseif ($this->data['factory_name']=='ARC (Aug 2022)'){
+    //   $path = API_AUG2022_ARC_PATH;
+    // }elseif ($this->data['factory_name']=='ARF (Aug 2022)'){
+    //   $path = API_AUG2022_ARF_PATH;
+    // }else {return array();} 
+    $path = get_api_url_from_site_name($this->data['factory_name']);
 
     $url = $path.'issue_and_receipts/loss_report_for_accounts/index';
-//	pd($url);
     $factory_loss_records = json_decode(curl_post_request($url, $postdata), true);
     if (!empty($factory_loss_records))
       if (   isset($factory_loss_records['data']['loss_details'])
@@ -130,7 +131,7 @@ class Loss_reports extends BaseController {
     $ghiss_melting_loss = $this->voucher_model->get('description, site_name, credit_weight as in_weight, 
                                                      purity as in_lot_purity, argold_id as parent_id,
                                                      0 as out_weight', 
-                                                     array('account_name' => 'Loss Account',
+                                                     array('account_name' => get_loss_account_name_from_site_name($this->data['factory_name']),
                                                            'site_name' => $this->data['site_name'],
                                                            'receipt_type' => 'Ghiss Melting Loss',
                                                            'quator'=> ''));
@@ -148,9 +149,10 @@ class Loss_reports extends BaseController {
 
     return $ghiss_melting_loss;
   }
+
   private function get_opening_loss($data) {
-    $opening_loss = $this->opening_loss_voucher_model->get('', 
-                                                     array('factory_name' => $this->data['site_name'],'quator IS NULL'=>NULL));
+    $opening_loss = $this->opening_loss_voucher_model->get('',  array('factory_name' => $this->data['site_name'],
+                                                                      'quator IS NULL'=>NULL));
     $opening_loss_details=array();
     foreach ($opening_loss as $opening_loss_index => $opening_loss_value) {
       $data['issue_department_id'] = $opening_loss_value['id'];

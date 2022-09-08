@@ -48,6 +48,7 @@ class Loss_report_details extends Ledgers {
       $loss_account_details = $this->voucher_model->find('sum(debit_weight) as weight,
                                                           factory_purity, sum(fine) as fine',
                                               array('parent_id'=>$loss_detail['parent_id'],
+                                                    'site_name' => $this->data['factory_name'],
                                                     'account_name!='=>'Unrecovarable'.' '.$this->data['factory_name']));
       
       $unrecovery_details = $this->voucher_model->find('sum(credit_weight) as weight',
@@ -76,12 +77,14 @@ class Loss_report_details extends Ledgers {
   }  
 
   private function get_ghiss_melting_loss_records($data) {
+    
+
     $ghiss_melting_loss = $this->voucher_model->get('receipt_type, description, site_name,
                                                      credit_weight as in_weight, purity as in_lot_purity,
                                                      argold_id as parent_id, 0 as out_weight,
                                                      created_at, created_at as first_date,
                                                      created_at as last_date, id', 
-                                               array('account_name' => 'Loss Account',
+                                               array('account_name' => get_loss_account_name_from_site_name($this->data['factory_name']),
                                                      'date(created_at)>=' => '2021-05-11',
                                                      'site_name' => $this->data['factory_name'],
                                                      'receipt_type' => 'Ghiss Melting Loss',
@@ -105,19 +108,20 @@ class Loss_report_details extends Ledgers {
   }  
 
   private function get_loss_records_from_factory($postdata) { 
-    if ($this->data['factory_name']=='ARC (May 2022)'){
-    $this->data['factory_url'] = API_MAY2022_ARC_PATH;
-    }elseif ($this->data['factory_name']=='ARF (May 2022)'){
-      $this->data['factory_url'] =API_MAY2022_ARF_PATH;
-    }elseif ($this->data['factory_name']=='AR Gold (May 2022)'){
-      $this->data['factory_url'] = API_MAY2022_ARG_PATH;
-    }elseif ($this->data['factory_name']=='AR Gold (Aug 2022)'){
-      $this->data['factory_url'] = API_AUG2022_ARG_PATH;
-    }elseif ($this->data['factory_name']=='ARC (Aug 2022)'){
-      $this->data['factory_url'] = API_AUG2022_ARC_PATH;
-    }elseif ($this->data['factory_name']=='ARF (Aug 2022)'){
-      $this->data['factory_url'] = API_AUG2022_ARF_PATH;
-    }else {return array();} 
+    // if ($this->data['factory_name']=='ARC (May 2022)'){
+    // $this->data['factory_url'] = API_MAY2022_ARC_PATH;
+    // }elseif ($this->data['factory_name']=='ARF (May 2022)'){
+    //   $this->data['factory_url'] =API_MAY2022_ARF_PATH;
+    // }elseif ($this->data['factory_name']=='AR Gold (May 2022)'){
+    //   $this->data['factory_url'] = API_MAY2022_ARG_PATH;
+    // }elseif ($this->data['factory_name']=='AR Gold (Aug 2022)'){
+    //   $this->data['factory_url'] = API_AUG2022_ARG_PATH;
+    // }elseif ($this->data['factory_name']=='ARC (Aug 2022)'){
+    //   $this->data['factory_url'] = API_AUG2022_ARC_PATH;
+    // }elseif ($this->data['factory_name']=='ARF (Aug 2022)'){
+    //   $this->data['factory_url'] = API_AUG2022_ARF_PATH;
+    // }else {return array();} 
+    $this->data['factory_url'] = get_api_url_from_site_name($this->data['factory_name']);
 
     $url = $this->data['factory_url'].'issue_and_receipts/loss_report_for_accounts/index';
     $factory_loss_records =  json_decode(curl_post_request($url, $postdata), true);

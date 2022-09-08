@@ -20,14 +20,15 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
 
   public function before_validate() {
     if ($this->attributes['receipt_type'] == 'Tounch Loss Fine') return;
-//    if ($this->attributes['receipt_type'] == 'Cutting Ghiss' || $this->attributes['receipt_type'] == 'Ice Cutting Ghiss') 
-  //    $this->attributes['account_name'] = 'ARF Software';
 
     if (empty($this->attributes['purity']))
       $this->attributes['fine'] = 0;
     else
       $this->attributes['fine'] = $this->attributes['credit_weight'] * $this->attributes['purity'] / 100;
     $this->attributes['packing_slip_balance'] =$this->attributes['credit_weight'];
+
+    $site_name = get_site_name_from_account_name($this->attributes['account_name']);
+    if (!empty($site_name)) $this->attributes['site_name'] = $site_name;
 
     $this->set_factory_purity_and_factory_fine_from_narration();    
     $this->set_id_for_alloy_vodator_gpc_vodator_and_stone_vatav();

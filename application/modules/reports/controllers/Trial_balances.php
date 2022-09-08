@@ -59,8 +59,8 @@ class Trial_balances extends Ledgers {
     $url=API_AUG2022_ARC_PATH."issue_and_receipts/ledger_balance/index";
     $arc_aug2022_records=json_decode(curl_post_request($url));
     
-    $url=API_EXPORT_INTERNAL_PATH."issue_and_receipts/ledger_balance/index";
-    $export_records=json_decode(curl_post_request($url));
+    //$url=API_EXPORT_INTERNAL_PATH."issue_and_receipts/ledger_balance/index";
+    //$export_records=json_decode(curl_post_request($url));
     
     $accounts_balance_select = '(sum(debit_weight*purity/100) - sum(credit_weight*purity/100)) as balance';
     

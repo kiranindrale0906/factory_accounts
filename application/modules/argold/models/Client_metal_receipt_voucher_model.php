@@ -66,15 +66,15 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   }
 
   private function set_site_name_from_receipt_type() {
-  //   if ($this->attributes['receipt_type'] == 'AR Gold Refresh')  $this->attributes['site_name'] = 'AR Gold';
-  //   elseif ($this->attributes['receipt_type'] == 'ARF Refresh')  $this->attributes['site_name'] = 'ARF';
-  //   elseif ($this->attributes['receipt_type'] == 'ARC Refresh')  $this->attributes['site_name'] = 'ARC';
     if (   $this->attributes['receipt_type'] == 'Refresh'
         || $this->attributes['receipt_type'] == 'Daily Drawer') {
       foreach ($this->formdata['metal_issue_vouchers'] as $metal_issue_voucher) {
         $this->attributes['site_name'] = get_site_name_from_account_name($metal_issue_voucher['account_name']);
         break;
       }
+    } else {
+      $site_name = get_site_name_from_account_name($this->attributes['account_name']);
+      if (!empty($site_name)) $this->attributes['site_name'] = $site_name;
     }
   }
 
@@ -373,8 +373,6 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   }
 
   public function before_save($action) {
-    if ($this->attributes['receipt_type']=='Daily Drawer')
-      // pd($this->formdata['metal_issue_vouchers']);
     $this->attributes['fine'] = $this->attributes['debit_weight'] * $this->attributes['purity'] / 100;
     $this->attributes['factory_fine'] = $this->attributes['debit_weight'] * $this->attributes['factory_purity'] / 100;
     parent::before_save($action);
@@ -437,6 +435,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $metal_issue_data['voucher_type'] = "metal issue voucher";
       $metal_issue_data['transaction_type'] = 'account';
       $metal_issue_data['is_export'] = $is_export;
+      $metal_issue_data['dd_type'] = $this->attributes['dd_type'];
       $obj_metal_issue_voucher=new metal_issue_voucher_model($metal_issue_data);
       $obj_metal_issue_voucher->save();
     }    
