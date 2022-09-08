@@ -92,8 +92,8 @@ class Chittis extends BaseController {
     } elseif($this->router->class == 'chitti_domestics'){ 
       $this->data['site_names'] = get_site_names(2);
       $this->data['account_name']= $this->account_model->get('distinct(name) as name,name as id',
-                                                              array('group_code'=>"Domestic Labour Account"));
-      pd($this->data['account_name']);
+                                                              array('sub_group_code'=>"Domestic Labour Account"));
+      // pd($this->data['account_name']);
       $where=array('voucher_type' => 'metal issue voucher',
                    'chitti_id' => '',
                    'site_name' => $this->data['record']['site_name']);
