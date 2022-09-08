@@ -16,6 +16,10 @@
       <th class="text-right">INR Wastage</th>
     <?php }?>
       <th class="text-right">Issue Fine</th>
+      <?php if($this->router->class == 'chitti_domestics'){ ?>
+      <th class="text-right">Rate per Gram</th>
+      <th class="text-right">Amount</th>
+    <?php }?>
     </tr>
   </thead>
   <tbody>
@@ -42,6 +46,10 @@
       <th class="text-right"></th>
       <?php }?>
       <th class="text-right"><?= four_decimal($issue_fine) ?></th>
+      <?php if($this->router->class == 'chitti_domestics'){ ?>
+      <th class="text-right"></th>
+      <th class="text-right"></th>
+      <?php }?>
     </tr>
   </tbody>
 

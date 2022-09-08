@@ -163,6 +163,9 @@
     elseif ($site_name=='AR Gold (Aug 2022)') return API_AUG2022_ARG_PATH;
     elseif ($site_name=='ARF (Aug 2022)')     return API_AUG2022_ARF_PATH;
     elseif ($site_name=='ARC (Aug 2022)')     return API_AUG2022_ARC_PATH;
+    elseif ($site_name=='Export')     return API_EXPORT_INTERNAL_PATH;
+    elseif ($site_name=='Domestic')     return API_DOMESTIC_INTERNAL_PATH;
+    elseif ($site_name=='Domesticstaging')     return API_DOMESTIC_INTERNAL_PATH;
   }
 
   function get_api_path($site_name, $hostversion) {

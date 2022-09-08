@@ -23,6 +23,9 @@
     <?php if($this->router->class == 'chitti_exports'){ ?>
     <td class="text-right"><?= four_decimal($vouchers['usd_wastage_percentage']) ?></td>
     <td class="text-right"><?= four_decimal($vouchers['inr_wastage_percentage']) ?></td>
-	<?php }?>
 	<td class="text-right"><?= four_decimal($vouchers['credit_weight']*$vouchers['factory_purity']/100); ?></td>
+	<?php }?><?php if($this->router->class == 'chitti_domestics'){ ?>
+    <td class="text-right"><?= four_decimal($vouchers['rate']) ?></td>
+    <td class="text-right"><?= four_decimal($vouchers['credit_weight']*$vouchers['rate']) ?></td>
+	<?php }?>
 </tr>
