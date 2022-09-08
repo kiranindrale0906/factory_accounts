@@ -151,6 +151,7 @@ class Chittis extends BaseController {
                             packet_no,
                             voucher_date,
                             customer_name,
+                            rate,
                             group_concat(narration) as narration,
                             argold_id as argold_id', 
                             $where, 
