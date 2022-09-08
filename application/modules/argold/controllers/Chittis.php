@@ -19,10 +19,15 @@ class Chittis extends BaseController {
       $show = (isset($_GET['show_all'])) ? $_GET['show_all'] : '';
       $account_names= $this->account_model->get('distinct(name) as name,name as id',array('group_code'=>"Domestic"));
       $account_name= array_column($account_names,'name');
+      $account_chitti_domestic_names= $this->account_model->get('distinct(name) as name,name as id',array('group_code'=>"Domestic Labour Account"));
+      $account_chitti_domestic_name= array_column($account_chitti_domestic_names,'name');
 
       if($this->router->class == 'chitti_exports'){ 
         if($show=='yes') $this->where='account_name not in ("'.implode('", "', $account_name).'")';
         else $this->where='chitti_hide=0 and account_name not in ("'.implode('", "', $account_name).'")';
+      }elseif($this->router->class == 'chitti_domestics'){ 
+        if($show=='yes') $this->where='account_name in ("'.implode('", "', $account_chitti_domestic_name).'")';
+        else $this->where='chitti_hide=0 and account_name in ("'.implode('", "', $account_chitti_domestic_name).'")';
       }else{
 
         if($show=='yes') $this->where='account_name in ("'.implode('", "', $account_name).'")';
@@ -67,8 +72,9 @@ class Chittis extends BaseController {
     if (!empty($_GET['purity'])) $this->data['record']['purity'] = $_GET['purity'];
     
     $this->data['record']['site_name'] = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'AR Gold (May2022)';
-
+    $this->data['site_names'] = get_site_names();
     if($this->router->class == 'chitti_exports'){ 
+      $this->data['site_names'] = get_site_names(1);
       $this->data['account_name']= $this->account_model->get('distinct(name) as name,name as id',
                                                               array('group_code'=>"Export"));
       $where=array('voucher_type' => 'metal issue voucher',
@@ -81,6 +87,22 @@ class Chittis extends BaseController {
                                        'voucher_type' => 'metal issue voucher',
                                        'chitti_id' => 0,
                                        'receipt_type in ("Finish Good","GPC Out","Packing Slip")'=>NULL)),
+                                 array(), array('group_by' => 'purity'));
+    
+    } elseif($this->router->class == 'chitti_domestics'){ 
+      $this->data['site_names'] = get_site_names(2);
+      $this->data['account_name']= $this->account_model->get('distinct(name) as name,name as id',
+                                                              array('group_code'=>"Domestic Labour Account"));
+      $where=array('voucher_type' => 'metal issue voucher',
+                   'chitti_id' => '',
+                   'site_name' => $this->data['record']['site_name']);
+      $account_name= array_column($this->data['account_name'],'name');
+      $this->data['purity'] = $this->voucher_model->get('purity as name, purity as id', 
+                                 array('where'=>array(
+                                       'account_name in ("'.implode('", "', $account_name).'")' => NULL,
+                                       'voucher_type' => 'metal issue voucher',
+                                       'chitti_id' => 0,
+                                       'receipt_type in ("QC Out")'=>NULL)),
                                  array(), array('group_by' => 'purity'));
     
     } else {
@@ -141,6 +163,11 @@ class Chittis extends BaseController {
         $this->data['record']['chitti_exports'] = $_POST['chitti_exports'];
         $this->data['chittis_details'] = @$_POST['chittis_details'];
       }
+    }elseif($this->router->class == 'chitti_domestics'){ 
+      if ($this->router->method == 'store' || $this->router->method == 'update') {
+        $this->data['record']['chitti_domestics'] = $_POST['chitti_domestics'];
+        $this->data['chittis_details'] = @$_POST['chittis_details'];
+      }
     }else{
       if ($this->router->method == 'store' || $this->router->method == 'update') {
         $this->data['record']['chittis'] = $_POST['chittis'];
@@ -149,7 +176,7 @@ class Chittis extends BaseController {
     }
   }
 
-  $this->data['site_names'] = get_site_names();
+  
     // if($this->router->class == 'chitti_exports'){ 
     //   $this->data['site_names'] = array(
     //                                   array('id' => 'AR Gold', 'name' => 'AR Gold'),
@@ -199,6 +226,8 @@ class Chittis extends BaseController {
   public function _after_save($formdata, $action) {
     if ($this->router->class == 'chitti_exports')
       $this->data['redirect_url']= ADMIN_PATH.'argold/chitti_exports';
+    elseif ($this->router->class == 'chitti_domestics')
+      $this->data['redirect_url']= ADMIN_PATH.'argold/chitti_domestics';
     else
       $this->data['redirect_url']= ADMIN_PATH.'argold/chittis';
     
