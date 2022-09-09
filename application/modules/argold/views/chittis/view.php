@@ -172,7 +172,15 @@
     <tr>
       <td>Grand Total</td><td class="text-right"><h6><?=four_decimal($record['debit_amount'])?></h6></td>
     </tr>
-  <?php }else{?>
+  <?php }else{
+    $sum_rate=$sum_rate_amount=0;
+    foreach ($metal_voucher_details as $index => $metal_voucher_detail) {
+      $sum_rate += $metal_voucher_detail['rate'];
+      $sum_rate_amount += ($metal_voucher_detail['rate']*$metal_voucher_detail['credit_weight']);
+       
+    }
+
+    ?>
     <tr>
       <td>Taxable Amount</td><td class="text-right"><h6><?=four_decimal($sum_rate_amount)?></h6></td>
     </tr>
