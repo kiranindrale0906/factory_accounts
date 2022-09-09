@@ -55,6 +55,7 @@
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['chitti_purity']); ?></td>
                   <?php if ($this->router->class != 'chitti_domestics'): ?>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['factory_purity'] - $metal_voucher_detail['chitti_purity']) ?></td>
+                  <?php endif; ?>
                   <!-- <td class="text-right"><?//= four_decimal($metal_voucher_detail['usd_wastage_percentage']); ?></td>
                   <td class="text-right"><?//= four_decimal($metal_voucher_detail['inr_wastage_percentage']); ?></td>
                    --><?php if ($detail==1): ?>
@@ -64,6 +65,7 @@
                   <?php if ($this->router->class == 'chitti_domestics'): ?>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['rate']) ?></td>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['rate']*$metal_voucher_detail['credit_weight']) ?></td>
+                  <?php endif; ?>
                   <?php if($group_by==0){
                   ?>
                   <td class="text-right no-print"><a class='red' href="<?=base_url().'argold/chittis/delete/'.$record['id'].'?voucher_id='.$metal_voucher_detail['id']?>">remove</a></td>
@@ -83,6 +85,7 @@
             <td class="text-right"></td>
             <?php if ($this->router->class != 'chitti_domestics'): ?>
             <td class="text-right"></td>
+            <?php endif; ?>
             <!-- <td class="text-right"></td>
             <td class="text-right"></td> -->
             <?php if ($detail==1): ?>
