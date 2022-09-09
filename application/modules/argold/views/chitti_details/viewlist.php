@@ -24,16 +24,22 @@
               <th class="text-right">Factory Fine</th>
             <?php endif; ?>
             <th class="text-right">Fine</th>
+            <?php if ($this->router->class != 'chitti_domestics'){ ?>
+            <th class="text-right">Rate</th>
+            <th class="text-right">Amount</th>
+            <?php } ?>
             <th class="text-right no-print">Action</th>
           </tr>
         </thead>
         <tbody>
           <?php 
-            $sum_weight=$sum_fine=$sum_factory_fine=0;
+            $sum_weight=$sum_fine=$sum_factory_fine=$sum_rate=$sum_rate_amount=0;
             $sr_no=0;
             foreach ($metal_voucher_details as $index => $metal_voucher_detail) {
               //if($packet_no == $metal_voucher_detail['packet_no']) {
                 $sum_weight += $metal_voucher_detail['credit_weight'];
+                $sum_rate += $metal_voucher_detail['rate'];
+                $sum_rate_amount += ($metal_voucher_detail['rate']*$metal_voucher_detail['credit_weight']);
                 $sum_fine += $metal_voucher_detail['fine'];
                 $sum_factory_fine += $metal_voucher_detail['factory_fine']; ?>
 
@@ -97,8 +103,8 @@
             <?php endif; ?>  
             <td class="text-right"><?=four_decimal($sum_factory_fine);?></td>
             <?php if ($this->router->class == 'chitti_domestics'){?>
-            <td class="text-right"></td>
-            <td class="text-right"></td>
+            <td class="text-right"><?=four_decimal($sum_rate);?></td>
+            <td class="text-right"><?=four_decimal($sum_rate_amount);?></td>
             <?php }?>
             <td class="text-right"></td>
           </tr>
