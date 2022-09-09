@@ -65,10 +65,12 @@
     $gst_rate = 2.5;
   else
     $gst_rate = 1.5;
+
 ?>
 
 <div style="max-width:45%; margin-left:10%; page-break-after:avoid">
   <table class="table table-sm">
+    <?php if($this->router->class != 'chitti_domestics'){ ?>
     <tr>
       <td>Weight</td><td class="text-right"><h6><?=four_decimal($record['credit_weight'])?></h6></td>
     </tr><tr>
@@ -169,6 +171,18 @@
   <?php }?>
     <tr>
       <td>Grand Total</td><td class="text-right"><h6><?=four_decimal($record['debit_amount'])?></h6></td>
+    </tr>
+  <?php }else{?>
+    <tr>
+      <td>Taxable Amount</td><td class="text-right"><h6><?=four_decimal($sum_rate_amount)?></h6></td>
+    </tr>
+    <tr class="no-print">
+      <td class="no-print">CGST Amount (<?= $gst_rate ?>%)</td>
+      <td class="text-right no-print"><?=four_decimal($sum_rate_amount*$gst_rate/100)?></td>
+    </tr>
+    <tr class="no-print">
+      <td class="no-print">SGST Amount (<?= $gst_rate ?>%)</td>
+      <td class="text-right no-print"><?=four_decimal($sum_rate_amount*$gst_rate/100)?></td>
     </tr>
   </table>
   <div class="col-md-3">
