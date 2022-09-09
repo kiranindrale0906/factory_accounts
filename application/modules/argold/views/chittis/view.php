@@ -172,7 +172,7 @@
     </tr>
   </table>
   <div class="col-md-3">
-   <h4 style="margin-left:45%" class="heading"><?= $record['narration']; ?></h4>
+   <h4 style="margin-left:45%" class="heading"><?= @$record['narration']; ?></h4>
   </div>
   <?php $this->load->view('chitti_details/empty_packet_view'); ?>
 </div>

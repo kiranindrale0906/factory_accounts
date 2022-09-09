@@ -19,7 +19,7 @@ class Chittis extends BaseController {
       $show = (isset($_GET['show_all'])) ? $_GET['show_all'] : '';
       $account_names= $this->account_model->get('distinct(name) as name,name as id',array('group_code'=>"Domestic"));
       $account_name= array_column($account_names,'name');
-      $account_chitti_domestic_names= $this->account_model->get('distinct(name) as name,name as id',array('group_code'=>"Domestic Labour Account"));
+      $account_chitti_domestic_names= $this->account_model->get('distinct(name) as name,name as id',array('sub_group_code'=>"Domestic Labour Account"));
       $account_chitti_domestic_name= array_column($account_chitti_domestic_names,'name');
 
       if($this->router->class == 'chitti_exports'){ 
