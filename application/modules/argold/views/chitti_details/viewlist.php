@@ -17,6 +17,7 @@
             <th class="text-right">Melting</th>
             <?php if ($this->router->class != 'chitti_domestics'): ?>
             <th class="text-right">Wastage</th>
+            <?php endif; ?>
             <!-- <th class="text-right">USD Wastage %</th> -->
             <!-- <th class="text-right">INR Wastage %</th> -->
             <?php if ($detail==1): ?>
