@@ -65,6 +65,7 @@ class Chittis extends BaseController {
     //   else
     //     $this->data['metal_voucher_details'][$index]['chitti_purity'] = 0;
     // }
+    pd($this->data['metal_voucher_details']);
   }
 
   public function _get_form_data() {
