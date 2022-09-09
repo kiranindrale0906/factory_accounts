@@ -15,6 +15,7 @@
               <th class="text-right">Factory Purity</th>
             <?php endif; ?>
             <th class="text-right">Melting</th>
+            <?php if ($this->router->class != 'chitti_domestics'): ?>
             <th class="text-right">Wastage</th>
             <!-- <th class="text-right">USD Wastage %</th> -->
             <!-- <th class="text-right">INR Wastage %</th> -->
@@ -52,6 +53,7 @@
                     <td class="text-right"><?= four_decimal($metal_voucher_detail['purity']); ?></td>
                   <?php endif; ?>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['chitti_purity']); ?></td>
+                  <?php if ($this->router->class != 'chitti_domestics'): ?>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['factory_purity'] - $metal_voucher_detail['chitti_purity']) ?></td>
                   <!-- <td class="text-right"><?//= four_decimal($metal_voucher_detail['usd_wastage_percentage']); ?></td>
                   <td class="text-right"><?//= four_decimal($metal_voucher_detail['inr_wastage_percentage']); ?></td>
@@ -59,6 +61,9 @@
                     <td class="text-right"><?= four_decimal($metal_voucher_detail['fine']) ?></td>
                   <?php endif; ?>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['factory_fine']) ?></td>
+                  <?php if ($this->router->class == 'chitti_domestics'): ?>
+                  <td class="text-right"><?= four_decimal($metal_voucher_detail['rate']) ?></td>
+                  <td class="text-right"><?= four_decimal($metal_voucher_detail['rate']*$metal_voucher_detail['credit_weight']) ?></td>
                   <?php if($group_by==0){
                   ?>
                   <td class="text-right no-print"><a class='red' href="<?=base_url().'argold/chittis/delete/'.$record['id'].'?voucher_id='.$metal_voucher_detail['id']?>">remove</a></td>
@@ -76,6 +81,7 @@
             <td></td>
             <td class="text-right"><?=four_decimal($sum_weight);?></td>
             <td class="text-right"></td>
+            <?php if ($this->router->class != 'chitti_domestics'): ?>
             <td class="text-right"></td>
             <!-- <td class="text-right"></td>
             <td class="text-right"></td> -->
@@ -86,6 +92,10 @@
               <td class="text-right"><?=four_decimal($sum_fine);?></td>
             <?php endif; ?>  
             <td class="text-right"><?=four_decimal($sum_factory_fine);?></td>
+            <?php if ($this->router->class == 'chitti_domestics'){?>
+            <td class="text-right"></td>
+            <td class="text-right"></td>
+            <?php }?>
             <td class="text-right"></td>
           </tr>
         </tbody>
