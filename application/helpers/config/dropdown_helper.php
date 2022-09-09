@@ -188,7 +188,10 @@
       array('id' => 'ARC (Aug 2022)',     'name' => 'ARC (Aug 2022)'),
     );
     if ($export==1) $site_names[] = array('id' => 'Export', 'name' => 'Export');
-    if ($export==2) $site_names[] = array('id' => 'Domestic', 'name' => 'Domestic');
+    if ($export==2) {
+      $site_names[] = array('id' => 'Domestic', 'name' => 'Domestic');
+      $site_names[] = array('id' => 'Domesticstaging', 'name' => 'Domesticstaging');
+    }
     return $site_names;
   }
 

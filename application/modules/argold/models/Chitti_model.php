@@ -178,6 +178,7 @@ class Chitti_model extends BaseModel {
 
   private function set_chitti_id_in_metal_issue_vouchers() {
     $chittis=array();
+
     if (!empty($this->formdata['chitti_details'])) {
       $chitti_ids=array_column($this->formdata['chitti_details'], 'chitti_id');
       $chitti_id_details=array();
@@ -194,9 +195,9 @@ class Chitti_model extends BaseModel {
                                                             'argold_id' => $argold_ids,
                                                             'account_name' => $this->attributes['account_name'],
                                                             'purity' => $this->attributes['purity']));
-      lq();
     } else 
       $chitti_details = $this->voucher_model->get('', array('chitti_id' => $this->attributes['id']));
+    
     
     foreach ($chitti_details as $index => $chitti_detail) {
       if (isset($chitti_detail['id'])) {
