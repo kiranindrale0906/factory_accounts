@@ -24,7 +24,7 @@
               <th class="text-right">Factory Fine</th>
             <?php endif; ?>
             <th class="text-right">Fine</th>
-            <?php if ($this->router->class != 'chitti_domestics'){ ?>
+            <?php if ($this->router->class == 'chitti_domestics'){ ?>
             <th class="text-right">Rate</th>
             <th class="text-right">Amount</th>
             <?php } ?>
