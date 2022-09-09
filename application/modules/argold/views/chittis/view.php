@@ -184,6 +184,7 @@
       <td class="no-print">SGST Amount (<?= $gst_rate ?>%)</td>
       <td class="text-right no-print"><?=four_decimal($sum_rate_amount*$gst_rate/100)?></td>
     </tr>
+  <?php }?>
   </table>
   <div class="col-md-3">
    <h4 style="margin-left:45%" class="heading"><?= @$record['narration']; ?></h4>
