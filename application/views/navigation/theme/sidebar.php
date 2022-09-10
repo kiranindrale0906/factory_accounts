@@ -47,6 +47,7 @@
                                             //'argold/chalans' => 'Chalans',
                                             //'argold/combine_chitties' => 'Combine Chitties',
                                             'argold/chitti_exports' => 'Chitti Export',
+                                            'argold/chitti_domestics' => 'Chitti Domestic',
                                             //'argold/packing_slips' => 'Packing slips',
                                             //'argold/domestic_labour_chitties' => 'Domestic Labour Chitti',
                                             'argold/refresh' => 'Refresh',
