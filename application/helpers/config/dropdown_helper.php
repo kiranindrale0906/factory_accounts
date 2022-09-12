@@ -214,6 +214,9 @@
       if (str_contains($account_name, 'May 2022')) return 'ARC (May 2022)';
       elseif (str_contains($account_name, 'Aug 2022')) return 'ARC (Aug 2022)';
     }
+
+    if ($account_name=='VADOTAR')
+      return 'AR Gold (Aug 2022)';
     
     $site_name = array('AR Gold Software (May 2022)' => 'AR Gold (May 2022)',
                        'ARF Software (May 2022)'     => 'ARF (May 2022)',
