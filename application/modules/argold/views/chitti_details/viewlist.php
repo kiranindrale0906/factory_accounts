@@ -15,23 +15,31 @@
               <th class="text-right">Factory Purity</th>
             <?php endif; ?>
             <th class="text-right">Melting</th>
+            <?php if ($this->router->class != 'chitti_domestics'): ?>
             <th class="text-right">Wastage</th>
+            <?php endif; ?>
             <!-- <th class="text-right">USD Wastage %</th> -->
             <!-- <th class="text-right">INR Wastage %</th> -->
             <?php if ($detail==1): ?>
               <th class="text-right">Factory Fine</th>
             <?php endif; ?>
             <th class="text-right">Fine</th>
+            <?php if ($this->router->class == 'chitti_domestics'){ ?>
+            <th class="text-right">Rate</th>
+            <th class="text-right">Amount</th>
+            <?php } ?>
             <th class="text-right no-print">Action</th>
           </tr>
         </thead>
         <tbody>
           <?php 
-            $sum_weight=$sum_fine=$sum_factory_fine=0;
+            $sum_weight=$sum_fine=$sum_factory_fine=$sum_rate=$sum_rate_amount=0;
             $sr_no=0;
             foreach ($metal_voucher_details as $index => $metal_voucher_detail) {
               //if($packet_no == $metal_voucher_detail['packet_no']) {
                 $sum_weight += $metal_voucher_detail['credit_weight'];
+                $sum_rate += $metal_voucher_detail['rate'];
+                $sum_rate_amount += ($metal_voucher_detail['rate']*$metal_voucher_detail['credit_weight']);
                 $sum_fine += $metal_voucher_detail['fine'];
                 $sum_factory_fine += $metal_voucher_detail['factory_fine']; ?>
 
@@ -52,13 +60,19 @@
                     <td class="text-right"><?= four_decimal($metal_voucher_detail['purity']); ?></td>
                   <?php endif; ?>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['chitti_purity']); ?></td>
+                  <?php if ($this->router->class != 'chitti_domestics'): ?>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['factory_purity'] - $metal_voucher_detail['chitti_purity']) ?></td>
+                  <?php endif; ?>
                   <!-- <td class="text-right"><?//= four_decimal($metal_voucher_detail['usd_wastage_percentage']); ?></td>
                   <td class="text-right"><?//= four_decimal($metal_voucher_detail['inr_wastage_percentage']); ?></td>
                    --><?php if ($detail==1): ?>
                     <td class="text-right"><?= four_decimal($metal_voucher_detail['fine']) ?></td>
                   <?php endif; ?>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['factory_fine']) ?></td>
+                  <?php if ($this->router->class == 'chitti_domestics'): ?>
+                  <td class="text-right"><?= four_decimal($metal_voucher_detail['rate']) ?></td>
+                  <td class="text-right"><?= four_decimal($metal_voucher_detail['rate']*$metal_voucher_detail['credit_weight']) ?></td>
+                  <?php endif; ?>
                   <?php if($group_by==0){
                   ?>
                   <td class="text-right no-print"><a class='red' href="<?=base_url().'argold/chittis/delete/'.$record['id'].'?voucher_id='.$metal_voucher_detail['id']?>">remove</a></td>
@@ -76,7 +90,9 @@
             <td></td>
             <td class="text-right"><?=four_decimal($sum_weight);?></td>
             <td class="text-right"></td>
+            <?php if ($this->router->class != 'chitti_domestics'): ?>
             <td class="text-right"></td>
+            <?php endif; ?>
             <!-- <td class="text-right"></td>
             <td class="text-right"></td> -->
             <?php if ($detail==1): ?>
@@ -86,6 +102,10 @@
               <td class="text-right"><?=four_decimal($sum_fine);?></td>
             <?php endif; ?>  
             <td class="text-right"><?=four_decimal($sum_factory_fine);?></td>
+            <?php if ($this->router->class == 'chitti_domestics'){?>
+            <td class="text-right"><?=four_decimal($sum_rate);?></td>
+            <td class="text-right"><?=four_decimal($sum_rate_amount);?></td>
+            <?php }?>
             <td class="text-right"></td>
           </tr>
         </tbody>

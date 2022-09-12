@@ -19,7 +19,7 @@ class Chittis extends BaseController {
       $show = (isset($_GET['show_all'])) ? $_GET['show_all'] : '';
       $account_names= $this->account_model->get('distinct(name) as name,name as id',array('group_code'=>"Domestic"));
       $account_name= array_column($account_names,'name');
-      $account_chitti_domestic_names= $this->account_model->get('distinct(name) as name,name as id',array('group_code'=>"Domestic Labour Account"));
+      $account_chitti_domestic_names= $this->account_model->get('distinct(name) as name,name as id',array('sub_group_code'=>"Domestic Labour Account"));
       $account_chitti_domestic_name= array_column($account_chitti_domestic_names,'name');
 
       if($this->router->class == 'chitti_exports'){ 
@@ -42,7 +42,7 @@ class Chittis extends BaseController {
     $this->data['account_id']='';
 
     if($this->data['group_by']==1) {
-    $this->data['metal_voucher_details'] = $this->voucher_model->get('sum(fine) as fine,sum(factory_fine) as factory_fine,sum(credit_weight) as credit_weight,group_concat(narration) as narration,purity,chitti_purity,factory_purity,customer_name', array('voucher_type' => 'metal issue voucher',
+    $this->data['metal_voucher_details'] = $this->voucher_model->get('sum(fine) as fine,sum(rate) as rate,sum(factory_fine) as factory_fine,sum(credit_weight) as credit_weight,group_concat(narration) as narration,purity,chitti_purity,factory_purity,customer_name', array('voucher_type' => 'metal issue voucher',
                                                                                'chitti_id' => $this->data['record']['id']),array(), array('group_by' => 'customer_name,chitti_purity,(factory_purity-chitti_purity)'));
     }else{
     $this->data['metal_voucher_details'] = $this->voucher_model->get('', array('voucher_type' => 'metal issue voucher',
@@ -65,6 +65,7 @@ class Chittis extends BaseController {
     //   else
     //     $this->data['metal_voucher_details'][$index]['chitti_purity'] = 0;
     // }
+    // pd($this->data['metal_voucher_details']);
   }
 
   public function _get_form_data() {
@@ -92,7 +93,8 @@ class Chittis extends BaseController {
     } elseif($this->router->class == 'chitti_domestics'){ 
       $this->data['site_names'] = get_site_names(2);
       $this->data['account_name']= $this->account_model->get('distinct(name) as name,name as id',
-                                                              array('group_code'=>"Domestic Labour Account"));
+                                                              array('sub_group_code'=>"Domestic Labour Account"));
+      // pd($this->data['account_name']);
       $where=array('voucher_type' => 'metal issue voucher',
                    'chitti_id' => '',
                    'site_name' => $this->data['record']['site_name']);
@@ -150,6 +152,7 @@ class Chittis extends BaseController {
                             packet_no,
                             voucher_date,
                             customer_name,
+                            rate,
                             group_concat(narration) as narration,
                             argold_id as argold_id', 
                             $where, 
