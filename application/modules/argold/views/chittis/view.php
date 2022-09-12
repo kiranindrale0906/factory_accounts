@@ -30,9 +30,9 @@
       <td class=""><h6><?= date('d-m-Y',strtotime($record['date']))?></h6></td>
       <td rowspan="3" style="text-align: center">
         <?php 
-            $string=$record['id'];      
-            $qr_code = generate_qrcode($string,'72');
-            echo $qr_code;
+            // $string=$record['id'];      
+            // $qr_code = generate_qrcode($string,'72');
+            // echo $qr_code;
         ?>
       </td>
     </tr><tr>
@@ -65,10 +65,12 @@
     $gst_rate = 2.5;
   else
     $gst_rate = 1.5;
+
 ?>
 
 <div style="max-width:45%; margin-left:10%; page-break-after:avoid">
   <table class="table table-sm">
+    <?php if($this->router->class != 'chitti_domestics'){ ?>
     <tr>
       <td>Weight</td><td class="text-right"><h6><?=four_decimal($record['credit_weight'])?></h6></td>
     </tr><tr>
@@ -170,9 +172,30 @@
     <tr>
       <td>Grand Total</td><td class="text-right"><h6><?=four_decimal($record['debit_amount'])?></h6></td>
     </tr>
+  <?php }else{
+    $sum_rate=$sum_rate_amount=0;
+    foreach ($metal_voucher_details as $index => $metal_voucher_detail) {
+      $sum_rate += $metal_voucher_detail['rate'];
+      $sum_rate_amount += ($metal_voucher_detail['rate']*$metal_voucher_detail['credit_weight']);
+       
+    }
+
+    ?>
+    <tr>
+      <td>Taxable Amount</td><td class="text-right"><h6><?=four_decimal($sum_rate_amount)?></h6></td>
+    </tr>
+    <tr class="no-print">
+      <td class="no-print">CGST Amount (<?= $gst_rate ?>%)</td>
+      <td class="text-right no-print"><?=four_decimal($sum_rate_amount*$gst_rate/100)?></td>
+    </tr>
+    <tr class="no-print">
+      <td class="no-print">SGST Amount (<?= $gst_rate ?>%)</td>
+      <td class="text-right no-print"><?=four_decimal($sum_rate_amount*$gst_rate/100)?></td>
+    </tr>
+  <?php }?>
   </table>
   <div class="col-md-3">
-   <h4 style="margin-left:45%" class="heading"><?= $record['narration']; ?></h4>
+   <h4 style="margin-left:45%" class="heading"><?= @$record['narration']; ?></h4>
   </div>
   <?php $this->load->view('chitti_details/empty_packet_view'); ?>
 </div>

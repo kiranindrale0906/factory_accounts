@@ -373,8 +373,6 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   }
 
   public function before_save($action) {
-    // if ($this->attributes['receipt_type']=='Daily Drawer')
-    //   pd($this->formdata['metal_issue_vouchers']);
     $this->attributes['fine'] = $this->attributes['debit_weight'] * $this->attributes['purity'] / 100;
     $this->attributes['factory_fine'] = $this->attributes['debit_weight'] * $this->attributes['factory_purity'] / 100;
     parent::before_save($action);
@@ -485,8 +483,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
               || $attributes['receipt_type'] == "Export Internal"
               || $attributes['receipt_type'] == "Domestic Internal") {
               // || $attributes['receipt_type'] == "ARC Refresh"
+      // pd($attributes);
       $api_data = array_merge($api_data, array('type'=>'Pure',
-                                               'hook_kdm_purity' => $attributes['hook_kdm_purity'],
+                                               'hook_kdm_purity' => (empty($attributes['hook_kdm_purity'])) ? $attributes['factory_purity'] : $attributes['hook_kdm_purity'],
                                                'description' => $attributes['description'],
                                                'process_name'=>'Refresh'));
       $send_data['refresh_departments'] = $api_data;
@@ -517,19 +516,20 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                    || $attributes['account_name'] == 'ARF Software (Aug 2022)' 
                    || $attributes['account_name'] == 'ARC Software (Aug 2022)'
                    || $attributes['account_name'] == 'Export Internal Software'
+                   || $attributes['account_name'] == 'Domestic Internal Software'
                     )) {
 
       $api_data = array_merge($api_data, array('type' => 'Pure','description' => $api_data['description'].'-'.$attributes['site_name']));
       $send_data['internal_receipts'] = $api_data;
-      $api_url = "api/api_internal_receipts/store";
+      if($attributes['account_name'] == 'Domestic Internal Software'){
+        $api_data['account']=$attributes['site_name'];
+        $send_data['domestic_internal_receipts'] = $api_data;
+        $api_url = "api/api_domestic_internal_receipts/store";
+      }else{
+        $api_url = "api/api_internal_receipts/store";
+      }
 
-    }elseif ($attributes['account_name'] == 'Domestic Internal Software') {
-
-      $api_data = array_merge($api_data, array('type' => 'Pure','description' => $api_data['description'].'-'.$attributes['site_name']));
-      $send_data['internal_receipts'] = $api_data;
-      $api_url = "api/api_domestic_internal_receipts/store";
-
-    } elseif (   $attributes['receipt_type'] == 'AR Gold RND'
+    }elseif (   $attributes['receipt_type'] == 'AR Gold RND'
               || $attributes['receipt_type'] == 'ARF RND'
               || $attributes['receipt_type'] == 'ARC RND') {
       $send_data['rnd_receipts'] = $api_data;
@@ -564,6 +564,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     }
     if (empty($api_url)) return true;
     $api_url = get_api_path_from_account_name($attributes['account_name']).$api_url;
+// print_r($api_url);  die();
 
     // if ($attributes['account_name'] == 'AR Gold Software')
     //   $api_url = API_ARG_PATH.$api_url;
@@ -579,10 +580,10 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     //   $api_url = API_2_ARC_PATH.$api_url;
     // elseif ($attributes['account_name'] == 'Export Internal Software')
     //   $api_url = API_EXPORT_INTERNAL_PATH.$api_url;
-    //print_r($send_data);
-    //pd($api_url);
+    // print_r($send_data);
+    // pd($api_url); 
     $result = curl_post_request($api_url, $send_data);
-//print_r($result);  
+    // pd($result);
 }
 
   public function create_vodator_records($records, $receipt_type, $site_name, $hostversion) {

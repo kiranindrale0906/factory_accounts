@@ -163,6 +163,9 @@
     elseif ($site_name=='AR Gold (Aug 2022)') return API_AUG2022_ARG_PATH;
     elseif ($site_name=='ARF (Aug 2022)')     return API_AUG2022_ARF_PATH;
     elseif ($site_name=='ARC (Aug 2022)')     return API_AUG2022_ARC_PATH;
+    elseif ($site_name=='Export')     return API_EXPORT_INTERNAL_PATH;
+    elseif ($site_name=='Domestic')     return API_DOMESTIC_INTERNAL_PATH;
+    elseif ($site_name=='Domesticstaging')     return API_DOMESTIC_INTERNAL_PATH;
   }
 
   function get_api_path($site_name, $hostversion) {
@@ -185,7 +188,10 @@
       array('id' => 'ARC (Aug 2022)',     'name' => 'ARC (Aug 2022)'),
     );
     if ($export==1) $site_names[] = array('id' => 'Export', 'name' => 'Export');
-    if ($export==2) $site_names[] = array('id' => 'Domestic', 'name' => 'Domestic');
+    if ($export==2) {
+      $site_names[] = array('id' => 'Domestic', 'name' => 'Domestic');
+      $site_names[] = array('id' => 'Domesticstaging', 'name' => 'Domesticstaging');
+    }
     return $site_names;
   }
 
@@ -243,6 +249,9 @@
                       'AR Gold Software (Aug 2022)' => API_AUG2022_ARG_PATH,
                       'ARF Software (Aug 2022)'     => API_AUG2022_ARF_PATH,
                       'ARC Software (Aug 2022)'     => API_AUG2022_ARC_PATH,
+                      'AR Gold Software Staging' => API_AUG2022_ARG_PATH,
+                      'ARF Software Staging'     => API_AUG2022_ARF_PATH,
+                      'ARC Software Staging'     => API_AUG2022_ARC_PATH,
                       'Export Internal Software'    => API_EXPORT_INTERNAL_PATH,
                       'Domestic Internal Software'    => API_DOMESTIC_INTERNAL_PATH);
     return $api_path[$account_name];
