@@ -123,17 +123,17 @@ define('API_DOMESTIC_INTERNAL_PATH','https://aug2022-domestic.ascratech.com/');
 define('FIELDS_PER_ROW', 3);
   // it efine('API_ARC_NOV2020_PATH', '');
 
-  define('API_MAY2022_ARG_PATH', 'https://staging-argold.ascratech.com/');
-  define('API_MAY2022_ARF_PATH', 'https://staging-arf.ascratech.com/');
-  define('API_MAY2022_ARC_PATH', 'https://staging-arc.ascratech.com/');
+  define('API_MAY2022_ARG_PATH', 'https://may2022-argold.ascratech.com/');
+  define('API_MAY2022_ARF_PATH', 'https://may2022-arf.ascratech.com/');
+  define('API_MAY2022_ARC_PATH', 'https://may2022-arc.ascratech.com/');
 
-  define('API_AUG2022_ARG_PATH', 'https://staging-argold.ascratech.com/');
-  define('API_AUG2022_ARF_PATH', 'https://staging-arf.ascratech.com/');
-  define('API_AUG2022_ARC_PATH', 'https://staging-arc.ascratech.com/');
+  define('API_AUG2022_ARG_PATH', 'https://aug2022-argold.ascratech.com/');
+  define('API_AUG2022_ARF_PATH', 'https://aug2022-arf.ascratech.com/');
+  define('API_AUG2022_ARC_PATH', 'https://aug2022-arc.ascratech.com/');
 
 
-  define('API_EXPORT_INTERNAL_PATH', 'https://staging-exports.ascratech.com/');
-  define('API_DOMESTIC_INTERNAL_PATH', 'https://staging-domestic.ascratech.com/');
+  //define('API_EXPORT_INTERNAL_PATH', 'https://staging-exports.ascratech.com/');
+//  define('API_DOMESTIC_INTERNAL_PATH', 'https://staging-domestic.ascratech.com/');
 
 // define('API_ARGs_PATH', 'https://argolds.ascratech.com/');
 //  define('API_ARFs_PATH', 'https://arfs.ascratech.com/');
