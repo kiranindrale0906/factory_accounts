@@ -163,8 +163,8 @@ class Ledgers extends BaseController {
       //                            concat(narration, " ,") as narration, concat(description, " ,") as description, 
       //                            chitti_id as chitti_no,parent_id as parent_id,id as id';
 
-      $account_receipt_where['site_name'] = '';                        
-      $account_issue_where['site_name'] = '';                        
+      //$account_receipt_where['site_name'] = '';                        
+      //$account_issue_where['site_name'] = '';                        
       if ($this->data['site_name'] == 'ARF' || $this->data['site_name'] == 'ARF (May 2022)'){
         $account_issue_where['account_name'] = 'ARF Software (May 2022)';
       }elseif ($this->data['site_name'] == 'ARF (Aug 2022)'){
@@ -212,6 +212,7 @@ class Ledgers extends BaseController {
     }
     
     $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(), array('order_by'=>'chitti_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
+	//lq();
     foreach ($issues as $issue_index => $issue_value) {
       $voucher_id = rtrim($issue_value['voucher_id'], ", ");
       if(!empty($voucher_id)){
