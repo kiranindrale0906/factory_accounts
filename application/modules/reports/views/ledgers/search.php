@@ -21,12 +21,14 @@
         $arf_companies = array();
         $arc_companies = array();
         $export_companies = array();
+        $domestic_companies = array();
         if($_SESSION['all_details']==1){
           $all_companies = array('All');
           $arg_companies = array('AR Gold (May 2022)','AR Gold (Aug 2022)');
           $arf_companies = array('ARF (May 2022)','AR Gold (Aug 2022)');
           $arc_companies = array('ARC (May 2022)','AR Gold (Aug 2022)');
-          // $export_companies = array('Export');
+          $export_companies = array('Export');
+          $domestic_companies = array('Domestic');
         }
         if($_SESSION['arg_details']==1){
           $arg_companies = array('AR Gold (May 2022)','AR Gold (Aug 2022)');
@@ -37,10 +39,13 @@
         if($_SESSION['arc_details']==1){
           $arc_companies = array('ARC (May 2022)','ARC (Aug 2022)');
         }
-        // if($_SESSION['export_details']==1){
-        //   $export_companies = array('Export');
-        // }
-          $companies=array_merge($all_companies,$arg_companies,$arf_companies,$arc_companies,$export_companies);
+        if($_SESSION['export_details']==1){
+          $export_companies = array('Export');
+        }
+        if($_SESSION['domestic_details']==1){
+          $domestic_companies = array('Domestic');
+        }
+          $companies=array_merge($all_companies,$arg_companies,$arf_companies,$arc_companies,$export_companies,$domestic_companies);
           foreach ($companies as $index => $company) { ?>
             <a class="ml-5 <?= ($site_name== $company) ? 'bold black underline' : '' ?>" 
                href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&site_name=<?= $company?>&period=<?= $period ?>&report_type=<?= $report_type ?>&detail=<?= $detail ?>&group=<?= $group ?>'><?= $company ?></a>
