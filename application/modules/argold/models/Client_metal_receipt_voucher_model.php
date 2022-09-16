@@ -73,13 +73,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
         break;
       }
     } else {
-      if($this->attributes['account_name']=="Export Internal Software" || $this->attributes['account_name']=="Domestic Internal Software"){
-        $site_name = $this->attributes['site_name'];//get_site_name_from_account_name($site_name);
-        if (!empty($site_name)) $this->attributes['site_name'] = $site_name;
-      }else{
       $site_name = get_site_name_from_account_name($this->attributes['account_name']);
       if (!empty($site_name)) $this->attributes['site_name'] = $site_name;
-      }
     }
   }
 
