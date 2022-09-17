@@ -51,6 +51,7 @@
                   array('id' => 'ARF Finished Goods Receipt',     'name' => 'ARF Finished Goods Receipt'),
                   array('id' => 'ARC Finished Goods Receipt',     'name' => 'ARC Finished Goods Receipt'),
                   array('id' => 'Export Internal',                    'name' => 'Export Internal'),
+                  array('id' => 'Domestic Internal',                    'name' => 'Domestic Internal'),
                   array('id' => 'AR Gold RND',                    'name' => 'AR Gold RND'),
                   array('id' => 'ARF RND',                        'name' => 'ARF RND'),
                   array('id' => 'ARC RND',                        'name' => 'ARC RND'),
@@ -190,7 +191,7 @@
     if ($export==1) $site_names[] = array('id' => 'Export', 'name' => 'Export');
     if ($export==2) {
       $site_names[] = array('id' => 'Domestic', 'name' => 'Domestic');
-      $site_names[] = array('id' => 'Domesticstaging', 'name' => 'Domesticstaging');
+      // $site_names[] = array('id' => 'Domesticstaging', 'name' => 'Domesticstaging');
     }
     return $site_names;
   }
@@ -206,6 +207,7 @@
       array('id' => 'ARC Software (Aug 2022)',     'name' => 'ARC Software (Aug 2022)'),
     );
     if ($export==1) $site_names[] = array('id' => 'Export', 'name' => 'Export');
+    if ($export==2) $site_names[] = array('id' => 'Domestic', 'name' => 'Domestic');
     return $site_names;
   }
 
@@ -230,7 +232,8 @@
                        'AR Gold Software (Aug 2022)' => 'AR Gold (Aug 2022)',
                        'ARF Software (Aug 2022)'     => 'ARF (Aug 2022)',
                        'ARC Software (Aug 2022)'     => 'ARC (Aug 2022)',
-                       'Export Internal Software'    => 'Export');
+                       'Export Internal Software'    => 'Export',
+                       'Domestic Internal Software'    => 'Domestic');
     if (!empty($site_name[$account_name])) return $site_name[$account_name];
   }
 
@@ -241,7 +244,8 @@
                           'AR Gold (Aug 2022)' => 'AR Gold Software (Aug 2022)',
                           'ARF (Aug 2022)'     => 'ARF Software (Aug 2022)',
                           'ARC (Aug 2022)'     => 'ARC Software (Aug 2022)',
-                          'Export'           => 'Export Internal Software');
+                          'Export'           => 'Export Internal Software',
+                          'Domestic'           => 'Domestic Internal Software');
     return $account_name[$site_name] ?? '';
   }
   
