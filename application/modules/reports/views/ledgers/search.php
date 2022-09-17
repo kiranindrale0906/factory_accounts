@@ -39,10 +39,10 @@
         if($_SESSION['arc_details']==1){
           $arc_companies = array('ARC (May 2022)','ARC (Aug 2022)');
         }
-        if($_SESSION['export_details']==1){
+        if(!empty($_SESSION['export_details'])&&$_SESSION['export_details']==1){
           $export_companies = array('Export');
         }
-        if($_SESSION['domestic_details']==1){
+        if(!empty($_SESSION['domestic_details'])&&$_SESSION['domestic_details']==1){
           $domestic_companies = array('Domestic');
         }
           $companies=array_merge($all_companies,$arg_companies,$arf_companies,$arc_companies,$export_companies,$domestic_companies);
