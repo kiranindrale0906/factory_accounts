@@ -203,11 +203,11 @@ class Ledgers extends BaseController {
                                and REPLACE(narration, "Software ", "") = "'.$this->data['site_name'].'")' => NULL);
       else {
         if ($this->data['site_name'] == 'ARF' || $this->data['site_name'] == 'ARF (May 2022)')
-          $where_receipt['narration'] = 'ARF Software';
+          $where_receipt['(narration = "ARF Software" or description = "ARF Software")'] = NULL;
         elseif ($this->data['site_name'] == 'ARC' || $this->data['site_name'] == 'ARC (May 2022)') 
-          $where_receipt['narration'] = 'ARC Software';
+          $where_receipt['(narration = "ARC Software" or description = "ARC Software")'] = NULL;
         elseif ($this->data['site_name'] == 'AR Gold' || $this->data['site_name'] == 'AR Gold (May 2022)')
-          $where_receipt['narration'] = 'AR Gold Software';    
+          $where_receipt['(narration = "AR Gold Software" or description = "AR Gold Software")'] = NULL;
       }
     }
     if ($this->data['domestic_export'] == 'Domestic') {
