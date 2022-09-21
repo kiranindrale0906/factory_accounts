@@ -12,10 +12,10 @@ class Core_cash_issue_voucher_model extends Voucher_model {
 
   function __construct($data=array()) {
     parent::__construct($data);
-    $this->load->model(array('argold/domestic_chitti_model','transactions/cash_receipt_voucher_model'));
+    $this->load->model(array('argold/chitti_domestic_model','transactions/cash_receipt_voucher_model'));
   }
   public function create_cash_vouchers_for_chitti($chitti_id) {
-    $chitti = $this->domestic_chitti_model->find('', array('id' => $chitti_id));
+    $chitti = $this->chitti_domestic_model->find('', array('id' => $chitti_id));
 
     $this->cash_issue_voucher_model->delete('', array('description' => 'Domestic Labour Chitti '.$chitti['id'], 'voucher_type' => 'cash issue voucher'));
     $this->cash_receipt_voucher_model->delete('', array('description' => 'Domestic Labour Chitti '.$chitti['id'],'voucher_type' => 'cash receipt voucher'));
