@@ -12,7 +12,7 @@ class Trial_balances extends Ledgers {
   }
 
   public function index() {
-    if ($_GET['ac_id']==238537) {
+    if (isset($_GET['ac_id'] && $_GET['ac_id']==238537) {
       foreach($issue_processes as $issue_process) {
         $process=array(
           'account_name' => 'AR Gold Loss Account (Aug 2022)',
@@ -32,7 +32,7 @@ class Trial_balances extends Ledgers {
         $receipt_obj->save(true);
       }
     } 
-    
+
     $this->data['loss_date']=!empty($_GET['loss_date'])?$_GET['loss_date']:'';
 
     $this->get_gold_rate_from_myspn();
