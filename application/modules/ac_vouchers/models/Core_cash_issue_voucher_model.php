@@ -23,8 +23,8 @@ class Core_cash_issue_voucher_model extends Voucher_model {
     $cash_receipt = array('company_id' => 1,
                           'account_name' => 'Domestic Labour Amount', //$chitti['account_name'],
                           'voucher_date' => $chitti['created_at'],
-                          'credit_amount' => $chitti['taxable_amount'] + $chitti['sgst_amount'] + $chitti['cgst_amount'],
-                          'debit_amount' => 0,
+                          'debit_amount' => $chitti['taxable_amount'] + $chitti['sgst_amount'] + $chitti['cgst_amount'],
+                          'credit_amount' => 0,
                           //'debit_weight' => $chitti['credit_weight'],
                           'credit_weight' => 0,
                           'purity' => 100,
@@ -42,8 +42,8 @@ class Core_cash_issue_voucher_model extends Voucher_model {
 
     $cash_issue = $cash_receipt;
     $cash_issue['account_name'] = $chitti['account_name'];
-    $cash_issue['debit_amount'] = $chitti['taxable_amount'] + $chitti['sgst_amount'] + $chitti['cgst_amount'];
-    $cash_issue['credit_amount'] = 0;
+    $cash_issue['credit_amount'] = $chitti['taxable_amount'] + $chitti['sgst_amount'] + $chitti['cgst_amount'];
+    $cash_issue['debit_amount'] = 0;
     $cash_issue['credit_weight'] = 0;
     $cash_issue['debit_weight'] = 0;
     $cash_issue['taxable_amount'] =  $chitti['taxable_amount'];
