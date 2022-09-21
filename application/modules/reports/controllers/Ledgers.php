@@ -591,6 +591,8 @@ class Ledgers extends BaseController {
 
       if ($this->data['domestic_export'] == 'All') {
         $where['(   purity != factory_purity 
+                 or (    receipt_type = "Domestic Internal"
+                     and voucher_type = "metal receipt voucher")
                  or (    account_name in ("'.$export_account_names.'") 
                      and voucher_type = "metal issue voucher")
               )'] = NULL;
@@ -607,8 +609,10 @@ class Ledgers extends BaseController {
         $where['(account_name in ("'.$domestic_account_names.'") 
                  and voucher_type = "metal issue voucher")'] = NULL;
       }elseif ($this->data['domestic_export'] == 'Domestic Internal') {
-        $where['account_name'] = 'Domestic Internal Software';
-        $where['voucher_type'] = 'metal issue voucher';
+        $where['((    account_name = "Domestic Internal Software" 
+                 and voucher_type = "metal issue voucher")
+                 or (    receipt_type = "Domestic Internal"
+                     and voucher_type = "metal receipt voucher"))'] = NULL;
       }
     
       $where['receipt_type!=']='Packing Slip';
