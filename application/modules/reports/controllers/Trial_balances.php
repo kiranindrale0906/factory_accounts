@@ -26,7 +26,7 @@ class Trial_balances extends Ledgers {
           // 'description'=>$_GET['description'],
           'company_id'=>1,
           // 'parent_id'=>$_GET['parent_id'],
-          'voucher_date'=> $issue_process['voucher_date'];
+          'voucher_date'=> $issue_process['voucher_date']);
         $receipt_obj = new metal_receipt_voucher_model($process);
         $receipt_obj->before_validate();
         $receipt_obj->save(true);
