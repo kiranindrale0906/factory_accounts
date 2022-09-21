@@ -115,6 +115,8 @@
              href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&site_name=<?= $site_name?>&period=<?= $period ?>&report_type=<?= $report_type ?>&detail=<?= $detail ?>&group=<?= $group ?>&domestic_export=Export'>Export</a>
           <a class="ml-5 <?= ($domestic_export=='Tanishq') ? 'bold black underline' : '' ?>" 
              href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&site_name=<?= $site_name?>&period=<?= $period ?>&report_type=<?= $report_type ?>&detail=<?= $detail ?>&group=<?= $group ?>&domestic_export=Tanishq'>Tanishq</a>
+          <a class="ml-5 <?= ($domestic_export=='Domestic Internal') ? 'bold black underline' : '' ?>" 
+             href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&site_name=<?= $site_name?>&period=<?= $period ?>&report_type=<?= $report_type ?>&detail=<?= $detail ?>&group=<?= $group ?>&domestic_export=Domestic Internal'>Domestic Internal</a>
         <?php }?>
         
         </h5>
