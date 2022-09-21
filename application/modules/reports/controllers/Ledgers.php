@@ -577,7 +577,7 @@ class Ledgers extends BaseController {
     if (!empty($this->data['site_name']) && $this->data['site_name'] != 'All')              
       $where['(  site_name = "'.$this->data['site_name'].'" 
               or (    REPLACE(narration, "Software ", "") = "'.$this->data['site_name'].'"
-                  and receipt_type = "Domestic Internal"))'] = NULL;
+                  and receipt_type in ("Domestic Internal", "Export Internal"))'] = NULL;
 
     if (   $this->data['report_type'] == 'Vadotar Report' || $this->data['report_type'] == 'Production Report') {
       $export_accounts = $this->account_model->get('name', array('group_code in ("Export")' => NULL ));
