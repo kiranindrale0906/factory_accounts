@@ -6,13 +6,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     
     function __construct($data=array()) {
       parent::__construct($data);
+      $this->load->model(array('ac_vouchers/voucher_model'));
     } 
 
-    public function before_validate() {
-      pd($this->formdata);
-    }
-
     public function after_save($action) {
+      $metal_issue_vouchers = $this->voucher_model->find('sum(rate * credit_weight) as amount', array('chitti_id' => $this->attributes['id']));
+      pd($metal_issue_vouchers);
+
       $this->load->model(array('transactions/cash_issue_voucher_model'));
       $this->cash_issue_voucher_model->create_cash_vouchers_for_chitti($this->attributes['id']);
     }
