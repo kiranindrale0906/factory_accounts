@@ -582,7 +582,7 @@ class Ledgers extends BaseController {
       $export_account_names = array_column($export_accounts, 'name');
       $domestic_accounts = $this->account_model->get('name', array('group_code in ("Domestic")' => NULL ));
       $domestic_account_names = array_column($domestic_accounts, 'name');
-            
+
       if ($this->data['domestic_export'] == 'All') $export_account_names[] = 'Tanishq';
       if ($this->data['domestic_export'] == 'All') $export_account_names[] = 'Domestic Internal Software';
 
@@ -606,6 +606,9 @@ class Ledgers extends BaseController {
       }elseif ($this->data['domestic_export'] == 'Domestic') {
         $where['(account_name in ("'.$domestic_account_names.'") 
                  and voucher_type = "metal issue voucher")'] = NULL;
+      }elseif ($this->data['domestic_export'] == 'Domestic Internal') {
+        $where['account_name'] = 'Domestic Internal Software';
+        $where['voucher_type'] = 'metal issue voucher';
       }
     
       $where['receipt_type!=']='Packing Slip';
