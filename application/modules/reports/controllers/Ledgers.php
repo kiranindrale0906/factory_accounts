@@ -576,7 +576,7 @@ class Ledgers extends BaseController {
     
     if (!empty($this->data['site_name']) && $this->data['site_name'] != 'All')              
       $where['(  site_name = "'.$this->data['site_name'].'" 
-              or (    narration = "'.$this->data['site_name'].'"
+              or (    REPLACE(narration, "Software ", "") = "'.$this->data['site_name'].'"
                   and receipt_type = "Domestic Internal"))'] = NULL;
 
     if (   $this->data['report_type'] == 'Vadotar Report' || $this->data['report_type'] == 'Production Report') {
