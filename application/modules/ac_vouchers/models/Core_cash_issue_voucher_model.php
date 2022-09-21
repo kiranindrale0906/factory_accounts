@@ -23,7 +23,7 @@ class Core_cash_issue_voucher_model extends Voucher_model {
     $cash_receipt = array('company_id' => 1,
                           'account_name' => 'Domestic Labour Amount', //$chitti['account_name'],
                           'voucher_date' => $chitti['created_at'],
-                          'credit_amount' => $chitti['debit_amount'],
+                          'credit_amount' => $chitti['rate'] * $chitti['credit_weight'],
                           'debit_amount' => 0,
                           //'debit_weight' => $chitti['credit_weight'],
                           'credit_weight' => 0,
@@ -42,7 +42,7 @@ class Core_cash_issue_voucher_model extends Voucher_model {
 
     $cash_issue = $cash_receipt;
     $cash_issue['account_name'] = $chitti['account_name'];
-    $cash_issue['debit_amount'] = $chitti['debit_amount'];
+    $cash_issue['debit_amount'] = $chitti['rate'] * $chitti['credit_weight'];
     $cash_issue['credit_amount'] = 0;
     $cash_issue['credit_weight'] = 0;
     $cash_issue['debit_weight'] = 0;
