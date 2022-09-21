@@ -106,6 +106,7 @@ class Chittis extends BaseController {
                                        'chitti_id' => 0,
                                        'receipt_type in ("QC Out")'=>NULL)),
                                  array(), array('group_by' => 'purity'));
+//pd($this->data['purity']);
     
     } else {
       $this->data['account_name']= $this->account_model->get('distinct(name) as name,name as id',
@@ -159,7 +160,7 @@ class Chittis extends BaseController {
                             array(), 
                             array('group_by'=>'packet_no, voucher_date, argold_id, customer_name'));
     }
-  } else {
+} else {
       $this->data['metal_vouchers'] = array();
     if($this->router->class == 'chitti_exports'){ 
       if ($this->router->method == 'store' || $this->router->method == 'update') {
