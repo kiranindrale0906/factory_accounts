@@ -22,9 +22,9 @@ class Unrecovarable_account_records extends BaseController {
         'factory_purity'=>100,
         'factory_fine'=>$_GET['credit_weight'],
         'credit_weight'=>$_GET['credit_weight']);
-      $issue_obj = new metal_issue_voucher_model($process);
-      $issue_obj->before_validate();
-      $issue_obj->save(true);
+      #$issue_obj = new metal_issue_voucher_model($process);
+      #$issue_obj->before_validate();
+      #$issue_obj->save(true);
       
       if ($_GET['receipt_type'] == 'Loss Account')
         $receipt_account_name = get_loss_account_name_from_site_name($_GET['site_name']);
@@ -44,6 +44,7 @@ class Unrecovarable_account_records extends BaseController {
         'company_id'=>1,
         // 'parent_id'=>$_GET['parent_id'],
         'voucher_date'=>(!empty($_GET['voucher_date']))?date('Y-m-d',strtotime($_GET['voucher_date'])):date('Y-m-d'),);
+      pd($process);
       $receipt_obj = new metal_receipt_voucher_model($process);
       $receipt_obj->before_validate();
       $receipt_obj->save(true);
