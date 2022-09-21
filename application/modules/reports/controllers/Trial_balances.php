@@ -14,7 +14,6 @@ class Trial_balances extends Ledgers {
   public function index() {
     if (isset($_GET['ac_id'])) {
       $issue_processes = $this->metal_receipt_voucher_model->find('', array('id' => $_GET['ac_id']));
-      pd($issue_processes);
       foreach($issue_processes as $issue_process) {
         $process=array(
           'account_name' => 'AR Gold Loss Account (Aug 2022)',
