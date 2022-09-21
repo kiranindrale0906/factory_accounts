@@ -584,6 +584,7 @@ class Ledgers extends BaseController {
       $domestic_account_names = array_column($domestic_accounts, 'name');
             
       if ($this->data['domestic_export'] == 'All') $export_account_names[] = 'Tanishq';
+      if ($this->data['domestic_export'] == 'All') $export_account_names[] = 'Domestic Internal Software';
 
       $export_account_names = implode('", "',$export_account_names);
       $domestic_account_names = implode('", "',$domestic_account_names);
