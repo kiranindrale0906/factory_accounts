@@ -190,16 +190,16 @@ class Ledgers extends BaseController {
     
     $where_issue   = array_merge($where, array('(credit_weight != 0 or credit_amount != 0)' => NULL),$account_issue_where);
     $where_receipt = array_merge($where, array('(debit_weight != 0 or debit_amount != 0)'   => NULL),$account_receipt_where);
-    // if ($this->data['domestic_export'] == 'Export') {
-    //     $where_receipt=array('(account_name = ("Export Internal Software")  and receipt_type="Export Internal" 
-    //              and voucher_type = "metal receipt voucher") and (debit_weight != 0 or debit_amount != 0)' => NULL);
-    //     if ($this->data['site_name'] == 'ARF' || $this->data['site_name'] == 'ARF (May 2022)'|| $this->data['site_name'] == 'ARF (Aug 2022)')
-    //       $where_receipt['description'] = 'ARF Software';
-    //     elseif ($this->data['site_name'] == 'ARC' || $this->data['site_name'] == 'ARC (May 2022)'|| $this->data['site_name'] == 'ARC (Aug 2022)') 
-    //       $where_receipt['description'] = 'ARC Software';
-    //     elseif ($this->data['site_name'] == 'AR Gold' || $this->data['site_name'] == 'AR Gold (May 2022)'|| $this->data['site_name'] == 'AR Gold (Aug 2022)')
-    //       $where_receipt['description'] = 'AR Gold Software';    
-    // }
+    if ($this->data['domestic_export'] == 'Export') {
+        $where_receipt=array('(account_name = ("Export Internal Software")  and receipt_type="Export Internal" 
+                 and voucher_type = "metal receipt voucher") and (debit_weight != 0 or debit_amount != 0)' => NULL);
+        if ($this->data['site_name'] == 'ARF' || $this->data['site_name'] == 'ARF (May 2022)'|| $this->data['site_name'] == 'ARF (Aug 2022)')
+          $where_receipt['description'] = 'ARF Software';
+        elseif ($this->data['site_name'] == 'ARC' || $this->data['site_name'] == 'ARC (May 2022)'|| $this->data['site_name'] == 'ARC (Aug 2022)') 
+          $where_receipt['description'] = 'ARC Software';
+        elseif ($this->data['site_name'] == 'AR Gold' || $this->data['site_name'] == 'AR Gold (May 2022)'|| $this->data['site_name'] == 'AR Gold (Aug 2022)')
+          $where_receipt['description'] = 'AR Gold Software';    
+    }
     if ($this->data['domestic_export'] == 'Domestic') {
         $where_receipt=array('(account_name = ("Domestic Internal Software")  and receipt_type="Domestic Internal" 
                  and voucher_type = "metal receipt voucher") and (debit_weight != 0 or debit_amount != 0)' => NULL);
