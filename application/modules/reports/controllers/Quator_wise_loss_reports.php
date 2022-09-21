@@ -53,7 +53,8 @@ class Quator_wise_loss_reports extends BaseController {
                             'account_name not like "%Loss Account%"' => NULL,
                             'site_name' => $this->data['site_name']);
 
-      $loss_account_names =  $this->account_model->get('name', array('group_id' => 3));
+      $loss_account_names =  $this->account_model->get('name', array('group_id' => 3,
+                                                                     'name not like "%Unrecovarable%"' => NULL));
       $loss_account_names = array_column($loss_account_names, 'name');
       $where['where']["account_name in ('".implode("' ,'",$loss_account_names)."')"] = NULL;
       $where['where']["narration like '%Unrecovarable%'"] = NULL;
