@@ -191,6 +191,12 @@ class Ledgers extends BaseController {
     $where_issue   = array_merge($where, array('(credit_weight != 0 or credit_amount != 0)' => NULL),$account_issue_where);
     $where_receipt = array_merge($where, array('(debit_weight != 0 or debit_amount != 0)'   => NULL),$account_receipt_where);
     if ($this->data['domestic_export'] == 'Export') {
+      if (str_contains($this->data['site_name'], 'May') || $this->data['site_name'] == 'All')
+        $where_receipt=array('(    account_name = ("Export Internal Software")  
+                               and receipt_type="Export Internal" 
+                               and voucher_type = "metal receipt voucher" 
+                               and (debit_weight != 0 or debit_amount != 0))' => NULL);
+      else
         $where_receipt=array('(    account_name = ("Export Internal Software")  
                                and receipt_type="Export Internal" 
                                and voucher_type = "metal receipt voucher" 
