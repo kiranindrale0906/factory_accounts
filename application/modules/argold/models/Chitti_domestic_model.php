@@ -8,6 +8,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       parent::__construct($data);
     } 
 
+    public function before_validate() {
+      pd($this->data);
+    }
+
     public function after_save($action) {
       $this->load->model(array('transactions/cash_issue_voucher_model'));
       $this->cash_issue_voucher_model->create_cash_vouchers_for_chitti($this->attributes['id']);
