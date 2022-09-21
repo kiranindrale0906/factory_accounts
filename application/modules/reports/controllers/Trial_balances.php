@@ -12,6 +12,27 @@ class Trial_balances extends Ledgers {
   }
 
   public function index() {
+    if ($_GET['ac_id']==238537) {
+      foreach($issue_processes as $issue_process) {
+        $process=array(
+          'account_name' => 'AR Gold Loss Account (Aug 2022)',
+          'site_name' => 'AR Gold (Aug 2022)',
+          'narration' => $issue_process['narration'],
+          'receipt_type' => 'Loss Account',
+          'debit_weight'=> $issue_process['credit_weight'],
+          'purity'=>100,
+          'factory_purity'=>100,
+          'factory_fine'=>$_GET['credit_weight'],
+          // 'description'=>$_GET['description'],
+          'company_id'=>1,
+          // 'parent_id'=>$_GET['parent_id'],
+          'voucher_date'=> $issue_process['voucher_date'];
+        $receipt_obj = new metal_receipt_voucher_model($process);
+        $receipt_obj->before_validate();
+        $receipt_obj->save(true);
+      }
+    } 
+    
     $this->data['loss_date']=!empty($_GET['loss_date'])?$_GET['loss_date']:'';
 
     $this->get_gold_rate_from_myspn();
