@@ -9,7 +9,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     } 
 
     public function before_validate() {
-      pd($this->data);
+      pd($this->attributes);
     }
 
     public function after_save($action) {
