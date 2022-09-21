@@ -193,7 +193,7 @@ class Ledgers extends BaseController {
     if ($this->data['domestic_export'] == 'Export') {
         $where_receipt=array('(    account_name = ("Export Internal Software")  
                                and receipt_type="Export Internal" 
-                               and voucher_type = "metal receipt voucher") 
+                               and voucher_type = "metal receipt voucher" 
                                and (debit_weight != 0 or debit_amount != 0)
                                and REPLACE(narration, "Software ", "") = "'.$this->data['site_name'].'")' => NULL);
         // if ($this->data['site_name'] == 'ARF' || $this->data['site_name'] == 'ARF (May 2022)'|| $this->data['site_name'] == 'ARF (Aug 2022)')
