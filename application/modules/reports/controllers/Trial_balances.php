@@ -333,7 +333,7 @@ class Trial_balances extends Ledgers {
   private function get_gold_rate_from_myspn() {
     //$gold_rate_response = get_web_page("http://spngoldlivebroadcast.noip.us:8888/VOTSBroadcast/Services/xml/a/%20mumbai?_=1617860765592");
     $gold_rate_response = get_web_page("http://spngoldlivebroadcast.noip.us:8888/VOTSBroadcast/Services/xml/a/%20mumbai?_=1658227048570");
-    $string = explode('GOLD MUMBAI 99.9 RTGS', $gold_rate_response);
+    $string = explode('99.50 GOLD PREMIUM WITH GST', $gold_rate_response);
     $this->data['gold_rate'] = @explode(',', $string[1])[3];
     $this->data['gold_rate'] = 1.03 * $this->data['gold_rate'];
 
