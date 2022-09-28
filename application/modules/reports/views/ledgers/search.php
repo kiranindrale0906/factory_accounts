@@ -81,6 +81,8 @@
              href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&site_name=<?= $site_name?>&period=<?= $period ?>&report_type=<?= $report_type ?>&detail=<?= $detail ?>&group=&domestic_export=<?= $domestic_export ?>'>None</a>
           <a class="ml-5 <?= ($group=='voucher_date') ? 'bold black underline' : '' ?>" 
              href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&site_name=<?= $site_name?>&period=<?= $period ?>&report_type=<?= $report_type ?>&detail=<?= $detail ?>&group=voucher_date&domestic_export=<?= $domestic_export ?>'>Date</a>
+          <a class="ml-5 <?= ($group=='voucher_id') ? 'bold black underline' : '' ?>" 
+             href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&site_name=<?= $site_name?>&period=<?= $period ?>&report_type=<?= $report_type ?>&detail=<?= $detail ?>&group=voucher_id&domestic_export=<?= $domestic_export ?>'>Voucher</a>
         </h5>
       </div>
     <?php } ?>
