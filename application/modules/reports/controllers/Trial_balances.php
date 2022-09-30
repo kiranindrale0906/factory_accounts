@@ -12,6 +12,30 @@ class Trial_balances extends Ledgers {
   }
 
   public function index() {
+    if (isset($_GET['ac_id'])) {
+      $issue_processes = $this->metal_receipt_voucher_model->get('', array('id' => $_GET['ac_id']));
+      foreach($issue_processes as $issue_process) {
+        $process=array(
+          'account_name' => 'AR Gold Loss Account (Aug 2022)',
+          'site_name' => 'AR Gold (Aug 2022)',
+          'narration' => $issue_process['narration'],
+          'receipt_type' => 'Loss Account',
+          'debit_weight'=> $issue_process['credit_weight'],
+          'purity'=>100,
+          'factory_purity'=>100,
+          'factory_fine' => $issue_process['credit_weight'],
+          // 'description'=>$_GET['description'],
+          'company_id'=>1,
+          // 'parent_id'=>$_GET['parent_id'],
+          'voucher_date'=> $issue_process['voucher_date'],
+          'metal_receipt_voucher_reference_id' => $issue_process['id']);
+        $receipt_obj = new metal_receipt_voucher_model($process);
+        $receipt_obj->before_validate();
+        $receipt_obj->save(true);
+      }
+      echo 'done'; die();
+    } 
+
     $this->data['loss_date']=!empty($_GET['loss_date'])?$_GET['loss_date']:'';
 
     $this->get_gold_rate_from_myspn();
@@ -309,7 +333,7 @@ class Trial_balances extends Ledgers {
   private function get_gold_rate_from_myspn() {
     //$gold_rate_response = get_web_page("http://spngoldlivebroadcast.noip.us:8888/VOTSBroadcast/Services/xml/a/%20mumbai?_=1617860765592");
     $gold_rate_response = get_web_page("http://spngoldlivebroadcast.noip.us:8888/VOTSBroadcast/Services/xml/a/%20mumbai?_=1658227048570");
-    $string = explode('GOLD MUMBAI 99.9 RTGS', $gold_rate_response);
+    $string = explode('GOLD MUMBAI 99.5 RTGS', $gold_rate_response);
     $this->data['gold_rate'] = @explode(',', $string[1])[3];
     $this->data['gold_rate'] = 1.03 * $this->data['gold_rate'];
 

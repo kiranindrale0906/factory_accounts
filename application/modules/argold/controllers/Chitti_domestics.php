@@ -9,6 +9,5 @@ class Chitti_domestics extends Chittis {
     $this->date_fields = array(array('chittis', 'date'));
     $this->redirect_after_save = 'view';
     $this->load->model(array('ac_vouchers/voucher_model','masters/account_model','argold/chitti_model','masters/narration_model'));
-  }
-  
+  } 
 }

@@ -10,7 +10,7 @@ class Unrecovarable_account_records extends BaseController {
   }
   public function store() {
     if(isset($_GET['from']) && $_GET['from']=='view') {
-      $process=array(
+      $issue_process=array(
         'account_name' => $_GET['issue_account_name'],
         'site_name' => get_site_name_from_account_name($_GET['issue_account_name']) ?? get_site_name_from_account_name($_GET['receipt_account_name']),
         'narration' => $_GET['issue_account_name'].' '.$_GET['narration'],
@@ -22,7 +22,7 @@ class Unrecovarable_account_records extends BaseController {
         'factory_purity'=>100,
         'factory_fine'=>$_GET['credit_weight'],
         'credit_weight'=>$_GET['credit_weight']);
-      $issue_obj = new metal_issue_voucher_model($process);
+      $issue_obj = new metal_issue_voucher_model($issue_process);
       $issue_obj->before_validate();
       $issue_obj->save(true);
       
@@ -33,7 +33,7 @@ class Unrecovarable_account_records extends BaseController {
 
       $process=array(
         'account_name' => $receipt_account_name,
-        'site_name' => get_site_name_from_account_name($_GET['receipt_account_name']) ?? get_site_name_from_account_name($_GET['issue_account_name']),
+        'site_name' => $issue_process['site_name'],
         'narration' => $_GET['issue_account_name'].' '.$_GET['narration'],
         'receipt_type' => $_GET['receipt_type'],
         'debit_weight'=>$_GET['credit_weight'],
