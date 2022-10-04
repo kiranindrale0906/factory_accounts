@@ -10,6 +10,7 @@
             <th></th>
             <th>Design Name</th>
             <th>Customer Name</th>
+            <th>Item Code</th>
             <th class="text-right">Gross</th>
             <?php if ($detail==1): ?>
               <th class="text-right">Factory Purity</th>
@@ -55,6 +56,7 @@
                     ?>
                   </td>
                   <td class="text-right"><?= (!empty($metal_voucher_detail['customer_name'])&& $metal_voucher_detail['customer_name']!='Market Issue')?($metal_voucher_detail['customer_name']):'' ; ?></td>
+                  <td class="text-right"><?= ($metal_voucher_detail['item_code']); ?></td>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['credit_weight']); ?></td>
                   <?php if ($detail==1): ?>
                     <td class="text-right"><?= four_decimal($metal_voucher_detail['purity']); ?></td>
@@ -86,6 +88,7 @@
           ?>
           <tr class="bg_gray bold">
             <td>Total</td>
+            <td></td>
             <td></td>
             <td></td>
             <td class="text-right"><?=four_decimal($sum_weight);?></td>

@@ -48,7 +48,7 @@ class Chittis extends BaseController {
       }else{
         $group_by = 'customer_name,chitti_purity,(factory_purity-chitti_purity)';
       }
-      $this->data['metal_voucher_details'] = $this->voucher_model->get('sum(fine) as fine,sum(rate) as rate,sum(factory_fine) as factory_fine,sum(credit_weight) as credit_weight,group_concat(narration) as narration,purity,chitti_purity,factory_purity,customer_name', array('voucher_type' => 'metal issue voucher',
+      $this->data['metal_voucher_details'] = $this->voucher_model->get('sum(fine) as fine,sum(rate) as rate,sum(factory_fine) as factory_fine,sum(credit_weight) as credit_weight,group_concat(narration) as narration,purity,chitti_purity,factory_purity,customer_name,item_code', array('voucher_type' => 'metal issue voucher',
                                                                                  'chitti_id' => $this->data['record']['id']),array(), array('group_by' => $group_by));
     }else{
     $this->data['metal_voucher_details'] = $this->voucher_model->get('', array('voucher_type' => 'metal issue voucher',
