@@ -31,9 +31,9 @@
       <td class=""><h6><?= date('d-m-Y',strtotime($record['date']))?></h6></td>
       <td rowspan="3" style="text-align: center">
         <?php 
-            // $string=$record['id'];      
-            // $qr_code = generate_qrcode($string,'72');
-            // echo $qr_code;
+             $string=$record['id'];      
+             $qr_code = generate_qrcode($string,'72');
+             echo $qr_code;
         ?>
       </td>
     </tr><tr>
