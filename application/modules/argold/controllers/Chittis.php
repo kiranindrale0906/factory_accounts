@@ -39,13 +39,15 @@ class Chittis extends BaseController {
   public function _get_view_data() {
     $this->data['detail'] = isset($_GET['detail']) ? 1 : 0;
     $this->data['group_by'] = isset($_GET['group_by']) ? 1 : 0;
+    $this->data['item_code'] = isset($_GET['item_code']) ? 1 : 0;
     $this->data['account_id']='';
 
     if($this->data['group_by']==1) {
-      if ($this->data['record']['account_name'] == 'OUTSIDE PARTY')
-        $group_by = 'item_code';
-      else 
+      if($this->data['item_code']==1){
+        $group_by = 'customer_name,chitti_purity,(factory_purity-chitti_purity),item_code';
+      }else{
         $group_by = 'customer_name,chitti_purity,(factory_purity-chitti_purity)';
+      }
       $this->data['metal_voucher_details'] = $this->voucher_model->get('sum(fine) as fine,sum(rate) as rate,sum(factory_fine) as factory_fine,sum(credit_weight) as credit_weight,group_concat(narration) as narration,purity,chitti_purity,factory_purity,customer_name', array('voucher_type' => 'metal issue voucher',
                                                                                  'chitti_id' => $this->data['record']['id']),array(), array('group_by' => $group_by));
     }else{
