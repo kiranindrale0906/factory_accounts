@@ -30,5 +30,5 @@ class Purchase_sale_ledgers extends Ledgers {
     $this->data['account_id'] = $account_id;  
     // if ($this->data['account_id'] != 0)
       $this->get_datewise_ledger_records();
-  // }
+   }
 }
