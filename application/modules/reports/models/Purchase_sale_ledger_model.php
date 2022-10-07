@@ -1,7 +1,7 @@
 <?php
 
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Purchase_sales_ledger_model extends BaseModel {
+class Purchase_sale_ledger_model extends BaseModel {
   protected $table_name = "ac_vouchers";
   function __construct($data=array()) {
     parent::__construct($data);
