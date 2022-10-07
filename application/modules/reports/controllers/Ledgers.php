@@ -599,7 +599,7 @@ class Ledgers extends BaseController {
   private function get_where_condition() {
     $where = array();
     if (!empty($this->data['record']['account_id']))  $where['account_id'] = $this->data['record']['account_id'];
-    if ($this->data['report_type']=="Purchase Sales Ledger")$where['account_name in ("Sales Account","Purchase Account")'] = NULL;
+    if ($this->data['report_type']=="Purchase Sales Ledger")$where['ac_ledger.account_name in ("Sales Account","Purchase Account")'] = NULL;
     
     if (!empty($this->data['site_name']) && $this->data['site_name'] != 'All')              
       $where['(  site_name = "'.$this->data['site_name'].'" 
