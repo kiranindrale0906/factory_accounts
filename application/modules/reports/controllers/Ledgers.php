@@ -222,11 +222,10 @@ class Ledgers extends BaseController {
     }
 	//pd($this->data['report_type']);
     if ($this->data['report_type'] == 'Purchase Sales Ledger') {
-//pd($this->data['report_type']);     
-     $where_issue['ac_ledger.sale_type']="Sale";
-      //$receipt_issue_select .=',chitties.account_name as chitti_account_name';
-      $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,array(), array('order_by'=>'ac_ledger.chitti_id, ac_ledger.voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
-      //lq(); 
+      $where_issue['chitties.sale_type']="Sale";
+      $receipt_issue_select .=',chitties.account_name as chitti_account_name';
+      $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(array('chitties','chitties.id=ac_ledger.chitti_id')), array('order_by'=>'ac_ledger.chitti_id, ac_ledger.voucher_type, ac_ledger.str_voucher_date asc', 'group_by' => $this->data['group']));
+  
     }else{
       $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(), array('order_by'=>'chitti_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
     }
@@ -245,9 +244,9 @@ class Ledgers extends BaseController {
       }
     }
     if ($this->data['report_type'] == 'Purchase Sales Ledger') {
-      $where_receipt['ac_ledger.sale_type']="Sale";
-      //$receipt_issue_select .=',chitties.account_name as chitti_account_name';
-       $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(), array('order_by'=>'ac_ledger.parent_id, ac_ledger.voucher_type,str_voucher_date asc', 'group_by' => $this->data['group']));
+      $where_receipt['chitties.sale_type']="Sale";
+      $receipt_issue_select .=',chitties.account_name as chitti_account_name';
+       $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(array('chitties','chitties.id=ac_ledger.chitti_id')), array('order_by'=>'ac_ledger.parent_id, ac_ledger.voucher_type, ac_ledger.str_voucher_date asc', 'group_by' => $this->data['group']));
     
   
     }else{
