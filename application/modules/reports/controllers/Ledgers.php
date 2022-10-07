@@ -225,7 +225,6 @@ class Ledgers extends BaseController {
       $where_issue['chitties.sale_type']="Sale";
       $receipt_issue_select .=',chitties.account_name as chitti_account_name';
       $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(array('chitties','chitties.id=ac_ledger.chitti_id')), array('order_by'=>'ac_ledger.chitti_id, ac_ledger.voucher_type, ac_ledger.str_voucher_date asc', 'group_by' => $this->data['group']));
-  
     }else{
       $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(), array('order_by'=>'chitti_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
     }
@@ -236,7 +235,7 @@ class Ledgers extends BaseController {
 
       $ac_voucher_issue_detail=$this->voucher_model->get('metal_receipt_voucher_reference_id,id',array('where'=>array('metal_receipt_voucher_reference_id is not NULL'=>NULL,'id in ('.$voucher_id.')'=>NULL)));
       $metal_receipt_voucher_reference_id=array_column($ac_voucher_issue_detail,'metal_receipt_voucher_reference_id');
-      }
+       }
      $issues[$issue_index]['reference_account_name']="";
       if(!empty($metal_receipt_voucher_reference_id)){
       $reference_ac_voucher_issue_detail=$this->voucher_model->find('GROUP_CONCAT(DISTINCT(account_name)) as account_name',array('where_in'=>array('id'=>$metal_receipt_voucher_reference_id)));
@@ -259,6 +258,8 @@ class Ledgers extends BaseController {
         $voucher_id = rtrim($issue_value['voucher_id'], ", ");
         $ac_voucher_issue_detail=$this->voucher_model->get('metal_receipt_voucher_reference_id,id',array('where'=>array('metal_receipt_voucher_reference_id is not NULL'=>NULL,'id in ('.$voucher_id.')'=>NULL)));
         $metal_receipt_voucher_reference_id=array_column($ac_voucher_issue_detail,'metal_receipt_voucher_reference_id');
+        $ac_voucher_issue_credit_weight_details=$this->voucher_model->find('sum(credit_weight) credit_weight',array('where'=>array('metal_receipt_voucher_reference_id is not NULL'=>NULL,'id in ('.$voucher_id.')'=>NULL)));
+        $issues[$issue_index]['chitti_credit_weight']=!empty($ac_voucher_issue_credit_weight_details)?$ac_voucher_issue_credit_weight_details['credit_weight']:0;
         $issues[$issue_index]['reference_account_name']="";
         if(!empty($metal_receipt_voucher_reference_id)){
         $reference_ac_voucher_issue_detail=$this->voucher_model->find('GROUP_CONCAT(DISTINCT(account_name)) as account_name',array('where_in'=>array('id'=>$metal_receipt_voucher_reference_id)));
@@ -270,6 +271,9 @@ class Ledgers extends BaseController {
         $voucher_id = rtrim($receipt_value['voucher_id'], ", ");
         $ac_voucher_receipt_detail=$this->voucher_model->get('metal_receipt_voucher_reference_id',array('where'=>array('metal_receipt_voucher_reference_id is not NULL'=>NULL,'id in ('.$voucher_id.')'=>NULL)));
         $metal_receipt_voucher_reference_id=array_column($ac_voucher_receipt_detail,'metal_receipt_voucher_reference_id');
+        $ac_voucher_receipt_credit_weight_details=$this->voucher_model->find('sum(credit_weight) credit_weight',array('where'=>array('metal_receipt_voucher_reference_id is not NULL'=>NULL,'id in ('.$voucher_id.')'=>NULL)));
+        $receipts[$receipt_index]['chitti_credit_weight']=!empty($ac_voucher_receipt_credit_weight_details)?$ac_voucher_receipt_credit_weight_details['credit_weight']:0;
+      
         $receipts[$receipt_index]['reference_account_name']="";
         if(!empty($metal_receipt_voucher_reference_id)){
         $reference_ac_voucher_receipt_detail=$this->voucher_model->find('GROUP_CONCAT(DISTINCT(account_name)) as account_name',array('where_in'=>array('id'=>$metal_receipt_voucher_reference_id)));

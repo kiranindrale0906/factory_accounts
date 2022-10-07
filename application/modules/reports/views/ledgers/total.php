@@ -48,7 +48,7 @@
         <td class="text-right"><?= four_decimal($record['usd_debit_amount'], '-') ?></td>
       <?php } ?>
       <?php if($report_type == 'Purchase Sales Ledger'){ ?>
-        <td class="text-right"><?= four_decimal($record['credit_weight'], '-') ?></td>
+        <td class="text-right"><?= @four_decimal($record['chitti_credit_weight'], '-') ?></td>
         <td class="text-right"><?= ($record['chitti_account_name']) ?></td>
       <?php } ?>
     <?php endif; ?>
