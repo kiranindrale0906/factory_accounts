@@ -222,7 +222,7 @@ class Ledgers extends BaseController {
     }
 
     if ($this->data['report_type'] == 'Purchase Sales Ledger') {
-      $where_issue['sale_type']="Sale";
+      $where_issue['ac_ledger.sale_type']="Sale";
       $receipt_issue_select .=',chitties.account_name as chitti_account_name';
       $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(array('chitties','chitties.id=ac_ledger.chitti_id')), array('order_by'=>'chitti_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
   
@@ -244,7 +244,7 @@ class Ledgers extends BaseController {
       }
     }
     if ($this->data['report_type'] == 'Purchase Sales Ledger') {
-      $where_receipt['sale_type']="Sale";
+      $where_receipt['ac_ledger.sale_type']="Sale";
       $receipt_issue_select .=',chitties.account_name as chitti_account_name';
        $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(array('chitties','chitties.id=ac_ledger.chitti_id')), array('order_by'=>'parent_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
     
@@ -656,25 +656,25 @@ class Ledgers extends BaseController {
         ||$this->data['report_type'] == 'Purchase Sales Ledger' 
         || $this->data['report_type'] == 'Rojmel Report'
         || $this->data['report_type'] == 'Metal Receipt Type Report') {
-      $receipt_issue_select = 'receipt_type, '.$period_select.' as voucher_date, 
-                               date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
-                               account_name, voucher_type, 
-                               site_name, voucher_type, 
-                               concat(voucher_number, ", ") as voucher_number, 
-                               GROUP_CONCAT(DISTINCT(voucher_id)) as voucher_id, 
-                               sum(credit_amount) as credit_amount, 
-                               sum(usd_credit_amount) as usd_credit_amount, 
-                               sum(debit_amount) as debit_amount, 
-                               sum(usd_debit_amount) as usd_debit_amount, 
-                               sum(credit_weight) as credit_weight, 
-                               sum(debit_weight) as debit_weight,
-                               sum(fine) as fine,
-                               sum(factory_fine) as factory_fine,
+      $receipt_issue_select = 'ac_ledger.receipt_type, '.$period_select.' as voucher_date, 
+                               date_format(ac_ledger.voucher_date,"%Y-%m-%d") as str_voucher_date,
+                               ac_ledger.account_name, ac_ledger.voucher_type, 
+                               ac_ledger.site_name, ac_ledger.voucher_type, 
+                               concat(ac_ledger.voucher_number, ", ") as voucher_number, 
+                               GROUP_CONCAT(DISTINCT(ac_ledger.voucher_id)) as voucher_id, 
+                               sum(ac_ledger.credit_amount) as credit_amount, 
+                               sum(ac_ledger.usd_credit_amount) as usd_credit_amount, 
+                               sum(ac_ledger.debit_amount) as debit_amount, 
+                               sum(ac_ledger.usd_debit_amount) as usd_debit_amount, 
+                               sum(ac_ledger.credit_weight) as credit_weight, 
+                               sum(ac_ledger.debit_weight) as debit_weight,
+                               sum(ac_ledger.fine) as fine,
+                               sum(ac_ledger.factory_fine) as factory_fine,
                                0 as purity_margin, 
-                               sum((credit_weight+debit_weight) * purity) / sum(credit_weight+debit_weight) as purity, 
-                               sum((credit_weight+debit_weight) * factory_purity) / sum(credit_weight+debit_weight) as factory_purity, 
-                               concat(narration, " ,") as narration, concat(description, " ,") as description, 
-                               chitti_id as chitti_no,parent_id as parent_id,id as id';
+                               sum((ac_ledger.credit_weight+ac_ledger.debit_weight) * ac_ledger.purity) / sum(ac_ledger.credit_weight+ac_ledger.debit_weight) as purity, 
+                               sum((ac_ledger.credit_weight+ac_ledger.debit_weight) * ac_ledger.factory_purity) / sum(ac_ledger.credit_weight+ac_ledger.debit_weight) as factory_purity, 
+                               concat(ac_ledger.narration, " ,") as narration, concat(description, " ,") as description, 
+                               ac_ledger.chitti_id as chitti_no,ac_ledger.parent_id as parent_id,ac_ledger.id as id';
 
     } elseif ($this->data['report_type'] == 'Account Receipt Report') {
       $receipt_issue_select = 'receipt_type, '.$period_select.' as voucher_date, 
