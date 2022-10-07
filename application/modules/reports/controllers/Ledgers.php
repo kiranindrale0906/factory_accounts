@@ -220,9 +220,10 @@ class Ledgers extends BaseController {
         elseif ($this->data['site_name'] == 'AR Gold' || $this->data['site_name'] == 'AR Gold (May 2022)'|| $this->data['site_name'] == 'AR Gold (Aug 2022)')
           $where_receipt['description'] = 'AR Gold Software';    
     }
-
+	//pd($this->data['report_type']);
     if ($this->data['report_type'] == 'Purchase Sales Ledger') {
-      $where_issue['ac_ledger.sale_type']="Sale";
+//pd($this->data['report_type']);     
+     $where_issue['ac_ledger.sale_type']="Sale";
       //$receipt_issue_select .=',chitties.account_name as chitti_account_name';
       $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,array(), array('order_by'=>'ac_ledger.chitti_id, ac_ledger.voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
       //lq(); 
@@ -343,8 +344,8 @@ class Ledgers extends BaseController {
     $issues=array();
     $issue_voucher_dates=array();
     }
-
-
+	//lq();
+	//pd($issues);
     $issue_voucher_dates = array_column($issues, 'voucher_date');
     $receipt_voucher_dates = array_column($receipts, 'voucher_date');
     $this->data['voucher_dates'] = array_values(array_unique(array_merge($issue_voucher_dates, $receipt_voucher_dates)));
