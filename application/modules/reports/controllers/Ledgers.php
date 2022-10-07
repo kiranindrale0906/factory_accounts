@@ -566,6 +566,7 @@ class Ledgers extends BaseController {
   private function get_group_by() {
     if (   $this->data['period'] == 'date' 
         && (   $this->data['report_type'] == 'Account Ledger'   
+            ||$this->data['report_type'] == 'Purchase Sales Ledger'   
             || $this->data['report_type'] == 'Domestic Labour Ledger'))
       $this->data['group'] = 'voucher_type, voucher_date, chitti_no, receipt_type, account_name';
     elseif (   $this->data['period'] == 'date' 
