@@ -3,7 +3,7 @@
     <?php if ($report_type == 'Vadotar Report'): ?>
       <th>Type</th>
     <?php endif; ?>
-    <?php if ($report_type != 'Account Ledger'): ?>
+    <?php if ($report_type != 'Account Ledger' || $report_type!="Purchase Sales Ledger"): ?>
       <th>Account Name</th>
     <?php endif; ?>
     <th>Date</th>
@@ -22,9 +22,13 @@
       <th class='text-right'>Vadotar</th>
       <th class='text-right'>%</th>
     <?php endif; ?>  
-    <?php if ($report_type == 'Domestic Labour Ledger' || $report_type == 'Export Labour Ledger' ||$report_type == 'Account Ledger' || $report_type == 'Vadotar Report'): ?>
+    <?php if ($report_type == 'Domestic Labour Ledger' || $report_type == 'Export Labour Ledger' ||$report_type == 'Account Ledger' || $report_type == 'Vadotar Report' || $report_type == 'Purchase Sales Ledger'): ?>
       <th class='text-right'>Amount</th>
       <th class='text-right'>Usd Amount</th>
+      <?php if($report_type == 'Purchase Sales Ledger'){ ?>
+        <th class="text-right">Gross Weight</td>
+        <th class="text-right">Chitti Account Name</td>
+      <?php } ?>
     <?php endif; ?>
   </tr>
 </thead>

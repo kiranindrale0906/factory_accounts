@@ -220,8 +220,15 @@ class Ledgers extends BaseController {
         elseif ($this->data['site_name'] == 'AR Gold' || $this->data['site_name'] == 'AR Gold (May 2022)'|| $this->data['site_name'] == 'AR Gold (Aug 2022)')
           $where_receipt['description'] = 'AR Gold Software';    
     }
-    
-    $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(), array('order_by'=>'chitti_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
+
+    if ($this->data['report_type'] == 'Purchase Sales Ledger') {
+      $where_issue['sale_type']="Sale";
+      $receipt_issue_select .=',chitties.account_name as chitti_account_name';
+      $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(array('chitties','chitties.id=ac_ledger.chitti_id')), array('order_by'=>'chitti_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
+  
+    }else{
+      $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(), array('order_by'=>'chitti_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
+    }
 	//lq();
     foreach ($issues as $issue_index => $issue_value) {
       $voucher_id = rtrim($issue_value['voucher_id'], ", ");
@@ -236,11 +243,18 @@ class Ledgers extends BaseController {
       $issues[$issue_index]['reference_account_name']=$reference_ac_voucher_issue_detail['account_name'];
       }
     }
-
-    $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(), array('order_by'=>'parent_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
+    if ($this->data['report_type'] == 'Purchase Sales Ledger') {
+      $where_receipt['sale_type']="Sale";
+      $receipt_issue_select .=',chitties.account_name as chitti_account_name';
+       $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(array('chitties','chitties.id=ac_ledger.chitti_id')), array('order_by'=>'parent_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
+    
+  
+    }else{
+      $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(), array('order_by'=>'parent_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
+    }
     
     
-    if ($this->data['report_type'] == 'Account Ledger'){
+    if ($this->data['report_type'] == 'Account Ledger' || $this->data['report_type'] == 'Purchase Sales Ledger'){
       foreach ($issues as $issue_index => $issue_value) {
         $voucher_id = rtrim($issue_value['voucher_id'], ", ");
         $ac_voucher_issue_detail=$this->voucher_model->get('metal_receipt_voucher_reference_id,id',array('where'=>array('metal_receipt_voucher_reference_id is not NULL'=>NULL,'id in ('.$voucher_id.')'=>NULL)));
@@ -329,6 +343,7 @@ class Ledgers extends BaseController {
     $issues=array();
     $issue_voucher_dates=array();
     }
+
 
     $issue_voucher_dates = array_column($issues, 'voucher_date');
     $receipt_voucher_dates = array_column($receipts, 'voucher_date');
@@ -638,6 +653,7 @@ class Ledgers extends BaseController {
 
   private function get_receipt_issue_select($period_select) {
     if (   $this->data['report_type'] == 'Account Ledger' 
+        ||$this->data['report_type'] == 'Purchase Sales Ledger' 
         || $this->data['report_type'] == 'Rojmel Report'
         || $this->data['report_type'] == 'Metal Receipt Type Report') {
       $receipt_issue_select = 'receipt_type, '.$period_select.' as voucher_date, 

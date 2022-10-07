@@ -43,8 +43,12 @@
       <td>-</td>
     <?php } ?>
   <?php endif; ?>
-  <?php if ($report_type == 'Account Ledger' || $report_type == 'Vadotar Report'): ?>
+  <?php if ($report_type == 'Account Ledger' || $report_type == 'Purchase Sales Ledger'|| $report_type == 'Vadotar Report'): ?>
     <td class="text-right"><a class=""  href='<?= base_url() ?>argold/voucher_details/view/<?=$record['chitti_no']?>'><?= four_decimal($record['credit_amount'], '-') ?></a></td>
     <td class="text-right"><?= four_decimal($record['usd_credit_amount'], '-') ?></td>
+    <?php if($report_type == 'Purchase Sales Ledger'){ ?>
+        <td class="text-right"><?= four_decimal($record['credit_weight'], '-') ?></td>
+        <td class="text-right"><?= ($record['chitti_account_name']) ?></td>
+      <?php } ?>
   <?php endif; ?>
 </tr>
