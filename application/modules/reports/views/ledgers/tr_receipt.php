@@ -38,8 +38,8 @@
     <td class="text-right"><a class=""  href='<?= base_url() ?>argold/voucher_details/view/<?=$record['chitti_no']?>'><?= four_decimal($record['debit_amount'], '-'); ?></a></td>
     <td class="text-right"><?= four_decimal($record['usd_debit_amount'], '-') ?></td>
     <?php if($report_type == 'Purchase Sales Ledger'){ ?>
-        <td class="text-right"><?= four_decimal($record['credit_weight'], '-') ?></td>
-        <td class="text-right"><?= (@$record['chitti_account_name']) ?></td>
+        <td class="text-right"><?= four_decimal($record['chitti_credit_weight'], '-') ?></td>
+        <td class="text-right"><?= ($record['chitti_account_name']) ?></td>
       <?php } ?>
   <?php endif; ?>
 </tr>
