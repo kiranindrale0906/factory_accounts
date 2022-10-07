@@ -188,8 +188,8 @@ class Ledgers extends BaseController {
       !empty($this->data['account_name'])?$account_receipt_where['account_name']=$this->data['account_name']:$account_receipt_where['account_name not in ("MAIN VADOTAR","PURCHASE ACCOUNT","ARF Software","ARC Software","AR Gold Software","Export Internal Software","Domestic Internal Software") '] = NULL;                    
     }   
     
-    $where_issue   = array_merge($where, array('(credit_weight != 0 or credit_amount != 0)' => NULL),$account_issue_where);
-    $where_receipt = array_merge($where, array('(debit_weight != 0 or debit_amount != 0)'   => NULL),$account_receipt_where);
+    $where_issue   = array_merge($where, array('(ac_ledger.credit_weight != 0 or ac_ledger.credit_amount != 0)' => NULL),$account_issue_where);
+    $where_receipt = array_merge($where, array('(ac_ledger.debit_weight != 0 or ac_ledger.debit_amount != 0)'   => NULL),$account_receipt_where);
     if ($this->data['domestic_export'] == 'Export') {
       $where_receipt=array('(      account_name = ("Export Internal Software")  
                                and receipt_type="Export Internal" 

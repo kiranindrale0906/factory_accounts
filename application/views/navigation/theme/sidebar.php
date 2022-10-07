@@ -87,7 +87,7 @@
                     //                     'reports/order_report'=>'Order Report'),
                     'Reports'   => array(
                                         'reports/account_ledgers' => 'Account Ledger',
-                                        'reports/purchase_sales_ledgers' => 'Purchase Sales Ledger',
+                                        'reports/Purchase_sale_ledgers' => 'Purchase Sales Ledger',
                                         // 'reports/account_ledgers' => 'Account Ledger Report',
                                         // 'reports/outstanding_report' => 'Outstanding Report',
                                         'reports/trial_balances' => 'Trial Balance',
