@@ -230,7 +230,8 @@ class Ledgers extends BaseController {
                                sum((ac_ledger.credit_weight+ac_ledger.debit_weight) * ac_ledger.factory_purity) / sum(ac_ledger.credit_weight+ac_ledger.debit_weight) as factory_purity',array('where'=>array('chitti_id =('.$issue_value['chitti_no'].')'=>NULL)));
         $issues[$index]['purity']=$ac_voucher_issues_chitti_detail['purity'];
         $issues[$index]['factory_purity']=$ac_voucher_issues_chitti_detail['factory_purity'];
-        $issues[$index]['factory_fine']=($issue_value['credit_weight']*$ac_voucher_issues_chitti_detail['factory_purity'])/100;
+        $issues[$index]['fine']=($issue_value['chitti_credit_weight']*$ac_voucher_issues_chitti_detail['purity'])/100;
+        $issues[$index]['factory_fine']=($issue_value['chitti_credit_weight']*$ac_voucher_issues_chitti_detail['factory_purity'])/100;
        }
     }else{
       $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(), array('order_by'=>'chitti_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
@@ -239,7 +240,6 @@ class Ledgers extends BaseController {
     foreach ($issues as $issue_index => $issue_value) {
       $voucher_id = rtrim($issue_value['voucher_id'], ", ");
       if(!empty($voucher_id)){
-
       $ac_voucher_issue_detail=$this->voucher_model->get('metal_receipt_voucher_reference_id,id',array('where'=>array('metal_receipt_voucher_reference_id is not NULL'=>NULL,'id in ('.$voucher_id.')'=>NULL)));
       $metal_receipt_voucher_reference_id=array_column($ac_voucher_issue_detail,'metal_receipt_voucher_reference_id');
        }
@@ -258,7 +258,8 @@ class Ledgers extends BaseController {
                                sum((ac_ledger.credit_weight+ac_ledger.debit_weight) * ac_ledger.factory_purity) / sum(ac_ledger.credit_weight+ac_ledger.debit_weight) as factory_purity',array('where'=>array('chitti_id =('.$value['chitti_no'].')'=>NULL)));
         $receipts[$index]['purity']=$ac_voucher_receipt_chitti_detail['purity'];
         $receipts[$index]['factory_purity']=$ac_voucher_receipt_chitti_detail['factory_purity'];
-        $receipts[$index]['factory_fine']=($value['credit_weight']*$ac_voucher_receipt_chitti_detail['factory_purity'])/100;
+        $issues[$index]['fine']=($issue_value['chitti_credit_weight']*$ac_voucher_receipt_chitti_detail['purity'])/100;
+        $issues[$index]['factory_fine']=($issue_value['chitti_credit_weight']*$ac_voucher_receipt_chitti_detail['factory_purity'])/100;
        }
     
   
