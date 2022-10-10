@@ -3,6 +3,7 @@
           + @$record['credit_amount'] + @$record['debit_amount']) != 0) { ?>
   <tr class="bold">
     <td></td>
+    <td></td>
     <td><?= $label ?></td>
     <?php if ($report_type == 'Vadotar Report'): ?>
       <td></td>
