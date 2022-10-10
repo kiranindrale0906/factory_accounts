@@ -9,8 +9,8 @@
           <tr>
             <th></th>
             <th>Design Name</th>
-            <th>Customer Name</th>
-            <th>Item Code</th>
+            <th class="text-right">Customer Name</th>
+            <th class="text-right">Item Code</th>
             <th class="text-right">Gross</th>
             <?php if ($detail==1): ?>
               <th class="text-right">Factory Purity</th>
