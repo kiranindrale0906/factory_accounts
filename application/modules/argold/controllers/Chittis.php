@@ -51,7 +51,7 @@ class Chittis extends BaseController {
         $group_by = 'customer_name,chitti_purity,(factory_purity-chitti_purity)';
       }
       $this->data['metal_voucher_details'] = $this->voucher_model->get($select, array('voucher_type' => 'metal issue voucher',
-                                                                                 'chitti_id' => $this->data['record']['id']),array(), array('group_by' => $group_by, 'order_by' =< 'item_code'));
+                                                                                 'chitti_id' => $this->data['record']['id']),array(), array('group_by' => $group_by, 'order_by' => 'item_code'));
     }else{
     $this->data['metal_voucher_details'] = $this->voucher_model->get('', array('voucher_type' => 'metal issue voucher',
                                                                                'chitti_id' => $this->data['record']['id']));
