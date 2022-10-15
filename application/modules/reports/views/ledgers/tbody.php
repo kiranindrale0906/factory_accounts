@@ -3,7 +3,6 @@
      if ($previous_date != '')
       $this->load->view('reports/ledgers/total', array('label' => 'Opening',
                                                        'record' => $opening[$voucher_date][$type]));
-
     if (!isset($detail) || $detail == 'yes') {
       foreach ($voucher_date_records as $index => $record) {
         if ($record['voucher_type'] != 'opening stock voucher')

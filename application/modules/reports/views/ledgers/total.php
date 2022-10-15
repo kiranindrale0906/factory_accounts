@@ -3,6 +3,7 @@
           + @$record['credit_amount'] + @$record['debit_amount']) != 0) { ?>
   <tr class="bold">
     <td></td>
+    <td></td>
     <td><?= $label ?></td>
     <?php if ($report_type == 'Vadotar Report'): ?>
       <td></td>
@@ -39,13 +40,17 @@
         <td></td> 
       <?php endif; ?>
     <?php endif; ?>
-    <?php if ($report_type == 'Account Ledger' || $report_type == 'Vadotar Report'): ?>
+    <?php if ($report_type == 'Account Ledger' || $report_type == 'Purchase Sales Ledger' || $report_type == 'Vadotar Report'): ?>
       <?php if ($type=='issue') { ?>
         <td class="text-right"><?= four_decimal($record['credit_amount'], '-') ?></td>
         <td class="text-right"><?= four_decimal($record['usd_credit_amount'], '-') ?></td>
       <?php } else { ?> 
         <td class="text-right"><?= four_decimal($record['debit_amount'], '-') ?></td>
         <td class="text-right"><?= four_decimal($record['usd_debit_amount'], '-') ?></td>
+      <?php } ?>
+      <?php if($report_type == 'Purchase Sales Ledger'){ ?>
+        <td class="text-right"><?= @four_decimal($record['chitti_credit_weight'], '-') ?></td>
+        <td class="text-right"><?= @($record['chitti_account_name']) ?></td>
       <?php } ?>
     <?php endif; ?>
   </tr>

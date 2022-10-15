@@ -12,6 +12,7 @@
   <div class="col-md-8 text-right">
   <a  href="<?=ADMIN_PATH.'argold/metal_issue_chitties/edit/'. $record['id']?>" class='btn bg_blue white no-print'>create metal receipt</a>
   <a  href="<?=ADMIN_PATH.'argold/chittis/view/'. $record['id'].'?group_by=1'?>" class='btn bg_blue white no-print'>Melting Detail In Group</a>
+  <a  href="<?=ADMIN_PATH.'argold/chittis/view/'. $record['id'].'?group_by=1&item_code=1'?>" class='btn bg_blue white no-print'>Melting Detail In Group with Item code</a>
   </div>
   <div class="col-md-1 text-right">
   <?php if($record['chitti_hide'] == 0) {  
@@ -30,9 +31,9 @@
       <td class=""><h6><?= date('d-m-Y',strtotime($record['date']))?></h6></td>
       <td rowspan="3" style="text-align: center">
         <?php 
-            // $string=$record['id'];      
-            // $qr_code = generate_qrcode($string,'72');
-            // echo $qr_code;
+             $string=$record['id'];      
+             $qr_code = generate_qrcode($string,'72');
+             echo $qr_code;
         ?>
       </td>
     </tr><tr>
