@@ -8,8 +8,6 @@
 ?>
 
 <?php 
-  // if (!empty($record['account_id'])) {
     $this->load->view('reports/ledgers/search'); 
-    $this->load->view('reports/ledgers/date_wise_ledger', array('report' => 'account ledger')); 
-  // }
+    $this->load->view('reports/ledgers/date_wise_ledger', array('report' => 'purchase sales ledger')); 
 ?>

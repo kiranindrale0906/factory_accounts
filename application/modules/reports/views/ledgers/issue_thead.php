@@ -3,7 +3,7 @@
     <?php if ($report_type == 'Vadotar Report'): ?>
       <th>Type</th>
     <?php endif; ?>
-    <?php if ($report_type != 'Account Ledger' && $report_type != 'Purchase Sales Ledger'): ?>
+    <?php if ($report_type != 'Account Ledger'): ?>
       <th>Account Name</th>
     <?php endif; ?>
     <th>Date</th>

@@ -13,7 +13,7 @@ class Api_chittis extends Chittis {
       $chitti_details = []; 
       $chitti_details['chittis'] = $this->api_chitti_model->find('',array('id'=>$_POST['chitti_id']));
       $chitti_details['chitti_details'] = $this->voucher_model->get('sum(fine) as fine,sum(rate) as rate,sum(factory_fine) as factory_fine,sum(credit_weight) as credit_weight,group_concat(narration) as narration,purity,chitti_purity,factory_purity,customer_name,item_code',array('chitti_id'=>$_POST['chitti_id'], 
-                                                                            'voucher_type'=>"metal issue voucher"), array(), array('group_by' => 'item_code'));
+                                                                            'voucher_type'=>"metal issue voucher"), array(), array('group_by' => 'item_code', 'order_by' => 'item_code'));
       echo json_encode(array('data'    =>$chitti_details,
                              'status'      => 'success',
                              'open_modal'  => FALSE));

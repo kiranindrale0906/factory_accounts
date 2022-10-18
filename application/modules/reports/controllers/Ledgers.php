@@ -220,11 +220,11 @@ class Ledgers extends BaseController {
         elseif ($this->data['site_name'] == 'AR Gold' || $this->data['site_name'] == 'AR Gold (May 2022)'|| $this->data['site_name'] == 'AR Gold (Aug 2022)')
           $where_receipt['description'] = 'AR Gold Software';    
     }
-
+	//pd($this->data['report_type']);
     if ($this->data['report_type'] == 'Purchase Sales Ledger') {
       $where_issue['chitties.sale_type']="Sale";
       $receipt_issue_select .=',chitties.account_name as chitti_account_name';
-      $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(array('chitties','chitties.id=ac_ledger.chitti_id')), array('order_by'=>'ac_ledger.chitti_id, ac_ledger.voucher_type, ac_ledger.str_voucher_date asc', 'group_by' => $this->data['group']));
+      $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(array('chitties','chitties.id=ac_ledger.chitti_id')), array('order_by'=>'ac_ledger.chitti_id, ac_ledger.voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
     }else{
       $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(), array('order_by'=>'chitti_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
     }
@@ -245,7 +245,7 @@ class Ledgers extends BaseController {
     if ($this->data['report_type'] == 'Purchase Sales Ledger') {
       $where_receipt['chitties.sale_type']="Sale";
       $receipt_issue_select .=',chitties.account_name as chitti_account_name';
-       $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(array('chitties','chitties.id=ac_ledger.chitti_id')), array('order_by'=>'ac_ledger.parent_id, ac_ledger.voucher_type, ac_ledger.str_voucher_date asc', 'group_by' => $this->data['group']));
+       $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(array('chitties','chitties.id=ac_ledger.chitti_id')), array('order_by'=>'ac_ledger.parent_id, ac_ledger.voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
     }else{
       $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(), array('order_by'=>'parent_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
     }
@@ -256,19 +256,21 @@ class Ledgers extends BaseController {
         $voucher_id = rtrim($issue_value['voucher_id'], ", ");
         $ac_voucher_issue_detail=$this->voucher_model->get('metal_receipt_voucher_reference_id,id',array('where'=>array('metal_receipt_voucher_reference_id is not NULL'=>NULL,'id in ('.$voucher_id.')'=>NULL)));
         $metal_receipt_voucher_reference_id=array_column($ac_voucher_issue_detail,'metal_receipt_voucher_reference_id');
-        $ac_voucher_issue_credit_weight_details=$this->voucher_model->find('sum(credit_weight) credit_weight',array('chitti_id'=>$issue_value['chitti_no']),'voucher_type="metal issue voucher"'=>NULL);
+        $ac_voucher_issue_credit_weight_details=$this->voucher_model->find('sum(credit_weight) credit_weight',array('chitti_id'=>$issue_value['chitti_no'],'voucher_type="metal issue voucher"'=>NULL));
         $issues[$issue_index]['chitti_credit_weight']=!empty($ac_voucher_issue_credit_weight_details)?$ac_voucher_issue_credit_weight_details['credit_weight']:0;
         $issues[$issue_index]['reference_account_name']="";
         if(!empty($metal_receipt_voucher_reference_id)){
         $reference_ac_voucher_issue_detail=$this->voucher_model->find('GROUP_CONCAT(DISTINCT(account_name)) as account_name',array('where_in'=>array('id'=>$metal_receipt_voucher_reference_id)));
         $issues[$issue_index]['reference_account_name']=$reference_ac_voucher_issue_detail['account_name'];
         if ($this->data['report_type'] == 'Purchase Sales Ledger'){
-         $ac_voucher_issues_chitti_detail=$this->voucher_model->find('sum((ac_ledger.credit_weight+ac_ledger.debit_weight) * ac_ledger.purity) / sum(ac_ledger.credit_weight+ac_ledger.debit_weight) as purity, 
+        
+         $ac_voucher_issues_chitti_detail=$this->ledger_model->find('sum((ac_ledger.credit_weight+ac_ledger.debit_weight) * ac_ledger.purity) / sum(ac_ledger.credit_weight+ac_ledger.debit_weight) as purity, 
                                sum((ac_ledger.credit_weight+ac_ledger.debit_weight) * ac_ledger.factory_purity) / sum(ac_ledger.credit_weight+ac_ledger.debit_weight) as factory_purity',array('where'=>array('chitti_id =('.$issue_value['chitti_no'].')'=>NULL)));
         $issues[$issue_index]['purity']=$ac_voucher_issues_chitti_detail['purity'];
         $issues[$issue_index]['factory_purity']=$ac_voucher_issues_chitti_detail['factory_purity'];
-        $issues[$issue_index]['fine']=($issue_value['chitti_credit_weight']*$ac_voucher_issues_chitti_detail['purity'])/100;
-        $issues[$issue_index]['factory_fine']=($issue_value['chitti_credit_weight']*$ac_voucher_issues_chitti_detail['factory_purity'])/100;
+        $issues[$issue_index]['fine']=($issues[$issue_index]['chitti_credit_weight']*$ac_voucher_issues_chitti_detail['purity'])/100;
+        $issues[$issue_index]['factory_fine']=($issues[$issue_index]['chitti_credit_weight']*$ac_voucher_issues_chitti_detail['factory_purity'])/100;
+
           }
         }
       }
@@ -277,21 +279,21 @@ class Ledgers extends BaseController {
         $voucher_id = rtrim($receipt_value['voucher_id'], ", ");
         $ac_voucher_receipt_detail=$this->voucher_model->get('metal_receipt_voucher_reference_id',array('where'=>array('metal_receipt_voucher_reference_id is not NULL'=>NULL,'id in ('.$voucher_id.')'=>NULL)));
         $metal_receipt_voucher_reference_id=array_column($ac_voucher_receipt_detail,'metal_receipt_voucher_reference_id');
-        $ac_voucher_receipt_credit_weight_details=$this->voucher_model->find('sum(credit_weight) credit_weight',array('chitti_id'=>$receipt_value['chitti_no']),'voucher_type="metal issue voucher"'=>NULL);
+        $ac_voucher_receipt_credit_weight_details=$this->voucher_model->find('sum(credit_weight) credit_weight',array('chitti_id'=>$receipt_value['chitti_no'],'voucher_type="metal issue voucher"'=>NULL));
         $receipts[$receipt_index]['chitti_credit_weight']=!empty($ac_voucher_receipt_credit_weight_details)?$ac_voucher_receipt_credit_weight_details['credit_weight']:0;
       
         $receipts[$receipt_index]['reference_account_name']="";
         if(!empty($metal_receipt_voucher_reference_id)){
-        $reference_ac_voucher_receipt_detail=$this->voucher_model->find('GROUP_CONCAT(DISTINCT(account_name)) as account_name',array('where_in'=>array('id'=>$metal_receipt_voucher_reference_id)));
+        $reference_ac_voucher_receipt_detail=$this->ledger_model->find('GROUP_CONCAT(DISTINCT(account_name)) as account_name',array('where_in'=>array('id'=>$metal_receipt_voucher_reference_id)));
         $receipts[$receipt_index]['reference_account_name']=$reference_ac_voucher_receipt_detail['account_name'];
-        if ($this->data['report_type'] == 'Purchase Sales Ledger'){
-        $ac_voucher_receipt_chitti_detail=$this->voucher_model->find('sum((ac_ledger.credit_weight+ac_ledger.debit_weight) * ac_ledger.purity) / sum(ac_ledger.credit_weight+ac_ledger.debit_weight) as purity, 
-                               sum((ac_ledger.credit_weight+ac_ledger.debit_weight) * ac_ledger.factory_purity) / sum(ac_ledger.credit_weight+ac_ledger.debit_weight) as factory_purity',array('where'=>array('chitti_id =('.$value['chitti_no'].')'=>NULL)));
-        $receipts[$index]['purity']=$ac_voucher_receipt_chitti_detail['purity'];
-        $receipts[$index]['factory_purity']=$ac_voucher_receipt_chitti_detail['factory_purity'];
-        $receipts[$index]['fine']=($issue_value['chitti_credit_weight']*$ac_voucher_receipt_chitti_detail['purity'])/100;
-        $receipts[$index]['factory_fine']=($issue_value['chitti_credit_weight']*$ac_voucher_receipt_chitti_detail['factory_purity'])/100;
 
+        if ($this->data['report_type'] == 'Purchase Sales Ledger'){
+        $ac_voucher_receipt_chitti_detail=$this->ledger_model->find('sum((ac_ledger.credit_weight+ac_ledger.debit_weight) * ac_ledger.purity) / sum(ac_ledger.credit_weight+ac_ledger.debit_weight) as purity, 
+                               sum((ac_ledger.credit_weight+ac_ledger.debit_weight) * ac_ledger.factory_purity) / sum(ac_ledger.credit_weight+ac_ledger.debit_weight) as factory_purity',array('where'=>array('chitti_id =('.$receipt_value['chitti_no'].')'=>NULL)));
+        $receipts[$receipt_index]['purity']=$ac_voucher_receipt_chitti_detail['purity'];
+        $receipts[$receipt_index]['factory_purity']=$ac_voucher_receipt_chitti_detail['factory_purity'];
+        $receipts[$receipt_index]['fine']=($receipts[$receipt_index]['chitti_credit_weight']*$ac_voucher_receipt_chitti_detail['purity'])/100;
+        $receipts[$receipt_index]['factory_fine']=( $receipts[$receipt_index]['chitti_credit_weight']*$ac_voucher_receipt_chitti_detail['factory_purity'])/100;
       }}}}
 
      $domestic_export_receipt_issue_select='account_name,voucher_date,date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,((debit_weight*purity)/100)- 
@@ -361,8 +363,8 @@ class Ledgers extends BaseController {
     $issues=array();
     $issue_voucher_dates=array();
     }
-
-
+	//lq();
+	//pd($issues);
     $issue_voucher_dates = array_column($issues, 'voucher_date');
     $receipt_voucher_dates = array_column($receipts, 'voucher_date');
     $this->data['voucher_dates'] = array_values(array_unique(array_merge($issue_voucher_dates, $receipt_voucher_dates)));
