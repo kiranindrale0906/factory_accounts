@@ -17,7 +17,10 @@ class Account_ledgers extends Ledgers {
 
   public function create() {
     ini_set('max_execution_time', '0');
-    $this->ledger_model->regenerate_ledger_records();
+    if(!empty($_GET['limit_date'])){
+      $limit_date=$_GET['limit_date'];
+    }
+    $this->ledger_model->regenerate_ledger_records($limit_date);
   }
 
   public function _get_form_data() {
