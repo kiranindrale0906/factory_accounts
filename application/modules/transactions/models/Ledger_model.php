@@ -11,7 +11,7 @@ class Ledger_model extends BaseModel {
     $this->load->model(array('ac_vouchers/voucher_model'));
   }
 
-  public function regenerate_ledger_records($limit_date==0) {
+  public function regenerate_ledger_records($limit_date=0) {
     if($limit_date==1){
     $this->delete('', array('id > ' => 0));
     $voucher_ids = $this->voucher_model->get('id',array('date(created_at) between "2022-04-29" and "2022-07-1"'=>NULL));
