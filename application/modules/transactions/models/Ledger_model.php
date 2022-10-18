@@ -14,16 +14,16 @@ class Ledger_model extends BaseModel {
   public function regenerate_ledger_records($limit_date==0) {
     if($limit_date==1){
     $this->delete('', array('id > ' => 0));
-    $voucher_ids = $this->voucher_model->get('id',array('date(created_at) between "2022-04-29" and "2022-07-1"'=>NULL));
+    $voucher_ids = $this->voucher_model->get('id',array('date(created_at) between "2022-04-29" and "2022-06-1"'=>NULL));
+    $this->regenerate_ledger_records(2);
     }
 
     $current_date=date('Y-m-d');
     if($limit_date==2){
-    $this->delete('', array('id > ' => 0,'date(voucher_date) between "2022-07-1" and "'.$current_date.'"'));
-    $voucher_ids = $this->voucher_model->get('id',array('date(created_at) between "2022-07-1" and "2022-09-1"'=>NULL));
+    $voucher_ids = $this->voucher_model->get('id',array('date(created_at) between "2022-06-1" and "2022-09-1"'=>NULL));
+    $this->regenerate_ledger_records(3);
     }
     if($limit_date==3){
-    $this->delete('', array('id > ' => 0,'date(voucher_date) between "2022-09-1" and "'.$current_date.'"'));
     $voucher_ids = $this->voucher_model->get('id',array('date(created_at) between "2022-09-1" and "'.$current_date.'"'=>NULL));
     }
     foreach ($voucher_ids as $voucher_id) {
