@@ -105,6 +105,7 @@ class Chittis extends BaseController {
       // pd($this->data['account_name']);
       $where=array('voucher_type' => 'metal issue voucher',
                    'chitti_id' => '',
+                   'date(voucher_date) > "2022-11-12"' => NULL,
                    'site_name' => $this->data['record']['site_name']);
       $account_name= array_column($this->data['account_name'],'name');
       $this->data['purity'] = $this->voucher_model->get('purity as name, purity as id', 
