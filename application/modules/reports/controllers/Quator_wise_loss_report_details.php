@@ -27,7 +27,7 @@ class Quator_wise_loss_report_details extends Ledgers {
     $arg_records=json_decode(curl_post_request($url,$data),true);
     $ghiss_melting_loss=array();
     $arg_records=!empty($arg_records)?$arg_records['data']['loss_details']['loss_detail']:$arg_records['data']['loss_details']['loss_detail']=array();
-    $ghiss_melting_loss=$this->voucher_model->get('receipt_type,description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight,created_at,created_at as first_date,created_at as last_date', array('account_name'=>'Loss Account','date(created_at)>='=>'2021-03-13','site_name'=>'AR Gold (May 2022)','receipt_type'=>'Ghiss Melting Loss','quator'=>$data['quator'],'description'=>$_GET['category']),array());
+    $ghiss_melting_loss=$this->voucher_model->get('receipt_type,description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight,created_at,created_at as first_date,created_at as last_date', array('account_name'=>'AR Gold Loss Account (May 2022)','date(created_at)>='=>'2021-03-13','site_name'=>'AR Gold (May 2022)','receipt_type'=>'Ghiss Melting Loss','quator'=>$data['quator'],'description'=>$_GET['category']),array());
     foreach ($ghiss_melting_loss as $ghiss_melting_loss_index => $ghiss_melting_loss_value) {
           $data['issue_department_id']=$ghiss_melting_loss_value['parent_id'];
           // $data['quator']=$this->data['quator_name'];
@@ -43,7 +43,7 @@ class Quator_wise_loss_report_details extends Ledgers {
     $url=API_MAY2022_ARF_PATH."issue_and_receipts/loss_report_for_accounts/index";
     $arf_records=json_decode(curl_post_request($url,$data),true);
     $arf_records=!empty($arf_records)?$arf_records['data']['loss_details']['loss_detail']:$arf_records['data']['loss_details']['loss_detail']=array();
-    $ghiss_melting_loss=$this->voucher_model->get('receipt_type,description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight,created_at,created_at as first_date,created_at as last_date', array('account_name'=>'Loss Account','site_name'=>'ARF  (May 2022)(May 2022)','date(created_at)>='=>'2021-03-13','receipt_type'=>'Ghiss Melting Loss','quator'=>$data['quator'],'description'=>$_GET['category']),array());
+    $ghiss_melting_loss=$this->voucher_model->get('receipt_type,description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight,created_at,created_at as first_date,created_at as last_date', array('account_name'=>'ARF Loss Account (May 2022)','site_name'=>'ARF  (May 2022)(May 2022)','date(created_at)>='=>'2021-03-13','receipt_type'=>'Ghiss Melting Loss','quator'=>$data['quator'],'description'=>$_GET['category']),array());
     foreach ($ghiss_melting_loss as $ghiss_melting_loss_index => $ghiss_melting_loss_value) {
           $data['issue_department_id']=$ghiss_melting_loss_value['parent_id'];
           // $data['quator']=$this->data['quator_name'];
@@ -59,7 +59,7 @@ class Quator_wise_loss_report_details extends Ledgers {
     $url=API_MAY2022_ARC_PATH."issue_and_receipts/loss_report_for_accounts/index";
     $arc_records=json_decode(curl_post_request($url,$data),true);
     $arc_records=!empty($arc_records)?$arc_records['data']['loss_details']['loss_detail']:$arc_records['data']['loss_details']['loss_detail']=array();
-    $ghiss_melting_loss=$this->voucher_model->get('receipt_type,description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight,created_at,created_at as first_date,created_at as last_date', array('account_name'=>'Loss Account','site_name'=>'ARC (May 2022)','date(created_at)>='=>'2021-03-13','receipt_type'=>'Ghiss Melting Loss','quator'=>$data['quator'],'description'=>$_GET['category']),array());
+    $ghiss_melting_loss=$this->voucher_model->get('receipt_type,description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight,created_at,created_at as first_date,created_at as last_date', array('account_name'=>'ARC Loss Account (May 2022)','site_name'=>'ARC (May 2022)','date(created_at)>='=>'2021-03-13','receipt_type'=>'Ghiss Melting Loss','quator'=>$data['quator'],'description'=>$_GET['category']),array());
     foreach ($ghiss_melting_loss as $ghiss_melting_loss_index => $ghiss_melting_loss_value) {
           $data['issue_department_id']=$ghiss_melting_loss_value['parent_id'];
           // $data['quator']=$this->data['quator_name'];
@@ -74,7 +74,7 @@ class Quator_wise_loss_report_details extends Ledgers {
     $url=API_AUG2022_ARC_PATH."issue_and_receipts/loss_report_for_accounts/index";
     $arc_aug2022_records=json_decode(curl_post_request($url,$data),true);
     $arc_aug2022_records=!empty($arc_aug2022_records)?$arc_aug2022_records['data']['loss_details']['loss_detail']:$arc_aug2022_records['data']['loss_details']['loss_detail']=array();
-    $ghiss_melting_loss=$this->voucher_model->get('receipt_type,description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight,created_at,created_at as first_date,created_at as last_date', array('account_name'=>'Loss Account','site_name'=>'ARC (Aug 2022)','date(created_at)>='=>'2021-03-13','receipt_type'=>'Ghiss Melting Loss','quator'=>$data['quator'],'description'=>$_GET['category']),array());
+    $ghiss_melting_loss=$this->voucher_model->get('receipt_type,description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight,created_at,created_at as first_date,created_at as last_date', array('account_name'=>'ARC Loss Account (Aug 2022)','site_name'=>'ARC (Aug 2022)','date(created_at)>='=>'2021-03-13','receipt_type'=>'Ghiss Melting Loss','quator'=>$data['quator'],'description'=>$_GET['category']),array());
     foreach ($ghiss_melting_loss as $ghiss_melting_loss_index => $ghiss_melting_loss_value) {
           $data['issue_department_id']=$ghiss_melting_loss_value['parent_id'];
           // $data['quator']=$this->data['quator_name'];
@@ -88,7 +88,7 @@ class Quator_wise_loss_report_details extends Ledgers {
     $url=API_AUG2022_ARF_PATH."issue_and_receipts/loss_report_for_accounts/index";
     $arf_aug2022_records=json_decode(curl_post_request($url,$data),true);
     $arf_aug2022_records=!empty($arf_aug2022_records)?$arf_aug2022_records['data']['loss_details']['loss_detail']:$arf_aug2022_records['data']['loss_details']['loss_detail']=array();
-    $ghiss_melting_loss=$this->voucher_model->get('receipt_type,description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight,created_at,created_at as first_date,created_at as last_date', array('account_name'=>'Loss Account','site_name'=>'ARF (Aug 2022)','date(created_at)>='=>'2021-03-13','receipt_type'=>'Ghiss Melting Loss','quator'=>$data['quator'],'description'=>$_GET['category']),array());
+    $ghiss_melting_loss=$this->voucher_model->get('receipt_type,description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight,created_at,created_at as first_date,created_at as last_date', array('account_name'=>'ARF Loss Account (Aug 2022)','site_name'=>'ARF (Aug 2022)','date(created_at)>='=>'2021-03-13','receipt_type'=>'Ghiss Melting Loss','quator'=>$data['quator'],'description'=>$_GET['category']),array());
     foreach ($ghiss_melting_loss as $ghiss_melting_loss_index => $ghiss_melting_loss_value) {
           $data['issue_department_id']=$ghiss_melting_loss_value['parent_id'];
           // $data['quator']=$this->data['quator_name'];
@@ -103,7 +103,7 @@ class Quator_wise_loss_report_details extends Ledgers {
     $url=API_AUG2022_ARG_PATH."issue_and_receipts/loss_report_for_accounts/index";
     $arg_aug2022_records=json_decode(curl_post_request($url,$data),true);
     $arg_aug2022_records=!empty($arg_aug2022_records)?$arg_aug2022_records['data']['loss_details']['loss_detail']:$arg_aug2022_records['data']['loss_details']['loss_detail']=array();
-    $ghiss_melting_loss=$this->voucher_model->get('receipt_type,description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight,created_at,created_at as first_date,created_at as last_date', array('account_name'=>'Loss Account','site_name'=>'AR Gold (Aug 2022)','date(created_at)>='=>'2021-03-13','receipt_type'=>'Ghiss Melting Loss','quator'=>$data['quator'],'description'=>$_GET['category']),array());
+    $ghiss_melting_loss=$this->voucher_model->get('receipt_type,description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight,created_at,created_at as first_date,created_at as last_date', array('account_name'=>'AR Gold Loss Account (Aug 2022)','site_name'=>'AR Gold (Aug 2022)','date(created_at)>='=>'2021-03-13','receipt_type'=>'Ghiss Melting Loss','quator'=>$data['quator'],'description'=>$_GET['category']),array());
     foreach ($ghiss_melting_loss as $ghiss_melting_loss_index => $ghiss_melting_loss_value) {
           $data['issue_department_id']=$ghiss_melting_loss_value['parent_id'];
           // $data['quator']=$this->data['quator_name'];
