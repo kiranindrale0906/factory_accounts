@@ -202,6 +202,7 @@ class Chitti_model extends BaseModel {
     
     
     foreach ($chitti_details as $index => $chitti_detail) {
+      pd($chitti_detail);
       if (isset($chitti_detail['id'])) {
         $voucher_obj = new voucher_model($chitti_detail);
         $voucher_obj->attributes['chitti_id'] = $this->attributes['id'];
