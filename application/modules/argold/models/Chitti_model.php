@@ -112,7 +112,7 @@ class Chitti_model extends BaseModel {
     }else{
       $this->attributes['taxable_amount']=$taxable_amount+$this->attributes['stone_amount'];
     }
-    $this->attributes['taxable_amount']=!empty($this->attributes['taxable_amount'])?$this->attributes['taxable_amount']:0;
+    $this->attributes['taxable_amount']=($this->attributes['taxable_amount']!=0)?$this->attributes['taxable_amount']:0;
     $this->attributes['cgst_amount'] = $this->attributes['taxable_amount'] * $gst_rate / 100;
     $this->attributes['sgst_amount'] = $this->attributes['taxable_amount'] * $gst_rate / 100;
     // pd($this->attributes['cgst_amount']);
