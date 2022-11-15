@@ -77,6 +77,7 @@ class Chitti_model extends BaseModel {
       $this->set_sales_amount_fields();
     }
       $this->attributes['narration'] = $this->attributes['narration'];
+//pd($this->attributes);
   }
 
   private function set_sales_amount_fields() {
@@ -148,7 +149,7 @@ class Chitti_model extends BaseModel {
     $total_plastic_tag=($this->attributes['plastic_tag']*$this->attributes['plastic_tag_quantity']);
     $total_empty_packet_weight=($this->attributes['empty_packet_weight']*$this->attributes['empty_packet_quantity']);
     $this->attributes['expected_weight']=($this->attributes['weight']+$total_empty_packet_weight+$total_order_tag+$total_plastic_tag+$this->attributes['other_item_gross']);
-    $this->attributes['actual_weight']=($this->attributes['actual_weight']!=0)?$this->attributes['actual_weight']:0;
+    $this->attributes['actual_weight']=(isset($this->attributes['actual_weight']))?$this->attributes['actual_weight']:0;
     $this->attributes['diff_weight'] = $this->attributes['expected_weight'] - $this->attributes['actual_weight'];
     if(!empty($this->attributes['hallmark_taxable_amount'])){
     $total_amount = $this->attributes['hallmark_taxable_amount'] + $this->attributes['cgst_amount'] + $this->attributes['sgst_amount']+$inr_amount;
@@ -169,18 +170,16 @@ class Chitti_model extends BaseModel {
       $this->attributes['debit_amount'] = round($total_amount + $total_amount * $tcs_rate/100);
     else
       $this->attributes['debit_amount'] = round($total_amount);
-
-  }
+}
   
   public function after_save($action){
-    $this->rate_cut_issue_voucher_model->create_rate_cut_vouchers_for_chitti($this->attributes['id']);
+ $this->rate_cut_issue_voucher_model->create_rate_cut_vouchers_for_chitti($this->attributes['id']);
     $this->set_chitti_id_in_metal_issue_vouchers();
     if (!isset($this->formdata['chitti_details']) || empty($this->formdata['chitti_details'])) return;
 	}  
 
   private function set_chitti_id_in_metal_issue_vouchers() {
     $chittis=array();
-
     if (!empty($this->formdata['chitti_details'])) {
       $chitti_ids=array_column($this->formdata['chitti_details'], 'chitti_id');
       $chitti_id_details=array();
