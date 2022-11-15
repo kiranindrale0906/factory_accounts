@@ -71,7 +71,7 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
                               'credit_weight' => 0,
                               'purity' => 100,
                               'sale_type' => $chitti['sale_type'],
-                              'taxable_amount' => $tax_fields['taxable_amount'],
+                              'taxable_amount' => ($tax_fields['taxable_amount']!=0 && $tax_fields['taxable_amount']!=NULL )?$tax_fields['taxable_amount']:0,
                               'usd_credit_amount' => ($chitti['premium_usd_amount']+$chitti['labour_usd_amount']+$chitti['freight_usd_amount']+$chitti['taxable_usd_amount']),
                               'cgst_amount'=>$tax_fields['cgst_amount'],
                               'sgst_amount'=>$tax_fields['sgst_amount'],
@@ -139,7 +139,7 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
                             'debit_weight'  => 0,
                             'purity'        => 100,
                             'sale_type'     => $metal_receipt_voucher['sale_type'],
-                            'taxable_amount' => $tax_fields['taxable_amount'],
+                            'taxable_amount' => ($tax_fields['taxable_amount']!=0 && $tax_fields['taxable_amount']!=NULL )?$tax_fields['taxable_amount']:0,
                             'cgst_amount'   => $tax_fields['cgst_amount'],
                             'sgst_amount'   => $tax_fields['sgst_amount'],
                             'tcs_amount'    => $tax_fields['tcs_amount'],
@@ -164,7 +164,7 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
     $rate_cut_receipt['debit_weight']  = $tax_fields['weight'];
     $rate_cut_receipt['credit_weight'] = 0;
     $rate_cut_receipt['sale_type'] = $metal_receipt_voucher['sale_type'];
-    $rate_cut_receipt['taxable_amount'] = $tax_fields['taxable_amount'];
+    $rate_cut_receipt['taxable_amount'] = ($tax_fields['taxable_amount']!=0 && $tax_fields['taxable_amount']!=NULL )?$tax_fields['taxable_amount']:0;
     $rate_cut_receipt['cgst_amount'] = $tax_fields['cgst_amount'];
     $rate_cut_receipt['sgst_amount'] = $tax_fields['sgst_amount'];
     $rate_cut_receipt['tcs_amount'] = $tax_fields['tcs_amount'];
