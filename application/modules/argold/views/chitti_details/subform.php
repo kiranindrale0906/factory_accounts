@@ -11,6 +11,7 @@
 																		 	 						        )),
 																		   'controller' => 'chitti_details'));?>
 	</td>
+	<td><?php echo $vouchers['item_code'];?></td>
 	<td><?php echo $vouchers['packet_no'];?></td>
 	<td><?php echo $vouchers['voucher_date'];?></td>
 	<td><?php echo $vouchers['narration'];?> 

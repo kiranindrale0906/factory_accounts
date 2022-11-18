@@ -81,6 +81,7 @@ function get_field_attribute($table, $field) {
     'factory_fine'     => array('factory_fine', '', FALSE, '', TRUE),
     'is_export'     => array('', '', TRUE, '', TRUE),
     'do_not_calculate_tax'     => array('', '', TRUE, '', TRUE),
+    'item_code'     => array('Item Code', '', TRUE, '', TRUE),
    );
   return $attributes[$table][$field];
 }
