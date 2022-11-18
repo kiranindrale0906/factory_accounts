@@ -178,7 +178,7 @@ class Chitti_model extends BaseModel {
     if (!isset($this->formdata['chitti_details']) || empty($this->formdata['chitti_details'])) return;
 	}  
 
-  private function set_chitti_id_in_metal_issue_vouchers() {
+  public function set_chitti_id_in_metal_issue_vouchers() {
     $chittis=array();
     if (!empty($this->formdata['chitti_details'])) {
       $chitti_ids=array_column($this->formdata['chitti_details'], 'chitti_id');

@@ -63,7 +63,7 @@
   // $sales_rate = !empty($profit_and_loss['sales_account']['fine']) ? (-1 * $profit_and_loss['sales_account']['amount'] / $profit_and_loss['sales_account']['fine']) : 0;
   // $sales_amount = !empty($profit_and_loss['sales_account']['amount']) ? $profit_and_loss['sales_account']['amount'] : 0;
 
-  $domestic_opening_fine = 241459.348 + 35003.788 + 7375.91 + 9500.44; //71950.427; //+6306.923;
+  $domestic_opening_fine = 3724.24 + 241459.348 + 35003.788 + 7375.91 + 9500.44; //71950.427; //+6306.923;
   $domestic_opening_rate = 5000; //4850.000;
   $domestic_opening_amount = $domestic_opening_fine * $domestic_opening_rate; //351356714.000;
 
