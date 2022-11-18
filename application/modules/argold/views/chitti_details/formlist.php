@@ -3,6 +3,7 @@
   <thead>
     <tr>
       <th><?php load_buttons('anchor', array('name'=>'Select All', 'class'=>'blue select_all')); ?></th>
+      <th>Item Code</th>
       <th>Packet No</th>
       <th>Date</th>
       <th>Narration</th>
@@ -33,6 +34,7 @@
     ?>
     <tr>
       <th>Total</th>
+      <th></th>
       <th></th>
       <th></th>
       <th></th>

@@ -27,8 +27,7 @@ class Chittis extends BaseController {
         else $this->where='chitti_hide=0 and account_name not in ("'.implode('", "', $account_name).'")';
       }elseif($this->router->class == 'chitti_domestics'){ 
         if($show=='yes') $this->where='account_name in ("'.implode('", "', $account_chitti_domestic_name).'")';
-        else $this->where='chitti_hide=0 and account_name in ("'.implode('", "', $account_chitti_domestic_name).'")';
-      }else{
+        else $this->where='chitti_hide=0 and account_name in ("'.implode('", "', $account_chitti_domestic_name).'")';      }else{
 
         if($show=='yes') $this->where='account_name in ("'.implode('", "', $account_name).'")';
         else $this->where='chitti_hide=0 and account_name in ("'.implode('", "', $account_name).'")';
@@ -162,6 +161,7 @@ class Chittis extends BaseController {
                             packet_no,
                             voucher_date,
                             customer_name,
+                            item_code,
                             rate,
                             group_concat(narration) as narration,
                             argold_id as argold_id', 
