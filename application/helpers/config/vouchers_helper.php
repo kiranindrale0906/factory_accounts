@@ -38,7 +38,7 @@ function get_tax_fields($factory_fine, $fine, $sale_type, $gold_rate, $gold_rate
     $fields['tcs_amount']     = $fields['total_amount'] * $fields['tcs_rate'] / 100;
     $fields['grand_total']    = round($fields['total_amount'] + $fields['tcs_amount']);
   }
-  if(isset($fields['taxable_amount']))?$fields['taxable_amount']:0;
+  (isset($fields['taxable_amount']))?$fields['taxable_amount']:0;
   return $fields;
 }
 

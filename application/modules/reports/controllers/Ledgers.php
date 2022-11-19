@@ -228,7 +228,7 @@ class Ledgers extends BaseController {
     }else{
       $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(), array('order_by'=>'chitti_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
     }
-	//lq();
+	//pd($issues);
     foreach ($issues as $issue_index => $issue_value) {
       $voucher_id = rtrim($issue_value['voucher_id'], ", ");
       if(!empty($voucher_id)){
@@ -669,7 +669,7 @@ class Ledgers extends BaseController {
 
     if ($this->data['report_type'] == 'Production Report') $where['account_name != '] = 'VADOTAR';
     if ($this->data['report_type'] == 'Metal Receipt Type Report') $where['receipt_type']='Metal';
-    if ($this->data['report_type'] == 'Account Ledger') $where['voucher_type not in ("cash receipt voucher","cash issue voucher")']=NULL;
+//    if ($this->data['report_type'] == 'Account Ledger') $where['chitti_id=voucher_id']=NULL;
     
     return $where;
   }

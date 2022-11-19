@@ -12,7 +12,7 @@ class Ledger_model extends BaseModel {
   }
 
   public function regenerate_ledger_records($limit_date=0) {
-    if($limit_month==1){
+    if($limit_date==1){
     $this->delete('', array('id > ' => 0,'month(voucher_date) between "4" and "5"'=>NULL));
     $voucher_ids = $this->voucher_model->get('id',array('month(voucher_date) between "4" and "5"'=>NULL));
     }
