@@ -144,6 +144,7 @@ class Chittis extends BaseController {
                             "" as voucher_number,
                             packet_no,
                             voucher_date,
+                            item_code,
                             customer_name,
                             usd_wastage_percentage,
                             inr_wastage_percentage,
