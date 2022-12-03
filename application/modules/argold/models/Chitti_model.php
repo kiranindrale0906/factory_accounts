@@ -55,20 +55,11 @@ class Chitti_model extends BaseModel {
                  (sum(credit_weight*purity) / sum(credit_weight)) as purity,
                  (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,
                  "" as voucher_number, packet_no, voucher_date';
-      $where=array('site_name' => $this->attributes['site_name'],
+      $chitti_details=$this->voucher_model->find($select, array('site_name' => $this->attributes['site_name'],
                                                                 'packet_no' => $packet_nos,
                                                                 'argold_id' => $argold_ids,
-                                                                'account_name' => $this->attributes['account_name']);  
-      if (!empty($this->attributes['purity'])){
-        if ($this->attributes['purity'] == '92.00') {
-          $where['round(purity,3)>'] = 90;
-          $where['round(purity,3)<'] = 93;
-        }elseif ($this->attributes['purity'] == '75.00') {
-          $where['round(purity,3)>'] = 70;
-          $where['round(purity,3)<'] = 89;
-        }
-      }          
-      $chitti_details=$this->voucher_model->find($select, $where);
+                                                                'account_name' => $this->attributes['account_name'],
+                                                                'purity' => $this->attributes['purity']));
     }
     if (!empty($this->attributes['date']))  $this->attributes['date'] = date('Y-m-d', strtotime($this->attributes['date']));
     if($this->attributes['product_rate']>0){
@@ -86,7 +77,6 @@ class Chitti_model extends BaseModel {
       $this->set_sales_amount_fields();
     }
       $this->attributes['narration'] = $this->attributes['narration'];
-//pd($this->attributes);
   }
 
   private function set_sales_amount_fields() {
@@ -122,7 +112,6 @@ class Chitti_model extends BaseModel {
     }else{
       $this->attributes['taxable_amount']=$taxable_amount+$this->attributes['stone_amount'];
     }
-    $this->attributes['taxable_amount']=($this->attributes['taxable_amount']!=0)?$this->attributes['taxable_amount']:0;
     $this->attributes['cgst_amount'] = $this->attributes['taxable_amount'] * $gst_rate / 100;
     $this->attributes['sgst_amount'] = $this->attributes['taxable_amount'] * $gst_rate / 100;
     // pd($this->attributes['cgst_amount']);
@@ -158,7 +147,6 @@ class Chitti_model extends BaseModel {
     $total_plastic_tag=($this->attributes['plastic_tag']*$this->attributes['plastic_tag_quantity']);
     $total_empty_packet_weight=($this->attributes['empty_packet_weight']*$this->attributes['empty_packet_quantity']);
     $this->attributes['expected_weight']=($this->attributes['weight']+$total_empty_packet_weight+$total_order_tag+$total_plastic_tag+$this->attributes['other_item_gross']);
-    $this->attributes['actual_weight']=(isset($this->attributes['actual_weight']))?$this->attributes['actual_weight']:0;
     $this->attributes['diff_weight'] = $this->attributes['expected_weight'] - $this->attributes['actual_weight'];
     if(!empty($this->attributes['hallmark_taxable_amount'])){
     $total_amount = $this->attributes['hallmark_taxable_amount'] + $this->attributes['cgst_amount'] + $this->attributes['sgst_amount']+$inr_amount;
@@ -179,16 +167,18 @@ class Chitti_model extends BaseModel {
       $this->attributes['debit_amount'] = round($total_amount + $total_amount * $tcs_rate/100);
     else
       $this->attributes['debit_amount'] = round($total_amount);
-}
+
+  }
   
   public function after_save($action){
- $this->rate_cut_issue_voucher_model->create_rate_cut_vouchers_for_chitti($this->attributes['id']);
+    $this->rate_cut_issue_voucher_model->create_rate_cut_vouchers_for_chitti($this->attributes['id']);
     $this->set_chitti_id_in_metal_issue_vouchers();
     if (!isset($this->formdata['chitti_details']) || empty($this->formdata['chitti_details'])) return;
 	}  
 
-  public function set_chitti_id_in_metal_issue_vouchers() {
+  private function set_chitti_id_in_metal_issue_vouchers() {
     $chittis=array();
+
     if (!empty($this->formdata['chitti_details'])) {
       $chitti_ids=array_column($this->formdata['chitti_details'], 'chitti_id');
       $chitti_id_details=array();
