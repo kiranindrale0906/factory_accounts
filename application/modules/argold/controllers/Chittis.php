@@ -134,7 +134,6 @@ class Chittis extends BaseController {
     }
 
     if (!empty($_GET['purity'])) $where['purity'] = $_GET['purity'];
-    
     if(!empty($this->data['record']['account_name'])) { 
       $where['account_name']=$this->data['record']['account_name'];
       if($this->router->class == 'chitti_exports'){ 
