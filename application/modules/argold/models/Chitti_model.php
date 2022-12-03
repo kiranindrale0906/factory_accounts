@@ -55,11 +55,20 @@ class Chitti_model extends BaseModel {
                  (sum(credit_weight*purity) / sum(credit_weight)) as purity,
                  (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,
                  "" as voucher_number, packet_no, voucher_date';
-      $chitti_details=$this->voucher_model->find($select, array('site_name' => $this->attributes['site_name'],
+      $where=array('site_name' => $this->attributes['site_name'],
                                                                 'packet_no' => $packet_nos,
                                                                 'argold_id' => $argold_ids,
-                                                                'account_name' => $this->attributes['account_name'],
-                                                                'purity' => $this->attributes['purity']));
+                                                                'account_name' => $this->attributes['account_name']);  
+      if (!empty($this->attributes['purity'])){
+        if ($this->attributes['purity'] == '92.00') {
+          $where['round(purity,3)>'] = 90;
+          $where['round(purity,3)<'] = 93;
+        }elseif ($this->attributes['purity'] == '75.00') {
+          $where['round(purity,3)>'] = 70;
+          $where['round(purity,3)<'] = 89;
+        }
+      }          
+      $chitti_details=$this->voucher_model->find($select, $where);
     }
     if (!empty($this->attributes['date']))  $this->attributes['date'] = date('Y-m-d', strtotime($this->attributes['date']));
     if($this->attributes['product_rate']>0){
