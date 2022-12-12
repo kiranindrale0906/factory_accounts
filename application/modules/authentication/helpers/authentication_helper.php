@@ -12,7 +12,7 @@
 									'socials_media/facebook/index','socials_media/facebook/store',
 									'slack/slack_login/index','slack/slack_login/store'
 									,'socials_media/twitter/index','socials_media/twitter/index','socials_media/linkedin/index','socials_media/linkedin/index',
-                  'api/api_metal_issue_vouchers/store','api/api_chittis/index','api/api_metal_receipt_vouchers/store','api/api_cash_receipt_vouchers/store','api/api_cash_issue_vouchers/store',
+                  'api/api_metal_issue_vouchers/store','api/api_chittis/index','api/api_metal_receipt_vouchers/store','api/api_cash_receipt_vouchers/store','api/api_cash_issue_vouchers/store','api/api_cash_receipt_vouchers/index','api/api_cash_issue_vouchers/index',
                    'reports/telegram_production_summary/index');
 	}
 
