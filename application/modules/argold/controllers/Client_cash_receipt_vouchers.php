@@ -8,7 +8,8 @@ class Client_cash_receipt_vouchers extends Core_cash_receipt_vouchers {
   }
 
   public function _get_form_data() {
-    $company_name = $this->company_model->find('name', array('id' => $_SESSION['company_id']))['name'];
+
+    //$company_name = $this->company_model->find('name', array('id' => $_SESSION['company_id']))['name'];
     $this->data['account_names_for_cash_issue'] = array(array('id' => '', 'name' => ''));
 
     $this->data['account_names_for_cash_issue'][] = array('id' => 'AR Gold Software', 'name' => 'AR Gold Software');
