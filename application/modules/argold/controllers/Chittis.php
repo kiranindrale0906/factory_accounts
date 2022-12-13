@@ -94,7 +94,7 @@ class Chittis extends BaseController {
                                        'account_name in ("'.implode('", "', $account_name).'")' => NULL,
                                        'voucher_type' => 'metal issue voucher',
                                        'chitti_id' => 0,
-                                       'receipt_type in ("Finish Good","GPC Out","Packing Slip")'=>NULL)),
+                                       'receipt_type in ("Finish Good","GPC Out","Packing Slip","Melting Wastage")'=>NULL)),
                                  array(), array('group_by' => 'purity'));
     
     } elseif($this->router->class == 'chitti_domestics'){ 
@@ -129,7 +129,7 @@ class Chittis extends BaseController {
                                     'account_name in ("'.implode('", "', $account_name).'")' => NULL,
                                     'voucher_type' => 'metal issue voucher',
                                     'chitti_id' => 0,
-                                    'receipt_type in ("Finish Good","GPC Out")'=>NULL)),
+                                    'receipt_type in ("Finish Good","GPC Out","Melting Wastage")'=>NULL)),
                               array(), array('group_by' => 'purity'));
     }
 
