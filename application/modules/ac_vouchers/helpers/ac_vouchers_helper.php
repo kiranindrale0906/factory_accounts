@@ -2,12 +2,15 @@
 
 function ac_vouchers_getTableSettings($table_setting_arg=array()) {
   $ci = &get_instance();
+  if($ci->router->class != "api_cash_issue_vouchers" and $ci->router->class != "api_cash_receipt_vouchers" ){
   if(!empty($table_setting_arg['where'])) {
     $table_setting_arg['where'] = 'company_id='.(!empty($ci->session->userdata('company_id'))?$ci->session->userdata('company_id'):-1)." AND ".$table_setting_arg['where'];
   }else{
     $table_setting_arg['where'] = 'company_id='.(!empty($ci->session->userdata('company_id'))?$ci->session->userdata('company_id'):-1);
-  }
-  if ($ci->router->class != "cash_issue_vouchers"
+  }}
+  if ($ci->router->class != "api_cash_issue_vouchers"
+      and $ci->router->class != "api_cash_receipt_vouchers"
+      and $ci->router->class != "cash_issue_vouchers"
       and $ci->router->class != "opening_stock_vouchers"
       and $ci->router->class != "cash_receipt_vouchers") {
   $table_setting_arg['where'] .= ' and receipt_type not in ("Alloy Vodator", "GPC Vodator", "Stone Vatav", "Meena Vatav", "Copper Vatav", "Rhodium Vatav")';
