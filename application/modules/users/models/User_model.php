@@ -99,6 +99,7 @@ class User_model extends Core_user_model {
               'arc_details'        => $user['arc_details'],
               'do_not_check_ip'        => $user['do_not_check_ip'],
               'vodator_report'        => $user['vodator_report'],
+              'gross_profit_report'        => $user['gross_profit_report'],
               'production_report'        => $user['production_report'],
               'email_id'        => $user['email_id'],
 //              'authToken'       => $user['authToken'],

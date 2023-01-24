@@ -1,6 +1,7 @@
 <thead class="bg_gray">
   <tr>
-    <?php if ($report_type == 'Vadotar Report'): ?>
+    <?php
+     if ($report_type == 'Vadotar Report'): ?>
       <th>Type</th>
     <?php endif; ?>
     <?php if ($report_type != 'Account Ledger'): ?>
@@ -15,6 +16,9 @@
     <th class='text-right'>Factory Fine</th>
     <th class='text-right'>Issue Melting</th>
     <th class='text-right'>Issue Fine</th>
+    <?php if($report_type == "Gross Profit Report"): ?>
+      <th class='text-right'>Amount</th>
+    <?php endif; ?>
     <?php if ($report_type == 'Vadotar Report' || $report_type == 'Production Report'): ?>
       <th class='text-right'>Vadotar</th>
       <th class='text-right'>%</th>

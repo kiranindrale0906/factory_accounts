@@ -26,6 +26,9 @@
   <td class="text-right"><?= four_decimal($record['purity'], '-') ?></td>
   <?php endif; ?>
   <td class="text-right"><?= four_decimal($record['fine'], '-'); ?></td>
+  <?php if($report_type == "Gross Profit Report"):?>
+    <td class="text-right">0</td>
+  <?php endif; ?>
   <?php if ($report_type == 'Vadotar Report' || $report_type == 'Production Report'): ?>
     <td class="text-right"><?= four_decimal($record['fine']-$record['factory_fine'], '-'); ?></td>
     <?php if ($record['debit_weight'] != 0) { ?>

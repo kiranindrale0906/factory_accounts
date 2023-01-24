@@ -28,6 +28,9 @@
       <td></td>
       <td class="text-right"><?= four_decimal($record['fine'], '-') ?></td>
     <?php } ?>
+    <?php if($report_type == "Gross Profit Report"):?>
+      <td class="text-right">0</td>
+    <?php endif; ?>
     <?php if ($report_type == 'Vadotar Report' || $report_type == 'Production Report'): 
       if (isset($record['credit_weight']) && $record['credit_weight'] > 0): ?>
         <td class="text-right"><?= four_decimal($record['factory_fine'] - $record['fine'], '-'); ?></td>

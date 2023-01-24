@@ -58,6 +58,13 @@
                                     array('label_for' => 'Vodator Report',
                                           'label'=> 'Vodator Report',
                                           'value' =>'1',))));?>
+      <?php  load_field('plain/checkbox',
+                  array('field'=>'gross_profit_report',
+                        'check_inline'=>true,
+                        'option'=> array(
+                                    array('label_for' => 'Gross Profit Report',
+                                          'label'=> 'Gross Profit Report',
+                                          'value' =>'1',))));?>
      <?php  load_field('plain/checkbox',
                   array('field'=>'production_report',
                         'check_inline'=>true,

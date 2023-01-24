@@ -66,6 +66,7 @@ function get_field_attribute($table, $field) {
     'arc_details'               => array('', '', TRUE, '', TRUE),
     'do_not_check_ip'               => array('', '', TRUE, '', TRUE),
     'vodator_report'               => array('', '', TRUE, '', TRUE),
+    'gross_profit_report'               => array('', '', TRUE, '', TRUE),
     'production_report'               => array('', '', TRUE, '', TRUE),
     'srno'             => array('Srno', '', FALSE, '', TRUE),
     'name'             => array('Name', 'Enter Name.', TRUE, '', TRUE),

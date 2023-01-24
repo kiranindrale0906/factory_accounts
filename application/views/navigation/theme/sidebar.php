@@ -92,6 +92,7 @@
                                         // 'reports/outstanding_report' => 'Outstanding Report',
                                         'reports/trial_balances' => 'Trial Balance',
                                         'reports/vadotar_reports' => 'Vadotar Report',
+                                        'reports/gross_profit_reports' => 'Gross Profit Report',
                                         'reports/rojmel_reports' => 'Rojmel Report',
                                         'reports/production_summary' => 'Production Summary',
                                         'reports/bw_accounts' => 'Bw Accounts',
