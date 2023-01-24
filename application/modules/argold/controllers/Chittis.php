@@ -94,7 +94,7 @@ class Chittis extends BaseController {
                                        'account_name in ("'.implode('", "', $account_name).'")' => NULL,
                                        'voucher_type' => 'metal issue voucher',
                                        'chitti_id' => 0,
-                                       'receipt_type in ("Finish Good","GPC Out","Packing Slip")'=>NULL)),
+                                       'receipt_type in ("Finish Good","GPC Out","Packing Slip","Melting Wastage")'=>NULL)),
                                  array(), array('group_by' => 'purity'));
     
     } elseif($this->router->class == 'chitti_domestics'){ 
@@ -121,7 +121,7 @@ class Chittis extends BaseController {
                                                               array('group_code'=>"Domestic"));
       $where=array('voucher_type' => 'metal issue voucher',
                    'chitti_id' => '',
-                   'packet_no!=' => 0,
+                   //'packet_no!=' => 0,
                    'site_name' => $this->data['record']['site_name']);
       $account_name = array_column($this->data['account_name'],'name');
       $this->data['purity'] = $this->voucher_model->get('purity as name, purity as id', 
@@ -129,7 +129,7 @@ class Chittis extends BaseController {
                                     'account_name in ("'.implode('", "', $account_name).'")' => NULL,
                                     'voucher_type' => 'metal issue voucher',
                                     'chitti_id' => 0,
-                                    'receipt_type in ("Finish Good","GPC Out")'=>NULL)),
+                                    'receipt_type in ("Finish Good","GPC Out","Melting Wastage")'=>NULL)),
                               array(), array('group_by' => 'purity'));
     }
 

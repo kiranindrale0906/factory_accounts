@@ -37,6 +37,9 @@
             $sum_weight=$sum_fine=$sum_factory_fine=$sum_rate=$sum_rate_amount=0;
             $sr_no=0;
             foreach ($metal_voucher_details as $index => $metal_voucher_detail) {
+              if($chittis_details['account_name']=="MALABAR GOLD"){
+                $metal_voucher_detail['chitti_purity']=91.80;
+              }
               //if($packet_no == $metal_voucher_detail['packet_no']) {
                 $sum_weight += $metal_voucher_detail['credit_weight'];
                 $sum_rate += $metal_voucher_detail['rate'];
