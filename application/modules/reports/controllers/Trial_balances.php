@@ -83,6 +83,16 @@ class Trial_balances extends Ledgers {
     $url=API_AUG2022_ARC_PATH."issue_and_receipts/ledger_balance/index";
     $arc_aug2022_records=json_decode(curl_post_request($url));
     
+    $url=API_FEB2023_ARG_PATH."issue_and_receipts/ledger_balance/index";
+    $arg_feb2023_records=json_decode(curl_post_request($url));
+
+    $url=API_FEB2023_ARF_PATH."issue_and_receipts/ledger_balance/index";
+    $arf_feb2023_records=json_decode(curl_post_request($url));
+    
+    // $url=API_FEB2023_ARC_PATH."issue_and_receipts/ledger_balance/index";
+    // $arc_feb2023_records=json_decode(curl_post_request($url));
+    
+
     $url=API_EXPORT_INTERNAL_PATH."issue_and_receipts/ledger_balance/index";
     $export_records=json_decode(curl_post_request($url));
     $url=API_DOMESTIC_INTERNAL_PATH."issue_and_receipts/ledger_balance/index";
@@ -103,6 +113,13 @@ class Trial_balances extends Ledgers {
     $this->data['accounts_aug2022_arc_balance']    = $this->voucher_model->find($accounts_balance_select, 
                                                           array('account_name' => 'ARC Software (Aug 2022)'))['balance'];
 
+    $this->data['accounts_feb2023_argold_balance'] = $this->voucher_model->find($accounts_balance_select, 
+                                                          array('account_name' => 'AR Gold Software (Feb 2023)'))['balance'];
+    $this->data['accounts_feb2023_arf_balance']    = $this->voucher_model->find($accounts_balance_select, 
+                                                          array('account_name' => 'ARF Software (Feb 2023)'))['balance'];
+    $this->data['accounts_feb2023_arc_balance']    = $this->voucher_model->find($accounts_balance_select, 
+                                                          array('account_name' => 'ARC Software (Feb 2023)'))['balance'];
+
     $this->data['accounts_export_balance'] = $this->voucher_model->find($accounts_balance_select, 
                                                           array('account_name' => 'Export Internal Software'))['balance'];
     $this->data['accounts_domestic_balance'] = $this->voucher_model->find($accounts_balance_select, 
@@ -113,6 +130,9 @@ class Trial_balances extends Ledgers {
     $this->data['live_aug2022_argold_balance'] = @$arg_aug2022_records->data->record->argold;
     $this->data['live_aug2022_arf_balance']    = @$arf_aug2022_records->data->record->argold;
     $this->data['live_aug2022_arc_balance']    = @$arc_aug2022_records->data->record->argold;
+    $this->data['live_feb2023_argold_balance'] = @$arg_feb2023_records->data->record->argold;
+    $this->data['live_feb2023_arf_balance']    = @$arf_feb2023_records->data->record->argold;
+    $this->data['live_feb2023_arc_balance']    = @$arc_feb2023_records->data->record->argold;
 
     $this->data['live_export_balance'] = @$export_records->data->record->argold;
     $this->data['live_domestic_balance'] = @$export_records->data->record->argold;
@@ -125,12 +145,15 @@ class Trial_balances extends Ledgers {
     $this->get_vadotar_from_factory('AR Gold', 'Aug 2022');    
     $this->get_vadotar_from_factory('ARF', 'Aug 2022');    
     $this->get_vadotar_from_factory('ARC', 'Aug 2022');    
+    $this->get_vadotar_from_factory('AR Gold', 'Feb 2023');    
+    $this->get_vadotar_from_factory('ARF', 'Feb 2023');    
+    //$this->get_vadotar_from_factory('ARC', 'Feb 2023');    
   }
 
   private function get_vadotar_from_factory($site_name, $hostversion) {
     $this->data['receipt_types'] = ['Alloy Vodator', 'GPC Vodator', 'Stone Vatav', 'Meena Vatav', 'Copper Vatav', 'Rhodium Vatav', 'Auto Tounch Loss Fine'];
     $this->data['site_names'] = ['AR Gold', 'ARF', 'ARC'];
-    $this->data['hostversions'] = ['May 2022', 'Aug 2022'];
+    $this->data['hostversions'] = ['May 2022', 'Aug 2022', 'Feb 2023'];
 
     $url = get_api_path($site_name, $hostversion)."issue_and_receipts/alloy_gpc_vodator_ledger/index";
     $response = json_decode(curl_post_request($url));

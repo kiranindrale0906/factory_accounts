@@ -83,6 +83,7 @@ class Quator_wise_loss_report_details extends Ledgers {
            $out_weight=!empty($ghiss_details)&&!empty($ghiss_details['data']['ghiss_melting_out_weights'])?$ghiss_details['data']['ghiss_melting_out_weights']:0;
           $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight']=$out_weight;
     }
+    
     $opening_loss_records = $this->get_opening_loss();
     $arc_aug2022_records=array_merge($arc_aug2022_records,$ghiss_melting_loss,$opening_loss_records);
     $url=API_AUG2022_ARF_PATH."issue_and_receipts/loss_report_for_accounts/index";
@@ -97,9 +98,9 @@ class Quator_wise_loss_report_details extends Ledgers {
            $out_weight=!empty($ghiss_details)&&!empty($ghiss_details['data']['ghiss_melting_out_weights'])?$ghiss_details['data']['ghiss_melting_out_weights']:0;
           $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight']=$out_weight;
     }
+    
     $opening_loss_records = $this->get_opening_loss();
     $arf_aug2022_records=array_merge($arf_aug2022_records,$ghiss_melting_loss,$opening_loss_records);
-
     $url=API_AUG2022_ARG_PATH."issue_and_receipts/loss_report_for_accounts/index";
     $arg_aug2022_records=json_decode(curl_post_request($url,$data),true);
     $arg_aug2022_records=!empty($arg_aug2022_records)?$arg_aug2022_records['data']['loss_details']['loss_detail']:$arg_aug2022_records['data']['loss_details']['loss_detail']=array();

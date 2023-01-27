@@ -164,6 +164,9 @@
     elseif ($site_name=='AR Gold (Aug 2022)') return API_AUG2022_ARG_PATH;
     elseif ($site_name=='ARF (Aug 2022)')     return API_AUG2022_ARF_PATH;
     elseif ($site_name=='ARC (Aug 2022)')     return API_AUG2022_ARC_PATH;
+    elseif ($site_name=='AR Gold (Feb 2023)') return API_FEB2023_ARG_PATH;
+    elseif ($site_name=='ARF (Feb 2023)')     return API_FEB2023_ARF_PATH;
+    elseif ($site_name=='ARC (Feb 2023)')     return API_FEB2023_ARC_PATH;
     elseif ($site_name=='Export')     return API_EXPORT_INTERNAL_PATH;
     elseif ($site_name=='Domestic')     return API_DOMESTIC_INTERNAL_PATH;
     elseif ($site_name=='Domesticstaging')     return API_DOMESTIC_INTERNAL_PATH;
@@ -176,6 +179,9 @@
     elseif ($site_name.' '.$hostversion=='AR Gold Aug 2022') return API_AUG2022_ARG_PATH;
     elseif ($site_name.' '.$hostversion=='ARF Aug 2022')     return API_AUG2022_ARF_PATH;
     elseif ($site_name.' '.$hostversion=='ARC Aug 2022')     return API_AUG2022_ARC_PATH;
+    elseif ($site_name.' '.$hostversion=='AR Gold Feb 2023') return API_FEB2023_ARG_PATH;
+    elseif ($site_name.' '.$hostversion=='ARF Feb 2023')     return API_FEB2023_ARF_PATH;
+    elseif ($site_name.' '.$hostversion=='ARC Feb 2023')     return API_FEB2023_ARC_PATH;
   }
 
   function get_site_names($export=1) {
@@ -187,6 +193,9 @@
       array('id' => 'AR Gold (Aug 2022)', 'name' => 'AR Gold (Aug 2022)'),
       array('id' => 'ARF (Aug 2022)',     'name' => 'ARF (Aug 2022)'),
       array('id' => 'ARC (Aug 2022)',     'name' => 'ARC (Aug 2022)'),
+      array('id' => 'AR Gold (Feb 2023)', 'name' => 'AR Gold (Feb 2023)'),
+      array('id' => 'ARF (Feb 2023)',     'name' => 'ARF (Feb 2023)'),
+      array('id' => 'ARC (Feb 2023)',     'name' => 'ARC (Feb 2023)'),
     );
     if ($export==1) $site_names[] = array('id' => 'Export', 'name' => 'Export');
     if ($export==2) {
@@ -205,6 +214,9 @@
       array('id' => 'AR Gold Software (Aug 2022)', 'name' => 'AR Gold Software (Aug 2022)'),
       array('id' => 'ARF Software (Aug 2022)',     'name' => 'ARF Software (Aug 2022)'),
       array('id' => 'ARC Software (Aug 2022)',     'name' => 'ARC Software (Aug 2022)'),
+      array('id' => 'AR Gold Software (Feb 2023)', 'name' => 'AR Gold Software (Feb 2023)'),
+      array('id' => 'ARF Software (Feb 2023)',     'name' => 'ARF Software (Feb 2023)'),
+      array('id' => 'ARC Software (Feb 2023)',     'name' => 'ARC Software (Feb 2023)'),
     );
     if ($export==1) $site_names[] = array('id' => 'Export', 'name' => 'Export');
     if ($export==2) $site_names[] = array('id' => 'Domestic', 'name' => 'Domestic');
@@ -215,13 +227,16 @@
     if (str_contains($account_name, 'AR Gold')) {
       if (str_contains($account_name, 'May 2022')) return 'AR Gold (May 2022)';
       elseif (str_contains($account_name, 'Aug 2022')) return 'AR Gold (Aug 2022)';
-     } elseif (str_contains($account_name, 'ARF')) {
+      elseif (str_contains($account_name, 'Feb 2023')) return 'AR Gold (Feb 2023)';
+    } elseif (str_contains($account_name, 'ARF')) {
       if (str_contains($account_name, 'May 2022')) return 'ARF (May 2022)';
       elseif (str_contains($account_name, 'Aug 2022')) return 'ARF (Aug 2022)';
+      elseif (str_contains($account_name, 'Feb 2023')) return 'ARF (Feb 2023)';
     } elseif (str_contains($account_name, 'ARC')) {
       if (str_contains($account_name, 'May 2022')) return 'ARC (May 2022)';
       elseif (str_contains($account_name, 'Aug 2022')) return 'ARC (Aug 2022)';
-    }
+      elseif (str_contains($account_name, 'Feb 2023')) return 'ARC (Feb 2023)';
+    } 
 
     if ($account_name=='VADOTAR')
       return 'AR Gold (Aug 2022)';
@@ -232,6 +247,9 @@
                        'AR Gold Software (Aug 2022)' => 'AR Gold (Aug 2022)',
                        'ARF Software (Aug 2022)'     => 'ARF (Aug 2022)',
                        'ARC Software (Aug 2022)'     => 'ARC (Aug 2022)',
+                       'AR Gold Software (Feb 2023)' => 'AR Gold (Feb 2023)',
+                       'ARF Software (Feb 2023)'     => 'ARF (Feb 2023)',
+                       'ARC Software (Feb 2023)'     => 'ARC (Feb 2023)',
                        'Export Internal Software'    => 'Export',
                        'Domestic Internal Software'    => 'Domestic');
     if (!empty($site_name[$account_name])) return $site_name[$account_name];
@@ -244,6 +262,9 @@
                           'AR Gold (Aug 2022)' => 'AR Gold Software (Aug 2022)',
                           'ARF (Aug 2022)'     => 'ARF Software (Aug 2022)',
                           'ARC (Aug 2022)'     => 'ARC Software (Aug 2022)',
+                          'AR Gold (Feb 2023)' => 'AR Gold Software (Feb 2023)',
+                          'ARF (Feb 2023)'     => 'ARF Software (Feb 2023)',
+                          'ARC (Feb 2023)'     => 'ARC Software (Feb 2023)',
                           'Export'           => 'Export Internal Software',
                           'Domestic'           => 'Domestic Internal Software');
     return $account_name[$site_name] ?? '';
@@ -256,6 +277,9 @@
                       'AR Gold Software (Aug 2022)' => API_AUG2022_ARG_PATH,
                       'ARF Software (Aug 2022)'     => API_AUG2022_ARF_PATH,
                       'ARC Software (Aug 2022)'     => API_AUG2022_ARC_PATH,
+                      'AR Gold Software (Feb 2023)' => API_FEB2023_ARG_PATH,
+                      'ARF Software (Feb 2023)'     => API_FEB2023_ARF_PATH,
+                      'ARC Software (Feb 2023)'     => API_FEB2023_ARC_PATH,
                       'AR Gold Software Staging' => API_AUG2022_ARG_PATH,
                       'ARF Software Staging'     => API_AUG2022_ARF_PATH,
                       'ARC Software Staging'     => API_AUG2022_ARC_PATH,
@@ -270,7 +294,10 @@
                           'AR Gold (May 2022)' => 'AR Gold Loss Account (May 2022)',
                           'AR Gold (Aug 2022)' => 'AR Gold Loss Account (Aug 2022)',
                           'ARC (Aug 2022)' => 'ARC Loss Account (Aug 2022)',
-                          'ARF (Aug 2022)' => 'ARF Loss Account (Aug 2022)');
+                          'ARF (Aug 2022)' => 'ARF Loss Account (Aug 2022)',
+                          'AR Gold (Feb 2023)' => 'AR Gold Loss Account (Feb 2023)',
+                          'ARC (Feb 2023)' => 'ARC Loss Account (Feb 2023)',
+                          'ARF (Feb 2023)' => 'ARF Loss Account (Feb 2023)');
     return $loss_account_name[$site_name]; 
   }
 

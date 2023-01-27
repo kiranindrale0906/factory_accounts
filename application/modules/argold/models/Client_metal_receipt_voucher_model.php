@@ -515,6 +515,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                    || $attributes['account_name'] == 'AR Gold Software (Aug 2022)'
                    || $attributes['account_name'] == 'ARF Software (Aug 2022)' 
                    || $attributes['account_name'] == 'ARC Software (Aug 2022)'
+                   || $attributes['account_name'] == 'AR Gold Software (Feb 2023)'
+                   || $attributes['account_name'] == 'ARF Software (Feb 2023)' 
+                   || $attributes['account_name'] == 'ARC Software (Feb 2023)'
                    || $attributes['account_name'] == 'Export Internal Software'
                    || $attributes['account_name'] == 'Domestic Internal Software'
                     )) {

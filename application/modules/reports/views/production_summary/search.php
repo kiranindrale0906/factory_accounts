@@ -23,19 +23,16 @@
          href='<?= base_url() ?>reports/production_summary?site_name=ARC (May 2022)'>ARC (May 2022)</a>   
       <?php }?>
       <?php if($_SESSION['arg_details']==1){?>    
-      
-      <a class="ml-5 <?= ($site_name == 'AR Gold (Aug 2022)') ? 'bold black underline' : '' ?>" 
-         href='<?= base_url() ?>reports/production_summary?site_name=AR Gold (Aug 2022)'>AR Gold (Aug 2022)</a>
+        <a class="ml-5 <?= ($site_name == 'AR Gold (Aug 2022)') ? 'bold black underline' : '' ?>" 
+           href='<?= base_url() ?>reports/production_summary?site_name=AR Gold (Aug 2022)'>AR Gold (Aug 2022)</a>
       <?php }?>
       <?php if($_SESSION['arf_details']==1){?> 
-      
-      <a class="ml-5 <?= ($site_name == 'ARF (Aug 2022)') ? 'bold black underline' : '' ?>" 
-         href='<?= base_url() ?>reports/production_summary?site_name=ARF (Aug 2022)'>ARF (Aug 2022)</a>   
+        <a class="ml-5 <?= ($site_name == 'ARF (Aug 2022)') ? 'bold black underline' : '' ?>" 
+           href='<?= base_url() ?>reports/production_summary?site_name=ARF (Aug 2022)'>ARF (Aug 2022)</a>   
       <?php }?>   
       <?php if($_SESSION['arc_details']==1){?> 
-      
-      <a class="ml-5 <?= ($site_name == 'ARC (Aug 2022)') ? 'bold black underline' : '' ?>" 
-         href='<?= base_url() ?>reports/production_summary?site_name=ARC (Aug 2022)'>ARC (Aug 2022)</a>   
+        <a class="ml-5 <?= ($site_name == 'ARC (Aug 2022)') ? 'bold black underline' : '' ?>" 
+           href='<?= base_url() ?>reports/production_summary?site_name=ARC (Aug 2022)'>ARC (Aug 2022)</a>   
       <?php }?>
     </h6>
   </div>

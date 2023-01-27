@@ -48,6 +48,25 @@
         </tr>
 
         <tr>
+          <td>AR GOLD (Feb 2023)</td>
+          <td class="text-right"><?= four_decimal(-1 * $accounts_feb2023_argold_balance) ?></td>
+          <td class="text-right"><?= four_decimal(-1 * $live_feb2023_argold_balance) ?></td>
+          <td class="text-right"><?= four_decimal($accounts_feb2023_argold_balance - $live_feb2023_argold_balance) ?></td>
+        </tr>
+        <tr>
+          <td>ARF (Feb 2023)</td>
+          <td class="text-right"><?= four_decimal(-1 * $accounts_feb2023_arf_balance) ?></td>
+          <td class="text-right"><?= four_decimal(-1 * $live_feb2023_arf_balance) ?>  </td>
+          <td class="text-right"><?= four_decimal($accounts_feb2023_arf_balance - $live_feb2023_arf_balance) ?></td>
+        </tr>
+        <tr>
+          <td>ARC (Feb 2023)</td>
+          <td class="text-right"><?= four_decimal(-1 * $accounts_feb2023_arc_balance) ?></td>
+          <td class="text-right"><?= four_decimal(-1 * $live_feb2023_arc_balance) ?>  </td>
+          <td class="text-right"><?= four_decimal($accounts_feb2023_arc_balance - $live_feb2023_arc_balance) ?></td>
+        </tr>
+
+        <tr>
           <td>Export</td>
           <td class="text-right"><?= four_decimal(-1 * $accounts_export_balance) ?></td>
           <td class="text-right"><?= four_decimal(-1 * $live_export_balance) ?>  </td>
