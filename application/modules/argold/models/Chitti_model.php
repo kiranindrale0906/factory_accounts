@@ -92,7 +92,11 @@ class Chitti_model extends BaseModel {
         $gst_rate = 2.5;
       }
     } else {
-      $gst_rate = 1.5;
+      if($this->attributes['account_name']=='MALABAR GOLD'){
+        $gst_rate = 9;
+      }else{
+       $gst_rate = 1.5;
+      }
       $this->attributes['credit_weight'] = $this->attributes['factory_fine']; 
     }
     $this->attributes['rate']=!empty($this->attributes['rate'])?$this->attributes['rate']:0;
