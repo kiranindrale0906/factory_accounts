@@ -62,10 +62,20 @@
 </div>
 
 <?php 
-  if ($record['sale_type'] == 'Labour')
+  if ($record['sale_type'] == 'Labour'){
+    if($record['account_name']=='MALABAR GOLD'){
+    $gst_rate = 9;
+    }else{
     $gst_rate = 2.5;
-  else
+    }
+  }
+  else{
+    if($record['account_name']=='MALABAR GOLD'){
+    $gst_rate = 9;
+    }else{
     $gst_rate = 1.5;
+    }
+  }
 
 ?>
 
