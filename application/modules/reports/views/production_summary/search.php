@@ -34,6 +34,18 @@
         <a class="ml-5 <?= ($site_name == 'ARC (Aug 2022)') ? 'bold black underline' : '' ?>" 
            href='<?= base_url() ?>reports/production_summary?site_name=ARC (Aug 2022)'>ARC (Aug 2022)</a>   
       <?php }?>
+      <?php if($_SESSION['arg_details']==1){?>    
+        <a class="ml-5 <?= ($site_name == 'AR Gold (Feb 2023)') ? 'bold black underline' : '' ?>" 
+           href='<?= base_url() ?>reports/production_summary?site_name=AR Gold (Feb 2023)'>AR Gold (Feb 2023)</a>
+      <?php }?>
+      <?php if($_SESSION['arf_details']==1){?> 
+        <a class="ml-5 <?= ($site_name == 'ARF (Feb 2023)') ? 'bold black underline' : '' ?>" 
+           href='<?= base_url() ?>reports/production_summary?site_name=ARF (Feb 2023)'>ARF (Feb 2023)</a>   
+      <?php }?>   
+      <?php if($_SESSION['arc_details']==1){?> 
+        <a class="ml-5 <?= ($site_name == 'ARC (Feb 2023)') ? 'bold black underline' : '' ?>" 
+           href='<?= base_url() ?>reports/production_summary?site_name=ARC (Feb 2023)'>ARC (Feb 2023)</a>   
+      <?php }?>
     </h6>
   </div>
 </div>
