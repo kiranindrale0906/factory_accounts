@@ -40,7 +40,7 @@
       <th></th>
       <th></th>
       <th></th>
-      <th class="text-right"><?= four_decimal($quantity) ?></th>
+      <th class="text-right"><?=($quantity) ?></th>
       <th class="text-right"><?= four_decimal($weight) ?></th>
       <th></th>
       <th></th>
