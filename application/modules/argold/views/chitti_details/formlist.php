@@ -25,9 +25,10 @@
   </thead>
   <tbody>
     <?php
-      $weight = $issue_fine = 0;
+      $weight = $issue_fine =$quantity = 0;
       foreach ($metal_vouchers as $index => $vouchers) {
         $weight += $vouchers['credit_weight'];
+        $quantity += $vouchers['quantity'];
         $issue_fine += $vouchers['credit_weight']*$vouchers['factory_purity']/100;
         $this->load->view('chitti_details/subform',array('index'=> $index, 'vouchers' => $vouchers));
       }
@@ -39,7 +40,7 @@
       <th></th>
       <th></th>
       <th></th>
-      <th></th>
+      <th class="text-right"><?= four_decimal($quantity) ?></th>
       <th class="text-right"><?= four_decimal($weight) ?></th>
       <th></th>
       <th></th>
