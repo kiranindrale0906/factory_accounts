@@ -28,18 +28,18 @@
           <td class="text-right"><?//= four_decimal(-1 * $live_arc_balance) ?>  </td>
           <td class="text-right"><?//= four_decimal($accounts_arc_balance - $live_arc_balance) ?></td>
         </tr> -->
-        <tr>
+        <<!-- tr>
           <td>AR GOLD (Aug 2022)</td>
           <td class="text-right"><?= four_decimal(-1 * $accounts_aug2022_argold_balance) ?></td>
           <td class="text-right"><?= four_decimal(-1 * $live_aug2022_argold_balance) ?></td>
           <td class="text-right"><?= four_decimal($accounts_aug2022_argold_balance - $live_aug2022_argold_balance) ?></td>
-        </tr>
-        <tr>
+        </tr> -->
+        <!-- <tr>
           <td>ARF (Aug 2022)</td>
           <td class="text-right"><?= four_decimal(-1 * $accounts_aug2022_arf_balance) ?></td>
           <td class="text-right"><?= four_decimal(-1 * $live_aug2022_arf_balance) ?>  </td>
           <td class="text-right"><?= four_decimal($accounts_aug2022_arf_balance - $live_aug2022_arf_balance) ?></td>
-        </tr>
+        </tr> -->
         <tr>
           <td>ARC (Aug 2022)</td>
           <td class="text-right"><?= four_decimal(-1 * $accounts_aug2022_arc_balance) ?></td>
@@ -59,12 +59,12 @@
           <td class="text-right"><?= four_decimal(-1 * $live_feb2023_arf_balance) ?>  </td>
           <td class="text-right"><?= four_decimal($accounts_feb2023_arf_balance - $live_feb2023_arf_balance) ?></td>
         </tr>
-        <tr>
+        <!-- <tr>
           <td>ARC (Feb 2023)</td>
           <td class="text-right"><?= four_decimal(-1 * $accounts_feb2023_arc_balance) ?></td>
           <td class="text-right"><?= four_decimal(-1 * $live_feb2023_arc_balance) ?>  </td>
           <td class="text-right"><?= four_decimal($accounts_feb2023_arc_balance - $live_feb2023_arc_balance) ?></td>
-        </tr>
+        </tr> -->
 
         <tr>
           <td>Export</td>
