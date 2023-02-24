@@ -396,6 +396,9 @@ class Trial_balances extends Ledgers {
       $this->create_update_vadotar_records(API_AUG2022_ARG_PATH, 'AR Gold', 'Aug 2022');
       $this->create_update_vadotar_records(API_AUG2022_ARF_PATH, 'ARF', 'Aug 2022');
       $this->create_update_vadotar_records(API_AUG2022_ARC_PATH, 'ARC', 'Aug 2022');
+      $this->create_update_vadotar_records(API_FEB2023_ARG_PATH, 'AR Gold', 'Feb 2023');
+      $this->create_update_vadotar_records(API_FEB2023_ARF_PATH, 'ARF', 'Feb 2023');
+      //$this->create_update_vadotar_records(API_FEB2023_ARC_PATH, 'ARC', 'Feb 2023');
     }
   }
 
