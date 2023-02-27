@@ -172,6 +172,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     if (     $this->attributes['receipt_type'] == 'Alloy Vodator'
           || $this->attributes['receipt_type'] == 'GPC Vodator'
           || $this->attributes['receipt_type'] == 'Stone Vatav'
+          || $this->attributes['receipt_type'] == 'Spring Vatav'
           || $this->attributes['receipt_type'] == 'Meena Vatav'
           || $this->attributes['receipt_type'] == 'Copper Vatav'
           || $this->attributes['receipt_type'] == 'Rhodium Vatav'
@@ -197,6 +198,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     if (     $this->attributes['receipt_type'] == 'Alloy Vodator'
           || $this->attributes['receipt_type'] == 'GPC Vodator'
           || $this->attributes['receipt_type'] == 'Stone Vatav'
+          || $this->attributes['receipt_type'] == 'Spring Vatav'
           || $this->attributes['receipt_type'] == 'Meena Vatav'
           || $this->attributes['receipt_type'] == 'Copper Vatav'
           || $this->attributes['receipt_type'] == 'Rhodium Vatav'
@@ -233,6 +235,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     if (     $this->attributes['receipt_type'] == 'Alloy Vodator'
           || $this->attributes['receipt_type'] == 'GPC Vodator'
           || $this->attributes['receipt_type'] == 'Stone Vatav'
+          || $this->attributes['receipt_type'] == 'Spring Vatav'
           || $this->attributes['receipt_type'] == 'Meena Vatav'
           || $this->attributes['receipt_type'] == 'Copper Vatav'
           || $this->attributes['receipt_type'] == 'Rhodium Vatav'
@@ -286,6 +289,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     if (    $this->attributes['receipt_type'] == "Alloy Vodator"
          || $this->attributes['receipt_type'] == "GPC Vodator"
          || $this->attributes['receipt_type'] == 'Stone Vatav'
+         || $this->attributes['receipt_type'] == 'Spring Vatav'
          || $this->attributes['receipt_type'] == 'Meena Vatav'
          || $this->attributes['receipt_type'] == 'Copper Vatav'
          || $this->attributes['receipt_type'] == 'Rhodium Vatav'
@@ -361,6 +365,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     if (   $this->attributes['receipt_type'] != 'Alloy Vodator'
         && $this->attributes['receipt_type'] != 'GPC Vodator'
         && $this->attributes['receipt_type'] != 'Stone Vatav'
+        && $this->attributes['receipt_type'] != 'Spring Vatav'
         && $this->attributes['receipt_type'] != 'Meena Vatav'
         && $this->attributes['receipt_type'] != 'Copper Vatav'
         && $this->attributes['receipt_type'] != 'Rhodium Vatav') return;
