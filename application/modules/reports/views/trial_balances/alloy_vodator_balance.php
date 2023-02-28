@@ -19,10 +19,10 @@
           foreach($receipt_types as $receipt_type) {
             foreach($site_names as $site_name) {
               foreach($hostversions as $hostversion) {
-                $accounts_weight = four_decimal($account_vadotar_balance[$receipt_type][$site_name][$hostversion]['balance']);
-                $accounts_fine = four_decimal($account_vadotar_balance[$receipt_type][$site_name][$hostversion]['balance_fine']);
-                $factory_weight = four_decimal($factory_vadotar_records[$receipt_type][$site_name][$hostversion]['balance']);
-                $factory_fine = four_decimal($factory_vadotar_records[$receipt_type][$site_name][$hostversion]['balance_fine']);
+                $accounts_weight = (!empty($account_vadotar_balance[$receipt_type][$site_name][$hostversion]['balance']))?four_decimal($account_vadotar_balance[$receipt_type][$site_name][$hostversion]['balance']):0;
+                $accounts_fine =(!empty($account_vadotar_balance[$receipt_type][$site_name][$hostversion]['balance_fine']))? four_decimal($account_vadotar_balance[$receipt_type][$site_name][$hostversion]['balance_fine']):0;
+                $factory_weight = (!empty($factory_vadotar_records[$receipt_type][$site_name][$hostversion]['balance']))?four_decimal($factory_vadotar_records[$receipt_type][$site_name][$hostversion]['balance']):0;
+                $factory_fine = (!empty($factory_vadotar_records[$receipt_type][$site_name][$hostversion]['balance_fine']))?four_decimal($factory_vadotar_records[$receipt_type][$site_name][$hostversion]['balance_fine']):0;
                 $balance_diff = $accounts_weight - $factory_weight;
                 $balance_fine_diff = $accounts_fine - $factory_fine;
         ?>
