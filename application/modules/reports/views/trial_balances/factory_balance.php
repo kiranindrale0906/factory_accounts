@@ -28,17 +28,17 @@
           <td class="text-right"><?//= four_decimal(-1 * $live_arc_balance) ?>  </td>
           <td class="text-right"><?//= four_decimal($accounts_arc_balance - $live_arc_balance) ?></td>
         </tr> -->
-        <<!-- tr>
+        <!--< tr>
           <td>AR GOLD (Aug 2022)</td>
-          <td class="text-right"><?= four_decimal(-1 * $accounts_aug2022_argold_balance) ?></td>
-          <td class="text-right"><?= four_decimal(-1 * $live_aug2022_argold_balance) ?></td>
-          <td class="text-right"><?= four_decimal($accounts_aug2022_argold_balance - $live_aug2022_argold_balance) ?></td>
+          <td class="text-right"><?//= four_decimal(-1 * $accounts_aug2022_argold_balance) ?></td>
+          <td class="text-right"><?//= four_decimal(-1 * $live_aug2022_argold_balance) ?></td>
+          <td class="text-right"><?//= four_decimal($accounts_aug2022_argold_balance - $live_aug2022_argold_balance) ?></td>
         </tr> -->
         <!-- <tr>
           <td>ARF (Aug 2022)</td>
-          <td class="text-right"><?= four_decimal(-1 * $accounts_aug2022_arf_balance) ?></td>
-          <td class="text-right"><?= four_decimal(-1 * $live_aug2022_arf_balance) ?>  </td>
-          <td class="text-right"><?= four_decimal($accounts_aug2022_arf_balance - $live_aug2022_arf_balance) ?></td>
+          <td class="text-right"><?//= four_decimal(-1 * $accounts_aug2022_arf_balance) ?></td>
+          <td class="text-right"><?//= four_decimal(-1 * $live_aug2022_arf_balance) ?>  </td>
+          <td class="text-right"><?//= four_decimal($accounts_aug2022_arf_balance - $live_aug2022_arf_balance) ?></td>
         </tr> -->
         <tr>
           <td>ARC (Aug 2022)</td>
@@ -61,9 +61,9 @@
         </tr>
         <!-- <tr>
           <td>ARC (Feb 2023)</td>
-          <td class="text-right"><?= four_decimal(-1 * $accounts_feb2023_arc_balance) ?></td>
-          <td class="text-right"><?= four_decimal(-1 * $live_feb2023_arc_balance) ?>  </td>
-          <td class="text-right"><?= four_decimal($accounts_feb2023_arc_balance - $live_feb2023_arc_balance) ?></td>
+          <td class="text-right"><?//= four_decimal(-1 * $accounts_feb2023_arc_balance) ?></td>
+          <td class="text-right"><?//= four_decimal(-1 * $live_feb2023_arc_balance) ?>  </td>
+          <td class="text-right"><?//= four_decimal($accounts_feb2023_arc_balance - $live_feb2023_arc_balance) ?></td>
         </tr> -->
 
         <tr>
@@ -82,11 +82,11 @@
 
         <tr>
           <td>Total</td>
-          <td class="text-right"><?= four_decimal(-1 * ($accounts_aug2022_argold_balance + $accounts_aug2022_arf_balance + $accounts_aug2022_arc_balance+$accounts_export_balance+$accounts_domestic_balance)) ?></td>
-          <td class="text-right"><?= four_decimal(-1 * ($live_aug2022_argold_balance + $live_aug2022_arf_balance + $live_aug2022_arc_balance+$live_export_balance+$live_domestic_balance)) ?>  </td>
-          <td class="text-right"><b><?= four_decimal(-1 * (  $accounts_aug2022_argold_balance  - $live_aug2022_argold_balance
+          <td class="text-right"><?= four_decimal(-1 * (/*$accounts_aug2022_argold_balance + $accounts_aug2022_arf_balance +*/ $accounts_aug2022_arc_balance+$accounts_export_balance+$accounts_domestic_balance)) ?></td>
+          <td class="text-right"><?= four_decimal(-1 * (/*$live_aug2022_argold_balance + $live_aug2022_arf_balance +*/ $live_aug2022_arc_balance+$live_export_balance+$live_domestic_balance)) ?>  </td>
+          <td class="text-right"><b><?= four_decimal(-1 * (  /*$accounts_aug2022_argold_balance  - $live_aug2022_argold_balance
                                                            + $accounts_aug2022_arf_balance - $live_aug2022_arf_balance
-                                                           + $accounts_aug2022_arc_balance - $live_aug2022_arc_balance
+                                                           +*/ $accounts_aug2022_arc_balance - $live_aug2022_arc_balance
                                                            +$accounts_export_balance - $live_export_balance
                                                            +$accounts_domestic_balance - $live_domestic_balance)) ?></b></td>
         </tr>
