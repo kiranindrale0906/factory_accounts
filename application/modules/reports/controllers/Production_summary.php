@@ -117,7 +117,7 @@ class Production_summary extends BaseController {
       $arc_records = json_decode(json_encode($records), true);
     }
     if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARC (Feb 2023)') {
-      $url = API_FEB2023_ARC_PATH."issue_departments/api_issue_departments/index";
+      $url = API_AUG2022_ARC_PATH."issue_departments/api_issue_departments/index";
       $records = json_decode(curl_post_request($url, $_GET));
       $arc_records = json_decode(json_encode($records), true);
     }
