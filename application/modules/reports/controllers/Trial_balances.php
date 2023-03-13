@@ -412,8 +412,11 @@ class Trial_balances extends Ledgers {
     if (!empty($records)) {
       $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator_group_by_date, 'Alloy Vodator', $site_name, $hostversion);
       $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator_group_by_date, 'GPC Vodator', $site_name, $hostversion);
+
       $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav_group_by_date, 'Stone Vatav', $site_name, $hostversion);
-      $this->metal_receipt_voucher_model->create_vodator_records($records->data->spring_vatav_group_by_date, 'Spring Vatav', $site_name, $hostversion);
+      if($hostversion=="Feb 2023"){
+        $this->metal_receipt_voucher_model->create_vodator_records($records->data->spring_vatav_group_by_date, 'Spring Vatav', $site_name, $hostversion);
+      }
       $this->metal_receipt_voucher_model->create_vodator_records($records->data->meena_vatav_group_by_date, 'Meena Vatav', $site_name, $hostversion);
       $this->metal_receipt_voucher_model->create_vodator_records($records->data->copper_vatav_group_by_date, 'Copper Vatav', $site_name, $hostversion);
       $this->metal_receipt_voucher_model->create_vodator_records($records->data->rhodium_vatav_group_by_date, 'Rhodium Vatav', $site_name, $hostversion);
