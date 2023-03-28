@@ -523,6 +523,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                    || $attributes['account_name'] == 'AR Gold Software (Feb 2023)'
                    || $attributes['account_name'] == 'ARF Software (Feb 2023)' 
                    || $attributes['account_name'] == 'ARC Software (Feb 2023)'
+                   || $attributes['account_name'] == 'AR Gold Software'
+                   || $attributes['account_name'] == 'ARF Software' 
+                   || $attributes['account_name'] == 'ARC Software'
                    || $attributes['account_name'] == 'Export Internal Software'
                    || $attributes['account_name'] == 'Domestic Internal Software'
                     )) {
@@ -610,7 +613,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $data=array('company_id' => 1,
                   'voucher_date' => $record['created_date'],
                   'receipt_type' => $receipt_type,
-                  'account_name' => $site_name.' '.$receipt_type.' ('.$hostversion.')',
+                  'account_name' => $site_name.' '.$receipt_type, //.' ('.$hostversion.')',
                   'debit_weight' => $record['weight'],
                   'purity' => $record['purity'],
                   'factory_purity' => $record['purity'],

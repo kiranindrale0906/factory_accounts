@@ -165,7 +165,7 @@ class Ledgers extends BaseController {
 
       //$account_receipt_where['site_name'] = '';                        
       //$account_issue_where['site_name'] = '';                        
-      if ($this->data['site_name'] == 'ARF' || $this->data['site_name'] == 'ARF (May 2022)'){
+      /*if ($this->data['site_name'] == 'ARF' || $this->data['site_name'] == 'ARF (May 2022)'){
         $account_issue_where['account_name'] = 'ARF Software (May 2022)';
       }elseif ($this->data['site_name'] == 'ARF (Aug 2022)'){
         $account_issue_where['account_name'] = 'ARF Software (Aug 2022)';
@@ -181,12 +181,13 @@ class Ledgers extends BaseController {
         $account_issue_where['account_name'] = 'AR Gold Software (May 2022)';
       }elseif ($this->data['site_name'] == 'AR Gold (Aug 2022)'){
         $account_issue_where['account_name'] = 'AR Gold Software (Aug 2022)';
-      }elseif ($this->data['site_name'] == 'AR Gold (Feb 2023)'){
-        $account_issue_where['account_name'] = 'AR Gold Software (Feb 2023)';
-      }elseif ($this->data['site_name'] == 'ARF (Feb 2023)'){
-        $account_issue_where['account_name'] = 'ARF Software (Feb 2023)';
-      }elseif ($this->data['site_name'] == 'ARC (Feb 2023)'){
-        $account_issue_where['account_name'] = 'ARC Software (Feb 2023)';
+      }else*/
+      if ($this->data['site_name'] == 'AR Gold'){
+        $account_issue_where['account_name'] = 'AR Gold Software';
+      }elseif ($this->data['site_name'] == 'ARF'){
+        $account_issue_where['account_name'] = 'ARF Software';
+      }elseif ($this->data['site_name'] == 'ARC'){
+        $account_issue_where['account_name'] = 'ARC Software';
       }
       else{
         $account_issue_where['account_name in ("ARF Software","ARC Software","AR Gold Software","ARF Software (May 2022)","ARC Software (May 2022)","AR Gold Software (May 2022)","ARF Software (Aug 2022)","ARC Software (Aug 2022)","AR Gold Software (Aug 2022)","ARF Software (Feb 2023)","ARC Software (Feb 2023)","AR Gold Software (Feb 2023)","Export Internal Software","Domestic Internal Software") '] = NULL;

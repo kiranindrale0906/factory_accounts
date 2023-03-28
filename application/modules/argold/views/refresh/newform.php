@@ -16,6 +16,9 @@
     <?php load_field('text', array('field' => 'rate'));?>
     <?php load_field('text',array('field' => 'manual_taxable_amount'));  ?>
     <?php load_field('dropdown', array('field' => 'site_name','option'=>array(
+                                                                              array('id'=>'AR Gold','name'=>'AR Gold'),
+                                                                              array('id'=>'ARF','name'=>'ARF'),
+                                                                              array('id'=>'ARC','name'=>'ARC'),
                                                                               array('id'=>'AR Gold (May 2022)','name'=>'AR Gold (May 2022)'),
                                                                               array('id'=>'ARF (May 2022)','name'=>'ARF (May 2022)'),
                                                                               array('id'=>'ARC (May 2022)','name'=>'ARC (May 2022)'),
