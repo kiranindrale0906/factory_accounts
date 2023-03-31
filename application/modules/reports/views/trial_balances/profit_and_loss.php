@@ -63,7 +63,7 @@
   // $sales_rate = !empty($profit_and_loss['sales_account']['fine']) ? (-1 * $profit_and_loss['sales_account']['amount'] / $profit_and_loss['sales_account']['fine']) : 0;
   // $sales_amount = !empty($profit_and_loss['sales_account']['amount']) ? $profit_and_loss['sales_account']['amount'] : 0;
 
-  $domestic_opening_fine = 3724.24 + 241459.348 + 35003.788 + 7375.91 + 9500.44; //71950.427; //+6306.923;
+  $domestic_opening_fine = 0; //3724.24 + 241459.348 + 35003.788 + 7375.91 + 9500.44; //71950.427; //+6306.923;
   $domestic_opening_rate = 5000; //4850.000;
   $domestic_opening_amount = $domestic_opening_fine * $domestic_opening_rate; //351356714.000;
 
@@ -76,7 +76,7 @@
   $closing_rate = $gold_rate / .995 / 10;
   $domestic_closing_amount = $domestic_closing_fine * $closing_rate;
 
-  $export_opening_fine = -1727.68; //7375.910; //22345.893; //-6306.923;
+  $export_opening_fine = 0; //-1727.68; //7375.910; //22345.893; //-6306.923;
   $export_opening_rate = 4625; //4400; //4250.000;
   $export_opening_amount = $export_opening_fine * $export_opening_rate; //95120251.000;
 
@@ -99,7 +99,7 @@
   // $exchange_gain_loss_rate = $purchase_rate - $total_sales_with_closing_rate;
   // $exchange_gain_loss_amount = $exchange_gain_loss_fine * $exchange_gain_loss_rate;
 
-  $export_labour_amount = $sale_export_Labour['taxable_amount'] + 7093167.000; // + 37137713.028;
+  $export_labour_amount = $sale_export_Labour['taxable_amount'] //+ 7093167.000; // + 37137713.028;
   $domestic_labour_amount['amount'] += 0; // 6012267.000;
 
   
