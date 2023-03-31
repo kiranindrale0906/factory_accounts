@@ -76,7 +76,7 @@
   $closing_rate = $gold_rate / .995 / 10;
   $domestic_closing_amount = $domestic_closing_fine * $closing_rate;
 
-  $export_opening_fine -1727.68; //7375.910; //22345.893; //-6306.923;
+  $export_opening_fine = -1727.68; //7375.910; //22345.893; //-6306.923;
   $export_opening_rate = 4625; //4400; //4250.000;
   $export_opening_amount = $export_opening_fine * $export_opening_rate; //95120251.000;
 
