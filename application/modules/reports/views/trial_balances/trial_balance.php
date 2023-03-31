@@ -160,7 +160,7 @@
         </table>
       </div>
     </div>
-    <?php $this->load->view('trial_balances/factory_balance'); ?>
+    <?php //$this->load->view('trial_balances/factory_balance'); ?>
   </div>
 <?php endif; ?>
 

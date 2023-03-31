@@ -38,7 +38,7 @@ class Trial_balances extends Ledgers {
 
     $this->data['loss_date']=!empty($_GET['loss_date'])?$_GET['loss_date']:'';
 
-    $this->get_gold_rate_from_myspn();
+//    $this->get_gold_rate_from_myspn();
     $this->update_alloy_gpc_stone_vadotar();
 
     $this->data['account_names'] = $this->model->get('distinct(account_name) as name', array(), array(), 
@@ -56,7 +56,7 @@ class Trial_balances extends Ledgers {
     $this->calculate_profit_loss_of_export_sales_accounts('Labour');
     $this->calculate_hallmark_amount_with_tax();
 
-    $this->get_vadotar_from_factories_and_accounts();
+    //$this->get_vadotar_from_factories_and_accounts();
 
     $this->get_overall_rolling();
 
@@ -155,9 +155,9 @@ class Trial_balances extends Ledgers {
   }
 
   private function get_vadotar_from_factories_and_accounts() {
-    $this->get_vadotar_from_factory('AR Gold', '');    
-    $this->get_vadotar_from_factory('ARF', '');    
-    $this->get_vadotar_from_factory('ARC', '');    
+    $this->get_vadotar_from_factory('AR Gold', 'Apr 2023');    
+    $this->get_vadotar_from_factory('ARF', 'Apr 2023');    
+    $this->get_vadotar_from_factory('ARC', 'Apr 2023');    
     // $this->get_vadotar_from_factory('AR Gold', 'May 2022');    
     // $this->get_vadotar_from_factory('ARF', 'May 2022');    
     // $this->get_vadotar_from_factory('ARC', 'May 2022');    
@@ -170,13 +170,13 @@ class Trial_balances extends Ledgers {
   }
 
   private function get_vadotar_from_factory($site_name, $hostversion) {
-    if($hostversion=="Feb 2023"){
+    if($hostversion=="Apr 2023"){
     $this->data['receipt_types'] = ['Alloy Vodator', 'GPC Vodator', 'Stone Vatav','Spring Vatav','Meena Vatav', 'Copper Vatav', 'Rhodium Vatav', 'Auto Tounch Loss Fine'];
     }else{
     $this->data['receipt_types'] = ['Alloy Vodator', 'GPC Vodator', 'Stone Vatav','Meena Vatav', 'Copper Vatav', 'Rhodium Vatav', 'Auto Tounch Loss Fine'];
     }
     $this->data['site_names'] = ['AR Gold', 'ARF', 'ARC'];
-    $this->data['hostversions'] = []; //['May 2022', 'Aug 2022', 'Feb 2023'];
+    $this->data['hostversions'] = ['Apr 2023']; //['May 2022', 'Aug 2022', 'Feb 2023'];
 
     $url = get_api_path($site_name, $hostversion)."issue_and_receipts/alloy_gpc_vodator_ledger/index";
     $response = json_decode(curl_post_request($url));
@@ -212,17 +212,17 @@ class Trial_balances extends Ledgers {
   } 
 
   private function get_overall_rolling() {  
-    $url=API_MAY2022_ARG_PATH."stock_summary_reports/overall_rolling_reports/index?overall_rolling=1";
+    $url=API_APR2023_ARG_PATH."stock_summary_reports/overall_rolling_reports/index?overall_rolling=1";
     $arg_rolling_records=json_decode(curl_post_request($url));
     $this->data['live_argold_rolling_balance'] =!empty($arg_rolling_records->data->balance)?$arg_rolling_records->data->balance:0;
     $this->data['live_argold_rolling_gpc_balance']=!empty($arg_rolling_records->data->gpc_out_balance)? $arg_rolling_records->data->gpc_out_balance:0;
     
-    $url=API_MAY2022_ARF_PATH."stock_summary_reports/overall_rolling_reports/index?overall_rolling=1";
+    $url=API_APR2023_ARF_PATH."stock_summary_reports/overall_rolling_reports/index?overall_rolling=1";
     $arf_rolling_records=json_decode(curl_post_request($url));
     $this->data['live_arf_rolling_balance'] =!empty($arf_rolling_records->data->balance)? $arf_rolling_records->data->balance:0;
     $this->data['live_arf_rolling_gpc_balance']=!empty($arf_rolling_records->data->gpc_out_balance)? $arf_rolling_records->data->gpc_out_balance:0;
     
-    $url=API_MAY2022_ARC_PATH."stock_summary_reports/overall_rolling_reports/index?overall_rolling=1";
+    $url=API_APR2023_ARC_PATH."stock_summary_reports/overall_rolling_reports/index?overall_rolling=1";
     $arc_rolling_records=json_decode(curl_post_request($url));
     $this->data['live_arc_rolling_balance'] =!empty($arc_rolling_records->data->balance)?$arc_rolling_records->data->balance:0;
     $this->data['live_arc_rolling_gpc_balance']=!empty($arc_rolling_records->data->gpc_out_balance)? $arc_rolling_records->data->gpc_out_balance:0;
