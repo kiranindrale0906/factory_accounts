@@ -12,8 +12,8 @@
 
   $domestic_export_records['PURCHASE ACCOUNT'][0]['fine'] = $domestic_export_records['PURCHASE ACCOUNT'][0]['fine'] ?? 0;
   $domestic_export_records['PURCHASE ACCOUNT'][0]['amount'] = $domestic_export_records['PURCHASE ACCOUNT'][0]['amount'] ?? 0;
-  $domestic_export_records['PURCHASE ACCOUNT'][0]['amount'] += 142308404; //364908474.000 - 3385;
-  $domestic_export_records['PURCHASE ACCOUNT'][0]['fine'] -= 29850; //83580;
+  $domestic_export_records['PURCHASE ACCOUNT'][0]['amount'] += 0; //142308404; //364908474.000 - 3385;
+  $domestic_export_records['PURCHASE ACCOUNT'][0]['fine'] -= 0; //29850; //83580;
    
   $purchase_domestic_fine = !empty($domestic_export_records['PURCHASE ACCOUNT'][0]['fine']) ? $domestic_export_records['PURCHASE ACCOUNT'][0]['fine'] : 0;
   $purchase_domestic_amount = !empty($domestic_export_records['PURCHASE ACCOUNT'][0]['amount']) ? -1 * $domestic_export_records['PURCHASE ACCOUNT'][0]['amount'] : 0;
@@ -22,8 +22,8 @@
   $domestic_export_records['PURCHASE ACCOUNT'][1]['fine'] = $domestic_export_records['PURCHASE ACCOUNT'][1]['fine'] ?? 0;
   $domestic_export_records['PURCHASE ACCOUNT'][1]['amount'] = $domestic_export_records['PURCHASE ACCOUNT'][1]['amount'] ?? 0;
 
-  $domestic_export_records['PURCHASE ACCOUNT'][1]['amount'] -= 142308404; //364908474.000;
-  $domestic_export_records['PURCHASE ACCOUNT'][1]['fine'] += 29850.000;
+  $domestic_export_records['PURCHASE ACCOUNT'][1]['amount'] -= 0; //142308404; //364908474.000;
+  $domestic_export_records['PURCHASE ACCOUNT'][1]['fine'] += 0; //29850.000;
   // $domestic_export_records['PURCHASE ACCOUNT'][1]['fine'] = $domestic_export_records['PURCHASE ACCOUNT'][1]['fine'] + 0;
   // $domestic_export_records['PURCHASE ACCOUNT'][1]['amount'] = $domestic_export_records['PURCHASE ACCOUNT'][1]['amount'] - 0;
 
@@ -33,10 +33,10 @@
 
   $domestic_export_records['SALES ACCOUNT'][0]['amount'] = $domestic_export_records['SALES ACCOUNT'][0]['amount'] ?? 0;
   $domestic_export_records['SALES ACCOUNT'][0]['amount'] -= $hallmark_amount;
-  $domestic_export_records['SALES ACCOUNT'][0]['amount'] -= (116042947.000); // + 5022732); //1296234161.00;
+  $domestic_export_records['SALES ACCOUNT'][0]['amount'] -= 0; //(116042947.000); // + 5022732); //1296234161.00;
 
   $domestic_export_records['SALES ACCOUNT'][0]['fine'] = $domestic_export_records['SALES ACCOUNT'][0]['fine'] ?? 0;
-  $domestic_export_records['SALES ACCOUNT'][0]['fine'] += 24663.902;
+  $domestic_export_records['SALES ACCOUNT'][0]['fine'] += 0; //24663.902;
 
   //$domestic_export_records['SALES ACCOUNT'][0]['fine'] = $domestic_export_records['SALES ACCOUNT'][0]['fine'];
   //$domestic_export_records['SALES ACCOUNT'][0]['amount'] = $domestic_export_records['SALES ACCOUNT'][0]['amount'];
