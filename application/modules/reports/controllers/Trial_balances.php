@@ -129,20 +129,20 @@ class Trial_balances extends Ledgers {
     // $this->data['accounts_feb2023_arc_balance']    = $this->voucher_model->find($accounts_balance_select, 
     //                                                       array('account_name' => 'ARC Software (Feb 2023)'))['balance'];
 
-    $this->data['accounts_argold_balance'] = $this->voucher_model->find($accounts_balance_select, 
+    $this->data['accounts_apr2023_argold_balance'] = $this->voucher_model->find($accounts_balance_select, 
                                                           array('account_name' => 'AR Gold Software'))['balance'];
-    $this->data['accounts_arf_balance']    = $this->voucher_model->find($accounts_balance_select, 
+    $this->data['accounts_apr2023_arf_balance']    = $this->voucher_model->find($accounts_balance_select, 
                                                           array('account_name' => 'ARF Software'))['balance'];
-    $this->data['accounts_arc_balance']    = $this->voucher_model->find($accounts_balance_select, 
+    $this->data['accounts_apr2023_arc_balance']    = $this->voucher_model->find($accounts_balance_select, 
                                                           array('account_name' => 'ARC Software'))['balance'];
 
-    $this->data['accounts_export_balance'] = $this->voucher_model->find($accounts_balance_select, 
+    $this->data['accounts_apr2023_export_balance'] = $this->voucher_model->find($accounts_balance_select, 
                                                           array('account_name' => 'Export Internal Software'))['balance'];
-    $this->data['accounts_domestic_balance'] = $this->voucher_model->find($accounts_balance_select, 
+    $this->data['accounts_apr2023_domestic_balance'] = $this->voucher_model->find($accounts_balance_select, 
                                                           array('account_name' => 'Domestic Internal Software'))['balance'];
-    $this->data['live_argold_balance'] = @$arg_records->data->record->argold;
-    $this->data['live_arf_balance']    = @$arf_records->data->record->argold;
-    $this->data['live_arc_balance']    = @$arc_records->data->record->argold;
+    $this->data['live_apr2023_argold_balance'] = @$arg_records->data->record->argold;
+    $this->data['live_apr2023_arf_balance']    = @$arf_records->data->record->argold;
+    $this->data['live_apr2023_arc_balance']    = @$arc_records->data->record->argold;
     // $this->data['live_aug2022_argold_balance'] = @$arg_aug2022_records->data->record->argold;
     // $this->data['live_aug2022_arf_balance']    = @$arf_aug2022_records->data->record->argold;
     // $this->data['live_aug2022_arc_balance']    = @$arc_aug2022_records->data->record->argold;
@@ -150,8 +150,8 @@ class Trial_balances extends Ledgers {
     // $this->data['live_feb2023_arf_balance']    = @$arf_feb2023_records->data->record->argold;
     // $this->data['live_feb2023_arc_balance']    = @$arc_feb2023_records->data->record->argold;
 
-    $this->data['live_export_balance'] = @$export_records->data->record->argold;
-    $this->data['live_domestic_balance'] = @$export_records->data->record->argold;
+    $this->data['live_apr2023_export_balance'] = @$export_records->data->record->argold;
+    $this->data['live_apr2023_domestic_balance'] = @$export_records->data->record->argold;
   }
 
   private function get_vadotar_from_factories_and_accounts() {
