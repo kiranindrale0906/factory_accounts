@@ -43,7 +43,7 @@
         <tr>
           <td>ARC</td>
           <td class="text-right"><?= four_decimal(-1 * $accounts_apr2023_arc_balance) ?></td>
-          <td class="text-right"><?= four_decimal(-1 * $live_aug2022_arc_balance) ?>  </td>
+          <td class="text-right"><?= four_decimal(-1 * $live_apr2023_arc_balance) ?>  </td>
           <td class="text-right"><?= four_decimal($accounts_aug2022_arc_balance - $live_aug2022_arc_balance) ?></td>
         </tr>
 
