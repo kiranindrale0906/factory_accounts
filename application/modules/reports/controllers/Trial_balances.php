@@ -56,7 +56,7 @@ class Trial_balances extends Ledgers {
     $this->calculate_profit_loss_of_export_sales_accounts('Labour');
     $this->calculate_hallmark_amount_with_tax();
 
-    //$this->get_vadotar_from_factories_and_accounts();
+    $this->get_vadotar_from_factories_and_accounts();
 
     $this->get_overall_rolling();
 
