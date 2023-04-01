@@ -26,6 +26,7 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
     else
       $this->attributes['fine'] = $this->attributes['credit_weight'] * $this->attributes['purity'] / 100;
     $this->attributes['packing_slip_balance'] =$this->attributes['credit_weight'];
+    $this->formdata['factory_site_name']=$this->attributes['site_name'];
     if($this->attributes['account_name']=="Export Internal Software" || $this->attributes['account_name']=="Domestic Internal Software"){
     }else{
       $site_name = get_site_name_from_account_name($this->attributes['account_name']);
@@ -104,6 +105,7 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
             || $account_name == 'ARF Software Staging'
             || $account_name == 'ARC Software Staging')){
      // echo "<pre>"; print_r($this->attributes);
+      $this->attributes['site_name']=$this->formdata['factory_site_name'];
       
       $this->client_metal_receipt_voucher_model->send_request_to_factory($this->attributes);
     }
