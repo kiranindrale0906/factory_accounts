@@ -252,14 +252,14 @@ class Quator_wise_loss_report_details extends Ledgers {
      //  $this->data['loss_details']=!empty($arc_aug2022_records)? $arc_aug2022_records:array();
      //  $this->data['factory_url']=API_AUG2022_ARC_PATH;
      // }
-     if($this->data['factory_name']=='AR Gold'){
+     if($this->data['factory_name']=='AR Gold (Apr 2023)'){
        $this->data['loss_details']=!empty($arg_apr2023_records)? $arg_apr2023_records:array();
        $this->data['factory_url']=API_APR2023_ARG_PATH;
       }
-     if($this->data['factory_name']=='ARF'){
+     if($this->data['factory_name']=='ARF (Apr 2023)'){
       $this->data['loss_details']=!empty($arf_apr2023_records)? $arf_apr2023_records:array();
       $this->data['factory_url']=API_APR2023_ARF_PATH;
-     }if($this->data['factory_name']=='ARC'){
+     }if($this->data['factory_name']=='ARC (Apr 2023)'){
       $this->data['loss_details']=!empty($arc_apr2023_records)? $arc_apr2023_records:array();
       $this->data['factory_url']=API_APR2023_ARC_PATH;
      }

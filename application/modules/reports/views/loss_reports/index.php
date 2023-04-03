@@ -8,7 +8,7 @@
     <div class="form-group container"> 
       <h5> Select Factory:
         <?php 
-        $all_companies = array('AR Gold','ARF','ARC');
+        $all_companies = array('AR Gold (Apr 2023)','ARF (Apr 2023)','ARC (Apr 2023)');
                                // 'AR Gold (Aug 2022)','ARF (Aug 2022)','ARC (Aug 2022)',
                                // 'AR Gold (Feb 2023)','ARF (Feb 2023)','ARC (Feb 2023)');
           $companies=array_merge($all_companies);
