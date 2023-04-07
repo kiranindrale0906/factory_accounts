@@ -185,7 +185,7 @@ class Quator_wise_loss_reports extends BaseController {
           $opening_loss=$this->get_opening_loss();
           $arg_records=array_merge($records,$ghiss_melting_loss,$opening_loss);
           
-        }elseif(isset($_GET['site_name'])&&$_GET['site_name']=='AR Gold'){
+        }elseif(isset($_GET['site_name'])&&$_GET['site_name']=='AR Gold (Apr 2023)'){
           $ghiss_melting_loss=array();
           $url=API_APR2023_ARG_PATH."issue_and_receipts/loss_report_for_accounts/index";
           
@@ -239,7 +239,7 @@ class Quator_wise_loss_reports extends BaseController {
           }
           $arg_records=array_merge($records,$ghiss_melting_loss,$opening_loss);
 
-        }elseif(isset($_GET['site_name'])&&$_GET['site_name']=='ARC'){
+        }elseif(isset($_GET['site_name'])&&$_GET['site_name']=='ARC (Apr 2023)'){
           $ghiss_melting_loss=array();
           $url=API_APR2023_ARC_PATH."issue_and_receipts/loss_report_for_accounts/index";
           $jan2021_records=json_decode(curl_post_request($url,$data),true);
@@ -293,7 +293,7 @@ class Quator_wise_loss_reports extends BaseController {
           $opening_loss=$this->get_opening_loss();
           $arg_records=array_merge($records,$ghiss_melting_loss,$opening_loss);
 
-        }elseif(isset($_GET['site_name'])&&$_GET['site_name']=='ARF'){
+        }elseif(isset($_GET['site_name'])&&$_GET['site_name']=='ARF (Apr 2023)'){
           $ghiss_melting_loss=array();
           $url=API_APR2023_ARF_PATH."issue_and_receipts/loss_report_for_accounts/index";
           $jan2021_records=json_decode(curl_post_request($url,$data),true);
