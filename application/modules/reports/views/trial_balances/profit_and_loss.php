@@ -22,8 +22,8 @@
   $domestic_export_records['PURCHASE ACCOUNT'][1]['fine'] = $domestic_export_records['PURCHASE ACCOUNT'][1]['fine'] ?? 0;
   $domestic_export_records['PURCHASE ACCOUNT'][1]['amount'] = $domestic_export_records['PURCHASE ACCOUNT'][1]['amount'] ?? 0;
 
-  $domestic_export_records['PURCHASE ACCOUNT'][1]['amount'] -= 69123346.50; //142308404; //364908474.000;
-  $domestic_export_records['PURCHASE ACCOUNT'][1]['fine'] += 14707.095; //29850.000;
+  $domestic_export_records['PURCHASE ACCOUNT'][1]['amount'] -= 0; //142308404; //364908474.000;
+  $domestic_export_records['PURCHASE ACCOUNT'][1]['fine'] += 0; //29850.000;
   // $domestic_export_records['PURCHASE ACCOUNT'][1]['fine'] = $domestic_export_records['PURCHASE ACCOUNT'][1]['fine'] + 0;
   // $domestic_export_records['PURCHASE ACCOUNT'][1]['amount'] = $domestic_export_records['PURCHASE ACCOUNT'][1]['amount'] - 0;
 
@@ -76,8 +76,8 @@
   $closing_rate = $gold_rate / .995 / 10;
   $domestic_closing_amount = $domestic_closing_fine * $closing_rate;
 
-  $export_opening_fine = 0; //-1727.68; //7375.910; //22345.893; //-6306.923;
-  $export_opening_rate = 4625; //4400; //4250.000;
+  $export_opening_fine = 14707.095; //-1727.68; //7375.910; //22345.893; //-6306.923;
+  $export_opening_rate = 4700; //4400; //4250.000;
   $export_opening_amount = $export_opening_fine * $export_opening_rate; //95120251.000;
 
   $export_closing_fine = $purchase_export_fine - $sales_export_fine + $export_opening_fine;
