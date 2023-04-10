@@ -140,9 +140,9 @@ class Trial_balances extends Ledgers {
                                                           array('account_name' => 'Export Internal Software'))['balance'];
     $this->data['accounts_apr2023_domestic_balance'] = $this->voucher_model->find($accounts_balance_select, 
                                                           array('account_name' => 'Domestic Internal Software'))['balance'];
-    $this->data['live_apr2023_argold_balance'] = @$arg_records->data->record->argold;
-    $this->data['live_apr2023_arf_balance']    = @$arf_records->data->record->argold;
-    $this->data['live_apr2023_arc_balance']    = @$arc_records->data->record->argold;
+    $this->data['live_apr2023_argold_balance'] = @$arg_apr2023_records->data->record->argold;
+    $this->data['live_apr2023_arf_balance']    = @$arf_apr2023_records->data->record->argold;
+    $this->data['live_apr2023_arc_balance']    = @$arc_apr2023_records->data->record->argold;
     // $this->data['live_aug2022_argold_balance'] = @$arg_aug2022_records->data->record->argold;
     // $this->data['live_aug2022_arf_balance']    = @$arf_aug2022_records->data->record->argold;
     // $this->data['live_aug2022_arc_balance']    = @$arc_aug2022_records->data->record->argold;
