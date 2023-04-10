@@ -130,11 +130,11 @@ class Trial_balances extends Ledgers {
     //                                                       array('account_name' => 'ARC Software (Feb 2023)'))['balance'];
 
     $this->data['accounts_apr2023_argold_balance'] = $this->voucher_model->find($accounts_balance_select, 
-                                                          array('account_name' => 'AR Gold Software'))['balance'];
+                                                          array('account_name' => 'AR Gold Software (Apr 2023)'))['balance'];
     $this->data['accounts_apr2023_arf_balance']    = $this->voucher_model->find($accounts_balance_select, 
-                                                          array('account_name' => 'ARF Software'))['balance'];
+                                                          array('account_name' => 'ARF Software (Apr 2023)'))['balance'];
     $this->data['accounts_apr2023_arc_balance']    = $this->voucher_model->find($accounts_balance_select, 
-                                                          array('account_name' => 'ARC Software'))['balance'];
+                                                          array('account_name' => 'ARC Software (Apr 2023)'))['balance'];
 
     $this->data['accounts_apr2023_export_balance'] = $this->voucher_model->find($accounts_balance_select, 
                                                           array('account_name' => 'Export Internal Software'))['balance'];
