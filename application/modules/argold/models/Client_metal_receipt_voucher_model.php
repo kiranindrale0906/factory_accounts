@@ -616,7 +616,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $data=array('company_id' => 1,
                   'voucher_date' => $record['created_date'],
                   'receipt_type' => $receipt_type,
-                  'account_name' => $site_name.' '.$receipt_type, //.' ('.$hostversion.')',
+                  'account_name' => $site_name.' '.$receipt_type.' ('.$hostversion.')',
                   'debit_weight' => $record['weight'],
                   'purity' => $record['purity'],
                   'factory_purity' => $record['purity'],
