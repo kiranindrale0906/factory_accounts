@@ -38,7 +38,7 @@ class Trial_balances extends Ledgers {
 
     $this->data['loss_date']=!empty($_GET['loss_date'])?$_GET['loss_date']:'';
 
-//    $this->get_gold_rate_from_myspn();
+    //$this->get_gold_rate_from_myspn();
     $this->update_alloy_gpc_stone_vadotar();
 
     $this->data['account_names'] = $this->model->get('distinct(account_name) as name', array(), array(), 
@@ -170,26 +170,27 @@ class Trial_balances extends Ledgers {
   }
 
   private function get_vadotar_from_factory($site_name, $hostversion) {
-    //$this->data['receipt_types'] = ['Alloy Vodator', 'GPC Vodator', 'Stone Vatav','Spring Vatav','Meena Vatav', 'Copper Vatav', 'Rhodium Vatav', 'Auto Tounch Loss Fine'];
-    $this->data['receipt_types'] = ['Alloy Vodator', 'GPC Vodator', 'Stone Vatav','Meena Vatav', 'Copper Vatav', 'Rhodium Vatav', 'Auto Tounch Loss Fine'];
+    $this->data['receipt_types'] = ['Alloy Vodator', 'GPC Vodator', 'Stone Vatav','Spring Vatav','Meena Vatav', 'Copper Vatav', 'Rhodium Vatav', 'Auto Tounch Loss Fine'];
+ //   $this->data['receipt_types'] = ['Alloy Vodator', 'GPC Vodator', 'Stone Vatav','Meena Vatav', 'Copper Vatav', 'Rhodium Vatav', 'Auto Tounch Loss Fine'];
     $this->data['site_names'] = ['AR Gold', 'ARF', 'ARC'];
     $this->data['hostversions'] = ['Apr 2023']; //['May 2022', 'Aug 2022', 'Feb 2023'];
 
     $url = get_api_path($site_name, $hostversion)."issue_and_receipts/alloy_gpc_vodator_ledger/index";
     $response = json_decode(curl_post_request($url));
-    
-    foreach ($this->data['receipt_types'] as $receipt_type) {
+//  pd($this->data['receipt_types']);  
+    foreach ($this->data['receipt_types'] as $index=>$receipt_type) {
       $this->data['factory_vadotar_records'] ??= [];
       $this->data['factory_vadotar_records'][$receipt_type] ??= [];
       $this->data['factory_vadotar_records'][$receipt_type][$site_name] ??= [];
       $this->data['factory_vadotar_records'][$receipt_type][$site_name][$hostversion] ??= [];
       
-
-      $this->data['factory_vadotar_records'][$receipt_type][$site_name][$hostversion]['balance'] = $response->data->$receipt_type[0]->weight;
-      $this->data['factory_vadotar_records'][$receipt_type][$site_name][$hostversion]['balance_fine'] = $response->data->$receipt_type[0]->fine;
+//pd($response->data->$receipt_type[0]->weight);
+      $this->data['factory_vadotar_records'][$receipt_type][$site_name][$hostversion]['balance'] = @$response->data->$receipt_type[0]->weight;
+      $this->data['factory_vadotar_records'][$receipt_type][$site_name][$hostversion]['balance_fine'] = @$response->data->$receipt_type[0]->fine;
 
       $this->get_accounts_vodator_balance($site_name, $receipt_type, $hostversion);
     }
+//pd($this->data['factory_vadotar_records']);
   }
 
   private function get_accounts_vodator_balance($site_name, $receipt_type, $hostversion) {
@@ -380,9 +381,15 @@ class Trial_balances extends Ledgers {
 
   private function get_gold_rate_from_myspn() {
     //$gold_rate_response = get_web_page("http://spngoldlivebroadcast.noip.us:8888/VOTSBroadcast/Services/xml/a/%20mumbai?_=1617860765592");
-    $gold_rate_response = get_web_page("http://spngoldlivebroadcast.noip.us:8888/VOTSBroadcast/Services/xml/a/%20mumbai?_=1658227048570");
-    $string = explode('GOLD MUMBAI 99.5 RTGS', $gold_rate_response);
-    $this->data['gold_rate'] = @explode(',', $string[1])[3];
+    //$gold_rate_response = get_web_page("http://spngoldlivebroadcast.noip.us:8888/VOTSBroadcast/Services/xml/a/%20mumbai?_=1658227048570");
+      
+    $gold_rate_response = get_web_page("http://bcast.arihantspot.com:7767/VOTSBroadcastStreaming/Services/xml/GetLiveRateByTemplateID/arihant?_=1680715854757");
+    //$string = explode('GOLD MUMBAI 99.5 RTGS', $gold_rate_response);
+    $string = explode("GOLD 995 WITH GST", $gold_rate_response);
+    //pd(explode('	',$string[1])[1]);
+    //$this->data['gold_rate'] = @explode(',', $string[1])[3];
+    $this->data['gold_rate'] = @explode('        ',$string[1]);
+    //pd($this->data['gold_rate']);
     $this->data['gold_rate'] = 1.03 * $this->data['gold_rate'];
 
     $string = explode('SPOT GOLD', $gold_rate_response);
