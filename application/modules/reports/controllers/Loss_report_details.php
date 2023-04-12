@@ -106,6 +106,36 @@ class Loss_report_details extends Ledgers {
 
     return $ghiss_melting_loss;
   }  
+private function get_fire_tounch_loss_records($data) {
+    
+
+    $fire_tounch_loss = $this->voucher_model->get('receipt_type, description, site_name,
+                                                     credit_weight as in_weight, purity as in_lot_purity,
+                                                     argold_id as parent_id, 0 as out_weight,
+                                                     created_at, created_at as first_date,
+                                                     created_at as last_date, id', 
+                                               array('account_name' => get_loss_account_name_from_site_name($this->data['factory_name']),
+                                                     'date(created_at)>=' => '2021-05-11',
+                                                     'site_name' => $this->data['factory_name'],
+                                                     'receipt_type' => 'Fire Tounch Loss',
+                                                     'description' => $this->data['department_name'],
+                                                     'quator' => ''));
+    foreach ($fire_tounch_loss as $fire_tounch_loss_index => $fire_tounch_loss_value) {
+      $data['issue_department_id'] = $fire_tounch_loss_value['parent_id'];
+      $data['quator'] = '';
+      
+      $fire_tounch_details = $this->get_loss_records_from_factory($data);
+
+      $out_weight = 0;
+      if (!empty($fire_tounch_details))
+        $out_weight = $fire_tounch_details;
+
+      $fire_tounch_loss[$fire_tounch_loss_index]['out_weight'] = $out_weight;
+      $fire_tounch_loss[$fire_tounch_loss_index]['id'] = $fire_tounch_loss_value['id'];
+    }
+
+    return $fire_tounch_loss;
+  }  
 
   private function get_loss_records_from_factory($postdata) { 
     // if ($this->data['factory_name']=='ARC (May 2022)'){
@@ -131,6 +161,8 @@ class Loss_report_details extends Ledgers {
         return $factory_loss_records['data']['loss_details']['loss_detail'];
       elseif (isset($factory_loss_records['data']['ghiss_melting_out_weights']))
         return $factory_loss_records['data']['ghiss_melting_out_weights'];
+      elseif (isset($factory_loss_records['data']['fire_tounch_out_weights']))
+        return $factory_loss_records['data']['fire_tounch_out_weights'];
       else
         return array();
     else

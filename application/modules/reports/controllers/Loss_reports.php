@@ -121,6 +121,8 @@ class Loss_reports extends BaseController {
         return $factory_loss_records['data']['loss_details']['loss_detail'];
       elseif (isset($factory_loss_records['data']['ghiss_melting_out_weights']))
         return $factory_loss_records['data']['ghiss_melting_out_weights'];
+      elseif (isset($factory_loss_records['data']['fire_tounch_out_weights']))
+        return $factory_loss_records['data']['fire_tounch_out_weights'];
       else
         return array();
     else
@@ -148,6 +150,29 @@ class Loss_reports extends BaseController {
     }
 
     return $ghiss_melting_loss;
+  }
+
+  private function get_fire_tounch_loss($data) {
+    $fire_tounch_loss = $this->voucher_model->get('description, site_name, credit_weight as in_weight, 
+                                                     purity as in_lot_purity, argold_id as parent_id,
+                                                     0 as out_weight', 
+                                                     array('account_name' => get_loss_account_name_from_site_name($this->data['factory_name']),
+                                                           'site_name' => $this->data['site_name'],
+                                                           'receipt_type' => 'Fire Tounch Loss',
+                                                           'quator'=> ''));
+    foreach ($fire_tounch_loss as $fire_tounch_loss_index => $fire_tounch_loss_value) {
+      unset($data['department_names']);
+      $data['issue_department_id'] = $fire_tounch_loss_value['parent_id'];
+      $data['quator'] = '';
+
+      $fire_tounch_details = $this->get_loss_records_from_factory($data);
+
+      $fire_tounch_loss[$fire_tounch_loss_index]['out_weight'] = 0;
+      if (!empty($ghiss_details)) 
+        $fire_tounch_loss[$fire_tounch_loss_index]['out_weight'] = $fire_tounch_details;
+    }
+
+    return $fire_tounch_loss;
   }
 
   private function get_opening_loss($data) {
