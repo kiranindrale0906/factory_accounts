@@ -13,7 +13,7 @@
      <?php load_field('date',array('field' => 'date','class'=>'datepicker_js','value'=>(!empty($record['date'])?date('d-m-Y',strtotime($record['date'])):date('d-m-Y')), )); ?>
     <?php load_field('dropdown', array('field' => 'factory_name',
                                       'option'=>array(
-                                        array('id'=>'AR Gold','name'=>'AR Gold'),array('id'=>'ARF','name'=>'ARF'),array('id'=>'ARC','name'=>'ARC')))) ?>
+                                        array('id'=>'AR Gold (Apr 2023)','name'=>'AR Gold (Apr 2023)'),array('id'=>'ARF (Apr 2023)','name'=>'ARF (Apr 2023)'),array('id'=>'ARC (Apr 2023)','name'=>'ARC (Apr 2023)')))) ?>
     <?php load_field('text', array('field' => 'type_of_loss')) ?>
     <?php load_field('text', array('field' => 'loss')) ?>
     <?php load_field('text', array('field' => 'out_weight')) ?>
