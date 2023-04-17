@@ -102,7 +102,7 @@
   $export_labour_amount = $sale_export_Labour['taxable_amount']; //+ 7093167.000; // + 37137713.028;
   $domestic_labour_amount['amount'] += 0; // 6012267.000;
 
-  
+
 ?>
 
 <?php
@@ -152,6 +152,8 @@
   $total_expenses_amount = $total_purchase_amount + $gross_profit_amount;
   $total_expenses_fine = $total_purchase_fine + $main_vadotar_fine + $pending_vadotar_fine;
   $total_expenses_rate = 0;  
+
+  $profit = ($main_vadotar_fine + $pending_vadotar_fine) * $sales_domestic_rate + $export_labour_amount + $domestic_labour_amount['amount'] + $hallmark_amount;
 ?>
 
 <hr />
@@ -248,6 +250,15 @@
             <td class="text-right"><?= four_decimal($total_purchase_rate, '-'); ?></td>
             <td class="text-right"><?= four_decimal($total_purchase_fine + 0, '-'); ?></td>
           </tr>
+
+          <?php if(HOST=='REPORT ACCOUNTS'){ ?>
+            <tr>
+              <td>Profit</td>
+              <td class="text-right"><?= four_decimal($profit , '-') ?></td>
+              <td class="text-right">-</td>
+              <td class="text-right">-</td>
+            </tr>
+          <?php }?>
         </table>
       </div>
     </div>
