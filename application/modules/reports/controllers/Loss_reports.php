@@ -132,11 +132,13 @@ class Loss_reports extends BaseController {
   private function get_ghiss_melting_loss($data) {
     $ghiss_melting_loss = $this->voucher_model->get('description, site_name, credit_weight as in_weight, 
                                                      purity as in_lot_purity, argold_id as parent_id,
-                                                     0 as out_weight', 
+                                                     0 as out_weight',
                                                      array('account_name' => get_loss_account_name_from_site_name($this->data['factory_name']),
-                                                           'site_name' => $this->data['site_name'],
-                                                           'receipt_type' => 'Ghiss Melting Loss',
-                                                           'quator'=> ''));
+                                                     'date(created_at)>=' => '2021-05-11',
+                                                     'site_name' => $this->data['factory_name'],
+                                                     'receipt_type' => 'Ghiss Melting Loss',
+                                                     // 'description' => $this->data['department_name'],
+                                                     'quator IS NULL' =>NULL));
     foreach ($ghiss_melting_loss as $ghiss_melting_loss_index => $ghiss_melting_loss_value) {
       unset($data['department_names']);
       $data['issue_department_id'] = $ghiss_melting_loss_value['parent_id'];
