@@ -170,7 +170,7 @@ private function get_fire_tounch_loss_records($data) {
   }  
   private function get_opening_loss($data) {
     $opening_loss = $this->opening_loss_voucher_model->get('', 
-                                                     array('factory_name' => $this->data['factory_name'],'quator' => "",'type_of_loss' => $this->data['department_name']));
+                                                     array('factory_name' => $this->data['factory_name'],'quator IS NULL'=>NULL'type_of_loss' => $this->data['department_name']));
     $opening_loss_details=array();
     foreach ($opening_loss as $opening_loss_index => $opening_loss_value) {
       $data['issue_department_id'] = $opening_loss_value['id'];
