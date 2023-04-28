@@ -32,8 +32,9 @@ class Loss_reports extends BaseController {
 
     $factory_loss_records = $this->get_loss_records_from_factory($data);
     $ghiss_melting_loss_records = $this->get_ghiss_melting_loss($data);
+    $fire_tounch_loss_records = $this->get_fire_tounch_loss($data);
     $opening_loss_records = $this->get_opening_loss($data);
-    $loss_records = array_merge($factory_loss_records, $ghiss_melting_loss_records,$opening_loss_records);
+    $loss_records = array_merge($factory_loss_records, $ghiss_melting_loss_records,$fire_tounch_loss_records,$opening_loss_records);
 
     if (empty($loss_records)) return;    
   
