@@ -29,8 +29,9 @@ class Loss_report_details extends Ledgers {
     
     $factory_loss_records = $this->get_loss_records_from_factory($data);
     $ghiss_melting_loss_records = $this->get_ghiss_melting_loss_records($data);
+    $fire_tounch_loss_records = $this->get_fire_tounch_loss_records($data);
     $opening_loss_records = $this->get_opening_loss($data);
-    $loss_detail_records = array_merge($factory_loss_records, $ghiss_melting_loss_records,$opening_loss_records);
+    $loss_detail_records = array_merge($factory_loss_records, $ghiss_melting_loss_records,$fire_tounch_loss_records,$opening_loss_records);
 
     $loss_detail_records = $this->factory_wise_record_array($loss_detail_records);
 
@@ -170,7 +171,7 @@ private function get_fire_tounch_loss_records($data) {
   }  
   private function get_opening_loss($data) {
     $opening_loss = $this->opening_loss_voucher_model->get('', 
-                                                     array('factory_name' => $this->data['factory_name'],'quator IS NULL'=>NULL'type_of_loss' => $this->data['department_name']));
+                                                     array('factory_name' => $this->data['factory_name'],'quator IS NULL'=>NULL,'type_of_loss' => $this->data['department_name']));
     $opening_loss_details=array();
     foreach ($opening_loss as $opening_loss_index => $opening_loss_value) {
       $data['issue_department_id'] = $opening_loss_value['id'];
