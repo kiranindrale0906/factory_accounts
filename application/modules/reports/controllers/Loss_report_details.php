@@ -29,8 +29,9 @@ class Loss_report_details extends Ledgers {
     
     $factory_loss_records = $this->get_loss_records_from_factory($data);
     $ghiss_melting_loss_records = $this->get_ghiss_melting_loss_records($data);
+    $fire_tounch_loss_records = $this->get_fire_tounch_loss_records($data);
     $opening_loss_records = $this->get_opening_loss($data);
-    $loss_detail_records = array_merge($factory_loss_records, $ghiss_melting_loss_records,$opening_loss_records);
+    $loss_detail_records = array_merge($factory_loss_records, $ghiss_melting_loss_records,$fire_tounch_loss_records,$opening_loss_records);
 
     $loss_detail_records = $this->factory_wise_record_array($loss_detail_records);
 
