@@ -139,7 +139,7 @@ class Loss_reports extends BaseController {
                                                      'site_name' => $this->data['factory_name'],
                                                      'receipt_type' => 'Ghiss Melting Loss',
                                                      // 'description' => $this->data['department_name'],
-                                                     'quator IS NULL' =>NULL));
+                                                     'quator = ""' =>NULL));
     foreach ($ghiss_melting_loss as $ghiss_melting_loss_index => $ghiss_melting_loss_value) {
       unset($data['department_names']);
       $data['issue_department_id'] = $ghiss_melting_loss_value['parent_id'];
