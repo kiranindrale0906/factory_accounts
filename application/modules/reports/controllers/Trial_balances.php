@@ -151,7 +151,7 @@ class Trial_balances extends Ledgers {
     // $this->data['live_feb2023_arc_balance']    = @$arc_feb2023_records->data->record->argold;
 
     $this->data['live_apr2023_export_balance'] = @$export_records->data->record->argold;
-    $this->data['live_apr2023_domestic_balance'] = @$export_records->data->record->argold;
+    $this->data['live_apr2023_domestic_balance'] = @$domestic_records->data->record->argold;
   }
 
   private function get_vadotar_from_factories_and_accounts() {
