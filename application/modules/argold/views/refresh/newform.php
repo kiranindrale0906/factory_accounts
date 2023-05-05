@@ -19,15 +19,7 @@
                                                                               array('id'=>'AR Gold','name'=>'AR Gold'),
                                                                               array('id'=>'ARF','name'=>'ARF'),
                                                                               array('id'=>'ARC','name'=>'ARC'),
-                                                                              array('id'=>'AR Gold (May 2022)','name'=>'AR Gold (May 2022)'),
-                                                                              array('id'=>'ARF (May 2022)','name'=>'ARF (May 2022)'),
-                                                                              array('id'=>'ARC (May 2022)','name'=>'ARC (May 2022)'),
-                                                                              array('id'=>'AR Gold (Aug 2022)','name'=>'AR Gold (Aug 2022)'),
-                                                                              array('id'=>'ARF (Aug 2022)','name'=>'ARF (Aug 2022)'),
-                                                                              array('id'=>'ARC (Aug 2022)','name'=>'ARC (Aug 2022)'),
-                                                                              array('id'=>'AR Gold (Feb 2023)','name'=>'AR Gold (Feb 2023)'),
-                                                                              array('id'=>'ARF (Feb 2023)','name'=>'ARF (Feb 2023)'),
-                                                                              array('id'=>'ARC (Feb 2023)','name'=>'ARC (Feb 2023)'))));?>
+                                                                              )));?>
   
   </div>
     <?php $this->load->view('refresh_details/formlist');?>
