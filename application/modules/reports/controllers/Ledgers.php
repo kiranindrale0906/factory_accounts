@@ -259,9 +259,9 @@ class Ledgers extends BaseController {
 
     }
     if ($this->data['report_type'] == 'Purchase Sales Ledger') {
-      $where_receipt['chitties.sale_type']="Sale";
+      $where_receipt['ac_ledger.sale_type']="Sale";
       $receipt_issue_select .=',chitties.account_name as chitti_account_name';
-       $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(array('chitties','chitties.id=ac_ledger.chitti_id')), array('order_by'=>'ac_ledger.parent_id, ac_ledger.voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
+       $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(array('chitties','chitties.id=ac_ledger.chitti_id','Left')), array('order_by'=>'ac_ledger.parent_id, ac_ledger.voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
     }else{
       $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(), array('order_by'=>'parent_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
     }
