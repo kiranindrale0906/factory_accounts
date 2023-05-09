@@ -30,6 +30,10 @@
         <th class="text-right">Gross Weight</td>
         <th class="text-right">Chitti Account Name</td>
       <?php } ?>
+      <?php if($report_type == 'Account Ledger'){ ?>
+        <th class="text-right">Chitti Account Name</td>
+      <?php } ?>
+    
     <?php endif; ?>
   </tr>
 </thead>
