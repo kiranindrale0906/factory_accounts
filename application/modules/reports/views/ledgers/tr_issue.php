@@ -51,7 +51,7 @@
         <td class="text-right"><?= ($record['chitti_account_name']) ?></td>
       <?php } ?>
     <?php if($report_type == 'Account Ledger'){ ?>
-        <td class="text-right"><?= (@$record['chitti_account_name']) ?></td>
+        <td class="text-right"><?= ($reference_account_name) ?></td>
       <?php } ?>
   
   <?php endif; ?>
