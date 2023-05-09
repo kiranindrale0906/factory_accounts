@@ -267,6 +267,7 @@ class Ledgers extends BaseController {
          $metal_receipt_voucher_reference=$this->voucher_model->find('metal_receipt_voucher_reference_id',array('id'=>$value['voucher_id']));
          $voucher_detail_account=$this->voucher_model->find('account_name',array('id'=>$metal_receipt_voucher_reference['metal_receipt_voucher_reference_id']));
          $receipts[$index]['chitti_account_name']=$voucher_detail_account['account_name'];
+
        }
 
     }else{
