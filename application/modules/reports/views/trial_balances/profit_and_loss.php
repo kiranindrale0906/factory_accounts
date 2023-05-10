@@ -160,6 +160,15 @@
 <h5 class="ml-2 pl-2">Profit and Loss Account</h5>
 
 <div class="row">
+<form class="col-12 fields-group-sm">
+    <div class="row">
+		<?php load_field('date',array('field' => 'profit_and_loss_search_date', 'class' => 'datepicker_js', 'col'=>'col-sm-3','value'=>''))?> 
+		<div class="col-sm-4 align-self-center">
+		        <?php load_buttons('button', array('name' =>'Search','class'=>'btn-xs btn_blue profit_and_loss_search_date mr-2')) ?> 
+		        <?php load_buttons('button', array('name' =>'Clear','class'=>'btn-xs btn_blue clear_btn')) ?> 
+		</div>
+	</div>
+</form>
   <div class="col-md-6">
     <div class="form-group container">
       <div class="table-responsive m-t-20">
