@@ -37,7 +37,7 @@ class Trial_balances extends Ledgers {
     } 
 
     $this->data['loss_date']=!empty($_GET['loss_date'])?$_GET['loss_date']:'';
-
+    $this->data['profit_and_loss_search_date']=($_GET['profit_and_loss_search_date']) ?? '';
     //$this->get_gold_rate_from_myspn();
     $this->update_alloy_gpc_stone_vadotar();
 
@@ -233,6 +233,9 @@ class Trial_balances extends Ledgers {
     if(!empty($this->data['loss_date'])){
       $where['date(voucher_date) <=']=date('Y-m-d', strtotime($this->data['loss_date']));
     }
+    if(!empty($this->data['profit_and_loss_search_date'])){
+      $where['date(voucher_date) <=']=date('Y-m-d', strtotime($this->data['profit_and_loss_search_date']));
+    }
 
     $select = "account_name, 
                IFNULL((sum(debit_weight*purity)/100),0) - IFNULL((sum(credit_weight*factory_purity)/100),0) as fine,
@@ -364,6 +367,9 @@ class Trial_balances extends Ledgers {
     }
     if(!empty($this->data['loss_date'])){
       $where['date(date) <=']=date('Y-m-d', strtotime($this->data['loss_date']));
+    }
+    if(!empty($this->data['profit_and_loss_search_date'])){
+      $where['date(date) <=']=date('Y-m-d', strtotime($this->data['profit_and_loss_search_date']));
     }
 
     $sales = $this->chitti_model->find($select, $where);
