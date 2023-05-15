@@ -52,7 +52,7 @@ class Refresh extends BaseController {
                                       array('id'=>'Daily Drawer','name'=>'Daily Drawer'),
                                       array('id'=>'Pipe and Para Process','name'=>'Pipe and Para Process'),
                                       array('id'=>'Arc Chain','name'=>'Arc Chain'),
-                                      array('id'=>'Arc Kuwaiti','name'=>'Arc Kuwaiti'),
+                                      array('id'=>'Arc Turkey','name'=>'Arc Turkey'),
                                       array('id'=>'Arc Ornament','name'=>'ARC Ornament'),
                                     );//$this->narration_model->get('name as name, name as  id, chain_purity, chain_margin', array() ,array(), array('order_by'=>'name asc'));
     
