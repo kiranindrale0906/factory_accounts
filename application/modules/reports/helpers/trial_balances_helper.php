@@ -57,6 +57,29 @@ function get_field_attribute($table, $field) {
   return $attributes[$table][$field];
 }
 
+function get_current_gold_rate(){
+  $curl = curl_init();
+
+  curl_setopt_array($curl, array(
+    CURLOPT_URL => 'http://goldpricez.com/api/rates/currency/inr/measure/gram',
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_ENCODING => '',
+    CURLOPT_MAXREDIRS => 10,
+    CURLOPT_TIMEOUT => 0,
+    CURLOPT_FOLLOWLOCATION => true,
+    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    CURLOPT_CUSTOMREQUEST => 'GET',
+    CURLOPT_HTTPHEADER => array(
+      'X-API-Key: f6412fdf260d55b6cb460cb4e5bad69cf6412fdf'
+    )
+  ));
+
+  $response = curl_exec($curl);
+  curl_close($curl);
+
+  $result = json_decode(json_decode($response),true);
+  return $result['gram_in_inr'];
+}
 /*
   | [0] => Label
   | [1] => Placeholder

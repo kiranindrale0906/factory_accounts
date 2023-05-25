@@ -73,7 +73,8 @@
 
   $domestic_closing_fine = $purchase_domestic_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_domestic_fine + $domestic_opening_fine;
   if (empty($gold_rate)) $gold_rate = 0;
-  $closing_rate = 6000; //$gold_rate / .995 / 10;
+  $export_closing_rate = get_current_gold_rate();  //$spot_gold / 31.1034 * $usd_rate;
+  $closing_rate = $export_closing_rate + ($export_closing_rate*(18/100)); //$gold_rate / .995 / 10;
   $domestic_closing_amount = $domestic_closing_fine * $closing_rate;
 
   $export_opening_fine = 14707.095; //-1727.68; //7375.910; //22345.893; //-6306.923;
@@ -83,7 +84,6 @@
   $export_closing_fine = $purchase_export_fine - $sales_export_fine + $export_opening_fine;
   if (empty($usd_rate)) $usd_rate = 0;
   if (empty($spot_gold)) $spot_gold = 0;
-  $export_closing_rate = 5000; //$spot_gold / 31.1034 * $usd_rate;
   $export_closing_amount = $export_closing_fine * $export_closing_rate;
 
   // $closing_fine = $purchase_domestic_fine + $purchase_export_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_domestic_fine - $sales_export_fine;
