@@ -627,7 +627,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $data['id'] = '';
       if (!empty($metal_receipt_voucher)) $data['id'] = $metal_receipt_voucher['id'];
       if (empty($record['weight'])) return;
-      if(empty($metal_receipt_voucher['debit_weight'])
+      if (empty($metal_receipt_voucher['debit_weight'])
          || ($metal_receipt_voucher['debit_weight'] != round($record['weight'], 4) )) {
         $metal_receipt_obj = new metal_receipt_voucher_model($data);
         $metal_receipt_obj->before_validate();

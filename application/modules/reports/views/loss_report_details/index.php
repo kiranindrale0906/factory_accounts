@@ -69,7 +69,7 @@
           <a href=<?= base_url()."argold/unrecovarable_account_records/store?from=view&receipt_type=".urlencode("Loss Account")."&site_name=".urlencode($factory_name)."&issue_account_name=".urlencode('Unrecovarable '.$factory_name)."&credit_weight=".$loss."&narration=".urlencode($category)."&parent_id=".$loss_out_detail['parent_id'] ?> target='_blank' onclick="return confirm('Do you want to add this in Unrecovarable?')" ><?='Unrecovarable '.$factory_name?></a>
         <?php //}?>
         </td>
-        <?php if(!empty($loss_out_detail['id'])&&$loss_out_detail['receipt_type']=="Ghiss Melting Loss"){?>
+        <?php if(!empty($loss_out_detail['id'])&&($loss_out_detail['receipt_type']=="Ghiss Melting Loss" || $loss_out_detail['receipt_type']=="Fire Tounch Loss")){?>
           <td class="text-right">
             <a href=<?= base_url()."argold/ghiss_melting_quators/edit/".$loss_out_detail['id'] ?> target='_blank' >Add Quartor</a>
           </td>
