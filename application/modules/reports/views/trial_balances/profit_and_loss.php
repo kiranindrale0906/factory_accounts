@@ -74,7 +74,10 @@
   $domestic_closing_fine = $purchase_domestic_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_domestic_fine + $domestic_opening_fine;
   if (empty($gold_rate)) $gold_rate = 0;
   $export_closing_rate = get_current_gold_rate();  //$spot_gold / 31.1034 * $usd_rate;
-  $closing_rate = $export_closing_rate + ($export_closing_rate*(18/100)); //$gold_rate / .995 / 10;
+  $export_closing_rate = $export_closing_rate+($export_closing_rate*0.01); //current gold rate + 1% of current gold rate (stamp duty)
+
+  $closing_rate = $export_closing_rate + ($export_closing_rate * 0.15); //$gold_rate / .995 / 10; //15% duty added
+  $closing_rate = $closing_rate + ($closing_rate * 0.03);//3% gst
   $domestic_closing_amount = $domestic_closing_fine * $closing_rate;
 
   $export_opening_fine = 14707.095; //-1727.68; //7375.910; //22345.893; //-6306.923;
