@@ -49,7 +49,8 @@ function get_field_attribute($table, $field) {
   'company_id'=>array('Company Name', 'Select Company Name', TRUE, '', TRUE),
   'account_id'=>array('Account Name', 'Select Account Name', TRUE, '', TRUE),
   'date_from'=>array('Date From', 'Enter Date From', TRUE, '', TRUE),
-  'date'=>array('Date', '', TRUE, '', TRUE),
+  'loss_from_date'=>array('Date', '', TRUE, '', TRUE),
+  'loss_to_date'=>array('Date', '', TRUE, '', TRUE),
   'profit_and_loss_search_from_date'=>array('From Date', '', TRUE, '', TRUE),
   'profit_and_loss_search_to_date'=>array('To Date', '', TRUE, '', TRUE),
   'date_to'=>array('Date To', 'Enter Date To', TRUE, '', TRUE)
