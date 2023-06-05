@@ -73,7 +73,11 @@
 
   $domestic_closing_fine = $purchase_domestic_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_domestic_fine + $domestic_opening_fine;
   if (empty($gold_rate)) $gold_rate = 0;
-  $closing_rate = 6000; //$gold_rate / .995 / 10;
+  $export_closing_rate = get_current_gold_rate();  //$spot_gold / 31.1034 * $usd_rate;
+  $export_closing_rate = $export_closing_rate+($export_closing_rate*0.01); //current gold rate + 1% of current gold rate (stamp duty)
+
+  $closing_rate = $export_closing_rate + ($export_closing_rate * 0.15); //$gold_rate / .995 / 10; //15% duty added
+  $closing_rate = $closing_rate + ($closing_rate * 0.03);//3% gst
   $domestic_closing_amount = $domestic_closing_fine * $closing_rate;
 
   $export_opening_fine = 14707.095; //-1727.68; //7375.910; //22345.893; //-6306.923;
@@ -83,7 +87,6 @@
   $export_closing_fine = $purchase_export_fine - $sales_export_fine + $export_opening_fine;
   if (empty($usd_rate)) $usd_rate = 0;
   if (empty($spot_gold)) $spot_gold = 0;
-  $export_closing_rate = 5000; //$spot_gold / 31.1034 * $usd_rate;
   $export_closing_amount = $export_closing_fine * $export_closing_rate;
 
   // $closing_fine = $purchase_domestic_fine + $purchase_export_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_domestic_fine - $sales_export_fine;
@@ -162,8 +165,9 @@
 <div class="row">
 <form class="col-12 fields-group-sm">
     <div class="row">
-		<?php load_field('date',array('field' => 'profit_and_loss_search_date', 'class' => 'datepicker_js', 'col'=>'col-sm-3','value'=>''))?> 
-		<div class="col-sm-4 align-self-center">
+		<?php load_field('date',array('field' => 'profit_and_loss_search_from_date', 'class' => 'datepicker_js', 'col'=>'col-sm-3','value'=>$profit_and_loss_search_from_date))?> 
+		<?php load_field('date',array('field' => 'profit_and_loss_search_to_date', 'class' => 'datepicker_js', 'col'=>'col-sm-3','value'=>$profit_and_loss_search_to_date))?> 
+    <div class="col-sm-4 align-self-center">
 		        <?php load_buttons('button', array('name' =>'Search','class'=>'btn-xs btn_blue profit_and_loss_search_date mr-2')) ?> 
 		        <?php load_buttons('button', array('name' =>'Clear','class'=>'btn-xs btn_blue clear_btn')) ?> 
 		</div>

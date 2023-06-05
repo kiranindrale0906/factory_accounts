@@ -232,11 +232,23 @@ class Trial_balances extends Ledgers {
     if (empty($this->data['account_names'])) return true;
     
     $where=array();
-    if(!empty($this->data['loss_date'])){
-      $where['date(voucher_date) <=']=date('Y-m-d', strtotime($this->data['loss_date']));
+
+    if(!empty($this->data['loss_from_date'])){
+      $where['date(voucher_date) >=']=date('Y-m-d', strtotime($this->data['loss_from_date']));
     }
-    if(!empty($this->data['profit_and_loss_search_date'])){
-      $where['date(voucher_date) <=']=date('Y-m-d', strtotime($this->data['profit_and_loss_search_date']));
+
+    if(!empty($this->data['loss_to_date'])){
+      $where['date(voucher_date) <=']=date('Y-m-d', strtotime($this->data['loss_to_date']));
+    }
+
+    
+    
+    if(!empty($this->data['profit_and_loss_search_from_date'])){
+      $where['date(voucher_date) >=']=date('Y-m-d', strtotime($this->data['profit_and_loss_search_from_date']));
+    }
+
+    if(!empty($this->data['profit_and_loss_search_to_date'])){
+      $where['date(voucher_date) <=']=date('Y-m-d', strtotime($this->data['profit_and_loss_search_to_date']));
     }
 
     $select = "account_name, 
@@ -367,9 +379,20 @@ class Trial_balances extends Ledgers {
       $where['ounce_rate != 0'] = NULL;
       $select = 'sum(taxable_usd_amount * usd_rate) + sum(premium_usd_amount * usd_rate) as taxable_amount, 0 as cgst_amount, 0 as sgst_amount, 0 as tcs_amount, sum(factory_fine) as factory_fine'; 
     }
-
     if(!empty($this->data['loss_from_date'])){
-      $where['where']=array('date(date) <='=>date('Y-m-d', strtotime($this->data['loss_from_date']))/*,'date(date) >='=>$this->data['loss_to_date']*/);
+      $where['date(date) >=']=date('Y-m-d', strtotime($this->data['loss_from_date']));
+    }
+
+    if(!empty($this->data['loss_to_date'])){
+      $where['date(date) <=']=date('Y-m-d', strtotime($this->data['loss_to_date']));
+    }
+
+    if(!empty($this->data['profit_and_loss_search_from_date'])){
+      $where['date(date) >=']=date('Y-m-d', strtotime($this->data['profit_and_loss_search_from_date']));
+    }
+
+    if(!empty($this->data['profit_and_loss_search_to_date'])){
+      $where['date(date) <=']=date('Y-m-d', strtotime($this->data['profit_and_loss_search_to_date']));
     }
     if(!empty($this->data['profit_and_loss_search_from_date'])){
       $where['where']=array('date(date) <='=>date('Y-m-d', strtotime($this->data['profit_and_loss_search_from_date']))/*,'date(date) >='=>$this->data['profit_and_loss_search_to_date']*/);
