@@ -36,8 +36,10 @@ class Trial_balances extends Ledgers {
       echo 'done'; die();
     } 
 
-    $this->data['loss_date']=!empty($_GET['loss_date'])?$_GET['loss_date']:'';
-    $this->data['profit_and_loss_search_date']=($_GET['profit_and_loss_search_date']) ?? '';
+    $this->data['loss_from_date']=!empty($_GET['loss_from_date'])?$_GET['loss_from_date']:'';
+    $this->data['loss_to_date']=!empty($_GET['loss_to_date'])?$_GET['loss_to_date']:'';
+    $this->data['profit_and_loss_search_from_date']=($_GET['profit_and_loss_search_from_date']) ?? '';
+    $this->data['profit_and_loss_search_to_date']=($_GET['profit_and_loss_search_to_date']) ?? '';
     //$this->get_gold_rate_from_myspn();
     $this->update_alloy_gpc_stone_vadotar();
 
@@ -365,12 +367,13 @@ class Trial_balances extends Ledgers {
       $where['ounce_rate != 0'] = NULL;
       $select = 'sum(taxable_usd_amount * usd_rate) + sum(premium_usd_amount * usd_rate) as taxable_amount, 0 as cgst_amount, 0 as sgst_amount, 0 as tcs_amount, sum(factory_fine) as factory_fine'; 
     }
-    if(!empty($this->data['loss_date'])){
-      $where['date(date) <=']=date('Y-m-d', strtotime($this->data['loss_date']));
+
+    if(!empty($this->data['loss_from_date'])){
+      $where['where']=array('date(date) <='=>date('Y-m-d', strtotime($this->data['loss_from_date']))/*,'date(date) >='=>$this->data['loss_to_date']*/);
     }
-    if(!empty($this->data['profit_and_loss_search_date'])){
-      $where['date(date) <=']=date('Y-m-d', strtotime($this->data['profit_and_loss_search_date']));
-    }
+    if(!empty($this->data['profit_and_loss_search_from_date'])){
+      $where['where']=array('date(date) <='=>date('Y-m-d', strtotime($this->data['profit_and_loss_search_from_date']))/*,'date(date) >='=>$this->data['profit_and_loss_search_to_date']*/);
+    
 
     $sales = $this->chitti_model->find($select, $where);
         
