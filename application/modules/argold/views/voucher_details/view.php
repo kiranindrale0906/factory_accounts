@@ -101,7 +101,7 @@ if(in_array($record['voucher_type'], array('metal receipt voucher','metal issue 
             </tr><tr>
               <td>Rate (<?= four_decimal($tax_fields['gold_rate_purity']) ?>%)</td><td class="text-right"><h6><?=four_decimal($tax_fields['gold_rate'])?></h6></td>
             </tr><tr>
-              <td>Taxable Amount</td><td class="text-right"><h6><?=four_decimal($record['taxable_amount'])?></h6></td>
+              <td>Taxable Amount</td><td class="text-right"><h6><?=four_decimal($tax_fields['gold_rate']*$record['factory_fine'])?></h6></td>
             </tr><tr>
               <td>CGST Amount</td><td class="text-right"><h6><?=four_decimal($record['cgst_amount'])?></h6></td>
             </tr><tr>
