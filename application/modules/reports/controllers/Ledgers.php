@@ -182,15 +182,15 @@ class Ledgers extends BaseController {
       }elseif ($this->data['site_name'] == 'AR Gold (Aug 2022)'){
         $account_issue_where['account_name'] = 'AR Gold Software (Aug 2022)';
       }else*/
-      if ($this->data['site_name'] == 'AR Gold'){
-        $account_issue_where['account_name'] = 'AR Gold Software';
-      }elseif ($this->data['site_name'] == 'ARF'){
-        $account_issue_where['account_name'] = 'ARF Software';
-      }elseif ($this->data['site_name'] == 'ARC'){
-        $account_issue_where['account_name'] = 'ARC Software';
+      if ($this->data['site_name'] == 'AR Gold (Apr 2023)'){
+        $account_issue_where['account_name'] = 'AR Gold Software (Apr 2023)';
+      }elseif ($this->data['site_name'] == 'ARF (Apr 2023)'){
+        $account_issue_where['account_name'] = 'ARF Software (Apr 2023)';
+      }elseif ($this->data['site_name'] == 'ARC (Apr 2023)'){
+        $account_issue_where['account_name'] = 'ARC Software (Apr 2023)';
       }
       else{
-        $account_issue_where['account_name in ("ARF Software","ARC Software","AR Gold Software","ARF Software (May 2022)","ARC Software (May 2022)","AR Gold Software (May 2022)","ARF Software (Aug 2022)","ARC Software (Aug 2022)","AR Gold Software (Aug 2022)","ARF Software (Feb 2023)","ARC Software (Feb 2023)","AR Gold Software (Feb 2023)","Export Internal Software","Domestic Internal Software") '] = NULL;
+        $account_issue_where['account_name in ("ARF Software (Apr 2023)","ARC Software (Apr 2023)","AR Gold Software (Apr 2023)","Export Internal Software","Domestic Internal Software") '] = NULL;
       }   
       !empty($this->data['account_name'])?$account_receipt_where['account_name']=$this->data['account_name']:$account_receipt_where['account_name not in ("MAIN VADOTAR","PURCHASE ACCOUNT","ARF Software","ARC Software","AR Gold Software","Export Internal Software","Domestic Internal Software") '] = NULL;                    
     }   
@@ -209,11 +209,11 @@ class Ledgers extends BaseController {
                                and (debit_weight != 0 or debit_amount != 0)
                                and REPLACE(narration, "Software ", "") = "'.$this->data['site_name'].'")' => NULL);
       else {
-        if ($this->data['site_name'] == 'ARF' || $this->data['site_name'] == 'ARF (May 2022)')
+        if ($this->data['site_name'] == 'ARF' || $this->data['site_name'] == 'ARF (May 2022)'|| $this->data['site_name'] == 'ARF (Apr 2023)')
           $where_receipt['(narration = "ARF Software" or description = "ARF Software")'] = NULL;
-        elseif ($this->data['site_name'] == 'ARC' || $this->data['site_name'] == 'ARC (May 2022)') 
+        elseif ($this->data['site_name'] == 'ARC' || $this->data['site_name'] == 'ARC (May 2022)' || $this->data['site_name'] == 'ARC (Apr 2023)') 
           $where_receipt['(narration = "ARC Software" or description = "ARC Software")'] = NULL;
-        elseif ($this->data['site_name'] == 'AR Gold' || $this->data['site_name'] == 'AR Gold (May 2022)')
+        elseif ($this->data['site_name'] == 'AR Gold' || $this->data['site_name'] == 'AR Gold (May 2022)' || $this->data['site_name'] == 'AR Gold (Apr 2023)')
           $where_receipt['(narration = "AR Gold Software" or description = "AR Gold Software")'] = NULL;
       }
     }
