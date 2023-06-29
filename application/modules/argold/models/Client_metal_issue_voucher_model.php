@@ -26,8 +26,7 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
     else
       $this->attributes['fine'] = $this->attributes['credit_weight'] * $this->attributes['purity'] / 100;
     $this->attributes['packing_slip_balance'] =$this->attributes['credit_weight'];
-    $this->formdata['factory_site_name']=$this->attributes['site_name'];
-    if($this->attributes['account_name']=="Export Internal Software" || $this->attributes['account_name']=="Domestic Internal Software"){
+  if($this->attributes['account_name']=="Export Internal Software" || $this->attributes['account_name']=="Domestic Internal Software"){
     }else{
       $site_name = get_site_name_from_account_name($this->attributes['account_name']);
       if (!empty($site_name)) $this->attributes['site_name'] = $site_name;
@@ -35,6 +34,8 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
 
     $this->set_factory_purity_and_factory_fine_from_narration();    
     $this->set_id_for_alloy_vodator_gpc_vodator_and_stone_vatav();
+    $this->formdata['factory_site_name']=$this->attributes['site_name'];
+
   }
 
   private function set_id_for_alloy_vodator_gpc_vodator_and_stone_vatav() {
@@ -104,8 +105,8 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
             || $account_name == 'AR Gold Software Staging'
             || $account_name == 'ARF Software Staging'
             || $account_name == 'ARC Software Staging')){
-     // echo "<pre>"; print_r($this->attributes);
-      $this->attributes['site_name']=$this->formdata['factory_site_name'];
+//      echo "<pre>"; print_r($this->formdata);
+    $this->attributes['site_name']=@$this->formdata['factory_site_name'];
       
       $this->client_metal_receipt_voucher_model->send_request_to_factory($this->attributes);
     }
