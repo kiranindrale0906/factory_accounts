@@ -336,7 +336,7 @@ class Quator_wise_loss_reports extends BaseController {
           $data['quator']=$this->data['quator_name'];
           $url=API_APR2023_ARF_PATH."issue_and_receipts/loss_report_for_accounts/index";
           $fire_tounch_details=json_decode(curl_post_request($url,$data),true);
-          $out_weight=!empty($fire_tounch_details)&&(!empty($fire_tounch_details['data']['fire_tounch_out_weights']))?$ghiss_details['data']['fire_tounch_out_weights']:0;
+          $out_weight=!empty($fire_tounch_details)&&(!empty($fire_tounch_details['data']['fire_tounch_out_weights']))?$fire_tounch_details['data']['fire_tounch_out_weights']:0;
           $fire_tounch_loss[$fire_tounch_loss_index]['out_weight']=$out_weight;
           }
           $opening_loss=$this->get_opening_loss();
