@@ -179,11 +179,14 @@
       <td>Freight USD Amount </td><td class="text-right"><h6><?=four_decimal($record['freight_usd_amount'])?></h6>
       </td>
     </tr> 
-  <?php }?>
+    <tr>
+      <td>Grand Total</td><td class="text-right"><h6><?=four_decimal(($record['taxable_usd_amount']+$record['premium_usd_amount']+$record['labour_usd_amount']+$record['freight_usd_amount'])*$record['usd_rate'])?></h6></td>
+    </tr>
+  <?php }else{?>
     <tr>
       <td>Grand Total</td><td class="text-right"><h6><?=four_decimal($record['debit_amount'])?></h6></td>
     </tr>
-  <?php }else{
+  <?php }}else{
     $sum_rate=$sum_rate_amount=0;
     foreach ($metal_voucher_details as $index => $metal_voucher_detail) {
       $sum_rate += $metal_voucher_detail['rate'];
