@@ -394,9 +394,6 @@ class Trial_balances extends Ledgers {
     if(!empty($this->data['profit_and_loss_search_to_date'])){
       $where['date(date) <=']=date('Y-m-d', strtotime($this->data['profit_and_loss_search_to_date']));
     }
-    if(!empty($this->data['profit_and_loss_search_from_date'])){
-      $where['where']=array('date(date) <='=>date('Y-m-d', strtotime($this->data['profit_and_loss_search_from_date']))/*,'date(date) >='=>$this->data['profit_and_loss_search_to_date']*/);
-    
 
     $sales = $this->chitti_model->find($select, $where);
         
