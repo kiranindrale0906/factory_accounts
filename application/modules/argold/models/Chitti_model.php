@@ -171,11 +171,15 @@ class Chitti_model extends BaseModel {
       $tcs_rate=0;
 
     //$this->attributes['debit_amount'] = (!empty($tcs_rate) || $tcs_rate!=0) ? round($total_amount + $total_amount * $tcs_rate/100) : 0;
-    if ($this->attributes['sale_type'] != 'Labour' && $this->attributes['usd_rate'] == 0)   
-      $this->attributes['debit_amount'] = round($total_amount + $total_amount * $tcs_rate/100);
-    else
-      $this->attributes['debit_amount'] = round($total_amount);
 
+      if($this->router->class == 'chitti_exports'){
+      $this->attributes['debit_amount'] = round($inr_amount);
+      }else{
+        if ($this->attributes['sale_type'] != 'Labour' && $this->attributes['usd_rate'] == 0)   
+          $this->attributes['debit_amount'] = round($total_amount + $total_amount * $tcs_rate/100);
+        else
+          $this->attributes['debit_amount'] = round($total_amount);
+         }
   }
   
   public function after_save($action){
