@@ -161,25 +161,22 @@
                                           //'ARF Refresh',
                                           'AR Gold Finished Goods',
                                           'ARF Finished Goods',
-                                          'AR Gold RND',
-                                          'ARF RND',
-                                          'ARC RND',
                                           'ARF Software Finished Goods',
                                           'ARC Finished Goods',
                                           'AR Gold Chain Receipt',
                                           'ARF Chain Receipt',
                                           'ARC Chain Receipt',
-                                          'AR Gold RND',
+                                          //'AR Gold RND',
                                           'Export Internal',
-                                          'ARF RND',
-                                          'ARC RND',
+                                          //'ARF RND',
+                                         // 'ARC RND',
                                           'AR Gold Finished Goods Receipt',
                                           'ARF Finished Goods Receipt',
                                           'ARC Finished Goods Receipt',
                                           'Vadotar',
                                           'Rodium',
                                           'Internal'))) 
-      $this->load->view('transactions/metal_issue_vouchers/subform_list');
+      {$this->load->view('transactions/metal_issue_vouchers/subform_list');}
     if ($this->router->class == "purchase_vouchers") $this->load->view('transactions/purchase_vouchers/subform_list');
     if ($this->router->class == "sales_vouchers") $this->load->view('transactions/sales_vouchers/subform_list');
     if ($this->router->class == "sales_return_vouchers") $this->load->view('transactions/sales_return_vouchers/subform_list');
