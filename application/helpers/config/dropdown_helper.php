@@ -242,6 +242,14 @@
       if (str_contains($account_name, 'Apr 2023')) return 'ARF (Apr 2023)';
     } elseif (str_contains($account_name, 'ARC')) {
       if (str_contains($account_name, 'Apr 2023')) return 'ARC (Apr 2023)';
+    }else{
+      if (str_contains($account_name, 'AR Gold')) {
+        return 'AR Gold (Apr 2023)'
+      }elseif (str_contains($account_name, 'ARF')){
+        return 'ARF (Apr 2023)'
+      }else{
+        return 'ARC (Apr 2023)'
+      }
     }
     /*if (str_contains($account_name, 'AR Gold')) {
       if (str_contains($account_name, 'May 2022')) return 'AR Gold (May 2022)';
