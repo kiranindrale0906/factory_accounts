@@ -209,7 +209,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       // }
     }  
 
-    if (in_array($this->attributes['receipt_type'], array(//'ARC Refresh', 
+    if (in_array($this->attributes['receipt_type'], array(//'ARC Refresh', 427
                                                           'ARC Chain Receipt',
                                                           'ARC Finished Goods Receipt',
                                                           'ARC Finished Goods'))) {
