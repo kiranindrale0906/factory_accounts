@@ -425,7 +425,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       //$metal_issue_data['account_id'] = $this->attributes['account_id'];
 
       if ($this->attributes['receipt_type'] != 'Vadotar') {
-        $metal_issue_data['purity'] = $this->attributes['factory_pu427rity'];
+        $metal_issue_data['purity'] = $this->attributes['factory_purity'];
         $metal_issue_data['factory_purity'] = $this->attributes['factory_purity'];
         $metal_issue_data['fine'] =!empty($metal_issue_voucher['credit_weight'])? $metal_issue_voucher['credit_weight'] * $this->attributes['factory_purity'] / 100 : 0;
         $metal_issue_data['factory_fine'] = $metal_issue_data['fine'];
