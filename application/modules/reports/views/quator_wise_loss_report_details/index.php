@@ -50,7 +50,7 @@
         <!-- <td class="text-right"><?//=four_decimal($loss_out_detail['production']);?></td> -->
         <td class="text-right">
           <a href=<?= base_url()."ac_vouchers/voucher_listing?parent_id=".$loss_out_detail['parent_id'].
-        "&site_name=".urlencode($factory_name) ?> target='_blank'><?=!empty($loss_out_detail['after_recovery'])?four_decimal($loss_out_detail['after_recovery']):0;?></a></td>
+        "&site_name=".urlencode($_GET['factory_name']) ?> target='_blank'><?=!empty($loss_out_detail['after_recovery'])?four_decimal($loss_out_detail['after_recovery']):0;?></a></td>
          <td class="text-right"><?=!empty($loss_out_detail['recoverd_loss_fine'])?four_decimal($loss_out_detail['recoverd_loss_fine']):'-';?></td>
 
         <td class="text-right"><?=(!empty($loss_out_detail['out_weight']) && $loss_out_detail['out_weight']!=0)?four_decimal((($loss_out_detail['loss_fine']-$loss_out_detail['recoverd_loss_fine'])/$loss_out_detail['out_weight']*1000)):'-';?></td>
