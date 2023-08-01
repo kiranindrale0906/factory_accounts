@@ -4,6 +4,8 @@ function getTableSettings() {
   $where=array();
   if(!empty($_GET['parent_id'])){
     $where=array('parent_id'=>$_GET['parent_id']);
+  }if(!empty($_GET['site_name'])){
+    $where['site_name']=$_GET['site_name'];
   }
   return array(
     'page_title'          => 'Vouchers',
