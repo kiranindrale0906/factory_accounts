@@ -4,6 +4,7 @@
 <div class="row text-right">
   <div class="col-md-12">
   <a href="<?=ADMIN_PATH.'transactions/metal_receipt_vouchers?refresh_id='.$refresh['id']?>" class='btn bg_blue white'>create metal receipt</a>
+  
   </div>
 </div>
 <?php }?>
@@ -49,6 +50,7 @@
         <th class="text-right">Fine</th>
         <th class="text-right">Factory Melting</th>
         <th class="text-right">Factory Fine</th>
+        <th class="text-right"></th>
       </tr>
     </thead>
     <tbody>
@@ -70,6 +72,7 @@
         <td class="text-right"><?=$refresh_detail['fine'] ?></td>
         <td class="text-right"><?=$refresh_detail['factory_purity'] ?></td>
         <td class="text-right"><?=$refresh_detail['factory_fine'] ?></td>
+        <td class="text-right"><a href="<?=ADMIN_PATH.'argold/refresh_details/delete/'.$refresh_detail['id']'?>" class='btn bg_blue white'>create metal receipt</a></td>
       </tr>
 
     <?php }?>
