@@ -3,7 +3,7 @@
 class Production_summary extends BaseController {
   public function __construct() {
     parent::__construct();
-    $this->load->model(array('masters/account_model', 'argold/refresh_detail_model'));
+    $this->load->model(array('masters/account_model', 'argold/refresh_detail_model', 'ac_vouchers/voucher_model'));
   }
 
   public function index() {
@@ -182,8 +182,25 @@ class Production_summary extends BaseController {
     };
    
     $refresh_details = $this->refresh_detail_model->get($select, $where, array(),$group_by);
+    $voucher_data=array();
+    if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARC') {
+      $select = 'date(created_at) as created_at, item_name, GROUP_CONCAT(id) as refresh_id, GROUP_CONCAT(credit_weight) as refresh_weight, sum(credit_weight) as weight, sum(credit_weight * purity) / sum(credit_weight) as purity, sum(credit_weight * factory_purity) / sum(credit_weight) as factory_purity';
+   
+      $voucher_data=$this->voucher_model->get($select, array('credit_weight !=' => 0,'site_name'=>"ARC (Apr 2023)",'receipt_type' => 'Domestic Internal'));
+    }if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARF') {
+      $select = 'date(created_at) as created_at, item_name, GROUP_CONCAT(id) as refresh_id, GROUP_CONCAT(credit_weight) as refresh_weight, sum(credit_weight) as weight, sum(credit_weight * purity) / sum(credit_weight) as purity, sum(credit_weight * factory_purity) / sum(credit_weight) as factory_purity';
+   
+      $voucher_data=$this->voucher_model->get($select, array('credit_weight !=' => 0,'site_name'=>"ARC (Apr 2023)",'receipt_type' => 'Domestic Internal'));
+    }if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold') {
+      $select = 'date(created_at) as created_at, item_name, GROUP_CONCAT(id) as refresh_id, GROUP_CONCAT(credit_weight) as refresh_weight, sum(credit_weight) as weight, sum(credit_weight * purity) / sum(credit_weight) as purity, sum(credit_weight * factory_purity) / sum(credit_weight) as factory_purity';
+   
+      $voucher_data=$this->voucher_model->get($select, array('credit_weight !=' => 0,'site_name'=>"AR Gold (Apr 2023)",'receipt_type' => 'Domestic Internal'));
+    }
 
-    $this->data['refresh_details'] = $this->get_grouped_records($refresh_details);
+    $records = array_merge($refresh_details,$voucher_data);
+    
+
+    $this->data['refresh_details'] = $this->get_grouped_records($records);
     $this->get_refresh_group_total();
   }
 
