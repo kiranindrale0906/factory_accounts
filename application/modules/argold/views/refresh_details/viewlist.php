@@ -72,7 +72,7 @@
         <td class="text-right"><?=$refresh_detail['fine'] ?></td>
         <td class="text-right"><?=$refresh_detail['factory_purity'] ?></td>
         <td class="text-right"><?=$refresh_detail['factory_fine'] ?></td>
-        <td class="text-right"><a href="<?=ADMIN_PATH.'argold/refresh_details/delete/'.$refresh_detail['id']'?>" class='btn bg_blue white'>create metal receipt</a></td>
+        <td class="text-right"><a href="<?=ADMIN_PATH.'argold/refresh_details/delete/'.$refresh_detail['id']?>" class='btn bg_blue white'>delete</a></td>
       </tr>
 
     <?php }?>
