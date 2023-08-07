@@ -1,7 +1,9 @@
 <h5 class="heading noprint">Refresh View</h5>
-<div class="col-md-8 text-right">
-<a href="<?=ADMIN_PATH.'argold/refresh/'.$refresh['id']?>" class='btn bg_red white'>Delete</a>
 
+<div class="row text-right">
+<div class="col-md-12">
+<a href="<?=ADMIN_PATH.'argold/refresh/delete/'.$refresh['id']?>" class='btn bg_red white'>Delete</a>
+</div>
 </div>
 <?php
 
