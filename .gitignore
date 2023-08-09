@@ -10,4 +10,5 @@ application/logs/*
 assets/core/.sass-cache/*
 uploads/*
 application/uploads/*
+application/config/constants.php
 
