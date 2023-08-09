@@ -38,6 +38,7 @@ class Refresh extends BaseController {
                                       array('id'=>'Dhoom B','name'=>'Dhoom B'),
                                       array('id'=>'Nano Process','name'=>'Nano Process'),
                                       array('id'=>'KA Chain Refresh','name'=>'KA Chain Refresh'),
+                                      array('id'=>'Verona Collection','name'=>'Verona Collection'),
                                       array('id'=>'Stone Ring 92','name'=>'Stone Ring 92'),
                                       array('id'=>'Ring','name'=>'Ring'),
                                       array('id'=>'Ring 75','name'=>'Ring 75'),
