@@ -13,6 +13,8 @@ class Refresh extends BaseController {
     $this->data['purity'] = $this->narration_model->get('distinct(chain_purity) as name,chain_purity as  id', array('chain_purity >'=>0) ,array(), array('order_by'=>'id asc'));
     $this->data['item_names'] = array(
                                       array('id'=>'Rope Chain','name'=>'Rope Chain'),
+                                      array('id'=>'Cnc Bangle Chain','name'=>'Cnc Bangle Chain'),
+                                      array('id'=>'Hand Made Chain','name'=>'Hand Made Chain'),
                                       array('id'=>'Machine Chain','name'=>'Machine Chain'),
                                       array('id'=>'Choco Chain','name'=>'Choco Chain'),
                                       array('id'=>'Round Box Chain','name'=>'Round Box Chain'),
