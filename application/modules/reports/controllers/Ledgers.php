@@ -666,6 +666,8 @@ class Ledgers extends BaseController {
         $where['(   purity != factory_purity 
                  or (    receipt_type = "Domestic Internal"
                      and voucher_type = "metal receipt voucher")
+                 or (    receipt_type = "Refresh"
+                     and voucher_type = "metal receipt voucher")
                  or (    account_name in ("'.$export_account_names.'") 
                      and voucher_type = "metal issue voucher")
               )'] = NULL;
