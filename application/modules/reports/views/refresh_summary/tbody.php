@@ -10,9 +10,8 @@
           if($record['data']!="voucher"){
           ?>
           <a href='<?= base_url() ?>argold/refresh/view/<?=$refresh_id?>'><?= @decimal_number_format($refresh_weights[$index], 2) ?></a>
-          <?php}else{
-            ?>
-            <a href='<?= base_url() ?>ac_vouchers/voucher_details/view/<?=$refresh_id?>'><?= @decimal_number_format($refresh_weights[$index], 2) ?></a>
+          <?php }else{
+           ?> <a href='<?= base_url() ?>argold/voucher_details/view/<?=$refresh_id?>'><?= @decimal_number_format($refresh_weights[$index], 2) ?></a>
           <?php } 
         } 
       ?>    
