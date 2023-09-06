@@ -272,7 +272,8 @@ class Ledgers extends BaseController {
 
     }else{
       $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(), array('order_by'=>'parent_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
-    }
+    //lq();
+}
     
     
     if ($this->data['report_type'] == 'Account Ledger' || $this->data['report_type'] == 'Purchase Sales Ledger'){
@@ -664,9 +665,9 @@ class Ledgers extends BaseController {
 
       if ($this->data['domestic_export'] == 'All') {
         $where['(   purity != factory_purity 
-                 or (    receipt_type = "Domestic Internal"
+                 or (    (receipt_type = "Domestic Internal" or receipt_type = "Export Internal")
                      and voucher_type = "metal receipt voucher")
-                 or (    receipt_type = "Refresh"
+		 or ( receipt_type="Refresh"
                      and voucher_type = "metal receipt voucher")
                  or (    account_name in ("'.$export_account_names.'") 
                      and voucher_type = "metal issue voucher")
