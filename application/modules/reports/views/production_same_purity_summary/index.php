@@ -6,7 +6,7 @@
 <?php 
   foreach($groups as $index => $group) { ?>
     <div class="row">
-      <div class="col-md-6 border-right">
+      <div class="col-md-12 border-right">
         <div class="table-responsive m-t-20">
           <h5>Production <?= $group ?></h5>
           <table class="table table-sm fixedthead">
