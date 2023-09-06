@@ -66,6 +66,7 @@ class User_role_model extends Core_user_role_model {
                                         'reports/metal_receipt_type_ledgers',
                                         'reports/bw_accounts',
                                         'reports/production_summary',
+                                        'reports/production_same_purity_summary',
                                         'reports/loss_accounts',
                                         'reports/loss_summaries',
                                         'reports/loss_reports',
