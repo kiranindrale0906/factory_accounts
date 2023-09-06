@@ -115,8 +115,10 @@ class Production_same_purity_summary extends BaseController {
     foreach ($this->data['production_details'] as $group => $production_detail) {
       $this->data['production_total'][$group] = array('weight' => 0, 'vadotar' => 0);
       foreach ($production_detail['records'] as $record) {
-        $this->data['production_total'][$group]['weight'] += $record['issue_gpc_out'];
-        $this->data['production_total'][$group]['vadotar'] += $record['issue_gpc_out'] * ($record['out_purity'] - $record['in_purity']) / 100;
+        if($record['out_purity']==$record['in_purity']){
+          $this->data['production_total'][$group]['weight'] += $record['issue_gpc_out'];
+          $this->data['production_total'][$group]['vadotar'] += $record['issue_gpc_out'] * ($record['out_purity'] - $record['in_purity']) / 100;
+        }
       }
     }
   }
