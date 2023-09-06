@@ -369,9 +369,9 @@ class Quator_wise_loss_reports extends BaseController {
           foreach ($arg_records as $index => $arg_loss_detail) {
               if(trim(strtolower($arg_loss_detail['description']))==trim(strtolower($category_name))){
                 $factory_wise_record[$index]['production']=0;
-                $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$arg_loss_detail['parent_id'],'account_name!='=>'Unrecovarable'.' '.$this->data['site_name']));
+                $loss_account_details= $this->voucher_model->find('sum(debit_weight) as weight,factory_purity,sum(fine) as fine',array('parent_id'=>$arg_loss_detail['parent_id'],'site_name'=>$this->data['site_name'],'account_name!='=>'Unrecovarable'.' '.$this->data['site_name']));
                 
-                $unrecovery_details = $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$arg_loss_detail['parent_id'],'account_name'=>'Unrecovarable'.' '.$this->data['site_name']));
+                $unrecovery_details = $this->voucher_model->find('sum(credit_weight) as weight',array('parent_id'=>$arg_loss_detail['parent_id'],'site_name'=>$this->data['site_name'],'account_name'=>'Unrecovarable'.' '.$this->data['site_name']));
 
                 $opening_recovered_loss=!empty($arg_loss_detail['opening_recovered_loss'])?$arg_loss_detail['opening_recovered_loss']:0;
                 $opening_after_recovery=!empty($arg_loss_detail['opening_after_recovery'])?$arg_loss_detail['opening_after_recovery']:0;
