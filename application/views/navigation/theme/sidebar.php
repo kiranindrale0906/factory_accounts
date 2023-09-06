@@ -95,6 +95,7 @@
                                         'reports/gross_profit_reports' => 'Gross Profit Report',
                                         'reports/rojmel_reports' => 'Rojmel Report',
                                         'reports/production_summary' => 'Production Summary',
+                                        'reports/production_same_purity_summary' => 'Production Same Purity Summary',
                                         'reports/bw_accounts' => 'Bw Accounts',
                                         'reports/loss_accounts' => 'Loss Accounts',
                                         'reports/loss_reports' => 'Loss Reports',
