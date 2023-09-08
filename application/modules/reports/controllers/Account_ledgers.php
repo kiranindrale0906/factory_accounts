@@ -6,6 +6,7 @@ class Account_ledgers extends Ledgers {
 
   public function __construct() {
     parent::__construct();
+    ini_set("memory_limit","500M");
     $this->load->model(array('masters/account_model', 'transactions/ledger_model'));
   }
 
