@@ -50,6 +50,10 @@ class Production_summary extends BaseController {
     elseif ($this->data['site_name'] == 'ARF')     $url = API_APR2023_ARF_PATH."issue_departments/api_issue_departments/create";
     elseif ($this->data['site_name'] == 'ARC')     $url = API_APR2023_ARC_PATH."issue_departments/api_issue_departments/create";
       
+   elseif ($this->data['site_name'] == 'AR Gold (Sep 2023)')     $url = API_SEP2023_ARG_PATH."issue_departments/api_issue_departments/create";
+    elseif ($this->data['site_name'] == 'ARF (Sep 2023)')     $url = API_SEP2023_ARF_PATH."issue_departments/api_issue_departments/create";
+    elseif ($this->data['site_name'] == 'ARC (Sep 2023)')     $url = API_SEP2023_ARC_PATH."issue_departments/api_issue_departments/create";
+      
     if (!empty($url)) {
       $records = json_decode(curl_post_request($url, $this->data));
       $this->data = array_merge($this->data, json_decode(json_encode($records), true));
@@ -97,6 +101,10 @@ class Production_summary extends BaseController {
       $url = API_APR2023_ARG_PATH."issue_departments/api_issue_departments/index";
       $records = json_decode(curl_post_request($url, $_GET));
       $argold_records = json_decode(json_encode($records), true);    
+    }if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold (Sep 2023)') {
+      $url = API_SEP2023_ARG_PATH."issue_departments/api_issue_departments/index";
+      $records = json_decode(curl_post_request($url, $_GET));
+      $argold_records = json_decode(json_encode($records), true);    
     }
     if (empty($argold_records['data'])) $argold_records['data'] = array();
 
@@ -116,6 +124,10 @@ class Production_summary extends BaseController {
       $arf_records = json_decode(json_encode($records), true);
     }*/if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARF') {
       $url = API_APR2023_ARF_PATH."issue_departments/api_issue_departments/index";
+      $records = json_decode(curl_post_request($url, $_GET));
+      $arf_records = json_decode(json_encode($records), true);
+    }if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARF (Sep 2023)') {
+      $url = API_SEP2023_ARF_PATH."issue_departments/api_issue_departments/index";
       $records = json_decode(curl_post_request($url, $_GET));
       $arf_records = json_decode(json_encode($records), true);
     }
@@ -138,6 +150,10 @@ class Production_summary extends BaseController {
     }*/
     if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARC') {
       $url = API_APR2023_ARC_PATH."issue_departments/api_issue_departments/index";
+      $records = json_decode(curl_post_request($url, $_GET));
+      $arc_records = json_decode(json_encode($records), true);
+    }if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARC (Sep 2023)') {
+      $url = API_SEP2023_ARC_PATH."issue_departments/api_issue_departments/index";
       $records = json_decode(curl_post_request($url, $_GET));
       $arc_records = json_decode(json_encode($records), true);
     }
@@ -194,6 +210,17 @@ class Production_summary extends BaseController {
 	
      }
       $voucher_data=$this->voucher_model->get($select, $domestic_where,array(),$group_by);
+    }if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARC (Sep 2023)') {
+      $select = 'date(created_at) as created_at, description as item_name,"voucher" as  data , GROUP_CONCAT(id) as refresh_id, GROUP_CONCAT(credit_weight) as refresh_weight, sum(credit_weight) as weight, sum(credit_weight * purity) / sum(credit_weight) as purity, sum(credit_weight * factory_purity) / sum(credit_weight) as factory_purity';
+      $domestic_where=array('credit_weight !=' => 0,'site_name'=>"ARC (Sep 2023)",'receipt_type' => 'Domestic Internal');
+      if(!empty($this->data['product_name'])){
+       $domestic_where['description']    =$this->data['product_name'];
+      // $group_by=array('group_by' => 'date(created_at)');
+    }else{
+  $domestic_where['description!=']="";
+  
+     }
+      $voucher_data=$this->voucher_model->get($select, $domestic_where,array(),$group_by);
     }if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARF') {
       $select = 'date(created_at) as created_at, description as item_name,"voucher" as  data , GROUP_CONCAT(id) as refresh_id, GROUP_CONCAT(credit_weight) as refresh_weight, sum(credit_weight) as weight, sum(credit_weight * purity) / sum(credit_weight) as purity, sum(credit_weight * factory_purity) / sum(credit_weight) as factory_purity';
       $domestic_where=array('credit_weight !=' => 0,'site_name'=>"ARF (Apr 2023)",'receipt_type' => 'Domestic Internal');
@@ -206,6 +233,18 @@ class Production_summary extends BaseController {
 	}
    
       $voucher_data=$this->voucher_model->get($select, $domestic_where,array(),$group_by);
+    }if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARF (Sep 2023)') {
+      $select = 'date(created_at) as created_at, description as item_name,"voucher" as  data , GROUP_CONCAT(id) as refresh_id, GROUP_CONCAT(credit_weight) as refresh_weight, sum(credit_weight) as weight, sum(credit_weight * purity) / sum(credit_weight) as purity, sum(credit_weight * factory_purity) / sum(credit_weight) as factory_purity';
+      $domestic_where=array('credit_weight !=' => 0,'site_name'=>"ARF (Sep 2023)",'receipt_type' => 'Domestic Internal');
+        if(!empty($this->data['product_name'])){
+          $domestic_where['description']    =$this->data['product_name'];
+        //  $group_by=array('group_by' => 'date(created_at)');
+      }else{
+  $domestic_where['description!=']    ="";
+
+  }
+   
+      $voucher_data=$this->voucher_model->get($select, $domestic_where,array(),$group_by);
     }if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold') {
       $select = 'date(created_at) as created_at, description as item_name,"voucher" as  data , GROUP_CONCAT(id) as refresh_id, GROUP_CONCAT(credit_weight) as refresh_weight, sum(credit_weight) as weight, sum(credit_weight * purity) / sum(credit_weight) as purity, sum(credit_weight * factory_purity) / sum(credit_weight) as factory_purity';
       $domestic_where=array('credit_weight !=' => 0,'site_name'=>"AR Gold (Apr 2023)",'receipt_type' => 'Domestic Internal');
@@ -215,6 +254,17 @@ class Production_summary extends BaseController {
           //$group_by=array('group_by' => 'date(created_at)');
       }else{
 	$domestic_where['description!=']    ="";
+      }
+      $voucher_data=$this->voucher_model->get($select,$domestic_where,array(),$group_by);
+    }if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold (Sep 2023)') {
+      $select = 'date(created_at) as created_at, description as item_name,"voucher" as  data , GROUP_CONCAT(id) as refresh_id, GROUP_CONCAT(credit_weight) as refresh_weight, sum(credit_weight) as weight, sum(credit_weight * purity) / sum(credit_weight) as purity, sum(credit_weight * factory_purity) / sum(credit_weight) as factory_purity';
+      $domestic_where=array('credit_weight !=' => 0,'site_name'=>"AR Gold (Sep 2023)",'receipt_type' => 'Domestic Internal');
+       
+      if(!empty($this->data['product_name'])){
+          $domestic_where['description']    =$this->data['product_name'];
+          //$group_by=array('group_by' => 'date(created_at)');
+      }else{
+  $domestic_where['description!=']    ="";
       }
       $voucher_data=$this->voucher_model->get($select,$domestic_where,array(),$group_by);
     }
