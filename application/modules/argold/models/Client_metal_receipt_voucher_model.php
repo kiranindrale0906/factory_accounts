@@ -596,7 +596,20 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     //   $api_url = API_EXPORT_INTERNAL_PATH.$api_url;
     // print_r($send_data);
     // pd($api_url); 
+    if ($attributes['account_name']=="AR Gold ERP Software" || $attributes['account_name']=="ARF ERP Software" || $attributes['account_name']=="ARC ERP Software"){
+    $api_data = array('receipt_type'=> $attributes['receipt_type'],
+                      'account_name'=> $attributes['account_name'],
+                      'credit_weight' => $attributes['credit_weight'],
+                      'factory_purity' => $attributes['factory_purity'],
+                      'description' => $attributes['narration'],
+                      'account_id' => $attributes['id']);
+    $send_data=$api_data;
+    $api_url = "https://argold.8848digitalerp.com/api/method/custom_app.api.material_receipt.create_material_receipt";
+    if (empty($api_url)) return true;
+    $result = curl_post_erp_request($api_url, $send_data);
+  }else{
     $result = curl_post_request($api_url, $send_data);
+  }
     // pd($result);
 }
 
