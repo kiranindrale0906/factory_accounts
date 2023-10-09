@@ -241,6 +241,9 @@
       array('id' => 'AR Gold Software (Sep 2023)', 'name' => 'AR Gold Software (Sep 2023)'),
       array('id' => 'ARF Software (Sep 2023)',     'name' => 'ARF Software (Sep 2023)'),
       array('id' => 'ARC Software (Sep 2023)',     'name' => 'ARC Software (Sep 2023)'),
+      array('id' => 'AR Gold ERP Software',     'name' => 'AR Gold ERP Software'),
+      array('id' => 'ARF ERP Software',     'name' => 'ARF ERP Software'),
+      array('id' => 'ARC ERP Software',     'name' => 'ARC ERP Software'),
     );
     if ($export==1) $site_names[] = array('id' => 'Export', 'name' => 'Export');
     if ($export==2) $site_names[] = array('id' => 'Domestic', 'name' => 'Domestic');
