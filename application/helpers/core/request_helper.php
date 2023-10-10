@@ -77,3 +77,55 @@ defined('BASEPATH') OR exit('No direct script access allowed.');
       return $content;
     }
   }
+
+  if (!function_exists('curl_post_erp_request')) {
+    function curl_post_erp_request($uri, $data = array()) {
+    $curl = curl_init();
+      curl_setopt_array($curl, array(
+        CURLOPT_URL =>$uri,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS => json_encode($data),
+        CURLOPT_HTTPHEADER => array(
+          'Authorization: token 4e7ab0aec03a4f2:cbb435e12073d32',
+          'Content-Type: application/json',
+          'Accept: application/json',
+          'Cookie: sid=Guest'
+        ),
+      ));
+    $response = curl_exec($curl);
+    curl_close($curl);
+    pd($response);
+    return $response;
+    }
+  }
+  if (!function_exists('curl_get_erp_request')) {
+    function curl_get_erp_request($uri, $data = array()) {
+    $curl = curl_init();
+
+      curl_setopt_array($curl, array(
+        CURLOPT_URL => $uri,
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'GET',
+        CURLOPT_HTTPHEADER => array(
+          'Authorization: token 4e7ab0aec03a4f2:cbb435e12073d32',
+          'Cookie: sid=Guest'
+        ),
+      ));
+      $response = curl_exec($curl);
+
+      curl_close($curl);
+      return $response;
+
+    }
+  }
