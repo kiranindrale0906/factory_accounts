@@ -214,6 +214,9 @@
       array('id' => 'AR Gold (Sep 2023)', 'name' => 'AR Gold (Sep 2023)'),
       array('id' => 'ARF (Sep 2023)',     'name' => 'ARF (Sep 2023)'),
       array('id' => 'ARC (Sep 2023)',     'name' => 'ARC (Sep 2023)'),
+    array('id' => 'ARG ERP', 'name' => 'ARG ERP'),
+      array('id' => 'ARF ERP',     'name' => 'ARF ERP'),
+      array('id' => 'ARC ERP',     'name' => 'ARC ERP'),
     );
     if ($export==1) $site_names[] = array('id' => 'Export', 'name' => 'Export');
     if ($export==2) {
