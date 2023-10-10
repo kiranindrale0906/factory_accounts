@@ -242,6 +242,7 @@
       array('id' => 'ARF Software (Sep 2023)',     'name' => 'ARF Software (Sep 2023)'),
       array('id' => 'ARC Software (Sep 2023)',     'name' => 'ARC Software (Sep 2023)'),
       array('id' => 'AR Gold ERP Software',     'name' => 'AR Gold ERP Software'),
+      array('id' => 'ARG ERP Software',     'name' => 'ARG ERP Software'),
       array('id' => 'ARF ERP Software',     'name' => 'ARF ERP Software'),
       array('id' => 'ARC ERP Software',     'name' => 'ARC ERP Software'),
     );
