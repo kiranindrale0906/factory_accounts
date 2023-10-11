@@ -596,7 +596,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     //   $api_url = API_EXPORT_INTERNAL_PATH.$api_url;
     // print_r($send_data);
     // pd($api_url); 
-    if ($attributes['account_name']=="AR Gold ERP Software" || $attributes['account_name']=="ARF ERP Software" || $attributes['account_name']=="ARC ERP Software"){
+    if ($attributes['account_name']=="AR Gold ERP Software" ||$attributes['account_name']=="ARG ERP Software" || $attributes['account_name']=="ARF ERP Software" || $attributes['account_name']=="ARC ERP Software"){
     $api_data = array('receipt_type'=> $attributes['receipt_type'],
                       'account_name'=> $attributes['account_name'],
                       'credit_weight' => $attributes['credit_weight'],

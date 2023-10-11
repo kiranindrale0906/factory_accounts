@@ -214,6 +214,7 @@
       array('id' => 'AR Gold (Sep 2023)', 'name' => 'AR Gold (Sep 2023)'),
       array('id' => 'ARF (Sep 2023)',     'name' => 'ARF (Sep 2023)'),
       array('id' => 'ARC (Sep 2023)',     'name' => 'ARC (Sep 2023)'),
+    array('id' => 'AR Gold ERP', 'name' => 'AR Gold ERP')
     );
     if ($export==1) $site_names[] = array('id' => 'Export', 'name' => 'Export');
     if ($export==2) {
@@ -278,6 +279,12 @@
       }else{
         return 'ARC';
       }
+    }elseif (str_contains($account_name, 'ARC ERP')) {
+       return 'AR Gold ERP'
+    }elseif (str_contains($account_name, 'ARG ERP')) {
+       return 'AR Gold ERP'
+    }elseif (str_contains($account_name, 'ARF ERP')) {
+       return 'AR Gold ERP'
     }
 
     /*if (str_contains($account_name, 'AR Gold')) {
