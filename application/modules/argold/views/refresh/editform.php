@@ -18,7 +18,9 @@
     <?php load_field('dropdown', array('field' => 'site_name','option'=>array(
                                                                               array('id'=>'AR Gold','name'=>'AR Gold'),
                                                                               array('id'=>'ARF','name'=>'ARF'),
-                                                                              array('id'=>'ARC','name'=>'ARC'))));?>
+                                                                              array('id'=>'ARC','name'=>'ARC'),array('id'=>'AR Gold (Sep 2023)','name'=>'AR Gold (Sep 2023)'),
+                                                                              array('id'=>'ARF (Sep 2023)','name'=>'ARF (Sep 2023)'),
+                                                                              array('id'=>'ARC (Sep 2023)','name'=>'ARC (Sep 2023)'),)));?>
   </div>
   <?php load_buttons('submit', array('controller' => $controller, 'name' => 'SAVE' , 'class' => 'btn_blue')) ?>
 </form>
