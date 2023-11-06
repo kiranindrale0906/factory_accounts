@@ -22,6 +22,10 @@ class Core_metal_issue_voucher_model extends Voucher_model {
     
     if (!in_array($this->attributes['receipt_type'], array('Alloy Vodator', 'GPC Vodator', 'Stone Vatav', 'Spring Vatav','Meena Vatav', 'Copper Vatav', 'Rhodium Vatav', 'HCL Loss', 'Tounch Loss Fine', 'AR Gold Loss Out', 'ARF Loss Out', 'ARC Loss Out', 'Ghiss Melting Loss', 'Castic Loss')))
       $rules[] = $this->get_credit_weight_validation_rules();
+    if ($this->attributes['sale_type'] == 'Sale'){ 
+      $rules[] = $this->get_gold_rate_validation_rules();
+      $rules[] = $this->get_gold_rate_purity_validation_rules();
+    }
     return $rules;
   }
 }

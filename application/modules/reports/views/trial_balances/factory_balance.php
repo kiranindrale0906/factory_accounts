@@ -49,9 +49,9 @@
 
         <tr>
           <td>AR GOLD</td>
-          <td class="text-right"><?= four_decimal(-1 * $accounts_apr2023_argold_balance) ?></td>
-          <td class="text-right"><?= four_decimal(-1 * $live_apr2023_argold_balance) ?></td>
-          <td class="text-right"><?= four_decimal($accounts_apr2023_argold_balance - $live_apr2023_argold_balance) ?></td>
+          <td class="text-right"><?= four_decimal(-1 * $accounts_sep2023_argold_balance) ?></td>
+          <td class="text-right"><?= four_decimal(-1 * $live_sep2023_argold_balance) ?></td>
+          <td class="text-right"><?= four_decimal($accounts_sep2023_argold_balance - $live_sep2023_argold_balance) ?></td>
         </tr>
         <tr>
           <td>ARF (Sep 2023)</td>
@@ -82,13 +82,13 @@
 
         <tr>
           <td>Total</td>
-          <td class="text-right"><?= four_decimal(-1 * (/*$accounts_aug2022_argold_balance + $accounts_aug2022_arf_balance +*/ $accounts_apr2023_arc_balance+$accounts_apr2023_argold_balance+$accounts_apr2023_arf_balance+$accounts_apr2023_export_balance+$accounts_apr2023_domestic_balance)) ?></td>
-          <td class="text-right"><?= four_decimal(-1 * (/*$live_apr2023_argold_balance + $live_apr2023_arf_balance +*/ $live_apr2023_arc_balance+$live_apr2023_argold_balance+$live_apr2023_arf_balance+$live_apr2023_export_balance+$live_apr2023_domestic_balance)) ?>  </td>
-          <td class="text-right"><b><?= four_decimal(-1 * (  /*$accounts_apr2023_argold_balance  - $live_apr2023_argold_balance
-                                                           + $accounts_apr2023_arf_balance - $live_apr2023_arf_balance
+          <td class="text-right"><?= four_decimal(-1 * (/*$accounts_aug2022_argold_balance + $accounts_aug2022_arf_balance +*/ $accounts_apr2023_arc_balance+$accounts_sep2023_argold_balance+$accounts_sep2023_arf_balance+$accounts_apr2023_export_balance+$accounts_apr2023_domestic_balance)) ?></td>
+          <td class="text-right"><?= four_decimal(-1 * (/*$live_sep2023_argold_balance + $live_sep2023_arf_balance +*/ $live_apr2023_arc_balance+$live_sep2023_argold_balance+$live_sep2023_arf_balance+$live_apr2023_export_balance+$live_apr2023_domestic_balance)) ?>  </td>
+          <td class="text-right"><b><?= four_decimal(-1 * (  /*$accounts_sep2023_argold_balance  - $live_sep2023_argold_balance
+                                                           + $accounts_sep2023_arf_balance - $live_sep2023_arf_balance
                                                            +*/ $accounts_apr2023_arc_balance - $live_apr2023_arc_balance
-                                                           +$accounts_apr2023_argold_balance - $live_apr2023_argold_balance
-                                                           +$accounts_apr2023_arf_balance - $live_apr2023_arf_balance
+                                                           +$accounts_sep2023_argold_balance - $live_sep2023_argold_balance
+                                                           +$accounts_sep2023_arf_balance - $live_sep2023_arf_balance
                                                            +$accounts_apr2023_export_balance - $live_apr2023_export_balance
                                                            +$accounts_apr2023_domestic_balance - $live_apr2023_domestic_balance)) ?></b></td>
         </tr>

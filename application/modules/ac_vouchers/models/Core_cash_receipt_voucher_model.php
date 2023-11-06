@@ -16,6 +16,10 @@ class Core_cash_receipt_voucher_model extends Voucher_model {
 
   function validation_rules($klass='') {
     $rules = parent::validation_rules($klass);
+    if ($this->attributes['sale_type'] == 'Sale'){ 
+      $rules[] = $this->get_gold_rate_validation_rules();
+      $rules[] = $this->get_gold_rate_purity_validation_rules();
+    }
     return $rules;
   }
 }
