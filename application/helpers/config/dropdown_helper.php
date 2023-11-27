@@ -290,11 +290,11 @@
         return 'ARC';
       }
     }elseif (str_contains($account_name, 'ARC ERP')) {
-       return 'AR Gold ERP'
+       return 'AR Gold ERP';
     }elseif (str_contains($account_name, 'ARG ERP')) {
-       return 'AR Gold ERP'
+       return 'AR Gold ERP';
     }elseif (str_contains($account_name, 'ARF ERP')) {
-       return 'AR Gold ERP'
+       return 'AR Gold ERP';
     }
     /*if (str_contains($account_name, 'AR Gold')) {
       if (str_contains($account_name, 'May 2022')) return 'AR Gold (May 2022)';
