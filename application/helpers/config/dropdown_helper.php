@@ -253,38 +253,28 @@
   }
 
   function get_site_name_from_account_name($account_name) {
+
     if (str_contains($account_name, 'AR Gold')) {
+
       if (str_contains($account_name, 'Apr 2023')){
         return 'AR Gold (Apr 2023)';
+      }elseif (str_contains($account_name, 'Sep 2023')){
+        return 'AR Gold (Sep 2023)';
       }else{
         return 'AR Gold';
       } 
     } elseif (str_contains($account_name, 'ARF')) {
       if (str_contains($account_name, 'Apr 2023')){
         return 'ARF (Apr 2023)';
+      }elseif (str_contains($account_name, 'Sep 2023')){
+        return 'ARF (Sep 2023)';
       }else{
         return 'ARF';
       }
     } elseif (str_contains($account_name, 'ARC')) {
       if (str_contains($account_name, 'Apr 2023')){
         return 'ARC (Apr 2023)';
-      }else{
-        return 'ARC';
-      }
-    } elseif (str_contains($account_name, 'AR Gold Sep 2023')) {
-      if (str_contains($account_name, 'Sep 2023')){
-        return 'AR Gold (Sep 2023)';
-      }else{
-        return 'AR Gold';
-      } 
-    } elseif (str_contains($account_name, 'ARF Sep 2023')) {
-      if (str_contains($account_name, 'Sep 2023')){
-        return 'ARF (Sep 2023)';
-      }else{
-        return 'ARF';
-      }
-    } elseif (str_contains($account_name, 'ARC Sep 2023')) {
-      if (str_contains($account_name, 'Sep 2023')){
+      }elseif (str_contains($account_name, 'Sep 2023')){
         return 'ARC (Sep 2023)';
       }else{
         return 'ARC';
@@ -296,6 +286,7 @@
     }elseif (str_contains($account_name, 'ARF ERP')) {
        return 'AR Gold ERP';
     }
+
     /*if (str_contains($account_name, 'AR Gold')) {
       if (str_contains($account_name, 'May 2022')) return 'AR Gold (May 2022)';
       elseif (str_contains($account_name, 'Aug 2022')) return 'AR Gold (Aug 2022)';
