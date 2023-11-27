@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Chitti_erps extends BaseController {
   public function __construct() {
     parent::__construct();
-    $this->date_fields = array(array('chittis', 'date'));
+    $this->date_fields = array(array('chitti_erps', 'date'));
     $this->redirect_after_save = 'view';
     $this->load->model(array('ac_vouchers/voucher_model','masters/account_model','argold/chitti_empty_packet_detail_model','masters/narration_model','masters/empty_packet_model'));
   }
@@ -183,7 +183,7 @@ class Chitti_erps extends BaseController {
       }
     }else{
       if ($this->router->method == 'store' || $this->router->method == 'update') {
-        $this->data['record']['chittis'] = $_POST['chittis'];
+        $this->data['record']['chitti_erps'] = $_POST['chitti_erps'];
         $this->data['chittis_details'] = @$_POST['chittis_details'];
       }
     }
@@ -218,7 +218,7 @@ class Chitti_erps extends BaseController {
   }
 
   public function store() {
-    $this->data['redirect_url'] = '/argold/chittis';
+    $this->data['redirect_url'] = '/argold/chitti_erps';
     parent::store();
   }
 
@@ -227,7 +227,7 @@ class Chitti_erps extends BaseController {
     if (!empty($voucher_id) && $voucher_id!=0) {
       $voucher_details=$this->voucher_model->get('',array('chitti_id'=>$id,'id'=>$voucher_id));
       $this->chitti_model->update_chitti_ids($voucher_details);
-      redirect(base_url().'argold/chittis/view/'.$id);
+      redirect(base_url().'argold/chitti_erps/view/'.$id);
     } else {
       $voucher_details=$this->voucher_model->get('',array('chitti_id'=>$id));
       if(!empty($voucher_details))
@@ -242,7 +242,7 @@ class Chitti_erps extends BaseController {
     elseif ($this->router->class == 'chitti_domestics')
       $this->data['redirect_url']= ADMIN_PATH.'argold/chitti_domestics';
     else
-      $this->data['redirect_url']= ADMIN_PATH.'argold/chittis';
+      $this->data['redirect_url']= ADMIN_PATH.'argold/chitti_erps';
     
     return $formdata;
   }
