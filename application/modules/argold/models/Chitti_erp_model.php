@@ -1,6 +1,6 @@
 <?php
 
-class Chitti_model extends BaseModel {
+class Chitti_erp_model extends BaseModel {
 
   protected $table_name = "chitties";
   public $router_class = "chitti_erps";
