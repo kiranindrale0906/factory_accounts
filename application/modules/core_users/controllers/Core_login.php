@@ -24,7 +24,13 @@ class Core_login extends BaseController {
 
   public function _after_save($formdata, $action){
     $user_data = $this->User_model->set_user_data_in_session(array("email_id" => $formdata['login']['email_id']));
-    
+    if ($this->db->table_exists('ip_addresses'))
+      $check_ip_address = $this->ip_address_model->find('',array('ip_address'=>$_SERVER['REMOTE_ADDR']));
+    else
+      $check_ip_address = '';
+    if(empty($check_ip_address) && $user_data['do_not_check_ip']==0){
+      redirect('users/logout');
+    }
     if(!is_api_request()) {
       $this->session->set_userdata($user_data);
       

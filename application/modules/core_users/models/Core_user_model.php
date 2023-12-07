@@ -70,11 +70,16 @@ class Core_user_model extends BaseModel {
       $this->attributes['encrypted_password'] = md5($this->attributes['password']);
       unset($this->attributes['password']);
     }
+    if (!isset($this->attributes['do_not_check_ip'])) 
+      $this->attributes['do_not_check_ip'] = 1;
+    else
+      $this->attributes['do_not_check_ip']=!empty($_POST['users']['do_not_check_ip'])?$_POST['users']['do_not_check_ip']:0;
   }
 
   public function set_user_data_in_session($where_condition){
     $user = $this->find('',$where_condition);
-    if (!isset($this->attributes['do_not_check_ip'])) $user['do_not_check_ip'] = 1;
+    //if (!isset($this->attributes['do_not_check_ip'])) $user['do_not_check_ip'] = 1;
+    if (!isset($user['do_not_check_ip'])) $user['do_not_check_ip'] = 1;
     
     $user_role_ids = $this->get_user_role_ids($user['id']);
     $this->update_db_session($user['id']);
@@ -88,7 +93,8 @@ class Core_user_model extends BaseModel {
               'user_role_ids'   => $user_role_ids,
               'is_email_verify' => @$user['is_email_verify'],
               'password_updated_at' => $user['password_updated_at'],
-              'controller_list' => $this->get_user_controller_list($user_role_ids)
+              'controller_list' => $this->get_user_controller_list($user_role_ids),
+              'do_not_check_ip' => $user['do_not_check_ip']
             );
   }
 
