@@ -37,6 +37,7 @@ class User_role_model extends Core_user_role_model {
                                             'transactions/interest_issue_vouchers',
                                             'transactions/interest_receipt_vouchers',
                                             'argold/chittis',
+                                            'argold/chitti_erps',
                                             'argold/chalans',
                                             'argold/chalan_details',
                                             'argold/opening_loss_vouchers',
