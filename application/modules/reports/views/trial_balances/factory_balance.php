@@ -59,12 +59,12 @@
           <td class="text-right"><?= four_decimal(-1 * $live_sep2023_arf_balance) ?>  </td>
           <td class="text-right"><?= four_decimal($accounts_sep2023_arf_balance - $live_sep2023_arf_balance) ?></td>
         </tr>
-        <!-- <tr>
+        <tr>
           <td>ARC (Feb 2023)</td>
-          <td class="text-right"><?//= four_decimal(-1 * $accounts_apr2023_arc_balance) ?></td>
-          <td class="text-right"><?//= four_decimal(-1 * $live_apr2023_arc_balance) ?>  </td>
-          <td class="text-right"><?//= four_decimal($accounts_apr2023_arc_balance - $live_apr2023_arc_balance) ?></td>
-        </tr> -->
+          <td class="text-right"><?= four_decimal(-1 * $accounts_apr2023_arc_balance) ?></td>
+          <td class="text-right"><?= four_decimal(-1 * $live_apr2023_arc_balance) ?>  </td>
+          <td class="text-right"><?= four_decimal($accounts_apr2023_arc_balance - $live_apr2023_arc_balance) ?></td>
+        </tr> 
 
         <tr>
           <td>Export</td>
