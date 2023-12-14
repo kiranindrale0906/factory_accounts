@@ -22,6 +22,9 @@
                                                                               array('id'=>'AR Gold (Sep 2023)','name'=>'AR Gold (Sep 2023)'),
                                                                               array('id'=>'ARF (Sep 2023)','name'=>'ARF (Sep 2023)'),
                                                                               array('id'=>'ARC (Sep 2023)','name'=>'ARC (Sep 2023)'),
+                                                                              array('id'=>'ARG ERP Software','name'=>'ARG ERP Software'),
+                                                                              array('id'=>'ARF ERP Software','name'=>'ARF ERP Software'),
+                                                                              array('id'=>'ARC ERP Software','name'=>'ARC ERP Software'),
                                                                               )));?>
   
   </div>
