@@ -100,8 +100,8 @@ class Trial_balances extends Ledgers {
     $url=API_APR2023_ARF_PATH."issue_and_receipts/ledger_balance/index";
     $arf_apr2023_records=json_decode(curl_post_request($url));
     
-//    $url=API_SEP2023_ARC_PATH."issue_and_receipts/ledger_balance/index";
-  //  $arc_sep2023_records=json_decode(curl_post_request($url));
+    $url=API_SEP2023_ARC_PATH."issue_and_receipts/ledger_balance/index";
+    $arc_sep2023_records=json_decode(curl_post_request($url));
     
     $url=API_SEP2023_ARG_PATH."issue_and_receipts/ledger_balance/index";
     $arg_sep2023_records=json_decode(curl_post_request($url));
@@ -263,10 +263,10 @@ class Trial_balances extends Ledgers {
     $this->data['live_arf_rolling_balance'] =!empty($arf_rolling_records->data->balance)? $arf_rolling_records->data->balance:0;
     $this->data['live_arf_rolling_gpc_balance']=!empty($arf_rolling_records->data->gpc_out_balance)? $arf_rolling_records->data->gpc_out_balance:0;
     
-    //$url=API_SEP2023_ARC_PATH."stock_summary_reports/overall_rolling_reports/index?overall_rolling=1";
-    //$arc_rolling_records=json_decode(curl_post_request($url));
-    //$this->data['live_arc_rolling_balance'] =!empty($arc_rolling_records->data->balance)?$arc_rolling_records->data->balance:0;
-    //$this->data['live_arc_rolling_gpc_balance']=!empty($arc_rolling_records->data->gpc_out_balance)? $arc_rolling_records->data->gpc_out_balance:0;
+    $url=API_SEP2023_ARC_PATH."stock_summary_reports/overall_rolling_reports/index?overall_rolling=1";
+    $arc_rolling_records=json_decode(curl_post_request($url));
+    $this->data['live_arc_rolling_balance'] =!empty($arc_rolling_records->data->balance)?$arc_rolling_records->data->balance:0;
+    $this->data['live_arc_rolling_gpc_balance']=!empty($arc_rolling_records->data->gpc_out_balance)? $arc_rolling_records->data->gpc_out_balance:0;
   }
   
   private function get_account_ledger_records() {
@@ -498,7 +498,7 @@ class Trial_balances extends Ledgers {
       $this->create_update_vadotar_records(API_APR2023_ARC_PATH, 'ARC', 'Apr 2023');
       $this->create_update_vadotar_records(API_APR2023_ARG_PATH, 'AR Gold', 'Apr 2023');
       $this->create_update_vadotar_records(API_APR2023_ARF_PATH, 'ARF', 'Apr 2023');
-      //$this->create_update_vadotar_records(API_SEP2023_ARC_PATH, 'ARC', 'Sep 2023');
+      $this->create_update_vadotar_records(API_SEP2023_ARC_PATH, 'ARC', 'Sep 2023');
       $this->create_update_vadotar_records(API_SEP2023_ARG_PATH, 'AR Gold', 'Sep 2023');
       $this->create_update_vadotar_records(API_SEP2023_ARF_PATH, 'ARF', 'Sep 2023');
       //$this->create_update_vadotar_records(API_FEB2023_ARC_PATH, 'ARC', 'Feb 2023');

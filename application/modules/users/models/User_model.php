@@ -78,13 +78,15 @@ class User_model extends Core_user_model {
     $this->attributes['arc_details']=!empty($_POST['users']['arc_details'])?$_POST['users']['arc_details']:0;
     $this->attributes['vodator_report']=!empty($_POST['users']['vodator_report'])?$_POST['users']['vodator_report']:0;
     $this->attributes['production_report']=!empty($_POST['users']['production_report'])?$_POST['users']['production_report']:0;
-    $this->attributes['do_not_check_ip']=!empty($_POST['users']['do_not_check_ip'])?$_POST['users']['do_not_check_ip']:0;
+    if (!isset($this->attributes['do_not_check_ip'])) 
+      $this->attributes['do_not_check_ip'] = 1;
+    else
+      $this->attributes['do_not_check_ip']=!empty($_POST['users']['do_not_check_ip'])?$_POST['users']['do_not_check_ip']:0;
   }
 
   public function set_user_data_in_session($where_condition) {
     $user = $this->find('',$where_condition);
-    if (!isset($this->attributes['do_not_check_ip'])) 
-      $user['do_not_check_ip'] = 1;
+    if (!isset($user['do_not_check_ip'])) $user['do_not_check_ip'] = 1;
 
     $user_role_ids = $this->get_user_role_ids($user['id']);
     $this->delete_all_user_sessions($user['id']);
