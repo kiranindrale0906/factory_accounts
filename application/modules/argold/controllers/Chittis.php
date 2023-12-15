@@ -43,10 +43,10 @@ class Chittis extends BaseController {
 
     if($this->data['group_by']==1) {
       if($this->data['item_code']==1){
-        $select='sum(fine) as fine,sum(rate) as rate,sum(factory_fine) as factory_fine,sum(credit_weight) as credit_weight,group_concat(narration) as narration,purity,chitti_purity,factory_purity,customer_name,group_concat(item_code) as item_code';
+        $select='sum(fine) as fine,sum(rate) as rate,sum(factory_fine) as factory_fine,sum(credit_weight) as credit_weight,group_concat(DISTINCT(narration)) as narration,purity,chitti_purity,factory_purity,customer_name,group_concat(DISTINCT(item_code)) as item_code';
         $group_by = 'customer_name,chitti_purity,(factory_purity-chitti_purity),item_code';
       }else{
-        $select='sum(fine) as fine,sum(rate) as rate,sum(factory_fine) as factory_fine,sum(credit_weight) as credit_weight,group_concat(narration) as narration,purity,chitti_purity,factory_purity,customer_name,item_code';
+        $select='sum(fine) as fine,sum(rate) as rate,sum(factory_fine) as factory_fine,sum(credit_weight) as credit_weight,group_concat(DISTINCT(narration)) as narration,purity,chitti_purity,factory_purity,customer_name,item_code';
         $group_by = 'customer_name,chitti_purity,(factory_purity-chitti_purity)';
       }
       $this->data['metal_voucher_details'] = $this->voucher_model->get($select, array('voucher_type' => 'metal issue voucher',
@@ -147,7 +147,7 @@ class Chittis extends BaseController {
                             customer_name,
                             usd_wastage_percentage,
                             inr_wastage_percentage,
-                            group_concat(narration) as narration,
+                            group_concat(DISTINCT(narration)) as narration,
                             argold_id as argold_id', 
                             $where, 
                             array(), 
@@ -163,7 +163,7 @@ class Chittis extends BaseController {
                             customer_name,
                             item_code,
                             rate,
-                            group_concat(narration) as narration,
+                            group_concat(DISTINCT(narration)) as narration,
                             argold_id as argold_id', 
                             $where, 
                             array(), 
