@@ -6,4 +6,7 @@ class Api_metal_receipt_vouchers extends Metal_receipt_vouchers {
   public function __construct() {
     parent::__construct();
   }
+public function store(){
+pd($_POST);
+}
 }

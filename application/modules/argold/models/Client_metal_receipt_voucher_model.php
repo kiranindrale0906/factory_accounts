@@ -40,6 +40,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
 
   public function before_validate() {
+//pd($this->formdata);
     $this->set_account_name_from_receipt_type();
     $this->set_site_name_from_receipt_type();
     $this->set_sale_type_from_receipt_type_for_metal();
@@ -597,15 +598,29 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     // print_r($send_data);
     // pd($api_url); 
     if ($attributes['account_name']=="AR Gold ERP Software" ||$attributes['account_name']=="ARG ERP Software" || $attributes['account_name']=="ARF ERP Software" || $attributes['account_name']=="ARC ERP Software"){
+      $parent_data=$this->metal_receipt_voucher_model->find('',array('id'=>$attributes['metal_receipt_voucher_reference_id']));
+      
       if($attributes['receipt_type']=="Daily Drawer"){
         $attributes['receipt_type']=$attributes['dd_type'];
       }
+      if($attributes['receipt_type']=="Refresh"){
+        $attributes['site_name']=$parent_data['site_name'];
+        $attributes['hook_kdm_purity']=$parent_data['hook_kdm_purity'];
+      }
+      if($attributes['receipt_type']=="AR Gold RND" || $attributes['receipt_type']=="ARF RND" || $attributes['receipt_type']=="ARF RND"){
+        $attributes['receipt_type']="RND";
+      }
+      $attributes['customer_name']=$parent_data['account_name'];
+
     $api_data = array('receipt_type'=> $attributes['receipt_type'],
                       'account_name'=> $attributes['account_name'],
-                      'factory'=> $attributes['site_name'],
-                      'factory'=> $attributes['site_name'],
+                      'customer_name'=> $attributes['customer_name'],
+                      'factory'=> $attributes['account_name'],
+                      'item_name'=> $attributes['narration'],
+                      'voucher_number'=> $attributes['voucher_number'],
                       'credit_weight' => $attributes['credit_weight'],
                       'factory_purity' => $attributes['factory_purity'],
+                      'hook_kdm_purity' => (empty($attributes['hook_kdm_purity'])) ? four_decimal($attributes['factory_purity']) : four_decimal($attributes['hook_kdm_purity']),
                       'description' => $attributes['description'],
                       'account_id' => $attributes['id']);
     $send_data=$api_data;
