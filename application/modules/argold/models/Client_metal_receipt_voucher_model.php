@@ -564,10 +564,10 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $send_data['finished_goods_receipts'] = $api_data;
       $api_url = "api/api_finished_goods_receipts/store";
 
-    } elseif ($attributes['receipt_type'] == 'Cutting Ghiss' 
+    } elseif (($attributes['receipt_type'] == 'Cutting Ghiss' 
               ||$attributes['receipt_type'] == 'Hand Cutting Ghiss' 
               ||$attributes['receipt_type'] == 'Hand Dull Ghiss' 
-              || $attributes['receipt_type'] == 'Ice Cutting Ghiss'){
+              || $attributes['receipt_type'] == 'Ice Cutting Ghiss') && ($attributes['account_name']!="AR Gold ERP Software" && $attributes['account_name']!="ARG ERP Software" && $attributes['account_name']!="ARF ERP Software" && $attributes['account_name']!="ARC ERP Software")){
       $department_name='';
       if($attributes['receipt_type']=='Cutting Ghiss'){
         $department_name='Cutting';
@@ -615,10 +615,21 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
         $attributes['receipt_type']="RND";
       }
       $attributes['customer_name']=$parent_data['account_name'];
+      $department_name="";
+      if($attributes['receipt_type']=='Cutting Ghiss'){
+        $department_name='Cutting';
+      }elseif($attributes['receipt_type']=='Hand Cutting Ghiss'){
+        $department_name='Hand Cutting';
+      }elseif($attributes['receipt_type']=='Hand Dull Ghiss'){
+        $department_name='Hand Dull';
+      }elseif($attributes['receipt_type']=='Ice Cutting Ghiss'){
+        $department_name='Ice Cutting';
+      }
 
     $api_data = array('receipt_type'=> $attributes['receipt_type'],
                       'account_name'=> $attributes['account_name'],
                       'customer_name'=> $attributes['customer_name'],
+                      'department_name'=> $department_name,
                       'factory'=> $attributes['account_name'],
                       'item_name'=> $attributes['narration'],
                       'voucher_number'=> $attributes['voucher_number'],
