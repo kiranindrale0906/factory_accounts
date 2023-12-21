@@ -47,7 +47,11 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     $this->set_factory_purity_from_receipt_type_for_metal_and_finished_goods_and_chain_receipt();
     $this->set_metal_receipt_attributes_from_receipt_type_for_vadotar();
     $this->set_metal_receipt_attributes();
-
+    if($this->attributes['site_name'] =="AR Gold ERP" and $this->attributes['site_name'] =="Metal"){
+	$this->formdata['metal_issue_vouchers'][0]=$this->attributes;
+	$this->formdata['metal_issue_vouchers'][0]['account_name']=$this->attributes['customer_name'];
+	$this->formdata['metal_issue_vouchers'][0]['credit_weight']=$this->attributes['debit_weight'];
+    }
     $this->set_metal_issue_voucher_attributes_from_argold_software_metal_receipt_and_refresh();
     $this->set_metal_issue_voucher_attributes_from_receipt_type_for_chain_receipt();
     $this->set_metal_issue_voucher_attributes_from_receipt_type_for_stone();
@@ -80,7 +84,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   }
 
   private function set_sale_type_from_receipt_type_for_metal() {
-    if ($this->attributes['receipt_type'] == 'Metal' && empty($this->attributes['parent_id'])) $this->attributes['sale_type'] == 'Sale';
+    if ($this->attributes['receipt_type'] == 'Metal' && empty($this->attributes['parent_id'])) @$this->attributes['sale_type'] == 'Sale';
   }
 
   private function set_account_name_from_receipt_type() {
@@ -412,7 +416,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   }
 
   private function create_metal_issue_vouchers() {
-    $this->load->model('transactions/metal_issue_voucher_model');
+    $this->load->model(array('transactions/metal_issue_voucher_model','transactions/metal_receipt_voucher_model'));
     if(empty($this->formdata['metal_issue_vouchers'])) return true;
     $is_export= $this->metal_receipt_voucher_model->find('is_export',array('id'=>$this->attributes['id']))['is_export'];
     foreach ($this->formdata['metal_issue_vouchers'] as $metal_issue_voucher) {
