@@ -48,7 +48,7 @@
         </tr>
 
         <tr>
-          <td>AR GOLD</td>
+          <td>AR GOLD (Sep 2023)</td>
           <td class="text-right"><?= four_decimal(-1 * $accounts_sep2023_argold_balance) ?></td>
           <td class="text-right"><?= four_decimal(-1 * $live_sep2023_argold_balance) ?></td>
           <td class="text-right"><?= four_decimal($accounts_sep2023_argold_balance - $live_sep2023_argold_balance) ?></td>
