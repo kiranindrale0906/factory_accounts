@@ -48,9 +48,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     $this->set_metal_receipt_attributes_from_receipt_type_for_vadotar();
     $this->set_metal_receipt_attributes();
     if($this->attributes['site_name'] =="AR Gold ERP" and $this->attributes['site_name'] =="Metal"){
-	$this->formdata['metal_issue_vouchers'][0]=$this->attributes;
-	$this->formdata['metal_issue_vouchers'][0]['account_name']=$this->attributes['customer_name'];
-	$this->formdata['metal_issue_vouchers'][0]['credit_weight']=$this->attributes['debit_weight'];
+    	$this->formdata['metal_issue_vouchers'][0]=$this->attributes;
+    	$this->formdata['metal_issue_vouchers'][0]['account_name']=$this->attributes['customer_name'];
+    	$this->formdata['metal_issue_vouchers'][0]['credit_weight']=$this->attributes['debit_weight'];
     }
     $this->set_metal_issue_voucher_attributes_from_argold_software_metal_receipt_and_refresh();
     $this->set_metal_issue_voucher_attributes_from_receipt_type_for_chain_receipt();
