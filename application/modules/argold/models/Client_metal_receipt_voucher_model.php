@@ -40,13 +40,18 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
 
   public function before_validate() {
+//pd($this->formdata);
     $this->set_account_name_from_receipt_type();
     $this->set_site_name_from_receipt_type();
     $this->set_sale_type_from_receipt_type_for_metal();
     $this->set_factory_purity_from_receipt_type_for_metal_and_finished_goods_and_chain_receipt();
     $this->set_metal_receipt_attributes_from_receipt_type_for_vadotar();
     $this->set_metal_receipt_attributes();
-
+    if($this->attributes['site_name'] =="AR Gold ERP" and $this->attributes['site_name'] =="Metal"){
+    	$this->formdata['metal_issue_vouchers'][0]=$this->attributes;
+    	$this->formdata['metal_issue_vouchers'][0]['account_name']=$this->attributes['customer_name'];
+    	$this->formdata['metal_issue_vouchers'][0]['credit_weight']=$this->attributes['debit_weight'];
+    }
     $this->set_metal_issue_voucher_attributes_from_argold_software_metal_receipt_and_refresh();
     $this->set_metal_issue_voucher_attributes_from_receipt_type_for_chain_receipt();
     $this->set_metal_issue_voucher_attributes_from_receipt_type_for_stone();
@@ -79,7 +84,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   }
 
   private function set_sale_type_from_receipt_type_for_metal() {
-    if ($this->attributes['receipt_type'] == 'Metal' && empty($this->attributes['parent_id'])) $this->attributes['sale_type'] == 'Sale';
+    if ($this->attributes['receipt_type'] == 'Metal' && empty($this->attributes['parent_id'])) @$this->attributes['sale_type'] == 'Sale';
   }
 
   private function set_account_name_from_receipt_type() {
@@ -411,7 +416,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   }
 
   private function create_metal_issue_vouchers() {
-    $this->load->model('transactions/metal_issue_voucher_model');
+    $this->load->model(array('transactions/metal_issue_voucher_model','transactions/metal_receipt_voucher_model'));
     if(empty($this->formdata['metal_issue_vouchers'])) return true;
     $is_export= $this->metal_receipt_voucher_model->find('is_export',array('id'=>$this->attributes['id']))['is_export'];
     foreach ($this->formdata['metal_issue_vouchers'] as $metal_issue_voucher) {
@@ -597,19 +602,33 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     // print_r($send_data);
     // pd($api_url); 
     if ($attributes['account_name']=="AR Gold ERP Software" ||$attributes['account_name']=="ARG ERP Software" || $attributes['account_name']=="ARF ERP Software" || $attributes['account_name']=="ARC ERP Software"){
+      $parent_data=$this->metal_receipt_voucher_model->find('',array('id'=>$attributes['metal_receipt_voucher_reference_id']));
+      
       if($attributes['receipt_type']=="Daily Drawer"){
         $attributes['receipt_type']=$attributes['dd_type'];
       }
+      if($attributes['receipt_type']=="Refresh"){
+        $attributes['site_name']=$parent_data['site_name'];
+        $attributes['hook_kdm_purity']=$parent_data['hook_kdm_purity'];
+      }
+      if($attributes['receipt_type']=="AR Gold RND" || $attributes['receipt_type']=="ARF RND" || $attributes['receipt_type']=="ARF RND"){
+        $attributes['receipt_type']="RND";
+      }
+      $attributes['customer_name']=$parent_data['account_name'];
+
     $api_data = array('receipt_type'=> $attributes['receipt_type'],
                       'account_name'=> $attributes['account_name'],
-                      'factory'=> $attributes['site_name'],
-                      'factory'=> $attributes['site_name'],
+                      'customer_name'=> $attributes['customer_name'],
+                      'factory'=> $attributes['account_name'],
+                      'item_name'=> $attributes['narration'],
+                      'voucher_number'=> $attributes['voucher_number'],
                       'credit_weight' => $attributes['credit_weight'],
                       'factory_purity' => $attributes['factory_purity'],
-                      'description' => $attributes['narration'],
+                      'hook_kdm_purity' => (empty($attributes['hook_kdm_purity'])) ? four_decimal($attributes['factory_purity']) : four_decimal($attributes['hook_kdm_purity']),
+                      'description' => $attributes['description'],
                       'account_id' => $attributes['id']);
     $send_data=$api_data;
-    $api_url = "https://staging-arg-manufacturing.8848digitalerp.com/api/method/custom_app.api.material_receipt.create_material_receipt";
+    $api_url = "https://staging1-arg-manufacturing.8848digitalerp.com/api/method/custom_app.api.material_receipt.create_material_receipt";
     if (empty($api_url)) return true;
     $result = curl_post_erp_request($api_url, $send_data);
   }else{
