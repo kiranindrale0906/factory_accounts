@@ -31,7 +31,7 @@
   $sales_amount = $sales_domestic_amount + $sales_export_amount;
   $sales_rate = ($sales_fine != 0) ? $sales_amount / $sales_fine : 0;
 
-  $domestic_closing_fine = $purchase_domestic_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_domestic_gold_fine + $domestic_opening_fine;
+  $domestic_closing_fine = @$purchase_domestic_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_domestic_gold_fine + $domestic_opening_fine;
   if (empty($gold_rate)) $gold_rate = 0;
   $export_closing_rate = get_current_gold_rate();  //$spot_gold / 31.1034 * $usd_rate;
   $export_closing_rate = $export_closing_rate+($export_closing_rate*0.01); //current gold rate + 1% of current gold rate (stamp duty)
@@ -44,12 +44,12 @@
   $export_opening_rate = 4700; //4400; //4250.000;
   $export_opening_amount = $export_opening_fine * $export_opening_rate; //95120251.000;
 
-  $export_closing_fine = $purchase_export_fine - $sales_export_fine + $export_opening_fine;
+  $export_closing_fine = @$purchase_export_fine - $sales_export_fine + $export_opening_fine;
   if (empty($usd_rate)) $usd_rate = 0;
   if (empty($spot_gold)) $spot_gold = 0;
   $export_closing_amount = $export_closing_fine * $export_closing_rate;
 
-  // $closing_fine = $purchase_domestic_fine + $purchase_export_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_domestic_fine - $sales_export_fine;
+  // $closing_fine = @$purchase_domestic_fine + @$purchase_export_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_domestic_fine - $sales_export_fine;
   // $closing_rate = $gold_rate / .995 / 10;
   // $closing_amount = $closing_fine * $closing_rate;
 
@@ -69,12 +69,12 @@
 ?>
 
 <?php
-  $total_domestic_purchase_amount = $domestic_opening_amount + $purchase_domestic_amount;
-  $total_domestic_purchase_fine = $domestic_opening_fine + $purchase_domestic_fine;
+  $total_domestic_purchase_amount = $domestic_opening_amount + @$purchase_domestic_amount;
+  $total_domestic_purchase_fine = $domestic_opening_fine + @$purchase_domestic_fine;
   $total_domestic_purchase_rate = ($total_domestic_purchase_fine != 0) ? $total_domestic_purchase_amount / $total_domestic_purchase_fine : 0;
 
   $total_import_purchase_amount = $export_opening_amount + $purchase_export_amount;
-  $total_import_purchase_fine = $export_opening_fine + $purchase_export_fine;
+  $total_import_purchase_fine = $export_opening_fine + @$purchase_export_fine;
   $total_import_purchase_rate = ($total_import_purchase_fine != 0) ? $total_import_purchase_amount / $total_import_purchase_fine : 0;
         
   $total_purchase_amount = $total_domestic_purchase_amount + $total_import_purchase_amount;
@@ -145,9 +145,9 @@
           </tr>
           <tr>
             <td>Domestic Purchase</td>
-            <td class="text-right"><?= four_decimal(@$purchase_domestic_amount, '-') ?></td>
+            <td class="text-right"><?= four_decimal(@@$purchase_domestic_amount, '-') ?></td>
             <td class="text-right"><?= four_decimal(@$purchase_domestic_rate, '-'); ?></td>
-            <td class="text-right"><?= four_decimal(@$purchase_domestic_fine, '-'); ?></td>
+            <td class="text-right"><?= four_decimal(@@$purchase_domestic_fine, '-'); ?></td>
           </tr>
 
           
@@ -169,7 +169,7 @@
             <td>Import</td>
             <td class="text-right"><?= four_decimal(@$purchase_export_amount, '-') ?></td>
             <td class="text-right"><?= four_decimal(@$purchase_export_rate, '-'); ?></td>
-            <td class="text-right"><?= four_decimal(@$purchase_export_fine, '-'); ?></td>
+            <td class="text-right"><?= four_decimal(@@$purchase_export_fine, '-'); ?></td>
           </tr>
 
           <tr>
