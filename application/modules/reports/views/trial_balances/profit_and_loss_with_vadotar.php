@@ -3,18 +3,18 @@
   foreach($purchase_sales_account_domestic_export_with_vadotar_records as $domestic_export_record) 
     $domestic_export_records[$domestic_export_record['is_export']] = $domestic_export_record;
   $sales_domestic_gold_fine = !empty($domestic_export_records[0]['gold_fine']) ? -1 * $domestic_export_records[0]['gold_fine'] : 0;
-  $sales_domestic_rate = !empty($domestic_export_records[0]['rate']) ? -1 * $domestic_export_records['SALES ACCOUNT'][0]['rate'] : 0;
+  $sales_domestic_rate = !empty($domestic_export_records[0]['rate']) ? -1 * $domestic_export_records[0]['rate'] : 0;
   $sales_domestic_amount = $sales_domestic_gold_fine*$sales_domestic_rate;
 
   $sales_domestic_vadotar_fine = !empty($domestic_export_records[0]['fine']) ? -1 * $domestic_export_records[0]['fine'] : 0;
   $sales_domestic_vadotar_amount = $sales_domestic_vadotar_fine*$sales_domestic_rate;
 
-   $domestic_export_records['SALES ACCOUNT'][1]['fine'] = $domestic_export_records['SALES ACCOUNT'][1]['fine']; //+ 24663.902;
-   $domestic_export_records['SALES ACCOUNT'][1]['amount'] = $domestic_export_records['SALES ACCOUNT'][1]['amount']; // + 116042947.000;
+   $domestic_export_records[1]['fine'] = $domestic_export_records[1]['fine']; //+ 24663.902;
+   $domestic_export_records[1]['amount'] = $domestic_export_records[1]['amount']; // + 116042947.000;
 
-  $sales_export_fine = !empty($domestic_export_records['SALES ACCOUNT'][1]['fine']) ? $domestic_export_records['SALES ACCOUNT'][1]['fine'] : 0;
-  $sales_export_rate = !empty($domestic_export_records['SALES ACCOUNT'][1]['fine']) ? $domestic_export_records['SALES ACCOUNT'][1]['amount'] / $domestic_export_records['SALES ACCOUNT'][1]['fine'] : 0;
-  $sales_export_amount = !empty($domestic_export_records['SALES ACCOUNT'][1]['amount']) ? $domestic_export_records['SALES ACCOUNT'][1]['amount'] : 0;
+  $sales_export_fine = !empty($domestic_export_records[1]['fine']) ? $domestic_export_records[1]['fine'] : 0;
+  $sales_export_rate = !empty($domestic_export_records[1]['fine']) ? $domestic_export_records[1]['amount'] / $domestic_export_records[1]['fine'] : 0;
+  $sales_export_amount = !empty($domestic_export_records[1]['amount']) ? $domestic_export_records[1]['amount'] : 0;
 
   $main_vadotar_fine = @$profit_and_loss['main_vadotar']['fine'];
   $main_vadotar_fine = $main_vadotar_fine;
@@ -27,11 +27,11 @@
   $domestic_opening_rate = 5500; //4850.000;
   $domestic_opening_amount = $domestic_opening_fine * $domestic_opening_rate; //351356714.000;
 
-  $sales_fine = $sales_domestic_fine + $sales_export_fine;
+  $sales_fine = $sales_domestic_gold_fine + $sales_export_fine;
   $sales_amount = $sales_domestic_amount + $sales_export_amount;
   $sales_rate = ($sales_fine != 0) ? $sales_amount / $sales_fine : 0;
 
-  $domestic_closing_fine = $purchase_domestic_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_domestic_fine + $domestic_opening_fine;
+  $domestic_closing_fine = $purchase_domestic_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_domestic_gold_fine + $domestic_opening_fine;
   if (empty($gold_rate)) $gold_rate = 0;
   $export_closing_rate = get_current_gold_rate();  //$spot_gold / 31.1034 * $usd_rate;
   $export_closing_rate = $export_closing_rate+($export_closing_rate*0.01); //current gold rate + 1% of current gold rate (stamp duty)
@@ -84,10 +84,10 @@
   $domestic_closing_amount = $domestic_closing_fine * $closing_rate;
             
   $total_domestic_amount = $sales_domestic_amount + $domestic_closing_amount;
-  $total_domestic_fine = $sales_domestic_fine + $domestic_closing_fine;
+  $total_domestic_fine = $sales_domestic_gold_fine + $domestic_closing_fine;
   $total_domestic_rate = ($total_domestic_fine != 0) ? $total_domestic_amount / $total_domestic_fine : 0;      
 
-  $domestic_gain_loss_fine = $sales_domestic_fine + $domestic_closing_fine;
+  $domestic_gain_loss_fine = $sales_domestic_gold_fine + $domestic_closing_fine;
   $domestic_gain_loss_rate = ($domestic_gain_loss_fine != 0) ? $total_domestic_purchase_rate - (($sales_domestic_amount + $domestic_closing_amount) / $domestic_gain_loss_fine) : 0;
   $domestic_gain_loss_amount = $domestic_gain_loss_fine * $domestic_gain_loss_rate;
 
