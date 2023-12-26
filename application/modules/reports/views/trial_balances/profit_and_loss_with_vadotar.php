@@ -73,7 +73,7 @@
   $total_domestic_purchase_fine = $domestic_opening_fine + @$purchase_domestic_fine;
   $total_domestic_purchase_rate = ($total_domestic_purchase_fine != 0) ? $total_domestic_purchase_amount / $total_domestic_purchase_fine : 0;
 
-  $total_import_purchase_amount = $export_opening_amount + $purchase_export_amount;
+  $total_import_purchase_amount = $export_opening_amount + @$purchase_export_amount;
   $total_import_purchase_fine = $export_opening_fine + @$purchase_export_fine;
   $total_import_purchase_rate = ($total_import_purchase_fine != 0) ? $total_import_purchase_amount / $total_import_purchase_fine : 0;
         
