@@ -92,15 +92,18 @@ defined('BASEPATH') OR exit('No direct script access allowed.');
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS => json_encode($data),
         CURLOPT_HTTPHEADER => array(
-          'Authorization: token 4e7ab0aec03a4f2:cbb435e12073d32',
+          'Authorization: token 4e7ab0aec03a4f2:9616a7717360494',
           'Content-Type: application/json',
           'Accept: application/json',
           'Cookie: sid=Guest'
         ),
       ));
     $response = curl_exec($curl);
+/*    if (curl_errno($curl)) {
+    $error_msg = curl_error($curl);
+}pd($error_msg);
+*/
     curl_close($curl);
-    pd($response);
     return $response;
     }
   }
@@ -118,7 +121,7 @@ defined('BASEPATH') OR exit('No direct script access allowed.');
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'GET',
         CURLOPT_HTTPHEADER => array(
-          'Authorization: token 4e7ab0aec03a4f2:cbb435e12073d32',
+          'Authorization: token 4e7ab0aec03a4f2:9616a7717360494',
           'Cookie: sid=Guest'
         ),
       ));
