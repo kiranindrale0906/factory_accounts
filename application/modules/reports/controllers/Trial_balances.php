@@ -306,14 +306,20 @@ class Trial_balances extends Ledgers {
                IFNULL((sum(debit_weight*purity)/100),0) - IFNULL((sum(credit_weight*factory_purity)/100),0) as fine,
                IFNULL(sum((purity-factory_purity)*debit_weight/100),0) - IFNULL(sum((factory_purity-purity)*credit_weight/100),0) as vadotar,
                IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount,0 as id";
-    $purchase_sales_account_domestic_export_with_vadotar_select = "IFNULL(is_export, 0) as is_export,IFNULL((sum(ac_vouchers.debit_weight*ac_vouchers.purity)/100), 0) - IFNULL((sum(ac_vouchers.credit_weight*ac_vouchers.factory_purity)/100), 0) as fine,IFNULL((sum(ac_vouchers.debit_weight*ac_vouchers.purity)/100), 0) - IFNULL((sum(ac_vouchers.credit_weight*ac_vouchers.purity)/100), 0) as gold_fine, IFNULL(sum((ac_vouchers.purity-ac_vouchers.factory_purity)*ac_vouchers.debit_weight/100), 0) - IFNULL(sum((ac_vouchers.factory_purity-ac_vouchers.purity)*ac_vouchers.credit_weight/100), 0) as vadotar, IFNULL(sum(ac_vouchers.debit_amount), 0) - IFNULL(sum(ac_vouchers.credit_amount), 0) as amount, 0 as `id`,IFNULL(sum(ac_vouchers.debit_weight), 0) - IFNULL(sum(ac_vouchers.credit_weight), 0) weight,sum(gold_rate),sum(chitties.rate) as rate,ac_vouchers.chitti_id";
+
     $this->data['purchase_sales_account_domestic_export_records'] = $this->model->get($purchase_sales_account_domestic_export_select, 
                                                 array_merge($where, array('account_name' => array('SALES ACCOUNT', 'PURCHASE ACCOUNT'))),  
                                                 array(), array('group_by'=>'account_name, is_export'));
-    $this->data['purchase_sales_account_domestic_export_with_vadotar_records'] = $this->model->get($purchase_sales_account_domestic_export_with_vadotar_select,array(array('voucher_type'=>"metal issue voucher","ac_account.sub_group_code"=>"Domestic")), 
-                                                array(array('ac_account','ac_vouchers.account_name=ac_account.name'),array('chitties','ac_vouchers.chitti_id=chitties.id')), array('group_by'=>'is_export'));
+    $purchase_sales_account_domestic_export_with_vadotar_select = "
+      IFNULL(is_export, 0) as is_export,
+      IFNULL((sum(ac_vouchers.credit_weight*ac_vouchers.factory_purity)/100), 0) as fine,
+      IFNULL((sum(ac_vouchers.credit_weight*ac_vouchers.purity)/100), 0) as gold_fine,
+      IFNULL(sum((ac_vouchers.factory_purity-ac_vouchers.purity)*ac_vouchers.credit_weight/100), 0) as vadotar,
+      IFNULL(sum(ac_vouchers.credit_weight), 0) weight";
+
+    $this->data['purchase_sales_account_domestic_export_with_vadotar_records'] = $this->model->get($purchase_sales_account_domestic_export_with_vadotar_select,array(array('voucher_type'=>"metal issue voucher","ac_account.group_code"=>"Domestic","ac_account.sub_group_code!="=>"Domestic Labour Account")),array(array('ac_account','ac_vouchers.account_name=ac_account.name')), array('group_by'=>'is_export,chitti_id'));
     
-    //pd($this->data['purchase_sales_account_domestic_export_with_vadotar_records']);
+    pd($this->data['purchase_sales_account_domestic_export_with_vadotar_records']);
 
     $this->data['domestic_labour_amount'] = $this->model->find('  IFNULL(sum(debit_amount),0) 
                                                                 - IFNULL(sum(credit_amount),0) as amount', 
