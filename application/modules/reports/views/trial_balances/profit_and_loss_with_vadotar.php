@@ -4,10 +4,10 @@
     $domestic_export_records[$domestic_export_record['is_export']] = $domestic_export_record;
   $sales_domestic_gold_fine = !empty($domestic_export_records[0]['gold_fine']) ? -1 * $domestic_export_records[0]['gold_fine'] : 0;
   $sales_domestic_rate = !empty($domestic_export_records[0]['rate']) ? $domestic_export_records[0]['rate'] : 0;
-  $sales_domestic_amount = $sales_domestic_gold_fine*$sales_domestic_rate;
-  $sales_domestic_vadotar_fine = !empty($domestic_export_records[0]['fine']) ? -1 * $domestic_export_records[0]['fine'] : 0;
-  $sales_domestic_vadotar_amount = $sales_domestic_vadotar_fine*$sales_domestic_rate;
+  $sales_domestic_amount = !empty($domestic_export_records[0]['gold_amount']) ? $domestic_export_records[0]['gold_amount'] : 0;
 
+  $sales_domestic_vadotar_fine = !empty($domestic_export_records[0]['vadotar_fine']) ? -1 * $domestic_export_records[0]['vadotar_fine'] : 0;
+  $sales_domestic_vadotar_amount = !empty($domestic_export_records[0]['vadotar_amount']) ? $domestic_export_records[0]['vadotar_amount'] : 0;
    $domestic_export_records[1]['fine'] = $domestic_export_records[1]['fine']; //+ 24663.902;
    $domestic_export_records[1]['amount'] = $domestic_export_records[1]['amount']; // + 116042947.000;
 
