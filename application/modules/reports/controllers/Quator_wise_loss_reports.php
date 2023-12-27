@@ -9,6 +9,9 @@ class Quator_wise_loss_reports extends BaseController {
   }
 
   public function index() {
+    ini_set('memory_limit', '-1');
+    ini_set('max_execution_time', '0');
+    
     $this->_get_form_data();
     $this->loss_account_details();
     $this->get_production_summary();

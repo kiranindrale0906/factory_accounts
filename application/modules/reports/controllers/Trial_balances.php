@@ -306,10 +306,46 @@ class Trial_balances extends Ledgers {
                IFNULL((sum(debit_weight*purity)/100),0) - IFNULL((sum(credit_weight*factory_purity)/100),0) as fine,
                IFNULL(sum((purity-factory_purity)*debit_weight/100),0) - IFNULL(sum((factory_purity-purity)*credit_weight/100),0) as vadotar,
                IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount,0 as id";
+
     $this->data['purchase_sales_account_domestic_export_records'] = $this->model->get($purchase_sales_account_domestic_export_select, 
-                                                array_merge($where, array('account_name' => array('SALES ACCOUNT', 'PURCHASE ACCOUNT'))), 
+                                                array_merge($where, array('account_name' => array('SALES ACCOUNT', 'PURCHASE ACCOUNT'))),  
                                                 array(), array('group_by'=>'account_name, is_export'));
-    
+    $purchase_sales_account_domestic_export_with_vadotar_select = "
+      IFNULL(is_export, 0) as is_export,
+      chitti_id,
+      IFNULL((sum(ac_vouchers.credit_weight*ac_vouchers.factory_purity)/100), 0) as fine,
+      IFNULL((sum(ac_vouchers.credit_weight*ac_vouchers.purity)/100), 0) as gold_fine,
+      IFNULL(sum((ac_vouchers.factory_purity-ac_vouchers.purity)*ac_vouchers.credit_weight/100), 0) as vadotar,
+      IFNULL(sum(ac_vouchers.credit_weight), 0) weight";
+
+    $profit_loss_with_vadotar_records = $this->model->get($purchase_sales_account_domestic_export_with_vadotar_select,array('voucher_type'=>"metal issue voucher","ac_account.group_code"=>"Domestic","ac_account.sub_group_code!="=>"Domestic Labour Account",'chitti_id!=0'=>null),array(array('ac_account','ac_vouchers.account_name=ac_account.name')), array('group_by'=>'is_export,chitti_id'));
+    $profit_loss_with_vadotar_domestic_sale_gold_fine=$profit_loss_with_vadotar_domestic_sale_gold_amount=0;
+    $profit_loss_with_vadotar_domestic_sale_vadotar_fine=$profit_loss_with_vadotar_domestic_sale_vadotar_amount=$profit_loss_with_vadotar_domestic_rate=0;
+
+    foreach ($profit_loss_with_vadotar_records as $profit_loss_with_vadotar_index => $profit_loss_with_vadotar_value) {
+      $chitti_details=$this->chitti_model->find('rate,sale_type',array('id'=>$profit_loss_with_vadotar_value['chitti_id']));
+      $profit_loss_with_vadotar_records[$profit_loss_with_vadotar_index]['rate']=$chitti_details['rate'];
+      $profit_loss_with_vadotar_records[$profit_loss_with_vadotar_index]['sale_type']=$chitti_details['sale_type'];
+      if($profit_loss_with_vadotar_records[$profit_loss_with_vadotar_index]['sale_type']=="Labour"){
+        $profit_loss_with_vadotar_records[$profit_loss_with_vadotar_index]['gold_fine']=0;
+      }
+      $profit_loss_with_vadotar_domestic_sale_gold_fine+=$profit_loss_with_vadotar_records[$profit_loss_with_vadotar_index]['gold_fine'];
+      $profit_loss_with_vadotar_domestic_sale_vadotar_fine+=$profit_loss_with_vadotar_records[$profit_loss_with_vadotar_index]['vadotar'];
+      $profit_loss_with_vadotar_domestic_sale_gold_amount+=$profit_loss_with_vadotar_records[$profit_loss_with_vadotar_index]['gold_fine']*$profit_loss_with_vadotar_records[$profit_loss_with_vadotar_index]['rate'];
+      $profit_loss_with_vadotar_domestic_sale_vadotar_amount+=$profit_loss_with_vadotar_records[$profit_loss_with_vadotar_index]['vadotar']*$profit_loss_with_vadotar_records[$profit_loss_with_vadotar_index]['rate'];
+
+      $this->data['purchase_sales_account_domestic_export_with_vadotar_records'][$profit_loss_with_vadotar_value['is_export']]['is_export']=$profit_loss_with_vadotar_value['is_export'];
+      $this->data['purchase_sales_account_domestic_export_with_vadotar_records'][$profit_loss_with_vadotar_value['is_export']]['gold_fine']=$profit_loss_with_vadotar_domestic_sale_gold_fine;
+      $this->data['purchase_sales_account_domestic_export_with_vadotar_records'][$profit_loss_with_vadotar_value['is_export']]['gold_amount']=$profit_loss_with_vadotar_domestic_sale_gold_amount;
+      $this->data['purchase_sales_account_domestic_export_with_vadotar_records'][$profit_loss_with_vadotar_value['is_export']]['gold_rate']=!empty($profit_loss_with_vadotar_domestic_sale_gold_fine)?($profit_loss_with_vadotar_domestic_sale_gold_amount/$profit_loss_with_vadotar_domestic_sale_gold_fine):0;
+      $this->data['purchase_sales_account_domestic_export_with_vadotar_records'][$profit_loss_with_vadotar_value['is_export']]['vadotar_rate']=($profit_loss_with_vadotar_domestic_sale_vadotar_amount/$profit_loss_with_vadotar_domestic_sale_vadotar_fine);
+      $this->data['purchase_sales_account_domestic_export_with_vadotar_records'][$profit_loss_with_vadotar_value['is_export']]['vadotar_fine']=$profit_loss_with_vadotar_domestic_sale_vadotar_fine;
+      $this->data['purchase_sales_account_domestic_export_with_vadotar_records'][$profit_loss_with_vadotar_value['is_export']]['vadotar_amount']=$profit_loss_with_vadotar_domestic_sale_vadotar_amount;
+
+    }
+
+    //pd($this->data['purchase_sales_account_domestic_export_with_vadotar_records']);
+
     $this->data['domestic_labour_amount'] = $this->model->find('  IFNULL(sum(debit_amount),0) 
                                                                 - IFNULL(sum(credit_amount),0) as amount', 
                                                 array_merge($where, array('account_name' => array('Domestic Labour Amount'))), 

@@ -1,0 +1,353 @@
+<?php 
+  $domestic_export_records = array();
+  foreach($purchase_sales_account_domestic_export_with_vadotar_records as $domestic_export_record) 
+    $domestic_export_records[$domestic_export_record['is_export']] = $domestic_export_record;
+  $sales_domestic_gold_fine = !empty($domestic_export_records[0]['gold_fine']) ? -1 * $domestic_export_records[0]['gold_fine'] : 0;
+  $sales_domestic_gold_rate = !empty($domestic_export_records[0]['gold_rate']) ? $domestic_export_records[0]['gold_rate'] : 0;
+  $sales_domestic_amount = !empty($domestic_export_records[0]['gold_amount']) ? $domestic_export_records[0]['gold_amount'] : 0;
+
+  $sales_domestic_vadotar_fine = !empty($domestic_export_records[0]['vadotar_fine']) ? -1 * $domestic_export_records[0]['vadotar_fine'] : 0;
+  $sales_domestic_vadotar_amount = !empty($domestic_export_records[0]['vadotar_amount']) ? $domestic_export_records[0]['vadotar_amount'] : 0;
+  $sales_domestic_vadotar_rate = !empty($domestic_export_records[0]['vadotar_rate']) ? $domestic_export_records[0]['vadotar_rate'] : 0;
+
+   $domestic_export_records[1]['fine'] = $domestic_export_records[1]['fine']; //+ 24663.902;
+   $domestic_export_records[1]['amount'] = $domestic_export_records[1]['amount']; // + 116042947.000;
+
+  $sales_export_fine = !empty($domestic_export_records[1]['fine']) ? $domestic_export_records[1]['fine'] : 0;
+  $sales_export_rate = !empty($domestic_export_records[1]['fine']) ? $domestic_export_records[1]['amount'] / $domestic_export_records[1]['fine'] : 0;
+  $sales_export_amount = !empty($domestic_export_records[1]['amount']) ? $domestic_export_records[1]['amount'] : 0;
+
+  $main_vadotar_fine = @$profit_and_loss['main_vadotar']['fine'];
+  $main_vadotar_fine = $main_vadotar_fine;
+  $main_vadotar_amount = $main_vadotar_rate = 0;
+
+  $pending_vadotar_fine = -1 * $profit_and_loss['pending_vadotar'];
+  $pending_vadotar_amount = $pending_vadotar_rate = 0;
+
+ $domestic_opening_fine = 329418.48; //3724.24 + 241459.348 + 35003.788 + 7375.91 + 9500.44; //71950.427; //+6306.923;
+  $domestic_opening_rate = 5500; //4850.000;
+  $domestic_opening_amount = $domestic_opening_fine * $domestic_opening_rate; //351356714.000;
+
+  $sales_fine = $sales_domestic_gold_fine + $sales_export_fine;
+  $sales_amount = $sales_domestic_amount + $sales_export_amount;
+  $sales_rate = ($sales_fine != 0) ? $sales_amount / $sales_fine : 0;
+
+  $domestic_closing_fine = @$purchase_domestic_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_domestic_gold_fine + $domestic_opening_fine;
+  if (empty($gold_rate)) $gold_rate = 0;
+  $export_closing_rate = get_current_gold_rate();  //$spot_gold / 31.1034 * $usd_rate;
+  $export_closing_rate = $export_closing_rate+($export_closing_rate*0.01); //current gold rate + 1% of current gold rate (stamp duty)
+
+  $closing_rate = $export_closing_rate + ($export_closing_rate * 0.15); //$gold_rate / .995 / 10; //15% duty added
+  $closing_rate = $closing_rate + ($closing_rate * 0.03);//3% gst
+  $domestic_closing_amount = $domestic_closing_fine * $closing_rate;
+
+  $export_opening_fine = 14707.095; //-1727.68; //7375.910; //22345.893; //-6306.923;
+  $export_opening_rate = 4700; //4400; //4250.000;
+  $export_opening_amount = $export_opening_fine * $export_opening_rate; //95120251.000;
+
+  $export_closing_fine = @$purchase_export_fine - $sales_export_fine + $export_opening_fine;
+  if (empty($usd_rate)) $usd_rate = 0;
+  if (empty($spot_gold)) $spot_gold = 0;
+  $export_closing_amount = $export_closing_fine * $export_closing_rate;
+
+  // $closing_fine = @$purchase_domestic_fine + @$purchase_export_fine + $main_vadotar_fine + $pending_vadotar_fine - $sales_domestic_fine - $sales_export_fine;
+  // $closing_rate = $gold_rate / .995 / 10;
+  // $closing_amount = $closing_fine * $closing_rate;
+
+  // $total_sales_with_closing_amount = $sales_domestic_amount + $sales_export_amount + $domestic_closing_amount + $export_closing_amount;
+  // $total_sales_with_closing_fine = $sales_domestic_fine + $sales_export_fine + $domestic_closing_fine + $export_closing_fine;
+  // $total_sales_with_closing_rate = ($total_sales_with_closing_fine != 0) ? $total_sales_with_closing_amount / $total_sales_with_closing_fine : 0;
+
+  
+  // $exchange_gain_loss_fine = $total_sales_with_closing_fine;
+  // $exchange_gain_loss_rate = $purchase_rate - $total_sales_with_closing_rate;
+  // $exchange_gain_loss_amount = $exchange_gain_loss_fine * $exchange_gain_loss_rate;
+
+  $export_labour_amount = $sale_export_Labour['taxable_amount']; //+ 7093167.000; // + 37137713.028;
+  $domestic_labour_amount['amount'] += 0; // 6012267.000;
+
+
+?>
+
+<?php
+  $total_domestic_purchase_amount = $domestic_opening_amount + @$purchase_domestic_amount;
+  $total_domestic_purchase_fine = $domestic_opening_fine + @$purchase_domestic_fine;
+  $total_domestic_purchase_rate = ($total_domestic_purchase_fine != 0) ? $total_domestic_purchase_amount / $total_domestic_purchase_fine : 0;
+
+  $total_import_purchase_amount = $export_opening_amount + @$purchase_export_amount;
+  $total_import_purchase_fine = $export_opening_fine + @$purchase_export_fine;
+  $total_import_purchase_rate = ($total_import_purchase_fine != 0) ? $total_import_purchase_amount / $total_import_purchase_fine : 0;
+        
+  $total_purchase_amount = $total_domestic_purchase_amount + $total_import_purchase_amount;
+  $total_purchase_fine = $total_domestic_purchase_fine + $total_import_purchase_fine;
+  $total_purchase_rate = ($total_purchase_fine != 0) ? $total_purchase_amount  / $total_purchase_fine : 0;
+      
+  $domestic_closing_amount = $domestic_closing_fine * $closing_rate;
+            
+  $total_domestic_amount = $sales_domestic_amount + $domestic_closing_amount;
+  $total_domestic_fine = $sales_domestic_gold_fine + $domestic_closing_fine;
+  $total_domestic_rate = ($total_domestic_fine != 0) ? $total_domestic_amount / $total_domestic_fine : 0;      
+
+  $domestic_gain_loss_fine = $sales_domestic_gold_fine + $domestic_closing_fine;
+  $domestic_gain_loss_rate = ($domestic_gain_loss_fine != 0) ? $total_domestic_purchase_rate - (($sales_domestic_amount + $domestic_closing_amount) / $domestic_gain_loss_fine) : 0;
+  $domestic_gain_loss_amount = $domestic_gain_loss_fine * $domestic_gain_loss_rate;
+
+  $export_closing_amount = $export_closing_fine * $export_closing_rate;
+
+  $total_export_amount = $sales_export_amount + $export_closing_amount;
+  $total_export_fine = $sales_export_fine + $export_closing_fine;
+  $total_export_rate = ($total_export_fine !=0 ) ? $total_export_amount / $total_export_fine : 0;
+
+  $export_gain_loss_fine = $sales_export_fine + $export_closing_fine;
+  $export_gain_loss_rate = ($export_gain_loss_fine != 0) ? $total_import_purchase_rate - (($sales_export_amount + $export_closing_amount) / $export_gain_loss_fine) : 0;
+  $export_gain_loss_amount = $export_gain_loss_fine * $export_gain_loss_rate;
+
+  $total_sales_amount = $total_domestic_amount + $total_export_amount + $export_labour_amount + $domestic_labour_amount['amount'] + $hallmark_amount;
+  $total_sales_fine = $total_domestic_fine + $total_export_fine;
+
+  $total_income_amount = $total_sales_amount + $domestic_gain_loss_amount + $export_gain_loss_amount;
+  $total_income_fine = $total_sales_fine;
+  $total_income_rate = ($total_income_fine != 0) ? $total_income_amount / $total_income_fine : 0;
+
+  $gross_profit_fine = 0;
+  $gross_profit_rate = 0;
+  $gross_profit_amount = $total_income_amount - $total_purchase_amount;
+
+  $total_expenses_amount = $total_purchase_amount + $gross_profit_amount;
+  $total_expenses_fine = $total_purchase_fine + $main_vadotar_fine + $pending_vadotar_fine;
+  $total_expenses_rate = 0;  
+
+  $profit = ($main_vadotar_fine + $pending_vadotar_fine) * $sales_domestic_rate + $export_labour_amount + $domestic_labour_amount['amount'] + $hallmark_amount;
+?>
+
+<hr />
+<h5 class="ml-2 pl-2">Profit and Loss Account</h5>
+
+<div class="row">
+<form class="col-12 fields-group-sm">
+</form>
+  <div class="col-md-6">
+    <div class="form-group container">
+      <div class="table-responsive m-t-20">
+        <table class="table table-sm fixedthead table-default">
+          <thead>
+            <tr>
+              <th>Expenses</th>
+              <th class="text-right">Amount</th>
+              <th class="text-right">Rate</th>
+              <th class="text-right">Fine</th>
+            </tr>
+          </thead>
+          <tr>
+            <td>Domestic Purchase Opening</td>
+            <td class="text-right"><?= four_decimal(@$domestic_opening_amount, '-') ?>  </td>
+            <td class="text-right"><?= four_decimal(@$domestic_opening_rate, '-'); ?>  </td>
+            <td class="text-right"><?= four_decimal(@$domestic_opening_fine, '-'); ?></td>
+          </tr>
+          <tr>
+            <td>Domestic Purchase</td>
+            <td class="text-right"><?= four_decimal(@@$purchase_domestic_amount, '-') ?></td>
+            <td class="text-right"><?= four_decimal(@$purchase_domestic_rate, '-'); ?></td>
+            <td class="text-right"><?= four_decimal(@@$purchase_domestic_fine, '-'); ?></td>
+          </tr>
+
+          
+          <tr>
+            <th>Total Domestic Purchase</th>
+            <th class="text-right"><?= four_decimal(@$total_domestic_purchase_amount, '-') ?></th>
+            <th class="text-right"><?= four_decimal(@$total_domestic_purchase_rate, '-'); ?></th>
+            <th class="text-right"><?= four_decimal(@$total_domestic_purchase_fine, '-'); ?></th>
+          </tr>
+
+          <tr>
+            <td>Import Opening</td>
+            <td class="text-right"><?= four_decimal(@$export_opening_amount, '-') ?>  </td>
+            <td class="text-right"><?= four_decimal(@$export_opening_rate, '-'); ?>  </td>
+            <td class="text-right"><?= four_decimal(@$export_opening_fine, '-'); ?></td>
+          </tr>
+          
+          <tr>
+            <td>Import</td>
+            <td class="text-right"><?= four_decimal(@$purchase_export_amount, '-') ?></td>
+            <td class="text-right"><?= four_decimal(@$purchase_export_rate, '-'); ?></td>
+            <td class="text-right"><?= four_decimal(@@$purchase_export_fine, '-'); ?></td>
+          </tr>
+
+          <tr>
+            <th>Total Import Purchase</th>
+            <th class="text-right"><?= four_decimal(@$total_import_purchase_amount, '-') ?></th>
+            <th class="text-right"><?= four_decimal(@$total_import_purchase_rate, '-'); ?></th>
+            <th class="text-right"><?= four_decimal(@$total_import_purchase_fine, '-'); ?></th>
+          </tr>
+          <?php if(HOST=='REPORT ACCOUNTS'){ ?>
+          <tr>
+            <td>Main Vadotar</td>
+            <td class="text-right"><?= four_decimal(@$main_vadotar_amount, '-') ?></td>
+            <td class="text-right"><?= four_decimal(@$main_vadotar_rate, '-') ?></td>
+            <td class="text-right"><?= four_decimal(@$main_vadotar_fine - 0, '-') ?></td>
+          </tr>
+        <?php }?>
+          <tr>
+            <td>Pending Vadotar</td>
+            <td class="text-right"><?= four_decimal(@$pending_vadotar_amount, '-'); ?></td>
+            <td class="text-right"><?= four_decimal(@$pending_vadotar_rate, '-'); ?></td>
+            <td class="text-right"><?= four_decimal(@$pending_vadotar_fine, '-'); ?></td>
+          </tr>
+          <?php
+          
+           if(HOST=='REPORT ACCOUNTS'){ ?>
+          <tr>
+            <td>Gross Profit</td>
+            <td class="text-right"><?= four_decimal(@$gross_profit_amount, '-'); ?></td>
+            <td class="text-right"><?= four_decimal(@$gross_profit_rate, '-'); ?></td>
+            <td class="text-right"><?= four_decimal(@$gross_profit_fine, '-'); ?></td>
+          </tr>
+          <tr>
+          <?php }?>
+            <th>Total</th>
+            <th class="text-right"><?= four_decimal(@$total_expenses_amount, '-'); ?></th>
+            <th class="text-right"><?= four_decimal(@$total_expenses_rate, '-'); ?></th>
+            <th class="text-right"><?= four_decimal(@$total_expenses_fine, '-'); ?></th>
+          </tr>
+
+          <tr>
+            <td>Total Purchase</td>
+            <td class="text-right"><?= four_decimal(@$total_purchase_amount, '-') ?></td>
+            <td class="text-right"><?= four_decimal(@$total_purchase_rate, '-'); ?></td>
+            <td class="text-right"><?= four_decimal(@$total_purchase_fine + 0, '-'); ?></td>
+          </tr>
+
+          <?php if(HOST=='REPORT ACCOUNTS'){ ?>
+            <tr>
+              <td>Profit</td>
+              <td class="text-right"><?= four_decimal(@$profit , '-') ?></td>
+              <td class="text-right">-</td>
+              <td class="text-right">-</td>
+            </tr>
+          <?php }?>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group container">
+      <div class="table-responsive m-t-20">
+        <table class="table table-sm fixedthead table-default">
+          <thead>
+            <tr>
+              <th>Income</th>
+              <th class="text-right">Amount</th>
+              <th class="text-right">Rate</th>
+              <th class="text-right">Fine</th>
+            </tr>
+          </thead>
+          <tr>
+            <td>Domestic Gold Sale</td>
+            <td class="text-right"><?= four_decimal($sales_domestic_amount) ?>  </td>
+            <td class="text-right"><?= four_decimal($sales_domestic_gold_rate); ?>  </td>
+            <td class="text-right"><?= four_decimal($sales_domestic_gold_fine, '-'); ?></td>
+          </tr>
+          <tr>
+            <td>Domestic Vadotar Sale</td>
+            <td class="text-right"><?= four_decimal($sales_domestic_vadotar_amount, '-') ?>  </td>
+            <td class="text-right"><?= four_decimal($sales_domestic_vadotar_rate, '-'); ?>  </td>
+            <td class="text-right"><?= four_decimal($sales_domestic_vadotar_fine, '-'); ?></td>
+          </tr>
+
+          
+          <tr>
+            <td>Domestic Closing Stock</td>
+            <td class="text-right"><?= four_decimal($domestic_closing_amount, '-') ?>  </td>
+            <td class="text-right"><?= four_decimal($closing_rate, '-'); ?>  </td>
+            <td class="text-right"><?= four_decimal($domestic_closing_fine, '-'); ?></td>
+          </tr>
+          <tr>
+            <th>Total Domestic Sale</th>
+            <th class="text-right"><?= four_decimal($total_domestic_amount, '-') ?>  </th>
+            <th class="text-right"><?= four_decimal($total_domestic_rate, '-'); ?>  </th>
+            <th class="text-right"><?= four_decimal($total_domestic_fine, '-'); ?></th>
+          </tr>
+
+          <tr>
+            <th>Domestic Gain</th>
+            <th class="text-right"><?= four_decimal($domestic_gain_loss_amount, '-') ?>  </th>
+            <th class="text-right"><?= four_decimal($domestic_gain_loss_rate, '-'); ?>  </th>
+            <th class="text-right"><?= four_decimal($domestic_gain_loss_fine, '-'); ?></th>
+          </tr>
+          <tr>
+            <td>Export Sale</td>
+            <td class="text-right"><?= four_decimal($sales_export_amount, '-') ?>  </td>
+            <td class="text-right"><?= four_decimal($sales_export_rate, '-'); ?>  </td>
+            <td class="text-right"><?= four_decimal($sales_export_fine, '-'); ?></td>
+          </tr>
+
+          <tr>
+            <td>Export Closing Stock</td>
+            <td class="text-right"><?= four_decimal($export_closing_amount, '-') ?>  </td>
+            <td class="text-right"><?= four_decimal($export_closing_rate, '-'); ?>  </td>
+            <td class="text-right"><?= four_decimal($export_closing_fine, '-'); ?></td>
+          </tr>
+          <tr>
+            <th>Total Export Sale</th>
+            <th class="text-right"><?= four_decimal($total_export_amount, '-') ?>  </th>
+            <th class="text-right"><?= four_decimal($total_export_rate, '-'); ?>  </th>
+            <th class="text-right"><?= four_decimal($total_export_fine, '-'); ?></th>
+          </tr>
+
+          <tr>
+            <th>Export Gain</th>
+            <th class="text-right"><?= four_decimal($export_gain_loss_amount, '-') ?>  </th>
+            <th class="text-right"><?= four_decimal($export_gain_loss_rate, '-'); ?>  </th>
+            <th class="text-right"><?= four_decimal($export_gain_loss_fine, '-'); ?></th>
+          </tr>
+          <tr>
+            <td>Export Labour</td>
+            <td class="text-right"><?= four_decimal($export_labour_amount, '-') ?>  </td>
+            <td class="text-right">-</td>
+            <td class="text-right">-</td>
+          </tr>
+          
+          <tr>
+            <td>Domestic Labour Amount</td>
+            <td class="text-right"><?= four_decimal($domestic_labour_amount['amount'], '-') ?></td>
+            <td class="text-right">-</td>
+            <td class="text-right">-</td>
+          </tr>
+          <tr>
+            <td>Hallmark Amount</td>
+            <td class="text-right"><?= four_decimal($hallmark_amount, '-') ?></td>
+            <td class="text-right">-</td>
+            <td class="text-right">-</td>
+          </tr>
+          <!-- <tr>
+            <th>TOTAL SALE</th>
+            <th class="text-right"><?= four_decimal($sales_amount, '-') ?>  </th>
+            <th class="text-right"><?= four_decimal($sales_rate, '-'); ?>  </th>
+            <th class="text-right"><?= four_decimal($sales_fine, '-'); ?></th>
+          </tr> -->
+          
+          
+           <!-- <tr>
+            <th>Sales and Closing</th>
+            <th class="text-right"><?= four_decimal($total_sales_with_closing_amount, '-') ?>  </th>
+            <th class="text-right"><?= four_decimal($total_sales_with_closing_rate, '-'); ?>  </th>
+            <th class="text-right"><?= four_decimal($total_sales_with_closing_fine, '-'); ?></th>
+          </tr> -->
+          <tr>
+            <th>Total</th>
+            <th class="text-right"><?= four_decimal($total_income_amount, '-') ?></th>
+            <th class="text-right"><?= four_decimal($total_income_rate, '-'); ?></th>
+            <th class="text-right"><?= four_decimal($total_income_fine, '-'); ?></th>
+          </tr>
+
+          <tr>
+            <td>Total Sales</td>
+            <td class="text-right"><?= four_decimal($total_sales_amount, '-') ?></td>
+            <td class="text-right">-</td>
+            <td class="text-right"><?= four_decimal($total_sales_fine, '-'); ?></td>
+          </tr>
+        </table>
+      </div>      
+    </div>
+  </div>  
+</div>
