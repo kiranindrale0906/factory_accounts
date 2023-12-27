@@ -1,7 +1,7 @@
 <?php 
   $url = 'reports/purchase_registers';
 ?>
-  <h6 class="heading blue bold text-uppercase mb-0">Profit and Loss Reports</h6>
+  <h6 class="heading blue bold text-uppercase mb-0">Profit and Sale Reports</h6>
   <hr>
     <form class="fields-group-sm">
     <div class="row">

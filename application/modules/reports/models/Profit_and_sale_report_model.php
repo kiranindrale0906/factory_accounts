@@ -1,6 +1,6 @@
 <?php
 
-class Profit_and_loss_report_model extends BaseModel {
+class Profit_and_sale_report_model extends BaseModel {
   protected $table_name = "ac_vouchers";
   protected $id = "id";
   public $router_class = "ac_vouchers";

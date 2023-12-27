@@ -19,9 +19,9 @@ $('.loss_search_date').click(function(){
     window.location.href = url+'?'+url_options.toString();
     return true;
 });
-$('.profit_and_loss_search_date').click(function(){
-    var from_date = $('input[name*="profit_and_loss_reports[from_date]').val();
-    var to_date = $('input[name*="profit_and_loss_reports[to_date]').val();
+$('.profit_and_sale_search_date').click(function(){
+    var from_date = $('input[name*="profit_and_sale_reports[from_date]').val();
+    var to_date = $('input[name*="profit_and_sale_reports[to_date]').val();
     var url = window.location.href;
     var url_options = new URLSearchParams(window.location.search);
     url_options.delete('from_date');
