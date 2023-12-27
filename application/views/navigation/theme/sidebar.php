@@ -110,6 +110,7 @@
                                         'reports/cash_gst_registers' => 'Cash GST Register Reports',
                                         'reports/domestic_export_ledgers' => 'Domestic Export Ledger',
                                         'reports/person_production_charts' => 'Person Production Charts',
+                                        'reports/profit_and_loss_reports' => 'Profit and Loss Reports',
                                         ),  
                     //'Interests' => array('transactions/interest_issue_vouchers'=>'Interest Issue Voucher','transactions/interest_receipt_vouchers'=>'Interest Receipt Voucher'),
                     'Registers'   => array(

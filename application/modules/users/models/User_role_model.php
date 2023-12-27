@@ -80,6 +80,7 @@ class User_role_model extends Core_user_role_model {
                                         'reports/sales_registers',
                                         'reports/cash_gst_registers',
                                         'reports/domestic_export_ledgers',
+                                        'reports/profit_and_loss_reports',
                                         ),
                      'Interest' => array('interest/interest_issue_voucher'),
                      'Registers' => array('registers/cash_registers','registers/bank_registers','registers/sales_registers','registers/purchase_registers','registers/rate_cut_purchase_value_registers','registers/rate_cut_purchase_weight_registers','registers/rate_cut_booking_value_registers','registers/rate_cut_booking_weight_registers','registers/expense_registers','registers/metal_registers'),
