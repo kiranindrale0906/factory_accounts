@@ -3,9 +3,8 @@
   foreach($purchase_sales_account_domestic_export_with_vadotar_records as $domestic_export_record) 
     $domestic_export_records[$domestic_export_record['is_export']] = $domestic_export_record;
   $sales_domestic_gold_fine = !empty($domestic_export_records[0]['gold_fine']) ? -1 * $domestic_export_records[0]['gold_fine'] : 0;
-  $sales_domestic_rate = !empty($domestic_export_records[0]['rate']) ? -1 * $domestic_export_records[0]['rate'] : 0;
+  $sales_domestic_rate = !empty($domestic_export_records[0]['rate']) ? $domestic_export_records[0]['rate'] : 0;
   $sales_domestic_amount = $sales_domestic_gold_fine*$sales_domestic_rate;
-
   $sales_domestic_vadotar_fine = !empty($domestic_export_records[0]['fine']) ? -1 * $domestic_export_records[0]['fine'] : 0;
   $sales_domestic_vadotar_amount = $sales_domestic_vadotar_fine*$sales_domestic_rate;
 

@@ -313,7 +313,7 @@ class Trial_balances extends Ledgers {
     $this->data['purchase_sales_account_domestic_export_with_vadotar_records'] = $this->model->get($purchase_sales_account_domestic_export_with_vadotar_select,array(array('voucher_type'=>"metal issue voucher","ac_account.sub_group_code"=>"Domestic")), 
                                                 array(array('ac_account','ac_vouchers.account_name=ac_account.name'),array('chitties','ac_vouchers.chitti_id=chitties.id')), array('group_by'=>'is_export'));
     
-    pd($this->data['purchase_sales_account_domestic_export_with_vadotar_records']);
+    //pd($this->data['purchase_sales_account_domestic_export_with_vadotar_records']);
 
     $this->data['domestic_labour_amount'] = $this->model->find('  IFNULL(sum(debit_amount),0) 
                                                                 - IFNULL(sum(credit_amount),0) as amount', 

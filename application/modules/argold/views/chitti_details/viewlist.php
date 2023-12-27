@@ -57,7 +57,9 @@
                       $narration = array_unique($narration);
                       $narration = str_replace('Hollow Choco Chain', 'HCC', implode(', ', $narration));
                       $narration = str_replace(['Sisma Chain','Choco Chain'],'', $narration);
-                      echo str_replace('HCC', 'Hollow Choco Chain', $narration);
+                      $narration=str_replace('HCC', 'Hollow Choco Chain', $narration);
+			$narration_array=array_map('trim',explode(',', $narration));
+		      echo implode(',', array_unique($narration_array));
                     ?>
                   </td>
                   <td class="text-right"><?= (!empty($metal_voucher_detail['customer_name'])&& $metal_voucher_detail['customer_name']!='Market Issue')?($metal_voucher_detail['customer_name']):'' ; ?></td>
