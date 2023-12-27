@@ -3,11 +3,13 @@
   foreach($purchase_sales_account_domestic_export_with_vadotar_records as $domestic_export_record) 
     $domestic_export_records[$domestic_export_record['is_export']] = $domestic_export_record;
   $sales_domestic_gold_fine = !empty($domestic_export_records[0]['gold_fine']) ? -1 * $domestic_export_records[0]['gold_fine'] : 0;
-  $sales_domestic_rate = !empty($domestic_export_records[0]['rate']) ? $domestic_export_records[0]['rate'] : 0;
+  $sales_domestic_gold_rate = !empty($domestic_export_records[0]['gold_rate']) ? $domestic_export_records[0]['gold_rate'] : 0;
   $sales_domestic_amount = !empty($domestic_export_records[0]['gold_amount']) ? $domestic_export_records[0]['gold_amount'] : 0;
 
   $sales_domestic_vadotar_fine = !empty($domestic_export_records[0]['vadotar_fine']) ? -1 * $domestic_export_records[0]['vadotar_fine'] : 0;
   $sales_domestic_vadotar_amount = !empty($domestic_export_records[0]['vadotar_amount']) ? $domestic_export_records[0]['vadotar_amount'] : 0;
+  $sales_domestic_vadotar_rate = !empty($domestic_export_records[0]['vadotar_rate']) ? $domestic_export_records[0]['vadotar_rate'] : 0;
+
    $domestic_export_records[1]['fine'] = $domestic_export_records[1]['fine']; //+ 24663.902;
    $domestic_export_records[1]['amount'] = $domestic_export_records[1]['amount']; // + 116042947.000;
 
@@ -242,13 +244,13 @@
           <tr>
             <td>Domestic Gold Sale</td>
             <td class="text-right"><?= four_decimal($sales_domestic_amount) ?>  </td>
-            <td class="text-right"><?= four_decimal($sales_domestic_rate); ?>  </td>
+            <td class="text-right"><?= four_decimal($sales_domestic_gold_rate); ?>  </td>
             <td class="text-right"><?= four_decimal($sales_domestic_gold_fine, '-'); ?></td>
           </tr>
           <tr>
             <td>Domestic Vadotar Sale</td>
             <td class="text-right"><?= four_decimal($sales_domestic_vadotar_amount, '-') ?>  </td>
-            <td class="text-right"><?= four_decimal($sales_domestic_rate, '-'); ?>  </td>
+            <td class="text-right"><?= four_decimal($sales_domestic_vadotar_rate, '-'); ?>  </td>
             <td class="text-right"><?= four_decimal($sales_domestic_vadotar_fine, '-'); ?></td>
           </tr>
 
