@@ -317,9 +317,19 @@ class Trial_balances extends Ledgers {
       IFNULL(sum((ac_vouchers.factory_purity-ac_vouchers.purity)*ac_vouchers.credit_weight/100), 0) as vadotar,
       IFNULL(sum(ac_vouchers.credit_weight), 0) weight";
 
-    $this->data['purchase_sales_account_domestic_export_with_vadotar_records'] = $this->model->get($purchase_sales_account_domestic_export_with_vadotar_select,array(array('voucher_type'=>"metal issue voucher","ac_account.group_code"=>"Domestic","ac_account.sub_group_code!="=>"Domestic Labour Account")),array(array('ac_account','ac_vouchers.account_name=ac_account.name')), array('group_by'=>'is_export,chitti_id'));
+    $profit_loss_with_vadotar_records = $this->model->get($purchase_sales_account_domestic_export_with_vadotar_select,array('voucher_type'=>"metal issue voucher","ac_account.group_code"=>"Domestic","ac_account.sub_group_code!="=>"Domestic Labour Account"),array(array('ac_account','ac_vouchers.account_name=ac_account.name')), array('group_by'=>'is_export,chitti_id'));
+    $profit_loss_with_vadotar_domestic_sale_gold_fine=$profit_loss_with_vadotar_domestic_sale_gold_rate=0
+    $profit_loss_with_vadotar_domestic_sale_vadotar_fine=$profit_loss_with_vadotar_domestic_sale_vadotar_rate=0
+    foreach ($profit_loss_with_vadotar_records as $profit_loss_with_vadotar_index => $profit_loss_with_vadotar_value) {
+      $chitti_details=$this->chitti_model->find('rate,sale_type',array('id'=>$profit_loss_with_vadotar_value['chitti_id']));
+      $profit_loss_with_vadotar_records[$profit_loss_with_vadotar_index]['rate']=$chitti_details['rate'];
+      $profit_loss_with_vadotar_records[$profit_loss_with_vadotar_index]['sale_type']=$chitti_details['sale_type'];
+      if($profit_loss_with_vadotar_records[$profit_loss_with_vadotar_index]['sale_type']=="Labour"){
+        $profit_loss_with_vadotar_records[$profit_loss_with_vadotar_index]['gold_fine']=0;
+      }
+    }
+    pd($profit_loss_with_vadotar_records);
     
-    pd($this->data['purchase_sales_account_domestic_export_with_vadotar_records']);
 
     $this->data['domestic_labour_amount'] = $this->model->find('  IFNULL(sum(debit_amount),0) 
                                                                 - IFNULL(sum(credit_amount),0) as amount', 
