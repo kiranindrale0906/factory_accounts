@@ -17,6 +17,9 @@ class Chitti_model extends BaseModel {
     }elseif($this->router->class == 'chitti_domestics'){ 
       $rules= array(array('field' => 'chitti_domestics[date]', 'label' => 'Date',
                         'rules' => 'trim|required'));
+    }elseif($this->router->class == 'chitti_erps'){ 
+      $rules= array(array('field' => 'chitti_erps[date]', 'label' => 'Date',
+                        'rules' => 'trim|required'));
     }else{
       $rules= array(array('field' => 'chittis[date]', 'label' => 'Date',
                         'rules' => 'trim|required'));
