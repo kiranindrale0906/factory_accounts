@@ -1,11 +1,20 @@
 <tr class="process_<?= $vouchers['packet_no']?>">
+	<?php
+
+	if ($this->router->class == 'chitti_erps'){
+		$option_value=$vouchers['packet_no'].'_'.$vouchers['argold_id'];
+	}else{
+		$option_value=$vouchers['packet_no'].'-'.$vouchers['argold_id'];
+	}
+
+	?>
 	<td>
 		<?php load_field('checkbox', array('field' => 'chitti_id',
 																		 	 'index' => $index,
 																		 	 'class' => 'chitti_details_id',
 																		 	 'option' => array(
 																		 	 							array('chk_id' => $index,
-																		                      'value' => $vouchers['packet_no'].'-'.$vouchers['argold_id'],
+																		                      'value' =>$option_value,
 																		                      'label' => '',
 																		                      'checked' => (!empty($chitti_details[$index]['chitti_id']) ? 'checked' : ''),
 																		 	 						        )),
