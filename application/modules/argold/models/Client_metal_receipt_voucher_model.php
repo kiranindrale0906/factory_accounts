@@ -47,7 +47,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     $this->set_factory_purity_from_receipt_type_for_metal_and_finished_goods_and_chain_receipt();
     $this->set_metal_receipt_attributes_from_receipt_type_for_vadotar();
     $this->set_metal_receipt_attributes();
-    if($this->attributes['site_name'] =='AR Gold ERP' && $this->attributes['receipt_type'] == 'Metal'){
+    if(!empty($this->attributes['site_name'])&&$this->attributes['site_name'] =='AR Gold ERP' && $this->attributes['receipt_type'] == 'Metal'){
     	$this->formdata['metal_issue_vouchers'][0]=$this->attributes;
     	$this->formdata['metal_issue_vouchers'][0]['account_name']=$this->attributes['customer_name'];
     	$this->formdata['metal_issue_vouchers'][0]['credit_weight']=$this->attributes['debit_weight'];
@@ -622,9 +622,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                       'factory'=> $attributes['account_name'],
                       'item_name'=> $attributes['narration'],
                       'voucher_number'=> $attributes['voucher_number'],
-                      'credit_weight' => $attributes['credit_weight'],
-                      'factory_purity' => $attributes['factory_purity'],
-                      'hook_kdm_purity' => (empty($attributes['hook_kdm_purity'])) ? four_decimal($attributes['factory_purity']) : four_decimal($attributes['hook_kdm_purity']),
+                      'credit_weight' => (float)$attributes['credit_weight'],
+                      'factory_purity' => (float)$attributes['factory_purity'],
+                      'hook_kdm_purity' => (empty($attributes['hook_kdm_purity'])) ? (float)four_decimal($attributes['factory_purity']) : (float)four_decimal($attributes['hook_kdm_purity']),
                       'description' => $attributes['description'],
                       'account_id' => $attributes['id']);
     $send_data=$api_data;
