@@ -91,7 +91,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     if ($this->attributes['receipt_type'] == "AR Gold Finished Goods")  $this->attributes['account_name'] = 'AR Gold';
      if ($this->attributes['receipt_type'] == "Export Internal")        $this->attributes['account_name'] = 'Export Internal Software';
      if ($this->attributes['receipt_type'] == "Domestic Internal")      $this->attributes['account_name'] = 'Domestic Internal Software';
-     //if ($this->attributes['receipt_type'] == "QC Out")                 $this->attributes['account_name'] = 'Domestic Internal Software';
+    if ($this->attributes['receipt_type'] == "QC Out")                 $this->attributes['account_name'] = 'Domestic Internal Software';
      if ($this->attributes['receipt_type'] == "Packing Slip")           $this->attributes['account_name'] = 'Export Internal Software';
     if ($this->attributes['receipt_type'] == "ARF Finished Goods")          $this->attributes['account_name'] = 'ARF';
     if ($this->attributes['receipt_type'] == "ARC Finished Goods")          $this->attributes['account_name'] = 'ARC';
@@ -402,7 +402,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   
   public function after_save($action) {
     parent::after_save($action);
+    if($this->attributes['account_name']!="Domestic Internal Software"){
     $this->create_metal_issue_vouchers();
+    }
     $this->create_rate_cut_vouchers_for_metal_and_refresh();
     $this->_add_metal_receipt_id_in_refresh_data();
   }
