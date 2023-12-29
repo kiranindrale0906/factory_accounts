@@ -44,6 +44,7 @@ class Chitti_model extends BaseModel {
       $chitti_details=$this->voucher_model->find($select, array('voucher_type' => 'metal issue voucher', 
                                                                 'chitti_id' => $this->attributes['id']));
     }elseif (!empty($this->formdata['chitti_details'])) {
+      pd($this->router->class);
       $chitti_ids=array_column($this->formdata['chitti_details'], 'chitti_id');
       $chitti_id_details=array();
       foreach ($chitti_ids as $index => $chitti_id) {
