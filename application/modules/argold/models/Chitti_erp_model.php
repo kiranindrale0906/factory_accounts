@@ -22,7 +22,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       $chitti_ids=array_column($this->formdata['chitti_details'], 'chitti_id');
       $chitti_id_details=array();
       foreach ($chitti_ids as $index => $chitti_id) {
-        $chittis=explode('-', $chitti_id);
+        $chittis=explode('_', $chitti_id);
         $chitti_id_details[$index]['packet_no']=$chittis[0];
         $chitti_id_details[$index]['erp_argold_id']=$chittis[1];
       }
@@ -34,9 +34,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                                             'erp_argold_id' => $argold_ids,
                                                             'account_name' => $this->attributes['account_name'],
                                                             'purity' => $this->attributes['purity']));
+
     } else 
       $chitti_details = $this->voucher_model->get('', array('chitti_id' => $this->attributes['id']));
-    
+    pd($chitti_details);
     
     foreach ($chitti_details as $index => $chitti_detail) {
       if (isset($chitti_detail['id'])) {
