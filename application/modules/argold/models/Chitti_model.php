@@ -44,26 +44,46 @@ class Chitti_model extends BaseModel {
       $chitti_details=$this->voucher_model->find($select, array('voucher_type' => 'metal issue voucher', 
                                                                 'chitti_id' => $this->attributes['id']));
     }elseif (!empty($this->formdata['chitti_details'])) {
-      pd($this->router->class);
       $chitti_ids=array_column($this->formdata['chitti_details'], 'chitti_id');
       $chitti_id_details=array();
-      foreach ($chitti_ids as $index => $chitti_id) {
-        $chittis=explode('-', $chitti_id);
-        $chitti_id_details[$index]['packet_no']=$chittis[0];
-        $chitti_id_details[$index]['argold_id']=$chittis[1];
-      }
-      $packet_nos=array_column($chitti_id_details, 'packet_no');
-      $argold_ids=array_column($chitti_id_details, 'argold_id');
+      if($this->router->class=="chitti_erps"){
+        foreach ($chitti_ids as $index => $chitti_id) {
+          $chittis=explode('-', $chitti_id);
+          $chitti_id_details[$index]['packet_no']=$chittis[0];
+          $chitti_id_details[$index]['erp_argold_id']=$chittis[1];
+        }
+        $packet_nos=array_column($chitti_id_details, 'packet_no');
+        $argold_ids=array_column($chitti_id_details, 'erp_argold_id');
 
-      $select = 'sum(credit_weight) as credit_weight,
-                 (sum(credit_weight*purity) / sum(credit_weight)) as purity,
-                 (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,
-                 "" as voucher_number, packet_no, voucher_date';
-      $chitti_details=$this->voucher_model->find($select, array('site_name' => $this->attributes['site_name'],
-                                                                'packet_no' => $packet_nos,
-                                                                'argold_id' => $argold_ids,
-                                                                'account_name' => $this->attributes['account_name'],
-                                                                'purity' => $this->attributes['purity']));
+        $select = 'sum(credit_weight) as credit_weight,
+                   (sum(credit_weight*purity) / sum(credit_weight)) as purity,
+                   (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,
+                   "" as voucher_number, packet_no, voucher_date';
+        $chitti_details=$this->voucher_model->find($select, array('site_name' => $this->attributes['site_name'],
+                                                                  'packet_no' => $packet_nos,
+                                                                  'erp_argold_id' => $argold_ids,
+                                                                  'account_name' => $this->attributes['account_name'],
+                                                                  'purity' => $this->attributes['purity']));
+      }else{
+        foreach ($chitti_ids as $index => $chitti_id) {
+            $chittis=explode('-', $chitti_id);
+            $chitti_id_details[$index]['packet_no']=$chittis[0];
+            $chitti_id_details[$index]['argold_id']=$chittis[1];
+          }
+          $packet_nos=array_column($chitti_id_details, 'packet_no');
+          $argold_ids=array_column($chitti_id_details, 'argold_id');
+
+          $select = 'sum(credit_weight) as credit_weight,
+                     (sum(credit_weight*purity) / sum(credit_weight)) as purity,
+                     (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,
+                     "" as voucher_number, packet_no, voucher_date';
+          $chitti_details=$this->voucher_model->find($select, array('site_name' => $this->attributes['site_name'],
+                                                                    'packet_no' => $packet_nos,
+                                                                    'argold_id' => $argold_ids,
+                                                                    'account_name' => $this->attributes['account_name'],
+                                                                    'purity' => $this->attributes['purity']));
+
+      }
     }
     if (!empty($this->attributes['date']))  $this->attributes['date'] = date('Y-m-d', strtotime($this->attributes['date']));
     if($this->attributes['product_rate']>0){
