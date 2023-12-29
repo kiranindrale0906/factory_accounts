@@ -137,7 +137,8 @@ class Chittis extends BaseController {
     if(!empty($this->data['record']['account_name'])) { 
       $where['account_name']=$this->data['record']['account_name'];
       if($this->router->class == 'chitti_exports'){ 
-      $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,sum(quantity) as quantity,
+      $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,
+        sum(quantity) as quantity,
                             (sum(credit_weight*purity) / sum(credit_weight)) as purity,
                             (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,
                             "" as voucher_number,
@@ -153,6 +154,24 @@ class Chittis extends BaseController {
                             array(), 
                             array('group_by'=>'packet_no, voucher_date, usd_wastage_percentage,
                                                inr_wastage_percentage, argold_id,customer_name'));
+    }elseif($this->router->class == 'chitti_erps'){ 
+      $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,
+        sum(quantity) as quantity,
+                            (sum(credit_weight*purity) / sum(credit_weight)) as purity,
+                            (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,
+                            "" as voucher_number,
+                            packet_no,
+                            voucher_date,
+                            item_code,
+                            customer_name,
+                            usd_wastage_percentage,
+                            inr_wastage_percentage,
+                            group_concat(DISTINCT(narration)) as narration,
+                            erp_argold_id as argold_id', 
+                            $where, 
+                            array(), 
+                            array('group_by'=>'packet_no, voucher_date, usd_wastage_percentage,
+                                               inr_wastage_percentage, erp_argold_id,customer_name'));
     }else{
       $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,sum(quantity) as quantity,
                             (sum(credit_weight*purity) / sum(credit_weight)) as purity,
@@ -174,6 +193,11 @@ class Chittis extends BaseController {
     if($this->router->class == 'chitti_exports'){ 
       if ($this->router->method == 'store' || $this->router->method == 'update') {
         $this->data['record']['chitti_exports'] = $_POST['chitti_exports'];
+        $this->data['chittis_details'] = @$_POST['chittis_details'];
+      }
+    }elseif($this->router->class == 'chitti_erps'){ 
+      if ($this->router->method == 'store' || $this->router->method == 'update') {
+        $this->data['record']['chitti_erps'] = $_POST['chitti_erps'];
         $this->data['chittis_details'] = @$_POST['chittis_details'];
       }
     }elseif($this->router->class == 'chitti_domestics'){ 
@@ -239,6 +263,8 @@ class Chittis extends BaseController {
   public function _after_save($formdata, $action) {
     if ($this->router->class == 'chitti_exports')
       $this->data['redirect_url']= ADMIN_PATH.'argold/chitti_exports';
+    elseif ($this->router->class == 'chitti_erps')
+      $this->data['redirect_url']= ADMIN_PATH.'argold/chitti_erps';
     elseif ($this->router->class == 'chitti_domestics')
       $this->data['redirect_url']= ADMIN_PATH.'argold/chitti_domestics';
     else
