@@ -2,6 +2,7 @@
   $domestic_export_records = array();
   foreach($purchase_sales_account_domestic_export_with_vadotar_records as $domestic_export_record) 
     $domestic_export_records = $domestic_export_record;
+  pd($domestic_export_records);
   $sales_domestic_gold_fine = !empty($domestic_export_records['gold_fine']) ? $domestic_export_records['gold_fine'] : 0;
   $sales_domestic_gold_rate = !empty($domestic_export_records['gold_rate']) ? $domestic_export_records['gold_rate'] : 0;
   $sales_domestic_amount = !empty($domestic_export_records['gold_amount']) ?  $domestic_export_records['gold_amount'] : 0;
