@@ -3,7 +3,7 @@
 class Profit_and_sale_reports extends BaseController {
   public function __construct() {
     parent::__construct();
-    $this->load->model(array('masters/account_model','ac_vouchers/voucher_model'));
+    $this->load->model(array('argold/chitti_model','masters/account_model','ac_vouchers/voucher_model'));
   }
   public function index() {
     $this->_get_form_data();
@@ -14,8 +14,8 @@ class Profit_and_sale_reports extends BaseController {
     $this->data['from_date']=!empty($_GET['from_date'])?$_GET['from_date']:'';
     $this->data['to_date']=!empty($_GET['to_date'])?$_GET['to_date']:'';
     
-  	$purchase_sales_account_domestic_export_with_vadotar_select = "is_export,
-      account_name,
+    $purchase_sales_account_domestic_export_with_vadotar_select = "is_export,
+      voucher_date,account_name,
       factory_purity,
       purity,
       chitti_id,
@@ -33,7 +33,6 @@ class Profit_and_sale_reports extends BaseController {
     }
 
     $profit_loss_with_vadotar_records = $this->model->get($purchase_sales_account_domestic_export_with_vadotar_select,$where,array(array('ac_account','ac_vouchers.account_name=ac_account.name')));
-    $profit_loss_with_vadotar_domestic_sale_gold_fine=$profit_loss_with_vadotar_domestic_sale_gold_amount=0;
     $profit_loss_with_vadotar_domestic_sale_vadotar_fine=$profit_loss_with_vadotar_domestic_sale_vadotar_amount=$profit_loss_with_vadotar_domestic_rate=0;
 
     foreach ($profit_loss_with_vadotar_records as $profit_loss_with_vadotar_index => $profit_loss_with_vadotar_value) {
@@ -43,14 +42,14 @@ class Profit_and_sale_reports extends BaseController {
         $profit_loss_with_vadotar_records[$profit_loss_with_vadotar_index]['gold_fine']=0;
       }
       $profit_loss_with_vadotar_records[$profit_loss_with_vadotar_index]['gold_amount']=$profit_loss_with_vadotar_value['gold_fine']*$chitti_details['rate'];
-      $profit_loss_with_vadotar_records[$profit_loss_with_vadotar_index]['gold_rate']=$profit_loss_with_vadotar_records[$profit_loss_with_vadotar_index]['gold_amount']/$profit_loss_with_vadotar_records[$profit_loss_with_vadotar_index]['gold_fine'];
+      $profit_loss_with_vadotar_records[$profit_loss_with_vadotar_index]['gold_rate']=!empty($profit_loss_with_vadotar_records[$profit_loss_with_vadotar_index]['gold_fine'])?$profit_loss_with_vadotar_records[$profit_loss_with_vadotar_index]['gold_amount']/$profit_loss_with_vadotar_records[$profit_loss_with_vadotar_index]['gold_fine']:0;
 
       $profit_loss_with_vadotar_records[$profit_loss_with_vadotar_index]['vadotar_fine']=$profit_loss_with_vadotar_value['vadotar'];
 
       $profit_loss_with_vadotar_records[$profit_loss_with_vadotar_index]['vadotar_amount']=$profit_loss_with_vadotar_value['vadotar']*$chitti_details['rate'];
 
-      $profit_loss_with_vadotar_records[$profit_loss_with_vadotar_index]['vadotar_rate']=$profit_loss_with_vadotar_records[$profit_loss_with_vadotar_index]['vadotar_amount']/$$[$profit_loss_with_vadotar_index]['vadotar_fine'];
+      $profit_loss_with_vadotar_records[$profit_loss_with_vadotar_index]['vadotar_rate']=($profit_loss_with_vadotar_value['vadotar']>0)?($profit_loss_with_vadotar_records[$profit_loss_with_vadotar_index]['vadotar_amount']/$profit_loss_with_vadotar_value['vadotar']):0;
     }
-    $this->data['profit_loss_with_vadotar_records']=$profit_loss_with_vadotar_records;
+    $this->data['profit_and_sale_records']=$profit_loss_with_vadotar_records;
   }
 }

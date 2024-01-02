@@ -71,7 +71,7 @@ function get_field_attribute($table, $field) {
   'profit_and_loss_search_to_date'=>array('To Date', '', TRUE, '', TRUE),
   'date_to'=>array('Date To', 'Enter Date To', TRUE, '', TRUE)
 );
-
+}
 function get_row_actions($row, $url, $select_url, $filter) {
   $actions = array();
   $controller = 'reports/bw_accounts';

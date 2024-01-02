@@ -1,5 +1,5 @@
 <?php 
-  $url = 'reports/purchase_registers';
+  $url = 'reports/profit_and_loss_reports';
 ?>
   <h6 class="heading blue bold text-uppercase mb-0">Profit and Sale Reports</h6>
   <hr>
@@ -8,11 +8,12 @@
       <?php load_field('date',array('field' => 'from_date', 'class' => 'datepicker_js', 'col'=>'col-sm-3','value'=>$from_date))?> 
       <?php load_field('date',array('field' => 'to_date', 'class' => 'datepicker_js', 'col'=>'col-sm-3','value'=>$to_date))?>
       <div class="col-sm-4 align-self-center">
-          <?php load_buttons('button', array('name' =>'Search','class'=>'btn-xs btn_blue profit_loss_search_date mr-2')) ?> 
+          <?php load_buttons('button', array('name' =>'Search','class'=>'btn-xs btn_blue profit_and_sale_search_date mr-2')) ?> 
           <?php load_buttons('button', array('name' =>'Clear','class'=>'btn-xs btn_blue clear_btn')) ?> 
       </div>
   </div>
 </form> 
+
 <div class="table-responsive">
   <table class="table table-sm table-default">
     <thead>
@@ -33,21 +34,21 @@
         </tr>
     </thead>
     <tbody>
-    <?php 
+	   <?php 
       $total_credit_weight=$total_gold_amount=$total_vadotar_amount=$total_gold_rate=$total_vadotar_rate=$total_gold_fine=$total_vadotar_fine=0;
-     foreach ($profit_and_loss_records as $index => $record) {
-      $total_credit_weight+=four_decimal($record['credit_weight']);
-      $total_gold_amount+=four_decimal($record['gold_amount']);
-      $total_vadotar_amount+=four_decimal($record['vadotar_amount']);
-      $total_gold_rate+=four_decimal($record['gold_rate']);
-      $total_vadotar_rate+=four_decimal($record['vadotar_rate']);
-      $total_gold_fine+=four_decimal($record['gold_fine']);
-      $total_vadotar_fine+=four_decimal($record['vadotar_fine']);
+     foreach ($profit_and_sale_records as $index => $record) {
+	$total_credit_weight+=$record['credit_weight'];
+	$total_gold_amount+=$record['gold_amount'];
+	$total_gold_fine+=$record['gold_fine'];
+	$total_gold_rate+=$record['gold_rate'];
+	$total_vadotar_fine+=$record['vadotar_fine'];
+	$total_vadotar_amount+=$record['vadotar_amount'];
+      
       ?>
       <tr>
-        <td class="text-left"><?=!empty($record['voucher_date'])?date('d-m-Y',strtotime($record['voucher_date'])):'-'; ?></td>
+	<td class="text-left"><?=!empty($record['voucher_date'])?date('d-m-Y',strtotime($record['voucher_date'])):'-'; ?></td>
         <td class="text-left"><?=!empty($record['account_name'])?$record['account_name']:'-'; ?></td>
-        <td class="text-left"><?=!empty($record['chitti_id'])?$record['chitti_id']:'-'; ?></td>
+        <td class="text-left"><?=!empty($record['chitti_id'])?"Chitti no -".$record['chitti_id']:'-'; ?></td>
         <td class="text-left"><?=!empty($record['sale_type'])?$record['sale_type']:'-'; ?></td>
         <td class="text-right"><?=!empty($record['credit_weight'])?four_decimal($record['credit_weight']):'-'; ?></td>
         <td class="text-right"><?=!empty($record['purity'])?four_decimal($record['purity']):'-'; ?></td>
@@ -57,16 +58,16 @@
         <td class="text-right"><?=!empty($record['gold_fine'])?four_decimal($record['gold_fine']):'-'; ?></td>
         <td class="text-right"><?=!empty($record['vadotar_amount'])?four_decimal($record['vadotar_amount']):'-'; ?></td>
         <td class="text-right"><?=!empty($record['vadotar_rate'])?four_decimal($record['vadotar_rate']):'-'; ?></td>
-        <td class="text-right"><?=!empty($record['vadotar_fine'])?four_decimal($record['vadotar_fine']):'-'; ?></td>
+        <td class="text-right"><?=!empty($record['vadotar_fine'])?four_decimal($record['vadotar_fine']):'-'; ?></td>      
       </tr>
     <?php }?>
-      <tr class="bg_gray bold">
+    </tbody>
+	<tr class="bg_gray bold">
     <td>Total</td>
     <td class="text-right"></td>
     <td class="text-right"></td>
     <td class="text-right"></td>
-    <td class="text-right"></td>
-    <td class="text-right"><?=$total_credit_weight ?></td>
+    <td class="text-right"><?=$total_credit_weight?></td>
     <td class="text-right"></td>
     <td class="text-right"></td>
     <td class="text-right"><?=$total_gold_amount?></td>
@@ -76,6 +77,5 @@
     <td class="text-right"><?=$total_vadotar_rate?></td>
     <td class="text-right"><?=$total_vadotar_fine?></td>
   </tr>
-    </tbody>
   </table>
 </div>
