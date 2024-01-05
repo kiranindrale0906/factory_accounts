@@ -47,7 +47,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     $this->set_factory_purity_from_receipt_type_for_metal_and_finished_goods_and_chain_receipt();
     $this->set_metal_receipt_attributes_from_receipt_type_for_vadotar();
     $this->set_metal_receipt_attributes();
-    if($this->attributes['site_name'] =="AR Gold ERP" and $this->attributes['site_name'] =="Metal"){
+    if($this->attributes['site_name'] =="AR Gold ERP" and $this->attributes['receipt_type'] =="Metal"){
     	$this->formdata['metal_issue_vouchers'][0]=$this->attributes;
     	$this->formdata['metal_issue_vouchers'][0]['account_name']=$this->attributes['customer_name'];
     	$this->formdata['metal_issue_vouchers'][0]['credit_weight']=$this->attributes['debit_weight'];
@@ -71,8 +71,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   }
 
   private function set_site_name_from_receipt_type() {
-    if (   $this->attributes['receipt_type'] == 'Refresh'
-        || $this->attributes['receipt_type'] == 'Daily Drawer') {
+    if (!empty($this->attributes['receipt_type']) && ($this->attributes['receipt_type'] == 'Refresh'|| $this->attributes['receipt_type'] == 'Daily Drawer') ){
       foreach ($this->formdata['metal_issue_vouchers'] as $metal_issue_voucher) {
         $this->attributes['site_name'] = get_site_name_from_account_name($metal_issue_voucher['account_name']);
         break;
@@ -88,15 +87,15 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   }
 
   private function set_account_name_from_receipt_type() {
-    if ($this->attributes['receipt_type'] == "AR Gold Finished Goods")  $this->attributes['account_name'] = 'AR Gold';
-     if ($this->attributes['receipt_type'] == "Export Internal")        $this->attributes['account_name'] = 'Export Internal Software';
-     if ($this->attributes['receipt_type'] == "Domestic Internal")      $this->attributes['account_name'] = 'Domestic Internal Software';
-    if ($this->attributes['receipt_type'] == "QC Out")                 $this->attributes['account_name'] = 'Domestic Internal Software';
-     if ($this->attributes['receipt_type'] == "Packing Slip")           $this->attributes['account_name'] = 'Export Internal Software';
-    if ($this->attributes['receipt_type'] == "ARF Finished Goods")          $this->attributes['account_name'] = 'ARF';
-    if ($this->attributes['receipt_type'] == "ARC Finished Goods")          $this->attributes['account_name'] = 'ARC';
-    if ($this->attributes['receipt_type'] == "ARF Software Finished Goods") $this->attributes['account_name'] = 'ARF Software';
-    if ($this->attributes['receipt_type'] == "Vadotar")                     $this->attributes['account_name'] = 'MAIN VADOTAR';
+    if (!empty($this->attributes['receipt_type']) && $this->attributes['receipt_type'] == "AR Gold Finished Goods")  $this->attributes['account_name'] = 'AR Gold';
+     if (!empty($this->attributes['receipt_type']) && $this->attributes['receipt_type'] == "Export Internal")        $this->attributes['account_name'] = 'Export Internal Software';
+     if (!empty($this->attributes['receipt_type']) && $this->attributes['receipt_type'] == "Domestic Internal")      $this->attributes['account_name'] = 'Domestic Internal Software';
+    if (!empty($this->attributes['receipt_type']) && $this->attributes['receipt_type'] == "QC Out")                 $this->attributes['account_name'] = 'Domestic Internal Software';
+     if (!empty($this->attributes['receipt_type']) && $this->attributes['receipt_type'] == "Packing Slip")           $this->attributes['account_name'] = 'Export Internal Software';
+    if (!empty($this->attributes['receipt_type']) && $this->attributes['receipt_type'] == "ARF Finished Goods")          $this->attributes['account_name'] = 'ARF';
+    if (!empty($this->attributes['receipt_type']) && $this->attributes['receipt_type'] == "ARC Finished Goods")          $this->attributes['account_name'] = 'ARC';
+    if (!empty($this->attributes['receipt_type']) && $this->attributes['receipt_type'] == "ARF Software Finished Goods") $this->attributes['account_name'] = 'ARF Software';
+    if (!empty($this->attributes['receipt_type']) && $this->attributes['receipt_type'] == "Vadotar")                     $this->attributes['account_name'] = 'MAIN VADOTAR';
   }
 
   private function set_metal_receipt_attributes_from_receipt_type_for_vadotar() {
@@ -624,13 +623,14 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                       'factory'=> $attributes['account_name'],
                       'item_name'=> $attributes['narration'],
                       'voucher_number'=> $attributes['voucher_number'],
-                      'credit_weight' => $attributes['credit_weight'],
-                      'factory_purity' => $attributes['factory_purity'],
-                      'hook_kdm_purity' => (empty($attributes['hook_kdm_purity'])) ? four_decimal($attributes['factory_purity']) : four_decimal($attributes['hook_kdm_purity']),
+                      'credit_weight' => (float)$attributes['credit_weight'],
+                      'factory_purity' => (float)$attributes['factory_purity'],
+                      'hook_kdm_purity' => (empty($attributes['hook_kdm_purity'])) ? (float)four_decimal($attributes['factory_purity']) : (float)four_decimal($attributes['hook_kdm_purity']),
                       'description' => $attributes['description'],
                       'account_id' => $attributes['id']);
     $send_data=$api_data;
-    $api_url = "https://staging1-arg-manufacturing.8848digitalerp.com/api/method/custom_app.api.material_receipt.create_material_receipt";
+//    $api_url = "https://staging1-arg-manufacturing.8848digitalerp.com/api/method/custom_app.api.material_receipt.create_material_receipt";
+    $api_url = "https://erp.ar-gold.in/api/method/custom_app.api.material_receipt.create_material_receipt";
     if (empty($api_url)) return true;
     $result = curl_post_erp_request($api_url, $send_data);
   }else{
