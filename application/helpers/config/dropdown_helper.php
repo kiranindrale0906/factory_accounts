@@ -320,6 +320,7 @@
                        'AR Gold Software (Sep 2023)' => 'AR Gold (Sep 2023)',
                        'ARF Software (Sep 2023)'     => 'ARF (Sep 2023)',
                        'ARC Software (Sep 2023)'     => 'ARC (Sep 2023)',
+                       'ARG ERP Software'            => 'AR Gold ERP',
                        'Export Internal Software'    => 'Export',
                        'Domestic Internal Software'    => 'Domestic');
     if (!empty($site_name[$account_name])) return $site_name[$account_name];
@@ -341,6 +342,7 @@
                           'AR Gold (Sep 2023)' => 'AR Gold Software (Sep 2023)',
                           'ARF (Sep 2023)'     => 'ARF Software (Sep 2023)',
                           'ARC (Sep 2023)'     => 'ARC Software (Sep 2023)',
+                          'AR Gold ERP'     => 'ARG ERP Software',
                           'Export'           => 'Export Internal Software',
                           'Domestic'           => 'Domestic Internal Software');
     return $account_name[$site_name] ?? '';
@@ -383,6 +385,7 @@
                           'AR Gold (Apr 2023)' => 'AR Gold Loss Account (Apr 2023)',
                           'ARC (Apr 2023)' => 'ARC Loss Account (Apr 2023)',
                           'ARF (Apr 2023)' => 'ARF Loss Account (Apr 2023)',
+                          'AR Gold ERP' => 'ARG ERP Loss Account',
                           'AR Gold (Sep 2023)' => 'AR Gold Loss Account (Sep 2023)',
                           'ARC (Sep 2023)' => 'ARC Loss Account (Sep 2023)',
                           'ARF (Sep 2023)' => 'ARF Loss Account (Sep 2023)');
