@@ -1,7 +1,7 @@
 <?php 
   $url = 'reports/profit_and_loss_reports';
 ?>
-  <h6 class="heading blue bold text-uppercase mb-0">Profit and Sale Reports</h6>
+  <h6 class="heading blue bold text-uppercase mb-0">Purchase Profit and Sale Reports</h6>
   <hr>
     <form class="fields-group-sm">
     <div class="row">
@@ -20,7 +20,7 @@
       <tr>
         <th class="">Date</th>
         <th class="">Account Name</th>
-        <th class="">Chitti No</th>
+        <th class="">Voucher No</th>
         <th class="">Sale Type</th>
         <th class="text-right">Credit Amount</th>
         <th class="text-right">Purity</th>
@@ -35,22 +35,22 @@
     </thead>
     <tbody>
 	   <?php 
-      $total_credit_weight=$total_gold_amount=$total_vadotar_amount=$total_gold_rate=$total_vadotar_rate=$total_gold_fine=$total_vadotar_fine=0;
+      $total_debit_weight=$total_gold_amount=$total_vadotar_amount=$total_gold_rate=$total_vadotar_rate=$total_gold_fine=$total_vadotar_fine=0;
      foreach ($profit_and_sale_records as $index => $record) {
-	$total_credit_weight+=$record['credit_weight'];
-	$total_gold_amount+=$record['gold_amount'];
-	$total_gold_fine+=$record['gold_fine'];
-	$total_gold_rate+=$record['gold_rate'];
-	$total_vadotar_fine+=$record['vadotar_fine'];
-	$total_vadotar_amount+=$record['vadotar_amount'];
+      	$total_debit_weight+=$record['debit_weight'];
+      	$total_gold_amount+=$record['gold_amount'];
+      	$total_gold_fine+=$record['gold_fine'];
+      	$total_gold_rate+=$record['gold_rate'];
+      	$total_vadotar_fine+=$record['vadotar_fine'];
+      	$total_vadotar_amount+=$record['vadotar_amount'];
       
       ?>
       <tr>
 	<td class="text-left"><?=!empty($record['voucher_date'])?date('d-m-Y',strtotime($record['voucher_date'])):'-'; ?></td>
         <td class="text-left"><?=!empty($record['account_name'])?$record['account_name']:'-'; ?></td>
-        <td class="text-left"><?=!empty($record['chitti_id'])?"Chitti no -".$record['chitti_id']:'-'; ?></td>
+        <td class="text-left"><?=!empty($record['voucher_number'])?$record['voucher_number']:'-'; ?></td>
         <td class="text-left"><?=!empty($record['sale_type'])?$record['sale_type']:'-'; ?></td>
-        <td class="text-right"><?=!empty($record['credit_weight'])?four_decimal($record['credit_weight']):'-'; ?></td>
+        <td class="text-right"><?=!empty($record['debit_weight'])?four_decimal($record['debit_weight']):'-'; ?></td>
         <td class="text-right"><?=!empty($record['purity'])?four_decimal($record['purity']):'-'; ?></td>
         <td class="text-right"><?=!empty($record['factory_purity'])?four_decimal($record['factory_purity']):'-'; ?></td>
         <td class="text-right"><?=!empty($record['gold_amount'])?four_decimal($record['gold_amount']):'-'; ?></td>
@@ -67,7 +67,7 @@
     <td class="text-right"></td>
     <td class="text-right"></td>
     <td class="text-right"></td>
-    <td class="text-right"><?=$total_credit_weight?></td>
+    <td class="text-right"><?=$total_debit_weight?></td>
     <td class="text-right"></td>
     <td class="text-right"></td>
     <td class="text-right"><?=$total_gold_amount?></td>

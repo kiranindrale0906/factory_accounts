@@ -2,7 +2,7 @@
 
 function getTableSettings() {
   return array(
-    'page_title'          => 'Profit and Sale Reports',
+    'page_title'          => 'Purchase Profit and Sale Reports',
     'primary_table'       => 'ac_vouchers',
     'default_column'      => 'id',
     'table'               => 'ac_vouchers',
@@ -61,7 +61,7 @@ function list_settings() {
 function get_field_attribute($table, $field) {
   $ci=&get_instance();
   $attributes = array();
-  $attributes['profit_and_sale_reports'] = array(
+  $attributes['purchase_profit_and_sale_reports'] = array(
   'company_id'=>array('Company Name', 'Select Company Name', TRUE, '', TRUE),
   'account_id'=>array('Account Name', 'Select Account Name', TRUE, '', TRUE),
   'date_from'=>array('Date From', 'Enter Date From', TRUE, '', TRUE),

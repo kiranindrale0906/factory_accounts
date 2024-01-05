@@ -111,6 +111,7 @@
                                         'reports/domestic_export_ledgers' => 'Domestic Export Ledger',
                                         'reports/person_production_charts' => 'Person Production Charts',
                                         'reports/profit_and_sale_reports' => 'Profit and Sale Reports',
+                                        'reports/purchase_profit_and_sale_reports' => 'Purchase Profit and Sale Reports',
                                         ),  
                     //'Interests' => array('transactions/interest_issue_vouchers'=>'Interest Issue Voucher','transactions/interest_receipt_vouchers'=>'Interest Receipt Voucher'),
                     'Registers'   => array(
