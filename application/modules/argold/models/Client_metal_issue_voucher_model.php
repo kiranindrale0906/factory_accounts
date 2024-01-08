@@ -60,6 +60,7 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
     if ($this->attributes['receipt_type'] == 'Ice Cutting Ghiss') return;
     
     if (!empty($this->attributes['argold_id'])) return;   //do not set factory purity if set in issue department
+    if (!empty($this->attributes['erp_argold_id'])) return;   //do not set factory purity if set in issue department
 
     if (   empty($this->attributes['narration']) 
         || $this->attributes['account_name'] != 'OUTSIDE PARTY') {
