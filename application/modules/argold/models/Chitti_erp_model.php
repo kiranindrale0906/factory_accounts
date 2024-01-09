@@ -37,7 +37,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     } else 
       $chitti_details = $this->voucher_model->get('', array('chitti_id' => $this->attributes['id']));
-    pd($chitti_details);
+//    pd($chitti_details);
     
     foreach ($chitti_details as $index => $chitti_detail) {
       if (isset($chitti_detail['id'])) {

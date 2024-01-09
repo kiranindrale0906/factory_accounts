@@ -42,8 +42,9 @@
         // if($_SESSION['arc_details']==1){
         //   $arc_companies = array('ARC (May 2022)','ARC (Aug 2022)','ARC (Feb 2023)');
         // }
+
         if($_SESSION['arg_details']==1){
-          $arg_companies = array('AR Gold (Apr 2023)','AR Gold (Sep 2023)');
+          $arg_companies = array('AR Gold (Apr 2023)','AR Gold (Sep 2023)','AR Gold ERP');
         }
         if($_SESSION['arf_details']==1){
           $arf_companies = array('ARF (Apr 2023)','ARF (Sep 2023)');

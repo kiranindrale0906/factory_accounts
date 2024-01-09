@@ -155,7 +155,8 @@ class Chittis extends BaseController {
                             array('group_by'=>'packet_no, voucher_date, usd_wastage_percentage,
                                                inr_wastage_percentage, argold_id,customer_name'));
     }elseif($this->router->class == 'chitti_erps'){ 
-      $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,
+    $where['erp_argold_id!=']="";  
+    $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,
         sum(quantity) as quantity,
                             (sum(credit_weight*purity) / sum(credit_weight)) as purity,
                             (sum(credit_weight*factory_purity) / sum(credit_weight)) as factory_purity,
@@ -172,6 +173,8 @@ class Chittis extends BaseController {
                             array(), 
                             array('group_by'=>'item_code, voucher_date, usd_wastage_percentage,
                                                inr_wastage_percentage, erp_argold_id,customer_name'));
+
+//pd($this->data['metal_vouchers']);
     }else{
       $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,sum(quantity) as quantity,
                             (sum(credit_weight*purity) / sum(credit_weight)) as purity,
