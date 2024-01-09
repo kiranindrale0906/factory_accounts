@@ -170,7 +170,7 @@ class Chittis extends BaseController {
                             erp_argold_id as argold_id', 
                             $where, 
                             array(), 
-                            array('group_by'=>'packet_no, voucher_date, usd_wastage_percentage,
+                            array('group_by'=>'item_code, voucher_date, usd_wastage_percentage,
                                                inr_wastage_percentage, erp_argold_id,customer_name'));
     }else{
       $this->data['metal_vouchers'] = $this->voucher_model->get('sum(credit_weight) as credit_weight,sum(quantity) as quantity,
