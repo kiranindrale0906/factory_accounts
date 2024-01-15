@@ -34,6 +34,8 @@
         <a class="ml-5 <?= ($site_name == 'ARC (Sep 2023)') ? 'bold black underline' : '' ?>" 
            href='<?= base_url() ?>reports/production_summary?site_name=ARC (Sep 2023)'>ARC (Sep 2023)</a>   
       <?php }?>  
+      <a class="ml-5 <?= ($site_name == 'AR Gold ERP') ? 'bold black underline' : '' ?>" 
+           href='<?= base_url() ?>reports/production_summary?site_name=AR Gold ERP'>AR Gold ERP</a>
     </h6>
   </div>
 </div>
