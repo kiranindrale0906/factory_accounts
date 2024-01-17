@@ -157,11 +157,18 @@ class Production_summary extends BaseController {
       $records = json_decode(curl_post_request($url, $_GET));
       $arc_records = json_decode(json_encode($records), true);
     }
+    if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold ERP') {
+      $url = "staging1-arg-manufacturing.8848digitalerp.com/api/method/custom_app.api.material_issue.materilaissue_details";
+      $records = json_decode(curl_get_erp_request($url, $_GET));
+      $arg_erp_records = json_decode(json_encode($records), true);
+    }
     if (empty($arc_records['data'])) $arc_records['data'] = array();
 
     $records = array_merge($argold_records['data'], 
                            $arf_records['data'],
-                           $arc_records['data']);
+                           $arc_records['data'],
+                           $arg_erp_records['message']);
+    pd($records);
     $this->data['production_details'] = $this->get_grouped_records($records);
     $this->get_production_group_total();
   }
@@ -259,6 +266,17 @@ class Production_summary extends BaseController {
     }if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold (Sep 2023)') {
       $select = 'date(created_at) as created_at, description as item_name,"voucher" as  data , GROUP_CONCAT(id) as refresh_id, GROUP_CONCAT(credit_weight) as refresh_weight, sum(credit_weight) as weight, sum(credit_weight * purity) / sum(credit_weight) as purity, sum(credit_weight * factory_purity) / sum(credit_weight) as factory_purity';
       $domestic_where=array('credit_weight !=' => 0,'site_name'=>"AR Gold (Sep 2023)",'receipt_type' => 'Domestic Internal');
+       
+      if(!empty($this->data['product_name'])){
+          $domestic_where['description']    =$this->data['product_name'];
+          //$group_by=array('group_by' => 'date(created_at)');
+      }else{
+  $domestic_where['description!=']    ="";
+      }
+      $voucher_data=$this->voucher_model->get($select,$domestic_where,array(),$group_by);
+    }if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold ERP') {
+      $select = 'date(created_at) as created_at, description as item_name,"voucher" as  data , GROUP_CONCAT(id) as refresh_id, GROUP_CONCAT(credit_weight) as refresh_weight, sum(credit_weight) as weight, sum(credit_weight * purity) / sum(credit_weight) as purity, sum(credit_weight * factory_purity) / sum(credit_weight) as factory_purity';
+      $domestic_where=array('credit_weight !=' => 0,'site_name'=>"AR Gold ERP",'receipt_type' => 'Domestic Internal');
        
       if(!empty($this->data['product_name'])){
           $domestic_where['description']    =$this->data['product_name'];
