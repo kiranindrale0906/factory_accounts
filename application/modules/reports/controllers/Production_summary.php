@@ -171,8 +171,8 @@ class Production_summary extends BaseController {
           $arg_erp_records[$index]['str_created_date']=$erp_record['creation'];
           $arg_erp_records[$index]['product_name']=!empty($erp_record['product'])?$erp_record['product']:"";
           $arg_erp_records[$index]['category_one']=!empty($erp_record['product_category'])?$erp_record['product_category']:"";
-          $arg_erp_records[$index]['machine_size']="";
-          $arg_erp_records[$index]['design_code']="";
+          $arg_erp_records[$index]['machine_size']=!empty($erp_record['machine_size'])?$erp_record['machine_size']:"";
+          $arg_erp_records[$index]['design_code']=!empty($erp_record['design'])?$erp_record['design']:"";
           $arg_erp_records[$index]['account_name']=$erp_record['customer'];
           $arg_erp_records[$index]['issue_gpc_out']=$erp_record['gross_weight'];
           $arg_erp_records[$index]['out_purity']=$erp_record['gpc_melting'];
