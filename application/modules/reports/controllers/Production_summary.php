@@ -163,15 +163,17 @@ class Production_summary extends BaseController {
       $erp_records = json_decode(json_encode($records), true);
       $arg_erp_records=array();
       foreach ($erp_records as $index => $erp_record) {
-        if(!empty($erp_record['items']=="GPC")){
+        if(!empty($erp_record['items'])){
           $arg_erp_records[$index]['created_at']=date('Y-m-d',strtotime($erp_record['creation']));
           $arg_erp_records[$index]['']=$erp_record['customer'];
           $arg_erp_records[$index]['product_name']="";
           $arg_erp_records[$index]['category_one']="";
+          $arg_erp_records[$index]['machine_size']="";
+          $arg_erp_records[$index]['design_code']="";
           $arg_erp_records[$index]['account_name']=$erp_record['customer'];
           $arg_erp_records[$index]['issue_gpc_out']=$erp_record['gross_weight'];
-          $arg_erp_records[$index]['out_purity']=$erp_record['melting'];
-          $arg_erp_records[$index]['in_purity']=$erp_record['gpc_melting'];
+          $arg_erp_records[$index]['out_purity']=$erp_record['gpc_melting'];
+          $arg_erp_records[$index]['in_purity']=$erp_record['melting'];
         }
       }
     }
