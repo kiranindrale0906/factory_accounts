@@ -77,7 +77,6 @@ defined('BASEPATH') OR exit('No direct script access allowed.');
       return $content;
     }
   }
-
   if (!function_exists('curl_post_erp_request')) {
     function curl_post_erp_request($uri, $data = array()) {
     $curl = curl_init();
@@ -123,7 +122,8 @@ defined('BASEPATH') OR exit('No direct script access allowed.');
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => 'GET',
         CURLOPT_HTTPHEADER => array(
-          'Authorization: token 4e7ab0aec03a4f2:9616a7717360494',
+         // 'Authorization: token 4e7ab0aec03a4f2:9616a7717360494',
+          'Authorization: token 4e7ab0aec03a4f2:7c92597cb5b8fd4'',
           'Cookie: sid=Guest'
         ),
       ));
