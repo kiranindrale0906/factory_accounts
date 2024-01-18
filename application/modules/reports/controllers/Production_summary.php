@@ -158,13 +158,27 @@ class Production_summary extends BaseController {
       $url = API_SEP2023_ARC_PATH."issue_departments/api_issue_departments/index";
       $records = json_decode(curl_post_request($url, $_GET));
       $arc_records = json_decode(json_encode($records), true);
-    }
+     }
       $arg_erp_records=array();
 
     if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold ERP') {
       $url = "staging1-arg-manufacturing.8848digitalerp.com/api/method/custom_app.api.material_issue.materilaissue_details";
       $records = json_decode(curl_get_erp_request($url, $_GET));
       $erp_records = json_decode(json_encode($records), true);
+       if (!isset($this->data['product_names'])) $this->data['product_names'] = array();
+      if (!isset($this->data['in_purities']))   $this->data['in_purities']   = array();
+      if (!isset($this->data['account_names'])) $this->data['account_names'] = array();
+      if (!isset($this->data['category_ones'])) $this->data['category_ones'] = array(); 
+      if (!isset($this->data['machine_sizes'])) $this->data['machine_sizes'] = array(); 
+      if (!isset($this->data['design_codes']))  $this->data['design_codes']  = array(); 
+
+      $this->data['product_names']=array_column($erp_records,'product');
+      $this->data['in_purities']=array_column($erp_records,'in_lot_purity');
+      $this->data['account_names']=array_column($erp_records,'customer');
+      $this->data['category_ones']=array_column($erp_records,'product_category');
+      $this->data['machine_sizes']=array_column($erp_records,'machine_size');
+      $this->data['design_codes']=array_column($erp_records,'design');
+    
       foreach ($erp_records['message'] as $index => $erp_record) {
         if(!empty($erp_record['items'])&&$erp_record['items']=="GPC"){
           $arg_erp_records[$index]['created_at']=date('Y-m-d',strtotime($erp_record['creation']));
