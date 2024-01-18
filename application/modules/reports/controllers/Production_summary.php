@@ -160,8 +160,23 @@ class Production_summary extends BaseController {
     if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold ERP') {
       $url = "staging1-arg-manufacturing.8848digitalerp.com/api/method/custom_app.api.material_issue.materilaissue_details";
       $records = json_decode(curl_get_erp_request($url, $_GET));
-      $arg_erp_records = json_decode(json_encode($records), true);
+      $erp_records = json_decode(json_encode($records), true);
+      $arg_erp_records=array();
+      foreach ($erp_records as $index => $erp_record) {
+        if(!empty($erp_record['items']=="GPC")){
+          $arg_erp_records[$index]['created_at']=date('Y-m-d',strtotime($erp_record['creation']));
+          $arg_erp_records[$index]['']=$erp_record['customer'];
+          $arg_erp_records[$index]['product_name']="";
+          $arg_erp_records[$index]['category_one']="";
+          $arg_erp_records[$index]['account_name']=$erp_record['customer'];
+          $arg_erp_records[$index]['issue_gpc_out']=$erp_record['gross_weight'];
+          $arg_erp_records[$index]['out_purity']=$erp_record['melting'];
+          $arg_erp_records[$index]['in_purity']=$erp_record['gpc_melting'];
+        }
+      }
     }
+    pd($arg_erp_records);
+
     if (empty($arc_records['data'])) $arc_records['data'] = array();
 
     $records = array_merge($argold_records['data'], 
