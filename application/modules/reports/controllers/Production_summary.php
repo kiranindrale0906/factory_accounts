@@ -1,3 +1,5 @@
+
+
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Production_summary extends BaseController {
@@ -14,7 +16,7 @@ class Production_summary extends BaseController {
     // else 
     //   $this->data['refresh_details'] = array();
     $this->get_groups();
-    // pd($this->data);
+    //pd($this->data);
     $this->load->render($this->router->class."/index", $this->data);
   }
 
@@ -157,33 +159,34 @@ class Production_summary extends BaseController {
       $records = json_decode(curl_post_request($url, $_GET));
       $arc_records = json_decode(json_encode($records), true);
     }
+      $arg_erp_records=array();
+
     if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold ERP') {
       $url = "staging1-arg-manufacturing.8848digitalerp.com/api/method/custom_app.api.material_issue.materilaissue_details";
       $records = json_decode(curl_get_erp_request($url, $_GET));
       $erp_records = json_decode(json_encode($records), true);
-      $arg_erp_records=array();
-      foreach ($erp_records as $index => $erp_record) {
-        if(!empty($erp_record['items']=="GPC")){
+//pd($erp_records);
+
+      foreach ($erp_records['message'] as $index => $erp_record) {
+        if(!empty($erp_record['items'])&&$erp_record['items']=="GPC"){
           $arg_erp_records[$index]['created_at']=date('Y-m-d',strtotime($erp_record['creation']));
-          $arg_erp_records[$index]['']=$erp_record['customer'];
-          $arg_erp_records[$index]['product_name']="";
-          $arg_erp_records[$index]['category_one']="";
+          $arg_erp_records[$index]['str_created_date']=$erp_record['creation'];
+          $arg_erp_records[$index]['product_name']=!empty($erp_record['product'])?$erp_record['product']:"";
+          $arg_erp_records[$index]['category_one']=!empty($erp_record['product_category'])?$erp_record['product_category']:"";
           $arg_erp_records[$index]['account_name']=$erp_record['customer'];
           $arg_erp_records[$index]['issue_gpc_out']=$erp_record['gross_weight'];
-          $arg_erp_records[$index]['out_purity']=$erp_record['melting'];
-          $arg_erp_records[$index]['in_purity']=$erp_record['gpc_melting'];
+          $arg_erp_records[$index]['out_purity']=$erp_record['gpc_melting'];
+          $arg_erp_records[$index]['in_purity']=$erp_record['melting'];
         }
       }
     }
-    pd($arg_erp_records);
-
+//pd($argold_records['data']);
     if (empty($arc_records['data'])) $arc_records['data'] = array();
 
     $records = array_merge($argold_records['data'], 
                            $arf_records['data'],
                            $arc_records['data'],
-                           $arg_erp_records['message']);
-    pd($records);
+                           $arg_erp_records);
     $this->data['production_details'] = $this->get_grouped_records($records);
     $this->get_production_group_total();
   }
