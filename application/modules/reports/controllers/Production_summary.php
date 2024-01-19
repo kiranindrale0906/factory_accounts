@@ -163,6 +163,19 @@ class Production_summary extends BaseController {
       $url = "staging1-arg-manufacturing.8848digitalerp.com/api/method/custom_app.api.material_issue.materilaissue_details";
       $records = json_decode(curl_get_erp_request($url, $_GET));
       $erp_records = json_decode(json_encode($records), true);
+      $this->data['product_names']=array_column($erp_records,'product');
+      $this->data['in_purities']=array_column($erp_records,'melting');
+      $this->data['account_names']=array_column($erp_records,'customer');
+      $this->data['category_ones']=array_column($erp_records,'product_category');
+      $this->data['machine_sizes']=array_column($erp_records,'machine_size');
+      $this->data['design_codes']=array_column($erp_records,'design');
+      if (!isset($this->data['product_names'])) $this->data['product_names'] = array();
+      if (!isset($this->data['in_purities']))   $this->data['in_purities']   = array();
+      if (!isset($this->data['account_names'])) $this->data['account_names'] = array();
+      if (!isset($this->data['category_ones'])) $this->data['category_ones'] = array(); 
+      if (!isset($this->data['machine_sizes'])) $this->data['machine_sizes'] = array(); 
+      if (!isset($this->data['design_codes']))  $this->data['design_codes']  = array(); 
+   
       $conditions=array();
 
       if(!empty($this->data['product_name'])){
