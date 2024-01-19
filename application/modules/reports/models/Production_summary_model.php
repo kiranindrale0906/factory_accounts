@@ -24,7 +24,7 @@ class production_summary_model extends BaseModel {
         $result[] = $value; 
     } 
   
-    // Return result 
+//pd($result);    // Return result 
     return $result; 
   
   }

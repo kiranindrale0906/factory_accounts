@@ -163,19 +163,19 @@ class Production_summary extends BaseController {
       $url = "staging1-arg-manufacturing.8848digitalerp.com/api/method/custom_app.api.material_issue.materilaissue_details";
       $records = json_decode(curl_get_erp_request($url, $_GET));
       $erp_records = json_decode(json_encode($records), true);
-      $this->data['product_names']=array_column($erp_records,'product');
-      $this->data['in_purities']=array_column($erp_records,'melting');
-      $this->data['account_names']=array_column($erp_records,'customer');
-      $this->data['category_ones']=array_column($erp_records,'product_category');
-      $this->data['machine_sizes']=array_column($erp_records,'machine_size');
-      $this->data['design_codes']=array_column($erp_records,'design');
+      $this->data['product_names']=array_unique(array_column($erp_records['message'],'product'));
+      $this->data['in_purities']=array_unique(array_column($erp_records['message'],'melting'));
+      $this->data['account_names']=array_unique(array_column($erp_records['message'],'customer'));
+      $this->data['category_ones']=array_unique(array_column($erp_records['message'],'product_category'));
+      $this->data['machine_sizes']=array_unique(array_column($erp_records['message'],'machine_size'));
+      $this->data['design_codes']=array_unique(array_column($erp_records['message'],'design'));
       if (!isset($this->data['product_names'])) $this->data['product_names'] = array();
       if (!isset($this->data['in_purities']))   $this->data['in_purities']   = array();
       if (!isset($this->data['account_names'])) $this->data['account_names'] = array();
       if (!isset($this->data['category_ones'])) $this->data['category_ones'] = array(); 
       if (!isset($this->data['machine_sizes'])) $this->data['machine_sizes'] = array(); 
       if (!isset($this->data['design_codes']))  $this->data['design_codes']  = array(); 
-   
+//pd( $this->data['product_names']);   
       $conditions=array();
 
       if(!empty($this->data['product_name'])){
@@ -191,8 +191,8 @@ class Production_summary extends BaseController {
       if(!empty($this->data['machine_size'])){
         $conditions['machine_size']=$this->data['machine_size'];
       }
-      $erp_record['message']=$this->production_summary_model->multi_array_search_with_condition($erp_records,$conditions);
-}
+      $erp_records['message']=$this->production_summary_model->multi_array_search_with_condition($erp_records,$conditions);
+
       foreach ($erp_records['message'] as $index => $erp_record) {
         if(!empty($erp_record['items'])&&$erp_record['items']=="GPC"){
 //pd( $erp_record); 
@@ -207,7 +207,7 @@ class Production_summary extends BaseController {
             $arg_erp_records[$index]['out_purity']=$erp_record['gpc_melting'];
             $arg_erp_records[$index]['in_purity']=$erp_record['melting'];
       }
-    }
+}    }
 //pd($argold_records['data']);
     if (empty($arc_records['data'])) $arc_records['data'] = array();
 
