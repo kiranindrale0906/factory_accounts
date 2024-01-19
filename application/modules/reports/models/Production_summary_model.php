@@ -7,35 +7,24 @@ class production_summary_model extends BaseModel {
     parent::__construct($data);
   }
   function multi_array_search_with_condition($array, $condition)
-  {
-  
-    // Create the result array 
-    $result = array(); 
-  
-    // Iterate over each array element 
+  { 
+    $result = array();
     foreach ($array['message'] as $key => $value) { 
-  
         // Iterate over each search condition 
-        foreach ($condition as $k => $v) { 
-      
+        foreach ($condition as $condition_key => $condition_value) { 
             // If the array element does not meet 
             // the search condition then continue 
             // to the next element 
-            if (!isset($value[$k]) || $value[$k] != $v) 
-            { 
-                  
-                // Skip two loops 
+            if (!isset($value[$condition_key]) || $value[$condition_key] != $condition_value) 
+            { // Skip two loops 
                 continue 2; 
             } 
-        } 
-      
-        // Append array element's key to the 
+        } // Append array element's key to the 
         //result array 
         $result[] = $value; 
     } 
   
     // Return result 
-    pd($result); 
     return $result; 
   
   }

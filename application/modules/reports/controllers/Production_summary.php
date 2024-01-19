@@ -178,9 +178,7 @@ class Production_summary extends BaseController {
       if(!empty($this->data['machine_size'])){
         $conditions['machine_size']=$this->data['machine_size'];
       }
-
       $erp_record['message']=$this->production_summary_model->multi_array_search_with_condition($erp_records,$conditions);
-      pd($erp_record['message']);
 }
       foreach ($erp_records['message'] as $index => $erp_record) {
         if(!empty($erp_record['items'])&&$erp_record['items']=="GPC"){
