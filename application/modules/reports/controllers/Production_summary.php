@@ -1,5 +1,3 @@
-
-
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Production_summary extends BaseController {
@@ -158,28 +156,58 @@ class Production_summary extends BaseController {
       $url = API_SEP2023_ARC_PATH."issue_departments/api_issue_departments/index";
       $records = json_decode(curl_post_request($url, $_GET));
       $arc_records = json_decode(json_encode($records), true);
-    }
+     }
       $arg_erp_records=array();
 
     if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold ERP') {
       $url = "staging1-arg-manufacturing.8848digitalerp.com/api/method/custom_app.api.material_issue.materilaissue_details";
       $records = json_decode(curl_get_erp_request($url, $_GET));
       $erp_records = json_decode(json_encode($records), true);
+      $this->data['product_names']=array_unique(array_column($erp_records['message'],'product'));
+      $this->data['in_purities']=array_unique(array_column($erp_records['message'],'melting'));
+      $this->data['account_names']=array_unique(array_column($erp_records['message'],'customer'));
+      $this->data['category_ones']=array_unique(array_column($erp_records['message'],'product_category'));
+      $this->data['machine_sizes']=array_unique(array_column($erp_records['message'],'machine_size'));
+      $this->data['design_codes']=array_unique(array_column($erp_records['message'],'design'));
+      if (!isset($this->data['product_names'])) $this->data['product_names'] = array();
+      if (!isset($this->data['in_purities']))   $this->data['in_purities']   = array();
+      if (!isset($this->data['account_names'])) $this->data['account_names'] = array();
+      if (!isset($this->data['category_ones'])) $this->data['category_ones'] = array(); 
+      if (!isset($this->data['machine_sizes'])) $this->data['machine_sizes'] = array(); 
+      if (!isset($this->data['design_codes']))  $this->data['design_codes']  = array(); 
+//pd( $this->data['product_names']);   
+      $conditions=array();
+
+      if(!empty($this->data['product_name'])){
+        $conditions['product']=$this->data['product_name'];
+      }if(!empty($this->data['category_one'])){
+        $conditions['product_category']=$this->data['category_one'];
+      }if(!empty($this->data['in_purity'])){
+        $conditions['gpc_melting']=$this->data['in_purity'];
+      }
+      if(!empty($this->data['design_code'])){
+        $conditions['design']=$this->data['design_code'];
+      }
+      if(!empty($this->data['machine_size'])){
+        $conditions['machine_size']=$this->data['machine_size'];
+      }
+      $erp_records['message']=$this->production_summary_model->multi_array_search_with_condition($erp_records,$conditions);
+
       foreach ($erp_records['message'] as $index => $erp_record) {
         if(!empty($erp_record['items'])&&$erp_record['items']=="GPC"){
+//pd( $erp_record); 
           $arg_erp_records[$index]['created_at']=date('Y-m-d',strtotime($erp_record['creation']));
-          $arg_erp_records[$index]['str_created_date']=$erp_record['creation'];
-          $arg_erp_records[$index]['product_name']=!empty($erp_record['product'])?$erp_record['product']:"";
-          $arg_erp_records[$index]['category_one']=!empty($erp_record['product_category'])?$erp_record['product_category']:"";
-          $arg_erp_records[$index]['machine_size']=!empty($erp_record['machine_size'])?$erp_record['machine_size']:"";
-          $arg_erp_records[$index]['design_code']=!empty($erp_record['design'])?$erp_record['design']:"";
-          $arg_erp_records[$index]['account_name']=$erp_record['customer'];
-          $arg_erp_records[$index]['issue_gpc_out']=$erp_record['gross_weight'];
-          $arg_erp_records[$index]['out_purity']=$erp_record['gpc_melting'];
-          $arg_erp_records[$index]['in_purity']=$erp_record['melting'];
-        }
+            $arg_erp_records[$index]['str_created_date']=$erp_record['creation'];
+            $arg_erp_records[$index]['product_name']=!empty($erp_record['product'])?$erp_record['product']:"";
+            $arg_erp_records[$index]['category_one']=!empty($erp_record['product_category'])?$erp_record['product_category']:"";
+            $arg_erp_records[$index]['machine_size']=!empty($erp_record['machine_size'])?$erp_record['machine_size']:"";
+            $arg_erp_records[$index]['design_code']=!empty($erp_record['design'])?$erp_record['design']:"";
+            $arg_erp_records[$index]['account_name']=$erp_record['customer'];
+            $arg_erp_records[$index]['issue_gpc_out']=$erp_record['balance_weight'];
+            $arg_erp_records[$index]['out_purity']=$erp_record['gpc_melting'];
+            $arg_erp_records[$index]['in_purity']=$erp_record['melting'];
       }
-    }
+}    }
 //pd($argold_records['data']);
     if (empty($arc_records['data'])) $arc_records['data'] = array();
 
