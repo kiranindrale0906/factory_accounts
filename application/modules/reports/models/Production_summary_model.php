@@ -8,13 +8,12 @@ class production_summary_model extends BaseModel {
   }
   function multi_array_search_with_condition($array, $condition)
   {
-      function search($array, $search_list) { 
   
     // Create the result array 
     $result = array(); 
   
     // Iterate over each array element 
-    foreach ($array as $key => $value) { 
+    foreach ($array['message'] as $key => $value) { 
   
         // Iterate over each search condition 
         foreach ($condition as $k => $v) { 
@@ -38,7 +37,6 @@ class production_summary_model extends BaseModel {
     // Return result 
     pd($result); 
     return $result; 
-} 
   
   }
 

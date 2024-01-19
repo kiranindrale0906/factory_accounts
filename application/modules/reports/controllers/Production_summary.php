@@ -1,5 +1,3 @@
-
-
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Production_summary extends BaseController {
@@ -167,22 +165,23 @@ class Production_summary extends BaseController {
       $erp_records = json_decode(json_encode($records), true);
       $conditions=array();
 
-      if(isset($this->data['product_name'])){
+      if(!empty($this->data['product_name'])){
         $conditions['product']=$this->data['product_name'];
-      }if(isset($this->data['category_one'])){
+      }if(!empty($this->data['category_one'])){
         $conditions['product_category']=$this->data['category_one'];
-      }if(isset($this->data['in_purity'])){
-        $conditions['in_lot_purity']=$this->data['in_purity'];
+      }if(!empty($this->data['in_purity'])){
+        $conditions['gpc_melting']=$this->data['in_purity'];
       }
-      if(isset($this->data['design_code'])){
+      if(!empty($this->data['design_code'])){
         $conditions['design']=$this->data['design_code'];
       }
-      if(isset($this->data['machine_size'])){
+      if(!empty($this->data['machine_size'])){
         $conditions['machine_size']=$this->data['machine_size'];
       }
 
-      $erp_record['message']=$this->multi_array_search_with_condition($erp_records,$conditions);
+      $erp_record['message']=$this->production_summary_model->multi_array_search_with_condition($erp_records,$conditions);
       pd($erp_record['message']);
+}
       foreach ($erp_records['message'] as $index => $erp_record) {
         if(!empty($erp_record['items'])&&$erp_record['items']=="GPC"){
            $arg_erp_records[$index]['created_at']=date('Y-m-d',strtotime($erp_record['creation']));
