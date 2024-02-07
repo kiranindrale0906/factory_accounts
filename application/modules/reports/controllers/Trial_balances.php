@@ -10,6 +10,7 @@ class Trial_balances extends Ledgers {
                              'transactions/metal_receipt_voucher_model', 'transactions/metal_issue_voucher_model', 
                              'ac_vouchers/voucher_model', 'argold/chitti_model'));
   }
+  
 
   public function index() {
     if (isset($_GET['ac_id'])) {
