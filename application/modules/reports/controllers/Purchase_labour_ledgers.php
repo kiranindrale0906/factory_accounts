@@ -13,6 +13,7 @@ class Purchase_labour_ledgers extends Ledgers {
   public function index() {
     $this->data['report_type'] = 'Purchase Labour Ledger';
     $this->_get_form_data();
+    pd($this->data);
     $this->load->render($this->router->class."/index",$this->data);
   }
 
