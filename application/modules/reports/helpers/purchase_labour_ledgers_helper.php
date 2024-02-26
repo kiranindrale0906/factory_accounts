@@ -14,7 +14,7 @@ function getTableSettings($table_setting_arg=array()) {
                         'extra_select_column' => 'id',
                         'actionFunction'      => '',
                         'headingFunction'     => 'list_settings',
-                        'search_url'          => 'bank_issue_voucher',
+                        'search_url'          => 'purchase_labour_ledgers',
                         'add_title'           => '',
                         'export_title'        => '',
                         'edit'                => '',
@@ -45,7 +45,7 @@ function list_settings($list_setting_arg=array()) {
 function get_field_attribute($table, $field) {
   $ci=&get_instance();
   $attributes = array();
-  $attributes['account_ledgers'] = array(
+  $attributes['purchase_labour_ledgers'] = array(
   'account_id'=>array('Account Name', 'Select Account Name', TRUE, '', TRUE),
   'date_from'=>array('Date From', 'Enter Date From', TRUE, '', TRUE),
   'date_to'=>array('Date To', 'Enter Date To', TRUE, '', TRUE));
