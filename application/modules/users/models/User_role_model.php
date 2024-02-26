@@ -58,6 +58,7 @@ class User_role_model extends Core_user_role_model {
                      //                    'reports/order_report'),
                      'Reports' => array('reports/account_ledgers',
                                         'reports/purchase_sale_ledgers',
+                                        'reports/purchase_labour_ledgers',
                                         'reports/outstanding_report',
                                         'reports/trial_balances',
                                         'reports/vadotar_reports',
