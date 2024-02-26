@@ -728,6 +728,7 @@ class Ledgers extends BaseController {
   private function get_receipt_issue_select($period_select) {
     if (   $this->data['report_type'] == 'Account Ledger' 
         ||$this->data['report_type'] == 'Purchase Sales Ledger' 
+        ||$this->data['report_type'] == 'Purchase Labour Ledger' 
         || $this->data['report_type'] == 'Rojmel Report'
         || $this->data['report_type'] == 'Metal Receipt Type Report') {
       $receipt_issue_select = 'ac_ledger.receipt_type, '.$period_select.' as voucher_date, 
