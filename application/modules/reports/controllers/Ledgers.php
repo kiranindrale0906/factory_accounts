@@ -9,7 +9,9 @@ class Ledgers extends BaseController {
   protected function get_datewise_ledger_records() {
     $this->set_variables_from_get_parameters();
     // $this->data['site_name']            = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'All';
-    // $this->data['period']               = (!empty($_GET['period'])) ? $_GET['period'] : 'date';
+    if($this->data['report_type'] == 'Purchase Labour Ledger'){
+     $this->data['period']               = (!empty($_GET['period'])) ? $_GET['period'] : 'date';
+    }
     // $this->data['detail']               = (!empty($_GET['detail'])) ? $_GET['detail'] : 'yes';
     // $this->data['group']                = (!empty($_GET['group'])) ? $_GET['group'] : '';
     // $this->data['domestic_export']      = (!empty($_GET['domestic_export'])) ? $_GET['domestic_export'] : 'All';
