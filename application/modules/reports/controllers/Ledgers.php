@@ -286,13 +286,13 @@ class Ledgers extends BaseController {
       $where_receipt['ac_ledger.sale_type']="Labour";
       $receipt_issue_select .=',chitties.account_name as chitti_account_name,ac_ledger.voucher_id';
        $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(array('chitties','chitties.id=ac_ledger.chitti_id','Left')), array('order_by'=>'ac_ledger.parent_id, ac_ledger.voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
-       foreach ($receipts as $index => $value) {
-         $receipts[$index]=$value;
-         $metal_receipt_voucher_reference=$this->voucher_model->find('metal_receipt_voucher_reference_id',array('id'=>$value['voucher_id']));
-         $voucher_detail_account=$this->voucher_model->find('account_name',array('id'=>$metal_receipt_voucher_reference['metal_receipt_voucher_reference_id']));
-         $receipts[$index]['chitti_account_name']=$voucher_detail_account['account_name'];
+       // foreach ($receipts as $index => $value) {
+       //   $receipts[$index]=$value;
+       //   $metal_receipt_voucher_reference=$this->voucher_model->find('metal_receipt_voucher_reference_id',array('id'=>$value['voucher_id']));
+       //   $voucher_detail_account=$this->voucher_model->find('account_name',array('id'=>$metal_receipt_voucher_reference['metal_receipt_voucher_reference_id']));
+       //   $receipts[$index]['chitti_account_name']=$voucher_detail_account['account_name'];
 
-       }
+       // }
 
     }else{
       $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(), array('order_by'=>'parent_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
