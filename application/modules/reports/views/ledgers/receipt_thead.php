@@ -25,7 +25,7 @@
       <th class='text-right'>Vadotar</th>
       <th class='text-right'>%</th>
     <?php endif; ?>  
-    <?php if ($report_type == 'Domestic Labour Ledger' || $report_type == 'Export Labour Ledger' ||$report_type == 'Account Ledger' || $report_type == 'Vadotar Report' || $report_type == 'Purchase Sales Ledger'): ?>
+    <?php if ($report_type == 'Domestic Labour Ledger' || $report_type == 'Export Labour Ledger' ||$report_type == 'Account Ledger' ||$report_type == 'Purchase Labour Ledger' || $report_type == 'Vadotar Report' || $report_type == 'Purchase Sales Ledger'): ?>
       <th class='text-right'>Amount</th>
       <th class='text-right'>Usd Amount</th>
       <?php if($report_type == 'Purchase Sales Ledger'){ ?>
