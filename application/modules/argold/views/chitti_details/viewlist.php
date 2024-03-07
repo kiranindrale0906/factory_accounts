@@ -37,8 +37,13 @@
             $sum_weight=$sum_fine=$sum_factory_fine=$sum_rate=$sum_rate_amount=0;
             $sr_no=0;
             foreach ($metal_voucher_details as $index => $metal_voucher_detail) {
-              if($chittis_details['account_name']=="MALABAR GOLD" && $metal_voucher_detail['chitti_purity']==92){
-                $metal_voucher_detail['chitti_purity']=91.80;
+              if($chittis_details['account_name']=="MALABAR GOLD" && 
+                 $metal_voucher_detail['chitti_purity']==92){
+                 $metal_voucher_detail['chitti_purity']=91.80;
+              }
+              if($chittis_details['account_name']=="Jewels N Joolry" && 
+                 $metal_voucher_detail['chitti_purity']==92){
+                 $metal_voucher_detail['chitti_purity']=91.67;
               }
               if($chittis_details['account_name']=="MALABAR GOLD" && $metal_voucher_detail['chitti_purity']==75){
               }
