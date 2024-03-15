@@ -43,7 +43,7 @@
         <td></td> 
       <?php endif; ?>
     <?php endif; ?>
-    <?php if ($report_type == 'Account Ledger' || $report_type == 'Purchase Sales Ledger' || $report_type == 'Vadotar Report'): ?>
+    <?php if ($report_type == 'Account Ledger' || $report_type == 'Purchase Sales Ledger' || $report_type == 'Purchase Labour Ledger' || $report_type == 'Vadotar Report'): ?>
       <?php if ($type=='issue') { ?>
         <td class="text-right"><?= four_decimal($record['credit_amount'], '-') ?></td>
         <td class="text-right"><?= four_decimal($record['usd_credit_amount'], '-') ?></td>

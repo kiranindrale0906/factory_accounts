@@ -246,6 +246,7 @@
       array('id' => 'ARG ERP Software',     'name' => 'ARG ERP Software'),
       array('id' => 'ARF ERP Software',     'name' => 'ARF ERP Software'),
       array('id' => 'ARC ERP Software',     'name' => 'ARC ERP Software'),
+      array('id' => 'ARNA BANGLE',     'name' => 'ARNA BANGLE'),
     );
     if ($export==1) $site_names[] = array('id' => 'Export', 'name' => 'Export');
     if ($export==2) $site_names[] = array('id' => 'Domestic', 'name' => 'Domestic');

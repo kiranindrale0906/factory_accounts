@@ -9,7 +9,9 @@ class Ledgers extends BaseController {
   protected function get_datewise_ledger_records() {
     $this->set_variables_from_get_parameters();
     // $this->data['site_name']            = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'All';
-    // $this->data['period']               = (!empty($_GET['period'])) ? $_GET['period'] : 'date';
+    if($this->data['report_type'] == 'Purchase Labour Ledger'){
+     $this->data['period']               = (!empty($_GET['period'])) ? $_GET['period'] : 'date';
+    }
     // $this->data['detail']               = (!empty($_GET['detail'])) ? $_GET['detail'] : 'yes';
     // $this->data['group']                = (!empty($_GET['group'])) ? $_GET['group'] : '';
     // $this->data['domestic_export']      = (!empty($_GET['domestic_export'])) ? $_GET['domestic_export'] : 'All';
@@ -279,6 +281,18 @@ class Ledgers extends BaseController {
          $receipts[$index]['chitti_account_name']=$voucher_detail_account['account_name'];
 
        }
+
+    }elseif ($this->data['report_type'] == 'Purchase Labour Ledger') {
+      $where_receipt['ac_ledger.sale_type']="Labour";
+      $receipt_issue_select .=',chitties.account_name as chitti_account_name,ac_ledger.voucher_id';
+       $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(array('chitties','chitties.id=ac_ledger.chitti_id','Left')), array('order_by'=>'ac_ledger.parent_id, ac_ledger.voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
+       // foreach ($receipts as $index => $value) {
+       //   $receipts[$index]=$value;
+       //   $metal_receipt_voucher_reference=$this->voucher_model->find('metal_receipt_voucher_reference_id',array('id'=>$value['voucher_id']));
+       //   $voucher_detail_account=$this->voucher_model->find('account_name',array('id'=>$metal_receipt_voucher_reference['metal_receipt_voucher_reference_id']));
+       //   $receipts[$index]['chitti_account_name']=$voucher_detail_account['account_name'];
+
+       // }
 
     }else{
       $receipts = $this->ledger_model->get($receipt_issue_select, $where_receipt, array(), array('order_by'=>'parent_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
@@ -621,6 +635,7 @@ class Ledgers extends BaseController {
   private function get_group_by() {
     if (   $this->data['period'] == 'date' 
         && (   $this->data['report_type'] == 'Account Ledger'   
+            ||$this->data['report_type'] == 'Purchase Labour Ledger'   
             ||$this->data['report_type'] == 'Purchase Sales Ledger'   
             || $this->data['report_type'] == 'Domestic Labour Ledger'))
       $this->data['group'] = 'voucher_type, voucher_date, chitti_no, receipt_type, account_name';
@@ -655,6 +670,7 @@ class Ledgers extends BaseController {
     $where = array();
     if (!empty($this->data['record']['account_id']))  $where['account_id'] = $this->data['record']['account_id'];
     if ($this->data['report_type']=="Purchase Sales Ledger")$where['ac_ledger.account_name in ("Sales Account","Purchase Account")'] = NULL;
+    if ($this->data['report_type']=="Purchase Labour Ledger")$where['ac_ledger.account_name in ("Sales Account","Purchase Account")'] = NULL;
     
     if (!empty($this->data['site_name']) && $this->data['site_name'] != 'All')              
       $where['(  site_name = "'.$this->data['site_name'].'" 
@@ -714,6 +730,7 @@ class Ledgers extends BaseController {
   private function get_receipt_issue_select($period_select) {
     if (   $this->data['report_type'] == 'Account Ledger' 
         ||$this->data['report_type'] == 'Purchase Sales Ledger' 
+        ||$this->data['report_type'] == 'Purchase Labour Ledger' 
         || $this->data['report_type'] == 'Rojmel Report'
         || $this->data['report_type'] == 'Metal Receipt Type Report') {
       $receipt_issue_select = 'ac_ledger.receipt_type, '.$period_select.' as voucher_date, 

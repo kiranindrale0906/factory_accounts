@@ -62,9 +62,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     $this->set_receipt_type_for_all_metal_issue_vouchers();
     $this->set_gold_rate_purity();
     $this->unset_metal_issue_voucher_records_when_credit_weight_is_0(); 
-//pd($this->formdata);
-
-  }
+      //pd($this->formdata);
+}
 
   private function set_gold_rate_purity() {
     if (   !isset($this->attributes['gold_rate_purity'])
@@ -403,8 +402,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   public function after_save($action) {
 //pd($this->formdata);
     parent::after_save($action);
-    if($this->attributes['account_name']!="Domestic Internal Software"){
-    $this->create_metal_issue_vouchers();
+    if($this->attributes['account_name']!="Domestic Internal Software" && $this->attributes['account_name']!="Export Internal Software"){
+      $this->create_metal_issue_vouchers();
     }
     $this->create_rate_cut_vouchers_for_metal_and_refresh();
     $this->_add_metal_receipt_id_in_refresh_data();
@@ -453,8 +452,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
   public function send_request_to_factory($attributes) {
     $attributes['account_name']=trim($attributes['account_name']);
-if ($attributes['credit_weight'] == 0) return true;
-
+    if ($attributes['credit_weight'] == 0) return true;
     $api_data = array('account'=> $attributes['account_name'].' (accounts)',
                       'in_weight' => $attributes['credit_weight'],
                       'in_lot_purity' => $attributes['factory_purity'],
@@ -494,6 +492,8 @@ if ($attributes['credit_weight'] == 0) return true;
               || $attributes['receipt_type'] == "Domestic Internal") {
               // || $attributes['receipt_type'] == "ARC Refresh"
       // pd($attributes);
+	if ($this->attributes['account_name'] == 'Export Internal Software' || $this->attributes['account_name'] == 'Domestic Internal Software') return;
+
       $api_data = array_merge($api_data, array('type'=>'Pure',
                                                'hook_kdm_purity' => (empty($attributes['hook_kdm_purity'])) ? $attributes['factory_purity'] : $attributes['hook_kdm_purity'],
                                                'description' => $attributes['receipt_type'].'-'.$attributes['description'],
@@ -508,14 +508,14 @@ if ($attributes['credit_weight'] == 0) return true;
       $send_data['chain_receipts'] = $api_data;
       $api_url = "api/api_chain_receipts/store";
 
-    }elseif ( $attributes['receipt_type'] == 'AR Gold Internal Receipt'
+    }elseif ( $attributes['receipt_t-ype'] == 'AR Gold Internal Receipt'
               || $attributes['receipt_type'] == 'ARF Internal Receipt'
               || $attributes['receipt_type'] == 'ARC Internal Receipt') {
       $api_data = array_merge($api_data, array('type' => 'Pure' ,'description' => $api_data['description'].'-'.$attributes['site_name']));
       $send_data['internal_receipts'] = $api_data;
       $api_url = "api/api_internal_receipts/store";
 
-    }elseif (    ($attributes['receipt_type'] == 'Melting Wastage' || $attributes['receipt_type'] == 'Daily Drawer Wastage'  || $attributes['receipt_type'] == 'GPC' || $attributes['receipt_type'] == 'GPC Out' || $attributes['receipt_type'] == 'Finish Good') 
+    }elseif (    ($attributes['receipt_type'] == 'Melting Wastage' || $attributes['receipt_type'] == 'Daily Drawer Wastage' || $attributes['receipt_type'] == 'GPC' || $attributes['receipt_type'] == 'GPC Out' || $attributes['receipt_type'] == 'Finish Good') 
               && (    $attributes['account_name'] == 'AR Gold Software Nov 2020' || $attributes['account_name'] == 'ARF Software Nov 2020' || $attributes['account_name'] == 'ARC Software Nov 2020'
                    || $attributes['account_name'] == 'AR Gold Software Jan 2021'
                     || $attributes['account_name'] == 'ARF Software Jan 2021' || $attributes['account_name'] == 'ARC Software Jan 2021'
@@ -540,7 +540,6 @@ if ($attributes['credit_weight'] == 0) return true;
                    || $attributes['account_name'] == 'Export Internal Software'
                    || $attributes['account_name'] == 'Domestic Internal Software'
                     )) {
-
       $api_data = array_merge($api_data, array('type' => 'Pure','description' => $api_data['description'].'-'.$attributes['site_name']));
       $send_data['internal_receipts'] = $api_data;
       if($attributes['account_name'] == 'Domestic Internal Software'){
@@ -584,8 +583,10 @@ if ($attributes['credit_weight'] == 0) return true;
       $send_data['pending_ghiss_receipts'] = array_merge($api_data, array('department_name' => $department_name));
       $api_url = "api/api_pending_ghiss_receipts/store";
     }
-    if (empty($api_url)) return true;
-    $api_url = get_api_path_from_account_name($attributes['account_name']).$api_url;
+    if($attributes['site_name']=="AR Gold ERP" && ($attributes['receipt_type'] == 'Melting Wastage' || $attributes['receipt_type'] == 'Daily Drawer Wastage'|| $attributes['receipt_type'] == 'Export Internal' || $attributes['receipt_type'] == 'Domestic Internal')){}else{
+    	if (empty($api_url)) return true;
+   	 $api_url = get_api_path_from_account_name($attributes['account_name']).$api_url;
+    }
 
     // if ($attributes['account_name'] == 'AR Gold Software')
     //   $api_url = API_ARG_PATH.$api_url;
@@ -601,11 +602,13 @@ if ($attributes['credit_weight'] == 0) return true;
     //   $api_url = API_2_ARC_PATH.$api_url;
     // elseif ($attributes['account_name'] == 'Export Internal Software')
     //   $api_url = API_EXPORT_INTERNAL_PATH.$api_url;
-     //print_r($send_data);
-     //pd($api_url); 
-    if ($attributes['account_name']=="AR Gold ERP Software" ||$attributes['account_name']=="ARG ERP Software" || $attributes['account_name']=="ARF ERP Software" || $attributes['account_name']=="ARC ERP Software"){
-      $parent_data=$this->metal_receipt_voucher_model->find('',array('id'=>$attributes['metal_receipt_voucher_reference_id']));
-      
+    // print_r($send_data);
+    // pd($api_url); 
+    if ($attributes['account_name']=="AR Gold ERP Software" ||$attributes['account_name']=="ARG ERP Software" || $attributes['account_name']=="ARF ERP Software" || $attributes['account_name']=="ARC ERP Software"|| $attributes['account_name']=="ARNA BANGLE"){
+      $this->load->model(array('transactions/metal_issue_voucher_model','transactions/metal_receipt_voucher_model'));
+      if(!empty($attributes['metal_receipt_voucher_reference_id'])){ 	
+       $parent_data=$this->metal_receipt_voucher_model->find('',array('id'=>$attributes['metal_receipt_voucher_reference_id']));
+      }      
       if($attributes['receipt_type']=="Daily Drawer"){
         $attributes['receipt_type']=$attributes['dd_type'];
       }
@@ -613,11 +616,17 @@ if ($attributes['credit_weight'] == 0) return true;
         $attributes['site_name']=$parent_data['site_name'];
         $attributes['hook_kdm_purity']=$parent_data['hook_kdm_purity'];
       }
+      if($attributes['receipt_type']=="Export Internal" || $attributes['receipt_type']=="Domestic Internal"){
+        $attributes['receipt_type']="Refresh";
+        $attributes['site_name']=$parent_data['site_name'];
+        $attributes['hook_kdm_purity']=$parent_data['hook_kdm_purity'];
+      }
       if($attributes['receipt_type']=="AR Gold RND" || $attributes['receipt_type']=="ARF RND" || $attributes['receipt_type']=="ARF RND"){
         $attributes['receipt_type']="RND";
       }
+      if(!empty($parent_data)){
       $attributes['customer_name']=$parent_data['account_name'];
-
+      }
     $api_data = array('receipt_type'=> $attributes['receipt_type'],
                       'account_name'=> $attributes['account_name'],
                       'customer_name'=> $attributes['customer_name'],
