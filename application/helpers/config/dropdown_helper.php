@@ -282,6 +282,8 @@
       }
     }elseif (str_contains($account_name, 'ARC ERP')) {
        return 'AR Gold ERP';
+    }elseif (str_contains($account_name, 'ARNA BANGLE')) {
+       return 'AR Gold ERP';
     }elseif (str_contains($account_name, 'ARG ERP')) {
        return 'AR Gold ERP';
     }elseif (str_contains($account_name, 'ARF ERP')) {
