@@ -349,7 +349,7 @@
   }
   
   function get_api_path_from_account_name($account_name) {
-    $api_path = array('AR Gold Software (May 2022)' => API_MAY2022_ARG_PATH,
+    $api_path = array(/*'AR Gold Software (May 2022)' => API_MAY2022_ARG_PATH,
                       'ARF Software (May 2022)'     => API_MAY2022_ARF_PATH,
                       'ARC Software (May 2022)'     => API_MAY2022_ARC_PATH,
                       'AR Gold Software (Aug 2022)' => API_AUG2022_ARG_PATH,
@@ -361,7 +361,7 @@
                       'AR Gold Software (Apr 2023)' => API_APR2023_ARG_PATH,
                       'ARF Software (Apr 2023)'     => API_APR2023_ARF_PATH,
                       'ARC Software (Apr 2023)'     => API_APR2023_ARC_PATH,
-                      'AR Gold Software (Sep 2023)' => API_SEP2023_ARG_PATH,
+                      */'AR Gold Software (Sep 2023)' => API_SEP2023_ARG_PATH,
                       'ARF Software (Sep 2023)'     => API_SEP2023_ARF_PATH,
                       'ARC Software (Sep 2023)'     => API_SEP2023_ARC_PATH,
                       'AR Gold Software Staging' => API_AUG2022_ARG_PATH,
@@ -369,7 +369,8 @@
                       'ARC Software Staging'     => API_AUG2022_ARC_PATH,
                       'Export Internal Software'    => API_EXPORT_INTERNAL_PATH,
                       'Domestic Internal Software'    => API_DOMESTIC_INTERNAL_PATH);
-    return $api_path[$account_name];
+    
+return $api_path[$account_name];
   }
 
   function get_loss_account_name_from_site_name($site_name) {

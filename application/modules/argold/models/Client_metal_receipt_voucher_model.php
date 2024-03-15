@@ -40,7 +40,6 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
 
   public function before_validate() {
-//pd($this->formdata);
     $this->set_account_name_from_receipt_type();
     $this->set_site_name_from_receipt_type();
     $this->set_sale_type_from_receipt_type_for_metal();
@@ -63,6 +62,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     $this->set_receipt_type_for_all_metal_issue_vouchers();
     $this->set_gold_rate_purity();
     $this->unset_metal_issue_voucher_records_when_credit_weight_is_0(); 
+//pd($this->formdata);
+
   }
 
   private function set_gold_rate_purity() {
@@ -400,6 +401,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   } 
   
   public function after_save($action) {
+//pd($this->formdata);
     parent::after_save($action);
     if($this->attributes['account_name']!="Domestic Internal Software"){
     $this->create_metal_issue_vouchers();
@@ -451,7 +453,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
   public function send_request_to_factory($attributes) {
     $attributes['account_name']=trim($attributes['account_name']);
-    if ($attributes['credit_weight'] == 0) return true;
+if ($attributes['credit_weight'] == 0) return true;
 
     $api_data = array('account'=> $attributes['account_name'].' (accounts)',
                       'in_weight' => $attributes['credit_weight'],
@@ -513,7 +515,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $send_data['internal_receipts'] = $api_data;
       $api_url = "api/api_internal_receipts/store";
 
-    }elseif (    ($attributes['receipt_type'] == 'Melting Wastage' || $attributes['receipt_type'] == 'Daily Drawer Wastage' || $attributes['receipt_type'] == 'GPC Out' || $attributes['receipt_type'] == 'Finish Good') 
+    }elseif (    ($attributes['receipt_type'] == 'Melting Wastage' || $attributes['receipt_type'] == 'Daily Drawer Wastage'  || $attributes['receipt_type'] == 'GPC' || $attributes['receipt_type'] == 'GPC Out' || $attributes['receipt_type'] == 'Finish Good') 
               && (    $attributes['account_name'] == 'AR Gold Software Nov 2020' || $attributes['account_name'] == 'ARF Software Nov 2020' || $attributes['account_name'] == 'ARC Software Nov 2020'
                    || $attributes['account_name'] == 'AR Gold Software Jan 2021'
                     || $attributes['account_name'] == 'ARF Software Jan 2021' || $attributes['account_name'] == 'ARC Software Jan 2021'
@@ -584,7 +586,6 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     }
     if (empty($api_url)) return true;
     $api_url = get_api_path_from_account_name($attributes['account_name']).$api_url;
-// print_r($api_url);  die();
 
     // if ($attributes['account_name'] == 'AR Gold Software')
     //   $api_url = API_ARG_PATH.$api_url;
@@ -600,8 +601,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     //   $api_url = API_2_ARC_PATH.$api_url;
     // elseif ($attributes['account_name'] == 'Export Internal Software')
     //   $api_url = API_EXPORT_INTERNAL_PATH.$api_url;
-    // print_r($send_data);
-    // pd($api_url); 
+     //print_r($send_data);
+     //pd($api_url); 
     if ($attributes['account_name']=="AR Gold ERP Software" ||$attributes['account_name']=="ARG ERP Software" || $attributes['account_name']=="ARF ERP Software" || $attributes['account_name']=="ARC ERP Software"){
       $parent_data=$this->metal_receipt_voucher_model->find('',array('id'=>$attributes['metal_receipt_voucher_reference_id']));
       
@@ -629,8 +630,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                       'description' => $attributes['description'],
                       'account_id' => $attributes['id']);
     $send_data=$api_data;
-//    $api_url = "https://staging1-arg-manufacturing.8848digitalerp.com/api/method/custom_app.api.material_receipt.create_material_receipt";
-    $api_url = "https://erp.ar-gold.in/api/method/custom_app.api.material_receipt.create_material_receipt";
+ $api_url = "https://staging1-arg-manufacturing.8848digitalerp.com/api/method/custom_app.api.material_receipt.create_material_receipt";
+   // $api_url = "https://erp.ar-gold.in/api/method/custom_app.api.material_receipt.create_material_receipt";
     if (empty($api_url)) return true;
     $result = curl_post_erp_request($api_url, $send_data);
   }else{
