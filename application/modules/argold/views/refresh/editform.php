@@ -25,6 +25,7 @@
                                                                               array('id'=>'ARG ERP Software','name'=>'ARG ERP Software'),
                                                                               array('id'=>'ARF ERP Software','name'=>'ARF ERP Software'),
                                                                               array('id'=>'ARC ERP Software','name'=>'ARC ERP Software'),
+                                                                              array('id'=>'ARNA BANGLE','name'=>'ARNA BANGLE'),
                                                                               )));?>
   </div>
   <?php load_buttons('submit', array('controller' => $controller, 'name' => 'SAVE' , 'class' => 'btn_blue')) ?>

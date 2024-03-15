@@ -102,6 +102,7 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
             || $account_name == 'ARF Software (Sep 2023)'
             || $account_name == 'ARC Software (Sep 2023)'
             || $account_name == 'AR Gold ERP Software'
+            || $account_name == 'ARNA BANGLE'
             || $account_name == 'ARG ERP Software'
             || $account_name == 'ARF ERP Software'
             || $account_name == 'ARC ERP Software'

@@ -508,7 +508,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $send_data['chain_receipts'] = $api_data;
       $api_url = "api/api_chain_receipts/store";
 
-    }elseif ( $attributes['receipt_type'] == 'AR Gold Internal Receipt'
+    }elseif ( $attributes['receipt_t-ype'] == 'AR Gold Internal Receipt'
               || $attributes['receipt_type'] == 'ARF Internal Receipt'
               || $attributes['receipt_type'] == 'ARC Internal Receipt') {
       $api_data = array_merge($api_data, array('type' => 'Pure' ,'description' => $api_data['description'].'-'.$attributes['site_name']));
@@ -583,7 +583,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $send_data['pending_ghiss_receipts'] = array_merge($api_data, array('department_name' => $department_name));
       $api_url = "api/api_pending_ghiss_receipts/store";
     }
-    if($attributes['site_name']=="AR Gold ERP" && $attributes['receipt_type'] == 'Melting Wastage'){}else{
+    if($attributes['site_name']=="AR Gold ERP" && ($attributes['receipt_type'] == 'Melting Wastage' || $attributes['receipt_type'] == 'Daily Drawer Wastage'|| $attributes['receipt_type'] == 'Export Internal' || $attributes['receipt_type'] == 'Domestic Internal')){}else{
     	if (empty($api_url)) return true;
    	 $api_url = get_api_path_from_account_name($attributes['account_name']).$api_url;
     }
@@ -604,7 +604,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     //   $api_url = API_EXPORT_INTERNAL_PATH.$api_url;
     // print_r($send_data);
     // pd($api_url); 
-    if ($attributes['account_name']=="AR Gold ERP Software" ||$attributes['account_name']=="ARG ERP Software" || $attributes['account_name']=="ARF ERP Software" || $attributes['account_name']=="ARC ERP Software"){
+    if ($attributes['account_name']=="AR Gold ERP Software" ||$attributes['account_name']=="ARG ERP Software" || $attributes['account_name']=="ARF ERP Software" || $attributes['account_name']=="ARC ERP Software"|| $attributes['account_name']=="ARNA BANGLE"){
       $this->load->model(array('transactions/metal_issue_voucher_model','transactions/metal_receipt_voucher_model'));
       if(!empty($attributes['metal_receipt_voucher_reference_id'])){ 	
        $parent_data=$this->metal_receipt_voucher_model->find('',array('id'=>$attributes['metal_receipt_voucher_reference_id']));
@@ -613,6 +613,11 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
         $attributes['receipt_type']=$attributes['dd_type'];
       }
       if($attributes['receipt_type']=="Refresh"){
+        $attributes['site_name']=$parent_data['site_name'];
+        $attributes['hook_kdm_purity']=$parent_data['hook_kdm_purity'];
+      }
+      if($attributes['receipt_type']=="Export Internal" || $attributes['receipt_type']=="Domestic Internal"){
+        $attributes['receipt_type']="Refresh";
         $attributes['site_name']=$parent_data['site_name'];
         $attributes['hook_kdm_purity']=$parent_data['hook_kdm_purity'];
       }
