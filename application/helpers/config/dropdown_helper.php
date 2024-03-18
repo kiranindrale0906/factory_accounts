@@ -282,8 +282,6 @@
       }
     }elseif (str_contains($account_name, 'ARC ERP')) {
        return 'AR Gold ERP';
-    }elseif (str_contains($account_name, 'ARNA BANGLE')) {
-       return 'AR Gold ERP';
     }elseif (str_contains($account_name, 'ARG ERP')) {
        return 'AR Gold ERP';
     }elseif (str_contains($account_name, 'ARF ERP')) {
@@ -303,7 +301,9 @@
       elseif (str_contains($account_name, 'Aug 2022')) return 'ARC (Aug 2022)';
       elseif (str_contains($account_name, 'Feb 2023')) return 'ARC (Feb 2023)';
     }*/ 
-
+    if ($account_name=='ARNA BANGLE')
+      return 'AR Gold ERP';
+     
     if ($account_name=='VADOTAR')
       return 'AR Gold';
       // return 'AR Gold (Aug 2022)';
