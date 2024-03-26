@@ -152,6 +152,17 @@ class Trial_balances extends Ledgers {
                                                           array('account_name' => 'Export Internal Software'))['balance'];
     $this->data['accounts_apr2023_domestic_balance'] = $this->voucher_model->find($accounts_balance_select, 
                                                           array('account_name' => 'Domestic Internal Software'))['balance'];
+    /*$this->data['accounts_apr2024_argold_balance'] = $this->voucher_model->find($accounts_balance_select, 
+                                                          array('account_name' => 'AR Gold Software (Apr 2024)'))['balance'];
+   */ $this->data['accounts_apr2024_arf_balance']    = $this->voucher_model->find($accounts_balance_select, 
+                                                          array('account_name' => 'ARF Software (Apr 2024)'))['balance'];
+    $this->data['accounts_apr2024_arc_balance']    = $this->voucher_model->find($accounts_balance_select, 
+                                                          array('account_name' => 'ARC Software (Apr 2024)'))['balance'];
+
+    $this->data['accounts_apr2024_export_balance'] = $this->voucher_model->find($accounts_balance_select, 
+                                                          array('account_name' => 'Export Internal Software (Apr 2024)'))['balance'];
+    $this->data['accounts_apr2024_domestic_balance'] = $this->voucher_model->find($accounts_balance_select, 
+                                                          array('account_name' => 'Domestic Internal Software (Apr 2024)'))['balance'];
     $this->data['accounts_sep2023_argold_balance'] = $this->voucher_model->find($accounts_balance_select, 
                                                           array('account_name' => 'AR Gold Software (Sep 2023)'))['balance'];
     $this->data['accounts_sep2023_arf_balance']    = $this->voucher_model->find($accounts_balance_select, 
@@ -185,6 +196,9 @@ class Trial_balances extends Ledgers {
     $this->get_vadotar_from_factory('AR Gold', 'Apr 2023');    
     $this->get_vadotar_from_factory('ARF', 'Apr 2023');    
     $this->get_vadotar_from_factory('ARC', 'Apr 2023');    
+   //$this->get_vadotar_from_factory('AR Gold', 'Apr 2024');    
+    $this->get_vadotar_from_factory('ARF', 'Apr 2024');    
+    $this->get_vadotar_from_factory('ARC', 'Apr 2024');    
     $this->get_vadotar_from_factory('AR Gold', 'Sep 2023');    
     $this->get_vadotar_from_factory('ARF', 'Sep 2023');    
 //    $this->get_vadotar_from_factory('ARC', 'Sep 2023');    
@@ -201,8 +215,8 @@ class Trial_balances extends Ledgers {
 
   private function get_vadotar_from_factory($site_name, $hostversion) {
     $this->data['receipt_types'] = ['Alloy Vodator', 'GPC Vodator', 'Stone Vatav','Meena Vatav', 'Copper Vatav', 'Rhodium Vatav', 'Auto Tounch Loss Fine'/*,'Auto Issue Tounch Loss Fine'*/, 'Spring Vatav'];
-    $this->data['site_names'] = ['AR Gold', 'ARF', 'ARC'];
-    $this->data['hostversions'] = ['Apr 2023','Sep 2023']; //['May 2022', 'Aug 2022', 'Feb 2023'];
+    $this->data['site_names'] = ['ARF', 'ARC'];
+    $this->data['hostversions'] = ['Apr 2024']; //['May 2022', 'Aug 2022', 'Feb 2023'];
 
     $url = get_api_path($site_name, $hostversion)."issue_and_receipts/alloy_gpc_vodator_ledger/index";
     $response = json_decode(curl_post_request($url));
@@ -554,6 +568,9 @@ class Trial_balances extends Ledgers {
       $this->create_update_vadotar_records(API_APR2023_ARC_PATH, 'ARC', 'Apr 2023');
       $this->create_update_vadotar_records(API_APR2023_ARG_PATH, 'AR Gold', 'Apr 2023');
       $this->create_update_vadotar_records(API_APR2023_ARF_PATH, 'ARF', 'Apr 2023');
+      $this->create_update_vadotar_records(API_APR2024_ARC_PATH, 'ARC', 'Apr 2024');
+      //$this->create_update_vadotar_records(API_APR2024_ARG_PATH, 'AR Gold', 'Apr 2024');
+      $this->create_update_vadotar_records(API_APR2024_ARF_PATH, 'ARF', 'Apr 2024');
       $this->create_update_vadotar_records(API_SEP2023_ARC_PATH, 'ARC', 'Sep 2023');
       $this->create_update_vadotar_records(API_SEP2023_ARG_PATH, 'AR Gold', 'Sep 2023');
       $this->create_update_vadotar_records(API_SEP2023_ARF_PATH, 'ARF', 'Sep 2023');

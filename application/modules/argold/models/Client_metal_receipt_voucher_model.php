@@ -335,7 +335,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   private function set_metal_issue_voucher_attributes_from_receipt_type_for_stone() {
     if ($this->attributes['receipt_type'] == "Stone") {
       unset($this->formdata['metal_issue_vouchers']);
-      $this->formdata['metal_issue_vouchers'] = array(array('account_name' => 'ARC Software (Sep 2023)',
+      $this->formdata['metal_issue_vouchers'] = array(array('account_name' => 'ARC Software (Apr 2024)',
                                                             'credit_weight' => $this->attributes['debit_weight'],
                                                             'purity' => $this->attributes['purity'],
                                                             'fine' => $this->attributes['debit_weight'] * $this->attributes['purity'] / 100,
@@ -534,6 +534,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                    || $attributes['account_name'] == 'AR Gold Software (Sep 2023)'
                    || $attributes['account_name'] == 'ARF Software (Sep 2023)' 
                    || $attributes['account_name'] == 'ARC Software (Sep 2023)'
+                   || $attributes['account_name'] == 'AR Gold Software (Apr 2024)'
+                   || $attributes['account_name'] == 'ARF Software (Apr 2024)' 
+                   || $attributes['account_name'] == 'ARC Software (Apr 2024)'
                    || $attributes['account_name'] == 'AR Gold Software'
                    || $attributes['account_name'] == 'ARF Software' 
                    || $attributes['account_name'] == 'ARC Software'

@@ -15,13 +15,9 @@
     <?php load_field('text', array('field' => 'factory_fine','readonly'=>'readonly'));?>
     <?php load_field('text', array('field' => 'rate'));?>
     <?php load_field('text',array('field' => 'manual_taxable_amount'));  ?>
-    <?php load_field('dropdown', array('field' => 'site_name','option'=>array(
-                                                                              array('id'=>'AR Gold','name'=>'AR Gold'),
-                                                                              array('id'=>'ARF','name'=>'ARF'),
-                                                                              array('id'=>'ARC','name'=>'ARC'),
-                                                                              array('id'=>'AR Gold (Sep 2023)','name'=>'AR Gold (Sep 2023)'),
-                                                                              array('id'=>'ARF (Sep 2023)','name'=>'ARF (Sep 2023)'),
-                                                                              array('id'=>'ARC (Sep 2023)','name'=>'ARC (Sep 2023)'),
+    <?php load_field('dropdown', array('field' => 'site_name','option'=>array(array('id'=>'AR Gold (Apr 2024)','name'=>'AR Gold (Apr 2024)'),
+                                                                              array('id'=>'ARF (Apr 2024)','name'=>'ARF (Apr 2024)'),
+                                                                              array('id'=>'ARC (Apr 2024)','name'=>'ARC (Apr 2024)'),
                                                                               array('id'=>'ARG ERP Software','name'=>'ARG ERP Software'),
                                                                               array('id'=>'ARF ERP Software','name'=>'ARF ERP Software'),
                                                                               array('id'=>'ARC ERP Software','name'=>'ARC ERP Software'),
