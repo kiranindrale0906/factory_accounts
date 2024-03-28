@@ -401,8 +401,7 @@
                       'ARC Software Staging'     => API_AUG2022_ARC_PATH,
                       'Export Internal Software'    => API_EXPORT_INTERNAL_PATH,
                       'Domestic Internal Software'    => API_DOMESTIC_INTERNAL_PATH,
-                      'Export Internal Software (Apr 2024)'    => API_APR2024_EXPORT_INTERNAL_PATH,
-                      'Domestic Internal Software (Apr 2024)'    => API_APR2024_DOMESTIC_INTERNAL_PATH);
+                      );
     
 return $api_path[$account_name];
   }

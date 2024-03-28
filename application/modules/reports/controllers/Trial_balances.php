@@ -273,12 +273,12 @@ class Trial_balances extends Ledgers {
     $arc_rolling_records=json_decode(curl_post_request($url));
     $this->data['live_arc_rolling_balance'] =!empty($arc_rolling_records->data->balance)?$arc_rolling_records->data->balance:0;
     $this->data['live_arc_rolling_gpc_balance']=!empty($arc_rolling_records->data->gpc_out_balance)? $arc_rolling_records->data->gpc_out_balance:0;
-    
-    $url=API_APR2024_ARG_PATH."stock_summary_reports/overall_rolling_reports/index?overall_rolling=1";
+
+    /*$url=API_APR2024_ARG_PATH."stock_summary_reports/overall_rolling_reports/index?overall_rolling=1";
     $arg_rolling_records=json_decode(curl_post_request($url));
     $this->data['live_argold_rolling_balance'] =!empty($arg_rolling_records->data->balance)?$arg_rolling_records->data->balance:0;
     $this->data['live_argold_rolling_gpc_balance']=!empty($arg_rolling_records->data->gpc_out_balance)? $arg_rolling_records->data->gpc_out_balance:0;
-    
+    */
     $url=API_APR2024_ARF_PATH."stock_summary_reports/overall_rolling_reports/index?overall_rolling=1";
     $arf_rolling_records=json_decode(curl_post_request($url));
     $this->data['live_arf_rolling_balance'] =!empty($arf_rolling_records->data->balance)? $arf_rolling_records->data->balance:0;
