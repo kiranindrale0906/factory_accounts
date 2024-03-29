@@ -9,14 +9,21 @@ function get_tax_fields($factory_fine, $fine, $sale_type, $gold_rate, $gold_rate
     $tcs_rate=0.075;
   else
     $tcs_rate = 0;
-
+    $gst_rate=0;
+    if($sale_type == 'Labour'){
+      $gst_rate = 2.50;
+    }elseif($sale_type == 'Sale Return'){
+      $gst_rate = 5;
+    }else{
+      $gst_rate=1.50;
+    }
   $fields = array('sale_type' => $sale_type,
-                  'gst_rate'  => ($sale_type == 'Labour') ? 2.50 : 1.50,
+                  'gst_rate'  => $gst_rate,
                   'tcs_rate'  => ($sale_type == 'Sale') ?  $tcs_rate : 0,
                   'gold_rate' => $gold_rate,
                   'gold_rate_purity' => $gold_rate_purity);
 
-  if ($fields['sale_type'] == 'Labour') 
+  if ($fields['sale_type'] == 'Labour' || $fields['sale_type'] == 'Sale Return' ) 
     $fields['weight'] = ($factory_fine > $fine) ? ($factory_fine - $fine) : ($fine - $factory_fine);
   else {
     $fields['weight'] = ($factory_fine > $fine) ? $factory_fine : $fine;
