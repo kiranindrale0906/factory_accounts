@@ -642,8 +642,8 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
                       'description' => $attributes['description'],
                       'account_id' => $attributes['id']);
     $send_data=$api_data;
- $api_url = "https://staging1-arg-manufacturing.8848digitalerp.com/api/method/custom_app.api.material_receipt.create_material_receipt";
-   // $api_url = "https://erp.ar-gold.in/api/method/custom_app.api.material_receipt.create_material_receipt";
+ //$api_url = "https://staging1-arg-manufacturing.8848digitalerp.com/api/method/custom_app.api.material_receipt.create_material_receipt";
+    $api_url = "https://erp.ar-gold.in/api/method/custom_app.api.material_receipt.create_material_receipt";
     if (empty($api_url)) return true;
     $result = curl_post_erp_request($api_url, $send_data);
   }else{
