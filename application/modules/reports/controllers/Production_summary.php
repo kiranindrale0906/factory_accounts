@@ -84,7 +84,7 @@ class Production_summary extends BaseController {
       return;
     }
     $this->data['production_summary'] = $_GET;
-    $_GET['start_date'] = '2021-11-04';
+    $_GET['start_date'] = '2024-04-01';
 
 /*    if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold (May 2022)') {
       $url = API_MAY2022_ARG_PATH."issue_departments/api_issue_departments/index";
@@ -172,11 +172,11 @@ class Production_summary extends BaseController {
       $url = API_APR2024_ARC_PATH."issue_departments/api_issue_departments/index";
       $records = json_decode(curl_post_request($url, $_GET));
       $arc_records = json_decode(json_encode($records), true);
-     }
+    }
       $arg_erp_records=array();
 
     if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold ERP') {
-      $url = "staging1-arg-manufacturing.8848digitalerp.com/api/method/custom_app.api.material_issue.materilaissue_details";
+      $url = "https://erp.ar-gold.in/api/method/custom_app.api.material_issue.materialissue_details";
       $records = json_decode(curl_get_erp_request($url, $_GET));
       $erp_records = json_decode(json_encode($records), true);
       $this->data['product_names']=array_unique(array_column($erp_records['message'],'product'));
@@ -227,7 +227,7 @@ class Production_summary extends BaseController {
 //pd($argold_records['data']);
     if (empty($arc_records['data'])) $arc_records['data'] = array();
 
-    $records = array_merge($argold_records['data'], 
+    $records = array_merge(/*$argold_records['data'],*/ 
                            $arf_records['data'],
                            $arc_records['data'],
                            $arg_erp_records);

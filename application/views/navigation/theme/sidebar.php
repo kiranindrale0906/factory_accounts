@@ -58,7 +58,7 @@
                                            //  'transactions/purchase_vouchers' => 'Purchase Voucher',//
                                            //  'transactions/journal_vouchers' => 'Journal Voucher',//
                                            //  'transactions/contra_vouchers' => 'Contra Voucher',//
-                                            //'transactions/rate_cut_receipt_vouchers' => 'Bhav Cut Voucher',
+                                            'transactions/rate_cut_receipt_vouchers' => 'Bhav Cut Voucher',
                                             // 'transactions/rate_cut_issue_vouchers' => 'Bhav Cut Issue Voucher',
                                             // 'transactions/rate_cut_booking_price_receipt_vouchers' => 'Bhav Cut Booking Price Voucher',
                                             // 'transactions/rate_cut_booking_weight_receipt_vouchers' => 'Bhav Cut Booking Weight Voucher',

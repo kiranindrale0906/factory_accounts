@@ -307,7 +307,6 @@ class Ledgers extends BaseController {
     //lq();
 }
     
-    
     if ($this->data['report_type'] == 'Account Ledger' || $this->data['report_type'] == 'Purchase Sales Ledger'){
       foreach ($issues as $issue_index => $issue_value) {
         $voucher_id = rtrim($issue_value['voucher_id'], ", ");
@@ -331,7 +330,6 @@ class Ledgers extends BaseController {
           }
         }
       }
-
       foreach ($receipts as $receipt_index => $receipt_value) {      
         $voucher_id = rtrim($receipt_value['voucher_id'], ", ");
         $ac_voucher_receipt_detail=$this->voucher_model->get('metal_receipt_voucher_reference_id',array('where'=>array('metal_receipt_voucher_reference_id is not NULL'=>NULL,'id in ('.$voucher_id.')'=>NULL)));
@@ -343,7 +341,8 @@ class Ledgers extends BaseController {
         if(!empty($metal_receipt_voucher_reference_id)){
         $reference_ac_voucher_receipt_detail=$this->ledger_model->find('GROUP_CONCAT(DISTINCT(account_name)) as account_name',array('where_in'=>array('id'=>$metal_receipt_voucher_reference_id)));
         $receipts[$receipt_index]['reference_account_name']=$reference_ac_voucher_receipt_detail['account_name'];
-
+        $receipts[$receipt_index]['debit_amount']=(!empty($receipt_value['sale_type']) && $receipt_value['sale_type']=="Sale Return")?$receipt_value['debit_amount']:$receipt_value['debit_amount'];
+      
         if ($this->data['report_type'] == 'Purchase Sales Ledger'){
         $ac_voucher_receipt_chitti_detail=$this->ledger_model->find('sum((ac_ledger.credit_weight+ac_ledger.debit_weight) * ac_ledger.purity) / sum(ac_ledger.credit_weight+ac_ledger.debit_weight) as purity, 
                                sum((ac_ledger.credit_weight+ac_ledger.debit_weight) * ac_ledger.factory_purity) / sum(ac_ledger.credit_weight+ac_ledger.debit_weight) as factory_purity',array('where'=>array('chitti_id =('.$receipt_value['chitti_no'].')'=>NULL)));
@@ -351,8 +350,7 @@ class Ledgers extends BaseController {
         $receipts[$receipt_index]['factory_purity']=$ac_voucher_receipt_chitti_detail['factory_purity'];
         $receipts[$receipt_index]['fine']=($receipts[$receipt_index]['chitti_credit_weight']*$ac_voucher_receipt_chitti_detail['purity'])/100;
         $receipts[$receipt_index]['factory_fine']=( $receipts[$receipt_index]['chitti_credit_weight']*$ac_voucher_receipt_chitti_detail['factory_purity'])/100;
-      }}}}
-
+            }}}}
      $domestic_export_receipt_issue_select='account_name,voucher_date,date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,((debit_weight*purity)/100)- 
     ((credit_weight*factory_purity)/100) as fine, ((purity-factory_purity)*debit_weight/100) - 
     ((factory_purity-purity)*credit_weight/100) as vadotar, (debit_amount - credit_amount) as credit_weight, 0 as `id`,0 as debit_amount,account_id,0 as debit_weight,0 as usd_credit_amount,0 as usd_debit_amount,0 as credit_amount,description,narration,chitti_id as chitti_no,purity,factory_purity,factory_fine';
@@ -428,7 +426,6 @@ class Ledgers extends BaseController {
     asort($this->data['voucher_dates']);
     $this->data['issues']   = $this->get_records_by_created_date($issues);
     $this->data['receipts'] = $this->get_records_by_created_date($receipts);
-
     $this->data['day_total'] = $this->set_index_for_dates();
     $this->get_day_total($this->data['issues']);
     $this->get_day_total($this->data['receipts']);      
@@ -744,7 +741,7 @@ class Ledgers extends BaseController {
       $receipt_issue_select = 'ac_ledger.receipt_type, '.$period_select.' as voucher_date, 
                                date_format(ac_ledger.voucher_date,"%Y-%m-%d") as str_voucher_date,
                                ac_ledger.account_name, ac_ledger.voucher_type, 
-                               ac_ledger.site_name, ac_ledger.voucher_type, 
+                               ac_ledger.site_name, ac_ledger.voucher_type,ac_ledger.sale_type, 
                                concat(ac_ledger.voucher_number, ", ") as voucher_number, 
                                GROUP_CONCAT(DISTINCT(ac_ledger.voucher_id)) as voucher_id, 
                                sum(ac_ledger.credit_amount) as credit_amount, 

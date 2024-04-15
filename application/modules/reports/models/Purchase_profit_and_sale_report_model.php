@@ -29,7 +29,7 @@ class Purchase_profit_and_sale_report_model extends BaseModel {
       $where['date(voucher_date) <=']=date('Y-m-d', strtotime($data['to_date']));
     }
 
-    $profit_loss_with_vadotar_records = $this->model->get($purchase_sales_account_domestic_export_with_vadotar_select,$where,array(array('ac_account','ac_vouchers.account_name=ac_account.name')));
+    $profit_loss_with_vadotar_records = $this->purchase_profit_and_sale_report_model->get($purchase_sales_account_domestic_export_with_vadotar_select,$where,array(array('ac_account','ac_vouchers.account_name=ac_account.name')));
     $profit_loss_with_vadotar_domestic_sale_vadotar_fine=$profit_loss_with_vadotar_domestic_sale_vadotar_amount=$profit_loss_with_vadotar_domestic_rate=0;
 
     foreach ($profit_loss_with_vadotar_records as $profit_loss_with_vadotar_index => $profit_loss_with_vadotar_value) {

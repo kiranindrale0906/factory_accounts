@@ -13,7 +13,7 @@ function get_tax_fields($factory_fine, $fine, $sale_type, $gold_rate, $gold_rate
     if($sale_type == 'Labour'){
       $gst_rate = 2.50;
     }elseif($sale_type == 'Sale Return'){
-      $gst_rate = 5;
+      $gst_rate = 2.50;
     }else{
       $gst_rate=1.50;
     }

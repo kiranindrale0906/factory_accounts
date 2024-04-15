@@ -395,7 +395,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
     if (   !empty($this->attributes['gold_rate']) && $this->attributes['gold_rate'] <= 0 
         && !empty($this->attributes['hallmark_rate']) && $this->attributes['hallmark_rate'] <= 0 ) return;
-    if($this->attributes['sale_type']=="Sale Return"){
+    if(!empty($this->attributes['sale_type']) && $this->attributes['sale_type']=="Sale Return"){
       $this->rate_cut_issue_voucher_model->create_rate_cut_vouchers_for_sales_return($this->attributes['id'], $this->attributes['receipt_type']);
     }else{
       $this->rate_cut_issue_voucher_model->create_rate_cut_vouchers_for_metal_and_refresh($this->attributes['id'], $this->attributes['receipt_type']);
@@ -511,7 +511,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $send_data['chain_receipts'] = $api_data;
       $api_url = "api/api_chain_receipts/store";
 
-    }elseif ( $attributes['receipt_t-ype'] == 'AR Gold Internal Receipt'
+    }elseif ( $attributes['receipt_type'] == 'AR Gold Internal Receipt'
               || $attributes['receipt_type'] == 'ARF Internal Receipt'
               || $attributes['receipt_type'] == 'ARC Internal Receipt') {
       $api_data = array_merge($api_data, array('type' => 'Pure' ,'description' => $api_data['description'].'-'.$attributes['site_name']));
