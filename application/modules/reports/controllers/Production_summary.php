@@ -210,8 +210,7 @@ class Production_summary extends BaseController {
       $erp_records['message']=$this->production_summary_model->multi_array_search_with_condition($erp_records,$conditions);
 
       foreach ($erp_records['message'] as $index => $erp_record) {
-        if(!empty($erp_record['items'])&&$erp_record['items']=="GPC"){
-//pd( $erp_record); 
+        if(!empty($erp_record['items'])&&$erp_record['items']=="GPC" || $erp_record['items']=="Finished Goods"){
           $arg_erp_records[$index]['created_at']=date('Y-m-d',strtotime($erp_record['creation']));
             $arg_erp_records[$index]['str_created_date']=$erp_record['creation'];
             $arg_erp_records[$index]['product_name']=!empty($erp_record['product'])?$erp_record['product']:"";
@@ -224,7 +223,6 @@ class Production_summary extends BaseController {
             $arg_erp_records[$index]['in_purity']=$erp_record['melting'];
       }
 }    }
-//pd($argold_records['data']);
     if (empty($arc_records['data'])) $arc_records['data'] = array();
 
     $records = array_merge(/*$argold_records['data'],*/ 
