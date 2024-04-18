@@ -175,4 +175,65 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
     $rate_cut_receipt_voucher_obj->before_validate();
     $rate_cut_receipt_voucher_obj->store();
   }
+  public function create_rate_cut_vouchers_for_sales_return($metal_receipt_voucher_id, $receipt_type) {
+    $metal_receipt_voucher = $this->metal_receipt_voucher_model->find('', array('id' => $metal_receipt_voucher_id));
+    $this->rate_cut_issue_voucher_model->delete('', array('description' => $receipt_type.' '.$metal_receipt_voucher['voucher_number'],
+                                                          'voucher_type' => 'rate cut issue voucher'));
+    $this->rate_cut_receipt_voucher_model->delete('', array('description' => $receipt_type.' '.$metal_receipt_voucher['voucher_number'],
+                                                            'voucher_type' => 'rate cut receipt voucher'));
+
+    if ($metal_receipt_voucher['gold_rate'] == 0 && $metal_receipt_voucher['hallmark_rate'] == 0) return;
+
+    if (   $metal_receipt_voucher['account_name'] == 'Dip R/d' 
+        || $metal_receipt_voucher['account_name'] == 'Pen R/d') {
+      $metal_receipt_voucher['is_export'] = 1;
+    }
+
+    $tax_fields = get_tax_fields($metal_receipt_voucher['factory_fine'], $metal_receipt_voucher['fine'], $metal_receipt_voucher['sale_type'], $metal_receipt_voucher['gold_rate'], $metal_receipt_voucher['gold_rate_purity'],$metal_receipt_voucher['created_at'], $metal_receipt_voucher['is_export'], $metal_receipt_voucher['do_not_calculate_tax'], $metal_receipt_voucher['hallmark_rate'], $metal_receipt_voucher['hallmark_quantity']);
+
+    $rate_cut_issue = array('company_id'    => 1,
+                            'account_name'  => $metal_receipt_voucher['account_name'],
+                            'voucher_date'  => $metal_receipt_voucher['created_at'],
+                            'debit_amount'  => $tax_fields['grand_total'],
+                            'credit_amount' => 0,
+                            'credit_weight' => $tax_fields['weight'],
+                            'debit_weight'  => 0,
+                            'purity'        => 100,
+                            'sale_type'     => $metal_receipt_voucher['sale_type'],
+                            'taxable_amount' => $tax_fields['taxable_amount'],
+                            'cgst_amount'   => $tax_fields['cgst_amount'],
+                            'sgst_amount'   => $tax_fields['sgst_amount'],
+                            'tcs_amount'    => $tax_fields['tcs_amount'],
+                            'gold_rate'     => $tax_fields['gold_rate'],
+                            'gold_rate_purity' => $tax_fields['gold_rate_purity'],
+                            'description'   => $receipt_type.' '.$metal_receipt_voucher['voucher_number'],
+                            'receipt_type'  => $receipt_type,
+                            'is_export'  => $metal_receipt_voucher['is_export'],
+                            'metal_receipt_voucher_reference_id' => $metal_receipt_voucher['id'],
+                            'site_name'     => $metal_receipt_voucher['site_name']);
+    $rate_cut_issue_voucher_obj = new rate_cut_issue_voucher_model($rate_cut_issue);
+    $rate_cut_issue_voucher_obj->before_validate();
+    $rate_cut_issue_voucher_obj->store();
+
+    $rate_cut_receipt = $rate_cut_issue;
+    $purchase_acccount_name = 'SALES ACCOUNT';
+    if ($metal_receipt_voucher['account_name'] == 'Dip R/d' || $metal_receipt_voucher['account_name'] == 'Pen R/d' || $metal_receipt_voucher['account_name'] == 'RODIUM')
+      $purchase_acccount_name = 'R/D SALES ACCOUNT';
+    $rate_cut_receipt['account_name']  = $purchase_acccount_name;
+    $rate_cut_receipt['credit_amount'] = $tax_fields['grand_total'];
+    $rate_cut_receipt['debit_amount']  = 0;
+    $rate_cut_receipt['debit_weight']  = $tax_fields['weight'];
+    $rate_cut_receipt['credit_weight'] = 0;
+    $rate_cut_receipt['sale_type'] = $metal_receipt_voucher['sale_type'];
+    $rate_cut_receipt['taxable_amount'] = $tax_fields['taxable_amount'];
+    $rate_cut_receipt['cgst_amount'] = $tax_fields['cgst_amount'];
+    $rate_cut_receipt['sgst_amount'] = $tax_fields['sgst_amount'];
+    $rate_cut_receipt['tcs_amount'] = $tax_fields['tcs_amount'];
+    $rate_cut_receipt['gold_rate'] = $tax_fields['gold_rate'];
+    $rate_cut_receipt['gold_rate_purity'] = $tax_fields['gold_rate_purity'];
+    
+    $rate_cut_receipt_voucher_obj = new rate_cut_receipt_voucher_model($rate_cut_receipt);
+    $rate_cut_receipt_voucher_obj->before_validate();
+    $rate_cut_receipt_voucher_obj->store();
+  }
 }

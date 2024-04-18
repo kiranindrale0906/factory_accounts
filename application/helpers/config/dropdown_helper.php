@@ -86,6 +86,7 @@
 
   function get_sale_types() {
     return array( array('id' => 'Sale', 'name' => 'Sale'),
+                  array('id' => 'Sale Return', 'name' => 'Sale Return'),
                   array('id' => 'Labour', 'name' => 'Labour'));
   }
 
@@ -245,13 +246,13 @@
       array('id' => 'AR Gold Software (Feb 2023)', 'name' => 'AR Gold Software (Feb 2023)'),
       array('id' => 'ARF Software (Feb 2023)',     'name' => 'ARF Software (Feb 2023)'),
       array('id' => 'ARC Software (Feb 2023)',     'name' => 'ARC Software (Feb 2023)'),*/
-      array('id' => 'AR Gold Software (Apr 2023)', 'name' => 'AR Gold Software (Apr 2023)'),
+      /*array('id' => 'AR Gold Software (Apr 2023)', 'name' => 'AR Gold Software (Apr 2023)'),
       array('id' => 'ARF Software (Apr 2023)',     'name' => 'ARF Software (Apr 2023)'),
       array('id' => 'ARC Software (Apr 2023)',     'name' => 'ARC Software (Apr 2023)'),
       array('id' => 'AR Gold Software (Sep 2023)', 'name' => 'AR Gold Software (Sep 2023)'),
       array('id' => 'ARF Software (Sep 2023)',     'name' => 'ARF Software (Sep 2023)'),
       array('id' => 'ARC Software (Sep 2023)',     'name' => 'ARC Software (Sep 2023)'),
-      array('id' => 'AR Gold Software (Apr 2024)', 'name' => 'AR Gold Software (Apr 2024)'),
+     */ array('id' => 'AR Gold Software (Apr 2024)', 'name' => 'AR Gold Software (Apr 2024)'),
       array('id' => 'ARF Software (Apr 2024)',     'name' => 'ARF Software (Apr 2024)'),
       array('id' => 'ARC Software (Apr 2024)',     'name' => 'ARC Software (Apr 2024)'),
       array('id' => 'AR Gold ERP Software',     'name' => 'AR Gold ERP Software'),
@@ -400,8 +401,7 @@
                       'ARC Software Staging'     => API_AUG2022_ARC_PATH,
                       'Export Internal Software'    => API_EXPORT_INTERNAL_PATH,
                       'Domestic Internal Software'    => API_DOMESTIC_INTERNAL_PATH,
-                      'Export Internal Software (Apr 2024)'    => API_APR2024_EXPORT_INTERNAL_PATH,
-                      'Domestic Internal Software (Apr 2024)'    => API_APR2024_DOMESTIC_INTERNAL_PATH);
+                      );
     
 return $api_path[$account_name];
   }
