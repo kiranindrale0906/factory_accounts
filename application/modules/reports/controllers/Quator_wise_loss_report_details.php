@@ -276,7 +276,6 @@ class Quator_wise_loss_report_details extends Ledgers {
     }
     $opening_loss_records = $this->get_opening_loss();
     $arg_aug2022_records=array_merge($arg_aug2022_records,$ghiss_melting_loss,$opening_loss_records);
-*/
 
     $url=API_SEP2023_ARF_PATH."issue_and_receipts/loss_report_for_accounts/index";
           $arf_sep2023_records=json_decode(curl_post_request($url,$data),true);
@@ -302,6 +301,7 @@ class Quator_wise_loss_report_details extends Ledgers {
           $opening_loss_records = $this->get_opening_loss();
           $arf_sep2023_records=array_merge($arf_sep2023_records,$ghiss_melting_loss,$opening_loss_records,$fire_tounch_loss);
 
+*/
 
  /*   $url=API_FEB2023_ARG_PATH."issue_and_receipts/loss_report_for_accounts/index";
     $arg_feb2023_records=json_decode(curl_post_request($url,$data),true);
@@ -317,7 +317,7 @@ class Quator_wise_loss_report_details extends Ledgers {
     }
     $opening_loss_records = $this->get_opening_loss();
     $arg_feb2023_records=array_merge($arg_feb2023_records,$ghiss_melting_loss,$opening_loss_records);
-*/
+*//*
     $url=API_APR2023_ARG_PATH."issue_and_receipts/loss_report_for_accounts/index";
     $arg_apr2023_records=json_decode(curl_post_request($url,$data),true);
     $arg_apr2023_records=!empty($arg_apr2023_records)?$arg_apr2023_records['data']['loss_details']['loss_detail']:$arg_apr2023_records['data']['loss_details']['loss_detail']=array();
@@ -364,7 +364,7 @@ class Quator_wise_loss_report_details extends Ledgers {
         $fire_tounch_loss[$fire_tounch_loss_index]['out_weight']=$out_weight;
     }
     $opening_loss_records = $this->get_opening_loss();
-    $arg_sep2023_records=array_merge($arg_sep2023_records,$ghiss_melting_loss,$opening_loss_records,$fire_tounch_loss);
+    $arg_sep2023_records=array_merge($arg_sep2023_records,$ghiss_melting_loss,$opening_loss_records,$fire_tounch_loss);*/
 
     // $arg_records=$this->factory_wise_record_array($arg_records);
     // $arf_records=$this->factory_wise_record_array($arf_records);
@@ -376,14 +376,14 @@ class Quator_wise_loss_report_details extends Ledgers {
     // $arf_feb2023_records=$this->factory_wise_record_array($arf_feb2023_records);
     // $arg_feb2023_records=$this->factory_wise_record_array($arg_feb2023_records);
     
-    $arc_apr2023_records=$this->factory_wise_record_array($arc_apr2023_records);
-    $arf_apr2023_records=$this->factory_wise_record_array($arf_apr2023_records);
-    $arg_apr2023_records=$this->factory_wise_record_array($arg_apr2023_records);
+    $arc_apr2024_records=$this->factory_wise_record_array($arc_apr2024_records);
+    $arf_apr2024_records=$this->factory_wise_record_array($arf_apr2024_records);
+    //$arg_apr2024_records=$this->factory_wise_record_array($arg_apr2024_records);
     
-    $arc_sep2023_records=$this->factory_wise_record_array($arc_sep2023_records);
+    /*$arc_sep2023_records=$this->factory_wise_record_array($arc_sep2023_records);
     $arf_sep2023_records=$this->factory_wise_record_array($arf_sep2023_records);
     $arg_sep2023_records=$this->factory_wise_record_array($arg_sep2023_records);
-    
+    */
     
 
      $this->data['loss_details']=array();
