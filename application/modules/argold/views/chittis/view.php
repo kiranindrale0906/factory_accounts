@@ -37,6 +37,9 @@
         ?>
       </td>
     </tr><tr>
+      <td>User Name</td><td class=""><h6><?=$_SESSION['name']; ?></h6></td>
+    </tr>
+    <tr>
       <td>Sale Type</td><td class=""><h6><?= $record['sale_type'] ?></h6></td>
     </tr>
     <?php 
