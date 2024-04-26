@@ -13,20 +13,27 @@
   <table class="table table-sm table-default">
     <thead>
       <tr>
+
+
         <th class="">Date</th>
-        <th class="text-left">Account Name</th>
-        <th class="text-left">Is Export</th>
-        <th class="text-right"> Taxable Amount</th>
-        <th class="text-right">CGST Amount</th>
-        <th class="text-right">SGST Amount</th>
-        <th class="text-right">TCS Amount</th>
-        <th class="text-right">Debit Amount</th>
+        <th class="text-left">Customer Name</th>
+        <th class="text-left">Type</th>
+        <th class="text-right">Weight</th>
+        <th class="text-right">Purity</th>
+        <th class="text-right">Factory Fine</th>
+        <th class="text-right">Wastage</th>
+        <th class="text-right">Wastage Fine</th>
+        <th class="text-right">Rate</th>
+        <th class="text-right">Rate With Gst</th>
+        <th class="text-right">Vadotar</th>
+        <th class="text-right">Amount</th>
         <th class="text-right"></th>
         </tr>
     </thead>
     <tbody>
     <?php 
       $total_taxable_amount=$total_cgst_amount=$total_sgst_amount=$total_tcs_amount=$total_debit=0;
+      
      foreach ($purchase_records as $index => $record) {
       $total_taxable_amount+=four_decimal($record['taxable_amount']);
       $total_cgst_amount+=four_decimal($record['cgst_amount']);
