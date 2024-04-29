@@ -6,7 +6,22 @@
 <div class="row"> 
   <div class="col-md-6">
     <div class="form-group container"> 
+      <h5> Select Type: 
+        <a class="ml-5 <?= (!empty($_GET['type'])&& $_GET['type']=='Sales') ? 'bold black underline' : '' ?>" 
+           href='<?= base_url().$url ?>?type=Sales&sale_type=<?= $sale_type?>'>Sales</a>
+        <a class="ml-5 <?= (!empty($_GET['type'])&& $_GET['type']=='Purchase') ? 'bold black underline' : '' ?>" 
+           href='<?= base_url().$url ?>?type=Purchase&sale_type=<?= $sale_type?>'>Purchase</a>
+      </h5>
     </div>
+    <div class="form-group container">
+      <h5> Select Sale Type:
+        <a class="ml-5 <?= (!empty($_GET['sale_type'])&& $_GET['sale_type']=='Labour') ? 'bold black underline' : '' ?>"
+           href='<?= base_url().$url ?>?type=<?= $type ?>&sale_type=Labour'>Labour</a>
+        <a class="ml-5 <?= (!empty($_GET['sale_type'])&& $_GET['sale_type']=='Sale') ? 'bold black underline' : '' ?>"
+           href='<?= base_url().$url ?>?type=<?= $type ?>&sale_type=Sale'>Sale</a>
+      </h5>
+    </div>
+
   </div>
 </div>  
 <div class="table-responsive">
@@ -24,17 +39,22 @@
         <th class="text-right">Rate</th>
         <th class="text-right">Rate With Gst</th>
         <th class="text-right">Vadotar</th>
+	<?php if(!empty($_GET['sale_type']) && $_GET['sale_type']=="Sale"){?>
+        <th class="text-right">Gold Sale</th>
+        <th class="text-right">Vadotar Sale</th>
+        <th class="text-right">Total</th>
+        
+        <?php }?>
         <th class="text-right">Amount</th>
         </tr>
     </thead>
    <?php
-      $total_taxable_amount=$total_cgst_amount=$total_sgst_amount=$total_tcs_amount=$total_debit=0;
      foreach ($sales_records as $sale_date_wise_index => $sale_date_wise_record) {
     ?>
 
     <tbody>
     <?php
-     $total_weight=$total_factory_fine=$total_wastage=$total_wastage_fine=$total_vadotar=$total_amount=0;
+     $total_weight=$total_vadotar_sale=$total_gold_sale=$total_sale_data=$total_factory_fine=$total_wastage=$total_wastage_fine=$total_vadotar=$total_amount=0;
      foreach ($sale_date_wise_record as $index => $record) {
 	$total_weight+=$record['weight'];
 	$total_factory_fine+=$record['factory_fine'];
@@ -42,6 +62,8 @@
 	$total_wastage_fine+=$record['wastage_fine'];
 	$total_vadotar+=$record['vadotar'];
 	$total_amount+=$record['amount'];
+	$total_vadotar_sale+=$record['vadotar_sale'];
+	$total_gold_sale+=$record['gold_sale'];
      ?>
 
       <tr>
@@ -56,7 +78,14 @@
         <td class="text-right"><?=!empty($record['rate'])?four_decimal($record['rate']):'-'; ?></td>
         <td class="text-right"><?=!empty($record['rate_of_gst'])?four_decimal($record['rate_of_gst']):'-'; ?></td>
         <td class="text-right"><?=!empty($record['vadotar'])?four_decimal($record['vadotar']):'-'; ?></td>
-        <td class="text-right"><?=!empty($record['amount'])?four_decimal($record['amount']):'-'; ?></td>
+        <?php if(!empty($_GET['sale_type']) && $_GET['sale_type']=="Sale"){?>
+        <td class="text-right"><?=!empty($record['gold_sale'])?four_decimal($record['gold_sale']):'-'; ?></td>
+        <td class="text-right"><?=!empty($record['vadotar_sale'])?four_decimal($record['vadotar_sale']):'-'; ?></td>
+        <td class="text-right"><?=!empty($record['total_sale'])?four_decimal($record['total_sale']):'-'; ?></td>
+        
+        <?php }?>
+	<td class="text-right"><?=!empty($record['amount'])?four_decimal($record['amount']):'-'; ?></td>
+	
       </tr>
     <?php }?>
     <tr class="bg_gray bold">
@@ -71,6 +100,13 @@
     <td class="text-right"></td>
     <td class="text-right"><?=four_decimal($total_wastage_fine)?></td>
     <td class="text-right"><?=four_decimal($total_vadotar)?></td>
+    <?php if(!empty($_GET['sale_type']) && $_GET['sale_type']=="Sale"){?>
+        <td class="text-right"><?=four_decimal($total_gold_sale); ?></td>
+        <td class="text-right"><?=four_decimal($total_vadotar_sale); ?></td>
+        <td class="text-right"></td>
+
+        <?php }?>
+
     <td class="text-right"><?=four_decimal($total_amount)?></td>
     </tr>
    <?php }?>

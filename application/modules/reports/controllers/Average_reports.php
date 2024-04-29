@@ -18,10 +18,17 @@ class Average_reports extends BaseController {
     $this->data['sales_records']=array();
     $this->data['purchase_records']=array();
     $where['rate!=']=0;
+    if(!empty($_GET['type'])){
+      $this->data['type']=$_GET['type'];
+    }else{
+      $this->data['type']='Sales';
+    }
     if(!empty($_GET['sale_type'])){
       $where['sale_type']=$_GET['sale_type'];
+      $this->data['sale_type']=$_GET['sale_type'];
     }else{
       $where['sale_type']='Labour';
+      $this->data['sale_type']='Labour';
     }
     $sales_records = $this->chitti_model->get('',$where);
     $purchase_records = $this->voucher_model->get('', array('gold_rate !=' => 0), array(),array('order_by'=>'voucher_date'));
