@@ -20,6 +20,8 @@ class Average_reports extends BaseController {
     $where['rate!=']=0;
     if(!empty($_GET['sale_type'])){
       $where['sale_type']=$_GET['sale_type'];
+    }else{
+      $where['sale_type']='Labour';
     }
     $sales_records = $this->chitti_model->get('',$where);
     $purchase_records = $this->voucher_model->get('', array('gold_rate !=' => 0), array(),array('order_by'=>'voucher_date'));
@@ -49,7 +51,7 @@ class Average_reports extends BaseController {
       $this->data['purchase_records'][$year][$purchase_index]['date_purchase']=date("Y-m-d",strtotime($purchase_value['created_at']));
       $this->data['purchase_records'][$year][$purchase_index]['customer_name']=$purchase_value['account_name'];
       $this->data['purchase_records'][$year][$purchase_index]['sale_type']=$purchase_value['sale_type'];
-      $this->data['purchase_records'][$year][$purchase_index]['weight']=$purchase_value['weight'];
+      $this->data['purchase_records'][$year][$purchase_index]['weight']=$purchase_value['credit_weight'];
       $this->data['purchase_records'][$year][$purchase_index]['purity']=$purchase_value['purity'];
       $this->data['purchase_records'][$year][$purchase_index]['factory_fine']=$factory_fine=$purchase_value['factory_fine'];
       $this->data['purchase_records'][$year][$purchase_index]['wastage']=$wastage=$purchase_value['factory_fine']-$purchase_value['factory_fine'];

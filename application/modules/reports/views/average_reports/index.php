@@ -25,14 +25,25 @@
         <th class="text-right">Rate With Gst</th>
         <th class="text-right">Vadotar</th>
         <th class="text-right">Amount</th>
-        <th class="text-right"></th>
         </tr>
     </thead>
-    <tbody>
-    <?php 
+   <?php
       $total_taxable_amount=$total_cgst_amount=$total_sgst_amount=$total_tcs_amount=$total_debit=0;
+     foreach ($sales_records as $sale_date_wise_index => $sale_date_wise_record) {
+    ?>
 
-     foreach ($sale_records as $index => $record) {?>
+    <tbody>
+    <?php
+     $total_weight=$total_factory_fine=$total_wastage=$total_wastage_fine=$total_vadotar=$total_amount=0;
+     foreach ($sale_date_wise_record as $index => $record) {
+	$total_weight+=$record['weight'];
+	$total_factory_fine+=$record['factory_fine'];
+	$total_wastage+=$record['wastage'];
+	$total_wastage_fine+=$record['wastage_fine'];
+	$total_vadotar+=$record['vadotar'];
+	$total_amount+=$record['amount'];
+     ?>
+
       <tr>
         <td class="text-left"><?=!empty($record['date_sale'])?date('d-m-Y',strtotime($record['date_sale'])):'-'; ?></td>
         <td class="text-left"><?=!empty($record['customer_name'])?$record['customer_name']:'-'; ?></td>
@@ -48,21 +59,21 @@
         <td class="text-right"><?=!empty($record['amount'])?four_decimal($record['amount']):'-'; ?></td>
       </tr>
     <?php }?>
-      <tr class="bg_gray bold">
+    <tr class="bg_gray bold">
     <td>Total</td>
     <td class="text-right"></td>
     <td class="text-right"></td>
+    <td class="text-right"><?=four_decimal($total_weight)?></td>
     <td class="text-right"></td>
     <td class="text-right"></td>
     <td class="text-right"></td>
+    <td class="text-right"><?=four_decimal($total_factory_fine)?></td>
     <td class="text-right"></td>
-    <td class="text-right"></td>
-    <td class="text-right"></td>
-    <td class="text-right"></td>
-    <td class="text-right"></td>
-    <td class="text-right"></td>
-    <td class="text-right"></td>
-  </tr>
+    <td class="text-right"><?=four_decimal($total_wastage_fine)?></td>
+    <td class="text-right"><?=four_decimal($total_vadotar)?></td>
+    <td class="text-right"><?=four_decimal($total_amount)?></td>
+    </tr>
+   <?php }?>
     </tbody>
   </table>
 </div>
