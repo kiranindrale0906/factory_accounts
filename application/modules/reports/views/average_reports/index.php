@@ -1,5 +1,5 @@
 <?php 
-  $url = 'reports/purchase_registers';
+  $url = 'reports/average_reports';
 ?>
   <h6 class="heading blue bold text-uppercase mb-0">Average Reports</h6>
   <hr>
@@ -13,8 +13,6 @@
   <table class="table table-sm table-default">
     <thead>
       <tr>
-
-
         <th class="">Date</th>
         <th class="text-left">Customer Name</th>
         <th class="text-left">Type</th>
@@ -33,36 +31,36 @@
     <tbody>
     <?php 
       $total_taxable_amount=$total_cgst_amount=$total_sgst_amount=$total_tcs_amount=$total_debit=0;
-      
-     foreach ($purchase_records as $index => $record) {
-      $total_taxable_amount+=four_decimal($record['taxable_amount']);
-      $total_cgst_amount+=four_decimal($record['cgst_amount']);
-      $total_sgst_amount+=four_decimal($record['sgst_amount']);
-      $total_tcs_amount+=four_decimal($record['tcs_amount']);
-      $total_debit+=four_decimal($record['credit_amount']);
-      ?>
+
+     foreach ($sale_records as $index => $record) {?>
       <tr>
-        <td class="text-left"><?=!empty($record['voucher_date'])?date('d-m-Y',strtotime($record['voucher_date'])):'-'; ?></td>
-        <td class="text-left"><?=!empty($record['account_name'])?$record['account_name']:'-'; ?></td>
-        <td class="text-left"><?=(!empty($record['is_export']))? "YES":'NO'; ?></td>
-        <td class="text-right"><?=!empty($record['taxable_amount'])?four_decimal($record['taxable_amount']):'-'; ?></td>
-        <td class="text-right"><?=!empty($record['cgst_amount'])?four_decimal($record['cgst_amount']):'-'; ?></td>
-        <td class="text-right"><?=!empty($record['sgst_amount'])?four_decimal($record['sgst_amount']):'-'; ?></td>
-        <td class="text-right"><?=!empty($record['tcs_amount'])?four_decimal($record['tcs_amount']):'-'; ?></td>
-        <td class="text-right"><?=!empty($record['credit_amount'])?four_decimal($record['credit_amount']):'-'; ?></td>
-        <td class="text-right"><a href="<?=base_url().'/argold/voucher_details/view/'.$record['id']?>">View</a></td>
-       
+        <td class="text-left"><?=!empty($record['date_sale'])?date('d-m-Y',strtotime($record['date_sale'])):'-'; ?></td>
+        <td class="text-left"><?=!empty($record['customer_name'])?$record['customer_name']:'-'; ?></td>
+        <td class="text-left"><?=!empty($record['sale_type'])?$record['sale_type']:'-'; ?></td>
+        <td class="text-right"><?=!empty($record['weight'])?four_decimal($record['weight']):'-'; ?></td>
+        <td class="text-right"><?=!empty($record['purity'])?four_decimal($record['purity']):'-'; ?></td>
+        <td class="text-right"><?=!empty($record['factory_fine'])?four_decimal($record['factory_fine']):'-'; ?></td>
+        <td class="text-right"><?=!empty($record['wastage'])?four_decimal($record['wastage']):'-'; ?></td>
+        <td class="text-right"><?=!empty($record['wastage_fine'])?four_decimal($record['wastage_fine']):'-'; ?></td>
+        <td class="text-right"><?=!empty($record['rate'])?four_decimal($record['rate']):'-'; ?></td>
+        <td class="text-right"><?=!empty($record['rate_of_gst'])?four_decimal($record['rate_of_gst']):'-'; ?></td>
+        <td class="text-right"><?=!empty($record['vadotar'])?four_decimal($record['vadotar']):'-'; ?></td>
+        <td class="text-right"><?=!empty($record['amount'])?four_decimal($record['amount']):'-'; ?></td>
       </tr>
     <?php }?>
       <tr class="bg_gray bold">
     <td>Total</td>
     <td class="text-right"></td>
     <td class="text-right"></td>
-    <td class="text-right"><?=$total_taxable_amount?></td>
-    <td class="text-right"><?=$total_cgst_amount?></td>
-    <td class="text-right"><?=$total_sgst_amount?></td>
-    <td class="text-right"><?=$total_tcs_amount?></td>
-    <td class="text-right"><?=$total_debit?></td>
+    <td class="text-right"></td>
+    <td class="text-right"></td>
+    <td class="text-right"></td>
+    <td class="text-right"></td>
+    <td class="text-right"></td>
+    <td class="text-right"></td>
+    <td class="text-right"></td>
+    <td class="text-right"></td>
+    <td class="text-right"></td>
     <td class="text-right"></td>
   </tr>
     </tbody>
