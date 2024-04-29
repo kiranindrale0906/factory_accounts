@@ -18,7 +18,7 @@ class Average_reports extends BaseController {
     $where['rate!=']=0;
     $this->data['sales_records'] = $this->chitti_model->get('',$where);
     $this->data['purchase_records'] = $this->voucher_model->get('', array('gold_rate !=' => 0), array(),array('order_by'=>'voucher_date'));
-    pd($this->data['sales_records']);
+    pd($this->data['purchase_records']);
   
   }
 }
