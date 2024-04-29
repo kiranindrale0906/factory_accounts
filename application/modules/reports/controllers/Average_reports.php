@@ -67,7 +67,15 @@ class Average_reports extends BaseController {
       $this->data['purchase_records'][$year][$purchase_index]['rate_of_gst']=$rate_of_gst=($purchase_value['rate']+($purchase_value['rate']*5)/100);
       $this->data['purchase_records'][$year][$purchase_index]['vadotar']=$vadotar=($wastage_fine-$factory_fine);
       $this->data['purchase_records'][$year][$purchase_index]['amount']=($rate_of_gst*$vadotar);
+      $this->data['purchase_records'][$year][$purchase_index]['gold_sale']=$gold_sale=($rate_of_gst*$factory_fine);
+      $this->data['purchase_records'][$year][$purchase_index]['vadotar_sale']=$vadotar_sale=($rate_of_gst*$vadotar);
+      $this->data['purchase_records'][$year][$purchase_index]['total_sale']=$total_sale=$vadotar_sale+$gold_sale;
+      $this->data['purchase_records'][$year][$purchase_index]['sub_total_sale']=(($total_sale/103)*100);
+   
   
+    }
+    if(!empty($_GET['type'])&&$_GET['type']=="Purchase"){
+      $this->data['sales_records']=$this->data['purchase_records'];
     }
   
   }
