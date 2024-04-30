@@ -1,5 +1,5 @@
 <?php
-use Da\QrCode\QrCode;
+//use Da\QrCode\QrCode;
 
 function get_tax_fields($factory_fine, $fine, $sale_type, $gold_rate, $gold_rate_purity, $created_at,$export = 0,$do_not_calculate_tax = 0, $hallmark_rate = 0, $hallmark_qty = 0) {
   $tcs_rate=0;
@@ -57,10 +57,10 @@ function parent_id_exist($parent_id){
 }
 if (!function_exists('generate_qrcode')) {
   function generate_qrcode($string,$size=50,$margin=200) {
-    $qrCode = (new QrCode($string))
-    ->setSize(2048)
-    ->setMargin($margin)
-    ->useForegroundColor(0,0,0);
-    return '<img width="'.$size.'" src="'.$qrCode->writeDataUri().'" alt="QR Code" />';
+//    $qrCode = (new QrCode($string))
+  //  ->setSize(2048)
+    //->setMargin($margin)
+    //->useForegroundColor(0,0,0);
+    return ""; //'<img width="'.$size.'" src="'.$qrCode->writeDataUri().'" alt="QR Code" />';
   }
 }
