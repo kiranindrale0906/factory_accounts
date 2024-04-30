@@ -18,6 +18,7 @@ class Average_reports extends BaseController {
     $this->data['sales_records']=array();
     $this->data['purchase_records']=array();
     $where['rate!=']=0;
+    $where_purchase=array('gold_rate !=' => 0);
     if(!empty($_GET['type'])){
       $this->data['type']=$_GET['type'];
     }else{
@@ -25,13 +26,15 @@ class Average_reports extends BaseController {
     }
     if(!empty($_GET['sale_type'])){
       $where['sale_type']=$_GET['sale_type'];
+      $where_purchase['sale_type']=$_GET['sale_type'];
       $this->data['sale_type']=$_GET['sale_type'];
     }else{
       $where['sale_type']='Labour';
+      $where_purchase['sale_type']='Labour';
       $this->data['sale_type']='Labour';
     }
     $sales_records = $this->chitti_model->get('',$where);
-    $purchase_records = $this->voucher_model->get('', array('gold_rate !=' => 0), array(),array('order_by'=>'voucher_date'));
+    $purchase_records = $this->voucher_model->get('',$where_purchase, array(),array('order_by'=>'voucher_date'));
     foreach ($sales_records as $sale_index => $sale_value) {
       $wastage=$wastage_fine=$factory_fine=$rate_of_gst=$vadotar=$gold_sale=$vadotar_sale=0;
       $year=date("Y-m-d",strtotime($sale_value['created_at']));
