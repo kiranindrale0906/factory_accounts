@@ -226,7 +226,7 @@
       array('id' => 'ARC (Apr 2024)',     'name' => 'ARC (Apr 2024)'),
     array('id' => 'AR Gold ERP', 'name' => 'AR Gold ERP')
     );
-    if ($export==1) $site_names[] = array('id' => 'Export', 'name' => 'Export');
+    if ($export==1) $site_names[] = array('id' => 'ExportApr 2024', 'name' => 'Export');
     if ($export==2) {
       $site_names[] = array('id' => 'Domestic', 'name' => 'Domestic');
       // $site_names[] = array('id' => 'Domesticstaging', 'name' => 'Domesticstaging');

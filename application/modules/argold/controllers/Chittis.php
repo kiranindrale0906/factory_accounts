@@ -7,7 +7,7 @@ class Chittis extends BaseController {
     parent::__construct();
     $this->date_fields = array(array('chittis', 'date'));
     $this->redirect_after_save = 'view';
-    $this->load->model(array('ac_vouchers/voucher_model','masters/account_model','argold/chitti_empty_packet_detail_model','masters/narration_model','masters/empty_packet_model'));
+    $this->load->model(array('users/user_model','ac_vouchers/voucher_model','masters/account_model','argold/chitti_empty_packet_detail_model','masters/narration_model','masters/empty_packet_model'));
   }
   
   public function view($id) {
@@ -61,6 +61,9 @@ class Chittis extends BaseController {
     $packet_no = array_column($this->data['metal_voucher_details'], 'packet_no');
     $this->data['packet_nos']=array_unique($packet_no);
 
+    $this->data['record']['user_name'] = $this->user_model->find('name',array('id'=>$this->data['record']['created_by']))['name'];
+
+
     $this->data['chittis_details'] = $this->chitti_model->find('account_name, date',
                                                                array('id'=>$this->data['record']['id']));
 
@@ -79,8 +82,13 @@ class Chittis extends BaseController {
     if (!empty($_GET['account_name'])) $this->data['record']['account_name'] = $_GET['account_name'];
     if (!empty($_GET['purity'])) $this->data['record']['purity'] = $_GET['purity'];
     
-    $this->data['record']['site_name'] = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'AR Gold (May2022)';
-    $this->data['site_names'] = get_site_names();
+//    $this->data['record']['site_name'] = (!empty($this->data['record']['site_name'])) ? $this->data['record']['site_name']: 'AR Gold (Apr 2024)';
+    if($this->router->method == 'edit'){
+        $this->data['record']['site_name'] = (!empty($this->data['record']['site_name'])) ? $this->data['record']['site_name']: 'AR Gold (Apr 2024)';
+    }else{
+	$this->data['record']['site_name'] = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'ARF (Apr 2024)';
+    }  
+  $this->data['site_names'] = get_site_names();
     if($this->router->class == 'chitti_exports'){ 
       $this->data['site_names'] = get_site_names(1);
       $this->data['account_name']= $this->account_model->get('distinct(name) as name,name as id',

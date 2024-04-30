@@ -37,7 +37,7 @@
         ?>
       </td>
     </tr><tr>
-      <td>User Name</td><td class=""><h6><?=$_SESSION['name']; ?></h6></td>
+      <td>User Name</td><td class=""><h6><?=$record['user_name']; ?></h6></td>
     </tr>
     <tr>
       <td>Sale Type</td><td class=""><h6><?= $record['sale_type'] ?></h6></td>
@@ -87,11 +87,11 @@
     <?php if($this->router->class != 'chitti_domestics'){ ?>
     <tr>
       <td>Weight</td><td class="text-right"><h6><?=four_decimal($record['credit_weight'])?></h6></td>
-    </tr><tr>
+    </tr><tr class="no-print">
       <td>Actual Weight</td><td class="text-right"><h6><?=four_decimal($record['actual_weight'])?></h6></td>
-    </tr><tr>
+    </tr><tr class="no-print">
       <td>Expected Weight</td><td class="text-right"><h6><?=four_decimal($record['expected_weight'])?></h6></td>
-    </tr><tr>
+    </tr><tr class="no-print">
       <td>Diff Weight</td><td class="text-right"><h6><?=four_decimal($record['diff_weight'])?></h6></td>
     </tr><tr>
       <td>Rate</td><td class="text-right"><h6><?=four_decimal($record['rate'])?></h6></td>
