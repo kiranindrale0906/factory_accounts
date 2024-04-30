@@ -55,7 +55,7 @@ class Average_reports extends BaseController {
     foreach ($purchase_records as $purchase_index => $purchase_value) {
       $wastage=$wastage_fine=$factory_fine=$rate_of_gst=$vadotar=0;
       $year=date("Y-m-d",strtotime($purchase_value['created_at']));
-      $this->data['purchase_records'][$year][$purchase_index]['date_purchase']=date("Y-m-d",strtotime($purchase_value['created_at']));
+      $this->data['purchase_records'][$year][$purchase_index]['date_sale']=date("Y-m-d",strtotime($purchase_value['created_at']));
       $this->data['purchase_records'][$year][$purchase_index]['customer_name']=$purchase_value['account_name'];
       $this->data['purchase_records'][$year][$purchase_index]['sale_type']=$purchase_value['sale_type'];
       $this->data['purchase_records'][$year][$purchase_index]['weight']=$purchase_value['credit_weight'];
