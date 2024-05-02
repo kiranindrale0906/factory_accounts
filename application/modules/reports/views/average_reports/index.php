@@ -94,11 +94,11 @@
     <td class="text-right"></td>
     <td class="text-right"><?=four_decimal($total_weight)?></td>
     <td class="text-right"></td>
-    <td class="text-right"></td>
-    <td class="text-right"></td>
     <td class="text-right"><?=four_decimal($total_factory_fine)?></td>
     <td class="text-right"></td>
     <td class="text-right"><?=four_decimal($total_wastage_fine)?></td>
+    <td class="text-right"></td>
+    <td class="text-right"></td>
     <td class="text-right"><?=four_decimal($total_vadotar)?></td>
     <?php if(!empty($_GET['sale_type']) && $_GET['sale_type']=="Sale"){?>
         <td class="text-right"><?=four_decimal($total_gold_sale); ?></td>

@@ -105,7 +105,7 @@
                                         'reports/quator_wise_loss_reports' => 'Quator Wise Loss Reports',
                                         'reports/metal_receipt_type_ledgers' => 'Receipt Type Ledger',
                                         'reports/account_receipt_reports' => 'Account Receipt Reports',
-                                        //'reports/purchase_registers' => 'Purchase Register Reports',
+                                        'reports/average_reports' => 'Average Reports',
                                         //'reports/sales_registers' => 'Sales Register Reports',
                                         //'reports/cash_gst_registers' => 'Cash GST Register Reports',
                                         //'reports/domestic_export_ledgers' => 'Domestic Export Ledger',
