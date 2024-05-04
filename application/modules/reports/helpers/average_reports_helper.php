@@ -22,6 +22,7 @@ function getTableSettings() {
   );
 }
 
+
 /*
   0 => column title
   1 => column name

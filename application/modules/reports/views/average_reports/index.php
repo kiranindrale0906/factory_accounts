@@ -83,6 +83,7 @@
         <td class="text-right"><?=!empty($record['vadotar_sale'])?four_decimal($record['vadotar_sale']):'-'; ?></td>
         <td class="text-right"><?=!empty($record['total_sale'])?four_decimal($record['total_sale']):'-'; ?></td>
         
+        
         <?php }?>
 	<td class="text-right"><?=!empty($record['amount'])?four_decimal($record['amount']):'-'; ?></td>
 	
