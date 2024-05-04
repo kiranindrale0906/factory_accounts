@@ -84,7 +84,7 @@ class Production_summary extends BaseController {
       return;
     }
     $this->data['production_summary'] = $_GET;
-    $_GET['start_date'] = '2021-11-04';
+    $_GET['start_date'] = '2024-04-01';
 
 /*    if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold (May 2022)') {
       $url = API_MAY2022_ARG_PATH."issue_departments/api_issue_departments/index";
@@ -172,11 +172,11 @@ class Production_summary extends BaseController {
       $url = API_APR2024_ARC_PATH."issue_departments/api_issue_departments/index";
       $records = json_decode(curl_post_request($url, $_GET));
       $arc_records = json_decode(json_encode($records), true);
-     }
+    }
       $arg_erp_records=array();
 
     if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold ERP') {
-      $url = "staging1-arg-manufacturing.8848digitalerp.com/api/method/custom_app.api.material_issue.materilaissue_details";
+      $url = "https://erp.ar-gold.in/api/method/custom_app.api.material_issue.materialissue_details";
       $records = json_decode(curl_get_erp_request($url, $_GET));
       $erp_records = json_decode(json_encode($records), true);
       $this->data['product_names']=array_unique(array_column($erp_records['message'],'product'));
@@ -210,8 +210,7 @@ class Production_summary extends BaseController {
       $erp_records['message']=$this->production_summary_model->multi_array_search_with_condition($erp_records,$conditions);
 
       foreach ($erp_records['message'] as $index => $erp_record) {
-        if(!empty($erp_record['items'])&&$erp_record['items']=="GPC"){
-//pd( $erp_record); 
+        if(!empty($erp_record['items'])&&$erp_record['items']=="GPC" || $erp_record['items']=="Finished Goods"){
           $arg_erp_records[$index]['created_at']=date('Y-m-d',strtotime($erp_record['creation']));
             $arg_erp_records[$index]['str_created_date']=$erp_record['creation'];
             $arg_erp_records[$index]['product_name']=!empty($erp_record['product'])?$erp_record['product']:"";
@@ -224,10 +223,9 @@ class Production_summary extends BaseController {
             $arg_erp_records[$index]['in_purity']=$erp_record['melting'];
       }
 }    }
-//pd($argold_records['data']);
     if (empty($arc_records['data'])) $arc_records['data'] = array();
 
-    $records = array_merge($argold_records['data'], 
+    $records = array_merge(/*$argold_records['data'],*/ 
                            $arf_records['data'],
                            $arc_records['data'],
                            $arg_erp_records);

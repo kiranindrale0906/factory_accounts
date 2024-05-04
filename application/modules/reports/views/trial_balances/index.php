@@ -14,7 +14,7 @@
 <h5 class="ml-2 pl-2">Loss Account Details</h5>
 <form class="fields-group-sm">
     <div class="row">
-		<?php load_field('date',array('field' => 'loss_from_date', 'class' => 'datepicker_js', 'col'=>'col-sm-3','value'=>$loss_from_date))?> 
+		<?php //load_field('date',array('field' => 'loss_from_date', 'class' => 'datepicker_js', 'col'=>'col-sm-3','value'=>$loss_from_date))?> 
     <?php load_field('date',array('field' => 'loss_to_date', 'class' => 'datepicker_js', 'col'=>'col-sm-3','value'=>$loss_to_date))?>
 		<div class="col-sm-4 align-self-center">
 		        <?php load_buttons('button', array('name' =>'Search','class'=>'btn-xs btn_blue loss_search_date mr-2')) ?> 

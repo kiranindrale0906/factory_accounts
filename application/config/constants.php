@@ -115,8 +115,8 @@ define('ACCESS_TOKEN', '1234');
 define('ACCOUNT_NAME_REPORT','account_name');
 //define('DB_BACKUP_FILE_PATH',APPPATH.'database_backups/');
 //define('HOST','');
-define('API_EXPORT_INTERNAL_PATH','https://may2022-exports.ascratech.com/');
-define('API_DOMESTIC_INTERNAL_PATH','https://aug2022-domestic.ascratech.com/');
+//define('API_APR2024_EXPORT_INTERNAL_PATH','https://apr2024-exports.ascratech.com/');
+//define('API_APR2024_DOMESTIC_INTERNAL_PATH','https://apr2024-domestic.ascratech.com/');
 //define('ENABLE_API_FOR_RECEIPT', TRUE);
 
 

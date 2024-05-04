@@ -44,7 +44,7 @@ class Average_reports extends BaseController {
       $this->data['sales_records'][$year][$sale_index]['weight']=$sale_value['weight'];
       $this->data['sales_records'][$year][$sale_index]['purity']=$sale_value['purity'];
       $this->data['sales_records'][$year][$sale_index]['factory_fine']=$factory_fine=($sale_value['weight']*$sale_value['purity'])/100;
-      $this->data['sales_records'][$year][$sale_index]['wastage']=$wastage=!empty($sale_value['weight'])?(($wastage_fine/$sale_value['weight'])*100):0;
+      $this->data['sales_records'][$year][$sale_index]['wastage']=$wastage=(!empty($sale_value['weight']) && $sale_value['weight']!=0)?(($wastage_fine/$sale_value['weight'])*100):0;
       $this->data['sales_records'][$year][$sale_index]['wastage_fine']=$wastage_fine=($sale_value['factory_fine']);
       $this->data['sales_records'][$year][$sale_index]['rate']=$sale_value['rate'];
       $this->data['sales_records'][$year][$sale_index]['rate_of_gst']=$rate_of_gst=($sale_value['rate']+($sale_value['rate']*5)/100);
@@ -59,13 +59,13 @@ class Average_reports extends BaseController {
     foreach ($purchase_records as $purchase_index => $purchase_value) {
       $wastage=$wastage_fine=$factory_fine=$rate_of_gst=$vadotar=0;
       $year=date("Y-m-d",strtotime($purchase_value['created_at']));
-      $this->data['purchase_records'][$year][$purchase_index]['date_purchase']=date("Y-m-d",strtotime($purchase_value['created_at']));
+      $this->data['purchase_records'][$year][$purchase_index]['date_sale']=date("Y-m-d",strtotime($purchase_value['created_at']));
       $this->data['purchase_records'][$year][$purchase_index]['customer_name']=$purchase_value['account_name'];
       $this->data['purchase_records'][$year][$purchase_index]['sale_type']=$purchase_value['sale_type'];
-      $this->data['purchase_records'][$year][$purchase_index]['weight']=$purchase_value['credit_weight'];
+      $this->data['purchase_records'][$year][$purchase_index]['weight']=$purchase_value['debit_weight'];
       $this->data['purchase_records'][$year][$purchase_index]['purity']=$purchase_value['purity'];
-      $this->data['purchase_records'][$year][$purchase_index]['factory_fine']=$factory_fine=($purchase_value['credit_weight']*$purchase_value['purity']/100);
-      $this->data['purchase_records'][$year][$purchase_index]['wastage']=$wastage=!empty($purchase_value['credit_weight'])?(($wastage_fine/$purchase_value['credit_weight'])*100):0;
+      $this->data['purchase_records'][$year][$purchase_index]['factory_fine']=$factory_fine=($purchase_value['debit_weight']*$purchase_value['purity']/100);
+      $this->data['purchase_records'][$year][$purchase_index]['wastage']=$wastage=(!empty($purchase_value['debit_weight']) && $purchase_value['debit_weight']!=0)?(($wastage_fine/$purchase_value['debit_weight'])*100):0;
       $this->data['purchase_records'][$year][$purchase_index]['wastage_fine']=$wastage_fine=($purchase_value['factory_fine']);
      $this->data['purchase_records'][$year][$purchase_index]['rate']=$purchase_value['gold_rate'];
       $this->data['purchase_records'][$year][$purchase_index]['rate_of_gst']=$rate_of_gst=($purchase_value['gold_rate']+($purchase_value['gold_rate']*5)/100);

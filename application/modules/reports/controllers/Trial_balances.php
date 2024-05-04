@@ -8,7 +8,7 @@ class Trial_balances extends Ledgers {
     parent::__construct();
     $this->load->model(array('masters/account_model','masters/company_model', 'transactions/ledger_model',
                              'transactions/metal_receipt_voucher_model', 'transactions/metal_issue_voucher_model', 
-                             'ac_vouchers/voucher_model', 'argold/chitti_model'));
+                             'ac_vouchers/voucher_model','reports/purchase_profit_and_sale_report_model', 'argold/chitti_model'));
   }
   
 
@@ -58,10 +58,11 @@ class Trial_balances extends Ledgers {
     $this->calculate_profit_loss_of_export_sales_accounts('Sale');
     $this->calculate_profit_loss_of_export_sales_accounts('Labour');
     $this->calculate_hallmark_amount_with_tax();
+    $this->calculate_stone_amount_with_tax();
 
     $this->get_vadotar_from_factories_and_accounts();
 
-    $this->get_overall_rolling();
+    //$this->get_overall_rolling();
 
     $this->data['layout']='application';
     $this->load->render($this->router->class."/index",$this->data);
@@ -174,7 +175,11 @@ class Trial_balances extends Ledgers {
                                                           array('account_name' => 'Export Internal Software (Sep 2023)'))['balance'];
     $this->data['accounts_sep2023_domestic_balance'] = $this->voucher_model->find($accounts_balance_select, 
                                                           array('account_name' => 'Domestic Internal Software (Sep 2023)'))['balance'];
-    /*$this->data['live_apr2023_argold_balance'] = @$arg_apr2023_records->data->record->argold;
+    $this->data['accounts_apr2024_export_balance'] = $this->voucher_model->find($accounts_balance_select,
+                                                          array('account_name' => 'Export Internal Software (Apr 2024)'))['balance'];
+    $this->data['accounts_apr2024_domestic_balance'] = $this->voucher_model->find($accounts_balance_select,
+                                                          array('account_name' => 'Domestic Internal Software (Apr 2024)'))['balance'];
+   /*$this->data['live_apr2023_argold_balance'] = @$arg_apr2023_records->data->record->argold;
     $this->data['live_apr2023_arf_balance']    = @$arf_apr2023_records->data->record->argold;
     $this->data['live_apr2023_arc_balance']    = @$arc_apr2023_records->data->record->argold;
 */
@@ -194,8 +199,8 @@ class Trial_balances extends Ledgers {
 
     /*$this->data['live_apr2023_export_balance'] = @$export_records->data->record->argold;
     $this->data['live_apr2023_domestic_balance'] = @$domestic_records->data->record->argold;
-    */$this->data['live_apr2024_export_balance'] = @$export_apr2024_records->data->record->argold;
-    $this->data['live_apr2024_domestic_balance'] = @$domestic_apr2024_records->data->record->argold;
+    */$this->data['live_apr2024_export_balance'] = @$export_records->data->record->argold;
+    $this->data['live_apr2024_domestic_balance'] = @$domestic_records->data->record->argold;
   }
 
   private function get_vadotar_from_factories_and_accounts() {
@@ -357,7 +362,7 @@ class Trial_balances extends Ledgers {
     $profit_loss_with_vadotar_records = $this->model->get($purchase_sales_account_domestic_export_with_vadotar_select,array('voucher_type'=>"metal issue voucher","ac_account.group_code"=>"Domestic","ac_account.sub_group_code!="=>"Domestic Labour Account",'chitti_id!=0'=>null),array(array('ac_account','ac_vouchers.account_name=ac_account.name')), array('group_by'=>'is_export,chitti_id'));
     $profit_loss_with_vadotar_domestic_sale_gold_fine=$profit_loss_with_vadotar_domestic_sale_gold_amount=0;
     $profit_loss_with_vadotar_domestic_sale_vadotar_fine=$profit_loss_with_vadotar_domestic_sale_vadotar_amount=$profit_loss_with_vadotar_domestic_rate=0;
-
+    $this->data['purchase_sales_account_domestic_export_with_vadotar_records']=array();
     foreach ($profit_loss_with_vadotar_records as $profit_loss_with_vadotar_index => $profit_loss_with_vadotar_value) {
       $chitti_details=$this->chitti_model->find('rate,sale_type',array('id'=>$profit_loss_with_vadotar_value['chitti_id']));
       $profit_loss_with_vadotar_records[$profit_loss_with_vadotar_index]['rate']=$chitti_details['rate'];
@@ -374,7 +379,7 @@ class Trial_balances extends Ledgers {
       $this->data['purchase_sales_account_domestic_export_with_vadotar_records']['Domestic'][$profit_loss_with_vadotar_value['is_export']]['gold_fine']=$profit_loss_with_vadotar_domestic_sale_gold_fine;
       $this->data['purchase_sales_account_domestic_export_with_vadotar_records']['Domestic'][$profit_loss_with_vadotar_value['is_export']]['gold_amount']=$profit_loss_with_vadotar_domestic_sale_gold_amount;
       $this->data['purchase_sales_account_domestic_export_with_vadotar_records']['Domestic'][$profit_loss_with_vadotar_value['is_export']]['gold_rate']=!empty($profit_loss_with_vadotar_domestic_sale_gold_fine)?($profit_loss_with_vadotar_domestic_sale_gold_amount/$profit_loss_with_vadotar_domestic_sale_gold_fine):0;
-      $this->data['purchase_sales_account_domestic_export_with_vadotar_records']['Domestic'][$profit_loss_with_vadotar_value['is_export']]['vadotar_rate']=($profit_loss_with_vadotar_domestic_sale_vadotar_amount/$profit_loss_with_vadotar_domestic_sale_vadotar_fine);
+      $this->data['purchase_sales_account_domestic_export_with_vadotar_records']['Domestic'][$profit_loss_with_vadotar_value['is_export']]['vadotar_rate']=@($profit_loss_with_vadotar_domestic_sale_vadotar_amount/$profit_loss_with_vadotar_domestic_sale_vadotar_fine);
       $this->data['purchase_sales_account_domestic_export_with_vadotar_records']['Domestic'][$profit_loss_with_vadotar_value['is_export']]['vadotar_fine']=$profit_loss_with_vadotar_domestic_sale_vadotar_fine;
       $this->data['purchase_sales_account_domestic_export_with_vadotar_records']['Domestic'][$profit_loss_with_vadotar_value['is_export']]['vadotar_amount']=$profit_loss_with_vadotar_domestic_sale_vadotar_amount;
     }
@@ -665,7 +670,15 @@ class Trial_balances extends Ledgers {
     $select_sale = 'sum(hallmark_amount) * 1.03 as hallmark_amount';
     $hallmark_amount_labour = $this->chitti_model->find($select_labour, array('usd_rate != 0', 'sale_type' => 'Labour'));
     $hallmark_amount_sale = $this->chitti_model->find($select_sale, array('usd_rate != 0', 'sale_type' => 'Sale'));
-    $this->data['hallmark_amount'] = $hallmark_amount_labour['hallmark_amount'] + $hallmark_amount_sale['hallmark_amount'];
+
+    $select_sale_return = 'sum(taxable_amount - gold_rate * factory_fine) as hallmark_amount';
+    $hallmark_amount_sale_return =  $this->voucher_model->find($select_sale_return, array('account_name' => 'SALES ACCOUNT', 'sale_type' => 'Sale Return'));
+
+    $this->data['hallmark_amount'] = $hallmark_amount_labour['hallmark_amount'] + $hallmark_amount_sale['hallmark_amount'] - $hallmark_amount_sale_return['hallmark_amount'];
   }
 
+  private function calculate_stone_amount_with_tax(){
+    $stone_amount =  $this->chitti_model->find('sum(stone_amount) as stone_amount');
+    $this->data['stone_amount'] = $stone_amount['stone_amount'];
+  }
 }

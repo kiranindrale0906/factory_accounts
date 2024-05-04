@@ -1,5 +1,5 @@
 <?php
-//use Da\QrCode\QrCode;
+use Da\QrCode\QrCode;
 
 function get_tax_fields($factory_fine, $fine, $sale_type, $gold_rate, $gold_rate_purity, $created_at,$export = 0,$do_not_calculate_tax = 0, $hallmark_rate = 0, $hallmark_qty = 0) {
   $tcs_rate=0;
@@ -9,9 +9,16 @@ function get_tax_fields($factory_fine, $fine, $sale_type, $gold_rate, $gold_rate
     $tcs_rate=0.075;
   else
     $tcs_rate = 0;
-
+    $gst_rate=0;
+    if($sale_type == 'Labour'){
+      $gst_rate = 2.50;
+    }elseif($sale_type == 'Sale Return'){
+      $gst_rate = 2.50;
+    }else{
+      $gst_rate=1.50;
+    }
   $fields = array('sale_type' => $sale_type,
-                  'gst_rate'  => ($sale_type == 'Labour' || $fields['sale_type'] == 'Sale Return') ? 2.50 : 1.50,
+                  'gst_rate'  => ($sale_type == 'Labour' || $sale_type == 'Sale Return') ? 2.50 : 1.50,
                   'tcs_rate'  => ($sale_type == 'Sale') ?  $tcs_rate : 0,
                   'gold_rate' => $gold_rate,
                   'gold_rate_purity' => $gold_rate_purity);
@@ -50,10 +57,10 @@ function parent_id_exist($parent_id){
 }
 if (!function_exists('generate_qrcode')) {
   function generate_qrcode($string,$size=50,$margin=200) {
-//    $qrCode = (new QrCode($string))
-  //  ->setSize(2048)
-    //->setMargin($margin)
-    //->useForegroundColor(0,0,0);
-    return ""; //'<img width="'.$size.'" src="'.$qrCode->writeDataUri().'" alt="QR Code" />';
+    $qrCode = (new QrCode($string))
+    ->setSize(2048)
+    ->setMargin($margin)
+    ->useForegroundColor(0,0,0);
+    return '<img width="'.$size.'" src="'.$qrCode->writeDataUri().'" alt="QR Code" />';
   }
 }
