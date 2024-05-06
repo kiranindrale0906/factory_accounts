@@ -48,7 +48,7 @@ class Chitti_model extends BaseModel {
       $chitti_id_details=array();
       if($this->router->class=="chitti_erps"){
         foreach ($chitti_ids as $index => $chitti_id) {
-          $chittis=explode('-', $chitti_id);
+          $chittis=explode('_', $chitti_id);
           $chitti_id_details[$index]['packet_no']=$chittis[0];
           $chitti_id_details[$index]['erp_argold_id']=$chittis[1];
         }
@@ -64,6 +64,7 @@ class Chitti_model extends BaseModel {
                                                                   'erp_argold_id' => $argold_ids,
                                                                   'account_name' => $this->attributes['account_name'],
                                                                   'purity' => $this->attributes['purity']));
+
       }else{
         foreach ($chitti_ids as $index => $chitti_id) {
             $chittis=explode('-', $chitti_id);
