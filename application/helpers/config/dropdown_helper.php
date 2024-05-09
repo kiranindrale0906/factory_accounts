@@ -177,7 +177,7 @@
     elseif ($site_name=='AR Gold (Apr 2024)') return API_APR2024_ARG_PATH;
     elseif ($site_name=='ARF (Apr 2024)')     return API_APR2024_ARF_PATH;
     elseif ($site_name=='ARC (Apr 2024)')     return API_APR2024_ARC_PATH;
-    elseif ($site_name=='Export')     return API_EXPORT_INTERNAL_PATH;
+    elseif ($site_name=='Export Apr 2024')     return API_EXPORT_INTERNAL_PATH;
     elseif ($site_name=='Domestic')     return API_DOMESTIC_INTERNAL_PATH;
     elseif ($site_name=='Domesticstaging')     return API_DOMESTIC_INTERNAL_PATH;
   }
@@ -226,7 +226,7 @@
       array('id' => 'ARC (Apr 2024)',     'name' => 'ARC (Apr 2024)'),
     array('id' => 'AR Gold ERP', 'name' => 'AR Gold ERP')
     );
-    if ($export==1) $site_names[] = array('id' => 'Export', 'name' => 'Export');
+    if ($export==1) $site_names[] = array('id' => 'Export Apr 2024', 'name' => 'Export Apr 2024');
     if ($export==2) {
       $site_names[] = array('id' => 'Domestic', 'name' => 'Domestic');
       // $site_names[] = array('id' => 'Domesticstaging', 'name' => 'Domesticstaging');

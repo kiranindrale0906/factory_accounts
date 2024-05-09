@@ -249,7 +249,7 @@ class Chittis extends BaseController {
                                                                           weight as id',array('weight!='=>''));
     $this->data['empty_packet_quantities'] = $this->empty_packet_model->get('distinct(qty) as name,
                                                                              qty as id',array('qty!='=>''));
-    $this->data['purity']=array_merge($this->data['purity'],array(array('id'=>88.322,'name'=>88.322)));  }
+    $this->data['purity']=array_merge($this->data['purity'],array(array('id'=>88.322,'name'=>88.322),array('id'=>91.70,'name'=>91.70)));  }
 
   public function store() {
     $this->data['redirect_url'] = '/argold/chittis';
