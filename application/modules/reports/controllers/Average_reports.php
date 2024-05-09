@@ -18,7 +18,7 @@ class Average_reports extends BaseController {
     $this->data['sales_records']=array();
     $this->data['purchase_records']=array();
     $where['rate!=']=0;
-    $where_purchase=array('gold_rate !=' => 0);
+    $where_purchase=array('gold_rate !=' => 0,'voucher_type'=>"metal receipt voucher");
     if(!empty($_GET['type'])){
       $this->data['type']=$_GET['type'];
     }else{
@@ -47,7 +47,8 @@ class Average_reports extends BaseController {
       $this->data['sales_records'][$year][$sale_index]['wastage']=$wastage=(!empty($sale_value['weight']) && $sale_value['weight']!=0)?(($wastage_fine/$sale_value['weight'])*100):0;
       $this->data['sales_records'][$year][$sale_index]['wastage_fine']=$wastage_fine=($sale_value['factory_fine']);
       $this->data['sales_records'][$year][$sale_index]['rate']=$sale_value['rate'];
-      $this->data['sales_records'][$year][$sale_index]['rate_of_gst']=$rate_of_gst=($sale_value['rate']+($sale_value['rate']*5)/100);
+      if($this->data['sale_type']=="Labour"){ $this->data['sales_records'][$year][$sale_index]['rate_of_gst']=$rate_of_gst=($sale_value['rate']+($sale_value['rate']*5)/100);}else{
+      $this->data['sales_records'][$year][$sale_index]['rate_of_gst']=$rate_of_gst=($sale_value['rate']+($sale_value['rate']*3)/100);}
       $this->data['sales_records'][$year][$sale_index]['vadotar']=$vadotar=($wastage_fine-$factory_fine);
       $this->data['sales_records'][$year][$sale_index]['amount']=$amount=($rate_of_gst*$vadotar);
       $this->data['sales_records'][$year][$sale_index]['gold_sale']=$gold_sale=($rate_of_gst*$factory_fine);
@@ -68,7 +69,9 @@ class Average_reports extends BaseController {
       $this->data['purchase_records'][$year][$purchase_index]['wastage']=$wastage=(!empty($purchase_value['debit_weight']) && $purchase_value['debit_weight']!=0)?(($wastage_fine/$purchase_value['debit_weight'])*100):0;
       $this->data['purchase_records'][$year][$purchase_index]['wastage_fine']=$wastage_fine=($purchase_value['factory_fine']);
      $this->data['purchase_records'][$year][$purchase_index]['rate']=$purchase_value['gold_rate'];
-      $this->data['purchase_records'][$year][$purchase_index]['rate_of_gst']=$rate_of_gst=($purchase_value['gold_rate']+($purchase_value['gold_rate']*5)/100);
+     if($this->data['sale_type']=="Labour"){ $this->data['purchase_records'][$year][$purchase_index]['rate_of_gst']=$rate_of_gst=($purchase_value['gold_rate']+($purchase_value['gold_rate']*5)/100);
+     }else{$this->data['purchase_records'][$year][$purchase_index]['rate_of_gst']=$rate_of_gst=($purchase_value['gold_rate']+($purchase_value['gold_rate']*3)/100);
+     }
       $this->data['purchase_records'][$year][$purchase_index]['vadotar']=$vadotar=($wastage_fine-$factory_fine);
       $this->data['purchase_records'][$year][$purchase_index]['amount']=($rate_of_gst*$vadotar);
       $this->data['purchase_records'][$year][$purchase_index]['gold_sale']=$gold_sale=($rate_of_gst*$factory_fine);

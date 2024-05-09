@@ -7,6 +7,7 @@ class Production_summary extends BaseController {
   }
 
   public function index() {
+
     $this->_get_form_data();
     $this->get_production_summary();
     // if ($this->data['site_name'] == '')
@@ -20,7 +21,6 @@ class Production_summary extends BaseController {
 
   public function _get_form_data() {
     if(!isset($this->data['record'])) $this->data['record'] = array();
-    
     $this->data['site_name']    = (!empty($_GET['site_name']))    ? $_GET['site_name'] : '';
     $this->data['product_name'] = (!empty($_GET['product_name'])) ? $_GET['product_name'] : '';
     $this->data['in_purity']    = (!empty($_GET['in_purity']))    ? $_GET['in_purity'] : '';
@@ -57,7 +57,6 @@ class Production_summary extends BaseController {
      /*elseif ($this->data['site_name'] == 'AR Gold (Apr 2024)')     $url = API_APR2024_ARG_PATH."issue_departments/api_issue_departments/create";
     */elseif ($this->data['site_name'] == 'ARF (Apr 2024)')     $url = API_APR2024_ARF_PATH."issue_departments/api_issue_departments/create";
     elseif ($this->data['site_name'] == 'ARC (Apr 2024)')     $url = API_APR2024_ARC_PATH."issue_departments/api_issue_departments/create";
-      
     if (!empty($url)) {
       $records = json_decode(curl_post_request($url, $this->data));
       $this->data = array_merge($this->data, json_decode(json_encode($records), true));
@@ -68,7 +67,6 @@ class Production_summary extends BaseController {
       if (!isset($this->data['machine_sizes'])) $this->data['machine_sizes'] = array(); 
       if (!isset($this->data['design_codes']))  $this->data['design_codes']  = array(); 
     }
-
     //$this->data['product_names'] = array_unique(array_merge($argold_data['product_names']['names'], $argold_data['product_names']['names']));
     //$this->data['in_purities']   = array_unique(array_merge($argold_data['in_purities']['names'],   $argold_data['in_purities']['names']));
     //$this->data['account_names'] = array_unique(array_merge($argold_data['account_names']['names'], $argold_data['account_names']['names']));
@@ -85,6 +83,16 @@ class Production_summary extends BaseController {
     }
     $this->data['production_summary'] = $_GET;
     $_GET['start_date'] = '2024-04-01';
+    if(!isset($this->data['record'])) $this->data['record'] = array();
+    $this->data['site_name']    = (!empty($_GET['site_name']))    ? $_GET['site_name'] : '';
+    $this->data['product_name'] = (!empty($_GET['product_name'])) ? $_GET['product_name'] : '';
+    $this->data['in_purity']    = (!empty($_GET['in_purity']))    ? $_GET['in_purity'] : '';
+    $this->data['account_name'] = (!empty($_GET['account_name'])) ? $_GET['account_name'] : '';
+    $this->data['category_one'] = (!empty($_GET['category_one'])) ? $_GET['category_one'] : '';
+    $this->data['group_by']     = (!empty($_GET['group_by']))     ? $_GET['group_by'] : '';
+    $this->data['machine_size'] = (!empty($_GET['machine_size'])) ? $_GET['machine_size'] : '';
+    $this->data['design_code']  = (!empty($_GET['design_code']))  ? $_GET['design_code'] : '';
+
 
 /*    if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold (May 2022)') {
       $url = API_MAY2022_ARG_PATH."issue_departments/api_issue_departments/index";
@@ -138,7 +146,8 @@ class Production_summary extends BaseController {
       $url = API_SEP2023_ARF_PATH."issue_departments/api_issue_departments/index";
       $records = json_decode(curl_post_request($url, $_GET));
       $arf_records = json_decode(json_encode($records), true);
-    }*/if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARF (Apr 2024)') {
+    }*/
+   if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARF (Apr 2024)') {
       $url = API_APR2024_ARF_PATH."issue_departments/api_issue_departments/index";
       $records = json_decode(curl_post_request($url, $_GET));
       $arf_records = json_decode(json_encode($records), true);

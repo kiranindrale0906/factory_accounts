@@ -64,7 +64,8 @@ function get_current_gold_rate(){
   $curl = curl_init();
 
   curl_setopt_array($curl, array(
-    CURLOPT_URL => 'https://api.metalpriceapi.com/v1/latest?base=INR&currencies=XAU&api_key=a6cd2760397ac18c03dd27c3e5bb7ca1',
+//    CURLOPT_URL => 'https://api.metalpriceapi.com/v1/latest?base=INR&currencies=XAU&api_key=a6cd2760397ac18c03dd27c3e5bb7ca1',
+    CURLOPT_URL => 'https://api.metalpriceapi.com/v1/latest?base=INR&currencies=XAU&api_key=dc682e5ea4ffbdc0d3e0af61b4796c71',
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => '',
     CURLOPT_MAXREDIRS => 10,
@@ -81,7 +82,7 @@ function get_current_gold_rate(){
   $result = json_decode($response,true);
   $rates = $result['rates']['XAU'] ?? 0;
   // pd(1/($rates*31.1035));
-  return 1/($rates*31.1035);
+  return (!empty($rates))? 1/($rates*31.1035):0;
 }
 /*
   | [0] => Label
