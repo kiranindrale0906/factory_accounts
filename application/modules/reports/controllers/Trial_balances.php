@@ -8,7 +8,7 @@ class Trial_balances extends Ledgers {
     parent::__construct();
     $this->load->model(array('masters/account_model','masters/company_model', 'transactions/ledger_model',
                              'transactions/metal_receipt_voucher_model', 'transactions/metal_issue_voucher_model', 
-                             'ac_vouchers/voucher_model','reports/purchase_profit_and_sale_report_model', 'argold/chitti_model'));
+                             'ac_vouchers/voucher_model','reports/purchase_profit_and_sale_report_model','reports/gold_rate_model', 'argold/chitti_model'));
   }
   
 
@@ -43,6 +43,9 @@ class Trial_balances extends Ledgers {
     $this->data['profit_and_loss_search_to_date']=($_GET['profit_and_loss_search_to_date']) ?? '';
     //$this->get_gold_rate_from_myspn();
     $this->update_alloy_gpc_stone_vadotar();
+    if (isset($_GET['update_gold_rate'])) {
+      $this->update_live_gold_rate();
+    }
 
     $this->data['account_names'] = $this->model->get('distinct(account_name) as name', array(), array(), 
                                                       array('order_by'=>'account_name asc'));
@@ -61,7 +64,7 @@ class Trial_balances extends Ledgers {
     $this->calculate_stone_amount_with_tax();
 
     $this->get_vadotar_from_factories_and_accounts();
-
+    $this->data['get_current_gold_rate']=$this->gold_rate_model->find('gold_rate',array('id'=>1))['gold_rate'];
     //$this->get_overall_rolling();
 
     $this->data['layout']='application';
@@ -564,6 +567,14 @@ class Trial_balances extends Ledgers {
     $string = explode('MUSDINR', $gold_rate_response);
     $this->data['usd_rate'] = @explode(',', $string[1])[3];
   }  
+
+  private function update_live_gold_rate() {
+    $update_vadotar = isset($_GET['update_gold_rate']) ? TRUE : FALSE;
+    $current_gold_rate=get_current_gold_rate();
+    $gold_rate['gold_rate']=$current_gold_rate;
+    $gold_rate_data = new gold_rate_model($gold_rate);
+    $gold_rate_data->update(false,array('id'=>1));
+  }
 
   private function update_alloy_gpc_stone_vadotar() {
     $update_vadotar = isset($_GET['update_vadotar']) ? TRUE : FALSE;
