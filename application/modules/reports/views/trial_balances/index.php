@@ -8,6 +8,9 @@
   if (isset($trial_balance))
     $this->load->view('trial_balances/trial_balance', array('trial_balance_records' => $trial_balance, 'loss_account' => 0)); 
 ?>
+<div class="col-md-12">
+  <?= getHttpButton('Update Live Gold Rate', base_url().'reports/trial_balances?update_gold_rate=1', 'float-right btn-success ml-5'); ?>
+</div>
 
 <hr />
 <div class="col-md-12">
