@@ -19,6 +19,8 @@
            href='<?= base_url().$url ?>?type=<?= $type ?>&sale_type=Labour'>Labour</a>
         <a class="ml-5 <?= (!empty($_GET['sale_type'])&& $_GET['sale_type']=='Sale') ? 'bold black underline' : '' ?>"
            href='<?= base_url().$url ?>?type=<?= $type ?>&sale_type=Sale'>Sale</a>
+        <a class="ml-5 <?= (!empty($_GET['sale_type'])&& $_GET['sale_type']=='Export') ? 'bold black underline' : '' ?>"
+           href='<?= base_url().$url ?>?type=<?= $type ?>&sale_type=Export'>Export</a>
       </h5>
     </div>
 

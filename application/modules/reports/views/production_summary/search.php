@@ -8,21 +8,6 @@
          href='<?= base_url() ?>reports/production_summary'>All</a>
       <?php }?>
       <?php if($_SESSION['arg_details']==1){?>    
-      
-       <a class="ml-5 <?= ($site_name == 'AR Gold') ? 'bold black underline' : '' ?>" 
-         href='<?= base_url() ?>reports/production_summary?site_name=AR Gold'>AR Gold</a>
-      <?php }?>
-      <?php if($_SESSION['arf_details']==1){?> 
-      
-      <a class="ml-5 <?= ($site_name == 'ARF') ? 'bold black underline' : '' ?>" 
-         href='<?= base_url() ?>reports/production_summary?site_name=ARF'>ARF</a>   
-      <?php }?>   
-      <?php if($_SESSION['arc_details']==1){?> 
-      
-      <a class="ml-5 <?= ($site_name == 'ARC') ? 'bold black underline' : '' ?>" 
-         href='<?= base_url() ?>reports/production_summary?site_name=ARC'>ARC</a>   
-      <?php }?>
-     <?php if($_SESSION['arg_details']==1){?>    
         <a class="ml-5 <?= ($site_name == 'AR Gold (Apr 2024)') ? 'bold black underline' : '' ?>" 
            href='<?= base_url() ?>reports/production_summary?site_name=AR Gold (Apr 2024)'>AR Gold (Apr 2024)</a>
       <?php }?>

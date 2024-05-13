@@ -5,7 +5,7 @@ class Average_reports extends BaseController {
   public function __construct(){
     parent::__construct();
     $this->load->model(array('reports/sales_register_model',
-                             'ac_vouchers/voucher_model',
+                             'ac_vouchers/voucher_model','masters/account_model',
                              'argold/chitti_model'));
   } 
 
@@ -25,14 +25,22 @@ class Average_reports extends BaseController {
       $this->data['type']='Sales';
     }
     if(!empty($_GET['sale_type'])){
+      if($_GET['sale_type']=="Export"){
+      $account_names=  $this->account_model->get('distinct(name) as name,name as id',array('group_code'=>"Domestic",'sub_group_code!='=>"Domestic Labour Account"));
+      $account_name= array_column($account_names,'name');
+      $where['account_name not in ("'.implode('", "', $account_name).'")']=NULL;
+      $where_purchase['is_export']=1;
+      }else{
       $where['sale_type']=$_GET['sale_type'];
       $where_purchase['sale_type']=$_GET['sale_type'];
       $this->data['sale_type']=$_GET['sale_type'];
+      }
     }else{
       $where['sale_type']='Labour';
       $where_purchase['sale_type']='Labour';
       $this->data['sale_type']='Labour';
     }
+    
     $sales_records = $this->chitti_model->get('',$where);
     $purchase_records = $this->voucher_model->get('',$where_purchase, array(),array('order_by'=>'voucher_date'));
     foreach ($sales_records as $sale_index => $sale_value) {
