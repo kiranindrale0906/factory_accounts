@@ -26,10 +26,13 @@ class Average_reports extends BaseController {
     }
     if(!empty($_GET['sale_type'])){
       if($_GET['sale_type']=="Export"){
+      $where=array();
       $account_names=  $this->account_model->get('distinct(name) as name,name as id',array('group_code'=>"Domestic",'sub_group_code!='=>"Domestic Labour Account"));
       $account_name= array_column($account_names,'name');
       $where['account_name not in ("'.implode('", "', $account_name).'")']=NULL;
       $where_purchase['is_export']=1;
+      $this->data['sale_type']='Export';
+
       }else{
       $where['sale_type']=$_GET['sale_type'];
       $where_purchase['sale_type']=$_GET['sale_type'];
@@ -42,7 +45,8 @@ class Average_reports extends BaseController {
     }
     
     $sales_records = $this->chitti_model->get('',$where);
-    $purchase_records = $this->voucher_model->get('',$where_purchase, array(),array('order_by'=>'voucher_date'));
+
+;    $purchase_records = $this->voucher_model->get('',$where_purchase, array(),array('order_by'=>'voucher_date'));
     foreach ($sales_records as $sale_index => $sale_value) {
       $wastage=$wastage_fine=$factory_fine=$rate_of_gst=$vadotar=$gold_sale=$vadotar_sale=0;
       $year=date("Y-m-d",strtotime($sale_value['created_at']));

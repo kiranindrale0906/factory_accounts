@@ -608,13 +608,12 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     //   $api_url = API_2_ARC_PATH.$api_url;
     // elseif ($attributes['account_name'] == 'Export Internal Software')
     //   $api_url = API_EXPORT_INTERNAL_PATH.$api_url;
-    // print_r($send_data);
-    // pd($api_url); 
-    if ($attributes['account_name']=="AR Gold ERP Software" ||$attributes['account_name']=="ARG ERP Software" || $attributes['account_name']=="ARF ERP Software" || $attributes['account_name']=="ARC ERP Software"|| $attributes['account_name']=="ARNA BANGLE"){
+  //  print_r($send_data);
+  if ($attributes['account_name']=="AR Gold ERP Software" ||$attributes['account_name']=="ARG ERP Software" || $attributes['account_name']=="ARF ERP Software" || $attributes['account_name']=="ARC ERP Software"|| $attributes['account_name']=="ARNA BANGLE"){
       $this->load->model(array('transactions/metal_issue_voucher_model','transactions/metal_receipt_voucher_model'));
       if(!empty($attributes['metal_receipt_voucher_reference_id'])){ 	
        $parent_data=$this->metal_receipt_voucher_model->find('',array('id'=>$attributes['metal_receipt_voucher_reference_id']));
-      }      
+      }      //pd($attributes);
       if($attributes['receipt_type']=="Daily Drawer"){
         $attributes['receipt_type']=$attributes['dd_type'];
       }
@@ -622,6 +621,12 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
         $attributes['site_name']=$parent_data['site_name'];
         $attributes['hook_kdm_purity']=$parent_data['hook_kdm_purity'];
       }
+
+      if($attributes['account_name']=="ARNA BANGLE"){
+	if($attributes['customer_name']==''){
+	$attributes['customer_name']="ARNA BANGLE";
+	}
+      }	
       if($attributes['receipt_type']=="Export Internal" || $attributes['receipt_type']=="Domestic Internal"){
         $attributes['receipt_type']="Refresh";
         $attributes['site_name']=$parent_data['site_name'];
@@ -633,6 +638,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       if(!empty($parent_data)){
       $attributes['customer_name']=$parent_data['account_name'];
       }
+
     $api_data = array('receipt_type'=> $attributes['receipt_type'],
                       'account_name'=> $attributes['account_name'],
                       'customer_name'=> $attributes['customer_name'],
@@ -652,7 +658,6 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
   }else{
     $result = curl_post_request($api_url, $send_data);
   }
-    // pd($result);
 }
 
   public function create_vodator_records($records, $receipt_type, $site_name, $hostversion) {

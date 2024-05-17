@@ -12,9 +12,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     public function after_save($action) {
       $this->set_chitti_id_in_metal_issue_vouchers();
       $metal_issue_vouchers = $this->voucher_model->find('sum(rate * credit_weight) as amount', array('chitti_id' => $this->attributes['id']));
-      $this->load->model(array('transactions/cash_issue_voucher_model'));
-      $this->cash_issue_voucher_model->create_cash_vouchers_for_chitti($this->attributes['id'], $metal_issue_vouchers['amount']);
-    }
+      $this->load->model(array('transactions/cash_issue_voucher_model','transactions/rate_cut_issue_voucher_model'));
+//      $this->cash_issue_voucher_model->create_cash_vouchers_for_chitti($this->attributes['id'], $metal_issue_vouchers['amount']);
+    $this->rate_cut_issue_voucher_model->create_rate_cut_vouchers_for_chitti($this->attributes['id']);
+  //  $this->set_chitti_id_in_metal_issue_vouchers();
+   // if (!isset($this->formdata['chitti_details']) || empty($this->formdata['chitti_details'])) return;
+  }
     public function set_chitti_id_in_metal_issue_vouchers() {
     $chittis=array();
 
