@@ -30,6 +30,7 @@ class Average_reports extends BaseController {
       $account_name= array_column($account_names,'name');
       $where['account_name not in ("'.implode('", "', $account_name).'")']=NULL;
       $where_purchase['is_export']=1;
+      $this->data['sale_type']='Export';
       }else{
       $where['sale_type']=$_GET['sale_type'];
       $where_purchase['sale_type']=$_GET['sale_type'];
