@@ -14,8 +14,9 @@ class Telegram_vadator_report extends BaseController {
     $this->send_vadotar_records($date);
   }
   private function send_vadotar_records($date) {
-    $company_vadotars = $this->model->get('date(voucher_date) voucher_date, sum(factory_fine - fine) as vadotar',array('date(voucher_date)' => $date), array(), array('group_by' => 'date(voucher_date)'));
-    $this->send_vadotar_message($refresh_records);      
+    $vadotars = $this->voucher_model->get('date(voucher_date) voucher_date, sum(factory_fine - fine) as vadotar',array('date(voucher_date)' => $date));
+    pd($vadotars); 
+    $this->send_message($company_vadotars);      
   }
   //send telegram message
   private function send_message($message) {
