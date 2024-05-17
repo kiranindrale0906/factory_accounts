@@ -26,6 +26,7 @@ class Average_reports extends BaseController {
     }
     if(!empty($_GET['sale_type'])){
       if($_GET['sale_type']=="Export"){
+      $where=array();
       $account_names=  $this->account_model->get('distinct(name) as name,name as id',array('group_code'=>"Domestic",'sub_group_code!='=>"Domestic Labour Account"));
       $account_name= array_column($account_names,'name');
       $where['account_name not in ("'.implode('", "', $account_name).'")']=NULL;
