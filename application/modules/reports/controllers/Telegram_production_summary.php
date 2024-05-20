@@ -5,7 +5,8 @@ class Telegram_production_summary extends BaseController {
     parent::__construct();
     $this->load->model(array('ac_vouchers/voucher_model'));
 
-    $this->bot = new \TelegramBot\Api\BotApi('1387671982:AAGd_ke_dJoiZ_tkThtUlCrPUBTo2oNfjdc');
+//    $this->bot = new \TelegramBot\Api\BotApi('1387671982:AAGd_ke_dJoiZ_tkThtUlCrPUBTo2oNfjdc');
+    $this->bot = new \TelegramBot\Api\BotApi('7199566349:AAF-0evNjld0Jl6OhaGeuVamGY4g-yNDc6k');
   }
 
   public function index() {
@@ -14,7 +15,7 @@ class Telegram_production_summary extends BaseController {
 
     $this->send_issue_gpc_out_records($date);
     $this->send_metal_receipt_record($date);
-    $this->send_refresh_records($date);
+   $this->send_refresh_records($date);
   }
 
   //get issue department records
@@ -37,6 +38,7 @@ class Telegram_production_summary extends BaseController {
     $refresh_records = $this->voucher_model->get('receipt_type, sum(debit_weight) as weight',
                                            array('receipt_type' => array('Refresh'), //'AR Gold Refresh', 'ARF Refresh', 'ARC Refresh',
                                                  'voucher_date' => $date), array(), array('group_by' => 'receipt_type'));
+   pd($refresh_records);
     $this->send_refresh_message($refresh_records);      
   }
 
@@ -70,9 +72,11 @@ class Telegram_production_summary extends BaseController {
     //Bhaskar: 1316386536
     //Nikhil Ranawat: 1056863449
     //Bheru Sankhla: 1699299372
-
-    $this->bot->sendMessage('712491427', $message);      
-    $this->bot->sendMessage('1056863449', $message);
-    $this->bot->sendMessage('1699299372', $message);
+//pd($message);
+    ini_set('max_execution_time',0);
+    $this->bot->sendMessage('1855495238', $message);      
+//    $this->bot->sendMessage('712491427', $message);      
+  //  $this->bot->sendMessage('1056863449', $message);
+   // $this->bot->sendMessage('1699299372', $message);
   }
 }
