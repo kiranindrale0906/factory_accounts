@@ -71,11 +71,11 @@ class User_role_model extends Core_user_role_model {
                                         'reports/production_same_purity_summary',
                                         'reports/loss_accounts',
                                         'reports/loss_summaries',
-                                        'reports/loss_reports',
+                                        
                                         'reports/category_wise_loss_reports',
-                                        'reports/loss_report_details',
-                                        'reports/quator_wise_loss_reports',
-                                        'reports/quator_wise_loss_report_details',
+                                        
+                                        
+                                        
                                         'reports/loss_account_details',
                                         'reports/purchase_registers',
                                         'reports/sales_registers',
@@ -87,6 +87,7 @@ class User_role_model extends Core_user_role_model {
                                         
                                         ),
                      'Interest' => array('interest/interest_issue_voucher'),
+                     'Loss Report' => array('reports/loss_reports','reports/loss_report_details','reports/quator_wise_loss_reports','reports/quator_wise_loss_report_details'),
                      'Registers' => array('registers/cash_registers','registers/bank_registers','registers/sales_registers','registers/purchase_registers','registers/rate_cut_purchase_value_registers','registers/rate_cut_purchase_weight_registers','registers/rate_cut_booking_value_registers','registers/rate_cut_booking_weight_registers','registers/expense_registers','registers/metal_registers'),
                      'Others' => array('others/account_wise_details','others/categories', 'others/items', 
                                        'others/cities','others/states', 'others/salesmans', 'others/narrations',
