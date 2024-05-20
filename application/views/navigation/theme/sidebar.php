@@ -23,7 +23,6 @@
                                         'masters/purity'=>'Purity',
                                         'masters/company'=>'Company',
                                         'masters/payment_terms'=>'Payment Terms',
-                                        'masters/opening_balance'=>'Opening Balance',
                                         'masters/department'=>'Department',
                                         'masters/customer_category'=>'Customer Category',
                                         'masters/department_category'=>'Department Category',
@@ -42,7 +41,7 @@
                                             
                                             //'transactions/metal_receipt_voucher_details' => 'Metal Receipt Details',
                                             //'transactions/metal_issue_voucher_details' => 'Metal Issue Details',
-                                            'argold/opening_loss_vouchers' => 'Opening Loss Vouchers',
+                                            //'argold/opening_loss_vouchers' => 'Opening Loss Vouchers',
                                             'argold/chittis' => 'Chitti',
                                             'argold/chitti_erps' => 'Chitti ERP',
                                             //'argold/chalans' => 'Chalans',
@@ -74,7 +73,7 @@
                                             // 'transactions/transfer_voucher' => 'Transfer Voucher',
                                             // 'transactions/repair_voucher_out' => 'Repair Voucher Out',
                                             // 'transactions/approval_in_voucher' => 'Approval in Voucher',
-                                             'transactions/opening_stock_vouchers' => 'Opening Stock Voucher',
+                                            // 'transactions/opening_stock_vouchers' => 'Opening Stock Voucher',
                                             // 'transactions/transfer_vouchers' => 'Transfer Vouchers',//
                                             // 'transactions/antique_sales_voucher' => 'Antique Sales Voucher',
                                             // 'transactions/mangalsutra_sales_voucher' => 'Mangalsutra Sales Voucher',
@@ -83,9 +82,10 @@
                                             // 'transactions/antique_sales_return_voucher' => 'Antique Sales Return Voucher',
                                             // 'transactions/mangalsutra_sales_return_voucher' => 'Mangalsutra Sales Return Voucher'
                                           ),
-                    // 'Reports'   => array('reports/mis_reports'=>'MIS Reports',
-                    //                     'reports/stock_report' =>'Stock Report',
-                    //                     'reports/order_report'=>'Order Report'),
+                    'Loss Reports'   => array('reports/loss_reports' => 'Loss Reports',
+                                        'reports/quator_wise_loss_reports' => 'Quator Wise Loss Reports'
+                                       ),
+    
                     'Reports'   => array(
                                         'reports/account_ledgers' => 'Account Ledger',
                                         'reports/purchase_sale_ledgers' => 'Purchase Sales Ledger',
@@ -99,11 +99,7 @@
                                         'reports/production_same_purity_summary' => 'Production Same Purity Summary',
                                         //'reports/bw_accounts' => 'Bw Accounts',
                                         //'reports/loss_accounts' => 'Loss Accounts',
-                                        'reports/loss_reports' => 'Loss Reports',
-                                        //'reports/loss_summaries' => 'Loss Summary',
-                                        //'reports/category_wise_loss_reports' => 'Category Wise Loss Reports',
-                                        'reports/quator_wise_loss_reports' => 'Quator Wise Loss Reports',
-                                        'reports/metal_receipt_type_ledgers' => 'Receipt Type Ledger',
+                                         'reports/metal_receipt_type_ledgers' => 'Receipt Type Ledger',
                                         'reports/account_receipt_reports' => 'Account Receipt Reports',
 
                                         'reports/average_reports' => 'Average Reports',
