@@ -8,7 +8,7 @@ class Ledger_model extends BaseModel {
 
   function __construct($data=array()) {
     parent::__construct($data);
-    $this->load->model(array('ac_vouchers/voucher_model'));
+    $this->load->model(array('ac_vouchers/voucher_model', 'transactions/rate_cut_issue_voucher_model'));
   }
 
   public function regenerate_ledger_records($limit_date=0) {
@@ -52,6 +52,13 @@ class Ledger_model extends BaseModel {
       $ledger_obj = new Ledger_model(array('voucher_id' => $voucher_id['id']));
       $ledger_obj->before_validate();
       $ledger_obj->save();
+      pd($ledger_obj);
+      if($this->attributes['sale_type']=="Sale Return"){
+        $this->rate_cut_issue_voucher_model->create_rate_cut_vouchers_for_sales_return($this->attributes['id'], $this->attributes['receipt_type']);
+      }else{
+        $this->rate_cut_issue_voucher_model->create_rate_cut_vouchers_for_metal_and_refresh($this->attributes['id'], $this->attributes['receipt_type']);
+      }
+
     }
   }
   
