@@ -52,7 +52,7 @@ class Ledger_model extends BaseModel {
       $ledger_obj = new Ledger_model(array('voucher_id' => $voucher_id['id']));
       $ledger_obj->before_validate();
       $ledger_obj->save();
-      if ($metal_receipt_voucher['gold_rate'] != 0 && $metal_receipt_voucher['hallmark_rate'] != 0){
+      if ($ledger_obj->attributes['gold_rate'] != 0){
       if($ledger_obj->attributes['sale_type']=="Sale Return"){
         $ledger_obj->rate_cut_issue_voucher_model->create_rate_cut_vouchers_for_sales_return($ledger_obj->attributes['id'], $ledger_obj->attributes['receipt_type']);
       }else{
