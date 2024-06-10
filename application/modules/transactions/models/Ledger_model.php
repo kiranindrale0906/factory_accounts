@@ -8,7 +8,7 @@ class Ledger_model extends BaseModel {
 
   function __construct($data=array()) {
     parent::__construct($data);
-    $this->load->model(array('ac_vouchers/voucher_model', 'transactions/rate_cut_issue_voucher_model'));
+    $this->load->model(array('ac_vouchers/voucher_model', 'transactions/rate_cut_issue_voucher_model', 'transactions/metal_receipt_voucher_model'));
   }
 
   public function regenerate_ledger_records($limit_date=0) {
