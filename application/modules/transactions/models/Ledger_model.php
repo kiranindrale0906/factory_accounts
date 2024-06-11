@@ -52,13 +52,13 @@ class Ledger_model extends BaseModel {
       $ledger_obj = new Ledger_model(array('voucher_id' => $voucher_id['id']));
       $ledger_obj->before_validate();
       $ledger_obj->save();
-      pd($ledger_obj);
+      if($ledger_obj->attributes['voucher_type']=="metal receipt voucher" || $ledger_obj->attributes['voucher_type']=="metal issue voucher"){
       if($ledger_obj->attributes['sale_type']=="Sale Return"){
         $ledger_obj->rate_cut_issue_voucher_model->create_rate_cut_vouchers_for_sales_return($ledger_obj->attributes['id'], $ledger_obj->attributes['receipt_type']);
       }else{
         $ledger_obj->rate_cut_issue_voucher_model->create_rate_cut_vouchers_for_metal_and_refresh($ledger_obj->attributes['id'], $ledger_obj->attributes['receipt_type']);
       }
-    }
+    }}
   }
   
   public function before_validate() {
