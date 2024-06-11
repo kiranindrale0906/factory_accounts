@@ -116,7 +116,6 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
 
   public function create_rate_cut_vouchers_for_metal_and_refresh($metal_receipt_voucher_id, $receipt_type) {
     $metal_receipt_voucher = $this->metal_receipt_voucher_model->find('', array('id' => $metal_receipt_voucher_id));
-    echo $receipt_type;pd($metal_receipt_voucher);
     $this->rate_cut_issue_voucher_model->delete('', array('description' => $receipt_type.' '.$metal_receipt_voucher['voucher_number'],
                                                           'voucher_type' => 'rate cut issue voucher'));
     $this->rate_cut_receipt_voucher_model->delete('', array('description' => $receipt_type.' '.$metal_receipt_voucher['voucher_number'],
