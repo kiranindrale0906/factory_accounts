@@ -326,6 +326,8 @@
     }*/ 
     if ($account_name=='ARNA BANGLE')
       return 'AR Gold ERP';
+    if ($account_name=='Domestic Internal ERP Software')
+      return 'AR Gold ERP';
      
     if ($account_name=='VADOTAR')
       return 'AR Gold';
