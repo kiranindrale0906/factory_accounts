@@ -489,13 +489,14 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $api_url="api/api_daily_drawer_receipts/store";  
 
     } else if(   $attributes['receipt_type'] == "Refresh"
+               $attributes['receipt_type'] == "Reject"
               //    $attributes['receipt_type'] == "AR Gold Refresh"
               // || $attributes['receipt_type'] == "ARF Refresh"
               || $attributes['receipt_type'] == "Export Internal"
               || $attributes['receipt_type'] == "Domestic Internal") {
               // || $attributes['receipt_type'] == "ARC Refresh"
       // pd($attributes);
-	if ($this->attributes['account_name'] == 'Export Internal Software' || $this->attributes['account_name'] == 'Domestic Internal Software') return;
+	if ($this->attributes['account_name'] == 'Export Internal Software' || $this->attributes['account_name'] == 'Domestic Internal Software' || $this->attributes['account_name'] == 'Domestic Internal ERP Software') return;
 
       $api_data = array_merge($api_data, array('type'=>'Pure',
                                                'hook_kdm_purity' => (empty($attributes['hook_kdm_purity'])) ? $attributes['factory_purity'] : $attributes['hook_kdm_purity'],
