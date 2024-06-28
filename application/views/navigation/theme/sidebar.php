@@ -83,11 +83,14 @@
                                             // 'transactions/mangalsutra_sales_return_voucher' => 'Mangalsutra Sales Return Voucher'
                                           ),
                     'Loss Reports'   => array('reports/loss_reports' => 'Loss Reports',
-                                        'reports/quator_wise_loss_reports' => 'Quator Wise Loss Reports'
+                                        'reports/quator_wise_loss_reports' => 'Quator Wise Loss Reports',
+                                        'reports/account_ledgers' => 'Account Ledger',
+                                        'reports/production_summary' => 'Production Summary',
+                                        'reports/production_same_purity_summary' => 'Production Same Purity Summary',
+                                        'reports/average_reports' => 'Average Reports'
                                        ),
     
                     'Reports'   => array(
-                                        'reports/account_ledgers' => 'Account Ledger',
                                         'reports/purchase_sale_ledgers' => 'Purchase Sales Ledger',
                                         // 'reports/account_ledgers' => 'Account Ledger Report',
                                         // 'reports/outstanding_report' => 'Outstanding Report',
@@ -95,14 +98,12 @@
                                         'reports/vadotar_reports' => 'Vadotar Report',
                                         //'reports/gross_profit_reports' => 'Gross Profit Report',
                                         //'reports/rojmel_reports' => 'Rojmel Report',
-                                        'reports/production_summary' => 'Production Summary',
-                                        'reports/production_same_purity_summary' => 'Production Same Purity Summary',
                                         //'reports/bw_accounts' => 'Bw Accounts',
                                         //'reports/loss_accounts' => 'Loss Accounts',
                                          'reports/metal_receipt_type_ledgers' => 'Receipt Type Ledger',
                                         'reports/account_receipt_reports' => 'Account Receipt Reports',
 
-                                        'reports/average_reports' => 'Average Reports',
+                                        
                                         //'reports/sales_registers' => 'Sales Register Reports',
                                         //'reports/cash_gst_registers' => 'Cash GST Register Reports',
                                         //'reports/domestic_export_ledgers' => 'Domestic Export Ledger',
