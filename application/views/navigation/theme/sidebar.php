@@ -84,13 +84,13 @@
                                           ),
                     'Loss Reports'   => array('reports/loss_reports' => 'Loss Reports',
                                         'reports/quator_wise_loss_reports' => 'Quator Wise Loss Reports',
-                                        'reports/account_ledgers' => 'Account Ledger',
                                         'reports/production_summary' => 'Production Summary',
                                         'reports/production_same_purity_summary' => 'Production Same Purity Summary',
                                         'reports/average_reports' => 'Average Reports'
                                        ),
     
                     'Reports'   => array(
+                                        'reports/account_ledgers' => 'Account Ledger',
                                         'reports/purchase_sale_ledgers' => 'Purchase Sales Ledger',
                                         // 'reports/account_ledgers' => 'Account Ledger Report',
                                         // 'reports/outstanding_report' => 'Outstanding Report',

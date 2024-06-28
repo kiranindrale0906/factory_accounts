@@ -56,7 +56,7 @@ class User_role_model extends Core_user_role_model {
                                             'argold/change_account_names'),
                      // 'Reports' => array('reports/mis_reports','reports/stock_report', 
                      //                    'reports/order_report'),
-                     'Reports' => array('reports/purchase_sale_ledgers',
+                     'Reports' => array('reports/purchase_sale_ledgers','reports/account_ledgers',
                                         'reports/purchase_labour_ledgers',
                                         'reports/outstanding_report',
                                         'reports/trial_balances',
@@ -79,7 +79,7 @@ class User_role_model extends Core_user_role_model {
                                         ),
                      'Interest' => array('interest/interest_issue_voucher'),
                      'LossReport' => array(
-                                    'reports/account_ledgers',
+                                    
                                     'reports/loss_reports',
                                     'reports/loss_report_details',
                                     'reports/quator_wise_loss_reports',
