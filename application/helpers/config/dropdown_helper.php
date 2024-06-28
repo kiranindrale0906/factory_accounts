@@ -277,7 +277,13 @@
       }elseif (str_contains($account_name, 'Apr 2024')){
         return 'AR Gold (Apr 2024)';
       }else{
-        return 'AR Gold';
+        if (str_contains($account_name, 'AR Gold ERP')){
+          return 'AR Gold ERP';
+        }elseif (str_contains($account_name, 'ARG')){
+          return 'AR Gold ERP';
+        }else{
+          return 'AR Gold';
+        }
       } 
     } elseif (str_contains($account_name, 'ARF')) {
       if (str_contains($account_name, 'Apr 2023')){
