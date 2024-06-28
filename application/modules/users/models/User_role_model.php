@@ -56,8 +56,7 @@ class User_role_model extends Core_user_role_model {
                                             'argold/change_account_names'),
                      // 'Reports' => array('reports/mis_reports','reports/stock_report', 
                      //                    'reports/order_report'),
-                     'Reports' => array('reports/account_ledgers',
-                                        'reports/purchase_sale_ledgers',
+                     'Reports' => array('reports/purchase_sale_ledgers',
                                         'reports/purchase_labour_ledgers',
                                         'reports/outstanding_report',
                                         'reports/trial_balances',
@@ -67,27 +66,27 @@ class User_role_model extends Core_user_role_model {
                                         'reports/rojmel_reports',
                                         'reports/metal_receipt_type_ledgers',
                                         'reports/bw_accounts',
-                                        'reports/production_summary',
-                                        'reports/production_same_purity_summary',
                                         'reports/loss_accounts',
                                         'reports/loss_summaries',
-                                        
                                         'reports/category_wise_loss_reports',
-                                        
-                                        
-                                        
                                         'reports/loss_account_details',
                                         'reports/purchase_registers',
                                         'reports/sales_registers',
                                         'reports/cash_gst_registers',
                                         'reports/domestic_export_ledgers',
                                         'reports/profit_and_sale_reports',
-                                        'reports/purchase_profit_and_sale_reports',
-                                        'reports/average_reports',
-                                        
+                                        'reports/purchase_profit_and_sale_reports'
                                         ),
                      'Interest' => array('interest/interest_issue_voucher'),
-                     'LossReport' => array('reports/loss_reports','reports/loss_report_details','reports/quator_wise_loss_reports','reports/quator_wise_loss_report_details'),
+                     'LossReport' => array(
+                                    'reports/account_ledgers',
+                                    'reports/loss_reports',
+                                    'reports/loss_report_details',
+                                    'reports/quator_wise_loss_reports',
+                                    'reports/quator_wise_loss_report_details',
+                                    'reports/production_summary',
+                                    'reports/production_same_purity_summary',
+                                    'reports/average_reports'),
                      'Registers' => array('registers/cash_registers','registers/bank_registers','registers/sales_registers','registers/purchase_registers','registers/rate_cut_purchase_value_registers','registers/rate_cut_purchase_weight_registers','registers/rate_cut_booking_value_registers','registers/rate_cut_booking_weight_registers','registers/expense_registers','registers/metal_registers'),
                      'Others' => array('others/account_wise_details','others/categories', 'others/items', 
                                        'others/cities','others/states', 'others/salesmans', 'others/narrations',
