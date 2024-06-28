@@ -187,6 +187,7 @@ class Production_summary extends BaseController {
     if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold ERP') {
       $url = "https://erp.ar-gold.in/api/method/custom_app.api.material_issue.materialissue_details";
       $records = json_decode(curl_get_erp_request($url, $_GET));
+//pd($records);
       $erp_records = json_decode(json_encode($records), true);
       $this->data['product_names']=array_unique(array_column($erp_records['message'],'product'));
       $this->data['in_purities']=array_unique(array_column($erp_records['message'],'melting'));
