@@ -12,7 +12,7 @@ class Ledger_model extends BaseModel {
   }
 
   public function regenerate_ledger_records($limit_date=0) {
-    /*if($limit_date==1){
+    ini_set('max_execution_time', '0');    /*if($limit_date==1){
     $this->delete('', array('id > ' => 0,'(month(voucher_date) between "4" and "5") and year(voucher_date)<=2022'=>NULL));
     $voucher_ids = $this->voucher_model->get('id',array('(month(voucher_date) between "4" and "5") and (year(voucher_date)<=2022)'=>NULL));
     }
@@ -52,15 +52,14 @@ class Ledger_model extends BaseModel {
       $ledger_obj = new Ledger_model(array('voucher_id' => $voucher_id['id']));
       $ledger_obj->before_validate();
       $ledger_obj->save();
-      if($ledger_obj->attributes['voucher_type']=="metal receipt voucher" || $ledger_obj->attributes['voucher_type']=="metal issue voucher"){
-
+     /* if($ledger_obj->attributes['voucher_type']=="metal receipt voucher" || $ledger_obj->attributes['voucher_type']=="metal issue voucher"){
       if($ledger_obj->attributes['sale_type']=="Sale Return"){
-        $ledger_obj->rate_cut_issue_voucher_model->create_rate_cut_vouchers_for_sales_return($ledger_obj->attributes['id'], $ledger_obj->attributes['receipt_type']);
+        $ledger_obj->rate_cut_issue_voucher_model->create_rate_cut_vouchers_for_sales_return($ledger_obj->attributes['voucher_id'], $ledger_obj->attributes['receipt_type']);
       }else{
-        pd($ledger_obj->attributes);
-        $ledger_obj->rate_cut_issue_voucher_model->create_rate_cut_vouchers_for_metal_and_refresh($ledger_obj->attributes['id'], $ledger_obj->attributes['receipt_type']);
+        
+        $ledger_obj->rate_cut_issue_voucher_model->create_rate_cut_vouchers_for_metal_and_refresh($ledger_obj->attributes['voucher_id'], $ledger_obj->attributes['receipt_type']);
       }
-    }}
+    }*/}
   }
   
   public function before_validate() {
