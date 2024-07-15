@@ -574,10 +574,11 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
     } elseif ($attributes['receipt_type'] == 'Cutting Ghiss' 
               ||$attributes['receipt_type'] == 'Recutting Ghiss' 
-              ||$attributes['receipt_type'] == 'Dc Ghiss' 
-              ||$attributes['receipt_type'] == 'Dc2 Ghiss' 
-              ||$attributes['receipt_type'] == 'Cnc Ghiss' 
-              ||$attributes['receipt_type'] == 'Round and ball chain cutting Ghiss' 
+              ||$attributes['receipt_type'] == 'DC Ghiss' 
+              ||$attributes['receipt_type'] == 'DC2 Ghiss' 
+              ||$attributes['receipt_type'] == 'CNC Ghiss' 
+              ||$attributes['receipt_type'] == 'Round and Ball Chain Cutting Ghiss' 
+              ||$attributes['receipt_type'] == 'Round and Ball Chain Ghiss' 
               ||$attributes['receipt_type'] == 'Hand Cutting Ghiss' 
               ||$attributes['receipt_type'] == 'Hand Dull Ghiss' 
               || $attributes['receipt_type'] == 'Ice Cutting Ghiss'){
@@ -592,8 +593,10 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
         $department_name='Dc2';
       }elseif($attributes['receipt_type']=='Cnc Ghiss'){
         $department_name='Cnc';
-      }elseif($attributes['receipt_type']=='Round and ball chain cutting Ghiss'){
-        $department_name='Round and ball chain cutting';
+      }elseif($attributes['receipt_type']=='Round and Ball Chain Cutting Ghiss'){
+        $department_name='Round and Ball Chain Cutting';
+      }elseif($attributes['receipt_type']=='Round and Ball Chain Ghiss'){
+        $department_name='Round and Ball Chain';
       }elseif($attributes['receipt_type']=='Hand Cutting Ghiss'){
         $department_name='Hand Cutting';
       }elseif($attributes['receipt_type']=='Hand Dull Ghiss'){
