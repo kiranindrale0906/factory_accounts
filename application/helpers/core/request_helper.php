@@ -34,6 +34,7 @@ defined('BASEPATH') OR exit('No direct script access allowed.');
 
   if (!function_exists('curl_post_request')) {
     function curl_post_request($uri, $data = array()) {
+
       if(!empty($uri)) {
         $api_url=$uri;
         $curl = curl_init($api_url);
@@ -44,9 +45,9 @@ defined('BASEPATH') OR exit('No direct script access allowed.');
           'access_token:'.ACCESS_TOKEN
         ]);
         $response = curl_exec($curl);
+//pd($response);
         if(curl_errno($curl))
           $response=array('status'=>'error','response'=>json_encode($response));
-        
         curl_close($curl);
         return $response;
       } else

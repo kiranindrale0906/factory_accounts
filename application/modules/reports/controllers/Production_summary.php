@@ -25,6 +25,8 @@ class Production_summary extends BaseController {
     $this->data['product_name'] = (!empty($_GET['product_name'])) ? $_GET['product_name'] : '';
     $this->data['in_purity']    = (!empty($_GET['in_purity']))    ? $_GET['in_purity'] : '';
     $this->data['account_name'] = (!empty($_GET['account_name'])) ? $_GET['account_name'] : '';
+    $this->data['filter_month'] = (!empty($_GET['filter_month'])) ? $_GET['filter_month'] : date('m');
+    $this->data['filter_year'] = (!empty($_GET['filter_year'])) ? $_GET['filter_year'] : date('Y');
     $this->data['category_one'] = (!empty($_GET['category_one'])) ? $_GET['category_one'] : '';
     $this->data['group_by']     = (!empty($_GET['group_by']))     ? $_GET['group_by'] : '';
     $this->data['machine_size'] = (!empty($_GET['machine_size'])) ? $_GET['machine_size'] : '';
@@ -88,6 +90,8 @@ class Production_summary extends BaseController {
     $this->data['product_name'] = (!empty($_GET['product_name'])) ? $_GET['product_name'] : '';
     $this->data['in_purity']    = (!empty($_GET['in_purity']))    ? $_GET['in_purity'] : '';
     $this->data['account_name'] = (!empty($_GET['account_name'])) ? $_GET['account_name'] : '';
+    $this->data['filter_month'] = (!empty($_GET['filter_month'])) ? $_GET['filter_month'] :date('m');
+    $this->data['filter_year'] = (!empty($_GET['filter_year'])) ? $_GET['filter_year'] :date('Y');
     $this->data['category_one'] = (!empty($_GET['category_one'])) ? $_GET['category_one'] : '';
     $this->data['group_by']     = (!empty($_GET['group_by']))     ? $_GET['group_by'] : '';
     $this->data['machine_size'] = (!empty($_GET['machine_size'])) ? $_GET['machine_size'] : '';
@@ -185,17 +189,19 @@ class Production_summary extends BaseController {
       $arg_erp_records=array();
 
     if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold ERP') {
-      $url = "https://erp.ar-gold.in/api/method/custom_app.api.material_issue.materialissue_details";
+
+      $url = "https://erp.ar-gold.in/api/method/custom_app.api.material_issue.materialissue_details?month=".$this->data['filter_month']."&year=".$this->data['filter_year'];
       $records = json_decode(curl_get_erp_request($url, $_GET));
 //pd($records);
       $erp_records = json_decode(json_encode($records), true);
+     if(!empty($erp_records)){
       $this->data['product_names']=array_unique(array_column($erp_records['message'],'product'));
       $this->data['in_purities']=array_unique(array_column($erp_records['message'],'melting'));
       $this->data['account_names']=array_unique(array_column($erp_records['message'],'customer'));
       $this->data['category_ones']=array_unique(array_column($erp_records['message'],'product_category'));
       $this->data['machine_sizes']=array_unique(array_column($erp_records['message'],'machine_size'));
       $this->data['design_codes']=array_unique(array_column($erp_records['message'],'design'));
-      if (!isset($this->data['product_names'])) $this->data['product_names'] = array();
+     } if (!isset($this->data['product_names'])) $this->data['product_names'] = array();
       if (!isset($this->data['in_purities']))   $this->data['in_purities']   = array();
       if (!isset($this->data['account_names'])) $this->data['account_names'] = array();
       if (!isset($this->data['category_ones'])) $this->data['category_ones'] = array(); 

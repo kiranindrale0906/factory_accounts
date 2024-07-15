@@ -9,6 +9,7 @@ class production_summary_model extends BaseModel {
   function multi_array_search_with_condition($array, $condition)
   { 
     $result = array();
+   if(!empty($array)){
     foreach ($array['message'] as $key => $value) { 
         // Iterate over each search condition 
         foreach ($condition as $condition_key => $condition_value) { 
@@ -22,7 +23,7 @@ class production_summary_model extends BaseModel {
         } // Append array element's key to the 
         //result array 
         $result[] = $value; 
-    } 
+    } }
   
 //pd($result);    // Return result 
     return $result; 
