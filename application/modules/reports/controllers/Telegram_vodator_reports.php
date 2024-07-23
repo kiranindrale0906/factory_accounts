@@ -14,6 +14,10 @@ class Telegram_vodator_reports extends BaseController {
 //    $date = date('Y-m-d');
 //    $this->send_vadotar_records('AR Gold (Apr 2024)',$date);
     $this->send_vadotar_records('AR Gold ERP',$date);
+    $this->send_vadotar_records('ARF ERP',$date);
+    $this->send_vadotar_records('ARC ERP',$date);
+    $this->send_vadotar_records('Domestic Internal ERP',$date);
+    $this->send_vadotar_records('ARNA BANGLE ERP',$date);
     $this->send_vadotar_records('ARF (Apr 2024)',$date);
     $this->send_vadotar_records('ARC (Apr 2024)',$date);
     $this->send_vadotar_records('Export',$date);

@@ -19,8 +19,8 @@
                                                                               array('id'=>'ARF (Apr 2024)','name'=>'ARF (Apr 2024)'),
                                                                               array('id'=>'ARC (Apr 2024)','name'=>'ARC (Apr 2024)'),
                                                                               array('id'=>'AR Gold ERP','name'=>'AR Gold ERP'),
-                                                                          //    array('id'=>'ARF ERP Software','name'=>'ARF ERP Software'),
-                                                                           //   array('id'=>'ARC ERP Software','name'=>'ARC ERP Software'),
+                                                                              array('id'=>'ARF ERP','name'=>'ARF ERP'),
+                                                                              array('id'=>'ARC ERP','name'=>'ARC ERP'),
                                                                               array('id'=>'ARNA BANGLE','name'=>'ARNA BANGLE'),
                                                                               )));?>
   

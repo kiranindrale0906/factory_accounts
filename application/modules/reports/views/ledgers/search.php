@@ -47,10 +47,10 @@
           $arg_companies = array('AR Gold (Apr 2024)','AR Gold ERP');
         }
         if($_SESSION['arf_details']==1){
-          $arf_companies = array('ARF (Apr 2024)');
+          $arf_companies = array('ARF (Apr 2024)','ARF ERP');
         }
         if($_SESSION['arc_details']==1){
-          $arc_companies = array('ARC (Apr 2024)');
+          $arc_companies = array('ARC (Apr 2024)','ARC ERP');
         }
         if(!empty($_SESSION['export_details'])&&$_SESSION['export_details']==1){
           $export_companies = array('Export');

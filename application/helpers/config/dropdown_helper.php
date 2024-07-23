@@ -294,7 +294,7 @@
         return 'ARF (Apr 2024)';
       }else{
         if (str_contains($account_name, 'ARF ERP')){
-          return 'AR Gold ERP';
+          return 'ARF ERP';
         }else{
           return 'ARF';
         }
@@ -308,13 +308,13 @@
         return 'ARC (Apr 2024)';
       }else{
         if (str_contains($account_name, 'ARC ERP')){
-          return 'AR Gold ERP';
+          return 'ARC ERP';
         }else{
           return 'ARC';
         }
       }
     }elseif (str_contains($account_name, 'ARF ERP')) {
-       return 'AR Gold ERP';
+       return 'ARF ERP';
     }
 
     /*if (str_contains($account_name, 'AR Gold')) {
@@ -331,9 +331,9 @@
       elseif (str_contains($account_name, 'Feb 2023')) return 'ARC (Feb 2023)';
     }*/ 
     if ($account_name=='ARNA BANGLE')
-      return 'AR Gold ERP';
+      return 'ARNA BANGLE ERP';
     if ($account_name=='Domestic Internal ERP Software')
-      return 'AR Gold ERP';
+      return 'Domestic Internal ERP';
      
     if ($account_name=='VADOTAR')
       return 'AR Gold';

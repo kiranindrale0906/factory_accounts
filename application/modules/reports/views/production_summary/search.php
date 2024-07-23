@@ -21,11 +21,26 @@
       <?php }?>  
       <a class="ml-5 <?= ($site_name == 'AR Gold ERP') ? 'bold black underline' : '' ?>" 
            href='<?= base_url() ?>reports/production_summary?site_name=AR Gold ERP'>AR Gold ERP</a>
+      <a class="ml-5 <?= ($site_name == 'ARF ERP') ? 'bold black underline' : '' ?>" 
+           href='<?= base_url() ?>reports/production_summary?site_name=ARF ERP'>ARF ERP</a>
+      <a class="ml-5 <?= ($site_name == 'ARC ERP') ? 'bold black underline' : '' ?>" 
+           href='<?= base_url() ?>reports/production_summary?site_name=ARC ERP'>ARC ERP</a>
+      <a class="ml-5 <?= ($site_name == 'ARNA BANGLE ERP') ? 'bold black underline' : '' ?>" 
+           href='<?= base_url() ?>reports/production_summary?site_name=ARNA BANGLE ERP'>ARNA BANGLE ERP</a>
+      <a class="ml-5 <?= ($site_name == 'Domestic Internal ERP') ? 'bold black underline' : '' ?>" 
+           href='<?= base_url() ?>reports/production_summary?site_name=Domestic Internal ERP'>Domestic Internal ERP</a>
     </h6>
   </div>
 </div>
 <br />
-
+<div class="row">
+  <div class="col-md-12">
+  <?php $months = array(1 => 'Jan.', 2 => 'Feb.', 3 => 'Mar.', 4 => 'Apr.', 5 => 'May', 6 => 'Jun.', 7 => 'Jul.', 8 => 'Aug.', 9 => 'Sep.', 10 => 'Oct.', 11 => 'Nov.', 12 => 'Dec.');
+   $transposed = array_slice($months, date('n'), 12, true) + array_slice($months, 0, date('n'), true);
+   $last8 = array_reverse(array_slice($transposed, -8, 12, true), true);
+  pd($last8);
+  ?></div>
+</div>
 <?php if (!empty($account_names)) { ?>
   <div class="row"> 
     <div class="col-md-12">

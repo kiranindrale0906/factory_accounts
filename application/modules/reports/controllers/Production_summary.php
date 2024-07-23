@@ -184,7 +184,7 @@ class Production_summary extends BaseController {
     }
       $arg_erp_records=array();
 
-    if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold ERP') {
+    if ($this->data['site_name'] == '' || ($this->data['site_name']=="AR Gold ERP" || $this->data['site_name']=="ARF ERP" || $this->data['site_name']=="ARC ERP" || $attributes['site_name']=="Domestic Internal ERP" || $attributes['site_name']=="ARNA BANGLE ERP")) {
       $url = "https://erp.ar-gold.in/api/method/custom_app.api.material_issue.materialissue_details";
       $records = json_decode(curl_get_erp_request($url, $_GET));
       $erp_records = json_decode(json_encode($records), true);
@@ -377,15 +377,15 @@ class Production_summary extends BaseController {
   $domestic_where['description!=']    ="";
       }
       $voucher_data=$this->voucher_model->get($select,$domestic_where,array(),$group_by);
-    }if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold ERP') {
+    }if ($this->data['site_name'] == '' || ($this->data['site_name']=="AR Gold ERP" || $this->data['site_name']=="ARF ERP" || $this->data['site_name']=="ARC ERP" || $attributes['site_name']=="Domestic Internal ERP" || $attributes['site_name']=="ARNA BANGLE ERP")) {
       $select = 'date(created_at) as created_at, description as item_name,"voucher" as  data , GROUP_CONCAT(id) as refresh_id, GROUP_CONCAT(credit_weight) as refresh_weight, sum(credit_weight) as weight, sum(credit_weight * purity) / sum(credit_weight) as purity, sum(credit_weight * factory_purity) / sum(credit_weight) as factory_purity';
-      $domestic_where=array('credit_weight !=' => 0,'site_name'=>"AR Gold ERP",'receipt_type' => 'Domestic Internal');
+      $domestic_where=array('credit_weight !=' => 0,'site_name'=>$this->data['site_name'],'receipt_type' => 'Domestic Internal');
        
       if(!empty($this->data['product_name'])){
           $domestic_where['description']    =$this->data['product_name'];
           //$group_by=array('group_by' => 'date(created_at)');
       }else{
-  $domestic_where['description!=']    ="";
+  $domestic_where['description!=']="";
       }
       $voucher_data=$this->voucher_model->get($select,$domestic_where,array(),$group_by);
     }
