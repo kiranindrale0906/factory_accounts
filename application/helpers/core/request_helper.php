@@ -34,6 +34,7 @@ defined('BASEPATH') OR exit('No direct script access allowed.');
 
   if (!function_exists('curl_post_request')) {
     function curl_post_request($uri, $data = array()) {
+
       if(!empty($uri)) {
         $api_url=$uri;
         $curl = curl_init($api_url);
@@ -44,9 +45,9 @@ defined('BASEPATH') OR exit('No direct script access allowed.');
           'access_token:'.ACCESS_TOKEN
         ]);
         $response = curl_exec($curl);
+//pd($response);
         if(curl_errno($curl))
           $response=array('status'=>'error','response'=>json_encode($response));
-        
         curl_close($curl);
         return $response;
       } else
@@ -91,7 +92,8 @@ defined('BASEPATH') OR exit('No direct script access allowed.');
         CURLOPT_CUSTOMREQUEST => 'POST',
         CURLOPT_POSTFIELDS => json_encode($data),
         CURLOPT_HTTPHEADER => array(
-          'Authorization: token 4e7ab0aec03a4f2:7066e1925da5f9d',
+          //'Authorization: token 4e7ab0aec03a4f2:7066e1925da5f9d',4e7ab0aec03a4f2:7c92597cb5b8fd4
+          'Authorization: token 4e7ab0aec03a4f2:7c92597cb5b8fd4',
           'Content-Type: application/json',
           'Accept: application/json',
           'Cookie: sid=Guest'
@@ -121,7 +123,8 @@ defined('BASEPATH') OR exit('No direct script access allowed.');
         CURLOPT_CUSTOMREQUEST => 'GET',
         CURLOPT_HTTPHEADER => array(
          // 'Authorization: token 4e7ab0aec03a4f2:9616a7717360494',
-          'Authorization: token 4e7ab0aec03a4f2:7066e1925da5f9d',
+//          'Authorization: token 4e7ab0aec03a4f2:7066e1925da5f9d',
+          'Authorization: token 4e7ab0aec03a4f2:7c92597cb5b8fd4',
           'Cookie: sid=Guest'
         ),
       ));

@@ -111,6 +111,7 @@ class Quator_wise_loss_reports extends BaseController {
 
     $loss_details= $this->voucher_model->get('description,fine,id', array('account_name like "%Loss Account%"'=> null,'parent_id'=>0),array());
     $category_names=array_column($categories,'description');
+//pd($category_names);
      $data['department_names']=array_unique($category_names);
       $data['type']='category';
       $data['completed_at']='2021-11-05';
@@ -339,7 +340,6 @@ class Quator_wise_loss_reports extends BaseController {
           $fire_tounch_loss=array();
           $url=API_APR2024_ARC_PATH."issue_and_receipts/loss_report_for_accounts/index";
           $jan2021_records=json_decode(curl_post_request($url,$data),true);
-
           $records=!empty($jan2021_records)?$jan2021_records['data']['loss_details']['loss_detail']:$jan2021_records['data']['loss_details']['loss_detail']=array();
           $ghiss_melting_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight', array('account_name'=>'ARC Loss Account (Apr 2024)','site_name'=>'ARC (Apr 2024)','receipt_type'=>'Ghiss Melting Loss','quator'=>$data['quator']),array());
           $opening_loss=$this->get_opening_loss();

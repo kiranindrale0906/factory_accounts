@@ -494,8 +494,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
               || $attributes['receipt_type'] == "Export Internal"
               || $attributes['receipt_type'] == "Domestic Internal") {
               // || $attributes['receipt_type'] == "ARC Refresh"
-      // pd($attributes);
-	if ($this->attributes['account_name'] == 'Export Internal Software' || $this->attributes['account_name'] == 'Domestic Internal Software' || $this->attributes['account_name'] == 'Domestic Internal ERP Software') return;
+	if ($attributes['account_name'] == 'Export Internal Software' || $attributes['account_name'] == 'Domestic Internal Software' || $attributes['account_name'] == 'Domestic Internal ERP Software') return;
 
       $api_data = array_merge($api_data, array('type'=>'Pure',
                                                'hook_kdm_purity' => (empty($attributes['hook_kdm_purity'])) ? $attributes['factory_purity'] : $attributes['hook_kdm_purity'],
@@ -574,6 +573,11 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
     } elseif ($attributes['receipt_type'] == 'Cutting Ghiss' 
               ||$attributes['receipt_type'] == 'Recutting Ghiss' 
+              ||$attributes['receipt_type'] == 'DC Ghiss' 
+              ||$attributes['receipt_type'] == 'DC 2 Ghiss' 
+              ||$attributes['receipt_type'] == 'CNC Ghiss' 
+              ||$attributes['receipt_type'] == 'Round and Ball Chain Cutting Ghiss' 
+              ||$attributes['receipt_type'] == 'Round and Ball Chain Ghiss' 
               ||$attributes['receipt_type'] == 'Hand Cutting Ghiss' 
               ||$attributes['receipt_type'] == 'Hand Dull Ghiss' 
               || $attributes['receipt_type'] == 'Ice Cutting Ghiss'){
@@ -582,6 +586,16 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
         $department_name='Cutting';
       }elseif($attributes['receipt_type']=='Recutting Ghiss'){
         $department_name='Recutting';
+      }elseif($attributes['receipt_type']=='DC Ghiss'){
+        $department_name='DC';
+      }elseif($attributes['receipt_type']=='DC 2 Ghiss'){
+        $department_name='Dc 2';
+      }elseif($attributes['receipt_type']=='CNC Ghiss'){
+        $department_name='CNC';
+      }elseif($attributes['receipt_type']=='Round and Ball Chain Cutting Ghiss'){
+        $department_name='Round and Ball Chain Cutting';
+      }elseif($attributes['receipt_type']=='Round and Ball Chain Ghiss'){
+        $department_name='Round and Ball Chain';
       }elseif($attributes['receipt_type']=='Hand Cutting Ghiss'){
         $department_name='Hand Cutting';
       }elseif($attributes['receipt_type']=='Hand Dull Ghiss'){
@@ -592,11 +606,11 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
       $send_data['pending_ghiss_receipts'] = array_merge($api_data, array('department_name' => $department_name));
       $api_url = "api/api_pending_ghiss_receipts/store";
     }
-    if(($attributes['site_name']=="AR Gold ERP" || $attributes['site_name']=="ARF ERP" || $attributes['site_name']=="ARC ERP" || $attributes['site_name']=="Domestic Internal ERP" || $attributes['site_name']=="ARNA BANGLE ERP") && ($attributes['receipt_type'] == 'GPC Out'|| $attributes['receipt_type'] == 'Melting Wastage' || $attributes['receipt_type'] == 'Daily Drawer Wastage'|| $attributes['receipt_type'] == 'Export Internal' || $attributes['receipt_type'] == 'Domestic Internal')){}elseif(($attributes['site_name']=="AR Gold ERP" || $attributes['site_name']=="ARF ERP" || $attributes['site_name']=="ARC ERP" || $attributes['site_name']=="Domestic Internal ERP" || $attributes['site_name']=="ARNA BANGLE ERP") &&($attributes['receipt_type'] == 'GPC'|| $attributes['receipt_type'] == 'GPC Out'|| $attributes['receipt_type'] == 'Finish Good')&& $attributes['account_name'] == 'Domestic Internal ERP Software' ){}else{
+
+    if(($attributes['site_name']=="AR Gold ERP" || $attributes['site_name']=="ARF ERP" || $attributes['site_name']=="ARC ERP" || $attributes['site_name']=="Domestic Internal ERP" || $attributes['site_name']=="ARNA BANGLE ERP") && ($attributes['receipt_type'] == 'GPC Out'|| $attributes['receipt_type'] == 'Melting Wastage' || $attributes['receipt_type'] == 'Daily Drawer Wastage'|| $attributes['receipt_type'] == 'Export Internal' || $attributes['receipt_type'] == 'Domestic Internal' || $attributes['receipt_type'] == 'Refresh')){}elseif(($attributes['site_name']=="AR Gold ERP" || $attributes['site_name']=="ARF ERP" || $attributes['site_name']=="ARC ERP" || $attributes['site_name']=="Domestic Internal ERP" || $attributes['site_name']=="ARNA BANGLE ERP") &&($attributes['receipt_type'] == 'GPC'|| $attributes['receipt_type'] == 'GPC Out'|| $attributes['receipt_type'] == 'Finish Good')&& $attributes['account_name'] == 'Domestic Internal ERP Software' ){}else{
     	if (empty($api_url)) return true;
    	 $api_url = get_api_path_from_account_name($attributes['account_name']).$api_url;
     }
-
     // if ($attributes['account_name'] == 'AR Gold Software')
     //   $api_url = API_ARG_PATH.$api_url;
     // elseif ($attributes['account_name'] == 'ARF Software')
@@ -612,6 +626,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     // elseif ($attributes['account_name'] == 'Export Internal Software')
     //   $api_url = API_EXPORT_INTERNAL_PATH.$api_url;
   //  print_r($send_data);
+
   if ($attributes['account_name']=="AR Gold ERP Software" ||$attributes['account_name']=="ARG ERP Software" || $attributes['account_name']=="ARF ERP Software" || $attributes['account_name']=="ARC ERP Software"|| $attributes['account_name']=="ARNA BANGLE"|| $attributes['account_name']=="Domestic Internal ERP Software"){
       $this->load->model(array('transactions/metal_issue_voucher_model','transactions/metal_receipt_voucher_model'));
       if(!empty($attributes['metal_receipt_voucher_reference_id'])){ 	
