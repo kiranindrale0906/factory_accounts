@@ -98,7 +98,7 @@ if(in_array($record['voucher_type'], array('metal receipt voucher','metal issue 
           <table class="table table-sm">
             <?php 
                 $taxable_amount = $tax_fields['gold_rate']*$record['factory_fine'];
-                if ($record['sale_type'] == 'Sale Return' and $record['account_name'] == 'Sales Account') { $taxable_amount = -1 * $taxable_amount; }
+                if (($record['sale_type'] == 'Sale Return'|| $record['sale_type']=="Sales Good Return") and $record['account_name'] == 'Sales Account') { $taxable_amount = -1 * $taxable_amount; }
             ?>
             <tr>
               <td>Weight</td><td class="text-right"><h6><?=four_decimal($tax_fields['weight'])?></h6></td>

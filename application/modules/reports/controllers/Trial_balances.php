@@ -684,7 +684,7 @@ class Trial_balances extends Ledgers {
     $hallmark_amount_sale = $this->chitti_model->find($select_sale, array('usd_rate != 0', 'sale_type' => 'Sale'));
 
     $select_sale_return = 'sum(taxable_amount - gold_rate * factory_fine) as hallmark_amount';
-    $hallmark_amount_sale_return =  $this->voucher_model->find($select_sale_return, array('account_name' => 'SALES ACCOUNT', 'sale_type' => 'Sale Return'));
+    $hallmark_amount_sale_return =  $this->voucher_model->find($select_sale_return, array('account_name' => 'SALES ACCOUNT', 'sale_type in ("Sale Return","Sales Good Return")' =>null));
 
     $this->data['hallmark_amount'] = $hallmark_amount_labour['hallmark_amount'] + $hallmark_amount_sale['hallmark_amount'] - $hallmark_amount_sale_return['hallmark_amount'];
   }

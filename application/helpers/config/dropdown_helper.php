@@ -87,6 +87,7 @@
   function get_sale_types() {
     return array( array('id' => 'Sale', 'name' => 'Sale'),
                   array('id' => 'Sale Return', 'name' => 'Sale Return'),
+                  array('id' => 'Sales Good Return', 'name' => 'Sales Good Return'),
                   array('id' => 'Labour', 'name' => 'Labour'));
   }
 

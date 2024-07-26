@@ -394,7 +394,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
 
     if (   !empty($this->attributes['gold_rate']) && $this->attributes['gold_rate'] <= 0 
         && !empty($this->attributes['hallmark_rate']) && $this->attributes['hallmark_rate'] <= 0 ) return;
-    if(!empty($this->attributes['sale_type']) && $this->attributes['sale_type']=="Sale Return"){
+    if(!empty($this->attributes['sale_type']) && ($this->attributes['sale_type']=="Sale Return" || $this->attributes['sale_type']=="Sales Good Return")){
       $this->rate_cut_issue_voucher_model->create_rate_cut_vouchers_for_sales_return($this->attributes['id'], $this->attributes['receipt_type']);
     }else{
       $this->rate_cut_issue_voucher_model->create_rate_cut_vouchers_for_metal_and_refresh($this->attributes['id'], $this->attributes['receipt_type']);

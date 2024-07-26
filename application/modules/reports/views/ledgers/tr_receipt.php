@@ -36,7 +36,7 @@
     <?php } ?>
   <?php endif; ?>
   <?php if ($report_type == 'Domestic Labour Ledger' || $report_type == 'Export Labour Ledger' ||$report_type == 'Account Ledger' || $report_type == 'Purchase Labour Ledger' || $report_type == 'Vadotar Report' ||$report_type == 'Purchase Sales Ledger'): ?>
-    <td class="text-right"><a class=""  href='<?= base_url() ?>argold/voucher_details/view/<?=$record['chitti_no']?>'><?=(!empty($record['sale_type'])&&$record['sale_type']=="Sale Return")?four_decimal($record['debit_amount'], '-'):four_decimal($record['debit_amount'], '-') ?></a></td>
+    <td class="text-right"><a class=""  href='<?= base_url() ?>argold/voucher_details/view/<?=$record['chitti_no']?>'><?=(!empty($record['sale_type'])&&($record['sale_type']=="Sale Return" || $record['sale_type']=="Sales Good Return"))?four_decimal($record['debit_amount'], '-'):four_decimal($record['debit_amount'], '-') ?></a></td>
     <td class="text-right"><?= four_decimal($record['usd_debit_amount'], '-') ?></td>
     <?php if($report_type == 'Purchase Sales Ledger'){ ?>
         <td class="text-right"><?= four_decimal($record['chitti_credit_weight'], '-') ?></td>

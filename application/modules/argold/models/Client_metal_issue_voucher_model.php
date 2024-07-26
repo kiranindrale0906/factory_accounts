@@ -26,7 +26,7 @@ class Client_metal_issue_voucher_model extends Core_metal_issue_voucher_model {
     else
       $this->attributes['fine'] = $this->attributes['credit_weight'] * $this->attributes['purity'] / 100;
     $this->attributes['packing_slip_balance'] =$this->attributes['credit_weight'];
-  if($this->attributes['account_name']=="Export Internal Software" || $this->attributes['account_name']=="Domestic Internal Software"){
+    if($this->attributes['account_name']=="Export Internal Software" || $this->attributes['account_name']=="Domestic Internal Software"){
     }else{
       $site_name = get_site_name_from_account_name($this->attributes['account_name']);
       if (!empty($site_name)) $this->attributes['site_name'] = $site_name;

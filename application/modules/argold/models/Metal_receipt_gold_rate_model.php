@@ -13,7 +13,7 @@ class Metal_receipt_gold_rate_model extends BaseModel {
   
   public function after_save($action) {
     parent::after_save($action);
-    if($this->attributes['sale_type']=="Sale Return"){
+    if($this->attributes['sale_type']=="Sale Return" || $this->attributes['sale_type']=="Sales Good Return"){
       $this->rate_cut_issue_voucher_model->create_rate_cut_vouchers_for_sales_return($this->attributes['id'], $this->attributes['receipt_type']);
     }else{
       $this->rate_cut_issue_voucher_model->create_rate_cut_vouchers_for_metal_and_refresh($this->attributes['id'], $this->attributes['receipt_type']);
