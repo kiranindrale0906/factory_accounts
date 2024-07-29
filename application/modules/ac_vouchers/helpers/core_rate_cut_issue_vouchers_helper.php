@@ -30,7 +30,6 @@ if (!function_exists('get_field_attribute')) {
   }
 }
 
-if (!function_exists('get_row_actions')) {
   if (!function_exists('get_row_actions')) {
   function get_row_actions($row, $url, $select_url, $filter) {
     $actions = array();
