@@ -116,6 +116,9 @@ class Quator_wise_loss_reports extends BaseController {
       $data['type']='category';
       $data['completed_at']='2021-11-05';
       $data['quator']=$this->data['quator_name'];
+      ini_set('max_input_vars', '3000');
+      ini_set('max_execution_time',0);
+
       if(!empty($data['department_names']) && !empty($this->data['quator_name'])){
         if(isset($_GET['site_name'])&&$_GET['site_name']=='ARC (May 2022)'){
           $ghiss_melting_loss=array();
