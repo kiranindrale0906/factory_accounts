@@ -6,30 +6,34 @@
       <?php if($_SESSION['all_details']==1){?>    
       <a class="ml-5 <?= ($site_name == '') ? 'bold black underline' : '' ?>" 
          href='<?= base_url() ?>reports/production_summary'>All</a>
+      <a class="ml-5 <?= ($site_name == 'ARNA BANGLE ERP') ? 'bold black underline' : '' ?>" 
+           href='<?= base_url() ?>reports/production_summary?site_name=ARNA BANGLE ERP'>ARNA BANGLE ERP</a>
+       <a class="ml-5 <?= ($site_name == 'Domestic Internal ERP') ? 'bold black underline' : '' ?>" 
+           href='<?= base_url() ?>reports/production_summary?site_name=Domestic Internal ERP'>Domestic Internal ERP</a>
+    
       <?php  }?>
       <?php if($_SESSION['arg_details']==1){?>    
         <a class="ml-5 <?= ($site_name == 'AR Gold (Apr 2024)') ? 'bold black underline' : '' ?>" 
            href='<?= base_url() ?>reports/production_summary?site_name=AR Gold (Apr 2024)'>AR Gold (Apr 2024)</a>
+           <a class="ml-5 <?= ($site_name == 'AR Gold ERP') ? 'bold black underline' : '' ?>" 
+           href='<?= base_url() ?>reports/production_summary?site_name=AR Gold ERP'>AR Gold ERP</a>
+     
       <?php }?>
       <?php if($_SESSION['arf_details']==1){?> 
         <a class="ml-5 <?= ($site_name == 'ARF (Apr 2024)') ? 'bold black underline' : '' ?>" 
            href='<?= base_url() ?>reports/production_summary?site_name=ARF (Apr 2024)'>ARF (Apr 2024)</a>   
+           <a class="ml-5 <?= ($site_name == 'ARF ERP') ? 'bold black underline' : '' ?>" 
+           href='<?= base_url() ?>reports/production_summary?site_name=ARF ERP'>ARF ERP</a>
+      
       <?php }?>   
       <?php if($_SESSION['arc_details']==1){?> 
         <a class="ml-5 <?= ($site_name == 'ARC (Apr 2024)') ? 'bold black underline' : '' ?>" 
            href='<?= base_url() ?>reports/production_summary?site_name=ARC (Apr 2024)'>ARC (Apr 2024)</a>   
-      <?php }?>  
-      <a class="ml-5 <?= ($site_name == 'AR Gold ERP') ? 'bold black underline' : '' ?>" 
-           href='<?= base_url() ?>reports/production_summary?site_name=AR Gold ERP'>AR Gold ERP</a>
-      <a class="ml-5 <?= ($site_name == 'ARF ERP') ? 'bold black underline' : '' ?>" 
-           href='<?= base_url() ?>reports/production_summary?site_name=ARF ERP'>ARF ERP</a>
-      <a class="ml-5 <?= ($site_name == 'ARC ERP') ? 'bold black underline' : '' ?>" 
+           <a class="ml-5 <?= ($site_name == 'ARC ERP') ? 'bold black underline' : '' ?>" 
            href='<?= base_url() ?>reports/production_summary?site_name=ARC ERP'>ARC ERP</a>
-      <a class="ml-5 <?= ($site_name == 'ARNA BANGLE ERP') ? 'bold black underline' : '' ?>" 
-           href='<?= base_url() ?>reports/production_summary?site_name=ARNA BANGLE ERP'>ARNA BANGLE ERP</a>
-      <a class="ml-5 <?= ($site_name == 'Domestic Internal ERP') ? 'bold black underline' : '' ?>" 
-           href='<?= base_url() ?>reports/production_summary?site_name=Domestic Internal ERP'>Domestic Internal ERP</a>
-    </h6>
+      
+      <?php }?>  
+       </h6>
   </div>
 </div>
 <br />
