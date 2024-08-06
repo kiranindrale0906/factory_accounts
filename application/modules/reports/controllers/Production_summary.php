@@ -7,6 +7,8 @@ class Production_summary extends BaseController {
   }
 
   public function index() {
+    ini_set('max_input_vars', '3000');
+    ini_set('max_execution_time',0);
 
     $this->_get_form_data();
     $this->get_production_summary();
@@ -36,6 +38,7 @@ class Production_summary extends BaseController {
                                         'AR Gold (Aug 2022)', 'ARC (Aug 2022)', 'ARF (Aug 2022)',
                                         'AR Gold (Feb 2023)', 'ARC (Feb 2023)', 'ARF (Feb 2023)');
     */
+
     $this->data['site_names']   = array('AR Gold', 'ARC', 'ARF');
     
     $url = '';
