@@ -17,6 +17,8 @@ class Quator_wise_loss_report_details extends Ledgers {
   }
 
   private function get_loss_details() {
+    ini_set('max_input_vars', '3000');
+    ini_set('max_execution_time',0);
     $this->data['factory_name']=!empty($_GET['factory_name'])?$_GET['factory_name']:'';
     $data['department_name']=$_GET['category'];
     $this->data['department_name']=$_GET['category'];
