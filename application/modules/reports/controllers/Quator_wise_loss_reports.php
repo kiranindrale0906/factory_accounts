@@ -14,7 +14,7 @@ class Quator_wise_loss_reports extends BaseController {
     
     $this->_get_form_data();
     $this->loss_account_details();
-    $this->get_production_summary();
+  //  $this->get_production_summary();
     $this->get_refresh_details();
 
     if (   !empty($this->data['quator_name'])
@@ -135,8 +135,9 @@ class Quator_wise_loss_reports extends BaseController {
           $ghiss_details=json_decode(curl_post_request($url,$data),true);
           $out_weight=!empty($ghiss_details)&&(!empty($ghiss_details['data']['ghiss_melting_out_weights']))?$ghiss_details['data']['ghiss_melting_out_weights']:0;
           $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight']=$out_weight;
-          }$fire_tounch_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight', array('account_name'=>'AR Gold Loss Account (Apr 2024)','site_name'=>'AR Gold (Apr 2024)','receipt_type'=>'Fire Tounch Loss','quator'=>$data['quator']),array());
-          foreach ($fire_tounch_loss as $fire_tounch_loss_index => $fire_tounch_loss_value) {
+          }
+          $fire_tounch_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight', array('account_name'=>'AR Gold Loss Account (Apr 2024)','site_name'=>'AR Gold (Apr 2024)','receipt_type'=>'Fire Tounch Loss','quator'=>$data['quator']),array());
+          foreach ($fire_tounch_loss as $fire_tounch_loss_index => $fire_tounch_loss_value){
           $data['issue_department_id']=$fire_tounch_loss_value['parent_id'];
           $data['quator']=$this->data['quator_name'];
           $url=API_APR2024_ARG_PATH."issue_and_receipts/loss_report_for_accounts/index";
@@ -267,7 +268,7 @@ class Quator_wise_loss_reports extends BaseController {
     }
     return $opening_loss_details;
   }
-  private function get_production_summary() {
+  /*private function get_production_summary() {
     $_GET['start_date'] = '2021-11-04';
    if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARC') {
       $url = API_MAY2022_ARC_PATH."issue_departments/api_issue_departments/index";
@@ -279,7 +280,7 @@ class Quator_wise_loss_reports extends BaseController {
     $records = array_merge($arc_records['data']);
     $this->data['production_details'] = $this->get_grouped_records($records);
     $this->get_production_group_total();
-  }
+  }*/
 
   private function get_refresh_details() {
     $select = 'date(created_at) as created_at, item_name, sum(weight) as weight, sum(weight * purity) / sum(weight) as purity, sum(weight * factory_purity) / sum(weight) as factory_purity';
@@ -313,7 +314,7 @@ class Quator_wise_loss_reports extends BaseController {
     return $date_wise_data;
   }
 
-  private function get_production_group_total() {
+  /*private function get_production_group_total() {
     $this->data['production_total'] = array();
     foreach ($this->data['production_details'] as $group => $production_detail) {
       $this->data['production_total'][$group] = array('weight' => 0, 'vadotar' => 0);
@@ -323,7 +324,7 @@ class Quator_wise_loss_reports extends BaseController {
       }
     }
   }
-
+*/
   private function get_refresh_group_total() {
     $this->data['refresh_total'] = array();
     foreach ($this->data['refresh_details'] as $group => $refresh_detail) {
