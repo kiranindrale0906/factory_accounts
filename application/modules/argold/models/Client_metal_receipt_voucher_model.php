@@ -577,7 +577,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
               ||$attributes['receipt_type'] == 'DC 2 Ghiss' 
               ||$attributes['receipt_type'] == 'CNC Ghiss' 
               ||$attributes['receipt_type'] == 'Round and Ball Chain Cutting Ghiss' 
-              ||$attributes['receipt_type'] == 'Round and Ball Chain Ghiss' 
+              ||$attributes['receipt_type'] == 'Round and Ball Chain Ghiss' 
               ||$attributes['receipt_type'] == 'Hand Cutting Ghiss' 
               ||$attributes['receipt_type'] == 'Hand Dull Ghiss' 
               || $attributes['receipt_type'] == 'Ice Cutting Ghiss'){
