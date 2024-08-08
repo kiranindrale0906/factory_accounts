@@ -142,7 +142,7 @@ trait Listing_trait  {
                                                                 'group_by'=>$group,
                                                                 'limit'=>$limit,
                                                                 'table'=>$this->primary_table));
-
+//lq();
     if($count == false)return $result_array; 
     else{
       if($sum == false)
