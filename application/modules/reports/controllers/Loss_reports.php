@@ -99,19 +99,6 @@ class Loss_reports extends BaseController {
   }
 
   private function get_loss_records_from_factory($postdata) {
-    // if ($this->data['factory_name']=='ARC (May 2022)'){
-    // $path = API_MAY2022_ARC_PATH;
-    // }elseif ($this->data['factory_name']=='ARF (May 2022)'){
-    //   $path =API_MAY2022_ARF_PATH;
-    // }elseif ($this->data['factory_name']=='AR Gold (May 2022)'){
-    //   $path = API_MAY2022_ARG_PATH;
-    // }elseif ($this->data['factory_name']=='AR Gold (Aug 2022)'){
-    //   $path = API_AUG2022_ARG_PATH;
-    // }elseif ($this->data['factory_name']=='ARC (Aug 2022)'){
-    //   $path = API_AUG2022_ARC_PATH;
-    // }elseif ($this->data['factory_name']=='ARF (Aug 2022)'){
-    //   $path = API_AUG2022_ARF_PATH;
-    // }else {return array();} 
     $path = get_api_url_from_site_name($this->data['factory_name']);
 
     $url = $path.'issue_and_receipts/loss_report_for_accounts/index';
@@ -120,10 +107,6 @@ class Loss_reports extends BaseController {
       if (   isset($factory_loss_records['data']['loss_details'])
           && !empty($factory_loss_records['data']['loss_details']['loss_detail']))
         return $factory_loss_records['data']['loss_details']['loss_detail'];
-      elseif (isset($factory_loss_records['data']['ghiss_melting_out_weights']))
-        return $factory_loss_records['data']['ghiss_melting_out_weights'];
-      elseif (isset($factory_loss_records['data']['fire_tounch_out_weights']))
-        return $factory_loss_records['data']['fire_tounch_out_weights'];
       else
         return array();
     else
@@ -140,7 +123,7 @@ class Loss_reports extends BaseController {
                                                      'receipt_type' => 'Ghiss Melting Loss',
                                                      // 'description' => $this->data['department_name'],
                                                      'quator = ""' =>NULL));
-    foreach ($ghiss_melting_loss as $ghiss_melting_loss_index => $ghiss_melting_loss_value) {
+    /*foreach ($ghiss_melting_loss as $ghiss_melting_loss_index => $ghiss_melting_loss_value) {
       unset($data['department_names']);
       $data['issue_department_id'] = $ghiss_melting_loss_value['parent_id'];
       $data['quator'] = '';
@@ -150,7 +133,19 @@ class Loss_reports extends BaseController {
       $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight'] = 0;
       if (!empty($ghiss_details)) 
         $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight'] = $ghiss_details;
-    }
+    }*/
+     $department_ids = array_column($ghiss_melting_loss, 'parent_id');
+          $url = API_APR2024_ARC_PATH . "issue_and_receipts/loss_report_for_accounts/index";
+          $data['issue_department_ids'] = $department_ids;
+          $data['quator'] = $this->data['quator_name'];
+          $details = json_decode(curl_post_request($url, $data), true);
+          $weights = !empty($details['data']['ghiss_melting_out_weights']) ? $details['data']['ghiss_melting_out_weights'] : [];
+
+          // Map out_weights to ghiss_melting_loss
+          foreach ($ghiss_melting_loss as $index => $value) {
+              $department_id = $value['parent_id'];
+              $ghiss_melting_loss[$index]['out_weight'] = isset($weights[$department_id]) ? $weights[$department_id] : 0;
+          }   
 
     return $ghiss_melting_loss;
   }
@@ -163,7 +158,7 @@ class Loss_reports extends BaseController {
                                                            'site_name' => $this->data['site_name'],
                                                            'receipt_type' => 'Fire Tounch Loss',
                                                            'quator'=> ''));
-    foreach ($fire_tounch_loss as $fire_tounch_loss_index => $fire_tounch_loss_value) {
+    /*foreach ($fire_tounch_loss as $fire_tounch_loss_index => $fire_tounch_loss_value) {
       unset($data['department_names']);
       $data['issue_department_id'] = $fire_tounch_loss_value['parent_id'];
       $data['quator'] = '';
@@ -173,6 +168,18 @@ class Loss_reports extends BaseController {
       $fire_tounch_loss[$fire_tounch_loss_index]['out_weight'] = 0;
       if (!empty($ghiss_details)) 
         $fire_tounch_loss[$fire_tounch_loss_index]['out_weight'] = $fire_tounch_details;
+    }*/
+    $fire_tounch_loss_department_ids = array_column($fire_tounch_loss, 'parent_id');
+    $url = API_APR2024_ARC_PATH . "issue_and_receipts/loss_report_for_accounts/index";
+    $data['issue_department_id'] = $fire_tounch_loss_department_ids;
+    $data['quator'] = $this->data['quator_name'];
+    $details = json_decode(curl_post_request($url, $data), true);
+    $fire_tounch_loss_weights = !empty($details['data']['fire_tounch_out_weights']) ? $details['data']['fire_tounch_out_weights'] : [];
+
+    // Map out_weights to ghiss_melting_loss
+    foreach ($fire_tounch_loss as $fire_tounch_loss_index => $fire_tounch_loss_value) {
+        $department_id = $fire_tounch_loss_value['parent_id'];
+        $fire_tounch_loss[$fire_tounch_loss_index]['out_weight'] = isset($fire_tounch_loss_weights[$department_id]) ? $fire_tounch_loss_weights[$department_id] : 0;
     }
 
     return $fire_tounch_loss;
