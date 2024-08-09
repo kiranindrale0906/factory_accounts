@@ -172,6 +172,13 @@ if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARC (Apr 2024
     if(!empty($this->data['in_purity'])){
        $where['factory_purity']    =$this->data['in_purity'];
     }
+
+    if (isset($this->data['filter_month']))
+      $where['MONTH(created_at)'] = $this->data['filter_month']; 
+    
+    if (isset($this->data['filter_year']))
+      $where['YEAR(created_at)'] = $this->data['filter_year']; 
+    
     
     if ($this->data['group_by'] == 'Week') {
       $period_from_date = 'DATE_SUB(
@@ -190,109 +197,32 @@ if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARC (Apr 2024
    
     $refresh_details = $this->refresh_detail_model->get($select, $where, array(),$group_by);
     $voucher_data=array();
-    if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARC') {
-      $select = 'date(created_at) as created_at, description as item_name,"voucher" as  data , GROUP_CONCAT(id) as refresh_id, GROUP_CONCAT(credit_weight) as refresh_weight, sum(credit_weight) as weight, sum(credit_weight * purity) / sum(credit_weight) as purity, sum(credit_weight * factory_purity) / sum(credit_weight) as factory_purity';
-      $domestic_where=array('credit_weight !=' => 0,'site_name'=>"ARC (Apr 2023)",'receipt_type' => 'Domestic Internal');
-      if(!empty($this->data['product_name'])){
-       $domestic_where['description']    =$this->data['product_name'];
-      // $group_by=array('group_by' => 'date(created_at)');
-    }else{
-	$domestic_where['description!=']="";
-	
-     }
-      $voucher_data=$this->voucher_model->get($select, $domestic_where,array(),$group_by);
-    }if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARC (Sep 2023)') {
-      $select = 'date(created_at) as created_at, description as item_name,"voucher" as  data , GROUP_CONCAT(id) as refresh_id, GROUP_CONCAT(credit_weight) as refresh_weight, sum(credit_weight) as weight, sum(credit_weight * purity) / sum(credit_weight) as purity, sum(credit_weight * factory_purity) / sum(credit_weight) as factory_purity';
-      $domestic_where=array('credit_weight !=' => 0,'site_name'=>"ARC (Sep 2023)",'receipt_type' => 'Domestic Internal');
-      if(!empty($this->data['product_name'])){
-       $domestic_where['description']    =$this->data['product_name'];
-      // $group_by=array('group_by' => 'date(created_at)');
-    }else{
-  $domestic_where['description!=']="";
-  
-     }
-      $voucher_data=$this->voucher_model->get($select, $domestic_where,array(),$group_by);
-    }if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARC (Apr 2024)') {
-      $select = 'date(created_at) as created_at, description as item_name,"voucher" as  data , GROUP_CONCAT(id) as refresh_id, GROUP_CONCAT(credit_weight) as refresh_weight, sum(credit_weight) as weight, sum(credit_weight * purity) / sum(credit_weight) as purity, sum(credit_weight * factory_purity) / sum(credit_weight) as factory_purity';
-      $domestic_where=array('credit_weight !=' => 0,'site_name'=>"ARC (Apr 2024)",'receipt_type' => 'Domestic Internal');
-      if(!empty($this->data['product_name'])){
-       $domestic_where['description']    =$this->data['product_name'];
-      // $group_by=array('group_by' => 'date(created_at)');
-    }else{
-  $domestic_where['description!=']="";
-  
-     }
-      $voucher_data=$this->voucher_model->get($select, $domestic_where,array(),$group_by);
-    }if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARF') {
-      $select = 'date(created_at) as created_at, description as item_name,"voucher" as  data , GROUP_CONCAT(id) as refresh_id, GROUP_CONCAT(credit_weight) as refresh_weight, sum(credit_weight) as weight, sum(credit_weight * purity) / sum(credit_weight) as purity, sum(credit_weight * factory_purity) / sum(credit_weight) as factory_purity';
-      $domestic_where=array('credit_weight !=' => 0,'site_name'=>"ARF (Apr 2023)",'receipt_type' => 'Domestic Internal');
+    if($this->data['site_name'] == '' || ($this->data['site_name']=="ARC (Apr 2024)" || $this->data['site_name']=="ARF (Apr 2024)" ||$this->data['site_name']=="AR Gold (Apr 2024)" )){
+      $domestic_where=array('credit_weight !=' => 0,'receipt_type' => 'Domestic Internal');
         if(!empty($this->data['product_name'])){
-          $domestic_where['description']    =$this->data['product_name'];
-        //  $group_by=array('group_by' => 'date(created_at)');
-      }else{
-	$domestic_where['description!=']    ="";
-
-	}
-   
-      $voucher_data=$this->voucher_model->get($select, $domestic_where,array(),$group_by);
-    }if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARF (Sep 2023)') {
-      $select = 'date(created_at) as created_at, description as item_name,"voucher" as  data , GROUP_CONCAT(id) as refresh_id, GROUP_CONCAT(credit_weight) as refresh_weight, sum(credit_weight) as weight, sum(credit_weight * purity) / sum(credit_weight) as purity, sum(credit_weight * factory_purity) / sum(credit_weight) as factory_purity';
-      $domestic_where=array('credit_weight !=' => 0,'site_name'=>"ARF (Sep 2023)",'receipt_type' => 'Domestic Internal');
-        if(!empty($this->data['product_name'])){
-          $domestic_where['description']    =$this->data['product_name'];
-        //  $group_by=array('group_by' => 'date(created_at)');
-      }else{
-  $domestic_where['description!=']    ="";
-
-  }
-   
-      $voucher_data=$this->voucher_model->get($select, $domestic_where,array(),$group_by);
-    }if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARF (Apr 2024)') {
-      $select = 'date(created_at) as created_at, description as item_name,"voucher" as  data , GROUP_CONCAT(id) as refresh_id, GROUP_CONCAT(credit_weight) as refresh_weight, sum(credit_weight) as weight, sum(credit_weight * purity) / sum(credit_weight) as purity, sum(credit_weight * factory_purity) / sum(credit_weight) as factory_purity';
-      $domestic_where=array('credit_weight !=' => 0,'site_name'=>"ARF (Apr 2024)",'receipt_type' => 'Domestic Internal');
-        if(!empty($this->data['product_name'])){
-          $domestic_where['description']    =$this->data['product_name'];
-        //  $group_by=array('group_by' => 'date(created_at)');
-      }else{
-  $domestic_where['description!=']    ="";
-
-  }
-   
-      $voucher_data=$this->voucher_model->get($select, $domestic_where,array(),$group_by);
-    }if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold') {
-      $select = 'date(created_at) as created_at, description as item_name,"voucher" as  data , GROUP_CONCAT(id) as refresh_id, GROUP_CONCAT(credit_weight) as refresh_weight, sum(credit_weight) as weight, sum(credit_weight * purity) / sum(credit_weight) as purity, sum(credit_weight * factory_purity) / sum(credit_weight) as factory_purity';
-      $domestic_where=array('credit_weight !=' => 0,'site_name'=>"AR Gold (Apr 2023)",'receipt_type' => 'Domestic Internal');
-       
-      if(!empty($this->data['product_name'])){
-          $domestic_where['description']    =$this->data['product_name'];
-          //$group_by=array('group_by' => 'date(created_at)');
-      }else{
-	$domestic_where['description!=']    ="";
+         $domestic_where['description']    =$this->data['product_name'];
+        // $group_by=array('group_by' => 'date(created_at)');
+        }else{
+           $domestic_where['description!=']="";
+      
+       }
+       if (isset($this->data['filter_month'])){
+        $domestic_where['MONTH(created_at)'] = $this->data['filter_month']; 
+       }
+      
+      if (isset($this->data['filter_year'])){
+        $domestic_where['YEAR(created_at)'] = $this->data['filter_year']; 
       }
-      $voucher_data=$this->voucher_model->get($select,$domestic_where,array(),$group_by);
-    }if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold (Sep 2023)') {
-      $select = 'date(created_at) as created_at, description as item_name,"voucher" as  data , GROUP_CONCAT(id) as refresh_id, GROUP_CONCAT(credit_weight) as refresh_weight, sum(credit_weight) as weight, sum(credit_weight * purity) / sum(credit_weight) as purity, sum(credit_weight * factory_purity) / sum(credit_weight) as factory_purity';
-      $domestic_where=array('credit_weight !=' => 0,'site_name'=>"AR Gold (Sep 2023)",'receipt_type' => 'Domestic Internal');
-       
-      if(!empty($this->data['product_name'])){
-          $domestic_where['description']    =$this->data['product_name'];
-          //$group_by=array('group_by' => 'date(created_at)');
+      if ($this->data['site_name'] == ''){
+        $domestic_where['site_name']=array("ARC (Apr 2024)","ARF (Apr 2024)","AR Gold (Apr 2024)");
       }else{
-  $domestic_where['description!=']    ="";
+         $domestic_where['site_name']=$this->data['site_name'];
       }
-      $voucher_data=$this->voucher_model->get($select,$domestic_where,array(),$group_by);
-    }if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold (Apr 2024)') {
+
       $select = 'date(created_at) as created_at, description as item_name,"voucher" as  data , GROUP_CONCAT(id) as refresh_id, GROUP_CONCAT(credit_weight) as refresh_weight, sum(credit_weight) as weight, sum(credit_weight * purity) / sum(credit_weight) as purity, sum(credit_weight * factory_purity) / sum(credit_weight) as factory_purity';
-      $domestic_where=array('credit_weight !=' => 0,'site_name'=>"AR Gold (Apr 2024)",'receipt_type' => 'Domestic Internal');
-       
-      if(!empty($this->data['product_name'])){
-          $domestic_where['description']    =$this->data['product_name'];
-          //$group_by=array('group_by' => 'date(created_at)');
-      }else{
-  $domestic_where['description!=']    ="";
-      }
-      $voucher_data=$this->voucher_model->get($select,$domestic_where,array(),$group_by);
-    }if ($this->data['site_name'] == '' || ($this->data['site_name']=="AR Gold ERP" || $this->data['site_name']=="ARF ERP" || $this->data['site_name']=="ARC ERP" || $this->data['site_name']=="Domestic Internal ERP" || $this->data['site_name']=="ARNA BANGLE ERP")) {
+      $voucher_data=$this->voucher_model->get($select, $domestic_where,array(),$group_by);
+    }
+    if ($this->data['site_name'] == '' || ($this->data['site_name']=="AR Gold ERP" || $this->data['site_name']=="ARF ERP" || $this->data['site_name']=="ARC ERP" || $this->data['site_name']=="Domestic Internal ERP" || $this->data['site_name']=="ARNA BANGLE ERP")) {
       $select = 'date(created_at) as created_at, description as item_name,"voucher" as  data , GROUP_CONCAT(id) as refresh_id, GROUP_CONCAT(credit_weight) as refresh_weight, sum(credit_weight) as weight, sum(credit_weight * purity) / sum(credit_weight) as purity, sum(credit_weight * factory_purity) / sum(credit_weight) as factory_purity';
       $domestic_where=array('credit_weight !=' => 0,'site_name'=>$this->data['site_name'],'receipt_type' => 'Domestic Internal');
        
@@ -300,7 +230,7 @@ if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARC (Apr 2024
           $domestic_where['description']    =$this->data['product_name'];
           //$group_by=array('group_by' => 'date(created_at)');
       }else{
-  $domestic_where['description!=']="";
+      $domestic_where['description!=']="";
       }
       $voucher_data=$this->voucher_model->get($select,$domestic_where,array(),$group_by);
     }
