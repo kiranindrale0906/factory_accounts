@@ -71,6 +71,8 @@ class Production_summary extends BaseController {
     }
     $this->data['production_summary'] = $_GET;
     $_GET['start_date'] = '2024-04-01';
+    $_GET['filter_month'] = date('m');
+    $_GET['filter_year'] =date('Y');
     if(!isset($this->data['record'])) $this->data['record'] = array();
     $this->data['site_name']    = (!empty($_GET['site_name']))    ? $_GET['site_name'] : '';
     $this->data['product_name'] = (!empty($_GET['product_name'])) ? $_GET['product_name'] : '';
