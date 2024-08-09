@@ -212,7 +212,7 @@ class Quator_wise_loss_reports extends BaseController {
           $records=!empty($jan2021_records)&&(!empty($jan2021_records['data']['loss_details']))?$jan2021_records['data']['loss_details']['loss_detail']:$jan2021_records['data']['loss_details']['loss_detail']=array();
 
           
-        /* foreach ($ghiss_melting_loss as $ghiss_melting_loss_index => $ghiss_melting_loss_value) {
+        /*foreach ($ghiss_melting_loss as $ghiss_melting_loss_index => $ghiss_melting_loss_value) {
           $data['issue_department_id']=$ghiss_melting_loss_value['parent_id'];
           $data['quator']=$this->data['quator_name'];
           $url=API_APR2024_ARF_PATH."issue_and_receipts/loss_report_for_accounts/index";

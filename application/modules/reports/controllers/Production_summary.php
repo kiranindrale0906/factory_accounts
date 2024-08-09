@@ -42,25 +42,8 @@ class Production_summary extends BaseController {
     $this->data['site_names']   = array('AR Gold', 'ARC', 'ARF');
     
     $url = '';
-    if     ($this->data['site_name'] == 'AR Gold (May 2022)') $url = API_MAY2022_ARG_PATH."issue_departments/api_issue_departments/create";
-    elseif ($this->data['site_name'] == 'ARF (May 2022)')     $url = API_MAY2022_ARF_PATH."issue_departments/api_issue_departments/create";
-    elseif ($this->data['site_name'] == 'ARC (May 2022)')     $url = API_MAY2022_ARC_PATH."issue_departments/api_issue_departments/create";
-    elseif ($this->data['site_name'] == 'AR Gold (Aug 2022)')     $url = API_AUG2022_ARG_PATH."issue_departments/api_issue_departments/create";
-    elseif ($this->data['site_name'] == 'ARF (Aug 2022)')     $url = API_AUG2022_ARF_PATH."issue_departments/api_issue_departments/create";
-    elseif ($this->data['site_name'] == 'ARC (Aug 2022)')     $url = API_AUG2022_ARC_PATH."issue_departments/api_issue_departments/create";
-    elseif ($this->data['site_name'] == 'AR Gold (Feb 2023)')     $url = API_FEB2023_ARG_PATH."issue_departments/api_issue_departments/create";
-    elseif ($this->data['site_name'] == 'ARF (Feb 2023)')     $url = API_FEB2023_ARF_PATH."issue_departments/api_issue_departments/create";
-    elseif ($this->data['site_name'] == 'ARC (Feb 2023)')     $url = API_FEB2023_ARC_PATH."issue_departments/api_issue_departments/create";
-    elseif ($this->data['site_name'] == 'AR Gold')     $url = API_APR2023_ARG_PATH."issue_departments/api_issue_departments/create";
-    elseif ($this->data['site_name'] == 'ARF')     $url = API_APR2023_ARF_PATH."issue_departments/api_issue_departments/create";
-    elseif ($this->data['site_name'] == 'ARC')     $url = API_APR2023_ARC_PATH."issue_departments/api_issue_departments/create";
-      
-    elseif ($this->data['site_name'] == 'AR Gold (Sep 2023)')     $url = API_SEP2023_ARG_PATH."issue_departments/api_issue_departments/create";
-    elseif ($this->data['site_name'] == 'ARF (Sep 2023)')     $url = API_SEP2023_ARF_PATH."issue_departments/api_issue_departments/create";
-    elseif ($this->data['site_name'] == 'ARC (Sep 2023)')     $url = API_SEP2023_ARC_PATH."issue_departments/api_issue_departments/create";
-      
      /*elseif ($this->data['site_name'] == 'AR Gold (Apr 2024)')     $url = API_APR2024_ARG_PATH."issue_departments/api_issue_departments/create";
-    */elseif ($this->data['site_name'] == 'ARF (Apr 2024)')     $url = API_APR2024_ARF_PATH."issue_departments/api_issue_departments/create";
+    */if ($this->data['site_name'] == 'ARF (Apr 2024)')     $url = API_APR2024_ARF_PATH."issue_departments/api_issue_departments/create";
     elseif ($this->data['site_name'] == 'ARC (Apr 2024)')     $url = API_APR2024_ARC_PATH."issue_departments/api_issue_departments/create";
     if (!empty($url)) {
       $records = json_decode(curl_post_request($url, $this->data));
@@ -99,92 +82,13 @@ class Production_summary extends BaseController {
     $this->data['group_by']     = (!empty($_GET['group_by']))     ? $_GET['group_by'] : '';
     $this->data['machine_size'] = (!empty($_GET['machine_size'])) ? $_GET['machine_size'] : '';
     $this->data['design_code']  = (!empty($_GET['design_code']))  ? $_GET['design_code'] : '';
-
-
-/*    if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold (May 2022)') {
-      $url = API_MAY2022_ARG_PATH."issue_departments/api_issue_departments/index";
-      $records = json_decode(curl_post_request($url, $_GET));
-      $argold_records = json_decode(json_encode($records), true);    
-    }
-    if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold (Aug 2022)') {
-      $url = API_AUG2022_ARG_PATH."issue_departments/api_issue_departments/index";
-      $records = json_decode(curl_post_request($url, $_GET));
-      $argold_records = json_decode(json_encode($records), true);    
-    }
-    if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold (Feb 2023)') {
-      $url = API_FEB2023_ARG_PATH."issue_departments/api_issue_departments/index";
-      $records = json_decode(curl_post_request($url, $_GET));
-      $argold_records = json_decode(json_encode($records), true);    
-    }*/
-    /*if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold') {
-      $url = API_APR2023_ARG_PATH."issue_departments/api_issue_departments/index";
-      $records = json_decode(curl_post_request($url, $_GET));
-      $argold_records = json_decode(json_encode($records), true);    
-    }if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold (Sep 2023)') {
-      $url = API_SEP2023_ARG_PATH."issue_departments/api_issue_departments/index";
-      $records = json_decode(curl_post_request($url, $_GET));
-      $argold_records = json_decode(json_encode($records), true);    
-    }if ($this->data['site_name'] == '' || $this->data['site_name'] == 'AR Gold (Apr 2024)') {
-      $url = API_APR2024_ARG_PATH."issue_departments/api_issue_departments/index";
-      $records = json_decode(curl_post_request($url, $_GET));
-      $argold_records = json_decode(json_encode($records), true);    
-    }*/
-    //if (empty($argold_records['data'])) $argold_records['data'] = array();
-
-/*    if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARF (May 2022)') {
-      $url = API_MAY2022_ARF_PATH."issue_departments/api_issue_departments/index";
-      $records = json_decode(curl_post_request($url, $_GET));
-      $arf_records = json_decode(json_encode($records), true);
-    }
-    if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARF (Aug 2022)') {
-      $url = API_AUG2022_ARF_PATH."issue_departments/api_issue_departments/index";
-      $records = json_decode(curl_post_request($url, $_GET));
-      $arf_records = json_decode(json_encode($records), true);
-    }
-    if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARF (Feb 2023)') {
-      $url = API_FEB2023_ARF_PATH."issue_departments/api_issue_departments/index";
-      $records = json_decode(curl_post_request($url, $_GET));
-      $arf_records = json_decode(json_encode($records), true);
-    }*//*if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARF') {
-      $url = API_APR2023_ARF_PATH."issue_departments/api_issue_departments/index";
-      $records = json_decode(curl_post_request($url, $_GET));
-      $arf_records = json_decode(json_encode($records), true);
-    }if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARF (Sep 2023)') {
-      $url = API_SEP2023_ARF_PATH."issue_departments/api_issue_departments/index";
-      $records = json_decode(curl_post_request($url, $_GET));
-      $arf_records = json_decode(json_encode($records), true);
-    }*/
    if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARF (Apr 2024)') {
       $url = API_APR2024_ARF_PATH."issue_departments/api_issue_departments/index";
       $records = json_decode(curl_post_request($url, $_GET));
       $arf_records = json_decode(json_encode($records), true);
     }
     if(empty($arf_records['data'])) $arf_records['data'] = array();
-
-    /*if($this->data['site_name'] == '' || $this->data['site_name'] == 'ARC (May 2022)') {
-      $url = API_MAY2022_ARC_PATH."issue_departments/api_issue_departments/index";
-      $records = json_decode(curl_post_request($url, $_GET));
-      $arc_records = json_decode(json_encode($records), true);
-    }
-    if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARC (Aug 2022)') {
-      $url = API_AUG2022_ARC_PATH."issue_departments/api_issue_departments/index";
-      $records = json_decode(curl_post_request($url, $_GET));
-      $arc_records = json_decode(json_encode($records), true);
-    }
-    if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARC (Feb 2023)') {
-      $url = API_AUG2022_ARC_PATH."issue_departments/api_issue_departments/index";
-      $records = json_decode(curl_post_request($url, $_GET));
-      $arc_records = json_decode(json_encode($records), true);
-    }*/
-    /*if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARC') {
-      $url = API_APR2023_ARC_PATH."issue_departments/api_issue_departments/index";
-      $records = json_decode(curl_post_request($url, $_GET));
-      $arc_records = json_decode(json_encode($records), true);
-    }if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARC (Sep 2023)') {
-      $url = API_SEP2023_ARC_PATH."issue_departments/api_issue_departments/index";
-      $records = json_decode(curl_post_request($url, $_GET));
-      $arc_records = json_decode(json_encode($records), true);
-     }*/if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARC (Apr 2024)') {
+if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARC (Apr 2024)') {
       $url = API_APR2024_ARC_PATH."issue_departments/api_issue_departments/index";
       $records = json_decode(curl_post_request($url, $_GET));
       $arc_records = json_decode(json_encode($records), true);
