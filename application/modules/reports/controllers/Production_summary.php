@@ -71,8 +71,6 @@ class Production_summary extends BaseController {
     }
     $this->data['production_summary'] = $_GET;
     $_GET['start_date'] = '2024-04-01';
-    $_GET['filter_month'] = date('m');
-    $_GET['filter_year'] =date('Y');
     if(!isset($this->data['record'])) $this->data['record'] = array();
     $this->data['site_name']    = (!empty($_GET['site_name']))    ? $_GET['site_name'] : '';
     $this->data['product_name'] = (!empty($_GET['product_name'])) ? $_GET['product_name'] : '';
@@ -84,13 +82,17 @@ class Production_summary extends BaseController {
     $this->data['group_by']     = (!empty($_GET['group_by']))     ? $_GET['group_by'] : '';
     $this->data['machine_size'] = (!empty($_GET['machine_size'])) ? $_GET['machine_size'] : '';
     $this->data['design_code']  = (!empty($_GET['design_code']))  ? $_GET['design_code'] : '';
-   if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARF (Apr 2024)') {
+    $_GET['filter_month'] = $this->data['filter_month'];
+    $_GET['filter_year'] =$this->data['filter_year'];
+    
+    if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARF (Apr 2024)') {
       $url = API_APR2024_ARF_PATH."issue_departments/api_issue_departments/index";
       $records = json_decode(curl_post_request($url, $_GET));
       $arf_records = json_decode(json_encode($records), true);
     }
+//pd();
     if(empty($arf_records['data'])) $arf_records['data'] = array();
-if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARC (Apr 2024)') {
+    if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARC (Apr 2024)') {
       $url = API_APR2024_ARC_PATH."issue_departments/api_issue_departments/index";
       $records = json_decode(curl_post_request($url, $_GET));
       $arc_records = json_decode(json_encode($records), true);
