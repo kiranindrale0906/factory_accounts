@@ -107,7 +107,7 @@ class Loss_report_details extends Ledgers {
     $department_ids = array_column($ghiss_melting_loss, 'parent_id');
     $url = API_APR2024_ARC_PATH . "issue_and_receipts/loss_report_for_accounts/index";
     $data['issue_department_ids'] = $department_ids;
-    $data['quator'] = $this->data['quator_name'];
+    $data['quator'] ='';
     $details = json_decode(curl_post_request($url, $data), true);
     $weights = !empty($details['data']['ghiss_melting_out_weights']) ? $details['data']['ghiss_melting_out_weights'] : [];
 
@@ -149,7 +149,7 @@ private function get_fire_tounch_loss_records($data) {
     $fire_tounch_loss_department_ids = array_column($fire_tounch_loss, 'parent_id');
     $url = API_APR2024_ARC_PATH . "issue_and_receipts/loss_report_for_accounts/index";
     $data['issue_department_id'] = $fire_tounch_loss_department_ids;
-    $data['quator'] = $this->data['quator_name'];
+    $data['quator'] = '';
     $details = json_decode(curl_post_request($url, $data), true);
     $fire_tounch_loss_weights = !empty($details['data']['fire_tounch_out_weights']) ? $details['data']['fire_tounch_out_weights'] : [];
 

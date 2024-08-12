@@ -10,8 +10,8 @@ class Telegram_vodator_reports extends BaseController {
   }
 
   public function index() {
-    $date = date('2024-05-18');
-//    $date = date('Y-m-d');
+//    $date = date('2024-05-18');
+    $date = date('Y-m-d');
 //    $this->send_vadotar_records('AR Gold (Apr 2024)',$date);
     $this->send_vadotar_records('AR Gold ERP',$date);
     $this->send_vadotar_records('ARF ERP',$date);

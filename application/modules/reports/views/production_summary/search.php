@@ -44,7 +44,7 @@
        ERP Months:
   <?php $months = array(1 => 'Jan.', 2 => 'Feb.', 3 => 'Mar.', 4 => 'Apr.', 5 => 'May', 6 => 'Jun.', 7 => 'Jul.', 8 => 'Aug.', 9 => 'Sep.', 10 => 'Oct.', 11 => 'Nov.', 12 => 'Dec.');
       foreach ($months as $month_key => $month) { ?>
-        <a class="ml-5 <?= ($filter_month == $month) ? 'bold black underline' : '' ?>"
+        <a class="ml-5 <?= ($filter_month == $month_key) ? 'bold black underline' : '' ?>"
                href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=<?= $group_by ?>&filter_month=<?= $month_key ?>&filter_year=2024'><?= $month ?></a>
 
           <?php } ?>
