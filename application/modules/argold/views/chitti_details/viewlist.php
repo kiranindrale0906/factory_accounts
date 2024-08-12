@@ -40,12 +40,16 @@
               if($chittis_details['account_name']=="MALABAR GOLD" && 
                  $metal_voucher_detail['chitti_purity']==92){
                  $metal_voucher_detail['chitti_purity']=91.80;
+              }if($chittis_details['account_name']=="P.N.GADGIL AND SONS LTD" && 
+                 $metal_voucher_detail['chitti_purity']==92){
+                 $metal_voucher_detail['chitti_purity']=91.80;
               }
               if($chittis_details['account_name']=="Jewels N Joolry" && 
                  $metal_voucher_detail['chitti_purity']==92){
                  $metal_voucher_detail['chitti_purity']=91.67;
               }
               if($chittis_details['account_name']=="MALABAR GOLD" && $metal_voucher_detail['chitti_purity']==75){
+              }if($chittis_details['account_name']=="P.N.GADGIL AND SONS LTD" && $metal_voucher_detail['chitti_purity']==75){
               }
               //if($packet_no == $metal_voucher_detail['packet_no']) {
                 $sum_weight += $metal_voucher_detail['credit_weight'];
