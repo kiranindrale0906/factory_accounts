@@ -10,7 +10,7 @@ class Telegram_vodator_reports extends BaseController {
   }
 
   public function index() {
-//    $date = date('2024-05-18');
+//    $date = date('2024-08-12');
     $date = date('Y-m-d');
 //    $this->send_vadotar_records('AR Gold (Apr 2024)',$date);
     $this->send_vadotar_records('AR Gold ERP',$date);
@@ -41,8 +41,11 @@ class Telegram_vodator_reports extends BaseController {
               ) AND receipt_type != "Packing Slip"'] = NULL;
 
     $vadotars = $this->voucher_model->find('site_name,date(voucher_date) voucher_date, sum(factory_fine - fine) as vadotar,sum(credit_weight-debit_weight) as gross_weight',$where,array());
+//pd($vadotars);
+   if(!empty($vadotars)){
     $this->send_company_vadotar_message($vadotars);      
-  }
+   }
+ }
   private function send_company_vadotar_message($record) {
       $message ='date:'.$record['voucher_date'].',site_name:'.$record['site_name'].',vadotar:'.$record['vadotar'].',gw:'.$record['gross_weight'];
       $this->send_message($message);

@@ -98,22 +98,24 @@ class Production_summary extends BaseController {
       $arc_records = json_decode(json_encode($records), true);
     }
       $arg_erp_records=array();
+//pd($this->data);
 
 
-    if ($this->data['site_name'] == '' || ($this->data['site_name']=="AR Gold ERP" || $this->data['site_name']=="ARF ERP" || $this->data['site_name']=="ARC ERP" || $this->data['site_name']=="Domestic Internal ERP" || $this->data['site_name']=="ARNA BANGLE ERP")) {
+    if ($this->data['site_name'] == '' || ($this->data['site_name']=="AR Gold ERP" || $this->data['site_name']=="ARG ERP Software" || $this->data['site_name']=="ARF ERP Software" || $this->data['site_name']=="ARC ERP Software"|| $this->data['site_name']=="ARNA BANGLE" || $this->data['site_name']=="ARF ERP" || $this->data['site_name']=="ARC ERP" || $this->data['site_name']=="Domestic Internal ERP" || $this->data['site_name']=="Domestic Internal ERP Software" || $this->data['site_name']=="ARNA BANGLE ERP")) {
 
       $url = "https://erp.ar-gold.in/api/method/custom_app.api.material_issue.materialissue_details?month=".$this->data['filter_month']."&year=".$this->data['filter_year'];
       $records = json_decode(curl_get_erp_request($url, $_GET));
-//pd($records);
       $erp_records = json_decode(json_encode($records), true);
      if(!empty($erp_records)){
       $this->data['product_names']=array_unique(array_column($erp_records['message'],'product'));
+      $this->data['wastage_percentage']=array_unique(array_column($erp_records['message'],'wastage_percentage'));
       $this->data['in_purities']=array_unique(array_column($erp_records['message'],'melting'));
       $this->data['account_names']=array_unique(array_column($erp_records['message'],'customer'));
       $this->data['category_ones']=array_unique(array_column($erp_records['message'],'product_category'));
       $this->data['machine_sizes']=array_unique(array_column($erp_records['message'],'machine_size'));
       $this->data['design_codes']=array_unique(array_column($erp_records['message'],'design'));
      } if (!isset($this->data['product_names'])) $this->data['product_names'] = array();
+      if (!isset($this->data['wastage_percentage']))   $this->data['wastage_percentage']   = array();
       if (!isset($this->data['in_purities']))   $this->data['in_purities']   = array();
       if (!isset($this->data['account_names'])) $this->data['account_names'] = array();
       if (!isset($this->data['category_ones'])) $this->data['category_ones'] = array(); 
@@ -121,7 +123,6 @@ class Production_summary extends BaseController {
       if (!isset($this->data['design_codes']))  $this->data['design_codes']  = array(); 
 //pd( $this->data['product_names']);   
       $conditions=array();
-
       if(!empty($this->data['product_name'])){
         $conditions['product']=$this->data['product_name'];
       }if(!empty($this->data['category_one'])){
@@ -135,8 +136,31 @@ class Production_summary extends BaseController {
       if(!empty($this->data['machine_size'])){
         $conditions['machine_size']=$this->data['machine_size'];
       }
-      $erp_records['message']=$this->production_summary_model->multi_array_search_with_condition($erp_records,$conditions);
+     
+      if(!empty($this->data['account_name'])){
+        $conditions['customer']=$this->data['account_name'];
+      }
+      if(!empty($this->data['site_name'])){
+	if($this->data['site_name']=="AR Gold ERP"){
+	$this->data['site_name']="ARG ERP Software";
+	}
+	if($this->data['site_name']=="ARF ERP"){
+        $this->data['site_name']="ARF ERP Software";
+        }
+	if($this->data['site_name']=="ARC ERP"){
+        $this->data['site_name']="ARC ERP Software";
+        }
+	if($this->data['site_name']=="Domestic Internal ERP"){
+        $this->data['site_name']="Domestic Internal ERP Software";
+        }
+	if($this->data['site_name']=="ARNA BANGLE ERP"){
+        $this->data['site_name']="ARNA BANGLE";
+        }
+        $conditions['factory']=$this->data['site_name'];
+      }
 
+      $erp_records['message']=$this->production_summary_model->multi_array_search_with_condition($erp_records,$conditions);
+    // pd($erp_records);
       foreach ($erp_records['message'] as $index => $erp_record) {
         if(!empty($erp_record['items'])&&$erp_record['items']=="GPC" || $erp_record['items']=="Finished Goods"){
           $arg_erp_records[$index]['created_at']=date('Y-m-d',strtotime($erp_record['creation']));
@@ -149,10 +173,10 @@ class Production_summary extends BaseController {
             $arg_erp_records[$index]['issue_gpc_out']=$erp_record['balance_weight'];
             $arg_erp_records[$index]['out_purity']=$erp_record['gpc_melting'];
             $arg_erp_records[$index]['in_purity']=$erp_record['melting'];
+            $arg_erp_records[$index]['wastage_percentage']=$erp_record['wastage_percentage'];
       }
 }    }
     if (empty($arc_records['data'])) $arc_records['data'] = array();
-
     $records = array_merge(/*$argold_records['data'],*/ 
                            $arf_records['data'],
                            $arc_records['data'],
@@ -165,8 +189,26 @@ class Production_summary extends BaseController {
     $select = 'date(created_at) as created_at, item_name,"" as data, GROUP_CONCAT(refresh_id) as refresh_id, GROUP_CONCAT(weight) as refresh_weight, sum(weight) as weight, sum(weight * purity) / sum(weight) as purity, sum(weight * factory_purity) / sum(weight) as factory_purity';
     $where=array();
     $group_by=array('group_by' => 'date(created_at), item_name');
-    if(!empty($this->data['site_name'])){
-       $where['site_name']    =$this->data['site_name'];
+       $site_name=$this->data['site_name'];
+        if($this->data['site_name']=="ARG ERP Software"){
+        $site_name="AR Gold ERP";
+        }
+        if($this->data['site_name']=="ARF ERP Software"){
+        $site_name="ARF ERP";
+        }
+        if($this->data['site_name']=="ARC ERP Software"){
+        $site_name="ARC ERP";
+        }
+        if($this->data['site_name']=="Domestic Internal ERP Software"){
+        $site_name="Domestic Internal ERP";
+        }
+        if($this->data['site_name']=="ARNA BANGLE ERP"){
+        $site_name="ARNA BANGLE";
+        }
+    
+  
+  if(!empty($this->data['site_name'])){
+       $where['site_name']    =$site_name;
     }
     if(!empty($this->data['product_name'])){
        $where['item_name']    =$this->data['product_name'];
@@ -220,7 +262,7 @@ class Production_summary extends BaseController {
       if ($this->data['site_name'] == ''){
         $domestic_where['site_name']=array("ARC (Apr 2024)","ARF (Apr 2024)","AR Gold (Apr 2024)");
       }else{
-         $domestic_where['site_name']=$this->data['site_name'];
+         $domestic_where['site_name']=$site_name;
       }
 
       $select = 'date(created_at) as created_at, description as item_name,"voucher" as  data , GROUP_CONCAT(id) as refresh_id, GROUP_CONCAT(credit_weight) as refresh_weight, sum(credit_weight) as weight, sum(credit_weight * purity) / sum(credit_weight) as purity, sum(credit_weight * factory_purity) / sum(credit_weight) as factory_purity';
