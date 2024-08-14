@@ -268,9 +268,9 @@ class Production_summary extends BaseController {
       $select = 'date(created_at) as created_at, description as item_name,"voucher" as  data , GROUP_CONCAT(id) as refresh_id, GROUP_CONCAT(credit_weight) as refresh_weight, sum(credit_weight) as weight, sum(credit_weight * purity) / sum(credit_weight) as purity, sum(credit_weight * factory_purity) / sum(credit_weight) as factory_purity';
       $voucher_data=$this->voucher_model->get($select, $domestic_where,array(),$group_by);
     }
-    if ($this->data['site_name'] == '' || ($this->data['site_name']=="AR Gold ERP" || $this->data['site_name']=="ARF ERP" || $this->data['site_name']=="ARC ERP" || $this->data['site_name']=="Domestic Internal ERP" || $this->data['site_name']=="ARNA BANGLE ERP")) {
+    if ($this->data['site_name'] == '' || ($this->data['site_name']=="AR Gold ERP" || $this->data['site_name']=="ARG ERP Software" || $this->data['site_name']=="ARF ERP Software" || $this->data['site_name']=="ARC ERP Software"|| $this->data['site_name']=="ARNA BANGLE" || $this->data['site_name']=="ARF ERP" || $this->data['site_name']=="ARC ERP" || $this->data['site_name']=="Domestic Internal ERP" || $this->data['site_name']=="Domestic Internal ERP Software" || $this->data['site_name']=="ARNA BANGLE ERP")) {
       $select = 'date(created_at) as created_at, description as item_name,"voucher" as  data , GROUP_CONCAT(id) as refresh_id, GROUP_CONCAT(credit_weight) as refresh_weight, sum(credit_weight) as weight, sum(credit_weight * purity) / sum(credit_weight) as purity, sum(credit_weight * factory_purity) / sum(credit_weight) as factory_purity';
-      $domestic_where=array('credit_weight !=' => 0,'site_name'=>$this->data['site_name'],'receipt_type' => 'Domestic Internal');
+      $domestic_where=array('credit_weight !=' => 0,'site_name'=>$site_name,'receipt_type' => 'Domestic Internal');
        
       if(!empty($this->data['product_name'])){
           $domestic_where['description']    =$this->data['product_name'];
