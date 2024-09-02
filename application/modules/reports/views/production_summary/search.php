@@ -29,7 +29,7 @@
       <?php if($_SESSION['arc_details']==1){?> 
         <a class="ml-5 <?= ($site_name == 'ARC (Apr 2024)') ? 'bold black underline' : '' ?>" 
            href='<?= base_url() ?>reports/production_summary?site_name=ARC (Apr 2024)'>ARC (Apr 2024)</a>   
-           <a class="ml-5 <?= ($site_name == 'ARC ERP' || $site_name == 'ARC ERP Software') ? 'bold black underline' : '' ?>" 
+           <a class="ml-5 <?= ($site_name == 'ARC ERP' || $site_name == 'ARC ERP Software'|| $site_name == 'Arc Erp Software') ? 'bold black underline' : '' ?>" 
            href='<?= base_url() ?>reports/production_summary?site_name=ARC ERP'>ARC ERP</a>
       
       <?php }?>  
