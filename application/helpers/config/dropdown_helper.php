@@ -263,6 +263,7 @@
       array('id' => 'ARG ERP Software',     'name' => 'ARG ERP Software'),
       array('id' => 'ARF ERP Software',     'name' => 'ARF ERP Software'),
       array('id' => 'ARC ERP Software',     'name' => 'ARC ERP Software'),
+      array('id' => 'Arc Erp Software',     'name' => 'Arc Erp Software'),
       array('id' => 'ARNA BANGLE',     'name' => 'ARNA BANGLE'),
     );
     if ($export==1) $site_names[] = array('id' => 'Export', 'name' => 'Export');
@@ -311,7 +312,7 @@
       }elseif (str_contains($account_name, 'Apr 2024')){
         return 'ARC (Apr 2024)';
       }else{
-        if (str_contains($account_name, 'ARC ERP')){
+        if (str_contains($account_name, 'ARC ERP') || str_contains($account_name, 'Arc Erp')){
           return 'ARC ERP';
         }else{
           return 'ARC';
