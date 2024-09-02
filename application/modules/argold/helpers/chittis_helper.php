@@ -46,6 +46,8 @@ function list_settings() {
     array("Factory", "site_name", FALSE, "site_name", FALSE, FALSE),
     array("Account Name", "account_name", FALSE, "account_name", FALSE, FALSE),
     array("Weight", "weight", FALSE, "weight", FALSE, FALSE),
+    array("Expected Weight", "expected_weight", FALSE, "expected_weight", FALSE, FALSE),
+    array("Actual Weight", "actual_weight", FALSE, "actual_weight", FALSE, FALSE),
     // array("Purity", "purity", FALSE, "purity", FALSE, FALSE),
     array("Fine", "fine", FALSE, "fine", FALSE, FALSE),
     array("Issue Fine", "factory_fine", FALSE, "factory_fine", FALSE, FALSE),
