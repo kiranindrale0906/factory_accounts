@@ -31,7 +31,7 @@
           $arf_companies = array('ARF (May 2022)','ARF (Aug 2022)','ARF (Feb 2023)');
           $arc_companies = array('ARC (May 2022)','ARC (Aug 2022)','ARC (Feb 2023)');
           */$export_companies = array('Export');
-          $domestic_companies = array('Domestic');
+          $domestic_companies = array('Domestic','Domestic Internal ERP');
         }
         // if($_SESSION['arg_details']==1){
         //   $arg_companies = array('AR Gold (May 2022)','AR Gold (Aug 2022)', 'AR Gold (Feb 2023)');
@@ -56,7 +56,7 @@
           $export_companies = array('Export');
         }
         if(!empty($_SESSION['domestic_details'])&&$_SESSION['domestic_details']==1){
-          $domestic_companies = array('Domestic');
+          $domestic_companies = array('Domestic','Domestic Internal ERP');
         }
           $companies=array_merge($all_companies,$arg_companies,$arf_companies,$arc_companies,$export_companies,$domestic_companies);
           foreach ($companies as $index => $company) { ?>

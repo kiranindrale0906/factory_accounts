@@ -692,7 +692,7 @@ ini_set('memory_limit', '256M');
 
       if ($this->data['domestic_export'] == 'All') $export_account_names[] = 'Tanishq';
       if ($this->data['domestic_export'] == 'All') $export_account_names[] = 'Domestic Internal Software';
-
+     if ($this->data['domestic_export'] == 'All') $export_account_names[] = 'Domestic Internal ERP Software';
       $export_account_names = implode('", "',$export_account_names);
       $domestic_account_names = implode('", "',$domestic_account_names);
 
