@@ -262,6 +262,7 @@
       array('id' => 'AR Gold ERP Software',     'name' => 'AR Gold ERP Software'),
       array('id' => 'ARG ERP Software',     'name' => 'ARG ERP Software'),
       array('id' => 'ARF ERP Software',     'name' => 'ARF ERP Software'),
+      array('id' => 'Arf Erp Software',     'name' => 'Arf Erp Software'),
       array('id' => 'ARC ERP Software',     'name' => 'ARC ERP Software'),
       array('id' => 'Arc Erp Software',     'name' => 'Arc Erp Software'),
       array('id' => 'ARNA BANGLE',     'name' => 'ARNA BANGLE'),

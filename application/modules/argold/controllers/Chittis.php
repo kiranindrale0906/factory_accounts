@@ -44,7 +44,7 @@ class Chittis extends BaseController {
     if($this->data['group_by']==1) {
       if($this->data['item_code']==1){
         $select='sum(fine) as fine,sum(rate) as rate,sum(factory_fine) as factory_fine,sum(credit_weight) as credit_weight,group_concat(DISTINCT(narration)) as narration,purity,chitti_purity,factory_purity,customer_name,group_concat(DISTINCT(item_code)) as item_code';
-        $group_by = 'customer_name,chitti_purity,(factory_purity-chitti_purity),item_code';
+        $group_by = 'chitti_purity,(factory_purity-chitti_purity),item_code';
       }else{
         $select='sum(fine) as fine,sum(rate) as rate,sum(factory_fine) as factory_fine,sum(credit_weight) as credit_weight,group_concat(DISTINCT(narration)) as narration,purity,chitti_purity,factory_purity,customer_name,item_code';
         $group_by = 'customer_name,chitti_purity,(factory_purity-chitti_purity)';

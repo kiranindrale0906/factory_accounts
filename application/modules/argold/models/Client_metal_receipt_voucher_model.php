@@ -627,7 +627,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     //   $api_url = API_EXPORT_INTERNAL_PATH.$api_url;
   //  print_r($send_data);
 
-  if ($attributes['account_name']=="AR Gold ERP Software" ||$attributes['account_name']=="ARG ERP Software" || $attributes['account_name']=="ARF ERP Software" || $attributes['account_name']=="ARC ERP Software" || $attributes['account_name']=="Arc Erp Software"|| $attributes['account_name']=="ARNA BANGLE"|| $attributes['account_name']=="Domestic Internal ERP Software"){
+  if ($attributes['account_name']=="AR Gold ERP Software" ||$attributes['account_name']=="ARG ERP Software" || $attributes['account_name']=="ARF ERP Software" || $attributes['account_name']=="Arf Erp Software" || $attributes['account_name']=="ARC ERP Software" || $attributes['account_name']=="Arc Erp Software"|| $attributes['account_name']=="ARNA BANGLE"|| $attributes['account_name']=="Domestic Internal ERP Software"){
       $this->load->model(array('transactions/metal_issue_voucher_model','transactions/metal_receipt_voucher_model'));
       if(!empty($attributes['metal_receipt_voucher_reference_id'])){ 	
        $parent_data=$this->metal_receipt_voucher_model->find('',array('id'=>$attributes['metal_receipt_voucher_reference_id']));
