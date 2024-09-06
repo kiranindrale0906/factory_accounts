@@ -9,7 +9,7 @@
           <tr>
             <th></th>
             <th>Design Name</th>
-            <th class="text-right">Customer Name</th>
+            <th class="text-right no-print">Customer Name</th>
             <th class="text-right">Item Code</th>
             <th class="text-right">Gross</th>
             <?php if ($detail==1): ?>
@@ -71,7 +71,7 @@
 		      echo implode(',', array_unique($narration_array));
                     ?>
                   </td>
-                  <td class="text-right"><?= (!empty($metal_voucher_detail['customer_name'])&& $metal_voucher_detail['customer_name']!='Market Issue')?($metal_voucher_detail['customer_name']):'' ; ?></td>
+                  <td class="text-right no-print"><?= (!empty($metal_voucher_detail['customer_name'])&& $metal_voucher_detail['customer_name']!='Market Issue')?($metal_voucher_detail['customer_name']):'' ; ?></td>
                   <td class="text-right"><?= ($metal_voucher_detail['item_code']); ?></td>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['credit_weight']); ?></td>
                   <?php if ($detail==1): ?>
@@ -105,7 +105,7 @@
           <tr class="bg_gray bold">
             <td>Total</td>
             <td></td>
-            <td></td>
+            <td class="no-print"></td>
             <td></td>
             <td class="text-right"><?=four_decimal($sum_weight);?></td>
             <td class="text-right"></td>
