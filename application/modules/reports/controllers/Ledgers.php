@@ -266,7 +266,6 @@ class Ledgers extends BaseController {
     }
 ini_set('memory_limit', '256M');
 
-//	pd($issues);
     foreach ($issues as $issue_index => $issue_value) {
       $voucher_id = rtrim($issue_value['voucher_id'], ", ");
       if(!empty($voucher_id)){
@@ -279,7 +278,16 @@ ini_set('memory_limit', '256M');
       $issues[$issue_index]['reference_account_name']=$reference_ac_voucher_issue_detail['account_name'];
       }
 
+     /* if($this->data['site_name']=="AR Gold ERP"){
+      if($issue_value['site_name']=="Domestic Internal ERP"){
+        $customr_name_detail=$this->voucher_model->find('customer_name',array('id'=>$issue_value['voucher_id']));
+        if($customr_name_detail['customer_name']!="ARG ERP Software"){
+        unset($issues[$issue_index]);
+        }
+      }
+     }*/
     }
+//pd($issues);
     if ($this->data['report_type'] == 'Purchase Sales Ledger') {
       $where_receipt['ac_ledger.sale_type']="Sale";
       $receipt_issue_select .=',chitties.account_name as chitti_account_name,ac_ledger.voucher_id';
@@ -679,10 +687,26 @@ ini_set('memory_limit', '256M');
     if ($this->data['report_type']=="Purchase Sales Ledger")$where['ac_ledger.account_name in ("Sales Account","Purchase Account")'] = NULL;
     if ($this->data['report_type']=="Purchase Labour Ledger")$where['ac_ledger.account_name in ("Sales Account","Purchase Account")'] = NULL;
     
-    if (!empty($this->data['site_name']) && $this->data['site_name'] != 'All')              
+/*    if (!empty($this->data['site_name']) && $this->data['site_name'] != 'All'){              
       $where['(  site_name = "'.$this->data['site_name'].'" 
               or (    REPLACE(narration, "Software ", "") = "'.$this->data['site_name'].'"
                   and receipt_type in ("Domestic Internal", "Export Internal")))'] = NULL;
+    }*/
+   /* if($this->data['site_name']=="AR Gold ERP" && $this->data['report_type']=="Production Report" ){
+       // $where['customer_name'] = 'ARG ERP Software';
+        $sitename='site_name in ("AR Gold ERP","Domestic Internal ERP")';
+      $where['('.$sitename.'
+              or (    REPLACE(narration, "Software ", "") = "'.$this->data['site_name'].'"
+                  and receipt_type in ("Domestic Internal", "Export Internal")))'] = NULL;
+
+     }else{*/
+     if (!empty($this->data['site_name']) && $this->data['site_name'] != 'All'){
+      $where['(  site_name = "'.$this->data['site_name'].'"
+              or (    REPLACE(narration, "Software ", "") = "'.$this->data['site_name'].'"
+                  and receipt_type in ("Domestic Internal", "Export Internal")))'] = NULL;
+   // }
+
+     }
 
     if (   $this->data['report_type'] == 'Vadotar Report' || $this->data['report_type'] == 'Production Report') {
       $export_accounts = $this->account_model->get('name', array('group_code in ("Export")' => NULL ));
