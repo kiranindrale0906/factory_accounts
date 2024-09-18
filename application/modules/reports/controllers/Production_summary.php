@@ -102,7 +102,6 @@ class Production_summary extends BaseController {
 
 
     if ($this->data['site_name'] == '' || ($this->data['site_name']=="AR Gold ERP" || $this->data['site_name']=="ARG ERP Software" || $this->data['site_name']=="ARF ERP Software"|| $this->data['site_name']=="Arf Erp Software" || $this->data['site_name']=="ARC ERP Software"|| $this->data['site_name']=="Arc Erp Software"|| $this->data['site_name']=="ARNA BANGLE" || $this->data['site_name']=="ARF ERP" || $this->data['site_name']=="ARC ERP" || $this->data['site_name']=="Domestic Internal ERP" || $this->data['site_name']=="Domestic Internal ERP Software" || $this->data['site_name']=="ARNA BANGLE ERP")) {
-
       $url = "https://erp.ar-gold.in/api/method/custom_app.api.material_issue.materialissue_details?month=".$this->data['filter_month']."&year=".$this->data['filter_year'];
       $records = json_decode(curl_get_erp_request($url, $_GET));
       $erp_records = json_decode(json_encode($records), true);
@@ -158,7 +157,6 @@ class Production_summary extends BaseController {
         }
         $conditions['factory']=$this->data['site_name'];
       }
-
       $erp_records['message']=$this->production_summary_model->multi_array_search_with_condition($erp_records,$conditions);
     // pd($erp_records);
       foreach ($erp_records['message'] as $index => $erp_record) {
