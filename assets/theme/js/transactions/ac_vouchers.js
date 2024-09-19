@@ -474,14 +474,30 @@ $(".onchange_vadotar_comapny_name").change(function(e){
 $('select[name*="chittis[purity]"]').on('change', function() {
   var purity = $(this).val(); 
   var site_name = $('select[name*="chittis[site_name]"] option:selected').text();
+  var factory_user = $('select[name*="chittis[factory_user]"] option:selected').text();
   var account =$('select[name*="chittis[account_name]"] option:selected').val();  
   window.location = base_url+ 'argold/chittis/create?account_name='+account+'&purity='+purity+'&site_name='+site_name;  
+});
+$('select[name*="chittis[factory_user]"]').on('change', function() {
+  var factory_user = $(this).val(); 
+  var purity = $('select[name*="chittis[purity]"] option:selected').text();
+  var site_name = $('select[name*="chittis[site_name]"] option:selected').text();
+  var account =$('select[name*="chittis[account_name]"] option:selected').val();  
+  window.location = base_url+ 'argold/chittis/create?account_name='+account+'&factory_user='+factory_user+'&purity='+purity+'&site_name='+site_name;  
 });
 $('select[name*="chitti_erps[purity]"]').on('change', function() {
   var purity = $(this).val(); 
   var site_name = $('select[name*="chitti_erps[site_name]"] option:selected').text();
+  var factory_user = $('select[name*="chitti_erps[factory_user]"] option:selected').text();
   var account =$('select[name*="chitti_erps[account_name]"] option:selected').val();  
   window.location = base_url+ 'argold/chitti_erps/create?account_name='+account+'&purity='+purity+'&site_name='+site_name;  
+});
+$('select[name*="chitti_erps[factory_user]"]').on('change', function() {
+  var factory_user = $(this).val(); 
+  var purity = $('select[name*="chitti_erps[purity]"] option:selected').text();
+  var site_name = $('select[name*="chitti_erps[site_name]"] option:selected').text();
+  var account =$('select[name*="chitti_erps[account_name]"] option:selected').val();  
+  window.location = base_url+ 'argold/chitti_erps/create?account_name='+account+'&factory_user='+factory_user+'&purity='+purity+'&site_name='+site_name;  
 });
 $('select[name*="chalans[purity]"]').on('change', function() {
   var purity = $(this).val();

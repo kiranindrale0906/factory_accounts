@@ -89,6 +89,7 @@ class Chittis extends BaseController {
 	$this->data['record']['site_name'] = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'ARF (Apr 2024)';
     }  
   $this->data['site_names'] = get_site_names();
+  $this->data['factory_user']=$this->voucher_model->get('factory_user as name,factory_user as id',array(''),array(),array('group_by'=>'factory_user'));
     if($this->router->class == 'chitti_exports'){ 
       $this->data['site_names'] = get_site_names(1);
       $this->data['account_name']= $this->account_model->get('distinct(name) as name,name as id',
@@ -114,6 +115,7 @@ class Chittis extends BaseController {
                    'date(voucher_date) > "2022-11-12"' => NULL,
                    'site_name' => $this->data['record']['site_name']);
       $account_name= array_column($this->data['account_name'],'name');
+
       $this->data['purity'] = $this->voucher_model->get('purity as name, purity as id', 
                                  array('where'=>array(
                                        'account_name in ("'.implode('", "', $account_name).'")' => NULL,
@@ -141,6 +143,7 @@ class Chittis extends BaseController {
     }
 
     if (!empty($_GET['purity'])) $where['purity'] = $_GET['purity'];
+    if (!empty($_GET['factory_user'])) $where['factory_user'] = $_GET['factory_user'];
     if(!empty($this->data['record']['account_name'])) { 
       $where['account_name']=$this->data['record']['account_name'];
       if($this->router->class == 'chitti_exports'){ 

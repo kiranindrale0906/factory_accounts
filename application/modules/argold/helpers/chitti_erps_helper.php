@@ -107,6 +107,7 @@ function get_field_attribute($table, $field) {
     'order_tag_quantity'   => array('Order Tag Quantity', '', FALSE, '', TRUE),
     'other_item_gross'   => array('Other item gross ', '', FALSE, '', TRUE),
     'narration'   => array('Narration', '', FALSE, '', TRUE),
+    'factory_user'   => array('Factory User', '', FALSE, '', TRUE),
 
   );
   

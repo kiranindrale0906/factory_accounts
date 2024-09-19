@@ -48,6 +48,7 @@
       <?php load_field('text',array('field' => 'freight_usd_amount'));  
     } ?>
      <?php load_field('text',array('field' => 'narration'));  ?>
+     <?php load_field('dropdown', array('field' => 'factory_user','option'=>$factory_user));?>
     
   </div>
     <?php $this->load->view('chitti_details/formlist');?>

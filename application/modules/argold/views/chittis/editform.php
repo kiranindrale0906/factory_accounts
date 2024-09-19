@@ -46,6 +46,7 @@
     <?php load_field('text',array('field' => 'freight_usd_amount'));  } ?>
     
     <?php load_field('text',array('field' => 'narration'));  ?>
+    <?php load_field('dropdown', array('field' => 'factory_user','option'=>$factory_user));?>
   </div>
   <?php load_buttons('submit', array('controller' => $controller, 'name' => 'SAVE' , 'class' => 'btn_blue')) ;
     echo validation_errors();
