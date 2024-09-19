@@ -87,10 +87,10 @@ class Chittis extends BaseController {
     if($this->router->method == 'edit'){
         $this->data['record']['site_name'] = (!empty($this->data['record']['site_name'])) ? $this->data['record']['site_name']: 'AR Gold (Apr 2024)';
     }else{
-	$this->data['record']['site_name'] = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'ARF (Apr 2024)';
+	$this->data['record']['site_name'] = (!empty($_GET['site_name'])) ? trim($_GET['site_name']) : 'ARF (Apr 2024)';
     }  
   $this->data['site_names'] = get_site_names();
-  $this->data['factory_user']=$this->voucher_model->get('factory_user as name,factory_user as id',array(''),array(),array('group_by'=>'factory_user'));
+  $this->data['factory_user']=$this->voucher_model->get('factory_user as name,factory_user as id',array('factory_user!='=>""),array(),array('group_by'=>'factory_user'));
     if($this->router->class == 'chitti_exports'){ 
       $this->data['site_names'] = get_site_names(1);
       $this->data['account_name']= $this->account_model->get('distinct(name) as name,name as id',
