@@ -81,6 +81,7 @@ class Chittis extends BaseController {
   public function _get_form_data() {
     if (!empty($_GET['account_name'])) $this->data['record']['account_name'] = $_GET['account_name'];
     if (!empty($_GET['purity'])) $this->data['record']['purity'] = $_GET['purity'];
+    if (!empty($_GET['factory_user'])) $this->data['record']['factory_user'] = $_GET['factory_user'];
     
 //    $this->data['record']['site_name'] = (!empty($this->data['record']['site_name'])) ? $this->data['record']['site_name']: 'AR Gold (Apr 2024)';
     if($this->router->method == 'edit'){
