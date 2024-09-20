@@ -256,7 +256,7 @@ class Ledgers extends BaseController {
                 || $this->data['site_name'] == 'AR Gold (Feb 2023)')
           $where_receipt['description'] = 'AR Gold Software';    
     }
-	//pd($this->data['report_type']);
+//	pd($where_issue);
     if ($this->data['report_type'] == 'Purchase Sales Ledger') {
       $where_issue['chitties.sale_type']="Sale";
       $receipt_issue_select .=',chitties.account_name as chitti_account_name';
@@ -264,6 +264,7 @@ class Ledgers extends BaseController {
     }else{
       $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(), array('order_by'=>'chitti_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
     }
+//lq(); echo"<pre>";print_r($where_issue);pd($where_receipt);
 ini_set('memory_limit', '256M');
 
     foreach ($issues as $issue_index => $issue_value) {
@@ -703,7 +704,12 @@ ini_set('memory_limit', '256M');
      if (!empty($this->data['site_name']) && $this->data['site_name'] != 'All'){
       $where['(  site_name = "'.$this->data['site_name'].'"
               or (    REPLACE(narration, "Software ", "") = "'.$this->data['site_name'].'"
-                  and receipt_type in ("Domestic Internal", "Export Internal")))'] = NULL;
+                  ))'] = NULL;
+//                  and receipt_type in ("Domestic Internal", "Export Internal")))'] = NULL;
+   // }
+
+     }if (!empty($this->data['site_name']) && $this->data['site_name'] == 'All'){
+      $where['site_name!="Domestic Internal ERP"'] = NULL;
    // }
 
      }
