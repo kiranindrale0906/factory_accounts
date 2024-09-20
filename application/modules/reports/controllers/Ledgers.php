@@ -712,11 +712,9 @@ ini_set('memory_limit', '256M');
       $where['site_name!="Domestic Internal ERP"'] = NULL;
    // }
 
-     }if (!empty($this->data['site_name']) && $this->data['site_name'] == 'All'){
-      $where['(receipt_type in ("Domestic Internal", "Export Internal"))'] = NULL;
+     }
    // }
 
-     }
 
     if (   $this->data['report_type'] == 'Vadotar Report' || $this->data['report_type'] == 'Production Report') {
       $export_accounts = $this->account_model->get('name', array('group_code in ("Export")' => NULL ));
