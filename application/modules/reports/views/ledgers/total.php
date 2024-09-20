@@ -12,6 +12,9 @@
     <?php if ($report_type == 'Production Report'): ?>
       <td></td>
     <?php endif; ?>
+    <?php if ($report_type == 'Summary Report'): ?>
+      <td></td>
+    <?php endif; ?>
     <?php if ($type=='issue') {?>  
       <td class="text-right"><?= four_decimal($record['credit_weight'], '-'); ?></td>
    <td></td>
@@ -31,7 +34,7 @@
     <?php if($report_type == "Gross Profit Report"):?>
       <td class="text-right">0</td>
     <?php endif; ?>
-    <?php if ($report_type == 'Vadotar Report' || $report_type == 'Production Report'): 
+    <?php if ($report_type == 'Vadotar Report' || $report_type == 'Production Report'|| $report_type == 'Summary Report'): 
       if (isset($record['credit_weight']) && $record['credit_weight'] > 0): ?>
         <td class="text-right"><?= four_decimal($record['factory_fine'] - $record['fine'], '-'); ?></td>
         <td class="text-right"><?= four_decimal(($record['factory_fine'] - $record['fine']) / $record['credit_weight'] * 100, '-'); ?></td>
