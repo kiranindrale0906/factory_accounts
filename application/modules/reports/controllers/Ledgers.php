@@ -447,7 +447,7 @@ ini_set('memory_limit', '256M');
     $this->data['opening']   = $this->set_index_for_dates();
     $this->data['balance']   = $this->set_index_for_dates();
     
-    if (isset($this->data['report_type']) && $this->data['report_type'] == 'Production Report') {
+    if (isset($this->data['report_type']) && ($this->data['report_type'] == 'Production Report' || $this->data['report_type'] == 'Summary Report')) {
       //do not compute opening / balance
     }
     else {
@@ -759,7 +759,7 @@ ini_set('memory_limit', '256M');
       $where['receipt_type!=']='Packing Slip';
     }
 
-    if ($this->data['report_type'] == 'Production Report') $where['account_name != '] = 'VADOTAR';
+    if ($this->data['report_type'] == 'Production Report' || $this->data['report_type'] == 'Summary Report') $where['account_name != '] = 'VADOTAR';
     if ($this->data['report_type'] == 'Metal Receipt Type Report') $where['receipt_type']='Metal';
 //    if ($this->data['report_type'] == 'Account Ledger') $where['chitti_id=voucher_id']=NULL;
     

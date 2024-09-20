@@ -103,7 +103,7 @@
     <?php } ?>
     <?php 
       if ($report_type != 'Account Receipt Report'){
-      if ($_SESSION['vodator_report']==1 || $_SESSION['production_report']==1 || $report_type == 'Vadotar Report' || $report_type == 'Production Report') { ?>
+      if ($_SESSION['vodator_report']==1 || $_SESSION['production_report']==1 || $report_type == 'Vadotar Report' || $report_type == 'Production Report'|| $report_type == 'Summary Report') { ?>
       <div class="form-group container"> 
         <h5> 
         <?php if($_SESSION['vodator_report']==1 || $_SESSION['production_report']==1){ ?>
@@ -117,6 +117,8 @@
           <a class="ml-5 <?= ($report_type=='Production Report') ? 'bold black underline' : '' ?>" 
              href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&site_name=<?= $site_name?>&period=<?= $period ?>&report_type=Production Report&detail=<?= $detail ?>&group=<?= $group ?>&domestic_export=<?= $domestic_export ?>'>Production Report</a>
         <?php }?>
+        <a class="ml-5 <?= ($report_type=='Summary Report') ? 'bold black underline' : '' ?>" 
+             href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&site_name=<?= $site_name?>&period=<?= $period ?>&report_type=Summary Report&detail=<?= $detail ?>&group=<?= $group ?>&domestic_export=<?= $domestic_export ?>'>Summary Report</a>
         </h5>
       </div>
 

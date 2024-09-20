@@ -27,7 +27,7 @@
   <?php if($report_type == "Gross Profit Report"):?>
     <td class="text-right">0</td>
   <?php endif; ?>
-  <?php if ($report_type == 'Vadotar Report' || $report_type == 'Production Report'): ?>
+  <?php if ($report_type == 'Vadotar Report' || $report_type == 'Production Report'|| $report_type == 'Summary Report'): ?>
     <td class="text-right"><?= four_decimal($record['fine']-$record['factory_fine'], '-'); ?></td>
     <?php if ($record['debit_weight'] != 0) { ?>
       <td class="text-right"><?= four_decimal(($record['fine']-$record['factory_fine']) / $record['debit_weight'] * 100, '-'); ?></td>

@@ -21,7 +21,7 @@
     <?php if ($report_type == 'Gross Profit Report'): ?>
       <th class='text-right'>Amount</th>
     <?php endif; ?>
-    <?php if ($report_type == 'Vadotar Report' || $report_type == 'Production Report'): ?>
+    <?php if ($report_type == 'Vadotar Report' || $report_type == 'Production Report'|| $report_type == 'Summary Report'): ?>
       <th class='text-right'>Vadotar</th>
       <th class='text-right'>%</th>
     <?php endif; ?>  
