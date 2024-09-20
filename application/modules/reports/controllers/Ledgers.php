@@ -629,6 +629,10 @@ ini_set('memory_limit', '256M');
   }  
 
   private function get_period_select() {
+
+    if($this->data['report_type']=="Summary Report"){
+      $period_select = 'date_format(voucher_date,"%Y-%m")';
+    }
     if     ($this->data['period'] == 'date')  $period_select = 'date_format(voucher_date,"%Y-%m-%d")';
     elseif ($this->data['period'] == 'month') $period_select = 'date_format(voucher_date,"%Y-%m")';
     elseif ($this->data['period'] == 'year')  $period_select = 'date_format(voucher_date,"%Y")';
@@ -762,7 +766,10 @@ ini_set('memory_limit', '256M');
     if ($this->data['report_type'] == 'Production Report' || $this->data['report_type'] == 'Summary Report') $where['account_name != '] = 'VADOTAR';
     if ($this->data['report_type'] == 'Metal Receipt Type Report') $where['receipt_type']='Metal';
 //    if ($this->data['report_type'] == 'Account Ledger') $where['chitti_id=voucher_id']=NULL;
-    
+    if ($this->data['report_type']=="Summary Report"){
+      $where['month(voucher_date)'] =date("M");
+      $where['YEAR(voucher_date)'] =date("YYYY");
+     }
     return $where;
   }
 
