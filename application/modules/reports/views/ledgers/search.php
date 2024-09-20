@@ -1,5 +1,5 @@
 <?php 
-  if ($report_type == 'Vadotar Report' || $report_type == 'Production Report')
+  if ($report_type == 'Vadotar Report' || $report_type == 'Production Report'|| $report_type == 'Summary Report')
     $url = 'reports/vadotar_reports';
   elseif ($report_type == 'Rojmel Report')
     $url = 'reports/rojmel_reports';
