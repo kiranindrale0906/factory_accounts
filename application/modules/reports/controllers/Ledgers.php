@@ -594,7 +594,7 @@ ini_set('memory_limit', '256M');
       } else
         $this->data['balance'][$voucher_date] = $this->data['day_balance'][$voucher_date]; 
 
-      if ($this->data['report_type'] == 'Vadotar Report') {
+      if ($this->data['report_type'] == 'Vadotar Report' || $this->data['report_type'] == 'Summary Report') {
         //$this->data['balance'][$voucher_date]['issue']['credit_weight'] = 0; 
         //$this->data['balance'][$voucher_date]['issue']['credit_amount'] = 0;
         //$this->data['balance'][$voucher_date]['issue']['usd_credit_amount'] = 0;
@@ -623,7 +623,7 @@ ini_set('memory_limit', '256M');
     $this->data['closing'][$last_voucher_date]['issue']['usd_credit_amount'] = 
     !empty($this->data['balance'][$last_voucher_date]['receipt']['usd_debit_amount']) ? $this->data['balance'][$last_voucher_date]['receipt']['usd_debit_amount']:0;
 
-    if ($this->data['report_type'] == 'Vadotar Report') {
+    if ($this->data['report_type'] == 'Vadotar Report' || $this->data['report_type'] == 'Summary Report') {
       $this->data['closing'][$last_voucher_date]['receipt']['fine'] = !empty($this->data['balance'][$last_voucher_date]['issue']['factory_fine'])?$this->data['balance'][$last_voucher_date]['issue']['factory_fine']:0;
     }
   }  
@@ -716,7 +716,7 @@ ini_set('memory_limit', '256M');
    // }
 
 
-    if (   $this->data['report_type'] == 'Vadotar Report' || $this->data['report_type'] == 'Production Report') {
+    if (   $this->data['report_type'] == 'Vadotar Report' || $this->data['report_type'] == 'Production Report'|| $this->data['report_type'] == 'Summary Report') {
       $export_accounts = $this->account_model->get('name', array('group_code in ("Export")' => NULL ));
       $export_account_names = array_column($export_accounts, 'name');
       $domestic_accounts = $this->account_model->get('name', array('group_code in ("Domestic")' => NULL ));
