@@ -96,7 +96,7 @@
                                         // 'reports/outstanding_report' => 'Outstanding Report',
                                         'reports/trial_balances' => 'Trial Balance',
                                         'reports/vadotar_reports' => 'Vadotar Report',
-                                        'reports/summary_reports' => 'Summary Report',
+                                        
                                         //'reports/gross_profit_reports' => 'Gross Profit Report',
                                         //'reports/rojmel_reports' => 'Rojmel Report',
                                         //'reports/bw_accounts' => 'Bw Accounts',
@@ -114,6 +114,7 @@
                                         //'reports/purchase_labour_ledgers' => 'Purchase Labour Report',
                                         ),  
                     //'Interests' => array('transactions/interest_issue_vouchers'=>'Interest Issue Voucher','transactions/interest_receipt_vouchers'=>'Interest Receipt Voucher'),
+                    'Summary Report'   => array('reports/summary_reports' => 'Summary Report'),
                     'Registers'   => array(
                       'registers/cash_registers' => 'Cash Register',
                       'registers/bank_registers' => 'Bank Register',
