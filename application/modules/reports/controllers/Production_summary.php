@@ -101,7 +101,7 @@ class Production_summary extends BaseController {
 //pd($this->data);
 
 
-    if ($this->data['site_name'] == '' || ($this->data['site_name']=="AR Gold ERP" || $this->data['site_name']=="ARG ERP Software" || $this->data['site_name']=="ARF ERP Software"|| $this->data['site_name']=="Arf Erp Software" || $this->data['site_name']=="ARC ERP Software"|| $this->data['site_name']=="Arc Erp Software"|| $this->data['site_name']=="ARNA BANGLE" || $this->data['site_name']=="ARF ERP" || $this->data['site_name']=="ARC ERP" || $this->data['site_name']=="Domestic Internal ERP" || $this->data['site_name']=="Domestic Internal ERP Software" || $this->data['site_name']=="ARNA BANGLE ERP")) {
+    if ($this->data['site_name'] == '' || ($this->data['site_name']=="AR Gold ERP" || $this->data['site_name']=="ARG ERP Software" || $this->data['site_name']=="ARF ERP Software"|| $this->data['site_name']=="Arf Erp Software" || $this->data['site_name']=="Rnd Erp Software" || $this->data['site_name']=="ARC ERP Software"|| $this->data['site_name']=="Arc Erp Software"|| $this->data['site_name']=="ARNA BANGLE" || $this->data['site_name']=="ARF ERP" || $this->data['site_name']=="ARC ERP" || $this->data['site_name']=="Domestic Internal ERP" || $this->data['site_name']=="Domestic Internal ERP Software" || $this->data['site_name']=="ARNA BANGLE ERP")) {
       $url = "https://erp.ar-gold.in/api/method/custom_app.api.material_issue.materialissue_details?month=".$this->data['filter_month']."&year=".$this->data['filter_year'];
       $records = json_decode(curl_get_erp_request($url, $_GET));
       $erp_records = json_decode(json_encode($records), true);
@@ -146,7 +146,10 @@ class Production_summary extends BaseController {
 	if($this->data['site_name']=="ARF ERP"){
         $this->data['site_name']="ARF ERP Software";
         }
-	if($this->data['site_name']=="ARC ERP"){
+	if($this->data['site_name']=="RND ERP"){
+        $this->data['site_name']="Rnd Erp Software";
+        }
+  if($this->data['site_name']=="ARC ERP"){
         $this->data['site_name']="Arc Erp Software";
         }
 	if($this->data['site_name']=="Domestic Internal ERP"){
@@ -193,6 +196,8 @@ class Production_summary extends BaseController {
         }
         if($this->data['site_name']=="ARF ERP Software" || $this->data['site_name']=="Arf Erp Software"){
         $site_name="ARF ERP";
+        }if($this->data['site_name']=="Rnd Erp Software"){
+        $site_name="RND ERP";
         }
         if($this->data['site_name']=="ARC ERP Software" || $this->data['site_name']=="Arc Erp Software"){
         $site_name="ARC ERP";
@@ -266,7 +271,7 @@ class Production_summary extends BaseController {
       $select = 'date(created_at) as created_at, description as item_name,"voucher" as  data , GROUP_CONCAT(id) as refresh_id, GROUP_CONCAT(credit_weight) as refresh_weight, sum(credit_weight) as weight, sum(credit_weight * purity) / sum(credit_weight) as purity, sum(credit_weight * factory_purity) / sum(credit_weight) as factory_purity';
       $voucher_data=$this->voucher_model->get($select, $domestic_where,array(),$group_by);
     }
-    if ($this->data['site_name'] == '' || ($this->data['site_name']=="AR Gold ERP" || $this->data['site_name']=="ARG ERP Software" || $this->data['site_name']=="ARF ERP Software"|| $this->data['site_name']=="Arf Erp Software" || $this->data['site_name']=="ARC ERP Software"|| $this->data['site_name']=="Arc Erp Software"|| $this->data['site_name']=="ARNA BANGLE" || $this->data['site_name']=="ARF ERP" || $this->data['site_name']=="ARC ERP" || $this->data['site_name']=="Domestic Internal ERP" || $this->data['site_name']=="Domestic Internal ERP Software" || $this->data['site_name']=="ARNA BANGLE ERP")) {
+    if ($this->data['site_name'] == '' || ($this->data['site_name']=="AR Gold ERP" || $this->data['site_name']=="ARG ERP Software" || $this->data['site_name']=="ARF ERP Software"|| $this->data['site_name']=="Arf Erp Software" || $this->data['site_name']=="Rnd Erp Software" || $this->data['site_name']=="ARC ERP Software"|| $this->data['site_name']=="Arc Erp Software"|| $this->data['site_name']=="ARNA BANGLE" || $this->data['site_name']=="ARF ERP" || $this->data['site_name']=="ARC ERP" || $this->data['site_name']=="Domestic Internal ERP" || $this->data['site_name']=="Domestic Internal ERP Software" || $this->data['site_name']=="ARNA BANGLE ERP")) {
       $select = 'date(created_at) as created_at, description as item_name,"voucher" as  data , GROUP_CONCAT(id) as refresh_id, GROUP_CONCAT(credit_weight) as refresh_weight, sum(credit_weight) as weight, sum(credit_weight * purity) / sum(credit_weight) as purity, sum(credit_weight * factory_purity) / sum(credit_weight) as factory_purity';
       $domestic_where=array('credit_weight !=' => 0,'site_name'=>$site_name,'receipt_type' => 'Domestic Internal');
        

@@ -45,7 +45,7 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     $this->set_factory_purity_from_receipt_type_for_metal_and_finished_goods_and_chain_receipt();
     $this->set_metal_receipt_attributes_from_receipt_type_for_vadotar();
     $this->set_metal_receipt_attributes();
-    if(!empty($this->attributes['site_name'])&&($this->attributes['site_name']=="AR Gold ERP" || $this->attributes['site_name']=="ARF ERP" || $this->attributes['site_name']=="ARC ERP" || $this->attributes['site_name']=="Domestic Internal ERP" || $this->attributes['site_name']=="ARNA BANGLE ERP") && $this->attributes['receipt_type'] == 'Metal'){
+    if(!empty($this->attributes['site_name'])&&($this->attributes['site_name']=="AR Gold ERP" || $this->attributes['site_name']=="ARF ERP" ||$this->attributes['site_name']=="RND ERP" || $this->attributes['site_name']=="ARC ERP" || $this->attributes['site_name']=="Domestic Internal ERP" || $this->attributes['site_name']=="ARNA BANGLE ERP") && $this->attributes['receipt_type'] == 'Metal'){
     	$this->formdata['metal_issue_vouchers'][0]=$this->attributes;
     	$this->formdata['metal_issue_vouchers'][0]['account_name']=$this->attributes['customer_name'];
     	$this->formdata['metal_issue_vouchers'][0]['credit_weight']=$this->attributes['debit_weight'];
@@ -608,7 +608,8 @@ $attributes['account_name']=trim($attributes['account_name']);
       $api_url = "api/api_pending_ghiss_receipts/store";
     }
 
-    if(($attributes['site_name']=="AR Gold ERP" || $attributes['site_name']=="ARF ERP" || $attributes['site_name']=="ARC ERP" || $attributes['site_name']=="Domestic Internal ERP" || $attributes['site_name']=="ARNA BANGLE ERP") && ($attributes['receipt_type'] == 'GPC Out'|| $attributes['receipt_type'] == 'Melting Wastage' || $attributes['receipt_type'] == 'Daily Drawer Wastage'|| $attributes['receipt_type'] == 'Export Internal' || $attributes['receipt_type'] == 'Domestic Internal' || $attributes['receipt_type'] == 'Refresh')){}elseif(($attributes['site_name']=="AR Gold ERP" || $attributes['site_name']=="ARF ERP" || $attributes['site_name']=="ARC ERP" || $attributes['site_name']=="Domestic Internal ERP" || $attributes['site_name']=="ARNA BANGLE ERP") &&($attributes['receipt_type'] == 'GPC'|| $attributes['receipt_type'] == 'GPC Out'|| $attributes['receipt_type'] == 'Finish Good') && ($attributes['account_name'] == 'Domestic Internal ERP Software' || $attributes['account_name'] == 'ARNA BANGLE' )){
+    if(($attributes['site_name']=="AR Gold ERP" || $attributes['site_name']=="ARF ERP" ||$attributes['site_name']=="RND ERP" || $attributes['site_name']=="ARC ERP" || $attributes['site_name']=="Domestic Internal ERP" || $attributes['site_name']=="ARNA BANGLE ERP") && ($attributes['receipt_type'] == 'GPC Out'|| $attributes['receipt_type'] == 'Melting Wastage' || $attributes['receipt_type'] == 'Daily Drawer Wastage'|| $attributes['receipt_type'] == 'Export Internal' || $attributes['receipt_type'] == 'Domestic Internal' || $attributes['receipt_type'] == 'Refresh')){}
+      elseif(($attributes['site_name']=="AR Gold ERP" || $attributes['site_name']=="ARF ERP" ||$attributes['site_name']=="RND ERP" || $attributes['site_name']=="ARC ERP" || $attributes['site_name']=="Domestic Internal ERP" || $attributes['site_name']=="ARNA BANGLE ERP") &&($attributes['receipt_type'] == 'GPC'|| $attributes['receipt_type'] == 'GPC Out'|| $attributes['receipt_type'] == 'Finish Good') && ($attributes['account_name'] == 'Domestic Internal ERP Software' || $attributes['account_name'] == 'ARNA BANGLE' )){
      }else{
 
     	if (empty($api_url)) return true;
@@ -632,7 +633,7 @@ $attributes['account_name']=trim($attributes['account_name']);
   //  print_r($send_data);
 //pd($attributes);
 //pd($api_url);
-  if ($attributes['account_name']=="AR Gold ERP Software" ||$attributes['account_name']=="ARG ERP Software" || $attributes['account_name']=="ARF ERP Software" || $attributes['account_name']=="Arf Erp Software" || $attributes['account_name']=="ARC ERP Software" || $attributes['account_name']=="Arc Erp Software"|| $attributes['account_name']=="ARNA BANGLE"|| $attributes['account_name']=="Domestic Internal ERP Software"){
+  if ($attributes['account_name']=="AR Gold ERP Software" ||$attributes['account_name']=="ARG ERP Software" || $attributes['account_name']=="ARF ERP Software" || $attributes['account_name']=="Arf Erp Software" ||$attributes['account_name']=="Rnd Erp Software" || $attributes['account_name']=="ARC ERP Software" || $attributes['account_name']=="Arc Erp Software"|| $attributes['account_name']=="ARNA BANGLE"|| $attributes['account_name']=="Domestic Internal ERP Software"){
       $this->load->model(array('transactions/metal_issue_voucher_model','transactions/metal_receipt_voucher_model'));
       if(!empty($attributes['metal_receipt_voucher_reference_id'])){ 	
        $parent_data=$this->metal_receipt_voucher_model->find('',array('id'=>$attributes['metal_receipt_voucher_reference_id']));
@@ -648,9 +649,9 @@ $attributes['account_name']=trim($attributes['account_name']);
       if($attributes['account_name']=="ARNA BANGLE"){
     //  	if($attributes['customer_name']==''){
       	$attributes['customer_name']="ARNA BANGLE";
-	if($attributes['receipt_type']=="GPC"){
-	$attributes['receipt_type']="GPC Out"; 
-	 }    //	}
+      	if($attributes['receipt_type']=="GPC"){
+      	$attributes['receipt_type']="GPC Out"; 
+      	 }    //	}
       }	
       if($attributes['receipt_type']=="Export Internal" || $attributes['receipt_type']=="Domestic Internal"){
         $attributes['receipt_type']="Refresh";

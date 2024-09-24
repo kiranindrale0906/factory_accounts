@@ -22,6 +22,7 @@
                                                                               array('id'=>'ARF ERP','name'=>'ARF ERP'),
                                                                               array('id'=>'ARC ERP','name'=>'ARC ERP'),
                                                                               array('id'=>'ARNA BANGLE','name'=>'ARNA BANGLE'),
+                                                                              array('id'=>'RND ERP','name'=>'RND ERP'),
                                                                               )));?>
   
   </div>
