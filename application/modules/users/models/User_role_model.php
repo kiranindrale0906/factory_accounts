@@ -61,7 +61,6 @@ class User_role_model extends Core_user_role_model {
                                         'reports/outstanding_report',
                                         'reports/trial_balances',
                                         'reports/vadotar_reports',
-                                        'reports/summary_reports',
                                         'reports/gross_profit_reports',
                                         'reports/account_receipt_reports',
                                         'reports/rojmel_reports',
