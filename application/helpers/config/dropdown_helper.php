@@ -228,6 +228,7 @@
     array('id' => 'AR Gold ERP', 'name' => 'AR Gold ERP'),
     array('id' => 'ARF ERP', 'name' => 'ARF ERP'),
     array('id' => 'ARC ERP', 'name' => 'ARC ERP'),
+    array('id' => 'RND ERP', 'name' => 'RND ERP'),
     array('id' => 'ARNA BANGLE ERP', 'name' => 'ARNA BANGLE ERP')
     );
     if ($export==1) $site_names[] = array('id' => 'Export Apr 2024', 'name' => 'Export Apr 2024');
@@ -265,6 +266,7 @@
       array('id' => 'Arf Erp Software',     'name' => 'Arf Erp Software'),
       array('id' => 'ARC ERP Software',     'name' => 'ARC ERP Software'),
       array('id' => 'Arc Erp Software',     'name' => 'Arc Erp Software'),
+      array('id' => 'Rnd Erp Software',     'name' => 'Rnd Erp Software'),
       array('id' => 'ARNA BANGLE',     'name' => 'ARNA BANGLE'),
     );
     if ($export==1) $site_names[] = array('id' => 'Export', 'name' => 'Export');
@@ -321,6 +323,8 @@
       }
     }elseif (str_contains($account_name, 'ARF ERP')) {
        return 'ARF ERP';
+    }elseif (str_contains($account_name, 'Rnd Erp')) {
+       return 'RND ERP';
     }
 
     /*if (str_contains($account_name, 'AR Gold')) {

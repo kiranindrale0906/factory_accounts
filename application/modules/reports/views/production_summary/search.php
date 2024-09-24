@@ -8,6 +8,8 @@
          href='<?= base_url() ?>reports/production_summary'>All</a>
       <a class="ml-5 <?= ($site_name == 'ARNA BANGLE ERP' || $site_name == 'ARNA BANGLE') ? 'bold black underline' : '' ?>" 
            href='<?= base_url() ?>reports/production_summary?site_name=ARNA BANGLE ERP'>ARNA BANGLE ERP</a>
+      <a class="ml-5 <?= ($site_name == 'Rnd Erp Software') ? 'bold black underline' : '' ?>" 
+           href='<?= base_url() ?>reports/production_summary?site_name=RND ERP'>RND ERP</a>
        <a class="ml-5 <?= ($site_name == 'Domestic Internal ERP' || $site_name == 'Domestic Internal ERP Software') ? 'bold black underline' : '' ?>" 
            href='<?= base_url() ?>reports/production_summary?site_name=Domestic Internal ERP'>Domestic Internal ERP</a>
     
