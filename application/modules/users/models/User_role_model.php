@@ -78,7 +78,7 @@ class User_role_model extends Core_user_role_model {
                                         'reports/purchase_profit_and_sale_reports'
                                         ),
                      'Interest' => array('interest/interest_issue_voucher'),
-                    'SummaryReport' => array('reports/summary_reports','reports/income_expenses','reports/quator_wise_loss_reports'),
+                    'SummaryReport' => array('reports/summary_reports','reports/income_expenses','reports/quator_wise_loss_reports','reports/quator_wise_loss_report_details'),
                      'LossReport' => array(
                                     
                                     'reports/loss_reports',
