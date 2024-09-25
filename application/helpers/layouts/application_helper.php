@@ -22,6 +22,7 @@ function APPLICATION_CSS($type='application'){
 		CORE_PATH().'css/base.css',
 		CORE_PATH().'css/style.css',
 		THEME_PATH().'css/style.css',
+		THEME_PATH().'css/custom.css',
 	);
 	return $css;
 }
@@ -90,6 +91,7 @@ function APPLICATION_JS($type='application'){
 		THEME_PATH().'js/reports/trial_balance/trial_balance.js',
 		THEME_PATH().'js/ar_gold/production_summary.js',
 		THEME_PATH().'js/base.js',
+		THEME_PATH().'js/table_row_toggle.js',
 	);
 }
 

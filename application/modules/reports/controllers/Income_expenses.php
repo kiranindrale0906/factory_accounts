@@ -11,7 +11,7 @@ class Income_expenses extends Ledgers {
 
   public function index() {
     $url = "https://apr2024-expenses.ar-gold.in/api/api_income_expenses?api=1&period=date";
-      $records = json_decode(curl_post_request($url, $_GET));
+      $records = json_decode(curl_post_request($url, $data), true);
       $expenses_records = json_decode(json_encode($records), true);
     pd($expenses_records);
     $this->load->render($this->router->class."/index",$this->data);
