@@ -1,0 +1,37 @@
+.toggle_content,.toggle_content.hide{
+  display: none;
+}
+.toggle_content.active{
+  display: table-row;
+}
+.toggle_content td:first-child {
+  padding-left: 20px !important;
+}
+.sub_toggle_row td:first-child:before {
+  content: "\f324";
+}
+.sub_toggle_row {cursor: pointer;}
+.toggle_row {
+  cursor: pointer;
+  background-color: rgba(0,0,0,.05)
+}
+.toggle_row td:first-child:before {
+  content: "\f067";
+}
+.toggle_row.active_row td:first-child:before {
+  content: "\f068";
+}
+.toggle_row td:first-child:before, .sub_toggle_row td:first-child:before {
+  font-family: 'Font Awesome 5 Pro';
+  position: relative;
+  left: 0;
+  font-size: 0.8rem;
+  display: inline-block;
+  padding-right: 5px;
+  font-weight: 700;
+  line-height: 0;
+  top: 0;
+  color: #216be9;
+}
+
+
