@@ -114,7 +114,9 @@
                                         //'reports/purchase_labour_ledgers' => 'Purchase Labour Report',
                                         ),  
                     //'Interests' => array('transactions/interest_issue_vouchers'=>'Interest Issue Voucher','transactions/interest_receipt_vouchers'=>'Interest Receipt Voucher'),
-                    'Summary Report'   => array('reports/summary_reports' => 'Summary Report'),
+                    'Summary Report'   => array(
+                      'reports/summary_reports' =>'Summary Report',
+                      'reports/income_expenses' => 'Expense Report'),
                     'Registers'   => array(
                       'registers/cash_registers' => 'Cash Register',
                       'registers/bank_registers' => 'Bank Register',
