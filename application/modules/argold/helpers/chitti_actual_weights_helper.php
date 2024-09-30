@@ -55,6 +55,7 @@ function get_field_attribute($table, $field) {
   $attributes['chitti_actual_weights'] = array(
     'id'            => array('', '', TRUE, '', TRUE),
     'actual_weight'     => array('Actual Weight', '', TRUE, '', TRUE),
+    'actual_weight_factory'     => array('Actual Weight', '', TRUE, '', TRUE),
      );
   return $attributes[$table][$field];
 }
