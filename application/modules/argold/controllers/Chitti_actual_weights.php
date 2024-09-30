@@ -10,12 +10,12 @@ class Chitti_actual_weights extends BaseController {
   }
 
   public function _after_save($formdata, $action) {
-    pd($formdata);
-    if ($this->router->class == 'chitti_exports')
+    //pd($formdata);
+    if ($formdata['actual_weight_factory'] == 'chitti_exports')
       $this->data['redirect_url']= ADMIN_PATH.'argold/chitti_exports';
-    elseif ($this->router->class == 'chitti_erps')
+    elseif ($formdata['actual_weight_factory'] == 'chitti_erps')
       $this->data['redirect_url']= ADMIN_PATH.'argold/chitti_erps';
-    elseif ($this->router->class == 'chitti_domestics')
+    elseif ($formdata['actual_weight_factory'] == 'chitti_domestics')
       $this->data['redirect_url']= ADMIN_PATH.'argold/chitti_domestics';
     else
       $this->data['redirect_url']= ADMIN_PATH.'argold/chittis';

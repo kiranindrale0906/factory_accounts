@@ -25,6 +25,9 @@ class Chittis extends BaseController {
       if($this->router->class == 'chitti_exports'){ 
         if($show=='yes') $this->where='account_name not in ("'.implode('", "', $account_name).'")';
         else $this->where='chitti_hide=0 and account_name not in ("'.implode('", "', $account_name).'")';
+      }elseif($this->router->class == 'chitti_erps'){ 
+        if($show=='yes') $this->where='site_name = "AR Gold ERP"';
+        else $this->where='chitti_hide=0 and site_name = "AR Gold ERP"';
       }elseif($this->router->class == 'chitti_domestics'){ 
         if($show=='yes') $this->where='account_name in ("'.implode('", "', $account_chitti_domestic_name).'")';
         else $this->where='chitti_hide=0 and account_name in ("'.implode('", "', $account_chitti_domestic_name).'")';      }else{
