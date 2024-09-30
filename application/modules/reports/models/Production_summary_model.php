@@ -6,7 +6,7 @@ class production_summary_model extends BaseModel {
   function __construct($data=array()) {
     parent::__construct($data);
   }
-  function multi_array_search_with_condition($array, $condition)
+  public function multi_array_search_with_condition($array, $condition)
   { 
     $result = array();
    if(!empty($array)){

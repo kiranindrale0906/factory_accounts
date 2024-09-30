@@ -3,7 +3,7 @@
 class Production_same_purity_summary extends BaseController {
   public function __construct() {
     parent::__construct();
-    $this->load->model(array('masters/account_model', 'argold/refresh_detail_model', 'ac_vouchers/voucher_model'));
+    $this->load->model(array('masters/account_model', 'argold/refresh_detail_model', 'ac_vouchers/voucher_model','reports/production_summary_model'));
   }
 
   public function index() {
@@ -25,6 +25,9 @@ class Production_same_purity_summary extends BaseController {
     $this->data['machine_size'] = (!empty($_GET['machine_size'])) ? $_GET['machine_size'] : '';
     $this->data['design_code']  = (!empty($_GET['design_code']))  ? $_GET['design_code'] : '';
     $this->data['site_names']   = array('AR Gold', 'ARC', 'ARF');
+    $this->data['filter_month'] = (!empty($_GET['filter_month'])) ? $_GET['filter_month'] : date('m');
+    $this->data['filter_year'] = (!empty($_GET['filter_year'])) ? $_GET['filter_year'] : date('Y');
+    
     
     $url = '';
     //if ($this->data['site_name'] == 'AR Gold')     $url = API_APR2024_ARG_PATH."issue_departments/api_issue_departments/create";
