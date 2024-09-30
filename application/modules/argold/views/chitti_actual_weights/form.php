@@ -6,6 +6,7 @@
       action="<?= get_form_action($controller, $action, $record) ?>">
   <?php if ($action == 'edit' || $action == 'update'): ?>
     <?php load_field('hidden', array('field' => 'id')); ?>
+    <?php load_field('hidden', array('field' => 'actual_weight_factory','name'=>$_GET['factory'])); ?>
   <?php endif; ?>     
   <div class="row">    
     <?php 

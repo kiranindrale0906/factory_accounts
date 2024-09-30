@@ -124,6 +124,7 @@ function get_field_attribute($table, $field) {
 function get_row_actions($row, $url, $select_url, $filter) {
   $actions = array();
   $controller = 'argold/chittis';
+  $module_name = 'chittis';
   $actions["View"] = array('request' => "http", 
                            'url' => ADMIN_PATH.$controller.'/view/'.$row['id'],
                            'confirm_message' => "",
@@ -138,7 +139,7 @@ function get_row_actions($row, $url, $select_url, $filter) {
                            'confirm_message' => "",
                            'class' => 'btn-sm');
   $actions["Add Actual Weight"] = array('request' => "http", 
-                           'url' => ADMIN_PATH.'argold/chitti_actual_weights/edit/'.$row['id'].'?factory='.$controller,
+                           'url' => ADMIN_PATH.'argold/chitti_actual_weights/edit/'.$row['id'].'?factory='.$module_name,
                            'confirm_message' => "",
                            'class' => 'btn-sm');
   $actions["Detail"] = array('request' => "http", 

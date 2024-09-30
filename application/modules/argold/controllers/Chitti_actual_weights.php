@@ -5,14 +5,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Chitti_actual_weights extends BaseController {
   public function __construct() {
     parent::__construct();
-    $this->redirect_after_save = 'view';
+    //$this->redirect_after_save = 'view';
     $this->load->model(array('transactions/metal_issue_voucher_model'));
   }
 
-  public function view($id) {
-    if ($this->router->class == 'chitti_erps')
-      redirect(ADMIN_PATH.'argold/chitti_erps');
+  public function _after_save($formdata, $action) {
+    pd($formdata);
+    if ($this->router->class == 'chitti_exports')
+      $this->data['redirect_url']= ADMIN_PATH.'argold/chitti_exports';
+    elseif ($this->router->class == 'chitti_erps')
+      $this->data['redirect_url']= ADMIN_PATH.'argold/chitti_erps';
+    elseif ($this->router->class == 'chitti_domestics')
+      $this->data['redirect_url']= ADMIN_PATH.'argold/chitti_domestics';
     else
-      redirect(ADMIN_PATH.'argold/chittis');
+      $this->data['redirect_url']= ADMIN_PATH.'argold/chittis';
+    
+    return $formdata;
   }
 }
