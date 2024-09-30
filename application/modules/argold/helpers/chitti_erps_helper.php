@@ -136,7 +136,7 @@ function get_row_actions($row, $url, $select_url, $filter) {
                            'confirm_message' => "",
                            'class' => 'btn-sm');
   $actions["Add Actual Weight"] = array('request' => "http", 
-                           'url' => ADMIN_PATH.'argold/chitti_actual_weights/edit/'.$row['id'].'factory='.$module_name,
+                           'url' => ADMIN_PATH.'argold/chitti_actual_weights/edit/'.$row['id'].'?factory='.$module_name,
                            'confirm_message' => "",
                            'class' => 'btn-sm');
   $actions["Detail"] = array('request' => "http", 
