@@ -10,6 +10,9 @@ class Chitti_actual_weights extends BaseController {
   }
 
   public function view($id) {
-    redirect(ADMIN_PATH.'argold/chittis');
+    if ($this->router->class == 'chitti_erps')
+      redirect(ADMIN_PATH.'argold/chitti_erps');
+    else
+      redirect(ADMIN_PATH.'argold/chittis');
   }
 }
