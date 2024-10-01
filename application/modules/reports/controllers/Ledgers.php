@@ -717,12 +717,12 @@ ini_set('memory_limit', '256M');
    // }
 
      }
-if(($this->data['report_type'] != 'Account Ledger' && $this->data['report_type'] != 'Production Report') && !empty($this->data['site_name']) && $this->data['site_name'] == 'All'){
+if(($this->data['report_type'] != 'Account Ledger' && $this->data['report_type'] != 'Production Report' && $this->data['report_type'] != 'Summary Report') && !empty($this->data['site_name']) && $this->data['site_name'] == 'All'){
       $where['site_name!="Domestic Internal ERP"'] = NULL;
    // }
 
      }
-   if(($this->data['report_type'] == 'Production Report') && !empty($this->data['site_name']) && $this->data['site_name'] == 'All'){
+   if(($this->data['report_type'] == 'Production Report' && $this->data['report_type'] == 'Summary Report') && !empty($this->data['site_name']) && $this->data['site_name'] == 'All'){
       $where['account_name!="Tanishq"'] = NULL;
      } 
    // }
