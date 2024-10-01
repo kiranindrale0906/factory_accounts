@@ -217,6 +217,11 @@ class Ledgers extends BaseController {
     
     $where_issue   = array_merge($where, array('(ac_ledger.credit_weight != 0 or ac_ledger.credit_amount != 0)' => NULL),$account_issue_where);
     $where_receipt = array_merge($where, array('(ac_ledger.debit_weight != 0 or ac_ledger.debit_amount != 0)'   => NULL),$account_receipt_where);
+
+    if(($this->data['report_type'] == 'Production Report') && !empty($this->data['site_name']) && $this->data['site_name'] == 'All'){
+      $where_receipt['account_name!="Tanishq"'] = NULL;
+      $where_issue['account_name!="Domestic Internal ERP Software"'] = NULL;
+     }
     if ($this->data['domestic_export'] == 'Export') {
       $where_receipt=array('(      account_name = ("Export Internal Software")  
                                and receipt_type="Export Internal" 
@@ -722,9 +727,7 @@ if(($this->data['report_type'] != 'Account Ledger' && $this->data['report_type']
    // }
 
      }
-   if(($this->data['report_type'] == 'Production Report') && !empty($this->data['site_name']) && $this->data['site_name'] == 'All'){
-      $where['account_name!="Tanishq"'] = NULL;
-     } 
+    
    // }
 
 
