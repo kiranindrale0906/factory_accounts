@@ -162,7 +162,7 @@
 <?php }} ?>
 <div class="row">
 <?php if($report_type == 'Summary Report'){ ?>
-  <div class="col-md-12">
+  <div class="form-group container">
 
   <h5>
     Months:
