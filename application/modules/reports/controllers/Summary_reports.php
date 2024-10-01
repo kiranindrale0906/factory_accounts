@@ -22,26 +22,14 @@ class Summary_reports extends Ledgers {
                IFNULL(sum((purity-factory_purity)*debit_weight/100),0) - IFNULL(sum((factory_purity-purity)*credit_weight/100),0) as vadotar,
                IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount,
                IFNULL(sum(usd_debit_amount),0) - IFNULL(sum(usd_credit_amount),0) as usd_amount,0 as id";
+   $where =array('account_name in ("ARC ERP Software","ARC Software (Apr 2024)","ARF ERP Software","ARF Software (Apr 2024)","ARG ERP Software","ARNA BANGLE")'=>NULL);
+   $loss_account=array();
     $this->data['trial_balance'] = $this->model->get($select,$where, array() , 
                                                       array('group_by'=>'account_name,',
                                                             'order_by'=>'account_name asc'));
     $this->data['loss_account_records'] = array();
     $loss_account_names =  $this->account_model->get('name', array('group_id' => 3));
     $loss_account_names = array_column($loss_account_names, 'name');
-    
-    foreach($this->data['trial_balance'] as $index => $trail_balance_record) {
-        $account_data=$this->account_model->find('unrecoverable_account_name',array('name'=>$trail_balance_record['account_name']));
-       $this->data['trial_balance'][$index]['unrecoverable_account_name']= !empty($account_data)?$account_data['unrecoverable_account_name']:'';
-      if (in_array($trail_balance_record['account_name'], $loss_account_names)) {
-        $loss_account['fine'] += $trail_balance_record['fine'];
-        $account_data=$this->account_model->find('unrecoverable_account_name',array('name'=>$trail_balance_record['account_name']));
-        $trail_balance_record['unrecoverable_account_name'] =$account_data['unrecoverable_account_name'] ;
-        $this->data['loss_account_records'][] = $trail_balance_record;
-        unset($this->data['trial_balance'][$index]);
-      }
-    }
-    $this->data['trial_balance'][] = $loss_account;
-
     $this->get_datewise_ledger_records();
     $this->get_companywise_vadotar();
   }

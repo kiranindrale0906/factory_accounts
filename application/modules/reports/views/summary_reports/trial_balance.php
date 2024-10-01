@@ -1,4 +1,4 @@
-<div class="col-md-6">
+<div class="col-md-12">
     <div class="form-group container">
       <div class="table-responsive m-t-20">
         <table class="table table-sm fixedthead table-default">

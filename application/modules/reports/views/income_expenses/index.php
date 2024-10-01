@@ -1,10 +1,11 @@
 <?php
   $this->load->view('reports/ledgers/report_header', array('header' => 'Income Expense Report'));
-  $this->load->view('reports/ledgers/search', array('url' => BASE_URL.'reports/income_expenses'));
+//  $this->load->view('reports/ledgers/search', array('url' => BASE_URL.'reports/income_expenses'));
 ?>
 
 <div class="row">
   <?php 
+//pd($dates);
     foreach ($dates as $index => $date) {$i = $index; ?>
       <div class="col-md-6">
         <div class="form-group container">
@@ -164,7 +165,7 @@
                                 <td class="text-right">
                                   <?php //if(!empty($voucher['document'])){ ?>
                                    <!-- <a target="_blank" href=<?//= BASE_URL.'uploads/invoices/original/'.$voucher['document']?>>View Document-->
-                                    <a target="_blank" href=<?= BASE_URL.'reports/income_expenses/view/1?account_name='.rawurlencode($voucher['account_name']).'&hod='.rawurlencode($expense_account_name).'&expenses_account='.rawurlencode($account_name).'&account_id='.$amount['account_id'].'&voucher_date='.$voucher['voucher_date'].'&period='.$period?>>View</a>
+                                    <a target="_blank" href=<?='https://apr2024-expenses.ar-gold.in/reports/income_expenses/view/1?account_name='.rawurlencode($voucher['account_name']).'&hod='.rawurlencode($expense_account_name).'&expenses_account='.rawurlencode($account_name).'&account_id='.$amount['account_id'].'&voucher_date='.$voucher['voucher_date'].'&period='.$period?>>View</a>
                                   <?php //} ?>
                                 </td>
                                 <td class="text-right"></td>
