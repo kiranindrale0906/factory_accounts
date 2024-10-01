@@ -160,7 +160,6 @@
       </h6>
       </div>
 <?php }} ?>
-<div class="row">
 <?php if($report_type == 'Summary Report'){ ?>
   <div class="form-group container">
 
@@ -175,4 +174,3 @@
      </h5>
    </div>
  <?php }?>
-</div>
