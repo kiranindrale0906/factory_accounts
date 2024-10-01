@@ -32,12 +32,12 @@ defined('BASEPATH') OR exit('No direct script access allowed.');
     }
   }
 if (!function_exists('get_curl_expenses')) {
-  function get_curl_expenses(){
+  function get_curl_expenses($url){
 
    $curl = curl_init();
 
  	curl_setopt_array($curl, array(
- 	 CURLOPT_URL => 'https://apr2024-expenses.ar-gold.in/api/api_income_expenses?api=1&period=date',
+ 	 CURLOPT_URL => $url,
  	 CURLOPT_RETURNTRANSFER => true,
   	 CURLOPT_ENCODING => '',
   	 CURLOPT_MAXREDIRS => 10,
