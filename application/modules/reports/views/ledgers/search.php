@@ -81,22 +81,8 @@
            href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&site_name=<?= $site_name?>&period=year&report_type=<?= $report_type ?>&detail=<?= $detail ?>&group=<?= $group ?>&domestic_export=<?= $domestic_export ?>'>Year</a>
       </h5>
     </div>
-  <?php }else{?>
-    <div class="row">
-  <div class="col-md-12">
-
-  <h6>
-    Months:
-  <?php $months = array(1 => 'Jan.', 2 => 'Feb.', 3 => 'Mar.', 4 => 'Apr.', 5 => 'May', 6 => 'Jun.', 7 => 'Jul.', 8 => 'Aug.', 9 => 'Sep.', 10 => 'Oct.', 11 => 'Nov.', 12 => 'Dec.');
-      foreach ($months as $month_key => $month) { ?>
-        <a class="ml-5 <?= ($filter_month == $month_key) ? 'bold black underline' : '' ?>"
-               href='<?= base_url() ?>reports/summary_reports?site_name=<?= $site_name ?>&filter_month=<?= $month_key ?>&filter_year=2024'><?= $month ?></a>
-
-          <?php } ?>
-     </h6>
-   </div>
-   </div>
- <?php }?>
+  <?php }?>
+    
     <!-- <div class="form-group container"> 
       <h5> Details: 
         <a class="ml-5 <?= ($detail=='yes') ? 'bold black underline' : '' ?>" 
@@ -174,3 +160,19 @@
       </h6>
       </div>
 <?php }} ?>
+<div class="row">
+<?php if($report_type == 'Summary Report'){ ?>
+  <div class="col-md-12">
+
+  <h5>
+    Months:
+  <?php $months = array(1 => 'Jan.', 2 => 'Feb.', 3 => 'Mar.', 4 => 'Apr.', 5 => 'May', 6 => 'Jun.', 7 => 'Jul.', 8 => 'Aug.', 9 => 'Sep.', 10 => 'Oct.', 11 => 'Nov.', 12 => 'Dec.');
+      foreach ($months as $month_key => $month) { ?>
+        <a class="ml-5 <?= ($filter_month == $month_key) ? 'bold black underline' : '' ?>"
+               href='<?= base_url() ?>reports/summary_reports?site_name=<?= $site_name ?>&filter_month=<?= $month_key ?>&filter_year=2024'><?= $month ?></a>
+
+          <?php } ?>
+     </h5>
+   </div>
+ <?php }?>
+</div>
