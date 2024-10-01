@@ -12,6 +12,8 @@ class Ledgers extends BaseController {
     if($this->data['report_type'] == 'Purchase Labour Ledger'){
      $this->data['period']               = (!empty($_GET['period'])) ? $_GET['period'] : 'date';
     }
+     $this->data['filter_month']= (!empty($_GET['filter_month'])) ? $_GET['filter_month'] : date('m');
+     $this->data['filter_year']= (!empty($_GET['filter_year'])) ? $_GET['filter_year'] : date('Y');
     // $this->data['detail']               = (!empty($_GET['detail'])) ? $_GET['detail'] : 'yes';
     // $this->data['group']                = (!empty($_GET['group'])) ? $_GET['group'] : '';
     // $this->data['domestic_export']      = (!empty($_GET['domestic_export'])) ? $_GET['domestic_export'] : 'All';
@@ -767,8 +769,8 @@ ini_set('memory_limit', '256M');
     if ($this->data['report_type'] == 'Metal Receipt Type Report') $where['receipt_type']='Metal';
 //    if ($this->data['report_type'] == 'Account Ledger') $where['chitti_id=voucher_id']=NULL;
     if ($this->data['report_type']=="Summary Report"){
-      $where['month(voucher_date)'] =date("M");
-      $where['YEAR(voucher_date)'] =date("YYYY");
+      $where['month(voucher_date)'] =$this->data['filter_month'];
+      $where['YEAR(voucher_date)'] =$this->data['filter_year'];
      }
     return $where;
   }
