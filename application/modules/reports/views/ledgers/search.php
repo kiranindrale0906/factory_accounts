@@ -166,9 +166,10 @@
   <h5>
     Months:
   <?php $months = array(1 => 'Jan.', 2 => 'Feb.', 3 => 'Mar.', 4 => 'Apr.', 5 => 'May', 6 => 'Jun.', 7 => 'Jul.', 8 => 'Aug.', 9 => 'Sep.', 10 => 'Oct.', 11 => 'Nov.', 12 => 'Dec.');
+     $year=date('Y');
       foreach ($months as $month_key => $month) { ?>
         <a class="ml-5 <?= ($filter_month == $month_key) ? 'bold black underline' : '' ?>"
-               href='<?= base_url() ?>reports/summary_reports?site_name=<?= $site_name ?>&filter_month=<?= $month_key ?>&filter_year=2024'><?= $month ?></a>
+               href='<?= base_url() ?>reports/summary_reports?site_name=<?= $site_name ?>&filter_month=<?= $month_key ?>&filter_year=<?=$year?>'><?= $month ?></a>
 
           <?php } ?>
      </h5>
