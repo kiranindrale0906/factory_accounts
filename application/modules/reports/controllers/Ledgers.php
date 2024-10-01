@@ -12,8 +12,12 @@ class Ledgers extends BaseController {
     if($this->data['report_type'] == 'Purchase Labour Ledger'){
      $this->data['period']               = (!empty($_GET['period'])) ? $_GET['period'] : 'date';
     }
+   if($this->data['report_type'] == 'Summary Report'){
+     $this->data['period']               = (!empty($_GET['period'])) ? $_GET['period'] : 'month';
+     $this->data['group']               = (!empty($_GET['group'])) ? $_GET['group'] : 'voucher_date';
      $this->data['filter_month']= (!empty($_GET['filter_month'])) ? $_GET['filter_month'] : date('m');
      $this->data['filter_year']= (!empty($_GET['filter_year'])) ? $_GET['filter_year'] : date('Y');
+    }
     // $this->data['detail']               = (!empty($_GET['detail'])) ? $_GET['detail'] : 'yes';
     // $this->data['group']                = (!empty($_GET['group'])) ? $_GET['group'] : '';
     // $this->data['domestic_export']      = (!empty($_GET['domestic_export'])) ? $_GET['domestic_export'] : 'All';
@@ -264,7 +268,7 @@ class Ledgers extends BaseController {
       $receipt_issue_select .=',chitties.account_name as chitti_account_name';
       $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(array('chitties','chitties.id=ac_ledger.chitti_id')), array('order_by'=>'ac_ledger.chitti_id, ac_ledger.voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
     }else{
-      $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(), array('order_by'=>'chitti_id, voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
+      $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(), array('order_by'=>'chitti_id, voucher_type, voucher_date asc', 'group_by' => $this->data['group']));
     }
 //lq(); echo"<pre>";print_r($where_issue);pd($where_receipt);
 ini_set('memory_limit', '256M');
@@ -431,8 +435,6 @@ ini_set('memory_limit', '256M');
     $issues=array();
     $issue_voucher_dates=array();
     }
-	//lq();
-	//pd($issues);
     $issue_voucher_dates = array_column($issues, 'voucher_date');
     $receipt_voucher_dates = array_column($receipts, 'voucher_date');
     $this->data['voucher_dates'] = array_values(array_unique(array_merge($issue_voucher_dates, $receipt_voucher_dates)));
@@ -714,11 +716,15 @@ ini_set('memory_limit', '256M');
 //                  and receipt_type in ("Domestic Internal", "Export Internal")))'] = NULL;
    // }
 
-     }if (!empty($this->data['site_name']) && $this->data['site_name'] == 'All'){
+     }
+if(($this->data['report_type'] != 'Account Ledger' && $this->data['report_type'] != 'Production Report') && !empty($this->data['site_name']) && $this->data['site_name'] == 'All'){
       $where['site_name!="Domestic Internal ERP"'] = NULL;
    // }
 
      }
+   if(($this->data['report_type'] == 'Production Report') && !empty($this->data['site_name']) && $this->data['site_name'] == 'All'){
+      $where['account_name!="Tanishq"'] = NULL;
+     } 
    // }
 
 
@@ -740,7 +746,9 @@ ini_set('memory_limit', '256M');
                      and voucher_type = "metal receipt voucher")
 		 or ( receipt_type="Refresh"
                      and voucher_type = "metal receipt voucher")
-                 or (    account_name in ("'.$export_account_names.'") 
+                 or( receipt_type="Reject" and  account_name="Domestic Internal ERP Software"  
+                     and voucher_type = "metal receipt voucher")
+		 or (    account_name in ("'.$export_account_names.'") 
                      and voucher_type = "metal issue voucher")
               )'] = NULL;
       } elseif ($this->data['domestic_export'] == 'Domestic') {
@@ -764,14 +772,15 @@ ini_set('memory_limit', '256M');
     
       $where['receipt_type!=']='Packing Slip';
     }
-
+//pd($where);
     if ($this->data['report_type'] == 'Production Report' || $this->data['report_type'] == 'Summary Report') $where['account_name != '] = 'VADOTAR';
     if ($this->data['report_type'] == 'Metal Receipt Type Report') $where['receipt_type']='Metal';
 //    if ($this->data['report_type'] == 'Account Ledger') $where['chitti_id=voucher_id']=NULL;
     if ($this->data['report_type']=="Summary Report"){
       $where['month(voucher_date)'] =$this->data['filter_month'];
       $where['YEAR(voucher_date)'] =$this->data['filter_year'];
-     }
+}
+//pd($where);
     return $where;
   }
 

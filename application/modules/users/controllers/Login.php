@@ -30,7 +30,6 @@ class Login extends Core_login {
 
       if( empty($check_ip_address) && $user_data['do_not_check_ip'] == 0)
         redirect('users/logout');
-      pd($_SESSION);
       if(isset($_SESSION['http_referer']) && !(empty($_SESSION['http_referer'])))
         $redirect_url =  $_SESSION['http_referer'];
       else
@@ -40,6 +39,8 @@ class Login extends Core_login {
         redirect('reports/account_ledgers');
       }elseif(HOST == 'REPORT ACCOUNTS'){
         redirect('reports/account_ledgers');
+      }elseif($_SESSION['name'] == 'summary'){
+        redirect('reports/summary_reports');
       } else{
         redirect($redirect_url);
       }

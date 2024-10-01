@@ -31,10 +31,34 @@ defined('BASEPATH') OR exit('No direct script access allowed.');
       return FALSE; 
     }
   }
+if (!function_exists('get_curl_expenses')) {
+  function get_curl_expenses(){
 
+   $curl = curl_init();
+
+ 	curl_setopt_array($curl, array(
+ 	 CURLOPT_URL => 'https://apr2024-expenses.ar-gold.in/api/api_income_expenses?api=1&period=date',
+ 	 CURLOPT_RETURNTRANSFER => true,
+  	 CURLOPT_ENCODING => '',
+  	 CURLOPT_MAXREDIRS => 10,
+         CURLOPT_TIMEOUT => 0,
+  	 CURLOPT_FOLLOWLOCATION => true,
+         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+         CURLOPT_CUSTOMREQUEST => 'POST',CURLOPT_SSL_VERIFYPEER => false,
+         CURLOPT_HTTPHEADER => array(
+         'Cookie: ci_session=igld4p8e8kndnb6l7e2547jalsvqq4vr'
+  	),
+	));
+
+	$response = curl_exec($curl);
+        if ($response === false) {
+    	echo 'cURL Error: ' . curl_error($curl);
+	} else {
+    // Print the response
+    	return  $response;
+	}} }
   if (!function_exists('curl_post_request')) {
     function curl_post_request($uri, $data = array()) {
-
       if(!empty($uri)) {
         $api_url=$uri;
         $curl = curl_init($api_url);
@@ -44,6 +68,7 @@ defined('BASEPATH') OR exit('No direct script access allowed.');
         curl_setopt($curl, CURLOPT_HTTPHEADER, [
           'access_token:'.ACCESS_TOKEN
         ]);
+//       pd($curl);
         $response = curl_exec($curl);
 //pd($response);
         if(curl_errno($curl))
