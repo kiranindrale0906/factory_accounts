@@ -86,7 +86,7 @@
   <div class="col-md-12">
 
   <h6>
-       ERP Months:
+    Months:
   <?php $months = array(1 => 'Jan.', 2 => 'Feb.', 3 => 'Mar.', 4 => 'Apr.', 5 => 'May', 6 => 'Jun.', 7 => 'Jul.', 8 => 'Aug.', 9 => 'Sep.', 10 => 'Oct.', 11 => 'Nov.', 12 => 'Dec.');
       foreach ($months as $month_key => $month) { ?>
         <a class="ml-5 <?= ($filter_month == $month_key) ? 'bold black underline' : '' ?>"
