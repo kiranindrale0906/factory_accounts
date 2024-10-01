@@ -10,7 +10,10 @@ class Income_expenses extends Ledgers {
   }
   public function index() {
     $this->data['report_type'] = 'Income Expenses';
-    $url = "https://apr2024-expenses.ar-gold.in/api/api_income_expenses?api=1&period=date";
+    $this->data['filter_month']= (!empty($_GET['filter_month'])) ? $_GET['filter_month'] : date('m');
+    $this->data['filter_year']= (!empty($_GET['filter_year'])) ? $_GET['filter_year'] : date('Y');
+    
+    $url = "https://apr2024-expenses.ar-gold.in/api/api_income_expenses?api=1&period=date&filter_month="+$this->data['filter_month']+"&filter_year="+$this->data['filter_year'];
     $records = json_decode(get_curl_expenses());
     $this->data = json_decode(json_encode($records), true);    
     $this->load->render($this->router->class."/index",$this->data['data']);
