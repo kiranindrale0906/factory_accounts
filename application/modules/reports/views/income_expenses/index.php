@@ -2,6 +2,19 @@
   $this->load->view('reports/ledgers/report_header', array('header' => 'Income Expense Report'));
 //  $this->load->view('reports/ledgers/search', array('url' => BASE_URL.'reports/income_expenses'));
 ?>
+<div class="form-group container">
+
+  <h5>
+    Months:
+  <?php $months = array(1 => 'Jan.', 2 => 'Feb.', 3 => 'Mar.', 4 => 'Apr.', 5 => 'May', 6 => 'Jun.', 7 => 'Jul.', 8 => 'Aug.', 9 => 'Sep.', 10 => 'Oct.', 11 => 'Nov.', 12 => 'Dec.');
+     $year=date('Y');
+      foreach ($months as $month_key => $month) { ?>
+        <a class="ml-5 <?= ($filter_month == $month_key) ? 'bold black underline' : '' ?>"
+               href='<?= base_url() ?>reports/income_expenses?filter_month=<?= $month_key ?>&filter_year=<?=$year?>'><?= $month ?></a>
+
+          <?php } ?>
+     </h5>
+   </div>
 
 <div class="row">
   <?php 
