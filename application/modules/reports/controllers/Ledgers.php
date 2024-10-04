@@ -218,10 +218,10 @@ class Ledgers extends BaseController {
     $where_issue   = array_merge($where, array('(ac_ledger.credit_weight != 0 or ac_ledger.credit_amount != 0)' => NULL),$account_issue_where);
     $where_receipt = array_merge($where, array('(ac_ledger.debit_weight != 0 or ac_ledger.debit_amount != 0)'   => NULL),$account_receipt_where);
 
-    if(($this->data['report_type'] == 'Production Report') && !empty($this->data['site_name']) && $this->data['site_name'] == 'All'){
-      $where_receipt['account_name!="Tanishq"'] = NULL;
-      $where_issue['account_name!="Domestic Internal ERP Software"'] = NULL;
-     }
+    if(($this->data['report_type'] == 'Production Report' || $this->data['report_type'] == 'Summary Report') && !empty($this->data['site_name']) && $this->data['site_name'] == 'All'){
+      $where_receipt['account_name Not in ("Tanishq","VADOTAR")'] = NULL;
+      $where_issue['account_name NOT IN ("Domestic Internal ERP Software","VADOTAR")'] = NULL;
+    }
     if ($this->data['domestic_export'] == 'Export') {
       $where_receipt=array('(      account_name = ("Export Internal Software")  
                                and receipt_type="Export Internal" 
@@ -267,7 +267,7 @@ class Ledgers extends BaseController {
                 || $this->data['site_name'] == 'AR Gold (Feb 2023)')
           $where_receipt['description'] = 'AR Gold Software';    
     }
-//	pd($where_issue);
+//	pd($where_receipt);
     if ($this->data['report_type'] == 'Purchase Sales Ledger') {
       $where_issue['chitties.sale_type']="Sale";
       $receipt_issue_select .=',chitties.account_name as chitti_account_name';
@@ -722,12 +722,14 @@ ini_set('memory_limit', '256M');
    // }
 
      }
-if(($this->data['report_type'] != 'Account Ledger' && $this->data['report_type'] != 'Production Report') && !empty($this->data['site_name']) && $this->data['site_name'] == 'All'){
+if(($this->data['report_type'] != 'Account Ledger' && $this->data['report_type'] != 'Production Report' && $this->data['report_type'] != 'Summary Report') && !empty($this->data['site_name']) && $this->data['site_name'] == 'All'){
       $where['site_name!="Domestic Internal ERP"'] = NULL;
    // }
 
      }
-    
+//   if(($this->data['report_type'] == 'Production Report' && $this->data['report_type'] == 'Summary Report') && !empty($this->data['site_name']) && $this->data['site_name'] == 'All'){
+   //   $where['account_name!="Tanishq"'] = NULL;
+    // } 
    // }
 
 
@@ -776,7 +778,7 @@ if(($this->data['report_type'] != 'Account Ledger' && $this->data['report_type']
       $where['receipt_type!=']='Packing Slip';
     }
 //pd($where);
-    if ($this->data['report_type'] == 'Production Report' || $this->data['report_type'] == 'Summary Report') $where['account_name != '] = 'VADOTAR';
+    //if ($this->data['report_type'] == 'Production Report' || $this->data['report_type'] == 'Summary Report') $where['account_name != '] = 'VADOTAR';
     if ($this->data['report_type'] == 'Metal Receipt Type Report') $where['receipt_type']='Metal';
 //    if ($this->data['report_type'] == 'Account Ledger') $where['chitti_id=voucher_id']=NULL;
     if ($this->data['report_type']=="Summary Report"){
