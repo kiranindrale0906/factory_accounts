@@ -186,7 +186,7 @@ class Chittis extends BaseController {
                             $where, 
                             array(), 
                             array('group_by'=>'item_code, voucher_date, usd_wastage_percentage,
-                                               inr_wastage_percentage, erp_argold_id,customer_name','order_by'=>"voucher_date asc"));
+                                               inr_wastage_percentage, erp_argold_id,customer_name','order_by'=>"date_format(ac_vouchers.created_at,'%H:%i:%s') asc"));
 
 //pd($this->data['metal_vouchers']);
     }else{
