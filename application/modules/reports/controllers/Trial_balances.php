@@ -159,8 +159,8 @@ class Trial_balances extends Ledgers {
                                                           array('account_name' => 'Domestic Internal Software'))['balance'];
     /*$this->data['accounts_apr2024_argold_balance'] = $this->voucher_model->find($accounts_balance_select, 
                                                           array('account_name' => 'AR Gold Software (Apr 2024)'))['balance'];
-   */ $this->data['accounts_apr2024_arf_balance']    = $this->voucher_model->find($accounts_balance_select, 
-                                                          array('account_name' => 'ARF Software (Apr 2024)'))['balance'];
+   */ $this->data['accounts_apr2024_arf_balance']    = $this->voucher_model->find($accounts_balance_select,  array('account_name' => 'ARF Software (Apr 2024)'))['balance'];
+    $this->data['accounts_aug2024_arf_balance']    = $this->voucher_model->find($accounts_balance_select,  array('account_name' => 'ARF Software (Aug 2024)'))['balance'];
     $this->data['accounts_apr2024_arc_balance']    = $this->voucher_model->find($accounts_balance_select, 
                                                           array('account_name' => 'ARC Software (Apr 2024)'))['balance'];
 

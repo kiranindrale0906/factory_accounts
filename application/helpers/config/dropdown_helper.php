@@ -176,6 +176,7 @@
     elseif ($site_name=='ARF (Sep 2023)')     return API_SEP2023_ARF_PATH;
     elseif ($site_name=='ARC (Sep 2023)')     return API_SEP2023_ARC_PATH;
     elseif ($site_name=='AR Gold (Apr 2024)') return API_APR2024_ARG_PATH;
+    elseif ($site_name=='AR Gold (Aug 2024)') return API_AUG2024_ARG_PATH;
     elseif ($site_name=='ARF (Apr 2024)')     return API_APR2024_ARF_PATH;
     elseif ($site_name=='ARC (Apr 2024)')     return API_APR2024_ARC_PATH;
     elseif ($site_name=='Export Apr 2024')     return API_EXPORT_INTERNAL_PATH;
@@ -200,6 +201,7 @@
     elseif ($site_name.' '.$hostversion=='ARF Sep 2023')     return API_SEP2023_ARF_PATH;
     elseif ($site_name.' '.$hostversion=='ARC Sep 2023')     return API_SEP2023_ARC_PATH;
     elseif ($site_name.' '.$hostversion=='AR Gold Apr 2024') return API_APR2024_ARG_PATH;
+    elseif ($site_name.' '.$hostversion=='AR Gold Aug 2024') return API_AUG2024_ARG_PATH;
     elseif ($site_name.' '.$hostversion=='ARF Apr 2024')     return API_APR2024_ARF_PATH;
     elseif ($site_name.' '.$hostversion=='ARC Apr 2024')     return API_APR2024_ARC_PATH;
   }
@@ -224,6 +226,7 @@
       //array('id' => 'ARC (Sep 2023)',     'name' => 'ARC (Sep 2023)'),
       array('id' => 'AR Gold (Apr 2024)', 'name' => 'AR Gold (Apr 2024)'),
       array('id' => 'ARF (Apr 2024)',     'name' => 'ARF (Apr 2024)'),
+      array('id' => 'ARF (Aug 2024)',     'name' => 'ARF (Aug 2024)'),
       array('id' => 'ARC (Apr 2024)',     'name' => 'ARC (Apr 2024)'),
     array('id' => 'AR Gold ERP', 'name' => 'AR Gold ERP'),
     array('id' => 'ARF ERP', 'name' => 'ARF ERP'),
@@ -259,6 +262,7 @@
       array('id' => 'ARC Software (Sep 2023)',     'name' => 'ARC Software (Sep 2023)'),
      */ array('id' => 'AR Gold Software (Apr 2024)', 'name' => 'AR Gold Software (Apr 2024)'),
       array('id' => 'ARF Software (Apr 2024)',     'name' => 'ARF Software (Apr 2024)'),
+      array('id' => 'ARF Software (Aug 2024)',     'name' => 'ARF Software (Aug 2024)'),
       array('id' => 'ARC Software (Apr 2024)',     'name' => 'ARC Software (Apr 2024)'),
       array('id' => 'AR Gold ERP Software',     'name' => 'AR Gold ERP Software'),
       array('id' => 'ARG ERP Software',     'name' => 'ARG ERP Software'),
@@ -300,6 +304,8 @@
         return 'ARF (Sep 2023)';
       }elseif (str_contains($account_name, 'Apr 2024')){
         return 'ARF (Apr 2024)';
+      }elseif (str_contains($account_name, 'Aug 2024')){
+        return 'ARF (Aug 2024)';
       }else{
         if (str_contains($account_name, 'ARF ERP')){
           return 'ARF ERP';
@@ -366,6 +372,7 @@
                        'ARC Software (Sep 2023)'     => 'ARC (Sep 2023)',
                        'AR Gold Software (Apr 2024)' => 'AR Gold (Apr 2024)',
                        'ARF Software (Apr 2024)'     => 'ARF (Apr 2024)',
+                       'ARF Software (Aug 2024)'     => 'ARF (Aug 2024)',
                        'ARC Software (Apr 2024)'     => 'ARC (Apr 2024)',
                        'ARG ERP Software'            => 'AR Gold ERP',
                        'Export Internal Software'    => 'Export',
@@ -391,6 +398,7 @@
                           'ARC (Sep 2023)'     => 'ARC Software (Sep 2023)',
                           //'AR Gold (Apr 2024)' => 'AR Gold Software (Apr 2024)',
                           'ARF (Apr 2024)'     => 'ARF Software (Apr 2024)',
+                          'ARF (Aug 2024)'     => 'ARF Software (Aug 2024)',
                           'ARC (Apr 2024)'     => 'ARC Software (Apr 2024)',
                           'AR Gold ERP'     => 'ARG ERP Software',
                           'Export'           => 'Export Internal Software',
@@ -417,6 +425,7 @@
                       'ARC Software (Sep 2023)'     => API_SEP2023_ARC_PATH,
                       //'AR Gold Software (Apr 2024)' => API_APR2024_ARG_PATH,
                       'ARF Software (Apr 2024)'     => API_APR2024_ARF_PATH,
+                      'ARF Software (Aug 2024)'     => API_AUG2024_ARF_PATH,
                       'ARC Software (Apr 2024)'     => API_APR2024_ARC_PATH,
                       'AR Gold Software Staging' => API_AUG2022_ARG_PATH,
                       'ARF Software Staging'     => API_AUG2022_ARF_PATH,
@@ -446,6 +455,7 @@ return $api_path[$account_name];
                           'ARC (Sep 2023)' => 'ARC Loss Account (Sep 2023)',
                           'ARF (Sep 2023)' => 'ARF Loss Account (Sep 2023)',
                           'AR Gold (Apr 2024)' => 'AR Gold Loss Account (Apr 2024)',
+                          'AR Gold (Aug 2024)' => 'AR Gold Loss Account (Aug 2024)',
                           'ARC (Apr 2024)' => 'ARC Loss Account (Apr 2024)',
                           'ARF (Apr 2024)' => 'ARF Loss Account (Apr 2024)');
     return $loss_account_name[$site_name]; 
