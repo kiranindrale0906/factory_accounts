@@ -24,6 +24,8 @@
       <?php if($_SESSION['arf_details']==1){?> 
         <a class="ml-5 <?= ($site_name == 'ARF (Apr 2024)') ? 'bold black underline' : '' ?>" 
            href='<?= base_url() ?>reports/production_summary?site_name=ARF (Apr 2024)'>ARF (Apr 2024)</a>   
+        <a class="ml-5 <?= ($site_name == 'ARF (Aug 2024)') ? 'bold black underline' : '' ?>" 
+           href='<?= base_url() ?>reports/production_summary?site_name=ARF (Aug 2024)'>ARF (Aug 2024)</a>   
            <a class="ml-5 <?= ($site_name == 'ARF ERP' || $site_name == 'ARF ERP Software' || $site_name == 'Arf Erp Software') ? 'bold black underline' : '' ?>" 
            href='<?= base_url() ?>reports/production_summary?site_name=ARF ERP'>ARF ERP</a>
       

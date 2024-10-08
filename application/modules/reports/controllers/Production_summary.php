@@ -44,6 +44,7 @@ class Production_summary extends BaseController {
     $url = '';
      /*elseif ($this->data['site_name'] == 'AR Gold (Apr 2024)')     $url = API_APR2024_ARG_PATH."issue_departments/api_issue_departments/create";
     */if ($this->data['site_name'] == 'ARF (Apr 2024)')     $url = API_APR2024_ARF_PATH."issue_departments/api_issue_departments/create";
+    elseif ($this->data['site_name'] == 'ARF (Aug 2024)')     $url = API_AUG2024_ARF_PATH."issue_departments/api_issue_departments/create";
     elseif ($this->data['site_name'] == 'ARC (Apr 2024)')     $url = API_APR2024_ARC_PATH."issue_departments/api_issue_departments/create";
     if (!empty($url)) {
       $records = json_decode(curl_post_request($url, $this->data));
@@ -90,6 +91,11 @@ class Production_summary extends BaseController {
       $records = json_decode(curl_post_request($url, $_GET));
       $arf_records = json_decode(json_encode($records), true);
     }
+    if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARF (Aug 2024)') {
+        $url = API_AUG2024_ARF_PATH."issue_departments/api_issue_departments/index";
+        $records = json_decode(curl_post_request($url, $_GET));
+        $arf_aug2024_records = json_decode(json_encode($records), true);
+      }
 //pd();
     if(empty($arf_records['data'])) $arf_records['data'] = array();
     if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARC (Apr 2024)') {
@@ -246,7 +252,7 @@ class Production_summary extends BaseController {
    
     $refresh_details = $this->refresh_detail_model->get($select, $where, array(),$group_by);
     $voucher_data=array();
-    if($this->data['site_name'] == '' || ($this->data['site_name']=="ARC (Apr 2024)" || $this->data['site_name']=="ARF (Apr 2024)" ||$this->data['site_name']=="AR Gold (Apr 2024)" )){
+    if($this->data['site_name'] == '' || ($this->data['site_name']=="ARC (Apr 2024)" || $this->data['site_name']=="ARF (Apr 2024)"|| $this->data['site_name']=="ARF (Aug 2024)" ||$this->data['site_name']=="AR Gold (Apr 2024)" )){
       $domestic_where=array('credit_weight !=' => 0,'receipt_type' => 'Domestic Internal');
         if(!empty($this->data['product_name'])){
          $domestic_where['description']    =$this->data['product_name'];
@@ -263,7 +269,7 @@ class Production_summary extends BaseController {
         $domestic_where['YEAR(created_at)'] = $this->data['filter_year']; 
       }
       if ($this->data['site_name'] == ''){
-        $domestic_where['site_name']=array("ARC (Apr 2024)","ARF (Apr 2024)","AR Gold (Apr 2024)");
+        $domestic_where['site_name']=array("ARC (Apr 2024)","ARF (Apr 2024)","ARF (Aug 2024)","AR Gold (Apr 2024)");
       }else{
          $domestic_where['site_name']=$site_name;
       }

@@ -15,7 +15,7 @@
     <?php load_field('text', array('field' => 'factory_fine','readonly'=>'readonly'));?>
     <?php load_field('text', array('field' => 'rate'));?>
     <?php load_field('text',array('field' => 'manual_taxable_amount'));  ?>
-    <?php load_field('dropdown', array('field' => 'site_name','option'=>array(  array('id'=>'AR Gold (Apr 2024)','name'=>'AR Gold (Apr 2024)'),array('id'=>'ARF (Apr 2024)','name'=>'ARF (Apr 2024)'),    array('id'=>'ARC (Apr 2024)','name'=>'ARC (Apr 2024)'),array('id'=>'AR Gold ERP','name'=>'AR Gold ERP'),array('id'=>'ARF ERP','name'=>'ARF ERP'),array('id'=>'ARC ERP','name'=>'ARC ERP'),//  array('id'=>'ARF ERP Software','name'=>'ARF ERP Software'),  //  array('id'=>'Arc Erp Software','name'=>'Arc Erp Software'),                                                                            array('id'=>'ARNA BANGLE','name'=>'ARNA BANGLE'));?>
+    <?php load_field('dropdown', array('field' => 'site_name','option'=>array(  array('id'=>'AR Gold (Apr 2024)','name'=>'AR Gold (Apr 2024)'),array('id'=>'ARF (Apr 2024)','name'=>'ARF (Apr 2024)'),array('id'=>'ARF (Aug 2024)','name'=>'ARF (Aug 2024)'),    array('id'=>'ARC (Apr 2024)','name'=>'ARC (Apr 2024)'),array('id'=>'AR Gold ERP','name'=>'AR Gold ERP'),array('id'=>'ARF ERP','name'=>'ARF ERP'),array('id'=>'ARC ERP','name'=>'ARC ERP'),//  array('id'=>'ARF ERP Software','name'=>'ARF ERP Software'),  //  array('id'=>'Arc Erp Software','name'=>'Arc Erp Software'),                                                                            array('id'=>'ARNA BANGLE','name'=>'ARNA BANGLE'));?>
   </div>
   <?php load_buttons('submit', array('controller' => $controller, 'name' => 'SAVE' , 'class' => 'btn_blue')) ?>
 </form>

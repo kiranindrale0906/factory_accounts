@@ -204,6 +204,60 @@ class Quator_wise_loss_reports extends BaseController {
           }
           $arg_records=array_merge($records,$ghiss_melting_loss,$opening_loss,$fire_tounch_loss);
 
+        }elseif(isset($_GET['site_name'])&&$_GET['site_name']=='ARF (Aug 2024)'){
+          $ghiss_melting_loss=array();
+          $fire_tounch_loss=array();
+          $url=API_AUG2024_ARF_PATH."issue_and_receipts/loss_report_for_accounts/index";
+          $jan2021_records=json_decode(curl_post_request($url,$data),true);
+          $records=!empty($jan2021_records)&&(!empty($jan2021_records['data']['loss_details']))?$jan2021_records['data']['loss_details']['loss_detail']:$jan2021_records['data']['loss_details']['loss_detail']=array();
+
+          
+        /*foreach ($ghiss_melting_loss as $ghiss_melting_loss_index => $ghiss_melting_loss_value) {
+          $data['issue_department_id']=$ghiss_melting_loss_value['parent_id'];
+          $data['quator']=$this->data['quator_name'];
+          $url=API_APR2024_ARF_PATH."issue_and_receipts/loss_report_for_accounts/index";
+          $ghiss_details=json_decode(curl_post_request($url,$data),true);
+          $out_weight=!empty($ghiss_details)&&(!empty($ghiss_details['data']['ghiss_melting_out_weights']))?$ghiss_details['data']['ghiss_melting_out_weights']:0;
+          $ghiss_melting_loss[$ghiss_melting_loss_index]['out_weight']=$out_weight;
+          }*/
+          $ghiss_melting_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight', array('account_name'=>'ARF Loss Account (Aug 2024)','site_name'=>'ARF (Aug 2024)','receipt_type'=>'Ghiss Melting Loss','quator'=>$data['quator']),array());
+           $department_ids = array_column($ghiss_melting_loss, 'parent_id');
+
+          $url = API_AUG2024_ARF_PATH . "issue_and_receipts/loss_report_for_accounts/index";
+          $data['issue_department_id'] = $department_ids;
+          $data['quator'] = $this->data['quator_name'];
+          $details = json_decode(curl_post_request($url, $data), true);
+          $weights = !empty($details['data']['ghiss_melting_out_weights']) ? $details['data']['ghiss_melting_out_weights'] : [];
+
+          // Map out_weights to ghiss_melting_loss
+          foreach ($ghiss_melting_loss as $index => $value) {
+              $department_id = $value['parent_id'];
+              $ghiss_melting_loss[$index]['out_weight'] = isset($weights[$department_id]) ? $weights[$department_id] : 0;
+          }
+          $fire_tounch_loss=$this->voucher_model->get('description,site_name,credit_weight as in_weight,purity as in_lot_purity,argold_id as parent_id,0 as out_weight', array('account_name'=>'ARF Loss Account (Aug 2024)','site_name'=>'ARF (Aug 2024)','receipt_type'=>'Fire Tounch Loss','quator'=>$data['quator']),array());
+         $fire_tounch_loss_department_ids = array_column($fire_tounch_loss, 'parent_id');
+
+          $url = API_AUG2024_ARF_PATH . "issue_and_receipts/loss_report_for_accounts/index";
+          $data['issue_department_id'] = $fire_tounch_loss_department_ids;
+          $data['quator'] = $this->data['quator_name'];
+          $details = json_decode(curl_post_request($url, $data), true);
+          $fire_tounch_loss_weights = !empty($details['data']['fire_tounch_out_weights']) ? $details['data']['fire_tounch_out_weights'] : [];
+
+          // Map out_weights to ghiss_melting_loss
+          foreach ($fire_tounch_loss as $fire_tounch_loss_index => $fire_tounch_loss_value) {
+              $department_id = $fire_tounch_loss_value['parent_id'];
+              $fire_tounch_loss[$fire_tounch_loss_index]['out_weight'] = isset($fire_tounch_loss_weights[$department_id]) ? $fire_tounch_loss_weights[$department_id] : 0;
+          }
+          /*foreach ($fire_tounch_loss as $fire_tounch_loss_index => $fire_tounch_loss_value) {
+          $data['issue_department_id']=$fire_tounch_loss_value['parent_id'];
+          $data['quator']=$this->data['quator_name'];
+          $url=API_APR2024_ARF_PATH."issue_and_receipts/loss_report_for_accounts/index";
+          $fire_tounch_details=json_decode(curl_post_request($url,$data),true);
+          $out_weight=!empty($fire_tounch_details)&&(!empty($fire_tounch_details['data']['fire_tounch_out_weights']))?$fire_tounch_details['data']['fire_tounch_out_weights']:0;
+          $fire_tounch_loss[$fire_tounch_loss_index]['out_weight']=$out_weight;
+          }*/
+          $opening_loss=$this->get_opening_loss();
+          $arg_records=array_merge($records,$ghiss_melting_loss,$opening_loss,$fire_tounch_loss);
         }elseif(isset($_GET['site_name'])&&$_GET['site_name']=='ARF (Apr 2024)'){
           $ghiss_melting_loss=array();
           $fire_tounch_loss=array();

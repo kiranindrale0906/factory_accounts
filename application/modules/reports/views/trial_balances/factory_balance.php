@@ -60,6 +60,12 @@
           <td class="text-right"><?= four_decimal($accounts_apr2024_arf_balance - $live_apr2024_arf_balance) ?></td>
         </tr>
         <tr>
+          <td>ARF (Aug 2024)</td>
+          <td class="text-right"><?= four_decimal(-1 * $accounts_aug2024_arf_balance) ?></td>
+          <td class="text-right"><?= four_decimal(-1 * $live_aug2024_arf_balance) ?>  </td>
+          <td class="text-right"><?= four_decimal($accounts_aug2024_arf_balance - $live_aug2024_arf_balance) ?></td>
+        </tr>
+        <tr>
           <td>ARC (Apr 2024)</td>
           <td class="text-right"><?= four_decimal(-1 * $accounts_apr2024_arc_balance) ?></td>
           <td class="text-right"><?= four_decimal(-1 * $live_apr2024_arc_balance) ?>  </td>
@@ -82,11 +88,12 @@
 
         <tr>
           <td>Total</td>
-          <td class="text-right"><?= four_decimal(-1 * ($accounts_apr2024_arf_balance+$accounts_apr2024_arc_balance+$accounts_apr2024_export_balance+$accounts_apr2024_domestic_balance)) ?></td>
-          <td class="text-right"><?= four_decimal(-1 * ($live_apr2024_arf_balance+$live_apr2024_arc_balance+$live_apr2024_export_balance+$live_apr2024_domestic_balance)) ?>  </td>
+          <td class="text-right"><?= four_decimal(-1 * ($accounts_apr2024_arf_balance+$accounts_aug2024_arf_balance+$accounts_apr2024_arc_balance+$accounts_apr2024_export_balance+$accounts_apr2024_domestic_balance)) ?></td>
+          <td class="text-right"><?= four_decimal(-1 * ($live_apr2024_arf_balance+$live_aug2024_arf_balance+$live_apr2024_arc_balance+$live_apr2024_export_balance+$live_apr2024_domestic_balance)) ?>  </td>
           <td class="text-right"><b><?= four_decimal(-1 * (
                                                            $accounts_apr2024_arc_balance - $live_apr2024_arc_balance
                                                            +$accounts_apr2024_arf_balance - $live_apr2024_arf_balance
+                                                          +$accounts_aug2024_arf_balance - $live_aug2024_arf_balance
                                                            +$accounts_apr2024_export_balance - $live_apr2024_export_balance
                                                            +$accounts_apr2024_domestic_balance - $live_apr2024_domestic_balance)) ?></b></td>
         </tr>
