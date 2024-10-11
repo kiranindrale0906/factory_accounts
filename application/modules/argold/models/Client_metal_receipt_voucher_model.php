@@ -608,9 +608,8 @@ $attributes['account_name']=trim($attributes['account_name']);
       $send_data['pending_ghiss_receipts'] = array_merge($api_data, array('department_name' => $department_name));
       $api_url = "api/api_pending_ghiss_receipts/store";
     }
-
     if(($attributes['site_name']=="AR Gold ERP" || $attributes['site_name']=="ARF ERP" ||$attributes['site_name']=="RND ERP" || $attributes['site_name']=="ARC ERP" || $attributes['site_name']=="Domestic Internal ERP" || $attributes['site_name']=="ARNA BANGLE ERP") && ($attributes['receipt_type'] == 'GPC Out'|| $attributes['receipt_type'] == 'Melting Wastage' || $attributes['receipt_type'] == 'Daily Drawer Wastage'|| $attributes['receipt_type'] == 'Export Internal' || $attributes['receipt_type'] == 'Domestic Internal' || $attributes['receipt_type'] == 'Refresh')){}
-      elseif(($attributes['site_name']=="AR Gold ERP" || $attributes['site_name']=="ARF ERP" ||$attributes['site_name']=="RND ERP" || $attributes['site_name']=="ARC ERP" || $attributes['site_name']=="Domestic Internal ERP" || $attributes['site_name']=="ARNA BANGLE ERP") &&($attributes['receipt_type'] == 'GPC'|| $attributes['receipt_type'] == 'GPC Out'|| $attributes['receipt_type'] == 'Finish Good') && ($attributes['account_name'] == 'Domestic Internal ERP Software' || $attributes['account_name'] == 'ARNA BANGLE' )){
+      elseif(($attributes['site_name']=="AR Gold ERP" || $attributes['site_name']=="ARF ERP" ||$attributes['site_name']=="RND ERP" || $attributes['site_name']=="ARC ERP" || $attributes['site_name']=="Domestic Internal ERP" || $attributes['site_name']=="ARNA BANGLE ERP") &&($attributes['receipt_type'] == 'GPC'|| $attributes['receipt_type'] == 'GPC Out'|| $attributes['receipt_type'] == 'Finish Good') && ($attributes['account_name'] == 'Domestic Internal ERP Software' || $attributes['account_name'] == 'ARNA BANGLE' || $attributes['account_name'] == 'Rnd Erp Software' )){
      }else{
 
     	if (empty($api_url)) return true;
