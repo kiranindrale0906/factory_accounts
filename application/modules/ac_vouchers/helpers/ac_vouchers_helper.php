@@ -147,6 +147,7 @@ function ac_vouchers_list_settings($list_setting_arg=array()) {
   $list_setting['narration'] = array("Item Name", "narration", FALSE, "narration", TRUE, TRUE);
   $list_setting['description'] = array("Description", "description", TRUE, "description", TRUE, TRUE);
   $list_setting['customer_name'] = array("Customer Name", "customer_name", TRUE, "customer_name", TRUE, TRUE);
+  $list_setting['erp_customer_name'] = array("Customer Name", "erp_customer_name", TRUE, "erp_customer_name", TRUE, TRUE);
   // $list_setting['created_by'] = array("Created by", "name", TRUE, "name", TRUE, TRUE, 'ac_users.name name');
   $list_setting['action'] = array("Action", "action", FALSE, "action", FALSE, FALSE);
 

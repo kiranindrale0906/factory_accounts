@@ -32,6 +32,7 @@ class Production_same_purity_summary extends BaseController {
     $url = '';
     //if ($this->data['site_name'] == 'AR Gold')     $url = API_APR2024_ARG_PATH."issue_departments/api_issue_departments/create";
     if ($this->data['site_name'] == 'ARF (Apr 2024)')     $url = API_APR2024_ARF_PATH."issue_departments/api_issue_departments/create";
+    elseif ($this->data['site_name'] == 'ARF (Aug 2024)')     $url = API_AUG2024_ARF_PATH."issue_departments/api_issue_departments/create";
     elseif ($this->data['site_name'] == 'ARC (Apr 2024)')     $url = API_APR2024_ARC_PATH."issue_departments/api_issue_departments/create";
       
     if (!empty($url)) {
@@ -63,8 +64,13 @@ class Production_same_purity_summary extends BaseController {
       $url = API_APR2024_ARF_PATH."issue_departments/api_issue_departments/index";
       $records = json_decode(curl_post_request($url, $_GET));
       $arf_records = json_decode(json_encode($records), true);
+    }if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARF (Aug 2024)') {
+      $url = API_AUG2024_ARF_PATH."issue_departments/api_issue_departments/index";
+      $records = json_decode(curl_post_request($url, $_GET));
+      $arf_aug2024_records = json_decode(json_encode($records), true);
     }
     if (empty($arf_records['data'])) $arf_records['data'] = array();
+    if (empty($arf_aug2024_records['data'])) $arf_aug2024_records['data'] = array();
     if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARC (Apr 2024)') {
       $url = API_APR2024_ARC_PATH."issue_departments/api_issue_departments/index";
       $records = json_decode(curl_post_request($url, $_GET));
@@ -151,6 +157,7 @@ class Production_same_purity_summary extends BaseController {
       }
     $records = array_merge(/*$argold_records['data'],*/ 
                            $arf_records['data'],
+                           $arf_aug2024_records['data'],
                            $arc_records['data'],
                            $arg_erp_records);
 
