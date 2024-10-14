@@ -179,6 +179,7 @@ class Chittis extends BaseController {
                             voucher_date,
                             item_code,
                             customer_name,
+                            erp_customer_name,
                             usd_wastage_percentage,
                             inr_wastage_percentage,
                             group_concat(DISTINCT(narration)) as narration,
