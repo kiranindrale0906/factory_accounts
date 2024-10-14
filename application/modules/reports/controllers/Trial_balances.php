@@ -239,7 +239,7 @@ class Trial_balances extends Ledgers {
     $this->data['hostversions'] = ['Apr 2024','Aug 2024']; //['May 2022', 'Aug 2022', 'Feb 2023'];
 
     $url = get_api_path($site_name, $hostversion)."issue_and_receipts/alloy_gpc_vodator_ledger/index";
-    $response = json_decode(curl_post_request($url));
+    $response = json_decode(curl_post_request(@$url));
 //  pd($this->data['receipt_types']);  
     foreach ($this->data['receipt_types'] as $index=>$receipt_type) {
       $this->data['factory_vadotar_records'] ??= [];
