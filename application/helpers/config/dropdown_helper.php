@@ -204,6 +204,8 @@
     elseif ($site_name.' '.$hostversion=='AR Gold Aug 2024') return API_AUG2024_ARG_PATH;
     elseif ($site_name.' '.$hostversion=='ARF Apr 2024')     return API_APR2024_ARF_PATH;
     elseif ($site_name.' '.$hostversion=='ARC Apr 2024')     return API_APR2024_ARC_PATH;
+  elseif ($site_name.' '.$hostversion=='ARF Aug 2024')     return API_AUG2024_ARF_PATH;
+    elseif ($site_name.' '.$hostversion=='ARC Aug 2024')     return API_AUG2024_ARC_PATH;
   }
 
   function get_site_names($export=1) {
