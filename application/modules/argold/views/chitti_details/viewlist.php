@@ -9,7 +9,11 @@
           <tr>
             <th></th>
             <th>Design Name</th>
+            <?php if ($this->router->class == 'chitti_erps'){ ?>
+            <th class="text-right no-print">ERP Customer Name</th>
+            <?php }else{?>
             <th class="text-right no-print">Customer Name</th>
+            <?php }?>
             <th class="text-right">Item Code</th>
             <th class="text-right">Gross</th>
             <?php if ($detail==1): ?>
@@ -71,7 +75,13 @@
 		      echo implode(',', array_unique($narration_array));
                     ?>
                   </td>
-                  <td class="text-right no-print"><?= (!empty($metal_voucher_detail['customer_name'])&& $metal_voucher_detail['customer_name']!='Market Issue')?($metal_voucher_detail['customer_name']):'' ; ?></td>
+                <?php if ($this->router->class == 'chitti_erps'){ ?>
+                  <td class="text-right no-print"><?= (!empty($metal_voucher_detail['erp_customer_name']))?($metal_voucher_detail['erp_customer_name']):'' ; ?>
+                    
+                  </td>
+                  <?php }else{ ?>
+                    <td class="text-right no-print"><?= (!empty($metal_voucher_detail['customer_name'])&& $metal_voucher_detail['customer_name']!='Market Issue')?($metal_voucher_detail['customer_name']):'' ; ?></td>
+                  <?php } ?>
                   <td class="text-right"><?= ($metal_voucher_detail['item_code']); ?></td>
                   <td class="text-right"><?= four_decimal($metal_voucher_detail['credit_weight']); ?></td>
                   <?php if ($detail==1): ?>

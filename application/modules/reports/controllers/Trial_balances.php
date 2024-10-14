@@ -100,8 +100,8 @@ class Trial_balances extends Ledgers {
     $url=API_APR2024_ARC_PATH."issue_and_receipts/ledger_balance/index";
     $arc_apr2024_records=json_decode(curl_post_request($url));
     
-    $url=API_AUG2024_ARC_PATH."issue_and_receipts/ledger_balance/index";
-    $arc_aug2024_records=json_decode(curl_post_request($url));
+    //$url=API_AUG2024_ARC_PATH."issue_and_receipts/ledger_balance/index";
+    //$arc_aug2024_records=json_decode(curl_post_request($url));
     
     //$url=API_APR2024_ARG_PATH."issue_and_receipts/ledger_balance/index";
     //$arg_apr2024_records=json_decode(curl_post_request($url));

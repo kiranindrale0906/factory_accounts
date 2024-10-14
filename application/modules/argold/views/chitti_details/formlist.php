@@ -8,6 +8,9 @@
       <th>Date</th>
       <th>Narration</th>
       <th>Customer Name</th>
+      <?php if ($this->router->class == 'chitti_erps'){ ?>
+      <th>ERP Customer Name</th>
+      <?php } ?>
       <th>Quantity</th>
       <th class="text-right">Weight</th>
       <th class="text-right">Factory Purity</th>
