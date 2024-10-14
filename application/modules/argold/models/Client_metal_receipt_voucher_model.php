@@ -580,6 +580,7 @@ $attributes['account_name']=trim($attributes['account_name']);
               ||$attributes['receipt_type'] == 'CNC Ghiss' 
               ||$attributes['receipt_type'] == 'Round and Ball Chain Cutting Ghiss' 
               ||$attributes['receipt_type'] == 'Round and Ball Chain Ghiss' 
+              ||$attributes['receipt_type'] == 'Round and Ball Chain 2 Ghiss' 
               ||$attributes['receipt_type'] == 'Hand Cutting Ghiss' 
               ||$attributes['receipt_type'] == 'Hand Dull Ghiss' 
               || $attributes['receipt_type'] == 'Ice Cutting Ghiss'){
@@ -598,6 +599,8 @@ $attributes['account_name']=trim($attributes['account_name']);
         $department_name='Round and Ball Chain Cutting';
       }elseif($attributes['receipt_type']=='Round and Ball Chain Ghiss'){
         $department_name='Round and Ball Chain';
+      }elseif($attributes['receipt_type']=='Round and Ball Chain 2 Ghiss'){
+        $department_name='Round and Ball Chain 2';
       }elseif($attributes['receipt_type']=='Hand Cutting Ghiss'){
         $department_name='Hand Cutting';
       }elseif($attributes['receipt_type']=='Hand Dull Ghiss'){
