@@ -43,6 +43,9 @@
       <th></th>
       <th></th>
       <th></th>
+      <?php if ($this->router->class == 'chitti_erps'){ ?>
+      <th></th>
+      <?php } ?>
       <th class="text-right"><?=($quantity) ?></th>
       <th class="text-right"><?= four_decimal($weight) ?></th>
       <th></th>
