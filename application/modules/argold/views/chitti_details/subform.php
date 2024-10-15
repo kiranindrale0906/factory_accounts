@@ -28,8 +28,8 @@
         <td class="text-right"><?= (!empty($vouchers['customer_name'])&& $vouchers['customer_name']!='Market Issue')?($vouchers['customer_name']):'' ;?></td>
   <?php if ($this->router->class == 'chitti_erps'){ ?>
   <td class="text-right"><?= (!empty($vouchers['erp_customer_name'])&& $vouchers['erp_customer_name']!='Market Issue')?($vouchers['erp_customer_name']):'' ;?></td>
-	<td class="quantity text-right"><?php echo $vouchers['quantity'];?></td>
 <?php }?>
+	<td class="quantity text-right"><?php echo $vouchers['quantity'];?></td>
   	<td class="text-right"><?= four_decimal($vouchers['credit_weight']) ;?></td>
 	<td class="text-right"><?= four_decimal($vouchers['purity']); ?></td>
         <td class="text-right"><?= four_decimal($vouchers['factory_purity'] - $vouchers['purity']) ?></td>
