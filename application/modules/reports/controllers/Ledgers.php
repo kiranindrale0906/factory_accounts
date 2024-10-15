@@ -224,7 +224,7 @@ class Ledgers extends BaseController {
 
     if(($this->data['report_type'] == 'Production Report' || $this->data['report_type'] == 'Summary Report') && !empty($this->data['site_name']) && $this->data['site_name'] == 'All'){
       $where_receipt['account_name Not in ("Tanishq","VADOTAR")'] = NULL;
-      $where_issue['account_name NOT IN ("Domestic Internal ERP Software","VADOTAR")'] = NULL;
+      $where_issue['account_name NOT IN ("VADOTAR")'] = NULL;
     }
     if ($this->data['domestic_export'] == 'Export') {
       $where_receipt=array('(      account_name = ("Export Internal Software")  
@@ -293,6 +293,13 @@ ini_set('memory_limit', '256M');
       if(!empty($metal_receipt_voucher_reference_id)){
       $reference_ac_voucher_issue_detail=$this->voucher_model->find('GROUP_CONCAT(DISTINCT(account_name)) as account_name',array('where_in'=>array('id'=>$metal_receipt_voucher_reference_id)));
       $issues[$issue_index]['reference_account_name']=$reference_ac_voucher_issue_detail['account_name'];
+      }
+      if(($this->data['report_type'] == 'Production Report' || $this->data['report_type'] == 'Summary Report') && !empty($this->data['site_name']) && $this->data['site_name'] == 'All' && $issue_value['account_name']=="Tanishq"){
+        $issues[$issue_index]['factory_fine']=0;
+        $issues[$issue_index]['fine']=0;
+        $issues[$issue_index]['factory_purity']=0;
+        $issues[$issue_index]['purity']=0;
+
       }
 
      /* if($this->data['site_name']=="AR Gold ERP"){
