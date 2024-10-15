@@ -299,6 +299,7 @@ ini_set('memory_limit', '256M');
         $issues[$issue_index]['fine']=0;
         $issues[$issue_index]['factory_purity']=0;
         $issues[$issue_index]['purity']=0;
+        $issues[$issue_index]['credit_weight']=0;
         $issues[$issue_index]['vodatar']=$issue_value['factory_fine']-$issue_value['fine'];
 
       }else{
