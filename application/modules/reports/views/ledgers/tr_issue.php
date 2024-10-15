@@ -36,7 +36,7 @@
   <?php endif; ?>
   <td class="text-right"><?= four_decimal($record['factory_fine'], '-'); ?></td>
   <?php if ($report_type == 'Vadotar Report' || $report_type == 'Production Report'|| $report_type == 'Summary Report'): ?>
-    <td class="text-right"><?= four_decimal($record['factory_fine']-$record['fine'], '-'); ?></td>
+    <td class="text-right"><?= four_decimal($record['vodatar'], '-'); ?></td>
     <?php if ($record['credit_weight'] != 0 ) { ?>
       <td class="text-right"><?= four_decimal(($record['factory_fine']-$record['fine']) / $record['credit_weight'] * 100, '-'); ?></td>
     <?php } else { ?>
