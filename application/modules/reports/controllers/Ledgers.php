@@ -295,12 +295,14 @@ ini_set('memory_limit', '256M');
       $issues[$issue_index]['reference_account_name']=$reference_ac_voucher_issue_detail['account_name'];
       }
       if(($this->data['report_type'] == 'Production Report' || $this->data['report_type'] == 'Summary Report') && !empty($this->data['site_name']) && $this->data['site_name'] == 'All' && $issue_value['account_name']=="Tanishq"){
-        $issues[$issue_index]['factory_fine']=0;
+       $issues[$issue_index]['factory_fine']=0;
         $issues[$issue_index]['fine']=0;
         $issues[$issue_index]['factory_purity']=0;
         $issues[$issue_index]['purity']=0;
         $issues[$issue_index]['vodatar']=$issue_value['factory_fine']-$issue_value['fine'];
 
+      }else{
+	$issues[$issue_index]['vodatar']=$issue_value['factory_fine']-$issue_value['fine'];
       }
 
      /* if($this->data['site_name']=="AR Gold ERP"){
@@ -312,7 +314,7 @@ ini_set('memory_limit', '256M');
       }
      }*/
     }
-//pd($issues);
+
     if ($this->data['report_type'] == 'Purchase Sales Ledger') {
       $where_receipt['ac_ledger.sale_type']="Sale";
       $receipt_issue_select .=',chitties.account_name as chitti_account_name,ac_ledger.voucher_id';
