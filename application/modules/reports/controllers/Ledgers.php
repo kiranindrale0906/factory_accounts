@@ -221,10 +221,12 @@ class Ledgers extends BaseController {
     
     $where_issue   = array_merge($where, array('(ac_ledger.credit_weight != 0 or ac_ledger.credit_amount != 0)' => NULL),$account_issue_where);
     $where_receipt = array_merge($where, array('(ac_ledger.debit_weight != 0 or ac_ledger.debit_amount != 0)'   => NULL),$account_receipt_where);
+    $where_tanishq_issue   = array_merge($where, array('(ac_ledger.credit_weight != 0 or ac_ledger.credit_amount != 0)' => NULL),$account_issue_where);
 
     if(($this->data['report_type'] == 'Production Report' || $this->data['report_type'] == 'Summary Report') && !empty($this->data['site_name']) && $this->data['site_name'] == 'All'){
       $where_receipt['account_name Not in ("Tanishq","VADOTAR")'] = NULL;
       $where_issue['account_name NOT IN ("Tanishq","VADOTAR")'] = NULL;
+      $where_tanishq_issue['account_name ="Tanishq"'] = NULL;
     }
     if ($this->data['domestic_export'] == 'Export') {
       $where_receipt=array('(      account_name = ("Export Internal Software")  
@@ -280,8 +282,13 @@ class Ledgers extends BaseController {
     }else{
      $receipt_issue_select .=',group_concat(distinct(ac_ledger.account_name)) as group_account_name';
       $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(), array('order_by'=>'chitti_id, voucher_type, voucher_date asc', 'group_by' => $this->data['group']));
+      if(($this->data['report_type'] == 'Production Report' || $this->data['report_type'] == 'Summary Report') && !empty($this->data['site_name']) && $this->data['site_name'] == 'All'){
+      $tanishq_issues   = $this->ledger_model->get($receipt_issue_select, $where_tanishq_issue,   array(), array('order_by'=>'chitti_id, voucher_type, voucher_date asc', 'group_by' => $this->data['group']));
+      array_merge($issues,$tanishq_issues);
+      }
+
+lq(); echo"<pre>";print_r($where_issue);pd($where_receipt);
     }
-//lq(); echo"<pre>";print_r($where_issue);pd($where_receipt);
 ini_set('memory_limit', '256M');
 //lq();
     foreach ($issues as $issue_index => $issue_value) {
