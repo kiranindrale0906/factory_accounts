@@ -36,7 +36,7 @@
     <?php endif; ?>
     <?php if ($report_type == 'Vadotar Report' || $report_type == 'Production Report'|| $report_type == 'Summary Report'): 
       if (isset($record['credit_weight']) && $record['credit_weight'] > 0): ?>
-        <td class="text-right"><?= four_decimal($record['vodatar'] '-'); ?></td>
+        <td class="text-right"><?= four_decimal($record['vodatar'] ,'-'); ?></td>
         <td class="text-right"><?= four_decimal(($record['factory_fine'] - $record['fine']) / $record['credit_weight'] * 100, '-'); ?></td>
       <?php elseif (isset($record['debit_weight']) && $record['debit_weight'] > 0): ?>
         <td class="text-right"><?= four_decimal($record['fine'] - $record['factory_fine'], '-'); ?></td>
