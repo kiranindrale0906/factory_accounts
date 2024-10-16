@@ -224,7 +224,7 @@ class Ledgers extends BaseController {
 
     if(($this->data['report_type'] == 'Production Report' || $this->data['report_type'] == 'Summary Report') && !empty($this->data['site_name']) && $this->data['site_name'] == 'All'){
       $where_receipt['account_name Not in ("Tanishq","VADOTAR")'] = NULL;
-      $where_issue['account_name NOT IN ("VADOTAR")'] = NULL;
+      $where_issue['account_name NOT IN ("Tanishq","VADOTAR")'] = NULL;
     }
     if ($this->data['domestic_export'] == 'Export') {
       $where_receipt=array('(      account_name = ("Export Internal Software")  
@@ -278,11 +278,12 @@ class Ledgers extends BaseController {
       $receipt_issue_select .=',chitties.account_name as chitti_account_name';
       $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(array('chitties','chitties.id=ac_ledger.chitti_id')), array('order_by'=>'ac_ledger.chitti_id, ac_ledger.voucher_type, str_voucher_date asc', 'group_by' => $this->data['group']));
     }else{
+     $receipt_issue_select .=',group_concat(distinct(ac_ledger.account_name)) as group_account_name';
       $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(), array('order_by'=>'chitti_id, voucher_type, voucher_date asc', 'group_by' => $this->data['group']));
     }
 //lq(); echo"<pre>";print_r($where_issue);pd($where_receipt);
 ini_set('memory_limit', '256M');
-
+//lq();
     foreach ($issues as $issue_index => $issue_value) {
       $voucher_id = rtrim($issue_value['voucher_id'], ", ");
       if(!empty($voucher_id)){
@@ -300,11 +301,9 @@ ini_set('memory_limit', '256M');
         $issues[$issue_index]['factory_purity']=0;
         $issues[$issue_index]['purity']=0;
         $issues[$issue_index]['credit_weight']=0;
-        $issues[$issue_index]['vodatar']=$issue_value['factory_fine']-$issue_value['fine'];
-
-      }else{
-	$issues[$issue_index]['vodatar']=$issue_value['factory_fine']-$issue_value['fine'];
       }
+
+	$issues[$issue_index]['vodatar']=$issue_value['factory_fine']-$issue_value['fine'];
 
      /* if($this->data['site_name']=="AR Gold ERP"){
       if($issue_value['site_name']=="Domestic Internal ERP"){
@@ -315,6 +314,7 @@ ini_set('memory_limit', '256M');
       }
      }*/
     }
+//pd($issues);
 
     if ($this->data['report_type'] == 'Purchase Sales Ledger') {
       $where_receipt['ac_ledger.sale_type']="Sale";
