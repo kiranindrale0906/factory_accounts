@@ -284,7 +284,32 @@ class Ledgers extends BaseController {
       $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(), array('order_by'=>'chitti_id, voucher_type, voucher_date asc', 'group_by' => $this->data['group']));
       if(($this->data['report_type'] == 'Production Report' || $this->data['report_type'] == 'Summary Report') && !empty($this->data['site_name']) && $this->data['site_name'] == 'All'){
       $tanishq_issues   = $this->ledger_model->get($receipt_issue_select, $where_tanishq_issue,   array(), array('order_by'=>'chitti_id, voucher_type, voucher_date asc', 'group_by' => $this->data['group']));
-     $issues= array_merge($issues,$tanishq_issues);
+      $issues= array_merge($issues,$tanishq_issues);
+      }if(($this->data['report_type'] == 'Production Report' || $this->data['report_type'] == 'Summary Report') && !empty($this->data['site_name']) && $this->data['site_name'] != 'All'){
+
+        $customer_select = '"" as receipt_type, '.$period_select.' as voucher_date, 
+                              date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,
+                              account_name as account_name, "" as voucher_type,site_name , "" as voucher_number, 
+                              GROUP_CONCAT(DISTINCT(voucher_id)) as voucher_id, 
+                              sum(credit_amount) as debit_amount, 
+                              sum(usd_credit_amount) as usd_debit_amount, 
+                              sum(debit_amount) as credit_amount, 
+                              sum(usd_debit_amount) as usd_credit_amount, 
+                              sum(credit_weight) as debit_weight, 
+                              sum(debit_weight) as credit_weight, 
+                              sum(fine) as fine,
+                              sum(factory_fine) as factory_fine,
+                              0 as purity_margin, 
+                              sum((credit_weight+debit_weight) * purity) /  sum(credit_weight+debit_weight)  as purity, 
+                              sum((credit_weight+debit_weight) * factory_purity) /  sum(credit_weight+debit_weight)  as factory_purity,
+                              ""  as narration, "" as description, 
+                              "" as chitti_no,parent_id as parent_id,id as id';       
+    $where_customer_name['(  site_name = "'.$this->data['site_name'].'"
+              or (    REPLACE(narration, "Software ", "") = "'.$this->data['site_name'].'"
+                  )) and (receipt_type="GPC" and customer_name="Domestic Internal ERP Software") and (ac_ledger.debit_weight != 0 or ac_ledger.debit_amount != 0)'] = NULL;
+      $customer_name_issues   = $this->ledger_model->get($customer_select, $where_customer_name,   array(), array('order_by'=>'chitti_id, voucher_type, voucher_date asc', 'group_by' => $this->data['group']));
+      lq();
+      $issues= array_merge($issues,$customer_name_issues);
       }
 }
 ini_set('memory_limit', '256M');
