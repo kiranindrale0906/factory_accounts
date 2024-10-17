@@ -286,9 +286,7 @@ class Ledgers extends BaseController {
       $tanishq_issues   = $this->ledger_model->get($receipt_issue_select, $where_tanishq_issue,   array(), array('order_by'=>'chitti_id, voucher_type, voucher_date asc', 'group_by' => $this->data['group']));
      $issues= array_merge($issues,$tanishq_issues);
       }
-//pd($issues);
-//lq(); echo"<pre>";print_r($where_issue);pd($where_receipt);
-    }
+}
 ini_set('memory_limit', '256M');
 //lq();
     foreach ($issues as $issue_index => $issue_value) {
@@ -310,7 +308,7 @@ ini_set('memory_limit', '256M');
         $issues[$issue_index]['credit_weight']=0;
  
       }
-       	$issues[$issue_index]['vodatar']=$issue_value['factory_fine']-$issue_value['fine'];
+       //	$issues[$issue_index]['vodatar']=$issue_value['factory_fine']-$issue_value['fine'];
 
 
      /* if($this->data['site_name']=="AR Gold ERP"){
@@ -531,7 +529,7 @@ ini_set('memory_limit', '256M');
           $this->data['day_total'][$record['voucher_date']]['issue']['factory_fine'] += $record['factory_fine'];
           $this->data['day_total'][$record['voucher_date']]['issue']['credit_amount'] += $record['credit_amount'];
           $this->data['day_total'][$record['voucher_date']]['issue']['usd_credit_amount'] += $record['usd_credit_amount'];
-          $this->data['day_total'][$record['voucher_date']]['issue']['vodatar'] += $record['vodatar'];
+          
         } else {
           $this->data['day_total'][$record['voucher_date']]['receipt']['debit_weight'] += $record['debit_weight'];
           $this->data['day_total'][$record['voucher_date']]['receipt']['fine'] += $record['fine'];
