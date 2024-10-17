@@ -8,8 +8,12 @@
         if ($record['voucher_type'] != 'opening stock voucher')
           if (($record['debit_weight'] != 0 || $record['debit_amount'] != 0))
             $this->load->view('reports/ledgers/tr_receipt', array('record' => $record));   
-          //elseif (($record['credit_weight'] != 0 || $record['credit_amount'] != 0)) 
+          elseif ($record['account_name']!="Tanishq"&&($record['credit_weight'] != 0 || $record['credit_amount'] != 0)) 
             $this->load->view('reports/ledgers/tr_issue', array('record' => $record));  
+
+          elseif ($record['account_name']=="Tanishq") 
+            $this->load->view('reports/ledgers/tr_issue', array('record' => $record));  
+
       }
     } 
 

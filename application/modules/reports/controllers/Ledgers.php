@@ -284,10 +284,10 @@ class Ledgers extends BaseController {
       $issues   = $this->ledger_model->get($receipt_issue_select, $where_issue,   array(), array('order_by'=>'chitti_id, voucher_type, voucher_date asc', 'group_by' => $this->data['group']));
       if(($this->data['report_type'] == 'Production Report' || $this->data['report_type'] == 'Summary Report') && !empty($this->data['site_name']) && $this->data['site_name'] == 'All'){
       $tanishq_issues   = $this->ledger_model->get($receipt_issue_select, $where_tanishq_issue,   array(), array('order_by'=>'chitti_id, voucher_type, voucher_date asc', 'group_by' => $this->data['group']));
-      array_merge($issues,$tanishq_issues);
+     $issues= array_merge($issues,$tanishq_issues);
       }
-
-lq(); echo"<pre>";print_r($where_issue);pd($where_receipt);
+//pd($issues);
+//lq(); echo"<pre>";print_r($where_issue);pd($where_receipt);
     }
 ini_set('memory_limit', '256M');
 //lq();
@@ -303,14 +303,15 @@ ini_set('memory_limit', '256M');
       $issues[$issue_index]['reference_account_name']=$reference_ac_voucher_issue_detail['account_name'];
       }
       if(($this->data['report_type'] == 'Production Report' || $this->data['report_type'] == 'Summary Report') && !empty($this->data['site_name']) && $this->data['site_name'] == 'All' && $issue_value['account_name']=="Tanishq"){
-       $issues[$issue_index]['factory_fine']=0;
-        $issues[$issue_index]['fine']=0;
+       //$issues[$issue_index]['factory_fine']=0;
+        //$issues[$issue_index]['fine']=0;
         $issues[$issue_index]['factory_purity']=0;
         $issues[$issue_index]['purity']=0;
         $issues[$issue_index]['credit_weight']=0;
+ 
       }
+       	$issues[$issue_index]['vodatar']=$issue_value['factory_fine']-$issue_value['fine'];
 
-	$issues[$issue_index]['vodatar']=$issue_value['factory_fine']-$issue_value['fine'];
 
      /* if($this->data['site_name']=="AR Gold ERP"){
       if($issue_value['site_name']=="Domestic Internal ERP"){
