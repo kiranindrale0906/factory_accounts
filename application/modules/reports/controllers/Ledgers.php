@@ -207,14 +207,14 @@ class Ledgers extends BaseController {
       }elseif ($this->data['site_name'] == 'ARF (Apr 2024)'){
         $account_issue_where['account_name'] = 'ARF Software (Apr 2024)';
       }elseif ($this->data['site_name'] == 'ARF (Aug 2024)'){
-        $account_issue_where['account_name'] = 'ARF Software (Aug 2024)';
+        $account_issue_where['account_name'] = 'Arf Software (Aug 2024)';
       }elseif ($this->data['site_name'] == 'ARC (Apr 2024)'){
         $account_issue_where['account_name'] = 'ARC Software (Apr 2024)';
       }elseif ($this->data['site_name'] == 'ARF (Aug 2024)'){
-        $account_issue_where['account_name'] = 'ARF Software (Aug 2024)';
+        $account_issue_where['account_name'] = 'Arf Software (Aug 2024)';
       }
       else{
-        $account_issue_where['account_name in ("ARF Software (Apr 2024)","ARF Software (Aug 2024)","ARC Software (Apr 2024)","AR Gold Software (Apr 2024)","Export Internal Software","Domestic Internal Software") '] = NULL;
+        $account_issue_where['account_name in ("ARF Software (Apr 2024)","Arf Software (Aug 2024)","ARC Software (Apr 2024)","AR Gold Software (Apr 2024)","Export Internal Software","Domestic Internal Software") '] = NULL;
       }   
       !empty($this->data['account_name'])?$account_receipt_where['account_name']=$this->data['account_name']:$account_receipt_where['account_name not in ("MAIN VADOTAR","PURCHASE ACCOUNT","ARF Software","ARC Software","AR Gold Software","Export Internal Software","Domestic Internal Software") '] = NULL;                    
     }   

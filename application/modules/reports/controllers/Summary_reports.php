@@ -22,7 +22,7 @@ class Summary_reports extends Ledgers {
                IFNULL(sum((purity-factory_purity)*debit_weight/100),0) - IFNULL(sum((factory_purity-purity)*credit_weight/100),0) as vadotar,
                IFNULL(sum(debit_amount),0) - IFNULL(sum(credit_amount),0) as amount,
                IFNULL(sum(usd_debit_amount),0) - IFNULL(sum(usd_credit_amount),0) as usd_amount,0 as id";
-   $where =array('account_name in ("ARC ERP Software","ARC Software (Apr 2024)","ARF ERP Software","ARF Software (Apr 2024)","ARF Software (Aug 2024)","ARG ERP Software","ARNA BANGLE")'=>NULL);
+   $where =array('account_name in ("ARC ERP Software","ARC Software (Apr 2024)","ARF ERP Software","ARF Software (Apr 2024)","Arf Software (Aug 2024)","ARG ERP Software","ARNA BANGLE")'=>NULL);
    $loss_account=array();
     $this->data['trial_balance'] = $this->model->get($select,$where, array() , 
                                                       array('group_by'=>'account_name,',
