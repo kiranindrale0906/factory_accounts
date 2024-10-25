@@ -539,6 +539,7 @@ $attributes['account_name']=trim($attributes['account_name']);
                    || $attributes['account_name'] == 'AR Gold Software (Apr 2024)'
                    || $attributes['account_name'] == 'ARF Software (Apr 2024)' 
                    || $attributes['account_name'] == 'Arf Software (Aug 2024)' 
+                   || $attributes['account_name'] == 'ARF Software (Aug 2024)' 
                    || $attributes['account_name'] == 'ARC Software (Apr 2024)'
                    || $attributes['account_name'] == 'AR Gold Software'
                    || $attributes['account_name'] == 'ARF Software' 
