@@ -113,6 +113,8 @@ class Production_summary extends BaseController {
       $erp_records = json_decode(json_encode($records), true);
      if(!empty($erp_records)){
       $this->data['product_names']=array_unique(array_column($erp_records['message'],'product'));
+       $this->data['product_names'][]="KA Chain Refresh";	
+//pd($this->data['product_names']);
       $this->data['wastage_percentage']=array_unique(array_column($erp_records['message'],'wastage_percentage'));
       $this->data['in_purities']=array_unique(array_column($erp_records['message'],'melting'));
       $this->data['account_names']=array_unique(array_column($erp_records['message'],'customer'));
