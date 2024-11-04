@@ -177,6 +177,7 @@
     elseif ($site_name=='ARC (Sep 2023)')     return API_SEP2023_ARC_PATH;
     elseif ($site_name=='AR Gold (Apr 2024)') return API_APR2024_ARG_PATH;
     elseif ($site_name=='AR Gold (Aug 2024)') return API_AUG2024_ARG_PATH;
+    elseif ($site_name=='ARF (Aug 2024)')     return API_AUG2024_ARF_PATH;
     elseif ($site_name=='ARF (Apr 2024)')     return API_APR2024_ARF_PATH;
     elseif ($site_name=='ARC (Apr 2024)')     return API_APR2024_ARC_PATH;
     elseif ($site_name=='Export Apr 2024')     return API_EXPORT_INTERNAL_PATH;
