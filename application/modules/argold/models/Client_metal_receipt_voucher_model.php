@@ -682,7 +682,6 @@ $attributes['account_name']=trim($attributes['account_name']);
                       'description' => $attributes['description'],
                       'account_id' => $attributes['id']);
     $send_data=$api_data;
-pd($send_data);
  //$api_url = "https://staging1-arg-manufacturing.8848digitalerp.com/api/method/custom_app.api.material_receipt.create_material_receipt";
     $api_url = "https://erp.ar-gold.in/api/method/custom_app.api.material_receipt.create_material_receipt";
     if (empty($api_url)) return true;
