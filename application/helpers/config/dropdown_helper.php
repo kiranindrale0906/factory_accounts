@@ -463,6 +463,7 @@ return $api_path[$account_name];
                           'ARF (Sep 2023)' => 'ARF Loss Account (Sep 2023)',
                           'AR Gold (Apr 2024)' => 'AR Gold Loss Account (Apr 2024)',
                           'AR Gold (Aug 2024)' => 'AR Gold Loss Account (Aug 2024)',
+                          'ARF (Aug 2024)' => 'ARF Loss Account (Aug 2024)',
                           'ARC (Apr 2024)' => 'ARC Loss Account (Apr 2024)',
                           'ARF (Apr 2024)' => 'ARF Loss Account (Apr 2024)');
     return $loss_account_name[$site_name]; 
