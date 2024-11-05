@@ -24,7 +24,14 @@
 	<td><?php echo $vouchers['packet_no'];?></td>
 	<td><?php echo $vouchers['voucher_date'];?></td>
 	<td><?php echo $vouchers['narration'];?> 
-	<a href=<?= get_api_url_from_site_name($record['site_name'])."issue_departments/issue_departments/view/".$vouchers['argold_id'] ?> target='_blank'>View</a></td>
+	<?php
+	if ($this->router->class == 'chitti_erps'){
+	?>
+		<a href=<?="https://erp.ar-gold.in/app/material-issue/".$vouchers['argold_id'] ?> target='_blank'>View</a>
+	<?php }else{?>
+<a href=<?= get_api_url_from_site_name($record['site_name'])."issue_departments/issue_departments/view/".$vouchers['argold_id'] ?> target='_blank'>View</a>
+<?php }?>
+</td>
         <td class="text-right"><?= (!empty($vouchers['customer_name'])&& $vouchers['customer_name']!='Market Issue')?($vouchers['customer_name']):'' ;?></td>
   <?php if ($this->router->class == 'chitti_erps'){ ?>
   <td class="text-right"><?= (!empty($vouchers['erp_customer_name'])&& $vouchers['erp_customer_name']!='Market Issue')?($vouchers['erp_customer_name']):'' ;?></td>
