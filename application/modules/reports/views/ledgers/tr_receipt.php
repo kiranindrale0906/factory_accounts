@@ -17,7 +17,7 @@
     <?php } ?>
   </td>
   <?php endif; ?>
-  <td class="text-right"><a class=""  href='<?= base_url() ?>argold/voucher_details/view/<?=$record['chitti_no']?>'><?= four_decimal($record['debit_weight'], '-') ?></a></td>
+  <td class="text-right"><a class=""  href='<?= base_url() ?>argold/voucher_details/view/<?=$record['voucher_id']?>'><?= four_decimal($record['debit_weight'], '-') ?></a></td>
   <td class="text-right"><?= four_decimal($record['factory_purity'], '-')?></td>
   <td class="text-right"><?= four_decimal($record['factory_fine'], '-'); ?></td>
   <?php if (!in_array($report_type, array("Export Purchase Ledger","Domestic Purchase Ledger","Domestic Sale Ledger","Export Sale Ledger"))): ?>
@@ -36,7 +36,7 @@
     <?php } ?>
   <?php endif; ?>
   <?php if ($report_type == 'Domestic Labour Ledger' || $report_type == 'Export Labour Ledger' ||$report_type == 'Account Ledger' || $report_type == 'Purchase Labour Ledger' || $report_type == 'Vadotar Report' ||$report_type == 'Purchase Sales Ledger'): ?>
-    <td class="text-right"><a class=""  href='<?= base_url() ?>argold/voucher_details/view/<?=$record['chitti_no']?>'><?=(!empty($record['sale_type'])&&($record['sale_type']=="Sale Return" || $record['sale_type']=="Sales Good Return"))?four_decimal($record['debit_amount'], '-'):four_decimal($record['debit_amount'], '-') ?></a></td>
+    <td class="text-right"><a class=""  href='<?= base_url() ?>argold/voucher_details/view/<?=$record['voucher_id']?>'><?=(!empty($record['sale_type'])&&($record['sale_type']=="Sale Return" || $record['sale_type']=="Sales Good Return"))?four_decimal($record['debit_amount'], '-'):four_decimal($record['debit_amount'], '-') ?></a></td>
     <td class="text-right"><?= four_decimal($record['usd_debit_amount'], '-') ?></td>
     <?php if($report_type == 'Purchase Sales Ledger'){ ?>
         <td class="text-right"><?= four_decimal($record['chitti_credit_weight'], '-') ?></td>
