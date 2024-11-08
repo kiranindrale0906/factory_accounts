@@ -799,8 +799,7 @@ if(($this->data['report_type'] != 'Account Ledger' && $this->data['report_type']
                      and voucher_type = "metal receipt voucher")
 		 or ( receipt_type="Refresh"
                      and voucher_type = "metal receipt voucher")
-                 or( receipt_type="Reject" and  account_name="Domestic Internal ERP Software"  
-                     and voucher_type = "metal receipt voucher")
+                 or(receipt_type in ("Reject","Repair") and  account_name="Domestic Internal ERP Software" and voucher_type = "metal receipt voucher")
 		 or (    account_name in ("'.$export_account_names.'") 
                      and voucher_type = "metal issue voucher")
               )'] = NULL;
