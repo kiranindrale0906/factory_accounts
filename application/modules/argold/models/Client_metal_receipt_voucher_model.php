@@ -574,39 +574,39 @@ $attributes['account_name']=trim($attributes['account_name']);
       $send_data['finished_goods_receipts'] = $api_data;
       $api_url = "api/api_finished_goods_receipts/store";
 
-    } elseif ($attributes['receipt_type'] == 'Cutting Ghiss' 
-              ||$attributes['receipt_type'] == 'Recutting Ghiss' 
-              ||$attributes['receipt_type'] == 'DC Ghiss' 
-              ||$attributes['receipt_type'] == 'DC 2 Ghiss' 
-              ||$attributes['receipt_type'] == 'CNC Ghiss' 
-              ||$attributes['receipt_type'] == 'Round and Ball Chain Cutting Ghiss' 
-              ||$attributes['receipt_type'] == 'Round and Ball Chain Ghiss' 
-              ||$attributes['receipt_type'] == 'Round and Ball Chain 2 Ghiss' 
-              ||$attributes['receipt_type'] == 'Hand Cutting Ghiss' 
-              ||$attributes['receipt_type'] == 'Hand Dull Ghiss' 
-              || $attributes['receipt_type'] == 'Ice Cutting Ghiss'){
+    } elseif ($attributes['narration'] == 'Cutting Ghiss' 
+              ||$attributes['narration'] == 'Recutting Ghiss' 
+              ||$attributes['narration'] == 'DC Ghiss' 
+              ||$attributes['narration'] == 'DC 2 Ghiss' 
+              ||$attributes['narration'] == 'CNC Ghiss' 
+              ||$attributes['narration'] == 'Round and Ball Chain Cutting Ghiss' 
+              ||$attributes['narration'] == 'Round and Ball Chain Ghiss' 
+              ||$attributes['narration'] == 'Round and Ball Chain 2 Ghiss' 
+              ||$attributes['narration'] == 'Hand Cutting Ghiss' 
+              ||$attributes['narration'] == 'Hand Dull Ghiss' 
+              || $attributes['narration'] == 'Ice Cutting Ghiss'){
       $department_name='';
-      if($attributes['receipt_type']=='Cutting Ghiss'){
+      if($attributes['narration']=='Cutting Ghiss'){
         $department_name='Cutting';
-      }elseif($attributes['receipt_type']=='Recutting Ghiss'){
+      }elseif($attributes['narration']=='Recutting Ghiss'){
         $department_name='Recutting';
-      }elseif($attributes['receipt_type']=='DC Ghiss'){
+      }elseif($attributes['narration']=='DC Ghiss'){
         $department_name='DC';
-      }elseif($attributes['receipt_type']=='DC 2 Ghiss'){
+      }elseif($attributes['narration']=='DC 2 Ghiss'){
         $department_name='Dc 2';
-      }elseif($attributes['receipt_type']=='CNC Ghiss'){
+      }elseif($attributes['narration']=='CNC Ghiss'){
         $department_name='CNC';
-      }elseif($attributes['receipt_type']=='Round and Ball Chain Cutting Ghiss'){
+      }elseif($attributes['narration']=='Round and Ball Chain Cutting Ghiss'){
         $department_name='Round and Ball Chain Cutting';
-      }elseif($attributes['receipt_type']=='Round and Ball Chain Ghiss'){
+      }elseif($attributes['narration']=='Round and Ball Chain Ghiss'){
         $department_name='Round and Ball Chain';
-      }elseif($attributes['receipt_type']=='Round and Ball Chain 2 Ghiss'){
+      }elseif($attributes['narration']=='Round and Ball Chain 2 Ghiss'){
         $department_name='Round and Ball Chain 2';
-      }elseif($attributes['receipt_type']=='Hand Cutting Ghiss'){
+      }elseif($attributes['narration']=='Hand Cutting Ghiss'){
         $department_name='Hand Cutting';
-      }elseif($attributes['receipt_type']=='Hand Dull Ghiss'){
+      }elseif($attributes['narration']=='Hand Dull Ghiss'){
         $department_name='Hand Dull';
-      }elseif($attributes['receipt_type']=='Ice Cutting Ghiss'){
+      }elseif($attributes['narration']=='Ice Cutting Ghiss'){
         $department_name='Ice Cutting';
       }
       $send_data['pending_ghiss_receipts'] = array_merge($api_data, array('department_name' => $department_name));
