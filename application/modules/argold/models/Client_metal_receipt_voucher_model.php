@@ -488,7 +488,8 @@ $attributes['account_name']=trim($attributes['account_name']);
       $api_url="api/api_daily_drawer_receipts/store";  
 
     } else if(   $attributes['receipt_type'] == "Refresh" ||
-               $attributes['receipt_type'] == "Reject"
+               $attributes['receipt_type'] == "Reject"||
+               $attributes['receipt_type'] == "Repair"
               //    $attributes['receipt_type'] == "AR Gold Refresh"
               // || $attributes['receipt_type'] == "ARF Refresh"
               || $attributes['receipt_type'] == "Export Internal"
