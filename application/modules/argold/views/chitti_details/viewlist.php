@@ -9,8 +9,11 @@
           <tr>
             <th></th>
             <th>Design Name</th>
-            <?php if ($this->router->class == 'chitti_erps'){ ?>
-            <th class="text-right no-print">ERP Customer Name</th>
+            <?php $print_customer_name="";if($chittis_details['account_name']=="MALABAR GOLD"){
+              $print_customer_name="no-print";
+            }
+            if ($this->router->class == 'chitti_erps'){ ?>
+            <th class="text-right <?=$print_customer_name?>">ERP Customer Name</th>
             <?php }else{?>
             <th class="text-right no-print">Customer Name</th>
             <?php }?>
@@ -76,7 +79,7 @@
                     ?>
                   </td>
                 <?php if ($this->router->class == 'chitti_erps'){ ?>
-                  <td class="text-right no-print"><?= (!empty($metal_voucher_detail['erp_customer_name']))?($metal_voucher_detail['erp_customer_name']):'' ; ?>
+                  <td class="text-right <?=$print_customer_name?>"><?= (!empty($metal_voucher_detail['erp_customer_name']))?($metal_voucher_detail['erp_customer_name']):'' ; ?>
                     
                   </td>
                   <?php }else{ ?>

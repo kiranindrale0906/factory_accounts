@@ -548,7 +548,7 @@ $attributes['account_name']=trim($attributes['account_name']);
                    || $attributes['account_name'] == 'Export Internal Software'
                    || $attributes['account_name'] == 'Domestic Internal Software'
                     )) {
-      $api_data = array_merge($api_data, array('type' => 'Pure','description' => $api_data['description'].'-'.$attributes['site_name']));
+      $api_data = array_merge($api_data, array('type' => 'Pure','description' => $api_data['description'].'-'.$attributes['site_name'].'-'.$attributes['description']));
       $send_data['internal_receipts'] = $api_data;
       if($attributes['account_name'] == 'Domestic Internal Software'){
         $api_data['account']=$attributes['site_name'];
