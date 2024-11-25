@@ -27,7 +27,7 @@
 	<?php
 	if ($this->router->class == 'chitti_erps'){
 	?>
-		<a href=<?="https://erp.ar-gold.in/app/material-issue/".$vouchers['argold_id'] ?> target='_blank'>View</a>
+		<a href=<?="https://erp.ar-gold.in/app/material-issue/".$vouchers['argold_id'] ?> target='_blank'>View(<?=$vouchers['argold_id']?>)</a>
 	<?php }else{?>
 <a href=<?= get_api_url_from_site_name($record['site_name'])."issue_departments/issue_departments/view/".$vouchers['argold_id'] ?> target='_blank'>View</a>
 <?php }?>

@@ -614,7 +614,7 @@ $attributes['account_name']=trim($attributes['account_name']);
       $api_url = "api/api_pending_ghiss_receipts/store";
     }
 
-    if(($attributes['site_name']=="AR Gold ERP" || $attributes['site_name']=="ARF ERP" ||$attributes['site_name']=="RND ERP" || $attributes['site_name']=="ARC ERP" || $attributes['site_name']=="Domestic Internal ERP" || $attributes['site_name']=="ARNA BANGLE ERP") && ($attributes['receipt_type'] == 'GPC Out'|| $attributes['receipt_type'] == 'Melting Wastage' || $attributes['receipt_type'] == 'Daily Drawer Wastage'||$attributes['receipt_type'] == 'Fancy 75 DD Wastage'|| $attributes['receipt_type'] == 'Pipe and Para DD Wastage'|| $attributes['receipt_type'] == 'Ball Chain DD Wastage' ||$attributes['receipt_type'] == 'Sisma DD Wastage'||$attributes['receipt_type'] == 'Fancy 92 DD Wastage' || $attributes['receipt_type'] == 'Export Internal' || $attributes['receipt_type'] == 'Domestic Internal' || $attributes['receipt_type'] == 'Refresh'|| $attributes['receipt_type'] == 'Repair')){}
+    if(($attributes['site_name']=="AR Gold ERP" || $attributes['site_name']=="ARF ERP" ||$attributes['site_name']=="RND ERP" || $attributes['site_name']=="ARC ERP" || $attributes['site_name']=="Domestic Internal ERP" || $attributes['site_name']=="ARNA BANGLE ERP") && ($attributes['receipt_type'] == 'GPC Out'|| $attributes['receipt_type'] == 'Melting Wastage' || $attributes['receipt_type'] == 'Daily Drawer Wastage'||$attributes['receipt_type'] == 'Fancy 75 DD Wastage'|| $attributes['receipt_type'] == 'Pipe and Para DD Wastage'|| $attributes['receipt_type'] == 'Ball Chain DD Wastage' ||$attributes['receipt_type'] == 'Sisma DD Wastage'||$attributes['receipt_type'] == 'Fancy 92 DD Wastage' || $attributes['receipt_type'] == 'Export Internal' || $attributes['receipt_type'] == 'Domestic Internal' || $attributes['receipt_type'] == 'Refresh'|| $attributes['receipt_type'] == 'Repair' || $attributes['receipt_type'] == 'Finished Goods')){}
       elseif(($attributes['site_name']=="AR Gold ERP" || $attributes['site_name']=="ARF ERP" ||$attributes['site_name']=="RND ERP" || $attributes['site_name']=="ARC ERP" || $attributes['site_name']=="Domestic Internal ERP" || $attributes['site_name']=="ARNA BANGLE ERP") &&($attributes['receipt_type'] == 'GPC' || $attributes['receipt_type'] == 'GPC Out'|| $attributes['receipt_type'] == 'Finish Good') && ($attributes['account_name'] == 'Domestic Internal ERP Software' || $attributes['account_name'] == 'ARNA BANGLE' || $attributes['account_name'] == 'Rnd Erp Software' ||  $attributes['account_name'] == 'ARG ERP Software' )){
      }else{
 
@@ -683,7 +683,6 @@ $attributes['account_name']=trim($attributes['account_name']);
                       'description' => $attributes['description'],
                       'account_id' => $attributes['id']);
     $send_data=$api_data;
-pd($send_data);
  //$api_url = "https://staging1-arg-manufacturing.8848digitalerp.com/api/method/custom_app.api.material_receipt.create_material_receipt";
     $api_url = "https://erp.ar-gold.in/api/method/custom_app.api.material_receipt.create_material_receipt";
     if (empty($api_url)) return true;
