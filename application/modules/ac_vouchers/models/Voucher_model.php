@@ -50,11 +50,16 @@ class Voucher_model extends BaseModel {
   }
 
   protected function get_purity_validation_rules() {
+    if($this->formdata[$this->router_class]['receipt_type']=="Unrecoverable Loss"){
+      return array('field' => $this->router_class.'[purity]', 'label' => 'Purity',
+                 'rules' => array('trim','required','numeric'));
+    }else{
     return array('field' => $this->router_class.'[purity]', 'label' => 'Purity',
                  'rules' => array('trim','required','numeric','less_than_equal_to[150]'/*,'greater_than[0]'*/,
                                   //array('purity_error_msg', array($this,'check_purity_exist'))
                                  ),
                  'errors' => array('purity_error_msg'=>'Purity not exist in Purity master.'));
+    }
   }
 
   protected function get_account_validation_rules() {
@@ -243,9 +248,7 @@ class Voucher_model extends BaseModel {
 
   private function get_serial_number($voucher_type,$period_id='') {
     $company_id = (!empty($this->session->userdata('company_id')) ? $this->session->userdata('company_id') : 0);
-    $result = $this->find('max(voucher_serial_number) as max_serial_number', array('period_id' => $period_id,
-                                                                                   'company_id' => $company_id,
-                                                                                   'voucher_type' => $voucher_type));
+    $result = $this->find('max(voucher_serial_number) as max_serial_number', array('period_id' => $period_id,                         'company_id' => $company_id,                       'voucher_type' => $voucher_type));
     if(!empty($result['max_serial_number']))
       return $result['max_serial_number'];
     else
