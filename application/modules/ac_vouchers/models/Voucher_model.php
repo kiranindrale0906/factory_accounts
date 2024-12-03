@@ -69,8 +69,14 @@ class Voucher_model extends BaseModel {
   }
 
   protected function get_factory_purity_validation_rules() {
+    if($this->formdata[$this->router_class]['receipt_type']=="Unrecoverable Loss"){
+      return array('field' => $this->router_class.'[factory_purity]', 'label' => 'Purity',
+                 'rules' => array('trim','required','numeric'));
+    }else{
+
     return array('field' => $this->router_class.'[factory_purity]', 'label' => 'Purity',
                  'rules' => array('trim','required','numeric','less_than_equal_to[150]'/*,'greater_than[0]'*/));
+    }
   }
 
   protected function get_receipt_type_validation_rules() {
