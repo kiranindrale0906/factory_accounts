@@ -234,7 +234,7 @@ class Trial_balances extends Ledgers {
   }
 
   private function get_vadotar_from_factory($site_name, $hostversion) {
-    $this->data['receipt_types'] = ['Alloy Vodator', 'GPC Vodator', 'Stone Vatav','Meena Vatav', 'Copper Vatav', 'Rhodium Vatav', 'Auto Tounch Loss Fine'/*,'Auto Issue Tounch Loss Fine'*/, 'Spring Vatav'];
+    $this->data['receipt_types'] = ['Alloy Vodator','Alloy Issue', 'GPC Vodator', 'Stone Vatav','Meena Vatav', 'Copper Vatav', 'Rhodium Vatav', 'Auto Tounch Loss Fine'/*,'Auto Issue Tounch Loss Fine'*/, 'Spring Vatav'];
     $this->data['site_names'] = ['ARF', 'ARC'];
     $this->data['hostversions'] = ['Apr 2024','Aug 2024']; //['May 2022', 'Aug 2022', 'Feb 2023'];
 
@@ -594,7 +594,7 @@ class Trial_balances extends Ledgers {
       $incorrect_vadotar_vouchers = $this->voucher_model->get('receipt_type, site_name, voucher_date, 
                                                                sum(credit_weight) as credit_weight, 
                                                                sum(debit_weight) as debit_weight',
-                                         array('receipt_type' => array('Alloy Vodator', 'GPC Vodator', 'Stone Vatav','Spring Vatav','Meena Vatav', 'Copper Vatav', 'Rhodium Vatav', 'Auto Tounch Loss Fine','Auto Issue Tounch Loss Fine','Spring Vatav')),
+                                         array('receipt_type' => array('Alloy Vodator','Alloy Issue', 'GPC Vodator', 'Stone Vatav','Spring Vatav','Meena Vatav', 'Copper Vatav', 'Rhodium Vatav', 'Auto Tounch Loss Fine','Auto Issue Tounch Loss Fine','Spring Vatav')),
                                          array(), array('group_by' => 'receipt_type, site_name, voucher_date',
                                                         'having' => 'credit_weight != debit_weight'));
 
@@ -632,6 +632,7 @@ class Trial_balances extends Ledgers {
     $records = json_decode(curl_post_request($url));
     if (!empty($records)) {
       $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator_group_by_date, 'Alloy Vodator', $site_name, $hostversion);
+      $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_issue_group_by_date, 'Alloy Issue', $site_name, $hostversion);
       $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator_group_by_date, 'GPC Vodator', $site_name, $hostversion);
 
       $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav_group_by_date, 'Stone Vatav', $site_name, $hostversion);
