@@ -632,7 +632,9 @@ class Trial_balances extends Ledgers {
     $records = json_decode(curl_post_request($url));
     if (!empty($records)) {
       $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_vodator_group_by_date, 'Alloy Vodator', $site_name, $hostversion);
+      if($site_name=="ARC"){
       $this->metal_receipt_voucher_model->create_vodator_records($records->data->alloy_issue_group_by_date, 'Alloy Issue', $site_name, $hostversion);
+      }
       $this->metal_receipt_voucher_model->create_vodator_records($records->data->gpc_vodator_group_by_date, 'GPC Vodator', $site_name, $hostversion);
 
       $this->metal_receipt_voucher_model->create_vodator_records($records->data->stone_vatav_group_by_date, 'Stone Vatav', $site_name, $hostversion);
