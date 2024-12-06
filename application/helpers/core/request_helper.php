@@ -144,7 +144,7 @@ if (!function_exists('get_curl_expenses')) {
         CURLOPT_HTTPHEADER => array(
           //'Authorization: token 4e7ab0aec03a4f2:7066e1925da5f9d',4e7ab0aec03a4f2:7c92597cb5b8fd4
           //'Authorization: token 4e7ab0aec03a4f2:a2e2945d24fa0af',
-          'Authorization: token 4e7ab0aec03a4f2:6018c5bb3901e34',
+          'Authorization:'.$erp_records['message']['data']['access_token'],// token 4e7ab0aec03a4f2:6018c5bb3901e34',
        	//'Authorization'=>$erp_records['message']['data']['access_token'],
           'Content-Type: application/json',
           'Accept: application/json',
@@ -182,7 +182,7 @@ if (!function_exists('get_curl_expenses')) {
 //          'Authorization: token 4e7ab0aec03a4f2:7066e1925da5f9d',
          // 'Authorization: token 4e7ab0aec03a4f2:a2e2945d24fa0af',
         //  'Authorization: token 4e7ab0aec03a4f2:7c92597cb5b8fd4',
-          'Authorization'=>$erp_records['message']['data']['access_token'],
+          'Authorization:'.$erp_records['message']['data']['access_token'],
           'Cookie: sid=Guest'
         ),
       ));
