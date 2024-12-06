@@ -103,9 +103,34 @@ if (!function_exists('get_curl_expenses')) {
       return $content;
     }
   }
+ if(!function_exists('curl_get_erp_token')){
+   function curl_get_erp_token($uri="", $data = array()) {
+      $curl = curl_init();
+      curl_setopt_array($curl, array(
+      CURLOPT_URL => 'https://erp.ar-gold.in/api/method/custom_app.api.login.get_access_token?usr=administrator&pwd=Ascra%408848',
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => '',
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 0,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => 'POST',
+      CURLOPT_HTTPHEADER => array(
+      'Cookie: full_name=Guest; sid=Guest; system_user=no; user_id=Guest; user_image='
+      ),
+     ));
+
+     $response = curl_exec($curl);
+
+    curl_close($curl);
+    return $response;
+   }}
   if (!function_exists('curl_post_erp_request')) {
     function curl_post_erp_request($uri, $data = array()) {
-    $curl = curl_init();
+    $records = json_decode(curl_get_erp_token($url="", $_GET=array()));
+    $erp_records = json_decode(json_encode($records), true);
+
+      $curl = curl_init();
       curl_setopt_array($curl, array(
         CURLOPT_URL =>$uri,
         CURLOPT_RETURNTRANSFER => true,
@@ -118,7 +143,9 @@ if (!function_exists('get_curl_expenses')) {
         CURLOPT_POSTFIELDS => json_encode($data),
         CURLOPT_HTTPHEADER => array(
           //'Authorization: token 4e7ab0aec03a4f2:7066e1925da5f9d',4e7ab0aec03a4f2:7c92597cb5b8fd4
-          'Authorization: token 4e7ab0aec03a4f2:7c92597cb5b8fd4',
+          //'Authorization: token 4e7ab0aec03a4f2:a2e2945d24fa0af',
+          'Authorization: token 4e7ab0aec03a4f2:6018c5bb3901e34',
+       	//'Authorization'=>$erp_records['message']['data']['access_token'],
           'Content-Type: application/json',
           'Accept: application/json',
           'Cookie: sid=Guest'
@@ -135,7 +162,11 @@ if (!function_exists('get_curl_expenses')) {
   }
   if (!function_exists('curl_get_erp_request')) {
     function curl_get_erp_request($uri, $data = array()) {
-    $curl = curl_init();
+//pd($this->curl_get_erp_token());
+      $records = json_decode(curl_get_erp_token($url="", $_GET=array()));
+      $erp_records = json_decode(json_encode($records), true);
+
+      $curl = curl_init();
 
       curl_setopt_array($curl, array(
         CURLOPT_URL => $uri,
@@ -149,7 +180,9 @@ if (!function_exists('get_curl_expenses')) {
         CURLOPT_HTTPHEADER => array(
          // 'Authorization: token 4e7ab0aec03a4f2:9616a7717360494',
 //          'Authorization: token 4e7ab0aec03a4f2:7066e1925da5f9d',
-          'Authorization: token 4e7ab0aec03a4f2:7c92597cb5b8fd4',
+         // 'Authorization: token 4e7ab0aec03a4f2:a2e2945d24fa0af',
+        //  'Authorization: token 4e7ab0aec03a4f2:7c92597cb5b8fd4',
+          'Authorization'=>$erp_records['message']['data']['access_token'],
           'Cookie: sid=Guest'
         ),
       ));

@@ -2,7 +2,11 @@
 @media print {    
   .no-print, .no-print * {
     display: none !important;
+	
   }
+//  .table-size{
+//    width: 200mm;
+//    height: 200mm;}	
 }
 </style>
 <div class="row ">

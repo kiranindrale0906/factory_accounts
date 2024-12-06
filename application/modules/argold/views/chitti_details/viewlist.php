@@ -3,17 +3,17 @@
     //foreach ($packet_nos as $packet_index => $packet_no) { 
     ?>
       <!-- <h6>Packet No :<?=$packet_no ?> </h6>     -->
-      <div class="table-responsive" style="font-weight:500">
+      <div class="table-size table-responsive" style="font-weight:500">
       <table class="table table-sm table-default">
         <thead>
           <tr>
             <th></th>
             <th>Design Name</th>
-            <?php $print_customer_name="";if($chittis_details['account_name']=="MALABAR GOLD"){
-              $print_customer_name="no-print";
+            <?php $print_customer_name="no-print";if($chittis_details['account_name']=="MALABAR GOLD"){
+              $print_customer_name="";
             }
             if ($this->router->class == 'chitti_erps'){ ?>
-            <th class="text-right <?=$print_customer_name?>">ERP Customer Name</th>
+            <th class="text-right <?=$print_customer_name?>">ERP Cust Name</th>
             <?php }else{?>
             <th class="text-right no-print">Customer Name</th>
             <?php }?>
@@ -118,7 +118,7 @@
           <tr class="bg_gray bold">
             <td>Total</td>
             <td></td>
-            <td class="no-print"></td>
+            <td class="<?=$print_customer_name?>"></td>
             <td></td>
             <td class="text-right"><?=four_decimal($sum_weight);?></td>
             <td class="text-right"></td>
