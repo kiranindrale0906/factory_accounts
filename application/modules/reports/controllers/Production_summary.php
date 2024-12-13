@@ -112,7 +112,7 @@ class Production_summary extends BaseController {
       $url = "https://erp.ar-gold.in/api/method/custom_app.api.material_issue.materialissue_details?month=".$this->data['filter_month']."&year=".$this->data['filter_year'];
       $records = json_decode(curl_get_erp_request($url, $_GET));
       $erp_records = json_decode(json_encode($records), true);
-     if(!empty($erp_records)){
+   if(!empty($erp_records)){
       $this->data['product_names']=array_unique(array_column($erp_records['message'],'product'));
        $this->data['product_names'][]="KA Chain Refresh";	
 //pd($this->data['product_names']);
@@ -168,9 +168,9 @@ class Production_summary extends BaseController {
         $this->data['site_name']="ARNA BANGLE";
         }
         $conditions['factory']=$this->data['site_name'];
-      }
+      }    
+
       $erp_records['message']=$this->production_summary_model->multi_array_search_with_condition($erp_records,$conditions);
-    // pd($erp_records);
       foreach ($erp_records['message'] as $index => $erp_record) {
         if(!empty($erp_record['items'])&&$erp_record['items']=="GPC" || $erp_record['items']=="Finished Goods"){
           $arg_erp_records[$index]['created_at']=date('Y-m-d',strtotime($erp_record['creation']));
