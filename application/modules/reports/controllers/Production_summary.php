@@ -121,7 +121,7 @@ class Production_summary extends BaseController {
       $this->data['account_names']=array_unique(array_column($erp_records['message'],'customer'));
       $this->data['category_ones']=array_unique(array_column($erp_records['message'],'product_category'));
       $this->data['machine_sizes']=array_unique(array_column($erp_records['message'],'machine_size'));
-      $this->data['design_codes']=array_unique(array_column($erp_records['message'],'design'));
+      $this->data['design_codes']=array_unique(array_column($erp_records['message'],'issue_design_name'));
      } if (!isset($this->data['product_names'])) $this->data['product_names'] = array();
       if (!isset($this->data['wastage_percentage']))   $this->data['wastage_percentage']   = array();
       if (!isset($this->data['in_purities']))   $this->data['in_purities']   = array();
