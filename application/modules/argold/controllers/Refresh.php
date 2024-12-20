@@ -62,6 +62,9 @@ class Refresh extends BaseController {
                                       array('id'=>'Arc Chain','name'=>'Arc Chain'),
                                       array('id'=>'Arc Turkey','name'=>'Arc Turkey'),
                                       array('id'=>'Arc Ornament','name'=>'ARC Ornament'),
+									  array('id'=>'Hollow Nawabi','name'=>'Hollow Nawabi'),
+									  array('id'=>'Mc Marvel','name'=>'Mc Marvel'),
+									  array('id'=>'Z 4','name'=>'Z 4'),
                                     );//$this->narration_model->get('name as name, name as  id, chain_purity, chain_margin', array() ,array(), array('order_by'=>'name asc'));
     
   }
