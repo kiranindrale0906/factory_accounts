@@ -62,6 +62,8 @@ class Refresh extends BaseController {
                                       array('id'=>'Arc Chain','name'=>'Arc Chain'),
                                       array('id'=>'Arc Turkey','name'=>'Arc Turkey'),
                                       array('id'=>'Arc Ornament','name'=>'ARC Ornament'),
+                                      array('id'=>'Arc Fancy','name'=>'ARC Fancy'),
+                                      array('id'=>'Arc Customer Order','name'=>'ARC Customer Order'),
 									  array('id'=>'Hollow Nawabi','name'=>'Hollow Nawabi'),
 									  array('id'=>'Mc Marvel','name'=>'Mc Marvel'),
 									  array('id'=>'Z 4','name'=>'Z 4'),
