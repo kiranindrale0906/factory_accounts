@@ -644,7 +644,7 @@ $attributes['account_name']=trim($attributes['account_name']);
       $this->load->model(array('transactions/metal_issue_voucher_model','transactions/metal_receipt_voucher_model'));
       if(!empty($attributes['metal_receipt_voucher_reference_id'])){ 	
        $parent_data=$this->metal_receipt_voucher_model->find('',array('id'=>$attributes['metal_receipt_voucher_reference_id']));
-      }    //  pd($attributes);
+      }   
       if($attributes['receipt_type']=="Daily Drawer"){
         $attributes['receipt_type']=$attributes['dd_type'];
       }
@@ -652,7 +652,6 @@ $attributes['account_name']=trim($attributes['account_name']);
         $attributes['site_name']=$parent_data['site_name'];
         $attributes['hook_kdm_purity']=$parent_data['hook_kdm_purity'];
       }
-
       if($attributes['account_name']=="ARNA BANGLE"){
     //  	if($attributes['customer_name']==''){
       	$attributes['customer_name']="ARNA BANGLE";
@@ -671,7 +670,6 @@ $attributes['account_name']=trim($attributes['account_name']);
       if(!empty($parent_data)){
       $attributes['customer_name']=$parent_data['account_name'];
       }
-
     $api_data = array('receipt_type'=> $attributes['receipt_type'],
                       'account_name'=> $attributes['account_name'],
                       'customer_name'=> $attributes['customer_name'],
@@ -691,6 +689,7 @@ $attributes['account_name']=trim($attributes['account_name']);
   }else{
     $result = curl_post_request($api_url, $send_data);
   }
+
 }
 
   public function create_vodator_records($records, $receipt_type, $site_name, $hostversion) {
