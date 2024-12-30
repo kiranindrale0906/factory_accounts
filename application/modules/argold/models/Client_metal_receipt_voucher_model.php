@@ -554,6 +554,12 @@ $attributes['account_name']=trim($attributes['account_name']);
         $api_data['account']=$attributes['site_name'];
         $send_data['domestic_internal_receipts'] = $api_data;
         $api_url = "api/api_domestic_internal_receipts/store";
+      }elseif (   $attributes['receipt_type'] == 'AR Gold RND'
+              || $attributes['receipt_type'] == 'ARF RND'
+              || $attributes['receipt_type'] == 'ARC RND') {
+      $send_data['rnd_receipts'] = $api_data;
+      $api_url = "api/api_rnd_receipts/store";  
+
       }else{
         $api_url = "api/api_internal_receipts/store";
       }
