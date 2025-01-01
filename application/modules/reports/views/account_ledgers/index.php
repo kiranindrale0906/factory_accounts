@@ -9,7 +9,7 @@
   <?= getHttpButton('Generate Ledger (1 to 3 month 2024)', base_url().'reports/account_ledgers/create?limit_date=6', 'float-right btn-success ml-5'); ?>
   <?= getHttpButton('Generate Ledger (4 to 7 month 2024)', base_url().'reports/account_ledgers/create?limit_date=7', 'float-right btn-success ml-5'); ?>
   <?= getHttpButton('Generate Ledger (8 to 12 month 2024)', base_url().'reports/account_ledgers/create?limit_date=8', 'float-right btn-success ml-5'); ?>
-  <?= getHttpButton('Generate Ledger (from current month)', base_url().'reports/account_ledgers/create?limit_date=9', 'float-right btn-success ml-5'); ?>
+  <?= getHttpButton('Generate Ledger (from current month) 2025', base_url().'reports/account_ledgers/create?limit_date=10', 'float-right btn-success ml-5'); ?>
 </div>
 <?php 
   $this->load->view('reports/ledgers/report_header', array('header' => 'Account Ledger'));

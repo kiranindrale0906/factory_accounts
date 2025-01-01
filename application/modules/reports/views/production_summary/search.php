@@ -45,11 +45,22 @@
   <div class="col-md-12">
 
   <h6>
-       ERP Months:
+       ERP Months (2024):
   <?php $months = array(1 => 'Jan.', 2 => 'Feb.', 3 => 'Mar.', 4 => 'Apr.', 5 => 'May', 6 => 'Jun.', 7 => 'Jul.', 8 => 'Aug.', 9 => 'Sep.', 10 => 'Oct.', 11 => 'Nov.', 12 => 'Dec.');
       foreach ($months as $month_key => $month) { ?>
         <a class="ml-5 <?= ($filter_month == $month_key) ? 'bold black underline' : '' ?>"
                href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=<?= $group_by ?>&filter_month=<?= $month_key ?>&filter_year=2024'><?= $month ?></a>
+
+          <?php } ?>
+     </h6>
+   </div>
+   <div class="col-md-12">
+  <h6>
+       ERP Months (2025):
+  <?php $new_months = array(1 => 'Jan.', 2 => 'Feb.', 3 => 'Mar.', 4 => 'Apr.', 5 => 'May', 6 => 'Jun.', 7 => 'Jul.', 8 => 'Aug.', 9 => 'Sep.', 10 => 'Oct.', 11 => 'Nov.', 12 => 'Dec.');
+      foreach ($new_months as $new_month_key => $new_month) { ?>
+        <a class="ml-5 <?= ($filter_month == $new_month_key) ? 'bold black underline' : '' ?>"
+               href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=<?= $group_by ?>&filter_month=<?= $new_month_key ?>&filter_year=2025'><?= $new_month ?></a>
 
           <?php } ?>
      </h6>
@@ -65,7 +76,7 @@
            href='<?= base_url() ?>reports/production_summary?filer_month=<?= $filter_month?>&filter_year=<?= $filter_year ?>&site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=<?= $group_by ?>'>All</a>
           <?php foreach ($account_names as $account) { ?>
             <a class="ml-5 <?= ($account_name == $account) ? 'bold black underline' : '' ?>"
-               href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=2024'><?= $account ?></a>    
+               href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=<?= $filter_year ?>'><?= $account ?></a>    
           <?php } ?>
       </h6>
     </div>
@@ -82,7 +93,7 @@
            href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=&in_purity=<?= $in_purity ?>&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=2024'>All</a>
           <?php foreach ($product_names as $product) { ?>
             <a class="ml-5 <?= ($product_name == $product) ? 'bold black underline' : '' ?>"
-               href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&account_name=<?= $account_name ?>&product_name=<?= $product ?>&in_purity=<?= $in_purity ?>&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=2024'><?= $product ?></a>    
+               href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&account_name=<?= $account_name ?>&product_name=<?= $product ?>&in_purity=<?= $in_purity ?>&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=<?= $filter_year ?>'><?= $product ?></a>    
           <?php } ?>
       </h6>
     </div>
@@ -99,7 +110,7 @@
              href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=&category_one=<?= $category_one ?>&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=2024'>All</a>
         <?php foreach ($in_purities as $purity) { ?>
           <a class="ml-5 <?= ($in_purity == $purity) ? 'bold black underline' : '' ?>" 
-             href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $purity ?>&category_one=<?= $category_one ?>&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=2024'><?= $purity ?></a>
+             href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $purity ?>&category_one=<?= $category_one ?>&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=<?= $filter_year ?>'><?= $purity ?></a>
         <?php } ?>
       </h6>
     </div>
@@ -113,10 +124,10 @@
       <h6>
         Category One:
         <a class="ml-5 <?= ($category_one == '') ? 'bold black underline' : '' ?>" 
-           href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=2024'>All</a>
+           href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=<?= $filter_year ?>'>All</a>
         <?php foreach ($category_ones as $categoryone) { ?>
           <a class="ml-5 <?= ($category_one == $categoryone) ? 'bold black underline' : '' ?>" 
-             href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $categoryone ?>&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=2024'><?= $categoryone ?></a>
+             href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $categoryone ?>&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=<?= $filter_year ?>'><?= $categoryone ?></a>
         <?php } ?>
       </h6>
     </div>
@@ -130,10 +141,10 @@
       <h6>
         Machine Size:
         <a class="ml-5 <?= ($machine_size == '') ? 'bold black underline' : '' ?>" 
-           href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=2024'>All</a>
+           href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=<?= $filter_year ?>'>All</a>
         <?php foreach ($machine_sizes as $machinesize) { ?>
           <a class="ml-5 <?= ($machine_size == $machinesize) ? 'bold black underline' : '' ?>" 
-             href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machinesize ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=2024'><?= $machinesize ?></a>
+             href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machinesize ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=<?= $filter_year ?>'><?= $machinesize ?></a>
         <?php } ?>
       </h6>
     </div>
@@ -147,10 +158,10 @@
       <h6>
         Design Codes:
         <a class="ml-5 <?= ($design_code == '') ? 'bold black underline' : '' ?>" 
-           href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=2024'>All</a>
+           href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=<?= $filter_year ?>'>All</a>
         <?php foreach ($design_codes as $designcode) { ?>
           <a class="ml-5 <?= ($design_code == $designcode) ? 'bold black underline' : '' ?>" 
-             href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $designcode ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=2024'><?= $designcode ?></a>
+             href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $designcode ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=<?= $filter_year ?>'><?= $designcode ?></a>
         <?php } ?>
       </h6>
     </div>
@@ -163,15 +174,15 @@
     <h6>
       Group By:
       <a class="ml-5 <?= ($group_by == '') ? 'bold black underline' : '' ?>" 
-         href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=&filter_month=<?=$filter_month ?>&filter_year=2024''>All</a>
+         href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=&filter_month=<?=$filter_month ?>&filter_year=<?= $filter_year ?>''>All</a>
        <a class="ml-5 <?= ($group_by == 'Date') ? 'bold black underline' : '' ?>" 
-         href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=Date&filter_month=<?=$filter_month ?>&filter_year=2024''>Date</a>
+         href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=Date&filter_month=<?=$filter_month ?>&filter_year=<?= $filter_year ?>''>Date</a>
        <a class="ml-5 <?= ($group_by == 'Week') ? 'bold black underline' : '' ?>" 
-         href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=Week&filter_month=<?=$filter_month ?>&filter_year=2024''>Week</a>
+         href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=Week&filter_month=<?=$filter_month ?>&filter_year=<?= $filter_year ?>''>Week</a>
        <a class="ml-5 <?= ($group_by == 'Month') ? 'bold black underline' : '' ?>" 
-         href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=Month&filter_month=<?=$filter_month ?>&filter_year=2024'>Month</a>
+         href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=Month&filter_month=<?=$filter_month ?>&filter_year=<?= $filter_year ?>'>Month</a>
          <a class="ml-5 <?= ($group_by == 'Year') ? 'bold black underline' : '' ?>" 
-         href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=Year&filter_month=<?=$filter_month ?>&filter_year=2024'>Year</a>
+         href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=Year&filter_month=<?=$filter_month ?>&filter_year=<?= $filter_year ?>'>Year</a>
     </h6>
   </div>
 </div>

@@ -35,7 +35,7 @@ class Ledger_model extends BaseModel {
     $voucher_ids = $this->voucher_model->get('id',array('(month(voucher_date) between "9" and "12") and (year(voucher_date)<=2022)'=>NULL));
     }*/if($limit_date==6){
     $this->delete('', array('id > ' => 0,'(month(voucher_date) between "1" and "3") and year(voucher_date)=2024'=>NULL));
-    $voucher_ids = $this->voucher_model->get('id',array('(month(voucher_date) between "1" and "3") and (year(voucher_date)=2024)'=>NULL));
+    $voucher_ids = $this->voucher_model->get('id',array('(month(voucher_date) between "1" and "3") and year(voucher_date)=2024'=>NULL));
     }if($limit_date==7){
     $this->delete('', array('id > ' => 0,'(month(voucher_date) between "4" and "7") and year(voucher_date)=2024'=>NULL));
     $voucher_ids = $this->voucher_model->get('id',array('(month(voucher_date) between "4" and "7") and (year(voucher_date)=2024)'=>NULL));
@@ -44,9 +44,12 @@ class Ledger_model extends BaseModel {
     $this->delete('', array('id > ' => 0,'month(voucher_date) >=8 and year(voucher_date)=2024'=>NULL));
     $voucher_ids = $this->voucher_model->get('id',array('month(voucher_date) >=8 and year(voucher_date)=2024'=>NULL));
     }
-    if($limit_date==9){
+   /* if($limit_date==9){
     $this->delete('', array('id > ' => 0,'(month(voucher_date) between "1" and "3") and year(voucher_date)=2024'=>NULL));
     $voucher_ids = $this->voucher_model->get('id',array('(month(voucher_date) between "1" and "3") and year(voucher_date)=2024'=>NULL));
+    }*/ if($limit_date==10){
+    $this->delete('', array('id > ' => 0,'(month(voucher_date) >=1  and year(voucher_date)=2025'=>NULL));
+    $voucher_ids = $this->voucher_model->get('id',array('(month(voucher_date) >=1) and year(voucher_date)=2025'=>NULL));
     }
     foreach ($voucher_ids as $voucher_id) {
       $ledger_obj = new Ledger_model(array('voucher_id' => $voucher_id['id']));
