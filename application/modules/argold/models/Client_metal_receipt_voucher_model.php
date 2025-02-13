@@ -550,16 +550,10 @@ $attributes['account_name']=trim($attributes['account_name']);
                     )) {
       $api_data = array_merge($api_data, array('type' => 'Pure','description' => $api_data['description'].'-'.$attributes['site_name'].'-'.$attributes['description']));
       $send_data['internal_receipts'] = $api_data;
-      if($attributes['account_name'] == 'Domestic Internal Software'){
+ if($attributes['account_name'] == 'Domestic Internal Software'){
         $api_data['account']=$attributes['site_name'];
         $send_data['domestic_internal_receipts'] = $api_data;
         $api_url = "api/api_domestic_internal_receipts/store";
-      }elseif (   $attributes['receipt_type'] == 'AR Gold RND'
-              || $attributes['receipt_type'] == 'ARF RND'
-              || $attributes['receipt_type'] == 'ARC RND') {
-      $send_data['rnd_receipts'] = $api_data;
-      $api_url = "api/api_rnd_receipts/store";  
-
       }else{
         $api_url = "api/api_internal_receipts/store";
       }
@@ -568,9 +562,9 @@ $attributes['account_name']=trim($attributes['account_name']);
     }elseif (   $attributes['receipt_type'] == 'AR Gold RND'
               || $attributes['receipt_type'] == 'ARF RND'
               || $attributes['receipt_type'] == 'ARC RND') {
+
       $send_data['rnd_receipts'] = $api_data;
       $api_url = "api/api_rnd_receipts/store";  
-
     }elseif (   $attributes['receipt_type'] == 'Export Internal ISSUE') {
       $send_data['export_internal_receipts'] = $api_data;
       $api_url = "api/api_export_internal_receipts/store";  
@@ -620,7 +614,7 @@ $attributes['account_name']=trim($attributes['account_name']);
       $api_url = "api/api_pending_ghiss_receipts/store";
     }
     if(($attributes['site_name']=="AR Gold ERP" || $attributes['site_name']=="ARF ERP" ||$attributes['site_name']=="RND ERP" || $attributes['site_name']=="ARC ERP" || $attributes['site_name']=="Domestic Internal ERP" || $attributes['site_name']=="ARNA BANGLE ERP") && ($attributes['receipt_type'] == 'GPC Out'||$attributes['receipt_type'] == 'Metal'|| $attributes['receipt_type'] == 'Melting Wastage' || $attributes['receipt_type'] == 'Daily Drawer Wastage'||$attributes['receipt_type'] == 'Fancy 75 DD Wastage'|| $attributes['receipt_type'] == 'Pipe and Para DD Wastage'|| $attributes['receipt_type'] == 'Ball Chain DD Wastage' ||$attributes['receipt_type'] == 'Sisma DD Wastage'||$attributes['receipt_type'] == 'Fancy 92 DD Wastage' || $attributes['receipt_type'] == 'Export Internal' || $attributes['receipt_type'] == 'Domestic Internal' || $attributes['receipt_type'] == 'Refresh'|| $attributes['receipt_type'] == 'Repair')){}
-      elseif(($attributes['site_name']=="AR Gold ERP" || $attributes['site_name']=="ARF ERP" ||$attributes['site_name']=="RND ERP" || $attributes['site_name']=="ARC ERP" || $attributes['site_name']=="Domestic Internal ERP" || $attributes['site_name']=="ARNA BANGLE ERP") &&($attributes['receipt_type'] == 'GPC' || $attributes['receipt_type'] == 'GPC Out'|| $attributes['receipt_type'] == 'Finish Good') && ($attributes['account_name'] == 'Domestic Internal ERP Software' || $attributes['account_name'] == 'ARNA BANGLE' || $attributes['account_name'] == 'Rnd Erp Software' ||  $attributes['account_name'] == 'ARG ERP Software' || $attributes['account_name']=='Arf Erp Software' )){
+      elseif(($attributes['site_name']=="AR Gold ERP" || $attributes['site_name']=="ARF ERP" ||$attributes['site_name']=="RND ERP" || $attributes['site_name']=="ARC ERP" || $attributes['site_name']=="Domestic Internal ERP" || $attributes['site_name']=="ARNA BANGLE ERP") &&($attributes['receipt_type'] == 'GPC' || $attributes['receipt_type'] == 'GPC Out'|| $attributes['receipt_type'] == 'Finish Good' || $attributes['receipt_type'] == 'Finished Goods') && ($attributes['account_name'] == 'Domestic Internal ERP Software' || $attributes['account_name'] == 'ARNA BANGLE' || $attributes['account_name'] == 'Rnd Erp Software' ||  $attributes['account_name'] == 'ARG ERP Software' || $attributes['account_name']=='Arf Erp Software' )){
 
      }else{
 
@@ -628,7 +622,7 @@ $attributes['account_name']=trim($attributes['account_name']);
    	 $api_url = get_api_path_from_account_name($attributes['account_name']).$api_url;
 
     }
-//pd($attributes);
+
     // if ($attributes['account_name'] == 'AR Gold Software')
     //   $api_url = API_ARG_PATH.$api_url;
     // elseif ($attributes['account_name'] == 'ARF Software')

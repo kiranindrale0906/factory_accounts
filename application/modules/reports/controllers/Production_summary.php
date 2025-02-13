@@ -112,7 +112,8 @@ class Production_summary extends BaseController {
       $url = "https://erp.ar-gold.in/api/method/custom_app.api.material_issue.materialissue_details?month=".$this->data['filter_month']."&year=".$this->data['filter_year'];
       $records = json_decode(curl_get_erp_request($url, $_GET));
       $erp_records = json_decode(json_encode($records), true);
-   if(!empty($erp_records)){
+//pd($erp_records);
+    if(!empty($erp_records)){
       $this->data['product_names']=array_unique(array_column($erp_records['message'],'product'));
        $this->data['product_names'][]="KA Chain Refresh";	
 //pd($this->data['product_names']);
@@ -139,7 +140,7 @@ class Production_summary extends BaseController {
         $conditions['gpc_melting']=$this->data['in_purity'];
       }
       if(!empty($this->data['design_code'])){
-        $conditions['design']=$this->data['design_code'];
+        $conditions['issue_design_name']=$this->data['design_code'];
       }
       if(!empty($this->data['machine_size'])){
         $conditions['machine_size']=$this->data['machine_size'];
@@ -178,9 +179,9 @@ class Production_summary extends BaseController {
             $arg_erp_records[$index]['product_name']=!empty($erp_record['product'])?$erp_record['product']:"";
             $arg_erp_records[$index]['category_one']=!empty($erp_record['product_category'])?$erp_record['product_category']:"";
             $arg_erp_records[$index]['machine_size']=!empty($erp_record['machine_size'])?$erp_record['machine_size']:"";
-            $arg_erp_records[$index]['design_code']=!empty($erp_record['design'])?$erp_record['design']:"";
+            $arg_erp_records[$index]['design_code']=!empty($erp_record['issue_design_name'])?$erp_record['issue_design_name']:"";
             $arg_erp_records[$index]['account_name']=$erp_record['customer'];
-            $arg_erp_records[$index]['issue_gpc_out']=$erp_record['balance_weight'];
+            $arg_erp_records[$index]['issue_gpc_out']=$erp_record['required_weight']; //$erp_record['balance_weight'];
             $arg_erp_records[$index]['out_purity']=$erp_record['gpc_melting'];
             $arg_erp_records[$index]['in_purity']=$erp_record['melting'];
             $arg_erp_records[$index]['wastage_percentage']=$erp_record['wastage_percentage'];
@@ -224,7 +225,16 @@ class Production_summary extends BaseController {
        $where['site_name']    =$site_name;
     }
     if(!empty($this->data['product_name'])){
+      if($this->data['product_name']=="Fancy 92"){
+       $where['item_name']    ="Fancy Chain";
+
+      }elseif($this->data['product_name']=="Fancy 75"){
+
+       $where['item_name']    ="Fancy 75 Chain";
+      }else{
+
        $where['item_name']    =$this->data['product_name'];
+      }
        $group_by=array('group_by' => 'date(created_at)');
     }
 

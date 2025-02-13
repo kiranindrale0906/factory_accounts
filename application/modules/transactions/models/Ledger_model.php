@@ -48,7 +48,7 @@ class Ledger_model extends BaseModel {
     $this->delete('', array('id > ' => 0,'(month(voucher_date) between "1" and "3") and year(voucher_date)=2024'=>NULL));
     $voucher_ids = $this->voucher_model->get('id',array('(month(voucher_date) between "1" and "3") and year(voucher_date)=2024'=>NULL));
     }*/ if($limit_date==10){
-    $this->delete('', array('id > ' => 0,'(month(voucher_date) >=1  and year(voucher_date)=2025'=>NULL));
+    $this->delete('', array('id > ' => 0,'(month(voucher_date) >=1)  and year(voucher_date)=2025'=>NULL));
     $voucher_ids = $this->voucher_model->get('id',array('(month(voucher_date) >=1) and year(voucher_date)=2025'=>NULL));
     }
     foreach ($voucher_ids as $voucher_id) {
