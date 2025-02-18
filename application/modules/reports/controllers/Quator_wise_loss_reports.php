@@ -61,7 +61,6 @@ class Quator_wise_loss_reports extends BaseController {
       $loss_account_names = array_column($loss_account_names, 'name');
       $where['where']["account_name in ('".implode("' ,'",$loss_account_names)."')"] = NULL;
       $where['where']["narration like '%Unrecovarable%'"] = NULL;
-
       $select = "account_name, narration as item_name,
                IFNULL((sum(credit_weight*purity)/100),0) - IFNULL((sum(debit_weight*factory_purity)/100),0) as fine,
                IFNULL(sum((purity-factory_purity)*debit_weight/100),0) - IFNULL(sum((factory_purity-purity)*credit_weight/100),0) as vadotar,

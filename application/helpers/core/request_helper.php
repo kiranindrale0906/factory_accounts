@@ -107,7 +107,7 @@ if (!function_exists('get_curl_expenses')) {
    function curl_get_erp_token($uri="", $data = array()) {
       $curl = curl_init();
       curl_setopt_array($curl, array(
-      CURLOPT_URL => 'https://erp.ar-gold.in/api/method/custom_app.api.login.get_access_token?usr=administrator&pwd=Ascra%408848',
+      CURLOPT_URL => 'https://erp.ar-gold.in/api/method/custom_app.api.login.get_access_token?usr=administrator&pwd=Erp@8848@digital@m@',
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => '',
       CURLOPT_MAXREDIRS => 10,
@@ -129,7 +129,6 @@ if (!function_exists('get_curl_expenses')) {
     function curl_post_erp_request($uri, $data = array()) {
     $records = json_decode(curl_get_erp_token($url="", $_GET=array()));
     $erp_records = json_decode(json_encode($records), true);
-
       $curl = curl_init();
       curl_setopt_array($curl, array(
         CURLOPT_URL =>$uri,
@@ -144,7 +143,7 @@ if (!function_exists('get_curl_expenses')) {
         CURLOPT_HTTPHEADER => array(
           //'Authorization: token 4e7ab0aec03a4f2:7066e1925da5f9d',4e7ab0aec03a4f2:7c92597cb5b8fd4
           //'Authorization: token 4e7ab0aec03a4f2:a2e2945d24fa0af',
-          'Authorization:'.$erp_records['message']['data']['access_token'],// token 4e7ab0aec03a4f2:6018c5bb3901e34',
+          'Authorization:'.$erp_records['message']['data']['access_token'], // token 4e7ab0aec03a4f2:6018c5bb3901e34',
        	//'Authorization'=>$erp_records['message']['data']['access_token'],
           'Content-Type: application/json',
           'Accept: application/json',
