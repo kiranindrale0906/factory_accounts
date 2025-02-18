@@ -139,7 +139,7 @@ class Production_summary extends BaseController {
         $conditions['gpc_melting']=$this->data['in_purity'];
       }
       if(!empty($this->data['design_code'])){
-        $conditions['design']=$this->data['design_code'];
+        $conditions['issue_design_name']=$this->data['design_code'];
       }
       if(!empty($this->data['machine_size'])){
         $conditions['machine_size']=$this->data['machine_size'];
@@ -224,7 +224,16 @@ class Production_summary extends BaseController {
        $where['site_name']    =$site_name;
     }
     if(!empty($this->data['product_name'])){
+      if($this->data['product_name']=="Fancy 92"){
+       $where['item_name']    ="Fancy Chain";
+
+      }elseif($this->data['product_name']=="Fancy 75"){
+
+       $where['item_name']    ="Fancy 75 Chain";
+      }else{
+
        $where['item_name']    =$this->data['product_name'];
+      }
        $group_by=array('group_by' => 'date(created_at)');
     }
 
