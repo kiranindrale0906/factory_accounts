@@ -91,10 +91,10 @@
       <h6>
         Product Name: 
         <a class="ml-5 <?= ($product_name == '') ? 'bold black underline' : '' ?>" 
-           href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=&in_purity=<?= $in_purity ?>&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=2024'>All</a>
+           href='<?= base_url() ?>reports/production_same_purity_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=&in_purity=<?= $in_purity ?>&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=2024'>All</a>
           <?php foreach ($product_names as $product) { ?>
             <a class="ml-5 <?= ($product_name == $product) ? 'bold black underline' : '' ?>"
-               href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&account_name=<?= $account_name ?>&product_name=<?= $product ?>&in_purity=<?= $in_purity ?>&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=<?= $filter_year ?>'><?= $product ?></a>    
+               href='<?= base_url() ?>reports/production_same_purity_summary?site_name=<?= $site_name ?>&account_name=<?= $account_name ?>&product_name=<?= $product ?>&in_purity=<?= $in_purity ?>&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=<?= $filter_year ?>'><?= $product ?></a>    
           <?php } ?>
       </h6>
     </div>
@@ -108,10 +108,10 @@
       <h6>
         Category One:
         <a class="ml-5 <?= ($category_one == '') ? 'bold black underline' : '' ?>" 
-           href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=<?= $filter_year ?>'>All</a>
+           href='<?= base_url() ?>reports/production_same_purity_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=<?= $filter_year ?>'>All</a>
         <?php foreach ($category_ones as $categoryone) { ?>
           <a class="ml-5 <?= ($category_one == $categoryone) ? 'bold black underline' : '' ?>" 
-             href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $categoryone ?>&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=<?= $filter_year ?>'><?= $categoryone ?></a>
+             href='<?= base_url() ?>reports/production_same_purity_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $categoryone ?>&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=<?= $filter_year ?>'><?= $categoryone ?></a>
         <?php } ?>
       </h6>
     </div>
