@@ -72,6 +72,19 @@
           <?php } ?>
      </h6>
    </div>
+      <div class="row">
+        <div class="col-md-12">
+
+  <h6>
+       ERP Months (2024):
+  <?php $months = array(1 => 'Jan.', 2 => 'Feb.', 3 => 'Mar.', 4 => 'Apr.', 5 => 'May', 6 => 'Jun.', 7 => 'Jul.', 8 => 'Aug.', 9 => 'Sep.', 10 => 'Oct.', 11 => 'Nov.', 12 => 'Dec.');
+      foreach ($months as $month_key => $month) { ?>
+        <a class="ml-5 <?= ($filter_month == $month_key) ? 'bold black underline' : '' ?>"
+               href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=<?= $group_by ?>&filter_month=<?= $month_key ?>&filter_year=2024'><?= $month ?></a>
+
+          <?php } ?>
+     </h6>
+   </div>
       <div class="col-md-12">
   <h6>
        ERP Months (2025):
@@ -84,5 +97,37 @@
      </h6>
    </div>
    </div>
+<?php if (!empty($product_names)) { ?>
+  <div class="row"> 
+    <div class="col-md-12">
+      <h6>
+        Product Name: 
+        <a class="ml-5 <?= ($product_name == '') ? 'bold black underline' : '' ?>" 
+           href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=&in_purity=<?= $in_purity ?>&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=2024'>All</a>
+          <?php foreach ($product_names as $product) { ?>
+            <a class="ml-5 <?= ($product_name == $product) ? 'bold black underline' : '' ?>"
+               href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&account_name=<?= $account_name ?>&product_name=<?= $product ?>&in_purity=<?= $in_purity ?>&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=<?= $filter_year ?>'><?= $product ?></a>    
+          <?php } ?>
+      </h6>
+    </div>
+  </div>
+  <br />
+<?php } ?>
 <br />
+<?php if (!empty($category_ones)) { ?>
+  <div class="row"> 
+    <div class="col-md-12">
+      <h6>
+        Category One:
+        <a class="ml-5 <?= ($category_one == '') ? 'bold black underline' : '' ?>" 
+           href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=<?= $filter_year ?>'>All</a>
+        <?php foreach ($category_ones as $categoryone) { ?>
+          <a class="ml-5 <?= ($category_one == $categoryone) ? 'bold black underline' : '' ?>" 
+             href='<?= base_url() ?>reports/production_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $categoryone ?>&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=<?= $filter_year ?>'><?= $categoryone ?></a>
+        <?php } ?>
+      </h6>
+    </div>
+  </div>
+  <br />
+<?php } ?>
       
