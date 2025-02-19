@@ -25,8 +25,8 @@ class Production_same_purity_summary extends BaseController {
     $this->data['machine_size'] = (!empty($_GET['machine_size'])) ? $_GET['machine_size'] : '';
     $this->data['design_code']  = (!empty($_GET['design_code']))  ? $_GET['design_code'] : '';
     $this->data['site_names']   = array('AR Gold', 'ARC', 'ARF');
-    $this->data['filter_month'] = (!empty($_GET['filter_month'])) ? $_GET['filter_month'] : "";
-    $this->data['filter_year'] = (!empty($_GET['filter_year'])) ? $_GET['filter_year'] :"";
+    $this->data['filter_month'] = (!empty($_GET['filter_month'])) ? $_GET['filter_month'] : date('m');
+    $this->data['filter_year'] = (!empty($_GET['filter_year'])) ? $_GET['filter_year'] : date('Y');
     
     
     $url = '';
