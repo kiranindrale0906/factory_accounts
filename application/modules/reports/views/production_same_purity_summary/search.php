@@ -118,4 +118,21 @@
   <br />
 <?php } ?>
   </div>
+  <?php if (!empty($in_purities)) { ?>
+  <div class="row"> 
+    <div class="col-md-12">
+      <h6>
+        In Purity: 
+          <a class="ml-5 <?= ($in_purity == '') ? 'bold black underline' : '' ?>" 
+             href='<?= base_url() ?>reports/production_same_purity_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=&category_one=<?= $category_one ?>&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=<?= $filter_year ?>'>All</a>
+        <?php foreach ($in_purities as $purity) { ?>
+          <a class="ml-5 <?= ($in_purity == $purity) ? 'bold black underline' : '' ?>" 
+             href='<?= base_url() ?>reports/production_same_purity_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $purity ?>&category_one=<?= $category_one ?>&group_by=<?= $group_by ?>&filter_month=<?=$filter_month ?>&filter_year=<?= $filter_year ?>'><?= $purity ?></a>
+        <?php } ?>
+      </h6>
+    </div>
+  </div>
+  <br />
+<?php } ?>
+
       
