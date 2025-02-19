@@ -80,12 +80,14 @@ class Production_same_purity_summary extends BaseController {
     $arg_erp_records=array();
     if ($this->data['site_name'] == '' || ($this->data['site_name']=="AR Gold ERP" || $this->data['site_name']=="ARG ERP Software" || $this->data['site_name']=="ARF ERP Software"|| $this->data['site_name']=="Arf Erp Software" || $this->data['site_name']=="Rnd Erp Software" || $this->data['site_name']=="ARC ERP Software"|| $this->data['site_name']=="Arc Erp Software"|| $this->data['site_name']=="ARNA BANGLE" || $this->data['site_name']=="ARF ERP" || $this->data['site_name']=="ARC ERP" || $this->data['site_name']=="Domestic Internal ERP" || $this->data['site_name']=="Domestic Internal ERP Software" || $this->data['site_name']=="ARNA BANGLE ERP")) {
       $url = "https://erp.ar-gold.in/api/method/custom_app.api.material_issue.materialissue_details?month=".$this->data['filter_month']."&year=".$this->data['filter_year'];
+//pd($url);
       $records = json_decode(curl_get_erp_request($url, $_GET));
       $erp_records = json_decode(json_encode($records), true);
-     if(!empty($erp_records)){
+//pd($erp_records);
+    if(!empty($erp_records)){
       $this->data['product_names']=array_unique(array_column($erp_records['message'],'product'));
       $this->data['wastage_percentage']=array_unique(array_column($erp_records['message'],'wastage_percentage'));
-      $this->data['in_purities']=array_unique(array_column($erp_records['message'],'melting'));
+      $this->data['in_purities']=array_unique(array_column($erp_records['message'],'issue_purity'));
       $this->data['account_names']=array_unique(array_column($erp_records['message'],'customer'));
       $this->data['category_ones']=array_unique(array_column($erp_records['message'],'product_category'));
       $this->data['machine_sizes']=array_unique(array_column($erp_records['message'],'machine_size'));
@@ -138,7 +140,7 @@ class Production_same_purity_summary extends BaseController {
         $conditions['factory']=$this->data['site_name'];
       }
       $erp_records['message']=$this->production_summary_model->multi_array_search_with_condition($erp_records,$conditions);
-    // pd($erp_records);
+//pd($erp_records);
       foreach ($erp_records['message'] as $index => $erp_record) {
         if(!empty($erp_record['items'])&&$erp_record['items']=="GPC" || $erp_record['items']=="Finished Goods"){
           $arg_erp_records[$index]['created_at']=date('Y-m-d',strtotime($erp_record['creation']));
@@ -150,7 +152,7 @@ class Production_same_purity_summary extends BaseController {
             $arg_erp_records[$index]['account_name']=$erp_record['customer'];
             $arg_erp_records[$index]['issue_gpc_out']=$erp_record['balance_weight'];
             $arg_erp_records[$index]['out_purity']=$erp_record['gpc_melting'];
-            $arg_erp_records[$index]['in_purity']=$erp_record['melting'];
+            $arg_erp_records[$index]['in_purity']=$erp_record['issue_purity'];
             $arg_erp_records[$index]['wastage_percentage']=$erp_record['wastage_percentage'];
       }
       }    
