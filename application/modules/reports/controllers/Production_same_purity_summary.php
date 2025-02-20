@@ -25,8 +25,8 @@ class Production_same_purity_summary extends BaseController {
     $this->data['machine_size'] = (!empty($_GET['machine_size'])) ? $_GET['machine_size'] : '';
     $this->data['design_code']  = (!empty($_GET['design_code']))  ? $_GET['design_code'] : '';
     $this->data['site_names']   = array('AR Gold', 'ARC', 'ARF');
-    $this->data['filter_month'] = (!empty($_GET['filter_month'])) ? $_GET['filter_month'] : "";
-    $this->data['filter_year'] = (!empty($_GET['filter_year'])) ? $_GET['filter_year'] :"";
+    $this->data['filter_month'] = (!empty($_GET['filter_month'])) ? $_GET['filter_month'] :"";//date('m');
+    $this->data['filter_year'] = (!empty($_GET['filter_year'])) ? $_GET['filter_year'] : "";//date('Y');
     
     
     $url = '';
@@ -79,8 +79,8 @@ class Production_same_purity_summary extends BaseController {
     if (empty($arc_records['data'])) $arc_records['data'] = array();
     $arg_erp_records=array();
     if ($this->data['site_name'] == '' || ($this->data['site_name']=="AR Gold ERP" || $this->data['site_name']=="ARG ERP Software" || $this->data['site_name']=="ARF ERP Software"|| $this->data['site_name']=="Arf Erp Software" || $this->data['site_name']=="Rnd Erp Software" || $this->data['site_name']=="ARC ERP Software"|| $this->data['site_name']=="Arc Erp Software"|| $this->data['site_name']=="ARNA BANGLE" || $this->data['site_name']=="ARF ERP" || $this->data['site_name']=="ARC ERP" || $this->data['site_name']=="Domestic Internal ERP" || $this->data['site_name']=="Domestic Internal ERP Software" || $this->data['site_name']=="ARNA BANGLE ERP")) {
-      $url = "https://erp.ar-gold.in/api/method/custom_app.api.material_issue.materialissue_details?month=".$this->data['filter_month']."&year=".$this->data['filter_year'];
-//pd($url);
+//      $url = "https://erp.ar-gold.in/api/method/custom_app.api.material_issue.materialissue_details?month=".$this->data['filter_month']."&year=".$this->data['filter_year']."&without_wastage=true";;
+      $url = "https://erp.ar-gold.in/api/method/custom_app.api.material_issue.materialissue_details?month=".$this->data['filter_month']."&year=".$this->data['filter_year'].'&without_wastage=1';
       $records = json_decode(curl_get_erp_request($url, $_GET));
       $erp_records = json_decode(json_encode($records), true);
 //pd($erp_records);
