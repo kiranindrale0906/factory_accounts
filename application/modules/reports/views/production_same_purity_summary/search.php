@@ -59,32 +59,7 @@
     </h6>
   </div>
 </div>
-<div class="row">
-  <div class="col-md-12">
 
-  <h6>
-       ERP Months (2024):
-  <?php $months = array(1 => 'Jan.', 2 => 'Feb.', 3 => 'Mar.', 4 => 'Apr.', 5 => 'May', 6 => 'Jun.', 7 => 'Jul.', 8 => 'Aug.', 9 => 'Sep.', 10 => 'Oct.', 11 => 'Nov.', 12 => 'Dec.');
-      foreach ($months as $month_key => $month) { ?>
-        <a class="ml-5 <?= ($filter_month == $month_key && $filter_year==2024) ? 'bold black underline' : '' ?>"
-               href='<?= base_url() ?>reports/production_same_purity_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=<?= $group_by ?>&filter_month=<?= $month_key ?>&filter_year=2024'><?= $month ?></a>
-
-          <?php } ?>
-     </h6>
-   </div>
-
-      <div class="col-md-12">
-  <h6>
-       ERP Months (2025):
-  <?php $new_months = array(1 => 'Jan.', 2 => 'Feb.', 3 => 'Mar.', 4 => 'Apr.', 5 => 'May', 6 => 'Jun.', 7 => 'Jul.', 8 => 'Aug.', 9 => 'Sep.', 10 => 'Oct.', 11 => 'Nov.', 12 => 'Dec.');
-      foreach ($new_months as $new_month_key => $new_month) { ?>
-        <a class="ml-5 <?= ($filter_month == $new_month_key  && $filter_year==2025) ? 'bold black underline' : '' ?>"
-               href='<?= base_url() ?>reports/production_same_purity_summary?site_name=<?= $site_name ?>&machine_size=<?= $machine_size ?>&design_code=<?= $design_code ?>&account_name=<?= $account_name ?>&product_name=<?= $product_name ?>&in_purity=<?= $in_purity ?>&category_one=<?= $category_one ?>&group_by=<?= $group_by ?>&filter_month=<?= $new_month_key ?>&filter_year=2025'><?= $new_month ?></a>
-
-          <?php } ?>
-     </h6>
-   </div>
-   </div>
   <div class="row"> 
 <?php if (!empty($product_names)) { ?>
     <div class="col-md-12">
