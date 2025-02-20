@@ -18,7 +18,6 @@
     <?php if ($type=='issue') {?>  
       <?php if ($report_type == 'Account Ledger' ):?>
       <td></td>
-      <td></td>
       <?php endif; ?>
       <td class="text-right"><?= four_decimal($record['credit_weight'], '-'); ?></td>
    <td></td>
