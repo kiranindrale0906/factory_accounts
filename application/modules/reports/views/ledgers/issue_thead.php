@@ -14,6 +14,10 @@
     <th class='text-right'>Gross Wt</th>
     <th class='text-right'>Factory Melting</th>
     <th class='text-right'>Factory Fine</th>
+    <?php if ($report_type != 'Account Ledger'): ?>
+      <th>Chitti Weight</th>
+      <th>Chitti Fine</th>
+    <?php endif; ?>
     <th class='text-right'>Issue Melting</th>
     <th class='text-right'>Issue Fine</th>
     <?php if($report_type == "Gross Profit Report"): ?>

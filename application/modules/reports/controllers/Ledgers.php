@@ -381,8 +381,10 @@ ini_set('memory_limit', '256M');
         $voucher_id = rtrim($issue_value['voucher_id'], ", ");
         $ac_voucher_issue_detail=$this->voucher_model->get('metal_receipt_voucher_reference_id,id',array('where'=>array('metal_receipt_voucher_reference_id is not NULL'=>NULL,'id in ('.$voucher_id.')'=>NULL)));
         $metal_receipt_voucher_reference_id=array_column($ac_voucher_issue_detail,'metal_receipt_voucher_reference_id');
-        $ac_voucher_issue_credit_weight_details=$this->voucher_model->find('sum(credit_weight) credit_weight',array('chitti_id'=>$issue_value['chitti_no'],'voucher_type="metal issue voucher"'=>NULL));
+        $ac_voucher_issue_credit_weight_details=$this->voucher_model->find('sum(credit_weight) credit_weight,sum(credit_weight*purity/100) chitti_fine',array('chitti_id'=>$issue_value['chitti_no'],'voucher_type="metal issue voucher"'=>NULL));
+
         $issues[$issue_index]['chitti_credit_weight']=!empty($ac_voucher_issue_credit_weight_details)?$ac_voucher_issue_credit_weight_details['credit_weight']:0;
+        $issues[$issue_index]['chitti_fine']=!empty($ac_voucher_issue_credit_weight_details)?$ac_voucher_issue_credit_weight_details['chitti_fine']:0;
         $issues[$issue_index]['reference_account_name']="";
         if(!empty($metal_receipt_voucher_reference_id)){
         $reference_ac_voucher_issue_detail=$this->voucher_model->find('GROUP_CONCAT(DISTINCT(account_name)) as account_name',array('where_in'=>array('id'=>$metal_receipt_voucher_reference_id)));
