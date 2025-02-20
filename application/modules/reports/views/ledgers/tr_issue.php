@@ -31,7 +31,10 @@
   <?php if($report_type == 'Account Ledger' && $record['purity']==0){ ?>
         <td class="text-right"><?= four_decimal($record['chitti_credit_weight'], '-') ?></td>
         <td class="text-right"><?= ($record['chitti_fine']) ?></td>
-      <?php } ?>
+      <?php }else{?>
+        <td class="text-right">-</td>
+        <td class="text-right">-</td>
+      } ?>
   <td class="text-right"><a class=""  href='<?= base_url() ?>argold/voucher_details/view/<?=$record['chitti_no']?>'><?= four_decimal($record['credit_weight'], '-') ?></a></td>
   <td class="text-right"><?= four_decimal($record['purity'], '-') ?></td>
   <td class="text-right"><?= four_decimal($record['fine'], '-'); ?></td>
