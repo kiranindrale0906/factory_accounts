@@ -16,13 +16,14 @@
       <td></td>
     <?php endif; ?>
     <?php if ($type=='issue') {?>  
-      <td class="text-right"><?= four_decimal($record['credit_weight'], '-'); ?></td>
-   <td></td>
-      <td class="text-right"><?= four_decimal($record['fine'], '-') ?></td>
       <?php if ($report_type == 'Account Ledger' ):?>
       <td></td>
       <td></td>
       <?php endif; ?>
+      <td class="text-right"><?= four_decimal($record['credit_weight'], '-'); ?></td>
+   <td></td>
+      <td class="text-right"><?= four_decimal($record['fine'], '-') ?></td>
+      
       <td></td>
       <td class="text-right"><?= four_decimal($record['factory_fine'], '-') ?></td>
     <?php } else { ?>  
