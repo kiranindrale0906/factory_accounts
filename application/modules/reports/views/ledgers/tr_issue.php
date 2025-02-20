@@ -28,7 +28,7 @@
     <?php } ?>
   </td>
   <?php endif; ?>
-  <?php if($report_type == 'Account Ledger'){ ?>
+  <?php if($report_type == 'Account Ledger' && $record['purity']==0){ ?>
         <td class="text-right"><?= four_decimal($record['chitti_credit_weight'], '-') ?></td>
         <td class="text-right"><?= ($record['chitti_fine']) ?></td>
       <?php } ?>
