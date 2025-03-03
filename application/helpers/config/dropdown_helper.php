@@ -311,7 +311,7 @@
       }elseif (str_contains($account_name, 'Aug 2024')){
         return 'ARF (Aug 2024)';
       }else{
-        if (str_contains($account_name, 'ARF ERP')){
+        if (str_contains($account_name, 'ARF ERP')|| str_contains($account_name, 'Arf Erp')){
           return 'ARF ERP';
         }else{
           return 'ARF';
