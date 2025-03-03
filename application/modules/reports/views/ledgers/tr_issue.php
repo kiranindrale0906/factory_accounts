@@ -14,6 +14,7 @@
   <td>
     <?php
       //if (!empty($record['chitti_no']))
+
     echo ' #'.$record['chitti_no'].' '.remove_duplicates_in_string($record['narration']).' '.$record['description'].' '.$reference_account_name;
     if ($group=='voucher_id')
       echo $record['voucher_id'];
