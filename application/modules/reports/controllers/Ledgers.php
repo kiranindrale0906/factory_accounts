@@ -534,6 +534,8 @@ ini_set('memory_limit', '256M');
         $empty_record[$created_date]['issue']['factory_fine'] = 0;
         $empty_record[$created_date]['issue']['credit_amount'] = 0;
         $empty_record[$created_date]['issue']['usd_credit_amount'] = 0;
+        $empty_record[$created_date]['issue']['chitti_credit_weight'] = 0;
+        $empty_record[$created_date]['issue']['chitti_fine'] = 0;
         $empty_record[$created_date]['receipt'] = array();
         $empty_record[$created_date]['receipt']['debit_weight'] = 0;
         $empty_record[$created_date]['receipt']['fine'] = 0;
