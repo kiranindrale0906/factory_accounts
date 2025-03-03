@@ -29,9 +29,9 @@
   </td>
   <?php endif; ?>
   <?php if($report_type == 'Account Ledger' && $record['purity']==0){ ?>
+        <td class="text-right"><?= ($record['chitti_account_name']) ?></td>
         <td class="text-right"><?= four_decimal($record['chitti_credit_weight'], '-') ?></td>
         <td class="text-right"><?= ($record['chitti_fine']) ?></td>
-        <td class="text-right"><?= ($record['chitti_account_name']) ?></td>
       <?php }else{?>
         <td class="text-right">-</td>
         <td class="text-right">-</td>

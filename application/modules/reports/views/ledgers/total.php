@@ -19,6 +19,7 @@
       <?php if ($report_type == 'Account Ledger' ):?>
       <td></td>
       <td><?= @four_decimal($record['chitti_credit_weight'], '-'); ?></td>
+      <td><?= @four_decimal($record['chitti_credit_weight'], '-'); ?></td>
       <td><?= @four_decimal($record['chitti_fine'], '-'); ?></td>
       <?php endif; ?>
       <td class="text-right"><?= four_decimal($record['credit_weight'], '-'); ?></td>
