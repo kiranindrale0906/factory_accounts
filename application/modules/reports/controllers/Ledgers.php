@@ -556,6 +556,8 @@ ini_set('memory_limit', '256M');
           $this->data['day_total'][$record['voucher_date']]['issue']['factory_fine'] += $record['factory_fine'];
           $this->data['day_total'][$record['voucher_date']]['issue']['credit_amount'] += $record['credit_amount'];
           $this->data['day_total'][$record['voucher_date']]['issue']['usd_credit_amount'] += $record['usd_credit_amount'];
+          $this->data['day_total'][$record['voucher_date']]['issue']['chitti_credit_weight'] += $record['chitti_credit_weight'];
+          $this->data['day_total'][$record['voucher_date']]['issue']['chitti_fine'] += $record['chitti_fine'];
           
         } else {
           $this->data['day_total'][$record['voucher_date']]['receipt']['debit_weight'] += $record['debit_weight'];
