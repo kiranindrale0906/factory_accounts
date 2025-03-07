@@ -5,7 +5,7 @@
   
       <?php if($_SESSION['all_details']==1){?>    
       <a class="ml-5 <?= ($site_name == '') ? 'bold black underline' : '' ?>" 
-         href='<?= base_url() ?>reports/production_same_purity_summary&filter_month=<?=$filter_month ?>&filter_year=<?= $filter_year ?>'>All</a>
+         href='<?= base_url() ?>reports/production_same_purity_summary?&filter_month=<?=$filter_month ?>&filter_year=<?= $filter_year ?>'>All</a>
       <a class="ml-5 <?= ($site_name == 'ARNA BANGLE ERP' || $site_name == 'ARNA BANGLE') ? 'bold black underline' : '' ?>" 
            href='<?= base_url() ?>reports/production_same_purity_summary?site_name=ARNA BANGLE ERP&filter_month=<?=$filter_month ?>&filter_year=<?= $filter_year ?>'>ARNA BANGLE ERP</a>
       <a class="ml-5 <?= ($site_name == 'Rnd Erp Software') ? 'bold black underline' : '' ?>" 

@@ -129,7 +129,7 @@ class Production_same_purity_summary extends BaseController {
         $this->data['site_name']="Rnd Erp Software";
         }
   if($this->data['site_name']=="ARC ERP"){
-        $this->data['site_name']="Arc Erp Software";
+        $this->data['site_name']="ARC ERP Software";
         }
   if($this->data['site_name']=="Domestic Internal ERP"){
         $this->data['site_name']="Domestic Internal ERP Software";

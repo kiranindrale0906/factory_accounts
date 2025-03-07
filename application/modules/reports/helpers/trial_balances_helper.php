@@ -81,8 +81,8 @@ function get_current_gold_rate(){
 
   $result = json_decode($response,true);
   $rates = $result['rates']['XAU'] ?? 0;
-  // pd(1/($rates*31.1035));
-  return (!empty($rates))? 1/($rates*31.1035):0;
+  //pd(1/($rates*31.1035));
+  return $rates=(!empty($rates))? (1/($rates*31.1035)):0;
 }
 /*
   | [0] => Label

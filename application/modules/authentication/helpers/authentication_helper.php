@@ -42,6 +42,6 @@
 }
 
 function excluded_urls_before_after_login(){
-    return array('slack/slack_login/index','slack/slack_login/store','masters/accounts/index','masters/quators/index');
+    return array('slack/slack_login/index','slack/slack_login/store','masters/accounts/index','masters/quators/index','reports/trial_balances/index');
 	}
 ?>

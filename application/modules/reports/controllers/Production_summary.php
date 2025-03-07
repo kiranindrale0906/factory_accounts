@@ -105,14 +105,12 @@ class Production_summary extends BaseController {
       $arc_records = json_decode(json_encode($records), true);
     }
       $arg_erp_records=array();
-//pd($this->data);
 
 
     if ($this->data['site_name'] == '' || ($this->data['site_name']=="AR Gold ERP" || $this->data['site_name']=="ARG ERP Software" || $this->data['site_name']=="ARF ERP Software"|| $this->data['site_name']=="Arf Erp Software" || $this->data['site_name']=="Rnd Erp Software" || $this->data['site_name']=="ARC ERP Software"|| $this->data['site_name']=="Arc Erp Software"|| $this->data['site_name']=="ARNA BANGLE" || $this->data['site_name']=="ARF ERP" || $this->data['site_name']=="ARC ERP" || $this->data['site_name']=="Domestic Internal ERP" || $this->data['site_name']=="Domestic Internal ERP Software" || $this->data['site_name']=="ARNA BANGLE ERP")) {
       $url = "https://erp.ar-gold.in/api/method/custom_app.api.material_issue.materialissue_details?month=".$this->data['filter_month']."&year=".$this->data['filter_year'];
       $records = json_decode(curl_get_erp_request($url, $_GET));
       $erp_records = json_decode(json_encode($records), true);
-//pd($erp_records);
     if(!empty($erp_records)){
       $this->data['product_names']=array_unique(array_column($erp_records['message'],'product'));
        $this->data['product_names'][]="KA Chain Refresh";	
@@ -131,7 +129,7 @@ class Production_summary extends BaseController {
       if (!isset($this->data['machine_sizes'])) $this->data['machine_sizes'] = array(); 
       if (!isset($this->data['design_codes']))  $this->data['design_codes']  = array(); 
 //pd( $this->data['product_names']);   
-      $conditions=array();
+$conditions=array();
       if(!empty($this->data['product_name'])){
         $conditions['product']=$this->data['product_name'];
       }if(!empty($this->data['category_one'])){
@@ -159,8 +157,8 @@ class Production_summary extends BaseController {
 	if($this->data['site_name']=="RND ERP"){
         $this->data['site_name']="Rnd Erp Software";
         }
-  if($this->data['site_name']=="ARC ERP"){
-        $this->data['site_name']="Arc Erp Software";
+  if($this->data['site_name']=="ARC ERP" ||  $this->data['site_name']=="Arc Erp Software"){
+        $this->data['site_name']="ARC ERP Software";
         }
 	if($this->data['site_name']=="Domestic Internal ERP"){
         $this->data['site_name']="Domestic Internal ERP Software";
@@ -170,9 +168,8 @@ class Production_summary extends BaseController {
         }
         $conditions['factory']=$this->data['site_name'];
       }    
-
       $erp_records['message']=$this->production_summary_model->multi_array_search_with_condition($erp_records,$conditions);
-      foreach ($erp_records['message'] as $index => $erp_record) {
+  foreach ($erp_records['message'] as $index => $erp_record) {
         if(!empty($erp_record['items'])&&$erp_record['items']=="GPC" || $erp_record['items']=="Finished Goods"){
           $arg_erp_records[$index]['created_at']=date('Y-m-d',strtotime($erp_record['creation']));
             $arg_erp_records[$index]['str_created_date']=$erp_record['creation'];
