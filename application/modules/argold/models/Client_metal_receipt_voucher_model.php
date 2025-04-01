@@ -45,11 +45,12 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
     $this->set_factory_purity_from_receipt_type_for_metal_and_finished_goods_and_chain_receipt();
     $this->set_metal_receipt_attributes_from_receipt_type_for_vadotar();
     $this->set_metal_receipt_attributes();
-    if(!empty($this->attributes['site_name'])&&($this->attributes['site_name']=="AR Gold ERP" || $this->attributes['site_name']=="ARF ERP" ||$this->attributes['site_name']=="RND ERP" || $this->attributes['site_name']=="ARC ERP" || $this->attributes['site_name']=="Domestic Internal ERP" || $this->attributes['site_name']=="ARNA BANGLE ERP") && $this->attributes['receipt_type'] == 'Metal'){
+    if(!empty($this->attributes['site_name'])&&($this->attributes['site_name']=="AR Gold ERP" || $this->attributes['site_name']=="ARF ERP"  ||$this->attributes['site_name']=="RND ERP"  || $this->attributes['site_name']=="ARC ERP" || $this->attributes['site_name']=="Domestic Internal ERP" || $this->attributes['site_name']=="ARNA BANGLE ERP") && $this->attributes['receipt_type'] == 'Metal'){
     	$this->formdata['metal_issue_vouchers'][0]=$this->attributes;
     	$this->formdata['metal_issue_vouchers'][0]['account_name']=$this->attributes['customer_name'];
     	$this->formdata['metal_issue_vouchers'][0]['credit_weight']=$this->attributes['debit_weight'];
     }
+//pd($this->formdata);
     $this->set_metal_issue_voucher_attributes_from_argold_software_metal_receipt_and_refresh();
     $this->set_metal_issue_voucher_attributes_from_receipt_type_for_chain_receipt();
     $this->set_metal_issue_voucher_attributes_from_receipt_type_for_stone();
@@ -149,10 +150,9 @@ class Client_metal_receipt_voucher_model extends Core_metal_receipt_voucher_mode
           if(!empty($metal_issue_voucher['credit_weight']))
           $credit_weight += $metal_issue_voucher['credit_weight'];
         }
-      }
+      } 
       $in_weight = $this->attributes['debit_weight'] - $credit_weight;
-      if ($in_weight == 0) return true;
-
+	if ($in_weight == 0) return true;
       pd('Please select account name to issue '.$this->attributes['receipt_type'].' to factory');
       // $this->formdata['metal_issue_vouchers'][] = array('account_name'  => 'AR Gold Software (Aug 2022)',
       //                                                   'credit_weight' => $in_weight,
@@ -681,7 +681,8 @@ $attributes['account_name']=trim($attributes['account_name']);
                       'hook_kdm_purity' => (empty($attributes['hook_kdm_purity'])) ? (float)four_decimal($attributes['factory_purity']) : (float)four_decimal($attributes['hook_kdm_purity']),
                       'description' => $attributes['description'],
                       'account_id' => $attributes['id']);
-    $send_data=$api_data;
+
+   $send_data=$api_data;
  //$api_url = "https://staging1-arg-manufacturing.8848digitalerp.com/api/method/custom_app.api.material_receipt.create_material_receipt";
     $api_url = "https://erp.ar-gold.in/api/method/custom_app.api.material_receipt.create_material_receipt";
     if (empty($api_url)) return true;

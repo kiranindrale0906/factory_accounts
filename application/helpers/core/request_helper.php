@@ -151,7 +151,7 @@ if (!function_exists('get_curl_expenses')) {
         ),
       ));
     $response = curl_exec($curl);
-/*    if (curl_errno($curl)) {
+   /* if (curl_errno($curl)) {
     $error_msg = curl_error($curl);
 }pd($error_msg);
 */

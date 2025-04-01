@@ -60,6 +60,7 @@ class Production_same_purity_summary extends BaseController {
       $argold_records = json_decode(json_encode($records), true);    
     }*/
     if (empty($argold_records['data'])) $argold_records['data'] = array();
+//pd($_GET);
     if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARF (Apr 2024)') {
       $url = API_APR2024_ARF_PATH."issue_departments/api_issue_departments/index";
       $records = json_decode(curl_post_request($url, $_GET));
