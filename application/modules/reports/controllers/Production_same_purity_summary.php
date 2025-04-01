@@ -157,10 +157,10 @@ class Production_same_purity_summary extends BaseController {
       }
       }    
       }
-    $records = array_merge(/*$argold_records['data'],*/ 
+    $records = array_merge(/*$argold_records['data'], 
                            $arf_records['data'],
                            $arf_aug2024_records['data'],
-                           $arc_records['data'],
+                           $arc_records['data'],*/
                            $arg_erp_records);
 
       $this->data['production_details'] = $this->get_grouped_records($records);

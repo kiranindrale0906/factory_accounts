@@ -16,7 +16,8 @@
           </tr>
         </thead>
         <?php 
-          foreach($receipt_types as $receipt_type) {
+    if(!empty($receipt_types)){         
+ foreach($receipt_types as $receipt_type) {
             foreach($site_names as $site_name) {
               foreach($hostversions as $hostversion) {
                 $accounts_weight = (!empty($account_vadotar_balance[$receipt_type][$site_name][$hostversion]['balance']))?four_decimal($account_vadotar_balance[$receipt_type][$site_name][$hostversion]['balance']):0;
@@ -39,7 +40,7 @@
         <?php  
               }
             }
-          }
+          }}
         ?>
       </table>
     </div>

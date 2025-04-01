@@ -106,12 +106,11 @@ class Production_summary extends BaseController {
     }
       $arg_erp_records=array();
 
-
     if ($this->data['site_name'] == '' || ($this->data['site_name']=="AR Gold ERP" || $this->data['site_name']=="ARG ERP Software" || $this->data['site_name']=="ARF ERP Software"|| $this->data['site_name']=="Arf Erp Software" || $this->data['site_name']=="Rnd Erp Software" || $this->data['site_name']=="ARC ERP Software"|| $this->data['site_name']=="Arc Erp Software"|| $this->data['site_name']=="ARNA BANGLE" || $this->data['site_name']=="ARF ERP" || $this->data['site_name']=="ARC ERP" || $this->data['site_name']=="Domestic Internal ERP" || $this->data['site_name']=="Domestic Internal ERP Software" || $this->data['site_name']=="ARNA BANGLE ERP")) {
       $url = "https://erp.ar-gold.in/api/method/custom_app.api.material_issue.materialissue_details?month=".$this->data['filter_month']."&year=".$this->data['filter_year'];
       $records = json_decode(curl_get_erp_request($url, $_GET));
       $erp_records = json_decode(json_encode($records), true);
-    if(!empty($erp_records)){
+   if(!empty($erp_records)){
       $this->data['product_names']=array_unique(array_column($erp_records['message'],'product'));
        $this->data['product_names'][]="KA Chain Refresh";	
 //pd($this->data['product_names']);
@@ -185,12 +184,12 @@ $conditions=array();
       }
 }    }
     if (empty($arc_records['data'])) $arc_records['data'] = array();
-    $records = array_merge(/*$argold_records['data'],*/ 
+    $records = array_merge(/*$argold_records['data'], 
                            $arf_records['data'],
                            $arc_records['data'],
-                           $arf_aug2024_records['data'],
+                           $arf_aug2024_records['data'],*/
                            $arg_erp_records);
-    $this->data['production_details'] = $this->get_grouped_records($records);
+   $this->data['production_details'] = $this->get_grouped_records($records);
     $this->get_production_group_total();
   }
 

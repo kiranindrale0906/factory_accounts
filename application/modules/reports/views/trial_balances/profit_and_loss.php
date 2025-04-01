@@ -64,8 +64,8 @@
   // $sales_rate = !empty($profit_and_loss['sales_account']['fine']) ? (-1 * $profit_and_loss['sales_account']['amount'] / $profit_and_loss['sales_account']['fine']) : 0;
   // $sales_amount = !empty($profit_and_loss['sales_account']['amount']) ? $profit_and_loss['sales_account']['amount'] : 0;
 
-  $domestic_opening_fine = 528859.318; //329418.48; //3724.24 + 241459.348 + 35003.788 + 7375.91 + 9500.44; //71950.427; //+6306.923;
-  $domestic_opening_rate = 6035; //4850.000;
+  $domestic_opening_fine = 618955.76 - 19944;  //528859.318; //329418.48; //3724.24 + 241459.348 + 35003.788 + 7375.91 + 9500.44; //71950.427; //+6306.923;
+  $domestic_opening_rate = 8920; //4850.000;
   $domestic_opening_amount = $domestic_opening_fine * $domestic_opening_rate; //351356714.000;
 
   $sales_fine = $sales_domestic_fine + $sales_export_fine;
@@ -81,8 +81,8 @@
   $closing_rate = $closing_rate + ($closing_rate * 0.03);//3% gst
   $domestic_closing_amount = $domestic_closing_fine * $closing_rate;
 
-  $export_opening_fine = 0; //14707.095; //-1727.68; //7375.910; //22345.893; //-6306.923;
-  $export_opening_rate = 0; //4700; //4400; //4250.000;
+  $export_opening_fine = 19944; //14707.095; //-1727.68; //7375.910; //22345.893; //-6306.923;
+  $export_opening_rate = 8380; //4700; //4400; //4250.000;
   $export_opening_amount = $export_opening_fine * $export_opening_rate; //95120251.000;
 
   $export_closing_fine = $purchase_export_fine - $sales_export_fine + $export_opening_fine;
