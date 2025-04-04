@@ -23,7 +23,7 @@
       <div class="col-md-6 border-right">
         <div class="form-group container">
           <div class="table-responsive m-t-20">
-            <h5 class="heading blue m-0">Issue</h5>
+            <h5 class="heading blue m-0">Issue</h5> 
             <table class="table table-sm fixedthead">
               <?php 
                 $this->load->view('reports/ledgers/issue_thead'); 

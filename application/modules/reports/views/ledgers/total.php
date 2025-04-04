@@ -28,6 +28,13 @@
       <td></td>
       <td class="text-right"><?= four_decimal($record['factory_fine'], '-') ?></td>
     <?php } else { ?>  
+      <?php if ($report_type == 'Account Ledger' ):?>
+      <td></td>
+
+      <td><?= @four_decimal($record['reference_gross_weight'], '-'); ?></td>
+      <td><?= @four_decimal($record['reference_fine'], '-'); ?></td>
+      <?php endif; ?>
+
       <td class="text-right"><?= four_decimal($record['debit_weight'], '-'); ?></td>
       <?php if (!in_array($report_type, array("Export Purchase Ledger","Domestic Purchase Ledger","Domestic Sale Ledger","Export Sale Ledger"))): ?>
   

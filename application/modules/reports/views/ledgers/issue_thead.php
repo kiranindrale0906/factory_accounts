@@ -14,7 +14,7 @@
     <?php if ($report_type == 'Account Ledger'): ?>
       <th>Chitti Account Name</td>
       <th>Chitti Weight</th>
-      <th>Chitti Fine</th>>
+      <th>Chitti Fine</th>
     <?php endif; ?>
     <th class='text-right'>Gross Wt</th>
     <th class='text-right'>Factory Melting</th>

@@ -179,3 +179,24 @@
      </h5>
    </div>
  <?php }?>
+<?php if ($report_type == 'Account Ledger'&&!empty($sales_types)) { ?>
+  <div class="row"> 
+    <div class="col-md-12">
+      <div class="form-group container"> 
+
+      <h5>
+        Sale Type: 
+          <a class="ml-5 <?= ($sale_type == '') ? 'bold black underline' : '' ?>" 
+           href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&sale_type=&site_name=<?= $site_name?>&period=<?= $period ?>&report_type=<?= $report_type ?>&detail=<?= $detail ?>&group=<?= $group ?>'>All</a>
+
+        <?php  foreach ($sales_types as $sales_type) { ?>
+          <a class="ml-5 <?= ($sale_type == $sales_type) ? 'bold black underline' : '' ?>" 
+          href='<?= base_url().$url ?>?account_id=<?= $account_id ?>&sale_type=<?= $sales_type?>&site_name=<?= $site_name?>&period=<?= $period ?>&report_type=<?= $report_type ?>&detail=<?= $detail ?>&group=<?= $group ?>'><?= $sales_type ?></a>    
+          
+        <?php } ?>
+      </h5>
+    </div>
+  </div>
+  </div>
+  <br />
+<?php } ?>

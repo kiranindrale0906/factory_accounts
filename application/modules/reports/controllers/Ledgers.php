@@ -383,9 +383,9 @@ ini_set('memory_limit', '256M');
         $metal_receipt_voucher_reference_id=array_column($ac_voucher_issue_detail,'metal_receipt_voucher_reference_id');
         $ac_voucher_issue_credit_weight_details=$this->voucher_model->find('sum(credit_weight) credit_weight,sum(factory_fine) chitti_fine,account_name as chitti_account_name',array('chitti_id'=>$issue_value['chitti_no'],'voucher_type="metal issue voucher"'=>NULL));
 
-        $issues[$issue_index]['chitti_credit_weight']=!empty($ac_voucher_issue_credit_weight_details)?$ac_voucher_issue_credit_weight_details['credit_weight']:0;
+        $issues[$issue_index]['chitti_credit_weight']=!empty($ac_voucher_issue_credit_weight_details)&& $issue_value['credit_weight']==0?$ac_voucher_issue_credit_weight_details['credit_weight']:0;
         $issues[$issue_index]['chitti_account_name']=!empty($ac_voucher_issue_credit_weight_details)?$ac_voucher_issue_credit_weight_details['chitti_account_name']:0;
-        $issues[$issue_index]['chitti_fine']=!empty($ac_voucher_issue_credit_weight_details)?$ac_voucher_issue_credit_weight_details['chitti_fine']:0;
+        $issues[$issue_index]['chitti_fine']=!empty($ac_voucher_issue_credit_weight_details)&& $issue_value['fine']==0?$ac_voucher_issue_credit_weight_details['chitti_fine']:0;
         $issues[$issue_index]['reference_account_name']="";
         if(!empty($metal_receipt_voucher_reference_id)){
         $reference_ac_voucher_issue_detail=$this->voucher_model->find('GROUP_CONCAT(DISTINCT(account_name)) as account_name',array('where_in'=>array('id'=>$metal_receipt_voucher_reference_id)));
@@ -402,6 +402,7 @@ ini_set('memory_limit', '256M');
           }
         }
       }
+
       foreach ($receipts as $receipt_index => $receipt_value) {      
         $voucher_id = rtrim($receipt_value['voucher_id'], ", ");
         $ac_voucher_receipt_detail=$this->voucher_model->get('metal_receipt_voucher_reference_id',array('where'=>array('metal_receipt_voucher_reference_id is not NULL'=>NULL,'id in ('.$voucher_id.')'=>NULL)));
@@ -414,7 +415,11 @@ ini_set('memory_limit', '256M');
         $reference_ac_voucher_receipt_detail=$this->ledger_model->find('GROUP_CONCAT(DISTINCT(account_name)) as account_name',array('where_in'=>array('id'=>$metal_receipt_voucher_reference_id)));
         $receipts[$receipt_index]['reference_account_name']=$reference_ac_voucher_receipt_detail['account_name'];
         $receipts[$receipt_index]['debit_amount']=(!empty($receipt_value['sale_type']) &&($receipt_value['sale_type']=="Sale Return" || $receipt_value['sale_type']=="Sales Good Return"))?$receipt_value['debit_amount']:$receipt_value['debit_amount'];
-      
+        $reference_ac_voucher_detail_on_parent_id=$this->ledger_model->find('debit_weight,fine',array('where'=>array('voucher_id'=>$receipt_value['parent_id'])));
+        if($this->data['report_type'] == 'Account Ledger' && $receipt_value['account_name']=="SALES ACCOUNT"){
+            $receipts[$receipt_index]['reference_gross_weight']=$reference_ac_voucher_detail_on_parent_id['debit_weight'];
+            $receipts[$receipt_index]['reference_fine']=$reference_ac_voucher_detail_on_parent_id['fine'];
+        }      
         if ($this->data['report_type'] == 'Purchase Sales Ledger'){
         $ac_voucher_receipt_chitti_detail=$this->ledger_model->find('sum((ac_ledger.credit_weight+ac_ledger.debit_weight) * ac_ledger.purity) / sum(ac_ledger.credit_weight+ac_ledger.debit_weight) as purity, 
                                sum((ac_ledger.credit_weight+ac_ledger.debit_weight) * ac_ledger.factory_purity) / sum(ac_ledger.credit_weight+ac_ledger.debit_weight) as factory_purity',array('where'=>array('chitti_id =('.$receipt_value['chitti_no'].')'=>NULL)));
@@ -422,6 +427,7 @@ ini_set('memory_limit', '256M');
         $receipts[$receipt_index]['factory_purity']=$ac_voucher_receipt_chitti_detail['factory_purity'];
         $receipts[$receipt_index]['fine']=($receipts[$receipt_index]['chitti_credit_weight']*$ac_voucher_receipt_chitti_detail['purity'])/100;
         $receipts[$receipt_index]['factory_fine']=( $receipts[$receipt_index]['chitti_credit_weight']*$ac_voucher_receipt_chitti_detail['factory_purity'])/100;
+
             }}}}
      $domestic_export_receipt_issue_select='account_name,voucher_date,date_format(voucher_date,"%Y-%m-%d") as str_voucher_date,((debit_weight*purity)/100)- 
     ((credit_weight*factory_purity)/100) as fine, ((purity-factory_purity)*debit_weight/100) - 
@@ -543,6 +549,8 @@ ini_set('memory_limit', '256M');
         $empty_record[$created_date]['receipt']['factory_fine'] = 0;
         $empty_record[$created_date]['receipt']['debit_amount'] = 0;
         $empty_record[$created_date]['receipt']['usd_debit_amount'] = 0;
+        $empty_record[$created_date]['receipt']['reference_gross_weight'] = 0;
+        $empty_record[$created_date]['receipt']['reference_fine'] = 0;
       }
     }
     return $empty_record;
@@ -568,6 +576,8 @@ ini_set('memory_limit', '256M');
           $this->data['day_total'][$record['voucher_date']]['receipt']['factory_fine'] += $record['factory_fine'];
           $this->data['day_total'][$record['voucher_date']]['receipt']['debit_amount'] += $record['debit_amount'];
           $this->data['day_total'][$record['voucher_date']]['receipt']['usd_debit_amount'] += $record['usd_debit_amount'];
+          $this->data['day_total'][$record['voucher_date']]['receipt']['reference_gross_weight'] += @$record['reference_gross_weight'];
+          $this->data['day_total'][$record['voucher_date']]['receipt']['reference_fine'] += @$record['reference_fine'];
         }
       }
     }
@@ -722,7 +732,7 @@ ini_set('memory_limit', '256M');
             ||$this->data['report_type'] == 'Purchase Labour Ledger'   
             ||$this->data['report_type'] == 'Purchase Sales Ledger'   
             || $this->data['report_type'] == 'Domestic Labour Ledger'))
-      $this->data['group'] = 'voucher_type, voucher_date, chitti_no, receipt_type, account_name';
+      $this->data['group'] = 'voucher_type, voucher_date, chitti_no, receipt_type, account_name,sale_type';
     elseif (   $this->data['period'] == 'date' 
             && $this->data['report_type'] == 'Metal Receipt Type Report')
       $this->data['group'] = 'voucher_type, voucher_date, receipt_type';      
@@ -740,6 +750,7 @@ ini_set('memory_limit', '256M');
 
   private function set_variables_from_get_parameters() {
     $this->data['site_name']            = (!empty($_GET['site_name'])) ? $_GET['site_name'] : 'All';
+    $this->data['sale_type']            = (!empty($_GET['sale_type'])) ? $_GET['sale_type'] : '';
     $this->data['period']               = (!empty($_GET['period'])) ? $_GET['period'] : 'date';
     $this->data['detail']               = (!empty($_GET['detail'])) ? $_GET['detail'] : 'yes';
     $this->data['group']                = (!empty($_GET['group'])) ? $_GET['group'] : '';
@@ -773,6 +784,12 @@ ini_set('memory_limit', '256M');
       $where['(  site_name = "'.$this->data['site_name'].'"
               or (    REPLACE(narration, "Software ", "") = "'.$this->data['site_name'].'"
                   ))'] = NULL;
+//                  and receipt_type in ("Domestic Internal", "Export Internal")))'] = NULL;
+   // }
+
+     }
+if (!empty($this->data['sale_type']) && $this->data['sale_type'] != 'All'){
+      $where['sale_type = "'.$this->data['sale_type'].'"'] = NULL;
 //                  and receipt_type in ("Domestic Internal", "Export Internal")))'] = NULL;
    // }
 
@@ -851,7 +868,7 @@ if(($this->data['report_type'] != 'Account Ledger' && $this->data['report_type']
         || $this->data['report_type'] == 'Metal Receipt Type Report') {
       $receipt_issue_select = 'ac_ledger.receipt_type, '.$period_select.' as voucher_date, 
                                date_format(ac_ledger.voucher_date,"%Y-%m-%d") as str_voucher_date,
-                               ac_ledger.account_name, ac_ledger.voucher_type, 
+                               ac_ledger.account_name, ac_ledger.voucher_type,ac_ledger.sale_type, 
                                ac_ledger.site_name, ac_ledger.voucher_type,ac_ledger.sale_type, 
                                concat(ac_ledger.voucher_number, ", ") as voucher_number, 
                                GROUP_CONCAT(DISTINCT(ac_ledger.voucher_id)) as voucher_id, 

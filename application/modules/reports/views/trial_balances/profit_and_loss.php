@@ -106,7 +106,6 @@
   $export_labour_amount = $sale_export_Labour['taxable_amount']; //+ 7093167.000; // + 37137713.028;
   $domestic_labour_amount['amount'] += 0; // 6012267.000;
 
-
 ?>
 
 <?php
