@@ -15,6 +15,8 @@ class Refresh extends BaseController {
                                       array('id'=>'Rope Chain','name'=>'Rope Chain'),
                                       array('id'=>'Rolex Chain','name'=>'Rolex Chain'),
                                       array('id'=>'Dus Collection','name'=>'Dus Collection'),
+                                      array('id'=>'Sumo Chain','name'=>'Sumo Chain'),
+                                      array('id'=>'Sumo Ball Chain','name'=>'Sumo Ball Chain'),
                                       array('id'=>'Nawabi Chain','name'=>'Nawabi Chain'),
                                       array('id'=>'Solid Nawabi Chain','name'=>'Solid Nawabi Chain'),
                                       array('id'=>'Nexon','name'=>'Nexon'),

@@ -6,11 +6,13 @@ Generate Ledger:
   <?//= getHttpButton('Generate Ledger (7 to 8 2022)', base_url().'reports/account_ledgers/create?limit_date=4', 'float-right btn-success ml-5'); ?>
   <?//= getHttpButton('Generate Ledger (9 to 12 2022)', base_url().'reports/account_ledgers/create?limit_date=5', 'float-right btn-success ml-5'); ?>
 
-  <?= getHttpButton('(1 to 3 month 2024)', base_url().'reports/account_ledgers/create?limit_date=6', 'float-right btn-success ml-5'); ?>
-  <?= getHttpButton('(4 to 7 month 2024)', base_url().'reports/account_ledgers/create?limit_date=7', 'float-right btn-success ml-5'); ?>
-  <?= getHttpButton('(8 to 12 month 2024)', base_url().'reports/account_ledgers/create?limit_date=8', 'float-right btn-success ml-5'); ?>
-  <?= getHttpButton('(from current month 2025)', base_url().'reports/account_ledgers/create?limit_date=10', 'float-right btn-success ml-5'); ?>
-</div></div>
+  <?= getHttpButton('(8 to 12 month 2025)', base_url().'reports/account_ledgers/create?limit_date=8', 'float-right btn-success ml-5'); ?>
+  <?= getHttpButton('(4 to 7 month 2025)', base_url().'reports/account_ledgers/create?limit_date=7', 'float-right btn-success ml-5'); ?>
+  <?= getHttpButton('(1 to 3 month 2025)', base_url().'reports/account_ledgers/create?limit_date=6', 'float-right btn-success ml-5'); ?>
+  <?//= getHttpButton('(from current month 2025)', base_url().'reports/account_ledgers/create?limit_date=10', 'float-right btn-success ml-5'); ?>
+</div>
+</div>
+<br>
 <?php 
   $this->load->view('reports/ledgers/report_header', array('header' => 'Account Ledger'));
   $this->load->view('ac_vouchers/ac_vouchers/company_error_message'); 

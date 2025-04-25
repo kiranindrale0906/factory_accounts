@@ -107,7 +107,7 @@ if (!function_exists('get_curl_expenses')) {
    function curl_get_erp_token($uri="", $data = array()) {
       $curl = curl_init();
       curl_setopt_array($curl, array(
-      CURLOPT_URL => 'https://erp.ar-gold.in/api/method/custom_app.api.login.get_access_token?usr=administrator&pwd=Erp@8848@digital@m@',
+      CURLOPT_URL => 'https://erp.ar-gold.in/api/method/custom_app.api.login.get_access_token?usr=administrator&pwd=Erp@8848@digital@man@',
       CURLOPT_RETURNTRANSFER => true,
       CURLOPT_ENCODING => '',
       CURLOPT_MAXREDIRS => 10,

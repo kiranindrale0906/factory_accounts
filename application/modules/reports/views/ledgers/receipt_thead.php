@@ -10,10 +10,10 @@
     <?php if (!in_array($report_type, array("Export Purchase Ledger","Domestic Purchase Ledger","Domestic Sale Ledger","Export Sale Ledger"))): ?>
     <th>Narration</th>
     <?php endif; ?>
-   <?php if ($report_type == 'Account Ledger' && $account_name!="" && $account_name=="SALES ACOOUNT"): ?>
+   <?php if($report_type == 'Account Ledger' && $account_name!="" && ($account_name=="SALES ACCOUNT" || $account_name=="PURCHASE ACCOUNT")){ ?>
       <th>Gross Weight</th>
       <th>Gross Fine</th>
-    <?php endif; ?>
+    <?php } ?>
     <th class='text-right'>Gross Wt</th>
     
     <th class='text-right'>Factory Melting</th>

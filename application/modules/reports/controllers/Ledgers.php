@@ -416,7 +416,7 @@ ini_set('memory_limit', '256M');
         $receipts[$receipt_index]['reference_account_name']=$reference_ac_voucher_receipt_detail['account_name'];
         $receipts[$receipt_index]['debit_amount']=(!empty($receipt_value['sale_type']) &&($receipt_value['sale_type']=="Sale Return" || $receipt_value['sale_type']=="Sales Good Return"))?$receipt_value['debit_amount']:$receipt_value['debit_amount'];
         $reference_ac_voucher_detail_on_parent_id=$this->ledger_model->find('debit_weight,fine',array('where'=>array('voucher_id'=>$receipt_value['parent_id'])));
-        if($this->data['report_type'] == 'Account Ledger' && $receipt_value['account_name']=="SALES ACCOUNT"){
+        if($this->data['report_type'] == 'Account Ledger' && ($receipt_value['account_name']=="SALES ACCOUNT"|| $receipt_value['account_name']=="PURCHASE ACCOUNT" )){
             $receipts[$receipt_index]['reference_gross_weight']=$reference_ac_voucher_detail_on_parent_id['debit_weight'];
             $receipts[$receipt_index]['reference_fine']=$reference_ac_voucher_detail_on_parent_id['fine'];
         }      
