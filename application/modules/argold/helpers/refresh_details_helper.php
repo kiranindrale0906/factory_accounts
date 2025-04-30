@@ -3,9 +3,9 @@
 function getTableSettings() {
   return array(
     'page_title'          => 'Refresh List',
-    'primary_table'       => 'refresh',
+    'primary_table'       => 'refresh_details',
     'default_column'      => 'id',
-    'table'               => 'refresh',
+    'table'               => 'refresh_details',
     'join_columns'        => '',
     'join_type'           => '',
     'where'               => '',
@@ -15,7 +15,7 @@ function getTableSettings() {
     'extra_select_column' => 'id',
     'actionFunction'      => '',
     'headingFunction'     => 'list_settings',
-    'search_url'          => 'refresh',
+    'search_url'          => 'refresh_details',
     'add_title'           => 'Add Refresh',
     'export_title'        => '',
     'edit'                => '',
