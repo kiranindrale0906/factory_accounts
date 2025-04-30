@@ -58,7 +58,15 @@ function list_settings() {
 
 function get_field_attribute($table, $field) {
   $attributes = array();
-
+  $attributes['refresh_details'] = array(
+    'refresh_id' => array('', '', TRUE, '', TRUE),
+    'weight' => array('', '', TRUE, '', TRUE),
+    'fine' => array('', '', TRUE, '', TRUE),
+    'factory_fine' => array('', '', TRUE, '', TRUE),
+    'purity' => array('', '', TRUE, '', TRUE),
+    'factory_purity' => array('', '', TRUE, '', TRUE),
+    'item_name' => array('', 'select', TRUE, '', TRUE),
+  );
   // $attributes['refresh'] = array(
   //   'id'            => array('', '', TRUE, '', TRUE),
   //   'weight'            => array('Weight', '', TRUE, '', TRUE),
