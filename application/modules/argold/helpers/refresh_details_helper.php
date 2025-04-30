@@ -55,33 +55,20 @@ function list_settings() {
   | [5] => Readonly
   | [6] => disabled
 */
-
 function get_field_attribute($table, $field) {
   $attributes = array();
-  $attributes['refresh_details'] = array(
-    'refresh_id' => array('', '', TRUE, '', TRUE),
-    'weight' => array('', '', TRUE, '', TRUE),
-    'fine' => array('', '', TRUE, '', TRUE),
-    'factory_fine' => array('', '', TRUE, '', TRUE),
-    'purity' => array('', '', TRUE, '', TRUE),
-    'factory_purity' => array('', '', TRUE, '', TRUE),
-    //'item_name' => array('Item Name', 'select', TRUE, '', TRUE),
+  $attributes["refreshs"] = array(
+    "id" => array("", "", FALSE, "", FALSE),
   );
-  // $attributes['refresh'] = array(
-  //   'id'            => array('', '', TRUE, '', TRUE),
-  //   'weight'            => array('Weight', '', TRUE, '', TRUE),
-  //   'fine'          => array('Fine', 'Enter Chitti.', TRUE, '', TRUE),
-  //   'purity'          => array('Purity', 'Select Purity.', TRUE, '', TRUE),
-  //  );
-  // $attributes['refresh_details'] = array(
-  //   'refresh_id' => array('', '', TRUE, '', TRUE),
-  //   'weight' => array('', '', TRUE, '', TRUE),
-  //   'fine' => array('', '', TRUE, '', TRUE),
-  //   'purity' => array('', '', TRUE, '', TRUE),
-  // );
- 
-  return $attributes;
+  $attributes["refresh_details"] = array(
+    "id" => array("", "", FALSE, "", FALSE),
+    "refresh_id"  => array("", "", FALSE, "", TRUE),
+    "item_name"  => array("Item Name", "", FALSE, "", TRUE),
+  );
+  return $attributes[$table][$field];
 }
+
+
 
 function get_row_actions($row, $url, $select_url, $filter) {
   $actions = array();
