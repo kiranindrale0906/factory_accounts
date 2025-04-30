@@ -86,7 +86,7 @@ function get_field_attribute($table, $field) {
     'factory_fine' => array('', '', TRUE, '', TRUE),
     'purity' => array('', '', TRUE, '', TRUE),
     'factory_purity' => array('', '', TRUE, '', TRUE),
-    'item_name' => array('', 'select', TRUE, '', TRUE),
+    'item_name' => array('Item Name', 'select item name', TRUE, '', TRUE),
   );
  
   return $attributes[$table][$field];

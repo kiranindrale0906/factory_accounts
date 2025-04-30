@@ -1,7 +1,3 @@
-<?php
-  if (!isset($record)) 
-    $record = array();
-?>
 <form method="post" class="form-horizontal fields-group-sm form_radius_none" enctype="multipart/form-data"
       action="<?= get_form_action($controller, $action, $record) ?>">
   <?php if ($action == 'edit' || $action == 'update'): ?>
