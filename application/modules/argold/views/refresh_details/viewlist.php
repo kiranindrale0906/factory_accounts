@@ -51,6 +51,7 @@
         <th class="text-right">Factory Melting</th>
         <th class="text-right">Factory Fine</th>
         <th class="text-right"></th>
+        <th class="text-right"></th>
       </tr>
     </thead>
     <tbody>
