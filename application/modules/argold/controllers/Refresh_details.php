@@ -7,7 +7,7 @@ class Refresh_details extends BaseController {
     parent::__construct();
   }
   public function _get_form_data() {
-    $this->data['purity'] = $this->narration_model->get('distinct(chain_purity) as name,chain_purity as  id', array('chain_purity >'=>0) ,array(), array('order_by'=>'id asc'));
+//    $this->data['purity'] = $this->narration_model->get('distinct(chain_purity) as name,chain_purity as  id', array('chain_purity >'=>0) ,array(), array('order_by'=>'id asc'));
     $this->data['item_names'] = array(
                                       array('id'=>'Rope Chain','name'=>'Rope Chain'),
                                       array('id'=>'Rolex Chain','name'=>'Rolex Chain'),
