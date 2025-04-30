@@ -18,8 +18,8 @@
   </td>
   <?php endif; ?>
   <?php if ($report_type == 'Account Ledger' && ($record['account_name']=="SALES ACCOUNT" || $record['account_name']=="PURCHASE ACCOUNT")): ?>
-    <td class="text-right"><?= four_decimal($record['reference_gross_weight'], '-')?></td>
-    <td class="text-right"><?= four_decimal($record['reference_fine'], '-'); ?></td>
+    <td class="text-right"><?= @four_decimal($record['reference_gross_weight'], '-')?></td>
+    <td class="text-right"><?= @four_decimal($record['reference_fine'], '-'); ?></td>
   
     <?php endif; ?>
   <td class="text-right"><a class=""  href='<?= base_url() ?>argold/voucher_details/view/<?=$record['voucher_id']?>'><?= four_decimal($record['debit_weight'], '-') ?></a></td>

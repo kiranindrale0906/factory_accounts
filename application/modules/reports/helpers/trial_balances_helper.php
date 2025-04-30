@@ -65,7 +65,8 @@ function get_current_gold_rate(){
 
   curl_setopt_array($curl, array(
 //    CURLOPT_URL => 'https://api.metalpriceapi.com/v1/latest?base=INR&currencies=XAU&api_key=a6cd2760397ac18c03dd27c3e5bb7ca1',
-    CURLOPT_URL => 'https://api.metalpriceapi.com/v1/latest?base=INR&currencies=XAU&api_key=dc682e5ea4ffbdc0d3e0af61b4796c71',
+    //CURLOPT_URL => 'https://api.metalpriceapi.com/v1/latest?base=INR&currencies=XAU&api_key=dc682e5ea4ffbdc0d3e0af61b4796c71',
+    CURLOPT_URL => 'https://api.metalpriceapi.com/v1/latest?base=INR&currencies=XAU&api_key=173344d63e41953d57c9509c948834f2',
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_ENCODING => '',
     CURLOPT_MAXREDIRS => 10,
