@@ -88,6 +88,7 @@
     <td class="text-right"></td>
     <td class="text-right"><?=four_decimal($sum_factory_fine);?></td>
     <td class="text-right"></td>
+    <td class="text-right"></td>
   </tr>
    <?php } ?>
     </tbody>
