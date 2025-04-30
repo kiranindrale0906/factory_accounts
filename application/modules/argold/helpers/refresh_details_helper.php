@@ -65,7 +65,7 @@ function get_field_attribute($table, $field) {
     'factory_fine' => array('', '', TRUE, '', TRUE),
     'purity' => array('', '', TRUE, '', TRUE),
     'factory_purity' => array('', '', TRUE, '', TRUE),
-    'item_name' => array('', 'select', TRUE, '', TRUE),
+    'item_name' => array('Item Name', 'select', TRUE, '', TRUE),
   );
   // $attributes['refresh'] = array(
   //   'id'            => array('', '', TRUE, '', TRUE),
@@ -85,7 +85,7 @@ function get_field_attribute($table, $field) {
 
 function get_row_actions($row, $url, $select_url, $filter) {
   $actions = array();
-  $controller = 'argold/refresh';
+  $controller = 'argold/refresh_details';
   // $actions["View"] = array('request' => "http", 
   //                          'url' => ADMIN_PATH.$controller.'/view/'.$row['id'],
   //                          'confirm_message' => "",
