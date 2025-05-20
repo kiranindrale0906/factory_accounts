@@ -110,6 +110,7 @@ class Production_summary extends BaseController {
       $url = "https://erp.ar-gold.in/api/method/custom_app.api.material_issue.materialissue_details?month=".$this->data['filter_month']."&year=".$this->data['filter_year'];
       $records = json_decode(curl_get_erp_request($url, $_GET));
       $erp_records = json_decode(json_encode($records), true);
+      $conditions=array();
     if(!empty($this->data['site_name'])){
   if($this->data['site_name']=="AR Gold ERP"){
   $this->data['site_name']="ARG ERP Software";
@@ -156,7 +157,7 @@ class Production_summary extends BaseController {
       if (!isset($this->data['machine_sizes'])) $this->data['machine_sizes'] = array(); 
       if (!isset($this->data['design_codes']))  $this->data['design_codes']  = array(); 
 //pd( $this->data['product_names']);   
-$conditions=array();
+
       if(!empty($this->data['product_name'])){
         $conditions['product']=$this->data['product_name'];
       }if(!empty($this->data['category_one'])){
@@ -174,6 +175,7 @@ $conditions=array();
       if(!empty($this->data['account_name'])){
         $conditions['customer']=$this->data['account_name'];
       }
+
        
       $erp_records['message']=$this->production_summary_model->multi_array_search_with_condition($erp_records,$conditions);
 
