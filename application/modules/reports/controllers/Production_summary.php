@@ -110,7 +110,6 @@ class Production_summary extends BaseController {
       $url = "https://erp.ar-gold.in/api/method/custom_app.api.material_issue.materialissue_details?month=".$this->data['filter_month']."&year=".$this->data['filter_year'];
       $records = json_decode(curl_get_erp_request($url, $_GET));
       $erp_records = json_decode(json_encode($records), true);
-    $factory_erp_records['message']=$this->production_summary_model->multi_array_search_with_condition($erp_records,$conditions);
     if(!empty($this->data['site_name'])){
   if($this->data['site_name']=="AR Gold ERP"){
   $this->data['site_name']="ARG ERP Software";
@@ -132,8 +131,9 @@ class Production_summary extends BaseController {
         }
         $conditions['factory']=$this->data['site_name'];
       }   
-   if(!empty($erp_records)){
-      $this->data['product_names']=array_unique(array_column($erp_records['message'],'product'));
+    $factory_erp_records['message']=$this->production_summary_model->multi_array_search_with_condition($erp_records,$conditions);
+   if(!empty($factory_erp_records)){
+      $this->data['product_names']=array_unique(array_column($factory_erp_records['message'],'product'));
        $this->data['product_names'][]="KA Chain Refresh";	
        $this->data['product_names'][]="Sumo Chain";	
        $this->data['product_names'][]="Sumo Ball Chain";	
@@ -142,12 +142,12 @@ class Production_summary extends BaseController {
        $this->data['product_names'][]="Refresh";	
        $this->data['product_names'][]="Pipe and Para Process";	
 //pd($this->data['product_names']);
-      $this->data['wastage_percentage']=array_unique(array_column($erp_records['message'],'wastage_percentage'));
-      $this->data['in_purities']=array_unique(array_column($erp_records['message'],'melting'));
-      $this->data['account_names']=array_unique(array_column($erp_records['message'],'customer'));
-      $this->data['category_ones']=array_unique(array_column($erp_records['message'],'product_category'));
-      $this->data['machine_sizes']=array_unique(array_column($erp_records['message'],'machine_size'));
-      $this->data['design_codes']=array_unique(array_column($erp_records['message'],'issue_design_name'));
+      $this->data['wastage_percentage']=array_unique(array_column($factory_erp_records['message'],'wastage_percentage'));
+      $this->data['in_purities']=array_unique(array_column($factory_erp_records['message'],'melting'));
+      $this->data['account_names']=array_unique(array_column($factory_erp_records['message'],'customer'));
+      $this->data['category_ones']=array_unique(array_column($factory_erp_records['message'],'product_category'));
+      $this->data['machine_sizes']=array_unique(array_column($factory_erp_records['message'],'machine_size'));
+      $this->data['design_codes']=array_unique(array_column($factory_erp_records['message'],'issue_design_name'));
      } if (!isset($this->data['product_names'])) $this->data['product_names'] = array();
       if (!isset($this->data['wastage_percentage']))   $this->data['wastage_percentage']   = array();
       if (!isset($this->data['in_purities']))   $this->data['in_purities']   = array();
