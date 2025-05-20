@@ -189,6 +189,29 @@ $conditions=array();
             $arg_erp_records[$index]['wastage_percentage']=$erp_record['wastage_percentage'];
       }
 }    }
+   if(!empty($arg_erp_records)){
+      $this->data['product_names']=array_unique(array_column($arg_erp_records,'product_name'));
+       $this->data['product_names'][]="KA Chain Refresh";	
+       $this->data['product_names'][]="Sumo Chain";	
+       $this->data['product_names'][]="Sumo Ball Chain";	
+       $this->data['product_names'][]="Verona Collection";	
+       $this->data['product_names'][]="Sisma Accessories Making Chain";	
+       $this->data['product_names'][]="Refresh";	
+       $this->data['product_names'][]="Pipe and Para Process";	
+//pd($this->data['product_names']);
+      $this->data['wastage_percentage']=array_unique(array_column($arg_erp_records,'wastage_percentage'));
+      $this->data['in_purities']=array_unique(array_column($arg_erp_records,'in_purity'));
+      $this->data['account_names']=array_unique(array_column($arg_erp_records,'account_name'));
+      $this->data['category_ones']=array_unique(array_column($arg_erp_records,'category_one'));
+      $this->data['machine_sizes']=array_unique(array_column($arg_erp_records,'machine_size'));
+      $this->data['design_codes']=array_unique(array_column($arg_erp_records,'design_code'));
+     } if (!isset($this->data['product_names'])) $this->data['product_names'] = array();
+      if (!isset($this->data['wastage_percentage']))   $this->data['wastage_percentage']   = array();
+      if (!isset($this->data['in_purities']))   $this->data['in_purities']   = array();
+      if (!isset($this->data['account_names'])) $this->data['account_names'] = array();
+      if (!isset($this->data['category_ones'])) $this->data['category_ones'] = array(); 
+      if (!isset($this->data['machine_sizes'])) $this->data['machine_sizes'] = array(); 
+      if (!isset($this->data['design_codes']))  $this->data['design_codes']  = array();
     if (empty($arc_records['data'])) $arc_records['data'] = array();
     $records = array_merge(/*$argold_records['data'], 
                            $arf_records['data'],
