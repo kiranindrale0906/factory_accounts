@@ -115,6 +115,10 @@ class Production_summary extends BaseController {
        $this->data['product_names'][]="KA Chain Refresh";	
        $this->data['product_names'][]="Sumo Chain";	
        $this->data['product_names'][]="Sumo Ball Chain";	
+       $this->data['product_names'][]="Verona Collection";	
+       $this->data['product_names'][]="Sisma Accessories Making Chain";	
+       $this->data['product_names'][]="Refresh";	
+       $this->data['product_names'][]="Pipe and Para Process";	
 //pd($this->data['product_names']);
       $this->data['wastage_percentage']=array_unique(array_column($erp_records['message'],'wastage_percentage'));
       $this->data['in_purities']=array_unique(array_column($erp_records['message'],'melting'));

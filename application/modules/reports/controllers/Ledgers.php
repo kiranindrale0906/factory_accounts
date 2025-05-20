@@ -228,6 +228,9 @@ class Ledgers extends BaseController {
       $where_issue['account_name NOT IN ("Tanishq","VADOTAR")'] = NULL;
       $where_tanishq_issue['account_name ="Tanishq"'] = NULL;
     }
+/*elseif(($this->data['report_type'] == 'Production Report' || $this->data['report_type'] == 'Summary Report') && !empty($this->data['site_name']) && $this->data['site_name'] != 'All'){
+      $where_receipt['account_name Not in ("Tanishq","VADOTAR")'] = NULL;
+    }*/
     if ($this->data['domestic_export'] == 'Export') {
       $where_receipt=array('(      account_name = ("Export Internal Software")  
                                and receipt_type="Export Internal" 
@@ -303,12 +306,11 @@ class Ledgers extends BaseController {
                               sum((credit_weight+debit_weight) * purity) /  sum(credit_weight+debit_weight)  as purity, 
                               sum((credit_weight+debit_weight) * factory_purity) /  sum(credit_weight+debit_weight)  as factory_purity,
                               ""  as narration, "" as description, 
-                              "" as chitti_no,parent_id as parent_id,id as id';       
+                              chitti_id as chitti_no,parent_id as parent_id,id as id';       
     $where_customer_name['(  site_name = "'.$this->data['site_name'].'"
               or (    REPLACE(narration, "Software ", "") = "'.$this->data['site_name'].'"
                   )) and ((receipt_type="GPC" or receipt_type="GPC Out") and voucher_type="metal receipt voucher" and customer_name="Domestic Internal ERP Software") and (ac_ledger.debit_weight != 0 or ac_ledger.debit_amount != 0)'] = NULL;
       $customer_name_issues   = $this->ledger_model->get($customer_select, $where_customer_name,   array(), array('order_by'=>'chitti_id, voucher_type, voucher_date asc', 'group_by' => $this->data['group']));
-     
       $issues= array_merge($issues,$customer_name_issues);
       }
 }

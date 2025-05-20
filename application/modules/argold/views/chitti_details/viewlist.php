@@ -1,7 +1,7 @@
 <?php 
   if(!empty($metal_voucher_details)) {
     //foreach ($packet_nos as $packet_index => $packet_no) { 
-    ?>
+   ?>
       <!-- <h6>Packet No :<?=$packet_no ?> </h6>     -->
       <div class="table-size table-responsive" style="font-weight:500">
       <table class="table table-sm table-default">

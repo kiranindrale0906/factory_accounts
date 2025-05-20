@@ -2,9 +2,12 @@
   <?php
   $reference_account_name=($report_type == 'Account Ledger')?$record['reference_account_name'] : "";
   
+
    if ($report_type == 'Vadotar Report'): ?>
     <td><?= $record['receipt_type'];?></td>
   <?php endif; ?>
+    <td><?= $record['site_name'];?></td>
+
   <?php if ($report_type != 'Account Ledger'): ?>
     <td><?= $record['account_name'];?></td>
   <?php endif; ?>

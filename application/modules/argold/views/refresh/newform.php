@@ -24,7 +24,8 @@
                                                                               array('id'=>'ARC ERP','name'=>'ARC ERP'),
                                                                               array('id'=>'ARNA BANGLE','name'=>'ARNA BANGLE'),
                                                                               array('id'=>'RND ERP','name'=>'RND ERP'),
-                                                                              )));?>
+                                                                              array('id'=>'Domestic Internal ERP','name'=>'Domestic Internal ERP')
+)));?>
   
   </div>
     <?php $this->load->view('refresh_details/formlist');?>

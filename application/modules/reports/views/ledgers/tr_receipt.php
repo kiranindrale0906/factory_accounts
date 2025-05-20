@@ -2,9 +2,12 @@
 <tr>
   <?php 
   $reference_account_name=($report_type == 'Account Ledger')?$record['reference_account_name'] : "";
+
   if ($report_type == 'Vadotar Report'): ?>
     <td><?= $record['receipt_type'];?></td>
   <?php endif; ?>
+    <td><?= $record['site_name'];?></td>
+
     <td><?= $record['account_name'];?></td>
   <td><?= date('d-m-y', strtotime($record['str_voucher_date'])); ?></td>
   <?php if (!in_array($report_type, array("Export Purchase Ledger","Domestic Purchase Ledger","Domestic Sale Ledger","Export Sale Ledger"))): ?>

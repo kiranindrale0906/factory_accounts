@@ -85,13 +85,23 @@ class Voucher_model extends BaseModel {
   }
 
   protected function get_debit_weight_validation_rules() {
+	 if($this->formdata[$this->router_class]['receipt_type']=="Unrecoverable Loss"){
     return array('field' => $this->router_class.'[debit_weight]', 'label' => 'Weight',
+                 'rules' => 'trim|required|numeric');
+	}else{
+	 return array('field' => $this->router_class.'[debit_weight]', 'label' => 'Weight',
                  'rules' => 'trim|required|numeric|greater_than[0]');
+	}
   }
 
   protected function get_credit_weight_validation_rules() {
-    return array('field' => $this->router_class.'[credit_weight]', 'label' => 'Credit Weight',
+ if($this->formdata[$this->router_class]['receipt_type']=="Unrecoverable Loss"){
+	    return array('field' => $this->router_class.'[credit_weight]', 'label' => 'Credit Weight',
+                 'rules' => 'trim|required|numeric');
+	}else{
+	 return array('field' => $this->router_class.'[credit_weight]', 'label' => 'Credit Weight',
                  'rules' => 'trim|required|numeric|greater_than[0]');
+	}
   }
   
   protected function get_credit_amount_validation_rules() {
