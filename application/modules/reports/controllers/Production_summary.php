@@ -238,6 +238,9 @@ class Production_summary extends BaseController {
       }elseif($this->data['product_name']=="Fancy 75"){
 
        $where['item_name']    ="Fancy 75 Chain";
+      }elseif($this->data['product_name']=="ARC Ornament" || $this->data['product_name']=="ARC Ornaments"){
+
+       $where['item_name']    ="ARC Ornament";
       }else{
 
        $where['item_name']    =$this->data['product_name'];
