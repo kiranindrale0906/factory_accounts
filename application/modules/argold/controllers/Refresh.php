@@ -33,6 +33,7 @@ class Refresh extends BaseController {
                                       array('id'=>'Lotus Chain','name'=>'Lotus Chain'),
                                       array('id'=>'Nawabi Chain','name'=>'Nawabi Chain'),
                                       array('id'=>'Refresh','name'=>'Refresh'),
+                                      array('id'=>'Fancy Yellow','name'=>'Fancy Yellow'),
                                       array('id'=>'Fancy Chain','name'=>'Fancy Chain'),
                                       array('id'=>'Fancy 75 Chain','name'=>'Fancy 75 Chain'),
                                       array('id'=>'KA Chain','name'=>'KA Chain'),
@@ -69,6 +70,7 @@ class Refresh extends BaseController {
 									  array('id'=>'Hollow Nawabi','name'=>'Hollow Nawabi'),
 									  array('id'=>'Mc Marvel','name'=>'Mc Marvel'),
 									  array('id'=>'Z 4','name'=>'Z 4'),
+									  array('id'=>'OMEGA FANCY','name'=>'OMEGA FANCY'),
                                     );//$this->narration_model->get('name as name, name as  id, chain_purity, chain_margin', array() ,array(), array('order_by'=>'name asc'));
     
   }
