@@ -11,22 +11,22 @@ class Item_name_model extends BaseModel {
 
   public function validation_rules($klass='') {
   	return array(
-			array('field' => 'item_names[name]', 'label' => 'Name', 
-            'rules' => array('trim','required',array('unique_name',
-                                            array($this, 'check_name_unique')), 'errors'=> array('unique_name' => "The selected  name already exist.")),
-            ),
+			array(
+        'field' => 'item_names[name]', 
+        'label' => 'name', 
+        'rules'  =>array('trim','required',
+                    array('check_name_error',array($this,'check_name_exist'))),
+        'errors' => array('check_name_error'=>'Name is alreay exist.')),
+      
       );
   }
-  public function check_name_unique(){
-    $fields = array('name');
-    return parent::check_unique($fields);
-  }
-  public function check_special_charactor($fields){
-     $charactors = preg_match('/[^a-zA-Z0-9.\d]/', $fields);
-     if($charactors!=0){
-     return false;
-     }else{
+
+  public function check_name_exist($name) {
+    if($name=="" && !isset($name))
       return true;
-     }
-   } 
+    else
+    $item_names=$this->item_name_model->find('id as id',array('name'=>$name));
+    return (empty($item_names)) ? false : true;
+  }
+  
 }
