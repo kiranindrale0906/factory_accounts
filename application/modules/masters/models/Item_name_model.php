@@ -25,7 +25,7 @@ class Item_name_model extends BaseModel {
     if($name=="" && !isset($name))
       return true;
     else
-    $item_names=$this->item_name_model->find('id as id',array('name'=>$name));
+    $item_names=$this->item_name_model->find('id as id',array('name!='=>$name));
     return (empty($item_names)) ? false : true;
   }
   
