@@ -27,6 +27,7 @@
                                         'masters/customer_category'=>'Customer Category',
                                         'masters/department_category'=>'Department Category',
                                         'masters/narrations'=>'Item Name',
+                                        'masters/item_names'=>'Product Name',
                                         'masters/periods'=>'Financial Year',
                                         'masters/settings'=>'Settings',
                                         'users/ip_addresses'=>'Ip Addresses',

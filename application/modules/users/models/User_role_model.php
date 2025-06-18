@@ -10,7 +10,7 @@ class User_role_model extends Core_user_role_model {
                                         'masters/company','masters/payment_terms', 'masters/opening_balance',
                                         'masters/department','masters/customer_category','masters/settings', 'masters/account_listing','masters/quators',
                                         'masters/department_category','masters/periods',
-                                        'masters/narrations','masters/periods','masters/empty_packets',
+                                        'masters/narrations','masters/item_names','masters/periods','masters/empty_packets',
                                           'masters/empty_bags'),
                      'Transactions' => array('transactions/cash_issue_vouchers', 
                                             'transactions/cash_receipt_vouchers',
