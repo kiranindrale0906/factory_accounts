@@ -135,7 +135,7 @@ class Production_summary extends BaseController {
     $factory_erp_records['message']=$this->production_summary_model->multi_array_search_with_condition($erp_records,$conditions);
    if(!empty($factory_erp_records)){
       $this->data['product_names']=array_unique(array_column($factory_erp_records['message'],'product'));
-      $refresh_details = $this->refresh_detail_model->get('distinct(item_name)',array('item_name not in ('.implode(',', $this->data['product_names']).')'=>NULL));
+      $refresh_details = $this->refresh_detail_model->get('distinct(item_name)',array('item_name not in ("'.implode('","', $this->data['product_names']).')'=>NULL));
       pd($refresh_details);
        $this->data['product_names'][]="KA Chain Refresh";	
        $this->data['product_names'][]="Sumo Chain";	
