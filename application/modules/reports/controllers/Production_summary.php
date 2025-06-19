@@ -136,14 +136,8 @@ class Production_summary extends BaseController {
    if(!empty($factory_erp_records)){
       $this->data['product_names']=array_unique(array_column($factory_erp_records['message'],'product'));
       $refresh_details = $this->refresh_detail_model->get('distinct(item_name)',array('item_name not in ("'.implode('","', $this->data['product_names']).'")'=>NULL));
-      pd($refresh_details);
-       $this->data['product_names'][]="KA Chain Refresh";	
-       $this->data['product_names'][]="Sumo Chain";	
-       $this->data['product_names'][]="Sumo Ball Chain";	
-       $this->data['product_names'][]="Verona Collection";	
-       $this->data['product_names'][]="Sisma Accessories Making Chain";	
-       $this->data['product_names'][]="Refresh";	
-       $this->data['product_names'][]="Pipe and Para Process";	
+      $refresh_details=array_unique(array_column($refresh_details,'item_name'));
+       $this->data['product_names']=array_merge($this->data['product_names'],$refresh_details)	
 //pd($this->data['product_names']);
       $this->data['wastage_percentage']=array_unique(array_column($factory_erp_records['message'],'wastage_percentage'));
       $this->data['in_purities']=array_unique(array_column($factory_erp_records['message'],'melting'));
