@@ -64,7 +64,7 @@ class Trial_balances extends Ledgers {
     $this->calculate_stone_amount_with_tax();
 
     $this->get_vadotar_from_factories_and_accounts();
-    $this->data['get_current_gold_rate']=$this->gold_rate_model->find('gold_rate',array('id'=>1))['gold_rate'];
+    @$this->data['get_current_gold_rate']=$this->gold_rate_model->find('gold_rate',array('id'=>1))['gold_rate'];
 //pd($this->data['get_current_gold_rate']);
     //$this->get_overall_rolling();
 
