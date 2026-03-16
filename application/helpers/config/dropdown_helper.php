@@ -71,11 +71,11 @@
   }
   function get_issue_type() {
     return array( array('id' => 'Metal',                       'name' => 'Metal'),
-                  array('id' => 'AR Gold Finished Goods',      'name' => 'AR Gold Finished Goods'),
-                  array('id' => 'ARC Finished Goods',          'name' => 'ARC Finished Goods'),
-                  array('id' => 'ARF Finished Goods',          'name' => 'ARF Finished Goods'),
-                  array('id' => 'ARF Software Finished Goods', 'name' => 'ARF Software Finished Goods'),
-                  array('id' => 'Internal',                    'name' => 'Internal'),
+                  // array('id' => 'AR Gold Finished Goods',      'name' => 'AR Gold Finished Goods'),
+                  // array('id' => 'ARC Finished Goods',          'name' => 'ARC Finished Goods'),
+                  // array('id' => 'ARF Finished Goods',          'name' => 'ARF Finished Goods'),
+                  // array('id' => 'ARF Software Finished Goods', 'name' => 'ARF Software Finished Goods'),
+                   array('id' => 'Internal',                    'name' => 'Internal'),
                   array('id' => 'Rhodium',                    'name' => 'Rhodium'),
                 );
   }
@@ -101,42 +101,44 @@
     return array(array('id'=>'Hook','name'=>'Hook'),
                  array('id'=>'KDM','name'=>'KDM'),
                  array('id'=>'Lobster','name'=>'Lobster'),
-                 array('id'=>'Ball','name'=>'Ball'),
-                 array('id'=>'Solid Pipe','name'=>'Solid Pipe'),
-                 array('id'=>'Hollow Pipe','name'=>'Hollow Pipe'),
-                 array('id'=>'Solid Wire','name'=>'Solid Wire'),
-                 array('id'=>'Cutting Wire','name'=>'Cutting Wire'),
-                 array('id'=>'Hard Wire','name'=>'Hard Wire'),
-                 array('id'=>'Cutting Pipe','name'=>'Cutting Pipe'),
-                 array('id'=>'Para','name'=>'Para'),
-                 array('id'=>'I/O Pic','name'=>'I/O Pic'),
-                 array('id'=>'Pipe','name'=>'Pipe'),
-                 array('id'=>'Anc Chain','name'=>'Anc Chain'),
-                 array('id'=>'Stone','name'=>'Stone'),
-                 array('id'=>'Sisma Pic','name'=>'Sisma Pic'),
-                 array('id'=>'1.8 pipe','name'=>'1.8 pipe'),
-                 array('id'=>'1.8mm kajol','name'=>'1.8mm kajol'),
-                 array('id'=>'1.8mm clipping','name'=>'1.8mm clipping'),
-                 array('id'=>'3mm clipping','name'=>'3mm clipping'),
-                 array('id'=>'2mm ball chain','name'=>'2mm ball chain'),
-                 array('id'=>'30 anchor','name'=>'30 anchor'),
-                 array('id'=>'30 pipe','name'=>'30 pipe'),
-                 array('id'=>'4gm fancy box','name'=>'4gm fancy box'),
-                 array('id'=>'Box pipe clipping','name'=>'Box pipe clipping'),
-                 array('id'=>'Cutting wire 0.5','name'=>'Cutting wire 0.5'),
-                 array('id'=>'Cutting wire 0.8','name'=>'Cutting wire 0.8'),
-                 array('id'=>'Cutting wire 1.1','name'=>'Cutting wire 1.1'),
-                 array('id'=>'Para 2mm','name'=>'Para 2mm'),
-                 array('id'=>'Para 3mm','name'=>'Para 3mm'),
-                 array('id'=>'Para 4mm','name'=>'Para 4mm'),
-                 array('id'=>'Plain Wire 0.4','name'=>'Plain Wire 0.4'),
-                 array('id'=>'Plain Wire 0.8','name'=>'Plain Wire 0.8'),
-                 array('id'=>'Tibki','name'=>'Tibki'),
-                 array('id'=>'Shook','name'=>'S'),
-                 array('id'=>'ARF KDM','name'=>'ARF KDM'),
-                 array('id'=>'Cap','name'=>'Cap'),
-                 array('id'=>'Kala Mani','name'=>'Kala Mani'),
-                 array('id'=>'GPC Powder','name'=>'GPC Powder'));
+                //  array('id'=>'Ball','name'=>'Ball'),
+                //  array('id'=>'Solid Pipe','name'=>'Solid Pipe'),
+                //  array('id'=>'Hollow Pipe','name'=>'Hollow Pipe'),
+                //  array('id'=>'Solid Wire','name'=>'Solid Wire'),
+                //  array('id'=>'Cutting Wire','name'=>'Cutting Wire'),
+                //  array('id'=>'Hard Wire','name'=>'Hard Wire'),
+                //  array('id'=>'Cutting Pipe','name'=>'Cutting Pipe'),
+                //  array('id'=>'Para','name'=>'Para'),
+                //  array('id'=>'I/O Pic','name'=>'I/O Pic'),
+                //  array('id'=>'Pipe','name'=>'Pipe'),
+                //  array('id'=>'Anc Chain','name'=>'Anc Chain'),
+                //  array('id'=>'Stone','name'=>'Stone'),
+                //  array('id'=>'Sisma Pic','name'=>'Sisma Pic'),
+                //  array('id'=>'1.8 pipe','name'=>'1.8 pipe'),
+                //  array('id'=>'1.8mm kajol','name'=>'1.8mm kajol'),
+                //  array('id'=>'1.8mm clipping','name'=>'1.8mm clipping'),
+                //  array('id'=>'3mm clipping','name'=>'3mm clipping'),
+                //  array('id'=>'2mm ball chain','name'=>'2mm ball chain'),
+                //  array('id'=>'30 anchor','name'=>'30 anchor'),
+                //  array('id'=>'30 pipe','name'=>'30 pipe'),
+                //  array('id'=>'4gm fancy box','name'=>'4gm fancy box'),
+                //  array('id'=>'Box pipe clipping','name'=>'Box pipe clipping'),
+                //  array('id'=>'Cutting wire 0.5','name'=>'Cutting wire 0.5'),
+                //  array('id'=>'Cutting wire 0.8','name'=>'Cutting wire 0.8'),
+                //  array('id'=>'Cutting wire 1.1','name'=>'Cutting wire 1.1'),
+                //  array('id'=>'Para 2mm','name'=>'Para 2mm'),
+                //  array('id'=>'Para 3mm','name'=>'Para 3mm'),
+                //  array('id'=>'Para 4mm','name'=>'Para 4mm'),
+                //  array('id'=>'Plain Wire 0.4','name'=>'Plain Wire 0.4'),
+                //  array('id'=>'Plain Wire 0.8','name'=>'Plain Wire 0.8'),
+                //  array('id'=>'Tibki','name'=>'Tibki'),
+                //  array('id'=>'Shook','name'=>'S'),
+                //  array('id'=>'ARF KDM','name'=>'ARF KDM'),
+                //  array('id'=>'Cap','name'=>'Cap'),
+                //  array('id'=>'Kala Mani','name'=>'Kala Mani'),
+                //  array('id'=>'GPC Powder','name'=>'GPC Powder')
+                  
+                );
   }
 
   function get_melting_purity(){
@@ -228,15 +230,15 @@
       //array('id' => 'AR Gold (Sep 2023)', 'name' => 'AR Gold (Sep 2023)'),
       //array('id' => 'ARF (Sep 2023)',     'name' => 'ARF (Sep 2023)'),
       //array('id' => 'ARC (Sep 2023)',     'name' => 'ARC (Sep 2023)'),
-      array('id' => 'AR Gold (Apr 2024)', 'name' => 'AR Gold (Apr 2024)'),
-      array('id' => 'ARF (Apr 2024)',     'name' => 'ARF (Apr 2024)'),
-      array('id' => 'ARF (Aug 2024)',     'name' => 'ARF (Aug 2024)'),
-      array('id' => 'ARC (Apr 2024)',     'name' => 'ARC (Apr 2024)'),
-    array('id' => 'AR Gold ERP', 'name' => 'AR Gold ERP'),
-    array('id' => 'ARF ERP', 'name' => 'ARF ERP'),
-    array('id' => 'ARC ERP', 'name' => 'ARC ERP'),
-    array('id' => 'RND ERP', 'name' => 'RND ERP'),
-    array('id' => 'ARNA BANGLE ERP', 'name' => 'ARNA BANGLE ERP')
+    //   array('id' => 'AR Gold (Apr 2024)', 'name' => 'AR Gold (Apr 2024)'),
+    //   array('id' => 'ARF (Apr 2024)',     'name' => 'ARF (Apr 2024)'),
+    //   array('id' => 'ARF (Aug 2024)',     'name' => 'ARF (Aug 2024)'),
+    //   array('id' => 'ARC (Apr 2024)',     'name' => 'ARC (Apr 2024)'),
+    // array('id' => 'AR Gold ERP', 'name' => 'AR Gold ERP'),
+    // array('id' => 'ARF ERP', 'name' => 'ARF ERP'),
+    // array('id' => 'ARC ERP', 'name' => 'ARC ERP'),
+    // array('id' => 'RND ERP', 'name' => 'RND ERP'),
+    // array('id' => 'ARNA BANGLE ERP', 'name' => 'ARNA BANGLE ERP')
     );
     if ($export==1) $site_names[] = array('id' => 'Export Apr 2024', 'name' => 'Export Apr 2024');
     if ($export==2) {
@@ -249,6 +251,7 @@
   function get_account_names($export=1) {
     $site_names = array(
       array('id' => '', 'name' => ''),
+      array('id' => 'Factory', 'name' => 'Factory'),
       /*array('id' => 'AR Gold Software (May 2022)', 'name' => 'AR Gold Software (May 2022)'),
       array('id' => 'ARF Software (May 2022)',     'name' => 'ARF Software (May 2022)'),
       array('id' => 'ARC Software (May 2022)',     'name' => 'ARC Software (May 2022)'),
@@ -264,7 +267,7 @@
       array('id' => 'AR Gold Software (Sep 2023)', 'name' => 'AR Gold Software (Sep 2023)'),
       array('id' => 'ARF Software (Sep 2023)',     'name' => 'ARF Software (Sep 2023)'),
       array('id' => 'ARC Software (Sep 2023)',     'name' => 'ARC Software (Sep 2023)'),
-     */ array('id' => 'AR Gold Software (Apr 2024)', 'name' => 'AR Gold Software (Apr 2024)'),
+      array('id' => 'AR Gold Software (Apr 2024)', 'name' => 'AR Gold Software (Apr 2024)'),
       array('id' => 'ARF Software (Apr 2024)',     'name' => 'ARF Software (Apr 2024)'),
       array('id' => 'Arf Software (Aug 2024)',     'name' => 'Arf Software (Aug 2024)'),
       array('id' => 'ARF Software (Aug 2024)',     'name' => 'ARF Software (Aug 2024)'),
@@ -277,7 +280,8 @@
       array('id' => 'Arc Erp Software',     'name' => 'Arc Erp Software'),
       array('id' => 'Rnd Erp Software',     'name' => 'Rnd Erp Software'),
       array('id' => 'Domestic Internal ERP Software',     'name' => 'Domestic Internal ERP Software'),
-      array('id' => 'ARNA BANGLE',     'name' => 'ARNA BANGLE'),
+      array('id' => 'ARNA BANGLE',     'name' => 'ARNA BANGLE'),*/
+
     );
     if ($export==1) $site_names[] = array('id' => 'Export', 'name' => 'Export');
     if ($export==2) $site_names[] = array('id' => 'Domestic', 'name' => 'Domestic');
@@ -337,7 +341,10 @@
        return 'ARF ERP';
     }elseif (str_contains($account_name, 'Rnd Erp')) {
        return 'RND ERP';
+    }elseif (str_contains($account_name, 'Factory')) {
+       return 'Factory';
     }
+
 
     /*if (str_contains($account_name, 'AR Gold')) {
       if (str_contains($account_name, 'May 2022')) return 'AR Gold (May 2022)';

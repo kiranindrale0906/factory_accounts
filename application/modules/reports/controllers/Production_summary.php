@@ -43,9 +43,10 @@ class Production_summary extends BaseController {
     
     $url = '';
      /*elseif ($this->data['site_name'] == 'AR Gold (Apr 2024)')     $url = API_APR2024_ARG_PATH."issue_departments/api_issue_departments/create";
-    */if ($this->data['site_name'] == 'ARF (Apr 2024)')     $url = API_APR2024_ARF_PATH."issue_departments/api_issue_departments/create";
-    elseif ($this->data['site_name'] == 'ARF (Aug 2024)')     $url = API_AUG2024_ARF_PATH."issue_departments/api_issue_departments/create";
-    elseif ($this->data['site_name'] == 'ARC (Apr 2024)')     $url = API_APR2024_ARC_PATH."issue_departments/api_issue_departments/create";
+    */
+    //  if ($this->data['site_name'] == 'ARF (Apr 2024)')     $url = API_APR2024_ARF_PATH."issue_departments/api_issue_departments/create";
+    // elseif ($this->data['site_name'] == 'ARF (Aug 2024)')     $url = API_AUG2024_ARF_PATH."issue_departments/api_issue_departments/create";
+    // elseif ($this->data['site_name'] == 'ARC (Apr 2024)')     $url = API_APR2024_ARC_PATH."issue_departments/api_issue_departments/create";
     if (!empty($url)) {
       $records = json_decode(curl_post_request($url, $this->data));
       $this->data = array_merge($this->data, json_decode(json_encode($records), true));
@@ -86,16 +87,16 @@ class Production_summary extends BaseController {
     $_GET['filter_month'] = $this->data['filter_month'];
     $_GET['filter_year'] =$this->data['filter_year'];
     
-    if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARF (Apr 2024)') {
-      $url = API_APR2024_ARF_PATH."issue_departments/api_issue_departments/index";
-      $records = json_decode(curl_post_request($url, $_GET));
-      $arf_records = json_decode(json_encode($records), true);
-    }
-    if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARF (Aug 2024)') {
-        $url = API_AUG2024_ARF_PATH."issue_departments/api_issue_departments/index";
-        $records = json_decode(curl_post_request($url, $_GET));
-        $arf_aug2024_records = json_decode(json_encode($records), true);
-      }
+    // if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARF (Apr 2024)') {
+    //   $url = API_APR2024_ARF_PATH."issue_departments/api_issue_departments/index";
+    //   $records = json_decode(curl_post_request($url, $_GET));
+    //   $arf_records = json_decode(json_encode($records), true);
+    // }
+    // if ($this->data['site_name'] == '' || $this->data['site_name'] == 'ARF (Aug 2024)') {
+    //     $url = API_AUG2024_ARF_PATH."issue_departments/api_issue_departments/index";
+    //     $records = json_decode(curl_post_request($url, $_GET));
+    //     $arf_aug2024_records = json_decode(json_encode($records), true);
+    //   }
 //pd();
     if(empty($arf_records['data'])) $arf_records['data'] = array();
     if(empty($arf_aug2024_records['data'])) $arf_aug2024_records['data'] = array();
@@ -137,7 +138,7 @@ class Production_summary extends BaseController {
       $this->data['product_names']=array_unique(array_column($factory_erp_records['message'],'product'));
       $refresh_details = $this->refresh_detail_model->get('distinct(item_name)',array('item_name not in ("'.implode('","', $this->data['product_names']).'")'=>NULL));
       $refresh_details=array_unique(array_column($refresh_details,'item_name'));
-       $this->data['product_names']=array_merge($this->data['product_names'],$refresh_details)	
+       $this->data['product_names']=array_merge($this->data['product_names'],$refresh_details);	
 //pd($this->data['product_names']);
       $this->data['wastage_percentage']=array_unique(array_column($factory_erp_records['message'],'wastage_percentage'));
       $this->data['in_purities']=array_unique(array_column($factory_erp_records['message'],'melting'));

@@ -26,7 +26,7 @@ class Account_ledgers extends Ledgers {
 
   public function _get_form_data() {
     $this->data['voucher_dates']=array();
-    $this->data['account_names'] = $this->account_model->get('distinct(ac_account.name) as name, ac_account.id as id',
+  $this->data['account_names'] = $this->account_model->get('distinct(ac_account.name) as name, ac_account.id as id',
                                                               array('where' => array('ac_account.name!=""' => '')),
                                                               array(),
                                                               array('order_by' => 'ac_account.name asc'));

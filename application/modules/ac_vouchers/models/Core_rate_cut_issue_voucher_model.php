@@ -29,6 +29,8 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
     $this->attributes['fine'] = $this->attributes['credit_weight'] * $this->attributes['purity'] / 100;
     $this->attributes['factory_purity'] = $this->attributes['purity'];
     $this->attributes['factory_fine'] = $this->attributes['fine'];
+    $this->attributes['do_not_calculate_tax']=
+      (!empty($this->attributes['do_not_calculate_tax']))?$this->attributes['do_not_calculate_tax']:0;
     if($this->attributes['do_not_calculate_tax']==1){
 
     }
@@ -130,6 +132,8 @@ class Core_rate_cut_issue_voucher_model extends Voucher_model {
       $metal_receipt_voucher['is_export'] = 1;
     }
 
+    $metal_receipt_voucher['do_not_calculate_tax']=
+      (!empty($metal_receipt_voucher['do_not_calculate_tax']))?$metal_receipt_voucher['do_not_calculate_tax']:0;
     $tax_fields = get_tax_fields($metal_receipt_voucher['factory_fine'], $metal_receipt_voucher['fine'], $metal_receipt_voucher['sale_type'], $metal_receipt_voucher['gold_rate'], $metal_receipt_voucher['gold_rate_purity'],$metal_receipt_voucher['created_at'], $metal_receipt_voucher['is_export'], $metal_receipt_voucher['do_not_calculate_tax'], $metal_receipt_voucher['hallmark_rate'], $metal_receipt_voucher['hallmark_quantity']);
 
     $rate_cut_issue = array('company_id'    => 1,
