@@ -31,27 +31,6 @@
                                           'label'=> 'All Details',
                                           'value' =>'1',))));?>
     <?php  load_field('plain/checkbox',
-                  array('field'=>'arg_details',
-                        'check_inline'=>true,
-                        'option'=> array(
-                                    array('label_for' => 'ARG Details',
-                                          'label'=> 'ARG Details',
-                                          'value' =>'1',))));?>
-     <?php  load_field('plain/checkbox',
-                  array('field'=>'arf_details',
-                        'check_inline'=>true,
-                        'option'=> array(
-                                    array('label_for' => 'ARF Details',
-                                          'label'=> 'ARF Details',
-                                          'value' =>'1',))));?>
-     <?php  load_field('plain/checkbox',
-                  array('field'=>'arc_details',
-                        'check_inline'=>true,
-                        'option'=> array(
-                                    array('label_for' => 'ARC Details',
-                                          'label'=> 'ARC Details',
-                                          'value' =>'1',))));?>
-     <?php  load_field('plain/checkbox',
                   array('field'=>'vodator_report',
                         'check_inline'=>true,
                         'option'=> array(

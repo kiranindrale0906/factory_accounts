@@ -34,39 +34,40 @@
   function get_receipt_type() {
     $data= array( array('id' => 'Metal',                          'name' => 'Metal'),
                   array('id' => 'Daily Drawer',                   'name' => 'Daily Drawer'),
+                  array('id' => 'Refresh','name' => 'Refresh')
                   // array('id' => 'AR Gold Refresh',                'name' => 'AR Gold Refresh'),
                   // array('id' => 'ARC Refresh',                    'name' => 'ARC Refresh'),
                   // array('id' => 'ARF Refresh',                    'name' => 'ARF Refresh'),
-                  array('id' => 'AR Gold Finished Goods',         'name' => 'AR Gold Finished Goods'),
-                  array('id' => 'ARC Finished Goods',             'name' => 'ARC Finished Goods'),
-                  array('id' => 'ARF Finished Goods',             'name' => 'ARF Finished Goods'),
-                  array('id' => 'ARF Software Finished Goods',    'name' => 'ARF Software Finished Goods'),
-                  array('id' => 'AR Gold Chain Receipt',          'name' => 'AR Gold Chain Receipt'),
-                  array('id' => 'ARF Chain Receipt',              'name' => 'ARF Chain Receipt'),
-                  array('id' => 'ARC Chain Receipt',              'name' => 'ARC Chain Receipt'),
-                  array('id' => 'AR Gold Internal Receipt',          'name' => 'AR Gold Internal Receipt'),
-                  array('id' => 'ARF Internal Receipt',              'name' => 'ARF Internal Receipt'),
-                  array('id' => 'ARC Internal Receipt',              'name' => 'ARC Internal Receipt'),
-                  array('id' => 'AR Gold Finished Goods Receipt', 'name' => 'AR Gold Finished Goods Receipt'),
-                  array('id' => 'ARF Finished Goods Receipt',     'name' => 'ARF Finished Goods Receipt'),
-                  array('id' => 'ARC Finished Goods Receipt',     'name' => 'ARC Finished Goods Receipt'),
-                  array('id' => 'Export Internal',                    'name' => 'Export Internal'),
-                  array('id' => 'Domestic Internal',                    'name' => 'Domestic Internal'),
-                  array('id' => 'AR Gold RND',                    'name' => 'AR Gold RND'),
-                  array('id' => 'ARF RND',                        'name' => 'ARF RND'),
-                  array('id' => 'ARC RND',                        'name' => 'ARC RND'),
-                  array('id' => 'Internal',                       'name' => 'Internal'),
-                  array('id' => 'Vadotar',                        'name' => 'Vadotar'),
-                  array('id' => 'Rhodium',                        'name' => 'Rhodium'),
-                  array('id' => 'Stone',                        'name' => 'Stone'),
-                );
-    if(!empty($_GET['refresh_id']) && $_GET['refresh_id']!=''){
-      // $data[]=array('id' => 'AR Gold Refresh','name' => 'AR Gold Refresh');
-      // $data[]=array('id' => 'ARC Refresh','name' => 'ARC Refresh');
-      // $data[]=array('id' => 'ARF Refresh','name' => 'ARF Refresh');
-      $data[]=array('id' => 'Refresh','name' => 'Refresh');
-    }
-    return $data;
+                //   array('id' => 'AR Gold Finished Goods',         'name' => 'AR Gold Finished Goods'),
+                //   array('id' => 'ARC Finished Goods',             'name' => 'ARC Finished Goods'),
+                //   array('id' => 'ARF Finished Goods',             'name' => 'ARF Finished Goods'),
+                //   array('id' => 'ARF Software Finished Goods',    'name' => 'ARF Software Finished Goods'),
+                //   array('id' => 'AR Gold Chain Receipt',          'name' => 'AR Gold Chain Receipt'),
+                //   array('id' => 'ARF Chain Receipt',              'name' => 'ARF Chain Receipt'),
+                //   array('id' => 'ARC Chain Receipt',              'name' => 'ARC Chain Receipt'),
+                //   array('id' => 'AR Gold Internal Receipt',          'name' => 'AR Gold Internal Receipt'),
+                //   array('id' => 'ARF Internal Receipt',              'name' => 'ARF Internal Receipt'),
+                //   array('id' => 'ARC Internal Receipt',              'name' => 'ARC Internal Receipt'),
+                //   array('id' => 'AR Gold Finished Goods Receipt', 'name' => 'AR Gold Finished Goods Receipt'),
+                //   array('id' => 'ARF Finished Goods Receipt',     'name' => 'ARF Finished Goods Receipt'),
+                //   array('id' => 'ARC Finished Goods Receipt',     'name' => 'ARC Finished Goods Receipt'),
+                //   array('id' => 'Export Internal',                    'name' => 'Export Internal'),
+                //   array('id' => 'Domestic Internal',                    'name' => 'Domestic Internal'),
+                //   array('id' => 'AR Gold RND',                    'name' => 'AR Gold RND'),
+                //   array('id' => 'ARF RND',                        'name' => 'ARF RND'),
+                //   array('id' => 'ARC RND',                        'name' => 'ARC RND'),
+                //   array('id' => 'Internal',                       'name' => 'Internal'),
+                //   array('id' => 'Vadotar',                        'name' => 'Vadotar'),
+                //   array('id' => 'Rhodium',                        'name' => 'Rhodium'),
+                //   array('id' => 'Stone',                        'name' => 'Stone'),
+                 );
+    // if(!empty($_GET['refresh_id']) && $_GET['refresh_id']!=''){
+    //   // $data[]=array('id' => 'AR Gold Refresh','name' => 'AR Gold Refresh');
+    //   // $data[]=array('id' => 'ARC Refresh','name' => 'ARC Refresh');
+    //   // $data[]=array('id' => 'ARF Refresh','name' => 'ARF Refresh');
+    //   $data[]=array('id' => 'Refresh','name' => 'Refresh');
+    // }
+     return $data;
   }
   function get_issue_type() {
     return array( array('id' => 'Metal',                       'name' => 'Metal'),
